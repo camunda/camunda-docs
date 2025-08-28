@@ -36,11 +36,35 @@ You build your template by adding property objects to the `properties` array. Th
 Not all keys and values are compatible with each other. For more information see the documentation below.
 Additionally, if your editor supports JSON schema, these incompatibilities are highlighted while you edit your template.
 
-:::note
-If you add multiple properties with equal `binding` objects, the behavior is undefined.
-:::
+The `properties` array contains a list of property objects that define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
+
+```json
+{
+  "schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  ...,
+  "properties": [
+    {
+      "label": "Some property",
+      "type": "String",
+      "binding": {
+        ...
+      }
+    },
+    {
+      "label": "Some other property",
+      "type": "Number",
+      "binding": {
+        ...
+      }
+    },
+    ...
+  ]
+}
+```
 
 For a comprehensive example showing how to create a REST connector template with all the concepts covered in this documentation, see the [complete template example](./template-example.md) page.
+
+The keys of the property object are explained in the following sections.
 
 ## Setting a default value: `value`
 
@@ -50,11 +74,11 @@ The value must match the `type` of the property.
 
 ```json
 {
+  "value": "4",
   "type": "Hidden",
-  "value": "http-job-type",
   "binding": {
     "type": "zeebe:taskDefinition",
-    "property": "type"
+    "property": "retries"
   }
 }
 ```
@@ -65,10 +89,10 @@ As an alternative to static `value`, you can use a generated value. The value is
 
 ```json
 {
-  "type": "Hidden",
   "generatedValue": {
     "type": "uuid"
   },
+  "type": "Hidden",
   "binding": {
     "type": "zeebe:property",
     "name": "id"
@@ -86,15 +110,14 @@ The following property types support the `placeholder` attribute:
 The placeholder is displayed when a field is empty:
 
 ```json
-...
-  "properties": [
-    {
-      "label": "Web service URL",
-      "type": "String",
-      "binding": { ... },
-      "placeholder": "https://example.com"
-    }
-  ]
+{
+  "label": "Web service URL",
+  "type": "String",
+  "binding": {
+    ...
+  },
+  "placeholder": "https://example.com"
+}
 ```
 
 ## Setting the input type: `type`
@@ -129,39 +152,32 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
 
 ```json
 {
-  ...,
-  "properties": [
-    ...
+  "label": "REST Method",
+  "description": "Specify the HTTP method to use.",
+  "type": "Dropdown",
+  "value": "get",
+  "choices": [
     {
-      "label": "REST Method",
-      "description": "Specify the HTTP method to use.",
-      "type": "Dropdown",
-      "value": "get",
-      "choices": [
-        {
-          "name": "GET",
-          "value": "get"
-        },
-        {
-          "name": "POST",
-          "value": "post"
-        },
-        {
-          "name": "PATCH",
-          "value": "patch"
-        },
-        {
-          "name": "DELETE",
-          "value": "delete"
-        }
-      ],
-      "binding": {
-        "type": "zeebe:taskHeader",
-        "key": "method"
-      }
+      "name": "GET",
+      "value": "get"
+    },
+    {
+      "name": "POST",
+      "value": "post"
+    },
+    {
+      "name": "PATCH",
+      "value": "patch"
+    },
+    {
+      "name": "DELETE",
+      "value": "delete"
     }
   ],
-  ...
+  "binding": {
+    "type": "zeebe:taskHeader",
+    "key": "method"
+  }
 }
 ```
 
@@ -183,13 +199,12 @@ The following input types support the `feel` property:
 The field will be displayed as a FEEL editor and a visual indication that a FEEL expression is required will be shown:
 
 ```json
-  "properties": [
-    {
-      "label": "Required FEEL Expression",
-      "type": "String",
-      "feel": "required"
-    }
-  ]
+{
+  "label": "Required FEEL Expression",
+  "type": "String",
+  "feel": "required",
+  ...
+}
 ```
 
 ### FEEL optional
@@ -197,13 +212,12 @@ The field will be displayed as a FEEL editor and a visual indication that a FEEL
 An indicator to switch to a FEEL expression is shown. When activated, the field will be displayed as a FEEL editor:
 
 ```json
-  "properties": [
     {
-      "label": "Optional FEEL Expression",
-      "type": "String",
-      "feel": "optional"
-    }
-  ]
+  "label": "Optional FEEL Expression",
+  "type": "String",
+  "feel": "optional",
+  ...
+}
 ```
 
 For `Boolean` and `Number` fields, the value will always be persisted as a FEEL expression. This ensures that the value will not be interpreted as a string when evaluated in the engine.
@@ -213,13 +227,12 @@ For `Boolean` and `Number` fields, the value will always be persisted as a FEEL 
 The value of `feel: static` is only valid for `Boolean` and `Number` fields. Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression. However, there is no toggle to switch to a FEEL editor and ensures only a static value can be entered:
 
 ```json
-  "properties": [
-    {
-      "label": "Static FEEL value",
-      "type": "Number",
-      "feel": "static"
-    }
-  ]
+{
+  "label": "Static FEEL value",
+  "type": "Number",
+  "feel": "static",
+  ...
+}
 ```
 
 For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value used in case of missing `feel` property.
@@ -237,6 +250,10 @@ The additional property sets defines the target for the `value` or user input.
 
 Notice that adherence to the following configuration options is enforced by design.
 If not adhering, the tooling logs a validation error and ignores the respective element template.
+
+:::note
+If you add multiple properties with equal `binding` objects, the behavior is undefined.
+:::
 
 ### `property`
 
@@ -267,7 +284,8 @@ Other properties, such as references and complex property types are currently NO
       "type": "property",
       "name": "mynamespace:customProperty"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -361,7 +379,8 @@ Configures the [task](../../bpmn/service-tasks/#task-definition) for a service o
       "type": "zeebe:taskDefinition",
       "property": "retries"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -497,7 +516,7 @@ to the value of the version tag of the process you want to call.
     "binding": {
       "type": "zeebe:calledElement",
       "property": "bindingType"
-    },
+    }
   },
   {
     ...,
@@ -505,8 +524,9 @@ to the value of the version tag of the process you want to call.
     "binding": {
       "type": "zeebe:calledElement",
       "property": "versionTag"
-    },
-  }
+    }
+  },
+  ...
 ]
 ```
 
@@ -574,7 +594,8 @@ to the value of the version tag of the form you want to link.
       "type": "zeebe:formDefinition",
       "property": "versionTag"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -598,30 +619,31 @@ The `zeebe:assignmentDefinition` binding allows you to configure the [user task 
 
 ```json
 [
-    {
-        ...,
-        "value": "=manager",
-        "binding": {
-        "type": "zeebe:assignmentDefinition",
-        "property": "assignee"
-        }
-    },
-    {
-        ...,
-        "value": "group1,group2",
-        "binding": {
-        "type": "zeebe:assignmentDefinition",
-        "property": "candidateGroups"
-        }
-    },
-    {
-        ...,
-        "value": "user1,user2,user3",
-        "binding": {
-        "type": "zeebe:assignmentDefinition",
-        "property": "candidateUsers"
-        }
+  {
+    ...,
+    "value": "=manager",
+    "binding": {
+      "type": "zeebe:assignmentDefinition",
+      "property": "assignee"
     }
+  },
+  {
+    ...,
+    "value": "group1,group2",
+    "binding": {
+      "type": "zeebe:assignmentDefinition",
+      "property": "candidateGroups"
+    }
+  },
+  {
+    ...,
+    "value": "user1,user2,user3",
+    "binding": {
+      "type": "zeebe:assignmentDefinition",
+      "property": "candidateUsers"
+    }
+  },
+  ...
 ]
 ```
 
@@ -658,7 +680,8 @@ The `zeebe:taskSchedule` binding allows you to configure [user task scheduling](
       "type": "zeebe:taskSchedule",
       "property": "followUpDate"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -678,16 +701,16 @@ If the template sets a static `value` for any property, it must be defined as an
 The `zeebe:priorityDefinition` binding allows you to configure [user task priority](../../bpmn/user-tasks/#define-user-task-priority).
 
 ```json
-[
-  {
-    ...,
-    "value": 42,
-    "binding": {
-      "type": "zeebe:priorityDefinition",
-      "property": "priority"
-    }
+
+{
+  ...,
+  "value": 42,
+  "binding": {
+    "type": "zeebe:priorityDefinition",
+    "property": "priority"
   }
-]
+}
+
 ```
 
 :::note
@@ -743,7 +766,8 @@ to the value of the version tag of the decision you want to call.
       "type": "zeebe:calledDecision",
       "property": "versionTag"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -778,7 +802,8 @@ The `zeebe:script` binding allows you to configure the [FEEL expression](../../b
       "type": "zeebe:script",
       "property": "resultVariable"
     }
-  }
+  },
+  ...
 ]
 ```
 
@@ -835,7 +860,8 @@ Associate a field with a group (ID) via the fields `group` key:
       "binding": {
         "type": "zeebe:taskDefinition:type"
       }
-    }
+    },
+    ...
   ]
 }
 ```
@@ -855,21 +881,20 @@ Set `pattern` to a regular expression to ensure the user's input matches the pat
 Together with the `pattern` constraint, you can define your custom error message:
 
 ```json
-...
-  "properties": [
-    {
-      "label": "Web service URL",
-      "type": "String",
-      "binding": { ... },
-      "constraints": {
-        "notEmpty": true,
-        "pattern": {
-          "value": "https://.*",
-          "message": "Must be https URL"
-        }
-      }
+{
+  "label": "Web service URL",
+  "type": "String",
+  "binding": {
+    ...
+  },
+  "constraints": {
+    "notEmpty": true,
+    "pattern": {
+      "value": "https://.*",
+      "message": "Must be https URL"
     }
-  ]
+  }
+}
 ```
 
 :::warning
@@ -894,115 +919,76 @@ There are three possible comparison operators:
 - `isActive`: Checks if the referenced property is currently active and not hidden by other conditions.
 
 ```json
-{
-  ...,
-  "properties": [
-    {
-      "id": "httpMethod",
-      "label": "HTTP Method",
-      "type": "Dropdown",
-      "choices": [
-        {
-          "name": "get",
-          "value": "GET"
-        },
-        {
-          "name": "patch",
-          "value": "PATCH"
-        },
-        {
-          "name": "post",
-          "value": "POST"
-        },
-        {
-          "name": "delete",
-          "value": "DELETE"
-        }
-      ],
-      "binding": {
-        ...
-      }
-    },
-    {
-      "label": "Request Body",
-      "type": "String",
-      "binding": {
-        ...
+[
+  {
+    "id": "httpMethod",
+    "label": "HTTP Method",
+    "type": "Dropdown",
+    "choices": [
+      {
+        "name": "get",
+        "value": "GET"
       },
-      "condition": {
-        "property": "httpMethod",
-        "oneOf": [
-          "patch",
-          "post",
-          "delete"
-        ]
-      }
-    },
-    {
-      "id": "authenticationType",
-      "label": "Authentication Type",
-      "type": "Dropdown",
-      "choices": [
-        {
-          "name": "None",
-          "value": ""
-        },
-        {
-          "name": "Basic",
-          "value": "basic"
-        }
-      ],
-      "binding": {
-        ...
-      }
-    },
-    {
-      "label": "Username",
-      "type": "String",
-      "binding": {
-        ...
+      {
+        "name": "patch",
+        "value": "PATCH"
       },
-      "condition": {
-        "allMatch": [
-          {
-            "property": "httpMethod",
-            "oneOf": [
-              "patch",
-              "post",
-              "delete"
-            ]
-          },
-          {
-            "property": "authenticationType",
-            "equals": "basic"
-          }
-        ]
+      {
+        "name": "post",
+        "value": "POST"
       }
-    },
-    {
-      "label": "Password",
-      "type": "String",
-      "binding": {
-        ...
-      },
-      "condition": {
-        "allMatch": [
-          {
-            "property": "httpMethod",
-            "oneOf": [
-              "patch",
-              "post",
-              "delete"
-            ]
-          },
-          {
-            "property": "authenticationType",
-            "equals": "basic"
-          }
-        ]
-      }
+    ],
+    "binding": {
+      ...
     }
-  ]
+  },
+  {
+    "label": "Request Body",
+    "type": "String",
+    "binding": {
+      ...
+    },
+    "condition": {
+      "allMatch": [
+        {
+          "property": "httpMethod",
+          "oneOf": [
+            "patch",
+            "post"
+          ]
+        },
+        {
+          "property": "...",
+          "isActive": "true"
+        },
+        {
+          "property": "...",
+          "equals": "someValue"
+        }
+      ]
+    }
+  },
+  ...
+]
+```
+
+![Display default entries](./img/entries-visible.png)
+
+## Preventing edits: `editable`
+
+By default, all properties defined in an element template that do not have type `Hidden` are editable.
+You can prevent edits by setting the `editable` property to `false`. The property will be displayed in the properties panel but cannot be changed.
+
+```json
+{
+  "label": "Task type",
+  "type": "String",
+  "value": "http-job-type",
+  "editable": false,
+  "binding": {
+    "type": "zeebe:taskDefinition",
+    "property": "type"
+  }
 }
 ```
 
@@ -1024,29 +1010,4 @@ Per default, the element template defines the visible entries of the properties 
     ]
   }
 ]
-```
-
-![Display default entries](./img/entries-visible.png)
-
-## Preventing edits: `editable`
-
-By default, all properties defined in an element template that do not have type `Hidden` are editable.
-You can prevent edits by setting the `editable` property to `false`. The property will be displayed in the properties panel but cannot be changed.
-
-```json
-{
-  ...,
-  "properties": [
-    {
-      "label": "Task type",
-      "type": "String",
-      "value": "http-job-type",
-      "editable": false,
-      "binding": {
-        "type": "zeebe:taskDefinition",
-        "property": "type"
-      }
-    }
-  ]
-}
 ```
