@@ -21,18 +21,20 @@ As they are never part of any element template, users can configure them indepen
 You build your template by adding property objects to the `properties` array.
 The keys in a property definition are listed below, `[optional]` keys are marked with square brackets:
 
-- `[label : String]`: A descriptive text shown with the property.
-- `type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`: Defining the input type in the properties panel.
-- `[feel : "required" | "optional" | "static"]`: Defines whether the property supports [FEEL](#feel) expressions.
-- `[value : String | Number | Boolean]`: An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- `[generatedValue : Object]`: An optional configuration to generate a value when the property is applied to an element.
-- `[placeholder : String]`: An optional placeholder text shown in the input field when it is empty.
-- `binding : Object`: An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
-- `[optional : Boolean]`: Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
-- `[constraints : Object]`: A list of editing constraints to apply to the value of the binding.
-- `[group : String]`: The group that the property belongs to.
+- `[label : String]`: A label text above the property input.
+- `[description : String]`: An optional description text below the property input.
+- `[tooltip : String]`: An optional tooltip text shown when hovering over the label.
+- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defining the input type in the properties panel.
+- [`[feel : "required" | "optional" | "static"]`](#adding-feel-editor-support-feel): Defines whether the property supports [FEEL](#feel) expressions.
+- [`[value : String | Number | Boolean]`](#setting-a-default-value-value): An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
+- [`[generatedValue : Object]`](#generating-a-value-generatedvalue): An optional configuration to generate a value when the property is applied to an element.
+- [`[placeholder : String]`](#setting-a-text-placeholder-placeholder): An optional placeholder text shown in the input field when it is empty.
+- [`binding : Object`](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding): An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
+- [`[optional : Boolean]`](#preventing-persisting-empty-values-optional): Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
+- [`[constraints : Object]`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the binding.
+- [`[group : String]`](#grouping-fields-group): The group that the property belongs to.
 - `[id : String]`: An identifier that can be used to reference the property in conditional properties
-- `[condition : Object]`: A condition that determines when [the property is active](#defining-conditional-properties)
+- [`[condition : Object]`](#showing-properties-conditionally-condition): A condition that determines when [the property is active](#defining-conditional-properties)
 
 Not all keys and values are compatible with each other, some keys require other keys to be set, even if the other key is generally optional.
 For more information see the documentation below.
