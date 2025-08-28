@@ -2,24 +2,30 @@
 id: mapping-rules
 title: "Mapping rules"
 sidebar_label: "Mapping rules"
-description: "Map your auth data to Camunda-specific data using mapping rules."
+description: "Map authentication entities from your Identity provider to Camunda-specific entities using mapping rules."
 ---
 
-:::info
-Mapping rules are only available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md). They do not work with any other authentication methods, such as basic authentication.
+Mapping rules are used to dynamically manage access control in Camunda by [connecting your Identity Provider](connect-to-identity-provider.md) and assigning claims from a JWT access token to [Orchestration Cluster Identity](../../identity/identity-introduction.md) entities.
+
+In **Camunda 8 SaaS**, these assignments are automatically resolved based on your organization's setup.
+
+In **Camunda 8 Self-Managed**, you can define mapping rules to assign users to [user groups](../../identity/group.md) and [roles](../../identity/role.md), grant [authorizations](../../identity/authorization.md), and associate them with specific [clients](../../identity/client.md) or [tenants](/self-managed/components/orchestration-cluster/identity/manage-tenants.md).
+
+:::note
+Mapping rules are available for Camunda 8 Self-Managed with [OIDC-based authentication](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md). They do not apply to other authentication methods, such as basic authentication.
 :::
 
 A mapping rule has the following properties:
 
 - **Claim name**: Either the name of a (nested) claim or a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535).
-- **Claim value**: The expected value of the claim. The mapping rule takes effect only if this value is matched in a JWT.
+- **Claim value**: The expected value of the claim. The mapping rule takes effect only if this value is matched in a JWT access token.
 
 Using a mapping rule is a two-step process:
 
 1. **Create the mapping rule** – This tells the Orchestration Cluster how to identify a match.
-2. **Assign the mapping rule** – Apply it to a group, role, tenant, or authorization.
+2. **Assign the mapping rule** – Apply it to a group, role, authorization, client or tenant.
 
-:::note
+:::info
 To use mapping rules, you must be familiar with the structure of the JWT access tokens that your OIDC provider issues to the Orchestration Cluster clients.
 :::
 
