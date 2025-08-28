@@ -4,6 +4,9 @@ title: "Process instance migration"
 description: "Use process instance migration to change the process definition of a running process instance."
 ---
 
+import TargetProcessDefinition from './assets/process-instance-migration/migration-joining-gateway-modeler-after.png';
+import ProcessInstanceAfterMigration from './assets/process-instance-migration/migration-joining-gateway-after.png';
+
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
@@ -290,7 +293,7 @@ The process instance is waiting at the joining parallel gateway, with an incomin
 
 Then, the process definition is updated to include an element `C` before the joining gateway.
 
-![Process definition is updated to include C.](assets/process-instance-migration/migration-joining-gateway-modeler-after.png)
+<img src={TargetProcessDefinition} alt="Process definition is updated to include C." class="img-600"/>
 
 To migrate the process instance, the following mapping instructions must be provided:
 
@@ -300,7 +303,7 @@ To migrate the process instance, the following mapping instructions must be prov
 
 After the migration, the process instance will look like the following:
 
-![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
+<img src={ProcessInstanceAfterMigration} alt="The instance waiting on service task B." class="img-600"/>
 
 In the example above, another element `C` is added before the joining gateway in the target process definition.
 To complete the process instance after the migration, element `B` must be completed.
