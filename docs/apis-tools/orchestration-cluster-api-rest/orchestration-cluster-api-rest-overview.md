@@ -181,8 +181,8 @@ The Orchestration Cluster REST API uses standard HTTP status codes and returns e
 | 404        | Not found                                                                                                   |
 | 409        | Conflict. The request attempts to modify a resource that is not in the correct state.                       |
 | 412        | Precondition failed. The client should check the cluster status.                                            |
-| 429        | Rate limit exceeded. The client exceeds a defined request limit, for example, Zeebe signaling backpressure. |
 | 500        | Internal server error. Generic error with further description in the problem detail.                        |
+| 503        | The service is currently unavailable. This may happen when the system signals backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism [here](../../components/zeebe/technical-concepts/internal-processing.md) |
 
 ### Date formats
 
