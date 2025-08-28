@@ -45,6 +45,13 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/process-applications",
         "components/concepts/element-templates",
+        {
+          "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
+          ],
+        },
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -67,12 +74,6 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
-            "components/concepts/access-control/authorizations",
-          ],
-        },
       ],
     },
     {
@@ -404,6 +405,7 @@ module.exports = {
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
+            "components/identity/client",
           ],
         },
       ],
@@ -635,13 +637,13 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
           ],
         },
