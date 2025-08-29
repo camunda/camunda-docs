@@ -127,3 +127,13 @@ The following commands have been renamed in the Camunda Java Client:
 ## Protocol and connection: REST vs gRPC selection
 
 Zeebe Java Client used **gRPC by default**. The Camunda Java Client use **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder.
+
+To use gRPC, add the following to your client builder:
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder()
+        .grpcAddress(URI.create("http://localhost:26500"))
+        .restAddress(URI.create("http://localhost:8080"))
+        .preferRestOverGrpc(false)
+    .build();
+```

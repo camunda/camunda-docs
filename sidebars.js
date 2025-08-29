@@ -959,9 +959,7 @@ module.exports = {
           ],
         },
         {
-          Deprecated: [
-            "apis-tools/testing/zeebe-process-test",
-          ],
+          Deprecated: ["apis-tools/testing/zeebe-process-test"],
         },
       ],
     },
@@ -979,6 +977,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
         "apis-tools/migration-manuals/migrate-to-spring-boot-camunda-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
+        "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
       ],
     },
   ],
