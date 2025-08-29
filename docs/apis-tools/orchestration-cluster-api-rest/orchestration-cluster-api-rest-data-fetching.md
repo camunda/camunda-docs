@@ -41,7 +41,13 @@ GET /v2/user-tasks/:userTaskKey
 
 ## Data consistency
 
-All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+Endpoints in the Orchestration Cluster API are either _strongly consistent_ or _eventually consistent_. This refers not to the behaviour of the endpoint itself, but to the data backing the endpoint.
+
+Strongly consistent endpoints return data that represents the real-time state of the system. Eventually consistent endpoints are backed by the data created by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), and data returned from these endpoints is _eventually consistent_ with the system state.
+
+This characteristic, if not managed, can lead to unexpected results. We clearly mark each endpoint with its consistency characteristic to allow you to manage this in your applications.
+
+As an example: when a resource is created by a call to strongly consistent endpoint, calling an eventually consistent endpoint immediately with the returned resource key _may_ result in a 404 (for a GET) or an empty result array for a search. These endpoints are eventually consistent. A further call to the eventually consistent endpoint will return the resource at some future time. This system characteristic needs to be managed in your application. Camunda client SDKs offer ergonomic methods to specify a maximum timeout to wait for a result to appear on an eventually consistent endpoint. Failure to account for the eventually consistency of the data on eventually consistent endpoints can lead to indeterministic results at runtime: i.e.: code pathways that work 100% of the time during development or testing may fail some percentage of the time under load, if the eventual consistency characteristic is not taken into account.
 
 ## User task support
 
