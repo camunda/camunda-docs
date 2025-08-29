@@ -1,4 +1,4 @@
-import AskAiImg from "./img/icon-ask-ai.png";
+import AskAiImg from "../img/icon-ask-ai.png";
 
 <div class="banner-column-container" style={{marginTop: '50px'}}>
 <div class="banner-column-left" style={{flex: '0.5'}}>

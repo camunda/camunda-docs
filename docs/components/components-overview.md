@@ -1,7 +1,7 @@
 ---
 id: components-overview
-title: Using Camunda
-sidebar_label: Using Camunda
+title: Using Camunda 8
+sidebar_label: Using Camunda 8
 slug: /components/
 description: "This section contains product manual content for each component in Camunda 8, including conceptual content."
 keywords:
@@ -30,9 +30,9 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Use Camunda to orchestrate and automate complex business processes that span people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
+Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -59,5 +59,11 @@ Explore and learn about Camunda components and BPMN, DMN, and FEEL expressions.
 <UsingGrid using={usingCamundaCards} />
 
 ## Camunda SaaS
+
+Reference information for [Camunda 8 SaaS](/components/saas/saas.md), including clusters, regions, and encryption at rest.
+
+## Glossary
+
+Explore the [glossary](/reference/glossary.md) and understand definitions for key Camunda 8 terms and abbreviations.
 
 <AskAi/>

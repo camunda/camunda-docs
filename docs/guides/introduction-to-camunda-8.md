@@ -7,22 +7,25 @@ description: "Learn about Camunda 8, a universal process orchestrator that allow
 ---
 
 import DocCardList from '@theme/DocCardList';
-import ArchDiagramImg from './img/c8-architecture-diagram.png';
+import OverviewImg from './img/hero-get-started.png';
+import AskAi from './react-components/\_banner-ask-ai.md'
 
-Get started with [Camunda 8](https://camunda.io), the universal process orchestrator you can use to orchestrate and automate complex business processes that span people, systems, and devices.
+<h3 class="subheading">Ready to start? Run your first local Camunda 8 project.</h3>
 
-You can deploy Camunda 8 in two ways:
+<div class="double-column-container">
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-- **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead.
-- **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure.
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human tasks and APIs using connectors.
 
-Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics. Camunda 8 [components](/components/components-overview.md) work together to form the complete Camunda 8 experience, allowing you to design, automate, and improve your business processes.
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first local Camunda 8 project</a>
 
-<img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
 
-:::info Migrating from Camunda 7 to Camunda 8
-Want to migrate your Camunda 7 process solutions to run on Camunda 8? See our [Camunda 7 migration guide](/guides/migrating-from-camunda-7/index.md).
-:::
+<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+
+</div>
+</div>
 
 ## Run your first local project
 
@@ -47,3 +50,5 @@ This guide is tailored for low-code developers using Camunda 8 SaaS to efficient
 This guide is designed for users who prefer a low-code approach to process automation, walking you through working with a REST connector task as a first time Camunda 8 SaaS user. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
 - [Get started with API orchestration](/guides/getting-started-orchestrate-apis.md)
+
+<AskAi/>

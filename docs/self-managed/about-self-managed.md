@@ -23,5 +23,23 @@ tags:
 ---
 
 import { CamundaSelfManaged } from "@site/src/components/CamundaSelfManaged";
+import OverviewImg from './assets/hero-self-managed.png';
+
+<h3 class="subheading">Get started with our self-hosted alternative to Camunda 8 SaaS.</h3>
+
+<div class="double-column-container">
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
+
+Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
+
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+
+</div>
+</div>
 
 <CamundaSelfManaged/>

@@ -34,7 +34,7 @@ module.exports = {
     "components/components-overview",
     {
       type: "category",
-      label: "Introduction to Camunda",
+      label: "Introduction to Camunda 8",
       link: {
         type: "doc",
         id: "components/concepts/concepts-overview",

@@ -1,16 +1,28 @@
 ---
 id: concepts-overview
-title: "Overview"
+title: "Introduction to Camunda 8"
 description: "The Camunda Concepts section details features of Camunda that likely span several components of the application. Learn more about job workers and workflow patterns, for example."
 ---
 
-This section contains product manual content for each component in Camunda 8, including conceptual content. Together, these components comprise the Camunda 8 SaaS experience.
+import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
 
-See our [introduction to Camunda](/guides/introduction-to-camunda-8.md) if you are new to Camunda, or visiting the Camunda documentation for the first time.
+Use [Camunda 8](https://camunda.io) to orchestrate and automate complex business processes for people, systems, and devices.
 
-:::note Looking for deployment guides?
+## About Camunda 8
 
-Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
+You can deploy Camunda 8 in two ways:
+
+- **Camunda 8 SaaS**: A fully managed cloud service for rapid deployment and minimal operational overhead.
+- **Camunda 8 Self-Managed**: A self-hosted solution for organizations requiring full control over their infrastructure.
+
+Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics. Camunda 8 [components](/components/components-overview.md) work together to form the complete Camunda 8 experience, allowing you to design, automate, and improve your business processes.
+
+<img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
+
+:::info
+
+- Want to migrate your Camunda 7 process solutions to run on Camunda 8? See our [Camunda 7 migration guide](/guides/migrating-from-camunda-7/index.md).
+- Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::
 

@@ -6,6 +6,10 @@ import IconIntegrationImg from "../assets/icon-integration.png";
 import IconEarlyAccessImg from "../assets/icon-earlyaccess.png";
 import IconModelerImg from "../assets/icon-modeler.png";
 import IconBpmnImg from "../assets/icon-bpmn.png";
+import IconOrchClusterImg from "../assets/icon-orchcluster.png";
+import IconConnectorsImg from "../assets/icon-connectors.png";
+import IconOptimizeImg from "../assets/icon-optimize.png";
+import IconConsoleImg from "../assets/icon-console.png";
 
 import IconSecurityImg from "../assets/icon-reference-api.png";
 import IconLicensingImg from "../assets/icon-reference-api.png";
@@ -72,28 +76,29 @@ export const usingCamundaCards = [
       "Learn about using BPMN, DMN, and FEEL expressions when modeling.",
   },
   {
-    link: "./public-api/",
+    link: "./orchestration-cluster/",
     title: "Orchestration Cluster",
-    image: IconApiImg,
-    description: "Learn more about what's included in Camunda 8's public API.",
+    image: IconOrchClusterImg,
+    description: "Get started with Zeebe, Operate, Tasklist, and Identity.",
   },
   {
-    link: "./supported-environments/",
+    link: "./connectors/introduction-to-connectors/",
     title: "Connectors",
-    image: IconEnvironmentsImg,
+    image: IconConnectorsImg,
     description:
-      "Environments and technologies supported for Camunda 8 compatibility.",
+      "Connect processes to external systems, applications, and data.",
   },
   {
-    link: "./dependencies/",
+    link: "./optimize/what-is-optimize/",
     title: "Optimize",
-    image: IconSourceImg,
-    description: "Camunda source code access and third-party dependencies.",
+    image: IconOptimizeImg,
+    description:
+      "Business intelligence and analytics for enterprise customers.",
   },
   {
-    link: "./data-collection/",
+    link: "./console/introduction-to-console/",
     title: "Console",
-    image: IconDataImg,
-    description: "Learn more about Camunda data collection and usage metrics.",
+    image: IconConsoleImg,
+    description: "Manage Camunda components, clusters, and your organization.",
   },
 ];
