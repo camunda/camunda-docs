@@ -46,6 +46,8 @@ The new mapping rule will appear in the list.
 
 ![mapping-rule-refreshed-table](../img/mapping-rule-refreshed-table.png)
 
+After the mapping rule is created, you can [assign authorizations](mapping-rules-authorizations.md) or associate it with a [tenant](assign-mapping-rules-to-tenants.md).
+
 </TabItem>
 
 <TabItem value="update">
