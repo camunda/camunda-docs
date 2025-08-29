@@ -34,46 +34,62 @@ module.exports = {
     "components/components-overview",
     {
       type: "category",
-      label: "Camunda basics",
+      label: "Introduction to Camunda",
       link: {
         type: "doc",
         id: "components/concepts/concepts-overview",
       },
       items: [
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/process-applications",
-        "components/concepts/element-templates",
-        "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
         {
-          "User task listeners": [
-            "components/concepts/user-task-listeners",
-            "components/concepts/listen-to-user-tasks",
+          type: "category",
+          label: "Processes",
+          link: {
+            type: "doc",
+            id: "components/concepts/processes",
+          },
+          items: [
+            "components/concepts/process-instance-creation",
+            "components/concepts/process-instance-modification",
+            "components/concepts/process-instance-migration",
+            "components/concepts/incidents",
           ],
         },
-        "components/concepts/process-instance-creation",
+        "components/concepts/process-applications",
+        "components/concepts/workflow-patterns",
+        {
+          type: "category",
+          label: "Identity and access management",
+          link: {
+            type: "doc",
+            id: "components/concepts/access-control/access-control-overview",
+          },
+          items: ["components/concepts/access-control/authorizations"],
+        },
+        "components/concepts/job-workers",
+        "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/element-templates",
+        {
+          Listeners: [
+            "components/concepts/execution-listeners",
+            {
+              type: "category",
+              label: "User task listeners",
+              link: {
+                type: "doc",
+                id: "components/concepts/user-task-listeners",
+              },
+              items: ["components/concepts/listen-to-user-tasks"],
+            },
+          ],
+        },
         "components/concepts/messages",
         "components/concepts/signals",
-        "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
         "components/concepts/resource-deletion",
-        {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
-            "components/concepts/access-control/authorizations",
-          ],
-        },
       ],
     },
+
     {
       type: "category",
       label: "Features and integrations",
@@ -332,6 +348,20 @@ module.exports = {
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
+        require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
+        "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
+      ],
+    },
+    {
+      type: "category",
+      label: "BPMN, DMN, and FEEL",
+      link: {
+        type: "doc",
+        id: "components/concepts/bpmn-dmn-feel", // create this doc
+      },
+      items: [
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
@@ -395,12 +425,9 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
-        require("./docs/components/modeler/forms/sidebar-schema"),
-        require("./docs/components/modeler/element-templates/sidebar-schema"),
-        "components/modeler/data-handling",
-        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
+
     {
       type: "category",
       label: "Orchestration Cluster",
@@ -763,8 +790,12 @@ module.exports = {
         id: "components/saas/saas",
       },
       items: [
+        "components/concepts/clusters",
         "reference/regions",
         "reference/camunda-help-center",
+        "components/concepts/backups",
+        "components/concepts/data-retention",
+        "components/concepts/encryption-at-rest",
         "reference/auto-updates",
         "reference/status",
         "reference/saas-ip-addresses",
