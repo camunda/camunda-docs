@@ -19,11 +19,6 @@ To learn more about the concept of mapping rules, see the [mapping rules documen
 
 ![authorizations-mapping-rule-tab.png](../img/authorizations-mapping-rule-tab.png)
 
-:::info
-A default mapping rule can be created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration).  
-This allows the first user to access the Identity UI. Afterward, you can configure additional rules for user access to Camunda components.
-:::
-
 <Tabs groupId="mappingRuleAction" defaultValue="add" queryString values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{label: 'Delete', value: 'delete', },]}>
 
 <TabItem value="add">
