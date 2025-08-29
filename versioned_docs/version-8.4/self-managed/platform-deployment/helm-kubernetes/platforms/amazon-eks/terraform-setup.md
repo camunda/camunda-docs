@@ -4,11 +4,11 @@ title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
-<!-- The following link to /docs/ is on purpose to always link to the latest version -->
+<!-- The following link to / is on purpose to always link to the latest version -->
 
 :::warning
 
-There is a [**newer release**](/docs/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
+There is a [**newer release**](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
 
 :::
 

@@ -77,7 +77,7 @@ Historical data can be leveraged via three possible mechanisms:
 
 - **Query API**: Using the public API (currently under development), this has the advantage that you can make use of the history data within your own applications.
 
-- Pushing **events**: Pushing Camunda events by using [exporters](/docs/components/zeebe/technical-concepts/architecture/#exporters). Note that you can only add own exporters in a Self-Managed setting, not in Camunda 8 SaaS. Exporters have the advantage that you can push the data into any infrastructure you have, and possibly even filter or enrich the data in that step.
+- Pushing **events**: Pushing Camunda events by using [exporters](/components/zeebe/technical-concepts/architecture/#exporters). Note that you can only add own exporters in a Self-Managed setting, not in Camunda 8 SaaS. Exporters have the advantage that you can push the data into any infrastructure you have, and possibly even filter or enrich the data in that step.
 
 ## Connecting custom business intelligence systems (BI), data warehouses (DWH), or monitoring solutions
 
