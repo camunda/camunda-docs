@@ -1,7 +1,7 @@
 ---
 id: restore
-sidebar_label: Backup restore
-title: Camunda backup restoration
+title: "Restore a backup"
+sidebar_label: "Restore a backup"
 keywords: ["backup", "backups", "restore"]
 description: "Learn how to restore a Camunda 8 Self-Managed backup."
 ---

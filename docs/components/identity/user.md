@@ -1,28 +1,37 @@
 ---
 id: user
-title: User management
-description: "Learn how to manage users in your Self-Managed Orchestration Cluster."
+title: Users
+description: "Learn how to manage user access to an orchestration cluster."
 ---
 
-:::note
-User management in Identity is only supported by Self-Managed deployments. For SaaS, see how to [connect your identity provider](/components/console/manage-organization/external-sso.md).
-:::
+Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.
 
-User management is the process of creating, updating, and deleting users in your orchestration cluster. Users can be assigned roles and permissions to access applications and perform actions on resources.
+## SaaS
+
+In a SaaS environment, user management is handled through [Camunda 8 Console](/components/console/manage-organization/manage-users.md). From Console, you can invite new users to your organization and manage their roles. For more advanced user management, you can configure [single sign-on (SSO)](/components/console/manage-organization/external-sso.md) to integrate with your own identity provider.
+
+## Self-Managed
+
+For Self-Managed deployments, user management depends on your authentication setup:
+
+- When using **basic authentication**, users are managed through Identity. This involves creating, updating, and deleting them directly in your cluster.
+- If you have configured an external [OpenID Connect (OIDC) provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md), user management is handled by that provider.
+
+The following sections describe how to manage users in a Self-Managed environment with **basic authentication** enabled.
 
 ### Create a user
 
 To create a user:
 
 1. Log in to Identity in your cluster, and click on the **Users** tab.
-2. Click on the `Create user` button, and provide the following the user details:
+2. Click on the **Create user** button, and provide the following the user details:
    - **Username**: The username for the user.
    - **Name**: The name of the user.
    - **Email**: The email address of the user.
    - **Password**: The password for the user.
-3. Click on the **Create user** button to finish.
+3. Click on the **Create user** button.
 
-The user is created, and can now log in to the Camunda 8 web application.
+The user is created, and can now log in to the Camunda 8 web applications.
 
 ![identity-create-user-tab](./img/create-user-tab.png)
 
@@ -37,7 +46,7 @@ The user is created, and can now log in to the Camunda 8 web application.
    - **Name**: The name of the user.
    - **Email**: The email address of the user.
    - **Password**: The password for the user.
-4. Click on the **Save** button to finish.
+4. Click on the **Save** button.
 
 The user details are updated, and the user can now use these credentials to log in.
 
@@ -52,7 +61,7 @@ The user details are updated, and the user can now use these credentials to log 
    :::
 3. Confirm the deletion by clicking on the **Delete** button in the confirmation dialog.
 
-The user is deleted, and can no longer log in to the Camunda 8 web application.
+The user is deleted, and can no longer log in to the Camunda 8 web applications.
 
 ### Assign authorizations to a user
 

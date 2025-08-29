@@ -1,6 +1,6 @@
 ---
 id: admin-upgrade-overview
-title: "Upgrade to Camunda 8.8 "
+title: "Upgrade to Camunda 8.8"
 description: "Administrator overview for preparing and running a Camunda 8.8 Self-Managed upgrade."
 ---
 

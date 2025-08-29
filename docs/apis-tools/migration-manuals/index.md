@@ -1,5 +1,5 @@
 ---
-title: "Camunda 8.8 APIs & tools upgrade guide"
+title: "Camunda 8.8 APIs & tools migration guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
@@ -65,7 +65,7 @@ For more information on upgrading and migrating, see [migrate to the Orchestrati
 
 ### Camunda Java Client
 
-The [Camunda Java Client](/apis-tools/java-client/index.md) is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
+The [Camunda Java Client](/apis-tools/java-client/getting-started.md) is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
 
 - The Camunda Java Client is a drop-in replacement for Zeebe Java Client, however, Zeebe Java Client is still available.
 - Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10. This allows you to plan and transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.

@@ -1,11 +1,11 @@
 ---
 id: introduction-to-connectors
 title: Introduction
-description: "A Connector is a reusable building block that performs the integration with an external system and works out of the box."
+description: "A connector is a reusable building block that performs the integration with an external system and works out of the box."
 keywords: [bridge, reusable component, low code]
 ---
 
-A **Connector** is a reusable building block that performs the integration with an external system.
+A **connector** is a reusable building block that performs the integration with an external system.
 
 Most processes require interaction with systems outside of Camunda to orchestrate and complete work.
 
@@ -19,15 +19,14 @@ Connectors offer a multilayer coding experience, enabling users with a variety o
 
 ![Multilayer Coding Experience](img/multilayer-coding-experience.png)
 
-A Connector consists of two parts:
+A connector consists of two parts:
 
-1. The programming code in Java to connect to the external system (for example, refer to the [Connector function](./custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound Connectors.)
-2. The user interface to be used during modeling, which is provided using [Connector Templates](manage-connector-templates.md).
+1. The programming code in Java to connect to the external system (for example, refer to the [connector function](./custom-built-connectors/connector-sdk.md#outbound-connector-runtime-logic) for outbound Connectors.)
+2. The user interface to be used during modeling, which is provided using [connector templates](manage-connector-templates.md).
 
-Users interacting with Connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
+Users interacting with connectors may only need to understand the configuration options exposed by the Connector Template in the properties panel.
 
-Connectors are available [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md) and come with [Connector Templates](manage-connector-templates.md) which customize how a BPMN element is shown,
-and how it can be configured by process developers. Connector templates are a specific kind of [element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom Connectors via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
+Connectors are available [out-of-the-box (OOTB)](./out-of-the-box-connectors/available-connectors-overview.md) and come with [connector templates](manage-connector-templates.md) that customize how a BPMN element is shown and how it can be configured by process developers. Connector templates are a specific type of [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md), which can also be used when creating custom connectors via the [Connector SDK](./custom-built-connectors/connector-sdk.md).
 
 Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides Connectors by Camunda partners and community contributors.
 

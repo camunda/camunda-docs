@@ -149,7 +149,7 @@ Web Modeler requires an application to be registered with Microsoft Entra ID to 
 
 1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application. Be sure to save your `Application (client) ID` and `Directory (tenant) ID`.
 
-2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
+2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, [PKCS#8](https://en.wikipedia.org/wiki/PKCS_8) private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
 
 3. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) for your app so it can update the content of your Azure repositories. Ensure `Azure DevOps > vso.code_write` is configured, and `Admin consent required` is set to `No`.
 
@@ -298,10 +298,18 @@ Refer to [Configuration of the restapi component](../../../self-managed/componen
 
 ## Troubleshooting
 
+### File names
+
 - Duplicate file names are not allowed for the same file type.
 - Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
-- Any `.json` file is treated as a connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
-- Git sync only supports `.md` files that are named exactly `README.md` (case sensitive). Git sync supports multiple `README.md` in a repository (including in subfolders).
+
+### File extensions
+
+- `.json` files are parsed as either a Connector template or a test scenario file. The operation will fail if the file contents are not valid for either type. If the remote repository contains any `.json` files that are not valid Web Modeler files, place them in a subfolder so they are automatically ignored during synchronization.
+- Git Sync only supports `.md` files named exactly `README.md` (case-sensitive). Multiple `README.md` files are supported in a single repository, including in subfolders.
+
+### Synchronization
+
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.

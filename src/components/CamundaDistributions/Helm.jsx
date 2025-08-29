@@ -73,4 +73,16 @@ export const HelmChartValuesFileLocalLink = () => {
   );
 };
 
+export const HelmChartValuesFileBitnamiLegacyLink = () => {
+  const version = camundaReleaseVersion();
+  return (
+    <a
+      title={`https://helm.camunda.io/camunda-platform/values/camunda-${version}/values-bitnami-legacy.yaml`}
+      href={`https://helm.camunda.io/camunda-platform/values/camunda-${version}/values-bitnami-legacy.yaml`}
+    >
+      Helm chart Bitnami legacy values file
+    </a>
+  );
+};
+
 export default HelmChartInstall;

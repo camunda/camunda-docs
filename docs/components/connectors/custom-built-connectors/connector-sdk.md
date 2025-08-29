@@ -1073,7 +1073,7 @@ The job handler wrapper provides the following benefits:
 
 Using the wrapper class, you can create a custom [Zeebe client](/apis-tools/working-with-apis-tools.md).
 For example, you can spin up a custom client with the
-[Zeebe Java client](/apis-tools/java-client/index.md) as follows:
+[Zeebe Java client](/apis-tools/java-client/getting-started.md) as follows:
 
 ```java
 import io.camunda.connector.MyConnectorFunction;

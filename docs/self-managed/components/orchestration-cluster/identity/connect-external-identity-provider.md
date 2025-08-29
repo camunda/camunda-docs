@@ -43,7 +43,7 @@ Before configuring Camunda, you must first prepare your IdP:
 5. Note the **client ID**, **client secret**, and **issuer URI** as these are required during Camunda configuration.
 
 :::note
-For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), [configure](./configuration.md#oidc-configuration) your IdP to include it in the token, and update the Camunda configuration.
+For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), [configure](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration) your IdP to include it in the token, and update the Camunda configuration.
 :::
 
 ### Step 2: Choose Your deployment and configuration Method
@@ -121,6 +121,12 @@ global.security.authentication.oidc.scope: ["openid"]
 - **Redirect URI**: By default, the redirect URI is `http://localhost:8080/sso-callback`. Update this if your deployment uses a different hostname or port.
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
+
+:::info
+If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods)),
+you need to make the cluster accept the token passed by Web Modeler.
+To do so, include the Web Modeler UI's token audience in the configured list of audiences.
+:::
 
 #### Example IdP configuration
 
@@ -224,7 +230,7 @@ global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [configuration reference](./configuration.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
@@ -423,6 +429,6 @@ private static final String clusterRestLocal = "http://localhost:8080";
 
 ## Further resources
 
-- [OIDC configuration reference](./configuration.md)
+- [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)
 - [OpenID Connect (OIDC) overview](https://openid.net/connect/)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
