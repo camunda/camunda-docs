@@ -44,7 +44,7 @@ Orchestrate and automate complex business processes for people, systems, and dev
 
 ## Best Practices
 
-[Camunda Best Practices](/components/best-practices/best-practices-overview.md) distill our experience with BPMN and DMN on the Camunda toolstack, incorporating insights from consulting, community feedback, and various interactions.
+[Camunda Best Practices](/components/best-practices/best-practices-overview.md) distill our experience with BPMN and DMN on the Camunda toolstack, incorporating insights from consulting, community feedback, and various interactions. For example, learn about [deciding your stack](/components/best-practices/architecture/deciding-about-your-stack.md), and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) to make sure your production deployment is sized appropriately, and can scale without any backpressure issues.
 
 ## Features and integrations
 
