@@ -3,17 +3,7 @@ name: publish-prod
 on:
   push:
     tags:
-      - "[0-9]+.[0-9]+.[0-9]+"
-      - "!0.25.[0-9]+"
-      - "!0.26.[0-9]+"
-      - "!1.0.[0-9]+"
-      - "!1.1.[0-9]+"
-      - "!1.2.[0-9]+"
-      - "!1.3.[0-9]+"
-      - "!8.0.[0-9]+"
-      - "!8.1.[0-9]+"
-      - "!8.2.[0-9]+"
-      - "!8.3.[0-9]+"
+      - "8.3.[0-9]+"
 
 permissions:
   id-token: write
@@ -34,8 +24,8 @@ jobs:
         run: npm run build
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-          DOCS_SITE_URL: https://docs.camunda.io
-          DOCS_SITE_BASE_URL: /
+          DOCS_SITE_URL: https://unsupported.docs.camunda.io
+          DOCS_SITE_BASE_URL: /8.3/
       - name: Get Github Actions IP
         id: ip
         uses: haythem/public-ip@v1.3
@@ -51,7 +41,7 @@ jobs:
         with:
           switches: -avzr --delete
           path: build/
-          remote_path: ${{ secrets.AWS_PROD_PUBLISH_PATH }}
+          remote_path: ${{ secrets.AWS_PROD_PUBLISH_PATH_UNSUPPORTED }}/8.3
           remote_host: ${{ secrets.AWS_PROD_PUBLISH_HOST }}
           remote_user: ${{ secrets.AWS_PROD_PUBLISH_USER }}
           # vvvvv Intentionally missing the AWS_ prefix vvvvv
@@ -64,17 +54,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         if: always()
-  trigger-crawl:
-    runs-on: ubuntu-latest
-    needs: publish
-    steps:
-      - name: Trigger Algolia crawl
-        uses: algolia/algoliasearch-crawler-github-actions@v1.1.13
-        id: algolia_crawler
-        with:
-          crawler-user-id: ${{ secrets.ALGOLIA_CRAWLER_USER_ID }}
-          crawler-api-key: ${{ secrets.ALGOLIA_CRAWLER_API_KEY }}
-          algolia-app-id: ${{ secrets.ALGOLIA_APP_ID }}
-          algolia-api-key: ${{ secrets.ALGOLIA_API_KEY }}
-          site-url: "https://docs.camunda.io"
-          crawler-name: ${{ secrets.ALGOLIA_CRAWLER_NAME }}
