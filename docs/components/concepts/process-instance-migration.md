@@ -306,7 +306,7 @@ After the migration, the process instance will look like the following:
 <img src={ProcessInstanceAfterMigration} alt="The instance waiting on service task B." class="img-600"/>
 
 In the example above, another element `C` is added before the joining gateway in the target process definition.
-To complete the process instance after the migration, element `B` must be completed.
+After the migration, element `B` must still be completed for the process instance to continue through the gateway.
 
 ## Process definitions and versions
 
