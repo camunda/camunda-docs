@@ -84,7 +84,7 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 
 As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
 
-1. Download the appropriate Oracle driver: https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar.
+1. Download the appropriate Oracle driver: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
 
 <Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
