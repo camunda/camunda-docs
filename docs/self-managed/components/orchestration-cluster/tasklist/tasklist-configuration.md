@@ -18,21 +18,11 @@ The following components are configurable:
 
 ## Licensing
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
-
-<Licensing/>
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
 ## Webserver
 
-Tasklist supports customizing the **context-path** using the default Spring configuration.
-
-Example for `application.yml`:
-`server.servlet.context-path: /tasklist`
-
-Example for environment variable:
-`SERVER_SERVLET_CONTEXT_PATH=/tasklist`
-
-Default context-path is `/`.
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
 
 ## Elasticsearch or OpenSearch
 
@@ -107,6 +97,22 @@ ELS schema is created, settings may be adjusted directly in the ELS template:
 
 Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
 
+:::
+
+### Settings for index templates priority
+
+Camunda 8 creates index templates that Elasticsearch/OpenSearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the Elasticsearch/OpenSearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Tasklist index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                    | Description                                           | Default value   |
+| --------------------------------------- | ----------------------------------------------------- | --------------- |
+| camunda.database.index.templatePriority | Priority for all index templates created by Camunda 8 | - (no priority) |
+
+:::note
+The priority should be different (strictly higher) than that set by the wildcard templates.
 :::
 
 ### Snippet from application.yml
@@ -269,58 +275,7 @@ livenessProbe:
 
 ## Logging
 
-Tasklist uses Log4j2 framework for logging. In the distribution archive and inside a Docker image `/usr/local/tasklist/config/log4j2.xml`, logging configuration files are included and can be further adjusted to your needs:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
-  <Properties>
-    <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-    <Property name="log.stackdriver.serviceName">${env:TASKLIST_LOG_STACKDRIVER_SERVICENAME:-tasklist}</Property>
-    <Property name="log.stackdriver.serviceVersion">${env:TASKLIST_LOG_STACKDRIVER_SERVICEVERSION:-}</Property>
-  </Properties>
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT" follow="true">
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-    </Console>
-    <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-      <StackdriverLayout serviceName="${log.stackdriver.serviceName}"
-        serviceVersion="${log.stackdriver.serviceVersion}" />
-    </Console>
-  </Appenders>
-  <Loggers>
-    <Logger name="io.camunda.tasklist" level="info" />
-    <Root level="info">
-      <AppenderRef ref="${env:TASKLIST_LOG_APPENDER:-Console}"/>
-    </Root>
-  </Loggers>
-</Configuration>
-```
-
-By default, Console Appender is used.
-
-### JSON logging configuration
-
-You can choose to output logs in JSON format (Stackdriver compatible). To enable it, define
-the environment variable `TASKLIST_LOG_APPENDER` like the following:
-
-```sh
-TASKLIST_LOG_APPENDER=Stackdriver
-```
-
-### Change logging level at runtime
-
-Tasklist supports the default scheme for changing logging levels as provided by [Spring Boot](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers).
-
-The log level for Tasklist can be changed by following the [Setting a Log Level](https://docs.spring.io/spring-boot/docs/2.4.3/actuator-api/htmlsingle/#loggers-setting-level) section.
-
-#### Set all Tasklist loggers to DEBUG
-
-```shell
-curl 'http://localhost:9600/actuator/loggers/io.camunda.tasklist' -i -X POST \
--H 'Content-Type: application/json' \
--d '{"configuredLevel":"debug"}'
-```
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
 
 ## Clustering
 
@@ -331,43 +286,6 @@ If more than one Camunda Tasklist instance is accessible by users for a failover
 | Name                                         | Description                                                | Default value |
 | :------------------------------------------- | :--------------------------------------------------------- | :------------ |
 | camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
-
-## Example of application.yml file
-
-The following snippet represents the default Tasklist configuration, which is shipped with the distribution. It can be found inside the `config` folder (`/usr/local/tasklist/config/application.yml`) and can be used to adjust Tasklist to your needs.
-
-```yaml
-# Tasklist configuration file
-
-camunda.tasklist:
-  # Set Tasklist username and password.
-  # If user with <username> does not exists it will be created.
-  # Default: demo/demo
-  #username:
-  #password:
-  #roles:
-  #  - OWNER
-  #  - OPERATOR
-
-  # ELS instance to store Tasklist data
-  elasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # url
-    url: http://localhost:9200
-  # Zeebe instance
-  zeebe:
-    # Gateway address
-    gatewayAddress: localhost:26500
-  # ELS instance to export Zeebe data to
-  zeebeElasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # url
-    url: http://localhost:9200
-    # Index prefix, configured in Zeebe Elasticsearch exporter
-    prefix: zeebe-record
-```
 
 ## Cross-site request forgery protection
 

@@ -339,10 +339,10 @@ Create a custom `backup-manager.yaml` configuration file for the standalone back
 
 ```yaml
 camunda:
-  backup:
-    webapps:
+  data:
+    backup:
       # Example assuming an existing snapshot repository 'els-test'
-      repositoryName: els-test
+      repository-name: els-test
   database:
     # Example assuming an existing user called 'camunda-admin' who has 'snapshot_user' privileges
     username: camunda-admin

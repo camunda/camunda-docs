@@ -13,7 +13,7 @@ There are many ways you can provision and configure a Kubernetes cluster, and th
 
 Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider. The charts are available in the [Camunda Helm repository](https://artifacthub.io/packages/helm/camunda/camunda-platform) and we encourage you to [report issues](https://github.com/camunda/camunda-platform-helm/issues).
 
-You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration cluster in production environments with Helm charts.
+You can also visit our Kubernetes [Camunda production deployment](../operational-guides/production-guide/helm-chart-production-guide.md) guide to learn about deploying Camunda Orchestration Cluster in production environments with Helm charts.
 
 ## What is Helm?
 
@@ -239,7 +239,7 @@ These secure images:
 To access the private image registry, create a `docker-registry` secret using your Camunda harbour image registry credentials:
 
 ```shell
-kubectl create secret docker-registry camunda-registry-secret \
+kubectl create secret docker-registry registry-camunda-cloud \
   --docker-server=registry.camunda.cloud \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
@@ -261,7 +261,7 @@ This file includes a reference to the `commonVendorPullSecrets` parameter used t
 The `commonVendorPullSecrets` is required because `global.image.pullSecrets` does **not** apply when accessing Bitnami charts.
 :::
 
-The default secret name used to access image repository is `camunda-registry-secret` .
+The default secret name used to access image repository is `registry-camunda-cloud` .
 You can override it using `--set`, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
 
 Use the following command to install Camunda with Bitnami secure images and your registry secret:

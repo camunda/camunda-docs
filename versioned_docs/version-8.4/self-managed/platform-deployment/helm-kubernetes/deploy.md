@@ -135,7 +135,7 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-If you want to install a previous version of the Camunda componenets, follow this command structure:
+If you want to install a previous version of the Camunda components, follow this command structure:
 
 ```bash
 # This will install Camunda Helm chart v8.1.x with the latest applications/dependencies of v8.1.x.

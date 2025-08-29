@@ -127,11 +127,12 @@ To save a scenario:
 
 1. Execute a path in your process.
 1. Click **Save scenario** in the process instance header.
+1. A new [test scenario file](advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
 
 ![Save a scenario](img/play-save-scenario.png)
 
 :::tip
-To view your saved scenarios click **View all** beneath the Scenarios column in the process instance header.
+To view your saved scenarios in Play, click **View all** beneath the Scenarios column in the process instance header.
 :::
 
 ### Scenario coverage
@@ -142,6 +143,10 @@ Scenario coverage is calculated as the percentage of flow nodes in your process 
 - Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
 
 ![Scenario coverage](img/play-coverage.png)
+
+:::warning
+Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](advanced-modeling/test-scenario-files.md).
+:::
 
 ### Run scenario
 
@@ -154,7 +159,6 @@ You can run scenarios on the process definition page by clicking either the **Ru
 
 ### Limitations {#scenarios-limitations}
 
-- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.

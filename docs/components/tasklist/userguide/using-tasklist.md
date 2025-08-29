@@ -24,7 +24,7 @@ Tasklist has two main pages:
 - [Tasks page](#tasks-overview) to manage tasks.
 - [Processes page](./starting-processes.md) to start processes.
 
-## Tasks overview
+## Tasks queue
 
 The **Tasks** page lists all tasks available to a user or user group and allows users to assign themselves a task from the list to work on.
 

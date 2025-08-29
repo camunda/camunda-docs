@@ -23,8 +23,7 @@ This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/g
 
 | Camunda Spring Boot SDK version | JDK  | Camunda version | Bundled Spring Boot version |
 | ------------------------------- | ---- | --------------- | --------------------------- |
-| 8.7.x                           | ≥ 17 | 8.7.x           | 3.4.x                       |
-| 8.8.x                           | ≥ 17 | 8.8.x           | 3.4.x                       |
+| 8.8.x                           | ≥ 17 | 8.8.x           | 3.5.x                       |
 
 ## Add the Camunda Spring Boot SDK to your project
 

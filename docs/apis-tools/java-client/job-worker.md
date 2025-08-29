@@ -5,16 +5,73 @@ description: "Let's take a deeper look at job workers to handle jobs."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
+**Job workers are the backbone of process automation in Camunda 8.** They handle automated tasks (service tasks) in your BPMN processes by continuously polling for available jobs and executing your business logic when jobs become available.
+
+This guide covers everything you need to know about implementing and configuring job workers with the Camunda Java Client, from basic concepts to advanced features such as streaming, metrics, and multi-tenancy.
+
+## Quick start
+
+Before diving into the details, here is a simple example of creating a job worker:
+
+```java
+try (final JobWorker workerRegistration = client.newWorker()
+        .jobType(jobType)
+        .handler(new EmailJobHandler())
+        .open()) {
+
+    System.out.println("Job worker opened and receiving jobs of type: " + jobType);
+
+    // Keep the worker running
+    Thread.sleep(Duration.ofMinutes(10));
+} catch (InterruptedException e) {
+    throw new RuntimeException(e);
+}
+
+private static class EmailJobHandler implements JobHandler {
+    @Override
+    public void handle(final JobClient client, final ActivatedJob job) {
+        // Perform your business logic here
+        System.out.println("Processing job: " + job.getKey() + " for a process instance: " + job.getProcessInstanceKey());
+
+        // Complete the job (or use client.newFailCommand() if something goes wrong)
+        client.newCompleteCommand(job.getKey())
+                .variables(Map.of("emailSent", true))
+                .send()
+                .join();
+    }
+}
+```
+
+For a complete walkthrough, see the [getting started guide](getting-started.md).
+
+## What are job workers?
+
+A job worker is a service that:
+
+- **Polls for jobs** of a specific type from the Camunda cluster
+- **Executes your business logic** when jobs are activated
+- **Reports job completion or failure** back to the cluster
+- **Handles retries and error scenarios** automatically
+
+When you model a service task in your BPMN process and assign it a job type (e.g., `send-email`, `process-payment`), job workers subscribe to these job types and process them as they become available.
+
+## Key benefits
+
+- **Decoupled architecture**: Workers run independently from the process engine
+- **Scalable processing**: Add more workers to handle increased load
+- **Fault tolerance**: Built-in retry mechanisms and error handling
+- **Language flexibility**: Implement workers in any language with a Camunda client
+
 ## Related resources
 
 - [Job worker basics](/components/concepts/job-workers.md)
 
-## The Java client's job worker
+## How job workers work
 
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 :::caution REST API limitation
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration cluster REST API. For example, this applies when:
+The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration Cluster REST API. For example, this applies when:
 
 - Performing long-polling job activation when activating jobs larger than the maximum message size.
 - Receiving additional job activation requests from the same Java client while the long-polling connection is still open.
@@ -35,10 +92,6 @@ On `open`, the job worker waits `pollInterval` milliseconds and then polls for `
 For example, imagine you have 10 process instances and a single job worker configured with `maxJobsActive = 3`. The job worker will first pull three jobs and begin executing them. The threshold to poll for new jobs is 1 (30% of 3 rounded up). After two jobs have completed, the threshold is reached and the job worker will poll for up to 2 additional jobs. This process repeats until the jobs from all 10 process instances are completed.
 
 If streaming is enabled (via `streamEnabled`), it will also open a long-living stream over which jobs will be pushed without having to be polled. In such cases, a worker will only buffer up to `maxJobsActive` jobs at the same time. You can then estimate its memory usage as `maxJobsActive` times the max message size.
-
-## Example usage
-
-- [Open a job worker](../java-client-examples/job-worker-open.md)
 
 ## Backoff configuration
 
@@ -199,7 +252,7 @@ It's also possible to set an overall timeout - so called `streamTimeout` - which
 
 #### Backfilling
 
-Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. Even if a stream is created afterwards, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
+Even with streaming enabled, job workers still occasionally poll the cluster for jobs. Due to implementation constraints, when a job is made activate-able, it is pushed out only if there exists a stream for it; if not, it remains untouched. However, if a stream exists, then streaming is always prioritized over polling.
 
 This ensures polling will not activate any new jobs, and the worker will back off and poll less often as long as it receives empty responses overtime.
 

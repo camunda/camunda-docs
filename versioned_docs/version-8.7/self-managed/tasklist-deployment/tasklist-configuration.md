@@ -125,11 +125,60 @@ ELS schema is created, settings may be adjusted directly in the ELS template:
 - Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
 - Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
 
-:::warning
-
-Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
-
+:::note
+From 8.7.11 you can opt-in to applying schema-related configuration updates on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
 :::
+
+### Settings for index templates priority
+
+Tasklist creates index templates that Elasticsearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the Elasticsearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Tasklist index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                                 | Description                                          | Default value   |
+| ---------------------------------------------------- | ---------------------------------------------------- | --------------- |
+| camunda.tasklist.elasticsearch.indexTemplatePriority | Priority for all index templates created by Tasklist | - (no priority) |
+
+For OpenSearch:
+
+| Name                                              | Description                                          | Default value   |
+| ------------------------------------------------- | ---------------------------------------------------- | --------------- |
+| camunda.tasklist.opensearch.indexTemplatePriority | Priority for all index templates created by Tasklist | - (no priority) |
+
+:::note
+The priority should be different (strictly higher) than that set by the wildcard templates.
+:::
+
+:::note
+This feature is only available for Tasklist 8.7.11 and later versions.
+:::
+
+:::note
+From 8.7.11 you can opt-in to applying the configured priority update on restart. See [Dynamic schema settings updates](#dynamic-schema-settings-updates-8711).
+:::
+
+### Dynamic schema settings updates (8.7.11+)
+
+Configure Operate to update certain schema-related settings each time it starts by enabling:
+
+| Name                                               | Description                                         | Default value |
+| -------------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+For OpenSearch:
+
+| Name                                            | Description                                         | Default value |
+| ----------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.operate.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+
+Behavior when enabled:
+
+- numberOfReplicas: Updated for existing indices and future indices.
+- numberOfShards: Updated in index templates and indices created after the change.
+- indexTemplatePriority: Updated in index templates
+- A restart is required after changing any of the schema configuration values.
 
 ### Snippet from application.yml
 

@@ -530,7 +530,7 @@ Cluster disk space is cleared when a trial cluster is paused.
 New features are available as part of the enhanced document handling being delivered with the 8.7 release.
 
 - A new Document API is available as part of the [Camunda 8 REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
-- The [Java client](/apis-tools/java-client/index.md) is enhanced to support these new Document API methods.
+- The [Java client](/apis-tools/java-client/getting-started.md) is enhanced to support these new Document API methods.
 - A document store concept is introduced and implemented as an in-memory and a GCP-based document store.
 - A new Tasklist [Filepicker component](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md) is added for uploading documents to the document store in a form.
 - The [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md) is enhanced to provide document support in property/variable bindings.

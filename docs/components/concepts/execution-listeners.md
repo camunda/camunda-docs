@@ -50,7 +50,7 @@ Execution listeners are processed by [job workers](/components/concepts/job-work
 - Listeners are based on the same concept of jobs and use the same protocol.
 - You can implement a handler for an execution listener just as you would for a regular job.
 
-See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process execution listener jobs.
+See the [job worker documentation](/apis-tools/java-client/job-worker.md) for examples of how to create a job worker and handler that can also process execution listener jobs.
 
 :::note
 [Throwing a BPMN error](/components/best-practices/development/dealing-with-problems-and-exceptions.md#throwing-and-handling-bpmn-errors) for an execution listener's job is not supported.

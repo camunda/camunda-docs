@@ -91,7 +91,7 @@ Camunda 8 relies on [Identity](/self-managed/components/management-identity/mana
 Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
 application.
 
-Furthermore, as of 8.5.0, the Orchestration cluster REST API part of Zeebe does not support custom tenant-providing filters.
+Furthermore, as of 8.5.0, the Orchestration Cluster REST API part of Zeebe does not support custom tenant-providing filters.
 
 :::
 

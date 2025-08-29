@@ -6,7 +6,7 @@ keywords: ["camunda docker"]
 description: "Step through multi-platform support, configuration, Docker images, and Docker Compose."
 ---
 
-:::danger
+:::warning
 While the Docker images themselves are supported for production usage, [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend to use [Kubernetes](/self-managed/installation-methods/helm/install.md) in production.
 :::
 

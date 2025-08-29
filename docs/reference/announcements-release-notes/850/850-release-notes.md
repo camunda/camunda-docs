@@ -256,7 +256,7 @@ Process tiles in Tasklist now indicate when a form must be submitted in order to
 
 <!-- https://github.com/camunda/product-hub/issues/1978 -->
 
-By default, task users can now only access the tasks for which they are authorized (either assigned to the task or part of a candidate group). Admins can change this behavior per cluster, for example, to deactivate these restrictions in development clusters. See [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
+By default, task users can now only access the tasks for which they are authorized (either assigned to the task or part of a candidate group). Admins can change this behavior per cluster, for example, to deactivate these restrictions in development clusters. See [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
 
 ### Multi-tenancy support with other OIDC providers <span class="badge badge--long" title="This feature affects Identity">Identity</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
