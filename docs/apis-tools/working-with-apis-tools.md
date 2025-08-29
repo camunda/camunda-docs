@@ -30,7 +30,7 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 - **Node.js SDK:** For JavaScript/TypeScript developers building integrations or automations.
 
 <DocCardList items={[
-{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"},
+{type:"link", href:"/docs/next/apis-tools/java-client/getting-started/", label: "Java client", docId:"apis-tools/java-client/getting-started"},
 {type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Spring SDK", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
 {type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js SDK", docId:"apis-tools/node-js-sdk"}
 ]}/>
@@ -55,7 +55,7 @@ Camunda provides official clients and SDKs to simplify API usage and speed up de
 
 ## When to use which API?
 
-- **Orchestration Cluster API:** For most process automation, orchestration, and user task scenarios. Recommended for new projects.
+- **Orchestration Cluster REST API:** For most process automation, orchestration, and user task scenarios. Recommended for new projects.
 - **Zeebe API:** For advanced, high throughput and low-latency integrations, or when you need gRPC features. Use only if you have specific requirements that the REST API cannot meet.
 - **Administration API:** For cluster and system management.
 - **Optimize API:** For analytics, dashboards, and reporting.

@@ -1,5 +1,5 @@
 ---
-title: "Camunda 8.8 APIs & tools upgrade guide"
+title: "Camunda 8.8 APIs & tools migration guide"
 description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes architectural highlights, prerequisites, and breaking changes relevant for developers."
 ---
 
@@ -15,7 +15,7 @@ This guide focuses on the API and SDK transitions required in an upgrade from Ca
 
 Camunda 8.8 introduces a significant architectural evolution that impacts both infrastructure deployment and application integration:
 
-- A new [orchestration cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
+- A new [Orchestration Cluster](/components/whats-new-in-88.md#orchestration-cluster) architecture.
 - Unified APIs for a more consistent developer experience.
 - Updated authentication models.
 - Deprecation of several legacy components.
@@ -39,14 +39,14 @@ See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announ
 
 Camunda 8.8 API and SDK changes and statuses are summarized as follows:
 
-| Component/Use            | 8.8 status     | Migrate to                 | Migrate by          |
-| :----------------------- | :------------- | :------------------------- | :------------------ |
-| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10 |
-| ZeebeClient              | **Deprecated** | Camunda Java Client        | Before Camunda 8.10 |
-| Spring Zeebe SDK         | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10 |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
-| Job-based user tasks     | **Deprecated** | Camunda user tasks         | Before Camunda 8.10 |
-| Tasklist GraphQL API     | **Removed**    | Orchestration Cluster API  | 8.8                 |
+| Component/Use            | 8.8 status     | Migrate to                  | Migrate by          |
+| :----------------------- | :------------- | :-------------------------- | :------------------ |
+| V1 component APIs        | **Deprecated** | Orchestration Cluster API   | Before Camunda 8.10 |
+| ZeebeClient              | **Deprecated** | Camunda Java Client         | Before Camunda 8.10 |
+| Spring Zeebe SDK         | **Deprecated** | Spring Boot Camunda Starter | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| Job-based user tasks     | **Deprecated** | Camunda user tasks          | Before Camunda 8.10 |
+| Tasklist GraphQL API     | **Removed**    | Orchestration Cluster API   | 8.8                 |
 
 :::info
 For more information, see the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -65,28 +65,28 @@ For more information on upgrading and migrating, see [migrate to the Orchestrati
 
 ### Camunda Java Client
 
-The [Camunda Java Client](/apis-tools/java-client/index.md) is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
+The [Camunda Java Client](/apis-tools/java-client/getting-started.md) is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.
 
 - The Camunda Java Client is a drop-in replacement for Zeebe Java Client, however, Zeebe Java Client is still available.
 - Zeebe Java Client is deprecated with 8.8 and will be removed with 8.10. This allows you to plan and transition to the Camunda Java Client without immediate pressure, allowing for a smoother migration process.
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
+:::
 
-### Camunda Spring SDK
+### Spring Boot Camunda Starter
 
-The [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+The [Spring Boot Camunda Starter](/apis-tools/spring-zeebe-sdk/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
-The transition from Zeebe Spring SDK to Camunda Spring SDK indicates significant architectural changes in Camunda 8.8.
+The transition from Zeebe Spring SDK to Spring Boot Camunda Starter indicates significant architectural changes in Camunda 8.8.
 
-- The Camunda Spring SDK is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
-- The Camunda Spring SDK continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
+- The Spring Boot Camunda Starter is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
+- The Spring Boot Camunda Starter continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
 - There is a grace period during which the old Zeebe client is still available until version 8.10. This allows you to adapt to the new SDK and make the required changes incrementally.
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating, see [migrate to Spring Boot Camunda Starter](migrate-to-camunda-java-client.md).
+:::
 
 ### Camunda Process Test (CPT)
 
@@ -101,9 +101,10 @@ For more information, see the update guide.
 | 8.9     | Continued support for both ZPT and CPT.                                                |
 | 8.10    | ZPT will be removed completely. You must have migrated your tests to CPT by this time. |
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating,
+see [migrate to Camunda Process Test](migrate-to-camunda-process-test.md).
+:::
 
 ### Camunda user tasks
 
@@ -127,6 +128,6 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 Ready to upgrade and migrate? Complete the following steps:
 
-1. **Coordinate your platform and development teams**: Ensure your orchestration cluster is upgraded to 8.8 before upgrading your application clients.
+1. **Coordinate your platform and development teams**: Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients.
 
 2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.

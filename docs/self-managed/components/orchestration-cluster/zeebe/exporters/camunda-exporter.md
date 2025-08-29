@@ -23,7 +23,7 @@ Enable the exporter by configuring the `className` in your [broker configuration
 
 ```yaml
 exporters:
-  camundaExporter:
+  camundaexporter:
     className: io.camunda.exporter.CamundaExporter
     args:
     # Refer to the table below for the available args options
@@ -122,11 +122,13 @@ When enabled, this creates an Index Lifecycle Management (ILM) Policy that delet
 `minimumAge`.
 All index templates created by this exporter apply the created ILM Policy.
 
-| Option     | Description                                                                   | Default |
-| ---------- | ----------------------------------------------------------------------------- | ------- |
-| enabled    | If `true` the ILM Policy is created and applied to the index templates.       | `false` |
-| minimumAge | Specifies how old the data must be, before the data is deleted as a duration. | `30d`   |
-| policyName | The name of the created and applied ILM policy.                               |         |
+| Option                 | Description                                                                                                                                                          | Default                                  |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| enabled                | If `true` the ILM Policy is created and applied to the index templates.                                                                                              | `false`                                  |
+| minimumAge             | Specifies how old the data must be, before the data is deleted as a duration.                                                                                        | `30d`                                    |
+| policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
+| usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
+| usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
@@ -175,9 +177,9 @@ exporters:
   #
   # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
   # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
-  # For example, the property "zeebe.broker.exporters.camundaExporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
+  # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
   #
-  camundaExporter:
+  camundaexporter:
     className: io.camunda.exporter.CamundaExporter
 
     args:
@@ -216,6 +218,8 @@ exporters:
           enabled: false
           minimumAge: 30d
           policyName: camunda-retention-policy
+          usageMetricsMinimumAge: 730d
+          usageMetricsPolicyName: camunda-usage-metrics-retention-policy
 
         batchOperation:
           exportItemsOnCreation: true

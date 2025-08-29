@@ -13,7 +13,7 @@ You need to keep `port-forward` running all the time to communicate with the rem
 
 ## Accessing workflow engine
 
-To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
+To interact with Camunda workflow engine via [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md) using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker from outside the Kubernetes cluster, run `kubectl port-forward` to the Zeebe cluster as following:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
@@ -43,14 +43,14 @@ kubectl port-forward svc/camunda-tasklist 8082:80
 
 kubectl port-forward svc/camunda-optimize 8083:80
 
-kubectl port-forward svc/camunda-connectors 8088:8080
+kubectl port-forward svc/camunda-connectors 8086:8080
 
 ```
 
 To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
 
 ```
-kubectl port-forward svc/camunda-web-modeler-webapp 8084:80
+kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
 
 kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
@@ -74,7 +74,7 @@ Finally, you can access each app pointing your browser at:
 - Operate: [http://localhost:8081](http://localhost:8081)
 - Tasklist: [http://localhost:8082](http://localhost:8082)
 - Optimize: [http://localhost:8083](http://localhost:8083)
-- Web Modeler: [http://localhost:8084](http://localhost:8084)
+- Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
 
 Log in to these services using the first user `demo`/`demo` credentials.

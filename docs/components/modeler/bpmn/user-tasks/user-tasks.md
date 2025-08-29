@@ -44,7 +44,7 @@ Note that in SaaS, all user IDs are converted to lowercase by default, as they a
 :::
 
 :::info
-Assignment resources can also be used for set user task restrictions ([SaaS](/components/concepts/access-control/user-task-access-restrictions.md)/[Self-Managed](/components/concepts/access-control/user-task-access-restrictions.md)), where users will see only the tasks they have authorization to work on.
+Assignment resources can also be used to set [user task restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md), where users will see only the tasks they have authorization to work on.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -205,7 +205,7 @@ to transform the variables passed to the job worker, or to customize how the var
 User tasks implemented using Job workers come with significant limitations when compared to [Camunda user tasks](#camunda-user-tasks):
 
 1. **API compatibility**:
-   You cannot use the [Orchestration cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to manage user tasks based on job workers. These tasks are restricted to the functionality provided for [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
+   You cannot use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to manage user tasks based on job workers. These tasks are restricted to the functionality provided for [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md).
 
 2. **Lifecycle management**:
    The Zeebe engine provides no visibility into lifecycle and state management features of Job worker-based user tasks. This means that you must handle these aspects in your custom application, outside the engine. Consider this approach only if your use case requires a highly specific user task implementation that cannot be achieved with Camunda user tasks.

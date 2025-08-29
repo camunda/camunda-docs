@@ -10,7 +10,7 @@ jobs:
     name: links-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Get Current Date
         id: dateofday
@@ -23,7 +23,7 @@ jobs:
           key: cache-lychee-${{ env.DATEOFDAY }}
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.4.1
+        uses: lycheeverse/lychee-action@v2.6.0
         id: link-checker
         with:
           fail: false

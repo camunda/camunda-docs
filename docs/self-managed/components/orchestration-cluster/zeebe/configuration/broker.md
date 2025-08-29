@@ -56,7 +56,7 @@ The `server` configuration allows you to configure the main REST server. Below a
 
 | Field   | Description                                                                                                                                                                       | Example value |
 | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the Orchestration cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -64,7 +64,7 @@ Allows you to configure the SSL security for the REST server.
 
 | Field                   | Description                                                                                                                                                                     | Example value |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled                 | If true, enables TLS for the Orchestration cluster REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                           | false         |
+| enabled                 | If true, enables TLS for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_SSL_ENABLED`.                           | false         |
 | certificate             | The path to a PEM encoded certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATE`.                                             |               |
 | certificate-private-key | The path to a PKCS1 or PKCS8 private key for the configured certificate. This setting can also be overridden using the environment variable `SERVER_SSL_CERTIFICATEPRIVATEKEY`. |               |
 
@@ -369,6 +369,8 @@ backup:
     forcePathStyleAccess: false
     compression: none
     basePath: null
+    maxConcurrentConnections:
+    connectionAcquisitionTimeout:
 ```
 
 ### zeebe.broker.data.backup.gcs
@@ -460,6 +462,7 @@ This section contains all cluster related configurations, to setup a zeebe clust
 | replicationFactor    | Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                                          |
 | clusterSize          | Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                          |
 | initialContactPoints | Allows to specify a list of known other nodes to connect to on startup. The contact points of the internal network configuration must be specified. The format is [HOST:PORT]. To guarantee the cluster can survive network partitions, all nodes must be specified as initial contact points. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` specifying a comma-separated list of contact points. Default is empty list.                                                                                                                                                                                                                               | [ 192.168.1.22:26502, 192.168.1.32:26502 ] |
+| clusterId            | Unique identifier for cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | zeebe-cluster-123                          |
 | clusterName          | Allows to specify a name for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERNAME`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | zeebe-cluster                              |
 | heartbeatInterval    | Configure heartbeatInterval. The leader sends a heartbeat to a follower every heartbeatInterval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 250ms                                      |
 | electionTimeout      | Configure electionTimeout. If a follower does not receive a heartbeat from the leader with in an election timeout, it can start a new leader election. electionTimeout should be greater than configured heartbeatInterval. When the electionTimeout is large, there will be delay in detecting a leader failure. When the electionTimeout is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes. If the network latency between the nodes is high, it is recommended to have a higher election latency. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_ELECTIONTIMEOUT`. | 2500ms                                     |
@@ -990,4 +993,41 @@ security:
       issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
+```
+
+### Console Ping Configuration
+
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and Zeebe Gateway to ping Console with license information.
+
+#### camunda.console.ping
+
+| Field                        | Description                                                                                                                                                                            | Example value                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                | `true`                         |
+| `endpoint`                   | Endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                               | `https://console.endpoint.com` |
+| `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERNAME`.                                               | `test_cluster_name`            |
+| `pingPeriod`                 | Frequency of pings (e.g., `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                     | `1h`                           |
+| `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PROPERTIES`.       | `testProperty: 123`            |
+| `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_MAX_RETRIES`. | `1`                            |
+| `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MINRETRYDELAY`.                                          | `1s`                           |
+| `retry.maxRetryDelay`        | Maximum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED_RETRY_MAXRETRYDELAY`.                                  | `10s`                          |
+| `retry.retryDelayMultiplier` | Multiplier applied to delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_RETRYDELAYMULTIPLIER`.                     | `2`                            |
+
+##### YAML snippet
+
+```yaml
+camunda:
+  console:
+    ping:
+      enabled: true
+      endpoint: https://console.endpoint.com
+      clusterName: test_cluster_name
+      pingPeriod: 1h
+      properties:
+        testProperty: 123
+      retry:
+        maxRetries: 1
+        minRetryDelay: 1s
+        maxRetryDelay: 10s
+        retryDelayMultiplier: 2
 ```

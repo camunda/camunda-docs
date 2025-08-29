@@ -1,7 +1,7 @@
 ---
 id: log-levels
 sidebar_label: Log levels
-title: Camunda componenets log levels
+title: Camunda components log levels
 description: "Learn about what information you can expect in various log levels and how to handle them"
 ---
 
@@ -23,8 +23,6 @@ Camunda 8 uses the following log levels:
 
 Enable logging for each Camunda 8 component as follows:
 
-- [Zeebe](/self-managed/components/orchestration-cluster/zeebe/configuration/logging.md)
-- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#logging)
-- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#logging)
+- [Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md)
 - [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/logging.md)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configure-logging.md)

@@ -1,6 +1,6 @@
 ---
 sidebar_label: Troubleshooting
-title: Camunda componenets troubleshooting
+title: Camunda components troubleshooting
 description: "Troubleshooting considerations in Platform deployment."
 ---
 
@@ -103,12 +103,13 @@ AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 
 This disables the additional checksum calculation in the S3 client and should resolve the issue.
 
-## Zeebe Backup with Azure Blob Storage
+## Zeebe backup with Azure Blob Storage
 
 When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
-The root cause of this issue is a deadlock in the Azure SDK, when virtual threads are used.
-This deadlock is especially likely to occur on systems with many partitions per broker and few CPU cores available.
-Set the following environment variable on your Zeebe brokers to disable the use of virtual threads in the Azure SDK:
+
+This issue is caused by a deadlock in the Azure SDK when virtual threads are used. It is more likely to occur on systems with many partitions per broker and limited CPU resources.
+
+To mitigate this, set the following environment variable on your Zeebe brokers to disable virtual threads in the Azure SDK:
 
 ```
 AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
@@ -267,3 +268,14 @@ The error message suggests adjusting the Ingress configuration to include the re
 :::note
 Sometimes, some checks may not be applicable to your setup if it's custom (for example, with the previous example the Ingress you use may not be [ingress-nginx](https://kubernetes.github.io/ingress-nginx/)).
 :::
+
+## Basic Authentication Performance
+
+Throughput when using Basic Authentication is very limited, supporting only a few API requests per second.
+Workloads greater than that which can be supported by Basic Authentication may cause request processing to stall,
+as queued requests can time out before they are processed.
+
+Development and testing scenarios that are performance-sensitive may
+[disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development),
+or use
+[OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).

@@ -1,13 +1,13 @@
 ---
 id: orchestration-cluster-api-rest-data-fetching
 title: "Data fetching"
-description: "Learn about fetching data using the Orchestration Cluster API."
+description: "Learn about fetching data using the Orchestration Cluster REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Orchestration Cluster API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants. Each search-enabled endpoint supports rich filtering, sorting, and pagination so you can quickly find the data that matters most.
+The Orchestration Cluster REST API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants. Each search-enabled endpoint supports rich filtering, sorting, and pagination so you can quickly find the data that matters most.
 
 The sections below explain how to structure a search request and interpret the response format.
 
@@ -20,7 +20,7 @@ The following examples support search via POST endpoints, each with its own set 
 - Users (`POST /v2/users/search`)
 - Batch operations (`POST /v2/batch-operations/search`)
 
-Refer to the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] for the full attribute lists.
+Refer to the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) for the full attribute lists.
 
 ## Supported operations
 
@@ -45,7 +45,7 @@ All search and retrieval endpoints (GET and POST) return near-real-time data con
 
 ## User task support
 
-The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
+The Orchestration Cluster REST API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
 
@@ -130,7 +130,7 @@ This limits the result set returned in the response to 3 items, no matter how ma
 
 To provide an easy yet expressive way for users to search for and filter resources, search requests can contain more advanced filter criteria than fields being _equal_ to a target value.
 
-For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the Orchestration Cluster API specification.
+For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the Orchestration Cluster REST API specification.
 
 #### Conditional Operators
 

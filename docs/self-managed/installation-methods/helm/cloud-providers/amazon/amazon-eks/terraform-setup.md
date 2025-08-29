@@ -526,10 +526,11 @@ Ensure that you use the actual values you passed to the Terraform module during 
 
 As you now have a database, you need to create dedicated databases for each Camunda component and an associated user that have a configured access. Follow these steps to create the database users and configure access.
 
-You can access the created database in two ways:
+You can access the created database in the following ways:
 
 1. **Bastion host:** Set up a bastion host within the same network to securely access the database.
-2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database.
+2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the database. See [Access internal infrastructure](#access-internal-infrastructure).
+3. **VPN:** Establish a VPN connection to the VPC where the Aurora Cluster resides, allowing secure access from your local machine or another network.
 
 The choice depends on your infrastructure setup and security preferences. In this guide, we'll use a pod within the EKS cluster to configure the database.
 
@@ -639,10 +640,11 @@ Running these commands cleans up both the job and the secret, ensuring that no u
 
 As you now have an OpenSearch domain, you need to configure the related access for each Camunda component.
 
-You can access the created OpenSearch domain in two ways:
+You can access the created OpenSearch domain in the following ways:
 
 1. **Bastion host:** Set up a bastion host within the same network to securely access the OpenSearch domain.
-2. **Pod within the EKS cluster:** Alternatively, deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain.
+2. **Pod within the EKS cluster:** Deploy a pod in your EKS cluster equipped with the necessary tools to connect to the OpenSearch domain. See [Access internal infrastructure](#access-internal-infrastructure).
+3. **VPN:** Establish a VPN connection to the VPC where the OpenSearch domain resides, allowing secure access from your local machine or another network.
 
 The choice depends on your infrastructure setup and security preferences. In this tutorial, we'll use a pod within the EKS cluster to configure the domain.
 
@@ -717,6 +719,84 @@ Running these commands will clean up both the job and the secret, ensuring that 
 
 </TabItem>
 </Tabs>
+
+### Access internal infrastructure
+
+:::warning Not recommended in production
+
+These approaches are intended for **development and troubleshooting purposes only**.
+For a production cluster, use a proper VPN or other secure access methods.
+
+:::
+
+Some infrastructure components, such as OpenSearch dashboards or Aurora PostgreSQL databases, are accessible only from inside the Virtual Private Cloud (VPC).
+You can use a temporary pod as a _jump host_ to tunnel traffic to these components.
+
+---
+
+<details>
+<summary>Generic approach using a jump host</summary>
+
+**Component connection details**
+
+Export `REMOTE_HOST`, `REMOTE_PORT`, and `LOCAL_PORT` with the component-specific values:
+
+| Component            | `REMOTE_HOST`      | `REMOTE_PORT`  | `LOCAL_PORT` |
+| -------------------- | ------------------ | -------------- | ------------ |
+| OpenSearch dashboard | `$OPENSEARCH_HOST` | `443`          | `9200`       |
+| Aurora PostgreSQL    | `$AURORA_ENDPOINT` | `$AURORA_PORT` | `5432`       |
+
+1. Run a socat pod to create a TCP tunnel:
+
+   ```bash
+   kubectl --namespace $CAMUNDA_NAMESPACE run my-jump-pod -it \
+   --image=alpine/socat \
+   --tty --rm \
+   --restart=Never \
+   --expose=true --port=$REMOTE_PORT -- \
+   tcp-listen:$REMOTE_PORT,fork,reuseaddr \
+   tcp-connect:$REMOTE_HOST:$REMOTE_PORT
+   ```
+
+   :::tip How it works
+   [socat](http://www.dest-unreach.org/socat/) (_SOcket CAT_) is a command-line tool that relays data between two network endpoints.
+
+   In this command:
+   - `tcp-listen:$REMOTE_PORT,fork,reuseaddr` listens on the specified port in the pod and can handle multiple connections.
+   - `tcp-connect:$REMOTE_HOST:$REMOTE_PORT` forwards all incoming traffic to the internal component endpoint.
+
+   Combined with `kubectl port-forward` (step 2), the flow is:
+
+   ```
+   Local Client → localhost:$LOCAL_PORT → port-forward → my-jump-pod:$REMOTE_PORT → socat → Remote Component
+   ```
+
+   This setup lets you securely reach internal components without exposing them publicly.
+   :::
+
+2. Port-forward the pod to your local machine:
+
+   ```bash
+   kubectl port-forward --namespace $CAMUNDA_NAMESPACE pod/my-jump-pod $LOCAL_PORT:$REMOTE_PORT
+   ```
+
+3. Connect to the component:
+
+   _OpenSearch example:_
+
+   ```bash
+   https://localhost:$LOCAL_PORT/_dashboards
+   ```
+
+   Accept the insecure connection if prompted.
+
+   _Aurora PostgreSQL example:_
+
+   ```bash
+   PGPASSWORD=$AURORA_PASSWORD psql -h localhost -p $LOCAL_PORT -U $AURORA_USERNAME -d <DATABASE>
+   ```
+
+</details>
 
 ## 3. Install Camunda 8 using the Helm chart
 
