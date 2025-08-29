@@ -89,7 +89,50 @@ module.exports = {
         "components/concepts/resource-deletion",
       ],
     },
-
+    {
+      type: "category",
+      label: "Best Practices",
+      link: {
+        type: "doc",
+        id: "components/best-practices/best-practices-overview",
+      },
+      items: [
+        {
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          Architecture: [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          Development: [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          Modeling: [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
+          ],
+          Operations: [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+        },
+      ],
+    },
     {
       type: "category",
       label: "Features and integrations",
@@ -108,20 +151,6 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
-          ],
-        },
-        {
-          type: "category",
-          label: "Document handling",
-          link: {
-            type: "doc",
-            id: "components/document-handling/getting-started",
-          },
-          items: [
-            "components/document-handling/use-cases",
-            "components/document-handling/upload-document-to-bpmn-process",
-            "components/document-handling/display-and-download-document",
-            "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
         {
@@ -175,6 +204,20 @@ module.exports = {
               label: "RPA library specifications",
               href: "https://camunda.github.io/rpa-python-libraries/",
             },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "components/document-handling/getting-started",
+          },
+          items: [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
         {
@@ -801,50 +844,7 @@ module.exports = {
         "reference/saas-ip-addresses",
       ],
     },
-    {
-      type: "category",
-      label: "Best Practices",
-      link: {
-        type: "doc",
-        id: "components/best-practices/best-practices-overview",
-      },
-      items: [
-        {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
-            "components/best-practices/architecture/understanding-human-tasks-management",
-          ],
-          Development: [
-            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
-            "components/best-practices/development/service-integration-patterns",
-            "components/best-practices/development/writing-good-workers",
-            "components/best-practices/development/dealing-with-problems-and-exceptions",
-            "components/best-practices/development/handling-data-in-processes",
-            "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-          ],
-          Modeling: [
-            "components/best-practices/modeling/creating-readable-process-models",
-            "components/best-practices/modeling/naming-bpmn-elements",
-            "components/best-practices/modeling/naming-technically-relevant-ids",
-            "components/best-practices/modeling/modeling-beyond-the-happy-path",
-            "components/best-practices/modeling/modeling-with-situation-patterns",
-            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
-            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
-            "components/best-practices/modeling/choosing-the-resource-binding-type",
-          ],
-          Operations: [
-            "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",
-          ],
-        },
-      ],
-    },
+
     "reference/glossary",
   ],
   "APIs & Tools": [
