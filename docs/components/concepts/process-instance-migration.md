@@ -287,19 +287,19 @@ For migrating joining gateways, the following conditions must be true:
 - The target gateway must have at least the same number of incoming sequence flows as the source gateway.
 
 Consider the following example:
-The process instance is waiting at the joining parallel gateway, with an incoming sequence flow `flow1` is taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
+The process instance is waiting at the joining parallel gateway, with an incoming sequence flow `flow1`, taken after the element `A` completes. Element `B` is still active and waiting at the user task.
 
 ![The instance waiting on joining gateway.](assets/process-instance-migration/migration-joining-gateway-before.png)
 
-Then, the process definition is updated to include an element `C` before the joining gateway.
+Then, the process definition is updated to include element `C` before the joining gateway.
 
 <img src={TargetProcessDefinition} alt="Process definition is updated to include C." class="img-600"/>
 
-To migrate the process instance, the following mapping instructions must be provided:
+To migrate the process instance, provide the following mapping instructions:
 
-- From the active element `B` to the target element `B`
-- From the joining parallel gateway instance `gateway1` to the target joining parallel gateway `gateway2`
-- From the taken sequence flow `flow1` to the target sequence flow `flow2`
+- From the active element `B` to the target element `B`.
+- From the joining parallel gateway instance `gateway1` to the target joining parallel gateway `gateway2`.
+- From the sequence flow `flow1` to the target sequence flow `flow2`.
 
 After the migration, the process instance will look like the following:
 
