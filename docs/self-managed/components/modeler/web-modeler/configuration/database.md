@@ -183,3 +183,11 @@ spring:
 ```
 </TabItem>
 </Tabs>
+
+#### Case sensitivity
+
+MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive collation. We recommend using `Latin1_General_CS_AS`.
+
+Not doing so may lead to unexpected behavior.
+The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
