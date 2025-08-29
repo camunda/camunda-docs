@@ -22,7 +22,7 @@ Get hands-on with [Camunda 8](https://camunda.io) with our getting started guide
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={OverviewImg} alt="Run your first local Camunda 8 project" title="Run your first local Camunda 8 project" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>

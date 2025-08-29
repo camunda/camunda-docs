@@ -37,7 +37,7 @@ Orchestrate and automate complex business processes for people, systems, and dev
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Image showing Self-Managed components and features" title="Use Camunda 8 Self-Managed as a self-hosted alternative to Camunda 8 SaaS" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={OverviewImg} alt="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." title="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
