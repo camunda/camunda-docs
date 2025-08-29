@@ -186,7 +186,7 @@ spring:
 
 #### Case sensitivity
 
-MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive collation. We recommend using `Latin1_General_CS_AS`.
+MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive one. We recommend using `Latin1_General_CS_AS`.
 
 Not doing so may lead to unexpected behavior.
 The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
