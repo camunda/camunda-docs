@@ -6,7 +6,7 @@ description: "Learn how to manage authorizations to an orchestration cluster."
 
 An authorization grants permissions to an **owner** to perform actions on a specific **resource**.
 
-- The **owner** is the entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules.md).
+- The **owner** is the entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](./mapping-rules/manage-mapping-rules.md).
 - The **resource** is the object that the permissions apply to, like a process definition or a decision instance.
 
 Each authorization specifies which actions (e.g., `READ`, `UPDATE`, `DELETE`) the owner is allowed to perform on the resource.
