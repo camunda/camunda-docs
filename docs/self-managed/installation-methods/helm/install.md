@@ -5,43 +5,240 @@ title: Helm chart installation
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
+import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './assets/\_install-card-data';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This guide walks through how to perform a basic installation of Camunda 8 Self-Managed by installing the orchestration cluster and optionally the management cluster.
+
+We recommend using managed services for PostgreSQL, Elasticsearch, and Keycloak when available. This page also includes an optional deployment of these dependencies via operators for cases where managed services are not available.
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
-## Prerequisites
+## Installation overview
 
-- Kubernetes cluster: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components.
-- Helm: Make sure the Helm CLI is installed.
+<ZeebeGrid zeebe={overviewCards} />
+
+## Infrastructure prerequisites
+
+When deploying Camunda 8 Self-Managed, you have two options for infrastructure dependencies:
+
+**Recommended approach**: Use managed services for:
+
+- **PostgreSQL**: For Keycloak, Camunda Identity, and Web Modeler databases
+- **Elasticsearch**: For storing Zeebe and Camunda data (orchestration cluster)
+- **Keycloak**: For authentication and identity management
+
+**Alternative approach**: If managed services are not available, you can deploy these dependencies using Kubernetes operators as documented in this guide.
+
+### Prerequisites
+
+- **Kubernetes cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components
+- **Helm**: Make sure the Helm CLI is installed
+- **kubectl**: Configured to access your cluster
+- **ClusterAdmin privileges**: Required to install operators (if using the operator-based approach)
+- **OpenSSL**: For generating random passwords
+- **envsubst command**: Part of `gettext` package for environment variable substitution in manifests
+
+### Environment setup
+
+Before starting the installation, set up the required environment variables:
+
+```bash
+export CAMUNDA_NAMESPACE="camunda"
+```
+
+This variable will be used throughout the installation process to specify the target namespace for the Camunda Platform deployment.
+
+### Setting up infrastructure with operators
+
+If you don't have access to managed services, you can use our reference deployment with Kubernetes operators. This deployment provides production-ready infrastructure components that integrate seamlessly with the Camunda Helm chart.
+
+The provided reference architecture repository allows you to directly reuse and extend the existing example base. This sample implementation is flexible to extend to your own needs without the potential limitations of a solution maintained by a third party.
+
+<Tabs groupId="env">
+<TabItem value="standard" label="Standard" default>
+
+First, clone the deployment references repository and navigate to the operator-based directory:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/get-your-copy.sh
+```
+
+Once in the repository directory, navigate to the operator-based folder:
+
+```bash
+cd generic/kubernetes/operator-based
+```
+
+Set the required environment variables:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/set-environment.sh
+```
+
+Deploy all infrastructure components:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/deploy-all-reqs.sh
+```
+
+Verify the infrastructure deployment:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/verify-all-reqs.sh
+```
+
+</TabItem>
+</Tabs>
+
+<details>
+<summary>Manual step-by-step infrastructure installation</summary>
+
+If you prefer to install components individually:
+
+#### PostgreSQL Installation
+
+PostgreSQL uses [CloudNativePG, a CNCF component under Apache 2.0 license](https://landscape.cncf.io/?item=app-definition-and-development--database--cloudnativepg).
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-install-operator.sh
+```
+
+Create database secrets:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-create-secrets.sh
+```
+
+Deploy PostgreSQL clusters:
+
+```bash
+kubectl apply -n camunda -f 01-postgresql-clusters.yml
+```
+
+Wait for clusters to be ready:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-wait-ready.sh
+```
+
+#### Elasticsearch Installation
+
+Elasticsearch uses ECK (Elastic Cloud on Kubernetes), the official operator from Elastic.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-install-operator.sh
+```
+
+Deploy Elasticsearch cluster:
+
+```bash
+kubectl apply -n camunda -f 02-elasticsearch-cluster.yml
+```
+
+Wait for cluster to be ready:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-wait-ready.sh
+```
+
+#### Keycloak Installation
+
+Keycloak uses the official [Keycloak Operator under Apache 2.0 license](https://landscape.cncf.io/?item=provisioning--security-compliance--keycloak).
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-install-operator.sh
+```
+
+Deploy Keycloak instance:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-deploy.sh
+```
+
+Wait for Keycloak to be ready:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-wait-ready.sh
+```
+
+</details>
 
 ## Installing the orchestration cluster
 
-- First, create a namespace to install the platform on Kubernetes:
-  ```bash
-  kubectl create namespace orchestration
-  ```
-  output:
-  ```bash
-  namespace/orchestration created
-  ```
-- To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), you need to add the [Helm repository](https://helm.sh/docs/topics/chart_repository/). You can do this with the following command:
-  ```bash
-  helm repo add camunda https://helm.camunda.io
-  helm repo update
-  ```
+Once your infrastructure is ready (either managed services or operator-based), you can deploy the Camunda Platform.
 
-To install the Helm chart on your namespace, run the following command:
+### Add the Camunda Helm repository
+
+First, add the Camunda Helm repository:
 
 ```bash
-helm install camunda camunda/camunda-platform -n orchestration
+helm repo add camunda https://helm.camunda.io
+helm repo update
 ```
+
+### Create namespace
+
+Create a namespace to install the platform on Kubernetes:
+
+```bash
+kubectl create namespace camunda
+```
+
+### Deploy Camunda Platform
+
+<Tabs groupId="infrastructure">
+<TabItem value="operator" label="With Operators" default>
+
+If you deployed infrastructure using operators, use the provided deployment script:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/04-camunda-deploy.sh
+```
+
+Wait for all components to be ready:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/04-camunda-wait-ready.sh
+```
+
+Verify the deployment:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/04-camunda-verify.sh
+```
+
+</TabItem>
+<TabItem value="managed" label="With Managed Services">
+
+If you're using managed services, create a custom values file and install:
+
+```bash
+helm install camunda camunda/camunda-platform -n camunda -f your-values.yaml
+```
+
+Replace `your-values.yaml` with your custom configuration file that points to your managed services.
+
+</TabItem>
+<TabItem value="basic" label="Basic Installation">
+
+For a basic installation with default embedded databases (not recommended for production):
+
+```bash
+helm install camunda camunda/camunda-platform -n camunda
+```
+
+</TabItem>
+</Tabs>
 
 ### Accessing the orchestration cluster
 
 Run the following command to locally port-forward the orchestration cluster pod to access the UI:
 
 ```bash
-kubectl port-forward svc/camunda-core 8080:8080
+kubectl port-forward svc/camunda-core 8080:8080 -n camunda
 ```
 
 Use the following URLs to access the orchestration cluster UIs:
@@ -52,22 +249,23 @@ http://localhost:8080/operate
 http://localhost:8080/tasklist
 ```
 
-By default, basic auth is configured on the orchestration cluster. There is a default user configured:
+**For operator-based deployments**: Use the Keycloak credentials provided during setup.
+
+**For basic installations**: Use the default credentials:
 
 ```
 username: demo
 password: demo
 ```
 
-## Enabling other components
+## Advanced configuration
 
-:::note
-This step is optional.
-:::
+The operator-based deployment automatically configures all Camunda components with proper authentication via Keycloak. For custom configurations or manual deployments, you may need additional setup.
 
-<!-- TODO: Add links to doc pages that explain each component. -->
+<details>
+<summary>Manual Keycloak configuration example</summary>
 
-The following components live outside the orchestration cluster:
+The following components require advanced authentication configuration:
 
 - Optimize
 - Web Modeler
@@ -75,25 +273,15 @@ The following components live outside the orchestration cluster:
 - Management Identity
 - Keycloak
 
-These components are disabled by default. They do not support basic auth, so another authentication/authorization mechanism should be used, such as Keycloak or OIDC. In this scenario, we will use Keycloak.
+These components are enabled by default in the operator-based deployment. For manual configurations, you can create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration.
 
-<!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
-
-Since the default configuration of the Helm chart uses basic auth, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
-
-- Enable Keycloak to provide another method of authentication.
-- Enable the rest of the Camunda components that live outside the orchestration cluster.
-
-<!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
-
-Create a file called `camunda-values.yaml` with the following content:
+Example configuration for enabling components with Keycloak:
 
 ```yaml
 global:
   identity:
     auth:
       enabled: true
-      #needs to be added in base values.yaml
       publicIssuerUrl: "http://camunda-keycloak/auth/realms/camunda-platform"
       admin:
         enabled: true
@@ -109,9 +297,6 @@ global:
         redirectUrl: "http://camunda-optimize"
         existingSecret:
           name: "integration-test-credentials"
-      #######################
-      # Orchestration Group
-      #######################
       core:
         redirectUrl: "http://camunda-core:8080"
         existingSecret:
@@ -151,10 +336,8 @@ webModeler:
   enabled: true
   restapi:
     mail:
-      # This value is required, otherwise the restapi pod wouldn't start.
       fromAddress: noreply@example.com
 
-# WebModeler Database.
 webModelerPostgresql:
   enabled: true
   auth:
@@ -190,9 +373,45 @@ console:
   enabled: true
 ```
 
-<!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
+</details>
+
+### Next steps
+
+After successful deployment, you can:
+
+1. **Configure monitoring**: Set up Prometheus and Grafana for observability
+2. **Set up TLS**: Configure HTTPS for production deployments
+3. **Configure backups**: Implement backup strategies for your data
+4. **Scale components**: Adjust resource allocation based on your workload
+
+### Cleanup
+
+<details>
+<summary>Cleanup instructions</summary>
+
+To remove all components:
+
+```bash
+# Remove Camunda Platform
+helm uninstall camunda -n camunda
+
+# Remove infrastructure (if using operators)
+kubectl delete namespace camunda
+kubectl delete namespace cnpg-system
+kubectl delete namespace elastic-system
+```
+
+**Note:** This will delete all data. For production, ensure proper backup procedures.
+
+</details>
 
 ## Additional resources
+
+- [Camunda deployment references repository](https://github.com/camunda/camunda-deployment-references)
+- [Helm chart configuration options](/self-managed/installation-methods/helm/)
+- [CloudNativePG documentation](https://cloudnative-pg.io/documentation/)
+- [Elastic Cloud on Kubernetes (ECK) documentation](https://www.elastic.co/docs/deploy-manage/deploy/cloud-on-k8s)
+- [Keycloak Operator documentation](https://www.keycloak.org/operator/installation)
 
 <!-- TODO: Add links to the following:
 - Basic auth guide
