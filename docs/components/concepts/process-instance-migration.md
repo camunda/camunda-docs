@@ -4,6 +4,9 @@ title: "Process instance migration"
 description: "Use process instance migration to change the process definition of a running process instance."
 ---
 
+import TargetProcessDefinition from './assets/process-instance-migration/migration-joining-gateway-modeler-after.png';
+import ProcessInstanceAfterMigration from './assets/process-instance-migration/migration-joining-gateway-after.png';
+
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
@@ -282,20 +285,28 @@ For migrating joining gateways, the following conditions must be true:
 
 - The joining gateway in the process instance must be mapped to the target gateway.
 - The target gateway must have at least the same number of incoming sequence flows as the source gateway.
-- Taken sequence flow IDs must exist in the target process definition and flow to the target gateway.
 
 Consider the following example:
-The process instance is waiting at the joining parallel gateway, with an incoming sequence flow taken as the element `A` is completed. Element `B` is still active and waiting at the user task.
+The process instance is waiting at the joining parallel gateway, with an incoming sequence flow `flow1`, taken after the element `A` completes. Element `B` is still active and waiting at the user task.
 
 ![The instance waiting on joining gateway.](assets/process-instance-migration/migration-joining-gateway-before.png)
 
-Mapping the active element `B` to the target element `B`, and mapping the joining parallel gateway instance to the target joining parallel gateway, will migrate the process instance to the target process definition. Note that the taken sequence flow (from element `A` to the joining gateway) must exist in the target process definition and flow to the target gateway.
+Then, the process definition is updated to include element `C` before the joining gateway.
 
-After the migration, the process instance will look like following:
+<img src={TargetProcessDefinition} alt="Process definition is updated to include C." class="img-600"/>
 
-![The instance waiting on service task B.](assets/process-instance-migration/migration-joining-gateway-after.png)
+To migrate the process instance, provide the following mapping instructions:
 
-In the example above, another element `C` is added before the joining gateway in the target process definition. To complete the process instance after the migration, element `C` must be completed. Process instance modification can be used to activate element `C` and complete it to reach the target gateway.
+- From the active element `B` to the target element `B`.
+- From the joining parallel gateway instance `gateway1` to the target joining parallel gateway `gateway2`.
+- From the sequence flow `flow1` to the target sequence flow `flow2`.
+
+After the migration, the process instance will look like the following:
+
+<img src={ProcessInstanceAfterMigration} alt="The instance waiting on service task B." class="img-600"/>
+
+In the example above, another element `C` is added before the joining gateway in the target process definition.
+After the migration, element `B` must still be completed for the process instance to continue through the gateway.
 
 ## Process definitions and versions
 
