@@ -45,11 +45,14 @@ When deploying Camunda 8 Self-Managed, you have two options for infrastructure d
 
 Before starting the installation, set up the required environment variables:
 
-```bash
-export CAMUNDA_NAMESPACE="camunda"
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/set-environment.sh
 ```
 
-This variable will be used throughout the installation process to specify the target namespace for the Camunda Platform deployment.
+These variables will be used throughout the installation process:
+- `CAMUNDA_NAMESPACE`: Target namespace for the Camunda Platform deployment
+- `CAMUNDA_DOMAIN`: The domain where Camunda will be deployed
+- `CAMUNDA_PROTOCOL`: The protocol to use for Camunda URLs (http/https)
 
 ### Setting up infrastructure with operators
 
@@ -84,7 +87,19 @@ Deploy all infrastructure components:
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/deploy-all-reqs.sh
 ```
 
-Verify the infrastructure deployment:
+Create Identity secrets for Camunda Platform:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/04-camunda-create-identity-secret.sh
+```
+
+Deploy Camunda Platform:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/04-camunda-deploy.sh
+```
+
+Verify the complete deployment:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/verify-all-reqs.sh
@@ -96,37 +111,52 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/operator-p
 <details>
 <summary>Manual step-by-step infrastructure installation</summary>
 
-If you prefer to install components individually:
+If you prefer to install components individually, these operators run on both Kubernetes and OpenShift; however, we recommend reviewing each operator's documentation to ensure all prerequisites are met.
 
-#### PostgreSQL Installation
+**Infrastructure Deployment:**
+- Use `--skip-postgresql`, `--skip-elasticsearch`, or `--skip-keycloak` flags to skip specific components
+- Infrastructure components are optional if you already use managed services
+
+### 1. PostgreSQL Installation
 
 PostgreSQL uses [CloudNativePG, a CNCF component under Apache 2.0 license](https://landscape.cncf.io/?item=app-definition-and-development--database--cloudnativepg).
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-install-operator.sh
-```
+This setup provisions three PostgreSQL clusters—one each for Keycloak, Camunda Identity, and Web Modeler. All clusters target PostgreSQL 15, selected as the common denominator across current Camunda components.
 
-Create database secrets:
+**Files:**
+- `01-postgresql-install-operator.sh` - Installs the CloudNativePG operator
+- `01-postgresql-create-secrets.sh` - Creates authentication secrets to access the databases
+- `01-postgresql-clusters.yml` - PostgreSQL cluster definitions
+- `01-postgresql-wait-ready.sh` - Waits for clusters to become healthy
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-create-secrets.sh
-```
-
-Deploy PostgreSQL clusters:
-
+**Commands:**
 ```bash
-kubectl apply -n camunda -f 01-postgresql-clusters.yml
+# Install operator
+./01-postgresql-install-operator.sh
+
+# Create secrets (generates random passwords)
+./01-postgresql-create-secrets.sh $CAMUNDA_NAMESPACE
+
+# Deploy clusters
+kubectl apply -n $CAMUNDA_NAMESPACE -f 01-postgresql-clusters.yml
+
+# Wait for readiness
+./01-postgresql-wait-ready.sh $CAMUNDA_NAMESPACE
 ```
 
-Wait for clusters to be ready:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-wait-ready.sh
+**Verification:**
+```bash
+./01-postgresql-verify.sh $CAMUNDA_NAMESPACE
 ```
 
-#### Elasticsearch Installation
+The deployment creates three PostgreSQL clusters:
+- `pg-identity` - For Camunda Identity
+- `pg-keycloak` - For Keycloak
+- `pg-webmodeler` - For Web Modeler
 
-Elasticsearch uses ECK (Elastic Cloud on Kubernetes), the official operator from Elastic.
+### 2. Elasticsearch Installation
+
+Elasticsearch uses ECK (Elastic Cloud on Kubernetes), the official operator from Elastic under the Elastic license.
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-install-operator.sh
