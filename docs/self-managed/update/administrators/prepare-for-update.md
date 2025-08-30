@@ -35,12 +35,12 @@ Start with the high-level overview [what's new in Camunda 8.8](/components/whats
 </tr>
 <tr>
     <td>Orchestration Cluster API</td>
-    <td>A new unified REST API for an Orchestration cluster. Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API. [For more information see](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/)</td>
+    <td>A new unified REST API for an Orchestration cluster. Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API. For more information, see the blog post [upcoming API Changes in Camunda 8](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).</td>
     <td><span className="label-highlight orange">Medium</span></td>
 </tr>
 <tr>
     <td>Data and exporters</td>
-    <td>Unified exporter architecture and unified data schema.<p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Taskist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
+    <td><p>Unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
     <td><span className="label-highlight orange">Medium</span></td>
 </tr>
 <tr>
@@ -52,7 +52,6 @@ Start with the high-level overview [what's new in Camunda 8.8](/components/whats
     <td>Optimize</td>
     <td>Performs a startup data migration that requires downtime during startup data migration. You need to plan a maintenance window.</td>
     <td><span className="label-highlight">Low</span></td>
-    <td></td>
 </tr>
 <tr>
     <td>Identity, authentication, and authorization</td>

@@ -13,13 +13,17 @@ import { overviewCards } from './react-components/\_card-data';
 
 ## About this guide
 
-This is a high-level guide applies to Camunda 8 Self-Managed deployments. It does not apply to Camunda SaaS.
+This high-level guide only applies to Camunda 8 Self-Managed deployments. It does not apply to Camunda SaaS.
 
 Use this guide if you:
 
 - Maintain the infrastructure running Camunda 8.
 - Need to upgrade from Camunda 8.7.x to 8.8.x. (Upgrades from 8.6 or earlier require first moving to 8.7.x.)
 - Want to review pre-upgrade requirements and follow the technical upgrade steps.
+
+## Upgrade steps
+
+The upgrade process involves both preparing for and performing the upgrade.
 
 <ZeebeGrid zeebe={overviewCards} />
 

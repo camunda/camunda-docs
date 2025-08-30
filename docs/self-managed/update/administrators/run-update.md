@@ -5,8 +5,6 @@ description: "Administrator checklist for executing a Camunda 8.8 Self-Managed u
 ---
 
 import DocCardList from '@theme/DocCardList';
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 
 This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure you have completed all steps in [Prepare for upgrade](./prepare-for-update.md) before continuing.
 
@@ -24,34 +22,23 @@ First, confirm you have completed the following prerequisites:
 
 Perform an upgrade as follows.
 
-<Tabs groupId="helm" defaultValue="helm" queryString values={
-[
-{label: 'Helm chart', value: 'helm', },
-{label: 'Docker Compose', value: 'docker', },
-]
-}>
-
-<TabItem value='helm'>
-
 ### Helm chart
 
-Upgrading with Helm is a straightforward process. Follow the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md) or detailed instructions.
-The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks. If you maintain custom deployment scripts, use the official Helm charts as a technical reference.
+To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md) for detailed instructions.
 
-</TabItem>
+The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
 
-<TabItem value='docker'>
+:::note
+If you maintain custom deployment scripts, use the official Helm charts as a technical reference.
+:::
 
-### Docker
+### Docker Compose
 
-Camunda-provided Docker Compose files are only intended for development and testing purposes, and is not reccomened for production environments. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
+Camunda-provided Docker Compose files are only intended for development and testing purposes, and **are not recommended for production environments**. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
 Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
-
-</TabItem>
-</Tabs>
 
 ## Next steps
 
@@ -65,7 +52,7 @@ After completing the upgrade to 8.8, you should:
 
 ## Useful resources
 
-- [Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md): Full step-by-step Helm upgrade guide.
+- [Helm chart upgrade guide: 8.7 to 8.8](../../installation-methods/helm/upgrade/helm-870-880.md): Full step-by-step Helm upgrade guide.
 - [Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md): How to gather troubleshooting data.
 - [Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md): Recommended backup workflows.
 - [Troubleshooting guides](../../operational-guides/troubleshooting.md): Common issues and resolution steps.
