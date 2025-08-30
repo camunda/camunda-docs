@@ -112,7 +112,7 @@ global:
       #######################
       # Orchestration Group
       #######################
-      core:
+      orchestration:
         redirectUrl: "http://camunda-core:8080"
         existingSecret:
           name: "integration-test-credentials"
@@ -163,7 +163,7 @@ webModelerPostgresql:
       adminPasswordKey: "webmodeler-postgresql-admin-password"
       userPasswordKey: "webmodeler-postgresql-user-password"
 
-core:
+orchestration:
   enabled: true
   clusterSize: "1"
   partitionCount: "1"
