@@ -50,6 +50,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/operator-p
 ```
 
 These variables will be used throughout the installation process:
+
 - `CAMUNDA_NAMESPACE`: Target namespace for the Camunda Platform deployment
 - `CAMUNDA_DOMAIN`: The domain where Camunda will be deployed
 - `CAMUNDA_PROTOCOL`: The protocol to use for Camunda URLs (http/https)
@@ -114,6 +115,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/operator-p
 If you prefer to install components individually, these operators run on both Kubernetes and OpenShift; however, we recommend reviewing each operator's documentation to ensure all prerequisites are met.
 
 **Infrastructure Deployment:**
+
 - Use `--skip-postgresql`, `--skip-elasticsearch`, or `--skip-keycloak` flags to skip specific components
 - Infrastructure components are optional if you already use managed services
 
@@ -124,32 +126,42 @@ PostgreSQL uses [CloudNativePG, a CNCF component under Apache 2.0 license](https
 This setup provisions three PostgreSQL clusters—one each for Keycloak, Camunda Identity, and Web Modeler. All clusters target PostgreSQL 15, selected as the common denominator across current Camunda components.
 
 **Files:**
+
 - `01-postgresql-install-operator.sh` - Installs the CloudNativePG operator
 - `01-postgresql-create-secrets.sh` - Creates authentication secrets to access the databases
 - `01-postgresql-clusters.yml` - PostgreSQL cluster definitions
 - `01-postgresql-wait-ready.sh` - Waits for clusters to become healthy
 
 **Commands:**
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-install-operator.sh
+```
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-create-secrets.sh
+```
+
+Deploy clusters:
+
 ```bash
-# Install operator
-./01-postgresql-install-operator.sh
-
-# Create secrets (generates random passwords)
-./01-postgresql-create-secrets.sh $CAMUNDA_NAMESPACE
-
-# Deploy clusters
 kubectl apply -n $CAMUNDA_NAMESPACE -f 01-postgresql-clusters.yml
+```
 
-# Wait for readiness
-./01-postgresql-wait-ready.sh $CAMUNDA_NAMESPACE
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-wait-ready.sh
 ```
 
 **Verification:**
-```bash
-./01-postgresql-verify.sh $CAMUNDA_NAMESPACE
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/01-postgresql-verify.sh
 ```
 
+**Quick status check:**
+
 The deployment creates three PostgreSQL clusters:
+
 - `pg-identity` - For Camunda Identity
 - `pg-keycloak` - For Keycloak
 - `pg-webmodeler` - For Web Modeler
@@ -158,41 +170,101 @@ The deployment creates three PostgreSQL clusters:
 
 Elasticsearch uses ECK (Elastic Cloud on Kubernetes), the official operator from Elastic under the Elastic license.
 
+The target version is Elasticsearch 8.16+, following Camunda's supported environments. This creates a highly available cluster with 3 master nodes, persistent storage, and bounded resources.
+
+**Files:**
+
+- `02-elasticsearch-install-operator.sh` - Installs the ECK operator
+- `02-elasticsearch-cluster.yml` - Elasticsearch cluster 8.18.0 with authentication disabled, 3 master nodes, persistent storage, and bounded resources
+- `02-elasticsearch-wait-ready.sh` - Waits for cluster to become ready
+
+**Commands:**
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-install-operator.sh
 ```
-
-Deploy Elasticsearch cluster:
-
-```bash
-kubectl apply -n camunda -f 02-elasticsearch-cluster.yml
-```
-
-Wait for cluster to be ready:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-wait-ready.sh
 ```
 
-#### Keycloak Installation
+**Verification:**
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/02-elasticsearch-verify.sh
+```
+
+**Quick status check:**
+
+```bash
+kubectl get elasticsearch -n $CAMUNDA_NAMESPACE
+kubectl get svc -n $CAMUNDA_NAMESPACE | grep "elasticsearch"
+```
+
+### 3. Keycloak Installation
 
 Keycloak uses the official [Keycloak Operator under Apache 2.0 license](https://landscape.cncf.io/?item=provisioning--security-compliance--keycloak).
+
+The target Keycloak version is 26+, following Camunda's supported environments. Keycloak is configured to serve under the path prefix `/auth`.
+
+#### Environment Variables
+
+The following environment variables are required for Keycloak realm configuration:
+
+- `CAMUNDA_DOMAIN` - The domain where Camunda will be deployed (default: `localhost`)
+- `CAMUNDA_PROTOCOL` - The protocol to use for Camunda URLs (default: `http`)
+
+**Files:**
+
+- `03-keycloak-install-operator.sh` - Installs the Keycloak operator
+- `03-keycloak-instance.yml` - Keycloak instance using CNPG database
+- `03-keycloak-wait-ready.sh` - Waits for instance to become ready
+- `03-keycloak-get-admin-credentials.sh` - Retrieves admin credentials
+
+**Commands:**
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-install-operator.sh
 ```
 
-Deploy Keycloak instance:
-
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-deploy.sh
 ```
 
-Wait for Keycloak to be ready:
-
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-wait-ready.sh
 ```
+
+Get admin credentials:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-get-admin-credentials.sh
+```
+
+**Verification:**
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/03-keycloak-verify.sh
+```
+
+**Quick status check:**
+
+```bash
+kubectl get keycloak -n $CAMUNDA_NAMESPACE
+kubectl get svc -n $CAMUNDA_NAMESPACE | grep keycloak
+```
+
+**Access Keycloak:**
+
+- With Ingress: `${CAMUNDA_PROTOCOL}://${CAMUNDA_DOMAIN}/auth/admin/`
+- Without Ingress: Port-forward locally, then open `http://localhost:8080/auth/admin/`
+  ```bash
+  kubectl -n $CAMUNDA_NAMESPACE port-forward svc/keycloak 8080:8080
+  ```
+
+#### Configure a Realm for Camunda
+
+The Keycloak realm for Camunda Platform will be automatically configured by the Camunda Helm chart during installation.
 
 </details>
 
