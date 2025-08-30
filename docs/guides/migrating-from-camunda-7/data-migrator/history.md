@@ -1,15 +1,19 @@
 ---
 id: history
-title: History (experimental)
-sidebar_label: History (experimental)
+title: History migration (experimental)
+sidebar_label: History migration
 description: "Copy audit trail (history) data from Camunda 7 to Camunda 8. Experimental and not for production."
 ---
 
+Use the History Data Migrator to copy process instance audit data to Camunda 8.
+
 :::info
-The history migration mode of the Data Migrator will **not be release before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-data-migrator/).
+The history migration mode of the Data Migrator will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-data-migrator/).
 :::
 
-Process instances left traces, referred to as [History in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
+## About history migration
+
+Process instances leave traces, referred to as [History in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/history/). These are audit logs of when a process instance was started, what path it took, and so on.
 
 It is important to note that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
@@ -19,7 +23,9 @@ Audit data migration might need to look at a huge amount of data, which can take
 
 You can run audit data migration alongside normal operations (for example, after the successful big bang migration of runtime process instances) so that it doesn't require downtime and as such, the performance might not be as critical as for runtime instance migration.
 
-**Requirements and limitations:**
+## Requirements and limitations
+
+The following requirements and limitations apply:
 
 - The History Data Migrator needs to access the Camunda 7 database.
 - The History Data Migrator can only migrate to Camunda 8 **if a relational database (RDBMS) is used**, a feature planned for **Camunda 8.9**.
@@ -44,11 +50,13 @@ You can run audit data migration alongside normal operations (for example, after
 
 ## Entity types
 
-- `HISTORY_PROCESS_DEFINITION` - Process definitions
-- `HISTORY_PROCESS_INSTANCE` - Process instances
-- `HISTORY_INCIDENT` - Process incidents
-- `HISTORY_VARIABLE` - Process variables
-- `HISTORY_USER_TASK` - User tasks
-- `HISTORY_FLOW_NODE` - Flow node instances
-- `HISTORY_DECISION_INSTANCE` - Decision instances
-- `HISTORY_DECISION_DEFINITION` - Decision definitions
+| Entity type                   | Description          |
+| :---------------------------- | :------------------- |
+| `HISTORY_PROCESS_DEFINITION`  | Process definitions  |
+| `HISTORY_PROCESS_INSTANCE`    | Process instances    |
+| `HISTORY_INCIDENT`            | Process incidents    |
+| `HISTORY_VARIABLE`            | Process variables    |
+| `HISTORY_USER_TASK`           | User tasks           |
+| `HISTORY_FLOW_NODE`           | Flow node instances  |
+| `HISTORY_DECISION_INSTANCE`   | Decision instances   |
+| `HISTORY_DECISION_DEFINITION` | Decision definitions |

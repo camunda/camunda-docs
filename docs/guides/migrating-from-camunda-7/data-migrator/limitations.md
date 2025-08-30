@@ -5,16 +5,18 @@ sidebar_label: Limitations
 description: "Data Migrator limitations."
 ---
 
-This page provides an overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator. It covers general limitations, as well as specific limitations related to variables and BPMN elements.
+An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
+
+## General limitations
 
 - To migrate running process instances, the historic process instance must exist.
   - You cannot migrate running instances when you have configured history level to `NONE` or a custom history level that doesn't create historic process instances.
   - The minimum supported history level is `ACTIVITY`.
-- You need to add an execution listener of type `migrator` to all your start events.
-- Multi-tenancy is currently not supported. I.e., a runtime process instance can only be migrated if it is not associated with a tenant.
+- You must add an execution listener of type `migrator` to all your start events.
+- Multi-tenancy is currently not supported. A runtime process instance can only be migrated if it is not associated with a tenant.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5315
 - Migration of users, groups, or tenants as well as authorizations is currently not supported.
-  - You need to ensure that the users, groups, and authorizations are already migrated to Camunda 8 before migrating process instances.
+  - You must ensure that the users, groups, and authorizations are already migrated to Camunda 8 before migrating process instances.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5175
 - Data changed via user operations
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
@@ -23,26 +25,28 @@ This page provides an overview of the current limitations of the Camunda 7 to Ca
 ## Variables
 
 - Proper handling and intercepting of variables is currently only supported for the Runtime Data Migrator.
-- [Unsupported Camunda 7 types](../variables#unsupported-types)
-- [Camunda 8 variable name restrictions](/components/concepts/variables.md#variable-values)
+- [Unsupported Camunda 7 types](../variables#unsupported-types).
+- [Camunda 8 variable name restrictions](/components/concepts/variables.md#variable-values).
   - Variables that do not follow the restrictions will cause issues in FEEL expression evaluation.
 - Variables set into the scope of embedded sub-processes are not supported yet and will be ignored.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5235
 
-Read more about variable migration in the [variables documentation](../variables).
+:::info
+To learn more about variable migration, see [variables](../variables).
+:::
 
 ## BPMN Elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
 
-### Elements supported in C7 but not supported in C8
+### Elements supported in Camunda 7 but not supported in Camunda 8
 
-Please refer to the [documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in C8 and adjust your models accordingly before migration.
+See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
 
 ### Start Events
 
 - It is required that a process instance contains a single process level None Start Event to run the data migrator.
-- If a process definition only has event-based start events (e.g., Message, Timer), it is required to add a temporary None Start Event. This change needs to be reverted after the data migration is completed.
+- If a process definition only has event-based start events (for example, Message, Timer), it is required to add a temporary None Start Event. This change must be reverted after the data migration is completed.
 - Example adding a None Start Event:
 
 ```diff
@@ -70,7 +74,7 @@ Please refer to the [documentation](/components/modeler/bpmn/bpmn.md#bpmn-covera
 
 ### Async before/after wait states
 
-C8 does not support [asynchronous continuation before or after](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#asynchronous-continuations) any kind of wait state. Service-task-like activities are executed asynchronously by default in Camunda 8 - so for example a service task waiting for asynchronous continuation before will be correctly migrated. But if you need to migrate an instance currently waiting asynchronously at other elements in a C7 model, like for example a gateway, this instance would just continue without waiting in the equivalent C8 model. You might need to adjust your model's logic accordingly prior to migration.
+Camunda 8 does not support [asynchronous continuation before or after](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#asynchronous-continuations) any kind of wait state. Service-task-like activities are executed asynchronously by default in Camunda 8 - so for example a service task waiting for asynchronous continuation before will be correctly migrated. But if you need to migrate an instance currently waiting asynchronously at other elements in a Camunda 7 model, such as a gateway for example, this instance would just continue without waiting in the equivalent Camunda 8 model. You might need to adjust your model's logic accordingly prior to migration.
 
 ### Message events
 
@@ -84,9 +88,9 @@ C8 does not support [asynchronous continuation before or after](https://docs.cam
 
 ### Triggered boundary events
 
-- C7 boundary events do not have a natural wait state.
+- Camunda 7 boundary events do not have a natural wait state.
 - If the process instance to be migrated is currently at a triggered boundary event in Camunda 7, there may still be a job associated with that event, either waiting to be executed or currently running. In this state, the token is considered to be at the element where the job is created: typically the first activity of the boundary event’s handler flow, or technically the point after the boundary event if asyncAfter is used.
-- During migration to Camunda 8, the token will be mapped to the corresponding target element. However, if that element expects input data that is normally produced by the boundary event’s job (e.g., setting variables), this data may be missing in the migrated instance.
+- During migration to Camunda 8, the token will be mapped to the corresponding target element. However, if that element expects input data that is normally produced by the boundary event’s job (for example, setting variables), this data may be missing in the migrated instance.
 - Recommendation: To ensure a consistent migration, allow boundary event executions to complete before initiating the migration.
 
 ### Call activity
@@ -110,25 +114,25 @@ Processes with active multi-instance elements can currently not be migrated. We 
 
 - Timer start events: prior to migration, you must ensure that your process has at least one [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Processes that only have a timer start event cannot be migrated.
 - If your model contains timer events (start and other), you must ensure that no timers fire during the migration process.
-  - Timers with [date](/components/modeler/bpmn/timer-events/timer-events.md#time-date): ensure the date lies outside the migration time frame
-  - Timers with [durations](/components/modeler/bpmn/timer-events/timer-events.md#time-duration): ensure the duration is significantly longer than the migration time frame
-  - Timers with [cycles](/components/modeler/bpmn/timer-events/timer-events.md#time-cycle)): ensure the cycle is significantly longer than the migration time frame and/or use a start time that lies outside the migration time frame
+  - Timers with [date](/components/modeler/bpmn/timer-events/timer-events.md#time-date): ensure the date lies outside the migration time frame.
+  - Timers with [durations](/components/modeler/bpmn/timer-events/timer-events.md#time-duration): ensure the duration is significantly longer than the migration time frame.
+  - Timers with [cycles](/components/modeler/bpmn/timer-events/timer-events.md#time-cycle)): ensure the cycle is significantly longer than the migration time frame and/or use a start time that lies outside the migration time frame.
 - Note that during deployment and/or migration, the timers may be restarted. If business logic requires you to avoid resetting timer cycles/duration, you need to apply a workaround:
   - Timers with cycles:
-    - Add a start time to your cycle definition that is equal to the moment in time when the currently running C7 timer is next due
-    - You must still ensure that the start time lies outside the migration time frame
+    - Add a start time to your cycle definition that is equal to the moment in time when the currently running C7 timer is next due.
+    - You must still ensure that the start time lies outside the migration time frame.
   - Timers with durations:
     - Non-interrupting timer boundary events:
-      - Switch to cycle definition with a start time that is equal to the moment in time when the currently running C7 timer is next due and add a "repeat once" configuration
-      - This way, for the first post migration run, the timer will trigger at the start time
-      - For all subsequent runs, the defined cycle duration will trigger the timer. The "repeat once" instruction ensures it only fires once, similar to a duration timer
-      - You must still ensure that the start time lies outside the migration time frame
+      - Switch to cycle definition with a start time that is equal to the moment in time when the currently running C7 timer is next due and add a "repeat once" configuration.
+      - This way, for the first post migration run, the timer will trigger at the start time.
+      - For all subsequent runs, the defined cycle duration will trigger the timer. The "repeat once" instruction ensures it only fires once, similar to a duration timer.
+      - You must still ensure that the start time lies outside the migration time frame.
     - Interrupting boundary and intermediate catching events:
-      - Add a variable to your C7 instance that contains the leftover duration until the next timer is due
-      - In your C8 model, adjust the timer duration definition to use an expression: if the variable is set, the value of this variable should be used for the duration. If the variable is not set or does not exist, you may configure a default duration
-      - This way, for the first post migration run the variable will exist and the timer will set its duration accordingly
-      - For all subsequent runs, the variable will not exist and the default duration will be used
-      - Again, you must ensure the leftover duration for the first post migration run lies outside the migration time frame
+      - Add a variable to your C7 instance that contains the leftover duration until the next timer is due.
+      - In your C8 model, adjust the timer duration definition to use an expression: if the variable is set, the value of this variable should be used for the duration. If the variable is not set or does not exist, you may configure a default duration.
+      - This way, for the first post migration run the variable will exist and the timer will set its duration accordingly.
+      - For all subsequent runs, the variable will not exist and the default duration will be used.
+      - Again, you must ensure the leftover duration for the first post migration run lies outside the migration time frame.
 
 ### Event subprocesses
 
@@ -139,6 +143,6 @@ Processes with active multi-instance elements can currently not be migrated. We 
 - When could it happen:
   - This can occur when a process instance is already inside an event subprocess in C7, and the start event of that same subprocess is accidentally triggered again in C8 during migration.
 - How to prevent it:
-  - Don't correlate messages or send signals during migration
-  - Temporarily adjust timer start events in event subprocesses to ensure they do not trigger during migration (see the section on timer events for more details)
+  - Don't correlate messages or send signals during migration.
+  - Temporarily adjust timer start events in event subprocesses to ensure they do not trigger during migration (see the section on timer events for more details).
   - If above suggestions are not feasible in your use case make sure service tasks are idempotent — so repeating them does not cause issues.

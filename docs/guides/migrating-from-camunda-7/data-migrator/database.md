@@ -7,7 +7,7 @@ description: "Database configuration for the Data Migrator."
 
 Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS history) data sources. The Data Migrator uses JDBC to connect to these databases.
 
-### Setup
+## Setup
 
 1. Include the appropriate JDBC driver in the classpath by dropping the JAR into `configuration/userlib`.
 2. Configure connection details in `configuration/application.yml`.
@@ -19,7 +19,7 @@ Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS histo
 The database vendor is automatically detected but can be overridden using the `database-vendor` property.
 :::
 
-### Compatibility
+## Compatibility
 
 The migrator supports the following SQL databases:
 
@@ -29,7 +29,7 @@ The migrator supports the following SQL databases:
 | **PostgreSQL** | 17      | `org.postgresql.Driver`    | Recommended for production |
 | **Oracle**     | 23ai    | `oracle.jdbc.OracleDriver` | Recommended for production |
 
-The migrator supports migration within the same database vendor only:
+The migrator supports migration only within the same database vendor:
 
 | Migration Path          | Status           |
 | ----------------------- | ---------------- |

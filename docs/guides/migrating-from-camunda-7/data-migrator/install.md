@@ -1,7 +1,7 @@
 ---
 id: install
-title: Installation & Quick start
-sidebar_label: Installation & Quick start
+title: Install and quick start
+sidebar_label: Install and quick start
 description: "Install the Data Migrator and run your first migration."
 ---
 
@@ -21,13 +21,13 @@ Install the Data Migrator and run your first data migration.
 2. Extract the archive to your preferred directory.
 3. Navigate to the extracted directory.
 
-## Quick Start
+## Quick start
 
-1. Make sure Camunda 8 is up and running and all process models that shall be migrated are deployed.
+1. Make sure Camunda 8 is up and running, and all process models to migrate are deployed.
 
    To be used with the Runtime Data Migrator, **every process model requires**:
-   - A blank start event (you need to add one if the process model doesn't have one)
-   - An execution listener at the end of your blank start event with the job type `migrator` (you have to add it manually, or let it be added by the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)).
+   - A blank start event (you must add one if the process model doesn't have one already).
+   - An execution listener at the end of your blank start event with the job type `migrator`. You have to add this manually, or let it be added by the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
 
    ```xml
     <bpmn:startEvent id="StartEvent_1">
@@ -57,7 +57,7 @@ Install the Data Migrator and run your first data migration.
      password: your-password
    ```
 
-4. Run the migrator:
+4. Run the Data Migrator:
 
    ```bash
    # On Linux/macOS

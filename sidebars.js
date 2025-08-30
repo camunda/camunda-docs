@@ -41,7 +41,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/limitations",
             {
               type: "category",
-              label: "Configuration & Reference",
+              label: "Configuration & reference",
               items: [
                 "guides/migrating-from-camunda-7/data-migrator/database",
                 "guides/migrating-from-camunda-7/data-migrator/config-examples",

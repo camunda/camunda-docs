@@ -1,7 +1,7 @@
 ---
 id: config-examples
-title: Configuration Examples
-sidebar_label: Configuration Examples
+title: Configuration examples
+sidebar_label: Configuration examples
 description: "Configuration examples for the Data Migrator."
 ---
 
@@ -47,7 +47,7 @@ camunda.migrator.c7.data-source:
   driver-class-name: org.h2.Driver
 ```
 
-You can apply any HikariCP property (e.g., pool size) under `camunda.migrator.c7.data-source`.
+You can apply any HikariCP property (for example, pool size) under `camunda.migrator.c7.data-source`.
 
 ### C8 RDBMS (history)
 
@@ -61,7 +61,7 @@ camunda.migrator.c8.data-source:
   driver-class-name: org.h2.Driver
 ```
 
-You can apply any HikariCP property (e.g., pool size) under `camunda.migrator.c8.data-source`.
+You can apply any HikariCP property (for example, pool size) under `camunda.migrator.c8.data-source`.
 
 ## Logging
 
