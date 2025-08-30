@@ -37,7 +37,7 @@ jobs:
             :warning: Preview environment for commit ${{ github.sha }} is being deleted. This usually takes 2-3 minutes.
 
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
+        uses: google-github-actions/setup-gcloud@v3
 
       - name: Remove files from Google bucket
         env:
