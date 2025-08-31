@@ -73,8 +73,3 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 1. Modify the `SPRING_DATASOURCE_URL` environment variable as follows: `jdbc:aws-wrapper:postgresql://[DB_HOST]:[DB_PORT]/[DB_NAME]?wrapperPlugins=iam`.
 2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
 3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.
-
-## Using a custom database schema
-
-Without configuration, Web Modeler uses the default schema of the database user, typically `public`.
-To use a custom schema, set the `SPRING_DATASOURCE_HIKARI_SCHEMA` environment variable to the desired schema name.

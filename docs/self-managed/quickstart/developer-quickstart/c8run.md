@@ -160,7 +160,7 @@ Place the above `application.yaml` into your root `/c8run` folder, provide it to
 You are then required to provide basic authentication credentials on API requests, as in the following:
 
 ```shell
-curl --request POST 'http://localhost:8080/v2/topology'  \
+curl --request GET 'http://localhost:8080/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'

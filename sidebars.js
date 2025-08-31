@@ -63,8 +63,11 @@ module.exports = {
             type: "doc",
             id: "components/concepts/access-control/access-control-overview",
           },
-          items: ["components/concepts/access-control/authorizations"],
-        },
+          items: [
+                  "components/concepts/access-control/authorizations",
+                  "components/concepts/access-control/connect-to-identity-provider",
+                  ],
+          },
         "components/concepts/job-workers",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/element-templates",
@@ -308,6 +311,7 @@ module.exports = {
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
+            "components/modeler/web-modeler/save-as-element-templates",
             "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
@@ -468,6 +472,11 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
+        require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
+        "components/modeler/data-handling",
+        "components/modeler/using-web-and-desktop-modeler-together",
+        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
 
@@ -551,6 +560,7 @@ module.exports = {
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
+            "components/identity/client",
           ],
         },
       ],
@@ -782,13 +792,13 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
           ],
         },
@@ -821,6 +831,121 @@ module.exports = {
         {
           Troubleshooting: [
             "components/console/console-troubleshooting/common-pitfalls",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Best Practices",
+      link: {
+        type: "doc",
+        id: "components/best-practices/best-practices-overview",
+      },
+      items: [
+        {
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          Architecture: [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          Development: [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          Modeling: [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
+          ],
+          Operations: [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Camunda integrations",
+      link: {
+        type: "doc",
+        id: "components/camunda-integrations/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "SAP",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/sap/sap-integration",
+          },
+          items: [
+            "components/camunda-integrations/sap/odata-connector",
+            "components/camunda-integrations/sap/rfc-connector",
+            "components/camunda-integrations/sap/btp-plugin",
+            "components/camunda-integrations/sap/csap-cli",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Early access",
+      link: {
+        type: "doc",
+        id: "components/early-access/overview",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Alpha features",
+          link: {
+            type: "doc",
+            id: "components/early-access/alpha/alpha-features",
+          },
+          items: [
+            {
+              type: "category",
+              label: "BPMN Copilot",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              },
+              items: [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+              ],
+            },
+            "components/early-access/alpha/feel-copilot/feel-copilot",
+            {
+              type: "category",
+              label: "MCP Client",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/mcp-client/mcp-client",
+              },
+              items: [
+                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                "components/early-access/alpha/mcp-client/mcp-client-connector",
+              ],
+            },
           ],
         },
       ],
@@ -959,24 +1084,9 @@ module.exports = {
       "API Clients": [
         {
           "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/authentication",
+            "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
-            {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
-              ],
-            },
           ],
         },
         {
@@ -1007,6 +1117,11 @@ module.exports = {
             "apis-tools/testing/connectors",
           ],
         },
+        {
+          Deprecated: [
+            "apis-tools/testing/zeebe-process-test",
+          ],
+        },
       ],
     },
     {
@@ -1021,6 +1136,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-spring-boot-camunda-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
@@ -1463,6 +1579,31 @@ module.exports = {
           },
           items: [
             {
+              type: "category",
+              label: "Core settings and features",
+              link: {
+                type: "doc",
+                id: "self-managed/components/orchestration-cluster/core-settings/overview",
+              },
+              items: [
+                {
+                  Configuration: [
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                  ],
+                },
+                // {
+                //   Concepts: [],
+                // },
+                // {
+                //   Migration: [],
+                // },
+              ],
+            },
+            {
               Zeebe: [
                 {
                   "Zeebe Gateway": [
@@ -1475,7 +1616,6 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/zeebe/configuration/configuration",
-                    "self-managed/components/orchestration-cluster/zeebe/configuration/logging",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/environment-variables",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/fixed-partitioning",
@@ -1562,7 +1702,6 @@ module.exports = {
               },
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
-                "self-managed/components/orchestration-cluster/identity/configuration",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
                 {
