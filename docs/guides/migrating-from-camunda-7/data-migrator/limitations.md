@@ -35,7 +35,7 @@ An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrat
 To learn more about variable migration, see [variables](../variables).
 :::
 
-## BPMN Elements
+## BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
 
@@ -43,7 +43,7 @@ Some BPMN elements and configurations supported in Camunda 7 are not supported i
 
 See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
 
-### Start Events
+### Start events
 
 - It is required that a process instance contains a single process level None Start Event to run the data migrator.
 - If a process definition only has event-based start events (for example, Message, Timer), it is required to add a temporary None Start Event. This change must be reverted after the data migration is completed.

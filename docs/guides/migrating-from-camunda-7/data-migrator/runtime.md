@@ -25,7 +25,7 @@ The following requirements and limitations apply:
 - The Runtime Data Migrator needs to access Orchestration Cluster APIs (which means you can also use it when running SaaS).
 - You must be familiar with the Data Migrator [limitations](limitations.md).
 
-If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/7.22/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
+If you need to adjust your process models before migration, you can use [process version migration](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-migration/) in the Camunda 7 environment to migrate process instances to versions that are migratable to Camunda 8. An interesting strategy can be to define dedicated migration states you want your process instances to pile up in. Another common strategy is to use [process instance modification](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-instance-modification/) in the Camunda 7 environment to move out of states that are not migratable (for example, process instances within a multiple instance task).
 
 <!-- TODO pile up: mention the job pause feature in Camunda 7 -->
 

@@ -12,7 +12,7 @@ Reference for all Data Migrator configuration properties, set in the `configurat
 Prefix: `camunda.client`
 
 :::info
-Read more about Camunda Client [configuration options](/docs/apis-tools/spring-zeebe-sdk/configuration/).
+Read more about Camunda Client [configuration options](/apis-tools/spring-zeebe-sdk/configuration.md).
 :::
 
 | Property        | Type     | Description                                                                                         |

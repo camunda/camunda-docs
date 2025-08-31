@@ -39,7 +39,7 @@ Migration details are summarized as follows:
 
 ## Typical choreography of runtime and history migration
 
-As described in [the roll-out phase of the migration journey](../migration-journey.md#6roll-out), you will typically use the following sequence of tasks when applying both data migrations while keeping downtimes to a minimum:
+As described in [the roll-out phase of the migration journey](../migration-journey.md), you will typically use the following sequence of tasks when applying both data migrations (while keeping downtimes to a minimum):
 
 1. Stop the Camunda 7 solution (normally shut down your application).
 2. Start the Data Migrator in "running instance migration mode".

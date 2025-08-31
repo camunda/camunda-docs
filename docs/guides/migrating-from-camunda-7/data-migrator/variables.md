@@ -133,7 +133,7 @@ camunda:
       - class-name: com.example.AnotherVariableInterceptor
 ```
 
-Example of a custom variable interceptor can be found in the ./examples/variable-interceptor directory.
+**Example:** See [./examples/variable-interceptor directory](https://github.com/camunda/camunda-7-to-8-data-migrator/tree/main/examples/variable-interceptor) for an example custom variable interceptor.
 
 ### Execution Order
 
