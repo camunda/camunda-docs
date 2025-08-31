@@ -1495,6 +1495,21 @@ h3.subheading {
   color: #fff !important;
 }
 
+.button--hero--topic::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
+    12px;
+  margin-left: 8px; /* spacing between text and icon */
+}
+
+.button--hero--topic:hover::after,
+.button--hero--topic:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
 [data-theme="dark"] .button--hero--topic {
   border-color: rgb(255, 255, 255);
   transition: 0.3s;
@@ -1507,4 +1522,30 @@ h3.subheading {
   background-color: #ffffff;
   color: var(--ifm-color-black) !important;
   border: 1px solid #171c29;
+}
+
+.link-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.link-arrow::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right.png") no-repeat center / 12px 12px;
+  margin-left: 6px; /* spacing between text and icon */
+}
+
+.link-arrow:hover::after,
+.link-arrow:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .link-arrow::after {
+  background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
+    12px;
 }

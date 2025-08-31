@@ -44,7 +44,13 @@ Orchestrate and automate complex business processes for people, systems, and dev
 
 ## Best Practices
 
-[Camunda Best Practices](/components/best-practices/best-practices-overview.md) distill our experience with BPMN and DMN on the Camunda toolstack, incorporating insights from consulting, community feedback, and various interactions. For example, learn about [deciding your stack](/components/best-practices/architecture/deciding-about-your-stack.md), and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) to make sure your production deployment is sized appropriately, and can scale without any backpressure issues.
+Camunda Best Practices distill our experience with BPMN and DMN on the Camunda toolstack, incorporating insights from consulting, community feedback, and various interactions.
+
+<p><a href="./best-practices/best-practices-overview/" class="link-arrow">Camunda Best Practices</a></p>
+
+:::tip
+Learn about [deciding your stack](/components/best-practices/architecture/deciding-about-your-stack.md), and [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) to make sure your production deployment is sized appropriately, and can scale without any backpressure issues.
+:::
 
 ## Features and integrations
 
@@ -58,12 +64,16 @@ Explore and learn about Camunda components and BPMN, DMN, and FEEL expressions.
 
 <UsingGrid using={usingCamundaCards} />
 
-## Camunda SaaS
+## Camunda 8 SaaS
 
-Reference information for [Camunda 8 SaaS](/components/saas/saas.md), including clusters, regions, and encryption at rest.
+Reference information for Camunda 8 SaaS, including clusters, regions, and encryption at rest.
+
+<p><a href="./saas/" class="link-arrow">Camunda 8 SaaS</a></p>
 
 ## Glossary
 
-Explore the [glossary](/reference/glossary.md) and understand definitions for key Camunda 8 terms and abbreviations.
+Explore the glossary and understand definitions for key Camunda 8 terms and abbreviations.
+
+<p><a href="../reference/glossary/" class="link-arrow">Glossary</a></p>
 
 <AskAi/>

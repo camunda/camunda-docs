@@ -31,24 +31,24 @@ Get hands-on with [Camunda 8](https://camunda.io) with our getting started guide
 
 This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
-- [Run your first local project](/guides/getting-started-example.md)
+<p><a href="./getting-started-example/" class="link-arrow">Run your first local project</a></p>
 
 ## Build your first AI agent
 
 Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
-- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+<p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
 ## Orchestrate human tasks
 
 This guide is tailored for low-code developers using Camunda 8 SaaS to efficiently allocate work through user tasks.
 
-- [Get started with human task orchestration](/guides/getting-started-orchestrate-human-tasks.md)
+<p><a href="./orchestrate-human-tasks/" class="link-arrow">Get started with human task orchestration</a></p>
 
 ## Orchestrate APIs using connectors
 
 This guide is designed for users who prefer a low-code approach to process automation, walking you through working with a REST connector task as a first time Camunda 8 SaaS user. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
-- [Get started with API orchestration](/guides/getting-started-orchestrate-apis.md)
+<p><a href="./orchestrate-apis/" class="link-arrow">Get started with API orchestration</a></p>
 
 <AskAi/>
