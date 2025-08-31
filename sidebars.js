@@ -64,10 +64,10 @@ module.exports = {
             id: "components/concepts/access-control/access-control-overview",
           },
           items: [
-                  "components/concepts/access-control/authorizations",
-                  "components/concepts/access-control/connect-to-identity-provider",
-                  ],
-          },
+            "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
+          ],
+        },
         "components/concepts/job-workers",
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/element-templates",
@@ -132,6 +132,9 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
         },
       ],
@@ -837,121 +840,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Best Practices",
-      link: {
-        type: "doc",
-        id: "components/best-practices/best-practices-overview",
-      },
-      items: [
-        {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
-            "components/best-practices/architecture/understanding-human-tasks-management",
-          ],
-          Development: [
-            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
-            "components/best-practices/development/service-integration-patterns",
-            "components/best-practices/development/writing-good-workers",
-            "components/best-practices/development/dealing-with-problems-and-exceptions",
-            "components/best-practices/development/handling-data-in-processes",
-            "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-          ],
-          Modeling: [
-            "components/best-practices/modeling/creating-readable-process-models",
-            "components/best-practices/modeling/naming-bpmn-elements",
-            "components/best-practices/modeling/naming-technically-relevant-ids",
-            "components/best-practices/modeling/modeling-beyond-the-happy-path",
-            "components/best-practices/modeling/modeling-with-situation-patterns",
-            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
-            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
-            "components/best-practices/modeling/choosing-the-resource-binding-type",
-          ],
-          Operations: [
-            "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",
-          ],
-          "CI/CD guidelines": [
-            "components/best-practices/cicd-guidelines/element-templates-at-scale",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda integrations",
-      link: {
-        type: "doc",
-        id: "components/camunda-integrations/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "SAP",
-          link: {
-            type: "doc",
-            id: "components/camunda-integrations/sap/sap-integration",
-          },
-          items: [
-            "components/camunda-integrations/sap/odata-connector",
-            "components/camunda-integrations/sap/rfc-connector",
-            "components/camunda-integrations/sap/btp-plugin",
-            "components/camunda-integrations/sap/csap-cli",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              ],
-            },
-            "components/early-access/alpha/feel-copilot/feel-copilot",
-            {
-              type: "category",
-              label: "MCP Client",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/mcp-client/mcp-client",
-              },
-              items: [
-                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                "components/early-access/alpha/mcp-client/mcp-client-connector",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Camunda 8 SaaS",
       link: {
         type: "doc",
@@ -1118,9 +1006,7 @@ module.exports = {
           ],
         },
         {
-          Deprecated: [
-            "apis-tools/testing/zeebe-process-test",
-          ],
+          Deprecated: ["apis-tools/testing/zeebe-process-test"],
         },
       ],
     },
