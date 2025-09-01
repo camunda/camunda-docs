@@ -50,6 +50,7 @@ module.exports = {
             "components/concepts/access-control/access-control-overview",
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
+            "components/concepts/access-control/mapping-rules",
           ],
         },
         "components/concepts/job-workers",
@@ -322,6 +323,7 @@ module.exports = {
         require("./docs/components/modeler/forms/sidebar-schema"),
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
+        "components/modeler/using-web-and-desktop-modeler-together",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -406,6 +408,13 @@ module.exports = {
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            {
+              "Mapping rules": [
+                "components/identity/mapping-rules/manage-mapping-rules",
+                "components/identity/mapping-rules/mapping-rule-authorizations",
+                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
+              ],
+            },
           ],
         },
       ],
@@ -924,24 +933,9 @@ module.exports = {
       "API Clients": [
         {
           "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/authentication",
+            "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
-            {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
-              ],
-            },
           ],
         },
         {
@@ -972,6 +966,11 @@ module.exports = {
             "apis-tools/testing/connectors",
           ],
         },
+        {
+          Deprecated: [
+            "apis-tools/testing/zeebe-process-test",
+          ],
+        },
       ],
     },
     {
@@ -986,6 +985,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-spring-boot-camunda-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
       ],
     },
@@ -1373,7 +1373,6 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
-        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",
@@ -1552,13 +1551,6 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
-                {
-                  "Mapping rules": [
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants",
-                  ],
-                },
               ],
             },
           ],
