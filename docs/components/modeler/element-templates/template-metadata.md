@@ -15,10 +15,17 @@ The tooling ignores element templates defining a higher `$schema` version and lo
 For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON schema version of the element template:
 
 ```json
-"$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.9.1/resources/schema.json"
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema@0.9.1/resources/schema.json",
+  ...
+}
 ```
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+
+:::info
+The Web Modeler only supports element templates pointing to the latest schema version: `"https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json"`
+:::
 
 ## Identification: `id` and `version`
 
@@ -27,9 +34,9 @@ To support [template evolution](https://github.com/bpmn-io/element-templates/blo
 
 ```json
 {
-  ...,
   "id": "sometemplate",
-  "version": 1
+  "version": 1,
+  ...
 }
 ```
 
@@ -54,7 +61,7 @@ They are shown when selecting a template and when the template has been applied 
 - `documentationRef : String` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
 - `category : Object` key is an optional category configuration for the template. You can define a category to group templates in the element template selection list. If not defined, the template will be displayed in the **Templates** section.
   - `id : String` key defines the unique identifier of the category.
-  - `name : String` key defines the name of the category that the template is shown it
+  - `name : String` key defines the name of the category that the template is shown in.
 
 ```json
 {
@@ -107,7 +114,7 @@ Compatibility is only validated if the platform version is provided by both the 
 }
 ```
 
-You can also use this feature to explicitly specify a template’s incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
+You can also use this feature to explicitly specify a template's incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
 
 ```json
 {

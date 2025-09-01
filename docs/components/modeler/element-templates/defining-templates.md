@@ -1,10 +1,10 @@
 ---
 id: defining-templates
 title: Defining templates
-description: "Learn about JSON schema compatibility, supported BPMN types, defining template properties, and more."
+description: "Learn how to define an element template"
 ---
 
-An Element template is defined in template descriptor files as a JSON object.
+An element template is defined in template descriptor files as a JSON object.
 The element template object is divided into required and optional keys:
 
 ### Required keys
@@ -13,22 +13,22 @@ The element template object is divided into required and optional keys:
 - [`id : String`](./template-metadata.md#identification-id-and-version): ID of the template.
 - [`name : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - [`appliesTo : Array<String>`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): List of BPMN types the template can be applied to.
-- [`properties : Array<Object>`](./template-properties.md): List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property can be configured with a number of options, such as type, binding, constraints, and more.
+- [`properties : Array<Object>`](./template-properties.md): List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property object defines the type of input and how the value is bound to a BPMN or Camunda extension property.
 
 ### Optional keys
 
-- [`version : Integer`](./template-metadata.md#identification-id-and-version): Property to support [templates versioning and upgrading](./template-metadata.md#template-versioning). If you add a version to a template, it is considered unique based on its ID and version.
+- [`version : Integer`](./template-metadata.md#identification-id-and-version): Property to support templates versioning and upgrading. If you add a version to a template, it is considered unique based on its ID and version.
 - [`description : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - [`keywords : Array<String>`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Optional list of keywords. Can be used to help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - [`category : Object`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Category for the template. The category is shown in the element template selection modal (if categories are supported by the tooling).
 - [`documentationRef : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): URL pointing to a template documentation. Shown in the properties panel (after applying an element template).
 - [`icon : Object`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Sets the template's icon. The icon is shown in the element template selection modal and in the properties panel (after applying an element template).
-- [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments [compatible with the template](./template-metadata.md#template-compatibility). Environment version is specified with semantic versions range.
+- [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
 - [`elementType : Object`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets the type of the element. The element is replaced with the specified type when a user applies the template.
 - [`groups : Object`](./template-metadata.md#grouping-properties-groups): Defines groups of properties. Groups are shown in the properties panel (after applying an element template).
 
 Some keys and values require other keys to be set. If your editor supports the [JSON schema](https://json-schema.org/), it will flag missing keys as errors.
-The Web Modelers editor will also show these errors in the template editor problems panel.
+The Web Modeler's editor will also show these errors in the template editor problems panel.
 
 Below you find a simple example of an element template with the most commonly used keys:
 
@@ -88,10 +88,12 @@ This is a Desktop Modeler-specific feature. Web Modeler requires each template t
 ]
 ```
 
-## Creating and editing connector templates
+## Creating and editing templates
 
-Connector templates are a specific type of element template. Just like element templates, you can edit them it the text editor of your choice
-or with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
+You can create and edit element templates in the text editor of your choice.
+Connector templates are a specific type of element template, so the same applies to them.
+If your editor supports the [JSON schema](https://json-schema.org/), it will recognize the structure of the template and provide additional editing support, such as formatting, code completion, and error highlighting.
+The [Web Modeler](/components/connectors/manage-connector-templates.md), offers a built-in template editor with validation and error highlighting as well as a live preview of the properties panel with the applied template.
 
 ## Further reading
 

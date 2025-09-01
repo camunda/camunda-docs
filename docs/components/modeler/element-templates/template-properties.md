@@ -16,11 +16,11 @@ You can find the full list of supported bindings in the [bindings](#binding-an-i
 
 When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension elements properties that can be defined by bindings in an element template.
 The template author must explicitly make the properties user configurable to show them in the properties panel once the user has applied the template.
-For example, if a template does not contain a property object for with the binding type `zeebe:input`,
+For example, if a template does not contain a property object with the binding type `zeebe:input`,
 the template user will not be able to define an input mapping for an element once the template is applied.
 
-:::note
-Some properties, such as, execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
+:::info
+Some properties, such as execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
 They are situational and require knowledge of the process context to be used.
 As they are never part of any element template, users can configure them independently of the applied template.
 :::
@@ -32,7 +32,7 @@ The property fields are divided into required and optional fields:
 
 ### Required keys
 
-- [`binding : Object`](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding): An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
+- [`binding : Object`](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding): An object specifying how the property is mapped to BPMN or Camunda extensions.
 
 ### Optional keys
 
@@ -41,17 +41,17 @@ The property fields are divided into required and optional fields:
 - [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
 - `description : String`: A description text below the property input.
 - `tooltip : String`: A tooltip text shown when hovering over the label.
-- [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports [FEEL](#feel) expressions.
+- [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
 - [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
 - [`placeholder : String`](#setting-a-text-placeholder-placeholder): A placeholder text shown in the input field when it is empty.
 - [`optional : Boolean`](#preventing-persisting-empty-values-optional): Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
 - [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the binding.
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
-- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when [the property is active](#defining-conditional-properties).
+- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active.
 - `id : String`: An identifier that can be used to reference the property in conditional properties.
 
-Not all keys and values are compatible with each other, some keys or values require other keys to be set, even if they are marked as optional above.
-For more information see the documentation below.
+Not all keys and values are compatible with each other. Some keys or values require other keys to be set, even if they are marked as optional above.
+For more information, see the documentation below.
 If your editor supports JSON schema, these incompatibilities or missing keys are highlighted while you edit your template.
 For most purposes, `binding`, `label`, `type`, and `value` are sufficient to define a property.
 
@@ -274,7 +274,12 @@ To fully grasp the concept of bindings, it is helpful to have a good understandi
 If you want to learn more about a certain BPMN element and its properties, you can read through the BPMN section on [Tasks](/components/modeler/bpmn/tasks.md), [Events](/components/modeler/bpmn/events.md), and [Subprocesses](/components/modeler/bpmn/subprocesses.md).
 Each page on an element contains a description of its properties and an example XML representation.
 
-:::note
+:::info
+If a property cannot be set via any of the bindings described below, it cannot be set by an element template.
+For example, element listeners and multi-instance configurations cannot be set by an element template.
+:::
+
+:::warning
 If you add multiple properties with equal `binding` objects, the behavior is undefined.
 :::
 
