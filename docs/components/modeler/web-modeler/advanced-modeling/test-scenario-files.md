@@ -92,26 +92,6 @@ To unlink the file from a process, remove the `processId` field or set it to `nu
 - **Element IDs**: Reference specific BPMN elements in your process definition.
 - **Process definition IDs**: Identify which process definition to interact with.
 
-### Update variables
-
-Updates process variables during test execution.
-
-**Fields**
-
-| Field       | Required | Description                                       |
-| ----------- | -------- | ------------------------------------------------- |
-| `type`      | Yes      | Must be `"update-variables"`.                     |
-| `variables` | Yes      | A JSON string containing the variables to update. |
-
-**Example:**
-
-```json
-{
-  "type": "update-variables",
-  "variables": "{\"customerId\": \"12345\", \"amount\": 100.50}"
-}
-```
-
 ### Create process instance
 
 Creates a new process instance from a process definition.
