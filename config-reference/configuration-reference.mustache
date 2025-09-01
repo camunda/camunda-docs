@@ -3,9 +3,24 @@ id: properties-reference
 title: Properties reference
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import Property from "@site/src/components/Property";
+
+
 Properties for the Camunda Spring SDK.
 
 ## Properties
+
+<Tabs groupId="property-format" defaultValue="property" queryString values={
+
+[
+{label: 'Configuration property', value: 'property' },
+{label: 'Environment variable', value: 'env' },
+]
+}>
+</Tabs>
+
 
 {{#groups}}
 
@@ -28,7 +43,7 @@ Properties for the Camunda Spring SDK.
 {{#properties}}
 <tr>
 <td>
-  <a href="#{{anchor}}" id="{{anchor}}"><code>{{name}}</code></a><br/><code>{{env}}</code>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
 <td>
   <code>{{type}}</code>
@@ -77,13 +92,13 @@ Deprecated {{&group.description}}
 {{#properties}}
 <tr>
 <td>
-  <a href="#{{anchor}}" id="{{anchor}}"><code>{{name}}</code></a><br/><code>{{env}}</code>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
 <td>
   <code>{{type}}</code>
 </td>
 <td>
-  {{#deprecation.replacement}}<code>{{deprecation.replacement}}</code>{{/deprecation.replacement}}
+  {{#deprecation.replacement}}<a href="#{{deprecation.replacementAnchor}}"><Property defaultValue="property" groupId="property-format" property="{{deprecation.replacement}}" env="{{deprecation.replacementEnv}}"/></a>{{/deprecation.replacement}}
 </td>
 <td>
 
