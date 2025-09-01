@@ -8,7 +8,7 @@ The `properties` array is where you define what properties should be applied to 
 The underlying concept is very simple:
 
 1. You will create one property object for each property that should be defined by the template.
-2. Each property object contains keys to define how the property is presented and how its value can be changed by the user.
+2. Each property object contains key-value pairs to define how the property is presented and how its value can be changed by the user.
 3. Each property object contains one `binding` object that specifies how the property is mapped to BPMN 2.0 XML.
 
 Element templates can only set properties that can be described by bindings supported by the element template schema.
@@ -17,18 +17,18 @@ You can find the full list of supported bindings in the [bindings](#binding-an-i
 When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension elements properties that can be defined by bindings in an element template.
 The template author must explicitly make the properties user configurable to show them in the properties panel once the user has applied the template.
 For example, if a template does not contain a property object with the binding type `zeebe:input`,
-the template user will not be able to define an input mapping for an element once the template is applied.
+the template user will not be able to define an input mapping for the element once the template is applied.
 
 :::info
 Some properties, such as execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
 They are situational and require knowledge of the process context to be used.
-As they are never part of any element template, users can configure them independently of the applied template.
+As they are never part of any element template, users can configure them independently of an applied template.
 :::
 
 ## What is part of a property?
 
 You build your template by adding property objects to the `properties` array.
-The property fields are divided into required and optional fields:
+The property object keys are divided into required and optional keys:
 
 ### Required keys
 
@@ -37,22 +37,23 @@ The property fields are divided into required and optional fields:
 ### Optional keys
 
 - [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defining the input type in the properties panel.
-- `label : String`: A label text above the property input.
 - [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- `description : String`: A description text below the property input.
+- `label : String`: A label text above the property input.
 - `tooltip : String`: A tooltip text shown when hovering over the label.
+- `description : String`: A description text below the property input.
 - [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
 - [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
 - [`placeholder : String`](#setting-a-text-placeholder-placeholder): A placeholder text shown in the input field when it is empty.
-- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
-- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the binding.
+- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Optional properties do not persist empty values in the underlying BPMN 2.0 XML.
+- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the property.
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
-- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active.
+- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
 - `id : String`: An identifier that can be used to reference the property in conditional properties.
 
-Not all keys and values are compatible with each other. Some keys or values require other keys to be set, even if they are marked as optional above.
+Not all keys and values are compatible with each other.
+Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
 For more information, see the documentation below.
-If your editor supports JSON schema, these incompatibilities or missing keys are highlighted while you edit your template.
+If your editor supports JSON schema, these incompatibilities or missing keys-value pairs are highlighted while you edit your template.
 For most purposes, `binding`, `label`, `type`, and `value` are sufficient to define a property.
 
 All property objects are defined inside the `properties` array:
@@ -83,13 +84,14 @@ All property objects are defined inside the `properties` array:
 
 For a comprehensive example showing how to create a REST connector template with all the concepts covered in this documentation, see the [complete template example](./template-example.md) page.
 
-The keys of the property object are explained in the following sections.
+The key-value pairs of the property object are explained in the following sections.
 
 ## Setting a default value: `value`
 
-The `value` attribute defines a static default value for a property.
-It is used when the property is applied to an element and no user input has been provided yet.
-The value must match the `type` of the property.
+The `value` key defines a static default value for a property.
+The value is applied to the property when the template is applied to an element until a user provides their own input value.
+`value` should be defined whenever the input type is not `Hidden`.
+The value of `value` must match the `type` of the property.
 
 ```json
 {
@@ -141,15 +143,15 @@ The placeholder is displayed when a field is empty:
 
 ## Setting the input type: `type`
 
-The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available. As seen above, `String` maps to a single-line input, while `Text` maps to a multi-line input.
+The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available.
 
 ### String input type
 
-The `String` type maps to a single-line input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Strings` as expressions.
+The `String` type maps to a single-line input field. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Strings` as an expression.
 
 ### Text input type
 
-The `Text` type maps to a multi-line text area. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Text` as expressions.
+The `Text` type maps to a multi-line text area. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Text` as an expression.
 
 ### Hidden input type
 
@@ -157,7 +159,7 @@ The `Hidden` type is not shown in the properties panel. It is used to set [stati
 
 ### Number input type
 
-The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Numbers` as expressions.
+The `Number` type maps to a number input field. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Numbers` as expressions.
 
 ### Boolean / checkbox input type
 
@@ -215,7 +217,7 @@ The following input types support the `feel` property:
 
 ### FEEL required
 
-The field will be displayed as a FEEL editor and a visual indication that a FEEL expression is required will be shown:
+The properties panel will display the field as a FEEL editor and will show a visual indication that a FEEL expression is required:
 
 ```json
 {
@@ -228,7 +230,7 @@ The field will be displayed as a FEEL editor and a visual indication that a FEEL
 
 ### FEEL optional
 
-An indicator to switch to a FEEL expression is shown. When activated, the field will be displayed as a FEEL editor:
+The properties panel will show an indicator to switch to a FEEL expression. When activated, the field display as a FEEL editor:
 
 ```json
     {
@@ -258,14 +260,13 @@ For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value 
 
 ## Binding an input to a BPMN or Camunda element property: `binding`
 
-The following ways exist to map a custom field to the underlying BPMN 2.0 XML.
-The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML.
-As default or if no user input was given, the value specified in `value` is displayed and used for `[userInput]`.
-`[]` brackets are used to indicate where the parameters are mapped to in the XML.
+The previous sections describe how to display a property to the user in the properties panel and how to configure its value.
+These inputs need to be mapped to the underlying BPMN 2.0 XML or Camunda extensions by using a `binding` object.
 
-The `binding` is an object with a mandatory `type` key and optional additional parameters depending on the binding type.
+The `binding` is an object with a mandatory `type` key and an additional parameter depending on the binding's `type` value.
 `binding.type` defines what kind of BPMN or Camunda element is targeted by the binding.
-The additional property sets defines the target for the `value` or user input.
+The additional binding parameter is a key on the binding object: For example, `name`, `key`, or `property`.
+That key-value pair defines the target for the default [`value`](#setting-a-default-value-value) or user input.
 
 Notice that adherence to the following configuration options is enforced by design.
 If not adhering, the tooling logs a validation error and ignores the respective element template.
@@ -276,12 +277,16 @@ Each page on an element contains a description of its properties and an example 
 
 :::info
 If a property cannot be set via any of the bindings described below, it cannot be set by an element template.
-For example, element listeners and multi-instance configurations cannot be set by an element template.
+For example, execution listeners and multi-instance configurations cannot be set by an element template.
 :::
 
 :::warning
 If you add multiple properties with equal `binding` objects, the behavior is undefined.
 :::
+
+The **mapping result** in the following section uses `[userInput]` to indicate where the input provided by the user in the `Properties Panel` is set in the BPMN XML.
+As default or if no user input was given, the value specified in [`value`](#setting-a-default-value-value) is displayed and used for `[userInput]`.
+`[]` brackets are used to indicate where the binding parameters are mapped to in the XML.
 
 ### Input mapping: `zeebe:input`
 
@@ -715,7 +720,7 @@ The `zeebe:taskSchedule` binding allows you to configure [user task scheduling](
 
 :::note
 When `zeebe:taskSchedule` is used, `zeebe:userTask` must be set on the same element.  
-If the template sets a static `value` for any property, it must be defined as an ISO 8601 combined date and time representation.
+If the template sets a static `value` for `dueDate` or `followUpDate`, it must be defined as an ISO 8601 combined date and time representation.
 :::
 
 ### User task priority: `zeebe:priorityDefinition`
@@ -837,6 +842,7 @@ The `zeebe:script` binding allows you to configure the [FEEL expression](../../b
 
 :::note
 When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
+If the input `type` is `String` or `Text`, the [`feel`](#adding-feel-editor-support-feel) must be set to `required`"
 :::
 
 ## Setting a task implementation
@@ -851,16 +857,18 @@ You pick an implementation type by adding the respective binding with the respec
 
 ## Setting a resource binding type
 
-Some tasks with the respective bindings support different [resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md):
+Some tasks with the respective bindings let you define the [resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md):
 
 - Call activity: [`zeebe:calledElement`](#called-element-zeebecalledelement)
 - User task form: [`zeebe:formDefinition`](#form-zeebeformdefinition)
 - Business rule task: [`zeebe:calledDecision`](#called-decision-zeebecalleddecision)
 
 Setting a resource binding type helps you define what version of a resource (process, form, or decision) should be used during process execution.
-Camunda generally recommends using `versionTag` as the resource binding type. This helps to ensure that only resources with a matching version tag are used during process execution.
-By default, the binding type is `latest`, meaning that the latest deployed version of a resource is used.
-This bears the risk that a resource is changed in an incompatible way making invocations with old templates fail.
+Camunda generally recommends using `versionTag` as the resource binding type.
+This helps to ensure that only resources with a matching `versionTag` are used during process execution.
+By default, the binding type is `latest`, meaning that the latest deployed version of a resource is used whenever the task is executed.
+Using `latest` in combination with element templates bears the risk that a resource can be changed in an incompatible way.
+This can make invocations with old templates fail, for example, because an input mapping is missing from an old template, but is required by the updated resource.
 
 The binding type can be set like so:
 
@@ -939,9 +947,10 @@ Associate a field with a group (ID) via the fields `group` key:
       "group": "definition",
       "label": "Task type",
       "type": "String",
-      "value": "http",
+      "value": "http-job",
       "binding": {
-        "type": "zeebe:taskDefinition:type"
+        "type": "zeebe:taskDefinition",
+        "property": "type"
       }
     },
     ...
@@ -989,11 +998,14 @@ The Modeler's problems panel will show errors for invalid properties, regardless
 
 ## Showing properties conditionally: `condition`
 
-Properties may have a condition which determines when they should be active, depending on the value of another property. When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML. If a property is **not active**, it is not displayed, and its value is removed from the XML.
+Properties may have a condition which determines when they should be active, depending on the value of another property.
+When property is **active**, it is displayed in the properties panel, and its value is serialized in the XML.
+If a property is **not active**, it is not displayed, and its value is removed from the XML.
 
 For a property value to be used in a condition, the property needs to have an `id` that can be referenced by the conditional property.
 
-A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`. All of the conditions must be met for the property to be active.
+A property can depend on one or more conditions. If there are multiple conditions, they can be defined using `allMatch`.
+All the conditions must be met for the property to be active.
 
 There are three possible comparison operators:
 
@@ -1077,7 +1089,9 @@ You can prevent edits by setting the `editable` property to `false`. The propert
 
 ## Displaying all entries: `entriesVisible`
 
-Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden. If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
+Per default, the element template defines the visible entries of the properties panel. All other property controls are hidden.
+If you want to bring all the default entries back, it is possible to use the `entriesVisible` property.
+If this key is set to `true`, the default properties will be listed below the element template properties in the properties panel.
 
 ```json
 [
