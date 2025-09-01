@@ -121,6 +121,15 @@ For example, you can validate your process by creating and rerunning scenarios f
 Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
 :::
 
+Scenarios are stored in [test scenario files](advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+
+Play will use the test scenario file [linked to the first executable process ID](advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
+
+If multiple test scenario files are linked to the same process ID, Play will use:
+
+- The test scenario file with the earliest name alphabetically
+- If multiple test scenario files have the same name, the one that was most recently updated
+
 ### Save scenario
 
 To save a scenario:
