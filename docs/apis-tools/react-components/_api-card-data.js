@@ -50,21 +50,21 @@ export const apiCards = [
 
 export const clientCards = [
   {
-    link: "./modeler/about-modeler/",
+    link: "../java-client/getting-started/",
     title: "Camunda Java Client",
     image: IconJavaImg,
     description:
       "The recommended way to build Orchestration Cluster integrations and job workers in Java.",
   },
   {
-    link: "./concepts/bpmn-dmn-feel/",
+    link: "../spring-zeebe-sdk/getting-started/",
     title: "Camunda Spring Boot SDK",
     image: IconSpringBootImg,
     description:
       "Build Spring Boot applications to connect to the Orchestration Cluster to build job workers.",
   },
   {
-    link: "./orchestration-cluster/",
+    link: "../node-js-sdk/",
     title: "Node.js SDK",
     image: IconNodeImg,
     description:
