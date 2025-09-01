@@ -4,7 +4,6 @@ title: Properties reference
 ---
 
 import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import Property from "@site/src/components/Property";
 
 Properties for the Camunda Spring SDK.
