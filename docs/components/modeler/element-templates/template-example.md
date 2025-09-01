@@ -4,8 +4,6 @@ title: Example template
 description: "A complete example showing how to create an element template."
 ---
 
-# Complete template example
-
 This page provides a complete example of an element template that demonstrates how to define user-editable fields and their mapping to BPMN 2.0 XML and Camunda extension elements.
 
 ## REST connector template

@@ -7,15 +7,15 @@ description: "Learn how to define an element template"
 An element template is defined in template descriptor files as a JSON object.
 The element template object is divided into required and optional keys:
 
-### Required keys
+## Required keys
 
 - [`$schema : String`](./template-metadata.md#validation-schema): URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository.
-- [`id : String`](./template-metadata.md#identification-id-and-version): ID of the template.
+- [`id : String`](./template-metadata.md#identification-id-and-version): Identifier of the template.
 - [`name : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Name of the template. Shown in the element template selection modal and in the properties panel on the right side of the screen (after applying an element template).
 - [`appliesTo : Array<String>`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): List of BPMN types the template can be applied to.
 - [`properties : Array<Object>`](./template-properties.md): List of properties of the template. These properties are applied to the BPMN element when the template is applied. Each property object defines the type of input and how the value is bound to a BPMN or Camunda extension property.
 
-### Optional keys
+## Optional keys
 
 - [`version : Integer`](./template-metadata.md#identification-id-and-version): Property to support templates versioning and upgrading. If you add a version to a template, it is considered unique based on its ID and version.
 - [`description : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).

@@ -29,7 +29,8 @@ The Web Modeler only supports element templates pointing to the latest schema ve
 
 ## Identification: `id` and `version`
 
-The `id` key defines the ID of the template. Templates with the same `id` and different versions offer an upgrade path.
+The `id` key defines the identifier of the template. Templates with the same `id` and different versions offer an upgrade path.
+Templates with the same `id` and `version` are considered identical, regardless of other differences.
 To support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates:
 
 ```json

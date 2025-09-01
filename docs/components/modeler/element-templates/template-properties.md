@@ -145,25 +145,25 @@ The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` 
 
 ### String input type
 
-The `String` type maps to a single-line input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Strings` as expressions.
+The `String` type maps to a single-line input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Strings` as expressions.
 
 ### Text input type
 
-The `Text` type maps to a multi-line text area. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Text` as expressions.
+The `Text` type maps to a multi-line text area. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Text` as expressions.
 
 ### Hidden input type
 
-The `Hidden` type is not shown in the properties panel. It is used to set [static](#value) or [generated](#generated-value) values that should not be changed by the user.
+The `Hidden` type is not shown in the properties panel. It is used to set [static](#setting-a-default-value-value) or [generated](#generating-a-value-generatedvalue) values that should not be changed by the user.
 
 ### Number input type
 
-The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#feel) section to use `Numbers` as expressions.
+The `Number` type maps to a number input field. By default, this will be persisted as a string in the BPMN. Refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Numbers` as expressions.
 
 ### Boolean / checkbox input type
 
 The `Boolean` type maps to a checkbox that can be toggled by the user.
 
-When checked, it maps to `true` in the respective field (refer to [bindings](#bindings)). Additionally, refer to the [FEEL](#feel) section to use `Booleans` as expressions.
+When checked, it maps to `true` in the respective field. Additionally, refer to the [FEEL](#adding-feel-editor-support-feel) section to use `Booleans` as expressions.
 
 ### Dropdown input type
 
@@ -481,8 +481,8 @@ The `bpmn:Message#property` binding allows you to set properties of a `bpmn:Mess
 ```
 
 :::note
-When designing a template for a message receive task or event, it sufficient to define the binding for the message [name](#bpmn:Message#property) and the [correlation key](#bpmn:Message#zeebe:subscription#property).
-The message ID is automatically generated when the template is applied. The `messageRef` [property](#property) does not have to be defined.
+When designing a template for a message receive task or event, it sufficient to define the binding for the message [name](#message-name-bpmnmessageproperty) and the [correlation key](#message-correlation-key-bpmnmessagezeebesubscriptionproperty).
+The message ID is automatically generated when the template is applied. The `messageRef` [property](#primitive-bpmn-properties-property) does not have to be defined.
 
 Remember that the message [name and correlation key](/components/concepts/messages.md#message-subscriptions) define the correlation characteristics of a message and can be shared by [multiple process definitions](/components/concepts/messages.md#message-cardinality).
 :::
@@ -629,7 +629,7 @@ to the value of the version tag of the form you want to link.
 
 :::note
 
-When `zeebe:formDefinition` is used, [`zeebe:userTask`](#zeebeusertask) must be set on the same element.
+When `zeebe:formDefinition` is used, [`zeebe:userTask`](#user-task-implementation-zeebeusertask) must be set on the same element.
 Properties `formId` and `externalReference` are mutually exclusive, meaning that only one of them can be set at a time.
 The property `externalReference` cannot be used together with `bindingType`.
 
@@ -677,7 +677,7 @@ The `zeebe:assignmentDefinition` binding allows you to configure the [user task 
 
 :::note
 
-When `zeebe:assignmentDefinition` is used, [`zeebe:userTask`](#zeebeusertask) must be set on the same element.
+When `zeebe:assignmentDefinition` is used, [`zeebe:userTask`](#user-task-implementation-zeebeusertask) must be set on the same element.
 
 :::
 
@@ -742,7 +742,7 @@ The `zeebe:priorityDefinition` binding allows you to configure [user task priori
 ```
 
 :::note
-When `zeebe:priorityDefinition` is used, [`zeebe:userTask`](#zeebeusertask) must be set on the same element.
+When `zeebe:priorityDefinition` is used, [`zeebe:userTask`](#user-task-implementation-zeebeusertask) must be set on the same element.
 
 If the template sets a static `value` for `priority`, it must be between 0 and 100.
 :::
@@ -843,7 +843,7 @@ When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same e
 
 The following tasks support multiple implementation types:
 
-- User task: [`zeebe:userTask`](#user-task-implementation-zeebeuserTask) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition) (most related properties, for example, [Assignment](#user-task-assignment-zeebeassignmentdefinition), [Task schedule](#user-task-schedule-zeebetaskschedule), and [Priority](#user-task-priority-zeebeprioritydefinition), are only supported when `zeebe:userTask` is set)
+- User task: [`zeebe:userTask`](#user-task-implementation-zeebeusertask) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition) (most related properties, for example, [Assignment](#user-task-assignment-zeebeassignmentdefinition), [Task schedule](#user-task-schedule-zeebetaskschedule), and [Priority](#user-task-priority-zeebeprioritydefinition), are only supported when `zeebe:userTask` is set)
 - Business rule task: [`zeebe:calledDecision`](#called-decision-zeebecalleddecision) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition)
 - Script task: [`zeebe:script`](#script-zeebescript) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition)
 
@@ -901,10 +901,10 @@ We support optional bindings that do not persist empty values in the underlying 
 If a user removes the value in the configured control, it will also remove the mapped element.
 The following binding types can be `optional`:
 
-- [`zeebe:input`](#zeebeinput)
-- [`zeebe:output`](#zeebeoutput)
-- [`zeebe:taskHeader`](#zeebetaskheader)
-- [`zeebe:property`](#zeebeproperty)
+- [`zeebe:input`](#input-mapping-zeebeinput)
+- [`zeebe:output`](#output-mapping-zeebeoutput)
+- [`zeebe:taskHeader`](#header-zeebetaskheader)
+- [`zeebe:property`](#extension-properties-zeebeproperty)
 
 Example:
 
