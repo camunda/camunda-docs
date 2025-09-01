@@ -192,6 +192,15 @@ webModelerPostgresql:
 
 For additional details on Identity secrets during installation, visit the [installation guide](/self-managed/installation-methods/helm/install.md#create-identity-secrets).
 
+## Document Store secrets
+
+Document Store configuration uses a different pattern that doesn't follow the unified secret structure. These secrets are configured using direct `existingSecret` references with multiple key specifications for different credential components.
+
+| **Secret**                         | **Chart values key**                                                                                                                                                                | **Purpose**                                                                                                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AWS Document Store Credentials** | `global.documentStore.type.aws.existingSecret`, `global.documentStore.type.aws.accessKeyIdKey`, `global.documentStore.type.aws.secretAccessKeyKey`                                  | AWS credentials for S3 document storage (requires multiple keys: access key ID and secret access key)                                          |
+| **GCP Document Store Credentials** | `global.documentStore.type.gcp.existingSecret`, `global.documentStore.type.gcp.credentialsKey`, `global.documentStore.type.gcp.mountPath`, `global.documentStore.type.gcp.fileName` | GCP service account JSON for GCS document storage (single key containing JSON file, with additional mount configuration for file-based access) |
+
 ## Migration from legacy pattern (8.7 → 8.8+)
 
 If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the new structured `secret:` pattern available in Camunda 8.8+ for better consistency and future compatibility. The legacy fields are deprecated in 8.8+ but will remain functional during the transition period.
