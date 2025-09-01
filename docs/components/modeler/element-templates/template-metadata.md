@@ -154,7 +154,8 @@ Such constraints are checked based on the element template schema and by the mod
 
 ## Grouping properties: `groups`
 
-You can define `groups` to organize custom fields into:
+You can define `groups` to organize custom fields into. The fields will be shown in their assigned group in the properties panel (after applying an element template).
+You can also define whether a group is expanded or collapsed by default.
 
 ```json
 {
@@ -187,9 +188,9 @@ You can define `groups` to organize custom fields into:
 
 Groups can have the following attributes:
 
-- `id`: Unique identifier of the group
-- `label`: Label of the group
-- `tooltip`: Tooltip for the group (optional)
-- `openByDefault`: Whether the group will be expanded in the properties panel (optional, default: `false`)
+- `id : String`: Unique identifier of the group
+- `label : String`: Label of the group
+- `tooltip : String`: Tooltip for the group (optional)
+- `openByDefault : Boolean`: Whether the group will be expanded in the properties panel (optional, default: `false`)
 
 A property can be assigned to a group by specifying the `group` key to the groups `id` value on the property.
