@@ -11,14 +11,6 @@ import IconConnectorsImg from "../assets/icon-connectors.png";
 import IconOptimizeImg from "../assets/icon-optimize.png";
 import IconConsoleImg from "../assets/icon-console.png";
 
-import IconSecurityImg from "../assets/icon-reference-api.png";
-import IconLicensingImg from "../assets/icon-reference-api.png";
-import IconApiImg from "../assets/icon-reference-api.png";
-import IconEnvironmentsImg from "../assets/icon-reference-api.png";
-import IconSourceImg from "../assets/icon-reference-api.png";
-import IconDataImg from "../assets/icon-reference-api.png";
-import IconReleaseNotesImg from "../assets/icon-reference-api.png";
-
 export const featuresCards = [
   {
     link: "./agentic-orchestration/",
@@ -100,5 +92,33 @@ export const usingCamundaCards = [
     title: "Console",
     image: IconConsoleImg,
     description: "Manage Camunda components, clusters, and your organization.",
+  },
+];
+
+export const featuresPageCards = [
+  {
+    link: "../../agentic-orchestration/",
+    title: "Agentic orchestration",
+    image: IconAgenticImg,
+    description:
+      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
+  },
+  {
+    link: "../../modeler/web-modeler/idp/",
+    title: "Intelligent document processing (IDP)",
+    image: IconIdpImg,
+    description: "integrate automated document processing into your processes.",
+  },
+  {
+    link: "../../rpa/overview/",
+    title: "Robotic process automation (RPA)",
+    image: IconRpaImg,
+    description: "Use RPA to automate manual, repetitive tasks.",
+  },
+  {
+    link: "../../document-handling/getting-started/",
+    title: "Document handling",
+    image: IconDocsImg,
+    description: "Store, track, and manage documents.",
   },
 ];
