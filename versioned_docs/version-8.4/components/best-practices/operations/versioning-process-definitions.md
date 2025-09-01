@@ -148,7 +148,7 @@ Having said this, we want to emphasize that the engine is perfectly fine with ha
 ### Using call activities to influence versioning behaviour of pieces
 
 :::caution Camunda 8
-With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/docs/components/modeler/bpmn/call-activities/).
+With Camunda 8 you cannot yet influence the version of the started process instance via the call activity. This feature is on the roadmap. At the moment, [a new process instance of the latest process definition version is started](/components/modeler/bpmn/call-activities/).
 :::
 
 When calling separately modeled subprocesses (i.e. _Call Activities_), the default behavior of the process engine is to call the _latest_ deployed version of that subprocess. You can change this default 'binding' behavior to call a _specific_ version or the version which was _deployed_ together with the parent process.
