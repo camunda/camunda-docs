@@ -208,7 +208,7 @@ Generate a Certificate Signing Request (CSR) using the key created in step 1.
 openssl req -new -key private_key.pem -out cert.csr
 ```
 
-<h4>3.Create a self-signed certificate</h4>
+<h4>3. Create a self-signed certificate</h4>
 Using the private key and the certificate signing request, create a certificate.
 ```
 openssl x509 -req -days 365 -in cert.csr -signkey private_key.pem -out cert.crt
