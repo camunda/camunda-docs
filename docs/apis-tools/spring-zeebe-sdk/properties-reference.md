@@ -22,8 +22,8 @@ Properties for the Camunda client.
 </thead>
 <tbody>
 <tr>
-<td>
-  <a href="#camundaclientca-certificate-path" id="camundaclientca-certificate-path"><code>camunda.client.ca-certificate-path</code></a><br/><code>CAMUNDA_CLIENT_CACERTIFICATEPATH</code>
+<td id="camundaclientca-certificate-path">
+  <code>CAMUNDA_CLIENT_CACERTIFICATEPATH</code>
 </td>
 <td>
   <code>string</code>
