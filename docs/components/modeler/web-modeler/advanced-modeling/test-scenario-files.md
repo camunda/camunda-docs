@@ -76,6 +76,8 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 }
 ```
 
+The `processId` should be shorter than 255 characters and not contain whitespace
+
 :::note
 Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
 :::
@@ -285,6 +287,26 @@ Simulates a job failure by throwing an error during service task execution.
   "errorCode": "PAYMENT_FAILED",
   "jobType": "payment-service",
   "errorMessage": "Insufficient funds in customer account"
+}
+```
+
+### Update variables
+
+Updates process variables during test execution.
+
+**Fields**
+
+| Field       | Required | Description                                       |
+| ----------- | -------- | ------------------------------------------------- |
+| `type`      | Yes      | Must be `"update-variables"`.                     |
+| `variables` | Yes      | A JSON string containing the variables to update. |
+
+**Example:**
+
+```json
+{
+  "type": "update-variables",
+  "variables": "{\"customerId\": \"12345\", \"amount\": 100.50}"
 }
 ```
 
