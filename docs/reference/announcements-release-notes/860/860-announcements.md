@@ -166,6 +166,10 @@ A new `commonLabels` value is now available and integrates with `camundaPlatform
 
 The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new [Bitnami Docker repository](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration).
+
 ### New base path for Operate and Tasklist web applications
 
 We are introducing a new base path for both the Operate and Tasklist **web applications**. This change applies to both Self-Managed and SaaS environments.

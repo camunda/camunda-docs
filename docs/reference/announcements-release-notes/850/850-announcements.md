@@ -96,6 +96,10 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 | :------------- | :----------------- |
 | 9 January 2024 | 9 July 2025        |
 
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new [Bitnami Docker repository](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration).
+
 ### Changes in supported environments
 
 #### Versioning changes in Helm chart
