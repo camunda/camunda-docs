@@ -1,6 +1,6 @@
 ---
 id: assign-mapping-rules-to-tenants
-title: "Assigning mapping rules to tenants"
+title: "Assign mapping rules to tenants"
 sidebar_label: "Tenant mapping rule assignment"
 description: "Grant claim-based access to tenants by assigning mapping rules in the Identity UI."
 ---
@@ -8,10 +8,10 @@ description: "Grant claim-based access to tenants by assigning mapping rules in 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide explains how to assign, update, or remove mapping rules from a tenant to grant access based on claim values.
+Mapping rules grant access to a tenant based on access token claim values. This guide details how to assign, update, or remove these rules.
 
 :::tip
-To learn more about mapping rules and tenants, see the [mapping rules documentation](../mapping-rules/managing-mapping-rules.md) and [tenant management documentation](../manage-tenants.md).
+To learn more about mapping rules and tenants, see the [mapping rules documentation](manage-mapping-rules.md) and [tenant management documentation](/self-managed/components/orchestration-cluster/identity/manage-tenants.md).
 :::
 
 1. Log in to the Identity UI and go to the **Tenants** tab.
@@ -49,8 +49,8 @@ To learn more about mapping rules and tenants, see the [mapping rules documentat
 
 ### Update a tenant mapping rule
 
-1. In the **Mapping Rules** tab, locate the mapping rule to change.
-2. Click **Remove** to delete the old mapping rule.
+1. In the **Mapping rules** tab, locate the mapping rule to change.
+2. Click the **Remove** button to delete the old mapping rule.
 3. Re-assign the updated mapping rule using the steps in the **Add** tab.
 
 :::note
@@ -63,10 +63,8 @@ Currently, tenant mapping rules must be updated by removing and re-adding them w
 
 ### Delete a mapping rule from a tenant
 
-1. In the **Mapping Rules** tab for the selected tenant, locate the assigned mapping rule.
-2. Click **Remove**.
-
-![tenant-remove-mapping-rule](../img/tenant-remove-mapping-rule.png)
+1. In the **Mapping rules** tab for the selected tenant, locate the assigned mapping rule.
+2. Click the **Remove** button.
 
 </TabItem>
 
