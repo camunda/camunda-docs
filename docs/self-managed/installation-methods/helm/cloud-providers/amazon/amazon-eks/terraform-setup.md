@@ -96,7 +96,7 @@ We support two variants of this architecture:
 - If you prefer a simpler setup with basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
 - If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
 
-Both can be set up with or without a **Domain** ([ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
+Both can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
 
 ### Outcome
 
@@ -319,7 +319,7 @@ The module is locally sourced in your clone. Any changes you make to the module 
    :::note Private cluster
 
    By default, this cluster is accessible from the internet.
-   To restrict access, set `private_vpc = true`. This creates a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can expose a public ingress by setting the `expose_public_elb` variable in the EKS module.
+   To restrict access, set `private_vpc = true`. This creates a private cluster that is only accessible through the [private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html) of your VPC. Optionally, you can expose a public Ingress by setting the `expose_public_elb` variable in the EKS module.
 
    ⚠️ Because private subnets are not reachable from the internet, you must connect your network to the cluster using either a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
