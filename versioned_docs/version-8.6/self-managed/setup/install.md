@@ -442,7 +442,7 @@ For upgrading the Camunda Helm chart from one release to another, perform a [Hel
 
 ## Production guidance
 
-For detailed instructions on running in production, please refer to our [Production Installation Guide](https://docs.camunda.io/docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/), available starting with version 8.7.
+For detailed instructions on running in production, see the [Camunda production installation guide with Kubernetes and Helm](/versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md), available starting with version 8.7.
 
 ## General notes
 
