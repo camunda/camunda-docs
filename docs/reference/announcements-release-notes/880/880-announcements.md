@@ -322,3 +322,18 @@ For more information, refer to:
 
 - [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md)
 - [Introducing Camunda Process Test—The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/)
+
+### Deprecated: Operate & Tasklist usage metrics endpoints
+
+With the **8.8 release**, Camunda announces the **deprecation of usage metrics endpoints in Operate and Tasklist**.
+
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/operate/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
+
+:::warning Breaking change
+Assignees list removed from response.
+:::
+
+These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
+
+Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.
