@@ -120,29 +120,12 @@ AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 When using Azure Blob Storage as a backup store, you can enable logging to 
 troubleshoot issues with the Azure SDK. To do this, go through the following steps:
 
-1. Download the following log4j2.xml and create configmap.
+1. Add logging for azure SDK, and set it to debug through the zeebe broker 
+   loggers endpoint: 
 
-`kubectl create configmap -n <namespace> zeebe-log4j-config --from-file=log4j2.xml=./log4j2.xml`
+`curl 'http://localhost:9600/actuator/loggers/com.azure' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'`
 
-2. Add a new volumeMount to Zeebe broker statefulset:
-
-```
-volumeMounts:
-- mountPath: /usr/local/zeebe/config/log4j2.xml
-  name: log4j-config
-  subPath: log4j2.xml
-```
-
-3. Add a new volume to Zeebe broker statefulset:
-
-```
-volumes:
-- configMap:
-  name: zeebe-log4j-config
-  name: log4j-config
-```
-
-4. Add Environment the following variable to Zeebe Broker StatefulSet.
+2. Add the following environment variable to the Zeebe Broker StatefulSet.
 
 `AZURE_HTTP_LOG_DETAIL_LEVEL=BASIC`
 
