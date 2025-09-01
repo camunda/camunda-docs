@@ -119,8 +119,3 @@ a.api-card {
   background-color: #9a4e00;
   color: #e1d9cd;
 }
-
-.badge:nth-of-type(1) {
-  margin-left: 0;
-  margin-bottom: 0rem;
-}

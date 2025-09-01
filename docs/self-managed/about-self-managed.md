@@ -49,4 +49,6 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 
 :::
 
+<br />
+
 <CamundaSelfManaged/>

@@ -9,7 +9,12 @@ const ApiCard = ({ link, title, image, description, type }) => {
       <p>{description}</p>
       {type && (
         <div className="api-type" style={{ marginBottom: "0px" }}>
-          <span className={`badge badge--${type.toLowerCase()}`}>{type}</span>
+          <span
+            className={`badge badge--${type.toLowerCase()}`}
+            style={{ marginBottom: "0px" }}
+          >
+            {type}
+          </span>
         </div>
       )}
     </a>
