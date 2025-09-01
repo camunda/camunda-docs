@@ -693,6 +693,33 @@ kubectl create namespace "$CAMUNDA_NAMESPACE"
 
 In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as the namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
 
+### Configure a high-performance StorageClass
+
+Camunda 8 requires high IOPS for performance-critical components like **Zeebe**, so it is important to use AWS **gp3** volumes rather than the default `gp2`.
+
+This step defines a custom `StorageClass` that:
+
+- Uses **gp3** EBS volumes with optimized IOPS and throughput
+- Sets a **`Retain`** reclaim policy
+- Uses `WaitForFirstConsumer` volume binding
+- Becomes the default StorageClass for the cluster
+
+#### Apply the StorageClass
+
+Run the following script to apply the new storage class and set it as default:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/storageclass-configure.sh
+```
+
+To verify completion of the operation, run:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/procedure/storageclass-verify.sh
+```
+
+This must be applied **before installing the Camunda Helm chart** so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
+
 ### Export values for the Helm chart
 
 After configuring and deploying your infrastructure with Terraform, follow these instructions to export key values for use in Helm charts to deploy [Camunda 8 on Kubernetes](./eks-helm.md).
