@@ -14,7 +14,7 @@ Underscores in environment variables correspond to configuration file key levels
 ## Environment variables
 
 | Environment variable                            | Description                                                                                                                                                                                                                    | Example value                              |
-|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
 | `KEYCLOAK_BASE_URL`                             | Base URL for Keycloak.                                                                                                                                                                                                         | `https://example.com/auth`                 |
 | `KEYCLOAK_INTERNAL_BASE_URL`                    | Internal base URL for Keycloak.                                                                                                                                                                                                | `http://camunda-platform-keycloak:80/auth` |
 | `KEYCLOAK_REALM`                                | Realm for Keycloak.                                                                                                                                                                                                            | `camunda-platform`                         |
@@ -55,6 +55,14 @@ These settings are useful when the application needs to make outgoing network re
 :::note
 The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
 :::
+
+### Experimental Features
+
+The following environment variables enable experimental features:
+
+| Environment variable                          | Description                                                                              | Example value | Default value |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_CONSOLE_EXPERIMENTAL_DISCOVERY_MODE` | This mode allows orchestration clusters to register itself by calling an API in Console. | `true`        | `false`       |
 
 ## Telemetry
 
