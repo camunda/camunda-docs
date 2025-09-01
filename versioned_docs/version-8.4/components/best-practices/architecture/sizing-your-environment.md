@@ -71,15 +71,15 @@ The closer you push throughput to the limits, the more latency you will get. Thi
 
 ### Payload size
 
-Every process instance can hold a payload (known as [process variables](/docs/components/concepts/variables/)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Optimize.
+Every process instance can hold a payload (known as [process variables](/components/concepts/variables/)). The payload of all running process instances must be managed by the runtime workflow engine, and all data of running and ended process instances is also forwarded to Operate and Optimize.
 
 The data you attach to a process instance (process variables) influences resource requirements. For example, it makes a big difference if you only add one or two strings (requiring around 1 KB of space) to your process instances, or a full JSON document containing 1 MB. Hence, the payload size is an important factor when looking at sizing.
 
 There are a few general rules regarding payload size:
 
-- The maximum [variable size per process instance is limited](/docs/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MB.
-- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/docs/components/best-practices/development/handling-data-in-processes/).
-- Every [partition](/docs/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
+- The maximum [variable size per process instance is limited](/components/concepts/variables/#variable-size-limitation), currently to roughly 3 MB.
+- We don't recommend storing much data in your process context. Refer to our [best practice on handling data in processes](/components/best-practices/development/handling-data-in-processes/).
+- Every [partition](/components/zeebe/technical-concepts/partitions/) of the Zeebe installation can typically handle up to 1 GB of payload in total. Larger payloads can lead to slower processing. For example, if you run one million process instances with 4 KB of data each, you end up with 3.9 GB of data, and you should run at least four partitions. In reality, this typically means six partitions, as you want to run the number of partitions as a multiple of the replication factor, which by default is three.
 
 The payload size also affects disk space requirements, as described in the next section.
 
@@ -124,7 +124,7 @@ Spinning up a Camunda 8 Cluster means you run multiple components that all need 
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
-Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/docs/components/zeebe/technical-concepts/partitions/)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **number of partitions cannot be changed after the cluster was initially provisioned** (at least not yet), elastic scalability of partitions is not yet possible.
+Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions/)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **number of partitions cannot be changed after the cluster was initially provisioned** (at least not yet), elastic scalability of partitions is not yet possible.
 
 If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
 
