@@ -119,7 +119,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 The orchestration cluster provides a number of [built-in roles](/components/concepts/access-control/authorizations.md#default-roles) with predefined permissions for easier setup.
 
-To assign users, clients, groups, or [mapping rules](/self-managed/concepts/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
+To assign users, clients, groups, or [mapping rules](/components/concepts/access-control/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">

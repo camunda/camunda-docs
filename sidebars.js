@@ -66,6 +66,7 @@ module.exports = {
           items: [
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
+            "components/concepts/access-control/mapping-rules",
           ],
         },
         "components/concepts/job-workers",
@@ -564,6 +565,13 @@ module.exports = {
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            {
+              "Mapping rules": [
+                "components/identity/mapping-rules/manage-mapping-rules",
+                "components/identity/mapping-rules/mapping-rule-authorizations",
+                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
+              ],
+            },
           ],
         },
       ],
@@ -1411,7 +1419,6 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/multi-tenancy",
-        "self-managed/concepts/mapping-rules",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",
@@ -1590,13 +1597,6 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
-                {
-                  "Mapping rules": [
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants",
-                  ],
-                },
               ],
             },
           ],
