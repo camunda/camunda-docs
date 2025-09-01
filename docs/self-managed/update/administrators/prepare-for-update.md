@@ -35,17 +35,17 @@ Start with the high-level overview [what's new in Camunda 8.8](/components/whats
 </tr>
 <tr>
     <td>Orchestration Cluster API</td>
-    <td>A new unified REST API for an Orchestration cluster. Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API. For more information, see the blog post [upcoming API Changes in Camunda 8](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).</td>
-    <td><span className="label-highlight orange">Medium</span></td>
+    <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p><ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li><li><p>For more information, see the blog post [upcoming API Changes in Camunda 8](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).</p></li></ul></p></td>
+    <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
     <td>Data and exporters</td>
-    <td><p>Unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
-    <td><span className="label-highlight orange">Medium</span></td>
+    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
+    <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
     <td>Unified components configuration</td>
-    <td>A new unified configuration with a shared YAML schema across Orchestration cluster components.</td>
+    <td>Introduced a new unified configuration with a shared YAML schema across Orchestration cluster components.</td>
     <td><span className="label-highlight red">Breaking changes</span></td>    
 </tr>
 <tr>
@@ -68,38 +68,38 @@ The following table provides a high-level overview of the impact of these change
 <table className="table-callout">
 <tr>
     <td style={{minWidth: "30%"}}>**Area**</td>
-    <td style={{width: "160px"}}>**Impact**</td>
     <td>**Description**</td>
+    <td style={{width: "160px"}}>**Impact**</td>
 </tr>
 <tr>
     <td>Access control and permissions</td>
-    <td><span className="label-highlight">Low</span></td>
     <td>The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model. Run the Identity migration scripts during the upgrade to migrate authorizations.</td>
+    <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
     <td>User groups, roles, tenants, and mapping rules</td>
+    <td>Now managed within [Orchestration Cluster Identity](/components/identity/identity-introduction.md), replacing the previous Management Identity setup. Run the Identity migration scripts during the upgrade to migrate entities.</td>
     <td><span className="label-highlight">Low</span></td>
-    <td>Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup. Run the Identity migration scripts during the upgrade to migrate entities.</td>
 </tr>
 <tr>
     <td>User task authorizations</td>
-    <td><span className="label-highlight orange">Medium</span></td>
     <td>[User task access restrictions](/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.</td>
+    <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
     <td>Identity via Keycloak</td>
-    <td><span className="label-highlight orange">Medium</span></td>
     <td>If managing Keycloak internally, verify required database schema updates. Confirm supported Keycloak versions in the [environment matrix](../../../reference/supported-environments.md).</td>
+    <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
-    <td><span className="label-highlight red">Breaking changes</span></td>
     <td>No longer supported. You must transition to using Basic authentication and re-create users in Orchestration Cluster Identity.</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 <tr>
     <td>LDAP authentication for Operate or Tasklist</td>
-    <td><span className="label-highlight red">Breaking changes</span></td>
     <td>No longer supported. You must transition to OIDC or Basic Authentication.</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>
 
