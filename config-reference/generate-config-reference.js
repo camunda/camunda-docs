@@ -175,6 +175,7 @@ const preGenerateDocs = (config) => {
       .toUpperCase()
       .replaceAll(/\./g, "_")
       .replaceAll(/-/g, "");
+    property.anchor = property.name.replaceAll(/\./g, "");
   });
 };
 const postGenerateDocs = (config) => {};
