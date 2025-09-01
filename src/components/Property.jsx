@@ -4,7 +4,7 @@ import { useLocation } from "@docusaurus/router";
 export default function Property({ defaultValue, groupId, property, env }) {
   const formats = {
     property,
-    env
+    env,
   };
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
