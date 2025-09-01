@@ -27,7 +27,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Learn how to use Camunda to orchestrate your processes.</h3>
 
-<div class="double-column-container">
+<div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
 Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
@@ -41,6 +41,12 @@ Orchestrate and automate complex business processes for people, systems, and dev
 
 </div>
 </div>
+
+:::info Camunda 8.8
+
+- See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+
+:::
 
 ## Best Practices
 
