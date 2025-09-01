@@ -217,7 +217,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
 5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
@@ -298,7 +297,7 @@ rosa verify openshift-client
 
    ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
-   The [VPN module setup section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
+   See the [VPN module setup](#vpn-module-setup) to configure an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) for secure access to the private cluster.
 
    :::
 
@@ -492,7 +491,6 @@ This section applies if you have previously created a private cluster and want t
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
-
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
@@ -549,7 +547,7 @@ You can access the created OpenShift cluster using the following steps:
    oc new-project "$CAMUNDA_NAMESPACE"
    ```
 
-   In the remainder of the guide, we reference the `CAMUNDA_NAMESPACE` variable as the namespace to create some required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+   In the remainder of the guide, the `CAMUNDA_NAMESPACE` variable represents the namespace used to create required resources in the Kubernetes cluster, such as secrets and one-time setup jobs.
 
 ## 3. Install Camunda 8 using the Helm chart
 
