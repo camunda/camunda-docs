@@ -86,6 +86,12 @@ Play runs only the first executable process within the BPMN diagram. Make sure t
 
 To unlink the file from a process, remove the `processId` field or set it to `null`.
 
+:::caution
+Unlinking a file means its scenarios will not be shown in the Play scenarios tab for that process.
+
+To fix this, re-link the file by restoring the `processId` field.
+:::
+
 ## Instructions
 
 ### Common patterns
