@@ -58,11 +58,11 @@ The proxy-related environment variables are lowercase because they follow a wide
 
 ### Experimental Features
 
-The following environment variables enable experimental features:
+The following environment variables enable experimental feature:
 
-| Environment variable                          | Description                                                                              | Example value | Default value |
-| --------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `CAMUNDA_CONSOLE_EXPERIMENTAL_DISCOVERY_MODE` | This mode allows orchestration clusters to register itself by calling an API in Console. | `true`        | `false`       |
+| Environment variable                          | Description                                                                                                                                           | Example value | Default value |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_CONSOLE_EXPERIMENTAL_DISCOVERY_MODE` | This mode allows [orchestration clusters](../../orchestration-cluster/zeebe/configuration/broker.md) to register itself by calling an API in Console. | `true`        | `false`       |
 
 ## Telemetry
 
