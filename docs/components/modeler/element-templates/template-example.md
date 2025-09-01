@@ -112,4 +112,4 @@ This example showcases several important template features:
 - **Optional bindings**: Fields that don't persist empty values
 - **Variable mapping**: How to map data between the process and external systems
 
-You can use this example as a starting point for creating your own connector templates.
+You can use this example as a starting point for creating your own element templates.
