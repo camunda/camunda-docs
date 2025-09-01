@@ -192,6 +192,32 @@ When synchronizing for the first time with a remote repository that already cont
 
 When successful, your project will display a new **Sync with Azure** button.
 
+<h3> Generating a private key and certificate</h3>
+
+Follow this steps to generate a private key and self signed certificate that can be used to connect Web Modeler with your Azure repository:
+
+<h4>1. Generate private key</h4>
+Generate a new RSA private key and save it to a file called `private_key.pem`.
+```
+openssl genrsa -out private_key.pem 2048
+```
+
+<h4>2. Create a certificate signing request</h4>
+Generate a Certificate Signing Request (CSR) using the key created in step 1.
+```
+openssl req -new -key private_key.pem -out cert.csr
+```
+
+<h4>3.Create a self-signed certificate</h4>
+Using the private key and the certificate signing request, create a certificate.
+```
+openssl x509 -req -days 365 -in cert.csr -signkey private_key.pem -out cert.crt
+```
+
+This generates a self-signed certificate named `cert.crt` valid for 365 days.
+
+You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure git sync configuration.
+
 </TabItem>
 <TabItem value='bitbucket'>
 
