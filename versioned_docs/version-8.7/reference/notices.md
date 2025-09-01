@@ -8,6 +8,32 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 28
+
+#### Publication date
+
+September 5, 2025
+
+#### Products affected
+
+- Camunda Optimize
+
+#### Impact
+
+Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-2025-5115), which allows a remote attacker to repeatedly send malformed HTTP/2 frames that exhaust a Jetty server’s CPU and memory, causing a denial-of-service.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.8 or 8.6.0 - 8.6.15
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.9, 8.6.16
+
 ### Notice 27
 
 #### Publication date
