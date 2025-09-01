@@ -194,7 +194,7 @@ When successful, your project will display a new **Sync with Azure** button.
 
 <h3> Generating a private key and certificate</h3>
 
-Follow this steps to generate a private key and self signed certificate that can be used to connect Web Modeler with your Azure repository:
+Follow these steps to generate a private key and self signed certificate that can be used to connect Web Modeler with your Azure repository:
 
 <h4>1. Generate private key</h4>
 Generate a new RSA private key and save it to a file called `private_key.pem`.
