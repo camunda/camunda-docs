@@ -53,8 +53,7 @@ RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 
 # 2. Broad version (or unversioned) redirects
 ##################################################################################
 
-# Numbered aliases for vNext. These are temporary, until this version becomes current.
-RewriteRule ^docs/8.8/(.*)$ /docs/next/$1 [R=302,L]
+
 
 # For linking from our apps - redirect URLs with the current version to URLs with no version
 RewriteRule ^docs/8.7/(.*)$ /docs/$1 [R=302,L]
