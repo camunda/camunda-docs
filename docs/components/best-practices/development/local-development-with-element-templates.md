@@ -58,7 +58,7 @@ For example:
 
 ```
 curl -L 'http://localhost:8080/v2/deployments' \
--H 'Accept: application/json'
+-H 'Accept: application/json' \
 -F resources=@/pathToYourForm/user-signup.form
 ```
 
