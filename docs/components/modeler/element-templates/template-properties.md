@@ -948,10 +948,10 @@ Associate a field with a group (ID) via the fields `group` key:
 
 Custom fields may have a number of constraints associated with them:
 
-- `notEmpty`: Input must be non-empty
-- `minLength`: Minimal length for the input
-- `maxLength`: Maximal length for the input
-- `pattern`: Regular expression to match the input against
+- `notEmpty : Boolean`: Input must be non-empty
+- `minLength : Integer`: Minimal length for the input
+- `maxLength : Integer`: Maximal length for the input
+- `pattern : Object`: Regular expression to match the input against
 
 ### Validating against a regex: `pattern`
 
