@@ -34,9 +34,9 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 - See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on Camunda 8.8.
   :::
 
-## Camunda 8 APIs
+## APIs and reference
 
-Camunda 8 exposes several APIs for different integration and automation needs:
+Use the following APIs for Camunda 8 integration and automation:
 
 <ApiGrid api={apiCards} />
 

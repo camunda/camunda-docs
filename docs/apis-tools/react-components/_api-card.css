@@ -81,3 +81,46 @@ a.api-card {
     grid-template-columns: 1fr;
   }
 }
+
+.badge--default {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 85%;
+  font-weight: var(--ifm-font-weight-bold);
+  line-height: 1;
+  color: #616161;
+}
+[data-theme="dark"] .badge--default {
+  color: #999;
+  background-color: #3f3f3f;
+}
+
+.badge--rest {
+  background-color: #0ba7b9;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.badge--grpc {
+  background-color: #ff8b00;
+  color: #fff;
+  margin-top: 10px;
+}
+
+[data-theme="dark"] .badge--rest {
+  background-color: #005d5d;
+  color: #bae6ff;
+}
+[data-theme="dark"] .badge--grpc {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+}
+
+.badge:nth-of-type(1) {
+  margin-left: 0;
+  margin-bottom: 0rem;
+}

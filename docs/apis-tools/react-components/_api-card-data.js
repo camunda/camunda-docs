@@ -13,38 +13,43 @@ export const apiCards = [
     title: "Orchestration Cluster API",
     image: IconOrchClusterImg,
     description:
-      "Main REST API for process automation, orchestration, and user task management.",
+      "Main API for process automation, orchestration, and task management.",
+    type: "REST",
   },
   {
     link: "../administration-api/administration-api-reference/",
     title: "Administration API (SaaS)",
     image: IconAdminImg,
     description: "Manage Camunda clusters and API clients in SaaS.",
+    type: "REST",
   },
   {
     link: "../administration-sm-api/administration-sm-api-overview/",
     title: "Administration API (Self-Managed)",
     image: IconAdminImg,
     description: "Get cluster data including installed apps and usage metrics.",
+    type: "REST",
   },
   {
     link: "../optimize-api/overview/",
     title: "Optimize API",
     image: IconOptimizeImg,
     description: "Process analytics, dashboards, and reporting data.",
+    type: "REST",
   },
   {
     link: "../web-modeler-api/overview/",
     title: "Web Modeler API",
     image: IconModelerImg,
     description: "Integrate with Web Modeler for modeling automation.",
+    type: "REST",
   },
   {
     link: "../zeebe-api/overview/",
     title: "Zeebe API (gRPC)",
     image: IconZeebeImg,
-    description:
-      "Advanced integrations and high-performance use cases. Use only if you need gRPC (requires HTTP/2).",
+    description: "Advanced integrations and high-performance use cases.",
+    type: "gRPC",
   },
 ];
 
@@ -55,6 +60,7 @@ export const clientCards = [
     image: IconJavaImg,
     description:
       "The recommended way to build Orchestration Cluster integrations and job workers in Java.",
+    type: "",
   },
   {
     link: "../spring-zeebe-sdk/getting-started/",
@@ -62,6 +68,7 @@ export const clientCards = [
     image: IconSpringBootImg,
     description:
       "Build Spring Boot applications to connect to the Orchestration Cluster to build job workers.",
+    type: "",
   },
   {
     link: "../node-js-sdk/",
@@ -69,5 +76,6 @@ export const clientCards = [
     image: IconNodeImg,
     description:
       "Get started with the official Camunda 8 JavaScript SDK for Node.js.",
+    type: "",
   },
 ];
