@@ -52,8 +52,9 @@ They are shown when selecting a template and when the template has been applied 
 - `keywords : Array<String>` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
 - `icon : Object` key is an optional icon configuration for the template. The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
 - `documentationRef : String` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
-- `category : Object` key is an optional category configuration for the template. You can define a category to group templates in the element template selection list. The category is defined as an object with `id` and `name` properties.
-  A category must have an `id` and a `name`. The category is optional. If not defined, the template will be displayed in the **Templates** section.
+- `category : Object` key is an optional category configuration for the template. You can define a category to group templates in the element template selection list. If not defined, the template will be displayed in the **Templates** section.
+  - `id : String` key defines the unique identifier of the category.
+  - `name : String` key defines the name of the category that the template is shown it
 
 ```json
 {

@@ -16,6 +16,8 @@ You can find the full list of supported bindings in the [bindings](#binding-an-i
 
 When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension elements properties that can be defined by bindings in an element template.
 The template author must explicitly make the properties user configurable to show them in the properties panel once the user has applied the template.
+For example, if a template does not contain a property object for with the binding type `zeebe:input`,
+the template user will not be able to define an input mapping for an element once the template is applied.
 
 :::note
 Some properties, such as, execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
@@ -26,26 +28,32 @@ As they are never part of any element template, users can configure them indepen
 ## What is part of a property?
 
 You build your template by adding property objects to the `properties` array.
-The keys in a property definition are listed below, `[optional]` keys are marked with square brackets:
+The property fields are divided into required and optional fields:
 
-- `[label : String]`: A label text above the property input.
-- `[description : String]`: An optional description text below the property input.
-- `[tooltip : String]`: An optional tooltip text shown when hovering over the label.
-- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defining the input type in the properties panel.
-- [`[feel : "required" | "optional" | "static"]`](#adding-feel-editor-support-feel): Defines whether the property supports [FEEL](#feel) expressions.
-- [`[value : String | Number | Boolean]`](#setting-a-default-value-value): An optional default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- [`[generatedValue : Object]`](#generating-a-value-generatedvalue): An optional configuration to generate a value when the property is applied to an element.
-- [`[placeholder : String]`](#setting-a-text-placeholder-placeholder): An optional placeholder text shown in the input field when it is empty.
+### Required keys
+
 - [`binding : Object`](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding): An object specifying how the property is mapped to BPMN or Camunda extensions (cf. [bindings](#bindings)).
-- [`[optional : Boolean]`](#preventing-persisting-empty-values-optional): Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
-- [`[constraints : Object]`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the binding.
-- [`[group : String]`](#grouping-fields-group): The group that the property belongs to.
-- `[id : String]`: An identifier that can be used to reference the property in conditional properties
-- [`[condition : Object]`](#showing-properties-conditionally-condition): A condition that determines when [the property is active](#defining-conditional-properties)
 
-Not all keys and values are compatible with each other, some keys require other keys to be set, even if the other key is generally optional.
+### Optional keys
+
+- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defining the input type in the properties panel.
+- `label : String`: A label text above the property input.
+- [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
+- `description : String`: A description text below the property input.
+- `tooltip : String`: A tooltip text shown when hovering over the label.
+- [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports [FEEL](#feel) expressions.
+- [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
+- [`placeholder : String`](#setting-a-text-placeholder-placeholder): A placeholder text shown in the input field when it is empty.
+- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Optional bindings do not persist empty values in the underlying BPMN 2.0 XML.
+- [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the binding.
+- [`group : String`](#grouping-fields-group): The group that the property belongs to.
+- [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when [the property is active](#defining-conditional-properties).
+- `id : String`: An identifier that can be used to reference the property in conditional properties.
+
+Not all keys and values are compatible with each other, some keys or values require other keys to be set, even if they are marked as optional above.
 For more information see the documentation below.
 If your editor supports JSON schema, these incompatibilities or missing keys are highlighted while you edit your template.
+For most purposes, `binding`, `label`, `type`, and `value` are sufficient to define a property.
 
 All property objects are defined inside the `properties` array:
 
@@ -266,7 +274,147 @@ If not adhering, the tooling logs a validation error and ignores the respective 
 If you add multiple properties with equal `binding` objects, the behavior is undefined.
 :::
 
-### `property`
+### Input mapping: `zeebe:input`
+
+| **Binding `type`**          | `zeebe:input`                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `name`: The name of the input parameter                                          |
+| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />`                            |
+
+Configures an [input mapping](../../../concepts/variables/#input-mappings).
+
+```json
+{
+  ...,
+  "value": "aProcessVariableName",
+  "binding": {
+    "type": "zeebe:input",
+    "name": "aTaskVariableName"
+  }
+}
+```
+
+### Output mapping: `zeebe:output`
+
+| **Binding `type`**          | `zeebe:output`                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
+| **Binding parameters**      | `source`: The source of the output parameter                                     |
+| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
+
+Configures an [output mapping](../../../concepts/variables/#output-mappings).
+
+```json
+{
+  ...,
+  "value": "aProcessVariableName",
+  "binding": {
+    "type": "zeebe:output",
+    "source": "aTaskVariableName"
+  }
+}
+```
+
+### Header: `zeebe:taskHeader`
+
+| **Binding `type`**          | `zeebe:taskHeader`                                  |
+| --------------------------- | --------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      | `key`: The key of the task header                   |
+| **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
+
+Configures a [task header](../../bpmn/service-tasks/#task-headers)
+
+```json
+{
+  ...,
+  "value": "aHeaderValue",
+  "binding": {
+    "type": "zeebe:taskHeader",
+    "key": "aHeaderKey"
+  }
+}
+```
+
+### Task definition: `zeebe:taskDefinition`
+
+| **Binding `type`**          | `zeebe:taskDefinition`                                                            |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`                               |
+| **Binding parameters**      | `property`: The name of the task definition property. Can be `type` or `retries`. |
+| **Mapping result**          | `<zeebe:taskDefinition [property]="[userInput]" />`                               |
+
+Configures the [task](../../bpmn/service-tasks/#task-definition) for a service or user task.
+
+```json
+[
+  {
+    ...,
+    "value": "aTaskType",
+    "binding": {
+      "type": "zeebe:taskDefinition",
+      "property": "type"
+    }
+  },
+  {
+    ...,
+    "value": "3",
+    "binding": {
+      "type": "zeebe:taskDefinition",
+      "property": "retries"
+    }
+  },
+  ...
+]
+```
+
+### Task definition: `zeebe:taskDefinition:type` (deprecated)
+
+:::danger
+`zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
+:::
+
+| **Binding `type`**          | `zeebe:taskDefinition:type`                         |
+| --------------------------- | --------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
+| **Binding parameters**      |                                                     |
+| **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
+
+Configures the [task type](../../bpmn/service-tasks/#task-definition) for a service or user task.
+
+```json
+{
+  ...,
+  "value": "aTaskType",
+  "binding": {
+    "type": "zeebe:taskDefinition:type"
+  }
+}
+```
+
+### Extension properties: `zeebe:property`
+
+| **Binding `type`**          | `zeebe:property`                                      |
+| --------------------------- | ----------------------------------------------------- |
+| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`    |
+| **Binding parameters**      | `name`: The name of the property                      |
+| **Mapping result**          | `<zeebe:property name="[name]" value="[userInput] />` |
+
+The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
+
+```json
+{
+  ...,
+  "value": "{\"outputVar\": 5}",
+  "binding": {
+    "type": "zeebe:property",
+    "name": "camundaModeler:exampleOutputJson"
+  }
+}
+```
+
+### Primitive BPMN properties: `property`
 
 | **Binding `type`**          | `property`                       |
 | --------------------------- | -------------------------------- |
@@ -300,147 +448,7 @@ Other properties, such as references and complex property types are currently NO
 ]
 ```
 
-### `zeebe:input`
-
-| **Binding `type`**          | `zeebe:input`                                                                    |
-| --------------------------- | -------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
-| **Binding parameters**      | `name`: The name of the input parameter                                          |
-| **Mapping result**          | `<zeebe:input target="[name]" source="[userInput] />`                            |
-
-Configures an [input mapping](../../../concepts/variables/#input-mappings).
-
-```json
-{
-  ...,
-  "value": "aProcessVariableName",
-  "binding": {
-    "type": "zeebe:input",
-    "name": "aTaskVariableName"
-  }
-}
-```
-
-### `zeebe:output`
-
-| **Binding `type`**          | `zeebe:output`                                                                   |
-| --------------------------- | -------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`<br />`Boolean`<br />`Number` |
-| **Binding parameters**      | `source`: The source of the output parameter                                     |
-| **Mapping result**          | `<zeebe:output target="[userInput]" source="[source] />`                         |
-
-Configures an [output mapping](../../../concepts/variables/#output-mappings).
-
-```json
-{
-  ...,
-  "value": "aProcessVariableName",
-  "binding": {
-    "type": "zeebe:output",
-    "source": "aTaskVariableName"
-  }
-}
-```
-
-### `zeebe:taskHeader`
-
-| **Binding `type`**          | `zeebe:taskHeader`                                  |
-| --------------------------- | --------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
-| **Binding parameters**      | `key`: The key of the task header                   |
-| **Mapping result**          | `<zeebe:header key="[key]" value="[userInput] />`   |
-
-Configures a [task header](../../bpmn/service-tasks/#task-headers)
-
-```json
-{
-  ...,
-  "value": "aHeaderValue",
-  "binding": {
-    "type": "zeebe:taskHeader",
-    "key": "aHeaderKey"
-  }
-}
-```
-
-### `zeebe:taskDefinition`
-
-| **Binding `type`**          | `zeebe:taskDefinition`                                                            |
-| --------------------------- | --------------------------------------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown`                               |
-| **Binding parameters**      | `property`: The name of the task definition property. Can be `type` or `retries`. |
-| **Mapping result**          | `<zeebe:taskDefinition [property]="[userInput]" />`                               |
-
-Configures the [task](../../bpmn/service-tasks/#task-definition) for a service or user task.
-
-```json
-[
-  {
-    ...,
-    "value": "aTaskType",
-    "binding": {
-      "type": "zeebe:taskDefinition",
-      "property": "type"
-    }
-  },
-  {
-    ...,
-    "value": "3",
-    "binding": {
-      "type": "zeebe:taskDefinition",
-      "property": "retries"
-    }
-  },
-  ...
-]
-```
-
-### `zeebe:taskDefinition:type`
-
-:::danger
-`zeebe:taskDefinition:type` is a deprecated binding. Instead, use `zeebe:taskDefinition` with `property=type`.
-:::
-
-| **Binding `type`**          | `zeebe:taskDefinition:type`                         |
-| --------------------------- | --------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br /> `Text`<br />`Hidden`<br />`Dropdown` |
-| **Binding parameters**      |                                                     |
-| **Mapping result**          | `<zeebe:taskDefinition type="[userInput]" />`       |
-
-Configures the [task type](../../bpmn/service-tasks/#task-definition) for a service or user task.
-
-```json
-{
-  ...,
-  "value": "aTaskType",
-  "binding": {
-    "type": "zeebe:taskDefinition:type"
-  }
-}
-```
-
-### `zeebe:property`
-
-| **Binding `type`**          | `zeebe:property`                                      |
-| --------------------------- | ----------------------------------------------------- |
-| **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`    |
-| **Binding parameters**      | `name`: The name of the property                      |
-| **Mapping result**          | `<zeebe:property name="[name]" value="[userInput] />` |
-
-The `zeebe:property` binding allows you to set any arbitrary property for an outside system. It does not impact execution of the Zeebe engine.
-
-```json
-{
-  ...,
-  "value": "{\"outputVar\": 5}",
-  "binding": {
-    "type": "zeebe:property",
-    "name": "camundaModeler:exampleOutputJson"
-  }
-}
-```
-
-### `bpmn:Message#property`
+### Message name: `bpmn:Message#property`
 
 | **Binding `type`**          | `bpmn:Message#property`                            |
 | --------------------------- | -------------------------------------------------- |
@@ -470,9 +478,9 @@ The message ID is automatically generated when the template is applied. The `mes
 Remember that the message [name and correlation key](/components/concepts/messages.md#message-subscriptions) define the correlation characteristics of a message and can be shared by [multiple process definitions](/components/concepts/messages.md#message-cardinality).
 :::
 
-### `bpmn:Message#zeebe:subscription#property`
+### Message correlation key: `bpmn:Message#zeebe:subscription#property`
 
-| **Binding `type`**          | `bpmn:Message#property`                            |
+| **Binding `type`**          | `bpmn:Message#zeebe:subscription#property`         |
 | --------------------------- | -------------------------------------------------- |
 | **Valid property `type`'s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown` |
 | **Binding parameters**      | `name`: The name of the property                   |
@@ -497,7 +505,7 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 :::
 
-### `zeebe:calledElement`
+### Called element: `zeebe:calledElement`
 
 | **Binding `type`**          | `zeebe:calledElement`                                                                                          |
 | --------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -547,7 +555,7 @@ For `zeebe:calledElement` bindings, variable propagation is not supported. To pr
 
 :::
 
-### `zeebe:userTask`
+### User task implementation: `zeebe:userTask`
 
 | **Binding `type`**          | `zeebe:userTask`                                                                                                      |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------- |
@@ -566,7 +574,7 @@ The `zeebe:userTask` binding allows you to configure the implementation type for
 }
 ```
 
-### `zeebe:formDefinition`
+### Form: `zeebe:formDefinition`
 
 | **Binding `type`**          | `zeebe:formDefinition`                                                                                                            |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -618,7 +626,7 @@ The property `externalReference` cannot be used together with `bindingType`.
 
 :::
 
-### `zeebe:assignmentDefinition`
+### User task assignment: `zeebe:assignmentDefinition`
 
 | **Binding `type`**          | `zeebe:assignmentDefinition`                                                                                           |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -664,7 +672,7 @@ When `zeebe:assignmentDefinition` is used, [`zeebe:userTask`](#zeebeusertask) mu
 
 :::
 
-### `zeebe:taskSchedule`
+### User task schedule: `zeebe:taskSchedule`
 
 | **Binding type**         | `zeebe:taskSchedule`                                                                       |
 | ------------------------ | ------------------------------------------------------------------------------------------ |
@@ -701,7 +709,7 @@ When `zeebe:taskSchedule` is used, `zeebe:userTask` must be set on the same elem
 If the template sets a static `value` for any property, it must be defined as an ISO 8601 combined date and time representation.
 :::
 
-### `zeebe:priorityDefinition`
+### User task priority: `zeebe:priorityDefinition`
 
 | **Binding type**         | `zeebe:priorityDefinition`                                                                                                             |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -730,7 +738,7 @@ When `zeebe:priorityDefinition` is used, [`zeebe:userTask`](#zeebeusertask) must
 If the template sets a static `value` for `priority`, it must be between 0 and 100.
 :::
 
-### `zeebe:calledDecision`
+### Called decision: `zeebe:calledDecision`
 
 | **Binding `type`**          | `zeebe:calledDecision`                                                                                                            |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -786,7 +794,7 @@ to the value of the version tag of the decision you want to call.
 When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on the same element.
 :::
 
-### `zeebe:script`
+### Script `zeebe:script`
 
 | **Binding `type`**          | `zeebe:script`                                                                         |
 | --------------------------- | -------------------------------------------------------------------------------------- |
@@ -821,6 +829,61 @@ The `zeebe:script` binding allows you to configure the [FEEL expression](../../b
 :::note
 When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
 :::
+
+## Setting a task implementation
+
+The following tasks support multiple implementation types:
+
+- User task: [`zeebe:userTask`](#user-task-implementation-zeebeuserTask) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition) (most related properties, for example, [Assignment](#user-task-assignment-zeebeassignmentdefinition), [Task schedule](#user-task-schedule-zeebetaskschedule), and [Priority](#user-task-priority-zeebeprioritydefinition), are only supported when `zeebe:userTask` is set)
+- Business rule task: [`zeebe:calledDecision`](#called-decision-zeebecalleddecision) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition)
+- Script task: [`zeebe:script`](#script-zeebescript) and [`zeebe:taskDefinition`](#task-definition-zeebetaskdefinition)
+
+You pick an implementation type by adding the respective binding with the respective type to your properties array.
+
+## Setting a resource binding type
+
+Some tasks with the respective bindings support different [resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md):
+
+- Call activity: [`zeebe:calledElement`](#called-element-zeebecalledelement)
+- User task form: [`zeebe:formDefinition`](#form-zeebeformdefinition)
+- Business rule task: [`zeebe:calledDecision`](#called-decision-zeebecalleddecision)
+
+Setting a resource binding type helps you define what version of a resource (process, form, or decision) should be used during process execution.
+Camunda generally recommends using `versionTag` as the resource binding type. This helps to ensure that only resources with a matching version tag are used during process execution.
+By default, the binding type is `latest`, meaning that the latest deployed version of a resource is used.
+This bears the risk that a resource is changed in an incompatible way making invocations with old templates fail.
+
+The binding type can be set like so:
+
+```json
+{
+  "properties": [
+    ...,
+    {
+      "type": "Hidden",
+      "value": "versionTag", // set binding type to versionTag
+      "binding": {
+        "type": "zeebe:calledElement", // or zeebe:formDefinition or zeebe:calledDecision
+        "property": "bindingType"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "v1", // set the version tag to use
+      "binding": {
+        "type": "zeebe:calledElement",
+        "property": "versionTag"
+      }
+    }
+  ]
+}
+```
+
+As you can see in the example above, the properties `bindingType` and `versionTag` are of type `Hidden`.
+This is because these properties should generally not be changed by the user, unless the template author has very good reasons to allow this.
+Should an update to the resource be necessary, you can create a new version of the template that uses a different version tag.
+
+For further information you can read the section on [element templates with dependencies](./element-template-with-dependencies.md).
 
 ## Preventing persisting empty values: `optional`
 
