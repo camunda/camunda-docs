@@ -76,10 +76,14 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 }
 ```
 
-The `processId` should be shorter than 255 characters and not contain whitespace
+The `processId` should be shorter than 255 characters and not contain whitespace.
 
 :::note
 Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
+:::
+
+:::caution
+If the BPMN diagram's process ID changes (or another process ID is added earlier in the BPMN file), the file's scenarios will not be used in the process's Play scenarios tab.
 :::
 
 ### Unlink a process
