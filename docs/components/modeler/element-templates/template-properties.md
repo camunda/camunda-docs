@@ -270,6 +270,10 @@ The additional property sets defines the target for the `value` or user input.
 Notice that adherence to the following configuration options is enforced by design.
 If not adhering, the tooling logs a validation error and ignores the respective element template.
 
+To fully grasp the concept of bindings, it is helpful to have a good understanding of BPMN 2.0 XML and Camunda extensions.
+If you want to learn more about a certain BPMN element and its properties, you can read through the BPMN section on [Tasks](/components/modeler/bpmn/tasks.md), [Events](/components/modeler/bpmn/events.md), and [Subprocesses](/components/modeler/bpmn/subprocesses.md).
+Each page on an element contains a description of its properties and an example XML representation.
+
 :::note
 If you add multiple properties with equal `binding` objects, the behavior is undefined.
 :::
@@ -794,7 +798,7 @@ to the value of the version tag of the decision you want to call.
 When `zeebe:calledDecision` is used, `zeebe:taskDefinition` cannot be used on the same element.
 :::
 
-### Script `zeebe:script`
+### Script: `zeebe:script`
 
 | **Binding `type`**          | `zeebe:script`                                                                         |
 | --------------------------- | -------------------------------------------------------------------------------------- |
