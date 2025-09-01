@@ -58,9 +58,10 @@ The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orche
 
 - This API is more powerful and easier to use, aligning with the new architecture introduced in Camunda 8.8.
 - The V1 APIs remain available until version 8.10 to allow you time to migrate to the new Orchestration Cluster API.
+- The Orchestration Cluster API becomes the new default over the Zeebe gRPC API, which is still [retained for high performance use cases](https://camunda.com/blog/2025/07/retaining-grpc-support/)
 
 :::info
-For more information on upgrading and migrating, see [migrate to the Orchestration Cluster API](migrate-to-camunda-api.md).
+For more information on upgrading and migrating, see [how to migrate from V1 APIs to the Orchestration Cluster API](migrate-to-camunda-api.md) or [how to migrate from gRPC API to the Orchestration Cluster AP](migrate-from-grpc-to-orchestration-cluster-api.md).
 :::
 
 ### Camunda Java Client
