@@ -1,7 +1,7 @@
 ---
 id: template-example
 title: Example template
-description: "A complete example showing how to create a REST connector element template."
+description: "A complete example showing how to create an element template."
 ---
 
 # Complete template example
