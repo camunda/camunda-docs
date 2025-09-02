@@ -90,4 +90,52 @@ export const configs = [
     ],
     types: ["1-to-1"],
   },
+  {
+    name: "api.grpc.ssl.certificate",
+    legacy: [
+      "zeebe.gateway.security.certificateChainPath",
+      "zeebe.broker.gateway.security.certificateChainPath",
+    ],
+    types: ["1-to-1"],
+  },
+  {
+    name: "api.grpc.ssl.certificate-private-key",
+    legacy: [
+      "zeebe.gateway.security.privateKeyPath",
+      "zeebe.broker.gateway.security.privateKeyPath",
+    ],
+    types: ["1-to-1"],
+  },
+  {
+    name: "api.grpc.ssl.key-store.file-path",
+    legacy: [
+      "zeebe.gateway.security.keyStore.filePath",
+      "zeebe.broker.gateway.security.keyStore.filePath",
+    ],
+    types: ["1-to-1"],
+  },
+  {
+    name: "api.grpc.ssl.key-store.password",
+    legacy: [
+      "zeebe.gateway.security.keyStore.password",
+      "zeebe.broker.gateway.security.keyStore.password",
+    ],
+    types: ["1-to-1"],
+  },
+  {
+    name: "api.grpc.interceptors.id",
+    legacy: [
+      "zeebe.gateway.interceptors.[x].id",
+      "zeebe.broker.gateway.interceptors.[x].id",
+    ],
+    types: ["1-to-1"],
+  },
+  {
+    name: "api.grpc.interceptors.jar-path",
+    legacy: [
+      "zeebe.gateway.interceptors.[x].jarPath",
+      "zeebe.broker.gateway.interceptors.[x].jarPath",
+    ],
+    types: ["1-to-1"],
+  },
 ];
