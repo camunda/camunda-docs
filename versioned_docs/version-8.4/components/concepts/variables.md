@@ -151,7 +151,11 @@ Examples:
 
 ::note
 The source expression has to be in the same context as the target to be used. Otherwise, use the full access path should be used.
-:::
+
+For example, if one output mapping is `mappings.context.value`
+- If a mapping is `mappings.context.another`, then `value` should be used in the output mapping to access to value of `mappings.context.value`.
+- If a mapping is `otherContext.value`, then `mappings.context.value` should be used in the output mapping to access to value of `mappings.context.value`.
+  :::
 
 ## Next steps
 
