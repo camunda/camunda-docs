@@ -20,15 +20,15 @@ Copilot supports the following LLM providers:
 
 ## Configuration
 
-To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true`. You can then configure the default LLM provider for BPMN, FEEL and Form copilots using the respective environment variables. Each provider has its own configuration options, which are detailed below.
+To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true` then configure the default LLM provider for BPMN, FEEL and Form copilots using the respective environment variables. Each provider has its own configuration options, which are detailed below.
 
-| Environment Variable                        | Description                                                   | Example Value | Default Value |
-| ------------------------------------------- | ------------------------------------------------------------- | ------------- | ------------- |
-| `FEATURE_AI_ENABLED`                        | Switch to use for enabling Copilot.                           | `true`        | `false`       |
-| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for BPMN Copilot.                             | `BEDROCK`     | -             |
-| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for FEEL Copilot.                             | `OPENAI`      | \_            |
-| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for Form Copilot.                             | `VERTEX_AI`   | \_            |
-| `RESTAPI_COPILOT_REQUEST_TIMEOUT`           | [optional] Overall request timeout for Copilot request in UI. | `200000`      | `300000`      |
+| Environment Variable                        | Description                                                                   | Example Value | Default Value |
+| ------------------------------------------- | ----------------------------------------------------------------------------- | ------------- | ------------- |
+| `FEATURE_AI_ENABLED`                        | Switch to use for enabling Copilot.                                           | `true`        | `false`       |
+| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for BPMN Copilot.                                             | `BEDROCK`     | -             |
+| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for FEEL Copilot.                                             | `OPENAI`      | -             |
+| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for Form Copilot.                                             | `VERTEX_AI`   | -             |
+| `RESTAPI_COPILOT_REQUEST_TIMEOUT`           | [optional] Overall request timeout in milliseconds for Copilot request in UI. | `200000`      | `300000`      |
 
 ### BPMN Copilot Configuration
 
