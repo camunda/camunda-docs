@@ -27,6 +27,145 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 :::
 
+## 8.8.0-alpha8
+
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                   |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| 9 September 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
+
+### Console Docker distribution <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2242 -->
+
+Console is now available as a Docker distribution.
+
+- You can deploy Camunda Console using a Docker image.
+- This makes it easier to run Console outside Kubernetes, using Docker Compose or any container service of your choice.
+- This helps you use Console with Camunda 8 clusters deployed via Docker.
+
+To learn more, see [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+
+### Operate and Tasklist APIs deprecation <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2838 -->
+
+Deprecating the Operate and Tasklist APIs marks a major step toward a more cohesive platform.
+
+In this release, these APIs are clearly marked as deprecated, ensuring developers are aware that they should begin shifting to the Orchestration Cluster API for task and process management.
+
+:::note
+Although the Operate and Tasklist APIs remain functional in this version, they will no longer receive feature updates and will eventually be removed in 8.10.
+:::
+
+### Web Modeler RDBMS support for Oracle and MS SQL <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2558 -->
+
+Web Modeler Self-Managed now supports Oracle Database and Microsoft Sequel Server, simplifying the Self-Managed setup journey, maintenance efforts, and expertise required to maintain the platform.
+
+### Web Modeler Test Scenarios <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2894 -->
+
+This release introduces persisted test definitions for Web Modeler and reusable building blocks.
+
+- Process developers and analysts can now easily save, export, and share test scenarios.
+- These new test files are portable and Git-syncable, and can be used to rapidly create Camunda Process Test-based files.
+
+### Run Orchestration Cluster without secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2897 -->
+
+Release notes needed.
+
+### Migrate taken sequence flows flowing to the joining gateway
+
+<!-- https://github.com/camunda/product-hub/issues/2913 -->
+
+Camunda 8 now supports enhanced migration of process instances with taken sequence flows leading to joining gateways.
+
+- Operators can define migration plans that map the active elements and the taken sequence flows flowing to the joining gateway.
+- The migration plan can be defined both in the Operate UI and via the API.
+
+### Web Modeler Cluster Identity compatibility
+
+<!-- https://github.com/camunda/product-hub/issues/2987 -->
+
+Web Modeler works seamlessly with Camunda 8.8 Orchestration Clusters, to ensure a smooth migration to 8.8.
+
+### Task Testing
+
+<!-- https://github.com/camunda/product-hub/issues/2660 -->
+
+Release notes needed.
+
+### Scaling up Orchestration Cluster <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add Zeebe partitions to a running cluster to boost capacity without incurring downtime.
+
+- New partitions immediately process tasks, overcoming previous limitations.
+- Note that existing messages and subscriptions remain on original partitions, which might cause slight imbalances for message-heavy workloads. Future updates will address this, ensuring balanced performance across all partitions.
+
+### Usage metrics for Camunda 8 usage support new licence and breakdown per tenant
+
+<!-- https://github.com/camunda/product-hub/issues/1979 -->
+
+In this release, usage metrics gain per-tenant reporting and align with Camunda’s updated licensing model (number of tenants).
+
+### Orchestration Cluster Identity
+
+<!-- https://github.com/camunda/product-hub/issues/2222 -->
+
+Self-Managed Identity Management: Admins can create and manage users, groups, roles, and memberships directly in Identity’s database.
+
+OIDC Integration: Easily integrate external Identity Providers such as Keycloak and Microsoft Entra.
+
+Role-Based Access Control (RBAC): Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more.
+
+Flexible Mapping: Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.
+
+Migration Support: Simplified migration tools make it easy for existing customers to transition to the new service.
+
+SaaS Enhancements
+
+Organizational Identity: Integrate your own IdP to manage organizational users and assign resources cluster-by-cluster.
+
+Cluster-Specific Roles and Groups: Manage distinct roles, groups, and authorizations for each cluster independently.
+
+### Element Template Support for All Tasks
+
+<!-- https://github.com/camunda/product-hub/issues/2606 -->
+
+connectors, modeler
+
+Release notes needed
+
+### Web Modeler Low-Code Process Testing
+
+<!-- https://github.com/camunda/product-hub/issues/2610 -->
+
+This release introduces the ability to persist scenarios as a versioned test file in the Web Modeler, enabling users to save and rerun targeted test cases for BPMN models. Ideal for both process developers and CoEs, this feature supports manual scenario creation and local test storage, with support for user tasks, connectors, and basic branching logic. Although test assertions are not supported, these scenarios support behavior driven development for Camunda Process Test.
+
+### Support Ad-Hoc Subprocess Dynamic Activation through Job workers/Connectors (Phase 3)
+
+<!-- https://github.com/camunda/product-hub/issues/2631 -->
+
+Release notes needed
+
+### CI/CD Guide for Building Blocks
+
+<!-- https://github.com/camunda/product-hub/issues/2858 -->
+
+Release notes needed
+
+### Console SM - Orchestration cluster registration and license check
+
+<!-- https://github.com/camunda/product-hub/issues/2867 -->
+
+Release notes needed
+
 ## 8.8.0-alpha7
 
 | Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
