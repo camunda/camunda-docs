@@ -153,7 +153,7 @@ Examples:
 | `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
 
 ::note
-The source expression has to be in the same context as the target to be used. Otherwise, use the full access path should be used.
+For reusing output mappings in the same output for a task, the mapping expression has to be in the same context as the target to be used. Otherwise, use the full access path should be used.
 
 For example, if one output mapping is `mappings.context.value`
 - If a mapping is `mappings.context.another`, then `value` should be used in the output mapping to access to value of `mappings.context.value`.
