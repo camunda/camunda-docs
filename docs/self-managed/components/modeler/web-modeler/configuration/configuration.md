@@ -78,7 +78,7 @@ The available configuration options depend on the version of the cluster:
 
 ### Database
 
-Web Modeler currently supports PostgreSQL, Oracle, and MSSQL as persistent data storage.
+Web Modeler currently supports PostgreSQL, Oracle, and Microsoft SQL Server (MSSQL) as persistent data storage.
 
 :::info Oracle driver
 The Oracle driver is not provided by default and must be downloaded and supplied for the application to load.
@@ -235,7 +235,7 @@ The proxy-related environment variables are lowercase because they follow a wide
 | `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:18080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `OAUTH2_TOKEN_AUDIENCE`                   | Expected value of the access token's audience claim (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                  | `web-modeler`                                                                      | -             |
 | `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                        | -             |
-| `CAMUNDA_IDENTITY_USERNAMECLAIM`          | ID token claim used to assign usernames.                                                                                                                                                                                                                        | `preferred_username`                                                               | `name`        |
+| `CAMUNDA_IDENTITY_USERNAMECLAIM`          | ID token claim used to assign usernames.                                                                                                                                                                                                                            | `preferred_username`                                                               | `name`        |
 | `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                             | -             |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
