@@ -94,7 +94,8 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 ##### Bitnami Docker repository migration
 
-The Camunda Helm charts have been updated to use the new [Bitnami Docker repository](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration).
+The Camunda Helm charts have been updated to use the new Bitnami Docker repository.  
+See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
 #### Alternative container images
 
