@@ -30,7 +30,7 @@ AWS_KEY=keyValue
 ...
 ```
 
-This works when custom connector are deployed as part of the c8 run docker compose setup. If you instead decide to run the connectors differently as documented [here](/components/connectors/custom-built-connectors/host-custom-connector.md#wiring-your-connector-with-a-camunda-cluster), it is best to configure secrets as env variable.
+This works when custom connectors are deployed as part of the c8 run docker compose setup. If you instead decide to run the connectors differently as documented [here](/components/connectors/custom-built-connectors/host-custom-connector.md#wiring-your-connector-with-a-camunda-cluster), it is best to configure secrets as environment variables.
 
 ## Provisioning custom connectors runtime
 
