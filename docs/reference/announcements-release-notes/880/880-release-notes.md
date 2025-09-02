@@ -45,6 +45,26 @@ Release notes needed
 
 Release notes needed
 
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+
+#### Job header binding
+
+<!-- https://github.com/camunda/connectors/issues/5131 -->
+
+Use the `@Header` annotation to bind a header value (for example, a FEEL expression) to a model class.
+
+#### SQL connector Oracle database connection
+
+<!-- https://github.com/camunda/connectors/issues/5074 -->
+
+The SQL connector now supports connecting to an Oracle database.
+
+To learn more, see [SQL connector](/components/connectors/out-of-the-box-connectors/sql.md).
+
+:::note
+This requires the Oracle JDBC driver that Camunda cannot distribute due to licensing restrictions. To connect to an Oracle database, you must manually download the JDBC driver from [Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) and run the connector in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
+:::
+
 ### Console <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
 
 #### Docker distribution
@@ -161,6 +181,12 @@ This release introduces persisted test definitions for Web Modeler and reusable 
 
 - Process developers and analysts can now easily save, export, and share test scenarios.
 - These new test files are portable and Git-syncable, and can be used to rapidly create Camunda Process Test-based files.
+
+#### Username claim configuration
+
+<!-- https://github.com/camunda/web-modeler/issues/9292 -->
+
+The claim used for usernames is now configurable via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable. This can be used for authentication for web apps (Tasklist, Optimize, Operate) as a different claim option for the username identifier.
 
 ### Usage metrics support updated licence model and tenant breakdown
 
