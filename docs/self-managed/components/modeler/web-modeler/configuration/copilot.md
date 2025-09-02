@@ -18,7 +18,9 @@ Copilot supports the following LLM providers:
 | Ollama           | `OLLAMA`                   |
 | OpenAI           | `OPENAI`                   |
 
-#### General Copilot Settings
+## Configuration
+
+To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true`. You can then configure the default LLM provider for BPMN, FEEL and Form copilots using the respective environment variables. Each provider has its own configuration options, which are detailed below.
 
 | Environment Variable                        | Description                                                   | Example Value | Default Value |
 | ------------------------------------------- | ------------------------------------------------------------- | ------------- | ------------- |
@@ -28,7 +30,7 @@ Copilot supports the following LLM providers:
 | `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for Form Copilot.                             | `VERTEX_AI`   | \_            |
 | `RESTAPI_COPILOT_REQUEST_TIMEOUT`           | [optional] Overall request timeout for Copilot request in UI. | `200000`      | `300000`      |
 
-#### BPMN Copilot Configuration
+### BPMN Copilot Configuration
 
 | Environment Variable                                  | Description                                                               | Example Value        | Default Value |
 | ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
@@ -44,7 +46,7 @@ Copilot supports the following LLM providers:
 | `RESTAPI_BPMN_COPILOT_MAX_CONNECTIONS`                | [optional] Max HTTP connections for BPMN Copilot.                         | `300`                | `200`         |
 | `RESTAPI_BPMN_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request for BPMN Copilot.                     | `120s`               | `60s`         |
 
-#### FEEL Copilot Configuration
+### FEEL Copilot Configuration
 
 | Environment Variable                                  | Description                                                               | Example Value        | Default Value |
 | ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
@@ -60,7 +62,7 @@ Copilot supports the following LLM providers:
 | `RESTAPI_FEEL_COPILOT_MAX_CONNECTIONS`                | [optional] Max HTTP connections for FEEL Copilot.                         | `300`                | `200`         |
 | `RESTAPI_FEEL_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request for FEEL Copilot.                     | `120s`               | `60s`         |
 
-#### Form Copilot Configuration
+### Form Copilot Configuration
 
 | Environment Variable                                  | Description                                                               | Example Value        | Default Value |
 | ----------------------------------------------------- | ------------------------------------------------------------------------- | -------------------- | ------------- |
@@ -76,7 +78,7 @@ Copilot supports the following LLM providers:
 | `RESTAPI_FORM_COPILOT_MAX_CONNECTIONS`                | [optional] Max HTTP connections for Form Copilot.                         | `300`                | `200`         |
 | `RESTAPI_FORM_COPILOT_READ_TIMEOUT`                   | [optional] Read timeout per request for Form Copilot.                     | `120s`               | `60s`         |
 
-#### AWS Bedrock Configuration
+### AWS Bedrock Configuration
 
 :::caution
 When configuring AWS Bedrock, make sure the model is available in the provided AWS region.
@@ -89,7 +91,7 @@ When configuring AWS Bedrock, make sure the model is available in the provided A
 | `RESTAPI_BPMNCOPILOT_ACCESS_KEY_ID`     | AWS access key ID for Bedrock (if not using instance/role credentials).     | `AKIA...`                                   |
 | `RESTAPI_BPMNCOPILOT_SECRET_ACCESS_KEY` | AWS secret access key for Bedrock (if not using instance/role credentials). | `wJalrXUtnFEMI/K7MDENG/bPxRfiCY...`         |
 
-#### OpenAI Configuration
+### OpenAI Configuration
 
 :::note
 Use this interface for OpenAI itself **and** OpenAI‑compatible providers.\
@@ -112,7 +114,7 @@ Use this interface for OpenAI itself **and** OpenAI‑compatible providers.\
 | `RESTAPI_COPILOT_OPENAI_PASSWORD`          | \[optional] Password for Basic auth to an OpenAI‑compatible gateway.                            | `s3cr3t`                             |
 | `RESTAPI_COPILOT_OPENAI_HEADERS`           | \[optional] Extra HTTP headers as a JSON map (string).                                          | `{"X-Org":"camunda","X-Trace":"on"}` |
 
-#### Azure OpenAI Configuration
+### Azure OpenAI Configuration
 
 | Environment Variable                             | Description                                       | Example Value                      |
 | ------------------------------------------------ | ------------------------------------------------- | ---------------------------------- |
@@ -120,7 +122,7 @@ Use this interface for OpenAI itself **and** OpenAI‑compatible providers.\
 | `RESTAPI_COPILOT_AZURE_OPENAI_API_KEY`           | API key for Azure OpenAI.                         | `az-aoai-key-**\*\*\*\***`         |
 | `RESTAPI_COPILOT_AZURE_OPENAI_ENDPOINT`          | Endpoint for Azure OpenAI.                        | `https://my-aoai.openai.azure.com` |
 
-#### Azure AI Configuration
+### Azure AI Configuration
 
 :::note
 Azure AI supports authentication via an API key or Microsoft Entra ID (formerly Azure AD) using the OAuth 2.0 client-credentials flow.
@@ -136,7 +138,7 @@ Azure AI supports authentication via an API key or Microsoft Entra ID (formerly 
 | `RESTAPI_COPILOT_AZURE_AI_TENANT_ID`        | **\[conditionally required]** Azure AD tenant ID for OAuth.                            | `11111111-2222-3333-4444-555555555555`                     |
 | `RESTAPI_COPILOT_AZURE_AI_AUTHORITY_HOST`   | **\[conditionally required]** Authority host for Azure OAuth.                          | `https://login.microsoftonline.com`                        |
 
-#### Google Vertex AI Configuration
+### Google Vertex AI Configuration
 
 | Environment Variable                         | Description                                     | Example Value                                                                                |
 | -------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -145,7 +147,7 @@ Azure AI supports authentication via an API key or Microsoft Entra ID (formerly 
 | `RESTAPI_COPILOT_VERTEX_AI_LOCATION`         | Vertex AI location/region.                      | `us-central1`                                                                                |
 | `RESTAPI_COPILOT_VERTEX_AI_CREDENTIALS_JSON` | Service account JSON (string) for Vertex AI.    | `{"type":"service_account","project_id":"my-proj","client_email":"...","private_key":"..."}` |
 
-#### Anthropic Configuration
+### Anthropic Configuration
 
 | Environment Variable                              | Description                                                              | Example Value                | Default Value |
 | ------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------- |
@@ -154,7 +156,7 @@ Azure AI supports authentication via an API key or Microsoft Entra ID (formerly 
 | `RESTAPI_COPILOT_ANTHROPIC_CACHE_SYSTEM_MESSAGES` | [optional] Enable client-side caching of system messages (if supported). | `false`                      | `true`        |
 | `RESTAPI_COPILOT_ANTHROPIC_CACHE_TOOLS`           | [optional] Enable client-side caching of tool schemas (if supported).    | `false`                      | `true`        |
 
-#### Ollama Configuration
+### Ollama Configuration
 
 | Environment Variable                      | Description                                                               | Example Value                        |
 | ----------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------ |
@@ -162,7 +164,7 @@ Azure AI supports authentication via an API key or Microsoft Entra ID (formerly 
 | `RESTAPI_COPILOT_OLLAMA_BASE_URL`         | Base URL for Ollama server.                                               | `http://localhost:11434`             |
 | `RESTAPI_COPILOT_OLLAMA_HEADERS`          | [optional] Extra HTTP headers for Ollama requests as a JSON map (string). | `{"X-Org":"camunda","X-Trace":"on"}` |
 
-#### Hugging Face Configuration
+### Hugging Face Configuration
 
 | Environment Variable                            | Description                                                              | Example Value                                 | Default Value |
 | ----------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------- | ------------- |
