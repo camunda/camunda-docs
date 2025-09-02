@@ -201,11 +201,12 @@ Copilot supports the following LLM providers:
 
 #### General Copilot Settings
 
-| Environment Variable                        | Description                       | Example Value |
-| ------------------------------------------- | --------------------------------- | ------------- |
-| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for BPMN Copilot. | `BEDROCK`     |
-| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for FEEL Copilot. | `OPENAI`      |
-| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for Form Copilot. | `VERTEX_AI`   |
+| Environment Variable                        | Description                         | Example Value |
+| ------------------------------------------- | ----------------------------------- | ------------- |
+| `FEATURE_AI_ENABLED`                        | Switch to use for enabling Copilot. | `true`        |
+| `RESTAPI_BPMN_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for BPMN Copilot.   | `BEDROCK`     |
+| `RESTAPI_FEEL_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for FEEL Copilot.   | `OPENAI`      |
+| `RESTAPI_FORM_COPILOT_DEFAULT_LLM_PROVIDER` | Provider to use for Form Copilot.   | `VERTEX_AI`   |
 
 #### BPMN Copilot Configuration
 
