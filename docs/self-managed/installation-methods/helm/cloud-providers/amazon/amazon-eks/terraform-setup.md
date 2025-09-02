@@ -552,7 +552,7 @@ The encryption provided by these certificates ensures that traffic can securely 
 
 To create the VPN Endpoint in your cluster's VPC, you need to retrieve the VPC ID using [Terraform outputs](https://developer.hashicorp.com/terraform/language/values/outputs) from the [EKS cluster module](#eks-cluster-module-setup). Follow these steps:
 
-1. Go to the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture) amd switch into the `cluster` module directory:
+1. Go to the [reference architecture directory of the cloned repository](#obtain-a-copy-of-the-reference-architecture) and switch into the `cluster` module directory:
 
    ```bash
    cd ./aws/kubernetes/eks-single-region/terraform/
