@@ -157,7 +157,7 @@ You can still use HTTP Webhook Connector in Desktop Modeler, or with your Camund
 In that case, HTTP Webhook Connector deployments and URLs will not be displayed in Modeler.
 :::
 
-For self-managed installations using the desktop modeler, the webhook URL format is:
+For self-managed installations, the webhook URL format is:
 
 `http(s)://<base URL>/<contextPath>/inbound/<webhook ID>`
 
