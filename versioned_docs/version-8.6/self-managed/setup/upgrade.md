@@ -363,7 +363,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 
 ```yaml
 image:
-  repository: bitnami/elasticsearch
+  repository: bitnamilegacy/elasticsearch
   tag: 8.8.2
 ```
 

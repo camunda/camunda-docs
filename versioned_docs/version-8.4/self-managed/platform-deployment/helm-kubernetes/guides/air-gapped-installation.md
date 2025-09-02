@@ -25,10 +25,10 @@ The following images must be available in your air-gapped environment:
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
-- [bitnami/postgres](https://hub.docker.com/r/bitnami/postgresql)
-- [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
-- [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
-- [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
+- [bitnami/postgres](https://hub.docker.com/r/bitnamilegacy/postgresql)
+- [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
+- [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
+- [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 - Web Modeler images (only available from [Camunda's private registry](../../docker.md#web-modeler)):
   - `web-modeler-ee/modeler-restapi`
   - `web-modeler-ee/modeler-webapp`
