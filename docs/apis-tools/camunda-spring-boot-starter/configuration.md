@@ -13,7 +13,7 @@ For example, the property `camunda.client.worker.defaults.max-jobs-active` is re
 
 ## Modes
 
-The Camunda Spring Boot SDK has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+The Camunda Spring Boot Starter has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
 
 :::note
 The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
@@ -34,7 +34,7 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="SaaS mode"
-https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/saas.yaml
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
 ```
 
 The only thing you need to configure then, are the connection details to your Camunda SaaS cluster:
@@ -67,7 +67,7 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="Self-managed mode"
-https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
 ## Connectivity
@@ -194,7 +194,7 @@ As alternative, do not provide any other property indicating an implicit authent
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="No authentication"
-https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/auth-methods/none.yaml
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
 ```
 
 ### Basic authentication
@@ -215,7 +215,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="Basic authentication"
-https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/auth-methods/basic.yaml
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
 ```
 
 ### OIDC authentication
@@ -236,7 +236,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="OIDC authentication"
-https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/resources/auth-methods/oidc.yaml
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
 
 #### Credentials cache path
@@ -438,7 +438,7 @@ public void handleJobFoo(@Variable(name = "variable1") String variable1) {
 }
 ```
 
-If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/spring-zeebe-sdk/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/spring-zeebe-sdk/getting-started.md):
+If you don't specify the `name` attribute on the annotation, the **method parameter name** is used as the variable name if you enabled the [`-parameters` compiler flag](/apis-tools/camunda-spring-boot-starter/getting-started.md#enable-the-java-compiler--parameters-flag) in the [getting started section](/apis-tools/camunda-spring-boot-starter/getting-started.md):
 
 ```java
 @JobWorker(type = "foo")
