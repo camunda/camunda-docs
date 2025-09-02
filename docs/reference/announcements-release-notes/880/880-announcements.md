@@ -68,6 +68,11 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 The configuration for the external database used by the Web Modeler REST API has been updated to align with the Identity component's database configuration. A new value, `webModeler.restapi.externalDatabase`, is now available and mirrors the structure of `identity.externalDatabase`. To ensure backward compatibility, the existing `webModeler.restapi.externalDatabase.url` field is retained and will take precedence if set.
 
+##### Default username claim in Web Modeler
+
+The default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`. This change aligns the configuration with other Camunda 8 components for consistency across the platform.
+To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+
 #### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
@@ -307,7 +312,7 @@ For details on how to migrate to the Camunda Java client, see the [migration gui
 
 ### Deprecated: Zeebe Process Test
 
-With the **8.8 release**, Camunda announces the **deprecation of [Zeebe Process Test](../../../apis-tools/java-client/zeebe-process-test.md)**.
+With the **8.8 release**, Camunda announces the **deprecation of [Zeebe Process Test](../../../apis-tools/testing/zeebe-process-test.md)**.
 
 It is superseded by [Camunda Process Test](../../../apis-tools/testing/getting-started.md) going forward.
 
@@ -317,3 +322,18 @@ For more information, refer to:
 
 - [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md)
 - [Introducing Camunda Process Test—The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/)
+
+### Deprecated: Operate & Tasklist usage metrics endpoints
+
+With the **8.8 release**, Camunda announces the **deprecation of usage metrics endpoints in Operate and Tasklist**.
+
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/operate/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
+
+:::warning Breaking change
+Assignees list removed from response.
+:::
+
+These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
+
+Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.

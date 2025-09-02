@@ -47,9 +47,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 
 ## License configuration
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
-
-<Licensing/>
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
 ## OIDC configuration
 

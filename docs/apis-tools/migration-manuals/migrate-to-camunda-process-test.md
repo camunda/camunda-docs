@@ -1,13 +1,14 @@
 ---
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
+sidebar_label: "Camunda Process Test"
 description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT).  
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).  
 Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**.  
 See the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for details.
 

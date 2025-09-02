@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-api
-title: Migrate to the Orchestration Cluster REST API
+title: Migrate to the Orchestration Cluster API
+sidebar_label: "Orchestration Cluster API"
 description: "Migrate from Camunda's V1 component REST APIs to the V2 Orchestration Cluster REST API to interact with Camunda 8 clusters, activate jobs, and run user task state operations."
 ---
 
@@ -15,7 +16,7 @@ This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/api
 
 - Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This is the single Orchestration Cluster REST API.
 - Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
-- In addition, several Zeebe gPRC endpoints will begin to be deprecated.
+- In addition, several Zeebe gRPC endpoints will begin to be deprecated.
 
 :::info
 To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
