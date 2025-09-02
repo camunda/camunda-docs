@@ -90,16 +90,16 @@ A new `commonLabels` value is now available and integrates with `camundaPlatform
 
 The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
+See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+
 ## Camunda 8.4
 
 | Release date   | End of maintenance |
 | :------------- | :----------------- |
 | 9 January 2024 | 9 July 2025        |
-
-##### Bitnami Docker repository migration
-
-The Camunda Helm charts have been updated to use the new Bitnami Docker repository.  
-See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
 ### Changes in supported environments
 
