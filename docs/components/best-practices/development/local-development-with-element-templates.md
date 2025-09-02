@@ -52,6 +52,16 @@ If you choose to start the connectors runtime using a different [connector runti
 
 ## Provision other dependencies
 
+### Using Desktop Modeler
+
+Deploy your element templates dependencies using [Desktop Modeler](/components/modeler/desktop-modeler/index.md) by following the [self-managed deployment guide](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md).
+
+The described process applies not only to diagrams but also to forms, DMNs and RPA scripts.
+
+### Using the Cluster API
+
+If you prefer an automated approach, you can easily write scripts that use the Orchestration Cluster rest API to deploy.
+
 To deploy additional dependencies -— for example forms, DMNs, or processes —- send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the relevant files
 
 For example:
@@ -88,7 +98,7 @@ You can now use element template that reference the `user-signup.form`.
 
 To make your element template available in Desktop modeler, follow the [configuring element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) documentation.
 
-### Additional resources and next steps
+## Additional resources and next steps
 
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
 - [Run your first local Camunda 8 project](/guides/getting-started-example.md)
