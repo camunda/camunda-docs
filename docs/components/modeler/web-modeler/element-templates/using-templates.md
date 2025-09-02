@@ -72,12 +72,12 @@ If a template was applied to an element but cannot be found, editing of the elem
 
 ## Creating templates from existing elements
 
-If a diagram element supports being used as a template, a _Save as_ clickable link will be displayed next to the header. Once clicked, you will be able to select a name and description for the templates. This allows you to easily reuse pre configured elements.
+If a diagram element supports being used as a template, a _Save as_ link will be displayed next to the header. Once clicked, you will be able to select a name and description for the template. This allows you to easily reuse pre-configured elements.
 
 ![Template Save as](./img/save-as.png)
 
 The template can be further customized by [editing it](/components/connectors/manage-connector-templates.md).
 
-To use the template, you first need to [publish it to the project or organization].
+To use the template, you first need to [publish it to the project or organization](/components/connectors/manage-connector-templates.md#publish-a-connector-template).
 
-Learn more about [saving elements as templates](./save-as-element-templates.md)
+Learn more about [saving elements as templates](./save-as-element-templates.md).
