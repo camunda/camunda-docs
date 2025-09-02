@@ -127,7 +127,7 @@ Although scenarios are quick to develop and use for non-developers, Camunda [bes
 
 Scenarios are stored in [test scenario files](advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
 
-Play will use the test scenario file [linked to the first executable process ID](advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
+Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
 
 If multiple test scenario files are linked to the same process ID, Play will use:
 
