@@ -22,6 +22,15 @@ First, confirm you have completed the following prerequisites:
 
 Perform an upgrade as follows.
 
+<Tabs groupId="helm" defaultValue="helm" queryString values={
+[
+{label: 'Helm chart', value: 'helm', },
+{label: 'Docker Compose', value: 'docker', },
+]
+}>
+
+<TabItem value='helm'>
+
 ### Helm chart
 
 To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md) for detailed instructions.
@@ -39,6 +48,9 @@ Camunda-provided Docker Compose files are only intended for development and test
 Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
+
+</TabItem>
+</Tabs>
 
 ## Next steps
 
