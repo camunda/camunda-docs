@@ -198,9 +198,8 @@ Follow these steps to generate a private key and self signed certificate that ca
 
 <h4>1. Generate private key</h4>
 Generate a new RSA private key and save it to a file called `private_key.pem`.
-```
+```sh
 openssl genrsa -out private_key.pem 2048
-```
 
 <h4>2. Create a certificate signing request</h4>
 Generate a Certificate Signing Request (CSR) using the key created in step 1.
