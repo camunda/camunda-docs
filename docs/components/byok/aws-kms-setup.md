@@ -1,7 +1,7 @@
 ---
 id: aws-byok-setup
-title: "AWS BYOK setup guide"
-description: "Learn how to configure Bring Your Own Key (BYOK) for Camunda 8 SaaS using AWS KMS."
+title: "Encryption at rest using external encryption keys"
+description: "Learn how to configure Camunda 8 SaaS using external AWS encryption keys."
 ---
 
 Learn how to configure Bring Your Own Key (BYOK) for Camunda 8 SaaS using AWS KMS.
@@ -84,12 +84,12 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 
 - Ensure you do not restrict the Camunda cluster IAM role from any required KMS actions; otherwise encryption will fail.
 - Keys must remain in the same region as your cluster.
-- Any revocation of access will immediately break cluster encryption.
+- Any revocation of access will immediately break the Camunda cluster.
 
 :::
 
-7. Click **Finish** to create the key.
-8. Copy the **Key ARN**; you will need it in the Camunda Console.
+1. Click **Finish** to create the key.
+2. Copy the **Key ARN**; you will need it in the Camunda Console.
 
 :::note Screenshot placeholder
 [Insert screenshot of AWS KMS key details showing Key ARN]
@@ -103,7 +103,7 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 4. Confirm and apply the key. The Camunda Operator will provision storage using your BYOK key for:
    1. Document handling storage
    2. Backup storage
-   3. Zeebe persistent disks
+   3. Orchestration Cluster persistent disks
    4. Elasticsearch persistent disks
 
 :::note Screenshot placeholder
@@ -113,8 +113,8 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 ## Step 4: Verify encryption and logging
 
 - AWS CloudTrail automatically logs all KMS operations.
-- Verify that your cluster’s storage volumes are using the correct KMS key.
 - Set up CloudWatch alerts for KMS key deletion or unauthorized access attempts.
+- Verify your cluster’s storage volumes are using the correct KMS key. This is possible, but not required.
 
 :::warning Monitoring reminder
 You are responsible for monitoring your key usage and access logs. Camunda will not track your AWS KMS logs in your account.
