@@ -1,8 +1,8 @@
 ---
 id: add-extra-manifests
-title: "Inject custom Kubernetes manifests into Camunda 8 Helm deployments"
-sidebar_label: "Inject custom Kubernetes manifests"
-description: "Learn how to add extra manifests to Helm deployments by injecting arbitrary data in the values.yaml."
+sidebar_label: Custom manifests
+title: Helm chart custom Kubernetes manifests injection
+description: "Learn how to add extra manifests to Helm deployments by injecting manifests in the values.yaml."
 ---
 
 ## Overview
@@ -33,6 +33,12 @@ global:
 ```
 
 For more information, see the Kubernetes [object documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/).
+
+## Manipulate manifests
+
+In general, the Camunda Helm chart is highly customizable and can be deployed in different setups. However, in some cases, it's necessary to manipulate manifests (e.g., when a certain feature is not supported out of the box in the chart template).
+
+For that case, [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post-rendering) allows you to manipulate, configure, and/or validate rendered manifests before they are installed by Helm. Post rendering is a good option to quickly add missing abilities in the chart; at the same time, you can raise a feature request for your use case.
 
 ## Best practices
 
