@@ -45,6 +45,14 @@ module.exports = {
         "components/concepts/processes",
         "components/concepts/process-applications",
         "components/concepts/element-templates",
+        {
+          "Access control": [
+            "components/concepts/access-control/access-control-overview",
+            "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
+            "components/concepts/access-control/mapping-rules",
+          ],
+        },
         "components/concepts/job-workers",
         "components/concepts/execution-listeners",
         {
@@ -67,12 +75,6 @@ module.exports = {
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
-        {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
-            "components/concepts/access-control/authorizations",
-          ],
-        },
       ],
     },
     {
@@ -321,6 +323,7 @@ module.exports = {
         require("./docs/components/modeler/forms/sidebar-schema"),
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
+        "components/modeler/using-web-and-desktop-modeler-together",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -404,6 +407,14 @@ module.exports = {
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
+            "components/identity/client",
+            {
+              "Mapping rules": [
+                "components/identity/mapping-rules/manage-mapping-rules",
+                "components/identity/mapping-rules/mapping-rule-authorizations",
+                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
+              ],
+            },
           ],
         },
       ],
@@ -635,13 +646,13 @@ module.exports = {
             "components/console/manage-organization/organization-settings",
             "components/console/manage-organization/manage-users",
             "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/view-organization-activity",
             "components/console/manage-organization/enable-alpha-features",
             "components/console/manage-organization/usage-history",
             "components/console/manage-organization/usage-alerts",
             "components/console/manage-organization/advanced-search",
             "components/console/manage-organization/switch-organization",
-            "components/console/manage-organization/external-sso",
             "components/console/manage-organization/delete-account",
           ],
         },
@@ -718,6 +729,9 @@ module.exports = {
           Operations: [
             "components/best-practices/operations/versioning-process-definitions",
             "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
         },
       ],
@@ -919,24 +933,9 @@ module.exports = {
       "API Clients": [
         {
           "Java client": [
-            "apis-tools/java-client/index",
-            "apis-tools/java-client/authentication",
+            "apis-tools/java-client/getting-started",
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/logging",
-            "apis-tools/java-client/zeebe-process-test",
-            {
-              Examples: [
-                "apis-tools/java-client-examples/index",
-                "apis-tools/java-client-examples/process-deploy",
-                "apis-tools/java-client-examples/process-instance-create",
-                "apis-tools/java-client-examples/process-instance-create-nonblocking",
-                "apis-tools/java-client-examples/process-instance-create-with-result",
-                "apis-tools/java-client-examples/decision-evaluate",
-                "apis-tools/java-client-examples/job-worker-open",
-                "apis-tools/java-client-examples/data-pojo",
-                "apis-tools/java-client-examples/cluster-topology-request",
-              ],
-            },
           ],
         },
         {
@@ -967,6 +966,9 @@ module.exports = {
             "apis-tools/testing/connectors",
           ],
         },
+        {
+          Deprecated: ["apis-tools/testing/zeebe-process-test"],
+        },
       ],
     },
     {
@@ -981,7 +983,9 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-spring-boot-camunda-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
+        "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
       ],
     },
   ],
@@ -1537,13 +1541,6 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
-                {
-                  "Mapping rules": [
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations",
-                    "self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants",
-                  ],
-                },
               ],
             },
           ],
