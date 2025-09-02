@@ -1356,7 +1356,6 @@ module.exports = {
         },
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        "self-managed/concepts/mapping-rules",
         {
           Monitoring: [
             "self-managed/operational-guides/monitoring/log-levels",
