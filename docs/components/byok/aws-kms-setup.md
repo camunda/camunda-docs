@@ -55,34 +55,28 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 
 ```json
 {
-  "Version": "2012-10-17",
-  "Id": "key-policy-camunda-byok",
-  "Statement": [
-    {
-      "Sid": "Enable IAM User Permissions",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "<YOUR_AWS_ACCOUNT_ROOT_ARN>"
-      },
-      "Action": "kms:*",
-      "Resource": "*"
-    },
-    {
-      "Sid": "Allow Camunda Cluster Access",
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "<CAMUNDA_CLUSTER_ROLE_ARN>"
-      },
-      "Action": [
-        "kms:Encrypt",
-        "kms:Decrypt",
-        "kms:ReEncrypt*",
-        "kms:GenerateDataKey*",
-        "kms:DescribeKey"
-      ],
-      "Resource": "*"
-    }
-  ]
+  "Sid": "Allow Camunda tenant IAM Role basic key access",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::<camunda-accountId>:role/<tenant-IAM-role>"
+  },
+  "Action": [
+    "kms:DescribeKey",
+    "kms:GenerateDataKey*",
+    "kms:Decrypt"
+  ],
+  "Resource": "*"
+},
+{
+  "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
+  "Effect": "Allow",
+  "Principal": {
+    "AWS": "arn:aws:iam::<camunda-accountId>:role/<tenant-IAM-role>"
+  },
+  "Action": [
+    "kms:CreateGrant"
+  ],
+  "Resource": "*"
 }
 ```
 
