@@ -130,12 +130,6 @@ You can now add Zeebe partitions to a running cluster in SaaS to boost capacity 
 
 Release notes needed.
 
-### Task Testing
-
-<!-- https://github.com/camunda/product-hub/issues/2660 -->
-
-Release notes needed.
-
 ### Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 #### Cluster Identity compatibility
