@@ -41,9 +41,9 @@ Use the following APIs for Camunda 8 integration and automation:
 
 <ApiGrid api={apiCards} />
 
-## Camunda Clients and SDKs
+## API clients
 
-Camunda provides the following official clients and SDKs to simplify API usage and speed up development:
+Camunda provides the following official clients to simplify API usage and speed up development:
 
 <ApiGrid api={clientCards} />
 

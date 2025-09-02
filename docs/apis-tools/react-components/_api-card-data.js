@@ -64,7 +64,7 @@ export const clientCards = [
   },
   {
     link: "../spring-zeebe-sdk/getting-started/",
-    title: "Camunda Spring Boot SDK",
+    title: "Camunda Spring Boot Starter",
     image: IconSpringBootImg,
     description:
       "Build Spring Boot applications to connect to the Orchestration Cluster to build job workers.",
