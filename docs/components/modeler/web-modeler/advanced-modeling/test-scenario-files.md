@@ -76,6 +76,10 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 }
 ```
 
+You can find the BPMN process ID in the properties panel, or in the `<bpmn:process id=` field of the XML.
+
+![process ID in properties panel](img/process-id-properties-panel.png)
+
 The `processId` should be shorter than 255 characters and not contain whitespace.
 
 :::note
