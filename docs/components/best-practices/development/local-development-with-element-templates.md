@@ -60,7 +60,7 @@ The described process applies not only to diagrams but also to forms, DMNs and R
 
 ### Using the Cluster API
 
-If you prefer an automated approach, you can easily write scripts that use the Orchestration Cluster rest API to deploy.
+If you prefer an automated approach, you can easily write scripts that use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to deploy.
 
 To deploy additional dependencies -— for example forms, DMNs, or processes —- send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the relevant files
 
