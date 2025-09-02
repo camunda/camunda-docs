@@ -63,6 +63,18 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 - If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc sub-process is directly completed.
 - If set to `false`, the ad-hoc sub-process waits for the completion of all active instances before completing.
 
+## Collecting the output
+
+The output of the inner flows of the ad-hoc sub-process can be collected by defining the `outputCollection` and the `outputElement` expression.
+
+`outputCollection` defines the name of the variable under which the collected output is stored (e.g. `results`). It is automatically created as a local variable of the ad-hoc sub-process and is updated when an inner flow is completed.
+When the ad-hoc sub-process is completed the variable is propagated to its parent scope.
+
+`outputElement` is an expression that defined the output of the inner flow (e.g. `= result`). Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the inner flow that holds the output value.
+This variable should be created with the output value; for example, by a job worker providing a variable with the name `result`.
+
+When the inner flow is completed, the `outputElement` expressions is evaluated and the result is inserted into the `outputCollection`.
+
 ## Variable mappings
 
 An ad-hoc sub-process can define input and output
