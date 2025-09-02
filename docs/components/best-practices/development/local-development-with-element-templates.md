@@ -18,7 +18,7 @@ This guide covers how to setup your element templates in your local environment.
 
 ## Provisioning secrets
 
-Element templates using secrets, need to have access to these values. Secrets can be added into the connector runtime using the included `connector-secrets.txt` file located at the root of the c8 run directory.
+Element templates using secrets need to have access to these values. Secrets can be added into the connector runtime using the included `connector-secrets.txt` file located at the root of the c8 run directory.
 
 Add secrets in the format `NAME=VALUE` per line. The secrets will then be available in the connector runtime in the format secrets.NAME
 
