@@ -70,7 +70,7 @@ Example:
 
 Connector templates are a specific type of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
-Alternatively, you can use any text editor on your local machine, but we recommend using one that supports IntelliSenese and can load **JSON schemas** -- for example, [VSCode](https://code.visualstudio.com/Docs/languages/json).
+Alternatively, you can use any text editor on your local machine, but we recommend using one that supports IntelliSense and can load **JSON schemas** -- for example, [VSCode](https://code.visualstudio.com/Docs/languages/json).
 
 ## JSON schema compatibility
 
