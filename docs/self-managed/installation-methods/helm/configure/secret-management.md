@@ -122,7 +122,7 @@ For production environments, create a Kubernetes Secret and reference it from yo
 
 #### Step 1: Create the secret
 
-Create a secret with `kubectl` or YAML:
+Create a secret using `kubectl` or a YAML manifest:
 
 - `kubectl`:
 
