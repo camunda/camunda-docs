@@ -53,8 +53,6 @@ This guide uses a generic [connector template](https://github.com/camunda/connec
    mvn clean verify package
    ```
 
-```
-
 This command creates a file named `target/connector-template-0.1.0-SNAPSHOT-with-dependencies.jar`.
 
 2. Copy the `.jar` file into the `custom_connectors` directory.
@@ -100,7 +98,7 @@ curl -L 'http://localhost:8080/v2/deployments' \
 -H 'Accept: application/json' \
 -F resources=@/pathToYourForm/user-signup.form
 
-````
+```
 
 You will get a response containing the details of the deployed elements:
 
@@ -120,7 +118,7 @@ You will get a response containing the details of the deployed elements:
   "deploymentKey": "KEY_OF_THE_DEPLOYMENT",
   "tenantId": "<default>"
 }
-````
+```
 
 You can use element templates that reference the `user-signup.form`.
 
