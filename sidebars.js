@@ -885,7 +885,7 @@ module.exports = {
       items: [
         "components/concepts/clusters",
         "components/saas/regions",
-        "components/concepts/encryption-at-rest",
+        "components/saas/encryption-at-rest",
         "components/concepts/backups",
         "reference/auto-updates",
         "components/concepts/data-retention",

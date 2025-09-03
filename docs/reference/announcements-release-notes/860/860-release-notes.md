@@ -120,7 +120,7 @@ You can now use advanced encryption key mechanisms on Camunda 8 SaaS when creati
 - Enterprise customers requiring a higher level of protection can select a dedicated Camunda-managed software or hardware (HSM) encryption key when creating a new cluster. The encryption key is managed by Camunda using Google Cloud Key Management Service (KMS).
 - You can configure encryption keys on a per-cluster basis so that each cluster has a dedicated encryption key.
 
-To learn more about this feature, see [encryption at rest](/components/concepts/encryption-at-rest.md).
+To learn more about this feature, see [encryption at rest](/components/saas/encryption-at-rest.md).
 
 ### Execution listener support<span class="badge badge--long" title="This feature affects Zeebe">Zeebe</span>
 
