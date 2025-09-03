@@ -503,7 +503,7 @@ RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-bac
 
 # Restructure Using Camunda section and content moves
 RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/next/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
-
+RewriteRule ^docs/next/reference/regions/?$ /docs/next/components/saas/regions/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.

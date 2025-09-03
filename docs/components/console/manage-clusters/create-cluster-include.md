@@ -7,7 +7,7 @@ To deploy and run your process, you must create a [cluster](/components/concepts
 1. Name your cluster.
 1. Select a [cluster type](/components/concepts/clusters.md#cluster-type) and [cluster size](/components/concepts/clusters.md#cluster-size).
 1. Assign a cluster tag to indicate what type of cluster it is.
-1. Select your [region](/reference/regions.md).
+1. Select your [region](/components/saas/regions.md).
 1. Select your [encryption at rest protection level](/components/concepts/encryption-at-rest.md) (enterprise only).
 1. Select a channel and release. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
 1. Click **Create cluster**.

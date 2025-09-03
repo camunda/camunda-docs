@@ -270,7 +270,7 @@ A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Am
 - Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
 - Keep cluster data within Singapore to support your local data residency and compliance needs.
 
-To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+To learn more about supported SaaS regions, see [regions](/components/saas/regions.md).
 
 ### Tasklist uses the Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
