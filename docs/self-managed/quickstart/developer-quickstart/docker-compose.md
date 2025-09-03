@@ -145,7 +145,7 @@ Both the full and lightweight Docker Compose files include a configuration for [
 
 ### Connector secrets
 
-Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE` per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
+Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE`, one per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
 
 ### Custom connectors
 
