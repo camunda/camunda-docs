@@ -43,13 +43,12 @@ Release notes needed
 
 <!-- https://github.com/camunda/product-hub/issues/2858 -->
 
-To support scalable reuse of building blocks, we’ve significantly improved our element templates documentation, with a focus on CI/CD practices for managing templates across teams and environments. Documentation updates include:
+Element templates documentation is improved to support scalable reuse of building blocks, with a focus on CI/CD practices for managing templates across teams and environments. These improvements provide CoEs and development teams with the tools and practices needed to efficiently scale template-driven development.
 
-- How element templates and their dependencies can be integrated into CI/CD pipelines, enabling reliable, maintainable, and automated reuse at scale.
-- A restructure of the element templates documentation to improve discoverability and usability. Content is tool-agnostic, with dedicated guidance for Web Modeler, detailed instructions for managing dependencies, and a setup guide for local development environments.
-- Moved relevant information previously found under Connectors into the element templates section.
-
-These updates empower CoEs and development teams with the tools and practices needed to scale template-driven development efficiently and with confidence.
+- How to integrate element templates and their dependencies into CI/CD pipelines.
+- Restructure of the element templates documentation to improve discoverability and usability.
+- Content is tool-agnostic, with Web Modeler guidance, dependency management, and local development environment setup.
+- Moved relevant information from Connectors into the element templates section.
 
 To learn more, see [Element templates in Modeler](/components/modeler/element-templates/about-templates.md).
 
