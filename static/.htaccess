@@ -508,7 +508,7 @@ RewriteRule ^docs/next/components/concepts/encryption-at-rest/?$ /docs/next/comp
 RewriteRule ^docs/next/components/concepts/backups/?$ /docs/next/components/saas/backups/ [R=301,L]
 RewriteRule ^docs/next/reference/auto-updates/?$ /docs/next/components/saas/auto-updates/ [R=301,L]
 RewriteRule ^docs/next/components/concepts/data-retention/?$ /docs/next/components/saas/data-retention/ [R=301,L]
-
+RewriteRule ^docs/next/reference/camunda-help-center/?$ /docs/next/components/saas/camunda-help-center/ [R=301,L]
 
 
 

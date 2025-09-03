@@ -889,7 +889,7 @@ module.exports = {
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
-        "reference/camunda-help-center",
+        "components/saas/camunda-help-center",
         "reference/status",
         "reference/saas-ip-addresses",
       ],
