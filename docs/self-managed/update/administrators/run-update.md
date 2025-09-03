@@ -24,7 +24,7 @@ First, confirm you have completed the following prerequisites:
 
 Perform an upgrade as follows.
 
-<Tabs groupId="helm" defaultValue="helm" queryString values={
+<Tabs groupId="installation" defaultValue="helm" queryString values={
 [
 {label: 'Helm chart', value: 'helm', },
 {label: 'Docker Compose', value: 'docker', },
