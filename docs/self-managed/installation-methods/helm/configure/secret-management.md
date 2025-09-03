@@ -194,7 +194,7 @@ For additional details on Identity secrets during installation, visit the [insta
 
 ## Document Store secrets
 
-Document Store configuration uses a different pattern that doesn't follow the unified secret structure. These secrets are configured using direct `existingSecret` references with multiple key specifications for different credential components.
+Document Store secrets are configured using direct `existingSecret` references with multiple key specifications for different credential components.
 
 | **Secret**                         | **Chart values key**                                                                                                                                                                | **Purpose**                                                                                                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
