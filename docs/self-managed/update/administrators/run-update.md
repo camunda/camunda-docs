@@ -5,6 +5,8 @@ description: "Administrator checklist for executing a Camunda 8.8 Self-Managed u
 ---
 
 import DocCardList from '@theme/DocCardList';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure you have completed all steps in [Prepare for upgrade](./prepare-for-update.md) before continuing.
 
