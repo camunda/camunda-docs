@@ -69,8 +69,7 @@ RPA scripts are not supported in Web Modeler
 To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, self-managed, and local development.
 
 For example:
-
-```
+```bash
 curl -L 'http://localhost:8080/v2/deployments' \
 -H 'Accept: application/json' \
 -F resources=@/pathToYourForm/user-signup.form
