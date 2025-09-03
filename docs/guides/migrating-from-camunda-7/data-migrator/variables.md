@@ -145,6 +145,6 @@ camunda:
 When variable transformation fails:
 
 - The entire process instance is skipped.
-- Detailed error messages are logged with the specific variable name and error cause.
+- Detailed exception messages are logged with the specific variable name and exception cause.
 - The instance is marked for potential retry after fixing the underlying issue.
 - You can use `--list-skipped` and `--retry-skipped` commands to manage failed migrations.

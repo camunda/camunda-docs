@@ -7,7 +7,11 @@ description: "Data Migrator limitations."
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.
 
-## General limitations
+## Runtime
+
+The runtime migration has the following limitations.
+
+### General limitations
 
 - To migrate running process instances, the historic process instance must exist.
   - You cannot migrate running instances when you have configured history level to `NONE` or a custom history level that doesn't create historic process instances.
@@ -22,7 +26,7 @@ An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrat
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5182
 
-## Variables
+### Variables
 
 - Proper handling and intercepting of variables is currently only supported for the Runtime Data Migrator.
 - [Unsupported Camunda 7 types](../variables#unsupported-types).
@@ -35,15 +39,15 @@ An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrat
 To learn more about variable migration, see [variables](../variables).
 :::
 
-## BPMN elements
+### BPMN elements
 
 Some BPMN elements and configurations supported in Camunda 7 are not supported in Camunda 8 or have specific limitations during migration. Below is an overview of these limitations and recommendations to address them.
 
-### Elements supported in Camunda 7 but not supported in Camunda 8
+#### Elements supported in Camunda 7 but not supported in Camunda 8
 
 See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) for more details on element support in Camunda 8, and adjust your models accordingly before migration.
 
-### Start events
+#### Start events
 
 - It is required that a process instance contains a single process level None Start Event to run the data migrator.
 - If a process definition only has event-based start events (for example, Message, Timer), it is required to add a temporary None Start Event. This change must be reverted after the data migration is completed.
@@ -72,28 +76,28 @@ See the [BPMN documentation](/components/modeler/bpmn/bpmn.md#bpmn-coverage/) fo
   </bpmn:process>
 ```
 
-### Async before/after wait states
+#### Async before/after wait states
 
 Camunda 8 does not support [asynchronous continuation before or after](https://docs.camunda.org/manual/latest/user-guide/process-engine/transactions-in-processes/#asynchronous-continuations) any kind of wait state. Service-task-like activities are executed asynchronously by default in Camunda 8 - so for example a service task waiting for asynchronous continuation before will be correctly migrated. But if you need to migrate an instance currently waiting asynchronously at other elements in a Camunda 7 model, such as a gateway for example, this instance would just continue without waiting in the equivalent Camunda 8 model. You might need to adjust your model's logic accordingly prior to migration.
 
-### Message events
+#### Message events
 
 - Only message catch and throw events are supported for migration.
 - Depending on your implementation, you may need to add [a correlation variable](/components/modeler/bpmn/message-events/message-events.md#messages) to the instance pre-migration.
 
-### Message and signal start events
+#### Message and signal start events
 
 - If your process starts with a message/signal start event, no token exists until the message/signal is received and hence no migration is possible until that moment.
 - Once the message/signal is received, the token is created and moved down the execution flow and may be waiting at a migratable element inside the process. However, due to how the migration logic is implemented, at the moment the data migrator only supports processes that start with a normal start event.
 
-### Triggered boundary events
+#### Triggered boundary events
 
 - Camunda 7 boundary events do not have a natural wait state.
 - If the process instance to be migrated is currently at a triggered boundary event in Camunda 7, there may still be a job associated with that event, either waiting to be executed or currently running. In this state, the token is considered to be at the element where the job is created: typically the first activity of the boundary event’s handler flow, or technically the point after the boundary event if asyncAfter is used.
 - During migration to Camunda 8, the token will be mapped to the corresponding target element. However, if that element expects input data that is normally produced by the boundary event’s job (for example, setting variables), this data may be missing in the migrated instance.
 - Recommendation: To ensure a consistent migration, allow boundary event executions to complete before initiating the migration.
 
-### Call activity
+#### Call activity
 
 To migrate a subprocess that is started from a call activity, the migrator must set the `legacyId` variable for the subprocess. This requires propagating the parent variables. This can be achieved by updating the C8 call activity in one of the following ways:
 
@@ -106,11 +110,11 @@ To migrate a subprocess that is started from a call activity, the migrator must 
 </zeebe:ioMapping>
 ```
 
-### Multi-instance
+#### Multi-instance
 
 Processes with active multi-instance elements can currently not be migrated. We recommend to finish the execution of any multi-instance elements prior to migration.
 
-### Timer events
+#### Timer events
 
 - Timer start events: prior to migration, you must ensure that your process has at least one [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Processes that only have a timer start event cannot be migrated.
 - If your model contains timer events (start and other), you must ensure that no timers fire during the migration process.
@@ -134,7 +138,7 @@ Processes with active multi-instance elements can currently not be migrated. We 
       - For all subsequent runs, the variable will not exist and the default duration will be used.
       - Again, you must ensure the leftover duration for the first post migration run lies outside the migration time frame.
 
-### Event subprocesses
+#### Event subprocesses
 
 - Event subprocesses with interrupting start events can cause unexpected behavior during migration if triggered at the wrong moment. This includes timer, message, and signal start events.
 - What can go wrong:
@@ -146,3 +150,33 @@ Processes with active multi-instance elements can currently not be migrated. We 
   - Don't correlate messages or send signals during migration.
   - Temporarily adjust timer start events in event subprocesses to ensure they do not trigger during migration (see the section on timer events for more details).
   - If above suggestions are not feasible in your use case make sure service tasks are idempotent — so repeating them does not cause issues.
+
+## History
+
+The history migration has the following limitations.
+
+### History cleanup
+
+The history cleanup due date is migrated if the C7 instance has a removal time.
+
+### Process instance
+
+- Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
+- This means that the history of subprocesses and call activities is not linked to their parent
+  process instance.
+- As a result, you cannot query for the history of a subprocess or call activity using the
+  parent process instance key.
+- See https://github.com/camunda/camunda-bpm-platform/issues/5359
+
+### Tenants
+
+- C7's `null` tenant is migrated to C8's `<default>` tenant.
+- All other `tenantId`s will be migrated as-is.
+- Read more about tenant handling in Camunda 8 [here](https://docs.camunda.io/docs/self-managed/concepts/multi-tenancy/#the-tenant-identifier).
+
+### DMN
+
+- The Data Migrator only migrates instances which are linked to process definition business rule tasks.
+- The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
+- Decision instance `inputs` and `outputs` are not yet migrated.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5364

@@ -34,6 +34,7 @@ module.exports = {
             id: "guides/migrating-from-camunda-7/data-migrator/index",
           },
           items: [
+            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
