@@ -1,12 +1,44 @@
 ---
 id: overview
-title: "Camunda integrations"
-description: "Learn more about Camunda integrations, such as Camunda's SAP integration."
+title: "Overview"
+description: "Learn more about Camunda integrations, such as Camunda's SAP and ServiceNow integrations."
 ---
 
-This section of the documentation features Camunda's various integrations. Currently, this consists of Camunda's SAP integration, including:
+Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape.
 
-- **[CSAP setup command line utility](/components/camunda-integrations/sap/csap-cli.md)**: A CLI to configure all SAP integration artifacts for deployment.
-- **[SAP OData connector](/components/camunda-integrations/sap/odata-connector.md)**: A protocol and outbound connector that runs as a Docker image on the SAP Business Technology Platform (BTP).
-- **[Business Technology Platform (BTP) plugin](/components/camunda-integrations/sap/btp-plugin.md)**: An artifact run on BTP. This connects to Camunda 8 SaaS to provide a generic Fiori app for starting BPMN processes and displaying [Camunda Forms](/components/modeler/forms/camunda-forms-reference.md) in the Fiori design language, the select exposure of SAP BTP services to [BPMN tasks](/components/modeler/bpmn/bpmn.md) and vice versa, and a generic endpoint to start BPMN processes with.
-- **[SAP RFC connector](/components/camunda-integrations/sap/rfc-connector.md)**: A Java Spring Boot application that runs on SAP BTP.
+The following integrations are available out of the box:
+
+- [ServiceNow integration](#servicenow-integration)
+- [SAP integration](#sap-integration)
+
+## ServiceNow integration
+
+Camunda’s ServiceNow integration bridges your business processes with IT service management (ITSM) to streamline and automate service delivery.
+
+With this integration, you can:
+
+- **Manage ServiceNow data**  
+  Create, read, update, and delete records in any ServiceNow table directly from a Camunda process.
+
+- **Trigger ServiceNow flows**  
+  Initiate automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+
+:::note
+Use this integration when you need to orchestrate processes that involve ITSM tasks or require seamless collaboration between ServiceNow and other business systems.
+:::
+
+## SAP integration
+
+Camunda’s SAP integration allows you to include SAP S/4HANA, ECC, and Business Technology Platform (BTP) functionality in your orchestrated processes.
+
+With this integration, you can:
+
+- **Execute core SAP functions**  
+  Call BAPIs and Remote Function Modules (RFCs) in SAP S/4HANA or ECC directly from Camunda.
+
+- **Connect to SAP BTP**  
+  Integrate with services and applications on the SAP Business Technology Platform to build comprehensive, cross-platform workflows.
+
+:::note
+This integration is ideal for organizations standardizing on SAP systems while extending automation to non-SAP applications and services.
+:::

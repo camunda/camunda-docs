@@ -270,12 +270,90 @@ module.exports = {
                 id: "components/camunda-integrations/sap/sap-integration",
               },
               items: [
-                "components/camunda-integrations/sap/odata-connector",
-                "components/camunda-integrations/sap/rfc-connector",
-                "components/camunda-integrations/sap/btp-plugin",
-                "components/camunda-integrations/sap/csap-cli",
+                "components/camunda-integrations/sap/prerequisites",
+                // {
+                //   "Feature documentation": [
+                //     "components/camunda-integrations/sap/feature/sap-demo-blueprint",
+                //     "components/camunda-integrations/sap/feature/manage-sap-records",
+                //     "components/camunda-integrations/sap/feature/connector-principal-propagation",
+                //     "components/camunda-integrations/sap/feature/sap-advanced-mesh-events",
+                //     "components/camunda-integrations/sap/feature/sap-task-center-mvp",
+                //   ],
+                // },
+                {
+                  "Integration modules": [
+                    "components/camunda-integrations/sap/odata-connector",
+                    "components/camunda-integrations/sap/rfc-connector",
+                    "components/camunda-integrations/sap/btp-plugin",
+                    "components/camunda-integrations/sap/csap-cli",
+                  ],
+                },
+                // {
+                //   "Cross-cutting concerns": [
+                //     "components/camunda-integrations/sap/cross-cutting/security",
+                //     "components/camunda-integrations/sap/cross-cutting/logging-monitoring",
+                //     "components/camunda-integrations/sap/cross-cutting/error-handling",
+                //     "components/camunda-integrations/sap/cross-cutting/compliance",
+                //   ],
+                // },
+                // {
+                //   "Examples & templates": [
+                //     "components/camunda-integrations/sap/examples/bpmn-templates",
+                //     "components/camunda-integrations/sap/examples/sample-config",
+                //     "components/camunda-integrations/sap/examples/test-data",
+                //   ],
+                // },
+                // {
+                //   "Troubleshooting & FAQs": [
+                //     "components/camunda-integrations/sap/troubleshooting/troubleshooting",
+                //     "components/camunda-integrations/sap/troubleshooting/pitfalls",
+                //     "components/camunda-integrations/sap/troubleshooting/limitations",
+                //   ],
+                // },
               ],
             },
+            "components/camunda-integrations/servicenow/servicenow-integration",
+            // NOTE: The above should be removed once items are added to the complete section below.
+            // {
+            //   type: "category",
+            //   label: "ServiceNow",
+            //   link: {
+            //     type: "doc",
+            //     id: "components/camunda-integrations/servicenow/servicenow-integration",
+            //   },
+            //   items: [
+            //     "components/camunda-integrations/servicenow/prerequisites",
+            // {
+            //   "Setup & configuration": [
+            //     "components/camunda-integrations/servicenow/setup/connector",
+            //     "components/camunda-integrations/servicenow/example-workflows",
+            //   ],
+            // },
+            // {
+            //     "Integration features": [
+            // "components/camunda-integrations/servicenow/features/manage-snow-records",
+            // "components/camunda-integrations/servicenow/features/start-process-servicenow",
+            //   ],
+            // },
+            // "components/camunda-integrations/servicenow/best-practices",
+            // {
+            //   "Troubleshooting & FAQs": [
+            //     "components/camunda-integrations/servicenow/troubleshooting/troubleshooting",
+            //     "components/camunda-integrations/servicenow/troubleshooting/pitfalls",
+            //     "components/camunda-integrations/servicenow/troubleshooting/limitations",
+            //     "components/camunda-integrations/servicenow/troubleshooting/faq",
+            //   ],
+            // },
+            // {
+            //   "Examples & blueprints": [
+            //     "components/camunda-integrations/servicenow/examples/example-blueprints",
+            //     "components/camunda-integrations/servicenow/examples/sample-use-cases",
+            //   ],
+            // },
+            // "components/camunda-integrations/servicenow/resources",
+            // "components/camunda-integrations/servicenow/glossary",
+            //   ],
+            // },
           ],
         },
         {
