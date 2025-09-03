@@ -1730,20 +1730,20 @@ module.exports = {
                 "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
               ],
             },
-            {
-              type: "category",
-              label: "Upgrade to Camunda 8.8",
-              link: {
-                type: "doc",
-                id: "self-managed/update/administrators/admin-upgrade-overview",
-              },
-              items: [
-                "self-managed/update/administrators/prepare-for-admin-upgrade",
-                "self-managed/update/administrators/run-admin-upgrade",
-              ],
-            },
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Upgrade to Camunda 8.8",
+      link: {
+        type: "doc",
+        id: "self-managed/update/administrators/admin-upgrade-overview",
+      },
+      items: [
+        "self-managed/update/administrators/prepare-for-admin-upgrade",
+        "self-managed/update/administrators/run-admin-upgrade",
       ],
     },
   ],
