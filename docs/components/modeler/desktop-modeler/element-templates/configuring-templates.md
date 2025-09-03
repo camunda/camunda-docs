@@ -7,7 +7,7 @@ description: "Learn about global and local templates, which are loaded by the mo
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-[Elemen templates](/components/modeler/element-templates/about-templates.md) are loaded by Desktop Modeler at application startup. Reloading it using `Cmd+R` or `Ctrl+R` reloads all templates. Templates are treated as global or local depending on their location in your file system.
+[Element templates](/components/modeler/element-templates/about-templates.md) are loaded by Desktop Modeler at application startup. Reloading it using `Cmd+R` or `Ctrl+R` reloads all templates. Templates are treated as global or local depending on their location in your file system.
 
 ## Global templates
 
