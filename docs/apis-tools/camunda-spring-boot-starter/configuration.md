@@ -868,7 +868,7 @@ camunda:
 
 ## Observing metrics
 
-The Camunda Spring Boot SDK provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
+The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
 
 - `camunda.job.invocations`: Number of invocations of job workers (tagging the job type)
 
