@@ -173,7 +173,6 @@ module.exports = {
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/save-as-element-templates",
             "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
@@ -197,6 +196,13 @@ module.exports = {
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process",
+              ],
+            },
+            {
+              "Element templates": [
+                "components/modeler/web-modeler/element-templates/manage-element-templates",
+                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                "components/modeler/web-modeler/element-templates/save-as-element-templates",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
