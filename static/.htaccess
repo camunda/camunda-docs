@@ -510,10 +510,7 @@ RewriteRule ^docs/next/reference/auto-updates/?$ /docs/next/components/saas/auto
 RewriteRule ^docs/next/components/concepts/data-retention/?$ /docs/next/components/saas/data-retention/ [R=301,L]
 RewriteRule ^docs/next/reference/camunda-help-center/?$ /docs/next/components/saas/camunda-help-center/ [R=301,L]
 RewriteRule ^docs/next/reference/status/?$ /docs/next/components/saas/status/ [R=301,L]
-
-
-
-
+RewriteRule ^docs/next/reference/saas-ip-addresses/?$ /docs/next/components/saas/saas-ip-addresses/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
