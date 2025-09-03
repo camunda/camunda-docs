@@ -320,6 +320,11 @@ RewriteRule ^docs/next/self-managed/concepts/access-control/apis/?$ /docs/next/s
 RewriteRule ^docs/next/self-managed/components/management-identity/install-identity/?$ /docs/next/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/next/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
+RewriteRule ^docs/next/self-managed/concepts/mapping-rules/?$ /docs/next/components/concepts/access-control/mapping-rules/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/next/components/identity/mapping-rules/manage-mapping-rules/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/next/components/identity/mapping-rules/mapping-rule-authorizations/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/next/components/identity/mapping-rules/assign-mapping-rules-to-tenants/ [R=301,L]
+
 # Microsoft AKS
 RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/next/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
 

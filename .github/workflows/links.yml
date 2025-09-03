@@ -23,7 +23,7 @@ jobs:
           key: cache-lychee-${{ env.DATEOFDAY }}
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.6.0
+        uses: lycheeverse/lychee-action@v2.6.1
         id: link-checker
         with:
           fail: false

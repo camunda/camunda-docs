@@ -22,5 +22,6 @@ To learn more about customizing your templates, see [defining templates](./defin
 
 Read more about using element templates in Web and Desktop Modeler:
 
-- [Using templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
+- [Using element templates in Web Modeler](/components/modeler/web-modeler/element-templates/using-templates.md)
+- [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
 - [Element templates with dependencies](./element-template-with-dependencies.md)
