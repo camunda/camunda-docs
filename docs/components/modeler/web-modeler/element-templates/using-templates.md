@@ -1,19 +1,23 @@
 ---
-id: using-templates
+id: using-templates-in-web-modeler
 title: Using templates
 description: "Learn how to apply, remove, update, and replace templates."
 ---
 
 ## Applying templates
 
-If a template matches a selected diagram element, the template catalog button is shown in the properties panel on the right side of the screen.
+If a template matches a selected diagram element, the blue template catalog button, **Select**, is shown in the properties panel on the right side of the screen.
 
 ![Template Chooser](./img/chooser.png)
 
-Clicking **Select** opens a modal menu, allowing you to browse and search available templates for the
+Clicking **Select** opens a popup menu, allowing you to browse and search available templates for the
 selected element.
 
-![Modal Menu](./img/modal.png)
+![Popup Menu](./img/modal.png)
+
+You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md).
+
+![Marketplace Menu](./img/marketplace.png)
 
 Applying a template stores it via the `modelerTemplate` property and the optional `modelerTemplateVersion` property
 on the selected element:
@@ -22,7 +26,7 @@ on the selected element:
 
 <bpmn:serviceTask id="MailTask"
                   zeebe:modelerTemplate="com.mycompany.MailTask"
-                  zeebe:modelerTemplateVesion="1"/>
+                  zeebe:modelerTemplateVersion="1"/>
 ```
 
 It also sets up custom fields on the diagram element and makes these available for inspection and editing.
@@ -32,8 +36,8 @@ Properties which were not configured in the element template using custom fields
 
 To remove an applied template from an element, either the _Unlink_ or _Remove_ function can be used:
 
-- **Remove**: Remove the element template from the `modelerTemplate` property and reset all properties of the respective element.
 - **Unlink**: Remove the element template from the `modelerTemplate` property but keep the properties which were set.
+- **Remove**: Remove the element template from the `modelerTemplate` property and reset all properties of the respective element.
 
 ![Unlink or Remove](./img/unlink-remove.png)
 
@@ -62,8 +66,18 @@ deprecated template, you can:
 
 ## Missing templates
 
-If a template is applied to an element but the respective template cannot be found on the system, the editing of the
-element is disabled. _Unlinking_ or _removing_ the template for the element or adding the element template config
-enables the editing again.
+If a template was applied to an element but cannot be found, editing of the element is disabled. To re-enable editing, either _unlink_ or _remove_ the template, or make it available by publishing a template with the same ID or creating a new one.
 
 ![Template not Found](./img/template-not-found.png)
+
+## Creating templates from existing elements
+
+If a diagram element supports being used as a template, a _Save as_ link will be displayed next to the header. Once clicked, you will be able to select a name and description for the template. This allows you to easily reuse pre-configured elements.
+
+![Template Save as](./img/save-as.png)
+
+The template can be further customized by [editing it](/components/connectors/manage-connector-templates.md).
+
+To use the template, you first need to [publish it to the project or organization](/components/connectors/manage-connector-templates.md#publish-a-connector-template).
+
+Learn more about [saving elements as templates](./save-as-element-templates.md).
