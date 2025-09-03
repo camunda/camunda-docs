@@ -12,11 +12,6 @@ The **Camunda Operate connector** allows you to interact with [Camunda Operate](
 To use the **Camunda Operate connector**, you need to have an active Camunda 8 cluster with Operate.
 This connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed.
 
-:::note
-Password authentication with Operate is currently not supported.
-If you are using Camunda 8 Self-Managed, you can only authenticate using [Identity](/self-managed/components/orchestration-cluster/core-settings/concepts/authentication.md).
-:::
-
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
 - [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
