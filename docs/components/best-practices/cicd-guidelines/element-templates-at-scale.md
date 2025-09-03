@@ -72,7 +72,7 @@ For example:
 ```bash
 curl -L 'http://localhost:8080/v2/deployments' \
 -H 'Accept: application/json' \
--F resources=@/pathToYourForm/user-signup.form
+-F resources=@/path/to/your/form/user-signup.form
 ```
 
 You will get a response containing the details of the deployed elements:
