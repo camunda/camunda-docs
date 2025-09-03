@@ -127,6 +127,7 @@ https://docs.camunda.io/docs/components/connectors/use-connectors/#result-expres
 https://docs.camunda.io/docs/components/connectors/use-connectors/#result-variable
 https://docs.camunda.io/docs/components/modeler/bpmn/none-events
 https://docs.camunda.io/docs/components/modeler/desktop-modeler/element-templates/using-templates/#replacing-templates
+https://docs.camunda.io/docs/components/modeler/feel/what-is-feel/
 https://docs.camunda.io/docs/components/modeler/web-modeler/camunda-marketplace
 https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/automation-anywhere/
 https://docs.camunda.io/docs/components/modeler/web-modeler/connectors/available-connectors/rest
