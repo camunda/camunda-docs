@@ -890,7 +890,7 @@ module.exports = {
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
-        "reference/status",
+        "components/saas/status",
         "reference/saas-ip-addresses",
       ],
     },
