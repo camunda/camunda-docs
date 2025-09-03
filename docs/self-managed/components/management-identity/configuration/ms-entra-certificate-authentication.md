@@ -1,7 +1,7 @@
 ---
 id: ms-entra-certificate-authentication
 title: "Microsoft Entra certificate-based authentication"
-sidebar_label: "MS Entra certificate authentication"
+sidebar_label: "Microsoft Entra certificate authentication"
 description: "Configure Microsoft Entra ID certificate-based authentication for secure service-to-service authentication using X.509 certificates."
 ---
 
@@ -12,77 +12,77 @@ Configure Microsoft Entra ID certificate-based authentication for Camunda 8 Self
 
 ## Overview
 
-Microsoft Entra certificate-based authentication enables secure service-to-service authentication using **OAuth 2.0 Client Credentials flow with JWT Client Assertion** (RFC 7523). Instead of using client secrets, your Camunda Identity service proves its identity to Microsoft Entra by signing JWT assertions with an X.509 certificate private key.
+Microsoft Entra certificate-based authentication enables secure service-to-service authentication using OAuth 2.0 client credentials flow with JWT client assertion (RFC 7523). Instead of using client secrets, the Camunda Identity service proves its identity to Microsoft Entra by signing JWT assertions with an X.509 certificate private key.
 
 ### Key benefits
 
-- **Enhanced security**: Certificate-based authentication eliminates shared secrets
-- **Automated authentication**: No user interaction required for service-to-service communication
-- **Microsoft compliance**: Follows Microsoft's recommended patterns for enterprise authentication
-- **Certificate rotation**: Support for certificate lifecycle management
+- **Enhanced security**: Certificate-based authentication eliminates shared secrets.
+- **Automated authentication**: No user interaction required for service-to-service communication.
+- **Microsoft compliance**: Follows Microsoft's recommended patterns for enterprise authentication.
+- **Certificate rotation**: Supports certificate lifecycle management.
 
 ### Architecture
 
-Camunda Identity acts as both an **OAuth2 Client** (to Microsoft Entra) and a **Resource Server** (for frontend/APIs):
+Camunda Identity acts as both an OAuth2 client (to Microsoft Entra) and a resource server (for frontend and APIs):
 
 ```
-Frontend → Identity (Resource Server) → MS Entra (Authorization Server)
+Frontend → Identity (Resource Server) → Microsoft Entra (Authorization Server)
    ↑                                            ↓
    └─── JWT Token ←── Identity (OAuth2 Client) ←┘
 ```
 
-#### Identity as OAuth2 Client (to MS Entra)
+#### Identity as OAuth2 client (to Microsoft Entra)
 
-- **Role**: Requests access tokens from Microsoft Entra using certificate-based authentication
-- **Flow**: OAuth2 Client Credentials with JWT Client Assertion (RFC 7523)
-- **Certificate use**: Signs JWT assertions to prove identity to MS Entra
-- **Token endpoint**: `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token`
-- **Authentication**: Creates JWT assertions signed with X.509 certificate private key
+- **Role**: Requests access tokens from Microsoft Entra using certificate-based authentication.
+- **Flow**: OAuth2 Client Credentials with JWT client assertion (RFC 7523).
+- **Certificate use**: Signs JWT assertions to prove identity to Microsoft Entra.
+- **Token endpoint**: `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token`.
+- **Authentication**: Creates JWT assertions signed with X.509 certificate private key.
 
-#### Identity as Resource Server (for Frontend/APIs)
+#### Identity as resource server (for Frontend and APIs)
 
-- **Role**: Validates and accepts JWT tokens for API access
-- **Protected endpoints**: `/v2/**` APIs (mapping rules, applications, users, etc.)
-- **Token validation**: Uses MS Entra access tokens as Spring Security `JwtAuthenticationToken`
-- **Authorization**: Extracts user authorities from JWT claims (`roles`, `app_roles`)
-- **Session management**: Stores authentication in HTTP sessions for thread safety
+- **Role**: Validates and accepts JWT tokens for API access.
+- **Protected endpoints**: `/v2/**` APIs (mapping rules, applications, users, etc.).
+- **Token validation**: Uses Microsoft Entra access tokens as Spring Security `JwtAuthenticationToken`.
+- **Authorization**: Extracts user authorities from JWT claims (`roles`, `app_roles`).
+- **Session management**: Stores authentication in HTTP sessions for thread safety.
 
 ## Prerequisites
 
 Before configuring certificate-based authentication, ensure you have:
 
-| Prerequisite                  | Description                                                    |
-|:------------------------------|:---------------------------------------------------------------|
-| **Microsoft Entra ID tenant** | Administrative access to your Entra ID tenant                  |
-| **X.509 certificate**         | Certificate with private key for JWT signing (PKCS#12 format)  |
-| **Application registration**  | Entra ID application configured for certificate authentication |
-| **Camunda 8.8+**              | Self-managed deployment with Identity service                  |
-| **OIDC configuration**        | Basic OIDC setup completed                                     |
+| Prerequisite              | Description                                                    |
+| :------------------------ | :------------------------------------------------------------- |
+| Microsoft Entra ID tenant | Administrative access to your Microsoft Entra ID tenant        |
+| X.509 certificate         | Certificate with private key for JWT signing (PKCS#12 format)  |
+| Application registration  | Entra ID application configured for certificate authentication |
+| Camunda 8.8+              | Self-managed deployment with Identity service                  |
+| OIDC configuration        | Basic OIDC setup completed                                     |
 
 ## Configuration steps
 
 ### Step 1: Configure Microsoft Entra ID application
 
-1. **Register application** in your Microsoft Entra ID tenant:
-   - Navigate to **Azure Portal** > **Microsoft Entra ID** > **App registrations**
-   - Click **New registration**
-   - Configure as **Web application** with appropriate redirect URIs
-2. **Upload certificate**:
-   - Navigate to **Certificates & secrets** > **Certificates**
-   - Click **Upload certificate**
-   - Upload your X.509 certificate (.cer file)
-   - Note the **thumbprint** (certificate identifier)
-3. **Configure API permissions**:
-   - Add required Microsoft Graph permissions
-   - Grant admin consent for organization
-4. **Note configuration values**:
-   - **Application (client) ID**
-   - **Directory (tenant) ID**
-   - **Certificate thumbprint**
+1. Register application in your Microsoft Entra ID tenant:
+   - Go to **Azure Portal** > **Microsoft Entra ID** > **App registrations**.
+   - Click **New registration**.
+   - Configure as **Web application** with appropriate redirect URIs.
+2. Upload certificate:
+   - Go to **Certificates & secrets** > **Certificates**.
+   - Click **Upload certificate**.
+   - Upload your X.509 certificate (.cer file).
+   - Note the **thumbprint** (certificate identifier).
+3. Configure API permissions:
+   - Add required Microsoft Graph permissions.
+   - Grant admin consent for organization.
+4. Note configuration values:
+   - Application (client) ID
+   - Directory (tenant) ID
+   - Certificate thumbprint
 
 ### Step 2: Prepare certificate files
 
-Ensure your certificate is in PKCS#12 format (.p12 or .pfx) with both certificate and private key:
+Ensure your certificate is in PKCS#12 format (`.p12` or `.pfx`) with both certificate and private key:
 
 ```bash
 # Convert PEM to PKCS#12 if needed
@@ -121,14 +121,14 @@ identity:
     CAMUNDA_IDENTITY_ISSUER_BACKEND_URL: "https://login.microsoftonline.com/ea952511-6a7f-40b8-af71-6c1be6f0dade/v2.0"
     CAMUNDA_IDENTITY_CLIENT_ID: "6fe432f2-7dc3-4e13-b1b4-4cc8480c80b7"
     CAMUNDA_IDENTITY_AUDIENCE: "6fe432f2-7dc3-4e13-b1b4-4cc8480c80b7"
-    
+
     # Certificate Authentication Configuration
     CAMUNDA_SECURITY_AUTHENTICATION_METHOD: OIDC
     CAMUNDA_SECURITY_CERT_AUTH_ENABLED: true
     CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GRANTTYPE: client_credentials
     CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPES: "2622078b-0164-41ee-8794-3ff8d9f8e402/.default"
     CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWK_SET_URI: "https://login.microsoftonline.com/ea952511-6a7f-40b8-af71-6c1be6f0dade/discovery/v2.0/keys"
-    
+
     # Certificate Path and Credentials
     CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_ASSERTION_KEYSTORE_PATH: "/certs/identity.p12"
     CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_ASSERTION_KEYSTORE_PASSWORD: "password"
@@ -138,7 +138,7 @@ identity:
     # Security Configuration
     CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED: false
     CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI: true
-    
+
     # Optional Features
     CAMUNDA_PERSISTENT_SESSIONS_ENABLED: true
     INITIAL_CLAIM_VALUE: "aaa3a5e0-1479-477b-af0e-4747374b9ed6"
@@ -153,7 +153,7 @@ identity:
 
 <TabItem value="helm">
 
-Configure certificate authentication using Helm values:
+Configure certificate authentication with Helm values:
 
 ```yaml
 global:
@@ -197,7 +197,7 @@ identity:
       value: "false"
     - name: SPRING_PROFILES_ACTIVE
       value: "oidc"
-  
+
   extraVolumes:
     - name: certificate-volume
       secret:
@@ -205,7 +205,7 @@ identity:
         items:
           - key: identity.p12
             path: identity.p12
-  
+
   extraVolumeMounts:
     - name: certificate-volume
       mountPath: /certs
@@ -281,14 +281,15 @@ export SPRING_PROFILES_ACTIVE=oidc
 
 ### Step 4: Verify configuration
 
-1. **Start Identity service** with the new configuration
-2. **Check logs** for successful certificate loading:
+1. Start the Identity service with the new configuration.
+2. Check logs for successful certificate loading:
 
    ```
    INFO  Loading certificate from keystore: /path/to/identity.p12
    INFO  Certificate loaded successfully with alias: identity
    ```
-3. **Test authentication** by accessing Identity endpoints:
+
+3. Test authentication by accessing Identity endpoints:
 
    ```bash
    curl -X GET "http://localhost:8080/identity/api/authentication/me"
@@ -298,26 +299,26 @@ export SPRING_PROFILES_ACTIVE=oidc
 
 The certificate-based authentication demonstrates Identity's dual role through this sequence:
 
-### Complete Request Flow
+### Complete request Flow
 
-1. **Request initiated**: Frontend makes API call to Identity service (e.g., `POST /v2/mapping-rules/search`)
-2. **Resource Server role**: Identity service determines authentication is required for protected endpoint
-3. **OAuth2 Client role begins**: Service detects no valid authentication exists
-4. **JWT assertion created**: Identity (as OAuth2 Client) creates signed JWT using certificate private key
-5. **Token request**: JWT assertion sent to Microsoft Entra token endpoint
-6. **Certificate validation**: Microsoft Entra validates JWT signature against uploaded certificate
-7. **Access token issued**: Microsoft Entra returns access token upon successful validation
-8. **Resource Server role resumes**: Identity decodes access token into `JwtAuthenticationToken`
-9. **Authorization check**: Service extracts authorities from JWT claims and validates permissions
-10. **Request authorized**: Original API request proceeds with proper authentication context
+1. **Request initiated**: Frontend makes API call to Identity service (e.g., `POST /v2/mapping-rules/search`).
+2. **Resource server role**: Identity service checks if authentication is required for protected endpoint.
+3. **OAuth2 client role begins**: Service detects no valid authentication exists.
+4. **JWT assertion created**: Identity (as OAuth2 client) creates signed JWT using certificate private key.
+5. **Token request**: JWT assertion sent to Microsoft Entra token endpoint.
+6. **Certificate validation**: Microsoft Entra validates JWT signature against uploaded certificate.
+7. **Access token issued**: Microsoft Entra returns access token upon successful validation.
+8. **Resource server role resumes**: Identity decodes access token into `JwtAuthenticationToken`.
+9. **Authorization check**: Service extracts authorities from JWT claims and validates permissions.
+10. **Request authorized**: Original API request proceeds with proper authentication context.
 
-### Dual Role Interaction
+### Dual role interaction
 
-- **Steps 1-2, 8-10**: Identity acts as **Resource Server** (validating and authorizing API requests)
-- **Steps 3-7**: Identity acts as **OAuth2 Client** (requesting tokens from MS Entra)
-- **Session storage**: Authentication cached for subsequent requests to avoid repeated OAuth2 flows
+- **Steps 1-2, 8-10**: Identity acts as the resource server (validating and authorizing API requests).
+- **Steps 3-7**: Identity acts as OAuth2 client (requesting tokens from Microsoft Entra).
+- **Session storage**: Authentication cached for subsequent requests to avoid repeated OAuth2 flows.
 
-### JWT Client Assertion structure
+### JWT client assertion structure
 
 The JWT assertion includes the following claims:
 
@@ -338,8 +339,8 @@ The JWT assertion includes the following claims:
 ### Required environment variables
 
 | Variable                                                                      | Description                          | Example               |
-|:------------------------------------------------------------------------------|:-------------------------------------|:----------------------|
-| `CAMUNDA_SECURITY_CERT_AUTH_ENABLED`                                         | **Enable certificate authentication** | `true`                |
+| :---------------------------------------------------------------------------- | :----------------------------------- | :-------------------- |
+| `CAMUNDA_SECURITY_CERT_AUTH_ENABLED`                                          | Enable certificate authentication    | `true`                |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_ASSERTION_KEYSTORE_PATH`         | Path to PKCS#12 certificate file     | `/certs/identity.p12` |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_ASSERTION_KEYSTORE_PASSWORD`     | Password for certificate keystore    | `your-password`       |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_ASSERTION_KEYSTORE_KEY_ALIAS`    | Alias of the certificate in keystore | `identity`            |
@@ -348,38 +349,38 @@ The JWT assertion includes the following claims:
 ### Microsoft Entra specific configuration
 
 | Variable                                         | Value                  | Description                                   |
-|:-------------------------------------------------|:-----------------------|:----------------------------------------------|
+| :----------------------------------------------- | :--------------------- | :-------------------------------------------- |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GRANTTYPE` | `client_credentials`   | OAuth2 grant type for service-to-service auth |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPES`    | `{client-id}/.default` | Microsoft Entra requires `.default` suffix    |
 | `CAMUNDA_IDENTITY_TYPE`                          | `MICROSOFT`            | Configures Microsoft-specific OIDC behavior   |
 
 ## Complementary authentication: mTLS support
 
-**✅ New in Camunda 8.8**: Generic mutual TLS (mTLS) authentication support alongside MS Entra certificate authentication
+**✅ New in Camunda 8.8**: Generic mutual TLS (mTLS) authentication support alongside Microsoft Entra certificate authentication.
 
 Camunda 8.8 introduces dual certificate authentication capabilities:
 
 ### Authentication methods comparison
 
-| Feature                    | MS Entra Certificate Auth                 | mTLS Authentication                        |
-|:---------------------------|:------------------------------------------|:-------------------------------------------|
-| **Use Case**               | OAuth2 service-to-service with MS Entra   | Direct certificate authentication (any CA) |
-| **Authentication Flow**    | OAuth2 Client Credentials + JWT assertion | Direct X.509 certificate validation        |
-| **Protocol**               | OIDC/OAuth2                               | mutual TLS (mTLS)                          |
-| **Certificate Validation** | Via Microsoft Entra ID                    | Via configured trusted CAs                 |
-| **Session Management**     | HTTP sessions + SecurityContext           | Spring Security authentication             |
-| **Supported Endpoints**    | `/v2/**` APIs (mapping rules, etc.)       | All API endpoints                          |
-| **Configuration Method**   | OIDC environment variables                | mTLS-specific environment variables        |
+| Feature                | Microsoft Entra Certificate Auth               | mTLS Authentication                        |
+| :--------------------- | :--------------------------------------------- | :----------------------------------------- |
+| Use Case               | OAuth2 service-to-service with Microsoft Entra | Direct certificate authentication (any CA) |
+| Authentication Flow    | OAuth2 client credentials with JWT assertion   | Direct X.509 certificate validation        |
+| Protocol               | OIDC/OAuth2                                    | mutual TLS (mTLS)                          |
+| Certificate Validation | Via Microsoft Entra ID                         | Via configured trusted CAs                 |
+| Session Management     | HTTP sessions with `SecurityContext`           | Spring Security authentication             |
+| Supported Endpoints    | `/v2/**` APIs (mapping rules, etc.)            | All API endpoints                          |
+| Configuration Method   | OIDC environment variables                     | mTLS-specific environment variables        |
 
-### mTLS Configuration
+### mTLS configuration
 
-Enable mTLS authentication alongside MS Entra support:
+Enable mTLS authentication alongside Microsoft Entra support:
 
 ```bash
 # Authentication Method (BASIC required for mTLS)
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=BASIC
 
-# SSL/TLS Server Configuration  
+# SSL/TLS Server Configuration
 SERVER_SSL_ENABLED=true
 SERVER_SSL_KEY_STORE=/path/to/server-keystore.p12
 SERVER_SSL_KEY_STORE_PASSWORD=changeit
@@ -407,14 +408,14 @@ CAMUNDA_SECURITY_CSRF_ENABLED=false
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   MS Entra      │    │    Camunda       │    │   mTLS Client   │
+│ Microsoft Entra │    │    Camunda       │    │   mTLS Client   │
 │   OAuth2 Flow   │    │    Identity      │    │   (Direct TLS)  │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
          │                       │                       │
     JWT Client                   │               X.509 Certificate
     Assertion                    │               Authentication
          │                       │                       │
-         └─── OAuth2 Token ──────┤───── mTLS Auth ──────┘
+         └─── OAuth2 Token ──────┤───── mTLS Auth ───────┘
                                  │
                             Spring Security
                           (Multiple Auth Methods)
@@ -423,12 +424,14 @@ CAMUNDA_SECURITY_CSRF_ENABLED=false
 ### Use cases for each method
 
 **MS Entra Certificate Authentication**:
+
 - Integration with Microsoft ecosystem
 - Enterprise identity management
 - OAuth2 compliance requirements
 - Service-to-service authentication with Entra ID
 
 **mTLS Authentication**:
+
 - Direct certificate authentication without external IdP
 - Microservices communication
 - API client authentication
@@ -439,63 +442,72 @@ CAMUNDA_SECURITY_CSRF_ENABLED=false
 
 ### Certificate management
 
-- **Store certificates securely** with appropriate file permissions (600 or 400)
-- **Use strong passwords** for certificate keystores
-- **Implement certificate rotation** before expiration
-- **Monitor certificate validity** with automated alerts
+- Store certificates securely with appropriate file permissions (600 or 400).
+- Use strong passwords for certificate keystores.
+- Implement certificate rotation before expiration.
+- Monitor certificate validity with automated alerts.
 
 ### Network security
 
-- **Use HTTPS** for all Identity service endpoints
-- **Restrict network access** to certificate files
-- **Configure firewall rules** for Microsoft Entra endpoints
+- Use HTTPS for all Identity service endpoints.
+- Restrict network access to certificate files.
+- Configure firewall rules for Microsoft Entra endpoints.
 
 ### Security implementation (Camunda 8.8)
 
-**Security Architecture**: MS Entra certificate authentication implements comprehensive security controls:
+Microsoft Entra certificate authentication implements comprehensive security controls:
 
 **Role Management**:
-- **Configuration-Based Assignment**: All role assignments require explicit configuration via environment variables
-- **Security Audit Logging**: Admin role assignments are logged with security warnings for monitoring
-- **Minimal Default Access**: Users receive only explicitly configured roles, no automatic privilege escalation
+
+- **Configuration-Based Assignment**: All role assignments require explicit configuration via environment variables.
+- **Security Audit Logging**: Admin role assignments are logged with security warnings for monitoring.
+- **Minimal Default Access**: Users receive only explicitly configured roles, no automatic privilege escalation.
 
 **Authentication Security**:
-- **JWT Token Validation**: Proper token validation with authority extraction from MS Entra JWT claims
-- **Session Management**: Thread-safe authentication storage using HTTP sessions and SecurityContext
-- **Certificate Validation**: JWT client assertions validated against certificates uploaded to MS Entra
+
+- **JWT Token Validation**: Proper token validation with authority extraction from Microsoft Entra JWT claims.
+- **Session Management**: Thread-safe authentication storage using HTTP sessions and `SecurityContext`.
+- **Certificate Validation**: JWT client assertions validated against certificates uploaded to Microsoft Entra.
 
 **Access Control**:
-- **Endpoint Protection**: `/v2/**` APIs protected with proper authentication requirements
-- **Authorization Checks**: Spring Security integration with role-based access control
-- **Thread Safety**: MODE_INHERITABLETHREADLOCAL ensures authentication context preservation across request processing
+
+- **Endpoint Protection**: `/v2/**` APIs protected with proper authentication requirements.
+- **Authorization Checks**: Spring Security integration with role-based access control.
+- **Thread Safety**: `MODE_INHERITABLETHREADLOCAL` ensures authentication context preservation across request processing.
 
 ## Troubleshooting
 
 ### Common issues
 
-**Issue**: Certificate not loading
+#### Certificate not loading
+
+**Issue**:
 
 ```
 ERROR Certificate keystore not found: /path/to/identity.p12
 ```
 
-**Solution**: Verify file path, permissions, and password
+**Solution**: Verify file path, permissions, and password.
 
-**Issue**: JWT signature verification fails
+#### JWT signature verification fails
+
+**Issue**:
 
 ```
 ERROR Microsoft Entra returned: invalid_client_assertion
 ```
 
-**Solution**: Ensure certificate uploaded to Entra matches local certificate
+**Solution**: Ensure certificate uploaded to Entra matches local certificate.
 
-**Issue**: Scope validation error
+#### Scope validation error
+
+**Issue**:
 
 ```
 ERROR Invalid scope: missing .default suffix
 ```
 
-**Solution**: Ensure scope ends with `/.default` for client_credentials flow
+**Solution**: Ensure scope ends with `/.default` for client_credentials flow.
 
 ### Debug logging
 
@@ -518,28 +530,29 @@ Monitor service health with these endpoints:
 
 When using Microsoft Entra certificate authentication, the following limitations apply:
 
-- **Certificate rotation**: Requires application restart to load new certificates
-- **Multiple certificates**: Only one certificate per Identity service instance
-- **Algorithm support**: Currently supports RS256 (RSA with SHA-256)
-- **Certificate validation**: No OCSP or CRL validation implemented
+- **Certificate rotation**: Requires application restart to load new certificates.
+- **Multiple certificates**: Only one certificate per Identity service instance.
+- **Algorithm support**: Currently supports RS256 (RSA with SHA-256).
+- **Certificate validation**: No OCSP or CRL validation implemented.
 
 ## Migration from client secrets
 
 To migrate from client secret to certificate authentication:
 
-1. **Generate and upload certificate** to Microsoft Entra
-2. **Update configuration** with certificate-specific environment variables
-3. **Remove client secret** configuration
-4. **Restart Identity service** with new configuration
-5. **Verify authentication** functionality
+1. Generate and upload certificate to Microsoft Entra.
+2. Update configuration with certificate-specific environment variables.
+3. Remove client secret configuration.
+4. Restart Identity service with new configuration.
+5. Verify authentication functionality.
 
 :::tip Production deployment
 For production deployments, consider implementing:
+
 - Certificate rotation automation
 - Monitoring and alerting for authentication failures
 - Backup authentication methods during certificate rotation
 - Load balancer health checks for authentication endpoints
-:::
+  :::
 
 ## Additional resources
 
