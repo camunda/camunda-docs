@@ -92,13 +92,25 @@ To learn more, see [Docker Compose developer quickstart](/self-managed/quickstar
 
 Release notes needed
 
-### Element template support for all tasks
+### Element template support for all tasks <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2606 -->
 
-connectors, modeler
+A new **Save as element template** feature is now available from the Web Modeler properties panel.
 
-Release notes needed
+With a task selected, you can:
+
+- Save a configured task (such as a service task, user task, send task, receive task, business rule task, script task, or a call activity) as a reusable element template.
+- Edit your saved templates using the element template editor. For example, modify input/output bindings, validation rules, categories/groups, and more.
+- Publish templates to your project or organization, making them available for colleagues to apply to new or existing tasks.
+
+To learn more, see [Save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md).
+
+Support for element template bindings is expanded as follows:
+
+- Element templates now support `zeebe:assignmentDefinition`, allowing authors to define task assignee(s) and/or candidate groups directly in templates.
+- Added support for `zeebe:priorityDefinition` to allow template authors to include a task priority value (integer 0–100 or FEEL expression).
+- Added support for `zeebe:taskSchedule` to allow you to template a task scheduling configuration for user tasks.
 
 ### Migrate taken sequence flows flowing to the joining gateway
 
