@@ -36,9 +36,9 @@ For more information, see the Kubernetes [object documentation](https://kubernet
 
 ## Manipulate manifests
 
-The Camunda Helm chart is highly flexible and can be adapted to different deployment scenarios. Still, there are cases where you need to adjust the rendered Kubernetes manifests directly - for example, when a feature isn’t yet supported in the chart templates.
+The Camunda Helm chart is highly customizable and can be deployed in different setups. However, in some cases, you may need to adjust the rendered Kubernetes manifests directly (for example, when a feature is not supported in the chart template).
 
-For those situations, [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post-rendering) provides a way to manipulate, configure, or validate manifests after they’ve been rendered but before Helm installs them. This is a convenient approach to add missing capabilities without waiting for a chart update, while also giving you the option to raise a feature request for long-term support.
+In those cases, [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post-rendering) lets you manipulate, configure, or validate rendered manifests before Helm installs them. Post rendering is a good way to quickly add missing features to the chart. You can also raise a feature request for your use case.
 
 ## Best practices
 
