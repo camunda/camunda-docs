@@ -297,7 +297,7 @@ rosa verify openshift-client
 
    ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
-   The [next section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
+   See the [VPN module setup](#vpn-module-setup) to configure an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html) for secure access to the private cluster.
 
    :::
 
@@ -487,7 +487,7 @@ This section applies if you have previously created a private cluster and want t
 2. Generate your client’s VPN configuration file. This file is compatible with [OpenVPN (ovpn)](https://openvpn.net/) format:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-single-region/procedure/gather-vpn-config.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/vpn/gather-vpn-config.sh
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
@@ -543,10 +543,11 @@ You can access the created OpenShift cluster using the following steps:
 6. Create a project for Camunda using `oc`:
 
    ```shell
-   oc new-project camunda
+   export CAMUNDA_NAMESPACE="camunda"
+   oc new-project "$CAMUNDA_NAMESPACE"
    ```
 
-   In the remainder of the guide, the `camunda` namespace part of the camunda project will be referenced to create the required resources in the Kubernetes cluster, such as secrets or one-time setup jobs.
+   In the remainder of the guide, the `CAMUNDA_NAMESPACE` variable represents the namespace used to create required resources in the Kubernetes cluster, such as secrets and one-time setup jobs.
 
 ## 3. Install Camunda 8 using the Helm chart
 

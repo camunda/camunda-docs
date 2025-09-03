@@ -28,6 +28,173 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 Review the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md).
 
+:::note
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](../../../installation-methods/index.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+:::
+
+### Settings to connect
+
+Operate supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch and OpenSearch
+
+Set the appropriate username/password combination in the configuration to use it.
+
+### Settings for Elasticsearch
+
+#### Settings to connect to a secured Elasticsearch instance
+
+To connect to a secured (https) Elasticsearch instance, you normally need to only set the URL protocol
+part to `https` instead of `http`. A secured Elasticsearch instance also needs `username` and `password`.
+The other SSL settings should only be used in case of connection problems; for example, in disabling
+host verification.
+
+:::note
+You may need to import the certificate into JVM runtime.
+:::
+
+Either set `host` and `port` (deprecated), or `url` (recommended).
+
+| Name                                              | Description                               | Default value         |
+| ------------------------------------------------- | ----------------------------------------- | --------------------- |
+| camunda.operate.elasticsearch.indexPrefix         | Prefix for index names                    | operate               |
+| camunda.operate.elasticsearch.clusterName         | Cluster name of Elasticsearch             | elasticsearch         |
+| camunda.operate.elasticsearch.url                 | URL of Elasticsearch REST API             | http://localhost:9200 |
+| camunda.operate.elasticsearch.username            | Username to access Elasticsearch REST API | -                     |
+| camunda.operate.elasticsearch.password            | Password to access Elasticsearch REST API | -                     |
+| camunda.operate.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch | -                     |
+| camunda.operate.elasticsearch.ssl.selfSigned      | Certificate was self-signed               | false                 |
+| camunda.operate.elasticsearch.ssl.verifyHostname  | Should the hostname be validated          | false                 |
+
+#### Settings for shards and replicas
+
+Operate creates the template with index settings named `operate-<version>_template` that Elasticsearch uses for all Operate indices. These settings can be changed.
+
+The following configuration parameters define the settings:
+
+| Name                                           | Description                                                  | Default value |
+| ---------------------------------------------- | ------------------------------------------------------------ | ------------- |
+| camunda.operate.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Operate indices   | 1             |
+| camunda.operate.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Operate indices | 0             |
+
+These values are applied only on first startup of Operate or during version update. After the Operate
+schema is created, settings may be adjusted directly in the Elasticsearch template, and the new settings are applied
+to indices created after adjustment.
+
+#### Settings for index templates priority
+
+Camunda 8 creates index templates that Elasticsearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the Elasticsearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Operate index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                    | Description                                           | Default value   |
+| --------------------------------------- | ----------------------------------------------------- | --------------- |
+| camunda.database.index.templatePriority | Priority for all index templates created by Camunda 8 | - (no priority) |
+
+:::note
+The priority should be different (strictly higher) than that set by the wildcard templates.
+:::
+
+#### A snippet from application.yml
+
+```yaml
+camunda.operate:
+  elasticsearch:
+    # Cluster name
+    clusterName: elasticsearch
+    # Url
+    url: https://localhost:9200
+    ssl:
+      selfSigned: true
+```
+
+#### Disable Elasticsearch deprecation logging
+
+When using an Elasticsearch version 8.16.0+ it is recommended to turn off deprecation logging for the Elasticsearch cluster.
+
+```shell
+curl -X PUT "http://localhost:9200/_cluster/settings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "persistent": {
+      "logger.org.elasticsearch.deprecation": "OFF"
+    }
+  }'
+```
+
+### Settings for OpenSearch
+
+#### Settings to connect to a secured OpenSearch instance
+
+To connect to a secured (https) OpenSearch instance, you normally need to only set the URL protocol
+part to `https` instead of `http`. A secured OpenSearch instance also needs `username` and `password`.
+
+To use AWS credentials instead of basic auth when connecting to Amazon OpenSearch Services, `awsEnabled` must be set.
+
+The other SSL settings should only be used in case of connection problems; for example, in disabling host verification.
+
+:::note
+You may need to import the certificate into JVM runtime.
+:::
+
+Either set `host` and `port` (deprecated), or `url` (recommended).
+
+| Name                                           | Description                            | Default value         |
+| ---------------------------------------------- | -------------------------------------- | --------------------- |
+| camunda.operate.opensearch.indexPrefix         | Prefix for index names                 | operate               |
+| camunda.operate.opensearch.clusterName         | Cluster name of OpenSearch             | opensearch            |
+| camunda.operate.opensearch.url                 | URL of OpenSearch REST API             | http://localhost:9200 |
+| camunda.operate.opensearch.username            | Username to access OpenSearch REST API | -                     |
+| camunda.operate.opensearch.password            | Password to access OpenSearch REST API | -                     |
+| camunda.operate.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch | -                     |
+| camunda.operate.opensearch.ssl.selfSigned      | Certificate was self-signed            | false                 |
+| camunda.operate.opensearch.ssl.verifyHostname  | Should the hostname be validated       | false                 |
+| camunda.operate.opensearch.awsEnabled          | Should AWS credentials be used         | false                 |
+
+#### Settings for shards and replicas
+
+Operate creates the template with index settings named `operate-<version>_template` that OpenSearch uses for all Operate indices. These settings can be changed.
+
+The following configuration parameters define the settings:
+
+| Name                                        | Description                                               | Default value |
+| ------------------------------------------- | --------------------------------------------------------- | ------------- |
+| camunda.operate.opensearch.numberOfShards   | How many shards OpenSearch uses for all Operate indices   | 1             |
+| camunda.operate.opensearch.numberOfReplicas | How many replicas OpenSearch uses for all Operate indices | 0             |
+
+These values are applied only on first startup of Operate or during version update. After the Operate
+schema is created, settings may be adjusted directly in the OpenSearch template, and the new settings are applied
+to indices created after adjustment.
+
+#### Settings for index templates priority
+
+Camunda 8 creates index templates that OpenSearch uses for the historical indices. The priority of these templates can be changed.
+
+This is useful when the OpenSearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Operate index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
+
+The following configuration parameter defines the setting:
+
+| Name                                    | Description                                           | Default value   |
+| --------------------------------------- | ----------------------------------------------------- | --------------- |
+| camunda.database.index.templatePriority | Priority for all index templates created by Camunda 8 | - (no priority) |
+
+:::note
+The priority should be different (strictly higher) than that set by the wildcard templates.
+:::
+
+#### A snippet from application.yml
+
+```yaml
+camunda.operate:
+  opensearch:
+    # Cluster name
+    clusterName: opensearch
+    # Url
+    url: https://localhost:9200
+    ssl:
+      selfSigned: true
+```
+
 ## Zeebe Broker connection
 
 Operate needs a connection to the Zeebe Broker to start the import and execute user operations.

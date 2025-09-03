@@ -7,9 +7,21 @@ description: "The Zeebe Gateway also exposes an HTTP endpoint for cluster manage
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Besides the [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [gRPC API](/apis-tools/zeebe-api/grpc.md) for process instance execution, the Zeebe Gateway also exposes an HTTP endpoint for cluster management operations. This API is not expected to be used by a typical user, but by a privileged user such as a cluster administrator. It is exposed via a different port and configured using configuration `management.server.port` (or via environment variable `MANAGEMENT_SERVER_PORT`). By default, this is set to `9600`.
+As well as the [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [gRPC API](/apis-tools/zeebe-api/grpc.md) for process instance execution, the Zeebe Gateway exposes an HTTP endpoint for cluster management operations.
 
-The API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints). For additional configurations such as security, refer to the Spring Boot documentation.
+## About this API
+
+This API is not expected to be used by a typical user, but by a privileged user such as a cluster administrator.
+
+It is exposed via a different port, and configured using configuration `management.server.port` (or via environment variable `MANAGEMENT_SERVER_PORT`). By default, this is set to `9600`.
+
+The API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints).
+
+:::info
+For additional configurations such as security, refer to the official [Spring Boot documentation](https://spring.io/guides).
+:::
+
+### Operations
 
 The following operations are currently available:
 
@@ -19,7 +31,7 @@ The following operations are currently available:
 
 ## Exporting API
 
-Exporting API is used:
+Use the Exporting API for the followings:
 
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
@@ -69,7 +81,9 @@ The Exporters API is used for [dual region deployment](/self-managed/installatio
 
 When **enabled**, records are exported to the exporter. The log is compacted only after the records are exported. When **disabled**, records are _not_ exported to the exporter, and the log will be compacted.
 
-The OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+:::info
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+:::
 
 :::note
 The `camunda‐zeebe‐gateway` service on port 9600 exposes the exporter endpoints.

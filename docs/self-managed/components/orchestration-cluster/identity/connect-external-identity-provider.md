@@ -71,7 +71,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
 </TabItem>
 <TabItem value="helm">
 ```
-global.security.authentication.method: oidc
+orchestration.security.authentication.method: oidc
 ```
 </TabItem>
 </Tabs>
@@ -107,13 +107,13 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
-global.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-global.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
+orchestration.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
+orchestration.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid"]
 ```
 </TabItem>
 </Tabs>
@@ -122,6 +122,12 @@ global.security.authentication.oidc.scope: ["openid"]
 
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
+:::info
+If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods)),
+you need to make the cluster accept the token passed by Web Modeler.
+To do so, include the Web Modeler UI's token audience in the configured list of audiences.
+:::
+
 #### Example IdP configuration
 
 The following examples use HELM values notation. You can also apply these using application.yaml or environment variables shown above.
@@ -129,24 +135,24 @@ The following examples use HELM values notation. You can also apply these using 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
-global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.usernameClaim: "email"
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+orchestration.security.authentication.oidc.usernameClaim: "email"
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
-global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.usernameClaim: "preferred_username"
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid", "profile", "email"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+orchestration.security.authentication.oidc.usernameClaim: "preferred_username"
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
 </TabItem>
 </Tabs>
@@ -184,7 +190,7 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS[0]=<YOUR_USERNAME>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+orchestration.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
 ```
 </TabItem>
 </Tabs>
@@ -217,7 +223,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
+orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 ```
 </TabItem>
 </Tabs>
