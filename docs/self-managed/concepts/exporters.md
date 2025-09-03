@@ -343,3 +343,42 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
         - This can lead to an increasing backlog of messages waiting to be expired. For finer control over the expiration checker's behavior, see the [message TTL checker configuration](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template#L1223).
 
         :::
+
+## Schema
+
+Previous Camunda versions sometimes required manual data migrations during upgrades, which introduced:
+- Operational downtime
+- Risk of human error
+- Backup and rollback procedures to safeguard the migration
+ 
+Starting with Camunda 8.8, exporters are designed to support updates without data migrations. 
+This improvement eliminates some complexity and downtime traditionally associated with version upgrades, 
+enabling faster and more confident release.
+
+### Schema Compatibility Guidelines (Elasticsearch/Opensearch)
+
+The indices which store data naturally undergo evolution as new features are added, to maintain a state of
+no data migrations, it is important to follow some guidelines regarding schema changes:
+
+#### Schema Changes to Avoid
+
+Index mappings must be mutated to avoid the following breaking schema changes that would require data migrations:
+
+- **Field Removal**: Removing existing fields from index data structures
+- **Data Type Changes**: Modifying the data type of existing columns (e.g., text to keyword)
+- **Required Field Addition**: Adding new mandatory fields without default values to existing record types
+- **Record Structure Changes**: Modifying the fundamental structure of exported records in incompatible ways
+
+#### Permitted Schema Evolution
+
+The following changes are acceptable and will not require data migrations:
+
+- **Additive Changes**: Adding new optional fields or columns with appropriate default values
+- **New Indices**: Creating new indices for new features
+- **Index Settings**: Adding new index settings that don't affect existing data.
+
+### Integration Testing
+
+The lack of data migrations between versions is enforced through the [SchemaUpdateIT](https://github.com/camunda/camunda/blob/main/schema-manager/src/test/java/io/camunda/search/schema/SchemaUpdateIT.java)
+test which runs for both Elasticsearch and Opensearch currently, any breaking changes added to the schema will
+fail.
