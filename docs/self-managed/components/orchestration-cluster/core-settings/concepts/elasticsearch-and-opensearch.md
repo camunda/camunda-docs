@@ -37,10 +37,10 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 | certificate-path | Path to SSL certificate                      | -                                              |
 | self-signed      | Certificate is self-signed                   | false                                          |
 | verify-hostname  | Validate hostname for SSL                    | false                                          |
-| awsEnabled          | Use AWS credentials (OpenSearch only)        | false                                          |
-| index-prefix         | Prefix for index names                       | operate / tasklist                             |
-| numberOfShards      | Number of shards for all indices             | 1                                              |
-| numberOfReplicas    | Number of replicas for all indices           | 0                                              |
+| awsEnabled       | Use AWS credentials (OpenSearch only)        | false                                          |
+| index-prefix     | Prefix for index names                       | operate / tasklist                             |
+| numberOfShards   | Number of shards for all indices             | 1                                              |
+| numberOfReplicas | Number of replicas for all indices           | 0                                              |
 
 :::note
 Shard and replica settings are applied on first startup or during version updates. After indices are created, they can be adjusted in the cluster template and applied to new indices.
