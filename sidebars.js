@@ -59,130 +59,272 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
-    "components/whats-new-in-88",
     {
       type: "category",
-      label: "Concepts",
+      label: "Introduction to Camunda 8",
       link: {
         type: "doc",
         id: "components/concepts/concepts-overview",
       },
       items: [
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/process-applications",
-        "components/concepts/element-templates",
         {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
+          type: "category",
+          label: "Processes",
+          link: {
+            type: "doc",
+            id: "components/concepts/processes",
+          },
+          items: [
+            "components/concepts/process-instance-creation",
+            "components/concepts/process-instance-modification",
+            "components/concepts/process-instance-migration",
+            "components/concepts/incidents",
+          ],
+        },
+        "components/concepts/process-applications",
+        "components/concepts/workflow-patterns",
+        {
+          type: "category",
+          label: "Identity and access management",
+          link: {
+            type: "doc",
+            id: "components/concepts/access-control/access-control-overview",
+          },
+          items: [
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/mapping-rules",
           ],
         },
         "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
+        "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/element-templates",
         {
-          "User task listeners": [
-            "components/concepts/user-task-listeners",
-            "components/concepts/listen-to-user-tasks",
+          Listeners: [
+            "components/concepts/execution-listeners",
+            {
+              type: "category",
+              label: "User task listeners",
+              link: {
+                type: "doc",
+                id: "components/concepts/user-task-listeners",
+              },
+              items: ["components/concepts/listen-to-user-tasks"],
+            },
           ],
         },
-        "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
-        "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
         "components/concepts/resource-deletion",
       ],
     },
     {
       type: "category",
-      label: "Agentic orchestration",
+      label: "Best Practices",
       link: {
         type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration",
+        id: "components/best-practices/best-practices-overview",
       },
       items: [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents",
-      ],
-    },
-    {
-      type: "category",
-      label: "Document handling",
-      link: {
-        type: "doc",
-        id: "components/document-handling/getting-started",
-      },
-      items: [
-        "components/document-handling/use-cases",
-        "components/document-handling/upload-document-to-bpmn-process",
-        "components/document-handling/display-and-download-document",
-        "components/document-handling/send-document-to-external-system-via-connector",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/modeler/web-modeler/idp",
-      },
-      items: [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
         {
-          type: "category",
-          label: "Document extraction",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-document-extraction",
-          },
-          items: [
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-            "components/modeler/web-modeler/idp/idp-structured-extraction",
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          Architecture: [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          Development: [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+          ],
+          Modeling: [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
+          ],
+          Operations: [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
         },
-        // "components/modeler/web-modeler/idp/idp-document-automation",
-        {
-          type: "category",
-          label: "Integrate IDP into your processes",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-integrate",
-          },
-          items: ["components/modeler/web-modeler/idp/idp-example"],
-        },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference",
       ],
     },
     {
       type: "category",
-      label: "Robotic Process Automation (RPA)",
+      label: "Features and integrations",
       link: {
         type: "doc",
-        id: "components/rpa/overview",
+        id: "components/features-integrations/features-integrations",
       },
       items: [
-        "components/rpa/getting-started",
-        "components/rpa/production",
         {
-          type: "link",
-          label: "RPA library specifications",
-          href: "https://camunda.github.io/rpa-python-libraries/",
+          type: "category",
+          label: "Agentic orchestration",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration",
+          },
+          items: [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp",
+          },
+          items: [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                "components/modeler/web-modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/modeler/web-modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-integrate",
+              },
+              items: ["components/modeler/web-modeler/idp/idp-example"],
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference",
+          ],
+        },
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+            {
+              type: "link",
+              label: "RPA library specifications",
+              href: "https://camunda.github.io/rpa-python-libraries/",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "components/document-handling/getting-started",
+          },
+          items: [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
+          ],
+        },
+        {
+          type: "category",
+          label: "Camunda integrations",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/sap/sap-integration",
+              },
+              items: [
+                "components/camunda-integrations/sap/odata-connector",
+                "components/camunda-integrations/sap/rfc-connector",
+                "components/camunda-integrations/sap/btp-plugin",
+                "components/camunda-integrations/sap/csap-cli",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Early access",
+          link: {
+            type: "doc",
+            id: "components/early-access/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Alpha features",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/alpha-features",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "BPMN Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  },
+                  items: [
+                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  ],
+                },
+                "components/early-access/alpha/feel-copilot/feel-copilot",
+                {
+                  type: "category",
+                  label: "MCP Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/mcp-client/mcp-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
     },
+
     {
       type: "category",
       label: "Modeler",
@@ -290,6 +432,20 @@ module.exports = {
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
+        require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
+        "components/modeler/data-handling",
+        require("./docs/components/modeler/reference/sidebar-schema"),
+      ],
+    },
+    {
+      type: "category",
+      label: "BPMN, DMN, and FEEL",
+      link: {
+        type: "doc",
+        id: "components/concepts/bpmn-dmn-feel", // create this doc
+      },
+      items: [
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
@@ -360,6 +516,7 @@ module.exports = {
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
+
     {
       type: "category",
       label: "Orchestration Cluster",
@@ -724,134 +881,24 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Best Practices",
-      link: {
-        type: "doc",
-        id: "components/best-practices/best-practices-overview",
-      },
-      items: [
-        {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
-            "components/best-practices/architecture/understanding-human-tasks-management",
-          ],
-          Development: [
-            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
-            "components/best-practices/development/service-integration-patterns",
-            "components/best-practices/development/writing-good-workers",
-            "components/best-practices/development/dealing-with-problems-and-exceptions",
-            "components/best-practices/development/handling-data-in-processes",
-            "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-          ],
-          Modeling: [
-            "components/best-practices/modeling/creating-readable-process-models",
-            "components/best-practices/modeling/naming-bpmn-elements",
-            "components/best-practices/modeling/naming-technically-relevant-ids",
-            "components/best-practices/modeling/modeling-beyond-the-happy-path",
-            "components/best-practices/modeling/modeling-with-situation-patterns",
-            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
-            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
-            "components/best-practices/modeling/choosing-the-resource-binding-type",
-          ],
-          Operations: [
-            "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",
-          ],
-          "CI/CD guidelines": [
-            "components/best-practices/cicd-guidelines/element-templates-at-scale",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda integrations",
-      link: {
-        type: "doc",
-        id: "components/camunda-integrations/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "SAP",
-          link: {
-            type: "doc",
-            id: "components/camunda-integrations/sap/sap-integration",
-          },
-          items: [
-            "components/camunda-integrations/sap/odata-connector",
-            "components/camunda-integrations/sap/rfc-connector",
-            "components/camunda-integrations/sap/btp-plugin",
-            "components/camunda-integrations/sap/csap-cli",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              ],
-            },
-            "components/early-access/alpha/feel-copilot/feel-copilot",
-            {
-              type: "category",
-              label: "MCP Client",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/mcp-client/mcp-client",
-              },
-              items: [
-                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                "components/early-access/alpha/mcp-client/mcp-client-connector",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Camunda 8 SaaS",
       link: {
         type: "doc",
         id: "components/saas/saas",
       },
       items: [
+        "components/concepts/clusters",
         "reference/regions",
-        "reference/camunda-help-center",
+        "components/concepts/encryption-at-rest",
+        "components/concepts/backups",
         "reference/auto-updates",
+        "components/concepts/data-retention",
+        "reference/camunda-help-center",
         "reference/status",
         "reference/saas-ip-addresses",
       ],
     },
+
     "reference/glossary",
   ],
   "APIs & Tools": [
@@ -1037,9 +1084,10 @@ module.exports = {
           label: "8.8",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/880/880-announcements",
+            id: "components/whats-new-in-88",
           },
           items: [
+            "components/whats-new-in-88",
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
           ],
