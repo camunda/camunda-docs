@@ -30,15 +30,15 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 
 | Name                | Description                                  | Default value                                  |
 | ------------------- | -------------------------------------------- | ---------------------------------------------- |
-| clusterName         | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
+| cluster-name         | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
 | url                 | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
 | username            | Username to access the cluster REST API      | -                                              |
 | password            | Password to access the cluster REST API      | -                                              |
-| ssl.certificatePath | Path to SSL certificate                      | -                                              |
-| ssl.selfSigned      | Certificate is self-signed                   | false                                          |
-| ssl.verifyHostname  | Validate hostname for SSL                    | false                                          |
+| certificate-path | Path to SSL certificate                      | -                                              |
+| self-signed      | Certificate is self-signed                   | false                                          |
+| verify-hostname  | Validate hostname for SSL                    | false                                          |
 | awsEnabled          | Use AWS credentials (OpenSearch only)        | false                                          |
-| indexPrefix         | Prefix for index names                       | operate / tasklist                             |
+| index-prefix         | Prefix for index names                       | operate / tasklist                             |
 | numberOfShards      | Number of shards for all indices             | 1                                              |
 | numberOfReplicas    | Number of replicas for all indices           | 0                                              |
 
