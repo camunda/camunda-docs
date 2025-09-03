@@ -5,10 +5,10 @@ sidebar_label: "APIs & tools"
 description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 
-import "./react-components/\_api-card.css";
+import "./react-components/\_apitools-card.css";
 import HeroImg from './img/hero-apis.png';
-import ApiGrid from './react-components/\_api-card';
-import { apiCards, clientCards } from './react-components/\_api-card-data';
+import ApiGrid from './react-components/\_apitools-card';
+import { apiCards, clientCards } from './react-components/\_apitools-card-data';
 import AskAi from './react-components/\_banner-ask-ai.md'
 
 <h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
