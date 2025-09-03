@@ -36,12 +36,14 @@ Perform an upgrade as follows.
 ### Helm chart
 
 To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md) for detailed instructions.
-
 The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
 
 :::note
 If you maintain custom deployment scripts, use the official Helm charts as a technical reference.
 :::
+
+</TabItem>
+<TabItem value='docker'>
 
 ### Docker Compose
 

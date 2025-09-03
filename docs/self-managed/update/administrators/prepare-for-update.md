@@ -83,14 +83,13 @@ The following table provides a high-level overview of the impact of these change
 </tr>
 <tr>
     <td>User task authorizations</td>
-    <td><span className="label-highlight orange">Medium</span></td>
     <td>Tasklist v1 API support [User task access restrictions](/components/tasklist/user-task-access-restrictions.md). After switching to the Tasklist v2 API, user task access restrictions do not apply.</td>
+    <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
     <td>Identity via Keycloak</td>
-    <td><span className="label-highlight red">High</span></td>
     <td>If managing Keycloak internally, verify required database schema updates. Confirm supported Keycloak versions in the [environment matrix](../../../reference/supported-environments.md).</td>
-    <td><span className="label-highlight yellow">Medium</span></td>
+    <td><span className="label-highlight orange">High</span></td>
 </tr>
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
