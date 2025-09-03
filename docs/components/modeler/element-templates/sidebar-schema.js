@@ -1,7 +1,6 @@
 module.exports = {
   "Element templates": [
     "components/modeler/element-templates/about-templates",
-    "components/modeler/element-templates/element-templates-with-dependencies",
     {
       type: "category",
       label: "Defining templates",
@@ -15,6 +14,7 @@ module.exports = {
         "components/modeler/element-templates/template-example",
       ],
     },
+    "components/modeler/element-templates/element-templates-with-dependencies",
     "components/modeler/element-templates/additional-resources",
   ],
 };
