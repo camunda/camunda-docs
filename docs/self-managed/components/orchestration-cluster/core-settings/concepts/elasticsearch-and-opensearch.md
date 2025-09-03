@@ -28,12 +28,12 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 
 ## Common configuration options
 
-| Name                | Description                                  | Default value                                  |
-| ------------------- | -------------------------------------------- | ---------------------------------------------- |
-| cluster-name         | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
-| url                 | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
-| username            | Username to access the cluster REST API      | -                                              |
-| password            | Password to access the cluster REST API      | -                                              |
+| Name             | Description                                  | Default value                                  |
+| ---------------- | -------------------------------------------- | ---------------------------------------------- |
+| cluster-name     | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
+| url              | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
+| username         | Username to access the cluster REST API      | -                                              |
+| password         | Password to access the cluster REST API      | -                                              |
 | certificate-path | Path to SSL certificate                      | -                                              |
 | self-signed      | Certificate is self-signed                   | false                                          |
 | verify-hostname  | Validate hostname for SSL                    | false                                          |
