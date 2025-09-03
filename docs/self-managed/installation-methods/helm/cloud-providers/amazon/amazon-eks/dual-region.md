@@ -370,7 +370,7 @@ This step defines a custom `StorageClass` that:
 
 #### Apply the StorageClass
 
-Run the following script to apply the new storage class and set it as default:
+Run the following script from the context of the `scripts` folder to apply the new [storage class](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/storage-class.yml) and set it as default:
 
 ```bash reference
 https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-configure.sh
