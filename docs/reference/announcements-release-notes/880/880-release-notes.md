@@ -22,7 +22,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 :::info 8.8 resources
 
 - See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
-- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- See [What's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::

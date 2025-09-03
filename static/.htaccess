@@ -501,6 +501,10 @@ RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-
 RewriteRule ^docs/8.5/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.5/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.6/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
+# Restructure Using Camunda section and content moves
+RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/next/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
+
+
 #---------------------------------------------------------------------------------
 #   8.7: content moves introduced prior to the release of version 8.7.
 #---------------------------------------------------------------------------------
