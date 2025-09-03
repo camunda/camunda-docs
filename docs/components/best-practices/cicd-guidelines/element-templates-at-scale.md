@@ -44,7 +44,7 @@ These guides show you how to configure them depending on the environment you are
 
 ### Job Workers
 
-As part of the pipeline, you may spin up a service that will connect to a Camunda cluster to perform specific tasks -- for example, you can use the [Spring Boot Camunda Starter](/apis-tools/spring-zeebe-sdk/getting-started.md) to start a custom connector.
+As part of the pipeline, you may spin up a service that will connect to a Camunda cluster to perform specific tasks. For example, you can use the [Spring Boot Camunda Starter](/apis-tools/spring-zeebe-sdk/getting-started.md) to start a custom connector.
 
 Recommended resources:
 
