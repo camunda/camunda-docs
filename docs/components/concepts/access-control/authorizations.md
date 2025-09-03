@@ -42,19 +42,16 @@ Authorization applies only to these orchestration components. It does not apply 
 ### Key components
 
 1. **Authorizations**
-
    - Assign permissions to Identities for specific resources.
    - Examples:
      - User `jonny` is authorized to create new users.
      - Group `marketing` is authorized to delete the group `sales`.
 
 2. **Owners**
-
    - Types include users, groups, roles, clients and mapping rules.
    - Authorizations can be assigned to any type of owner.
 
 3. **Permissions**
-
    - Define allowed interactions with resources.
    - Are specific to each resource type.
 
@@ -88,7 +85,7 @@ CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
-global.security.authorizations.enabled=true
+orchestration.security.authorizations.enabled=true
 ```
   </TabItem>
 </Tabs>
