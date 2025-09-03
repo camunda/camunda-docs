@@ -1,6 +1,6 @@
 ---
 id: overview
-title: "Overview"
+title: "Camunda integrations"
 description: "Learn more about Camunda integrations, such as Camunda's SAP integration."
 ---
 
