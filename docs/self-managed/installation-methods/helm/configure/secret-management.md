@@ -13,7 +13,7 @@ The Helm chart supports different patterns for secret management depending on yo
 
 ### New pattern (Camunda 8.8+, recommended)
 
-Starting with Camunda 8.8, the new pattern uses a structured `secret:` configuration under components with three options:
+Starting with Camunda 8.8, the new pattern uses a structured `secret:` configuration under components. This block supports three options:
 
 - `inlineSecret`: Plain-text value for non-production usage
 - `existingSecret`: Reference to an existing Kubernetes Secret name
@@ -32,33 +32,33 @@ component:
 
 ### Legacy pattern (Camunda 8.7 and below)
 
-For Camunda 8.7 and earlier versions, the legacy pattern uses direct `existingSecret` and `existingSecretKey` fields. These are deprecated in 8.8+ but still supported for backward compatibility.
+For Camunda 8.7 and earlier versions, the legacy pattern uses direct `existingSecret` and `existingSecretKey` fields. These fields are deprecated in 8.8+ but remain supported for backward compatibility.
 
 ### Bitnami subchart pattern
 
-Some components use Bitnami subcharts for database services (PostgreSQL), which follow their own authentication patterns that differ from the main Camunda secret structure. These use the standard Bitnami PostgreSQL Helm chart pattern with `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
+Some components use Bitnami subcharts for database services such as PostgreSQL. These subcharts follow their own authentication patterns, which differ from the main Camunda secret structure. They use the standard Bitnami PostgreSQL Helm chart pattern, which uses `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
 
 The following Bitnami subchart configurations are available:
 
-- **`identityPostgresql.auth`** - PostgreSQL database for Identity service
-- **`identityKeycloak.auth`** - Keycloak admin credentials
-- **`identityKeycloak.postgresql.auth`** - PostgreSQL database for Keycloak (when using Identity with Keycloak)
-- **`webModelerPostgresql.auth`** - PostgreSQL database for Web Modeler
+- `identityPostgresql.auth`: PostgreSQL database for Identity service
+- `identityKeycloak.auth`: Keycloak admin credentials
+- `identityKeycloak.postgresql.auth`: PostgreSQL database for Keycloak (when using Identity with Keycloak)
+- `webModelerPostgresql.auth`: PostgreSQL database for Web Modeler
 
 ## Internal secrets
 
-These secrets are used by Camunda applications and must be configured manually when using external secrets.
+Camunda applications use the following secrets. You must configure them manually when using external secrets.
 
 ### Secrets using the new pattern (Camunda 8.8+)
 
 | **Secret**                              | **Chart values key**                        | **Purpose**                                             |
 | --------------------------------------- | ------------------------------------------- | ------------------------------------------------------- |
-| **Enterprise License Key**              | `global.license.secret`                     | Camunda Enterprise License Key                          |
+| **Enterprise License Key**              | `global.license.secret`                     | Camunda Enterprise license key                          |
 | **Identity First User Password**        | `identity.firstUser.secret`                 | Default user password (`demo/demo`)                     |
 | **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`         | OAuth admin client secret for administrative operations |
 | **OAuth Client Secret (Console)**       | `global.identity.auth.console.secret`       | OAuth client secret for Console                         |
 | **OAuth Client Secret (Connectors)**    | `global.identity.auth.connectors.secret`    | OAuth client secret for connectors                      |
-| **OAuth Client Secret (Orchestration)** | `global.identity.auth.orchestration.secret` | OAuth client secret for Orchestration Cluster           |
+| **OAuth Client Secret (Orchestration)** | `global.identity.auth.orchestration.secret` | OAuth client secret for Orchestration cluster           |
 | **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`      | OAuth client secret for Optimize                        |
 
 ### Secrets using Bitnami subchart patterns (all versions)
@@ -70,14 +70,16 @@ These secrets are used by Camunda applications and must be configured manually w
 | **Keycloak PostgreSQL Password**    | `identityKeycloak.postgresql.auth.existingSecret` | Password for embedded PostgreSQL used by Keycloak |
 | **Web Modeler PostgreSQL Password** | `webModelerPostgresql.auth.existingSecret`        | Passwords for Web Modeler's embedded PostgreSQL   |
 
-**PostgreSQL Secret Keys**: For PostgreSQL subcharts, both `adminPasswordKey` and `userPasswordKey` are required:
+### PostgreSQL secret keys
+
+For PostgreSQL subcharts, the following keys are required:
 
 - `adminPasswordKey`: Password for the PostgreSQL administrator (typically used for administrative operations)
 - `userPasswordKey`: Password for the application-specific database user (used by the Camunda component)
 
 ## External secrets
 
-These secrets are necessary when integrating Camunda with third-party services.
+These secrets are required when integrating Camunda with third-party services.
 
 ### Secrets using the new pattern (Camunda 8.8+)
 
@@ -95,8 +97,8 @@ These secrets are necessary when integrating Camunda with third-party services.
 
 Secrets can be configured in different ways depending on your Camunda version:
 
-- **Camunda 8.8+**: Use the new structured `secret:` pattern with `inlineSecret` for non-production or external Kubernetes Secrets for production
-- **Camunda 8.7 and below**: Use the legacy pattern with direct `existingSecret` fields
+- **Camunda 8.8+**: Use the structured `secret:` pattern with `inlineSecret` for non-production, or external Kubernetes Secrets for production.
+- **Camunda 8.7 and below**: Use the legacy pattern with direct `existingSecret` fields.
 
 ### Method 1: Inline secrets (Camunda 8.8+, non-production only)
 
@@ -116,85 +118,87 @@ identity:
 
 ### Method 2: External Kubernetes secrets (recommended for all versions)
 
-For production environments, create a Kubernetes Secret and reference it from your `values.yaml`. This method works for both Camunda 8.8+ (with new pattern) and 8.7 and below (with legacy pattern).
+For production environments, create a Kubernetes Secret and reference it from your `values.yaml`. This method works for both Camunda 8.8+ (new pattern) and 8.7 and below (legacy pattern).
 
 #### Step 1: Create the secret
 
-Create a secret using `kubectl` or a YAML manifest:
+Create a secret with `kubectl` or YAML:
 
-```sh
-kubectl create secret generic console-secret \
-  --from-literal=client-secret=camundapassword \
-  --namespace camunda
-```
+- `kubectl`:
 
-Or using YAML:
+  ```sh
+  kubectl create secret generic console-secret \
+    --from-literal=client-secret=camundapassword \
+    --namespace camunda
+  ```
 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: console-secret
-  namespace: camunda
-type: Opaque
-stringData:
-  client-secret: "camundapassword"
-```
+- YAML:
+
+  ```yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: console-secret
+    namespace: camunda
+  type: Opaque
+  stringData:
+    client-secret: "camundapassword"
+  ```
 
 #### Step 2: Reference in `values.yaml`
 
-**For components using the new pattern:**
+- For components using the new pattern:
 
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        secret:
-          existingSecret: "console-secret"
-          existingSecretKey: "client-secret"
-```
+  ```yaml
+  global:
+    identity:
+      auth:
+        console:
+          secret:
+            existingSecret: "console-secret"
+            existingSecretKey: "client-secret"
+  ```
 
-**For Bitnami subchart components:**
+- For Bitnami subchart components:
 
-```yaml
-# PostgreSQL database for Identity service
-identityPostgresql:
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: identity-postgresql-admin-password
-      userPasswordKey: identity-postgresql-user-password
-
-# Keycloak admin credentials
-identityKeycloak:
-  auth:
-    existingSecret: camunda-credentials
-    passwordSecretKey: identity-keycloak-admin-password
-
-# PostgreSQL database for Keycloak (when using Identity with Keycloak)
-identityKeycloak:
-  postgresql:
+  ```yaml
+  # PostgreSQL database for Identity service
+  identityPostgresql:
     auth:
       existingSecret: camunda-credentials
       secretKeys:
-        adminPasswordKey: identity-keycloak-postgresql-admin-password
-        userPasswordKey: identity-keycloak-postgresql-user-password
+        adminPasswordKey: identity-postgresql-admin-password
+        userPasswordKey: identity-postgresql-user-password
 
-# PostgreSQL database for Web Modeler
-webModelerPostgresql:
-  auth:
-    existingSecret: camunda-credentials
-    secretKeys:
-      adminPasswordKey: web-modeler-postgresql-admin-password
-      userPasswordKey: web-modeler-postgresql-user-password
-```
+  # Keycloak admin credentials
+  identityKeycloak:
+    auth:
+      existingSecret: camunda-credentials
+      passwordSecretKey: identity-keycloak-admin-password
 
-For additional details on Identity secrets during installation, visit the [installation guide](/self-managed/installation-methods/helm/install.md#create-identity-secrets).
+  # PostgreSQL database for Keycloak (when using Identity with Keycloak)
+  identityKeycloak:
+    postgresql:
+      auth:
+        existingSecret: camunda-credentials
+        secretKeys:
+          adminPasswordKey: identity-keycloak-postgresql-admin-password
+          userPasswordKey: identity-keycloak-postgresql-user-password
 
-## Document Store secrets
+  # PostgreSQL database for Web Modeler
+  webModelerPostgresql:
+    auth:
+      existingSecret: camunda-credentials
+      secretKeys:
+        adminPasswordKey: web-modeler-postgresql-admin-password
+        userPasswordKey: web-modeler-postgresql-user-password
+  ```
 
-Document Store secrets are configured using direct `existingSecret` references with multiple key specifications for different credential components.
+For additional details on Identity secrets during installation, see [Helm chart installation](/self-managed/installation-methods/helm/install.md#create-identity-secrets).
+
+## Document store secrets
+
+Document store secrets are configured using direct `existingSecret` references, with multiple key specifications for different credential components.
 
 | **Secret**                         | **Chart values key**                                                                                                                                                                | **Purpose**                                                                                                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -203,64 +207,64 @@ Document Store secrets are configured using direct `existingSecret` references w
 
 ## Migration from legacy pattern (8.7 → 8.8+)
 
-If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the new structured `secret:` pattern available in Camunda 8.8+ for better consistency and future compatibility. The legacy fields are deprecated in 8.8+ but will remain functional during the transition period.
+If you are upgrading from Camunda 8.7 or earlier and using the legacy secret management pattern, migrate to the structured `secret:` pattern available in Camunda 8.8+. This ensures consistency and prepares for future compatibility. The legacy fields are deprecated in 8.8+ but remain functional during the transition period.
 
-### Scenario 1: Migrating an external secret reference
+### Migrate an external secret reference
 
-This scenario applies when your legacy configuration references a Kubernetes secret by name.
+This applies if your legacy configuration references a Kubernetes secret by name.
 
-**Legacy configuration:**
+- Legacy configuration:
 
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        existingSecret:
-          name: console-secret
-        existingSecretKey: client-secret
-```
-
-**New configuration:**
-
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        secret:
-          existingSecret: console-secret
+  ```yaml
+  global:
+    identity:
+      auth:
+        console:
+          existingSecret:
+            name: console-secret
           existingSecretKey: client-secret
-```
+  ```
 
-### Scenario 2: Migrating a plaintext secret
+- New configuration:
 
-This scenario applies when your legacy configuration provided a plaintext string directly in `existingSecret`.
+  ```yaml
+  global:
+    identity:
+      auth:
+        console:
+          secret:
+            existingSecret: console-secret
+            existingSecretKey: client-secret
+  ```
 
-**Legacy configuration:**
+### Migrate a plaintext secret
 
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        existingSecret: "my-plaintext-secret"
-```
+This applies if your legacy configuration provided a plaintext string directly in `existingSecret`.
 
-**New configuration:**
+- Legacy configuration:
 
-```yaml
-global:
-  identity:
-    auth:
-      console:
-        secret:
-          inlineSecret: "my-plaintext-secret"
-```
+  ```yaml
+  global:
+    identity:
+      auth:
+        console:
+          existingSecret: "my-plaintext-secret"
+  ```
+
+- New configuration:
+
+  ```yaml
+  global:
+    identity:
+      auth:
+        console:
+          secret:
+            inlineSecret: "my-plaintext-secret"
+  ```
 
 ## TLS certificates
 
-For TLS-enabled services, you'll need to configure certificate secrets.
+Configure certificate secrets for TLS-enabled services.
 
 ### Ingress TLS
 
@@ -290,24 +294,26 @@ global:
 
 ### Console TLS (legacy pattern)
 
-```yaml
-console:
-  tls:
-    enabled: true
-    existingSecret: console-tls-secret
-    certKeyFilename: tls.key
-```
+- Configure TLS for Console with the legacy pattern:
 
-Create TLS secrets using the standard Kubernetes TLS secret type:
+  ```yaml
+  console:
+    tls:
+      enabled: true
+      existingSecret: console-tls-secret
+      certKeyFilename: tls.key
+  ```
 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: camunda-platform
-  namespace: camunda
-type: kubernetes.io/tls
-data:
-  tls.crt: <base64 encoded cert>
-  tls.key: <base64 encoded key>
-```
+- Create TLS secrets using the standard Kubernetes TLS secret type:
+
+  ```yaml
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: camunda-platform
+    namespace: camunda
+  type: kubernetes.io/tls
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  ```
