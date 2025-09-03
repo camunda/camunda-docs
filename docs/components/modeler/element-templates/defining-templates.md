@@ -70,6 +70,8 @@ Example:
 
 Connector templates are a specific type of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
+Alternatively, you can use any text editor on your local machine, but we recommend using one that supports IntelliSenese and can load **JSON schemas** -- for example, [VSCode](https://code.visualstudio.com/Docs/languages/json).
+
 ## JSON schema compatibility
 
 The application uses the `$schema` property to ensure compatibility for a given element template. You can find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
