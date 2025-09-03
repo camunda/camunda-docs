@@ -23,6 +23,7 @@ Cluster data is stored in Elasticsearch indices, each governed by a schema versi
 > The version in the index name is specific to the schema and may differ from the cluster software version. See [data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md).
 
 For more information about the specific indices used by the orchestration cluster, refer to the [Index Diagrams](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices.md).
+
 ## Data migration
 
 From 8.8 onwards, no schema migrations are required when upgrading the orchestration cluster. For older versions, follow the migration instructions below.
