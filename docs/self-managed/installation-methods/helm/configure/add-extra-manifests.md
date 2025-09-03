@@ -2,7 +2,7 @@
 id: add-extra-manifests
 sidebar_label: Custom manifests
 title: Helm chart custom Kubernetes manifests injection
-description: "Learn how to add extra manifests to Helm deployments by injecting manifests in the values.yaml."
+description: "Learn how to add extra Kubernetes manifests to Helm deployments by defining them in the values.yaml file."
 ---
 
 ## Overview
