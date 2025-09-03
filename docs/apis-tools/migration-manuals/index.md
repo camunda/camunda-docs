@@ -39,14 +39,14 @@ See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announ
 
 Camunda 8.8 API and SDK changes and statuses are summarized as follows:
 
-| Component/Use            | 8.8 status     | Migrate to                 | Migrate by          |
-| :----------------------- | :------------- | :------------------------- | :------------------ |
-| V1 component APIs        | **Deprecated** | Orchestration Cluster API  | Before Camunda 8.10 |
-| ZeebeClient              | **Deprecated** | Camunda Java Client        | Before Camunda 8.10 |
-| Spring Zeebe SDK         | **Deprecated** | Camunda Spring SDK         | Before Camunda 8.10 |
-| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT) | Before Camunda 8.10 |
-| Job-based user tasks     | **Deprecated** | Camunda user tasks         | Before Camunda 8.10 |
-| Tasklist GraphQL API     | **Removed**    | Orchestration Cluster API  | 8.8                 |
+| Component/Use            | 8.8 status     | Migrate to                  | Migrate by          |
+| :----------------------- | :------------- | :-------------------------- | :------------------ |
+| V1 component APIs        | **Deprecated** | Orchestration Cluster API   | Before Camunda 8.10 |
+| ZeebeClient              | **Deprecated** | Camunda Java Client         | Before Camunda 8.10 |
+| Spring Zeebe SDK         | **Deprecated** | Spring Boot Camunda Starter | Before Camunda 8.10 |
+| Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT)  | Before Camunda 8.10 |
+| Job-based user tasks     | **Deprecated** | Camunda user tasks          | Before Camunda 8.10 |
+| Tasklist GraphQL API     | **Removed**    | Orchestration Cluster API   | 8.8                 |
 
 :::info
 For more information, see the blog post [Upcoming API Changes in Camunda 8: A Unified and Streamlined Experience](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -58,9 +58,14 @@ The [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orche
 
 - This API is more powerful and easier to use, aligning with the new architecture introduced in Camunda 8.8.
 - The V1 APIs remain available until version 8.10 to allow you time to migrate to the new Orchestration Cluster API.
+- The Orchestration Cluster API becomes the new default instead of the Zeebe gRPC API (which is still [retained for high performance use cases](https://camunda.com/blog/2025/07/retaining-grpc-support/)).
 
 :::info
-For more information on upgrading and migrating, see [migrate to the Orchestration Cluster API](migrate-to-camunda-api.md).
+For more information on upgrading and migrating, see the following upgrade guides:
+
+- [Migrate from V1 APIs to the Orchestration Cluster API](migrate-to-camunda-api.md)
+- [Migrate from gRPC API to the Orchestration Cluster API](migrate-from-grpc-to-orchestration-cluster-api.md)
+
 :::
 
 ### Camunda Java Client
@@ -74,19 +79,19 @@ The [Camunda Java Client](/apis-tools/java-client/getting-started.md) is now the
 For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
 :::
 
-### Camunda Spring SDK
+### Spring Boot Camunda Starter
 
-The [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+The [Spring Boot Camunda Starter](/apis-tools/spring-zeebe-sdk/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
-The transition from Zeebe Spring SDK to Camunda Spring SDK indicates significant architectural changes in Camunda 8.8.
+The transition from Zeebe Spring SDK to Spring Boot Camunda Starter indicates significant architectural changes in Camunda 8.8.
 
-- The Camunda Spring SDK is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
-- The Camunda Spring SDK continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
+- The Spring Boot Camunda Starter is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
+- The Spring Boot Camunda Starter continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
 - There is a grace period during which the old Zeebe client is still available until version 8.10. This allows you to adapt to the new SDK and make the required changes incrementally.
 
-<!-- :::info
-For more information, see the update guide.
-::: -->
+:::info
+For more information on upgrading and migrating, see [migrate to Spring Boot Camunda Starter](migrate-to-camunda-java-client.md).
+:::
 
 ### Camunda Process Test (CPT)
 
