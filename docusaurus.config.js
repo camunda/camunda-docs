@@ -371,10 +371,6 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "Camunda Help Center",
-              to: "docs/reference/camunda-help-center",
-            },
-            {
               label: "Try free",
               href: "https://signup.camunda.com/accounts?utm_source=unsupported.docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
@@ -422,10 +418,6 @@ module.exports = {
             {
               label: "Blog",
               href: "https://camunda.com/blog/tag/camunda-platform-8/",
-            },
-            {
-              label: "Release policy",
-              to: "docs/reference/announcements-release-notes/release-policy",
             },
           ],
         },

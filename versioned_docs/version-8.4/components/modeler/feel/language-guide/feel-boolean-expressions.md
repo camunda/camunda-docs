@@ -222,7 +222,7 @@ duration("PT4H") instance of days and time duration
 
 ### Unary-tests/in
 
-Evaluates a [unary-tests](/components/modeler/feel/language-guide/feel-unary-tests) with the given value. The keyword `in` separates the value from the unary-tests.
+Evaluates a [unary-tests](/components/modeler/feel/language-guide/feel-unary-tests.md) with the given value. The keyword `in` separates the value from the unary-tests.
 
 ```feel
 5 in (3..7)

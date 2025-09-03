@@ -42,7 +42,7 @@ Therefore, the tweet approval process needs two variables:
 | `tweet`       | String        | "@Camunda rocks" |
 | `approved`    | Boolean       | true             |
 
-In Camunda 8, [values are stored as JSON](/components/concepts/variables/#variable-values).
+In Camunda 8, [values are stored as JSON](/components/concepts/variables.md#variable-values).
 
 :::caution Camunda 7 handles variables slightly differently
 This best practice describes variable handling within Camunda 8. Process variables are handled slightly differently with Camunda 7. Consult the [Camunda 7 documentation](https:/.camunda.org/manual/latest/user-guide/process-engine/variables/) for details. In essence, variable values are not handled as JSON and thus there are [different values](https:/.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values) supported.
@@ -65,7 +65,7 @@ completeTask(
 
 In Camunda, you do _not_ declare process variables in the process model. This allows for a lot of flexibility. Refer to recommendations below on how to overcome possible disadvantages of this approach.
 
-Consult the [docs about variables](/components/concepts/variables/#variable-values) to learn more.
+Consult the [docs about variables](/components/concepts/variables.md#variable-values) to learn more.
 
 Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-object.svg" width="60" />) as process variables. We recommend using them occasionally _for documentation_, but you need to [avoid excessive usage of data objects](../../modeling/creating-readable-process-models#avoiding-excessive-usage-of-data-objects).
 
@@ -73,7 +73,7 @@ Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-
 
 Do not excessively use process variables. As a rule of thumb, store _as few variables as possible_ within Camunda.
 
-Please note the [technical limitations of variables sizes](/components/concepts/variables/#variable-size-limitation).
+Please note the [technical limitations of variables sizes](/components/concepts/variables.md#variable-size-limitation).
 
 ### Storing references only
 

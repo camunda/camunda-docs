@@ -53,7 +53,7 @@ While assigning users to groups is advised, it's not the only option. You could 
 
 If you have human tasks in your process, you must make up your mind on how exactly you want to let your users work on their tasks and interact with the workflow engine. You have basically three options:
 
-- [Camunda Tasklist](/components/tasklist/introduction-to-tasklist/): The Tasklist application shipped with Camunda. This works out-of-the-box and has a low development effort. However, it is limited in terms of customizability and how much you can influence the user experience.
+- [Camunda Tasklist](/components/tasklist/introduction-to-tasklist.md): The Tasklist application shipped with Camunda. This works out-of-the-box and has a low development effort. However, it is limited in terms of customizability and how much you can influence the user experience.
 
 - Custom task list application: You can develop a custom task list and adapt this to your needs without compromises. Human tasks are shown inside your custom application, following your style guide and usability concept. You will use the [Camunda Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in the background. This is very flexible, but requires additional development work.
 

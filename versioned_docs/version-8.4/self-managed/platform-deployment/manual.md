@@ -11,8 +11,8 @@ This page guides you through the manual installation of the Camunda 8 on a local
 - Operating system:
   - Linux
   - Windows/macOS (development only, not supported for production)
-- Java Virtual Machine, see [supported environments](/reference/supported-environments/) for version details
-- Elasticsearch, see [supported environments](/reference/supported-environments/) for version details
+- Java Virtual Machine, see [supported environments](/reference/supported-environments.md) for version details
+- Elasticsearch, see [supported environments](/reference/supported-environments.md) for version details
 
 Make sure to configure the web applications to use a port that is available. By default the web applications like Operate and Tasklist listen both to port 8080.
 
