@@ -87,6 +87,8 @@ As the Oracle driver is not provided by default in each of the Camunda 8 distrib
 1. Download the appropriate Oracle driver: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
 
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
 <Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
 [
 {label: 'Environment variables', value: 'envVars' },
@@ -99,6 +101,7 @@ As the Oracle driver is not provided by default in each of the Camunda 8 distrib
 SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default Oracle driver
 ```
 </TabItem>
 <TabItem value="valuesYaml">
@@ -110,6 +113,9 @@ webModeler:
       url: "jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
       user: "[DB_USER]"
       password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default Oracle driver
+        value: "[YOUR_CUSTOM_DRIVER]"
     extraVolumeMounts:
       - name: oracle-driver
         mountPath: /driver-lib
@@ -140,6 +146,7 @@ spring:
     url: jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]
     username: [DB_USER]
     password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default Oracle driver
 ```
 </TabItem>
 </Tabs>
@@ -147,6 +154,8 @@ spring:
 ### MSSQL
 
 The MSSQL driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
 
 <Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
 [
@@ -160,6 +169,7 @@ The MSSQL driver is provided by default, so no additional steps are necessary to
 SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
 SPRING_DATASOURCE_USERNAME="[DB_USER]"
 SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
 ```
 </TabItem>
 <TabItem value="valuesYaml">
@@ -171,6 +181,9 @@ webModeler:
       url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
       user: "[DB_USER]"
       password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
+        value: "[YOUR_CUSTOM_DRIVER]"
 ```
 </TabItem>
 <TabItem value="applicationYaml">
@@ -180,6 +193,7 @@ spring:
     url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
     username: [DB_USER]
     password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MSSQL driver
 ```
 </TabItem>
 </Tabs>
