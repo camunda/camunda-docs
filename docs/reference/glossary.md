@@ -318,6 +318,13 @@ While a process represents a defined sequence of distinct steps representing you
 
 - [Processes](/components/concepts/processes.md)
 
+### Process instance tag
+
+An optional, immutable, lightweight label attached when a process instance is created (v2 API, SDK, 8.8+). Tags provide fast, structured metadata for routing, correlation, prioritization, and analytics segmentation without inspecting large variable payloads.
+
+- Creation & examples: [Process instance creation – Tags](/components/concepts/process-instance-creation.md#tags-88)
+- Tags on jobs: [Job workers](/components/concepts/job-workers.md#tags-88)
+
 ### Process instance variable
 
 A process instance variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
