@@ -188,6 +188,59 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
+## Tags (8.8+)
+
+Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the v2 API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
+
+### Definition
+
+- A tag is a case-sensitive string.
+- Format (regex): `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$`
+    - Must start with a letter (A-Z or a-z).
+    - Remaining characters may be alphanumeric, underscore (`_`), hyphen (`-`), colon (`:`), or dot (`.`).
+- Length: 1–100 characters.
+- Maximum 10 unique tags per process instance (duplicates are ignored).
+- Order is not guaranteed; treat the set as unordered.
+
+### Semantics
+
+- Tags are included in process instance search responses and on activated job payloads.
+- Tags are immutable after creation for now (cannot be added, changed, or removed later).
+- Search filtering uses AND semantics: an instance must contain all requested tags (it may contain additional tags). Partial or wildcard matching is not supported for now.
+- Tags are exported with the process instance and with job entities starting in 8.8 by the default exporters.
+- Tags are not shown in web applications for now (e.g., Operate, Tasklist) in 8.8 — they are API/SDK-only metadata.
+
+### Use cases
+
+- Lightweight correlation (e.g., `businessKey:1234`).
+- Routing or selective processing (`priority:high`, `region:emea`).
+- Downstream external lookups (e.g. `crmId:123`).
+
+Do not place sensitive or personal data (PII) in tags: they are broadly propagated with jobs and exports!
+
+### Examples
+
+Create with tags:
+
+```
+curl -L 'http://localhost:8080/v2/process-instances' \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-d '{
+  "processDefinitionId": "order-process",
+  "processDefinitionVersion": 3,
+  "tags": ["priority:high","business_key:1234","region:emea"],
+  "variables": { "orderId": "1234" }
+}'
+```
+
+### Best practices
+
+- Prefer a `key:value` or `key` style to keep tags self-describing.
+- Keep values short; use process variables for larger or mutable data.
+- Use consistent prefixes for organizational scoping (e.g., `dept:`, `env:`).
+- Use variables (not tags) for mutable or large data.
+
 ## Next steps
 
 - [About Modeler](/components/modeler/about-modeler.md)
