@@ -25,10 +25,15 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 4. An initial user with username/password: `demo` / `demo`
 5. An `admin` role with full permissions, applied to the `demo` user
 
-To modify this [initial configuration](./configuration.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+To modify this [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 :::note
 In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
+:::
+
+:::note
+As a Spring Boot application, the Orchestration Cluster supports standard
+[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 :::
 
 ### Configure initial users
@@ -114,7 +119,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 The orchestration cluster provides a number of [built-in roles](/components/concepts/access-control/authorizations.md#default-roles) with predefined permissions for easier setup.
 
-To assign users, clients, groups, or [mapping rules](/self-managed/concepts/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
+To assign users, clients, groups, or [mapping rules](/components/concepts/access-control/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
 <Tabs>
   <TabItem value="helm" label="Helm properties">

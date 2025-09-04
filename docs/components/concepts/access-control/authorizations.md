@@ -1,5 +1,5 @@
 ---
-title: Authorizations in Orchestration Cluster
+title: Orchestration Cluster authorization
 description: Learn how to control access to components and APIs in Camunda 8's Orchestration Cluster using the built-in authorization system.
 keywords:
   [
@@ -32,32 +32,32 @@ Authorization applies only to these orchestration components. It does not apply 
 
 ### Authorization model
 
-- Based on the **principle of least privilege**
-- Can be enabled or disabled in both SaaS and Self-Managed environments
-- When disabled: all users and clients have full access
-- When enabled: no access is granted by default; explicit authorization is required
-- No concept of deny rules—absence of permission means no access
-- Enforced across both web components and API requests
+- Based on the **principle of least privilege**.
+- Can be enabled or disabled in both SaaS and Self-Managed environments.
+- When disabled: all users and clients have full access.
+- When enabled: no access is granted by default; explicit authorization is required.
+- No concept of deny rules—absence of permission means no access.
+- Enforced across both web components and API requests.
 
 ### Key components
 
 1. **Authorizations**
-   - Assign permissions to Identities for specific resources
+   - Assign permissions to Identities for specific resources.
    - Examples:
-     - User `jonny` is authorized to create new users
-     - Group `marketing` is authorized to delete the group `sales`
+     - User `jonny` is authorized to create new users.
+     - Group `marketing` is authorized to delete the group `sales`.
 
 2. **Owners**
-   - Types include users, groups, roles, and mapping rules
-   - Authorizations can be assigned to any type of owner
+   - Types include users, groups, roles, clients and mapping rules.
+   - Authorizations can be assigned to any type of owner.
 
 3. **Permissions**
-   - Define allowed interactions with resources
-   - Are specific to each resource type
+   - Define allowed interactions with resources.
+   - Are specific to each resource type.
 
 4. **Resources**
-   - Entities users interact with
-   - Each resource has its own set of permissions
+   - Entities users interact with.
+   - Each resource has its own set of permissions.
 
 ## Configuration
 
@@ -85,7 +85,7 @@ CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
-global.security.authorizations.enabled=true
+orchestration.security.authorizations.enabled=true
 ```
   </TabItem>
 </Tabs>
@@ -113,6 +113,36 @@ The following table lists all resources that support authorization in Camunda 8 
 | **System**                           | `*`                                    | All system operations                | `READ`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tenant**                           | `*`, `tenantA`                         | All tenants / Tenant ID              | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **User**                             | `*`, `felix.mueller`                   | All users / Username                 | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+## Security considerations
+
+Certain permissions grant powerful capabilities and should be assigned with caution. It is critical to ensure that only trusted users and clients are granted these permissions to maintain the security and integrity of your system.
+
+### Resource CREATE permission (deployment)
+
+Granting `CREATE` permission on the **Resource** is equivalent to allowing remote code execution. When a user deploys a BPMN model, it can contain executable code in script tasks, service tasks, or listeners that will be run by the process engine.
+
+Only grant this permission to users and clients who are fully trusted to deploy and execute code in your environment.
+
+### User CREATE/UPDATE permissions
+
+The `CREATE` and `UPDATE` permissions for the **User** resource are highly sensitive. When a user's password is set or changed via Identity, there are no security controls enforced, such as password complexity policies.
+
+This permission should only be assigned to trusted administrators.
+
+### System access permissions
+
+Permissions that control system access are particularly security-sensitive.
+This includes CRUD operations to the following resources:
+
+- **System**
+- **User**
+- **Group**
+- **Role**
+- **Mapping rule**
+- **Tenant**
+
+These permissions should be strictly limited to trusted system administrators who are responsible for managing user access control.
 
 ## Default roles
 

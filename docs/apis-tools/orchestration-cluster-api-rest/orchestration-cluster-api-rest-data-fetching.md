@@ -20,7 +20,7 @@ The following examples support search via POST endpoints, each with its own set 
 - Users (`POST /v2/users/search`)
 - Batch operations (`POST /v2/batch-operations/search`)
 
-Refer to the [interactive Orchestration Cluster REST API Explorer][camunda-api-explorer] for the full attribute lists.
+Refer to the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) for the full attribute lists.
 
 ## Supported operations
 

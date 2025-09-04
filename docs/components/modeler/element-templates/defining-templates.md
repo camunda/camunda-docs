@@ -38,6 +38,8 @@ Templates are defined in template descriptor files as a JSON array:
 ]
 ```
 
+If your template descriptor defines a single template, you can simply create a JSON object. Note that Web Modeler does not support loading JSON arrays.
+
 As seen in the code snippet, a template consists of a number of important components:
 
 - `$schema : String`: URI pointing towards the [JSON schema](https://json-schema.org/) which defines the structure of the element template `.json` file. Element template schemas are maintained in the [element templates JSON schema](https://github.com/camunda/element-templates-json-schema) repository. Following the [JSON schema](https://json-schema.org/) standard, you may use them for validation or to get assistance (e.g., auto-completion) when working with them in your favorite IDE.
@@ -68,9 +70,11 @@ Example:
 
 Connector templates are a specific type of element template. You can edit them with visual preview and edit support like formatting, code completion, and error highlighting in [Web Modeler](/components/connectors/manage-connector-templates.md).
 
+Alternatively, you can use any text editor on your local machine, but we recommend using one that supports IntelliSense and can load **JSON schemas**. For example, [VSCode](https://code.visualstudio.com/Docs/languages/json).
+
 ## JSON schema compatibility
 
-The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
+The application uses the `$schema` property to ensure compatibility for a given element template. You can find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
 The tooling ignores element templates defining a higher `$schema` version and logs a warning message.
 
@@ -81,6 +85,11 @@ For example, given the following `$schema` definition, the application takes `0.
 ```
 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+
+:::important
+
+Web Modeler only supports the latest version of the JSON schema hosted at `https://unpkg.com`. The element template `$schema` value will always be automatically updated to `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`.
+:::
 
 ## Template versioning
 

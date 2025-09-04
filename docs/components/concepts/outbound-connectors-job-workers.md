@@ -1,6 +1,7 @@
 ---
 id: outbound-connectors-job-workers
 title: Outbound connectors vs. job workers
+sidebar_label: Connectors vs job workers
 description: Integrating with external systems can be done with a connector or a job worker.
 ---
 

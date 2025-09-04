@@ -385,15 +385,11 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "Camunda Help Center",
-              to: "docs/reference/camunda-help-center",
-            },
-            {
               label: "Try free",
               href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
-              label: "Contact",
+              label: "Support and feedback",
               to: "docs/reference/contact",
             },
           ],
