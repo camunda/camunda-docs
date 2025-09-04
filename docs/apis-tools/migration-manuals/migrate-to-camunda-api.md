@@ -57,6 +57,7 @@ To successfully migrate to the V2 Orchestration Cluster API, perform the followi
 <TabItem value='query-endpoints'>
 
 - Unified search request structure.
+
   - Attributes `filter`, `page`, and `sort` on root level.
   - Endpoint-specific filter attributes in the filter object, not at the root level.
   - Pagination information in the `page` object. For example, the attributes `from`, `limit`, `before`, and `after`.
@@ -1069,7 +1070,7 @@ Response structure changes as outlined in [general changes][].
 
 [setting variables]: /apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
-[multi-tenancy]: /self-managed/concepts/multi-tenancy.md
+[multi-tenancy]: /components/concepts/multi-tenancy.md
 
 ### Process definition
 

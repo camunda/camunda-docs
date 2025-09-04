@@ -172,7 +172,7 @@ The history cleanup due date is migrated if the C7 instance has a removal time.
 
 - C7's `null` tenant is migrated to C8's `<default>` tenant.
 - All other `tenantId`s will be migrated as-is.
-- Read more about [multi-tenancy](/self-managed/concepts/multi-tenancy.md#the-tenant-identifier) in Camunda 8.
+- Read more about [multi-tenancy](/components/concepts/multi-tenancy.md#the-tenant-identifier) in Camunda 8.
 
 ### DMN
 

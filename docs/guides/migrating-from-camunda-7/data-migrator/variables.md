@@ -99,6 +99,7 @@ These variables are migrated as-is, but may require special handling in FEEL exp
 The following transformers are automatically applied during migration:
 
 1. `BuiltInVariableTransformer` (Order: 0)
+
    - Handles all basic variable type transformations.
    - Converts JSON objects to Map structures.
    - Handles Spin JSON/XML variables.

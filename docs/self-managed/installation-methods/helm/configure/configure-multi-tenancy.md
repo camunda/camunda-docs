@@ -67,7 +67,7 @@ Once the Zeebe application is assigned to the tenant, you should be able to:
 - Successfully retry jobs in Operate.
 - Retrieve jobs from the correct tenant context.
 
-For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/components/management-identity/managing-tenants.md#assign-applications-to-a-tenant-1).
+For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/components/management-identity/manage-tenants.md#assign-applications-to-a-tenant-1).
 
 ### Tenant requirement for job actions
 
