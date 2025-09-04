@@ -93,22 +93,23 @@ Replace `io.camunda` with the logger name you want to adjust.
 
 ## Sensitive data
 
-Camunda 8 will avoid logging out sensitive data (e.g. PII, unencrypted business relevant data, etc.), but you may wish to enable this at times for debugging purposes. By default, we set all loggers that could log sensitive information (variable values, ...) to INFO level. To enable debug logging for these loggers, it is not enough to enable logging via `ZEEBE_LOG_LEVEL`, but rather you have to explicitly set the logging level
-to something lower than INFO for those loggers.
+Camunda 8 avoids logging sensitive data, such as personally identifiable information (PII) or unencrypted business-relevant data. However, you may sometimes want to enable this logging for debugging purposes.
+
+By default, all loggers that could log sensitive information (for example, variable values) are set to **INFO** level. To enable debug logging for these loggers, it is **not sufficient** to set `ZEEBE_LOG_LEVEL` alone. You must explicitly configure the logging level to a level lower than INFO for the relevant loggers.
 
 :::warning
-If you enable the following loggers, sensitive data may be exposed in your logs.
+Enabling the following loggers may expose sensitive data in your logs. Use with caution.
 :::
 
 ### RDBMS
 
-For exported Records:
+For exported records:
 
 ```properties
 logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
 ```
 
-For executed SQLs + Parameters:
+For executed SQLs and parameters:
 
 ```properties
 logging.level.io.camunda.db.rdbms.sql=DEBUG
