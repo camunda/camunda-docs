@@ -111,11 +111,11 @@ For more details about the applications version included in the Helm chart, revi
 
 #### Versioning changes in Elasticsearch
 
-As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/versioned_docs/version-8.4/reference/supported-environments.md).
+As of the 8.4 release, Camunda is compatible with Elasticsearch 8.9+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
 
 #### Support for Amazon OpenSearch
 
-As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/versioned_docs/version-8.4/self-managed/about-self-managed.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Zeebe, Operate, and Tasklist are now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/about-self-managed.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 
 :::info
 The Helm charts are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand. Refer to the [Helm deployment documentation](/self-managed/installation-methods/helm/install.md) for further details.
