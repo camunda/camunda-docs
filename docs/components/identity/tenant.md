@@ -9,10 +9,9 @@ description: "Manage tenants within the Orchestration Cluster Identity to suppor
 Multi-tenancy is currently only supported for Camunda 8 Self-Managed. It is not yet available on SaaS.
 :::
 
-Multi-tenancy in Camunda 8 allows a single installation to serve multiple distinct tenants, providing logical data isolation for different teams, departments, or clients. To learn more about multi-tenancy, refer to the [multi-tenancy concepts](../concepts/multi-tenancy.md).
+A tenant is a logical separator for data within a Camunda 8 installation. This allows multiple teams, departments, or clients to share a single environment without sharing data. To learn more, refer to the [multi-tenancy concepts](../concepts/multi-tenancy.md).
 
-Tenants for the Orchestration Cluster are managed directly in [Identity](identity-introduction.md).
-By default, tenancy is enabled, but tenancy checks are disabled. All data is mapped to the `<default>` tenant. This allows administrators to manage tenants and their assignments without enforcing tenancy checks prematurely.
+Tenants for the Orchestration Cluster are managed directly in [Identity](identity-introduction.md). By default, tenancy is enabled, but tenancy checks are disabled, and all data is mapped to the `<default>` tenant. This allows administrators to manage tenants and their assignments without enforcing tenancy checks prematurely.
 
 To enable multi-tenancy checks, refer to the [Self-Managed configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
 

@@ -5,7 +5,7 @@ sidebar_label: "Tenants for Optimize"
 description: "Manage tenants within Identity to support the logical separation of your infrastructure."
 ---
 
-Multi-tenancy in Camunda 8 allows a single installation to serve multiple distinct tenants, providing logical data isolation for different teams, departments, or clients. To learn more about the core concepts, refer to the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
+Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants — such as departments, teams, or external clients — while maintaining per-tenant isolation of data and processes in a shared environment. To learn more, refer to the [multi-tenancy concepts](/components/concepts/multi-tenancy.md).
 
 Tenants managed within Management Identity apply **only to Optimize**, allowing you to isolate data access for reports and dashboards.
 

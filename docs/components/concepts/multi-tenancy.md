@@ -9,7 +9,7 @@ description: "Multi-tenancy allows you to re-use your Camunda installation."
 Multi-tenancy is currently only supported for Camunda 8 Self-Managed. It is not yet available on SaaS.
 :::
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](../identity/tenant.md) within a single installation. Multi-tenancy extends these capabilities to cater to the needs of different departments, teams, or even external clients, all within a shared Camunda environment.
+Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants — such as departments, teams, or external clients — while maintaining per-tenant isolation of data and processes in a shared environment.
 
 The following sections take a closer look at how multi-tenancy works in Camunda 8.
 

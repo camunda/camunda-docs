@@ -6,7 +6,7 @@ description: "Learn about the supported multi-tenancy scenarios."
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
+Multi-tenancy is the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Optimize has been enhanced to support multi-tenancy for Self-Managed setups. More information about
