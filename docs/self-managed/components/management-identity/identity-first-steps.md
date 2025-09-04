@@ -51,7 +51,7 @@ Once you are able to log in to Identity, you can start managing authentication, 
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)
-- [Manage tenants](managing-tenants.md)
+- [Manage tenants](manage-tenants.md)
 
 :::info
 Learn more about how to [configure Identity](configuration/identity-configuration-overview.md) and [authentication](authentication.md).

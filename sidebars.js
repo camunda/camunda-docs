@@ -70,6 +70,7 @@ module.exports = {
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
+        "components/concepts/multi-tenancy",
         "components/concepts/data-retention",
         "components/concepts/encryption-at-rest",
         "components/concepts/outbound-connectors-job-workers",
@@ -408,6 +409,7 @@ module.exports = {
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/tenant",
             {
               "Mapping rules": [
                 "components/identity/mapping-rules/manage-mapping-rules",
@@ -1371,7 +1373,6 @@ module.exports = {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
         "self-managed/concepts/exporters",
-        "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",
@@ -1381,7 +1382,6 @@ module.exports = {
           label: "Configure flow control",
           id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         },
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1549,7 +1549,6 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
-                "self-managed/components/orchestration-cluster/identity/manage-tenants",
               ],
             },
           ],
@@ -1658,8 +1657,8 @@ module.exports = {
                     "self-managed/components/management-identity/access-management/manage-permissions",
                   ],
                 },
-                "self-managed/components/management-identity/managing-tenants",
                 "self-managed/components/management-identity/mapping-rules",
+                "self-managed/components/management-identity/manage-tenants",
               ],
             },
             {

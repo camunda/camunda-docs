@@ -6,11 +6,11 @@ description: "Learn about the supported multi-tenancy scenarios."
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
-Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/managing-tenants.md) or
+Multi-tenancy in the context of Camunda 8 refers to the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
 clients within a single installation.
 
 From version 8.3 onwards, Optimize has been enhanced to support multi-tenancy for Self-Managed setups. More information about
-the feature can be found in [the multi-tenancy documentation](/self-managed/concepts/multi-tenancy.md).
+the feature can be found in the [multi-tenancy concepts](/components/concepts/multi-tenancy.md).
 
 Optimize imports the relevant tenant information from Zeebe records and retrieves each user's tenant authorizations from Identity, so that the logged-in users only have access to the data on tenants that they are authorized to see in Identity. Because tenant authorizations are cached in Optimize to improve performance, there could be a delay until any changes made to tenant authorizations in Identity are visible in Optimize.
 
@@ -43,6 +43,4 @@ If required, the tenant authorization cache in Optimize can also be configured v
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
-
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/installation-methods/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.

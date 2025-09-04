@@ -17,7 +17,7 @@ Identity is an integrated component of the [Orchestration Cluster](../orchestrat
   - **OIDC:** Integration with an OpenID Connect-compatible provider (e.g., Keycloak, Microsoft Entra ID, Okta).
 - **Fine-grained authorizations:** [Authorizations](authorization.md) provide granular control over resources like process instances, user tasks, and decisions, ensuring a robust security model.
 - **Tenant management:** Multi-tenancy is managed directly within an orchestration cluster, allowing for clear separation of resources.
-  - Multi-tenancy is available only on [Self-Managed deployment](/self-managed/components/orchestration-cluster/identity/manage-tenants.md).
+  - Multi-tenancy is available only on [Self-Managed deployment](tenant.md)
 
 ## Access management
 
@@ -27,7 +27,7 @@ Depending on your setup, Identity allows you to manage the following entities to
 - **[Groups](group.md):** Collections of users that simplify access management by allowing permissions to be granted to teams collectively.
 - **[Roles](role.md):** Sets of permissions that define what actions can be performed on specific resources. Roles can be assigned to users or groups.
 - **[Authorizations](authorization.md):** The specific permissions that connect users, groups, or roles with resources and actions (e.g `READ`, `UPDATE`, `DELETE`).
-- **[Tenants](/self-managed/components/orchestration-cluster/identity/manage-tenants.md):** A mechanism for isolating data within a single Camunda 8 cluster, which is useful for multi-tenancy applications. (Self-Managed only).
+- **[Tenants](tenant.md):** A mechanism for isolating data within a single Camunda 8 cluster, which is useful for multi-tenancy applications. (Self-Managed only).
 
 ## Identity on Self-Managed
 

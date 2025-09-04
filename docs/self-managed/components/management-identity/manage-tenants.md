@@ -1,24 +1,22 @@
 ---
-id: managing-tenants
-title: "Manage tenants"
-sidebar_label: "Tenants"
+id: manage-tenants
+title: "Tenants for Optimize"
+sidebar_label: "Tenants for Optimize"
 description: "Manage tenants within Identity to support the logical separation of your infrastructure."
 ---
 
-Manage and use tenants to isolate data access for your custom applications and users.
+Multi-tenancy in Camunda 8 allows a single installation to serve multiple distinct tenants, providing logical data isolation for different teams, departments, or clients. To learn more about the core concepts, refer to the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
-## About using multi-tenancy with Identity
+Tenants managed within Management Identity apply **only to Optimize**, allowing you to isolate data access for reports and dashboards.
 
-Camunda 8 multi-tenancy refers to the ability to serve multiple distinct tenants or clients within a single installation.
+If you are using multi-tenancy for an Orchestration Cluster, you can also enable and configure tenants in Management Identity to ensure data isolation in Optimize. For information on managing tenants for the Orchestration Cluster, see the [Orchestration Cluster tenants documentation](/docs/components/identity/tenant.md).
 
-**Precondition**: Multi-tenancy is disabled by default. To enable multi-tenancy, you must:
+## Enabling multi-tenancy for Optimize
+
+**Precondition**: Multi-tenancy is disabled by default. To enable multi-tenancy for Optimize, you must:
 
 1. Enable [`MULTITENANCY_ENABLED` feature flag](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#feature-flags).
 2. [Configure a database](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration).
-
-:::info
-To learn more about using multi-tenancy in Camunda 8, see [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
-:::
 
 ## Create a tenant
 
@@ -26,7 +24,7 @@ To learn more about using multi-tenancy in Camunda 8, see [multi-tenancy](/self-
 A `<default>` tenant is automatically created during Identity startup.
 :::
 
-1. Log in to the Identity interface and navigate to the **Tenants** tab.
+1. Log in to Management Identity and navigate to the **Tenants** tab.
 
    ![tenant-management-tab](./img/tenant-management-tab.png)
 
@@ -42,11 +40,11 @@ A `<default>` tenant is automatically created during Identity startup.
 
    ![tenant-management-details](./img/tenant-management-details.png)
 
-## Assign applications, groups, and users to a tenant
+## Tenant assignments
 
-You can assign applications, groups, and individual users to a tenant as follows:
+You can assign [users, groups and applications](./application-user-group-role-management/identity-application-user-group-role-management-overview.md) to a tenant as follows:
 
-### Assign applications to a tenant
+### Assign users to a tenant
 
 1. Click **Assigned users** to view the users assigned to the tenant, and click **Assign users**:
 
