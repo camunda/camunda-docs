@@ -75,6 +75,21 @@ This variable should be created with the output value; for example, by a job wor
 
 When the inner flow is completed, the `outputElement` expressions is evaluated and the result is inserted into the `outputCollection`.
 
+## Special ad-hoc sub-process variables
+
+On activation of the ad-hoc sub-process the `adHocSubProcessElements` variable is created on the scope of the ad-hoc sub-process.
+The variable contains some metadata about the ad-hoc sub-process and its inner elements, which can be used by job workers to determine which action to take.
+The variable contains a list of activatable elements. Each of these elements contains the following properties:
+
+- `elementId`: The ID of the element.
+- `elementName`: The name of the element.
+- `documentation`: The documentation of the element.
+- `properties`: The properties defined on the element.
+- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function.
+
+:::info Updating the value of the `adHocSubProcessElements` variable can lead to unexpected behavior. It is not recommended to update this variable.
+:::
+
 ## Variable mappings
 
 An ad-hoc sub-process can define input and output
