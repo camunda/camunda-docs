@@ -5,10 +5,12 @@ sidebar_label: "Upgrade"
 description: "To upgrade to a more recent version of the Camunda Helm charts, there are certain things you need to keep in mind."
 ---
 
-:::note
-When upgrading to a new version of the Camunda 8 Helm charts, we recommend updating to the **latest patch** release of the next **major** version of the chart.
+import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";
 
-For example, if the current Helm chart version is 10.x.x, and the latest next major version is 11.0.1, the recommended upgrade is to 11.0.1 (not 11.0.0).
+:::note
+When upgrading to a new version of the Camunda 8 Helm charts, upgrade sequentially from the **latest patch version of the current release** to the **latest patch version of the next release**.
+
+For example, if the current Helm chart version is 10.2.1, upgrade first to the latest 10.x.x patch (such as 10.2.5). Then upgrade to the latest patch of the next major version, such as 11.0.1 instead of 11.0.0.
 :::
 
 To upgrade to a more recent version of the Camunda Helm charts, review the [instructions for a specific version](#version-update-instructions).
@@ -94,6 +96,16 @@ For more details on the Keycloak upgrade path, you can also read the [Keycloak U
 ## Helm CLI version
 
 For a smooth upgrade, always use the same Helm CLI version corresponding with the chart version that shows in the [chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+## Upgrade notes
+
+### Bitnami Docker repository migration
+
+On August 28, 2025, Bitnami migrated its container images from [bitnami](https://hub.docker.com/u/bitnami) to [bitnamilegacy](https://hub.docker.com/u/bitnamilegacy). See the [Bitnami GitHub announcement](https://github.com/bitnami/containers/issues/83267) for details.
+
+The Camunda Helm charts have been updated to use the new repository.
+
+If you are still using a Camunda Helm chart that references the old repository, use the <HelmChartValuesFileBitnamiLegacyLink/> to override the image repositories.
 
 ## Version update instructions
 
@@ -218,7 +230,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 
 ```yaml
 image:
-  repository: bitnami/elasticsearch
+  repository: bitnamilegacy/elasticsearch
   tag: 8.8.2
 ```
 

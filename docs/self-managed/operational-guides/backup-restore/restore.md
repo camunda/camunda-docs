@@ -1,7 +1,7 @@
 ---
 id: restore
-sidebar_label: Backup restore
-title: Camunda backup restoration
+title: "Restore a backup"
+sidebar_label: "Restore a backup"
 keywords: ["backup", "backups", "restore"]
 description: "Learn how to restore a Camunda 8 Self-Managed backup."
 ---
@@ -442,7 +442,7 @@ connectors:
   enabled: false
 optimize:
   enabled: false
-core:
+orchestration:
   enabled: false
 ```
 
@@ -665,7 +665,7 @@ It will overwrite the start command of the resulting Zeebe pod, executing a rest
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
 ```yaml
-core:
+orchestration:
    enabled: true
    env:
    # Environment variables to overwrite the Zeebe startup behavior
@@ -699,7 +699,7 @@ optimize:
 Alternative approach to overwriting the startup behaviour to restore the partitions.
 
 ```yaml
-core:
+orchestration:
    enabled: true
    command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:

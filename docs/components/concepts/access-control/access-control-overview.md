@@ -1,5 +1,7 @@
 ---
-title: Access control concepts in Camunda 8
+id: access-control-overview
+title: Identity and access management in Camunda 8
+sidebar_label: Identity and access management
 description: Understand the difference between authentication and authorization in Camunda 8, and how they work together to secure your orchestration cluster.
 keywords:
   [

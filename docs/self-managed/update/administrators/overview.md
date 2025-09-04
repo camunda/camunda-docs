@@ -1,6 +1,6 @@
 ---
 id: admin-upgrade-overview
-title: "Upgrade to Camunda 8.8 "
+title: "Upgrade to Camunda 8.8"
 description: "Administrator overview for preparing and running a Camunda 8.8 Self-Managed upgrade."
 ---
 
@@ -27,5 +27,5 @@ A successful upgrade to Camunda 8.8 requires careful preparation, and you should
 Once you have completed your preparation, learn how to safely [perform an upgrade](run-update.md).
 
 :::info
-See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
 :::

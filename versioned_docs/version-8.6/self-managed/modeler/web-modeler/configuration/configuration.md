@@ -41,15 +41,18 @@ To add additional clusters, increment the `0` value for each variable (`CAMUNDA_
 
 ### Database
 
+:::note
+Web Modeler does not support the use of custom schemas in versions prior to `8.7.0`.
+:::
+
 Web Modeler requires a PostgreSQL database as persistent data storage (other database systems are currently not supported).
 
-| Environment variable                  | Description                                                                                                                                                                                                                                                                         | Example value                                            |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                                                                                                                                                                                                                                                            | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
-| `SPRING_DATASOURCE_USERNAME`          | Database user name                                                                                                                                                                                                                                                                  | `modeler-user`                                           |
-| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                                                                                                                                                                                                                                              | \*\*\*                                                   |
-| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver                                                                                                                                                                                                                               | `software.amazon.jdbc.Driver`                            |
-| `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
+| Environment variable                  | Description                                           | Example value                                            |
+| ------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------- |
+| `SPRING_DATASOURCE_URL`               | JDBC URL of the database                              | `jdbc:postgresql://postgres.example.com:5432/modeler-db` |
+| `SPRING_DATASOURCE_USERNAME`          | Database user name                                    | `modeler-user`                                           |
+| `SPRING_DATASOURCE_PASSWORD`          | Database user password                                | \*\*\*                                                   |
+| `SPRING_DATASOURCE_DRIVER_CLASS_NAME` | [optional]<br/>Java class name of the database driver | `software.amazon.jdbc.Driver`                            |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
 
@@ -175,7 +178,7 @@ The proxy-related environment variables are lowercase because they follow a wide
 | `OAUTH2_JWKS_URL`                         | [Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's JSON Web Key Set (for JWT verification).                                                                                                                                           | `http://keycloak:8080/auth/realms/camunda-platform/protocol/openid-connect/certs` | -             |
 | `OAUTH2_TOKEN_AUDIENCE`                   | Expected value of the access token's audience claim (used for JWT validation);<br/>_must be set to_ `web-modeler`.                                                                                                                                                  | `web-modeler`                                                                     | -             |
 | `OAUTH2_TOKEN_ISSUER`                     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                  | `https://keycloak.example.com/auth/realms/camunda-platform`                       | -             |
-| `CAMUNDA_IDENTITY_USERNAMECLAIM`          | ID token claim used to assign usernames.                                                                                                                                                                                                                        | `preferred_username`                                                              | `name`        |
+| `CAMUNDA_IDENTITY_USERNAMECLAIM`          | ID token claim used to assign usernames.                                                                                                                                                                                                                            | `preferred_username`                                                              | `name`        |
 | `IDENTITY_BASE_URL`                       | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                           | `http://identity:8080`                                                            | -             |
 
 Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.

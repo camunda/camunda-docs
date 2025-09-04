@@ -53,6 +53,10 @@ Alternatively, save example data to the BPMN file directly from the modal in Pla
 
 Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
 
+:::note
+Play will only consider the first executable process ID in the BPMN file.
+:::
+
 ![play example data](img/play-example-data.png)
 
 ## Play a process
@@ -121,6 +125,15 @@ For example, you can validate your process by creating and rerunning scenarios f
 Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
 :::
 
+Scenarios are stored in [test scenario files](advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+
+Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
+
+If multiple test scenario files are linked to the same process ID, Play will use:
+
+- The test scenario file with the earliest name alphabetically
+- If multiple test scenario files have the same name, the one that was most recently updated
+
 ### Save scenario
 
 To save a scenario:
@@ -162,6 +175,7 @@ You can run scenarios on the process definition page by clicking either the **Ru
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
+- Processes with multiple start events are not supported. If a process has multiple start events, Play only considers the first start event in the BPMN XML, and scenarios will only run from that start event.
 
 ## Modify a process instance
 

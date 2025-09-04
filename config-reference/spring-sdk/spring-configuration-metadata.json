@@ -367,7 +367,7 @@
       "type": "java.lang.Boolean",
       "description": "If `true`, prefers REST over gRPC for operations supported by both protocols.",
       "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "name": "camunda.client.request-timeout",
@@ -1226,5 +1226,8 @@
       }
     }
   ],
-  "hints": []
+  "hints": [],
+  "ignored": {
+    "properties": []
+  }
 }

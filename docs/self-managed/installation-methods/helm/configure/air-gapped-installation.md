@@ -26,10 +26,10 @@ The following images must be available in your air-gapped environment:
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
-- [bitnami/postgresql](https://hub.docker.com/r/bitnami/postgresql)
-- [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak)
-- [bitnami/os-shell](https://hub.docker.com/r/bitnami/os-shell/)
-- [bitnami/elasticsearch](https://hub.docker.com/r/bitnami/elasticsearch/)
+- [bitnami/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
+- [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
+- [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
+- [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 - [Web Modeler images](/self-managed/installation-methods/docker/docker.md#component-images):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
   - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
@@ -49,7 +49,7 @@ For example, the Docker image of Zeebe and PostgreSQL can be pulled via DockerHu
 docker pull camunda/zeebe:latest
 docker pull registry.camunda.cloud/camunda/zeebe:latest
 
-docker pull bitnami/postgresql:latest
+docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest
 ```
 
@@ -166,10 +166,10 @@ zeebeGateway:
 elasticsearch:
   image:
     registry: example.jfrog.io
-    repository: bitnami/os-shell
+    repository: bitnamilegacy/os-shell
   sysctlImage:
     registry: example.jfrog.io
-    repository: bitnami/elasticsearch
+    repository: bitnamilegacy/elasticsearch
 identity:
   image:
     repository: camunda/identity
@@ -177,12 +177,12 @@ identity:
 identityKeycloak:
   image:
     registry: example.jfrog.io
-    repository: bitnami/keycloak
+    repository: bitnamilegacy/keycloak
     ...
   postgresql:
     image:
       registry: example.jfrog.io
-      repository: bitnami/postgresql
+      repository: bitnamilegacy/postgresql
 
       ...
 operate:
@@ -218,7 +218,7 @@ webModeler:
 postgresql:
   image:
     registry: example.jfrog.io
-    repository: bitnami/postgresql
+    repository: bitnamilegacy/postgresql
   ...
 ```
 
