@@ -190,59 +190,60 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 
 ## Tags (8.8+)
 
-Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
+Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting the full variable payloads.
 
 ### Definition
 
 - A tag is a case-sensitive string.
 - Format (regex): `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$`
-    - Must start with a letter (A-Z or a-z).
-    - Remaining characters may be alphanumeric, underscore (`_`), hyphen (`-`), colon (`:`), or dot (`.`).
+  - Must start with a letter (A–Z or a–z).
+  - Remaining characters may be alphanumeric, underscore (`_`), hyphen (`-`), colon (`:`), or dot (`.`).
 - Length: 1–100 characters.
-- Maximum 10 unique tags per process instance (duplicates are ignored).
+- Maximum of 10 unique tags per process instance (duplicates are ignored).
 - Order is not guaranteed; treat the set as unordered.
 
-Validation failures during process instance creation (too many tags, invalid pattern/lengt) cause the create request to be rejected with a 4xx error.
+If validation fails during process instance creation (e.g., too many tags, invalid pattern, or length), the create request is rejected with a 4xx error.
 
 ### Semantics
 
-- Tags are included in process instance search responses and on activated job payloads.
-- Tags are immutable after creation for now (cannot be added, changed, or removed later).
-- Search filtering uses AND semantics: an instance must contain all requested tags (it may contain additional tags). Partial or wildcard matching is not supported for now.
+- Tags are included in process instance search responses and in activated job payloads.
+- Tags are immutable after creation (they cannot be added, changed, or removed later).
+- Search filtering uses AND semantics: an instance must contain all requested tags (it may contain additional tags). Partial or wildcard matching is not supported.
 - Tags are exported with the process instance and with job entities starting in 8.8 by the default exporters.
-- Tags are not shown in web applications for now (e.g., Operate, Tasklist) in 8.8 — they are API/SDK-only metadata.
+- Tags are not shown in web applications (e.g., Operate, Tasklist) in 8.8 — they are API/SDK-only metadata.
 
 ### Use cases
 
-- Routing and prioritization (e.g. `priority:high`).
-- Business / domain identifiers from internal or third‑party systems (e.g. `businessKey:1234`, `customerId:7890`, `orderId:4567`).
-- Cross-system correlation keys without exposing full variable payloads. (e.g. `traceId:abcd-1234`, `crmId:3004`).
-- Analytics segmentation (e.g. `region:emea`, `channel:web`).
-- Feature rollout / experiment grouping (e.g. `experiment:checkout-v2`).
-- Environment or tenant-like labeling where full multi-tenancy isn’t required (e.g. `env:staging`).
+- Routing and prioritization (e.g., `priority:high`)
+- Business or domain identifiers from internal or third-party systems (e.g., `businessKey:1234`, `customerId:7890`, `orderId:4567`)
+- Cross-system correlation keys without exposing full variable payloads (e.g., `traceId:abcd-1234`, `crmId:3004`)
+- Analytics segmentation (e.g., `region:emea`, `channel:web`)
+- Feature rollout or experiment grouping (e.g., `experiment:checkout-v2`)
+- Environment or tenant-like labeling where full multi-tenancy isn’t required (e.g., `env:staging`)
 
 ### Guidelines
 
 - Do not store secrets or PII; tags propagate with jobs and exports.
 - Prefer concise `key:value` or `key` patterns for consistency.
 - Use variables (not tags) for mutable or large data.
-- Establish internal naming conventions (for example, prefixes like `env:`, `dept:`) for governance. 
+- Establish internal naming conventions (e.g., prefixes like `env:` or `dept:`) for governance.
 
 ### Examples
 
 Create with tags:
 
-```
+```bash
 curl -L 'http://localhost:8080/v2/process-instances' \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--d '{
-  "processDefinitionId": "order-process",
-  "processDefinitionVersion": 3,
-  "tags": ["priority:high","business_key:1234","region:emea"],
-  "variables": { "orderId": "1234" }
-}'
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -d '{
+    "processDefinitionId": "order-process",
+    "processDefinitionVersion": 3,
+    "tags": ["priority:high","businessKey:1234","region:emea"],
+    "variables": { "orderId": "1234" }
+  }'
 ```
+
 ## Next steps
 
 - [About Modeler](/components/modeler/about-modeler.md)

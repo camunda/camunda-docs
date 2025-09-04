@@ -12,7 +12,7 @@ A job has the following properties:
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
-- **Tags (8.8+)**: Immutable labels copied from the process instance at job creation; Great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) & [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
+- **Tags (8.8+)**: Immutable labels copied from the process instance at job creation; great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
 
 ## Requesting jobs
 
@@ -256,5 +256,5 @@ Key points:
 - Tags are case-sensitive and immutable. They cannot be added, modified, or removed on the job.
 - The tags on a job mirror the process instance's tags at job creation time and can not be altered.
 - Apply tag-based logic inside the worker after activation, e.g. routing, prioritization, data correlation.
- 
-See, use-cases [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for more information (e.g. format, validation rules, limits, use-cases and guidelines).
+
+See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for more information (format, validation rules, limits, use cases, and guidelines).
