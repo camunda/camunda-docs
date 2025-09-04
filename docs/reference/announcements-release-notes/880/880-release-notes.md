@@ -33,11 +33,19 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | 9 September 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
 
-### Ad-Hoc Sub-process supports job worker/connector dynamic activation
+### Ad-hoc sub-process dynamic activation using job workers
 
 <!-- https://github.com/camunda/product-hub/issues/2631 -->
 
-Release notes needed
+Ad-hoc sub-process elements can now be activated by job workers.
+
+- In the process model you can define a task definition.
+- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result allows you to define which elements in the ad-hoc sub-process are activated.
+- Once any flows in the ad-hoc sub-process complete, a new job is created. This gives the job worker control over what to do next.
+
+:::note
+As well as activating elements, the job result allows fulfilment of the completion condition. When this happens, the ad-hoc sub-process is completed. The sub-process waits for active children to be completed first. Alternatively, you can cancel remaining instances by setting this in the job result.
+:::
 
 ### CI/CD building blocks guide
 
