@@ -6,7 +6,7 @@ description: "Manage tenants within the Orchestration Cluster Identity to suppor
 ---
 
 :::info
-Multi-tenancy is currently only supported for Camunda 8 Self-Managed. It is not yet available on SaaS.
+Multi-tenancy is only supported on Camunda 8 Self-Managed. It is not yet available on SaaS.
 :::
 
 A tenant is a logical separator for data within a Camunda 8 installation. This allows multiple teams, departments, or clients to share a single environment without sharing data. To learn more, refer to the [multi-tenancy concepts](../concepts/multi-tenancy.md).
