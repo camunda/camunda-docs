@@ -80,7 +80,7 @@ No. Camunda never stores your encryption key. Access is granted through standard
 
 ### Where can I find BYOK setup instructions?
 
-See [BYOK setup guide](/components/security/encryption/byok-setup.md) for configuration steps.
+See [BYOK setup guide](/components/saas/byok/aws-kms-setup.md) for configuration steps.
 
 ## Other questions
 
