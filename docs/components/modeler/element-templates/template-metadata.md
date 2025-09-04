@@ -10,9 +10,15 @@ The metadata of an element template contains important information about the tem
 
 `$schema` is a required key-value pair and must be set.
 
-The application uses the `$schema` property to ensure compatibility for a given element template. You find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
+The application uses the `$schema` property to ensure compatibility for a given element template. You can find [the latest supported versions here](https://www.npmjs.com/package/@camunda/zeebe-element-templates-json-schema).
 
-The tooling ignores element templates defining a higher `$schema` version and logs a warning message.
+The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
+
+:::info
+The Web Modeler only supports element templates pointing to the latest schema version: `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`
+:::
+
+The Desktop Modeler ignores element templates defining a higher `$schema` version and logs a warning message.
 
 For example, given the following `$schema` definition, the application takes `0.9.1` as the JSON schema version of the element template:
 
@@ -23,21 +29,16 @@ For example, given the following `$schema` definition, the application takes `0.
 }
 ```
 
-The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
-
-:::info
-The Web Modeler only supports element templates pointing to the latest schema version: `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`
-:::
-
 ## Identification: `id` and `version`
 
 - `id : String` is a required key and must be set.
-- `version : Integer` is optional but Camunda strongly recommends to be set it.
+- `version : Integer` is optional but Camunda strongly recommends setting it.
 
-The `id` key defines the identifier of the template. Templates with the same `id` and no `version` set are regarded as equal independent of their other key-value pairs.
-Thus, if you plan to make any changes to your template and want to support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` property on your templates.
-Templates with the same `id` and different versions offer an upgrade path.
-If `id` and `version` as identical the tooling treats the templates as identical, regardless of other key-value pairs.
+The `id` key defines the identifier of the template.
+If no `version` is set, templates with the same `id` are regarded as equal, independent of their other key-value pairs.
+If `version` is set, the modeler treats templates with the same `id ` and `version` as identical, independent of their other key-value pairs.
+Thus, if you plan to make any changes to your template and want to support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), maintain a `version` key-value pair on your template.
+Templates with the same `id` and different `version` values offer an upgrade path.
 
 ```json
 {
@@ -47,10 +48,10 @@ If `id` and `version` as identical the tooling treats the templates as identical
 }
 ```
 
-Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best effort basis.
+Once a template with a new `version` is available to users, the editor tooling suggests an upgrade, [preserving technical bindings](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#upgrade-behavior) on a best-effort basis.
 
 :::tip
-Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand foundations of our upgrade mechanism, and foundations on how the element template life cycle works.
+Versioning is an important cornerstone of template evolution. Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to understand the foundations of our upgrade mechanism and of the element template lifecycle.
 :::
 
 ## Discoverability: `name`, `description`, `keywords`, `icon`, `documentationRef`, and `category`
@@ -61,14 +62,21 @@ Versioning is an important cornerstone of template evolution. Review the [upstre
 These keys define the user-facing metadata of the template. They help the template users to discover and understand the purpose of the template.
 They are shown when selecting a template and when the template has been applied to an element.
 
-- `name : String` key defines the name of the template.
-- `description : String` key is optional and provides additional information about the template.
-- `keywords : Array<String>` key is an optional list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
-- `icon : Object` key is an optional icon configuration for the template. The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they get rendered 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
-- `documentationRef : String` key is an optional URL pointing to a template documentation. It is shown in the properties panel (after applying an element template).
-- `category : Object` key is an optional category configuration for the template. You can define a category to group templates in the element template selection list. If not defined, the template will be displayed in the **Templates** section.
+- `name : String` defines the name of the template.
+- `description : String` provides additional information about the template.
+- `keywords : Array<String>` list of keywords that can help users find this template. Keywords are used for search and filtering but are not displayed in the UI.
+- `icon : Object` defines the templates icon. The icon contents must be a valid [data](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs) or HTTP(s) URL. We recommend using square icons as they are rendered at 18x18 pixels on the canvas and 32x32 pixels in the properties panel.
+- `documentationRef : String` URL pointing to the template's documentation. It is shown in the properties panel.
+- `category : Object` defines a category used to group templates in the element template selection list. If not defined, the template will be displayed in the **Templates** section.
   - `id : String` required key that defines the unique identifier of the category.
-  - `name : String` required key defines the name of the category that the template is shown in.
+  - `name : String` required key that defines the name of the category that the template is shown in.
+
+It is generally a good idea to provide a proper description of you template. This helps users to understand the purpose of the template and how to use it.
+In case you require more space to explain the template, you can also provide a `documentationRef` pointing to a more detailed documentation page.
+This is particularly useful for templates that require external dependencies, such as custom connector implementations.
+
+Another good practice is to use a custom icon for your template. This helps users to quickly identify the template in the selection modal and in the properties panel.
+If you use the Web Modeler's element template editor, you can upload an image and Web Modeler will take care of encoding it as a data URL.
 
 ```json
 {
@@ -94,13 +102,13 @@ They are shown when selecting a template and when the template has been applied 
 ## Engine compatibility: `engines`
 
 - `engines : Object` is an optional key-value pair.
-  - `camunda : SemanticVersion` is an optional key to define compatibility with Camunda versions.
+  - `camunda : SemanticVersion` is an optional key to define compatibility with Camunda Orchestration Cluster Versions.
   - `camundaDesktopModeler : SemanticVersion` is an optional key to define compatibility with Desktop Modeler versions.
   - `camundaWebModeler : SemanticVersion` is an optional key to define compatibility with Web Modeler versions.
 
 Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Web Modeler) using the `engines` key.
 
-This key has a dictionary object as it's value, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
+This key has a dictionary object as its value, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
 For example, the following `engines` definition specifies that the template is compatible with Camunda 8.6 or higher.
 
@@ -113,7 +121,8 @@ For example, the following `engines` definition specifies that the template is c
 }
 ```
 
-Compatibility is only validated if the platform version is provided by both the template and the modeler. In the example below, the template is compatible with specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
+Compatibility is only validated if the platform version is provided by both the template and the modeler.
+In the example below, the template is compatible with the specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
 
 ```json
 {
@@ -140,29 +149,28 @@ You can also use this feature to explicitly specify a template's incompatibility
 If no `engines` are specified, a template is considered compatible with any execution platform version.
 
 :::tip
-Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the life cycle.
+Review the [upstream documentation](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview) to learn more about template evolution and the template lifecycle.
 :::
 
 ## Supported BPMN types: `appliesTo` and `elementType`
 
 - `appliesTo` is a required key and must be set.
-- `elementType` is an optional key. (Can be required under some circumstances, see below.)
+- `elementType` is an optional key that can be required under some circumstances, see below for more information.
 
-Currently, element templates may be used on the following BPMN elements:
+These two key-value pairs define what BPMN types the template can be applied to (`appliesTo`) and whether the element is replaced with a different type when the template is applied (`elementType`).
 
-- `bpmn:Activity` (including user tasks, service tasks, call activities , ad-hoc subprocesses, and others)
-- `bpmn:SequenceFlow` (for maintaining `condition`)
-- `bpmn:Process`
-- `bpmn:Event`
-
-- `appliesTo : Array<String>`: specifies the BPMN types the template can be applied to. The template will only be selectable for these types of elements in the modeler.
-- The `elementType : Object`: If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
-  - `value : String`: Is a required key. The BPMN type to set the element to when the template is applied.
+- `appliesTo : Array<String>`: specifies the BPMN types the template can be applied to. The template will only be selectable for these types of elements in the modeler. Currently, element templates may be used on the following BPMN elements:
+  - `bpmn:Activity` (including user tasks, service tasks, call activities, ad-hoc subprocesses, and others)
+  - `bpmn:SequenceFlow` (for maintaining `condition`)
+  - `bpmn:Process`
+  - `bpmn:Event`
+- `elementType : Object`: If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
+  - `value : String`: Is a required key. The BPMN element is changed to this type the template is applied.
   - `eventDefinition: String`: You must set this key's value to `"bpmn:MessageEventDefinition"` if you are templating any message event. Otherwise, this key should be ignored.
 
-Some properties require a specific BPMN type, and thus value for `elementType`, to work correctly.
+Some properties require a specific BPMN type, and thus a specific value for `elementType`, to work correctly.
 For example, if the template sets `zeebe:calledDecision` on an element and `appliesTo` is set to `bpmn:Task`, the `elementType` must be set to `bpmn:BusinessRuleTask`.
-Such constraints are checked based on the element template schema and by the modeler when it loads the templates.
+These constraints are checked based on the [element template schema](./template-metadata.md#validation-schema) by your editor (if it supports JSON schema) and by the modeler when it loads the templates.
 
 ```json
 {
@@ -180,8 +188,8 @@ Such constraints are checked based on the element template schema and by the mod
 
 - `groups` is an optional key.
 
-You can define `groups` to organize custom fields into. The fields will be shown in their assigned group in the properties panel (after applying an element template).
-You can also define whether a group is expanded or collapsed by default.
+You can define `groups` to organize custom fields into. The fields will be shown in their assigned group in the properties panel.
+You can also specify whether a group is expanded or collapsed by default. This helps you to highlight important fields and to reduce visual clutter.
 
 Groups can have the following attributes:
 
@@ -190,7 +198,7 @@ Groups can have the following attributes:
 - `tooltip : String`: Tooltip for the group (optional)
 - `openByDefault : Boolean`: Whether the group will be expanded in the properties panel (optional, default: `false`)
 
-A property can be assigned to a group by setting the [`group` key](./template-properties.md#grouping-fields-group) to the groups `id` value.
+A property can be assigned to a group by setting the [`group` key](./template-properties.md#grouping-fields-group) to the group's `id` value.
 
 ```json
 {

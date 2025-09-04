@@ -14,13 +14,13 @@ The underlying concept is very simple:
 Element templates can only set properties that can be described by bindings supported by the element template schema.
 You can find the full list of supported bindings in the [bindings](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding) section.
 
-When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension elements properties that can be defined by bindings in an element template.
-The template author must explicitly make the properties user configurable to show them in the properties panel once the user has applied the template.
+When the user applies a template, the properties panel hides all BPMN 2.0 XML and Camunda extension element properties that can be defined by bindings in an element template.
+The template author must explicitly make the properties user-configurable to show them in the properties panel once the user has applied the template.
 For example, if a template does not contain a property object with the binding type `zeebe:input`,
 the template user will not be able to define an input mapping for the element once the template is applied.
 
 :::info
-Some properties, such as execution listeners, task listeners, element documentation, and multi-instance configurations cannot be set by element templates.
+Some properties &mdash; such as execution listeners, task listeners, element documentation, and multi-instance configurations &mdash; cannot be set by element templates.
 They are situational and require knowledge of the process context to be used.
 As they are never part of any element template, users can configure them independently of an applied template.
 :::
@@ -36,15 +36,15 @@ The property object keys are divided into required and optional keys:
 
 ### Optional keys
 
-- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defining the input type in the properties panel.
+- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defines the input type in the properties panel.
 - [`value : String | Number | Boolean`](#setting-a-default-value-value): A default value to be used if the property to be bound is not yet set by the user or if the type is `Hidden`.
-- `label : String`: A label text above the property input.
-- `tooltip : String`: A tooltip text shown when hovering over the label.
-- `description : String`: A description text below the property input.
-- [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
 - [`generatedValue : Object`](#generating-a-value-generatedvalue): A configuration to generate a value when the property is applied to an element.
-- [`placeholder : String`](#setting-a-text-placeholder-placeholder): A placeholder text shown in the input field when it is empty.
-- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Optional properties do not persist empty values in the underlying BPMN 2.0 XML.
+- [`placeholder : String`](#setting-a-text-placeholder-placeholder): Placeholder text shown in the input field when it is empty.
+- [`feel : "required" | "optional" | "static"`](#adding-feel-editor-support-feel): Defines whether the property supports FEEL expressions.
+- `label : String`: Label text above the property input.
+- `tooltip : String`: Tooltip text shown when hovering over the label.
+- `description : String`: Description text below the property input.
+- [`optional : Boolean`](#preventing-persisting-empty-values-optional): Setting this key's value determines whether properties persist empty values in the underlying BPMN 2.0 XML.
 - [`constraints : Object`](#validating-user-input-constraints): A list of editing constraints to apply to the value of the property.
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
@@ -53,7 +53,11 @@ The property object keys are divided into required and optional keys:
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
 For more information, see the documentation below.
-If your editor supports JSON schema, these incompatibilities or missing keys-value pairs are highlighted while you edit your template.
+
+If your editor (e.g. VS Code) offers validation based on JSON schema, these incompatibilities or missing key-value pairs are highlighted as you edit your template.
+The Web Modeler's element template editor offers an additional problems panel that shows these errors with additional descriptions to help you better understand what needs to be fixed.
+The Desktop Modeler shows these errors with additional descriptions in the output tab, when it tries to load an invalid template.
+
 For most purposes, `binding`, `label`, `type`, and `value` are sufficient to define a property.
 
 All property objects are defined inside the `properties` array:
@@ -86,61 +90,6 @@ For a comprehensive example showing how to create a REST connector template with
 
 The key-value pairs of the property object are explained in the following sections.
 
-## Setting a default value: `value`
-
-The `value` key defines a static default value for a property.
-The value is applied to the property when the template is applied to an element until a user provides their own input value.
-`value` should be defined whenever the input type is not `Hidden`.
-The value of `value` must match the `type` of the property.
-
-```json
-{
-  "value": "4",
-  "type": "Hidden",
-  "binding": {
-    "type": "zeebe:taskDefinition",
-    "property": "retries"
-  }
-}
-```
-
-## Generating a value: `generatedValue`
-
-As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
-
-```json
-{
-  "generatedValue": {
-    "type": "uuid"
-  },
-  "type": "Hidden",
-  "binding": {
-    "type": "zeebe:property",
-    "name": "id"
-  }
-}
-```
-
-## Setting a text placeholder: `placeholder`
-
-The following property types support the `placeholder` attribute:
-
-- `String`
-- `Text`
-
-The placeholder is displayed when a field is empty:
-
-```json
-{
-  "label": "Web service URL",
-  "type": "String",
-  "binding": {
-    ...
-  },
-  "placeholder": "https://example.com"
-}
-```
-
 ## Setting the input type: `type`
 
 The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available.
@@ -169,7 +118,7 @@ When checked, it maps to `true` in the respective field. Additionally, refer to 
 
 ### Dropdown input type
 
-The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a custom properties `choices` attribute as `{ name, value }` pairs:
+The `Dropdown` type allows users to select from a number of pre-defined options that are stored in a `choices` array as `{ name : String, value : String }` pairs:
 
 ```json
 {
@@ -206,6 +155,61 @@ The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
 
+## Setting a default value: `value`
+
+The `value` key defines a static default value for a property.
+The value is applied to the property defined by the [`binding`](#binding-an-input-to-a-bpmn-or-camunda-element-property-binding) when the template is applied to an element until a user provides their own input value.
+`value` should be defined whenever the input type is [`Hidden`](#hidden-input-type).
+The value of `value` must match the `type` of the property and must be a string if the `type` is hidden.
+
+```json
+{
+  "value": "4",
+  "type": "Hidden",
+  "binding": {
+    "type": "zeebe:taskDefinition",
+    "property": "retries"
+  }
+}
+```
+
+## Generating a value: `generatedValue`
+
+As an alternative to static `value`, you can use a generated value. The value is generated when a property is applied to an element. Currently, the generated value can be a UUID:
+
+```json
+{
+  "generatedValue": {
+    "type": "uuid"
+  },
+  "type": "Hidden",
+  "binding": {
+    "type": "zeebe:property",
+    "name": "id"
+  }
+}
+```
+
+## Setting a text placeholder: `placeholder`
+
+The following property types support the `placeholder` attribute:
+
+- [`String`](#string-input-type)
+- [`Text`](#text-input-type)
+
+The placeholder is displayed when a field is empty:
+
+```json
+{
+  "label": "Web service URL",
+  "type": "String",
+  "binding": {
+    ...
+  },
+  "placeholder": "https://example.com"
+}
+```
+
 ## Adding FEEL editor support: `feel`
 
 The following input types support the `feel` property:
@@ -230,7 +234,7 @@ The properties panel will display the field as a FEEL editor and will show a vis
 
 ### FEEL optional
 
-The properties panel will show an indicator to switch to a FEEL expression. When activated, the field display as a FEEL editor:
+The properties panel will show an indicator to switch to a FEEL expression. When activated, the field displays as a FEEL editor:
 
 ```json
     {
@@ -245,7 +249,9 @@ For `Boolean` and `Number` fields, the value will always be persisted as a FEEL 
 
 ### FEEL static
 
-The value of `feel: static` is only valid for `Boolean` and `Number` fields. Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression. However, there is no toggle to switch to a FEEL editor and ensures only a static value can be entered:
+The value of `feel: static` is only valid for `Boolean` and `Number` fields.
+Similar to [FEEL optional](#feel-optional), the value of the field will be persisted as a FEEL expression.
+However, there is no toggle to switch to a FEEL editor and only a static value can be entered:
 
 ```json
 {
@@ -256,7 +262,7 @@ The value of `feel: static` is only valid for `Boolean` and `Number` fields. Sim
 }
 ```
 
-For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the value used in case of missing `feel` property.
+For binding types `zeebe:input` and `zeebe:output`, `feel: static` is the default value used in case of missing `feel` property.
 
 ## Binding an input to a BPMN or Camunda element property: `binding`
 

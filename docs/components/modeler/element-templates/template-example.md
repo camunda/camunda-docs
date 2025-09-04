@@ -96,7 +96,8 @@ The example defines five custom fields, each mapped to different technical prope
 
 ## Visual result
 
-The task type is hidden to the user. Properties specified in the template can be edited through the properties panel as shown in the following screenshot:
+The task type is hidden to the user, as it is a technical implementation detail.
+The other properties specified in the template can be edited through the properties panel after the user has applied the template as shown in the following screenshot:
 
 ![Custom Fields](./img/overview.png)
 
@@ -104,10 +105,10 @@ The task type is hidden to the user. Properties specified in the template can be
 
 This example showcases several important template features:
 
-- **Hidden properties**: Setting technical values that users shouldn't modify
-- **Input validation**: Using constraints to ensure valid URLs
-- **Dropdown choices**: Providing predefined options for user selection
-- **Optional bindings**: Fields that don't persist empty values
-- **Variable mapping**: How to map data between the process and external systems
+- **Hidden properties**: Setting technical values that users shouldn't modify.
+- **Input validation**: Using constraints to ensure valid URLs.
+- **Dropdown choices**: Providing predefined options for user selection.
+- **Optional bindings**: Fields that don't persist empty values in the XML.
+- **Variable mapping**: How to map data between the process and external systems.
 
 You can use this example as a starting point for creating your own element templates.

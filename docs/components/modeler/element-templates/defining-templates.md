@@ -4,7 +4,7 @@ title: Defining templates
 description: "Learn how to define an element template"
 ---
 
-An element template is defined in template descriptor files as a JSON object.
+An element template is defined in a template descriptor files as a JSON object.
 The element template object is divided into required and optional key-value pairs:
 
 ## Required keys
@@ -17,15 +17,15 @@ The element template object is divided into required and optional key-value pair
 
 ## Optional keys
 
-- [`version : Integer`](./template-metadata.md#identification-id-and-version): Property to support templates versioning and upgrading. If you add a version to a template, it is considered unique based on its ID and version.
+- [`version : Integer`](./template-metadata.md#identification-id-and-version): Property to support template versioning and upgrading. If you add a version to a template, it is considered unique based on its ID and version.
 - [`description : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Description of the template. Shown in the element template selection modal and in the properties panel (after applying an element template).
 - [`keywords : Array<String>`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): List of keywords. Helps users find the template through search. Keywords are used for search and filtering but are not displayed in the UI.
-- [`category : Object`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Category for the template. The category is shown in the element template selection modal.
+- [`category : Object`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Category for the template. The template appears under the category name in the element template selection modal.
 - [`documentationRef : String`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): URL pointing to the template's documentation. Shown in the properties panel (after applying an element template).
 - [`icon : Object`](./template-metadata.md#discoverability-name-description-keywords-icon-documentationref-and-category): Sets the template's icon. The icon is shown in the element template selection modal and in the properties panel (after applying an element template).
-- [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments compatible with the template. Environment version is specified with semantic versions range.
+- [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments compatible with the template. The environment version is specified using a semantic version range.
 - [`elementType : Object`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets the type of the element. The element is replaced with the specified type when a user applies the template.
-- [`groups : Object`](./template-metadata.md#grouping-properties-groups): Defines groups of property input fields. Groups are shown in the properties panel (after applying an element template).
+- [`groups : Object`](./template-metadata.md#grouping-properties-groups): Defines groups of property input fields. Groups are sections in the properties panel. Properties can be assigned a group.
 
 Some keys and values require other keys to be set. If your editor supports the [JSON schema](https://json-schema.org/), it will flag missing keys as errors.
 The Web Modeler's editor will also show these errors in the template editor problems panel.
@@ -63,7 +63,7 @@ Below you find a simple example of an element template with the most commonly us
 
 ## Creating multiple templates in one file
 
-You can define multiple templates in one JSON file by wrapping them in an array. Templates defined in such a way are only supported by Desktop Modeler and cannot be used in Web Modeler.
+You can define multiple templates in one JSON file by wrapping them in an array.
 
 :::warning
 This is a Desktop Modeler-specific feature. Web Modeler requires each template to be in a separate file.
@@ -94,12 +94,12 @@ You can create and edit element templates in the text editor of your choice.
 Connector templates are a specific type of element template, so the same applies to them.
 If your editor supports the [JSON schema](https://json-schema.org/), it will recognize the structure of the template and provide additional editing support, such as formatting, code completion, and error highlighting.
 
-The [Web Modeler](/components/connectors/manage-connector-templates.md), offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
+The [Web Modeler](/components/connectors/manage-connector-templates.md) offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
 
 ## Further reading
 
 For detailed information about specific aspects of template development, see:
 
-- **[Template Metadata](./template-metadata.md)** - Learn about template identification fields like name, ID, description, keywords, versioning, JSON schema compatibility, engine compatibility, and supported BPMN types.
-- **[Template Properties](./template-properties.md)** - The properties array is the heart of the element template. Here you can define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
-- **[Example Template](./template-example.md)** - A complete example showing how to create an element template.
+- **[Template metadata](./template-metadata.md)** - Learn more about template key-value pairs that help you version your template, make it discoverable, and allow you to define compatability.
+- **[Template properties](./template-properties.md)** - The properties array is the heart of the element template. Here you can define what properties should be applied to the BPMN element and how these properties should be shown and validated in the properties panel.
+- **[Example template](./template-example.md)** - A complete example showing how to create an element template.
