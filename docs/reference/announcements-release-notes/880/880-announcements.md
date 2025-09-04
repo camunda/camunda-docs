@@ -349,7 +349,7 @@ Camunda 8.8 adds optional, immutable **tags** for process instances you can set 
 
 **Highlights**
 
-- Added via [process instance creation](/docs/components/concepts/process-instance-creation.md#tags-88) and included in process instance and job responses.
+- Added via [process instance creation](/components/concepts/process-instance-creation.md#tags-88) and included in process instance and job responses.
 - Forwarded to every job created for the instance at element activation (immutable snapshot).
 - Exported with process instance and job entities (analytics / pipelines) starting in 8.8.
 - Exact-match AND filtering semantics when querying process instances by tags (instance must contain all supplied tags; may include more).
