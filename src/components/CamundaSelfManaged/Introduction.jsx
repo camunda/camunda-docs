@@ -5,6 +5,18 @@ const Introduction = () => {
   return (
     <div>
       <h2>Self-Managed vs. SaaS?</h2>
+            <p>
+        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS
+        is who is responsible for the infrastructure and operations.
+      </p>
+      <table className="table-callout" width={"100%"}>
+<tr>
+    <td width="50%"><p><img src={`${linkBase}/camunda-8-self-managed.svg`} alt="Camunda 8 Self-Managed" /><strong>Camunda 8 Self-Managed</strong></p><p>You are responsible for deploying,
+          scaling, securing, maintaining, and updating the entire Camunda stack
+          on your own Kubernetes clusters or cloud infrastructure.</p></td>
+    <td>**Summary**</td>
+</tr>
+</table>
       <p>
         The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS
         is who is responsible for the infrastructure and operations.
