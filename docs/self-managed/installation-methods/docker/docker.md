@@ -160,7 +160,7 @@ This uses the [Connectors Bundle](https://hub.docker.com/r/camunda/connectors-bu
 
 Note that some out-of-the-box connectors are licensed under the
 [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
-Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
+Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors).
 
 Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide the connector templates for modeling.
 

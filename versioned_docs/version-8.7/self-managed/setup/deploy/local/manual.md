@@ -22,7 +22,7 @@ Tasklist, Operate and Zeebe distributions are available for download on the [rel
 
 All connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run connectors locally including their necessary dependencies.
 Note that some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
-Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
+Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors).
 
 ## Download and run Elasticsearch
 
