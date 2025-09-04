@@ -22,14 +22,14 @@ const QuickStart = () => {
       title: "Developers",
       icon: UserDevIcon,
       description:
-        "Get started quickly with local development setup and basic configuration",
+        "Get started quickly with local development setup and basic configuration.",
       link: "/self-managed/quickstart/developer-quickstart/",
     },
     {
       title: "Administrators",
       icon: UserOpsIcon,
       description:
-        "Learn how to deploy and manage Camunda in production environments",
+        "Learn how to deploy and manage Camunda in production environments.",
       link: "/self-managed/quickstart/administrator-quickstart/",
     },
   ];

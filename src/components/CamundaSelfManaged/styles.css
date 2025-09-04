@@ -123,6 +123,10 @@ a.sm-card {
   display: block;
 }
 
-.sm-quickstart {
+.sm-quickstart,
+.sm-installation,
+.sm-components,
+.sm-infrastructure,
+.sm-reference-architecture {
   margin-bottom: 3rem;
 }
