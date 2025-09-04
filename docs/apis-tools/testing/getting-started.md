@@ -41,7 +41,7 @@ We have two variations of CPT: for the [Camunda Spring Boot Starter](/apis-tools
 Add the following dependency to your Maven project:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot STarter', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
