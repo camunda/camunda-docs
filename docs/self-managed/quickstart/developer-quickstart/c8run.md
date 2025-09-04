@@ -63,9 +63,8 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-By default, authentication and authorization are disabled. These [can be enabled](#enable-authentication-and-authorization) via the configuration file (`configuration/application.yaml`), or overridden at startup using command-line arguments.
-
-The following options are available when starting C8Run:
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
 | Argument                   | Description                                                                                                                                                                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -143,7 +142,7 @@ Available APIs include:
 
 ### Enable authentication and authorization
 
-By default, **C8Run** starts with authentication disabled and API endpoints unprotected.  
+By default, Camunda 8 Run starts with authentication disabled and API endpoints unprotected.  
 To require authentication and enforce authorization, provide a custom configuration file.
 
 You can either:
