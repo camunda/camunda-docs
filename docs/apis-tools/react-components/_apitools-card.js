@@ -1,14 +1,14 @@
 import React from "react";
-import "./_api-card.css";
+import "./_apitools-card.css";
 
 const ApiCard = ({ link, title, image, description, type }) => {
   return (
-    <a href={link} className="api-card" title={title}>
-      <img src={image} alt={`${title} icon`} className="api-card-image" />
+    <a href={link} className="apitools-card" title={title}>
+      <img src={image} alt={`${title} icon`} className="apitools-card-image" />
       <h3>{title}</h3>
       <p>{description}</p>
       {type && (
-        <div className="api-type" style={{ marginBottom: "0px" }}>
+        <div className="apitools-type" style={{ marginBottom: "0px" }}>
           <span
             className={`badge badge--${type.toLowerCase()}`}
             style={{ marginBottom: "0px" }}
@@ -23,7 +23,7 @@ const ApiCard = ({ link, title, image, description, type }) => {
 
 const ApiGrid = ({ api }) => {
   return (
-    <div className="api-grid">
+    <div className="apitools-grid">
       {api.map((api, index) => (
         <ApiCard
           key={index}
