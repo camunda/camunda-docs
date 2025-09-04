@@ -69,7 +69,7 @@ Connectors:
 
 :::note
 
-Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/). See [Camunda Connectors Bundle project](https://github.com/camunda/connectors-bundle) for an overview.
+Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/). See [Camunda Connectors Bundle project](https://github.com/camunda/connectors) for an overview.
 
 :::
 
