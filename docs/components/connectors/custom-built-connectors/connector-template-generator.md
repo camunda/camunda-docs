@@ -13,7 +13,7 @@ You can start from a blank template or import an existing API definition such as
 To generate a connector template:
 
 1. Select the Modeler project you want to create the template in.
-1. Click **Create new**, and select **Connector template** to open the **Create new connector template** screen.
+1. Click **Create new**, select **Element template**, and then select the **Connector template** tab to open the **Create new connector template** screen.
    ![Create the new connector template](./img/configure-template-details.png)
 
 1. Select the template starting point.
@@ -29,7 +29,6 @@ To generate a connector template:
    - **Description:** Enter a description for the template. For example, describe the template's main features and benefits.
 
    - **Icon:** Use a default BPMN symbol as the template icon in a BPMN diagram, or upload a custom icon. Supported icon formats are SVG, PNG, and JPEG, with a maximum file size limit of 8 KB. Icons must be a minimum of 512 x 512 pixels in size.
-
      - **Import from URL**: Enter the URL for the image you want to import, and click **Import icon**.
      - **Upload file**: Drag and drop a file into the upload area, or click the link and select a file to upload.
 

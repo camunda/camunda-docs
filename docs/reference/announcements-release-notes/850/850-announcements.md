@@ -90,6 +90,11 @@ A new `commonLabels` value is now available and integrates with `camundaPlatform
 
 The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
+See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+
 ## Camunda 8.4
 
 | Release date   | End of maintenance |
@@ -128,6 +133,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/568
     - **Mitigation:** Bug is planned to be fixed with upcoming `8.4.1` release
 - In **Camunda HELM `9.0.x`**
+
   - **Limitation**
     - **Description:** The existing Helm charts use the Elasticsearch configurations by default and are not yet prepared with the OpenSearch configurations as templates/pre-filled. The Helm charts can still be used to install for OpenSearch, but some adjustments are needed beforehand.
     - **Reference:** n/a

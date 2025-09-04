@@ -25,6 +25,33 @@ module.exports = {
         "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
         "guides/migrating-from-camunda-7/migration-tooling",
+
+        {
+          type: "category",
+          label: "Data Migrator",
+          link: {
+            type: "doc",
+            id: "guides/migrating-from-camunda-7/data-migrator/index",
+          },
+          items: [
+            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
+            "guides/migrating-from-camunda-7/data-migrator/install",
+            "guides/migrating-from-camunda-7/data-migrator/runtime",
+            "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/variables",
+            "guides/migrating-from-camunda-7/data-migrator/limitations",
+            {
+              type: "category",
+              label: "Configuration & reference",
+              items: [
+                "guides/migrating-from-camunda-7/data-migrator/database",
+                "guides/migrating-from-camunda-7/data-migrator/config-examples",
+                "guides/migrating-from-camunda-7/data-migrator/config-properties",
+              ],
+            },
+            "guides/migrating-from-camunda-7/data-migrator/troubleshooting",
+          ],
+        },
         "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
       ],
@@ -32,131 +59,274 @@ module.exports = {
   ],
   Components: [
     "components/components-overview",
-    "components/whats-new-in-88",
     {
       type: "category",
-      label: "Concepts",
+      label: "Introduction to Camunda 8",
       link: {
         type: "doc",
         id: "components/concepts/concepts-overview",
       },
       items: [
-        "components/concepts/clusters",
-        "components/concepts/processes",
-        "components/concepts/process-applications",
-        "components/concepts/element-templates",
         {
-          "Access control": [
-            "components/concepts/access-control/access-control-overview",
+          type: "category",
+          label: "Processes",
+          link: {
+            type: "doc",
+            id: "components/concepts/processes",
+          },
+          items: [
+            "components/concepts/process-instance-creation",
+            "components/concepts/process-instance-modification",
+            "components/concepts/process-instance-migration",
+            "components/concepts/incidents",
+          ],
+        },
+        "components/concepts/process-applications",
+        "components/concepts/workflow-patterns",
+        {
+          type: "category",
+          label: "Identity and access management",
+          link: {
+            type: "doc",
+            id: "components/concepts/access-control/access-control-overview",
+          },
+          items: [
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/mapping-rules",
           ],
         },
+        "components/concepts/multi-tenancy",
         "components/concepts/job-workers",
-        "components/concepts/execution-listeners",
+        "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/element-templates",
         {
-          "User task listeners": [
-            "components/concepts/user-task-listeners",
-            "components/concepts/listen-to-user-tasks",
+          Listeners: [
+            "components/concepts/execution-listeners",
+            {
+              type: "category",
+              label: "User task listeners",
+              link: {
+                type: "doc",
+                id: "components/concepts/user-task-listeners",
+              },
+              items: ["components/concepts/listen-to-user-tasks"],
+            },
           ],
         },
-        "components/concepts/process-instance-creation",
         "components/concepts/messages",
         "components/concepts/signals",
-        "components/concepts/incidents",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/workflow-patterns",
-        "components/concepts/process-instance-modification",
-        "components/concepts/process-instance-migration",
-        "components/concepts/multi-tenancy",
-        "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
-        "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
         "components/concepts/resource-deletion",
       ],
     },
     {
       type: "category",
-      label: "Agentic orchestration",
+      label: "Best Practices",
       link: {
         type: "doc",
-        id: "components/agentic-orchestration/agentic-orchestration",
+        id: "components/best-practices/best-practices-overview",
       },
       items: [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents",
-      ],
-    },
-    {
-      type: "category",
-      label: "Document handling",
-      link: {
-        type: "doc",
-        id: "components/document-handling/getting-started",
-      },
-      items: [
-        "components/document-handling/use-cases",
-        "components/document-handling/upload-document-to-bpmn-process",
-        "components/document-handling/display-and-download-document",
-        "components/document-handling/send-document-to-external-system-via-connector",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/modeler/web-modeler/idp",
-      },
-      items: [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
         {
-          type: "category",
-          label: "Document extraction",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-document-extraction",
-          },
-          items: [
-            "components/modeler/web-modeler/idp/idp-unstructured-extraction",
-            "components/modeler/web-modeler/idp/idp-structured-extraction",
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc",
+          ],
+          Architecture: [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management",
+          ],
+          Development: [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+            "components/best-practices/development/local-development-with-element-templates",
+          ],
+          Modeling: [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type",
+          ],
+          Operations: [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes",
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale",
           ],
         },
-        // "components/modeler/web-modeler/idp/idp-document-automation",
-        {
-          type: "category",
-          label: "Integrate IDP into your processes",
-          link: {
-            type: "doc",
-            id: "components/modeler/web-modeler/idp/idp-integrate",
-          },
-          items: ["components/modeler/web-modeler/idp/idp-example"],
-        },
-        "components/modeler/web-modeler/idp/idp-key-concepts",
-        "components/modeler/web-modeler/idp/idp-reference",
       ],
     },
     {
       type: "category",
-      label: "Robotic Process Automation (RPA)",
+      label: "Features and integrations",
       link: {
         type: "doc",
-        id: "components/rpa/overview",
+        id: "components/features-integrations/features-integrations",
       },
       items: [
-        "components/rpa/getting-started",
-        "components/rpa/production",
         {
-          type: "link",
-          label: "RPA library specifications",
-          href: "https://camunda.github.io/rpa-python-libraries/",
+          type: "category",
+          label: "Agentic orchestration",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/agentic-orchestration",
+          },
+          items: [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
+          ],
+        },
+        {
+          type: "category",
+          label: "Intelligent document processing (IDP)",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/idp",
+          },
+          items: [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            {
+              type: "category",
+              label: "Document extraction",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-document-extraction",
+              },
+              items: [
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                "components/modeler/web-modeler/idp/idp-structured-extraction",
+              ],
+            },
+            // "components/modeler/web-modeler/idp/idp-document-automation",
+            {
+              type: "category",
+              label: "Integrate IDP into your processes",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/idp/idp-integrate",
+              },
+              items: ["components/modeler/web-modeler/idp/idp-example"],
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference",
+          ],
+        },
+        {
+          type: "category",
+          label: "Robotic Process Automation (RPA)",
+          link: {
+            type: "doc",
+            id: "components/rpa/overview",
+          },
+          items: [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+            {
+              type: "link",
+              label: "RPA library specifications",
+              href: "https://camunda.github.io/rpa-python-libraries/",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Document handling",
+          link: {
+            type: "doc",
+            id: "components/document-handling/getting-started",
+          },
+          items: [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector",
+          ],
+        },
+        {
+          type: "category",
+          label: "Camunda integrations",
+          link: {
+            type: "doc",
+            id: "components/camunda-integrations/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "SAP",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/sap/sap-integration",
+              },
+              items: [
+                "components/camunda-integrations/sap/odata-connector",
+                "components/camunda-integrations/sap/rfc-connector",
+                "components/camunda-integrations/sap/btp-plugin",
+                "components/camunda-integrations/sap/csap-cli",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Early access",
+          link: {
+            type: "doc",
+            id: "components/early-access/overview",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Alpha features",
+              link: {
+                type: "doc",
+                id: "components/early-access/alpha/alpha-features",
+              },
+              items: [
+                {
+                  type: "category",
+                  label: "BPMN Copilot",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  },
+                  items: [
+                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                  ],
+                },
+                "components/early-access/alpha/feel-copilot/feel-copilot",
+                {
+                  type: "category",
+                  label: "MCP Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/mcp-client/mcp-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+              ],
+            },
+          ],
         },
       ],
     },
+
     {
       type: "category",
       label: "Modeler",
@@ -174,7 +344,6 @@ module.exports = {
             "components/modeler/web-modeler/git-sync",
             "components/modeler/web-modeler/import-diagram",
             "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/save-as-element-templates",
             "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
@@ -198,6 +367,13 @@ module.exports = {
                 "components/modeler/web-modeler/design-your-process",
                 "components/modeler/web-modeler/implement-your-process",
                 "components/modeler/web-modeler/play-your-process",
+              ],
+            },
+            {
+              "Element templates": [
+                "components/modeler/web-modeler/element-templates/manage-element-templates",
+                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                "components/modeler/web-modeler/element-templates/save-as-element-templates",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -258,6 +434,21 @@ module.exports = {
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
+        require("./docs/components/modeler/forms/sidebar-schema"),
+        require("./docs/components/modeler/element-templates/sidebar-schema"),
+        "components/modeler/data-handling",
+        "components/modeler/using-web-and-desktop-modeler-together",
+        require("./docs/components/modeler/reference/sidebar-schema"),
+      ],
+    },
+    {
+      type: "category",
+      label: "BPMN, DMN, and FEEL",
+      link: {
+        type: "doc",
+        id: "components/concepts/bpmn-dmn-feel", // create this doc
+      },
+      items: [
         {
           BPMN: [
             "components/modeler/bpmn/modeler-bpmn",
@@ -321,13 +512,9 @@ module.exports = {
         },
         require("./docs/components/modeler/dmn/sidebar-schema"),
         require("./docs/components/modeler/feel/sidebar-schema"),
-        require("./docs/components/modeler/forms/sidebar-schema"),
-        require("./docs/components/modeler/element-templates/sidebar-schema"),
-        "components/modeler/data-handling",
-        "components/modeler/using-web-and-desktop-modeler-together",
-        require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
+
     {
       type: "category",
       label: "Orchestration Cluster",
@@ -693,134 +880,24 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Best Practices",
-      link: {
-        type: "doc",
-        id: "components/best-practices/best-practices-overview",
-      },
-      items: [
-        {
-          "Project management": [
-            "components/best-practices/management/following-the-customer-success-path",
-            "components/best-practices/management/doing-a-proper-poc",
-          ],
-          Architecture: [
-            "components/best-practices/architecture/deciding-about-your-stack",
-            "components/best-practices/architecture/sizing-your-environment",
-            "components/best-practices/architecture/understanding-human-tasks-management",
-          ],
-          Development: [
-            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
-            "components/best-practices/development/service-integration-patterns",
-            "components/best-practices/development/writing-good-workers",
-            "components/best-practices/development/dealing-with-problems-and-exceptions",
-            "components/best-practices/development/handling-data-in-processes",
-            "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-          ],
-          Modeling: [
-            "components/best-practices/modeling/creating-readable-process-models",
-            "components/best-practices/modeling/naming-bpmn-elements",
-            "components/best-practices/modeling/naming-technically-relevant-ids",
-            "components/best-practices/modeling/modeling-beyond-the-happy-path",
-            "components/best-practices/modeling/modeling-with-situation-patterns",
-            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
-            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
-            "components/best-practices/modeling/choosing-the-resource-binding-type",
-          ],
-          Operations: [
-            "components/best-practices/operations/versioning-process-definitions",
-            "components/best-practices/operations/reporting-about-processes",
-          ],
-          "CI/CD guidelines": [
-            "components/best-practices/cicd-guidelines/element-templates-at-scale",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Camunda integrations",
-      link: {
-        type: "doc",
-        id: "components/camunda-integrations/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "SAP",
-          link: {
-            type: "doc",
-            id: "components/camunda-integrations/sap/sap-integration",
-          },
-          items: [
-            "components/camunda-integrations/sap/odata-connector",
-            "components/camunda-integrations/sap/rfc-connector",
-            "components/camunda-integrations/sap/btp-plugin",
-            "components/camunda-integrations/sap/csap-cli",
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Early access",
-      link: {
-        type: "doc",
-        id: "components/early-access/overview",
-      },
-      items: [
-        {
-          type: "category",
-          label: "Alpha features",
-          link: {
-            type: "doc",
-            id: "components/early-access/alpha/alpha-features",
-          },
-          items: [
-            {
-              type: "category",
-              label: "BPMN Copilot",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              },
-              items: [
-                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-              ],
-            },
-            "components/early-access/alpha/feel-copilot/feel-copilot",
-            {
-              type: "category",
-              label: "MCP Client",
-              link: {
-                type: "doc",
-                id: "components/early-access/alpha/mcp-client/mcp-client",
-              },
-              items: [
-                "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
-                "components/early-access/alpha/mcp-client/mcp-client-connector",
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Camunda 8 SaaS",
       link: {
         type: "doc",
         id: "components/saas/saas",
       },
       items: [
-        "reference/regions",
-        "reference/camunda-help-center",
-        "reference/auto-updates",
-        "reference/status",
-        "reference/saas-ip-addresses",
+        "components/concepts/clusters",
+        "components/saas/regions",
+        "components/saas/encryption-at-rest",
+        "components/saas/backups",
+        "components/saas/auto-updates",
+        "components/saas/data-retention",
+        "components/saas/camunda-help-center",
+        "components/saas/status",
+        "components/saas/saas-ip-addresses",
       ],
     },
+
     "reference/glossary",
   ],
   "APIs & Tools": [
@@ -1006,9 +1083,10 @@ module.exports = {
           label: "8.8",
           link: {
             type: "doc",
-            id: "reference/announcements-release-notes/880/880-announcements",
+            id: "reference/announcements-release-notes/880/whats-new-in-88",
           },
           items: [
+            "reference/announcements-release-notes/880/whats-new-in-88",
             "reference/announcements-release-notes/880/880-announcements",
             "reference/announcements-release-notes/880/880-release-notes",
           ],
@@ -1147,6 +1225,10 @@ module.exports = {
                 //     "self-managed/installation-methods/helm/configure/authentication/basic",
                 //   ],
                 // },
+                "self-managed/installation-methods/helm/configure/air-gapped-installation",
+                "self-managed/installation-methods/helm/configure/application-configs",
+                "self-managed/installation-methods/helm/configure/running-custom-connectors",
+                "self-managed/installation-methods/helm/configure/add-extra-manifests",
                 {
                   Database: [
                     {
@@ -1165,23 +1247,18 @@ module.exports = {
                     },
                   ],
                 },
+                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
                     "self-managed/installation-methods/helm/configure/accessing-components-without-ingress",
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/secret-management",
-                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
-                //license key
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
+                "self-managed/installation-methods/helm/configure/secret-management",
+                //license key
                 //image registry to include air gapped below and enterprise images
-                "self-managed/installation-methods/helm/configure/air-gapped-installation",
-                "self-managed/installation-methods/helm/configure/running-custom-connectors",
-                //certificates
-                "self-managed/installation-methods/helm/configure/add-extra-manifests",
-                "self-managed/installation-methods/helm/configure/application-configs",
               ],
             },
             {
@@ -1202,8 +1279,8 @@ module.exports = {
             },
             {
               "Operational tasks": [
-                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/installation-methods/helm/operational-tasks/diagnostics",
+                "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
               ],
               //also to include backup and restore, and scaling
             },
@@ -1212,7 +1289,7 @@ module.exports = {
               label: "Cloud providers",
               link: {
                 type: "doc",
-                id: "self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks",
+                id: "self-managed/installation-methods/helm/cloud-providers/index",
               },
               items: [
                 {
@@ -1260,6 +1337,7 @@ module.exports = {
                     },
                   ],
                 },
+                "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
                 {
                   type: "category",
                   label: "Microsoft",
@@ -1270,11 +1348,6 @@ module.exports = {
                   items: [
                     "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-terraform",
                     "self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm",
-                  ],
-                },
-                {
-                  Google: [
-                    "self-managed/installation-methods/helm/cloud-providers/gcp/google-gke",
                   ],
                 },
                 {
@@ -1337,6 +1410,7 @@ module.exports = {
             },
           ],
         },
+        "self-managed/operational-guides/data-purge",
         {
           type: "category",
           label: "Document handling",
@@ -1360,9 +1434,8 @@ module.exports = {
             },
           ],
         },
-        {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
-        },
+        "self-managed/concepts/exporters",
+        "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
           Monitoring: [
             "self-managed/operational-guides/monitoring/log-levels",
@@ -1370,7 +1443,7 @@ module.exports = {
           ],
         },
         {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/concepts/exporters",
         "self-managed/concepts/elasticsearch-privileges",
@@ -1378,44 +1451,19 @@ module.exports = {
         "self-managed/concepts/opensearch-privileges",
         "self-managed/operational-guides/data-purge",
         {
-          type: "doc",
-          label: "Configure flow control",
-          id: "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+          Privileges: [
+            "self-managed/concepts/elasticsearch-privileges",
+            "self-managed/concepts/elasticsearch-without-cluster-privileges",
+            "self-managed/concepts/opensearch-privileges",
+          ],
+        },
+        {
+          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
       ],
     },
     {
       Components: [
-        {
-          Modeler: [
-            {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
-                {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
-                    "self-managed/components/modeler/web-modeler/configuration/database",
-                    "self-managed/components/modeler/web-modeler/configuration/identity",
-                    "self-managed/components/modeler/web-modeler/configuration/logging",
-                    "self-managed/components/modeler/web-modeler/configuration/ssl",
-                  ],
-                  Troubleshooting: [
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
-                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
-                  ],
-                },
-              ],
-            },
-            {
-              "Desktop Modeler": [
-                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
-              ],
-            },
-          ],
-        },
         {
           type: "category",
           label: "Orchestration Cluster",
@@ -1554,45 +1602,6 @@ module.exports = {
           ],
         },
         {
-          Connectors: [
-            "self-managed/components/connectors/overview",
-            "self-managed/components/connectors/connectors-configuration",
-          ],
-          Optimize: [
-            "self-managed/components/optimize/overview",
-            {
-              Configuration: [
-                {
-                  "System configuration": [
-                    "self-managed/components/optimize/configuration/system-configuration",
-                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
-                  ],
-                },
-                "self-managed/components/optimize/configuration/logging",
-                "self-managed/components/optimize/configuration/security-instructions",
-                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
-                "self-managed/components/optimize/configuration/history-cleanup",
-                "self-managed/components/optimize/configuration/localization",
-                "self-managed/components/optimize/configuration/object-variables",
-                "self-managed/components/optimize/configuration/variable-import",
-                "self-managed/components/optimize/configuration/multi-tenancy",
-              ],
-            },
-            {
-              "Migration & update": [
-                "self-managed/components/optimize/migration-update/camunda-8/instructions",
-                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
-                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
-                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
-                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
-                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
-                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
-                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
-                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
-              ],
-            },
-          ],
           Console: [
             "self-managed/components/console/overview",
             {
@@ -1603,6 +1612,42 @@ module.exports = {
             },
             "self-managed/components/console/usage-metrics",
             "self-managed/components/console/telemetry",
+          ],
+        },
+        {
+          Modeler: [
+            {
+              "Web Modeler": [
+                "self-managed/components/modeler/web-modeler/overview",
+                {
+                  Configuration: [
+                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                    "self-managed/components/modeler/web-modeler/configuration/database",
+                    "self-managed/components/modeler/web-modeler/configuration/identity",
+                    "self-managed/components/modeler/web-modeler/configuration/logging",
+                    "self-managed/components/modeler/web-modeler/configuration/ssl",
+                  ],
+                  Troubleshooting: [
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems",
+                  ],
+                },
+              ],
+            },
+            {
+              "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed",
+              ],
+            },
+          ],
+        },
+        {
+          Connectors: [
+            "self-managed/components/connectors/overview",
+            "self-managed/components/connectors/connectors-configuration",
           ],
         },
         {
@@ -1675,8 +1720,45 @@ module.exports = {
           ],
         },
         {
+          Optimize: [
+            "self-managed/components/optimize/overview",
+            {
+              Configuration: [
+                {
+                  "System configuration": [
+                    "self-managed/components/optimize/configuration/system-configuration",
+                    "self-managed/components/optimize/configuration/system-configuration-platform-8",
+                  ],
+                },
+                "self-managed/components/optimize/configuration/logging",
+                "self-managed/components/optimize/configuration/security-instructions",
+                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
+                "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/localization",
+                "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/variable-import",
+                "self-managed/components/optimize/configuration/multi-tenancy",
+              ],
+            },
+            {
+              "Migration & update": [
+                "self-managed/components/optimize/migration-update/camunda-8/instructions",
+                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
+              ],
+            },
+          ],
+        },
+        {
           type: "category",
-          label: "Components update",
+          label: "Components upgrade",
           link: {
             type: "doc",
             id: "self-managed/components/components-upgrade/introduction",

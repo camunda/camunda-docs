@@ -30,7 +30,7 @@ The **Save as template** feature is available for the following BPMN activity ty
 - Manual task
 - Call activity
 
-You cannot create a template for the [undefined task type](../../bpmn/undefined-tasks).
+You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
 
 ## Create an element template from a task
 
@@ -53,6 +53,7 @@ In this example, we'll configure a business rule task for fraud detection:
 
 1. Select a task in your BPMN diagram.
 2. Configure the task with the properties you need. For example, set up a business rule task by defining:
+
    - **Implementation**: Choose the implementation type (for example, DMN decision).
    - **Called decision**: Reference the decision to be invoked.
    - **Binding type**: Select the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md). We recommend using `versionTag` to ensure that the template always references a compatible resource version.
@@ -82,6 +83,7 @@ If you want to further customize or publish your template:
 
 1. Click **Edit template** from the notification to open the template editor.
 2. The template editor allows you to:
+
    - Modify template properties and [bindings](/components/modeler/element-templates/defining-templates.md#bindings).
    - Set up validation and [constraints](/components/modeler/element-templates/defining-templates.md#constraints) for user input.
    - Configure template groups and categories.
