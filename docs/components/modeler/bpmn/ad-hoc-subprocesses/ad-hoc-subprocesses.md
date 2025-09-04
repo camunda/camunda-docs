@@ -63,6 +63,12 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 - If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc sub-process is directly completed.
 - If set to `false`, the ad-hoc sub-process waits for the completion of all active instances before completing.
 
+## BPMN implementation
+
+An ad-hoc sub-process can be handled in Zeebe internally. This is the default behavior when modeling an ad-hoc sub-process.
+You can model which [elements to activate](#activate-an-element) and when the sub-process is [completed](#completion).
+Alternatively, you could use the [ad-hoc sub-process API](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) to activate elements manually.
+
 ## Job worker implementation
 
 An ad-hoc sub-process can be handled using a [Job worker](/components/concepts/job-workers.md). You can define the sub-process to be handles by a Job worker by giving it a task definition.
