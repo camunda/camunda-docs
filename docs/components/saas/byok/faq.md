@@ -24,7 +24,7 @@ Camunda 8 SaaS supports the following options:
 - **Camunda-managed hardware key:** Data encrypted with a Camunda-managed key at the hardware (HSM) protection level.
 - **Bring your own key (BYOK):** Use your own encryption key from a supported cloud KMS provider, such as AWS KMS.
 
-For a full comparison, see [Encryption at rest](/components/security/encryption-at-rest.md).
+For a full comparison, see [encryption at rest](/components/saas/encryption-at-rest.md).
 
 ### When can I choose the encryption type?
 
