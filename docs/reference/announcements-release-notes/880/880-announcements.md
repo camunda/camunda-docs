@@ -343,7 +343,7 @@ These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/o
 
 Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.
 
-### Process Instance Tags <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span> {#process-instance-tags}
+### Process instance tags <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span> {#process-instance-tags}
 
 Camunda 8.8 adds optional, immutable **tags** for process instances you can set at creation via the Orchestration Cluster API or SDK. Tags provide lightweight, structured metadata for routing, correlation, prioritization and more without inspecting full variable payloads.
 
