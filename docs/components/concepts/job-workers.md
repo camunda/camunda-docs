@@ -12,7 +12,7 @@ A job has the following properties:
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
-- **Tags (8.8+)**: Immutable labels (max 10) copied from the process instance at job creation; Great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) & [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
+- **Tags (8.8+)**: Immutable labels copied from the process instance at job creation; Great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) & [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
 
 ## Requesting jobs
 
@@ -255,35 +255,6 @@ Key points:
 
 - Tags are case-sensitive and immutable. They cannot be added, modified, or removed on the job.
 - The tags on a job mirror the process instance's tags at job creation time and can not be altered.
-- Apply tag-based logic inside the worker after activation to filter by tags.
-
-### Tag format and limits
-
-| Property | Value |
-|----------|-------|
-| Max tags per process instance | 10 (duplicates rejected) |
-| Tag length | 1–100 characters |
-| Regex | `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` |
-| First character | Letter (A–Z / a–z) |
-| Allowed subsequent characters | Alphanumeric, `_`, `-`, `:`, `.` |
-| Case sensitivity | Case sensitive (preserved & matched exactly) |
-| Mutability | Immutable after process instance creation |
-
-Validation failures during process instance creation (too many tags, invalid pattern/length, duplicates) cause the create request to be rejected with a 4xx error; consequently no jobs will carry those tags.
-
-### Use cases
-
-- Routing and prioritization (e.g. `priority:high`).
-- Business / domain identifiers from internal or third‑party systems (e.g. `businessKey:1234`, `customerId:7890`, `orderId:4567`).
-- Cross-system correlation keys without exposing full variable payloads.
-- Analytics segmentation (e.g. `region:emea`, `channel:web`).
-- Feature rollout / experiment grouping (e.g. `experiment:checkout-v2`).
-- Environment or tenant-like labeling where full multi-tenancy isn’t required (e.g. `env:staging`).
-
-### Guidelines
-
-- Do not store secrets or PII; tags propagate with jobs and exports.
-- Prefer concise `key:value` or `key` patterns for consistency.
-- Use variables (not tags) for mutable or large data.
-
-See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for format, validation rules, and limits.
+- Apply tag-based logic inside the worker after activation, e.g. routing, prioritization, data correlation.
+ 
+See, use-cases [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for more information (e.g. format, validation rules, limits, use-cases and guidelines).

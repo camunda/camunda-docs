@@ -190,7 +190,7 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 
 ## Tags (8.8+)
 
-Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the v2 API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
+Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
 
 ### Definition
 
@@ -202,6 +202,8 @@ Process instance tags are lightweight, immutable labels you can attach when crea
 - Maximum 10 unique tags per process instance (duplicates are ignored).
 - Order is not guaranteed; treat the set as unordered.
 
+Validation failures during process instance creation (too many tags, invalid pattern/lengt) cause the create request to be rejected with a 4xx error.
+
 ### Semantics
 
 - Tags are included in process instance search responses and on activated job payloads.
@@ -212,11 +214,18 @@ Process instance tags are lightweight, immutable labels you can attach when crea
 
 ### Use cases
 
-- Lightweight correlation (e.g., `businessKey:1234`).
-- Routing or selective processing (`priority:high`, `region:emea`).
-- Downstream external lookups (e.g. `crmId:123`).
+- Routing and prioritization (e.g. `priority:high`).
+- Business / domain identifiers from internal or third‑party systems (e.g. `businessKey:1234`, `customerId:7890`, `orderId:4567`).
+- Cross-system correlation keys without exposing full variable payloads. (e.g. `traceId:abcd-1234`, `crmId:3004`).
+- Analytics segmentation (e.g. `region:emea`, `channel:web`).
+- Feature rollout / experiment grouping (e.g. `experiment:checkout-v2`).
+- Environment or tenant-like labeling where full multi-tenancy isn’t required (e.g. `env:staging`).
 
-Do not place sensitive or personal data (PII) in tags: they are broadly propagated with jobs and exports!
+### Guidelines
+
+- Do not store secrets or PII; tags propagate with jobs and exports.
+- Prefer concise `key:value` or `key` patterns for consistency.
+- Use variables (not tags) for mutable or large data.
 
 ### Examples
 
@@ -233,14 +242,6 @@ curl -L 'http://localhost:8080/v2/process-instances' \
   "variables": { "orderId": "1234" }
 }'
 ```
-
-### Best practices
-
-- Prefer a `key:value` or `key` style to keep tags self-describing.
-- Keep values short; use process variables for larger or mutable data.
-- Use consistent prefixes for organizational scoping (e.g., `dept:`, `env:`).
-- Use variables (not tags) for mutable or large data.
-
 ## Next steps
 
 - [About Modeler](/components/modeler/about-modeler.md)
