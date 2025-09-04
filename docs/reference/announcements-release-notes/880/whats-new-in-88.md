@@ -55,6 +55,10 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
             <li><p>**Management Identity**: Controls access for Web Modeler, Console and Optimize.</p></li></ul></p></td>
 </tr>
 <tr>
+    <td>[Process instance tags](#process-instance-tags)</td>
+    <td>Add immutable, lightweight tags (max 10) at process instance creation for routing, correlation, and prioritization; forwarded to every job and provided in responses; API/SDK-only in 8.8.</td>
+</tr>
+<tr>
     <td>[APIs & tools](#apis-and-tools)</td>
     <td>New and changed APIs & tools are introduced in Camunda 8.8.</td>
 </tr>
@@ -109,6 +113,66 @@ In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flo
 Camunda 8.8 introduces a unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
 
 In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
+
+## Process instance tags {#process-instance-tags}
+
+Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweight labels you attach when creating a process instance via the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+<div className="list-tick">
+
+- **Lightweight correlation & routing**: Provide quick, structured identifiers (for example, `businessKey:1234`, `priority:high`, `region:emea`) without exposing or parsing large variable payloads.
+- **Job propagation**: Tags are copied to every job created for the instance (see [job workers](/components/concepts/job-workers.md#tags-88)), enabling fast worker-side branching, prioritization, or external lookups.
+- **Export visibility**: Tags are included with exported process instance and job entities (analytics / data pipelines) beginning in 8.8.
+- **Consistent filter semantics**: The process instance search filter (when using tags) requires an instance to contain **all** supplied tags (AND logic). Instances may contain additional tags. No partial or wildcard matching.
+- **Immutable & bounded**: Up to 10 unique tags; each 1–100 characters; case-sensitive; regex `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` (must start with a letter). They cannot be added, updated, or removed after creation.
+- **API‑only in 8.8**: Tags do **not** yet appear in Operate, Optimize or Tasklist UIs; you manage and consume them exclusively through APIs and exported data streams.
+
+</div>
+
+### Why it matters
+
+Tags provide a durable, low-overhead mechanism for:
+
+- Cross-system correlation (mapping internal or third‑party identifiers without overloading business variables).
+- Early routing / selective processing decisions in workers prior to fetching or inspecting large variable sets.
+- Simple classification and future prioritization (for example, `priority:high`).
+- Analytics segmentation keys (`channel:web`, `segment:enterprise`).
+
+### Format & validation
+
+| Constraint | Rule |
+|-----------|------|
+| Max tag count | 10 (duplicates rejected) |
+| Length | 1–100 characters |
+| Regex | `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` |
+| Case handling | Case-sensitive; preserved exactly |
+| Mutability | Immutable after instance creation |
+
+Creation requests violating any constraint are rejected (4xx) so that invalid tags never appear downstream.
+
+### Best practices
+
+- Use a `key:value` or `key` pattern for clarity (e.g. `businessKey:1234`, `priority:high`).
+- Keep tags concise; prefer variables for mutable or large data.
+- Avoid secrets or personally identifiable information—tags propagate broadly (jobs, exports).
+- Establish internal naming conventions (for example, prefixes like `env:`, `dept:`) for governance.
+
+### Limitations & future roadmap
+
+| Area | 8.8 Behavior                           | Under assessment; Possible features (post-8.8)              |
+|------|----------------------------------------|-------------------------------------------------------------|
+| UI visibility | Not shown in Operate/Optimize/Tasklist | Display & basic filtering in UI                             |
+| Job activation filtering | Not available                          | Server-side tag-based activation filtering / prioritization |
+| Mutation | Not supported                          | Add features after process instance creation                |
+| Partial/regex search | Not supported                          | Support advanced filtering for tags                         |
+
+### Related documentation
+
+- Feature concept & creation examples: [Process instance creation](/components/concepts/process-instance-creation.md#tags-88)
+- Tags on jobs: [Job workers](/components/concepts/job-workers.md#tags-88)
+- API specification (creation/search): See Orchestration Cluster REST API process instance endpoints.
+
+> If you previously relied on large variable sets for lightweight correlation, adopting tags can help simplifying your flows.
 
 ## Identity, authentication, and authorization {#identity}
 
