@@ -6,8 +6,7 @@ description: "Learn more about what's new and changed in Camunda 8.8."
 keywords: ["what's changed", "what's new"]
 ---
 
-import OrchestrationClusterImg from './assets/orchestration-cluster.png';
-import PersonaBadge from './react-components/\_persona-badge';
+import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
 Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
@@ -84,10 +83,10 @@ The Orchestration Cluster (previously automation cluster) is now the core compon
 
 In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
 
-- [Zeebe](../reference/glossary.md#zeebe) is the [workflow engine](../reference/glossary.md#workflow-engine).
-- Operate is used for monitoring and troubleshooting [process instances](../reference/glossary.md#process-instance) running in Zeebe.
-- Tasklist is used for interacting with [user tasks](../reference/glossary.md#user-task) (assigning, completing, and so on).
-- [Identity](../reference/glossary.md#identity) is used for managing the integrated Orchestration Cluster authentication and authorization.
+- [Zeebe](/reference/glossary.md#zeebe) is the [workflow engine](/reference/glossary.md#workflow-engine).
+- Operate is used for monitoring and troubleshooting [process instances](/reference/glossary.md#process-instance) running in Zeebe.
+- Tasklist is used for interacting with [user tasks](/reference/glossary.md#user-task) (assigning, completing, and so on).
+- [Identity](/reference/glossary.md#identity) is used for managing the integrated Orchestration Cluster authentication and authorization.
 
 In Camunda 8.7 and earlier, each component (Zeebe, Operate, Tasklist, and Identity) was deployed independently.
 
@@ -288,7 +287,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 | What's new/changed                                                                                                                   | Description                                                                                                                                                                                                                                                                                                 |
 | :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Orchestration Cluster REST API](#orchestration-cluster)                                                                             | The unified Orchestration Cluster REST API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.                                                                                                                            |
-| [Camunda Java Client](apis-tools/java-client/getting-started.md)                                                                               | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
+| [Camunda Java Client](apis-tools/java-client/getting-started.md)                                                                     | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
 | [Camunda Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)                                                                | The Camunda Spring Boot SDK replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.                                                                           |
 | [Camunda Process Test](/apis-tools/testing/getting-started.md)                                                                       | Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.                                                                        |
 | [Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)                                                 | Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.                                                                                                                                         |
@@ -296,7 +295,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
 | [Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)      | With the 8.8 release, the gRPC API continues but is being disabled by default starting with 8.10.                                                                                                                                                                                                           |
 
 :::info
-To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](../apis-tools/migration-manuals/index.md).
+To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
 :::
 
 ## Upgrade guides {#upgrade-guides}
@@ -305,7 +304,7 @@ Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibi
 
 The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
-| Guide                                                                           | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
-| :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Self-Managed upgrade guide](../self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
-| [API and SDK upgrade guide](../apis-tools/migration-manuals/index.md)           | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
+| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
+| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
+| [API and SDK upgrade guide](/apis-tools/migration-manuals/index.md)           | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
