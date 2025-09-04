@@ -3,7 +3,7 @@ title: "Writing good workers"
 description: "Service tasks within Camunda 8 require you to set a task type and implement job workers who perform whatever needs to be performed."
 ---
 
-[Service tasks](/docs/components/modeler/bpmn/service-tasks/) within Camunda 8 require you to set a task type and implement [job workers](/docs/components/concepts/job-workers) who perform whatever needs to be performed. This describes that you might want to:
+[Service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md) within Camunda 8 require you to set a task type and implement [job workers](/components/concepts/job-workers.md) who perform whatever needs to be performed. This describes that you might want to:
 
 1. Write all glue code in one application, separating different classes or functions for the different task types.
 2. Think about idempotency and read or write as little data as possible from/to the process.

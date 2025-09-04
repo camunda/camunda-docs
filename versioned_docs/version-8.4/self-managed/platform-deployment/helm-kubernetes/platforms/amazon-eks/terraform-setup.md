@@ -4,11 +4,11 @@ title: "Deploy an EKS cluster with Terraform"
 description: "Deploy an Amazon Kubernetes Cluster (EKS) with a Terraform module for a quick Camunda 8 setup."
 ---
 
-<!-- The following link to /docs/ is on purpose to always link to the latest version -->
+<!-- The following link to / is on purpose to always link to the latest version -->
 
 :::warning
 
-There is a [**newer release**](/docs/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) of the documentation available with updated instructions. Use of the latest release is encouraged.
+There is a **newer release** of the documentation available with updated instructions. Use of the latest release is encouraged.
 
 :::
 
@@ -26,7 +26,7 @@ If you are completely new to Terraform and the idea of IaC, read through the [Te
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) to create any resources within AWS.
 - [Terraform (1.9+)](https://developer.hashicorp.com/terraform/downloads)
-- [Kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
+- [Kubectl (1.30+)](https://kubernetes.io/tasks/tools/#kubectl) to interact with the cluster.
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured.
   - This simplifies the setup by not relying on explicit credentials and instead creating a mapping between IAM roles and Kubernetes service account based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
   - This allows a Kubernetes service account to temporarily impersonate an AWS IAM role to interact with AWS services like S3, RDS, or Route53 without having to supply explicit credentials.

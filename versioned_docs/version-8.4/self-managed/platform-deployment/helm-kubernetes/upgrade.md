@@ -455,7 +455,7 @@ To authenticate:
 3. Connect with:
 
 - [Desktop Modeler](/components/modeler/desktop-modeler/connect-to-camunda-8.md).
-- [Zeebe client (zbctl)](/docs/self-managed/zeebe-deployment/security/secure-client-communication/#zbctl).
+- [Zeebe client (zbctl)](/self-managed/zeebe-deployment/security/secure-client-communication.md#zbctl).
 
 ### v8.2.0 (Minor)
 

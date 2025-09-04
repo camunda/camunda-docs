@@ -14,7 +14,7 @@ description: "Take a closer look at understanding workers, handling exceptions o
 ## Understanding workers
 
 :::caution Camunda 8 only
-The description of workers targets Camunda 8, even if [external tasks in Camunda 7](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
+The description of workers targets Camunda 8, even if [external tasks in Camunda 7](https:/.camunda.org/manual/latest/user-guide/process-engine/external-tasks/) are conceptually similar. If you are looking for Camunda 7, visit [understanding Camunda 7 transaction handling](../understanding-transaction-handling-c7/).
 :::
 
 First, let's briefly examine how a worker operates.
@@ -25,7 +25,7 @@ If there is no worker subscribed when a job is created, the job is simply put in
 
 ![Worker concept](dealing-with-problems-and-exceptions-assets/worker-concept.png)
 
-Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/docs/components/concepts/job-workers/#completing-or-failing-jobs):
+Whenever the worker has finished whatever it needs to do (like invoking the REST endpoint), it sends another call to the workflow engine, which [can be one of these three](/components/concepts/job-workers.md#completing-or-failing-jobs):
 
 - [`CompleteJob`](/apis-tools/zeebe-api/gateway-service.md#completejob-rpc): The service task went well, the process instance can move on.
 - [`FailJob `](/apis-tools/zeebe-api/gateway-service.md#failjob-rpc): The service task failed, and the workflow engine should handle this failure. There are two possibilities:
@@ -100,11 +100,11 @@ zbc.createWorker("retrieveMoney", (job) => {
 
 ### Using incidents
 
-Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/docs/components/operate/userguide/resolve-incidents-update-variables/).
+Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/components/operate/userguide/resolve-incidents-update-variables.md).
 
 ### Writing idempotent workers
 
-Zeebe uses the **at-least-once strategy** for job handlers, which is a typical choice in distributed systems. This means that the process instance only advances in the happy case (the job was completed, the workflow engine received the complete job request and committed it). A typical failure case occurs when the worker who polled the job crashes and cannot complete the job anymore. [In this case, the workflow engine gives the job to another worker after a configured timeout](/docs/components/concepts/job-workers#timeouts). This ensures that the job handler is executed at least once.
+Zeebe uses the **at-least-once strategy** for job handlers, which is a typical choice in distributed systems. This means that the process instance only advances in the happy case (the job was completed, the workflow engine received the complete job request and committed it). A typical failure case occurs when the worker who polled the job crashes and cannot complete the job anymore. [In this case, the workflow engine gives the job to another worker after a configured timeout](/components/concepts/job-workers.md#timeouts). This ensures that the job handler is executed at least once.
 
 But this can mean that the handler is executed more than once! You need to consider this in your handler code, as the handler might be called more than one time. The [technical term describing this is idempotency](https://en.wikipedia.org/wiki/Idempotence).
 
@@ -139,7 +139,7 @@ We decide that we want to deal with an exception in the process: in case the inv
 
 ...we assign a task to a human user, who is now in charge of taking care of delivering the invoice.
 
-Learn more about the usage of [error events](/docs/components/modeler/bpmn/error-events/) in the user guide.
+Learn more about the usage of [error events](/components/modeler/bpmn/events.md) in the user guide.
 
 ### Throwing and handling BPMN errors
 

@@ -31,7 +31,7 @@ Let’s look at using BPMN tasks to handle these communication patterns before d
 
 ### Service task
 
-The [service task](/docs/components/modeler/bpmn/service-tasks) is the typical element to implement synchronous request/response calls, such as REST, gRPC or SOAP. You should **always use service tasks for synchronous request/response**.
+The [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) is the typical element to implement synchronous request/response calls, such as REST, gRPC or SOAP. You should **always use service tasks for synchronous request/response**.
 
 ![Service task](service-integration-patterns-assets/service-task.png)
 
@@ -61,7 +61,7 @@ You could also argue to use send tasks to invoke synchronous request/response ca
 
 ### Receive task
 
-A [receive task](/docs/components/modeler/bpmn/receive-tasks/) waits for an asynchronous message. Receive tasks **should be used for incoming asynchronous messages or events**, like AMQP messages or Kafka records.
+A [receive task](/components/modeler/bpmn/receive-tasks/receive-tasks.md) waits for an asynchronous message. Receive tasks **should be used for incoming asynchronous messages or events**, like AMQP messages or Kafka records.
 
 ![Receive task](service-integration-patterns-assets/receive-task.png)
 
@@ -108,15 +108,15 @@ Or, you might run multiple workflow engines which can lead to internal IDs only 
 
 In practice, however, using the internal job instance key is not a big problem if you get responses in very short time frames (milliseconds). Whenever you have more long-running interactions, you should consider using send and receive tasks, or build your own lookup table that can also address the problems mentioned above.
 
-This is also balanced by the fact that service tasks are simply very handy. The concept is by far the easiest way to implement asynchronous request/response communication. The job instance key is generated for you and unique for every message interchange. You don’t have to think about race conditions or idempotency constraints yourself. [Timeout handling and retry logic](/docs/components/concepts/job-workers#timeouts) is built into the service task implementation of Zeebe. There is also [a clear API to let the workflow engine know of technical or business errors](/docs/components/concepts/job-workers#completing-or-failing-jobs).
+This is also balanced by the fact that service tasks are simply very handy. The concept is by far the easiest way to implement asynchronous request/response communication. The job instance key is generated for you and unique for every message interchange. You don’t have to think about race conditions or idempotency constraints yourself. [Timeout handling and retry logic](/components/concepts/job-workers.md#timeouts) is built into the service task implementation of Zeebe. There is also [a clear API to let the workflow engine know of technical or business errors](/components/concepts/job-workers.md#completing-or-failing-jobs).
 
 **Technical implications of using send and receive tasks**
 
-Using send and receive tasks means to use [the message concept built into Zeebe](/docs/components/concepts/messages). This is a powerful concept to solve a lot of problems around cardinalities of subscriptions, correlation of the message to the right process instances, and verification of uniqueness of the message (idempotency).
+Using send and receive tasks means to use [the message concept built into Zeebe](/components/concepts/messages.md). This is a powerful concept to solve a lot of problems around cardinalities of subscriptions, correlation of the message to the right process instances, and verification of uniqueness of the message (idempotency).
 
 When using messages, you need to provide the correlation id yourself. This means that the correlation id is fully under your control, but it also means that you need to generate it yourself and make sure it is unique. You will most likely end up with generated UUIDs.
 
-You can leverage [message buffering](/docs/components/concepts/messages#message-buffering) capabilities, which means that the process does not yet need to be ready to receive the message. You could, for example, do other things in between, but this also means that you will not get an exception right away if a message cannot be correlated, as it is simply buffered. This leaves you in charge of dealing with messages that can never be delivered.
+You can leverage [message buffering](/components/concepts/messages.md#message-buffering) capabilities, which means that the process does not yet need to be ready to receive the message. You could, for example, do other things in between, but this also means that you will not get an exception right away if a message cannot be correlated, as it is simply buffered. This leaves you in charge of dealing with messages that can never be delivered.
 
 Retries are not built-in, so if you need to model a loop to retry the initial service call if no response is received. And (at least in the current Zeebe version), there is no possibility to trigger error events for a receive task, which means you need to model error messages as response payload or separate message types — both are discussed later in this post.
 
@@ -186,7 +186,7 @@ As a fourth possibility, you can add event subprocesses, which get activated whe
 
 ![Event subprocess to capture different response messages](service-integration-patterns-assets/response-event-subprocess.png)
 
-This pattern is pretty handy, but also needs some explanation to people new to BPMN. It has one downside you need to know: once your process instance moves to the subprocess, you can’t easily go back to the typical flow. To some extent this problem can be solved by advanced modeling patterns like shown in the [allow for order cancellation anytime](../../modeling/building-flexibility-into-bpmn-models/#allow-for-order-cancellation-any-time) example.
+This pattern is pretty handy, but also needs some explanation to people new to BPMN. It has one downside you need to know: once your process instance moves to the subprocess, you can’t easily go back to the typical flow.
 
 At the same time, the event subprocess has a superpower worth mentioning: you can now wait for cancellation messages in whole chunks of your process — it could arrive anytime.
 
@@ -199,7 +199,7 @@ At the same time, the event subprocess has a superpower worth mentioning: you ca
 
 ### Message type on the wire != BPMN message type
 
-There is one important detail worth mentioning in the context of message response patterns: The message type used in BPMN models does not have to be exactly the message type you get on the wire. When you correlate technical messages, e.g. from AMQP, you typically write a piece of glue code that receives the message and calls the workflow engine API. This is described in [connecting the workflow engine with your world](../connecting-the-workflow-engine-with-your-world/), including a code example. In this glue code you can do various transformations, for example:
+There is one important detail worth mentioning in the context of message response patterns: The message type used in BPMN models does not have to be exactly the message type you get on the wire. When you correlate technical messages, e.g. from AMQP, you typically write a piece of glue code that receives the message and calls the workflow engine API. This is described in [connecting the workflow engine with your world](/components/best-practices/development/connecting-the-workflow-engine-with-your-world.md), including a code example. In this glue code you can do various transformations, for example:
 
 - Messages on different message queues could lead to the same BPMN message type, probably having some additional parameter in the payload indicating the origin.
 - Some message header or payload attributes could be used to select between different BPMN message types being used.
@@ -208,7 +208,7 @@ It is probably not best practice to be as inconsistent as possible between techn
 
 ## Hiding technical complexity behind call activities
 
-Whenever technical details of one service integration become complicated, you can think of creating a separate process model for the technicalities of the call and use a [call activity](/docs/components/modeler/bpmn/call-activities/) in the main process.
+Whenever technical details of one service integration become complicated, you can think of creating a separate process model for the technicalities of the call and use a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) in the main process.
 
 An example is given in chapter 7 of [Practical Process Automation](https://processautomationbook.com/):
 
