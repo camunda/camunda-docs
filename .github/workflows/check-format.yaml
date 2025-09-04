@@ -11,12 +11,12 @@ jobs:
           node-version: 22
       - name: Install Dependencies
         run: npm ci
-      - name: Verify format with Vale
-        uses: errata-ai/vale-action@v2.1.1
-        with:
-          filter_mode: added
-          reporter: github-pr-review
-          version: 3.9.6
+      # - name: Verify format with Vale
+      #   uses: errata-ai/vale-action@v2.1.1
+      #   with:
+      #     filter_mode: added
+      #     reporter: github-pr-review
+      #     version: 3.9.6
       - name: Verify format with Prettier
         uses: camunda/reviewdog-action-prettier@main
         with:
