@@ -16,7 +16,7 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 | Configuration parameter         | Description                            | Default value |
 | ------------------------------- | -------------------------------------- | ------------- |
-| camunda.operate.importerEnabled | When true, Importer module is enabled. | true          |
+| camunda.operate.importerEnabled | When true, Importer module is enabled. | false         |
 | camunda.operate.archiverEnabled | When true, Archiver module is enabled. | true          |
 | camunda.operate.webappEnabled   | When true, Webapp module is enabled.   | true          |
 

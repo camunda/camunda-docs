@@ -7,11 +7,23 @@ description: "The Zeebe Gateway also exposes an HTTP endpoint for cluster manage
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Besides the [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [gRPC API](/apis-tools/zeebe-api/grpc.md) for process instance execution, the Zeebe Gateway also exposes an HTTP endpoint for cluster management operations. This API is not expected to be used by a typical user, but by a privileged user such as a cluster administrator. It is exposed via a different port and configured using configuration `management.server.port` (or via environment variable `MANAGEMENT_SERVER_PORT`). By default, this is set to `9600`.
+As well as the [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [gRPC API](/apis-tools/zeebe-api/grpc.md) for process instance execution, the Zeebe Gateway exposes an HTTP endpoint for cluster management operations.
 
-The API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints). For additional configurations such as security, refer to the Spring Boot documentation.
+## About this API
 
-The following operations are currently available:
+This API is not expected to be used by a typical user, but by a privileged user such as a cluster administrator.
+
+It is exposed via a different port, and configured using configuration `management.server.port` (or via environment variable `MANAGEMENT_SERVER_PORT`). By default, this is set to `9600`.
+
+The API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html#actuator.endpoints).
+
+:::info
+For additional configurations such as security, refer to the official [Spring Boot documentation](https://spring.io/guides).
+:::
+
+### Operations
+
+This API currently supports the following operations:
 
 - [Rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md)
 - [Pause and resume exporting](#exporting-api)
@@ -19,7 +31,7 @@ The following operations are currently available:
 
 ## Exporting API
 
-Exporting API is used:
+Use the Exporting API for the followings:
 
 - As a debugging tool.
 - When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
@@ -65,17 +77,22 @@ When all partitions soft pause exporting, a successful response is received. If 
 
 ## Exporters API
 
-The Exporters API is used for [dual region deployment](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) operations, and allows for enabling and disabling configured exporters. By default, all configured exporters are enabled.
+The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.
 
-When **enabled**, records are exported to the exporter. The log is compacted only after the records are exported. When **disabled**, records are _not_ exported to the exporter, and the log will be compacted.
+The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) operations.
 
-The OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+- **Enabled**: Records are exported to the exporter. The log is compacted only after the records are exported.
+- **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
+
+:::info
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/exporter-api.yaml).
+:::
 
 :::note
 The `camunda‐zeebe‐gateway` service on port 9600 exposes the exporter endpoints.
 :::
 
-<Tabs groupId="exporters" defaultValue="enable" queryString values={[{label: 'Enable an exporter', value: 'enable' },{label: 'Disable an exporter', value: 'disable' }, {label: 'Monitor', value: 'monitor'}]} >
+<Tabs groupId="exporters" defaultValue="enable" queryString values={[{label: 'Enable an exporter', value: 'enable' },{label: 'Disable an exporter', value: 'disable' }, {label: 'Delete an exporter', value: 'delete' }, {label: 'Monitor', value: 'monitor'}]} >
 
 <TabItem value="enable">
 
@@ -106,9 +123,26 @@ After disabling the exporter, no records will be exported to this exporter. Othe
 
 </TabItem>
 
+<TabItem value="delete">
+
+To delete an exporter permanently from the system, first remove the configuration of the exporter from the application. Then send the following request to the gateway's management API:
+
+```
+POST actuator/exporters/{exporterId}/delete
+```
+
+If the configuration is deleted, the exporter remains in the system but enters a blocked state. This prevents log compaction and thus increases the disk usage.
+
+- To fully remove the exporter, it must be deleted using the Management API to ensure all references to it are removed.
+- To re-add the exporter, restore its configuration in the application properties and restart the system.
+
+Alternatively, if you no longer wish to use an exporter, you can disable it using the management API. The exporter can be re-enabled at any time without requiring a system restart.
+
+</TabItem>
+
 <TabItem value="monitor">
 
-Both enable and disable requests are processed asynchronously. To monitor the status of the exporters, send the following request to the gateway's management API:
+All requests to change the state of the exporters are processed asynchronously. To monitor the status of the exporters, send the following request to the gateway's management API:
 
 ```
 GET actuator/exporters/

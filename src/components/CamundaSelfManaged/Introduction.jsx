@@ -4,18 +4,6 @@ import { activeVersionURLPath as linkBase } from "../Versions";
 const Introduction = () => {
   return (
     <div>
-      <p>
-        Welcome to Camunda 8 Self-Managed the self-hosted alternative to{" "}
-        <a href={`${linkBase()}/components`}>Camunda 8 SaaS</a>! This section
-        provides everything you need to get started with deploying and managing
-        Camunda in your own infrastructure.
-      </p>
-      <p>
-        From quick start guides to infrastructure and deployment options, we'll
-        help you build a robust process automation platform that meets your
-        organization's specific needs.
-      </p>
-
       <h2>Self-Managed vs. SaaS?</h2>
       <p>
         The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS

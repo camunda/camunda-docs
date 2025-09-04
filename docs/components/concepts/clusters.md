@@ -8,15 +8,6 @@ A [cluster](/components/console/manage-clusters/create-cluster.md) is a provided
 
 When [creating a cluster in SaaS](/components/console/manage-clusters/create-cluster.md), you can choose the cluster **type** and **size** to meet your organization's availability and scalability needs, and to provide control over cluster performance, uptime, and disaster recovery guarantees.
 
-:::note
-
-Prior to 8.6, clusters were configured by hardware size (S, M, L).
-
-- This documentation covers the SaaS cluster model introduced in 8.6. To learn more about clusters prior to 8.6, see previous documentation versions.
-- To learn how you can migrate your existing clusters to the newer model, contact your Customer Success Manager.
-
-:::
-
 ## Cluster type
 
 The cluster type defines the level of availability and uptime for the cluster.

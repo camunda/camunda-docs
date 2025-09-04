@@ -440,6 +440,10 @@ kubectl logs -f <POD_NAME>
 
 For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/setup/upgrade.md).
 
+## Production installation
+
+For production installation, see the [Camunda production installation guide with Kubernetes and Helm](/versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md), available starting with version 8.7.
+
 ## General notes
 
 - **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.

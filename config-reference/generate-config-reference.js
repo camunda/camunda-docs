@@ -175,6 +175,15 @@ const preGenerateDocs = (config) => {
       .toUpperCase()
       .replaceAll(/\./g, "_")
       .replaceAll(/-/g, "");
+    property.anchor = property.name.replaceAll(/\./g, "");
+    if (property.deprecation && property.deprecation.replacement) {
+      property.deprecation.replacementEnv = property.deprecation.replacement
+        .toUpperCase()
+        .replaceAll(/\./g, "_")
+        .replaceAll(/-/g, "");
+      property.deprecation.replacementAnchor =
+        property.deprecation.replacement.replaceAll(/\./g, "");
+    }
   });
 };
 const postGenerateDocs = (config) => {};

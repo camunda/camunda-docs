@@ -1,6 +1,6 @@
 ---
 id: overview
-title: "Console (Self-Managed)"
+title: "Console on Self-Managed"
 sidebar_label: "Overview"
 description: "Console Self-Managed provides key insights into orchestration cluster deployments, process orchestration usage, and streamlining usage tracking."
 ---

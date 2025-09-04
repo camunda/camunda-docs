@@ -53,11 +53,11 @@ At this time, updates do not trigger backups, however, manual backups can be ini
 
 ### Update a cluster manually
 
-When an update is available, an **Update** button will appear. This button is not available for clusters enrolled in [automatic updates](/reference/auto-updates.md).
+When an update is available, an **Update** button will appear. This button is not available for clusters enrolled in [automatic updates](/components/saas/auto-updates.md).
 
 ### Automated cluster updates
 
-You can decide if you want to have [automated updates](/reference/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+You can decide if you want to have [automated updates](/components/saas/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
 ## Resize a cluster
 

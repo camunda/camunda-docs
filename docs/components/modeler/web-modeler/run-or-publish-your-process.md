@@ -37,10 +37,11 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
 
 ### Before deploying a process
 
+- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 - Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
@@ -50,7 +51,7 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
 - Ensure there are no missing secrets or misconfigured clients required for the process to run.
   :::info
-  When missing secrets or no client credentials with a `Zeebe` scope are detected, a warning is shown in the **Deploy diagram** dialog.
+  When missing secrets or no client credentials with access to the Orchestration Cluster API are detected, a warning is shown in the **Deploy diagram** dialog.
   Each warning offers a link to manage the missing secrets or misconfigured clients.
   :::
 
@@ -67,6 +68,10 @@ Running a process means that you execute the process as a process instance on Ca
 - [Run programmatically](#deploy-to-run-programmatically)
 - [Run manually from Modeler](#run-manually-from-modeler)
 - [Schedule via timer](#schedule-via-timer)
+
+### Before running a process
+
+- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the users running the process are assigned to both the `CREATE_PROCESS_INSTANCE` permission to the `PROCESS_DEFINITION` resource type and `CREATE` permission to the `RESOURCE` resource type.
 
 ### Test run using Play mode
 
@@ -92,7 +97,10 @@ You can also test your process thoroughly on a development cluster to observe ho
 
 4. Click on **Run** to confirm. This will start a process instance on the selected cluster. If required, it (re-)deploys the process beforehand on the cluster.
 
-After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required.
+After the process instance has been started, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Follow this link to observe the progress of the process instance and interact with it if required. If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
+
+- `READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type
+- `operate` permission to the `COMPONENT` resource type
 
 :::info
 Starting an instance from Web Modeler [deploys](#deploy-a-process) recent changes to the target cluster, which changes future runs of this process definition in case it has already been deployed and used. Existing process instances are not affected.
@@ -154,7 +162,9 @@ You have the following options to publish a process:
 
 ### Deploy to run programmatically
 
-In order to be able to call a process programmatically from or inside another application or service, you simply have to [deploy](#deploy-a-process) it. Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs. Read the [documentation on APIs & clients](../../../apis-tools/working-with-apis-tools.md) to learn more.
+To call a process programmatically from or inside another application or service, [deploy](#deploy-a-process) it.
+Once deployed, you can run a process via our APIs, using an API client, or via one the various community SDKs.
+Read the [documentation on APIs & clients](../../../apis-tools/working-with-apis-tools.md) to learn more.
 
 ### Publish via webhook
 
@@ -179,18 +189,7 @@ You have multiple options to ensure that the webhook connection is safe for use 
 
 Publishing a process to Tasklist makes it available to users through the web-based [Tasklist application](../../tasklist/introduction-to-tasklist.md).
 
-<Tabs groupId="tasklistPublishing" defaultValue="saas" values={[{label: 'SaaS', value: 'saas', }, {label: 'Self-Managed', value: 'sm', },]} >
-<TabItem value="saas">
-
 To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, it will automatically appear in the Tasklist application, where users can start new instances of the process.
-
-</TabItem>
-<TabItem value="sm">
-
-To publish a process to Tasklist, you first need to [deploy](#deploy-a-process) it. Once the process is deployed, you need to [set permissions in Identity](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md#resource-based-permissions) in order to make it accessible in the Tasklist application.
-
-</TabItem>
-</Tabs>
 
 <img src={TasklistProcessesImg} style={{width: 800}} alt="Processes published to Tasklist" />
 
@@ -251,5 +250,6 @@ When working on Camunda 8 Self-Managed, you can define access permissions on a p
 
 ### Missing client credentials
 
-When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog. The warning offers a link to manage the missing or misconfigured credentials.
-Client credentials with the `Zeebe` scope are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
+When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog.
+The warning offers a link to manage the missing or misconfigured credentials.
+Client credentials with access to the Orchestration Cluster API are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.

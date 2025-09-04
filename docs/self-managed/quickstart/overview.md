@@ -1,7 +1,7 @@
 ---
 id: overview
-title: "Overview"
-sidebar_label: "Overview"
+title: "Quickstart"
+sidebar_label: "Quickstart"
 description: ""
 ---
 

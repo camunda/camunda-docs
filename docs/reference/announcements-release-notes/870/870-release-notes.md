@@ -163,7 +163,7 @@ Create and append tasks with resources available in the current project and proc
 
 ### Amazon Web Services (AWS) region support <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
-Camunda 8 SaaS now supports Amazon Web Services (AWS) deployments. When creating a new cluster, you can select from the following new [AWS regions](/reference/regions.md):
+Camunda 8 SaaS now supports Amazon Web Services (AWS) deployments. When creating a new cluster, you can select from the following new [AWS regions](/components/saas/regions.md):
 
 - Frankfurt, Europe (eu-central-1)
 - North America, Virginia (us-east-1)
@@ -572,7 +572,7 @@ A new Singapore (asia-southeast1) region is available for SaaS clusters. Use thi
 - Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
 - Keep cluster data within Singapore to support your local data residency and compliance needs.
 
-To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+To learn more about supported SaaS regions, see [regions](/components/saas/regions.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2122 -->
 

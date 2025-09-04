@@ -110,10 +110,10 @@ The client is removed from the role.
 
 ## Manage mapping rules
 
-<span class="badge badge--platform">Camunda 8 Self-Managed only</span>
+<span class="badge badge--platform">Self-Managed only</span>
 
 :::note
-[Mapping rules](/self-managed/concepts/mapping-rules.md) are only available for OIDC authentication.
+[Mapping rules](../concepts/access-control/mapping-rules.md) are only available for OIDC authentication.
 :::
 
 ### Assign mapping rules to a role

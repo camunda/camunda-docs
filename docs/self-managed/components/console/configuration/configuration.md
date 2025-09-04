@@ -14,7 +14,7 @@ Underscores in environment variables correspond to configuration file key levels
 ## Environment variables
 
 | Environment variable                            | Description                                                                                                                                                                                                                    | Example value                              |
-|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------|
+| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
 | `KEYCLOAK_BASE_URL`                             | Base URL for Keycloak.                                                                                                                                                                                                         | `https://example.com/auth`                 |
 | `KEYCLOAK_INTERNAL_BASE_URL`                    | Internal base URL for Keycloak.                                                                                                                                                                                                | `http://camunda-platform-keycloak:80/auth` |
 | `KEYCLOAK_REALM`                                | Realm for Keycloak.                                                                                                                                                                                                            | `camunda-platform`                         |
@@ -47,7 +47,7 @@ Camunda 8 components without a valid license may display **Non-Production Licens
 These settings are useful when the application needs to make outgoing network requests in environments that require traffic to pass through a proxy server.
 
 | Environment variable | Description                                                                                    | Example value                         | Default value |
-| -------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------- | ------------- |
+| :------------------- | :--------------------------------------------------------------------------------------------- | :------------------------------------ | :------------ |
 | `http_proxy`         | Specifies the proxy server to be used for outgoing HTTP requests.                              | `http://proxy.example.com:8080`       | -             |
 | `https_proxy`        | Specifies the proxy server to be used for outgoing HTTPS requests.                             | `https://secureproxy.example.com:443` | -             |
 | `no_proxy`           | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed. | `localhost,127.0.0.1,.example.com`    | -             |
@@ -55,6 +55,14 @@ These settings are useful when the application needs to make outgoing network re
 :::note
 The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
 :::
+
+### Experimental Features
+
+The following environment variables enable experimental features:
+
+| Environment variable                          | Description                                                                                                                                           | Example value | Default value |
+| :-------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ | :------------ |
+| `CAMUNDA_CONSOLE_EXPERIMENTAL_DISCOVERY_MODE` | This mode allows [orchestration clusters](../../orchestration-cluster/zeebe/configuration/broker.md) to register itself by calling an API in Console. | `true`        | `false`       |
 
 ## Telemetry
 
@@ -71,7 +79,7 @@ To enable usage collection, configure the parameters described in the next secti
 To enable telemetry, the following parameters need to be configured. Camunda will provide you with the customer ID (Camunda Docker username) needed to send telemetry data to Camunda.
 
 | Parameter                            | Description                                                                                                                                          | Example value                 |
-| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| :----------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------- |
 | `customerId`                         | Unique identifier of the customer. This is also a Camunda Docker registry username.                                                                  | `customername`                |
 | `installationId`                     | Unique installation ID of the current customer installation.                                                                                         | `my-deployment`               |
 | `telemetry`                          | Telemetry config for Console Self-Managed: `disabled`, `online`, or `download`.                                                                      | `online`                      |
@@ -208,7 +216,7 @@ You can use a different OIDC provider by following the steps described in the [O
 To help understand how Console operates, we expose the following endpoints by default:
 
 | Endpoint                                         | Port   | Path                |
-| ------------------------------------------------ | ------ | ------------------- |
+| :----------------------------------------------- | :----- | :------------------ |
 | Metrics endpoint with default Prometheus metrics | `9100` | `/prometheus`       |
 | Readiness probe                                  | `9100` | `/health/readiness` |
 | Liveness probe                                   | `9100` | `/health/liveness`  |
@@ -216,7 +224,7 @@ To help understand how Console operates, we expose the following endpoints by de
 ## Troubleshooting
 
 | Problem                                  | Solution                                                                                                                                          |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Invalid parameter: redirect_uri          | Ensure the correct redirect URL is configured for the application Console in Identity. The redirect URL must match the Console URL.               |
 | JWKS for authentication is not reachable | To verify a user's access token the JWKS needs to be reachable. Make sure the environment variable `KEYCLOAK_INTERNAL_BASE_URL` is set correctly. |
 | Console shows error 401                  | Make sure the logged-in user has the role `Console` assigned in the Identity service.                                                             |
