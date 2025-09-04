@@ -125,7 +125,7 @@ Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweig
 - **Export visibility**: Tags are included with exported process instance and job entities (analytics / data pipelines) beginning in 8.8.
 - **Consistent filter semantics**: The process instance search filter (when using tags) requires an instance to contain **all** supplied tags (AND logic). Instances may contain additional tags. No partial or wildcard matching.
 - **Immutable & bounded**: Up to 10 unique tags; each 1–100 characters; case-sensitive; regex `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` (must start with a letter). They cannot be added, updated, or removed after creation.
-- **API‑only in 8.8**: Tags do **not** yet appear in Operate, Optimize or Tasklist UIs; you manage and consume them exclusively through APIs and exported data streams.
+- **API/SDK‑only in 8.8**: Tags do **not** yet appear in Operate, Optimize or Tasklist UIs; you manage and consume them exclusively through APIs and exported data streams.
 
 </div>
 
@@ -137,18 +137,6 @@ Tags provide a durable, low-overhead mechanism for:
 - Early routing / selective processing decisions in workers prior to fetching or inspecting large variable sets.
 - Simple classification and future prioritization (for example, `priority:high`).
 - Analytics segmentation keys (`channel:web`, `segment:enterprise`).
-
-### Format & validation
-
-| Constraint | Rule |
-|-----------|------|
-| Max tag count | 10 (duplicates rejected) |
-| Length | 1–100 characters |
-| Regex | `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` |
-| Case handling | Case-sensitive; preserved exactly |
-| Mutability | Immutable after instance creation |
-
-Creation requests violating any constraint are rejected (4xx) so that invalid tags never appear downstream.
 
 ### Best practices
 
@@ -163,7 +151,7 @@ Creation requests violating any constraint are rejected (4xx) so that invalid ta
 |------|----------------------------------------|-------------------------------------------------------------|
 | UI visibility | Not shown in Operate/Optimize/Tasklist | Display & basic filtering in UI                             |
 | Job activation filtering | Not available                          | Server-side tag-based activation filtering / prioritization |
-| Mutation | Not supported                          | Add features after process instance creation                |
+| Mutation | Not supported                          | Attach tags after process instance creation                 |
 | Partial/regex search | Not supported                          | Support advanced filtering for tags                         |
 
 ### Related documentation

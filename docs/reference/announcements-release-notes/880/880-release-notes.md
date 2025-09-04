@@ -47,23 +47,9 @@ Introduce optional, immutable **process instance tags** set at creation for ligh
 
 - Define up to 10 unique tags (case-sensitive) on `POST /v2/process-instances`.
 - Copied to every job at element activation (immutable snapshot) and included in job responses.
-- Included in exported process instance and job entities (analytics / pipelines) starting with 8.
+- Included in exported process instance and job entities (analytics / pipelines) starting with 8.8.
 - Exact-match AND filtering semantics for process instance search (must contain all requested tags; may contain more).
 - API/SDK-only (not yet visible in Operate / Optimize / Tasklist UIs).
-
-**Format & limits**
-
-| Rule | Value |
-|------|-------|
-| Max tags | 10 |
-| Length | 1–100 chars |
-| Regex | `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` |
-| Mutability | Immutable after creation |
-| Case | Preserved & matched exactly |
-
-Invalid create requests (too many, duplicates, pattern mismatch) are rejected with 4xx.
-
-**Recommended usage**: `key:value` or `key` style like `businessKey:1234`, `priority:high`, `region:emea`, `test` for correlation, routing, segmentation. Avoid secrets/PII (broad propagation).
 
 See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) and [job workers](/components/concepts/job-workers.md#tags-88) for details.
 

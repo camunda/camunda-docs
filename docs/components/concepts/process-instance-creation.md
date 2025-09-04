@@ -226,6 +226,7 @@ Validation failures during process instance creation (too many tags, invalid pat
 - Do not store secrets or PII; tags propagate with jobs and exports.
 - Prefer concise `key:value` or `key` patterns for consistency.
 - Use variables (not tags) for mutable or large data.
+- Establish internal naming conventions (for example, prefixes like `env:`, `dept:`) for governance. 
 
 ### Examples
 

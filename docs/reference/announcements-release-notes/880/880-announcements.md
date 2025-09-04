@@ -349,33 +349,11 @@ Camunda 8.8 adds optional, immutable **tags** for process instances you can set 
 
 **Highlights**
 
-- Added to `POST /v2/process-instances` (creation) and included in process instance and job responses.
+- Added via [process instance creation](/docs/components/concepts/process-instance-creation.md#tags-88) and included in process instance and job responses.
 - Forwarded to every job created for the instance at element activation (immutable snapshot).
 - Exported with process instance and job entities (analytics / pipelines) starting in 8.8.
 - Exact-match AND filtering semantics when querying process instances by tags (instance must contain all supplied tags; may include more).
-- API-only in 8.8 (not visible in Operate or Tasklist UIs yet).
-
-**Constraints**
-
-| Limit / Rule | Value |
-|--------------|-------|
-| Max tags per instance | 10 unique |
-| Length | 1–100 characters |
-| Regex | `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$` (must start with a letter) |
-| Case | Case-sensitive (stored & matched exactly) |
-| Mutability | Immutable after creation |
-
-Invalid creation requests (too many, or malformed tags) are rejected (4xx) so invalid tags never propagate.
-
-**Recommended usage**
-
-Use `key:value` or `key` style labels (e.g. `businessKey:1234`, `priority:high`, `region:emea`, `customerId:7890` , `test`) for:
-
-- Correlation with external or internal systems.
-- Fast worker-side branching / prioritization prior to loading large variable sets.
-- Analytics segmentation & classification.
-
-Avoid secrets or PII—tags propagate broadly (jobs, exports).
+- API/SDK-only in 8.8 (not visible in Operate, Optimize or Tasklist UIs yet).
 
 For feature overview and best practices see [What's new in 8.8 – process instance tags](/reference/announcements-release-notes/880/whats-new-in-88.md#process-instance-tags) and the concept pages: [process instance creation](/components/concepts/process-instance-creation.md#tags-88) & [job workers](/components/concepts/job-workers.md#tags-88).
 
