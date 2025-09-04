@@ -36,7 +36,7 @@ const QuickStart = () => {
 
   return (
     <div className="sm-quickstart">
-      <h2>Quick Start</h2>
+      <h2>Quickstart</h2>
       <p>
         Whether you're a developer looking to get up and running quickly or an
         operations team planning a production deployment, you'll find the

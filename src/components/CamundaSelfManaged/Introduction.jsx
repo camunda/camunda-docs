@@ -3,39 +3,28 @@ import { activeVersionURLPath as linkBase } from "../Versions";
 
 const Introduction = () => {
   return (
-    <div>
-      <h2>Self-Managed vs. SaaS?</h2>
-            <p>
-        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS
-        is who is responsible for the infrastructure and operations.
-      </p>
-      <table className="table-callout" width={"100%"}>
-<tr>
-    <td width="50%"><p><img src={`${linkBase}/camunda-8-self-managed.svg`} alt="Camunda 8 Self-Managed" /><strong>Camunda 8 Self-Managed</strong></p><p>You are responsible for deploying,
-          scaling, securing, maintaining, and updating the entire Camunda stack
-          on your own Kubernetes clusters or cloud infrastructure.</p></td>
-    <td>**Summary**</td>
-</tr>
-</table>
+    <div style={{ marginBottom: "3rem" }}>
+      <h2>Self-Managed or SaaS?</h2>
       <p>
-        The primary difference between Camunda 8 Self-Managed and Camunda 8 SaaS
-        is who is responsible for the infrastructure and operations.
+        The main difference between Camunda 8 Self-Managed and Camunda 8 SaaS
+        is responsibility for infrastructure and operations.
       </p>
+
       <ul>
         <li>
-          <b>Camunda 8 Self-Managed:</b> You are responsible for deploying,
+          <p><b>Camunda 8 Self-Managed:</b> You are responsible for deploying,
           scaling, securing, maintaining, and updating the entire Camunda stack
-          on your own Kubernetes clusters or cloud infrastructure.
+          on your own Kubernetes clusters or cloud infrastructure.</p>
         </li>
         <li>
-          <b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
+          <p><b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
           availability, security, and upgrades - so you can focus on modeling,
-          deploying, and managing your business processes.
+          deploying, and managing your business processes.</p>
         </li>
       </ul>
       <p>
-        In short: <b>Self-Managed</b> offers maximum control and flexibility,
-        while <b>SaaS</b> provides speed and simplicity.
+        In summary: choose <b>Self-Managed</b> for maximum control and flexibility,
+        and <b>SaaS</b> for speed and simplicity.
       </p>
     </div>
   );
