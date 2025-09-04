@@ -9,7 +9,7 @@ Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants
 
 Tenants managed within Management Identity apply **only to Optimize**, allowing you to isolate data access for reports and dashboards.
 
-If you are using multi-tenancy for an Orchestration Cluster, you can also enable and configure tenants in Management Identity to ensure data isolation in Optimize. For information on managing tenants for the Orchestration Cluster, see the [Orchestration Cluster tenants documentation](/docs/components/identity/tenant.md).
+If you are using multi-tenancy for an Orchestration Cluster, you can also enable and configure tenants in Management Identity to ensure data isolation in Optimize. For information on managing tenants for the Orchestration Cluster, see the [Orchestration Cluster tenants documentation](/components/identity/tenant.md).
 
 ## Enabling multi-tenancy for Optimize
 
