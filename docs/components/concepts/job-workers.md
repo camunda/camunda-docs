@@ -255,7 +255,7 @@ Key points:
 
 - Tags are case-sensitive and immutable. They cannot be added, modified, or removed on the job.
 - The tags on a job mirror the process instance's tags at job creation time and can not be altered.
-- Future enhancements may allow filtering job activation by tags; for now, apply tag-based logic inside the worker after activation.
+- Apply tag-based logic inside the worker after activation to filter by tags.
 
 ### Tag format and limits
 
