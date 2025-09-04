@@ -11,7 +11,7 @@ Orchestration Cluster component configuration changes that apply when upgrading 
 
 ## About Camunda 8.8 unified configuration keys
 
-Camunda 8.8 introduces [unified configuration for Orchestration Cluster components](/components/whats-new-in-88.md) to define cluster and component behavior in a single, centralized configuration system.
+Camunda 8.8 introduces [unified configuration for Orchestration Cluster components](/docs/reference/announcements-release-notes/880/whats-new-in-88.md) to define cluster and component behavior in a single, centralized configuration system.
 
 - This means some configuration keys have changed or are replaced with new keys.
 - For example, the new `camunda.system.cpu-thread-count` key replaces the `zeebe.broker.threads.cpuThreadCount` legacy key.
