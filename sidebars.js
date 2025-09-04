@@ -63,7 +63,21 @@ module.exports = {
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
+        {
+          type: "category",
+          label: "Encryption",
+          link: {
+            type: "doc",
+            id: "components/saas/byok/overview",
+          },
+          items: [
+            "components/concepts/encryption-at-rest",
+            "components/saas/byok/aws-byok-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/cost-and-troubleshooting",
+            "components/saas/byok/faq",
+          ],
+        },
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
