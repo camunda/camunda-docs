@@ -63,6 +63,24 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 - If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc sub-process is directly completed.
 - If set to `false`, the ad-hoc sub-process waits for the completion of all active instances before completing.
 
+## Job worker implementation
+
+An ad-hoc sub-process can be handled using a [Job worker](/components/concepts/job-workers.md). You can define the sub-process to be handles by a Job worker by giving it a task definition.
+
+If the ad-hoc sub-process is defined as a job worker, it will create a Job upon activation. The Job worker must decide what the next step is.
+To do this it can use the `adHocSubProcessElements` variable (see [Special ad-hoc sub-process variables](#special-ad-hoc-sub-process-variables)).
+
+When a process instance reaches an ad-hoc sub-process with a Job worker implementation:
+
+1. Zeebe creates a corresponding Job and wait for its completion.
+2. The Job worker decides which elements to activate and completes the Job with an [`adHocSubProcess` Job result](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx).
+3. Zeebe activates the elements from the Job result.
+4. As soon as any of the flows inside the ad-hoc sub-process completes, Zeebe creates a new Job for the ad-hoc sub-process.
+5. The Job worker decides what to do. It can activate more elements or fulfill the completion condition. If the completion condition is fulfilled the Job worker can specify if any active elements should be canceled.
+
+Since the Job worker can activate multiple elements at once, and we create a Job once one of these child flows completes, it is possible that the Job for the ad-hoc sub-process gets recreated. There will only ever be a single active Job for the ad-hoc sub-process at any time.
+The Job worker should expect that the Job might be recreated whilst working on it, and that the Job completion could result in a `NOT_FOUND` rejection.
+
 ## Collecting the output
 
 The output of the inner flows of the ad-hoc sub-process can be collected by defining the `outputCollection` and the `outputElement` expression.
