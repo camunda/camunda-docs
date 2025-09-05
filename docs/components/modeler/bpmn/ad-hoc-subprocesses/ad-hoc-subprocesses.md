@@ -82,7 +82,7 @@ When a process instance reaches an ad-hoc sub-process with a Job worker implemen
 2. The Job worker decides which elements to activate and completes the Job with an [`adHocSubProcess` Job result](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx).
 3. Zeebe activates the elements from the Job result.
 4. As soon as any of the flows inside the ad-hoc sub-process completes, Zeebe creates a new Job for the ad-hoc sub-process.
-5. The Job worker decides what to do. It can activate more elements or fulfill the completion condition. If the completion condition is fulfilled the Job worker can specify if any active elements should be canceled.
+5. The Job worker decides what to do. It can activate more elements or fulfill the completion condition. If the completion condition is fulfilled the Job worker can specify if any active elements should be canceled. It is not possible to fulfill the completion condition and activate more elements at the same time.
 
 Since the Job worker can activate multiple elements at once, and we create a Job once one of these child flows completes, it is possible that the Job for the ad-hoc sub-process gets recreated. There will only ever be a single active Job for the ad-hoc sub-process at any time.
 The Job worker should expect that the Job might be recreated whilst working on it, and that the Job completion could result in a `NOT_FOUND` rejection.
