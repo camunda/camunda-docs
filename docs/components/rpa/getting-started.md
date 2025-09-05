@@ -49,7 +49,7 @@ Once you are happy with your script and have tested it locally, you can start au
 1. **Deploy the RPA file**:
 
    1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Modeler.
-   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../identity/role.md).
+   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../identity/role.md#assign-client-to-a-role).
    3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    4. Note the ID of your RPA script. You will need this in the next step.
 
