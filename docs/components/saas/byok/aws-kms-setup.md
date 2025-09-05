@@ -20,9 +20,10 @@ Before you begin, make sure you have:
 :::warning Important
 
 - Deleting or disabling your KMS key will make your cluster and data inaccessible.
-- BYOK keys cannot be rotated automatically by Camunda 8.8; any rotation must be done manually in AWS KMS.
+- BYOK keys cannot be rotated by Camunda 8.8; any rotation must be done manually in AWS KMS by the customer.
 - Make sure the key policy grants your Camunda cluster the required access.
-  :::
+
+:::
 
 ## Step 1: Create a Camunda 8 SaaS cluster
 
@@ -51,14 +52,14 @@ Follow these steps in your AWS account:
 
 ### Example KMS key policy
 
-Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
+Replace `<tenant-iam-role-arn>` with the IAM role ARN from Step 1:
 
 ```json
 {
   "Sid": "Allow Camunda tenant IAM Role basic key access",
   "Effect": "Allow",
   "Principal": {
-    "AWS": "arn:aws:iam::<camunda-accountId>:role/<tenant-IAM-role>"
+    "AWS": "<tenant-iam-role-arn>"
   },
   "Action": [
     "kms:DescribeKey",
@@ -71,7 +72,7 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
   "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
   "Effect": "Allow",
   "Principal": {
-    "AWS": "arn:aws:iam::<camunda-accountId>:role/<tenant-IAM-role>"
+    "AWS": "<tenant-iam-role-arn>"
   },
   "Action": [
     "kms:CreateGrant"
@@ -88,8 +89,8 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 
 :::
 
-1. Click **Finish** to create the key.
-2. Copy the **Key ARN**; you will need it in the Camunda Console.
+7. Click **Finish** to create the key.
+8. Copy the **Key ARN**; you will need it in the Camunda Console.
 
 :::note Screenshot placeholder
 [Insert screenshot of AWS KMS key details showing Key ARN]
@@ -117,15 +118,15 @@ Replace `<CAMUNDA_CLUSTER_ROLE_ARN>` with the IAM role ARN from Step 1:
 - Verify your cluster’s storage volumes are using the correct KMS key. This is possible, but not required.
 
 :::warning Monitoring reminder
-You are responsible for monitoring your key usage and access logs. Camunda will not track your AWS KMS logs in your account.
+You are responsible for monitoring your key usage and access logs.
 :::
 
 ## Additional considerations
 
-- **Key rotation**: AWS supports manual rotation; Camunda 8.8 does not automatically rotate customer keys.
-- **Cost implications**: You are responsible for all KMS charges, including API calls, storage, and logging.
+- **Key rotation**: AWS supports manual rotation; Camunda 8.8 does not rotate customer keys.
+- **Cost implications**: Using BYOK with AWS KMS keys incurs storage and management charges in your own AWS account. See the [Camunda pricing model](./cost-and-troubleshooting.md) for details.
 - **Failure scenarios**: If the key is deleted or permissions revoked, cluster data will become inaccessible until the issue is resolved.
 
 :::note Reference
-For more information, see the [AWS KMS Documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html?).
+For more information, see the [AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html?).
 :::

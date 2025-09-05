@@ -77,8 +77,8 @@ The **HTTP Webhook connector** is an inbound connector that allows you to start 
   - Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
   - Set the required roles which will be used to validate if the JWT contains all required roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
 
-1. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
-2. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
+4. Configure **Activation Condition**. For example, given external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}`, the **Activation Condition** value might look like `=(request.body.status = "OK")`. Leave this field empty to trigger your webhook every time.
+5. Use **Variable Mapping** to map specific fields from the request into process variables using [FEEL](/components/modeler/feel/what-is-feel.md).
    For example, given the external caller triggers a webhook endpoint with the body `{"id": 1, "status": "OK"}` and you would like to extract `id` as a process variable `myDocumentId`, the **Result Expression** might look like this:
 
 ```
@@ -87,7 +87,7 @@ The **HTTP Webhook connector** is an inbound connector that allows you to start 
 }
 ```
 
-6. Fill in the **Correlation** parameters if they are required by the element template.
+1. Fill in the **Correlation** parameters if they are required by the element template.
 
 ### Correlation
 
