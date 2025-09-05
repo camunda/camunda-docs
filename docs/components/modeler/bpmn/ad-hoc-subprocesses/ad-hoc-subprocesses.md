@@ -92,7 +92,7 @@ The Job worker should expect that the Job might be recreated whilst working on i
 The output of the inner flows of the ad-hoc sub-process can be collected by defining the `outputCollection` and the `outputElement` expression.
 
 `outputCollection` defines the name of the variable under which the collected output is stored (e.g. `results`). It is automatically created as a local variable of the ad-hoc sub-process and is updated when an inner flow is completed.
-When the ad-hoc sub-process is completed the variable is propagated to its parent scope.
+When the ad-hoc sub-process is completed the variable defined as the `outputCollection` is [propagated](components/concepts/variables.md#variable-propagation) to its parent scope.
 
 `outputElement` is an expression that defined the output of the inner flow (e.g. `= result`). Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the inner flow that holds the output value.
 This variable should be created with the output value; for example, by a job worker providing a variable with the name `result`.
