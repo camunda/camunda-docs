@@ -188,11 +188,11 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
-## Tags (8.8+)
+## Tags
 
 Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting the full variable payloads.
 
-### Definition
+### Tag format and constraints
 
 - A tag is a case-sensitive string.
 - Format (regex): `^[A-Za-z][A-Za-z0-9_\-:.]{0,99}$`
@@ -201,6 +201,7 @@ Process instance tags are lightweight, immutable labels you can attach when crea
 - Length: 1–100 characters.
 - Maximum of 10 unique tags per process instance (duplicates are ignored).
 - Order is not guaranteed; treat the set as unordered.
+- Tags cannot be modified after creation
 
 If validation fails during process instance creation (e.g., too many tags, invalid pattern, or length), the create request is rejected with a 4xx error.
 

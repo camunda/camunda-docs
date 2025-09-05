@@ -320,7 +320,7 @@ While a process represents a defined sequence of distinct steps representing you
 
 ### Process instance tag
 
-An optional, immutable, lightweight label attached when a process instance is created (8.8+). Tags provide fast, structured metadata for routing, correlation, prioritization, and analytics segmentation without inspecting large variable payloads.
+An optional, immutable, lightweight label attached when a process instance is created. Tags provide fast, structured metadata for routing, correlation, prioritization, and analytics segmentation without inspecting large variable payloads.
 
 - Tags on process instance creation: [Process instance creation – Tags](/components/concepts/process-instance-creation.md#tags-88)
 - Tags on jobs: [Job workers](/components/concepts/job-workers.md#tags-88)

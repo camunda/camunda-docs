@@ -345,7 +345,7 @@ Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 
 
 ### Process instance tags <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span> {#process-instance-tags}
 
-Camunda 8.8 adds optional, immutable **tags** for process instances you can set at creation via the Orchestration Cluster API or SDK. Tags provide lightweight, structured metadata for routing, correlation, prioritization and more without inspecting full variable payloads.
+Camunda 8.8 adds optional, immutable **tags** for process instances you can set at creation via the Orchestration Cluster API or Clients. Tags provide lightweight, structured metadata for routing, correlation, prioritization and more without inspecting full variable payloads.
 
 **Highlights**
 
@@ -356,4 +356,3 @@ Camunda 8.8 adds optional, immutable **tags** for process instances you can set 
 - API/SDK-only in 8.8 (not visible in Operate, Optimize or Tasklist UIs yet).
 
 For feature overview and best practices see [What's new in 8.8 – process instance tags](/reference/announcements-release-notes/880/whats-new-in-88.md#process-instance-tags) and the concept pages: [process instance creation](/components/concepts/process-instance-creation.md#tags-88) & [job workers](/components/concepts/job-workers.md#tags-88).
-

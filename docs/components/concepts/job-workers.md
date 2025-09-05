@@ -12,7 +12,7 @@ A job has the following properties:
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
-- **Tags (8.8+)**: Immutable labels copied from the process instance at job creation; great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
+- **Tags**: Immutable labels copied from the process instance at job creation; great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
 
 ## Requesting jobs
 
@@ -247,14 +247,23 @@ For example, if jobs of a given type are not activated, but a worker is opened f
 
 If it's not present in the gateway as a client stream, restart your worker. If it's not present as a consumer in one of the brokers, this indicates a bug. As a workaround, restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
 
-## Tags (8.8+)
+## Tags
 
-Tags are copied to each job exactly once: when the BPMN element is activated and the job is created. The job then holds an immutable snapshot of the process instance's tag set.
+Tags provide a powerful way to add lightweight metadata to jobs. 
 
-Key points:
+### How tags work with jobs
 
-- Tags are case-sensitive and immutable. They cannot be added, modified, or removed on the job.
-- The tags on a job mirror the process instance's tags at job creation time and can not be altered.
-- Apply tag-based logic inside the worker after activation, e.g. routing, prioritization, data correlation.
+When a BPMN element is activated and creates a job:
+
+1. **Snapshot creation**: The job receives a copy of all tags from the process instance at that exact moment
+2. **Immutability**: Once copied to the job, tags cannot be modified, added, or removed
+3. **Worker access**: Job workers can read these tags to implement custom logic
+
+### Key characteristics
+
+- **Case-sensitive**: Tags `Priority:High` and `priority:high` are different
+- **Timing**: Tags are copied exactly once when the job is created from the BPMN element
+- **Immutable**: The tag set on a job never changes after creation
+- **Inherited**: Jobs inherit the complete tag set from their process instance
 
 See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for more information (format, validation rules, limits, use cases, and guidelines).
