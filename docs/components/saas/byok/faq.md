@@ -1,6 +1,6 @@
 ---
 id: faq
-title: "Encryption at rest: FAQ"
+title: "FAQ"
 description: "Frequently asked questions about encryption at rest, encryption key types, and Bring Your Own Key (BYOK) in Camunda 8 SaaS."
 keywords: ["encryption", "BYOK", "KMS", "encryption keys", "security", "FAQ"]
 ---
