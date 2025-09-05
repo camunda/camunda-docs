@@ -47,7 +47,7 @@ Ad-hoc sub-process elements can now be activated by job workers.
 As well as activating elements, the job result allows fulfilment of the completion condition. When this happens, the ad-hoc sub-process is completed. The sub-process waits for active children to be completed first. Alternatively, you can cancel remaining instances by setting this in the job result.
 :::
 
-### CI/CD building blocks guide
+### CI/CD building blocks guide <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2858 -->
 
@@ -141,7 +141,7 @@ In this release, these APIs are clearly marked as deprecated, ensuring developer
 Although the Operate and Tasklist APIs remain functional in this version, they will no longer receive feature updates and will eventually be removed in 8.10.
 :::
 
-### Orchestration Cluster <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
+### Orchestration Cluster <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span>
 
 #### Orchestration Cluster Identity
 
@@ -175,7 +175,11 @@ You can now add Zeebe partitions to a running cluster in SaaS to boost capacity 
 
 <!-- https://github.com/camunda/product-hub/issues/2897 -->
 
-Release notes needed.
+Customers can continue using Orchestration Cluster in "Zeebe-only" mode without secondary storage.
+
+- This is for customers who do not use Query APIs, Operate, or Tasklist, and want to avoid deploying and maintaining additional database infrastructure.
+- Administrators can configure the Orchestration Cluster to run without secondary storage by setting the `camunda.database.type=none` configuration flag.
+- The application will start up successfully, and activate only the components required for Zeebe.
 
 ### Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
