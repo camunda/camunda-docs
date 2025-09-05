@@ -247,9 +247,9 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 
 9. Create the required account roles:
 
-   ```bash
-   rosa create account-roles --mode auto
-   ```
+```bash
+rosa create account-roles --mode auto
+```
 
 10. Verify your AWS quotas, and if quotas are insufficient, consult the following:
 
