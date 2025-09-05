@@ -204,7 +204,7 @@ This release introduces the ability to persist scenarios as a versioned test fil
 
 Web Modeler Self-Managed now supports Oracle Database and Microsoft Sequel Server, simplifying the Self-Managed setup journey, maintenance efforts, and expertise required to maintain the platform.
 
-#### Test scenarios
+#### Test scenario files
 
 <!-- https://github.com/camunda/product-hub/issues/2894 -->
 
