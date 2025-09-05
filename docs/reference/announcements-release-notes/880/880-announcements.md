@@ -345,14 +345,6 @@ Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 
 
 ### Process instance tags <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span> {#process-instance-tags}
 
-Camunda 8.8 adds optional, immutable **tags** for process instances you can set at creation via the Orchestration Cluster API or Clients. Tags provide lightweight, structured metadata for routing, correlation, prioritization and more without inspecting full variable payloads.
+Camunda 8.8 adds optional, immutable **tags** for process instances you can set at creation via the Orchestration Cluster API or Clients and are also forwarded to job workers. Tags provide lightweight, structured metadata for routing, correlation, prioritization and more without inspecting full variable payloads.
 
-**Highlights**
-
-- Added via [process instance creation](/components/concepts/process-instance-creation.md#tags-88) and included in process instance and job responses.
-- Forwarded to every job created for the instance at element activation (immutable snapshot).
-- Exported with process instance and job entities (analytics / pipelines) starting in 8.8.
-- Exact-match AND filtering semantics when querying process instances by tags (instance must contain all supplied tags; may include more).
-- API/SDK-only in 8.8 (not visible in Operate, Optimize or Tasklist UIs yet).
-
-For feature overview and best practices see [What's new in 8.8 – process instance tags](/reference/announcements-release-notes/880/whats-new-in-88.md#process-instance-tags) and the concept pages: [process instance creation](/components/concepts/process-instance-creation.md#tags-88) & [job workers](/components/concepts/job-workers.md#tags-88).
+For a full feature overview see [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).

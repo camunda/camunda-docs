@@ -190,7 +190,7 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 
 ## Tags
 
-Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or SDK. They help downstream workers and external systems make quick routing or decision choices without inspecting the full variable payloads.
+Process instance tags are lightweight, immutable labels you can attach when creating a process instance via the API or Clients. Tags get inherited by all jobs created from that instance. They help downstream workers and external systems make quick routing or decision choices without inspecting full variable payloads.
 
 ### Tag format and constraints
 
@@ -208,19 +208,18 @@ If validation fails during process instance creation (e.g., too many tags, inval
 ### Semantics
 
 - Tags are included in process instance search responses and in activated job payloads.
-- Tags are immutable after creation (they cannot be added, changed, or removed later).
+- Tags are immutable after creation - cannot be added, changed, or removed after process instance has been created.
 - Search filtering uses AND semantics: an instance must contain all requested tags (it may contain additional tags). Partial or wildcard matching is not supported.
 - Tags are exported with the process instance and with job entities starting in 8.8 by the default exporters.
-- Tags are not shown in web applications (e.g., Operate, Tasklist) in 8.8 — they are API/SDK-only metadata.
+- Tags are not shown in web applications (e.g., Operate, Tasklist) — they are API/Client-only metadata.
 
 ### Use cases
 
 - Routing and prioritization (e.g., `priority:high`)
-- Business or domain identifiers from internal or third-party systems (e.g., `businessKey:1234`, `customerId:7890`, `orderId:4567`)
-- Cross-system correlation keys without exposing full variable payloads (e.g., `traceId:abcd-1234`, `crmId:3004`)
+- Business or domain identifiers from internal or third-party systems (e.g., `reference:1234`, `team:accounting`, `origin:crm`)
+- Cross-system correlation keys without exposing full variable payloads (e.g., `trace-id:abcd-1234`, `crm-id:3004`)
 - Analytics segmentation (e.g., `region:emea`, `channel:web`)
 - Feature rollout or experiment grouping (e.g., `experiment:checkout-v2`)
-- Environment or tenant-like labeling where full multi-tenancy isn’t required (e.g., `env:staging`)
 
 ### Guidelines
 
@@ -240,7 +239,7 @@ curl -L 'http://localhost:8080/v2/process-instances' \
   -d '{
     "processDefinitionId": "order-process",
     "processDefinitionVersion": 3,
-    "tags": ["priority:high","businessKey:1234","region:emea"],
+    "tags": ["channel:web", "reference:1234", "region:emea"],
     "variables": { "orderId": "1234" }
   }'
 ```

@@ -43,17 +43,7 @@ Development continues on the single unified Camunda 8 REST API that consolidates
 
 Introduce optional, immutable **process instance tags** set at creation for lightweight routing, correlation, and future prioritization without inspecting large variable payloads.
 
-**Highlights**
-
-- Define up to 10 unique tags (case-sensitive) on `POST /v2/process-instances`.
-- Copied to every job at element activation (immutable snapshot) and included in job responses.
-- Included in exported process instance and job entities (analytics / pipelines) starting with 8.8.
-- Exact-match AND filtering semantics for process instance search (must contain all requested tags; may contain more).
-- API/SDK-only (not yet visible in Operate / Optimize / Tasklist UIs).
-
-See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) and [job workers](/components/concepts/job-workers.md#tags-88) for details.
-
-### Camunda 8 Run supports 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
+For a full feature overview see [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).### Camunda 8 Run supports 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
 
 Camunda 8 Run now includes Identity, allowing all core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
 

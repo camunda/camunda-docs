@@ -12,7 +12,7 @@ A job has the following properties:
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
-- **Tags**: Immutable labels copied from the process instance at job creation; great for lightweight routing, prioritization, and correlation (e.g. `businessKey:1234`). See [tags](#tags-88) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88).
+- **Tags**: - **Tags**: Immutable labels copied from the process instance at job creation; Great for providing additional metadata (e.g., `reference:1234`, `team:accounting`, `trace-id:3004`). See [tags](#tags) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
 
 ## Requesting jobs
 
@@ -249,7 +249,7 @@ If it's not present in the gateway as a client stream, restart your worker. If i
 
 ## Tags
 
-Tags provide a powerful way to add lightweight metadata to jobs. 
+Tags provide a powerful way to add lightweight metadata to jobs.
 
 ### How tags work with jobs
 
@@ -266,4 +266,4 @@ When a BPMN element is activated and creates a job:
 - **Immutable**: The tag set on a job never changes after creation
 - **Inherited**: Jobs inherit the complete tag set from their process instance
 
-See [process instance creation tags](/components/concepts/process-instance-creation.md#tags-88) for more information (format, validation rules, limits, use cases, and guidelines).
+For detailed information about tag formats, validation rules, limits, and additional use cases, see [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
