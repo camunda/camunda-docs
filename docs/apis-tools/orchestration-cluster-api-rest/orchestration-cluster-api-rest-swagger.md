@@ -149,7 +149,7 @@ camunda:
 
 After exploring the API with Swagger UI:
 
-- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
+- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
 - **Review the complete API reference** in the [Overview](./orchestration-cluster-api-rest-overview.md)
 - **Set up proper authentication** following the [Authentication guide](./orchestration-cluster-api-rest-authentication.md)
 - **Learn advanced querying** with [Data Fetching and Search](./orchestration-cluster-api-rest-data-fetching.md)

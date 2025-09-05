@@ -1,6 +1,6 @@
 ---
 id: about-self-managed
-title: "What is Camunda 8 Self-Managed?"
+title: "Camunda 8 Self-Managed"
 sidebar_label: "Camunda 8 Self-Managed"
 description: "Step through everything you need to download, configure, and work with components of Camunda 8 Self-Managed, a self-hosted alternative to using Camunda 8 SaaS."
 keywords:
@@ -46,7 +46,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 :::info Upgrading to Camunda 8.8
 
 - Existing customers can upgrade their Self-Managed deployment to 8.8 using the [upgrade to 8.8 guide](/self-managed/update/administrators/overview.md).
-- See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 :::
 
