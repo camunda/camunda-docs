@@ -116,11 +116,11 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 
 ## Process instance tags {#process-instance-tags}
 
-Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweight labels you can attach  when creating a process instance (see [Process instance creation](/components/concepts/process-instance-creation.md#tags))
+Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweight labels you can attach  when creating a process instance (see [Process instance creation](/components/concepts/process-instance-creation.md#tags)).
 
 <div className="list-tick">
 
-- **Lightweight correlation and routing**: Provide quick, structured identifiers (for example, `businessKey:1234`, `priority:high`, `region:emea`) without exposing or parsing large variable payloads.
+- **Lightweight correlation and routing**: Provide quick, structured identifiers (for example, `reference:1234`, `priority:high`, `region:emea`) without exposing or parsing large variable payloads.
 - **Job propagation**: Tags are copied to every job created for the instance (see [job workers](/components/concepts/job-workers.md#tags)), enabling fast worker-side branching, prioritization, or external lookups.
 - **Export visibility**: Tags are included with exported process instance and job entities (analytics and data pipelines) beginning in 8.8.
 - **Consistent filter semantics**: The process instance search filter (when using tags) requires an instance to contain **all** supplied tags (AND logic). Instances may contain additional tags. No partial or wildcard matching.
