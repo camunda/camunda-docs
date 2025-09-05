@@ -45,7 +45,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
-  - Programmatic access: Use the [Java client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
+  - Programmatic access: Use the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
   - Custom client: [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate your own client
   - Universal client: [Postman collection](https://www.postman.com/camundateam/camunda-8-postman/collection/apl78x9/camunda-8-api-rest)
 
@@ -63,7 +63,7 @@ Authentication for the Orchestration Cluster REST API depends on your environmen
 
 - See the [authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on supported methods by deployment type
 - For production security, OIDC with X.509 client certificates is supported in self-managed environments. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates)
-- If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
+- If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)
 
 For detailed authentication setup, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your deployment type.
 
@@ -171,17 +171,17 @@ The Orchestration Cluster REST API uses standard HTTP status codes and returns e
 
 #### Common error codes
 
-| Error code | Meaning                                                                                                     |
-| ---------- | ----------------------------------------------------------------------------------------------------------- |
-| 200        | OK                                                                                                          |
-| 204        | No content                                                                                                  |
-| 400        | Bad request. Generic error with further description in the problem detail.                                  |
-| 401        | Unauthorized. The client is not authenticated. Retry with a modified authorization header.                  |
-| 403        | Forbidden. The client has insufficient permissions for the request.                                         |
-| 404        | Not found                                                                                                   |
-| 409        | Conflict. The request attempts to modify a resource that is not in the correct state.                       |
-| 412        | Precondition failed. The client should check the cluster status.                                            |
-| 500        | Internal server error. Generic error with further description in the problem detail.                        |
+| Error code | Meaning                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200        | OK                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 204        | No content                                                                                                                                                                                                                                                                                                                                                                                                |
+| 400        | Bad request. Generic error with further description in the problem detail.                                                                                                                                                                                                                                                                                                                                |
+| 401        | Unauthorized. The client is not authenticated. Retry with a modified authorization header.                                                                                                                                                                                                                                                                                                                |
+| 403        | Forbidden. The client has insufficient permissions for the request.                                                                                                                                                                                                                                                                                                                                       |
+| 404        | Not found                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 409        | Conflict. The request attempts to modify a resource that is not in the correct state.                                                                                                                                                                                                                                                                                                                     |
+| 412        | Precondition failed. The client should check the cluster status.                                                                                                                                                                                                                                                                                                                                          |
+| 500        | Internal server error. Generic error with further description in the problem detail.                                                                                                                                                                                                                                                                                                                      |
 | 503        | The service is currently unavailable. This may happen when the system signals backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism [here](../../components/zeebe/technical-concepts/internal-processing.md) |
 
 ### Date formats
@@ -198,7 +198,7 @@ For full details on variable filtering and structure, see [search requests](orch
 
 Now that you're familiar with the Orchestration Cluster REST API, here are some useful next steps:
 
-- [Build a job worker using the Spring SDK](../spring-zeebe-sdk/getting-started.md)
+- [Build a job worker using the Spring SDK](../camunda-spring-boot-starter/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
 - [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](../migration-manuals/migrate-to-camunda-api.md)
 - [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema
