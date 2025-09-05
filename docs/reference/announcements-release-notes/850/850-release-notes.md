@@ -52,7 +52,7 @@ The process overview page was redesigned for clarity and ease-of-use.
 
 <!-- https://github.com/camunda/product-hub/issues/2148 -->
 
-Use the supported [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
+Use the supported [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
 
 ### Modeler-only role in Camunda 8 SaaS <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
