@@ -12,19 +12,19 @@ const Introduction = () => {
 
       <ul>
         <li>
-          <p><b>Camunda 8 Self-Managed:</b> You are responsible for deploying,
+          <p><strong>Camunda 8 Self-Managed:</strong> You are responsible for deploying,
           scaling, securing, maintaining, and updating the entire Camunda stack
           on your own Kubernetes clusters or cloud infrastructure.</p>
         </li>
         <li>
-          <p><b>Camunda 8 SaaS:</b> Camunda manages the infrastructure,
-          availability, security, and upgrades - so you can focus on modeling,
+          <p><strong>Camunda 8 SaaS:</strong> Camunda manages the infrastructure,
+          availability, security, and upgrades so you can focus on modeling,
           deploying, and managing your business processes.</p>
         </li>
       </ul>
       <p>
-        In summary: choose <b>Self-Managed</b> for maximum control and flexibility,
-        and <b>SaaS</b> for speed and simplicity.
+        In summary: choose <strong>Self-Managed</strong> for maximum control and flexibility,
+        and <strong>SaaS</strong> for speed and simplicity.
       </p>
     </div>
   );
