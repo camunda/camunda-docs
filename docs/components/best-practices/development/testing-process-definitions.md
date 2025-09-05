@@ -63,7 +63,7 @@ When using Java, most customers use Spring Boot, so we describe this approach in
   :::
 
 1. Use [_JUnit 5_](http://junit.org) as your unit test framework.
-2. Use the [Camunda Spring Boot SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md).
+2. Use the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md).
 3. Use `@CamundaSpringProcessTest` to start a process engine.
 4. Ensure you have Docker installed locally to use [TestContainers](../../../apis-tools/testing/getting-started.md#prerequisites), which is the easiest way to run tests.
 5. Use assertions from [Camunda Process Test](../../../apis-tools/testing/assertions.md) to verify that your expectations about the process state are met.

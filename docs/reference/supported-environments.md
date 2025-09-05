@@ -45,7 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
-- **Camunda Spring Boot SDK**: OpenJDK 17+, Spring Boot 3.5.x
+- **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x
 - **Helm CLI**: 3.14.x (for the exact version, check the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/).)
 
 ## Camunda 8 Self-Managed
@@ -95,14 +95,14 @@ Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check th
 
 Requirements for the components can be seen below:
 
-| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                         |
-| ---------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.17+ (requires use of [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))                                                             |
-| Optimize                                                   | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.17+                                                                                                                                                                                            |
-| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                                            |
-| Management Identity                                        | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)) |
-| Web Modeler                                                | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                                                 |
-| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                          |
+| Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                            |
+| ---------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.17+ (requires use of [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))                                                                                                |
+| Optimize                                                   | OpenJDK 21+  | Elasticsearch 8.16+<br/>Amazon OpenSearch 2.17+                                                                                                                                                                                                                               |
+| Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                                                                               |
+| Management Identity                                        | OpenJDK 17+  | Keycloak 25.x, 26.x<br/>PostgreSQL 14.x, 15.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration))<br/>Oracle 19c<br/>SQL Server 2019 |
+| Web Modeler                                                | -            | PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x                                                                                                                                                                                    |
+| Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                                                             |
 
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 

@@ -33,7 +33,7 @@ This release extends the OpenSearch features supported by Optimize. Full support
 
 ### Spring Zeebe SDK test support in 8.6.7
 
-[Testing support for the Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+[Testing support for the Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
 
 :::note
 This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).

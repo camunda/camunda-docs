@@ -66,7 +66,7 @@ When to use it:
 
 :::tip
 If you start the process application in your test case, you
-should [disable the job workers](../spring-zeebe-sdk/configuration.md#disable-a-job-worker) to avoid interferences with
+should [disable the job workers](../camunda-spring-boot-starter/configuration.md#disable-a-job-worker) to avoid interferences with
 the mocks, for example, by setting the following configuration:
 
 ```java

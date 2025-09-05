@@ -43,7 +43,7 @@ Camunda 8.8 API and SDK changes and statuses are summarized as follows:
 | :----------------------- | :------------- | :-------------------------- | :------------------ |
 | V1 component APIs        | **Deprecated** | Orchestration Cluster API   | Before Camunda 8.10 |
 | ZeebeClient              | **Deprecated** | Camunda Java Client         | Before Camunda 8.10 |
-| Spring Zeebe SDK         | **Deprecated** | Spring Boot Camunda Starter | Before Camunda 8.10 |
+| Spring Zeebe SDK         | **Deprecated** | Camunda Spring Boot Starter | Before Camunda 8.10 |
 | Zeebe Process Test (ZPT) | **Deprecated** | Camunda Process Test (CPT)  | Before Camunda 8.10 |
 | Job-based user tasks     | **Deprecated** | Camunda user tasks          | Before Camunda 8.10 |
 | Tasklist GraphQL API     | **Removed**    | Orchestration Cluster API   | 8.8                 |
@@ -79,18 +79,18 @@ The [Camunda Java Client](/apis-tools/java-client/getting-started.md) is now the
 For more information on upgrading and migrating, see [migrate to Camunda Java Client](migrate-to-camunda-java-client.md).
 :::
 
-### Spring Boot Camunda Starter
+### Camunda Spring Boot Starter
 
-The [Spring Boot Camunda Starter](/apis-tools/spring-zeebe-sdk/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+The [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
-The transition from Zeebe Spring SDK to Spring Boot Camunda Starter indicates significant architectural changes in Camunda 8.8.
+The transition from Zeebe Spring SDK to Camunda Spring Boot Starter indicates significant architectural changes in Camunda 8.8.
 
-- The Spring Boot Camunda Starter is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
-- The Spring Boot Camunda Starter continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
+- The Camunda Spring Boot Starter is a drop-in replacement for the Zeebe Spring SDK while still supporting the ZeebeClient.
+- The Camunda Spring Boot Starter continues to provide support for the ZeebeClient, so existing applications using the Zeebe Spring SDK can transition smoothly without major changes.
 - There is a grace period during which the old Zeebe client is still available until version 8.10. This allows you to adapt to the new SDK and make the required changes incrementally.
 
 :::info
-For more information on upgrading and migrating, see [migrate to Spring Boot Camunda Starter](migrate-to-camunda-java-client.md).
+For more information on upgrading and migrating, see [migrate to Camunda Spring Boot Starter](migrate-to-camunda-java-client.md).
 :::
 
 ### Camunda Process Test (CPT)

@@ -63,7 +63,7 @@ export const clientCards = [
     type: "",
   },
   {
-    link: "../spring-zeebe-sdk/getting-started/",
+    link: "../camunda-spring-boot-starter/getting-started/",
     title: "Camunda Spring Boot Starter",
     image: IconSpringBootImg,
     description:

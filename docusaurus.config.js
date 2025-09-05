@@ -81,13 +81,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.4: {
-                specPath: "api/operate/version-8.4/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -129,13 +122,6 @@ module.exports = {
                 specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.4: {
-                specPath: "api/tasklist/version-8.4/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -545,9 +531,6 @@ module.exports = {
             8.5: {
               banner: "none",
             },
-            8.4: {
-              banner: "none",
-            },
           },
           docItemComponent: "@theme/ApiItem",
         },
@@ -562,7 +545,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.4/**",
             "/docs/8.5/**",
             "/docs/8.6/**",
           ],

@@ -300,9 +300,9 @@ This is especially relevant if you were using GCS through the S3 compatibility m
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE, FILESYSTEM]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). Use FILESYSTEM to store backups directly via the filesystem to a particular folder. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
@@ -449,6 +449,34 @@ backup:
     sasToken:
       type: null
       value: null
+```
+
+### zeebe.broker.data.backup.filesystem
+
+To store your backups in the local filesystem, choose the `FILESYSTEM` backup store and specify where to store the backups locally.
+
+:::caution
+Since the durability of the backups are largely dependent on the target file system and underlying storage, it is recommended to use known durable solutions in production, such as S3, GCS, or Azure. To ensure that this can be used properly in production, you must use a POSIX-compliant file system, and at a minimum replicated disks (e.g. RAID configured disks).
+:::
+
+:::note Backup encryption
+Zeebe does not support backup encryption natively, but it _can_ use filesystem based encryption. This then is a feature of the filesystem and not Zeebe itself.
+:::
+
+| Field    | Description                                                                                                                                                                                                                                                                                 | Example Value      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
+
+#### YAML snippet
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: FILESYSTEM
+        filesystem:
+          basePath:
 ```
 
 ### zeebe.broker.cluster
