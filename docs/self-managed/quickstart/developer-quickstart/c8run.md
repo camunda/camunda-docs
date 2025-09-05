@@ -143,7 +143,7 @@ Available APIs include:
 ### Enable authentication and authorization
 
 By default, Camunda 8 Run starts with authentication enabled and API endpoints unprotected.  
-To require authentication and enforce authorization, provide a custom configuration file.
+To enforce authorization rules, provide a custom configuration file.
 
 You can either:
 
