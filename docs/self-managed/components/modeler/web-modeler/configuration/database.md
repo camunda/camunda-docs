@@ -4,7 +4,11 @@ title: "Database"
 description: "Read details on how to connect Web Modeler with a database."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This page describes advanced database connection configuration for Web Modeler. For a general guide on how to set up Web Modeler's database connection, visit [the configuration overview](configuration.md#database).
+Web Modeler supports multiple database vendors. PostgreSQL will be used by default.
 
 ## Configuring SSL for the database connection
 
@@ -74,7 +78,130 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 2. Modify the `SPRING_DATASOURCE_USERNAME` environment variable to match the database user you configured for AWS IAM authentication as described in the [Amazon Aurora documentation](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL).
 3. Remove the `SPRING_DATASOURCE_PASSWORD` environment variable.
 
-## Using a custom database schema
+## Using alternative database vendors
 
-Without configuration, Web Modeler uses the default schema of the database user, typically `public`.
-To use a custom schema, set the `SPRING_DATASOURCE_HIKARI_SCHEMA` environment variable to the desired schema name.
+### Oracle
+
+As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
+
+1. Download the appropriate Oracle driver: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html.
+2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="oracle-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default Oracle driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default Oracle driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+    extraVolumeMounts:
+      - name: oracle-driver
+        mountPath: /driver-lib
+    extraVolumes:
+      - name: oracle-driver
+        emptyDir: {}
+    initContainers:
+      - name: fetch-jdbc-drivers
+        image: alpine:3.22.1
+        imagePullPolicy: "Always"
+        command:
+          [
+            "sh",
+            "-c",
+            "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /driver-lib/ojdbc.jar",
+          ]
+        volumeMounts:
+          - name: oracle-driver
+            mountPath: /driver-lib
+        securityContext:
+          runAsUser: 1001
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//[DB_HOST]:[DB_PORT]/[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default Oracle driver
+```
+</TabItem>
+</Tabs>
+
+### MSSQL
+
+The MSSQL driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MSSQL driver
+```
+</TabItem>
+</Tabs>
+
+#### Case sensitivity
+
+MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive one. We recommend using `Latin1_General_CS_AS`.
+
+Not doing so may lead to unexpected behavior.
+The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
