@@ -1,7 +1,7 @@
 ---
 id: install
-title: "Camunda 8 Helm installation"
-sidebar_label: "Install"
+sidebar_label: Install
+title: Helm chart installation
 description: "Camunda provides continuously improved Helm charts, of which are not cloud provider-specific so you can choose your Kubernetes provider."
 ---
 
@@ -112,7 +112,7 @@ global:
       #######################
       # Orchestration Group
       #######################
-      core:
+      orchestration:
         redirectUrl: "http://camunda-core:8080"
         existingSecret:
           name: "integration-test-credentials"
@@ -163,7 +163,7 @@ webModelerPostgresql:
       adminPasswordKey: "webmodeler-postgresql-admin-password"
       userPasswordKey: "webmodeler-postgresql-user-password"
 
-core:
+orchestration:
   enabled: true
   clusterSize: "1"
   partitionCount: "1"

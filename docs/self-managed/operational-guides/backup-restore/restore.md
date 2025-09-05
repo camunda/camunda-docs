@@ -435,14 +435,14 @@ In a manual setup, you can simply stop all components.
 If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elsaticsearch:
+elasticsearch:
   enabled: true
 
 connectors:
   enabled: false
 optimize:
   enabled: false
-core:
+orchestration:
   enabled: false
 ```
 
@@ -665,7 +665,7 @@ It will overwrite the start command of the resulting Zeebe pod, executing a rest
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
 ```yaml
-core:
+orchestration:
    enabled: true
    env:
    # Environment variables to overwrite the Zeebe startup behavior
@@ -685,7 +685,7 @@ core:
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elsaticsearch:
+elasticsearch:
    enabled: true
 
 connectors:
@@ -699,7 +699,7 @@ optimize:
 Alternative approach to overwriting the startup behaviour to restore the partitions.
 
 ```yaml
-core:
+orchestration:
    enabled: true
    command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:
@@ -714,6 +714,8 @@ core:
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 
@@ -750,6 +752,20 @@ However, the restore will fail if:
 
 If the restore fails, you can re-run the application after fixing the root cause.
 
+#### Data directory is not empty
+
+If the data directory is not empty, the restore will fail with an error message:
+
+```
+Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+```
+
+On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
+In such cases, the restore application can be configured to ignore the presence of these files and folders.
+The config `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore.
+By default, it ignores `lost+found` folder found on ext4 filesystems.
+To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
+
 ## Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
 
 Now that you have actively restored Elasticsearch/OpenSearch and the Zeebe cluster partitions, you can start all components again and use Camunda 8 as normal.
@@ -776,7 +792,7 @@ After the database has been restored, you can start Web Modeler again.
 
 :::danger
 When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](self-managed/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
+Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip

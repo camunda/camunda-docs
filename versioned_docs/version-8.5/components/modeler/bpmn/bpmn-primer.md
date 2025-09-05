@@ -115,9 +115,7 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md).
-
-![overview](./assets/modeler.gif)
+The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md). Learn more by [modeling your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md).
 
 - [Download page](https://camunda.com/download/modeler/)
 - [Source code repository](https://github.com/camunda/camunda-modeler)
@@ -136,11 +134,9 @@ You can think of process execution as tokens running through the process model. 
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="200px"
-url={[
-{src: '/videos/sequenceflow.mp4', type: 'video/mp4'}
-]}
+src="/videos/sequenceflow.mp4"
 />
 </center>
 
@@ -152,11 +148,9 @@ The basic elements of BPMN processes are tasks; these are atomic units of work c
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/tasks.mp4', type: 'video/mp4'}
-]}
+src="/videos/tasks.mp4"
 />
 </center>
 
@@ -174,11 +168,9 @@ BPMN's **exclusive gateway** chooses one sequence flow out of many based on data
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/exclusive-gw.mp4', type: 'video/mp4'}
-]}
+src="/videos/exclusive-gw.mp4"
 />
 </center>
 
@@ -188,11 +180,9 @@ BPMN's **parallel gateway** generates new tokens by activating multiple sequence
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/parallel-gw.mp4', type: 'video/mp4'}
-]}
+src="/videos/parallel-gw.mp4"
 />
 </center>
 
@@ -206,11 +196,9 @@ Refer to the [gateways](gateways.md) section on which types of gateways are curr
 <ReactPlayer
 playing
 loop
-playsinline
+playsInline
 height="300px"
-url={[
-{src: '/videos/catch-event.mp4', type: 'video/mp4'}
-]}
+src="/videos/catch-event.mp4"
 />
 </center>
 
@@ -222,9 +210,7 @@ Refer to the [events](events.md) section on which types of events are currently 
 
 ### Subprocesses: Grouping elements
 
-**Subprocesses** are element containers that allow defining common functionality. For example, we can attach an event to a subprocess's border:
-
-![payload](./assets/sub-process.gif)
+[**Subprocesses**](/components/modeler/bpmn/subprocesses.md) are element containers that allow defining common functionality. For example, you can attach an event to a subprocess's border.
 
 When the event is triggered, the subprocess is interrupted, regardless which of its elements is currently active.
 

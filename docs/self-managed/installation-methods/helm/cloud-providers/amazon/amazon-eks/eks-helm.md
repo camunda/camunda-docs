@@ -378,7 +378,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 Use these environment variables in the `kubectl` command to create the secret.
 
-- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#smtp--email)).
+- The `smtp-password` should be replaced with the appropriate external value ([see how it's used by Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#smtp--email)).
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/create-identity-secret.sh
@@ -400,7 +400,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/upgrade.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/installation-methods/helm/upgrade/index.md) or any other component upgrades.
 
 :::
 
@@ -416,7 +416,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 #### Web Modeler
 
-As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
+As the Web Modeler REST API uses PostgreSQL, configure the `restapi` to use IRSA with Amazon Aurora PostgreSQL. Check the [Web Modeler database configuration](../../../../../components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql) for more details.
 Web Modeler already comes fitted with the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Keycloak
@@ -431,21 +431,21 @@ From Keycloak versions 21+, the default JDBC driver can be overwritten, allowing
 
 The [official Keycloak documentation](https://www.keycloak.org/server/db#preparing-keycloak-for-amazon-aurora-postgresql) also provides detailed instructions for utilizing Amazon Aurora PostgreSQL.
 
-A custom Keycloak container image containing necessary configurations is accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak), incorporates the required wrapper for seamless integration.
+A custom Keycloak container image containing necessary configurations is accessible on Docker Hub at [camunda/keycloak](https://hub.docker.com/r/camunda/keycloak). This image, built upon the base image [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak), incorporates the required wrapper for seamless integration.
 
 #### Container image sources
 
 The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
 
-Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnami/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
+Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnamilegacy/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
 ##### Keycloak image configuration
 
-Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnami/keycloak).
+Bitnami Keycloak container image configuration is available at [hub.docker.com/bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak).
 
 ##### Identity
 
-Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
+Identity uses PostgreSQL, and `identity` is configured to use IRSA with Amazon Aurora PostgreSQL. Check the [Identity database configuration](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#running-identity-on-amazon-aurora-postgresql) for more details. Identity includes the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) within the Docker image.
 
 #### Amazon OpenSearch Service
 
@@ -488,7 +488,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/identity/application-user-group-role-management/applications.md).
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
 
@@ -513,11 +513,11 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
+1. Open Identity in your browser at `http://localhost:8084`. You will be redirected to Keycloak and prompted to log in with a username and password.
 2. Use `demo` as both the username and password.
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
 4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
@@ -542,9 +542,9 @@ Optimize:
 Connectors:
 > kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
 WebModeler:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
 Console:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 </summary>
@@ -558,7 +558,7 @@ Console:
 <Tabs groupId="c8-connectivity">
   <TabItem value="rest-api" label="REST API" default>
 
-For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
@@ -588,7 +588,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </Tabs>
 
-Generate a temporary token to access the Orchestration cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration cluster REST API and display the cluster topology:
+Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
@@ -610,7 +610,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   </TabItem>
   <TabItem value="modeler" label="Desktop Modeler">
 
-Follow our existing [Modeler guide on deploying a diagram](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
 
 <Tabs groupId="domain" defaultValue="with" queryString values={
 [

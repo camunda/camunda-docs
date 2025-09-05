@@ -64,6 +64,60 @@ global:
       redirectUrl: https://operate.example.com
 ```
 
+## Zeebe Backup with S3
+
+In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+They will disable to automated creation of checksums.
+
+**Backups to IBM COS fail with 403 Access Denied**
+
+When using an S3 backup store with IBM Cloud Object Storage, you may encounter `403 Access Denied` errors even though the access credentials are valid.
+This may be caused by a [recent change in the AWS S3 client](https://docs.aws.amazon.com/sdkref/latest/guide/feature-dataintegrity.html), which now calculates checksums for data integrity by default. IBM COS does not appear to support this feature.
+
+To resolve this issue, you can restore the previous behavior by setting the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This will prevent the S3 client from calculating the additional checksums and should resolve the issue.
+
+**Backups to Dell EMC ECS fail with 400 Bad Request**
+
+When using an S3 backup store with Dell EMC ECS, you may encounter the following error:
+
+`The Content-SHA256 you specified did not match what we received (Service: S3, Status Code: 400)`
+
+This issue is caused by a recent change in the AWS S3 client, which now signs streaming chunked uploads differently. Dell EMC ECS does not support chunked encoding.
+
+To resolve this issue, set the following environment variable on your Zeebe brokers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+```
+
+This disables the additional checksum calculation in the S3 client and should resolve the issue.
+
+## Zeebe backup with Azure Blob Storage
+
+When using an Azure backup store, requests to the backup API may time out due to [a bug in the Azure SDK](https://github.com/Azure/azure-sdk-for-java/issues/46231).
+
+This issue is caused by a deadlock in the Azure SDK when virtual threads are used. It is more likely to occur on systems with many partitions per broker and limited CPU resources.
+
+To mitigate this, set the following environment variable on your Zeebe brokers to disable virtual threads in the Azure SDK:
+
+```
+AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
+```
+
 ## Zeebe Ingress (gRPC)
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose the Zeebe Gateway externally, you need the following:

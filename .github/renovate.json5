@@ -16,21 +16,28 @@
   ],
   packageRules: [
     {
+      // Automerge all updates for all non-Docusaurus devDependencies
+      excludePackageNames: ["/docusaurus/"],
+      matchDepTypes: ["devDependencies"],
+      automerge: true,
+      groupName: "devDependencies",
+    },
+    {
+      // Automerge minor and patch updates for all non-Docusaurus dependencies
+      excludePackageNames: ["/docusaurus/"],
+      matchDepTypes: ["dependencies"],
+      matchUpdateTypes: ["patch", "minor"],
+      automerge: true,
+      groupName: "dependencies",
+    },
+    {
       groupName: "docusaurus",
       matchPackageNames: ["/docusaurus/"],
     },
     {
-      // Automerge dev dependencies
-      matchPackageNames: [
-        "@playwright/test",
-        "@types/jest",
-        "husky",
-        "jest",
-        "lint-staged",
-        "playwright",
-        "prettier",
-      ],
-      groupName: "dev dependencies",
+      // Automerge docusaurus patches
+      matchPackageNames: ["/docusaurus/"],
+      matchUpdateTypes: ["patch"],
       automerge: true,
     },
     {
@@ -41,19 +48,12 @@
       automerge: false,
     },
     {
-      // Automerge docusaurus patches
-      matchPackageNames: ["/docusaurus/"],
-      matchUpdateTypes: ["patch"],
-      automerge: true,
-    },
-    {
       // Automerge patches and minor updates of GitHub Actions
       matchManagers: ["github-actions"],
       matchUpdateTypes: ["patch", "minor"],
       automerge: true,
       groupName: "GitHub Actions",
     },
-    // Use only stable/LTS versions of NodeJS (even numbers): 18, 20, ...
     {
       matchPackageNames: ["node"],
       matchUpdateTypes: ["patch", "minor"],

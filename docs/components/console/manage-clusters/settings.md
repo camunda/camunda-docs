@@ -1,10 +1,10 @@
 ---
 id: settings
 title: Settings
-description: "Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
+description: "Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster."
 ---
 
-Manage your cluster settings using resource-based authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
+Manage your cluster settings using authorizations, automatic cluster updates, and user task restrictions, or permanently delete the cluster.
 
 ## Manage cluster settings
 
@@ -16,15 +16,15 @@ To manage your cluster settings:
 
 ![Cluster settings](./img/cluster-settings.png)
 
-## Resource-based authorizations
+## Authorizations
 
-You can enable resource-based authorization on a per-cluster basis to control the level of access users have over system resources.
+You can enable authorizations on a per-cluster basis to control the level of access users and clients have over Orchestration Cluster resources.
 
-- Enable this setting to use resource-based authorization in the cluster. You must define resource access for each user as users no longer have access to all process and decision definitions.
-- Disable this setting if you do not want to use resource-based authorization in the cluster. You can still configure resource authorizations, but they are only applied to cluster users when you enable this setting.
+- Enable this setting to use [authorizations](/components/concepts/access-control/authorizations.md) in the cluster.
+- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Identity, but they are only applied to cluster when you enable this setting.
 
 :::tip
-For more information on resource-based authorization, see [resource authorizations](/components/concepts/resource-authorizations.md) and [resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
+For more information, see [authorizations](/components/concepts/access-control/authorizations.md).
 :::
 
 ## Automatic cluster updates
@@ -42,11 +42,17 @@ For more information on updating clusters, see [update your cluster](/components
 
 You can enable user task access restrictions in the cluster to restrict Tasklist task access to assigned/candidate users and groups.
 
+:::info
+User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](../../tasklist/api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
+:::
+
 - Enable this setting to use user task access restrictions in the cluster. Tasks assigned to users or candidate groups are only visible to assigned users or respective group members.
 - Disable this setting if you do not want to use user task access restrictions in the cluster. Any user can see any task, regardless of the assignment. Use this mode in development environments to test assignment rules.
 
+Changes to this setting can take a few minutes to be applied, as it requires a Tasklist restart.
+
 :::tip
-For more information on user task access restrictions, see [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
+For more information on user task access restrictions, see [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
 :::
 
 ## Delete this cluster

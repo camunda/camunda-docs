@@ -1,7 +1,7 @@
 ---
 id: configure-db-custom-headers
-title: "Configure custom headers"
-sidebar_label: "Configure custom HTTP headers"
+sidebar_label: Configure custom HTTP headers
+title: Helm chart custom headers configuration
 description: "Learn how to configure DB client custom HTTP headers"
 ---
 
@@ -95,7 +95,7 @@ For each container, mount your plugin's JAR file inside the container's file sys
 
 ### Configure components
 
-Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/installation-methods/helm/configure/application-configs.md).
+Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](../application-configs.md).
 
 The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
 
@@ -204,7 +204,7 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 #### Configure Zeebe Exporter
 
 :::note
-The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](/self-managed/zeebe-deployment/exporters/camunda-exporter.md).
+The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](../../../../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
 :::
 
 ```yaml

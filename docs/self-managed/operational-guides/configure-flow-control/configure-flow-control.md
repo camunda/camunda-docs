@@ -1,7 +1,7 @@
 ---
 id: configure-flow-control
-title: "Configure flow control"
-sidebar_label: "Configure flow control"
+sidebar_label: Flow control
+title: Camunda components flow control configuration
 description: "Configure flow control to limit write rates and manage exporting backlogs."
 ---
 

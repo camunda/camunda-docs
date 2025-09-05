@@ -1,6 +1,7 @@
 ---
 id: metrics
-title: "Metrics"
+sidebar_label: Metrics
+title: Camunda components metrics
 keywords: ["observability", "metrics", "monitoring", "monitor"]
 Description: "Learn about Camunda distributed system monitoring metrics using the Micrometer library as a facade for exporting metrics."
 ---
@@ -239,7 +240,7 @@ The health of partitions in a broker can be monitored using the metric `zeebe_he
 
 Brokers can export optional execution latency metrics.
 
-To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/zeebe-deployment/configuration/configuration.md).
+To enable export of execution metrics, set the `ZEEBE_BROKER_EXECUTION_METRICS_EXPORTER_ENABLED` environment variable to `true` in your Zeebe [configuration file](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).
 
 ## Grafana
 
@@ -256,3 +257,18 @@ Zeebe comes with a pre-built dashboard, available in the repository:
 :::tip
 You can also try out an [interactive dashboard](https://snapshots.raintank.io/dashboard/snapshot/Vbu3EHQMTI5Onh5RKuiS5J7QSMd7Sp5V) to learn about each panel and get an understanding of available data.
 :::
+
+### Data layer
+
+A pre-built Grafana dashboard is available for the data layer in the repository:
+
+[monitor/grafana/data_layer.json](https://github.com/camunda/camunda/blob/main/monitor/grafana/dashboards/data_layer.json)
+
+To use it:
+
+1. [Import](https://grafana.com/docs/grafana/latest/reference/export_import/#importing-a-dashboard) the dashboard into your Grafana instance.
+2. When prompted, select the appropriate Prometheus data source (especially if multiple are configured).
+
+The dashboard provides insights into key data layer components for Camunda versions `>= 8.8`, with a focus on the Camunda exporter through which all data flows.
+
+![Example panels](assets/example-panels-data-layer.png)

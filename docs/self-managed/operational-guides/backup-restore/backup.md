@@ -1,7 +1,7 @@
 ---
 id: backup
-title: "Create a backup"
-sidebar_label: "Create a backup"
+sidebar_label: Create a backup
+title: Camunda backup creation
 keywords: ["backup", "backups"]
 description: "Learn how to back up your Camunda 8 Self-Managed components."
 ---
@@ -46,6 +46,9 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="http://localhost:9200"
 
+      export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
+
       export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://localhost:9600"
       export OPTIMIZE_MANAGEMENT_API="http://localhost:9620"
       ```
@@ -61,6 +64,9 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
 
+      export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
+
       export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
       ```
@@ -71,7 +77,7 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
 
 ### 1. Soft pause exporting in Zeebe
 
-This step uses the [management API](/self-managed/zeebe-deployment/operations/management-api.md?exporting=softPause#exporting-api).
+This step uses the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md?exporting=softPause#exporting-api).
 
 This will continue exporting records, but not delete those records (log compaction) from Zeebe. This makes the backup a hot backup, as covered in the [why you should use backup and restore](backup-and-restore.md#why-you-should-use-backup-and-restore).
 
@@ -583,7 +589,7 @@ This step uses the [Zeebe management backup API](/self-managed/operational-guide
       while [[ "$(curl -s "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/backupRuntime/$BACKUP_ID" | jq -r .state)" != "COMPLETED" ]]; do echo "Waiting..."; sleep 5; done; echo "Finished backup with ID $BACKUP_ID"
       ```
 
-### 10. Resume exporting in Zeebe using the [management API](/self-managed/zeebe-deployment/operations/management-api.md)
+### 10. Resume exporting in Zeebe using the [management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
 
       ```bash
       curl -XPOST "$ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/exporting/resume"

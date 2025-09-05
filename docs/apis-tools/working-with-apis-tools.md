@@ -5,115 +5,58 @@ sidebar_label: "APIs & tools"
 description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
 ---
 
-import DocCardList from '@theme/DocCardList';
+import "./react-components/\_apitools-card.css";
+import HeroImg from './img/hero-apis.png';
+import ApiGrid from './react-components/\_apitools-card';
+import { apiCards, clientCards } from './react-components/\_apitools-card-data';
+import AskAi from './react-components/\_banner-ask-ai.md'
 
-This section steps through available concepts for integration:
+<h3 class="subheading">Camunda 8 APIs and official clients and SDKs.</h3>
 
-- **Control your Camunda 8 process automation** by [deploying processes](/components/modeler/web-modeler/run-or-publish-your-process.md#deploy-a-process), [starting process instances](/components/modeler/web-modeler/run-or-publish-your-process.md), [activating jobs](/components/concepts/job-workers.md), and more using supplemental and community-maintained **Zeebe client libraries**.
-- **Interact with the Camunda 8 ecosystem** by learning about [Camunda Components](/components/components-overview.md) and their APIs to communicate with your cluster, search, get and change data, create Cloud API clients, and more.
-- **Develop a custom front end for task applications** by learning the basic architecture of task applications, the APIs for interacting with Camunda 8 through your applications, and the open source form.js library for creating and embedding human task forms into these applications.
+<div class="double-column-container" style={{marginBottom: '50px'}}>
+<div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-:::note
-You're permitted to use these web apps and APIs for free with the Free Edition in non-production environments. To use the software in production, [purchase the Camunda Enterprise Edition](https://camunda.com/products/cloud/camunda-cloud-enterprise-contact/). Read more in our [licensing](../reference/licenses.md) documentation.
+Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
+
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+
+</div>
+<div class="double-column-right" style={{flex: '1'}}>
+
+<img src={HeroImg} alt="Use Camunda 8 APIs and clients to build, automate, and monitor your applications." title="Use Camunda 8 APIs and clients to build, automate, and monitor your applications." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+
+</div>
+</div>
+
+:::info Upgrading to Camunda 8.8
+
+- Existing customers can upgrade APIs & tools to 8.8 using the [APIs & tools migration guide](/apis-tools/migration-manuals/index.md).
+- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+
 :::
 
-## Deploy processes, start process instances, and more using Zeebe client libraries
+## APIs and reference
 
-Clients allow applications to do the following:
+Use the following APIs for Camunda 8 integration and automation:
 
-- Deploy processes.
-- Start and cancel process instances.
-- Activate jobs, work on those jobs, and subsequently complete or fail jobs.
-- Publish messages.
-- Update process instance variables and resolve [incidents](/components/concepts/incidents.md).
+<ApiGrid api={apiCards} />
 
-The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via a mix of REST and [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
+## API clients
 
-Camunda 8 provides several official clients based on this API. Official clients have been developed and tested by Camunda. They also add convenience functions (for example, thread handling for job workers) on top of the core API.
+Camunda provides the following official clients to simplify API usage and speed up development:
 
-### Official Zeebe clients
+<ApiGrid api={clientCards} />
 
-Official clients have been developed and tested by Camunda. They also add convenience functions (e.g. thread handling for job workers) on top of the core API.
+## Camunda Process Test
 
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/java-client/", label: "Java client", docId:"apis-tools/java-client/index"}
-]}/>
+Use Camunda Process Test to test your process definitions and automations with a dedicated testing framework.
 
-## Learn about Camunda Components and their APIs
+<p><a href="../testing/getting-started/" class="link-arrow">Camunda Process Test</a></p>
 
-:::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-:::
+## Upgrade to Camunda 8.8
 
-Camunda 8 components have APIs to enable polyglot developers to work with in their programming language of choice. Below are links to available component APIs.
+If you are migrating from Camunda 7 or from v1 component REST APIs, see the [Camunda 8.8 APIs & tools migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for guidance.
 
-![Architecture diagram for Camunda including all the components for SaaS](./img/ComponentsAndArchitecture_SaaS.png)
+<p><a href="../migration-manuals/" class="link-arrow">Camunda 8.8 APIs & tools migration guide</a></p>
 
-### API Reference
-
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/administration-api/administration-api-reference/", label: "Administration API (REST)", docId:"apis-tools/administration-api/administration-api-reference"},
-{
-type:"link", href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/", label: "Orchestration cluster API (REST)", docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/optimize-api/optimize-api-authentication/", label: "Optimize API (REST)", description: "Get, delete, and export reports and dashboards, enable and disable sharing, and more."
-},
-{
-type:"link", href:"/docs/next/apis-tools/web-modeler-api/overview/", label: "Web Modeler API (REST)", docId:"apis-tools/web-modeler-api/overview"
-},
-{
-type:"link", href:"/docs/next/apis-tools/zeebe-api/overview/", label: "Zeebe API (gRPC)", docId:"apis-tools/zeebe-api/grpc"
-}
-]}/>
-
-:::note
-Additionally, visit our documentation on [Operate](../self-managed/operate-deployment/usage-metrics.md) and [Tasklist](../self-managed/tasklist-deployment/usage-metrics.md) usage metric APIs.
-:::
-
-### SDKs
-
-<DocCardList items={[{type:"link", href:"/docs/next/apis-tools/spring-zeebe-sdk/getting-started/", label: "Camunda Spring Boot", docId:"apis-tools/spring-zeebe-sdk/getting-started"},
-{
-type:"link", href:"/docs/next/apis-tools/node-js-sdk/", label: "Node.js", docId:"apis-tools/node-js-sdk"
-},
-]}/>
-
-### Postman
-
-Camunda maintains a set of collections and APIs on Postman to help learn and use the available APIs.
-
-Watch and fork your favorite collections and APIs in the [Camunda Team](https://www.postman.com/camundateam) Postman.
-
-:::note
-Collections and APIs are manually updated and not all API functionality may be available. For the most up-to-date API functionality, refer to the [API reference docs](/apis-tools/working-with-apis-tools.md#api-reference).
-:::
-
-### Community clients
-
-[Community clients](/apis-tools/community-clients/index.md) supplement the official clients. These clients have not been tested by Camunda.
-
-It is also possible to [build your own client](../apis-tools/build-your-own-client.md) You can browse other community extensions and the most up-to-date list of community clients [here](https://github.com/orgs/camunda-community-hub/repositories).
-
-### Community SDKs
-
-In addition to APIs and clients, the Camunda Developer Experience team is looking for feedback on popular community clients turned SDKs. While these are currently on the Camunda Community Hub, we are actively iterating and evaluating feedback to fully support them.
-
-- [Node.js SDK](https://github.com/camunda-community-hub/camunda-8-sdk-node-js)
-
-## Develop a custom frontend for task applications
-
-Camunda 8 provides APIs and JavaScript libraries to allow frontend developers to build custom task applications or to integrate with third-party tools or UI builders. The extensible Camunda Forms framework allows developers to build complex forms that can be rendered anywhere, while being maintained by business developers using Camunda Modeler.
-
-<DocCardList items={[
-{
-type: "link",
-href: "/docs/next/apis-tools/frontend-development/task-applications/introduction-to-task-applications",
-label: "Task applications",
-docId:"apis-tools/frontend-development/task-applications/introduction-to-task-applications"
-},
-{
-type: "link",
-href: "/docs/next/apis-tools/frontend-development/forms/introduction-to-forms",
-label: "Forms",
-docId: "apis-tools/frontend-development/forms/introduction-to-forms"
-}
-]}/>
+<AskAi/>

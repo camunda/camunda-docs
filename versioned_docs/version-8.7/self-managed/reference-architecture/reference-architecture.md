@@ -31,15 +31,15 @@ Deviations from the reference architecture are unavoidable. However, such change
 
 ## Architecture
 
-### Orchestration cluster vs Web Modeler and Console
+### Orchestration Cluster vs Web Modeler and Console
 
-When designing a reference architecture, it's essential to understand the differences between an orchestration cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
+When designing a reference architecture, it's essential to understand the differences between an Orchestration Cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
 
 #### Orchestration Cluster
 
 ![Orchestration Cluster](./img/orchestration-cluster.jpg)
 
-The orchestration cluster is the core of Camunda.
+The Orchestration Cluster is the core of Camunda.
 
 The included components are:
 
@@ -50,7 +50,7 @@ The included components are:
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 - [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting Zeebe with external systems and services.
 
-Each component within the orchestration cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
+Each component within the Orchestration Cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
 
 This design ensures that all components are in sync, working collectively to maintain consistent state management, data integrity, and smooth process orchestration across the entire cluster. This architecture ensures reliable process execution with clear boundaries between each workflow engine's operation.
 
@@ -67,7 +67,7 @@ Additionally, Web Modeler and Console require the following:
 
 - [Identity](/self-managed/identity/what-is-identity.md): A service for managing user authentication and authorization.
 
-The Identity deployment is typically a shared entity between the orchestration cluster and Web Modeler and Console. For production environments, using an external [identity provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md) is recommended.
+The Identity deployment is typically a shared entity between the Orchestration Cluster and Web Modeler and Console. For production environments, using an external [identity provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md) is recommended.
 
 ### Databases
 
@@ -115,16 +115,16 @@ For more information and guides, see the reference for [Kubernetes](/self-manage
 
 ### Containers
 
-Containers, such as Docker, offer a middle ground between the manual JAR and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
+Containers, such as Docker, offer a middle ground between the manual and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
 
-- Advisable as a middle ground between manual JAR and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
+- Advisable as a middle ground between manual and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
 - Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
 For more information and guides, see the reference for [containers](/self-managed/setup/deploy/other/docker.md).
 
-### Manual JAR (bare metal/virtual machines)
+### Manual (bare metal/virtual machines)
 
 For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 

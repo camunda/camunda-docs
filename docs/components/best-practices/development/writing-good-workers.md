@@ -131,7 +131,7 @@ client.newWorker().jobType("retrieveMoney")
   }).open();
 ```
 
-The [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
+The [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) provides a more elegant way of writing this, but also uses a normal worker from the Java client underneath. In this case, your code might look like this:
 
 ```java
 @JobWorker(type = "retrieveMoney", autoComplete = false)
@@ -148,7 +148,7 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
   .build();
 ```
 
-In the Camunda Spring Boot SDK, you can do this using a [configuration](/apis-tools/spring-zeebe-sdk/configuration.md#execution-threads).
+In the Camunda Spring Boot Starter, you can do this using a [configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#execution-threads).
 
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 

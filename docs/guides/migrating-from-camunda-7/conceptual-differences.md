@@ -89,7 +89,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
+- [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -112,7 +112,7 @@ You can find a complete Java Spring Boot example, showing the Camunda 7 process 
 
 The programming models of Camunda 7 and Camunda 8 are very similar if you program in Java and use Spring.
 
-For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
+For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md)):
 
 ```java
 @JobWorker(type = "payment")
@@ -132,7 +132,7 @@ public void retrievePayment(ActivatedJob job) {
 
 <!--
 :::note
-JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Spring Zeebe SDK documentation](../../apis-tools/spring-zeebe-sdk/getting-started.md).
+JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Camunda Spring Boot Starter documentation](../../apis-tools/camunda-spring-boot-starter/getting-started.md).
 :::
 -->
 
@@ -152,7 +152,7 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md) may be provided in the future.
 
 ### Polyglot applications (C#, Node.js)
 
@@ -164,7 +164,7 @@ When you run your application in Node.js or C#, for example, you exchange one re
 
 ## Plugins
 
-[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md) or [interceptors](self-managed/zeebe-deployment/zeebe-gateway/interceptors.md#implementing-an-interceptor).
+[**Process engine plugins**](https://docs.camunda.org/manual/latest/user-guide/process-engine/process-engine-plugins/) are not available in Camunda 8, as such plugins can massively change the behavior or even harm the stability of the engine. Some use cases might be implemented using [exporters](/self-managed/concepts/exporters.md) or [interceptors](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/interceptors.md#implementing-an-interceptor).
 
 :::note
 Exporters are only available for Self-Managed Zeebe clusters and are not available in Camunda 8 SaaS.

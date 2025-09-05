@@ -113,6 +113,24 @@ For current regional support information, refer to [supported foundation models 
 
 :::
 
+## Optical Character Recognition (OCR) {#ocr}
+
+Optical Character Recognition (OCR) technology is used to detect and extract text and layout from scanned or digital documents.
+
+Structured data extraction currently uses Amazon Textract:
+
+- Extracts text, layout, and key-value pairs.
+- Supports horizontal text only.
+- Supports English handwriting.
+- Supported languages for typed characters: Spanish, German, French, Italian, Portuguese.
+
+Known limitations:
+
+- No language detection.
+- No vertical text support.
+- Limited support for complex custom fields.
+- No detection of table headers.
+
 ## Table data extraction {#table-data}
 
 IDP can extract table data using LLM foundation models to identify and structure tabular data based on your prompts.

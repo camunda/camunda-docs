@@ -8,7 +8,7 @@ description: "Learn how to use Camunda 8 connectors in Desktop Modeler."
 
 Use [Camunda 8 connectors](../../connectors/introduction.md) to access a growing range of external services or communication protocols.
 
-Desktop Modeler automatically fetches and updates [element templates](./element-templates/about-templates.md) for [pre-built connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) from the [Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). This happens automatically, in the background, unless explicitly [disabled](#disable-automatic-connector-template-fetching). connector templates can also be provided [manually](#add-connector-templates-manually), offering you full control over the building blocks provided by the modeler.
+Desktop Modeler automatically fetches and updates [element templates](/components/modeler/element-templates/about-templates.md) for [pre-built connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md) from the [Camunda Marketplace](https://marketplace.camunda.com/en-US/listing?pl=3038&attr=20486&cat=107792&locale=en-US). This happens automatically, in the background, unless explicitly [disabled](#disable-automatic-connector-template-fetching). connector templates can also be provided [manually](#add-connector-templates-manually), offering you full control over the building blocks provided by the modeler.
 
 ## Automatic connector template fetching
 
@@ -37,5 +37,5 @@ For full control over the building blocks offered by Desktop Modeler, download e
 ## Additional resources
 
 - [About Camunda 8 connectors](../../connectors/out-of-the-box-connectors/available-connectors-overview.md)
-- [About Element Templates](./element-templates/about-templates.md)
+- [About element templates](/components/modeler/element-templates/about-templates.md)
 - [Desktop Modeler flags](./flags/flags.md#disable-connector-templates)

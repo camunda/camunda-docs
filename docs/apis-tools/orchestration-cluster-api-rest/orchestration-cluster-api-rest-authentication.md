@@ -1,140 +1,147 @@
 ---
 id: orchestration-cluster-api-rest-authentication
 title: "Authentication"
-description: "Step through authentication options that can be used to access Orchestration Cluster API."
+description: "Step through authentication options that can be used to access the Orchestration Cluster REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-All Orchestration Cluster API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
+This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
 
-## Generate a token
+# Authentication methods for the Orchestration Cluster REST API
 
-<Tabs groupId="environment" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
+The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration:
 
-<TabItem value='saas'>
+- **No Authentication**
+- **Basic Authentication**
+- **OIDC Access Token Authentication**
 
-1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
-2. Add permissions to this client for **Zeebe**.
-3. Once you have created the client, capture the following values required to generate a token:
-   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   | Name                     | Environment variable name        | Default value                                |
-   | ------------------------ | -------------------------------- | -------------------------------------------- |
-   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
-   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
-   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 | `ZEEBE_TOKEN_AUDIENCE`           | `zeebe.camunda.io`                           |
-   | Zeebe REST Address       | `ZEEBE_REST_ADDRESS`             | -                                            |
-   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::caution
-   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
-   :::
-4. Execute an authentication request to the token issuer:
-   ```bash
-   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
-       --header 'Content-Type: application/x-www-form-urlencoded' \
-       --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${ZEEBE_TOKEN_AUDIENCE}" \
-       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
-   ```
-   A successful authentication response looks like the following:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-5. Capture the value of the `access_token` property and store it as your token.
+## When to use each method
 
-</TabItem>
+- **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
+- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments with C8 Run when authentication is enabled.
+- **OIDC Access Token Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
-<TabItem value='self-managed'>
+## Authentication support matrix
 
-1. [Add an M2M application in Identity](/self-managed/identity/application-user-group-role-management/applications.md).
-2. [Add permissions to this application](/self-managed/identity/application-user-group-role-management/applications.md) for **Orchestration Cluster API**.
-3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/identity/authentication.md) to access the Orchestration Cluster API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
-   ```shell
-   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
-   --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=${CLIENT_ID}" \
-   --data-urlencode "client_secret=${CLIENT_SECRET}" \
-   --data-urlencode 'grant_type=client_credentials'
-   ```
-   A successful authentication response looks like the following:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-5. Capture the value of the `access_token` property and store it as your token.
+| Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC Access Token |
+| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | -------------------------- |
+| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
+| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
+| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
+| SaaS                                                                                   | OIDC Access Token      | ❌                      | ❌                  | ✅ (required)              |
 
-</TabItem>
+# Authenticate API calls
 
-</Tabs>
+## No Authentication (Local Development)
 
-## Use a token
-
-Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
-
-For example, to send a request to the Orchestration Cluster API's `/topology` endpoint:
-
-<Tabs groupId="environment" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value='saas'>
-
-:::tip
-The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Orchestration Cluster API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/`.
-:::
-
-</TabItem>
-
-<TabItem value='self-managed'>
-
-:::tip
-The `${ZEEBE_REST_ADDRESS}` variable below represents the URL of the Orchestration Cluster API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8080/`.
-:::
-
-</TabItem>
-
-</Tabs>
+By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster REST API without authentication for local development. You can make API requests directly:
 
 ```shell
-curl --header "Authorization: Bearer ${TOKEN}" \
-     ${ZEEBE_REST_ADDRESS}/v2/topology
+curl http://localhost:8080/v2/topology
 ```
 
-A successful response includes [information about the cluster](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx). For example:
+## Basic Authentication
 
-```json
-{
-  "brokers": [
-    ...
-  ],
-  "clusterSize": 3,
-  "partitionsCount": 3,
-  "replicationFactor": 3,
-  "gatewayVersion": "8.6.0"
-}
+Basic Authentication uses username and password credentials. To set it up:
+
+**For Camunda 8 Run:**
+Enable Basic Auth by configuring authentication in your `application.yaml`. For detailed steps, see the [Camunda 8 Run documentation on enabling authentication](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
+
+**For Helm:**
+Basic Auth is enabled by default for the Orchestration Cluster API.
+
+Once authentication is enabled, include your username and password in each API request. You can use an existing user or the default user `demo`/`demo`:
+
+```shell
+curl --user username:password \
+     http://localhost:8080/v2/topology
 ```
 
-## Token expiration
+:::note
+Basic Authentication only supports a very small number of API requests per second, and may not be suitable for production use.
+Please see
+[Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
+:::
 
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
+## OIDC Access Token Authentication using Client Credentials
+
+OIDC Access Token Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+
+<Tabs groupId="environment" defaultValue="saas" queryString values={[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value="saas">
+
+1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the Camunda Console.
+2. Use the credentials to request an Access Token:
+
+```shell
+curl --request POST ${CAMUNDA_OAUTH_URL} \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'grant_type=client_credentials' \
+    --data-urlencode "audience=${CAMUNDA_TOKEN_AUDIENCE}" \
+    --data-urlencode "client_id=${CAMUNDA_CLIENT_ID}" \
+    --data-urlencode "client_secret=${CAMUNDA_CLIENT_SECRET}"
+```
+
+3. Use the Access Token from the response in your API requests:
+
+```shell
+curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+     ${BASE_URL}/topology
+```
+
+Replace the `${BASE_URL}` based on the address of your cluster. See the [Context paths](orchestration-cluster-api-rest-overview.md#context-paths) for SaaS URL formats.
+
+</TabItem>
+
+<TabItem value="self-managed">
+
+1. **Register a client in your Identity Provider (IdP).**  
+   An IdP manages digital identities and authentication, such as Keycloak, Azure Entra (formerly Azure AD), Okta, or similar systems.
+2. **Use the credentials (client ID and secret) to request an Access Token.**  
+   The example below shows Keycloak configuration (the endpoint URL will vary based on your IdP):
+
+```shell
+curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode "client_id=${CLIENT_ID}" \
+--data-urlencode "client_secret=${CLIENT_SECRET}" \
+--data-urlencode 'grant_type=client_credentials'
+```
+
+3. Use the access token from the response in your API requests:
+
+```shell
+curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
+     ${BASE_URL}/topology
+```
+
+Replace the `${BASE_URL}` based on the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
+
+</TabItem>
+
+</Tabs>
+
+## OIDC access token authentication using X.509 client certificates
+
+For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) enforces mutual TLS (mTLS).
+
+**For Java applications**  
+The Java client supports automatic OIDC access token retrieval using X.509 client certificates. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/getting-started.md#oidc-access-token-authentication-with-x509-client-certificate) for complete configuration details.
+
+**For other clients**  
+Refer to your identity provider's documentation for obtaining tokens using X.509 certificates.
+
+## Automatic token management in official clients
+
+When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
+
+**Learn more:**
+
+- [Camunda Java client authentication and token management](./../java-client/getting-started.md)
+- [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)

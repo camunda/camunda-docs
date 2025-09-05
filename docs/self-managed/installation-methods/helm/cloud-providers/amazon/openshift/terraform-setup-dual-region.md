@@ -208,7 +208,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 1. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
 1. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
@@ -254,7 +253,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    ```
 
 1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-
    - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
    - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
 
@@ -342,7 +340,6 @@ this guide uses a dedicated [aws terraform provider](https://registry.terraform.
 :::
 
 1. Configure each cluster by editing the beginning of their respective files in the `locals` section:
-
    - Each cluster should have a unique, non-overlapping CIDR block to ensure proper functioning of the Submariner overlay network (as referenced in the [Submariner documentation](https://submariner.io/0.8/getting-started/architecture/globalnet)).
      This is essential for successful inter-cluster communication using the Submariner underlay network.
      If you can't fullfill this requirement, you may need to implement a [Submariner Global Private Network](https://submariner.io/0.8/getting-started/architecture/globalnet/).

@@ -28,7 +28,6 @@ To get started with RPA, you first need to write an RPA script. [Camunda Modeler
 Once you have written your script, you can test it on a local RPA worker.
 
 1. **Start the RPA worker**:
-
    1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
    2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
    3. Start the worker by running the executable.
@@ -47,13 +46,11 @@ Once you are happy with your script and have tested it locally, you can start au
 ### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
-
    1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) for your Modeler.
    2. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    3. Note the ID of your RPA script. You will need this in the next step.
 
 2. **Add RPA to your process**:
-
    1. In Camunda Modeler, create a new BPMN file or open an existing one.
    2. Add a new task and change it to an "RPA connector".
       ![A screenshot of appending a RPA Task](img/create-new-task.png)
@@ -61,7 +58,6 @@ Once you are happy with your script and have tested it locally, you can start au
       ![A screenshot of configuring a RPA Task](img/rpa-task-configuration.png)
 
 3. **Deploy and run the process**:
-
    1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Modeler.
    2. Start an instance of your process.
 
@@ -70,7 +66,6 @@ Once you are happy with your script and have tested it locally, you can start au
 The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 1. **Create credentials for the worker**:
-
    1. Create the necessary worker credentials in Console. You can follow the same steps as for the Modeler credentials. Give your new client the scopes `Zeebe` and `Secrets`.
    2. Add the generated credentials to your `application.properties` in the same directory as your RPA worker executable.
 

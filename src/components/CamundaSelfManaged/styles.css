@@ -122,3 +122,11 @@ a.sm-card {
   margin-bottom: 10px;
   display: block;
 }
+
+.sm-quickstart,
+.sm-installation,
+.sm-components,
+.sm-infrastructure,
+.sm-reference-architecture {
+  margin-bottom: 3rem;
+}

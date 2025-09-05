@@ -4,9 +4,11 @@ title: "Usage metrics"
 description: "Learn about the three main usage metrics that impact Camunda 8 pricing."
 ---
 
-There are three main usage metrics that have an impact on Camunda 8 pricing. It is important to understand these definitions, their impact on billing, and how to retrieve them.
+There are three main usage metrics that have an impact on Camunda 8 pricing.
 
 ## Definition of metrics
+
+It is important to understand these definitions, their impact on billing, and how to retrieve them.
 
 ### Root process instance
 
@@ -22,7 +24,7 @@ The number of **task users** (TU) that have served as assignees.
 
 ## Retrieve metrics in SaaS
 
-On Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
+In Camunda 8 SaaS an **Owner** or **Admin** of an organization can retrieve the information from the **Billing** page.
 
 You can access the **Billing** page by selecting **Organization Management** in the Camunda Console navigation bar.
 
@@ -39,12 +41,12 @@ For Operate and Tasklist, the metrics are stored in the `operate-metric-1.0.0_` 
 
 On Camunda 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.
 
-For **root process instances** and **decision instances**, follow the steps provided in the [Operate guide](/self-managed/operate-deployment/usage-metrics.md).
+For **root process instances** and **decision instances**, follow the steps provided in the [Operate guide](/self-managed/components/orchestration-cluster/operate/usage-metrics.md).
 
-For **task users**, follow the steps provided in the [Tasklist guide](/self-managed/tasklist-deployment/usage-metrics.md).
+For **task users**, follow the steps provided in the [Tasklist guide](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
 
 :::note
 If you are not running Tasklist or Operate, there is currently no way to retrieve usage metrics until future releases. Regardless, the metrics still need to be factored into any enterprise agreement and count towards any task user pricing.
 :::
 
-With Console installed, it may be easier to access usage metrics from Operate and Tasklist. Perform the steps described above via the corresponding [Console usage metrics documentation](../../self-managed/console-deployment/usage-metrics.md).
+With Console installed, it may be easier to access usage metrics from Operate and Tasklist. Perform the steps described above via the corresponding [Console usage metrics documentation](../../self-managed/components/console/usage-metrics.md).

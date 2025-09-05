@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster using Camunda 8 Run."
+description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -17,7 +17,7 @@ Camunda 8 Run allows you to install and start a simplified, single-application C
 
 Camunda 8 Run includes the following:
 
-- Orchestration cluster
+- Orchestration Cluster
 - Connectors
 - Elasticsearch
 
@@ -63,11 +63,12 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following command-line arguments are available:
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
 | Argument                   | Description                                                                                                                                                                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/zeebe-deployment/configuration/configuration.md).                                                                                                              |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                        |
 | `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                              |
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                              |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                              |
@@ -95,7 +96,7 @@ These web interfaces are available at:
 
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
-- **Orchestration Cluster API:** http://localhost:8080/v2/
+- **Orchestration Cluster REST API:** http://localhost:8080/v2/
 - **Inbound Connectors API:** http://localhost:8085/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
@@ -111,7 +112,7 @@ The following components do not have a web interface, but their endpoints are us
 
 Make sure you have installed [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md) before continuing.
 
-To [deploy diagrams](/self-managed/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
+To [deploy diagrams](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md) from Desktop Modeler, use the following configuration:
 
 - **Target:** Self-Managed
 - **Cluster endpoint:** `http://localhost:26500` (Zeebe Gateway)
@@ -136,34 +137,60 @@ All APIs are **unprotected by default** in Camunda 8 Run and can be accessed wit
 
 Available APIs include:
 
-- [Tasklist V1](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md)
-- [Operate V1](/apis-tools/operate-api/overview.md)
-- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
 - [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+- [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md)
 
 ### Enable authentication and authorization
 
-To enforce API authentication and work with authorizations, you must enable these features. The following minimal `application.yaml` shows the required configuration:
+By default, Camunda 8 Run starts with authentication enabled and API endpoints unprotected.  
+To enforce authorization rules, provide a custom configuration file.
+
+You can either:
+
+- Update the existing `configuration/application.yaml`, or
+- Create a new `application.yaml` in the `/c8run` folder and pass it at startup using the [`--config` flag](#configuration-options):
 
 ```yaml
-camunda.security:
-  authentication.unprotected-api: false
-  authorizations.enabled: true
+camunda:
+  security:
+    authentication:
+      # Require authentication for API requests
+      unprotected-api: false
+    authorizations:
+      # Enable authorization checks
+      enabled: true
 ```
 
-Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
+Start C8Run with the configuration:
 
-```
+```bash
 ./start.sh --config application.yaml
 ```
 
-You are then required to provide basic authentication credentials on API requests, as in the following:
+Once enabled, API requests must include valid credentials. For example:
 
 ```shell
-curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
+curl --request GET 'http://localhost:8080/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
+```
+
+To add additional users (e.g., an admin user), extend the configuration:
+
+```yaml
+camunda:
+  security:
+    initialization:
+      users:
+        - username: user
+          password: user
+          name: user
+          email: user@example.com
+      defaultRoles:
+        admin:
+          users:
+            - user
 ```
 
 ## Shut down Camunda 8 Run
@@ -212,3 +239,23 @@ The following advanced configuration options can be provided via environment var
 ## Next steps
 
 Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+
+## Troubleshooting
+
+### User creation
+
+User creation in Identity only happens on the first startup. This means:
+
+- If you want to add a user using the --username and --password options, or
+- If you want to seed users at startup via configuration in `application.yaml`,
+
+then you must ensure that Elasticsearch starts fresh. Otherwise, Identity will reuse the existing indices and skip creating new users.
+
+Tip: If you are testing locally, delete the existing Elasticsearch indices before restarting C8Run:
+
+```bash
+# Example: delete indices to reset Identity state
+curl -XDELETE 'http://localhost:9200/identity*'
+```
+
+After clearing the indices, restart C8Run with your configuration or command-line options, and the users will be created as expected.

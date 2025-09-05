@@ -1,11 +1,11 @@
 ---
 id: external-sso
-title: Connect your IdP with Camunda
+title: Connect to an identity provider
 keywords: [SSO, AzureAD, SAML]
 description: "For enterprise customers, we support integrating external identity providers."
 ---
 
-For Enterprise plan customers, Camunda supports integrating external identity providers (IdPs). Therefore, users within your organization do not need to sign up by creating an account with Camunda.
+Enterprise plan customers can integrate an external identity provider (IdP) with Camunda. This means users within your organization do not need to sign up by creating a Camunda account.
 
 ## Onboarding procedure
 

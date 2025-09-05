@@ -39,13 +39,11 @@ To integrate SAP systems with Camunda, all integration artifacts must meet the f
   Camunda 8.5+
 
 - **SAP BTP and Cloud Foundry**
-
   - The integration runs on SAP BTP, Cloud Foundry environment, that requires the [appropriate service](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all) setup.
   - [(Free) Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?region=all&service_plan=lite&commercialModel=btpea) for system and service connectivity.
 
 - **On-Premises SAP S/4HANA or ECC Systems _(if applicable)_**<br/>
   If the SAP S/4HANA or ECC system is hosted on-premises, the following additional components are required:
-
   - [(Free) Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all) for secure communication.
   - [SAP Cloud connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector), properly configured and connected to both, the SAP S/4HANA or ECC system and the BTP subaccount where the Camunda SAP integration artifacts will run.
 

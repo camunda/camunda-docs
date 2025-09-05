@@ -1,0 +1,69 @@
+---
+id: mapping-rule-authorizations
+title: "Assign authorizations on mapping rules"
+sidebar_label: "Mapping rule authorizations"
+description: "Grant permissions on mapping rules using the Authorizations UI in Identity."
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+This guide explains how to assign users, groups, roles or clients permission to manage specific mapping rules. To learn how to create mapping rules themselves, see [Manage mapping rules](manage-mapping-rules.md).
+
+:::tip
+To learn more about the concept of mapping rules, see the [mapping rules documentation](../../concepts/access-control/mapping-rules.md).
+:::
+
+1. Log in to the Identity UI and navigate to the **Authorizations** tab.
+2. In the left sidebar, select **Mapping rule** as the resource type.
+
+![authorizations-mapping-rule-tab.png](../img/authorizations-mapping-rule-tab.png)
+
+<Tabs groupId="mappingRuleAction" defaultValue="add" queryString values={[{label: 'Add', value: 'add', },{label: 'Update', value: 'update', },{label: 'Delete', value: 'delete', },]}>
+
+<TabItem value="add">
+
+### Add authorization to manage a mapping rule
+
+1. Click **Create authorization**.
+
+2. In the modal, set the following:
+   - **Owner type**: User, Group, Role or Client
+   - **Owner**: Select the specific owner
+   - **Resource type**: `Mapping rule`
+   - **Resource ID**: Enter a unique resource ID
+   - **Permissions**: Select one or more (Create, Read, Update, Delete)
+
+![create-mapping-rule-authorization-modal.png](../img/create-mapping-rule-authorization-modal.png)
+
+3. Click **Create authorization** to save the authorization for the mapping rule.
+
+</TabItem>
+
+<TabItem value="update">
+
+### Update authorization to manage a mapping rule
+
+1. In the **Authorizations** table with **Mapping rule** selected, click **Delete** next to an existing rule (update is done by removing and re-adding with changes).
+
+2. Recreate the rule with updated values using the **Add** tab steps above.
+
+:::note
+Currently, rule updates are handled by deleting and re-creating the authorization with modified values.
+:::
+
+</TabItem>
+
+<TabItem value="delete">
+
+### Delete authorization to manage a mapping rule
+
+1. Navigate to the **Authorizations** tab with **Mapping rule** selected as the resource type.
+
+2. Click the **Delete** button on the rule you want to remove.
+
+![delete-mapping-rule.png](../img/delete-mapping-rule.png)
+
+</TabItem>
+
+</Tabs>

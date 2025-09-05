@@ -520,7 +520,7 @@ In a manual setup, you can simply stop all components.
 If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elsaticsearch:
+elasticsearch:
   enabled: true
 
 connectors:
@@ -780,7 +780,7 @@ zeebe:
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elsaticsearch:
+elasticsearch:
    enabled: true
 
 connectors:
@@ -813,6 +813,8 @@ zeebe:
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately otherwise a rolling update is happening. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 
@@ -848,6 +850,20 @@ However, the restore will fail if:
 - Due to any other unexpected errors.
 
 If the restore fails, you can re-run the application after fixing the root cause.
+
+#### Data directory is not empty
+
+If the data directory is not empty, the restore will fail with an error message:
+
+```
+Brokers's data directory /usr/local/zeebe/data is not empty. Aborting restore to avoid overwriting data. Please restart with a clean directory
+```
+
+On some filesystems, the data directory may contain special files and folders that can't or shouldn't be deleted.
+In such cases, the restore application can be configured to ignore the presence of these files and folders.
+The config `zeebe.restore.ignoreFilesInTarget` takes a list of file and folder names to ignore.
+By default, it ignores `lost+found` folder found on ext4 filesystems.
+To also ignore `.snapshot` folders, set `zeebe.restore.ignoreFilesInTarget: [".snapshot", "lost+found"]` or the equivalent environment variable `ZEEBE_RESTORE_IGNOREFILESINTARGET=".snapshot,lost+found"`.
 
 ## Step 3: Start all Camunda 8 components {#start-all-camunda-8-components}
 

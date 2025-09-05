@@ -30,11 +30,11 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ### Identity Keycloak now requires v25 or v26 <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#identity).
+Identity 8.7 now requires Keycloak v25 or v26, and Keycloak versions must be updated to match. This update also includes changes to the Camunda Helm chart. For more information on configuration changes, see the Self-Managed [update guide](/self-managed/components/components-upgrade/860-to-870.md#identity).
 
 ### Spring Zeebe SDK now requires Spring Boot 3.4.x <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The Spring Zeebe SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Spring Zeebe SDK [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
+The Spring Zeebe SDK 8.7 now requires Spring Boot 3.4.x. For more information on compatibility, see the Spring Zeebe SDK [version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
 
 ### Desktop Modeler no longer supports macOS 12
 
@@ -51,17 +51,17 @@ For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.co
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
-With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
+With this version, we ship a breaking change to how Web Modeler **Deploy diagram** modals work. Clusters must now be proactively [configured](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from Web Modeler.
 
 <img src={DeployDiagramImg} alt="New 8.7 deploy diagram modal" width="600px" style={{border: '0', paddingTop: '0', marginTop: '0'}} />
 
 - In 8.6, you could still configure cluster details on the **Deploy diagram** modal when deploying.
-- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
-- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
+- In 8.7, you can no longer configure cluster details on the **Deploy diagram** modal. You must [configure the cluster](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) to be able to deploy from this modal.
+- Note that you must also be assigned the `Zeebe` [Identity role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) to be able to deploy (if `BEARER_TOKEN` is used as authentication).
 
 ### Deprecated: Web Modeler cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The following authentication methods for a [configured cluster in Web Modeler](/self-managed/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
+The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
 - `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
@@ -100,7 +100,7 @@ The Zeebe Java client will not be developed further and will only receive bug fi
 
 ### Spring Zeebe SDK
 
-Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot SDK. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
+Starting with 8.8, the Spring Zeebe SDK will become the new Camunda Spring Boot Starter. The SDK will rely on the new Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
 :::note
 The Spring Zeebe SDK will not be developed further and will only receive bug fixes for as long as version 8.9 is officially supported. This SDK is scheduled for removal in version 8.10.
@@ -133,6 +133,11 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 The configuration for the external database used by the Web Modeler REST API has been updated to align with the Identity component's database configuration. A new value, `webModeler.restapi.externalDatabase`, is now available and mirrors the structure of `identity.externalDatabase`. To ensure backward compatibility, the existing `webModeler.restapi.externalDatabase.url` field is retained and will take precedence if set.
 
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
+See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+
 #### Adjustments
 
 - **New package structure**:
@@ -145,10 +150,10 @@ The configuration for the external database used by the Web Modeler REST API has
 
 ### Connectors
 
-Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) will be used instead.
+Starting with 8.7, the connector runtime will stop using the deprecated community [Spring Zeebe library](https://github.com/camunda-community-hub/spring-zeebe) to communicate with the core APIs of Camunda. The new [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) will be used instead.
 
 Although the official SDK is largely compatible with the community library, some changes might be required in the configuration of Self-Managed connector deployments.
 
-We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
+We recommend updating the configuration to match the new property format of the [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) to avoid any issues. The old properties will be removed in a future release.
 
-For more information, see the [update guide](/self-managed/operational-guides/update-guide/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/connectors-deployment/connectors-configuration.md).
+For more information, see the [update guide](/self-managed/components/components-upgrade/860-to-870.md#connectors) and the [connectors configuration guide](/self-managed/components/connectors/connectors-configuration.md).

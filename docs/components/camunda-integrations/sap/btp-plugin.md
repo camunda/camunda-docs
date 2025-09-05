@@ -33,7 +33,6 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 ![Camunda Forms in Fiori](./img/forms-fiori.png)
 
 - Equip the last user task with a custom header `final-user-task` and the value:
-
   - `success` to display the last user task on the "happy path".
   - `fail` to use that user task to communicate a failed process to the user.
 
@@ -166,4 +165,4 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 }
 ```
 
-The advantage over Orchestration cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
+The advantage over Orchestration Cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.

@@ -5,7 +5,7 @@ description: "Learn more about integration, secure management, and efficient sto
 keywords: ["document handling", "document storage configuration"]
 ---
 
-Camunda 8 Self-Managed supports document storage and management using Camunda Forms, connectors, Tasklist, and the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx).
+Camunda 8 Self-Managed supports document storage and management using Camunda Forms, connectors, Tasklist, and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx).
 
 You can store, track, and manage binary data, like PDFs, images and other file types, across development and production environments.
 
@@ -26,4 +26,4 @@ Step through all of these capabilities in the [use cases section](/components/do
 You can configure document storage based on your deployment setup and production requirements.
 Supported options include an external cloud storage such as Google Cloud Platform (GCP) or AWS S3, local file storage or an in-memory storage.
 
-Learn how to set it up in the [storage configuration guide](/self-managed/concepts/document-handling/configuration/overview.md).
+Learn how to set it up in the [storage configuration guide](/self-managed/concepts/document-handling/configuration/index.md).

@@ -75,7 +75,6 @@ Follow these steps:
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
-
    - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
 

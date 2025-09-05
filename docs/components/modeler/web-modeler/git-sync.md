@@ -54,7 +54,9 @@ Click **Create GitHub App** to finish.
 <h3> Configure GitHub in Web Modeler </h3>
 
 :::note
-When using a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance. It usually looks like `http(s)://HOSTNAME/api/v3`. Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct enterprise server version.
+When using Web Modeler Self-Managed with a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance.
+It usually looks like `http(s)://HOSTNAME/api/v3`.
+Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct Enterprise Server version.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to GitHub, and click **Connect repository**.
@@ -62,13 +64,13 @@ When using a self-hosted GitHub instance, ensure the environment variable `CAMUN
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-
-   - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
+   - **Installation ID:** Found in the URL of your GitHub App's installation page.
+   - **GitHub API Base URL:** (optional - _**SaaS only**_) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
-   - **GitHub repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -87,15 +89,16 @@ When successful, your project will display a new **Sync with GitHub** button.
 
 <h3> Create a new access token </h3>
 
-Web Modeler requires an access token to sync changes with your GitLab repository. You can use the following options:
+Web Modeler requires an access token to sync changes with your GitLab repository. You can use one of the following options:
 
-- **Project access token** (Recommended)
+- **Project access token** (recommended)
 - Group access token
 - Personal access token
 
-Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) to generate a new project access token for your repository with the following configuration:
+To generate a project access token, follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#create-a-project-access-token) and use the following configuration:
 
-- Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token) for either the `developer` or `maintainer` role:
+- Assign the token to a user with the `developer` or `maintainer` role.
+- Enable the following [**scopes**](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#scopes-for-a-project-access-token):
   - `api`
   - `read_api`
   - `read_repository`
@@ -109,30 +112,29 @@ Follow the [GitLab documentation](https://docs.gitlab.com/ee/user/project/settin
 <h3> Configure GitLab in Web Modeler </h3>
 
 :::note
-When using a self-hosted GitLab instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL` is set to the API URL of your self-hosted GitLab instance. It usually looks like `http(s)://HOSTNAME/api/v4`.
+If you're using a self-hosted GitLab instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL` is set to the API URL of your self-hosted instance. This usually follows the format: `http(s)://HOSTNAME/api/v4`.
 :::
 
-1. Within Web Modeler, navigate to the process application you would like to connect to GitLab, and click **Connect repository**.
+1. In Web Modeler, navigate to the process application you want to connect to GitLab, and click **Connect repository**.
 
-2. Select the **GitLab** tile, located at the top of the modal.
+2. In the modal, select the **GitLab** tile at the top.
 
-3. Provide the following information in the **Configure GitLab** modal:
+3. In the **Configure GitLab** modal, provide the following information:
+   - **Access token:** The project, group, or personal access token you generated.
+   - **Project ID:** The ID copied from your GitLab project settings.
+   - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
+   - **Branch:** The name of the branch to use for merging and managing changes.
+   - **Repository path:** (optional) The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
-   - **Access token:** The generated project, group or personal access token.
-   - **Project ID:** The ID copied from the GitLab project settings.
-   - **GitLab repository URL:** The base URL of the repository you want to sync with, for example `https://gilab.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
-   - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
-
-4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
+4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
 5. Click **Save Configuration**.
 
 :::note
-When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
+If you're syncing for the first time with a remote repository that already contains commits, make sure Web Modeler has assigned the correct main process.
 :::
 
-When successful, your project will display a new **Sync with GitLab** button.
+Once connected successfully, your project will display a **Sync with GitLab** button.
 
 </TabItem>
 <TabItem value='azure'>
@@ -147,7 +149,7 @@ Web Modeler requires an application to be registered with Microsoft Entra ID to 
 
 1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application. Be sure to save your `Application (client) ID` and `Directory (tenant) ID`.
 
-2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, RSA-encrypted private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
+2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, [PKCS#8](https://en.wikipedia.org/wiki/PKCS_8) private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
 
 3. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) for your app so it can update the content of your Azure repositories. Ensure `Azure DevOps > vso.code_write` is configured, and `Admin consent required` is set to `No`.
 
@@ -164,7 +166,7 @@ Ensure the following:
 <h3> Configure Azure in Web Modeler </h3>
 
 :::note
-When using a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
+When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
@@ -172,14 +174,13 @@ When using a self-hosted Azure DevOps Server instance, ensure the environment va
 2. Select the **Azure** tile, located at the top of the modal.
 
 3. Provide the following information in the **Configure Azure** modal:
-
    - **Application (client) ID:** Can be found on the applications registration page.
    - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
    - **Private Key:** The private key used to generate the certificate in PEM format.
    - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
-   - **Branch name:** The branch name to use for merging and managing changes.
-   - **Path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Branch:** The name of the branch to use for merging and managing changes.
+   - **Repository path:** (optional) The path to the folder containing your process application files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -190,6 +191,35 @@ When synchronizing for the first time with a remote repository that already cont
 :::
 
 When successful, your project will display a new **Sync with Azure** button.
+
+<h3> Generating a private key and certificate</h3>
+
+Follow these steps to generate a private key and self signed certificate that can be used to connect Web Modeler with your Azure repository:
+
+<h4>1. Generate private key</h4>
+Generate a new RSA private key and save it to a file called `private_key.pem`.
+
+```sh
+openssl genrsa -out private_key.pem 2048
+```
+
+<h4>2. Create a certificate signing request</h4>
+Generate a Certificate Signing Request (CSR) using the key created in step 1.
+
+```sh
+openssl req -new -key private_key.pem -out cert.csr
+```
+
+<h4>3. Create a self-signed certificate</h4>
+Using the private key and the certificate signing request, create a certificate.
+
+```sh
+openssl x509 -req -days 365 -in cert.csr -signkey private_key.pem -out cert.crt
+```
+
+This generates a self-signed certificate named `cert.crt` valid for 365 days.
+
+You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure git sync configuration.
 
 </TabItem>
 <TabItem value='bitbucket'>
@@ -219,11 +249,10 @@ Web Modeler currently only supports Bitbucket Cloud.
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
-
    - **Access token:** The repository, project, or workspace access token you generated.
-   - **Bitbucket repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
@@ -294,14 +323,22 @@ Creating multiple copies of a process application can complicate navigation and 
 
 ## Self-Managed environment variables
 
-Refer to [Configuration of the restapi component](../../../self-managed/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
+Refer to [Configuration of the restapi component](../../../self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 
+### File names
+
 - Duplicate file names are not allowed for the same file type.
 - Characters with special meaning to Git (for example, `/`), or characters disallowed by Git, are not allowed in either branch or file names.
-- Any `.json` file is treated as a connector template, and the operation will fail if it is not. If the remote repository stores any `.json` files that are not connector templates, place them in a subfolder to be automatically ignored by the synchronization process.
-- Git sync only supports `.md` files that are named exactly `README.md` (case sensitive). Git sync supports multiple `README.md` in a repository (including in subfolders).
+
+### File extensions
+
+- `.json` files are parsed as either a Connector template or a test scenario file. The operation will fail if the file contents are not valid for either type. If the remote repository contains any `.json` files that are not valid Web Modeler files, place them in a subfolder so they are automatically ignored during synchronization.
+- Git Sync only supports `.md` files named exactly `README.md` (case-sensitive). Multiple `README.md` files are supported in a single repository, including in subfolders.
+
+### Synchronization
+
 - When synchronizing for the first time with a remote repository that already contains commits, Web Modeler will attempt to select a main process with a file name that matches its own main process. If there is no matching process, Web Modeler will select a process at random from the available `.bpmn` files. In the event that no `.bpmn` files exist in the remote repository, Web Modeler will not proceed, and will instead display an error message. Ensure the main process is correctly assigned, especially in cases where a random process has been selected.
 - Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.

@@ -8,6 +8,204 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 27
+
+#### Publication date
+
+August 27, 2025
+
+#### Products affected
+
+- Camunda Optimize
+
+#### Impact
+
+Optimize's email functionality was affected by [CVE-2025-7962](https://nvd.nist.gov/vuln/detail/CVE-2025-7962), which allowed for SMTP injection by providing forged email recipient addresses that could lead to malicious content being sent to arbitrary recipients.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.8, 8.6.15
+
+### Notice 26
+
+#### Publication date
+
+August 27th, 2025
+
+#### Products affected
+
+- Camunda Optimize
+
+#### Impact
+
+Optimize was affected by [CVE-2025-53864](https://nvd.nist.gov/vuln/detail/CVE-2025-53864) which allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.8, 8.6.15
+
+### Notice 25
+
+#### Publication date
+
+August 27th, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+
+#### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
+- Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24
+- Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.11, 8.6.25, 8.5.21
+- Zeebe 8.7.11, 8.6.25
+- Operate 8.7.11, 8.6.25, 8.5.19
+- Optimize 8.7.8, 8.6.15
+
+### Notice 24
+
+#### Publication date
+
+August 27th, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Identity
+- Camunda Optimize
+
+#### Impact
+
+The embedded Netty was affected by [CVE-2025-55163](https://nvd.nist.gov/vuln/detail/CVE-2025-55163) which allows malformed HTTP/2 control frames usage that results in resource exhaustion and distributed denial of service.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
+- Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.22
+- Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
+- Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
+- Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.11, 8.6.25, 8.5.21
+- Zeebe 8.7.11, 8.6.25, 8.5.23
+- Operate 8.7.11, 8.6.25, 8.5.19
+- Identity 8.7.6, 8.6.19, 8.5.20
+- Optimize 8.7.8, 8.6.15
+
+### Notice 23
+
+#### Publication date
+
+July 31st, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Identity
+- Camunda Optimize
+
+#### Impact
+
+The embedded Spring Boot Tomcat was affected by [CVE-2025-53506](https://nvd.nist.gov/vuln/detail/CVE-2025-53506) which allowed for uncontrolled resource consumption that could be used to exhaust system resources in a potential DoS (denial of service) attack.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.18
+- Zeebe 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22
+- Operate 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.16
+- Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
+- Optimize 8.7.0 - 8.7.6 or 8.6.0 - 8.6.12
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.9, 8.6.23, 8.5.19
+- Zeebe 8.7.9, 8.6.23
+- Operate 8.7.9, 8.6.23, 8.5.17
+- Identity 8.7.5, 8.6.18, 8.5.19
+- Optimize 8.7.7, 8.6.13
+
+### Notice 22
+
+#### Publication date
+
+July 31st, 2025
+
+#### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+#### Impact
+
+Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520), which could lead to potential DoS (denial of service) attacks.
+
+#### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Zeebe 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+- Operate 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
+
+#### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.6.22
+- Tasklist 8.7.9
+- Zeebe 8.6.23
+- Zeebe 8.7.9
+- Operate 8.6.23
+- Operate 8.7.9
+
 ### Notice 21
 
 #### Publication date

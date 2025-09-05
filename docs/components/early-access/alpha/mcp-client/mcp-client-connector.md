@@ -34,18 +34,20 @@ camunda:
           clients:
             # STDIO server started Node.js process
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
-              stio:
-                command:
-                  - "npx"
+              stdio:
+                command: npx
+                args:
                   - "-y"
                   - "@modelcontextprotocol/server-filesystem"
                   - "<path-to-files>"
+                env:
+                  MY_ENV_VAR: "my-value" # <-- optional environment variables
 
             # STDIO server started as docker container
             time:
-              stio:
-                command:
-                  - "docker"
+              stdio:
+                command: docker
+                args:
                   - "run"
                   - "-i"
                   - "--rm"
@@ -54,8 +56,8 @@ camunda:
             # Connection to a remote HTTP/SSE MCP server
             some-remote-server:
               enabled: false
-              http:
-                sse-url: https://example.com/mcp/sse
+              sse:
+                url: https://example.com/mcp/sse
 ```
 
 The YAML structure above describes the overall configuration structure of the MCP Client connector. How to configure
@@ -115,7 +117,7 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
 4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
 5. If you only want to run the MCP Client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 

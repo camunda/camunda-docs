@@ -1,7 +1,9 @@
 ---
 id: index
-title: Overview
+sidebar_label: Kubernetes with Helm
+title: Camunda Helm chart
 description: "In this section, find details on installation using Kubernetes with Helm."
+page_rank: 80
 ---
 
 import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
@@ -9,7 +11,7 @@ import { HelmChartInstall } from "@site/src/components/CamundaDistributions";
 :::note
 The `13.0.0-alpha4.1` Helm chart released with Camunda 8.8.0-alpha4 introduces a new default setup to support the 8.8 [Identity management updates](/reference/announcements-release-notes/880/880-release-notes.md#identity-management-updates-saasself-managed). Currently, this setup is limited to the following components:
 
-- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration cluster Identity)
+- The Orchestration core (Zeebe, Operate, Tasklist, and Orchestration Cluster Identity)
 - Connectors
 
 This temporary limitation will be resolved in subsequent alpha releases.
@@ -49,7 +51,7 @@ The following charts are installed as part of the Camunda 8 Self-Managed platfor
 :::note Amazon OpenSearch Helm support
 The existing Helm charts are configured to use Elasticsearch by default, but they can also be configured to connect to Amazon OpenSearch Service. Refer to the guide on [using Amazon OpenSearch Service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
 
-**Zeebe**: Configure the [OpenSearch exporter](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md).
+**Zeebe**: Configure the [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md).
 
 **Operate**, **Tasklist**, and **Optimize**: These components use the same configuration keys for both Elasticsearch and OpenSearch. To switch, replace the `elasticsearch` prefix with `opensearch` and provide the corresponding values.
 
@@ -57,9 +59,9 @@ For example, `CAMUNDA_OPERATE_ELASTICSEARCH_URL` becomes `CAMUNDA_OPERATE_OPENSE
 
 Refer to the configuration documentation for each component for additional parameters:
 
-- [Operate](/self-managed/operate-deployment/operate-configuration.md#settings-for-opensearch)
-- [Tasklist](/self-managed/tasklist-deployment/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Optimize](/self-managed/optimize-deployment/configuration/system-configuration.md#opensearch)
+- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#settings-for-opensearch)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
+- [Optimize](/self-managed/components/optimize/configuration/system-configuration.md#opensearch)
   :::
 
 ![Camunda 8 Self-Managed Architecture Diagram](./assets/camunda-platform-8-self-managed-architecture-diagram-combined-ingress.png)
@@ -110,7 +112,7 @@ In the default configuration, Helm charts automatically generate all required Ca
 
 However, due to an issue with a [Bitnami library](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#credential-errors-while-upgrading-chart-releases), running future `helm upgrade` commands may unintentionally regenerate these secrets.
 
-While upgrades are still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/upgrade.md#upgrading-where-identity-enabled), we recommend **pre-creating these secrets** to ensure a smoother upgrade process. This is especially helpful when using CI/CD tools such as ArgoCD, FluxCD, or Jenkins.
+While upgrades are still possible by following our [upgrade guide](/self-managed/installation-methods/helm/upgrade/index.md#upgrading-where-identity-enabled), we recommend **pre-creating these secrets** to ensure a smoother upgrade process. This is especially helpful when using CI/CD tools such as ArgoCD, FluxCD, or Jenkins.
 
 Below is an example of a pre-created secret:
 
@@ -255,7 +257,7 @@ These enterprise images:
 To access the private registry, create a Kubernetes `docker-registry` secret using your Camunda Enterprise credentials:
 
 ```shell
-kubectl create secret docker-registry camunda-registry-secret \
+kubectl create secret docker-registry registry-camunda-cloud \
   --docker-server=registry.camunda.cloud \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
@@ -280,7 +282,7 @@ This file includes a reference to the `commonVendorPullSecrets` parameter, which
 
 :::
 
-By default, the secret name `camunda-registry-secret` is used. You can override this using the `--set` flag, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
+By default, the secret name `registry-camunda-cloud` is used. You can override this using the `--set` flag, a custom `values-enterprise.yaml` file, or any other [Helm value override mechanism](https://helm.sh/docs/chart_template_guide/values_files/#using-helm-install--f).
 
 Use the following command to install Camunda with enterprise vendor images and your registry secret:
 
@@ -462,10 +464,10 @@ kubectl logs -f <POD_NAME>
 
 ## Upgrading
 
-For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/upgrade.md).
+For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/installation-methods/helm/upgrade/index.md).
 
 ## General notes
 
-- **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/zeebe-deployment/configuration/gateway-health-probes.md) for Zeebe.
+- **Zeebe Gateway** is deployed as a stateless service. We support [Kubernetes startup and liveness probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md) for Zeebe.
 - **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which must be provisioned in advance. The type of persistent storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub, use a mirror registry, or follow our guide on [installing in an air-gapped environment](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).

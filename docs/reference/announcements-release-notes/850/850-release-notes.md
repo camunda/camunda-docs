@@ -8,9 +8,9 @@ These release notes identify the new features included in Camunda 8.5, 8.4, and 
 
 ## 8.5 minor
 
-| Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                             |
-| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/operational-guides/update-guide/840-to-850.md) |
+| Release date | End of maintenance | Changelog(s)                                                                                                                                                                                                                                                | Release blog                                                          | Update guide                                                                           |
+| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| 9 April 2024 | 14 October 2025    | -[ Camunda 8 Core ](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) <br /> -[ connectors ](https://github.com/camunda/connectors/releases/tag/8.5.0) <br /> - [ Optimize ](https://github.com/camunda/camunda-optimize/releases/tag/3.13.0) | [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/) | [Self-Managed update guide](/self-managed/components/components-upgrade/840-to-850.md) |
 
 ### Updated SaaS URLs <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -52,7 +52,7 @@ The process overview page was redesigned for clarity and ease-of-use.
 
 <!-- https://github.com/camunda/product-hub/issues/2148 -->
 
-Use the supported [Spring Zeebe SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
+Use the supported [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
 
 ### Modeler-only role in Camunda 8 SaaS <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
@@ -208,7 +208,7 @@ Our marketplace now supports process blueprints as well. You can discover a wide
 
 <!-- https://github.com/camunda/product-hub/issues/1376 -->
 
-We are excited to announce the release of a new Camunda 8 component - [Camunda Console Self-Managed](/self-managed/console-deployment/overview.md), the new console has been developed to enhance the management and monitoring of Camunda 8 installations within an enterprise installation. It facilitates a clear and concise overview of the Camunda platform as deployed within Kubernetes environments, making operational tasks more streamlined and efficient.
+We are excited to announce the release of a new Camunda 8 component - [Camunda Console Self-Managed](/self-managed/components/console/overview.md), the new console has been developed to enhance the management and monitoring of Camunda 8 installations within an enterprise installation. It facilitates a clear and concise overview of the Camunda platform as deployed within Kubernetes environments, making operational tasks more streamlined and efficient.
 
 ### Rolling updates for Zeebe Self-Managed <span class="badge badge--long" title="This feature affects Zeebe">Zeebe</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -256,7 +256,7 @@ Process tiles in Tasklist now indicate when a form must be submitted in order to
 
 <!-- https://github.com/camunda/product-hub/issues/1978 -->
 
-By default, task users can now only access the tasks for which they are authorized (either assigned to the task or part of a candidate group). Admins can change this behavior per cluster, for example, to deactivate these restrictions in development clusters. See [user task access restrictions](/components/concepts/access-control/user-task-access-restrictions.md).
+By default, task users can now only access the tasks for which they are authorized (either assigned to the task or part of a candidate group). Admins can change this behavior per cluster, for example, to deactivate these restrictions in development clusters. See [user task access restrictions](/components/tasklist/user-task-access-restrictions.md).
 
 ### Multi-tenancy support with other OIDC providers <span class="badge badge--long" title="This feature affects Identity">Identity</span> <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
@@ -271,7 +271,7 @@ Mapping rules allow you to automatically assign users or client credentials to s
 
 You can now use Role-Based Access Control (RBAC) with your own OIDC Identity Provider (i.e. Entra ID) and Camunda 8 web applications without relying on Keycloak.
 
-Create roles within Identity, assign component-specific permissions (such as view-only Operate) to the roles. Then, create [mapping rules](/self-managed/concepts/mapping-rules.md) to automatically assign users to specific roles based on authentication token claim values.
+Create roles within Identity, assign component-specific permissions (such as view-only Operate) to the roles. Then, create [mapping rules](/components/concepts/access-control/mapping-rules.md) to automatically assign users to specific roles based on authentication token claim values.
 Role Mapping is not yet supported for Web Modeler, but will follow.
 
 ### Intuitive modeling <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>

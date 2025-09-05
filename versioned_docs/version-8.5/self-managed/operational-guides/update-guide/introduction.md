@@ -24,14 +24,14 @@ Depending on your amount of data, run a minor version for at least 24 hours befo
 
 ## [Camunda 8.4 to Camunda 8.5](../840-to-850)
 
-Update from 8.4.x to 8.5.0
+Update from 8.4.x to 8.5.x
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.5.0) |
 [Release blog](https://camunda.com/blog/2024/04/camunda-8-5-release/)
 
 ## [Camunda 8.3 to Camunda 8.4](../830-to-840)
 
-Update from 8.3.x to 8.4.0
+Update from 8.3.x to 8.4.x
 
 [Release notes](https://github.com/camunda/camunda-platform/releases/tag/8.4.0) |
 [Release blog](https://camunda.com/blog/2024/01/camunda-8-4-simplifying-installation-enhancing-user-experience/)
