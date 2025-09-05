@@ -19,32 +19,10 @@ Each Orchestration Cluster deployment includes a single Log4j2 configuration fil
   - Camunda 8 (`io.camunda` and `io.atomix`)
   - Spring and Spring Boot (`org.springframework`)
 
-You can view the default `log4j2.xml` in the  
-[GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/log4j2.xml).
+### Default Log4J2 configuration
 
-### Example Log4j2 configuration
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
-  <Properties>
-    <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-  </Properties>
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT" follow="true">
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-    </Console>
-    <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-      <StackdriverJSONLayout/>
-    </Console>
-  </Appenders>
-  <Loggers>
-    <Logger name="io.camunda" level="info" />
-    <Root level="info">
-      <AppenderRef ref="${env:LOG_APPENDER:-Console}"/>
-    </Root>
-  </Loggers>
-</Configuration>
+```yaml reference
+https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/config/log4j2.xml
 ```
 
 ## Environment variables for log levels
