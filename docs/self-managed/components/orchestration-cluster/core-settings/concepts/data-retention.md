@@ -16,12 +16,11 @@ All data present in the Database (from both **main** and **dated** indices) is v
 
 ## Archive period
 
-By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](#TODO Have we got documentation for this?) configuration parameter.
+By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/operate/importer-and-archiver.md#archive-period) configuration parameter.
 
 ## Data cleanup
 
-The amount of stored data can grow significantly over time. Therefore, we recommend implementing a data cleanup strategy. 
+The amount of stored data can grow significantly over time. Therefore, we recommend implementing a data cleanup strategy.
 Dated indices, which contain only finished process instances, may be safely removed from Elasticsearch/OpenSearch.
 
-In the Orchestration Cluster, strategies for the deletion of archived data can be defined via the [Retention configuration](#TODO add link to retention settings).
-
+In the Orchestration Cluster, strategies for the deletion of archived data can be defined via the [retention configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options).
