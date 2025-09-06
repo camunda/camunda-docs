@@ -97,7 +97,7 @@ These web interfaces are available at:
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
 - **Orchestration Cluster REST API:** http://localhost:8080/v2/
-- **Inbound Connectors API:** http://localhost:8085/
+- **Inbound Connectors API:** http://localhost:8086/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
 - **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
