@@ -1620,6 +1620,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/identity/manage-tenants",
               ],
             },
+            "self-managed/components/orchestration-cluster/configuration-mapping",
           ],
         },
         {
