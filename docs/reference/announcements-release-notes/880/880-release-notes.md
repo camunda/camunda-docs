@@ -27,6 +27,204 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 :::
 
+## 8.8.0-alpha8
+
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                   |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| 9 September 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
+
+### Ad-hoc sub-process dynamic activation using job workers
+
+<!-- https://github.com/camunda/product-hub/issues/2631 -->
+
+Ad-hoc sub-process elements can now be activated by job workers.
+
+- In the process model you can define a task definition.
+- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result allows you to define which elements in the ad-hoc sub-process are activated.
+- Once any flows in the ad-hoc sub-process complete, a new job is created. This gives the job worker control over what to do next.
+
+:::note
+As well as activating elements, the job result allows fulfilment of the completion condition. When this happens, the ad-hoc sub-process is completed. The sub-process waits for active children to be completed first. Alternatively, you can cancel remaining instances by setting this in the job result.
+:::
+
+### CI/CD building blocks guide <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2858 -->
+
+Element templates documentation is improved to support scalable reuse of building blocks, with a focus on CI/CD practices for managing templates across teams and environments. These improvements provide CoEs and development teams with the tools and practices needed to efficiently scale template-driven development.
+
+- How to integrate element templates and their dependencies into CI/CD pipelines.
+- Restructure of the element templates documentation to improve discoverability and usability.
+- Content is tool-agnostic, with Web Modeler guidance, dependency management, and local development environment setup.
+- Moved relevant information from Connectors into the element templates section.
+
+To learn more, see [Element templates in Modeler](/components/modeler/element-templates/about-templates.md).
+
+### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
+
+#### Job header binding
+
+<!-- https://github.com/camunda/connectors/issues/5131 -->
+
+Use the `@Header` annotation to bind a header value (for example, a FEEL expression) to a model class.
+
+#### SQL connector Oracle database connection
+
+<!-- https://github.com/camunda/connectors/issues/5074 -->
+
+The SQL connector now supports connecting to an Oracle database.
+
+To learn more, see [SQL connector](/components/connectors/out-of-the-box-connectors/sql.md).
+
+:::note
+This requires the Oracle JDBC driver that Camunda cannot distribute due to licensing restrictions. To connect to an Oracle database, you must manually download the JDBC driver from [Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) and run the connector in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
+:::
+
+### Console <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
+
+#### Docker distribution
+
+<!-- https://github.com/camunda/product-hub/issues/2242 -->
+
+Console is now available as a Self-Managed Docker distribution.
+
+- You can deploy Camunda Console using a Docker image.
+- This makes it easier to run Console outside Kubernetes, using Docker Compose or any container service of your choice.
+- This helps you use Console with Camunda 8 clusters deployed via Docker.
+
+To learn more, see [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+
+#### Registration and license check for Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/2867 -->
+
+Release notes needed
+
+### Element template support for all tasks <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2606 -->
+
+A new **Save as element template** feature is now available from the Web Modeler properties panel.
+
+With a task selected, you can:
+
+- Save a configured task (such as a service task, user task, send task, receive task, business rule task, script task, or a call activity) as a reusable element template.
+- Edit your saved templates using the element template editor. For example, modify input/output bindings, validation rules, categories/groups, and more.
+- Publish templates to your project or organization, making them available for colleagues to apply to new or existing tasks.
+
+To learn more, see [Save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md).
+
+Support for element template bindings is expanded as follows:
+
+- Element templates now support `zeebe:assignmentDefinition`, allowing authors to define task assignee(s) and/or candidate groups directly in templates.
+- Added support for `zeebe:priorityDefinition` to allow template authors to include a task priority value (integer 0–100 or FEEL expression).
+- Added support for `zeebe:taskSchedule` to allow you to template a task scheduling configuration for user tasks.
+
+### Migrate taken sequence flows flowing to the joining gateway
+
+<!-- https://github.com/camunda/product-hub/issues/2913 -->
+
+Camunda 8 now supports enhanced migration of process instances with taken sequence flows leading to joining gateways.
+
+- Operators can define migration plans that map the active elements and the taken sequence flows flowing to the joining gateway.
+- The migration plan can be defined both in the Operate UI and via the API.
+
+### Operate and Tasklist API deprecation <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
+
+<!-- https://github.com/camunda/product-hub/issues/2838 -->
+
+Deprecating the Operate and Tasklist APIs marks a major step toward a more cohesive platform.
+
+In this release, these APIs are clearly marked as deprecated, ensuring developers are aware that they should begin shifting to the Orchestration Cluster API for task and process management.
+
+:::note
+Although the Operate and Tasklist APIs remain functional in this version, they will no longer receive feature updates and will eventually be removed in 8.10.
+:::
+
+### Orchestration Cluster <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span>
+
+#### Orchestration Cluster Identity
+
+<!-- https://github.com/camunda/product-hub/issues/2222 -->
+
+This release includes support for Orchestration Cluster Identity as follows:
+
+**Self-Managed Identity Management:**
+
+- Admins can create and manage users, groups, roles, and memberships directly in Identity’s database.
+- OIDC Integration: Easily integrate external Identity Providers such as Keycloak and Microsoft Entra.
+- Role-Based Access Control (RBAC): Assign roles and group permissions on a per-resource basis for fine-grained access control. Supported resources include Authorization, Claim Mapping Rules, Messages, Batches, Applications, Tenants, Deployments, Process Definitions, Decision Definitions, and more.
+- Flexible Mapping: Map users, groups, and roles to resource authorizations and tenants. Leverage OIDC token claims and application/client mappings to streamline permission assignments.
+- Migration Support: Simplified migration tools make it easy for existing customers to transition to the new service.
+
+**SaaS enhancements:**
+
+- Organizational Identity: Integrate your own identity provider to manage organizational users and assign resources cluster-by-cluster.
+- Cluster-Specific Roles and Groups: Manage distinct roles, groups, and authorizations for each cluster independently.
+
+#### Orchestration Cluster scaling
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add Zeebe partitions to a running cluster in SaaS to boost capacity without incurring downtime.
+
+- New partitions immediately process tasks, overcoming previous limitations.
+- Note that existing messages and subscriptions remain on original partitions, which might cause slight imbalances for message-heavy workloads. Future updates will address this, ensuring balanced performance across all partitions.
+
+#### Run Orchestration Cluster without secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2897 -->
+
+Customers can continue using Orchestration Cluster in "Zeebe-only" mode without secondary storage.
+
+- This is for customers who do not use Query APIs, Operate, or Tasklist, and want to avoid deploying and maintaining additional database infrastructure.
+- Administrators can configure the Orchestration Cluster to run without secondary storage by setting the `camunda.database.type=none` configuration flag.
+- The application will start up successfully, and activate only the components required for Zeebe.
+
+### Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+
+#### Cluster Identity compatibility
+
+<!-- https://github.com/camunda/product-hub/issues/2987 -->
+
+Web Modeler works seamlessly with Camunda 8.8 Orchestration Clusters, to ensure a smooth migration to 8.8.
+
+#### Low-code Process Testing
+
+<!-- https://github.com/camunda/product-hub/issues/2610 -->
+
+This release introduces the ability to persist scenarios as a versioned test file in the Web Modeler, enabling users to save and rerun targeted test cases for BPMN models.
+
+- This feature is ideal for both process developers and CoEs, as it supports manual scenario creation and local test storage, with support for user tasks, connectors, and basic branching logic.
+- Although test assertions are not supported, these scenarios support behavior driven development for Camunda Process Test.
+
+#### RDBMS support for Oracle and MS SQL in Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/2558 -->
+
+Web Modeler Self-Managed now supports Oracle Database and Microsoft Sequel Server, simplifying the Self-Managed setup journey, maintenance efforts, and expertise required to maintain the platform.
+
+#### Test scenario files
+
+<!-- https://github.com/camunda/product-hub/issues/2894 -->
+
+This release introduces persisted test definitions for Web Modeler and reusable building blocks.
+
+- Process developers and analysts can now easily save, export, and share test scenarios.
+- These new test files are portable and Git-syncable, and can be used to rapidly create Camunda Process Test-based files.
+
+#### Username claim configuration
+
+<!-- https://github.com/camunda/web-modeler/issues/9292 -->
+
+The claim used for usernames is now configurable via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable. This can be used for authentication for web apps (Tasklist, Optimize, Operate) as a different claim option for the username identifier.
+
+### Usage metrics support updated licence model and tenant breakdown
+
+<!-- https://github.com/camunda/product-hub/issues/1979 -->
+
+Usage metrics now include reporting per-tenant, and align with Camunda’s updated licensing model (number of tenants).
+
 ## 8.8.0-alpha7
 
 | Release date   | Changelog(s)                                                                                                                                                                               | Blog                                                                                |
