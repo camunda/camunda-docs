@@ -19,32 +19,10 @@ Each Orchestration Cluster deployment includes a single Log4j2 configuration fil
   - Camunda 8 (`io.camunda` and `io.atomix`)
   - Spring and Spring Boot (`org.springframework`)
 
-You can view the default `log4j2.xml` in the  
-[GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/config/log4j2.xml).
+### Default Log4J2 configuration
 
-### Example Log4j2 configuration
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" monitorInterval="30">
-  <Properties>
-    <Property name="LOG_PATTERN">%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} %clr{%5p} %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx</Property>
-  </Properties>
-  <Appenders>
-    <Console name="Console" target="SYSTEM_OUT" follow="true">
-      <PatternLayout pattern="${LOG_PATTERN}"/>
-    </Console>
-    <Console name="Stackdriver" target="SYSTEM_OUT" follow="true">
-      <StackdriverJSONLayout/>
-    </Console>
-  </Appenders>
-  <Loggers>
-    <Logger name="io.camunda" level="info" />
-    <Root level="info">
-      <AppenderRef ref="${env:LOG_APPENDER:-Console}"/>
-    </Root>
-  </Loggers>
-</Configuration>
+```yaml reference
+https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/config/log4j2.xml
 ```
 
 ## Environment variables for log levels
@@ -65,13 +43,13 @@ Log4j2 appenders define how logs are output. The Orchestration Cluster supports:
 
 1. **Console** - Default. Outputs formatted text logs to standard out. Select with `ZEEBE_LOG_APPENDER=Console`.
 2. **Stackdriver (JSON format)** - Outputs logs in JSON format compatible with [Google Cloud Logging/Stackdriver](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry). Select with `ZEEBE_LOG_APPENDER=Stackdriver`.
-3. **Rolling file** - Writes logs to a file that rotates and compresses old logs. Enabled by default; disable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=false`.
+3. **Rolling file** - Writes logs to a file that rotates and compresses old logs. Disabled by default; enable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true`.
 
 ## JSON logging
 
 To enable JSON logging (Stackdriver format) for any component:
 
-`LOG_APPENDER=Stackdriver`
+`ZEEBE_LOG_APPENDER=Stackdriver`
 
 Set this variable for each component’s environment as needed.
 
@@ -90,6 +68,30 @@ curl 'http://localhost:9600/actuator/loggers/io.camunda' \
 ```
 
 Replace `io.camunda` with the logger name you want to adjust.
+
+## Sensitive data
+
+Camunda 8 avoids logging sensitive data, such as personally identifiable information (PII) or unencrypted business-relevant data. However, you may sometimes want to enable this logging for debugging purposes.
+
+By default, all loggers that could log sensitive information (for example, variable values) are set to **INFO** level. To enable debug logging for these loggers, it is **not sufficient** to set `ZEEBE_LOG_LEVEL` alone. You must explicitly configure the logging level to a level lower than INFO for the relevant loggers.
+
+:::warning
+Enabling the following loggers may expose sensitive data in your logs. Use with caution.
+:::
+
+### RDBMS
+
+For exported records:
+
+```properties
+logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
+```
+
+For executed SQLs and parameters:
+
+```properties
+logging.level.io.camunda.db.rdbms.sql=DEBUG
+```
 
 ## Notes
 
