@@ -63,6 +63,57 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 - If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc sub-process is directly completed.
 - If set to `false`, the ad-hoc sub-process waits for the completion of all active instances before completing.
 
+## BPMN implementation
+
+An ad-hoc sub-process can be handled in Zeebe internally. This is the default behavior when modeling an ad-hoc sub-process.
+You can model which [elements to activate](#activate-an-element) and when the sub-process is [completed](#completion).
+Alternatively, you could use the [ad-hoc sub-process API](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) to activate elements manually.
+
+## Job worker implementation
+
+An ad-hoc sub-process can be handled using a [Job worker](/components/concepts/job-workers.md). You can define the sub-process to be handles by a Job worker by giving it a task definition.
+
+If the ad-hoc sub-process is defined as a job worker, it will create a Job upon activation. The Job worker must decide what the next step is.
+To do this it can use the `adHocSubProcessElements` variable (see [Special ad-hoc sub-process variables](#special-ad-hoc-sub-process-variables)).
+
+When a process instance reaches an ad-hoc sub-process with a Job worker implementation:
+
+1. Zeebe creates a corresponding Job and wait for its completion.
+2. The Job worker decides which elements to activate and completes the Job with an [`adHocSubProcess` Job result](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx).
+3. Zeebe activates the elements from the Job result.
+4. As soon as any of the flows inside the ad-hoc sub-process completes, Zeebe creates a new Job for the ad-hoc sub-process.
+5. The Job worker decides what to do. It can activate more elements or fulfill the completion condition. If the completion condition is fulfilled the Job worker can specify if any active elements should be canceled. It is not possible to fulfill the completion condition and activate more elements at the same time.
+
+Since the Job worker can activate multiple elements at once, and we create a Job once one of these child flows completes, it is possible that the Job for the ad-hoc sub-process gets recreated. There will only ever be a single active Job for the ad-hoc sub-process at any time.
+The Job worker should expect that the Job might be recreated whilst working on it, and that the Job completion could result in a `NOT_FOUND` rejection.
+
+## Collecting the output
+
+The output of the inner flows of the ad-hoc sub-process can be collected by defining the `outputCollection` and the `outputElement` expression.
+
+`outputCollection` defines the name of the variable under which the collected output is stored (e.g. `results`). It is automatically created as a local variable of the ad-hoc sub-process and is updated when an inner flow is completed.
+When the ad-hoc sub-process is completed the variable defined as the `outputCollection` is [propagated](components/concepts/variables.md#variable-propagation) to its parent scope.
+
+`outputElement` is an expression that defined the output of the inner flow (e.g. `= result`). Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the inner flow that holds the output value.
+This variable should be created with the output value; for example, by a job worker providing a variable with the name `result`.
+
+When the inner flow is completed, the `outputElement` expressions is evaluated and the result is inserted into the `outputCollection`.
+
+## Special ad-hoc sub-process variables
+
+On activation of the ad-hoc sub-process the `adHocSubProcessElements` variable is created on the scope of the ad-hoc sub-process.
+The variable contains some metadata about the ad-hoc sub-process and its inner elements, which can be used by job workers to determine which action to take.
+The variable contains a list of activatable elements. Each of these elements contains the following properties:
+
+- `elementId`: The ID of the element.
+- `elementName`: The name of the element.
+- `documentation`: The documentation of the element.
+- `properties`: The properties defined on the element.
+- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function.
+
+:::info Updating the value of the `adHocSubProcessElements` variable can lead to unexpected behavior. It is not recommended to update this variable.
+:::
+
 ## Variable mappings
 
 An ad-hoc sub-process can define input and output
