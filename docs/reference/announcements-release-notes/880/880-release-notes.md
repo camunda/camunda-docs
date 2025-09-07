@@ -22,7 +22,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 :::info 8.8 resources
 
 - See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) to learn more about supported environment changes and breaking changes or deprecations.
-- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- See [What's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -270,7 +270,7 @@ A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Am
 - Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
 - Keep cluster data within Singapore to support your local data residency and compliance needs.
 
-To learn more about supported SaaS regions, see [regions](/reference/regions.md).
+To learn more about supported SaaS regions, see [regions](/components/saas/regions.md).
 
 ### Tasklist uses the Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
 
@@ -587,16 +587,16 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | 11 March 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha2)</li></ul> | [Release blog](https://camunda.com/blog/2025/03/camunda-alpha-release-march-2025/) |
 
-### Camunda Spring Boot SDK for the C8 REST API
+### Camunda Spring Boot Starter for the C8 REST API
 
-A Spring Boot SDK is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+A Spring Boot Starter is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
-- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)).
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility)).
 
-To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2249 -->
 

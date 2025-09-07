@@ -21,7 +21,7 @@ First, you should evaluate your current setup:
 Review and make sure you understand the platform-level changes between Camunda 8.7 and 8.8. Understanding these highlights helps you plan your upgrade and anticipate operational impacts.
 
 :::tip
-Start with the high-level overview [what's new in Camunda 8.8](/components/whats-new-in-88.md).
+Start with the high-level overview [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md).
 :::
 
 <table className="table-callout">
@@ -114,7 +114,7 @@ The following table provides a high-level overview of the impact of these change
 </table>
 
 :::info
-Learn more about all Identity 8.8 changes in the [Identity section of what's new in Camunda 8.8](/components/whats-new-in-88.md#identity).
+Learn more about all Identity 8.8 changes in the [Identity section of what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md#identity).
 :::
 
 ## Step 3. Check infrastructure compatibility
