@@ -73,6 +73,7 @@ jobs:
             🤖 This PR was created automatically. If you have any questions about the automation, please check the [update-release-links.js script](./hacks/update-release-links.js).
           branch: auto/update-release-links
           delete-branch: true
+          reviewers: camunda/tech-writers
 
       - name: Log automation result
         run: |
