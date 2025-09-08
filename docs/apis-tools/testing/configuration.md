@@ -26,7 +26,7 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 You can change the Docker images and other runtime properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
@@ -162,7 +162,7 @@ path, then you need to set the path when starting the application with the comma
 Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
@@ -235,10 +235,10 @@ public class MyProcessTest {
 
 It's possible to change the client's CredentialProvider, thereby changing how the client authenticates against the
 Camunda runtime. You can find a detailed breakdown of how to implement basic or OIDC authentication in
-[the Java Client/Authentication section.](/apis-tools/spring-zeebe-sdk/configuration.md)
+[the Java Client/Authentication section.](/apis-tools/camunda-spring-boot-starter/configuration.md)
 
 <Tabs groupId="clientOptions" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 

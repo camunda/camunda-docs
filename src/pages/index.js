@@ -154,7 +154,7 @@ function Home() {
                   "docs/apis-tools/spring-zeebe-sdk/getting-started/"
                 )}
               >
-                Camunda Spring Boot SDK
+                Camunda Spring Boot Starter
               </Link>
               <Link
                 className={clsx(

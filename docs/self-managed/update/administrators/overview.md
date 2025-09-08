@@ -28,9 +28,9 @@ The upgrade process involves both preparing for and performing the upgrade.
 <ZeebeGrid zeebe={overviewCards} />
 
 :::info Related resources
-
 - [New in 8.8: Features and changes](/components/whats-new-in-88.md)
 - [Release announcements (8.8)](/reference/announcements-release-notes/880/880-announcements.md)
 - [Release notes (8.8)](/reference/announcements-release-notes/880/880-release-notes.md)
 - [Quality board](https://github.com/orgs/camunda/projects/187/views/15)
-  :::
+:::
+
