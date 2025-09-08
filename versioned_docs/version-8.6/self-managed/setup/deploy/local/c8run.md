@@ -98,6 +98,10 @@ To add a custom Connector:
 
 Once configured correctly, your Connectors are available for use in Modeler.
 
+### Use Connector Secrets
+Connector Secrets can be provided as environment variables by adding them to the .env file in the root folder. 
+
+
 ## Use Camunda APIs
 
 Camunda 8 Run authenticates with the [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md), [Operate](/apis-tools/operate-api/overview.md), and [Zeebe](/apis-tools/zeebe-api/grpc.md) APIs, as well as the unified [Camunda 8 REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview.md), by including cookie headers in each request. This cookie can be obtained by using the API endpoint `/api/login`.
