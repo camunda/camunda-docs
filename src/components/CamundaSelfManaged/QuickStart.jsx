@@ -22,21 +22,21 @@ const QuickStart = () => {
       title: "Developers",
       icon: UserDevIcon,
       description:
-        "Get started quickly with local development setup and basic configuration",
+        "Get started quickly with local development setup and basic configuration.",
       link: "/self-managed/quickstart/developer-quickstart/",
     },
     {
       title: "Administrators",
       icon: UserOpsIcon,
       description:
-        "Learn how to deploy and manage Camunda in production environments",
+        "Learn how to deploy and manage Camunda in production environments.",
       link: "/self-managed/quickstart/administrator-quickstart/",
     },
   ];
 
   return (
     <div className="sm-quickstart">
-      <h2>Quick Start</h2>
+      <h2>Quickstart</h2>
       <p>
         Whether you're a developer looking to get up and running quickly or an
         operations team planning a production deployment, you'll find the

@@ -22,14 +22,14 @@ const ReferenceArchitecture = () => {
       title: "Kubernetes",
       icon: K8sIcon,
       description:
-        "Reference architecture for deploying Camunda on Kubernetes clusters",
+        "Reference architecture for deploying Camunda on Kubernetes clusters.",
       link: "/self-managed/reference-architecture/kubernetes/",
     },
     {
       title: "Manual",
       icon: JarIcon,
       description:
-        "Reference architecture for traditional JAR-based deployment patterns",
+        "Reference architecture for traditional JAR-based deployment patterns.",
       link: "/self-managed/reference-architecture/manual/",
     },
   ];

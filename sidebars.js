@@ -1019,9 +1019,9 @@ module.exports = {
         },
         {
           "Camunda Spring Boot Starter": [
-            "apis-tools/spring-zeebe-sdk/getting-started",
-            "apis-tools/spring-zeebe-sdk/configuration",
-            "apis-tools/spring-zeebe-sdk/properties-reference",
+            "apis-tools/camunda-spring-boot-starter/getting-started",
+            "apis-tools/camunda-spring-boot-starter/configuration",
+            "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
         "apis-tools/node-js-sdk",
@@ -1062,7 +1062,7 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
         "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
-        "apis-tools/migration-manuals/migrate-to-spring-boot-camunda-starter",
+        "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
       ],
