@@ -39,6 +39,12 @@ Development continues on the single unified Camunda 8 REST API that consolidates
 
 <!-- https://github.com/camunda/product-hub/issues/2243 -->
 
+### Process instance tags <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span> {#process-instance-tags-alpha7}
+
+Introduce optional, immutable **process instance tags** set at creation for lightweight routing, correlation, and future prioritization without inspecting large variable payloads.
+
+For a full feature overview see [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).
+
 ### Camunda 8 Run supports 8.8 architecture <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Developer">Developer</span>
 
 Camunda 8 Run now includes Identity, allowing all core applications to run locally in configurations similar to production. This simplifies local development by enabling multiple user authentications and credentials.
