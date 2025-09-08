@@ -125,6 +125,70 @@ public class MyProcessTest {
 
 </Tabs>
 
+### Multi-tenancy
+
+Multi-tenancy is disabled by default. If your tests require multi-tenancy, you must enable it for the testcontainers
+runtime:
+
+<Tabs groupId="config_multitenancy" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+io:
+  camunda:
+    process:
+      test:
+        multitenancy-enabled: true
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+You can register the JUnit extension manually and use the fluent builder to enable multi-tenancy:
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+                .withMultitenancyEnabled();
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+Enabling multi-tenancy secures the testcontainers runtime with Basic Auth and creates a default user for it:
+
+```
+- Username: demo
+- Name: demo
+- Password: demo`
+- Email: demo@example.com
+```
+
+:::info
+The user is deleted during the cluster purge in-between tests. There is a brief window during the purge where
+the user hasn't been recreated yet and requests to the runtime will fail because of it. The CamundaManagementClient will
+wait for the user to be re-created as part of the purge process, but any custom implementations making use of the purge
+endpoint must take that behavior into consideration.
+:::
+
 ## Remote runtime
 
 Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running on your machine.
