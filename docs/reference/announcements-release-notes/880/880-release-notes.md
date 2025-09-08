@@ -779,16 +779,16 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | 11 March 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha2)</li></ul> | [Release blog](https://camunda.com/blog/2025/03/camunda-alpha-release-march-2025/) |
 
-### Camunda Spring Boot SDK for the C8 REST API
+### Camunda Spring Boot Starter for the C8 REST API
 
-A Spring Boot SDK is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
+A Spring Boot Starter is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
 - Easily integrate process entity management and queries within your workflows.
 - Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
 - Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
-- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility)).
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility)).
 
-To learn more about this feature, see the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2249 -->
 

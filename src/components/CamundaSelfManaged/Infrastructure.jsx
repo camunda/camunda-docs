@@ -24,27 +24,27 @@ const Infrastructure = () => {
       title: "Amazon",
       icon: AWSIcon,
       description:
-        "Deploy Camunda on AWS with EKS, RDS, and other AWS services",
+        "Deploy Camunda on AWS with EKS, RDS, and other AWS services.",
       link: "/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/",
     },
     {
       title: "Microsoft",
       icon: AzureIcon,
       description:
-        "Set up Camunda on Azure with AKS and Azure Database services",
+        "Set up Camunda on Azure with AKS and Azure Database services.",
       link: "/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/",
     },
     {
       title: "Google",
       icon: GCPIcon,
       description:
-        "Deploy on Google Cloud Platform with GKE and other GCP services",
+        "Deploy on Google Cloud Platform with GKE and other GCP services.",
       link: "/self-managed/installation-methods/helm/cloud-providers/gcp/google-gke/",
     },
     {
       title: "Red Hat OpenShift",
       icon: OpenShiftIcon,
-      description: "Run Camunda on OpenShift container platform",
+      description: "Run Camunda on OpenShift container platform.",
       link: "/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift/",
     },
   ];
@@ -53,7 +53,7 @@ const Infrastructure = () => {
     <div className="sm-infrastructure">
       <h2>Infrastructure</h2>
       <p>
-        Guidance for provisioning Cloud infrastructure to deploy Camunda 8
+        Provision your cloud infrastructure to deploy Camunda 8
         Self-Managed in a scalable, secure, and production-ready environment.
       </p>
       <div className="sm-grid-4">

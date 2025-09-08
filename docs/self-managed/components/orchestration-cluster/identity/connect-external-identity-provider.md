@@ -309,7 +309,7 @@ As per default authorizations are enabled, your application will only be able to
 ```
 
 </TabItem>
-<TabItem value="springclient" label="Camunda Spring Boot SDK">
+<TabItem value="springclient" label="Camunda Spring Boot Starter">
 1) Add the dependency to your Java Project:
 
 ```xml
