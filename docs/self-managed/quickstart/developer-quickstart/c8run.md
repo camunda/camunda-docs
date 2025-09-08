@@ -131,10 +131,11 @@ To add a custom connector:
 
 Once configured, your connectors are available for use in Modeler.
 
-### Use Connector Secrets
-Connector Secrets can be provided as environment variables by adding them to the .env file in the root folder. 
+### Configure Connector secrets
 
-When C8Run is started with the `-docker` option the `connector-secrets.txt` file within the docker-compose folder is the place to put add the Connector Secrets to. 
+Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
+
+When starting C8Run with the `--docker` option, add the connector secrests to the `connector-secrets.txt` file in the docker-compose folder.
 
 ### Use Camunda APIs
 

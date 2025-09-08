@@ -98,9 +98,9 @@ To add a custom Connector:
 
 Once configured correctly, your Connectors are available for use in Modeler.
 
-### Use Connector Secrets
-Connector Secrets can be provided as environment variables by adding them to the .env file in the root folder. 
+### Configure Connector secrets
 
+Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
 
 ## Use Camunda APIs
 
