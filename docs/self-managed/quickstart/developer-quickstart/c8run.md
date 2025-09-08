@@ -131,7 +131,6 @@ To add a custom connector:
 
 Once configured, your connectors are available for use in Modeler.
 
-
 ### Use Connector Secrets
 Connector Secrets can be provided as environment variables by adding them to the .env file in the root folder. 
 
