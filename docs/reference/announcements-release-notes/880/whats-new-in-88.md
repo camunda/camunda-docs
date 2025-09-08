@@ -116,7 +116,7 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 
 ## Process instance tags {#process-instance-tags}
 
-Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweight labels you can attach when creating a process instance (see [Process instance creation](/components/concepts/process-instance-creation.md#tags)).
+Camunda 8.8 introduces **process instance tags**: optional, immutable, lightweight labels you can attach when creating a process instance (see [process instance creation](/components/concepts/process-instance-creation.md#tags)).
 
 <div className="list-tick">
 

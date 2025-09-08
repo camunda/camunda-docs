@@ -12,7 +12,7 @@ A job has the following properties:
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
-- **Tags**: Immutable labels copied from the process instance at job creation; Great for providing additional metadata (e.g., `reference:1234`, `team:accounting`, `trace-id:3004`). See [tags](#tags) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
+- **Tags**: Immutable labels copied from the process instance at job creation. This is great for providing additional metadata (e.g., `reference:1234`, `team:accounting`, `trace-id:3004`). See [tags](#tags) and [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
 
 ## Requesting jobs
 
@@ -255,15 +255,15 @@ Tags provide a powerful way to add lightweight metadata to jobs.
 
 When a BPMN element is activated and creates a job:
 
-1. **Snapshot creation**: The job receives a copy of all tags from the process instance at that exact moment
-2. **Immutability**: Once copied to the job, tags cannot be modified, added, or removed
-3. **Worker access**: Job workers can read these tags to implement custom logic
+1. **Snapshot creation**: The job receives a copy of all tags from the process instance at that exact moment.
+2. **Immutability**: Once copied to the job, tags cannot be modified, added, or removed.
+3. **Worker access**: Job workers can read these tags to implement custom logic.
 
 ### Key characteristics
 
-- **Case-sensitive**: Tags `Priority:High` and `priority:high` are different
-- **Timing**: Tags are copied exactly once when the job is created from the BPMN element
-- **Immutable**: The tag set on a job never changes after creation
-- **Inherited**: Jobs inherit the complete tag set from their process instance
+- **Case-sensitive**: Tags `Priority:High` and `priority:high` are different.
+- **Timing**: Tags are copied exactly once when the job is created from the BPMN element.
+- **Immutable**: The tag set on a job never changes after creation.
+- **Inherited**: Jobs inherit the complete tag set from their process instance.
 
 For detailed information about tag formats, validation rules, limits, and additional use cases, see [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
