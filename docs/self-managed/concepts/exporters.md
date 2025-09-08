@@ -346,38 +346,38 @@ For example, if you want to allow exporting only message events with `EXPIRED` i
 
 ## Schema
 
-In previous Camunda versions, some upgrades required manual data migrations, which often introduced:
+In earlier Camunda versions, some upgrades required manual data migrations. These migrations often introduced:
 
 - Operational downtime
 - Risk of human error
-- Complex backup and rollback procedures to safeguard the migration
+- Complex backup and rollback procedures
 
 Starting with **Camunda 8.8**, exporters are designed to support upgrades without requiring data migrations.  
-This change reduces complexity, minimizes downtime, and enables faster, more reliable releases.
+This approach reduces complexity, minimizes downtime, and enables faster, more reliable releases.
 
 ### Schema compatibility guidelines (Elasticsearch/OpenSearch)
 
-As new features are added, the indices storing data naturally evolve. To maintain **zero required data migrations** across versions, follow these schema change guidelines.
+As new features are added, the indices storing data evolve. To maintain **zero required data migrations** across versions, follow these schema guidelines.
 
 #### Schema changes to avoid
 
-Avoid the following breaking schema changes, as they would require data migrations:
+The following **breaking changes** require data migrations and must be avoided:
 
 - **Field removal**: Deleting existing fields from index mappings
-- **Data type changes**: Modifying the data type of existing fields (e.g., `text` → `keyword`)
-- **Required field additions**: Adding mandatory fields without default values to existing record types
-- **Record structure changes**: Altering the fundamental structure of exported records in incompatible ways
+- **Data type changes**: Changing the data type of existing fields (for example, `text` → `keyword`)
+- **Required field additions**: Adding mandatory fields without default values
+- **Record structure changes**: Modifying the structure of exported records in incompatible ways
 
-#### Permitted schema evolution
+#### Safe schema evolution
 
-The following changes are safe and do **not** require data migrations:
+The following changes are considered **backward compatible** and do **not** require data migrations:
 
 - **Additive changes**: Adding optional fields or columns with default values
 - **New indices**: Creating new indices for new features
-- **Index settings**: Adding or updating index settings that do not affect existing data
+- **Index settings**: Updating index settings in ways that do not affect existing data
 
 ### Integration testing
 
-Schema compatibility is enforced through the [`SchemaUpdateIT`](https://github.com/camunda/camunda/blob/main/schema-manager/src/test/java/io/camunda/search/schema/SchemaUpdateIT.java) integration test.
+Schema compatibility is verified through the [`SchemaUpdateIT`](https://github.com/camunda/camunda/blob/main/schema-manager/src/test/java/io/camunda/search/schema/SchemaUpdateIT.java) integration test.
 
-This test runs for both **Elasticsearch** and **OpenSearch**. Any incompatible schema change will cause the test to fail, preventing breaking changes from being introduced.
+This test runs on both **Elasticsearch** and **OpenSearch**. Any incompatible schema change causes the test to fail, preventing breaking changes from being introduced.
