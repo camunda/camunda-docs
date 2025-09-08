@@ -129,6 +129,7 @@ Connector Secrets can be provided as environment variables by adding them to the
 
 When C8Run is started with the `-docker` option the `connector-secrets.txt` file within the docker-compose folder is the place to put add the Connector Secrets to. 
 
+When C8Run is started with the `-docker` option the `connector-secrets.txt` file within the docker-compose folder is the place to put add the Connector Secrets to.
 
 ### Use Camunda APIs
 
