@@ -33,7 +33,7 @@ These release notes identify the new features included in 8.8, including [alpha 
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
 | 9 September 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
 
-### Ad-hoc sub-process dynamic activation using job workers
+### Ad-hoc sub-process dynamic activation using job workers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Agentic orchestration</span>
 
 <!-- https://github.com/camunda/product-hub/issues/2631 -->
 
@@ -80,7 +80,7 @@ To learn more, see [SQL connector](/components/connectors/out-of-the-box-connect
 This requires the Oracle JDBC driver that Camunda cannot distribute due to licensing restrictions. To connect to an Oracle database, you must manually download the JDBC driver from [Oracle](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) and run the connector in [hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
 :::
 
-### Console <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
+### Console <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span>
 
 #### Docker distribution
 
@@ -94,11 +94,11 @@ Console is now available as a Self-Managed Docker distribution.
 
 To learn more, see [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 
-#### Registration and license check for Orchestration Cluster
+#### Usage metrics for licence model and tenant
 
-<!-- https://github.com/camunda/product-hub/issues/2867 -->
+<!-- https://github.com/camunda/product-hub/issues/1979 -->
 
-Release notes needed
+Usage metrics now include reporting per-tenant, and align with Camunda’s updated licensing model (number of tenants).
 
 ### Element template support for all tasks <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 
@@ -218,12 +218,6 @@ This release introduces persisted test definitions for Web Modeler and reusable 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
 The claim used for usernames is now configurable via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable. This can be used for authentication for web apps (Tasklist, Optimize, Operate) as a different claim option for the username identifier.
-
-### Usage metrics support updated licence model and tenant breakdown
-
-<!-- https://github.com/camunda/product-hub/issues/1979 -->
-
-Usage metrics now include reporting per-tenant, and align with Camunda’s updated licensing model (number of tenants).
 
 ## 8.8.0-alpha7
 
