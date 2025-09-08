@@ -29,9 +29,9 @@ These release notes identify the new features included in 8.8, including [alpha 
 
 ## 8.8.0-alpha8
 
-| Release date     | Changelog(s)                                                                                                                                                                           | Blog                                                                                   |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
-| 9 September 2025 | <ul><li>[Camunda 8 core](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[Connectors](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog                                                                                   |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
+| 9 September 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha8)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha8)</li></ul> | [Release blog](https://camunda.com/blog/2025/09/camunda-alpha-release-september-2025/) |
 
 ### Ad-hoc sub-process dynamic activation using job workers <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Agentic orchestration</span>
 
@@ -60,7 +60,7 @@ Key updates include:
 - Tool-agnostic content covering Web Modeler, dependency management, and local development setups
 - Moving relevant information from Connectors to the element templates section
 
-See [Element templates in Modeler](/components/modeler/element-templates/about-templates.md) for details.
+See [element templates in Modeler](/components/modeler/element-templates/about-templates.md) for details.
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span>
 
@@ -112,7 +112,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more
 - Publish templates to your project or organization for reuse
 
-See [Save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
+See [save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
 
 Additional support includes:
 
