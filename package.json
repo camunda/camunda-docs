@@ -31,9 +31,9 @@
     "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
-    "config-reference:download:spring-sdk": "npm run config-reference:download spring-sdk",
+    "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
     "config-reference:generate": "node ./config-reference/generate-config-reference.js generate",
-    "config-reference:generate:spring-sdk": "npm run config-reference:generate spring-sdk",
+    "config-reference:generate:camunda-spring-boot-starter": "npm run config-reference:generate camunda-spring-boot-starter",
     "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
