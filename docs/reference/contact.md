@@ -24,19 +24,30 @@ import CommunityImg from './img/icon-reference-community.png';
 import SalesImg from './img/icon-reference-sales.png';
 import SecurityImg from './img/icon-reference-padlock.png';
 import SupportImg from './img/icon-reference-support.png';
+import FeatureImg from './img/icon-feature-request.png';
 
 Get support for Camunda or send us your feedback via the following channels.
 
 <table className="table-callout">
 <tr>
+<td><img src={SupportImg} title="Camunda support icon" alt="Camunda support icon" className="img-100 img-transparent"/></td>
+<td>[Support](https://camunda.com/services/enterprise-support-guide/)</td>
+<td>Request support by following our [Enterprise support process](https://camunda.com/services/enterprise-support-guide/). You can also find support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).</td>
+</tr>
+<tr>
 <td><img src={BugImg} title="Camunda bug icon" alt="Camunda bug icon" className="img-100 img-transparent"/></td>
-<td>[Bugs and feature requests](https://forum.camunda.io/)</td>
-<td>Send us your bug reports and feature requests via the [Camunda community forum](https://forum.camunda.io/) or [Camunda Developer Hub](https://camunda.com/developers).</td>
+<td>[Bugs](https://forum.camunda.io/)</td>
+<td>Send us your bug reports via the [Camunda community forum](https://forum.camunda.io/) or [Camunda Developer Hub](https://camunda.com/developers).</td>
 </tr>
 <tr>
 <td><img src={CommunityImg} title="Camunda community icon" alt="Camunda community icon" className="img-100 img-transparent"/></td>
 <td width="25%"><p>[Community](https://forum.camunda.io/)</p></td>
 <td><p>We encourage everyone to participate in our community via the [Camunda community forum](https://forum.camunda.io/), where you can exchange ideas with other Camunda users and Camunda employees.</p><p>For all other Camunda community programs and resources, visit the [Camunda Developer Hub](https://camunda.com/developers).</p></td>
+</tr>
+<tr>
+<td><img src={FeatureImg} title="Camunda feature icon" alt="Camunda bug icon" className="img-100 img-transparent"/></td>
+<td>[Feature request](https://roadmap.camunda.com/c/236-how-to-submit-a-feature-request)</td>
+<td>Submit a feature request in the [Product Roadmap Portal](https://roadmap.camunda.com/c/236-how-to-submit-a-feature-request).</td>
 </tr>
 <tr>
 <td><img src={SalesImg} title="Camunda sales icon" alt="Camunda sales icon" className="img-100 img-transparent"/></td>
@@ -47,11 +58,6 @@ Get support for Camunda or send us your feedback via the following channels.
 <td><img src={SecurityImg} title="Camunda security icon" alt="Camunda security icon" className="img-100 img-transparent"/></td>
 <td>[Security issues](/reference/notices.md)</td>
 <td><p>For security-related issues, see [security notices](/reference/notices.md) for the most up-to-date information on known issues and how to report a vulnerability so we can solve the problem as quickly as possible.</p><p>Do not use GitHub for security-related issues.</p></td>
-</tr>
-<tr>
-<td><img src={SupportImg} title="Camunda support icon" alt="Camunda support icon" className="img-100 img-transparent"/></td>
-<td>[Support and feedback](https://camunda.com/services/enterprise-support-guide/)</td>
-<td>Request support or send feedback via Jira by following our [Enterprise support process](https://camunda.com/services/enterprise-support-guide/). You can also find feedback and support options in the Help Center or [Camunda community forum](https://forum.camunda.io/).</td>
 </tr>
 </table>
 
