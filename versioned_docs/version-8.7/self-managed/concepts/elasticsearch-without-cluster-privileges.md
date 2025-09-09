@@ -394,6 +394,7 @@ You can use the standalone schema manager if:
          numberOfShards: 3 # affects only new Zeebe record indices
          numberOfReplicas: 1 # affects only new Zeebe record indices
          templatePriority: 25 # optional (8.7.11+), overrides default priority 20
+       ... # other settings
    camunda:
      operate:
        elasticsearch:
@@ -401,12 +402,14 @@ You can use the standalone schema manager if:
          numberOfShards: 1 # only new Operate indices
          numberOfReplicas: 1 # updates existing Operate indices
          indexTemplatePriority: 25 # optional (8.7.11+), overrides default priority 0
+       ... # other settings
      tasklist:
        elasticsearch:
          updateSchemaSettings: true # required to push dynamic schema settings (8.7.11+)
          numberOfShards: 1 # only new Tasklist indices
          numberOfReplicas: 1 # updates existing Tasklist indices
          indexTemplatePriority: 25 # optional (8.7.11+), overrides default priority 0
+       ... # other settings
    ```
 2. Run the standalone schema manager with a user that has the required cluster privileges (as shown under [Initialize the schema manager](#initialize)). The running Camunda application (without cluster privileges) can stay online.
 3. Wait for successful completion in the logs.
