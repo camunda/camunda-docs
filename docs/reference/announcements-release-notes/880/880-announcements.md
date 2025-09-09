@@ -97,6 +97,18 @@ Additional upgrade considerations are necessary for deployments that use custom 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
 See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
+##### Secret management improvements and deprecations
+
+Camunda 8.8 introduces a new structured secret management pattern for Helm charts that provides better consistency and security. The legacy secret configuration fields are deprecated but remain functional during the transition period.
+
+Key changes include:
+
+- **New pattern**: Components now use a structured `secret:` configuration with `inlineSecret`, `existingSecret`, and `existingSecretKey` fields
+- **AWS Document Store**: Now requires separate secret configurations for `accessKeyId` and `secretAccessKey` instead of a single secret
+- **Legacy fields deprecated**: Direct `existingSecret` fields outside the structured pattern are deprecated
+
+See the [secret management guide](/self-managed/installation-methods/helm/configure/secret-management.md) for migration instructions and examples.
+
 #### Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->
