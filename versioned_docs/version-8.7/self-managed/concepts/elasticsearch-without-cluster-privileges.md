@@ -330,7 +330,7 @@ operate:
 
 A Camunda minor version upgrade can be prepared by first running the standalone schema manager for the target version `N+1` to pre-create or adjust index templates and mappings, then upgrading the Camunda single application. This minimizes downtime when only schema adjustments are needed.
 
-If the target upgrade ALSO requires a data/application migration step (as documented in the upgrade guide), follow the documented migration sequence. That may require:
+If the target upgrade ALSO requires a data/application migration step (as documented in the [upgrade guide](/self-managed/setup/upgrade.md)), follow the documented migration sequence. That may require:
 
 1. Stopping the Camunda application (or scaling down) before executing the migration logic.
 2. Running the schema manager (if schema changes are part of the upgrade) with the new version `N+1` using a privileged user.
@@ -339,26 +339,18 @@ If the target upgrade ALSO requires a data/application migration step (as docume
 
 If no explicit migration is required, the running application at version `N` may remain online while you run the `N+1` schema manager.
 
-#### When to use this procedure
-
-Always review the relevant version section in the [upgrade guide](/self-managed/setup/upgrade.md):
-
-- If it indicates only schema/template changes: you can keep version `N` running while executing the `N+1` schema manager, then upgrade the application.
-- If it indicates additional migrations: stop the application as required, then perform the documented migration steps after (or in the order specified with) the schema manager run.
-
 #### High-level flow
 
 1. Current state: Camunda single application is running at version `N` (example 8.6) (already processing traffic) with its indices in Elasticsearch.
-2. Verification: Check the upgrade documentation for upgrading from `N` to `N+1`. Determine whether additional migrations are required:
+2. Verification: Check the upgrade documentation for upgrading from `N` to `N+1` (example 8.7). Determine whether additional migrations are required:
 
 - No migrations: proceed while keeping `N` running.
 - Migrations required: schedule downtime/maintenance window and stop the application before executing required migration steps.
 
-3. Preparation: Obtain the Camunda distribution for version `N+1` (example 8.7).
+3. Preparation: Obtain the Camunda distribution for version `N+1`.
 4. Run schema manager (version `N+1`) standalone with a configuration granting the required cluster privileges (as shown earlier under [Initialize the schema manager](#initialize)). Leave the existing application (version `N`) running. The schema manager applies any new or updated templates / mappings (and ILM policies if enabled) required by version `N+1`.
 5. Completion check: Wait until the schema manager logs successful completion and exits without errors.
 6. Application upgrade: Upgrade (or perform a rolling update of) the Camunda single application from version `N` to `N+1`, using the configuration that disables schema creation (as shown above). At this point, the new application version will reuse the already-prepared indices.
-7. Cleanup: Remove any temporary elevated credentials used solely for the schema manager run.
 
 #### Example timeline
 
