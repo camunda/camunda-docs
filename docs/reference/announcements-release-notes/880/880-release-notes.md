@@ -177,7 +177,7 @@ You can now run Orchestration Cluster in "Zeebe-only" mode without secondary sto
 - Enable by setting `camunda.database.type=none`
 - Starts only the required Zeebe components
 
-### Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
+### Web Modeler <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
 #### Cluster Identity compatibility
 
