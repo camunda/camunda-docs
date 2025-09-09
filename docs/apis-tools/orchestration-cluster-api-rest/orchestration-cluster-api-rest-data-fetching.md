@@ -41,13 +41,28 @@ GET /v2/user-tasks/:userTaskKey
 
 ## Data consistency
 
-Endpoints in the Orchestration Cluster API are either _strongly consistent_ or _eventually consistent_. This refers not to the behaviour of the endpoint itself, but to the data backing the endpoint.
+Endpoints in the Orchestration Cluster API are classified as either **strongly consistent** or **eventually consistent**.  
+This distinction applies to the _data behind the endpoint_, not the endpoint's functionality itself.
 
-Strongly consistent endpoints return data that represents the real-time state of the system. Eventually consistent endpoints are backed by the data created by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md), and data returned from these endpoints is _eventually consistent_ with the system state.
+- **Strongly consistent endpoints** return data that reflects the real-time state of the system.
+- **Eventually consistent endpoints** return data exported by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md). This data may lag behind the real-time state until the exporter processes it, so it becomes consistent only after a delay.
 
-This characteristic, if not managed, can lead to unexpected results. We clearly mark each endpoint with its consistency characteristic to allow you to manage this in your applications.
+Each endpoint is clearly labeled with its consistency type so you can account for this behavior in your applications.
 
-As an example: when a resource is created by a call to strongly consistent endpoint, calling an eventually consistent endpoint immediately with the returned resource key _may_ result in a 404 (for a GET) or an empty result array for a search. These endpoints are eventually consistent. A further call to the eventually consistent endpoint will return the resource at some future time. This system characteristic needs to be managed in your application. Failure to account for the eventually consistency of the data on eventually consistent endpoints can lead to indeterministic results at runtime: i.e.: code pathways that work 100% of the time during development or testing may fail some percentage of the time under load, if the eventual consistency characteristic is not taken into account.
+### Why consistency matters
+
+If eventual consistency is not handled properly, it can lead to unexpected results.
+
+For example:
+
+1. A resource is created using a strongly consistent endpoint.
+2. An _immediate_ request to an eventually consistent endpoint for the same resource might return:
+   - `404 Not Found` for a `GET` request, or
+   - an empty result set for a search request.
+
+This happens because the eventually consistent endpoint has not yet synced the new data. A later request will return the correct result once the data export completes.
+
+If your application does not account for eventual consistency, you may encounter **non-deterministic runtime behavior**. Code paths that work reliably during development or testing may fail intermittently in production, especially under load, if this characteristic is ignored.
 
 ## User task support
 
