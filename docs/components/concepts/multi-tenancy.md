@@ -2,74 +2,75 @@
 id: multi-tenancy
 title: "Multi-tenancy"
 sidebar_label: "Multi-tenancy"
-description: "Multi-tenancy allows you to re-use your Camunda installation."
+description: "Multi-tenancy allows you to host multiple tenants within a single Camunda installation."
 ---
 
 :::info
-Multi-tenancy is only supported on Camunda 8 Self-Managed. It is not yet available on SaaS.
+Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available in Camunda 8 SaaS.
 :::
 
-Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants — such as departments, teams, or external clients — while maintaining per-tenant isolation of data and processes in a shared environment.
+Multi-tenancy in Camunda 8 enables a single installation to serve multiple tenants—such as departments, teams, or external clients—while keeping each tenant's data and processes logically isolated.
 
-The following sections take a closer look at how multi-tenancy works in Camunda 8.
+The following sections explain how multi-tenancy works in Camunda 8.
 
-### Isolation of data and processes
+## Isolation of data and processes
 
-In a multi-tenant installation, each tenant's data and processes are logically isolated from one another.
-This means that one tenant's workflows, data models, and process configurations do not interfere with or impact the operations of other tenants. Each tenant operates in a separate and secure space within the same Camunda 8 instance.
+Each tenant's data and processes are logically isolated from others.  
+This ensures that one tenant's workflows, data models, and configurations do not interfere with or affect other tenants. Each tenant operates in a secure, independent space within the same Camunda 8 instance.
 
-### Resource sharing
+## Resource sharing
 
-Despite the isolation, multi-tenancy allows for efficient resource sharing. Tenants can leverage the same
-Camunda 8 software installation, reducing infrastructure costs and resource overhead. This shared model optimizes resource utilization and ensures that Camunda 8 remains cost-effective.
+Multi-tenancy provides cost efficiency by allowing multiple tenants to share the same Camunda 8 installation and infrastructure. This reduces operational overhead while maintaining logical isolation between tenants.
 
-### Efficient administration
+## Efficient administration
 
-Administrators can manage all tenants from [Identity](../identity/tenant.md). This simplifies the process of monitoring and maintaining different tenant environments, making administrative tasks more efficient and reducing overhead.
+Administrators can manage all tenants centrally using [Identity](../identity/tenant.md).  
+This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
-### Security
+## Security
 
-Security is a paramount concern in multi-tenant installations. Robust access control mechanisms ensure that
-tenants cannot access each other's data or processes. Security measures are in place to maintain the privacy and integrity of each tenant's information.
+Strong access control mechanisms prevent tenants from accessing each other's data or processes.  
+These controls ensure tenant-level security and maintain data integrity across all environments.
 
-## Example of tenant membership
+## Example: tenant membership in action
 
-When a user attempts to deploy a process model or start a process instance, the system verifies their tenant assignments.
+When a user deploys a process model or starts a process instance, the system validates the user's tenant assignments.
 
-For example, consider a user who is a member of `Tenant A` but not `Tenant B`.
+For example, assume a user belongs to `Tenant A` but not `Tenant B`:
 
-1.  **Deploying a process model:**
+1. **Deploying a process model**
+   - If the user deploys to `Tenant A`, the Orchestration Cluster verifies the assignment. If valid, the model is deployed and all related process instances belong to `Tenant A`.
+   - If the user deploys to `Tenant B`, the deployment fails because the user lacks access to that tenant.
 
-    - If the user deploys a process model to `Tenant A`, the Orchestration Cluster verifies their assignment. If successful, the process is deployed and its instances belong to `Tenant A`.
-    - If the user deploys the same process model to `Tenant B`, the access check fails and the deployment is rejected.
+2. **Running process instances**
+   - When querying process instances, the user only sees instances belonging to `Tenant A`.
 
-2.  **Running process instances:**
-    - When the user queries for process instances, they will only see instances belonging to `Tenant A`.
+This mechanism ensures proper isolation and access control across tenants.
 
-This ensures that data and processes are properly isolated between tenants, and users can only interact with resources they are authorized to access.
+## How multi-tenancy works
 
-## How does it work?
+Camunda 8 implements multi-tenancy using tenant identifiers within a single installation.  
+All tenant data is stored in the same database, with isolation enforced by appending a tenant identifier to each data object (e.g., process definitions, process instances, jobs).
 
-Camunda 8 implements multi-tenancy by relying on tenant identifiers in a single Camunda 8 installation. The data of all tenants is stored in the same storage. Isolation is provided by appending a tenant identifier to each data entry (ex. process definition, process instance, job, etc.)
+### Tenant identifier
 
-### The tenant identifier
-
-The tenant identifier will be set as a property to any data produced by Camunda 8. When multi-tenancy checks are disabled, all data is mapped to the `<default>` tenant identifier.
+The tenant identifier is added to all data created in Camunda 8.  
+When multi-tenancy is disabled, all data is assigned to the `<default>` tenant identifier.
 
 :::note
-The `<default>` tenant identifier is a reserved identifier and it can't be modified by users.
+The `<default>` tenant identifier is reserved and cannot be changed by users.
 :::
 
-Organizations can add additional tenants. Identity verifies that the tenant identifiers satisfy the following criteria:
+Organizations can create additional tenants. Tenant identifiers must meet the following requirements:
 
-- Alphanumeric characters
-- Dashes (`-`)
-- Underscores (`_`)
-- Dots (`.`)
-- A maximum length of 31 characters.
+- Use only alphanumeric characters, dashes (`-`), underscores (`_`), or dots (`.`)
+- Be no longer than 31 characters
 
 ### Inherited tenant ownership
 
-Tenant ownership in Camunda 8 is hierarchical. A user may only deploy resources to an authorized tenant and any Camunda 8 data produced from these resources will belong to the same tenant. The following diagram provides a nice example on how tenant ownership is inherited.
+Tenant ownership in Camunda 8 is hierarchical.  
+A user can only deploy resources to authorized tenants. Any data created by those resources inherits the same tenant identifier.
+
+The following diagram illustrates tenant ownership inheritance:
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
