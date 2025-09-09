@@ -370,9 +370,9 @@ The following **breaking changes** require data migrations and must be avoided:
 
 #### Safe schema evolution
 
-The following changes are considered **backward compatible** and do **not** require data migrations:
+The following changes are considered **backwards compatible** and do **not** require data migrations:
 
-- **Additive changes**: Adding optional fields or columns with default values
+- **Additive changes**: Adding optional fields with default values
 - **New indices**: Creating new indices for new features
 - **Index settings**: Updating index settings in ways that do not affect existing data
 
