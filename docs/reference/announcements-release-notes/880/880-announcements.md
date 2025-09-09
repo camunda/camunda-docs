@@ -16,7 +16,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 :::info 8.8 resources
 
 - See [release notes](/reference/announcements-release-notes/880/880-release-notes.md) to learn more about new features and enhancements.
-- See [What's new in Camunda 8.8](/components/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
+- See [What's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md) for important changes to consider when planning your upgrade from Camunda 8.7.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
@@ -73,14 +73,14 @@ The configuration for the external database used by the Web Modeler REST API has
 The default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`. This change aligns the configuration with other Camunda 8 components for consistency across the platform.
 To continue using the `name` claim, explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` as an environment variable for the Web Modeler `webapp`. See [Identity / Keycloak](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
 
-#### Deprecation of Self-Managed AWS Marketplace offering
+##### Deprecation of Self-Managed AWS Marketplace offering
 
 As of **October 2025**, the **Self-Managed AWS Marketplace** offering will be **deprecated** and no longer publicly available.  
 Existing customers may continue to use the product until their contracts expire.
 
 For future use, refer to our [new AWS Marketplace listing](https://aws.amazon.com/marketplace/pp/prodview-6y664fcnydiqg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for more information.
 
-#### Separated Ingress deprecation
+##### Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
@@ -91,6 +91,11 @@ New migration guides will also be provided to support you when migrating from a 
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
+
+##### Bitnami Docker repository migration
+
+The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
+See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
 #### Alternative container images
 
@@ -292,13 +297,13 @@ The existing data schema in the secondary storage has been harmonized, to be use
 Learn more about these updates in Streamlined Deployment with 8.7.
 ::: -->
 
-### Camunda Java client and Camunda Spring Boot SDK
+### Camunda Java client and Camunda Spring Boot Starter
 
-With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
+With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot Starter replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
-The Camunda Spring Boot SDK is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
+The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
 
 :::note
 
@@ -322,3 +327,18 @@ For more information, refer to:
 
 - [Migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md)
 - [Introducing Camunda Process Test—The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/)
+
+### Deprecated: Operate & Tasklist usage metrics endpoints
+
+With the **8.8 release**, Camunda announces the **deprecation of usage metrics endpoints in Operate and Tasklist**.
+
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/operate/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
+
+:::warning Breaking change
+Assignees list removed from response.
+:::
+
+These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
+
+Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.

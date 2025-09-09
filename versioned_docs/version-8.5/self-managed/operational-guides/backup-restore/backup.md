@@ -55,6 +55,9 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="http://localhost:9200"
 
+      export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
+
       export OPERATE_MANAGEMENT_API="http://localhost:9600"
       export OPTIMIZE_MANAGEMENT_API="http://localhost:9620"
       export TASKLIST_MANAGEMENT_API="http://localhost:9640"
@@ -71,6 +74,9 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
 
       export ELASTIC_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export ELASTIC_ENDPOINT="$CAMUNDA_RELEASE_NAME-elasticsearch:9200"
+
+      export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
+      export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
 
       export OPERATE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-operate:80"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
