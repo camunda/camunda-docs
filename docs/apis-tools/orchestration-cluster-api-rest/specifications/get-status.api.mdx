@@ -1,0 +1,58 @@
+---
+id: get-status
+title: "Get cluster status"
+description: "<MarkerStronglyConsistentExtension />"
+sidebar_label: "Get cluster status"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVMFu2zAM/RWBl13cOO02oPAtS7MgQ5cUdbpiSHOgHSYWZkueRKc1DP/7INlpmyHA2ttOskSaj3yPZAOMOwvRCsZ5ZZkMrAPQJRlkqdVsAxHsiGNGriwEsCGbGlk6G0TwoB7UajVezONZvJzMxz+jeHm7mE/Xa2cZZ5T+soIzEhlhzpmwPozQW/+YdoAiqcWejNzWUu2E9DZDH6xAFjmhZaEViRINSwcrHiVnAvuQtXPZkBlAAIZsqZUlC1EDF8NP7jjOd/kKVVpxdyNQbUSG78VqA/g8/PjP+FeL+7lH2GiyQmkWGe5JoKrfANEGUBBnulcAAiiRM4ggtAcxLJk9GSdeA5XJIYLGphkV2EZh2GTachs1pTbchvsLCGCPRmKSdwQ5c1fBFqucIYJcp5j75791dnU5g8KCDuotTJqR5a5PRN884nYSL8UUmR6x9jw5+GOYy+Hl8CSCc31D9NHNTHSVe4Cu4mOIjLk8CdE5vxekbdeO7LQykuvYhego/EJoyIwqJ0sDXJf0gu2R3D3xThD0H1+1KdDl+O1+6UWWaqv975Jz5386qdHNzAlIxnbFDAfnEECqFWPq+XXSQARjLCq1QTFRO6mIjFQ7CPrmcJnZKAx3krMqGaS6CNPO/fmU1lZkHa3H3Dk6ttqIVBdFpWSK7Ga1b90D5uWh990w5jIlZelEatedRfzoihHng+F7UkxynYQFShX2EDYcj77fza9GZ9ez8WQeT87OB8MBP7Gnt9SWC1Sv8pgSPw+pPbnXGk8sKf7vVlzfY0xPHJY5SuWk8tQ1/XpYQV/TOuhHfAVNk6ClO5O3rXv+XZGpIVqtXzaCu71eONOJa84/IEAc4g==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get cluster status"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/status"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description:
+        "The cluster is UP and has at least one partition with a healthy leader.",
+    },
+    "503": {
+      description:
+        "The cluster is DOWN and does not have any partition with a healthy leader.",
+    },
+  }}
+></StatusCodes>
