@@ -4,7 +4,6 @@ import useBaseUrl from "@docusaurus/useBaseUrl";
 /\*_ MDX note: imports only above; all logic stays inside the component. _/
 
 export default function LiveBenchBusinessFilter() {
-/_ ------------------------------- load CSV from /data (no guessing) ------------------------------- _/
 const csvUrl = useBaseUrl("/data/by_models.csv");
 
 // tiny CSV parser (comma/semicolon, quoted cells, header de-dupe)
