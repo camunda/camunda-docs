@@ -41,7 +41,7 @@ Get support for Camunda or send us your feedback via the following channels.
 </tr>
 <tr>
 <td><img src={CommunityImg} title="Camunda community icon" alt="Camunda community icon" className="img-100 img-transparent"/></td>
-<td width="25%"><p>[Community](https://forum.camunda.io/)</p></td>
+<td width="20%"><p>[Community](https://forum.camunda.io/)</p></td>
 <td><p><ul><li>Participate in our community via the [Camunda community forum](https://forum.camunda.io/), where you can exchange ideas with other Camunda users and Camunda employees.</li><li><p>For all other Camunda community programs and resources, visit the [Camunda Developer Hub](https://camunda.com/developers).</p></li></ul></p></td>
 </tr>
 <tr>
