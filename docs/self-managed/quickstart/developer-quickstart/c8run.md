@@ -48,7 +48,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 - On Windows:
   - Use the command: `.\c8run.exe start`
 
-If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
+If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8088/operate](http://localhost:8088/operate).
 
 To start Camunda 8 Run using Docker:
 
@@ -73,11 +73,11 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                              |
 | `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                              |
 | `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                              |
-| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                 |
+| `--port <arg>`             | Sets the Camunda core port (default: `8088`).                                                                                                                                                                                 |
 | `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                      |
 | `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. Additional options are not supported and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
 | `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                     |
-| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                       |
+| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8088/operate'`). By default, Operate is opened.                                                                                                                       |
 
 ## Work with Camunda 8 Run
 
@@ -90,17 +90,17 @@ You can log in to all web interfaces using with the default credentials:
 
 These web interfaces are available at:
 
-- **Operate:** http://localhost:8080/operate
-- **Tasklist:** http://localhost:8080/tasklist
-- **Identity:** http://localhost:8080/identity
+- **Operate:** http://localhost:8088/operate
+- **Tasklist:** http://localhost:8088/tasklist
+- **Identity:** http://localhost:8088/identity
 
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
-- **Orchestration Cluster REST API:** http://localhost:8080/v2/
+- **Orchestration Cluster REST API:** http://localhost:8088/v2/
 - **Inbound Connectors API:** http://localhost:8086/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
-- **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
+- **Swagger UI (API Explorer):** http://localhost:8088/swagger-ui/index.html
 
 :::note
 
@@ -176,7 +176,7 @@ Start C8Run with the configuration:
 Once enabled, API requests must include valid credentials. For example:
 
 ```shell
-curl --request GET 'http://localhost:8080/v2/topology'  \
+curl --request GET 'http://localhost:8088/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
