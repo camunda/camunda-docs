@@ -26,7 +26,7 @@ Get support for Camunda or send us your feedback via the following channels.
 </tr>
 <tr>
 <td>[Bugs](https://forum.camunda.io/)</td>
-<td><p><ul><li>Send us your bug reports via a support ticket (Enterprise customers) or via the [Camunda community forum](https://forum.camunda.io/).</li><li><p>Review our technical bug trackers at [github.com/camunda/camunda/issues](https://github.com/camunda/camunda/issues) or the [quality board](https://github.com/orgs/camunda/projects/187/views/5).</p></li></ul></p></td>
+<td><p><ul><li>Send us your bug reports via a support ticket (Enterprise customers) or via the [Camunda community forum](https://forum.camunda.io/).</li><li><p>Review our technical bug trackers in [github.com/camunda/camunda/issues](https://github.com/camunda/camunda/issues) or the [quality board](https://github.com/orgs/camunda/projects/187/views/5).</p></li></ul></p></td>
 </tr>
 <tr>
 <td width="20%"><p>[Community](https://forum.camunda.io/)</p></td>
