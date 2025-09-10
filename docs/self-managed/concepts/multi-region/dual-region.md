@@ -11,6 +11,10 @@ import DualRegion from "./img/dual-region.svg";
 
 Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing** to ensure high availability and disaster recovery.
 
+:::important Key Concept
+**Both regions must be fully operational at all times.** The distinction is only in traffic routing: one region serves users (primary) while the other processes data but doesn't serve users (secondary).
+:::
+
 :::caution
 
 Before implementing a dual-region setup, ensure you understand the topic, the [limitations](#camunda-8-dual-region-limitations) of dual-region setup, and the general [considerations](#platform-considerations) of operating a dual-region setup.
@@ -82,6 +86,10 @@ The depicted architecture consists of two regions in a Kubernetes-based installa
 
 **Region 0** is designated as the **primary** region serving user traffic. **Region 1** is the **secondary** region, fully operational but not serving user traffic. Both regions actively participate in data processing and replication.
 
+:::note Architecture Clarification
+The visual representation shows both regions as operational. Any grayed-out appearance in the diagram refers to user traffic routing, not system operational status. All components in both regions must be running and operational.
+:::
+
 Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers. Zeebe exports data to Elasticsearch instances in both regions. Operate and Tasklist in both regions import data but only the primary region serves users.
 
 ### Components operational requirements
@@ -96,9 +104,9 @@ Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.o
 #### Elasticsearch
 
 - **Mode**: Active-active
-- **Requirement**: Both instances must be running
+- **Requirement**: Both clusters must be running
 - **Function**: Receives exports from Zeebe continuously
-- **Critical**: If secondary region Elasticsearch is down, Zeebe exporters may fail
+- **Critical**: If secondary region Elasticsearch is down, Zeebe exporters may fail globally
 
 #### Operate and Tasklist
 
@@ -115,7 +123,13 @@ Traffic management responsibilities:
 
 - Configure DNS to route to primary region
 - Implement health checks and failover procedures
-- Manually redirect traffic during primary region failure
+- Manually redirect traffic during primary region failure in combination with the [operational failover procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover)
+
+:::warning Operation requirement
+
+Traffic redirection must be performed as part of the complete failover procedure. Simply redirecting traffic without following the operational procedure can lead to system inconsistencies and data issues.
+
+:::
 
 ### Components
 
@@ -139,14 +153,15 @@ Key points:
 
 #### Elasticsearch
 
-Elasticsearch operates in **active-active** mode for data ingestion, with Zeebe exporting to both instances simultaneously.
+Elasticsearch operates in **active-active** mode for data ingestion, with two separate, independent Elasticsearch clusters—one in each region. Zeebe directly exports data to both Elasticsearch clusters simultaneously, ensuring data replication without requiring inter-Elasticsearch communication.
 
 Important considerations:
 
-- Each region has its own Elasticsearch instance
-- Zeebe exports to both instances continuously
-- Both instances must be operational to prevent export failures
-- Data consistency maintained through Zeebe's export mechanism
+- Each region has its own independent Elasticsearch cluster
+- Zeebe exports identical data to both clusters continuously and directly
+- Both clusters must be operational to prevent export failures across the entire system
+- Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication
+- The clusters do not communicate with each other—replication happens at the Zeebe level
 
 #### Operate and Tasklist
 
@@ -163,6 +178,14 @@ Data specific to each region (not replicated through Zeebe):
 
 - **Operate**: Uncompleted batch operations
 - **Tasklist**: Task assignments
+
+:::warning Data Loss Impact
+
+This region-specific data will be permanently lost during a region failure and cannot be recovered.
+
+This occurs because the [operational failback procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback) requires creating a complete Elasticsearch backup from the surviving region and restoring it to the recreated region, which overwrites any region-specific data that was not replicated through Zeebe. Plan your operational procedures accordingly.
+
+:::
 
 ## Requirements and limitations
 
@@ -197,13 +220,24 @@ Zeebe creates partitions in a [round-robin fashion](/components/zeebe/technical-
 
 This numbering and the round-robin partition distribution assures the even replication across the two regions.
 
+### Performance considerations
+
+Dual-region setups introduce additional latency and complexity that can impact performance:
+
+- **Network latency**: All Raft communication between brokers occurs across regions, adding network latency to consensus operations
+- **Throughput impact**: Cross-region replication may reduce overall throughput compared to single-region deployments
+- **Resource overhead**: Each region requires full resource allocation, effectively doubling infrastructure costs
+- **Monitoring complexity**: Performance metrics and alerting must account for cross-region dependencies
+
+Consider these factors when sizing your dual-region deployment and setting performance expectations.
+
 ### Camunda 8 dual-region limitations
 
 | **Aspect**            | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Installation methods  | <p><ul><li>For **Kubernetes** we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/installation-methods/helm/install.md) installed in two Kubernetes clusters.</li><li>For **other platforms**, using alternative installation methods (for example, with docker-compose) is not covered by our guides.</li></ul></p>                                                                                                              |
 | Traffic Management    | <p>**Hybrid Active-Active/Active-Passive Architecture**</p><p><ul><li>**Data Layer**: Active-active replication with zero RPO</li><li>**User Traffic**: Active-passive routing to prevent conflicts</li><li>**All Components**: Must be operational in both regions</li></ul></p>                                                                                                                                                                                           |
-| Identity Support      | <p>Identity, including multi-tenancy and Role-Based Access Control (RBAC), has specific requirements in dual-region setups:</p><p><ul><li>**External Identity Provider**: Recommended approach using external IdP</li><li>**Shared Database**: Single PostgreSQL instance accessible from both regions</li><li>**Not Supported**: Independent Identity instances per region</li></ul></p>                                                                                   |
+| Identity Support      | Identity, including multi-tenancy and Role-Based Access Control (RBAC), is currently unavailable in this setup.                                                                                                                                                                                                                                                                                                                                                             |
 | Optimize Support      | Not supported (requires Identity with specific configuration).                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Connectors Deployment | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments and using message idempotency is of importance to not duplicate events.                                                                                                                      |
 | Connectors            | If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following: <ul><li> when you want to delete the process deployment, delete it via Operate, otherwise the inbound connector won't deregister.</li><li>if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
@@ -212,18 +246,7 @@ This numbering and the round-robin partition distribution assures the even repli
 
 ### Identity configuration for dual-region
 
-For dual-region setups requiring user interfaces (Tasklist, Operate), Identity configuration requires special consideration:
-
-#### Supported approaches:
-
-1. **External Identity Provider**: Use an external IdP (like Azure AD, Okta) accessible from both regions
-2. **Shared PostgreSQL**: Single database instance accessible from both regions
-3. **Externally managed Identity**: Identity service running outside both regions
-
-#### Not supported:
-
-- Independent Identity instances per region (permissions and users won't be synchronized)
-- Multiple PostgreSQL databases without replication
+Identity, including multi-tenancy and Role-Based Access Control (RBAC), is currently unavailable in this setup.
 
 ### Infrastructure and deployment platform considerations
 
@@ -231,12 +254,23 @@ Multi-region setups come with inherent complexities, and it is essential to full
 
 The following areas must be managed independently, and are not controlled by Camunda or covered by our guides:
 
-- Managing multiple Kubernetes clusters and their deployments across regions.
-- Dual-region monitoring and alerting.
-- Increased costs of multiple clusters and cross-region traffic.
-- Data consistency and synchronization challenges (for example, brought in by the increased latency).
-  - Bursts of increased latency can already have an impact.
-- Managing DNS and incoming traffic.
+- **Kubernetes cluster management**: Managing multiple Kubernetes clusters and their deployments across regions
+- **Monitoring and alerting**: Dual-region monitoring and alerting with cross-region correlation
+- **Cost implications**: Increased costs of multiple clusters and cross-region traffic
+- **Network reliability**: Data consistency and synchronization challenges (for example, brought in by the increased latency)
+  - Bursts of increased latency can already have an impact
+- **Traffic management**: Managing DNS and incoming traffic routing
+- **Security**: Ensuring consistent security policies and network controls across regions
+- **Backup and disaster recovery**: Coordinating backup strategies across regions
+
+:::tip Operational Readiness
+Before implementing dual-region, ensure your organization has:
+
+- Experience managing multi-cluster Kubernetes environments
+- Established procedures for cross-region networking and security
+- Monitoring and alerting systems capable of cross-region correlation
+- Defined RTO/RPO requirements and tested recovery procedures
+  :::
 
 ### Upgrade considerations
 
@@ -248,7 +282,16 @@ Simultaneously upgrading both regions can result in a loss of quorum for partiti
 
 In a dual-region setup, loss of either region will affect Camunda 8's processing capability due to quorum requirements.
 
-When a region becomes unavailable, the Zeebe cluster loses quorum (half of brokers unreachable) and stops processing new data. This affects all components as they cannot update or process new workflows until the failover procedure completes.
+When a region becomes unavailable, the Zeebe cluster loses quorum (half of brokers unreachable) and **immediately stops processing** new data. This affects all components as they cannot update or process new workflows until the failover procedure completes.
+
+:::warning Immediate Impact
+Region failure results in **immediate service interruption**:
+
+- All workflow processing stops
+- No new process instances can be started
+- Running process instances are suspended
+- User interfaces become unavailable (if primary region is lost)
+  :::
 
 The [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) details recovery from region loss and re-establishment procedures.
 
