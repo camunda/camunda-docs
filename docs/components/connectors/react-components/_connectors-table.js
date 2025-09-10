@@ -29,6 +29,7 @@ import GraphqlImg from "../img/connector-graphql.png";
 import HubSpotImg from "../img/connector-hubspot.png";
 import HuggingFaceImg from "../img/connector-hugging-face.png";
 import KafkaImg from "../img/connector-kafka.png";
+import MessageSendImg from "../img/connector-message-send.png";
 import Microsoft365Img from "../img/connector-365.png";
 import MicrosoftTeamsImg from "../img/connector-teams.png";
 import OpenaiImg from "../img/connector-openai.png";
@@ -345,6 +346,13 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../kafka/?kafka=outbound",
       image: KafkaImg,
+    },
+    {
+      name: "Message Send",
+      description: "Send Camunda BPMN Messages.",
+      type: "Outbound",
+      link: "../message-send/",
+      image: MessageSendImg,
     },
     {
       name: "Microsoft 365",

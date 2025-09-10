@@ -692,6 +692,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
             {
               Microsoft: [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
