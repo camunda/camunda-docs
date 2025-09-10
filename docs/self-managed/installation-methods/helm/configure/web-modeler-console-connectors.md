@@ -119,7 +119,7 @@ console:
 For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
 :::note
-Console requires the Identity component for authentication. The Camunda Helm Chart installs Identity by default. If you log in to Console using port-forward, you must also port-forward the Keycloak service:
+Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward, you must also port-forward the Keycloak service:
 
 ```
 kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80
