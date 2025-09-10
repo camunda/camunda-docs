@@ -1,8 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 
-/\*_ MDX note: imports only above; all logic stays inside the component. _/
-
 export default function LiveBenchBusinessFilter() {
 const csvUrl = useBaseUrl("/data/by_models.csv");
 
