@@ -99,7 +99,7 @@ See [Bitnami Docker repository migration](/self-managed/installation-methods/hel
 
 ##### Secret management improvements and deprecations
 
-Camunda 8.8 introduces a new structured secret management pattern for Helm charts that provides better consistency and security. The legacy secret configuration fields are deprecated but remain functional during the transition period.
+Camunda 8.8 introduces a consistent secret pattern for Helm charts. The legacy secret configuration are deprecated and will be removed with 8.9, but remain functional during the transition period.
 
 See the [secret management guide](/self-managed/installation-methods/helm/configure/secret-management.md) for migration instructions and examples.
 
