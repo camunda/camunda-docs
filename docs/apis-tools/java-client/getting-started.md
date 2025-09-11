@@ -27,6 +27,7 @@ It supports both REST and gRPC protocols, authentication setup, and provides rob
 **The Camunda Java Client replaces the Zeebe Java Client as of version 8.8.**
 
 - Provides improved structure and full Orchestration Cluster API support
+- Uses **REST** as default communication protocol (gRPC configurable)
 - The Zeebe Java Client will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
