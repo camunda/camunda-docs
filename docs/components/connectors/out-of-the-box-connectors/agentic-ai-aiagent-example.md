@@ -24,7 +24,6 @@ First, an AI Agent connector is added and configured in the process diagram. Nex
 1. A descriptive ID is configured for the ad-hoc sub-process. This can then be configured in the **Ad-hoc sub-process ID** field in the AI Agent connector [tools](agentic-ai-aiagent.md#tools) section.
 
 1. A loop is modeled into the sub-process and back to the AI Agent connector.
-
    - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
 
    - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
