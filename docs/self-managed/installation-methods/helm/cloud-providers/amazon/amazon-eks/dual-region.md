@@ -357,6 +357,33 @@ The script [test_dns_chaining.sh](https://github.com/camunda/c8-multi-region/blo
 
 2. Watch how a nginx pod and service will be deployed per cluster. It will wait until the pods are ready and finally ping from nginx in cluster 0 the nginx in cluster 1 and vice versa. If it fails to contact the other nginx five times, it will fail.
 
+### Configure a high-performance StorageClass
+
+Camunda 8 requires high IOPS for performance-critical components such as Zeebe. To achieve this, use AWS `gp3` volumes instead of the default `gp2`.
+
+This step defines a custom `StorageClass` that:
+
+- Uses `gp3` EBS volumes with optimized IOPS and throughput.
+- Sets a `Retain` reclaim policy.
+- Uses `WaitForFirstConsumer` volume binding.
+- Becomes the default `StorageClass` for the cluster.
+
+#### Apply the StorageClass
+
+Run the following script from the context of the `aws/dual-region/scripts/` folder to apply the new [storage class](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/storage-class.yml) and set it as default:
+
+```bash reference
+https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-configure.sh
+```
+
+To verify completion of the operation, run:
+
+```bash reference
+https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/storageclass-verify.sh
+```
+
+You must apply the custom `StorageClass` before installing the Camunda Helm chart so that PersistentVolumeClaims (PVCs) are provisioned with the correct performance characteristics.
+
 ## Deploy Camunda 8 to the clusters
 
 ### Create the secret for Elasticsearch

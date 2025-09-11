@@ -51,7 +51,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
    ```
 
 3. Configure the SDK to connect to your cluster according
-   to [the Camunda SDK documentation](../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+   to [the Camunda SDK documentation](../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
 4. To only run the AI Agent Client connector, disable the other agentic AI connectors provided by the `connector-agentic-ai` dependency in your `application.yml`:
 
    ```yaml

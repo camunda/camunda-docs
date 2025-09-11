@@ -1,4 +1,4 @@
-/** this is the only class altered during swizzling. **/
+/** these are the only classes altered during swizzling. **/
 
 .cardDescription {
   font-size: 0.8rem;
@@ -7,8 +7,6 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
-
-/** everything below here is untouched from the original. **/
 
 .cardContainer {
   --ifm-link-color: var(--ifm-color-emphasis-800);
@@ -19,7 +17,16 @@
   border: 1px solid var(--ifm-color-emphasis-200);
   transition: all var(--ifm-transition-fast) ease;
   transition-property: border, box-shadow;
+  border-radius: 4px;
 }
+
+h2.cardTitle {
+  font-size: 1.2rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/** everything below here is untouched from the original. **/
 
 .cardContainer:hover {
   border-color: var(--ifm-color-primary);
@@ -28,8 +35,4 @@
 
 .cardContainer *:last-child {
   margin-bottom: 0;
-}
-
-.cardTitle {
-  font-size: 1.2rem;
 }

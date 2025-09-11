@@ -15,6 +15,7 @@ const unsupportedVersions = [
   // 👋 When archiving a version, add it into here!
   //   `label` appears in the top navbar version selector.
   //   `urlSuffix` gets appended to the target `unsupported.docs.camunda.io/` URL.
+  { label: "8.4", urlSuffix: "8.4" },
   { label: "8.3", urlSuffix: "8.3" },
   { label: "8.2 / 3.10.0", urlSuffix: "8.2" },
   { label: "8.1 / 3.9.0", urlSuffix: "8.1" },

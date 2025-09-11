@@ -55,7 +55,7 @@ Running components can be accessed with the username `demo` and password `demo`:
 - Operate: [http://localhost:8088/operate](http://localhost:8088/operate)
 - Tasklist: [http://localhost:8088/tasklist](http://localhost:8088/tasklist)
 - Optimize: [http://localhost:8083](http://localhost:8083)
-- Console: [http://localhost:8089](http://localhost:8089)
+- Console: [http://localhost:8087](http://localhost:8087)
 - Identity: [http://localhost:8084](http://localhost:8084)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Elasticsearch: [http://localhost:9200](http://localhost:9200)
@@ -145,7 +145,7 @@ Both the full and lightweight Docker Compose files include a configuration for [
 
 ### Connector secrets
 
-Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE` per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
+Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE`, one per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
 
 ### Custom connectors
 

@@ -17,7 +17,7 @@ By default, the connectors are disabled. You need to change the runtime configur
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -70,7 +70,7 @@ If you use [Connectors secrets](/components/connectors/use-connectors/index.md#u
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -135,7 +135,7 @@ You can retrieve the URL address to invoke an inbound connector in your test fro
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -212,7 +212,7 @@ under the hostname `host.testcontainers.internal`.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -319,7 +319,7 @@ To use a custom connectors bundle, replace the connectors in the test runtime.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>

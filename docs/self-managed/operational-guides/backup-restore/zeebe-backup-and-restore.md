@@ -28,7 +28,7 @@ Usage of this API requires the backup store to be configured for the component.
 To use the backup feature in Zeebe, you must choose which external storage system you will use.
 Make sure to set the same configuration on all brokers in your cluster.
 
-Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure) for external storage.
+Zeebe supports [S3](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3), [Google Cloud Storage (GCS)](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupgcs), and [Azure](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupazure), and [local filesystem](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackupfilesystem) for external storage.
 
 :::caution
 Backups created with one store are not available or restorable from another store.
@@ -164,7 +164,7 @@ When the response is 200 OK, the response body consists of a JSON object describ
 
 Information about all backups can be retrieved using the following request:
 
-### Request
+### Request to list all backups
 
 ```
 GET actuator/backupRuntime
@@ -175,6 +175,25 @@ GET actuator/backupRuntime
 
 ```shell
 curl --request GET 'http://localhost:9600/actuator/backupRuntime'
+```
+
+</details>
+
+### Request to list backups matching a prefix
+
+The list of backups can be filtered by specifying a backup ID prefix:
+
+```
+GET actuator/backupRuntime/{backupIdPrefix}
+```
+
+The backup ID prefix must end with `*`, for example `10*` will match all backups with IDs starting with `10`.
+
+<details>
+  <summary>Example request</summary>
+
+```shell
+curl --request GET 'http://localhost:9600/actuator/backupRuntime/10*'
 ```
 
 </details>

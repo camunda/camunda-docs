@@ -13,7 +13,7 @@ Camunda extensions found in the [Camunda Community Hub](https://github.com/camun
 :::
 
 :::tip
-Camunda now officially supports the [JavaScript SDK](/apis-tools/node-js-sdk.md) and the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md).
+Camunda now officially supports the [JavaScript SDK](/apis-tools/node-js-sdk.md) and the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md).
 :::
 
 In addition to the core Camunda-maintained clients, there are a number of community-maintained component libraries:

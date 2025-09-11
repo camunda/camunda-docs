@@ -160,7 +160,7 @@ When the response is 200 OK, the response body consists of a JSON object describ
 
 Information about all backups can be retrieved using the following request:
 
-### Request
+### Request to list all backups
 
 ```
 GET actuator/backups
@@ -171,6 +171,25 @@ GET actuator/backups
 
 ```shell
 curl --request GET 'http://localhost:9600/actuator/backups'
+```
+
+</details>
+
+### Request to list backups matching a prefix
+
+The list of backups can be filtered by specifying a backup ID prefix:
+
+```
+GET actuator/backupRuntime/{backupIdPrefix}
+```
+
+The backup ID prefix must end with `*`, for example `10*` will match all backups with IDs starting with `10`.
+
+<details>
+  <summary>Example request</summary>
+
+```shell
+curl --request GET 'http://localhost:9600/actuator/backupRuntime/10*'
 ```
 
 </details>

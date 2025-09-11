@@ -100,11 +100,11 @@ Switching between testcontainers and embedded requires just two steps:
    - Testcontainers: `import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;`
    - Embedded: `import io.camunda.zeebe.process.test.extension.ZeebeProcessTest;`
 
-## Camunda Spring Boot SDK integration
+## Camunda Spring Boot Starter integration
 
-You can add testing to your Camunda Spring Boot SDK setup as follows.
+You can add testing to your Camunda Spring Boot Starter setup as follows.
 
-### Camunda Spring Boot SDK embedded module
+### Camunda Spring Boot Starter embedded module
 
 To integrate an in-memory test engine and use assertions, add the following Maven dependency:
 
@@ -117,7 +117,7 @@ To integrate an in-memory test engine and use assertions, add the following Mave
 </dependency>
 ```
 
-### Camunda Spring Boot SDK testcontainers module
+### Camunda Spring Boot Starter testcontainers module
 
 To integrate a testcontainer engine and use assertions, add the following Maven dependency:
 

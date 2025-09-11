@@ -126,7 +126,7 @@ The following commands have been renamed in the Camunda Java Client:
 
 ## Protocol and connection: REST vs gRPC selection
 
-Zeebe Java Client used **gRPC by default**. The Camunda Java Client use **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder.
+Zeebe Java Client used **gRPC by default**. The Camunda Java Client uses **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder and configure `preferRestOverGrpc=false` to make gRPC the default.
 
 To use gRPC, add the following to your client builder:
 

@@ -17,12 +17,12 @@ This guide covers conceptually what your pipeline needs to do, from obtaining cr
 
 Before building your pipeline, ensure you have the following:
 
-| Prerequisite                                                                                                                    | Purpose                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [VCS repository](https://en.wikipedia.org/wiki/Version_control)                                                                 | Store all element templates                                                     |
-| System of record                                                                                                                | Track which templates are required in each cluster and which projects need them |
-| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                             |
-| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                              |
+| Prerequisite                                                                                                                    | Purpose                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                             | Store all element templates                                                                                                                                                                                                                                   |
+| Template state management                                                                                                       | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which projects depend on them. This source acts as the single source of truth for template deployments. |
+| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                                                                                                                                                                                                           |
+| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                                                                                                                                                                                                            |
 
 For simplicity, this guide assumes:
 
@@ -35,14 +35,16 @@ For simplicity, this guide assumes:
 
 ### Secrets
 
-Secrets are required to authenticate the pipeline with your cluster and Web Modeler:
+You can use sensitive information in your element templates without exposing it in your BPMN processes by referencing secrets.
+
+These guides show you how to configure them depending on the environment you are using:
 
 - **SaaS**: Use the [Administration API](/apis-tools/administration-api/administration-api-reference.md) or [Console UI](/components/console/manage-clusters/manage-secrets.md) to configure secrets.
 - **Self-Managed/local development**: Configure secrets outside the pipeline. See [connector secrets](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 ### Job Workers
 
-As part of the pipeline, you may spin up a service to connect to the cluster, or handle it in a separate pipeline.
+As part of the pipeline, you may spin up a service that will connect to a Camunda cluster to perform specific tasks. For example, you can use the [Spring Boot Camunda Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) to start a job worker.
 
 Recommended resources:
 
@@ -60,7 +62,39 @@ The following dependency types are provisioned at runtime using the [Orchestrati
 | [BPMN processes](/components/modeler/bpmn/bpmn.md)                    | Used in call activities     |
 | [DMN decisions](/components/modeler/dmn/dmn.md)                       | Used in business rule tasks |
 
+:::note
+RPA scripts are not supported in Web Modeler
+:::
+
 To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, self-managed, and local development.
+
+For example:
+
+```bash
+curl -L 'http://localhost:8080/v2/deployments' \
+-H 'Accept: application/json' \
+-F resources=@/path/to/your/form/user-signup.form
+```
+
+You will get a response containing the details of the deployed elements:
+
+```json
+{
+  "deployments": [
+    {
+      "form": {
+        "formKey": "KEY_OF_THE_FORM",
+        "formId": "user-signup",
+        "version": 1,
+        "resourceName": "user-signup.form",
+        "tenantId": "<default>"
+      }
+    }
+  ],
+  "deploymentKey": "KEY_OF_THE_DEPLOYMENT",
+  "tenantId": "<default>"
+}
+```
 
 When referencing a dependency such as a form, Camunda recommends using a `versionTag` as your [binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md#supported-binding-types). This option ensures the right version of the target resource is always used.
 

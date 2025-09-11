@@ -111,7 +111,6 @@ function CardLink({ item }: { item: PropSidebarItemLink }): ReactNode {
   return (
     <CardLayout
       href={item.href}
-      icon={icon}
       title={item.label}
       description={item.description ?? doc?.description}
     />

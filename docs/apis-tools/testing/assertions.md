@@ -106,9 +106,19 @@ assertThatProcessInstance(byKey(processInstanceKey)).isActive();
 // by process ID
 assertThatProcessInstance(byProcessId("my-process")).isActive();
 
+// by parent process instance key.
+assertThatProcessInstance(byParentProcesInstanceKey(parentProcessInstanceKey)).isActive();
+
+// combine selectors with and()
+assertThatProcessInstance(byProcessId("my-process").and(byParentProcesInstanceKey(parentProcessInstanceKey))).isActive();
+
 // custom selector implementation
 assertThatProcessInstance(processInstance -> { .. }).isActive();
 ```
+
+:::info Multiple matches
+The process instance selector selects the first available match in the event that multiple instances are discovered.
+:::
 
 ### isActive
 
@@ -182,6 +192,9 @@ assertThat(processInstance).hasActiveElements(byId("task_A"));
 
 // by BPMN element name
 assertThat(processInstance).hasActiveElements(byName("A"));
+
+// combine selectors with and()
+assertThat(processInstance).hasActiveElements(byId("task_A").and(byName("A")));
 
 // custom selector implementation
 assertThat(processInstance).hasActiveElements(element -> { .. });
@@ -390,6 +403,9 @@ assertThatUserTask(byTaskName("User Task")).isCompleted();
 assertThatUserTask(byElementId("user-task-id", processInstanceKey)).isCompleted();
 assertThatUserTask(byTaskName("User Task", processInstanceKey)).isCompleted();
 
+// combine selectors with and()
+assertThatUserTask(byTaskName("User Task").and(byElementId("user-task-id"))).isCompleted();
+
 // custom selector implementation
 assertThatUserTask(userTask -> { .. }).isCompleted();
 ```
@@ -555,6 +571,9 @@ assertThatDecision(byName("Decision Name", processInstanceKey)).isEvaluated();
 
 // by process instance key
 assertThatDecision(byProcessInstanceKey(processInstanceKey)).isEvaluated();
+
+// combine selectors with and()
+assertThatDecision(byName("Decision Name").and(byId("decision-id"))).isEvaluated();
 
 // custom selector implementation
 assertThatDecision(decisionInstance -> { .. }).isEvaluated();

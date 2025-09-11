@@ -103,6 +103,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview)
 - [Google Vertex AI](https://cloud.google.com/vertex-ai)
 - [OpenAI](http://openai.com/)
+- OpenAI-compatible
 
 :::note
 
@@ -187,16 +188,28 @@ For more information about Google Vertex AI models, see the [Vertex AI documenta
 
 Select this option to use the [OpenAI Chat Completion API](https://platform.openai.com/docs/api-reference/chat).
 
-| Field               | Required | Description                                                                                                                                              |
-| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI API key      | Yes      | Your OpenAI account API key for authorization.                                                                                                           |
-| Organization ID     | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
-| Project ID          | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
-| Custom API endpoint | No       | Optional custom API endpoint.                                                                                                                            |
-| Custom headers      | No       | Map of custom headers to add to the request.                                                                                                             |
+| Field           | Required | Description                                                                                                                                              |
+| :-------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenAI API key  | Yes      | Your OpenAI account API key for authorization.                                                                                                           |
+| Organization ID | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
+| Project ID      | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
 
 :::info
 To learn more about authentication to the OpenAPI API, refer to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
+:::
+
+#### OpenAI-compatible
+
+Select this option to use an LLM provider that provides OpenAI-compatible endpoints.
+
+| Field        | Required | Description                                                                                                                                                                       |
+| :----------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API endpoint | Yes      | The base URL of the OpenAI-compatible endpoint. Example value: `https://api.your-llm-provider.com/v1`                                                                             |
+| API key      | No       | The API key for authentication. Leave blank if using HTTP headers for authentication. If an <b>Authorization</b> header is specified in the headers, then the API key is ignored. |
+| Headers      | No       | Optional HTTP headers to include in the request to the OpenAI-compatible endpoint.                                                                                                |
+
+:::note
+A **Custom parameters** field is available in the model parameters to provide any additional parameters supported by your OpenAI-compatible provider.
 :::
 
 ### Model

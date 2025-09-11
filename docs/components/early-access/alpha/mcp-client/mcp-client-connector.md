@@ -117,7 +117,7 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
 4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
 5. If you only want to run the MCP Client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 

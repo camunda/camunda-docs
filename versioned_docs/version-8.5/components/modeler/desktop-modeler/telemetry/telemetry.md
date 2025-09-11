@@ -1,10 +1,10 @@
 ---
 id: telemetry
 title: Telemetry
-description: "Opt in for the collection of telemetry data using Desktop Modeler. This data is used to better understand how the application is used and to improve it."
+description: "Opt out for the collection of telemetry data using Desktop Modeler. This data is used to better understand how the application is used and to improve it."
 ---
 
-You can opt in for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data. This page summarizes the data collected.
+You can opt out for the collection of telemetry data when using Desktop Modeler. This data is used to better understand how the application is used and to improve it based on data. This page summarizes the data collected.
 
 ## General structure of the events
 
