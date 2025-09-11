@@ -20,51 +20,19 @@ export const configs = [
 
   */
 
-  {
-    name: "camunda.system.cpu-thread-count",
-    legacy: ["zeebe.broker.threads.cpuThreadCount"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.io-thread-count",
-    legacy: ["zeebe.broker.threads.ioThreadCount"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.clock-controlled",
-    legacy: ["zeebe.clock.controlled"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.actor.idle.max-spins",
-    legacy: ["zeebe.actor.idle.maxSpins"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.actor.idle.max-yields",
-    legacy: ["zeebe.actor.idle.maxYields"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.actor.idle.max-park-period",
-    legacy: ["zeebe.actor.idle.maxParkPeriod"],
-    types: ["1-to-1"],
-  },
-  {
-    name: "camunda.system.upgrade.enable-version-check",
-    legacy: ["zeebe.broker.experimental.versionCheckRestrictionEnabled"],
-    types: ["1-to-1"],
-  },
+  // API keys
 
   {
     name: "camunda.api.grpc.address",
     legacy: ["zeebe.gateway.network.host", "zeebe.broker.gateway.network.host"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.port",
     legacy: ["zeebe.gateway.network.port", "zeebe.broker.gateway.network.port"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.min-keep-alive-interval",
@@ -73,6 +41,7 @@ export const configs = [
       "zeebe.broker.gateway.network.minKeepAliveInterval",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.max-message-size",
@@ -81,6 +50,7 @@ export const configs = [
       "zeebe.broker.gateway.network.maxMessageSize",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.ssl.enabled",
@@ -89,6 +59,7 @@ export const configs = [
       "zeebe.broker.gateway.security.enabled",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.ssl.certificate",
@@ -97,6 +68,7 @@ export const configs = [
       "zeebe.broker.gateway.security.certificateChainPath",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.ssl.certificate-private-key",
@@ -105,6 +77,7 @@ export const configs = [
       "zeebe.broker.gateway.security.privateKeyPath",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.ssl.key-store.file-path",
@@ -113,6 +86,7 @@ export const configs = [
       "zeebe.broker.gateway.security.keyStore.filePath",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.ssl.key-store.password",
@@ -121,6 +95,7 @@ export const configs = [
       "zeebe.broker.gateway.security.keyStore.password",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.interceptors.id",
@@ -129,6 +104,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].id",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.interceptors.jar-path",
@@ -137,6 +113,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].jarPath",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.interceptors.class-name",
@@ -145,6 +122,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].className",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.management-threads",
@@ -153,6 +131,7 @@ export const configs = [
       "zeebe.broker.gateway.threads.managementThreads",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.long-polling.enabled",
@@ -161,6 +140,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.enabled",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.long-polling.timeout",
@@ -169,6 +149,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.timeout",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.long-polling.timeout",
@@ -177,6 +158,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.probeTimeout",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.long-polling.min-empty-responses",
@@ -185,6 +167,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.minEmptyResponses",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
 
   {
@@ -194,6 +177,7 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].id",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.filters.jar-path",
@@ -202,6 +186,7 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].jarPath",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.filters.class-name",
@@ -210,88 +195,109 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].className",
     ],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.process-cache.max-size",
     legacy: ["camunda.rest.processCache.maxSize"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.process-cache.expiration-idle",
     legacy: ["camunda.rest.processCache.expirationIdleMillis"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.executor.core-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.corePoolSizeMultiplier"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.executor.max-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.maxPoolSizeMultiplier"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
   {
     name: "camunda.api.grpc.rest.executor.keep-alive",
     legacy: ["camunda.rest.apiExecutor.keepAliveSeconds"],
     types: ["1-to-1"],
+    area: ["Api"],
   },
+
+  // Cluster keys
 
   {
     name: "camunda.cluster.metadata.sync-delay",
     legacy: ["zeebe.broker.cluster.configManager.gossip.syncDelay"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.metadata.sync-request-timeout",
     legacy: ["zeebe.broker.cluster.configManager.gossip.syncRequestTimeout"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.metadata.gossip-fanout",
     legacy: ["zeebe.broker.cluster.configManager.gossip.gossipFanout"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.raft.priority-election-enabled",
     legacy: ["zeebe.broker.cluster.raft.enablePriorityElection"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.raft.flush-enabled",
     legacy: ["zeebe.broker.cluster.raft.flush.enabled"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.raft.flush-delay",
     legacy: ["zeebe.broker.cluster.raft.flush.delay"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.raft.heartbeat-interval",
     legacy: ["zeebe.broker.cluster.heartbeatInterval"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
   {
     name: "camunda.cluster.raft.election-timeout",
     legacy: ["zeebe.broker.cluster.electionTimeout"],
     types: ["1-to-1"],
+    area: ["Cluster"],
   },
+
+  // Data keys
 
   {
     name: "camunda.data.snapshot-period",
     legacy: ["zeebe.broker.data.snapshotPeriod"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.export.distribution-interval",
     legacy: ["zeebe.broker.exporting.distributionInterval"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.export.skip-records",
     legacy: ["zeebe.broker.exporting.skipRecords"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.repository-name",
@@ -300,146 +306,175 @@ export const configs = [
       "camunda.tasklist.backup.repositoryName",
     ],
     types: ["1-to-1", "Double-configuration"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.snapshot-timeout",
     legacy: ["camunda.operate.backup.snapshotTimeout"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.incomplete-check-timeout",
     legacy: ["camunda.operate.backup.incompleteCheckTimeoutInSeconds"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.store",
     legacy: ["zeebe.broker.data.backup.store"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.bucket-name",
     legacy: ["zeebe.broker.data.backup.s3.bucketName"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.endpoint",
     legacy: ["zeebe.broker.data.backup.s3.endpoint"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.endpoint",
     legacy: ["zeebe.broker.data.backup.s3.endpoint"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.region",
     legacy: ["zeebe.broker.data.backup.s3.region"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.access-key",
     legacy: ["zeebe.broker.data.backup.s3.accessKey"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.secret-key",
     legacy: ["zeebe.broker.data.backup.s3.secretKey"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.api-call-timeout",
     legacy: ["zeebe.broker.data.backup.s3.apiCallTimeout"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.force-path-style-access",
     legacy: ["zeebe.broker.data.backup.s3.forcePathStyleAccess"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.compression:",
     legacy: ["zeebe.broker.data.backup.s3.compression:"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.max-concurrent-connections:",
     legacy: ["zeebe.broker.data.backup.s3.maxConcurrentConnections"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.connection-acquisition-timeout",
     legacy: ["zeebe.broker.data.backup.s3.connectionAcquisitionTimeout"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.base-path",
     legacy: ["zeebe.broker.data.backup.s3.basePath"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.s3.support-legacy-md5",
     legacy: ["zeebe.broker.data.backup.s3.supportLegacyMd5"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.gcs.bucket-name",
     legacy: ["zeebe.broker.data.backup.gcs.bucketName"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.gcs.host",
     legacy: ["zeebe.broker.data.backup.gcs.host"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.gcs.auth",
     legacy: ["zeebe.broker.data.backup.gcs.auth"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.endpoint",
     legacy: ["zeebe.broker.data.backup.azure.endpoint"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.account-name",
     legacy: ["zeebe.broker.data.backup.azure.accountName"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.account-key",
     legacy: ["zeebe.broker.data.backup.azure.accountKey"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.connection-string",
     legacy: ["zeebe.broker.data.backup.azure.connectionString"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.base-path",
     legacy: ["zeebe.broker.data.backup.azure.basePath"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.create-container",
     legacy: ["zeebe.broker.data.backup.azure.createContainer"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.sas-token.type",
     legacy: ["zeebe.broker.data.backup.azure.sasToken.type"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.azure.sas-token.value",
     legacy: ["zeebe.broker.data.backup.azure.sasToken.value"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.backup.filesystem.base-path",
     legacy: ["zeebe.broker.data.backup.filesystem.basePath"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.secondary-storage.type",
@@ -450,6 +485,7 @@ export const configs = [
       "zeebe.broker.exporters.camundaexporter.args.connect.type",
     ],
     types: ["Double-configuration"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.secondary-storage.elasticsearch.url",
@@ -462,81 +498,144 @@ export const configs = [
       "camunda.tasklist.zeebeElasticsearch.url",
     ],
     types: ["Double-configuration"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.directory",
     legacy: ["zeebe.broker.data.directory"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.runtime-directory",
     legacy: ["zeebe.broker.data.runtimeDirectory"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.disk.monitoring-interval",
     legacy: ["zeebe.broker.data.disk.monitoringInterval"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.disk.monitoring-enabled",
     legacy: ["zeebe.broker.data.disk.enableMonitoring"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.disk.free-space.processing",
     legacy: ["zeebe.broker.data.disk.freeSpace.processing"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.disk.free-space.replication",
     legacy: ["zeebe.broker.data.disk.freeSpace.replication"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.logstream.log-segment-size",
     legacy: ["zeebe.broker.data.logSegmentSize"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.logstream.log-index-density",
     legacy: ["zeebe.broker.data.logIndexDensity"],
     types: ["1-to-1"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.statistics-enabled",
     legacy: ["zeebe.broker.experimental.rocksdb.enableStatistics"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.access-metrics",
     legacy: ["zeebe.broker.experimental.rocksdb.accessMetrics"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.memory-limit",
     legacy: ["zeebe.broker.experimental.rocksdb.memoryLimit"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.max-open-files",
     legacy: ["zeebe.broker.experimental.rocksdb.maxOpenFiles"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.max-write-buffer-number",
     legacy: ["zeebe.broker.experimental.rocksdb.maxWriteBufferNumber"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.min-write-buffer-number-to-merge",
     legacy: ["zeebe.broker.experimental.rocksdb.minWriteBufferNumberToMerge"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.io-rate-bytes-per-second",
     legacy: ["zeebe.broker.experimental.rocksdb.ioRateBytesPerSecond"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.wal-disabled",
     legacy: ["zeebe.broker.experimental.rocksdb.walDisabled"],
+    area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.sst-partitioning-enabled",
     legacy: ["zeebe.broker.experimental.rocksdb.enableSstPartitioning"],
+    area: ["Data"],
+  },
+
+  // System keys
+
+  {
+    name: "camunda.system.cpu-thread-count",
+    legacy: ["zeebe.broker.threads.cpuThreadCount"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.io-thread-count",
+    legacy: ["zeebe.broker.threads.ioThreadCount"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.clock-controlled",
+    legacy: ["zeebe.clock.controlled"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.actor.idle.max-spins",
+    legacy: ["zeebe.actor.idle.maxSpins"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.actor.idle.max-yields",
+    legacy: ["zeebe.actor.idle.maxYields"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.actor.idle.max-park-period",
+    legacy: ["zeebe.actor.idle.maxParkPeriod"],
+    types: ["1-to-1"],
+    area: ["System"],
+  },
+  {
+    name: "camunda.system.upgrade.enable-version-check",
+    legacy: ["zeebe.broker.experimental.versionCheckRestrictionEnabled"],
+    types: ["1-to-1"],
+    area: ["System"],
   },
 ];

@@ -1,34 +1,65 @@
 import "./_config-table.css";
 import React, { useState } from "react";
-import { configs } from "./_config-table-data.js"; // assume each item may now have 'types' array
+import { configs } from "./_config-table-data.js";
 
-const TYPE_OPTIONS = ["1-to-1", "Double-configuration"]; // extend if needed
+const TYPE_OPTIONS = ["1-to-1", "Double-configuration"];
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  // SINGLE selection (null = All)
   const [selectedType, setSelectedType] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  // Select (or deselect if clicking the same)
   const chooseType = (type) => {
     setSelectedType((prev) => (prev === type ? null : type));
   };
 
   const clearType = () => setSelectedType(null);
 
+  const handleSort = (columnKey) => {
+    setSortConfig((prev) => ({
+      key: columnKey,
+      direction:
+        prev.key === columnKey && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
+
+  const getSortableValue = (config, columnKey) => {
+    switch (columnKey) {
+      case "area":
+        const areaArray = Array.isArray(config.area)
+          ? config.area
+          : config.area
+            ? [config.area]
+            : [];
+        return areaArray.join(", ").toLowerCase();
+      case "name":
+        return config.name.toLowerCase();
+      case "legacy":
+        const legacyArray = Array.isArray(config.legacy)
+          ? config.legacy
+          : [config.legacy].filter(Boolean);
+        return legacyArray.join(", ").toLowerCase();
+      case "type":
+        const typeArray = Array.isArray(config.types)
+          ? config.types
+          : config.type
+            ? [config.type]
+            : [];
+        return typeArray.join(", ").toLowerCase();
+      default:
+        return "";
+    }
+  };
+
   const filteredConnectors = configs.filter((config) => {
     const search = searchTerm.toLowerCase();
-
-    // Normalize legacy -> always an array
     const legacyArray = Array.isArray(config.legacy)
       ? config.legacy
       : [config.legacy].filter(Boolean);
-
-    // Normalize types: support old 'type' string or new 'types' array
     const typeArray = Array.isArray(config.types)
       ? config.types
       : config.type
@@ -43,6 +74,26 @@ const SearchableTable = () => {
 
     return matchesSearchTerm && matchesTypeFilter;
   });
+
+  const sortedConnectors = [...filteredConnectors].sort((a, b) => {
+    if (!sortConfig.key) return 0;
+
+    const aValue = getSortableValue(a, sortConfig.key);
+    const bValue = getSortableValue(b, sortConfig.key);
+
+    if (aValue < bValue) {
+      return sortConfig.direction === "asc" ? -1 : 1;
+    }
+    if (aValue > bValue) {
+      return sortConfig.direction === "asc" ? 1 : -1;
+    }
+    return 0;
+  });
+
+  const getSortIcon = (columnKey) => {
+    if (sortConfig.key !== columnKey) return " ";
+    return sortConfig.direction === "asc" ? " ↑" : " ↓";
+  };
 
   return (
     <div className="config-input">
@@ -99,18 +150,43 @@ const SearchableTable = () => {
         })}
       </div>
 
-      {filteredConnectors.length > 0 ? (
+      {sortedConnectors.length > 0 ? (
         <div className="config-table-wrapper">
           <table className="config-table">
             <thead>
               <tr>
-                <th>New key (8.8)</th>
-                <th>Legacy key(s) (8.7 and earlier)</th>
-                <th>Type</th>
+                <th
+                  className="sortable-header"
+                  onClick={() => handleSort("area")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Area{getSortIcon("area")}
+                </th>
+                <th
+                  className="sortable-header"
+                  onClick={() => handleSort("name")}
+                  style={{ cursor: "pointer" }}
+                >
+                  New key (8.8){getSortIcon("name")}
+                </th>
+                <th
+                  className="sortable-header"
+                  onClick={() => handleSort("legacy")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Legacy key(s) (8.7 and earlier){getSortIcon("legacy")}
+                </th>
+                <th
+                  className="sortable-header"
+                  onClick={() => handleSort("type")}
+                  style={{ cursor: "pointer" }}
+                >
+                  Type{getSortIcon("type")}
+                </th>
               </tr>
             </thead>
             <tbody>
-              {filteredConnectors.map((config, index) => {
+              {sortedConnectors.map((config, index) => {
                 const legacyArray = Array.isArray(config.legacy)
                   ? config.legacy
                   : [config.legacy].filter(Boolean);
@@ -119,8 +195,16 @@ const SearchableTable = () => {
                   : config.type
                     ? [config.type]
                     : [];
+                const areaArray = Array.isArray(config.area)
+                  ? config.area
+                  : config.area
+                    ? [config.area]
+                    : [];
                 return (
                   <tr key={index}>
+                    <td style={{ minWidth: "100px" }}>
+                      {areaArray.length > 0 ? areaArray.join(", ") : "-"}
+                    </td>
                     <td className="config-table-name">
                       <code>{config.name}</code>
                     </td>
@@ -143,14 +227,16 @@ const SearchableTable = () => {
                       {typeArray.length > 0 ? (
                         <div className="config-type-badges">
                           {typeArray.map((t) => (
-                            <span
-                              key={t}
-                              className={`badge badge--${t
-                                .toLowerCase()
-                                .replace(/[^a-z0-9]+/g, "-")}`}
-                            >
-                              {t}
-                            </span>
+                            <p style={{ marginBottom: "-10px" }}>
+                              <span
+                                key={t}
+                                className={`badge badge--${t
+                                  .toLowerCase()
+                                  .replace(/[^a-z0-9]+/g, "-")}`}
+                              >
+                                {t}
+                              </span>
+                            </p>
                           ))}
                         </div>
                       ) : (

@@ -201,3 +201,16 @@
 .config-type-badges .badge {
   word-break: keep-all;
 }
+
+.sortable-header:hover {
+  background-color: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Optional: Add active state for when clicking */
+.sortable-header:active {
+  background-color: var(--ifm-color-emphasis-200);
+}
