@@ -1,7 +1,7 @@
 ---
 id: cancel-process-instances-batch-operation
 title: "Create a batch operation to cancel process instances"
-description: "<MarkerEventuallyConsistentExtension />"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create a batch operation to cancel process instances"
 hide_title: true
 hide_table_of_contents: true
@@ -34,7 +34,8 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension />
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Cancels multiple running process instances.
 Since only ACTIVE root instances can be cancelled, any given filters for state and
