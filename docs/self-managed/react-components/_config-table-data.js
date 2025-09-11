@@ -171,7 +171,7 @@ export const configs = [
   },
 
   {
-    name: "camunda.api.grpc.rest.filters.id",
+    name: "camunda.api.rest.filters.id",
     legacy: [
       "zeebe.gateway.filters.[x].id",
       "zeebe.broker.gateway.filters.[x].id",
@@ -180,7 +180,7 @@ export const configs = [
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.filters.jar-path",
+    name: "camunda.api.rest.filters.jar-path",
     legacy: [
       "zeebe.gateway.filters.[x].jarPath",
       "zeebe.broker.gateway.filters.[x].jarPath",
@@ -189,7 +189,7 @@ export const configs = [
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.filters.class-name",
+    name: "camunda.api.rest.filters.class-name",
     legacy: [
       "zeebe.gateway.filters.[x].className",
       "zeebe.broker.gateway.filters.[x].className",
@@ -198,13 +198,13 @@ export const configs = [
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.process-cache.max-size",
+    name: "camunda.api.rest.process-cache.max-size",
     legacy: ["camunda.rest.processCache.maxSize"],
     types: ["1-to-1"],
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.process-cache.expiration-idle",
+    name: "camunda.api.rest.process-cache.expiration-idle",
     legacy: ["camunda.rest.processCache.expirationIdleMillis"],
     types: ["1-to-1"],
     area: ["Api"],
@@ -216,19 +216,19 @@ export const configs = [
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.executor.max-pool-size-multiplier",
+    name: "camunda.api.rest.executor.max-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.maxPoolSizeMultiplier"],
     types: ["1-to-1"],
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.executor.keep-alive",
+    name: "camunda.api.rest.executor.keep-alive",
     legacy: ["camunda.rest.apiExecutor.keepAliveSeconds"],
     types: ["1-to-1"],
     area: ["Api"],
   },
   {
-    name: "camunda.api.grpc.rest.executor.queue-capacity",
+    name: "camunda.api.rest.executor.queue-capacity",
     legacy: ["camunda.rest.apiExecutor.queueCapacity"],
     types: ["1-to-1"],
     area: ["Api"],
