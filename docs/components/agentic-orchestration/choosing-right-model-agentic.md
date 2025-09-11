@@ -1,6 +1,6 @@
 ---
 id: choosing-right-model-agentic
-title: Choosing the right model for your agentic process
+title: Best practices for your agentic process
 description: Guide to selecting the appropriate LLM or foundation model for orchestrating agentic AI workflows.
 ---
 
