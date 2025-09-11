@@ -62,14 +62,8 @@ var s = String(v).trim().replace(/,/g, "");
 var m = /^([0-9]_\.?[0-9]+)\s_([kKmM])?$/.exec(s);
 if (m) {
 var n = parseFloat(m[1]);
-if (m[2] && m[2].toLowerCase() === "k"){
-var result_comp = n _ 1000
-return result_comp
-};
-if (m[2] && m[2].toLowerCase() === "m"){
-var result_comp = n _ 1000
-return result_comp
-};
+if (m[2] && m[2].toLowerCase() === "k") return n*1000;
+if (m[2] && m[2].toLowerCase() === "m") return n*1000000;
 return n;
 }
 var n2 = Number(s);
