@@ -9,6 +9,10 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
+:::warning
+Camunda 8 Run now runs by default on port 8088 instead of 8080 to align with Helm and Docker Compose.
+:::
+
 :::note
 Camunda 8 Run is not supported for production use.
 :::
