@@ -127,8 +127,7 @@ public class MyProcessTest {
 
 ### Multi-tenancy
 
-Multi-tenancy is disabled by default. If your tests require multi-tenancy, you must enable it for the testcontainers
-runtime:
+Multi-tenancy is disabled by default. If your tests require multi-tenancy, you must enable it in the following way:
 
 <Tabs groupId="config_multitenancy" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -173,12 +172,12 @@ public class MyProcessTest {
 
 </Tabs>
 
-Enabling multi-tenancy secures the testcontainers runtime with Basic Auth and creates a default user for it:
+Enabling multi-tenancy secures the runtime with Basic Auth and creates a default user for it:
 
 ```
 - Username: demo
 - Name: demo
-- Password: demo`
+- Password: demo
 - Email: demo@example.com
 ```
 
