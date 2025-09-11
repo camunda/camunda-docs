@@ -121,6 +121,10 @@ As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no
 
 ## Key changes
 
+### Play job-based user tasks
+
+User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above. Consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
+
 ### Connector SDK
 
 #### Core SDK restructuring
