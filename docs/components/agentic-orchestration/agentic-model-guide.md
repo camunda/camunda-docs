@@ -66,6 +66,7 @@ Use the interactive tool below to generate a LiveBench link tailored to your nee
 import LiveBenchModelFilter from '../react-components/livebench-model-filter.md'
 
 <LiveBenchModelFilter/>
+Benchmarks powered by **LiveBench** — *“LiveBench: A Challenging, Contamination-Free LLM Benchmark”* (White et al., ICLR 2025). Used under a Creative Commons license.
 
 **Note:** Model rankings and metrics are provided by LiveBench. You do not need to host or download any model data. The generated link queries LiveBench directly so you always see the latest evaluation results.
 
