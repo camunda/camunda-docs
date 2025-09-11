@@ -5,7 +5,8 @@ export const MarkerStronglyConsistentExtension = () => {
     <p>
       <span
         style={{
-          backgroundColor: "#FC5D0D",
+          // Use theme success color so it adapts to light/dark themes
+          backgroundColor: "var(--ifm-color-success)",
           borderRadius: "7px",
           color: "#fff",
           padding: "0.2rem",
