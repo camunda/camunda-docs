@@ -297,19 +297,28 @@ The existing data schema in the secondary storage has been harmonized, to be use
 Learn more about these updates in Streamlined Deployment with 8.7.
 ::: -->
 
-### Camunda Java client and Camunda Spring Boot SDK
+### Camunda Java client and Camunda Spring Boot Starter
 
-With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot SDK replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
+With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot Starter replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
 
 The `CamundaClient` replaces the `ZeebeClient`, offering the same functionality and adding new capabilities.
 
-The Camunda Spring Boot SDK is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility).
+The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
 
 :::note
 
+- The new `CamundaClient` uses REST as the default communication protocol, explicitly use the configuration option `preferRestOverGrpc=false` to switch to gRPC as the default protocol. (Note: job streaming is only supported via gRPC, but can be used alongside REST for other operations)
 - If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues, as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
 - The old `zeebe-client-java` artifact is now relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 - The Zeebe Java client will not be developed further and will only receive bug fixes while version 8.7 is officially supported.
+
+:::
+
+The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
+
+:::info
+
+The new Camunda Spring Boot Starter provides the `CamundaClient` when requested. The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC. If you want to continue using gRPC by default with the `CamundaClient`, you need to explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
 
 :::
 

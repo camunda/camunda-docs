@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: "22"
           cache: "npm"
@@ -47,11 +47,18 @@ jobs:
             echo "changed_files=${CHANGED_FILES}" >> $GITHUB_OUTPUT
           fi
 
+      - name: Generate GitHub App token
+        id: generate_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
+          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+
       - name: Create Pull Request
         if: steps.update-links.outputs.changes_detected == 'true'
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.generate_token.outputs.token }}
           commit-message: "docs: update release links in release notes"
           title: "🔗 Auto-update release links in release notes"
           body: |
@@ -73,6 +80,7 @@ jobs:
             🤖 This PR was created automatically. If you have any questions about the automation, please check the [update-release-links.js script](./hacks/update-release-links.js).
           branch: auto/update-release-links
           delete-branch: true
+          team-reviewers: camunda/tech-writers
 
       - name: Log automation result
         run: |
