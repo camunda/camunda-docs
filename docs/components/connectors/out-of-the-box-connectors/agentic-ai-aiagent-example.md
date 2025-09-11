@@ -71,11 +71,11 @@ For example, the completed ad-hoc sub-process configuration would look as follow
 
 #### Configure an input mapping for the tool call result variable
 
-In order to avoid interference between tool calls, it is important to create an [input mapping](../../concepts/variables.md#input-mappings) for the `toolCallResult` variable. This ensures that the variable is created as local variable within the ad-hoc sub-process.
+To prevent interference between tool calls, create an [input mapping](../../concepts/variables.md#input-mappings) for the `toolCallResult` variable. This ensures the variable is created as a local variable within the ad-hoc sub-process.
 
-1. In the **Inputs** section of the ad-hoc sub-process properties panel, add a new entry
-2. In the **Local variable name** field, enter `toolCallResult`. If you changed the name of the variable in the step above, adjust accordingly.
-3. Leave **Variable assignment value** blank
+1. In the **Inputs** section of the ad-hoc sub-process properties panel, add a new entry.
+2. In the **Local variable name** field, enter `toolCallResult` (or use your custom variable name if you changed it earlier).
+3. Leave the **Variable assignment value** field blank.
 
 ## Example response interaction feedback loop {#response-loop}
 
