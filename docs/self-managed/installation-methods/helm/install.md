@@ -5,13 +5,13 @@ title: Install Camunda with Helm
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm charts.
 ---
 
-This guide explains how to install Camunda 8 Self-Managed by installing the orchestration cluster and optionally the management cluster.
+Use this guide to install Camunda 8 Self-Managed with the orchestration cluster, and optionally enable additional components.
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
 ## Prerequisites
 
-- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components.
+- **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/installation-methods/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
 ## Install the orchestration cluster
@@ -48,8 +48,8 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 To install a previous version, run:
 
 ```shell
-helm install camunda camunda/camunda-platform --version 8.1 \
-    --values https://helm.camunda.io/camunda-platform/values/values-v8.1.yaml
+helm install camunda camunda/camunda-platform --version 8.7 \
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.7.yaml
 ```
 
 ### Access the orchestration cluster
@@ -214,13 +214,9 @@ console:
   enabled: true
 ```
 
-For more information about enabling other components, see [Enable Web Modeler, Console, and Optimize](/self-managed/installation-methods/helm/configure/web-modeler-console-connectors.md).
-
 Installing all components in a cluster requires downloading all related Docker images to the Kubernetes nodes. The time required depends on your cloud provider and network speed.
 
-For air-gapped environments, see [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).
-
-By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Registry and images](/self-managed/installation-methods/helm/configure/registry-and-images.md).
+For more information about enabling other components, see [Enable Web Modeler, Console, and Connectors](/self-managed/installation-methods/helm/configure/web-modeler-console-connectors.md).
 
 <!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
 
@@ -242,7 +238,9 @@ kubectl logs -f <POD_NAME>
 
 - **Zeebe gateway** is deployed as a stateless service. It supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
 - **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
-- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub, use a mirror registry, or see [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).
+- **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
+- **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).
+- **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Registry and images](/self-managed/installation-methods/helm/configure/registry-and-images.md).
 
 ## Additional resources
 

@@ -5,7 +5,7 @@ title: Configure registry and images
 description: Configure image sources for the Camunda Helm chart, including enterprise images and pull secrets.
 ---
 
-Use this page to configure image sources for the Camunda Helm chart. By default, the chart uses Bitnami open-source images, but for production you can switch to vendor-supported enterprise images. This page explains how to create registry secrets and install Camunda with enterprise images.
+Use this page to configure image sources for the Camunda Helm chart. By default, the chart uses Bitnami open-source images, but for production, Camunda recommends switching to vendor-supported enterprise images. This page explains how to create registry secrets and install Camunda with enterprise images.
 
 ### Install with vendor enterprise images
 

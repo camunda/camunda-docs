@@ -53,15 +53,8 @@ elasticsearch:
 
 From the above configuration, the internal Elasticsearch component and the Elasticsearch configuration for all components are disabled. This is required to use Amazon OpenSearch Service.
 
-To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret:
-
-```yaml
-global:
-  opensearch:
-    auth:
-      existingSecret: secretName
-      existingSecretKey: secretKey
-```
+To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret.
+For details and examples, see [Helm charts secret management](/self-managed/installation-methods/helm/configure/secret-management.md).
 
 ## Component configuration
 

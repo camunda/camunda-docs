@@ -38,6 +38,7 @@ global:
 ## Provide the key with a secret
 
 You can also store the license key in a Kubernetes secret and reference it from `values.yaml`.
+For more details on working with secrets, see [Secret management](/self-managed/installation-methods/helm/configure/secret-management/).
 
 1. Create the secret:
 

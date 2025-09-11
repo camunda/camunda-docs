@@ -1,6 +1,6 @@
 ---
 id: web-modeler-console-connectors
-sidebar_label: Enable Web Modeler, Console, and Connectors
+sidebar_label: Web Modeler, Console, and Connectors
 title: Enable Web Modeler, Console, and Connectors
 description: Configure Identity secrets and enable Web Modeler, Console, and Connectors in the Camunda Helm chart.
 ---
