@@ -53,7 +53,6 @@ const delim =
 
 };
 
-/_ ------------------------------------- helpers ------------------------------------- _/
 const toNumber = function (v) {
 if (v === null || v === undefined || v === "") return NaN;
 if (typeof v === "number") return v;
@@ -257,7 +256,6 @@ if (s.includes("proprietary") || s.includes("closed")) return "proprietary";
 return "";
 };
 
-/_ -------------------------------- sliders (context / cost1M-blended / speed) -------------------------------- _/
 const CONTEXT_MAX = 1000000;
 const COST_CAP = 100; // slider max = 100; when at max, treat as "no cost filter"
 const SPEED_MAX = 400;
