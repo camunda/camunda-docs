@@ -76,7 +76,7 @@ OIDC Access Token Authentication is the recommended method for production and re
 
 <TabItem value="saas">
 
-1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the Camunda Console.
+1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console.
 2. Use the credentials to request an Access Token:
 
 ```shell
