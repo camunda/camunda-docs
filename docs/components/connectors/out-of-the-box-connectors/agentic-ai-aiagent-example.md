@@ -24,7 +24,6 @@ First, an AI Agent connector is added and configured in the process diagram. Nex
 1. A descriptive ID is configured for the ad-hoc sub-process. This can then be configured in the **Ad-hoc sub-process ID** field in the AI Agent connector [tools](agentic-ai-aiagent.md#tools) section.
 
 1. A loop is modeled into the sub-process and back to the AI Agent connector.
-
    - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
 
    - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
@@ -69,6 +68,14 @@ As a final step, the element must be configured to activate the ad-hoc sub-proce
 For example, the completed ad-hoc sub-process configuration would look as follows:
 
 ![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
+
+#### Configure an input mapping for the tool call result variable
+
+In order to avoid interference between tool calls, it is important to create an [input mapping](../../concepts/variables.md#input-mappings) for the `toolCallResult` variable. This ensures that the variable is created as local variable within the ad-hoc sub-process.
+
+1. In the **Inputs** section of the ad-hoc sub-process properties panel, add a new entry
+2. In the **Local variable name** field, enter `toolCallResult`. If you changed the name of the variable in the step above, adjust accordingly.
+3. Leave **Variable assignment value** blank
 
 ## Example response interaction feedback loop {#response-loop}
 
