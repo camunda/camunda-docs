@@ -227,6 +227,12 @@ export const configs = [
     types: ["1-to-1"],
     area: ["Api"],
   },
+  {
+    name: "camunda.api.grpc.rest.executor.queue-capacity",
+    legacy: ["camunda.rest.apiExecutor.queueCapacity"],
+    types: ["1-to-1"],
+    area: ["Api"],
+  },
 
   // Cluster keys
 
