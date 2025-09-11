@@ -10,7 +10,7 @@ Choosing the optimal Large Language Model (LLM) for your agentic workflow is cru
 
 When integrating an AI agent into your process, evaluate how well it performs its intended actions. Key aspects of agent performance include how effectively it uses tools, whether it completes assigned tasks, and how strictly it follows instructions. For example:
 
-- **Tool usage:** Measure whether the agent selects and uses the correct tools (APIs, plugins, etc.) for the job. A good agent should choose appropriate tools with the right parameters to accomplish the user’s goals. Ineffective tool use can lead to unnecessary steps or failures, so this metric gauges the agent’s practical decision-making.
+- **Tool usage:** Measure whether the agent selects and uses the correct tools for the job. A good agent should choose appropriate tools with the right parameters to accomplish the user’s goals. Ineffective tool use can lead to unnecessary steps or failures, so this metric gauges the agent’s practical decision-making.
 
 - **Action completion:** Determine if the agent successfully accomplishes all the user’s goals for a given task. This is the ultimate measure of success—did the agent fully resolve what it was asked to do? High performance here means the agent can carry a task through to the end without human intervention.
 
