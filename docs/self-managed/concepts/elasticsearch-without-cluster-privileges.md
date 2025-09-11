@@ -311,72 +311,80 @@ orchestration:
 
 ### Minor version upgrades using the standalone schema manager {#minor-upgrades}
 
-A Camunda minor version upgrade can be prepared by first running the standalone schema manager for the target version `N+1` to pre-create or adjust index templates and mappings, then upgrading the Camunda single application. This minimizes downtime when only schema adjustments are needed.
+Prepare a Camunda minor version upgrade by running the standalone schema manager for the target version (`N+1`). This pre-creates or adjusts index templates and mappings. You can then upgrade the Camunda single application, minimizing downtime for upgrades that require only schema adjustments.
 
 :::important
-Upgrade 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
+Upgrading from 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
 
-- Components: [Components update 8.7 to 8.8](../components/components-upgrade/870-to-880.md)
-- Helm deployments: [Helm chart upgrade guide: 8.7 to 8.8](../installation-methods/helm/upgrade/helm-870-880.md)
+- [Components update 8.7 to 8.8](../components/components-upgrade/870-to-880.md)
+- [Helm chart upgrade guide: 8.7 to 8.8](../installation-methods/helm/upgrade/helm-870-880.md)
 
-These procedures may require stopping or scaling down the Camunda application before running the migration.
+These steps may require stopping or scaling down the Camunda application before running the migration.
 :::
 
-If the target upgrade ALSO requires a data/application migration step (as documented in the [upgrade guide](/self-managed/update/administrators/overview.md)), follow the documented migration sequence. That may require:
+If the target upgrade also requires a data or application migration (as documented in [Upgrade to Camunda 8.8](/self-managed/update/administrators/overview.md)), follow the migration sequence:
 
-1. Stopping the Camunda application (or scaling down) before executing the migration logic.
-2. Running the schema manager (if schema changes are part of the upgrade) with the new version `N+1` using a privileged user.
-3. Executing any required migration tooling/steps per the upgrade documentation.
-4. Starting (or rolling out) the Camunda application at version `N+1` with schema creation disabled.
+1. Stop the Camunda application (or scale it down) before executing the migration logic.
+2. Run the schema manager for version `N+1` with a privileged user if schema changes are part of the upgrade.
+3. Execute any required migration tooling or steps described in the upgrade documentation.
+4. Start or roll out the Camunda application at version `N+1` with schema creation disabled.
 
-If no explicit migration is required, the running application at version `N` may remain online while you run the `N+1` schema manager.
+If no migration is required, you can keep the application running at version `N` while you run the schema manager for version `N+1`.
 
 #### High-level flow
 
-1. Current state: Camunda single application is running at version `N` (example 8.7) (already processing traffic) with its indices in Elasticsearch.
-2. Verification: Check the upgrade documentation for upgrading from `N` to `N+1` (example 8.8). Determine whether additional migrations are required. For 8.7 → 8.8, migrations are required:
+1. Current state: Camunda single application is running at version `N` (for example, 8.7) and processing traffic with its indices in Elasticsearch.
 
-- No migrations: proceed while keeping `N` running.
-- Migrations required: schedule downtime/maintenance window and stop the application before executing required migration steps.
+2. Verification: Check the upgrade documentation for version `N → N+1` (for example, 8.7 → 8.8) to determine if migrations are required.
+   - If migrations are not required, continue while keeping `N` running.
+   - If migrations are required, schedule downtime and stop the application before running migration steps.
 
 3. Preparation: Obtain the Camunda distribution for version `N+1`.
-4. Run schema manager (version `N+1`) standalone with a configuration granting the required cluster privileges (as shown earlier under [Initialize the schema manager](#initialize)). Leave the existing application (version `N`) running. The schema manager applies any new or updated templates / mappings (and ILM policies if enabled) required by version `N+1`.
+
+4. Run the schema manager for version `N+1` with a configuration that grants the required cluster privileges (see [Initialize the schema manager](#initialize)). Keep the existing application at version `N` running. The schema manager applies any new or updated templates, mappings, and ILM policies (if enabled) required by version `N+1`.
+
 5. Completion check: Wait until the schema manager logs successful completion and exits without errors.
-6. Application upgrade: Upgrade (or perform a rolling update of) the Camunda single application from version `N` to `N+1`, using the configuration that disables schema creation (as shown above). At this point, the new application version will reuse the already-prepared indices.
+
+6. Application upgrade: Upgrade or perform a rolling update of the Camunda single application from version `N` to `N+1`, using a configuration that disables schema creation. The new version will reuse the already-prepared indices.
 
 #### Example timeline
 
-| Time | Action                                                          |
-| ---- | --------------------------------------------------------------- |
-| T0   | App v8.6.X running, serving workload                            |
-| T1   | Launch schema manager v8.7.Y with elevated (cluster) privileges |
-| T2   | Schema manager finishes (success) and exits                     |
-| T3   | Upgrade / roll application to v8.7.Y (schema creation disabled) |
-| T4   | Traffic now served by app v8.7.Y                                |
+| Time | Action                                                                  |
+| ---- | ----------------------------------------------------------------------- |
+| T0   | App v8.6.X running, serving workload                                    |
+| T1   | Launch schema manager v8.7.Y with elevated cluster privileges           |
+| T2   | Schema manager completes successfully and exits                         |
+| T3   | Upgrade or roll out application to v8.7.Y with schema creation disabled |
+| T4   | Traffic now served by app v8.7.Y                                        |
 
-This staged approach reduces (or can eliminate) downtime for minor upgrades that only need schema adjustments.
+This staged approach reduces or eliminates downtime for minor upgrades that require only schema adjustments.
 
-### Updating index settings (shards, replicas, template priority) {#settings-updates}
+### Update index settings with the standalone schema manager {#settings-updates}
 
-You can also use the standalone schema manager to roll out certain supported index template setting changes without granting cluster privileges to the continuously running Camunda single application.
+You can use the standalone schema manager to roll out certain index template setting changes without granting cluster privileges to the continuously running Camunda application.
 
-Supported settings (see the detailed [configuration references](../components/orchestration-cluster/core-settings/overview.md) and the [Elasticsearch Exporter](../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
+Supported settings (see [configuration references](../components/orchestration-cluster/core-settings/overview.md) and the [Elasticsearch exporter configuration](../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
 
-- numberOfShards (Operate / Tasklist / Camunda / Zeebe elasticsearch exporter) – static: only affects new indices created after the change (existing indices keep their shard count).
-- numberOfReplicas (Operate / Tasklist / Camunda) – dynamic: applied to existing indices and index templates.
-- numberOfReplicas (Zeebe elasticsearch exporter) – static: only affects new indices created after the change (existing indices keep their replica count).
-- templatePriority (Operate / Tasklist / Camunda / Zeebe elasticsearch exporter) – affects precedence when multiple index templates match; higher priority templates win.
+- **numberOfShards** (Operate / Tasklist / Camunda / Zeebe Elasticsearch exporter) — static: applies only to new indices created after the change. Existing indices keep their shard count.
+- **numberOfReplicas** (Operate / Tasklist / Camunda) — dynamic: applied to existing indices and index templates.
+- **numberOfReplicas** (Zeebe Elasticsearch exporter) — static: applies only to new indices created after the change. Existing indices keep their replica count.
+- **templatePriority** (Operate / Tasklist / Camunda / Zeebe Elasticsearch exporter): determines precedence when multiple index templates match. Higher priority templates override lower ones.
 
-#### Use the standalone schema manager for schema settings updates
+#### When to use the schema manager for settings updates
 
-You can use the standalone schema manager if:
+Use the standalone schema manager if you need to:
 
-- You need to adjust index template-level settings (for future indices) or trigger a global index replicas count change.
-- You want to modify index template priority.
+- Adjust index template-level settings for future indices.
+- Trigger a global index replicas count change.
+- Modify index template priority.
 
 #### Procedure
 
-1. Prepare a schema manager configuration including the new settings. For Operate / Tasklist 8.7.11+ include `updateSchemaSettings: true`, for example:
+1. Prepare a schema manager configuration that includes the new settings.
+   - For Operate and Tasklist version 8.7.11+, set `updateSchemaSettings: true`.
+
+   Example configuration:
+
    ```yaml
    zeebe.broker.exporters.elasticsearch:
      className: io.camunda.zeebe.exporter.ElasticsearchExporter
@@ -395,8 +403,9 @@ You can use the standalone schema manager if:
          templatePriority: 25 # optional, overrides default priority 0
         ... # other settings
    ```
-2. Run the standalone schema manager with a user that has the required cluster privileges (as shown under [Initialize the schema manager](#initialize)). The running Camunda application (without cluster privileges) can stay online.
-3. Wait for successful completion in the logs.
+
+2. Run the standalone schema manager with a user that has the required cluster privileges (see [Initialize the schema manager](#initialize)). You can keep the Camunda application online without cluster privileges.
+3. Check the logs to confirm the schema manager completed successfully.
 
 ### Limitations
 
