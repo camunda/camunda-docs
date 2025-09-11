@@ -50,3 +50,7 @@ In the example above, the retry attempts will be spaced 30 seconds apart, instea
 If necessary, the **retry backoff** property can be made visible and editable in the properties panel by changing the property `type` to `String`.
 
 `retryBackoff` is a reserved task header key recognized by the connector runtime. You don't need to handle this input in your connector implementation, as the runtime handles it automatically for all outbound connectors.
+
+## Downloading documents
+
+To download documents without an additional step, check out [this](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector)
