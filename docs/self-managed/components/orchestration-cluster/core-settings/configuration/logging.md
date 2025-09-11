@@ -5,96 +5,107 @@ description: Configure and manage logging for the Camunda 8 Self-Managed Orchest
 ---
 
 This page explains how to configure, customize, and manage logging in the **Camunda 8 Self-Managed Orchestration Cluster**.  
-The Orchestration Cluster includes **Tasklist**, **Operate**, **Zeebe**, and **Identity**, and uses the **Log4j2** framework for logging.
+The cluster consists of **Zeebe**, **Operate**, **Tasklist**, and **Identity**. All use the **Log4j2** framework for logging.
 
-You can configure output formats, logging levels, appenders, and change log levels dynamically at runtime.
+You can configure output formats, log levels, appenders, and change log levels dynamically at runtime.
 
-## Log4j2 configuration
+## Default Log4j2 configuration
 
-Each Orchestration Cluster deployment includes a single Log4j2 configuration file (`log4j2.xml`):
+Here’s a representative snippet of the default `log4j2.xml` configuration (for Zeebe, Operate, Tasklist, Identity) for Camunda 8:
 
-- **Default location**: Depends on the deployment type (distribution archive, Docker image, or Kubernetes).
-- **Default appender**: `ConsoleAppender`, which writes logs to standard output.
-- **Default log level**: `WARN` for most packages, with `INFO` for:
-  - Camunda 8 (`io.camunda` and `io.atomix`)
-  - Spring and Spring Boot (`org.springframework`)
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n"/>
+    </Console>
 
-### Default Log4J2 configuration
+    <Console name="Stackdriver" target="SYSTEM_OUT">
+      <StackdriverLayout />
+    </Console>
 
-```yaml reference
-https://github.com/camunda/camunda/blob/stable/8.8/dist/src/main/config/log4j2.xml
+    <RollingFile name="RollingFile"
+                 fileName="logs/app.log"
+                 filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy interval="1"/>
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Logger name="io.camunda" level="INFO"/>
+    <Logger name="io.atomix" level="WARN"/>
+    <Logger name="org.springframework" level="INFO"/>
+
+    <Root level="WARN">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="${env:ZEEBE_LOG_APPENDER:-Console}"/>
+      <AppenderRef ref="RollingFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
 ```
 
-## Environment variables for log levels
+:::note
+Note: This is a simplified, illustrative default. The actual `log4j2.xml` in your version may have additional appenders, different file paths, or slightly different patterns.
 
-You can set log levels globally or per component using environment variables.
+See the full [logging documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#default-logging-configuration) for the official default file and additional settings.
+:::
 
-- **Global log level**
-  - `CAMUNDA_LOG_LEVEL` (e.g., `DEBUG`, `INFO`, `ERROR`)
-  - Recommended for most use cases.
-- **Component-specific log levels (use only if you need finer control)**
-  - `ZEEBE_LOG_LEVEL` – `io.camunda.zeebe` (Zeebe-related logs)
-  - `ATOMIX_LOG_LEVEL` – Clustering and Raft logs
-  - `ES_LOG_LEVEL` – `org.elasticsearch` logs
+## Environment variables for configuration
 
-## Appenders (output formats)
+| Purpose                   | Environment Variable | Applies to Component(s)    | Example Value / Notes           |
+| ------------------------- | -------------------- | -------------------------- | ------------------------------- |
+| Global log level          | `CAMUNDA_LOG_LEVEL`  | All components             | `DEBUG`, `INFO`, `ERROR`        |
+| Zeebe package level       | `ZEEBE_LOG_LEVEL`    | Zeebe (`io.camunda.zeebe`) | Overrides global for Zeebe logs |
+| Atomix / clustering level | `ATOMIX_LOG_LEVEL`   | Clustering / Raft          | Default WARN if unset           |
+| Elasticsearch logs        | `ES_LOG_LEVEL`       | `org.elasticsearch`        | Same pattern                    |
 
-Log4j2 appenders define how logs are output. The Orchestration Cluster supports:
+## Appenders (log outputs)
 
-1. **Console** - Default. Outputs formatted text logs to standard out. Select with `ZEEBE_LOG_APPENDER=Console`.
-2. **Stackdriver (JSON format)** - Outputs logs in JSON format compatible with [Google Cloud Logging/Stackdriver](https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry). Select with `ZEEBE_LOG_APPENDER=Stackdriver`.
-3. **Rolling file** - Writes logs to a file that rotates and compresses old logs. Disabled by default; enable with `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true`.
+The following appenders are supported. Only one non-console appender is used at a time per component (console or Stackdriver, plus optional file rolling appender).
 
-## JSON logging
+| Appender           | Description                                                            | How to Enable / Variable                                                                         |
+| ------------------ | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Console            | Default text output to standard out with pattern layout                | `ZEEBE_LOG_APPENDER=Console`, `OPERATE_LOG_APPENDER=Console`, etc.                               |
+| Stackdriver (JSON) | JSON format for compatibility with Google Cloud Logging / Stackdriver  | `ZEEBE_LOG_APPENDER=Stackdriver` (and similarly for other components)                            |
+| RollingFile        | Logs to a file, rotated/compressed as configured. Disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` **and** set correct `*_LOG_APPENDER` variable if needed |
 
-To enable JSON logging (Stackdriver format) for any component:
+## Pattern layout/format
 
-`ZEEBE_LOG_APPENDER=Stackdriver`
+- Default layout shows **time only** (no full date), thread name, MDC context (if any), log level, logger name, and message.
+- Example pattern:
 
-Set this variable for each component’s environment as needed.
+```perl
+%d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n
+```
 
-## Changing log levels at runtime
+## Changing log level at runtime
 
-The Orchestration Cluster supports dynamic log level changes via the
-[`Spring Boot Actuator loggers endpoint`](https://docs.spring.io/spring-boot/docs/current/actuator-api/html/#loggers).
-
-Example for a local component:
+You can dynamically adjust log levels using Spring Boot Actuator endpoints.
 
 ```bash
 curl 'http://localhost:9600/actuator/loggers/io.camunda' \
   -i -X POST \
   -H 'Content-Type: application/json' \
-  -d '{"configuredLevel":"debug"}'
+  -d '{"configuredLevel":"DEBUG"}'
 ```
 
-Replace `io.camunda` with the logger name you want to adjust.
+Replace `io.camunda` with the logger you want to adjust.
 
-## Sensitive data
+## Sensitive data and logging
 
-Camunda 8 avoids logging sensitive data, such as personally identifiable information (PII) or unencrypted business-relevant data. However, you may sometimes want to enable this logging for debugging purposes.
+By default, loggers that may handle sensitive information (for example, variable values, actor names, etc.) are set to **INFO** level.
 
-By default, all loggers that could log sensitive information (for example, variable values) are set to **INFO** level. To enable debug logging for these loggers, it is **not sufficient** to set `ZEEBE_LOG_LEVEL` alone. You must explicitly configure the logging level to a level lower than INFO for the relevant loggers.
+To capture more detail (DEBUG or TRACE), you must explicitly configure those loggers via their logger names or component-specific variables. Be careful: enabling verbose logging may expose sensitive data. Use debug/trace levels only temporarily for troubleshooting.
 
-:::warning
-Enabling the following loggers may expose sensitive data in your logs. Use with caution.
-:::
+## Additional notes
 
-### RDBMS
-
-For exported records:
-
-```properties
-logging.level.io.camunda.exporter.rdbms.RdbmsExporter=TRACE
-```
-
-For executed SQLs and parameters:
-
-```properties
-logging.level.io.camunda.db.rdbms.sql=DEBUG
-```
-
-## Notes
-
-- Learn more about [log levels](/self-managed/operational-guides/monitoring/log-levels.md).
-- The Orchestration Cluster uses Log4j2 by default in both distributions and Docker images.
-- Adjusting logging can help with troubleshooting, performance optimization, and integration with external monitoring systems.
+- Always check the inline default configuration first before customizing.
+- Use the component-specific `*_LOG_LEVEL` and `*_LOG_APPENDER` variables for fine-grained control.
+- Only enable the file appender (RollingFile) or Stackdriver when needed; console is simpler for stdout logs.
+- Monitor differences across environments (dev/test/prod) to avoid surprises caused by log verbosity.
