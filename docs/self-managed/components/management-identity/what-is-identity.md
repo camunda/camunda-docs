@@ -40,7 +40,7 @@ Manage and control access for your users and applications, using groups and role
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)
-- [Manage tenants](managing-tenants.md)
+- [Manage tenants](manage-tenants.md)
 - [Mapping rules](mapping-rules.md)
 
 ## Reference

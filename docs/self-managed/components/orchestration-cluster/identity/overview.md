@@ -1,6 +1,7 @@
 ---
 id: overview
-title: Overview
+title: Identity on Self-Managed
+sidebar_label: "Overview"
 description: "Learn how Identity is bundled with your default orchestration cluster."
 ---
 
@@ -9,9 +10,9 @@ import TabItem from '@theme/TabItem';
 
 Identity is included by default with any [orchestration cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster). Within an Orchestration Cluster, Identity provides unified, cluster-level identity management and authorization.
 
-Identity is available via [Helm install](/self-managed/installation-methods/helm/install.md) and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+Identity is available via [Helm install](/self-managed/installation-methods/helm/install.md) and for local development via [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md).
 
-:::note
+:::info
 The following guides cover Identity configuration in Self-Managed environments. For information on using and managing Identity, see the [user guides](/components/identity/identity-introduction.md).
 :::
 

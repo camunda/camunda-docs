@@ -41,7 +41,7 @@ Camunda 8 SaaS uses single-tenant clusters, with all data contained in a single 
 A cell-based architecture means that each cluster runs as dedicated processes in a separate cell isolated from all other clusters, allowing secure fault and workload separation. Scaling is achieved by deploying additional clusters for new use cases and/or teams.
 
 :::note
-Camunda Self-Managed also supports [multi-tenant](/self-managed/concepts/multi-tenancy.md) clusters, where multiple tenants share the same underlying infrastructure, but with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
+Camunda Self-Managed also supports [multi-tenant](/components/concepts/multi-tenancy.md) clusters, where multiple tenants share the same underlying infrastructure, but with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
 :::
 
 ### Zeebe
