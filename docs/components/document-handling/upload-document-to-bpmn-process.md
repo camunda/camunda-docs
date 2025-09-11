@@ -76,6 +76,20 @@ Refer to the example array below:
 ]
 ```
 
+## Upload a document when using any connector
+
+Documents available for download from an unprotected URL can be added to a process in any connector by specifying them like this:
+
+```json
+{
+  "camunda.document.type": "external",
+  "url": "https://www.example.com/file.pdf",
+  "name": "my-test-file.pdf"
+}
+```
+
+The `name` field is optional. If it is not provided, a random UUID will be used instead.
+
 ## Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
