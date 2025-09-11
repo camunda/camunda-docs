@@ -75,8 +75,8 @@ Follow these steps:
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
-   - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
-   - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
+   - `8.6.0` is the OData connector in version `0` for Camunda 8 SaaS version `8.6`
+   - `8.5.1` is the OData connector in version `1` for Camunda 8 SaaS version `8.5`
 
 2. Download the matching `mtad.yaml.example` from [the OData connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases). Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
 3. Customize the names of the SAP BTP Destination and Connectivity instances as needed—both will be automatically created during deployment. If instances with the same names already exist in your subaccount, they will be reused.

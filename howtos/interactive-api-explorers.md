@@ -20,7 +20,7 @@ The source for each API's instance lives in an identifying folder within the `/a
 
 ## Updating an OpenAPI spec
 
-### Automatic synchronization (applies only to the Next version of the C8 REST API)
+### Automatic synchronization (applies only to the Next version of the Camunda 8 REST API)
 
 [A workflow](https://github.com/camunda/camunda-docs/actions/workflows/sync-rest-api-docs.yaml) is configured to synchronize the "next" version of the REST API docs, scheduled on a weekly basis. The workflow pulls the specification from [the upstream camunda/camunda repo's `main` branch](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml), and re-generates the documentation for the "next" version based on that spec.
 

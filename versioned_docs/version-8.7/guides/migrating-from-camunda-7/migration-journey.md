@@ -160,9 +160,9 @@ There are two possible migration scenarios: Drain out and big bang.
 
 Both are valid approaches. Let's briefly look at the differences.
 
-- **Drain out**: Keep running the C7-based solution, but run the C8-based (migrated) solution in parallel. New process instances are started in the new one. After some time, no processes are active in C7 any more, and the C7-based solution can be decommissioned.
+- **Drain out**: Keep running the Camunda 7-based solution, but run the Camunda 8-based (migrated) solution in parallel. New process instances are started in the new one. After some time, no processes are active in Camunda 7 any more, and the Camunda 7-based solution can be decommissioned.
 
-- **Big bang**: The solution is migrated from C7 to C8, including data migration scripts. At one moment in time, the C7-based solution is stopped, the data is migrated, and the new C8-based solution is started. This C7 solution can be decommissioned right after. Note that a big bang relates to **one process solution only**. So if you run multiple processes, you typically migrate them one by one in multiple big bangs, not in one super big bang. For any of those processes, when you migrate, you flip the switch and are on C8 for those processes.
+- **Big bang**: The solution is migrated from Camunda 7 to Camunda 8, including data migration scripts. At one moment in time, the Camunda 7-based solution is stopped, the data is migrated, and the new Camunda 8-based solution is started. This Camunda 7 solution can be decommissioned right after. Note that a big bang relates to **one process solution only**. So if you run multiple processes, you typically migrate them one by one in multiple big bangs, not in one super big bang. For any of those processes, when you migrate, you flip the switch and are on Camunda 8 for those processes.
 
 Let's look at the pros and cons of each approach.
 
@@ -182,8 +182,8 @@ Pros:
 
 Cons:
 
-- Requires code switch (for example, forwarding messages to either C7 or C8 depending on where the corresponding process was started).
-- Duplicate tooling (for example, one Tasklist for C7 and one for C8 processes; same for operators with Cockpit and Optimize).
+- Requires code switch (for example, forwarding messages to either Camunda 7 or Camunda 8 depending on where the corresponding process was started).
+- Duplicate tooling (for example, one Tasklist for Camunda 7 and one for Camunda 8 processes; same for operators with Cockpit and Optimize).
 - Need to operate two solutions at the same time.
 
 **Big bang**
@@ -331,7 +331,7 @@ While Camunda sees a lot of value in doing both tasks at the same time - as you 
 
 ## <span className="callout">5</span>Migrate data (optional)
 
-With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](./migration-tooling.md#data-migrator)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
+With your solution code migrated, you also need to look at your production data. Camunda currently develops the **[Data Migrator](./migration-tooling.md#data-migrator)** to be used for this (**planned to be available with 8.8**). You might need to customize the data migrator, especially if you used complex data formats in Camunda 7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step you might also need to extract big payloads and binaries (such as documents) into an external data store and reference it from the process (using for example upcoming document handling possibilities).
 
 Data to be migrated includes **runtime instances, audit data, and optimize data**. Let's look at it one by one.
 
@@ -375,7 +375,7 @@ After you migrated the solution and prepared and tested the data migration (if n
 
 - **Drain out**: In a drain out scenario you need to deploy your new solution next to the existing Camunda 7 solution. Then you need to add switching logic in your code, API gateway, or load balancer logic, which redirects traffic to your new solution. However, you still need to correlate callbacks to waiting process instances to the old solution, and might also present user tasks of both solutions to your users.
 
-- **Big bang**: In a big bang scenario, you will typically shutdown the old solution (or at least parts of it for the process under migration), then run the runtime instance migration to make sure all waiting process instances are transferred to the Camunda 8 solution. After this step succeeded, you can start up the new solution and route traffic to it. This approach assumes there can be a downtime of the application. If that is not an option, another alternative is to startup the C8 solution in parallel and just switch the traffic routing without downtime, and then start to migrate runtime instances afterwards.
+- **Big bang**: In a big bang scenario, you will typically shutdown the old solution (or at least parts of it for the process under migration), then run the runtime instance migration to make sure all waiting process instances are transferred to the Camunda 8 solution. After this step succeeded, you can start up the new solution and route traffic to it. This approach assumes there can be a downtime of the application. If that is not an option, another alternative is to startup the Camunda 8 solution in parallel and just switch the traffic routing without downtime, and then start to migrate runtime instances afterwards.
 
 Audit data migration can run after the switch has happened, after a successful drain out (in parallel to normal operations) or of course during the downtime of a big bang. The best approach depends on the amount of data and the possibility for downtimes.
 
