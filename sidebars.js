@@ -128,36 +128,6 @@ module.exports = {
         id: "components/best-practices/best-practices-overview",
       },
       items: [
-        "components/agentic-orchestration/ao-design",
-        "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/choosing-right-model-agentic",
-        "components/agentic-orchestration/model-recommentations-agentic",
-      ],
-    },
-    {
-      type: "category",
-      label: "Document handling",
-      link: {
-        type: "doc",
-        id: "components/document-handling/getting-started",
-      },
-      items: [
-        "components/document-handling/use-cases",
-        "components/document-handling/upload-document-to-bpmn-process",
-        "components/document-handling/display-and-download-document",
-        "components/document-handling/send-document-to-external-system-via-connector",
-      ],
-    },
-    {
-      type: "category",
-      label: "Intelligent document processing (IDP)",
-      link: {
-        type: "doc",
-        id: "components/modeler/web-modeler/idp",
-      },
-      items: [
-        "components/modeler/web-modeler/idp/idp-configuration",
-        "components/modeler/web-modeler/idp/idp-applications",
         {
           "Project management": [
             "components/best-practices/management/following-the-customer-success-path",
@@ -216,6 +186,8 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/model-recommentations-agentic",
           ],
         },
         {
