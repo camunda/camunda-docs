@@ -73,7 +73,7 @@ If the `c8.data-source` configuration is absent, the RDBMS history data migrator
 | :------------------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `.table-prefix`      | `string`  | Optional prefix for Camunda 8 RDBMS database tables. Default: _(empty)_                                                                                   |
 | `.auto-ddl`          | `boolean` | Automatically create/update Camunda 8 RDBMS database schema. Default: `false`                                                                             |
-| `.database-vendor`   | `string`  | Database vendor for C8 schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                    |
+| `.database-vendor`   | `string`  | Database vendor for Camunda 8 schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                             |
 | `.*`                 |           | You can apply all [`HikariConfig` properties](https://github.com/brettwooldridge/HikariCP?tab=readme-ov-file#gear-configuration-knobs-baby). For example: |
 | `.jdbc-url`          | `string`  | JDBC connection URL for the target Camunda 8 RDBMS database. Default: `jdbc:h2:mem:migrator`                                                              |
 | `.username`          | `string`  | Username for Camunda 8 database connection. Default: `sa`                                                                                                 |

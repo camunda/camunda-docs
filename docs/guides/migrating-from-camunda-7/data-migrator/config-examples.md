@@ -33,9 +33,9 @@ camunda.migrator:
 
 ## Datasource
 
-Configure the Camunda 7 and Camunda 8 datasources. You can use the same or different databases for C7 and C8.
+Configure the Camunda 7 and Camunda 8 datasources. You can use the same or different databases for Camunda 7 and Camunda 8.
 
-### C7 (runtime and history)
+### Camunda 7 (runtime and history)
 
 ```yaml
 camunda.migrator.c7.data-source:
@@ -49,7 +49,7 @@ camunda.migrator.c7.data-source:
 
 You can apply any HikariCP property (for example, pool size) under `camunda.migrator.c7.data-source`.
 
-### C8 RDBMS (history)
+### Camunda 8 RDBMS (history)
 
 ```yaml
 camunda.migrator.c8.data-source:

@@ -16,9 +16,9 @@ Troubleshooting information for common issues when running the Data Migrator.
 
 ## Process instances are skipped
 
-- Ensure C8 process definitions are deployed.
+- Ensure Camunda 8 process definitions are deployed.
 - Verify `migrator` execution listeners are added to None Start Events.
-- Ensure flow nodes exist in both C7 and C8 models.
+- Ensure flow nodes exist in both Camunda 7 and Camunda 8 models.
 - Review skipped instance logs for exact reasons.
 
 List and retry skipped instances:
@@ -37,7 +37,7 @@ List and retry skipped instances:
 
 ## Variable migration errors
 
-- Check C8 variable name restrictions.
+- Check Camunda 8 variable name restrictions.
 - Verify variable types are supported.
 - Implement a custom `VariableInterceptor` if needed.
 
