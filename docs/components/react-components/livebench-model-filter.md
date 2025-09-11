@@ -54,20 +54,23 @@ const delim =
 };
 
 /_ ------------------------------------- helpers ------------------------------------- _/
-const toNumber = (v) => {
-if (v == null || v === "") return NaN;
+const toNumber = function (v) {
+if (v === null || v === undefined || v === "") return NaN;
 if (typeof v === "number") return v;
-const s = String(v).trim().replace(/,/g, "");
-const m = /^([0-9]_\.?[0-9]+)\s_([kKmM])?$/.exec(s);
+
+var s = String(v).trim().replace(/,/g, "");
+// e.g., "12.34", "12k", "1.2M"
+var m = /^([0-9]_\.?[0-9]+)\s_([kKmM])?$/.exec(s);
 if (m) {
-const n = parseFloat(m[1]);
-if (m[2]?.toLowerCase() === "k") return n _ 1_000;
-if (m[2]?.toLowerCase() === "m") return n _ 1_000_000;
+var n = parseFloat(m[1]);
+if (m[2] && m[2].toLowerCase() === "k") return n _ 1000;
+if (m[2] && m[2].toLowerCase() === "m") return n _ 1000000;
 return n;
 }
-const n = Number(s);
-return Number.isFinite(n) ? n : NaN;
+var n2 = Number(s);
+return isFinite(n2) ? n2 : NaN;
 };
+
 const normalize01 = (v) => {
 const n = toNumber(v);
 if (!Number.isFinite(n)) return NaN;
@@ -95,10 +98,21 @@ const COST_1K_FALLBACK_COL = "usd_per_1k_output"; // fallback if needed
 const SPEED_COL = "median_output_tokens_per_second"; // tokens / sec
 const LICENSE_COL = "license_type"; // open / proprietary (optional)
 
-// Map from metric base -> CSV column (eval** prefix in file)
-const resolveMetricKey = (base, cols) => {
-const p = `eval**${base}`;
-return cols.includes(p) ? p : null;
+// Map from metric base -> CSV column (eval\*\* prefix in file)
+const resolveMetricKey = function (base, cols) {
+var exact = "eval\_\_" + base; // <-- double underscore
+if (cols.indexOf(exact) !== -1) return exact;
+
+// tolerant fallback: find any eval**\* column that contains the base
+var i, c, lowBase = String(base).toLowerCase();
+for (i = 0; i < cols.length; i++) {
+c = String(cols[i]);
+if (c.toLowerCase() === lowBase) return c;
+if (c.toLowerCase().indexOf("eval**") === 0 && c.toLowerCase().indexOf(lowBase) !== -1) {
+return c;
+}
+}
+return null;
 };
 
 /_ --------------------------------------- data load --------------------------------------- _/
@@ -244,7 +258,7 @@ return "";
 };
 
 /_ -------------------------------- sliders (context / cost1M-blended / speed) -------------------------------- _/
-const CONTEXT_MAX = 1_000_000;
+const CONTEXT_MAX = 1000000;
 const COST_CAP = 100; // slider max = 100; when at max, treat as "no cost filter"
 const SPEED_MAX = 400;
 
@@ -340,6 +354,7 @@ style={{marginRight: 8, marginBottom: 8}} >
 );
 
 const Slider = ({id, label, value, onChange, min, max, step = 1}) => (
+
 <div style={{marginBottom: 12}}>
 <label htmlFor={id} style={{display: "block", fontWeight: 600}}>
 {label}: <span style={{fontWeight: 400}}>{Number.isFinite(value) ? value : "—"}</span>
@@ -358,6 +373,7 @@ style={{width: "100%", marginTop: 6}}
 );
 
 const profileWhy = activeProfile ? (
+
 <div className="alert alert--secondary" style={{ marginBottom: 12 }}>
 <div style={{ fontWeight: 700, marginBottom: 4 }}>{activeProfile.label} — why these filters</div>
 <ul style={{ margin: 0 }}>
@@ -367,6 +383,7 @@ const profileWhy = activeProfile ? (
 ) : null;
 
 return (
+
 <div
 style={{
         border: "1px solid var(--ifm-color-emphasis-200)",
