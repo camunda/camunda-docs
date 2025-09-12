@@ -1,11 +1,14 @@
 .config-table-wrapper {
   margin-top: 1rem;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .config-table {
   width: 100%;
   border-collapse: collapse;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .config-table th,
