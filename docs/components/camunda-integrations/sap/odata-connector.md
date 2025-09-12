@@ -42,7 +42,12 @@ WebIDEUsage: odata_gen
 ```
 
 :::info
-The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing (i.e., no User Tasks in the execution path). Use `BasicAuthentication` or any `OAuth2`-based mechanism. `PrincipalPropagation` is not supported because it requires a user-bound security context; Camunda User Tasks do not expose a JWT (for example, as a transient variable) that the connector could forward at runtime.
+The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing — that is, scenarios without user tasks in the execution path.
+
+Use `BasicAuthentication` or any `OAuth2`-based mechanism.
+
+`PrincipalPropagation` is not supported because it requires a user-bound security context. Camunda user tasks do not expose a JWT (for example, as a transient variable) that the connector can forward at runtime.
+
 :::
 
 ## Configuration and deployment
