@@ -895,7 +895,7 @@ module.exports = {
           },
           items: [
             "components/saas/encryption-at-rest",
-            "components/saas/byok/aws-byok-setup",
+            "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
             "components/saas/byok/cost-and-troubleshooting",
             "components/saas/byok/faq",

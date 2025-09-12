@@ -4,7 +4,7 @@ title: "Cost implications and troubleshooting"
 description: "Learn more about cost implications and troubleshooting."
 ---
 
-Using BYOK with AWS KMS incurs costs directly in your AWS account. Camunda 8.8 does not charge for the BYOK feature itself, but you are responsible for all AWS KMS usage.
+Using external encryption keys with AWS KMS incurs costs directly in your AWS account. Camunda does not charge for the feature itself, but you are responsible for all AWS KMS usage.
 
 ## Cost implications
 
@@ -15,7 +15,7 @@ Using BYOK with AWS KMS incurs costs directly in your AWS account. Camunda 8.8 d
 | CloudTrail logs | Charges for storing and accessing CloudTrail events                      | Includes encryption/decryption activity by Camunda cluster |
 
 :::warning Cost responsibility
-You are responsible for monitoring AWS KMS usage and associated costs. Camunda does not bill for KMS or CloudTrail usage.
+You are responsible for monitoring AWS KMS usage and associated costs.
 :::
 
 ### Cost optimization tips
@@ -26,15 +26,15 @@ You are responsible for monitoring AWS KMS usage and associated costs. Camunda d
 
 ## Troubleshooting
 
-The following table summarizes common issues customers may encounter when using BYOK and recommended actions:
+The following table summarizes common issues customers may encounter when using external encryption keys and recommended actions:
 
-| Issue                             | Possible cause                                                  | Resolution                                                                   |
-| --------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| Cluster cannot access KMS key     | Key policy does not grant Camunda cluster IAM role access       | Update KMS key policy to include correct IAM role permissions                |
-| Encryption/decryption errors      | Key is disabled, deleted, or in wrong region                    | Re-enable key, restore key, or create key in correct region                  |
-| CloudTrail does not show activity | CloudTrail not enabled in region                                | Enable CloudTrail for region where cluster resides                           |
-| Key rotation issues               | Old key deleted before updating cluster, or new key not applied | Ensure cluster references new Key ARN, verify volumes encrypted with new key |
+| Issue                             | Possible cause                                                      | Resolution                                                                                                 |
+| --------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Cluster cannot access KMS key     | Key policy does not grant the Camunda Cluster AWS Role access       | Update KMS key policy to include the correct AWS Role ARN from the Camunda Console                         |
+| Encryption/decryption errors      | Key is disabled, deleted, or in the wrong region                    | Re-enable or restore key, or create a new key in the same region as the Camunda cluster                    |
+| CloudTrail does not show activity | CloudTrail not enabled in region                                    | Enable CloudTrail in the AWS region where the cluster resides                                              |
+| Key rotation issues               | New key not applied before old key deletion, or cluster not updated | Update cluster configuration with the new Key ARN before removing the old key. Verify encryption settings. |
 
 :::note Support
-If issues persist after checking policies, regions, and key status, contact AWS support for KMS-related troubleshooting. For Camunda-specific issues with cluster provisioning, contact Camunda support.
+If issues persist after checking key policies, region, and key status, contact AWS support for KMS-related troubleshooting. For Camunda-specific issues with cluster provisioning, contact Camunda support.
 :::

@@ -22,7 +22,7 @@ Without BYOK, customers in these environments may need to accept a higher risk p
 
 ## Feature overview
 
-BYOK enables Camunda 8 SaaS customers using **AWS regions** to configure their own AWS KMS encryption keys for cluster data at rest.
+External encryption enables Camunda SaaS customers to configure their own AWS KMS encryption keys for cluster data at rest.
 
 **Supported storage types** (encrypted with customer-managed keys):
 
@@ -35,11 +35,11 @@ BYOK enables Camunda 8 SaaS customers using **AWS regions** to configure their o
 
 - **Provisioning** — configure a customer-managed key when creating a cluster
 - **Audit logging** — view encryption and decryption activity in AWS CloudTrail
-- **Rotation** — rotation must be handled manually in AWS KMS; Camunda does not currently perform automated rotation
+- **Rotation** — rotation must be handled on the AWS KMS side; Camunda SaaS cannot initiate key rotation.
 
 ## Shared responsibility model
 
-BYOK introduces a shared responsibility between Camunda and the customer.
+External encryption introduces a shared responsibility between Camunda and the customer.
 
 **Customer responsibilities**
 
@@ -47,7 +47,6 @@ BYOK introduces a shared responsibility between Camunda and the customer.
 - Ensure the key resides in the same **AWS region** as your Camunda 8 SaaS cluster
 - Configure key policies to allow Camunda access
 - Monitor and rotate keys as required by your internal security policies
-- Cover costs for **storage** and **management** of the KMS key in your AWS account (Camunda covers **usage** costs for encryption and decryption API calls)
 
 :::warning Key deletion or permissions changes
 Disabling, deleting, or revoking permissions for your KMS key will make your cluster and its data inaccessible. This is the customer's responsibility to manage and restore.
@@ -59,10 +58,3 @@ Disabling, deleting, or revoking permissions for your KMS key will make your clu
 - Handle encryption and decryption operations for the customer
 - Integrate BYOK into the cluster creation and provisioning flow
 - Surface key usage errors in the Camunda Console
-- Provide documentation, examples, and troubleshooting guidance
-
-:::note Risk scenarios
-
-- **Incorrect key policy configuration** → Customer responsibility to fix the policy
-- **Camunda system failure in applying the key** → Camunda responsibility to resolve and ensure data remains encrypted  
-  :::

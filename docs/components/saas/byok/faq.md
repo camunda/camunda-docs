@@ -1,13 +1,13 @@
 ---
 id: faq
 title: "FAQ"
-description: "Frequently asked questions about encryption at rest, encryption key types, and Bring Your Own Key (BYOK) in Camunda 8 SaaS."
+description: "Frequently asked questions about encryption at rest, encryption key types, and External Encryption Keys in Camunda 8 SaaS."
 keywords: ["encryption", "BYOK", "KMS", "encryption keys", "security", "FAQ"]
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-This page answers common questions about encryption at rest, encryption key types, and Bring Your Own Key (BYOK) for Camunda 8 SaaS clusters.
+This page answers common questions about encryption at rest, encryption key types, and External Encryption Keys for Camunda 8 SaaS clusters.
 
 ## General questions
 
@@ -19,10 +19,10 @@ Encryption at rest ensures that data stored on physical media (for example, disk
 
 Camunda 8 SaaS supports the following options:
 
-- **Provider-managed encryption (default):** Data encrypted with a Google Cloud Platform (GCP) provider-managed key.
+- **Provider-managed encryption (default):** Data encrypted with an encryption key supplied by the cloud provider (AWS, GCP).
 - **Camunda-managed software key:** Data encrypted with a Camunda-managed key at the software protection level.
 - **Camunda-managed hardware key:** Data encrypted with a Camunda-managed key at the hardware (HSM) protection level.
-- **Bring your own key (BYOK):** Use your own encryption key from a supported cloud KMS provider, such as AWS KMS.
+- **External:** Use your own encryption key from a supported cloud KMS provider, such as AWS KMS.
 
 For a full comparison, see [encryption at rest](/components/saas/encryption-at-rest.md).
 
@@ -32,7 +32,7 @@ You can only choose the encryption type when creating a new cluster. It cannot b
 
 ### Is encryption at rest enabled by default?
 
-Yes. All Camunda 8 SaaS clusters have encryption at rest enabled by default using GCP provider-managed encryption keys.
+Yes. All Camunda 8 SaaS clusters have encryption at rest enabled by default using provider-managed encryption keys.
 
 ## Camunda-managed keys
 
@@ -52,23 +52,19 @@ Camunda-managed keys are rotated regularly with zero downtime to maintain compli
 
 ### Do backups use Camunda-managed keys?
 
-No. Backups always use the default GCP provider-managed encryption.
+No. Backups always use the default provider-managed encryption.
 
-## Bring your own key (BYOK)
+## External encryption keys
 
-### What is BYOK?
+### What are external encryption keys?
 
-Bring Your Own Key (BYOK) lets you use your own encryption key from a supported cloud Key Management Service (KMS) provider, such as AWS KMS, to encrypt Camunda 8 SaaS cluster data.
+External encryption keys allow you to supply an encryption key from a supported Cloud Key Management Service (KMS) provider, such as AWS KMS, to encrypt Camunda 8 SaaS cluster data. Amazon KMS is currently the only supported KMS provider.
 
 You retain full control over the key lifecycle, including rotation and revocation.
 
-### Which plans support BYOK?
+### Which plans support external encryption?
 
-BYOK is available for **enterprise plans only**.
-
-### How does key rotation work with BYOK?
-
-You rotate the key in your KMS provider. Camunda automatically detects the rotation and applies it with zero downtime.
+External encryption is available for **enterprise plans only**.
 
 ### Can I revoke access to my encryption key?
 
@@ -78,9 +74,9 @@ Yes. If you revoke access to the key in your KMS provider, Camunda will immediat
 
 No. Camunda never stores your encryption key. Access is granted through standard cloud KMS integrations.
 
-### Where can I find BYOK setup instructions?
+### Where can I find setup instructions?
 
-See [BYOK setup guide](/components/saas/byok/aws-kms-setup.md) for configuration steps.
+See [external encryption setup guide](/components/saas/byok/aws-kms-setup.md) for configuration steps.
 
 ## Other questions
 
@@ -90,7 +86,7 @@ Encryption at rest has minimal impact on performance because encryption and decr
 
 ### Can I use different encryption keys for each cluster?
 
-Yes. Each cluster can have its own encryption key, whether provider-managed, Camunda-managed, or BYOK.
+Yes. Each cluster can have its own encryption key, whether provider-managed, Camunda-managed, or External.
 
 ### Is encryption in transit also supported?
 
