@@ -1517,9 +1517,11 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                   ],
                 },
-                // {
-                //   Migration: [],
-                // },
+                {
+                  Migration: [
+                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
+                  ],
+                },
               ],
             },
             {
@@ -1596,12 +1598,10 @@ module.exports = {
               ],
               Operate: [
                 "self-managed/components/orchestration-cluster/operate/operate-configuration",
-                "self-managed/components/orchestration-cluster/operate/importer-and-archiver",
               ],
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/importer-and-archiver",
                 "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
