@@ -27,7 +27,7 @@ This documentation is intended for:
 - **Solution architects** designing process automation across Camunda and ServiceNow.
 - **Administrators** managing integration configuration and security.
 
-<!-- ## Scope
+<!--- ## Scope
 
 This overview page introduces the ServiceNow integration. Detailed topics are covered in separate sections:
 
@@ -38,80 +38,73 @@ This overview page introduces the ServiceNow integration. Detailed topics are co
 - [Examples & blueprints](./servicenow-example-blueprints.md)
 - [Troubleshooting & FAQs](./servicenow-troubleshooting.md)
 - [Resources](./servicenow-resources.md)
-- [Glossary](./servicenow-glossary.md)   -->
+- [Glossary](./servicenow-glossary.md)
 
-<!--
 adding bullet points here in the outline that Dominic drafted
 ofc they need to be properly formulated
--> feel free to use, change, and shuffle them around
-
+feel free to use, change, and shuffle them around
 
 overall: there's separate and very detailed installation and config instructions in the SN marketplace entry for the Camunda Spoke
-let's not repeat from that documentation in here but rather link to it where appropriate -> Dom should have the final call(s) here
--->
+let's not repeat from that documentation in here but rather link to it where appropriate Dom should have the final call(s) here --->
 
 ## Scope
 
 ### About the integration
 
-- hybrid approach: custom actions in SN spoke ("Camunda Spoke") & Camunda Connector and Element Templates
-- can be used independent of each other, yet most powerful when used together
-- no proprietary Camunda setup needed -> all standard SN plugins and artifacts
-- Camunda's SN integration is certified
+- Hybrid approach using custom actions in the ServiceNow Spoke ("Camunda Spoke") and Camunda Connectors/Element Templates
+- Components can be used independently but are most powerful when combined
+- No proprietary Camunda setup required — only standard ServiceNow plugins and artifacts
+- Camunda's ServiceNow integration is certified
 
 ### Prerequisites
 
 - Camunda 8.8+
-- SaaS is targeted ootb, SM needs small adaptions in the SN spoke
-- SN plugin dependencies listed in Spoke; IntegrationHub Enterprise Pack optional, only required when SN flows are to be started from Camunda
-- SN: technical user with appropriate permissions on desired table; this user is then used in the SN connector in Camunda
+- SaaS supported out-of-the-box; Self-Managed requires small adaptions in the ServiceNow Spoke
+- ServiceNow plugin dependencies listed in the Spoke; IntegrationHub Enterprise Pack required only for starting ServiceNow flows from Camunda
+- ServiceNow technical user with appropriate permissions for the required tables; this user is then configured in the Camunda ServiceNow connector
 
-### Setup and Configuration
+### Setup and configuration
 
-- SN: from SN Marketplace
-- Camunda: ootb available (Element Templates will be published just as any other ootb Connector template)
-- Camunda: API credential (for use in SN connectivity); Orchestration Cluster Secret required
-- Camunda SN outbound connector element template: only instance/tenant host name (e.g. `ven1234`) is required, not the full host name
+- **ServiceNow**: Install from the ServiceNow Marketplace
+- **Camunda**: Out-of-the-box support (Element Templates published like any other Connector template)
+- **Camunda API credential**: Used for ServiceNow connectivity; Orchestration Cluster Secret required
+- **Outbound connector element template**: Only the instance/tenant host name (e.g., `ven1234`) is required, not the full hostname
 
-### Integration Features
+### Integration features
 
-- SN
+- **ServiceNow**
+  - Start a BPMN process
+  - Cancel a BPMN process
+  - Send a message or signal to a BPMN process for correlation
 
-  - start BPMN process
-  - cancel BPMN process
-  - send a message to a BPMN process (correlation)
-  - send a signal to a BPMN process
+- **Camunda**
+  - Perform CRUD operations on any ServiceNow table
+  - Preconfigured support for several popular tables with complete payloads for write operations
+  - Error handling and result mapping similar to the REST Connector
+  - Start a ServiceNow Flow via REST call (requires IntegrationHub Enterprise Pack)
 
-- Camunda
+### Best practices
 
-  - CRUD on any SN table
-  - several popular tables pre-configured, including "maximal" payload for write operations
-  - error handling ~ REST connector
-  - result/output mapping ~ REST connector
-  - start a SN flow via REST call; requires installation of ServiceNow IntegrationHub Enterprise Pack (b/c only then can Flows in SN be started via a REST call)
+- Reference the four integration patterns from our technical demos
+- In BPMN, map the `sys_id` from the write operation response into a top-scope variable so it can be used in later steps
+- Store ServiceNow technical user credentials securely using Connector Secrets and reuse them via `{{secrets.<...>}}` in the ServiceNow element template (outbound connector and flow starter)
 
-### Best Practices
+### Troubleshooting & FAQs
 
-- reference 4 Integration Patterns from our Tec Dem
-- in BPMN: map `sys_id` from write operation response into top scope variable to have the unique identifier for a SN record in subsequent steps in the BPMN process
-- use Connector Secrets to safely store the SN technical user credentials and re-use them via {{secrets.<...>}} in the SN element template (outbound connector and flow starter)
-
-### Troubleshooting & Faqs
-
-- SN: turn on verbose flow execution logs (via `Flow Reporting Settings` in the actual flow in SN Flow Designer)
-- Camunda: map both entire SN task response operation and individual variables from the response (accounts for any external system call, not SN integration specific)
-- Camunda: use error handling of SN tasks to act on hiccups or network communication errors to SN instance
+- **ServiceNow**: Enable verbose flow execution logs via `Flow Reporting Settings` in the ServiceNow Flow Designer
+- **Camunda**: Map both the entire ServiceNow task response and any required individual variables
+- Use Camunda error handling to respond to task or network communication failures
 
 ### Resources
 
-- SN: dedicated installation + configuration doc for the Camunda Spoke
+- Dedicated installation and configuration documentation for the Camunda Spoke
 
 ### Glossary
 
-- "Camunda Spoke": custom actions for communicating with a Camunda Cluster
+- **Camunda Spoke**: Custom actions for communicating with a Camunda cluster
 
 ## Key benefits
 
-- Streamline ITSM processes by combining Camunda’s orchestration with ServiceNow workflows.
-- Reduce manual effort and human error through automated task execution.
-- Enable end-to-end visibility of processes that span multiple systems.
+- Streamline ITSM processes by combining Camunda’s orchestration with ServiceNow workflows
+- Reduce manual effort and human error through automation
+- Gain end-to-end visibility of processes across multiple systems
