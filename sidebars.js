@@ -848,7 +848,6 @@ module.exports = {
             "components/console/manage-clusters/create-cluster",
             "components/console/manage-clusters/manage-cluster",
             "components/console/manage-clusters/cluster-connectors",
-            "components/console/manage-clusters/setup-client-connection-credentials",
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
@@ -1227,6 +1226,9 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/application-configs",
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 "self-managed/installation-methods/helm/configure/add-extra-manifests",
+                "self-managed/installation-methods/helm/configure/registry-and-images",
+                "self-managed/installation-methods/helm/configure/license-key",
+                "self-managed/installation-methods/helm/configure/web-modeler-console-connectors",
                 {
                   Database: [
                     {
