@@ -580,6 +580,106 @@ export const configs = [
     types: ["Double-configuration"],
     area: ["Data"],
   },
+
+  {
+    name: "camunda.data.secondary-storage.opensearch.url",
+    legacy: [
+      "camunda.database.url",
+      "camunda.operate.opensearch.url",
+      "camunda.tasklist.opensearch.url",
+      "zeebe.broker.exporters.camundaexporter.args.connect.url",
+      "(camunda.operate.zeebeOpensearch.url)",
+      "(camunda.tasklist.zeebeOpensearch.url)",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.cluster-name",
+    legacy: [
+      "camunda.database.clusterName",
+      "camunda.operate.opensearch.clusterName",
+      "camunda.tasklist.opensearch.clusterName",
+      "zeebe.broker.exporters.camundaexporter.args.connect.clusterName",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.username",
+    legacy: [
+      "camunda.database.username",
+      "camunda.operate.opensearch.username",
+      "camunda.tasklist.opensearch.username",
+      "zeebe.broker.exporters.camundaexporter.args.connect.username",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.password",
+    legacy: [
+      "camunda.database.password",
+      "camunda.operate.opensearch.password",
+      "camunda.tasklist.opensearch.password",
+      "zeebe.broker.exporters.camundaexporter.args.connect.password",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.security.enabled",
+    legacy: [
+      "camunda.database.security.enabled",
+      "zeebe.broker.exporters.camundaexporter.args.connect.security.enabled",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.security.certificate-path",
+    legacy: [
+      "camunda.database.security.certificatePath",
+      "camunda.tasklist.opensearch.ssl.certificatePath",
+      "camunda.operate.opensearch.ssl.certificatePath",
+      "zeebe.broker.exporters.camundaexporter.args.connect.security.certificatePath",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.security.verify-hostname",
+    legacy: [
+      "camunda.database.security.verifyHostname",
+      "camunda.tasklist.opensearch.ssl.verifyHostname",
+      "camunda.operate.opensearch.ssl.verifyHostname",
+      "zeebe.broker.exporters.camundaexporter.args.connect.security.verifyHostname",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.security.self-signed",
+    legacy: [
+      "camunda.database.security.selfSigned",
+      "camunda.tasklist.elasticsearch.ssl.selfSigned",
+      "camunda.operate.elasticsearch.ssl.selfSigned",
+      "zeebe.broker.exporters.camundaexporter.args.connect.security.selfSigned",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.index-prefix",
+    legacy: [
+      "camunda.database.indexPrefix",
+      "camunda.tasklist.opensearch.indexPrefix",
+      "camunda.operate.opensearch.indexPrefix",
+      "zeebe.broker.exporters.camundaexporter.args.index.indexPrefix",
+    ],
+    types: ["Double-configuration"],
+    area: ["Data"],
+  },
   {
     name: "camunda.data.primary-storage.directory",
     legacy: ["zeebe.broker.data.directory"],
