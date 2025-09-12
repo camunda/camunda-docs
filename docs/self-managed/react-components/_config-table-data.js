@@ -731,46 +731,55 @@ export const configs = [
   {
     name: "camunda.data.primary-storage.rocksdb.statistics-enabled",
     legacy: ["zeebe.broker.experimental.rocksdb.enableStatistics"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.access-metrics",
     legacy: ["zeebe.broker.experimental.rocksdb.accessMetrics"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.memory-limit",
     legacy: ["zeebe.broker.experimental.rocksdb.memoryLimit"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.max-open-files",
     legacy: ["zeebe.broker.experimental.rocksdb.maxOpenFiles"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.max-write-buffer-number",
     legacy: ["zeebe.broker.experimental.rocksdb.maxWriteBufferNumber"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.min-write-buffer-number-to-merge",
     legacy: ["zeebe.broker.experimental.rocksdb.minWriteBufferNumberToMerge"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.io-rate-bytes-per-second",
     legacy: ["zeebe.broker.experimental.rocksdb.ioRateBytesPerSecond"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.wal-disabled",
     legacy: ["zeebe.broker.experimental.rocksdb.walDisabled"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
   {
     name: "camunda.data.primary-storage.rocksdb.sst-partitioning-enabled",
     legacy: ["zeebe.broker.experimental.rocksdb.enableSstPartitioning"],
+    types: ["1-to-1"],
     area: ["Data"],
   },
 

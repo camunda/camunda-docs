@@ -202,9 +202,7 @@ const SearchableTable = () => {
                     : [];
                 return (
                   <tr key={index}>
-                    <td style={{ minWidth: "100px" }}>
-                      {areaArray.length > 0 ? areaArray.join(", ") : "-"}
-                    </td>
+                    <td>{areaArray.length > 0 ? areaArray.join(", ") : "-"}</td>
                     <td className="config-table-name">
                       <code>{config.name}</code>
                     </td>
