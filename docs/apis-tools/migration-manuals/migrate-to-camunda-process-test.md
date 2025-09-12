@@ -1,13 +1,14 @@
 ---
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
+sidebar_label: "Camunda Process Test"
 description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/java-client/zeebe-process-test.md) (ZPT).  
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).  
 Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**.  
 See the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for details.
 
@@ -34,7 +35,7 @@ Be aware that there are differences between ZPT and CPT in both API and behavior
 
 First, update your Maven dependency.
 
-- **If you use ZPT with Camunda Spring Boot SDK integration**  
+- **If you use ZPT with Camunda Spring Boot Starter integration**  
   (`artifactId: spring-boot-starter-camunda-test` or `spring-boot-starter-camunda-test-testcontainer`),  
   replace it with **CPT’s Spring integration module**.
 
@@ -44,7 +45,7 @@ First, update your Maven dependency.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -119,7 +120,7 @@ Prepare your remote runtime:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -153,7 +154,7 @@ Now, it's time to migrate your process tests.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -252,7 +253,7 @@ This is the equivalent CPT test class:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>

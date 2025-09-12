@@ -1,16 +1,18 @@
 ---
 id: delete-document
 title: "Delete document"
-description: "Delete a document from the Camunda 8 cluster."
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Delete document"
 hide_title: true
 hide_table_of_contents: true
-api: eJztV01z2zYQ/Ss7OCVTmlRSp01509hOqk7qeGylOTg+gOBSREICDLC0rdHwv3cWoD5sy40z7aUzOWgkEYt9+7Bvl4uVILnwIr8Ux1b1LRoSV4mwHTpJ2ppZKXJRYoOEm/VElOiV0x0biFwch2WQUI4WUDnbAtUIR7LtTSnhNaim94Qu/WQ+mVNLCFRLAqq1B+1B9c6hoWYJvu866whLqKzbevRkHXqwFdCywxymHy8SeHt0loA2By221i3hmbHmoHO27BVH9jyBxirZPHj+yYhEdNLJFgkdc18JI1tkpiPerBSJ0Eyuk1SLRDj82muHpcjJ9Xj/BOY1wuw4RFfjNmiyEI8uFYnwqsZWinwlmIHIhSenzUIMQ7KBDyy32F97dMs74JVs/FPRg7NtDHcXOUP/HNUV4/rOGo+e119OJvz1EHrj80b6EasE3yuF3ld90yxTMSTicHL4re2a6hDkQl+jYUbs0FiCyvamTEPalDXEGsxXQnZdo1VQadY5WzTY/vTZs9/VDq27gFM4i5ZQIkndgC0+oyIIkbNhgSVoA5fnb47gt8NXv149q4k6n2fZzc1N6ip1gKUm61LrFpmrFH/Y7nkK8xodQiuXUCDIstSMKRvoHFcTafTgO1S60oqzwkzHsIOmI78xCzEslulm8zZH93OViMq6VpLIRe/0g/KcwofzGegSDelqqc3iIXTYU8m+YR+ysD3lRSPNF04caWr2gt5H8X3bSrdc6/AuwJAIT5L6HRpCG8IFut34taGfXz7wzTL5fT4/g+gClC0xtIfQPkYgJtFqo9u+FfnhZJKIVt7Gf79MJgP75Iw/gYkBvO0aaYK07tPRBlquq+gtENPGkzTqv8qMdXqh7+Om3CfWuRCjiI8jo2HgtVf76nNqgE/ZsQ7ROevAqtBrS7ipdRPcc52usbnToKcftfaj1n7U2mO1NiSiRartdjQK8wTVIhfZ+nXms9V2mBj4TYvuej1t9K4RuVjFyhnyLFvV1tOQr3j0GbJrTsu1dFoWTRQjL8cKWysnjDbh8b4M8gLPFGtm752q0VOc6eAozmJwfnIxh7eS8EbGlzTD34V5PXk92YvApk/wPj2bQWQedbnTK9YQXPR7IaLx94KEycWj6p2m5QW7iEdYoHTopj2naaOdETsg8f9oJJLxx5u1ov74OOfwC+m1+pYLtgkK0qaywXBU0n4G07MZZxudj8wn6YuH4j2bhRpUtm17ExqxWcSBSe6ZsUUiGq3Q+FAm42y5NnsXV+CviAgvUk5wVOS6/y401X2RKttmKm7bfBeNLbJWapONED47mv754fR4evBudnRyenFy8CKdpHRL4Qw666mVZieO8bZQPnKbWG1fO//Pi8UoC8JbyrpGasPCCce7GpvE5eaa4UUi8p07x1UyVvqlWK0K6fGDa4aBH8erAPeOUntuC49cBnaP79/cC/ay+ILLO5eUa9n0bCW45Nb96juDfHY+Xm6ew1NuUXvjGh9Ks9wNah3vzvkOV0MiapQluhBmNJgqhR3tbH102mGem9Z/fPLuZH4ihuFvcfxGuQ==
+api: eJztV0tvGzcQ/isETwm63lVSp3X3pspKqiK1DUtpUNg6UNxZLRMuueHDtiDsfy+G3NXDklEb7anIQZDEx3zzzYsza+rY0tL8hp5r7mtQjs4TqhswzAmtJgXNaQESHGz2E1qA5UY0eIDm9Fbdqpub0eXFdDKdjS9Gf+XT2fXlxYf5HHfOw2XCSNHdJ6XRNXEVkBGrvSoYOSNceuvApHjhQjsgrmKOuEpYIizh3hhQTq6I9U2jjYOClNpsJVqnDViiS+JWDeRk+HmakA+jq4QIdVJDrc2KvFJanTRGF56j3q8TIjVn8mD9VtGENsywGhwYtMyaKlYD2qHDmxQ0oQKpN8xVNKEGvnlhoKC5Mx4e22dWAZmcB+0q2CrtNImGTWlCLa+gZjRfUyblZRlQ96X05ieTIlrHK/HNg1wRUYByohRgd6yMQkttauZ27gbFnXAS9hfbedsmG5rBmluO3zyY1R7Jkkn7XJZB2Jbr/iZGwj579F9QwQi1pG07R1zbaGXB4v7bwQC/DqE3Mu+Z7bAKYj3nYG3ppVyltE3o6eD0n64LVwUll+IOFDJCgUo7UmqvijSEB9fKYSagu5pGCh5yJWuMXkiof/hiUe56h9Y+4JBcxZOkAMeEJHrxBbgjQXM8uICCCEVurt+PyC+n736ev6qca2yeZff396kp+QkUwmmTarPMTMnxg+dep2RWgQFSsxVZAGFFIRCTSdIYzGmHQWIb4KIUHL2CTDu1Q+5Efp0XolqYDpvLWx899tVOuHkjDorEkHy6nvShuhJqeQgd7pTMS5TBFtq7fCGZ+oqO64L2EPQxivV1zcyqj8N9gDah1jHnd2hQoRwswezqL5T78e2BbAyT32azKxJFEK4LCGUolKkOCEnUQona1zQ/HQwSWrOH+O+nwaBFmejxZzBRBB4ayVQIrcd0hCI15lWUFogJZR1T/L/yjDZiKR7jprTd+oJ2QXweGbUt7r07lp9DRdDKBuMQjNGGaB5qekHuKyGDeMzTHhsrDVj3Pde+59r3XHsq19qE1uAqvW3QQt/iKprTrH/ObLbeNi0tvrRg7vquxhtJc7qOmdPmWbautHVtvsYWq83u0C13zAi2kDEYcTtmWB85oYUKy8c8iBvYU/TMLg2vwLrYWZJR7PnI9Xg6Ix+Yg3sWH2mE34c5G5wNjiLg0WdIH15NSGQe43KnVvQQmPRHIeLhl4KEzsUC90a41RRFRBP+CsyAGXp00yZ2OuyAhP8X4RBNuh/v+4j6/fMsBIVQpQ7Xu+A4rtTwaoIOBGMjmUH6piunjAf7du1e34WP1VIogC6MY3D0pXApXOUXKdd1xuPxzbew1oOl7UGoX01CxnJd116Fsq2Wsb1iRzp/mlApOCgLR1T7GHfIn5EMeZMOXqLiQupFVjOhsg7CZqPhH58uzocnHyej8cV0fPImHaTuwQXzNtq6mqkdPboZpnhiAlpvH6n/4zDURamDB5c1kgmFzg7GX3cF52YzGlma0HxnTponXdW4oev1gln4ZGTb4nIcK8KcIyyWmCcGi13j/psZ4yiLr7DaG3jumPR4imL69rXvhUq+uu4GpdfkOZPfUb26RaZWu0r1+hZ7k1tCK2AFmKBmPDDkHBq3c/XJzgl5bp6R8/HH8WxM2/Zv2TKQeQ==
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Delete a document from the Camunda 8 cluster.
 
 Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
@@ -50,7 +55,15 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       in: "path",
       required: true,
       description: "The ID of the document to delete.",
-      schema: { type: "string" },
+      schema: {
+        allOf: [
+          {
+            description: "Document Id that uniquely identifies a document.",
+            format: "DocumentId",
+            title: "DocumentId",
+          },
+        ],
+      },
     },
     {
       name: "storeId",

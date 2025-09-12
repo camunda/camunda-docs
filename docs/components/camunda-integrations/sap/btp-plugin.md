@@ -101,7 +101,7 @@ Either walk yourself through the prompts or provide all information to the CLI:
 
 - `csap setup` will guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for btp-plugin \

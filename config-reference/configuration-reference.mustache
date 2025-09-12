@@ -3,9 +3,24 @@ id: properties-reference
 title: Properties reference
 ---
 
-Properties for the Camunda Spring SDK.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import Property from "@site/src/components/Property";
+
+
+Properties for the Camunda Spring Boot Starter.
 
 ## Properties
+
+<Tabs groupId="property-format" defaultValue="property" queryString values={
+
+[
+{label: 'Configuration property', value: 'property' },
+{label: 'Environment variable', value: 'env' },
+]
+}>
+</Tabs>
+
 
 {{#groups}}
 
@@ -18,28 +33,27 @@ Properties for the Camunda Spring SDK.
 <table>
 <thead>
   <tr>
-    <th>Configuration Property/Environment Variable</th>
-    <th>Type</th>
-    <th>Default value</th>
+    <th>Property</th>
     <th>Description</th>
+    <th>Default value</th>
   </tr>
 </thead>
 <tbody>
 {{#properties}}
 <tr>
 <td>
-  <code>{{name}}</code><br/><code>{{env}}</code>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
-<td>
-  <code>{{type}}</code>
-</td>
-<td>
-  <code>{{defaultValue}}</code>
-</td>
+
 <td>
 
 {{&description}}
 
+Type: <code>{{type}}</code>
+
+</td>
+<td>
+  <code>{{defaultValue}}</code>
 </td>
 </tr>
 {{/properties}}
@@ -47,6 +61,10 @@ Properties for the Camunda Spring SDK.
 </table>
 {{/table}}
 {{/groups}}
+
+
+
+
 
 ## Deprecated properties
 
@@ -67,8 +85,7 @@ Deprecated {{&group.description}}
 <table>
 <thead>
   <tr>
-    <th>Configuration Property/Environment Variable</th>
-    <th>Type</th>
+    <th>Property</th>
     <th>Replacement</th>
     <th>Hint</th>
   </tr>
@@ -77,18 +94,18 @@ Deprecated {{&group.description}}
 {{#properties}}
 <tr>
 <td>
-  <code>{{name}}</code><br/><code>{{env}}</code>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
 <td>
-  <code>{{type}}</code>
+  {{#deprecation.replacement}}<a href="#{{deprecation.replacementAnchor}}"><Property defaultValue="property" groupId="property-format" property="{{deprecation.replacement}}" env="{{deprecation.replacementEnv}}"/></a>{{/deprecation.replacement}}
 </td>
 <td>
-  {{#deprecation.replacement}}<code>{{deprecation.replacement}}</code>{{/deprecation.replacement}}
-</td>
-<td>
-
+{{#deprecation.reason}}
 {{deprecation.reason}}
-
+{{/deprecation.reason}}
+{{^deprecation.reason}}
+N/A
+{{/deprecation.reason}}
 </td>
 </tr>
 {{/properties}}

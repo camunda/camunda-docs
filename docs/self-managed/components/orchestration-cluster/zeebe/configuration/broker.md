@@ -300,9 +300,9 @@ This is especially relevant if you were using GCS through the S3 compatibility m
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE, FILESYSTEM]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). Use FILESYSTEM to store backups directly via the filesystem to a particular folder. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
@@ -451,6 +451,34 @@ backup:
       value: null
 ```
 
+### zeebe.broker.data.backup.filesystem
+
+To store your backups in the local filesystem, choose the `FILESYSTEM` backup store and specify where to store the backups locally.
+
+:::caution
+Since the durability of the backups are largely dependent on the target file system and underlying storage, it is recommended to use known durable solutions in production, such as S3, GCS, or Azure. To ensure that this can be used properly in production, you must use a POSIX-compliant file system, and at a minimum replicated disks (e.g. RAID configured disks).
+:::
+
+:::note Backup encryption
+Zeebe does not support backup encryption natively, but it _can_ use filesystem based encryption. This then is a feature of the filesystem and not Zeebe itself.
+:::
+
+| Field    | Description                                                                                                                                                                                                                                                                                 | Example Value      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
+
+#### YAML snippet
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: FILESYSTEM
+        filesystem:
+          basePath:
+```
+
 ### zeebe.broker.cluster
 
 This section contains all cluster related configurations, to setup a zeebe cluster.
@@ -462,6 +490,7 @@ This section contains all cluster related configurations, to setup a zeebe clust
 | replicationFactor    | Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                                          |
 | clusterSize          | Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                          |
 | initialContactPoints | Allows to specify a list of known other nodes to connect to on startup. The contact points of the internal network configuration must be specified. The format is [HOST:PORT]. To guarantee the cluster can survive network partitions, all nodes must be specified as initial contact points. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` specifying a comma-separated list of contact points. Default is empty list.                                                                                                                                                                                                                               | [ 192.168.1.22:26502, 192.168.1.32:26502 ] |
+| clusterId            | Unique identifier for cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | zeebe-cluster-123                          |
 | clusterName          | Allows to specify a name for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERNAME`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | zeebe-cluster                              |
 | heartbeatInterval    | Configure heartbeatInterval. The leader sends a heartbeat to a follower every heartbeatInterval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 250ms                                      |
 | electionTimeout      | Configure electionTimeout. If a follower does not receive a heartbeat from the leader with in an election timeout, it can start a new leader election. electionTimeout should be greater than configured heartbeatInterval. When the electionTimeout is large, there will be delay in detecting a leader failure. When the electionTimeout is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes. If the network latency between the nodes is high, it is recommended to have a higher election latency. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_ELECTIONTIMEOUT`. | 2500ms                                     |
@@ -992,4 +1021,41 @@ security:
       issuerBackendUrl: http://keycloak:18080/auth/realms/camunda-platform
       audience: zeebe-api
       type: keycloak
+```
+
+### Console Ping Configuration
+
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and Zeebe Gateway to ping Console with license information.
+
+#### camunda.console.ping
+
+| Field                        | Description                                                                                                                                                                            | Example value                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                | `true`                         |
+| `endpoint`                   | Endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                               | `https://console.endpoint.com` |
+| `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERNAME`.                                               | `test_cluster_name`            |
+| `pingPeriod`                 | Frequency of pings (e.g., `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                     | `1h`                           |
+| `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PROPERTIES`.       | `testProperty: 123`            |
+| `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_MAX_RETRIES`. | `1`                            |
+| `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MINRETRYDELAY`.                                          | `1s`                           |
+| `retry.maxRetryDelay`        | Maximum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED_RETRY_MAXRETRYDELAY`.                                  | `10s`                          |
+| `retry.retryDelayMultiplier` | Multiplier applied to delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_RETRYDELAYMULTIPLIER`.                     | `2`                            |
+
+##### YAML snippet
+
+```yaml
+camunda:
+  console:
+    ping:
+      enabled: true
+      endpoint: https://console.endpoint.com
+      clusterName: test_cluster_name
+      pingPeriod: 1h
+      properties:
+        testProperty: 123
+      retry:
+        maxRetries: 1
+        minRetryDelay: 1s
+        maxRetryDelay: 10s
+        retryDelayMultiplier: 2
 ```

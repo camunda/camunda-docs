@@ -1,16 +1,18 @@
 ---
 id: get-decision-requirements
 title: "Get decision requirements"
-description: "Returns Decision Requirements as JSON."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get decision requirements"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWUtz2zYQ/is7OCVTWpQTp0150/iRKo0dj63UB9cHEFiJiEmAAUDJGg3/ewcAKckWZcudzPRQHTQUyeV++/oWxHJBLJ0YktySE2TCCCVB449KaCxQWkPuIqJK1NQKJYecJGSCtpW8WheMCEfDtCidJEnIFdpKSwNLtevSQA18vv560ftbkoiUVNMCLWpnx4JIWiBJCO9A+RPnJCLC6S+pzUhEGmM5Sayu8KkRowyBGiMmEjnc4xzUGGyGwLt8jWCWCZYBZcFACpUUPyoEwVFaMRaoYaw02EyYbg09EhHDMiwoSRbEzkvnh7FayAmp6ztnrSmVNGjc/Xf9vjtsWtypG4QBUzGGxoyrPJ+D9gFGHmLIlLQorVNIyzIXzGcs/m6c1sWmVSr9jsy64GuXXyuCTV1Bv/D5eOpPV6hPzi/AZe/ZMPdIHZEpaiOCaY1aIS1OUJOIjJUuqA2X3r/rBFrmtNHzMmCXY66ed3VrePIyhkajKs1w94CtB6t9GsZaFU0pbi81mFEDJdUGuce2KKm0u3oUpHdyahsNd8JZ597PoFftPBU2d7BdXegKTZVbUtdO8Ggbv0qtpoIjB04tdbySysKU5oL3tjOp1CrNsfhlk1GPAQZwGSSBo6Uih8A053EQTJGDkHB7dXYMvx99+O3uTWZtaZI4ns1mPT1mB8iFVbqn9CTWY+Z+Tu5tD0YZaoSCziFFoJwLh0lzWHEYTIlMjAUDq3xiG7PB5Sp0iucbQLi7mdslKSstNlI9gG9XwzaPcyEnm9D+mTF12UkITVVlkzSn8p6sMvpSQQ3AVEVB9bKLPwaoI2IstZX5t03lj9HoEoIKYIrjqhobIOdEIaQoqoIkR/1+RAr6EM5+7fc9V1zGd/BEAj6UOZW+tJ66IyQUSmNTP94xIY2lkv2szCgtJuIp7mN2NUV8EjxqCXXYTShHUjQWcsruTWAS0MpmDjXQB5hGbwTN/SqZIeV+vV+Qm5ubg8FKGDuXq+UiWu8JuifonqDbCPp+s97PlE4F5yh9eS652ix7NM/VDPcL355Xe149w6uj1+zUZsJmHmAipij9vtO9rTu6jVUleQ/OV24aoHrtlVTIdjPgN4qQKj5/doe3p+eenv9zen7o2ugNJLgoa1eHqLXSoBirtEbu9qG5V++GKS12sy7uubbn2p5r27hWR6RAm6lmEOxntzYjCYnblfBgfSWMF1umR7UblKKetiPfSuckIYvApzqJ40WmjK2TRam0reOpS9aUakHTPJSoux1419ZTrhjN/eWuvLob68O2r5plaGyYa8NxXhmLGq5Or0fwiVqc0bmPuYN/DPOx/7HfieBEd9A+uBxC8DxU61oHaSFcK+iECMKvBfGDZ4Os0sLOr52KEMIUqUbtdt5rFdVgeyR3HoRI1Pw5a+vs883ImZ9SI9hLKpyMryshx8oLNvXV7cHgckjWBsSk3zvcLOnLoWcmU0VRSd+e5SS8d1E4pkUlOYWPwIJKx9lcMJTGk6f5vtCKfQl34K9mlHzYcwkOFdl25YmwWZX2mCpiFh5bHtNcpXFBhYwbCBMfD86/XZwMDr4Mj08vrk8PDnv9nn2wPgalMragcs2OT2i73yOfer1YLUuv+brSpMXig43LnArpEufdWzTsvSWd7CURSbZNf++ihoK3ZLFIqcFvOq9rd/lHhXpOktu7FWM9xbkw7j8nyZjm5umXmnXf3jRg/C38B99vOsPVXKRy7htRXrkzEpF7NwjfOiKv7+p20uVDEKQHjGFp1/RsfK9xhF222U+nI1LX/wDfs6Wx
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns Decision Requirements as JSON.
 
 <Heading
@@ -49,7 +54,12 @@ Returns Decision Requirements as JSON.
       required: true,
       description:
         "The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        format: "string<DecisionRequirementsKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -87,11 +97,30 @@ Returns Decision Requirements as JSON.
                   "The name of the resource from which this decision requirements was parsed.",
               },
               tenantId: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
                 type: "string",
-                description: "The tenant ID of the decision requirements.",
+                title: "TenantId",
               },
               decisionRequirementsKey: {
-                type: "string",
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description:
+                      "System-generated key for a deployed decision requirements definition.",
+                    format: "DecisionRequirementsKey",
+                    example: "2251799813683346",
+                    title: "DecisionRequirementsKey",
+                  },
+                ],
                 description:
                   "The assigned key, which acts as a unique identifier for this decision requirements.",
               },

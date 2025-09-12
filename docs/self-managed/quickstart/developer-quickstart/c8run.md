@@ -63,7 +63,8 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following command-line arguments are available:
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
 | Argument                   | Description                                                                                                                                                                                                                   |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -96,7 +97,7 @@ These web interfaces are available at:
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
 - **Orchestration Cluster REST API:** http://localhost:8080/v2/
-- **Inbound Connectors API:** http://localhost:8085/
+- **Inbound Connectors API:** http://localhost:8086/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
 - **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
@@ -130,6 +131,12 @@ To add a custom connector:
 
 Once configured, your connectors are available for use in Modeler.
 
+### Configure Connector secrets
+
+Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
+
+When starting C8Run with the `--docker` option, add the connector secrests to the `connector-secrets.txt` file in the docker-compose folder.
+
 ### Use Camunda APIs
 
 All APIs are **unprotected by default** in Camunda 8 Run and can be accessed without credentials or tokens.
@@ -141,29 +148,55 @@ Available APIs include:
 
 ### Enable authentication and authorization
 
-To enforce API authentication and work with authorizations, you must enable these features. The following minimal `application.yaml` shows the required configuration:
+By default, Camunda 8 Run starts with authentication enabled and API endpoints unprotected.  
+To enforce authorization rules, provide a custom configuration file.
+
+You can either:
+
+- Update the existing `configuration/application.yaml`, or
+- Create a new `application.yaml` in the `/c8run` folder and pass it at startup using the [`--config` flag](#configuration-options):
 
 ```yaml
-camunda.security:
-  authentication.unprotected-api: false
-  authorizations.enabled: true
-  initialization.default-roles.admin.users:
-    - "username"
+camunda:
+  security:
+    authentication:
+      # Require authentication for API requests
+      unprotected-api: false
+    authorizations:
+      # Enable authorization checks
+      enabled: true
 ```
 
-Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
+Start C8Run with the configuration:
 
-```
+```bash
 ./start.sh --config application.yaml
 ```
 
-You are then required to provide basic authentication credentials on API requests, as in the following:
+Once enabled, API requests must include valid credentials. For example:
 
 ```shell
-curl --request POST 'http://localhost:8080/v2/topology'  \
+curl --request GET 'http://localhost:8080/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
+```
+
+To add additional users (e.g., an admin user), extend the configuration:
+
+```yaml
+camunda:
+  security:
+    initialization:
+      users:
+        - username: user
+          password: user
+          name: user
+          email: user@example.com
+      defaultRoles:
+        admin:
+          users:
+            - user
 ```
 
 ## Shut down Camunda 8 Run
@@ -212,3 +245,23 @@ The following advanced configuration options can be provided via environment var
 ## Next steps
 
 Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
+
+## Troubleshooting
+
+### User creation
+
+User creation in Identity only happens on the first startup. This means:
+
+- If you want to add a user using the --username and --password options, or
+- If you want to seed users at startup via configuration in `application.yaml`,
+
+then you must ensure that Elasticsearch starts fresh. Otherwise, Identity will reuse the existing indices and skip creating new users.
+
+Tip: If you are testing locally, delete the existing Elasticsearch indices before restarting C8Run:
+
+```bash
+# Example: delete indices to reset Identity state
+curl -XDELETE 'http://localhost:9200/identity*'
+```
+
+After clearing the indices, restart C8Run with your configuration or command-line options, and the users will be created as expected.

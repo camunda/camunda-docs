@@ -24,6 +24,10 @@ To learn more about using Play for validation, see [Play mode for rapid validati
 
 ## Deploy your process application
 
+### Before deploying a process application
+
+- If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
+
 Once validation is complete, deploy your process application to cluster stages in your [development lifecycle](/components/modeler/web-modeler/process-application-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
 1. Open the [main process](create-a-process-application.md#main-process).
@@ -39,7 +43,7 @@ Once validation is complete, deploy your process application to cluster stages i
 
 All BPMN, DMN, and form files contained in the process application folder are deployed as a single bundle.
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters). You should have the `Zeebe` [role](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) assigned in Identity to be authorized to deploy.
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a process application cannot be deployed incompletely or in an inconsistent state.
@@ -59,7 +63,7 @@ To run your process application:
 1. Select the **Implement** tab.
 1. Select **Run** to open the **Start instance** modal.
    <p><img src={RunProcessApplicationImg} alt="Run a process application" /></p>
-1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Open this link to monitor the process instance.</li></ul></p>
+1. Select **Run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](../../operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
 
 :::note
 Single-file deployment is not supported in a process application. If you select **Deploy** or **Run** in any diagram other than the main process, you are prompted to open the main process for deployment.

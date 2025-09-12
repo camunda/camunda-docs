@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-java-client
 title: Migrate to the Camunda Java Client
+sidebar_label: "Camunda Java Client"
 description: "Migrate from Zeebe Java Client to the Camunda Java Client. This guide provides an overview of the migration process."
 ---
 
@@ -13,7 +14,7 @@ Migrate to the Camunda Java Client from the Zeebe Java Client.
 
 This guide provides an overview of the process for migrating to the Camunda Java Client.
 
-- The [Camunda Java Client](../java-client/index.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
+- The [Camunda Java Client](../java-client/getting-started.md) is the official Java library for connecting to Orchestration Cluster, automating processes, and implementing job workers.
 - The Zeebe Java Client remains available until Camunda 8.10.
 
 :::tip
@@ -96,7 +97,7 @@ CamundaClient client = CamundaClient.newClientBuilder()
 :::info
 
 - Refer to the [CamundaClientBuilder documentation](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/CamundaClientBuilder.html) for more details on available configuration options.
-- The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but you must ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/index.md#bootstrapping) for more details.
+- The construction for OAuth, Basic Auth, or custom providers remains conceptually the same, but you must ensure you use the classes from the new package. Refer to the [Camunda Java Client bootstrapping](../java-client/getting-started.md#bootstrapping) for more details.
 
 :::
 
@@ -125,4 +126,14 @@ The following commands have been renamed in the Camunda Java Client:
 
 ## Protocol and connection: REST vs gRPC selection
 
-Zeebe Java Client used **gRPC by default**. The Camunda Java Client use **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder.
+Zeebe Java Client used **gRPC by default**. The Camunda Java Client uses **REST by default**. If you want to use gRPC, you need to explicitly set the `grpcAddress` in the client builder and configure `preferRestOverGrpc=false` to make gRPC the default.
+
+To use gRPC, add the following to your client builder:
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder()
+        .grpcAddress(URI.create("http://localhost:26500"))
+        .restAddress(URI.create("http://localhost:8080"))
+        .preferRestOverGrpc(false)
+    .build();
+```

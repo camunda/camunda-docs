@@ -478,6 +478,16 @@ body {
   border: 2px solid #333;
 }
 
+/* Search bar general */
+
+/* As we now show the breadcrumbs with full path,
+we make it less bold compared to the search keyword */
+.DocSearch-Hit-source {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: unset !important;
+}
+
 /* Landing page search bar */
 
 .homeSearch {
@@ -644,6 +654,35 @@ h3 .badge:nth-of-type(1) {
   color: #000000;
   margin-left: 4px;
   vertical-align: text-top;
+}
+
+.badge--consistent {
+  background-color: var(--ifm-color-success);
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+.badge--eventually-consistent {
+  background-color: #ff8b00;
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+[data-theme="dark"] .badge--eventually-consistent {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--consistent {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 
 /* HTTP Method badges */
@@ -1457,4 +1496,85 @@ ul ul .table-of-contents__link--active {
 .label-highlight.red {
   background-color: #da1e28;
   color: #fff;
+}
+
+h3.subheading {
+  margin-bottom: 40px;
+  margin-top: -10px;
+  font-weight: normal;
+}
+@media (max-width: 996px) {
+  .hero-topic {
+    display: none;
+  }
+  h3.subheading {
+    margin-bottom: 20px;
+  }
+}
+.button--hero--topic {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+  color: #fff !important;
+  transition: all 0.3s;
+}
+
+.button--hero--topic:hover {
+  background-color: #0050e6;
+  border-color: #0050e6;
+  color: #fff !important;
+}
+
+.button--hero--topic::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
+    12px;
+  margin-left: 8px; /* spacing between text and icon */
+}
+
+.button--hero--topic:hover::after,
+.button--hero--topic:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .button--hero--topic {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .button--hero--topic:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black) !important;
+  border: 1px solid #171c29;
+}
+
+.link-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.link-arrow::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right.png") no-repeat center / 12px 12px;
+  margin-left: 6px; /* spacing between text and icon */
+}
+
+.link-arrow:hover::after,
+.link-arrow:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .link-arrow::after {
+  background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
+    12px;
 }

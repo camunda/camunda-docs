@@ -1,16 +1,18 @@
 ---
 id: migrate-process-instances-batch-operation
 title: "Create a batch operation to migrate process instances"
-description: "Migrate multiple instances of process instances."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create a batch operation to migrate process instances"
 hide_title: true
 hide_table_of_contents: true
-api: eJztXety2ziyfhUUKj+SWd3sZM5MNDnZcmxlVju+la0ktWv5xBAJiRiTAAOAtrUqVZ2/+38f4TzZPsnZBkiKIilFTuzEmWCqJonIZjcu3R8aQAM9w5pMFO6e4WMpPKoUYlxpwj2KzxtYxFQSzQTv+7iLIzaRRNOUsJ/SqVdEe8FRRokb2KfKkyw2v7r4wH6FoiTULA5pLkAhMUZxSapqDfkp4x5FgofT6mt0zXSAdnYH/bc9pDQw9ghHI4rS0vkNRPgUTdgV5UM+ZqGmUqGxkCk1kRSxCReS+ohwH4krKiXzfcqRn0jGJ0gHTKERVArl9W8N+QAeM4V8wSkiasq9QAouEhVOG0gHFMo6kVDYtEBaEu+S+ihRliu1TPOW+o1O0ViKyLySVMWCK2rKlNMuCmBKnyhEuR8LxjV63DYUzZxCtWcV/vMnrSH0iKQfEqr0K+FPcXdmfjJJfdzVMqEN7AmuKdfwisRxyDzzfft3BR04w8oLaETgX3oaU9zFYvQ79TRu4FiCeM2ogre2seFfyxpQ1iykKJFegCx9CzcwCcOjMe6e3f7LcolWcXpFFK1o08fZLVdQaSL1HtG0WsdBQJF5jXyi6bo6wfdNzSJTHGA+tTo9TsIQEf8KCuZnJfNITEYsZFCCuvIJTlMh6RulQYdxA4+FjIjGXexn8uBzpkOg6t0QT6MI1KVqr/CUKqOEVyRMKKJAHU5beN6Y5Sx2spKmvV5mk7/P5W/czI/oh2oD7wbUu7SGTD8kJGRZu6Wmd8V86tsCFySsa455Az/iHxHF+B0KozdMabVSHhsb9l4iJeV6oR32s4KckRAhJdzwnOgqv18lJZpKpAPCkSeimEimBL+DGkzqVH9JXNY9dys3rKnlvri+lzqGdXUsCLufGjL+Mb3I9SFKDRSGOTGuEVvUFSIlmeIGZppGqgDha8szn8/PF2ABgDVgEX1tzPc4LQaen88bmHJ/NR5S7js0dGjo0NCh4feBhmaGUY+FVddTfwQZS9OsU6Dv8SS6X6D8TEy8jSsPFVIYxpAkggmondThBt49Ojje7w16e7iBB72Tg/7hDvwodMKqtjHd8AmovLKtvyRIf/2Wu6sR4CHU5D6Gly8GS1+l2Qzcs0tah4u3qvNSZYFjqhlDPuSnSRwLqamPrlnoe0T6yAuIJJ5ZpiGSdoHqB3Txw0U3Z/gPKkUDCU4bMN7kC0mLD1vmkz8XPjHEsPBSpDMleFcjN12xocojsSmaDtCIeJcqJCpopJpvG6yLLobDHy7sukrWqPvssjIgLI0ada1eN4IERPW5x/x0Naakg+V+eBdQHZiRmKnqCBMQhQiSNIRVMcRSttCCXGhwX7GmnHANa3t1Q5Z9i/p760z61GjIgx6TPmlEsMJrl6g25fWKKOYVmqHM8Uu7/ffl4X/zaFuqjmknofu3F89hafjz5c+Nxq7XDgfUdwnURai2iFYHzldEMjIKaY2e17r4Of0Gnb+inzmJNujmQxLlepcJNQBvutMs6zv4dvDt4NvB9/cK3+WmHeRAU8XNeaOwQ3pmMTjD0oKkt+kXb+FFpVSmy4s+/290Wj9uXNJU62uc+Fu73qMSan1D4O0A1wHuJwJuwSqNFq324WICLXq8oWla6qpnd0nXrnU6y3SW6SzzkyyzF9KIcr2pZVJL7izTWaazzPuyzOWwwlXLxeWARbdu7BYenE27hYfvfOEBguSkFPKAKkUmqyLlgAJFliTfstMia2mYfTg0dWjq0NSh6feOpgFRJ1RLRtU+HddEQi6CIhZbchAKMSYspD76XYzSQ0TSckEhHet65afLk9HT1eF99mxRqnTlSalCRCnhMaKzxiqWbZOl3l5NQb7hWMC0Op8Vx7SqST41BHBlEz+EEMB7b7D7jvz7AhX4pge/L9laLs7v/uL86lq9dkqQ0q1YS8lGkP7eZw8dbmrgpgbfOjq6qcH3jrAbTw1KAFwMpl49TajsIpnQaV6Nma4zg4yoB2s4fyEq2BX+illCzs+u9wREBcgTPm3UoPwiGGQduve5phMqS/D+2cjOLNvigSjG9dPtr4T1aXHQY1OIJ18Dole2yJ2D9lpJD//Q5Nri39eJybVC7/K45EcE3cdZybUiv/QQvLowy35wiktVkJ4v7TqW75Kx9K8ZDX1lgvaW7TkFxD06Zpyt24vMHGQ/p3Tbkc5Ldl6y85Kdl1xF0cP0kMlGOArR0A5JHZI6JHVI6pC0hKRvqVSmoTcE0ytL72b4bobvZvhuhv+HmOGvhsUBmdwWGZEmE+dtOm/TeZvO23TeZglWVx+OquKpOxflwM+B392ei7I351fcQaa0KQi83fzmyZIjYBwfdEipr+AcgL1a3E79UEi1pvIXqCpHJIwDwpOISuapBrp4f9FAF034o3thYPCidfELCimf/Mei//3P/0NbnQ40SMT4vnmIu1sNHJGb/FenA4cxQQSU5H/Odpp/J81/nKd/d5rP3w+HzW7rfNZpPH8+fwThaTckik2LjeCye6rU+0s67W5tP31WMHtw/+YNnHD2IaF92w72/vmI3KS/tzpL9KdU4+KW0drtoo+PWqLmcnoDp6C+KEw7jgBTTjS7yi7pRRMpkliBVz9iPL/S/+gEhWLCvBbqETj6ZqQixo0Omg6HfAEUlDC9gs2nMeUQAQA5A7Kb/lMZmSKzsTWlXJ0j4KKIZmrMqG/GpoGImyG9oiEam8rnvC4eCXmBvJAkyqY6KBV553DPlhn9+3//hSJKOOOTLnqsCwxNxoQnhvRxwagt6/x1lKgUw1tD/mIkXw75Cxq97FlV6L5o0+glFPXi4gLyCAz5bMgRGto7Uoe4i4ZpNOMQN+yb7DY6eLm1/TR9+khIeHAGvxCaoWHdLqDll754f7U1xGjeuM0X20PcQMPi9XtAANqJ5sDnfMjnpi5pHoiss6r5KXRAtPFNXiQhUnoa0v8e4pj4PuOTJoSad9F2J775BUVEThgvPhrilyDrRcjyD0Enm+ZHE3S7i3ymPCA0aSw4gia3zWga3EaMvmiHbHNOAbkq3PWXzl+1MKy3tp8avrfjCMpoGghRBjE2XdsTn9wg5uN1gj0mvZAC+QsIp3lZ098v2uYNmBJUbKEqpn4AlHkd71Pctu0maCH7bUHjSt+A8i03PkIv2klo+8E+S3+n5he/PBSadtEbY+qwBBHSm1TOI6ig5e8J7ptighpPEYticMdiKs2En3u0gQA9zGDjkcS4j4yjgE2C5pUIkwhudr9iUnAImlKph7tRYLPL5+FusL8Ld9rdYO9usN9clrvB3uXzcGjo0NChoUNDl8/D5fNw+TxcPg+Xz8Pt07l8Hi6gwgVUuD1FF1DxRwNql8/DwbeDbwffDr7/qPDt8nk8ePB2gOsA1+XzcJbpLPM7tkyXz8NZprPMh2WZLp+HW3hwNv0t2LRbeHhwCw8un4dDU4emDk0dmrp8Hi6fx1J1XD6PB5QOw+XzeDgBfy6fx7c1cLl8Hm5q4KYGbmrgpgZffWrg8nm42z7dbZ/utk932+fDvO3T5fNwXrLzkp2X7Lzkh3MvqMvn4ZDUIalDUoekLp+Hm+G7Gb6b4bsZvsvn4bxN5206b9N5mw/X23T5PBz4OfBz+TxcPg+zXbT2xjVLCvIjNrEn1I5Dwgs9kWNBFU/zTwy6y8TT5jZ8SziiKBDX0EmWjCJSPTA+liIyKTpqoFkLRLiAYAQ7WCxjUUTimPFJvyB4dcBgSqysPDAFJRLp1dxNlJ4t0UROaPWA+20uLKppLluKjzQWibO4i9XFXW6lmgIvCOraznLrbRxrV+hDKFEt3NoCfBJPxrWo4Vm6bqRc6KrIgpYfWNYlZT+o6Iy1IsPneGM3Ir2YpL4zskrVxSOiTeq5pjSNWq1fbdwHmX2+Wjqpagy8LDZ3GJZx4NbMT+iHhCpt/WUsqYoFV1bttjudzY7ISssDXROFPLNG4kO7eYLrNGaJxHHIPEPdhrQ4Rqu9gEakzhSXtX/52G5tL/9G8zG7VLZa3V/mODCva2+OnMZ0Y76L6ObdncPd3v7745Oj3d7p6fv+4ekAnuAGPumdHu2/7b3vH+7293qHA9zAB/1fT3YGvTrqg6O9/uu/1b3Z60HQdN2bnb299293Tvo7r/bh55vjPWBeeJJ+utfb7Z/2jw7f7/Ve9w/7g/7RYZVv4d2SN1FuvTweu55k16rECVVJmCnas1W6VbHBsrLZ8y8tdCAkRT7VhIVmIrXwltJMVJkuo5HwpxZWV2hkLMUopNGfqppZ9maOLWUqN0t9RRbDgpF+dvJ6Fz1/9uNP548DrWPVbbevr69bcuw1qc+0kC0hJ2059uB/oHvSQoOASmoS04wogixBIJOEaGELSMXUY2PmFQ5UmsKAHi5lo1lhSDpV9LLe5gtkiWQ1Htybkz4y4X5sPIXhsCLafDMm0LldTEYi0d1RSPglXmjEx/1ElUQRkUXXuyAgvZM82WiBr24o/8tgcIwsCxOpaCYqWXAiCEpdSRaBCT8D1zEiN/bXf3U6c+AJPb5BTTiiN3FIuNXWUnUYR9FCb1s27tIq+h31jJBswspyW2XvEx7u2Rpl9rhVb48ZtoewPAATEeYjkoDLrlPzAcg3hSChmaIElPhUmq569+5dc2dBTGthfzFncQbqDNQZ6CoDfVrV99dCjpjvU27UM7dVBssIGpEwFNdrXTFnV86uvnO7+rHOEd3hZidfgh7aMw7CMwuPProOWJh7qZns1PCck+lszdnaKluDNUuqA+HjLo6FMqpDYKUWt1NzauY3DbTzVQ3cwIrKK+NQns1wIkPcxTNrPPNuuz0LhNLz7gx22ebtq21cut8cXlsjy5QnFB4JA1uAaifCC164h/xIwrK8Tiefu2GiIALkpHc6QL8STa+J2dHBIH5ZzM+dnzu1EoB0A+47x31ka25VswAXmQiw+1oRlvi2Qsy6s6JeIpmengKLdAGGEkkl+PEF9UllG0lmxdwQ4Ub6j9eZUv313cAuuSjmfYwF0BglAoxMF6ZeCX/ay9blZ9my13ISU7zd2X7W7PzU3H4+2Pqx++NWd/vnVuenrb/jQma/dURpwqvFufSl/CV2cX+RZGRhOgVNO8suuS++NbfW5xOc8/q7lBcfrL7UtUxTd73kgqZ60V1hkWrpEqfF8/J1JLbS9TeHLNqpcP57idXK44uW7Yqzhp2azeFl1itivtcQ5KGMdcyLAT1reJSa1+6XndVsEp03bLL1M6eeTj0foHqa7d7KxmHt1txZzbZTUUZp96ioRev2Z4q7KIyPhRkOUpehfpzaOe6DsmbthDutraqXctw3zpYnoijhxuPmk2ybeZdECfcJ+hl5liW4YSHzKFdmSEntIiPbt29Q2vhoqwXDuPU7Mkd7wnSQjFqeiNqe/Sz/exSKUTsijLdTEaq9u3Pw5nBvp7nf3+0dnvaaW61OS9/YHWFwhCLbDVk5zGo5IpWF78JmVXmRXJVbZLaYhWR7a4s4osV9ToVdsfxha8hPGSy8Cx5Oq69tq1oLS6+LSqOJ0sL5DRNCMWFXlA+5Ha9tYIilhqV6NuECJlOQD15cUSnNIgbyE2k9TKYq+y1DPoDHTCEf9p+JmnIvkIKLRIXTRuaHTiQUNi2QlsS7pD5K8nlaZStpsWOb7xZAmWo2fDLHnnI/Foxr9LhtKJo5hWrPKvznT5bmTJre6HYcEmaiU4xOzVIn+AxXnODi5h4MLdaVPcOz2Ygo+kaG8zk8/pBQOcXds/MF4MOvebYSa2z50hjfrlWKptnyWowAld05CFGyX+x4Ho31Wtrzgl9/fHQKm1qw42KQxeAmluQaN8yfXQyRVXG+/W+ezXBI+CSxiG95wn//D9Qbfv4=
+api: eJztXd1y27iSfhUUKxfJrCzJTjJJNN5sKbYyR2f8V7aS1BzLFUNkS8KYBBgAtKPjUtW53ft9hH2y8yS7DZAUJVKyndiJE2OqZsYiwUaj0fi60fjpS0/TkfJax96BFD4oRRhXmnIfvJOaJ2KQVDPBu4HX8iI2klRDWrCbllNvqPbH+1lJr+YFoHzJYvOr5fV5nx8fb+3vHXWPep29rT9bnfedvd679s7JCb7btVRJlISaxSHkDCgihiRe4ErV+/yIcR+I4OGk/JpcMD0m7a1e932HKI2EfcrJAEjKfVAjlE/IiJ0D7/MhCzVIRYZCpqWpBMJGXEgICOUBEecgJQsC4CRIJOMjosdMkQE2muTyqfd5Dx8zRQLBgVA14f5YCi4SFU5qRI8BeR1JZDZlSEvqn0FAEmWpgiWaS/IPmJChFJF5JUHFgiswPOVlZwwY7hNFgAexYFyTxw1TYi0voRqXJfrTJ/U+9piETwko/UYEE691aX4yCYHX0jKBmucLroFrfEXjOGS++b7xl8IOvvSUP4aI4l96EoPX8sTgL/C1V/NiidVrBgrfWmHjX/Masqh5RAGV/pjY8nWv5tEw3B96reObf7nI0TJKb6iCkjZdTW6+gUpTqbephnIbe2Mg5jUJqIZVbcLv1zSLDDtIfGJ1epiEIaHBOTIWZJz5NKYDFjLkoIo/wSGtJH2jNOqwV/OGQkZUey0vyOrDz5kOsVTnM/U1iVBdSuN5F5+CMkp4TsMECGDpcFL3prXLnEQ74zTt9UUy+fu8/muL+RF8Kgt4awz+mR3I8CmhIcvklg69cxZAYBku1LBKHNOa94hfURXjt1gZfGZKq6X1saEh7ydSAtcz7bCfFeoZCBEC5YbmSJfp/S6BapBEjyknvohiKpkS/BZaMKpS/bnqsu653XrDilbuiIs7aWNY1cZCZXfTQsav0otcH6J0gKKZE8OKaou6QqWkE6/mMQ2RKkD4Sn6m0+nJDCwQsHosgrdm+B6kbHjTk2nNAx4sx0PggUNDh4YODR0aPgw0NDOMaiwsu576CmRcmIYdYfkOT6K7BcqvxMSbuPLYIOWhDUkinKDaSZ1X87b2dw92Or3Otlfzep3D3e5eG38UOmGZbEw3fAEqL5X1twTp7y+527IA96Eld2FevhksfRexGbhnZ1CFizdq81xjkWKqGRgNOkriWEgNAblgYeBTGRB/TCX1TZiGSmhhqV/I6S+nrZzgP0GKGhEcamhv8kDS7MO6+eS/Cp+Ywhh4KZYzHHyoqDeN2IDyaWxY02MyoP6ZCqka11LNtwJrkdN+/5dTG1fJhLrDzkoGYc5qVEm9yoKMqepynwVpNGZBBxf74cMY9NhYYqbKFmZMFaFEQohRMcJSsihBLjS6r54GTrnG2F+VybJvSXd71ZA+Mhpyr23SF1kEW3lliOq6tN5QxfyCGBYpfmu3/648/B8ebReaY+QkdPfm1XMMDX99/VOjsau1wwH1bQJ1EaotolWB8zmVjA5CqNDzShc/L3+Nzl/Sz5xG1+jmPRrlepdVagDedKcJ6zv4dvDt4NvB90OF70XR9nKgKePmtFZYIT22GJxhaaGm9+kX7/FFiSvT5UWf/w+YVNuNM0i1vsKJr88h6wJ2T5SGaG0EHMzCtyGEIqSVZPLQ1kGZr5oHn2kUm2ZtbDxff/Hq1cv1p7++ar549usK5/8fAAMgHT5i3Kxgi0T6tj2P/07PKQkFHxEFktGQ/RPX21UKo08qQoF5Hws+Qp5WTJ/M61uI85gV+K8B9IfeBUsskhPLD21QXWcWOvObuxNO+kXpT83MK6Y4TioKVE/EaDaq5udjZzBx9tTZ03vcBc6eOnv6k3ems6f3xp52QoiA6+vaU7DFb8OeLpKaE3UFW0tE/fLXFy9f3QdRV7D8Rfa0TOfO7OmD6IKb29MHIpaHYU8fQmfeX3v6IKRv7en8wZtlGyoWj/S4nRVuac4tzbmluQe+NIfHSKQUcheUoqNlZ0mwBIlskXxTmxaZpHGm49DUoalDU4emDx1Nx1QdgpYM1A4MK84KzbYNzzat4WbhIWUhBOQvMUiP2UtLhYQw1NXKD/M+8dHyAzD29H2qdItTA0WoUsJnVGfCKvJWnEAsw/dOBSM/8GmZtDlftdN/mUi+9JDMUhHfh0Mydy6wuz4b8w0a8EMbv28pLXcS5u5OwlRJvXJKkJZbEkvJLEh3+6tNh5sauKnBj46Obmrw0BH22lODBQAuHjdcPk0orf2aw4W8fKqwahhkhToYw/kbVeMtESyZJeT0bLxnTNWY+CKAWgXKz7ZLr0L3LtcwArkA71+N7MySLS5pMK6fbnwnrE/ZIY8NE0++B0Qvlcitg/bKmu7/tSIr2b+rO0VWVnqbF4pcUdFd3CaysspvbYKXMzPvB6e4VAXS9sbGkpiY0oYtOlJ10qMjRTjYGLi9eM4CGwlBa5C/Ifuc0DAeU55EIJmvauT042mNnK7hf1qnxsCd1k9/IyHw0f9boX//9/+S9WazopF5U6yR3uzR0evjk+KK7bE3ZqPxmhaJQTsJEQTMXhh5snQW18bG1MkeQKDuph2zFeUBXsMISn08g0lrfePps2KzenS0YjEY305rXsLZpwS6tin24sSIfk5/rzfnyh+BNl5Y9givH1zYj2V7/i2DMFBmnXkemVPTtg1DxtmqVeVsqhPkJd3CspvvuPmOm++4+U4ZRffSA/XXwlE8+emQ1CGpQ1KHpA5JF5D0PUhlBH1NMD235V2sxsVqXKzGxWp+kljNMljEmMENkdEEQ5y36bxN5206b9N5m/OwuvxwahlPv/xcagBxKCYQVFCtOg08z97y80vP7sX5pUqmv+bahzlKd3ZQ9SH2yc3PrT5MKd2dLfzq048PsEPmrLkT4BcIEO3jtFSqesXwasdFVORiMzWi+0bCdD2ZIlFONTvPctKQkRRJrHBiN2A8z2C3f0hCMWJ+nXQonmM1tRLGzRgz/Yzp8QD9mvTG8QBi4LidB1PkZYnt0joyp4QNrSuZu3MRUlFUMzVkEBj3pCfitRDOISRD0/ic1ukjIU+JH9JE2cx+Cyy397Ytz+Tf//ofEgHljI9a5LEuEDQJAp+Yoo8LTq0lnb+OEpXOh+p9vjmQr/t8E6LXHatlrc0GRK+R1dPTU0yb1+eXfU5I36YE6Xst0k+3Jve9mn2TXb6OL9c3nqZPHwmJD47xFyGXpF+1EGzppS8+nq/3PTKt3eSLjb5XI/3ibfNYANe0yRTpnPT51LQlTXuYdVY5HaMeU23c080kJEpPQvjPvhfTIGB8tIbnRlpkoxl//o1EVI4YLz7qe6+xrs2Q5R+iTq6ZH2uo2y0SMOVjQZO1kRMUuRWjEbjd/r3ZCNn1KY3peeFq+zSEoYUhvb7x1NC9GUVURiMgAgw3zLVsT3yxQMzHqyr2mfRDwOKbuDfudUV/bzbMGxxK2LCZqpj24ZQhb+NdVrdhuwklZL8taNzCN6h888InZLORhLYf7LP0dzr84td7QkOLvDNDHaNQIXxO63mEDbT0fcEDwyaq8YSwKMbQRgzSWBDuQ40gepj5jU8TM4NgnJjtLOciTCJMZHbOpOC4A1Klk5xrWTeXvtIlbLuNcJJL2OYStl2/LpewzaWvdGjo0NChoUNDl77Spa906Std+kqXvtIt1br0lW5PjdtT4/bUuD01PxtQu/SVDr4dfDv4dvD9s8K3S1/5s2Vicem2vn8XuHRbLt3WT96Z9zc9yIOQvktf6ezpw+kCZ0+dPf3JO9PZ03tjT136Spe+8ufuApe+0qWv/Mk78/7a0wchfZe+0i3NuaU5tzTnluZc+kqHpg5NHZo6NP3eaOrSV/7wp2Vc+sobHi1x6Std+kqXvvLeGi6XvtJNDdzUwE0N3NTgu08NXPpKlxLBpURwKRFcSoT7mhLBpa906Std+ko333HzHTffcfMdl77SIalDUoekDknvF5K69JUuVuNiNS5W87BjNS59pfM2nbfpvE3nbbr0lT9kyjSXvvIe9olLX+nSV/54HeLSV36tAG+SvnLlBeO2KOpzxEb2uOlBSIsdk6Nz2aTmnxgDLxNfm+RvtuAAyFhc4GqtLQYVN2eQoRSRyUhZYZ21IJQL3Flk/YV56xDROGZ81C1UvHz3b1pY2fpwqKc9VmIoPSimqRxB+Waoa3iMq8RlubhCWDTONlEtZ3deShUMF4ZAhewstc61N84W+hA5WjX3NO0UAYRrhgWMYgUm9ynPCFae7g4qhsVsYLZ9zc6Znnxcb/56JtTAK+8SDrIdESiGL2oZ41rc25Yt3DS62IHlhhdG/K5t4MLA3y2NH7sPwdCpRJ1Vt0M7dC6gc+UdsunlrdUjONPBqh3pBNVyUQFWdFOtEhqXW4DdDMTfzN1NYKzAYrW5vz9vLG5M/BA+JaC0nVd7ElQsuLLYtNFsXu9SBGlpkAuqiG9iqQEqlC+4Tnep0jgOmW9KNzBVsIE+fwwRra4hpbJY09UzlflbHUpjZTa//E4KW4hdlBNYJQkLKnR2+ZDmVQKqHqfPnm6se8XNTYtyKtf7B+TholI1pQs0eqZRVX2JzV1KpwKR01NBW+29rc7Ox4PD/a3O0dHH7t5RD594Ne+wc7S/877zsbu31d3u7PW8mrfb/f2w3etUld7d3+6+/bPqzXYHDxtVvWlvb3983z7stt/s4M93B9tIvPAk/XS7s9U96u7vfdzuvO3udXvd/b0y3cK7k2UdgNLLzzFVF9myQ+IQVBJmw/XZshFaQq7FIWvPjdbJrpBAAtCUhSZsNQt4pTnOM0QgAxFMrAezZFzHUgxCiP7jqvHdxlgElkzrzZKq05kHZmo/Pny7RV49e/7i5PFY61i1Go2Li4u6HPprEDAtZF3IUUMOffwXyz2pk94YJJiUxwMgmH8a66QhmYEEUTH4bMj8wkUEhhnUw7k8x0sQRqeKvnwUS1YOw5B3h11itsmz4QQ9z1LV5pshxc5teXQgEt0ahJSfeTONuCqe2SYqiSIqi1HeQgVptrvkWsspVYbzb73eAbEkzA5/A0LZpn6sqG7sEWcRDuFnzabZbWl//dpsTpEm9vg1WsIJfI5Dyq22LjSHcRLN9LZuzytYRb+lnhGSjdhivXVvYaKHD7dti7LxuF49HjMLGWIwFsPILCA0wW2yOh0+aPIMEzQ0UY4x0ACk6aoPHz6stWeFYX5wlcLjboC6AeoG6LIB+rSs72+FHLAgAG7UMx+rDFesNKFhKC5WOrRuXLlx9cDH1fMqR7TNzb4piXpozwYK38T1A3IxZmHupWZ1pwPPOZlurLmxtmys4fIA6LEIvJYXC2VUh+qx1/Ia6XBay2/oaeSxIa/mKZDnxqE8vvQSGXot79IOnmmr0bgcC6WnrUvc0zBtnG94C5nz8LUdZJnyhMKn4dgyUO5EfMELGe72Je5m0OnkcytMFO63O+wc9cjvVMMFNRuRPKx+vpqXzZfNyhqw6DWotw+6xLbcqmYBLrIqcNxXVmEL37QSs8SjwE8k05MjJGFF+AaoBIl+fEF90rpNTWZR0xTyaukfbzOl+vuHntELhL00YvdGBJNOFuq5zOKBCIl4Im/bzBO8jebGs7Xmi7WNV731563n662Nl/Xmi/V/mDhLcHWhNDv67IqWuWS39kDdLCPtbDQUlOc4y4hYfGtSHOZzlpPqxFtVN7QvzyqyvHTVnelVt9WWb4QtRKXmbjucPV+8t8uKpPqKrZkUCxelzJFaes7fkl1yKL+ZHT9dfaCz8nTirPolx25WFMh3kzev2FO5gkZVZ5gFhUdCGt1x2uy0+UfXZrMeWlrUr1w2P65YEq5cmlxcXS0XMqtjK9YQK/g0Ps5QGAOVeiDVZq990EXNz0TmNevrqc9OfWPB00GyRaOEBzRdT4FUbtb9yPztEdPjZFD3RdTwbfH8/0ypBJQ3LflTB13jFvoiihJu5gZ8lB1Cz+p8SXzLLTqMIfOBK6hgbce+IWkXk/V68yYsDkIxaESU8UZahWpstXff7W2313a6W529o87aer1Z15/t4XJ02SLb/xkfJq5PaClEX1iMXAznq0V/5XI2X/Jwc+jx8db+3lH3qNfZ2/qz1Xnf2eu9a++cnOC7dBF6tv90dqNjYVU0f1jv8yOGSwiCh5Pyayt1iwXphZHpLtSU+aBm9h2P2DnwPrduit1NbUvjogMbcYHTQsoDIs5BShOOIUEira/MVGnlqM97+JgpEuCmFaom3B9LwUWiwkkt86hHEplNGdKS+mcQkCSfcZZWC2fbPPJ1D+SpYukqm6IAD2LBuCaPG6bEWl5CNS5L9KdP5mZ/Gj7rRhxSZraxGZ27TN35Y6/kzhcXexECrVN+7F1eDqiCdzKcTvHxpwTkxGsdn8wMF/6aZjFlAzJnBgG2rNKsmcW7mSUrrdbiqqX9ou37EOuVZU8KM5SD/SNcnsO1IwN5BuE9SS8Q0OmF1/Jw02+c7xkyzy69kPJRYm2TpYn//B+o1vPo
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -31,6 +33,9 @@ import Heading from "@theme/Heading";
   path={"/process-instances/migration"}
   context={"endpoint"}
 ></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Migrate multiple instances of process instances.
 Since only process instances with ACTIVE state can be migrated, any given
@@ -475,157 +480,310 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                         },
                         processInstanceKey: {
                           description: "The key of this process instance.",
-                          allOf: [
+                          oneOf: [
                             {
                               description:
-                                "String property with basic advanced search capabilities.",
-                              type: "object",
-                              oneOf: [
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
+                              allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  title: "Exact match",
-                                  description: "Matches the value exactly.",
-                                },
-                                {
-                                  title: "Advanced filter",
-                                  description: "Basic advanced string filter.",
-                                  type: "object",
-                                  properties: {
-                                    $eq: {
-                                      description:
-                                        "Checks for equality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $neq: {
-                                      description:
-                                        "Checks for inequality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $exists: {
-                                      description:
-                                        "Checks if the current property exists.",
-                                      type: "boolean",
-                                    },
-                                    $in: {
-                                      description:
-                                        "Checks if the property matches any of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                    $notIn: {
-                                      description:
-                                        "Checks if the property matches none of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                  },
+                                  title: "LongKey",
                                 },
                               ],
-                              title: "BasicStringFilterProperty",
+                              title: "ProcessInstanceKey",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                                $neq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
                             },
                           ],
                         },
                         parentProcessInstanceKey: {
                           description: "The parent process instance key.",
-                          allOf: [
+                          oneOf: [
                             {
                               description:
-                                "String property with basic advanced search capabilities.",
-                              type: "object",
-                              oneOf: [
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
+                              allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  title: "Exact match",
-                                  description: "Matches the value exactly.",
-                                },
-                                {
-                                  title: "Advanced filter",
-                                  description: "Basic advanced string filter.",
-                                  type: "object",
-                                  properties: {
-                                    $eq: {
-                                      description:
-                                        "Checks for equality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $neq: {
-                                      description:
-                                        "Checks for inequality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $exists: {
-                                      description:
-                                        "Checks if the current property exists.",
-                                      type: "boolean",
-                                    },
-                                    $in: {
-                                      description:
-                                        "Checks if the property matches any of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                    $notIn: {
-                                      description:
-                                        "Checks if the property matches none of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                  },
+                                  title: "LongKey",
                                 },
                               ],
-                              title: "BasicStringFilterProperty",
+                              title: "ProcessInstanceKey",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                                $neq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
                             },
                           ],
                         },
                         parentElementInstanceKey: {
                           description: "The parent element instance key.",
-                          allOf: [
+                          oneOf: [
                             {
                               description:
-                                "String property with basic advanced search capabilities.",
-                              type: "object",
-                              oneOf: [
+                                "System-generated key for a element instance.",
+                              format: "ElementInstanceKey",
+                              example: "2251799813686789",
+                              allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  title: "Exact match",
-                                  description: "Matches the value exactly.",
-                                },
-                                {
-                                  title: "Advanced filter",
-                                  description: "Basic advanced string filter.",
-                                  type: "object",
-                                  properties: {
-                                    $eq: {
-                                      description:
-                                        "Checks for equality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $neq: {
-                                      description:
-                                        "Checks for inequality with the provided value.",
-                                      type: "string",
-                                    },
-                                    $exists: {
-                                      description:
-                                        "Checks if the current property exists.",
-                                      type: "boolean",
-                                    },
-                                    $in: {
-                                      description:
-                                        "Checks if the property matches any of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                    $notIn: {
-                                      description:
-                                        "Checks if the property matches none of the provided values.",
-                                      type: "array",
-                                      items: { type: "string" },
-                                    },
-                                  },
+                                  title: "LongKey",
                                 },
                               ],
-                              title: "BasicStringFilterProperty",
+                              title: "ElementInstanceKey",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                                $neq: {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                              },
                             },
                           ],
                         },
@@ -1022,6 +1180,24 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                             },
                           ],
                         },
+                        tags: {
+                          description:
+                            "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                          type: "array",
+                          format: "string<Tag>[]",
+                          example: ["high-touch", "remediation"],
+                          items: {
+                            description:
+                              "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                            example: "business_key:1234",
+                            format: "Tag",
+                            type: "string",
+                            title: "Tag",
+                          },
+                          uniqueItems: true,
+                          maxItems: 10,
+                          title: "TagSet",
+                        },
                       },
                       title: "BaseProcessInstanceFilterFields",
                     },
@@ -1309,72 +1485,101 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                     },
                     processDefinitionKey: {
                       description: "The process definition key.",
-                      allOf: [
+                      oneOf: [
                         {
                           description:
-                            "String property with basic advanced search capabilities.",
-                          type: "object",
-                          oneOf: [
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          allOf: [
                             {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
-                              title: "Exact match",
-                              description: "Matches the value exactly.",
-                            },
-                            {
-                              title: "Advanced filter",
-                              description: "Basic advanced string filter.",
-                              type: "object",
-                              properties: {
-                                $eq: {
-                                  description:
-                                    "Checks for equality with the provided value.",
-                                  type: "string",
-                                },
-                                $neq: {
-                                  description:
-                                    "Checks for inequality with the provided value.",
-                                  type: "string",
-                                },
-                                $exists: {
-                                  description:
-                                    "Checks if the current property exists.",
-                                  type: "boolean",
-                                },
-                                $in: {
-                                  description:
-                                    "Checks if the property matches any of the provided values.",
-                                  type: "array",
-                                  items: { type: "string" },
-                                },
-                                $notIn: {
-                                  description:
-                                    "Checks if the property matches none of the provided values.",
-                                  type: "array",
-                                  items: { type: "string" },
-                                },
-                              },
+                              title: "LongKey",
                             },
                           ],
-                          title: "BasicStringFilterProperty",
+                          title: "ProcessDefinitionKey",
+                        },
+                        {
+                          title: "Advanced filter",
+                          description: "Advanced ProcessDefinitionKey filter.",
+                          type: "object",
+                          properties: {
+                            $eq: {
+                              description:
+                                "System-generated key for a deployed process definition.",
+                              format: "ProcessDefinitionKey",
+                              example: "2251799813686749",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "ProcessDefinitionKey",
+                            },
+                            $neq: {
+                              description:
+                                "System-generated key for a deployed process definition.",
+                              format: "ProcessDefinitionKey",
+                              example: "2251799813686749",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "ProcessDefinitionKey",
+                            },
+                            $exists: {
+                              description:
+                                "Checks if the current property exists.",
+                              type: "boolean",
+                            },
+                            $in: {
+                              type: "array",
+                              items: {
+                                description:
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                    type: "string",
+                                    title: "LongKey",
+                                  },
+                                ],
+                                title: "ProcessDefinitionKey",
+                              },
+                            },
+                            $notIn: {
+                              type: "array",
+                              items: {
+                                description:
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
+                                allOf: [
+                                  {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                    type: "string",
+                                    title: "LongKey",
+                                  },
+                                ],
+                                title: "ProcessDefinitionKey",
+                              },
+                            },
+                          },
                         },
                       ],
-                    },
-                    tags: {
-                      description: "List of tags",
-                      type: "array",
-                      items: {
-                        type: "string",
-                        description:
-                          "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
-                        minLength: 1,
-                        maxLength: 100,
-                        pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
-                        example: "business_key:1234",
-                        title: "Tag",
-                      },
-                      uniqueItems: true,
-                      maxItems: 10,
-                      title: "TagSet",
                     },
                   },
                   title: "ProcessInstanceFilterFields",
@@ -1816,163 +2021,310 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               processInstanceKey: {
                                 description:
                                   "The key of this process instance.",
-                                allOf: [
+                                oneOf: [
                                   {
                                     description:
-                                      "String property with basic advanced search capabilities.",
-                                    type: "object",
-                                    oneOf: [
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        title: "Exact match",
-                                        description:
-                                          "Matches the value exactly.",
-                                      },
-                                      {
-                                        title: "Advanced filter",
-                                        description:
-                                          "Basic advanced string filter.",
-                                        type: "object",
-                                        properties: {
-                                          $eq: {
-                                            description:
-                                              "Checks for equality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $neq: {
-                                            description:
-                                              "Checks for inequality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $exists: {
-                                            description:
-                                              "Checks if the current property exists.",
-                                            type: "boolean",
-                                          },
-                                          $in: {
-                                            description:
-                                              "Checks if the property matches any of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                          $notIn: {
-                                            description:
-                                              "Checks if the property matches none of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                        },
+                                        title: "LongKey",
                                       },
                                     ],
-                                    title: "BasicStringFilterProperty",
+                                    title: "ProcessInstanceKey",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Advanced ProcessInstanceKey filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ProcessInstanceKey",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ProcessInstanceKey",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ProcessInstanceKey",
+                                        },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ProcessInstanceKey",
+                                        },
+                                      },
+                                    },
                                   },
                                 ],
                               },
                               parentProcessInstanceKey: {
                                 description: "The parent process instance key.",
-                                allOf: [
+                                oneOf: [
                                   {
                                     description:
-                                      "String property with basic advanced search capabilities.",
-                                    type: "object",
-                                    oneOf: [
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        title: "Exact match",
-                                        description:
-                                          "Matches the value exactly.",
-                                      },
-                                      {
-                                        title: "Advanced filter",
-                                        description:
-                                          "Basic advanced string filter.",
-                                        type: "object",
-                                        properties: {
-                                          $eq: {
-                                            description:
-                                              "Checks for equality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $neq: {
-                                            description:
-                                              "Checks for inequality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $exists: {
-                                            description:
-                                              "Checks if the current property exists.",
-                                            type: "boolean",
-                                          },
-                                          $in: {
-                                            description:
-                                              "Checks if the property matches any of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                          $notIn: {
-                                            description:
-                                              "Checks if the property matches none of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                        },
+                                        title: "LongKey",
                                       },
                                     ],
-                                    title: "BasicStringFilterProperty",
+                                    title: "ProcessInstanceKey",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Advanced ProcessInstanceKey filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ProcessInstanceKey",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ProcessInstanceKey",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ProcessInstanceKey",
+                                        },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ProcessInstanceKey",
+                                        },
+                                      },
+                                    },
                                   },
                                 ],
                               },
                               parentElementInstanceKey: {
                                 description: "The parent element instance key.",
-                                allOf: [
+                                oneOf: [
                                   {
                                     description:
-                                      "String property with basic advanced search capabilities.",
-                                    type: "object",
-                                    oneOf: [
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        title: "Exact match",
-                                        description:
-                                          "Matches the value exactly.",
-                                      },
-                                      {
-                                        title: "Advanced filter",
-                                        description:
-                                          "Basic advanced string filter.",
-                                        type: "object",
-                                        properties: {
-                                          $eq: {
-                                            description:
-                                              "Checks for equality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $neq: {
-                                            description:
-                                              "Checks for inequality with the provided value.",
-                                            type: "string",
-                                          },
-                                          $exists: {
-                                            description:
-                                              "Checks if the current property exists.",
-                                            type: "boolean",
-                                          },
-                                          $in: {
-                                            description:
-                                              "Checks if the property matches any of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                          $notIn: {
-                                            description:
-                                              "Checks if the property matches none of the provided values.",
-                                            type: "array",
-                                            items: { type: "string" },
-                                          },
-                                        },
+                                        title: "LongKey",
                                       },
                                     ],
-                                    title: "BasicStringFilterProperty",
+                                    title: "ElementInstanceKey",
+                                  },
+                                  {
+                                    title: "Advanced filter",
+                                    description:
+                                      "Advanced ElementInstanceKey filter.",
+                                    type: "object",
+                                    properties: {
+                                      $eq: {
+                                        description:
+                                          "System-generated key for a element instance.",
+                                        format: "ElementInstanceKey",
+                                        example: "2251799813686789",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ElementInstanceKey",
+                                      },
+                                      $neq: {
+                                        description:
+                                          "System-generated key for a element instance.",
+                                        format: "ElementInstanceKey",
+                                        example: "2251799813686789",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
+                                            type: "string",
+                                            title: "LongKey",
+                                          },
+                                        ],
+                                        title: "ElementInstanceKey",
+                                      },
+                                      $exists: {
+                                        description:
+                                          "Checks if the current property exists.",
+                                        type: "boolean",
+                                      },
+                                      $in: {
+                                        description:
+                                          "Checks if the property matches any of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a element instance.",
+                                          format: "ElementInstanceKey",
+                                          example: "2251799813686789",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ElementInstanceKey",
+                                        },
+                                      },
+                                      $notIn: {
+                                        description:
+                                          "Checks if the property matches none of the provided values.",
+                                        type: "array",
+                                        items: {
+                                          description:
+                                            "System-generated key for a element instance.",
+                                          format: "ElementInstanceKey",
+                                          example: "2251799813686789",
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
+                                              type: "string",
+                                              title: "LongKey",
+                                            },
+                                          ],
+                                          title: "ElementInstanceKey",
+                                        },
+                                      },
+                                    },
                                   },
                                 ],
                               },
@@ -2376,6 +2728,24 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   },
                                 ],
                               },
+                              tags: {
+                                description:
+                                  "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                                type: "array",
+                                format: "string<Tag>[]",
+                                example: ["high-touch", "remediation"],
+                                items: {
+                                  description:
+                                    "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                                  example: "business_key:1234",
+                                  format: "Tag",
+                                  type: "string",
+                                  title: "Tag",
+                                },
+                                uniqueItems: true,
+                                maxItems: 10,
+                                title: "TagSet",
+                              },
                             },
                             title: "BaseProcessInstanceFilterFields",
                           },
@@ -2670,73 +3040,102 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           },
                           processDefinitionKey: {
                             description: "The process definition key.",
-                            allOf: [
+                            oneOf: [
                               {
                                 description:
-                                  "String property with basic advanced search capabilities.",
-                                type: "object",
-                                oneOf: [
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
+                                allOf: [
                                   {
-                                    type: "string",
-                                    title: "Exact match",
-                                    description: "Matches the value exactly.",
-                                  },
-                                  {
-                                    title: "Advanced filter",
                                     description:
-                                      "Basic advanced string filter.",
-                                    type: "object",
-                                    properties: {
-                                      $eq: {
-                                        description:
-                                          "Checks for equality with the provided value.",
-                                        type: "string",
-                                      },
-                                      $neq: {
-                                        description:
-                                          "Checks for inequality with the provided value.",
-                                        type: "string",
-                                      },
-                                      $exists: {
-                                        description:
-                                          "Checks if the current property exists.",
-                                        type: "boolean",
-                                      },
-                                      $in: {
-                                        description:
-                                          "Checks if the property matches any of the provided values.",
-                                        type: "array",
-                                        items: { type: "string" },
-                                      },
-                                      $notIn: {
-                                        description:
-                                          "Checks if the property matches none of the provided values.",
-                                        type: "array",
-                                        items: { type: "string" },
-                                      },
-                                    },
+                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                    type: "string",
+                                    title: "LongKey",
                                   },
                                 ],
-                                title: "BasicStringFilterProperty",
+                                title: "ProcessDefinitionKey",
+                              },
+                              {
+                                title: "Advanced filter",
+                                description:
+                                  "Advanced ProcessDefinitionKey filter.",
+                                type: "object",
+                                properties: {
+                                  $eq: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                  $neq: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                  $exists: {
+                                    description:
+                                      "Checks if the current property exists.",
+                                    type: "boolean",
+                                  },
+                                  $in: {
+                                    type: "array",
+                                    items: {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  },
+                                  $notIn: {
+                                    type: "array",
+                                    items: {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  },
+                                },
                               },
                             ],
-                          },
-                          tags: {
-                            description: "List of tags",
-                            type: "array",
-                            items: {
-                              type: "string",
-                              description:
-                                "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
-                              minLength: 1,
-                              maxLength: 100,
-                              pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
-                              example: "business_key:1234",
-                              title: "Tag",
-                            },
-                            uniqueItems: true,
-                            maxItems: 10,
-                            title: "TagSet",
                           },
                         },
                         title: "ProcessInstanceFilterFields",
@@ -2763,11 +3162,27 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                     properties: {
                       sourceElementId: {
                         description: "The element ID to migrate from.",
-                        type: "string",
+                        allOf: [
+                          {
+                            description: "The model-defined id of an element.",
+                            format: "ElementId",
+                            type: "string",
+                            example: "Activity_106kosb",
+                            title: "ElementId",
+                          },
+                        ],
                       },
                       targetElementId: {
                         description: "The element ID to migrate into.",
-                        type: "string",
+                        allOf: [
+                          {
+                            description: "The model-defined id of an element.",
+                            format: "ElementId",
+                            type: "string",
+                            example: "Activity_106kosb",
+                            title: "ElementId",
+                          },
+                        ],
                       },
                     },
                     required: ["sourceElementId", "targetElementId"],
@@ -2775,9 +3190,25 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                   },
                 },
                 targetProcessDefinitionKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a deployed process definition.",
+                      format: "ProcessDefinitionKey",
+                      example: "2251799813686749",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessDefinitionKey",
+                    },
+                  ],
                   description:
                     "The key of process definition to migrate the process instance to.",
-                  type: "string",
                 },
               },
               required: ["targetProcessDefinitionKey", "mappingInstructions"],
@@ -2801,11 +3232,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
       content: {
         "application/json": {
           schema: {
+            description: "The created batch operation.",
             type: "object",
             properties: {
               batchOperationKey: {
+                allOf: [
+                  {
+                    oneOf: [
+                      {
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                      },
+                      { type: "string", format: "uuid" },
+                    ],
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
                 description: "Key of the batch operation.",
-                type: "string",
               },
               batchOperationType: {
                 description: "The type of the batch operation.",

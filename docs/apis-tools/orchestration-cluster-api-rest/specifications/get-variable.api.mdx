@@ -1,16 +1,18 @@
 ---
 id: get-variable
 title: "Get variable"
-description: "Get the variable by the variable key."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get variable"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWU1z2zYQ/Ss7OCVTWpQTp015Ux0nVZsmHkeJD64PILgSEYMAAywtazT87x0QpER92FGmvVUHjURh+d5+PWC4XDLiM8eSG/aFW8lThew2YqZEy0kaPc5YwmZIq8WIZeiElaVfZQl7hwSUI9y3BpAuNq/vcDH4W7OIldzyAgmtZ1syzQtkCevs/sQFi5j0kCWnnEXM4rdKWsxYQrbCbd7JNgeLmBM5FpwlS0aL0oM7slLPWF3fejhXGu3Q+fUXw6H/egJSOnCVEOjctFJqARapshqzEIswmlCTx+BlqaRokhV/dR5o2XNkk6HLIjjkVuTQ+QSSsPARtH6b9CsKYhHjSn2cNul6BOi7CKX1tSQZ4g5J30b7wAsEMwXKpVtloAfWpTFihJpr8k2xk7xmBcZvDgPql31vIe5wAVNjD4BywpRP4zQeITSGh7lXWuNLP9aOuBYHobe3gGzvOYTIZ1SSwl5Fr9BVin7jDpnv2s3y3XNV7anf20opaNb+FSmra7949pg2SmvuZYYZZJy4F4g25GllNnhcEqU1qcLip+9JYwSXwRIyJC4VhA4G7iAYppiB1HBz9fYcfj179cvts5yodEkcz+fzgZ2KE8wkGTswdhbbqfAfb/d8AJMcLULBF5Ai8CyTnpMrWCcXXIlCTqUAMl01G2d87oLknxZWWN3eeCI2NbbgxBJWWbmzd47g89UYZIaa5HQh9WyXurlnyn11EsZTU1GSKq7v2LqKu6TbLK4qCm77ndoj8AoiTlUvDCY14Qxt33+p6eWLHWzfFr9PJpcQIECYDNeybYl8EIXUsqgKlpwNhxEr+EO4+nk4rD2mr/gBkWjAh1Jx3bTWdjhSQ2Estv3TBNZp8T+qjLFyJrd5BxuKapv4TYioE9TpfkH5Ew4dgeLizgUlAa8o96xBPiAsNk5w5Xwac+RZc4Au2fX19clobYyb4trWfH0U6FGgR4E+JtCXew5VY1OZZaib9lxptT32uFJmjseD76iro66e0NXZnocNQzA1lc6O0jlK5yidR6Tzat9D2EiDz7L1fYjWGgtGiMpazGCeS7V6Bu242zPryZHFUWtHrf2vtVZHrEDKTTvobAaVlLOExd0MxcXL3riq9oNGtPfdHLOyiiVsGXRTJ3G8zI2jOlmWxlId3/uirJB8oH456KvrG2UEV83f++rnF/RqQofw0YocHYX5LJyryhFauLr4NIF3nHDOF01uPf0mzevh6+FeBm96AProcgwh8tCVvZ2io/CS30sRjH+UpBncOhSVlbT45CFCClPkFq1/+u11TsvdMPnrYMSi9sfbrp/+uJ5491PupPgehLdp+kfqqWkM2z7aH8HocuyrjdaFyIeD093WvRw3ChSmKCrdbMN6BnNJOXA450WlMw6vQQRIr00lBWqH6/kt68zehxX4EhjhdOALHDqy231nkvIqHQhTxCLctvpOlUnjgksdtxQuPh/99fnDm9HJ+/H5xYdPFyeng+GAHqjJQWkcFVz3/PDD//tH3gws1yfOD7wkaAtB+EBxqbjUvlRNQMtWlzc9NUUs6Q+Sb6NWXDdsuUy5w89W1bX/+1uFdsGSm9u1FsNUXTr/O2PJlCu3/ZKhH8Kzq/Z1xHPY9+phr9/tn1wvmj2gmd0yFrE7P07eGIHXt3U33Gn8ChYjIbCk3r077xq8Pla717uLCavrfwBRo+wh
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Get the variable by the variable key.
 
 <Heading
@@ -48,7 +53,12 @@ Get the variable by the variable key.
       in: "path",
       required: true,
       description: "The variable key.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        format: "string<VariableKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -76,21 +86,70 @@ Get the variable by the variable key.
                     type: "string",
                   },
                   tenantId: {
-                    description: "Tenant ID of this variable.",
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
                     type: "string",
+                    title: "TenantId",
                   },
                   variableKey: {
+                    allOf: [
+                      {
+                        description: "System-generated key for a variable.",
+                        format: "VariableKey",
+                        example: "2251799813683287",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "VariableKey",
+                      },
+                    ],
                     description: "The key for this variable.",
-                    type: "string",
                   },
                   scopeKey: {
+                    allOf: [
+                      {
+                        description: "System-generated key for a scope.",
+                        format: "ScopeKey",
+                        example: "2251799813683890",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ScopeKey",
+                      },
+                    ],
                     description: "The key of the scope of this variable.",
-                    type: "string",
                   },
                   processInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
                     description:
                       "The key of the process instance of this variable.",
-                    type: "string",
                   },
                 },
                 title: "VariableResultBase",

@@ -1,16 +1,18 @@
 ---
 id: get-process-instance-statistics
 title: "Get process instance statistics"
-description: "Get statistics about elements by the process instance key."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get process instance statistics"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/Ss7OCVTWpTz1ZQ3jeOkatPUtZ364PoAgisRMQkwAGhbo+F/7yxASrRIO86k05MOGknkYt8u9r0FuWvm+NKy5JKdGC3QWpDKOq4EsquI6QoNd1KrecYStkTXGs1bmzPHnbROCssilqEVRlZkzhL2AR3YzW3gqa4dYIElKmchXYHLEaodTLjG1eQfxSJWccNLdGgotjVTvESWsOo+/O+4YhGTBFdxl7OIGfxaS4MZS5ypcTem8xyBWyuXCjOCAr0YDSOC21yKHLhwFrgFDrWSX2sEmaFyciHRwEIbcLm0g8UTFjErciw5S9bMrSoK3Doj1ZI1zRXFaCutLFq6/2I6pa9hnIOt6W2mQVsXjoCEVg6VIxe8qgopfLXiL5b8rHtx3AfYrXVXmD7I1xrNCrpgCazNRadfUDiqkSF+OBkykQ5LO57L0HvPHTeG+zKOr+9CHYnw6bG1i4nFj8U3f+fLGopPxAgbbYEbBL5cGlxyh1kPr6trxLhw8gbH/TvteAGqLlM0xLlgu9l92/GwjaPnXyqHSzQsYgttSu7CpTevCFHQ2gIfyGkXs7P+UVSphFfBA6Xehd2Yt4L57iR1WRXonpxlZ/5jaTYRc9IVuOXfcVi9bXinnhqsGbHt2tNgzV8kqe3CJmKvHpH/jcwwg4w7DtKC0g5ueCGzR2RfGZ0WWP70LfnP4CRYQoaOywKCbKjVBcPUbyBcnr4/gl9evf756lnuXGWTOL69vZ2YhTjATDptJtosY7MQ9CG75xM4z9EglHwFKQLPMkmYvICtIMFWKORCCnC6a78+GCpL6P6Pqznc3e2tvSrWRg7Ooxl8Pp13DXwl1XII7dcsOFUnYf7AStKCq2u2LfEQdBfF1mXJTf9o6QE0EaP+VffSeICFL18MfBMtfj0/P4HgAoTO8N4xRECURCmVLOuSJa+m04iV/C78ezOdNuSTKv6ETBTgXVVw5am1m45UUGqDLX8moTG0zw3/TWW0kUu5izvZlSZdfBcy6gR1OC4oejJA66Dg4toGJQGvXU6oQT4gDPogeOHPpxx55p8/1uzi4uJgtjXG++LaPeObvUD3At0L9CGBvhzy/b02qcwyVJ6eG622xx4vCn2L+4Nvr6u9rh7U1euxJ8mZAtplQzxEY7QBLURtDGb0klNs3jI77FZ4gYt7re21ttfaUGtNxEp0uW5HYn5Y5XKWsLhV08Hm3TNeDydWTbwdYcTtS+l2BQ2P0Nx0c6/aFCxh66CxJonjda6ta5J1pY1r4hsq4A03kqdFoC3dDlrsOFZowQt/eazWdIOGa90e/GlEjtaFqR8cFbV1aOD0+OwcPnCHt3zl60Dw92HeTt9ORxHI9AneZydzCJkHBve6SgdB7WEUIhh/L4gfxlkUtZFudUYuwhamyA0aetzvsazF9kj0PxixqP3xvuPebxfnFH7KrRTfckE2nmtSLbQ3bDk3nsHsZE7VRmND5tPJ4ZDmJ3OvVqHLsla+Zasl3EqXA4cjXtYq4/AWRHBJOi6kQGW9oNoha2f2MdyBvwMiHE6owIGRXadeSpfX6UToMhZh2eY7LXQal1yquIWw8dHsj8+f3s0OPs6Pjj+dHR8cTqYTd+f8HlTaupKrXhw0QX5kCrqb+3p7YP3o8LktmMM7F1cFl4pK6hNft1q/ZAOts4glo/PpeyEPBX8VtaK9ZOt1yi1+NkXT0GU/gWXJ5dVW474pZNLS74wlC17Y3Sl3fx+enbbz8Ofwv82+Rzevm/WqlW9YRU3/WMSucTU+1m+umu4N3OccDGdCYOV6LgZDb9L0pjt/OD5nTfMv4pauog==
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Get statistics about elements by the process instance key.
 
 <Heading
@@ -49,7 +54,12 @@ Get statistics about elements by the process instance key.
       required: true,
       description:
         "The assigned key of the process instance, which acts as a unique identifier for this process instance.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -78,31 +88,35 @@ Get statistics about elements by the process instance key.
                     elementId: {
                       description:
                         "The element ID for which the results are aggregated.",
-                      type: "string",
+                      allOf: [
+                        {
+                          description: "The model-defined id of an element.",
+                          format: "ElementId",
+                          type: "string",
+                          example: "Activity_106kosb",
+                          title: "ElementId",
+                        },
+                      ],
                     },
                     active: {
                       description:
                         "The total number of active instances of the element.",
                       type: "integer",
-                      format: "int64",
                     },
                     canceled: {
                       description:
                         "The total number of canceled instances of the element.",
                       type: "integer",
-                      format: "int64",
                     },
                     incidents: {
                       description:
                         "The total number of incidents for the element.",
                       type: "integer",
-                      format: "int64",
                     },
                     completed: {
                       description:
                         "The total number of completed instances of the element.",
                       type: "integer",
-                      format: "int64",
                     },
                   },
                   title: "ProcessElementStatisticsResult",

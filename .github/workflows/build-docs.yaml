@@ -9,7 +9,7 @@ jobs:
       temporary_link_path: .github/workflows/validate-links
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Install Dependencies
@@ -31,7 +31,7 @@ jobs:
           sed -i '/SERVER_PORT/d;/SERVER_NAME/d' build/.htaccess
       - name: Run a web server for link checking
         run: |
-          docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnami/apache:2.4.54
+          docker run -d --name webserver -v "$PWD/build":/app -p 8888:8080 bitnamilegacy/apache:2.4.54
           container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' webserver)
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV

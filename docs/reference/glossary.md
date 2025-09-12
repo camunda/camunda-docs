@@ -136,9 +136,9 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [Connectors](#connector) to create the connector-specific [element](#element) configuration.
+Use an element template to extend the Desktop Modeler or Web Modeler with domain-specific diagram [elements](#element). Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
-- [Element templates](/components/modeler/desktop-modeler/element-templates/about-templates.md)
+- [Element templates](/components/modeler/element-templates/about-templates.md)
 
 ### Event
 
@@ -317,6 +317,13 @@ BPMN model.
 While a process represents a defined sequence of distinct steps representing your business logic, a process instance represents a currently executing or completed process. For a single process, there could be many associated process instances in various stages of their executing lifecycle. Process instances are identified by process instance ids. Executing process instances are also sometimes referred to as inflight processes.
 
 - [Processes](/components/concepts/processes.md)
+
+### Process instance tag
+
+An optional, immutable, lightweight label attached when a process instance is created. Tags provide fast, structured metadata for routing, correlation, prioritization, and analytics segmentation without inspecting large variable payloads.
+
+- Tags on process instance creation: [Process instance creation – Tags](/components/concepts/process-instance-creation.md#tags)
+- Tags on jobs: [Job workers](/components/concepts/job-workers.md#tags)
 
 ### Process instance variable
 

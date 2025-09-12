@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Orchestration Cluster, Optimize, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+A Docker Compose configuration to run Camunda Self-Managed components (Orchestration Cluster, Optimize, Console, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
 While the [Docker images](/self-managed/installation-methods/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed for developers to run a local environment and are not intended for production use. For production, we recommend [Kubernetes](/self-managed/installation-methods/helm/install.md).
@@ -38,7 +38,7 @@ docker compose up -d
 
 Running `docker compose up -d` starts all Camunda components. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also includes additional configuration files for lightweight development.
 
-- **docker-compose.yaml:** Contains all Camunda 8 components for a full-stack deployment, including the Orchestration Cluster, Connectors, Optimize, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
+- **docker-compose.yaml:** Contains all Camunda 8 components for a full-stack deployment, including the Orchestration Cluster, Connectors, Optimize, Console, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
 - **docker-compose-core.yaml:** Contains only the Camunda 8 Orchestration Cluster components and Connectors.
 - **docker-compose-web-modeler.yaml:** Contains the standalone Camunda 8 Web Modeler installation. For more information, see the [Web Modeler instructions](#web-modeler).
 
@@ -55,6 +55,7 @@ Running components can be accessed with the username `demo` and password `demo`:
 - Operate: [http://localhost:8088/operate](http://localhost:8088/operate)
 - Tasklist: [http://localhost:8088/tasklist](http://localhost:8088/tasklist)
 - Optimize: [http://localhost:8083](http://localhost:8083)
+- Console: [http://localhost:8087](http://localhost:8087)
 - Identity: [http://localhost:8084](http://localhost:8084)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Elasticsearch: [http://localhost:9200](http://localhost:9200)
@@ -144,7 +145,7 @@ Both the full and lightweight Docker Compose files include a configuration for [
 
 ### Connector secrets
 
-Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE` per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
+Secrets can be added into the connector runtime using the included `connector-secrets.txt` file. Add secrets in the format `NAME=VALUE`, one per line. The secrets will then be available in the connector runtime as `secrets.NAME`.
 
 ### Custom connectors
 

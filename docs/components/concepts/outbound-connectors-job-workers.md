@@ -1,12 +1,13 @@
 ---
 id: outbound-connectors-job-workers
 title: Outbound connectors vs. job workers
+sidebar_label: Connectors vs job workers
 description: Integrating with external systems can be done with a connector or a job worker.
 ---
 
 Integrating with external systems can be done with a connector or a [job worker](job-workers.md).
 
-You define the domain-specific UI for modeling a connector through a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md). This connector template is, in fact, an [element template](/components/modeler/desktop-modeler/element-templates/about-templates.md). Therefore, you can also build a connector-like system using element templates and job workers.
+You define the domain-specific UI for modeling a connector through a [connector template](/components/connectors/custom-built-connectors/connector-templates.md). A connector template is a type of [element template](/components/modeler/element-templates/about-templates.md). Therefore, you can also build a connector-like system using element templates and job workers.
 
 If they both share the same core functionality, how do they differ, and when should you choose what connectors and job workers serve different purposes when it comes to aspects like delivery, reusability, focus, and context.
 

@@ -26,7 +26,7 @@ The default runtime of CPT is based on [Testcontainers](https://java.testcontain
 You can change the Docker images and other runtime properties in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
@@ -162,7 +162,7 @@ path, then you need to set the path when starting the application with the comma
 Set the configuration to use a remote runtime in the following way. Change the connection to the runtime, if needed.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
@@ -224,6 +224,96 @@ public class MyProcessTest {
             )
             .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
             .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"));
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Configuring the Camunda Client's CredentialProvider
+
+It's possible to change the client's CredentialProvider, thereby changing how the client authenticates against the
+Camunda runtime. You can find a detailed breakdown of how to implement basic or OIDC authentication in
+[the Java Client/Authentication section.](/apis-tools/camunda-spring-boot-starter/configuration.md)
+
+<Tabs groupId="clientOptions" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+io:
+  camunda:
+    process:
+      test:
+        # Switch from a managed to a remote runtime
+        runtime-mode: remote
+        # Change the connection (default: Camunda 8 Run)
+        remote:
+          camunda-monitoring-api-address: http://0.0.0.0:9600
+          connectors-rest-api-address: http://0.0.0.0:8085
+          client:
+            rest-address: http://0.0.0.0:8080
+            grpc-address: http://0.0.0.0:26500
+            request-timeout: PT20S
+            auth:
+              # Choose from 'basic', 'oidc', or 'none'
+              method: basic
+              username: admin
+              password: admin
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+runtimeMode=remote
+remote.connectorsRestApiAddress=http://0.0.0.0:8085
+remote.client.grpcAddress=http://0.0.0.0:26500
+remote.client.restAddress=http://0.0.0.0:8080
+remote.client.auth.requestTimeout=PT20S
+remote.client.auth.method=basic
+remote.client.auth.username=admin
+remote.client.auth.password=admin
+```
+
+Alternatively, you can configure the CredentialsProvider per test class via the extension:
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+            // Switch from a managed to a remote runtime
+            .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
+            // Change the connection (default: Camunda 8 Run)
+            .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
+                .usePlaintext()
+                .restAddress(URI.create("http://0.0.0.0:8080"))
+                .grpcAddress(URI.create("http://0.0.0.0:26500"))
+            )
+            .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
+            .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+            .withClientRequestTimeout(Duration.ofSeconds(20))
+            .withRemoteCamundaClientCredentialsProvider(
+                    CredentialsProvider.newBasicAuthCredentialsProviderBuilder()
+                            .username("admin")
+                            .password("admin"));
 }
 ```
 
