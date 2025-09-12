@@ -498,13 +498,13 @@ function replaceConsistencyMarkersWithComponents(outputDir) {
       if (hasEC) {
         updated = updated.replaceAll(
           "[[CONSISTENCY:EVENTUAL]]",
-          "<MarkerEventuallyConsistentExtension />"
+          "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
         );
       }
       if (hasSC) {
         updated = updated.replaceAll(
           "[[CONSISTENCY:STRONG]]",
-          "<MarkerStronglyConsistentExtension />"
+          "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
         );
       }
       if (updated !== content) fs.writeFileSync(file, updated, "utf8");

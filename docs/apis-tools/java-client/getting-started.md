@@ -27,6 +27,7 @@ It supports both REST and gRPC protocols, authentication setup, and provides rob
 **The Camunda Java Client replaces the Zeebe Java Client as of version 8.8.**
 
 - Provides improved structure and full Orchestration Cluster API support
+- Uses **REST** as default communication protocol (gRPC configurable)
 - The Zeebe Java Client will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
@@ -263,7 +264,7 @@ The client will automatically read the environment variables and configure the a
 <TabItem value="oidc-saas">
 
 **Use for:** Camunda 8 SaaS environments.
-Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md).
+Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
 
 ```java
 private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";

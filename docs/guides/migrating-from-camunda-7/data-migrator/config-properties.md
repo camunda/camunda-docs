@@ -12,7 +12,7 @@ Reference for all Data Migrator configuration properties, set in the `configurat
 Prefix: `camunda.client`
 
 :::info
-Read more about Camunda Client [configuration options](/apis-tools/spring-zeebe-sdk/configuration.md).
+Read more about Camunda Client [configuration options](/apis-tools/camunda-spring-boot-starter/configuration.md).
 :::
 
 | Property        | Type     | Description                                                                                         |
@@ -25,16 +25,18 @@ Read more about Camunda Client [configuration options](/apis-tools/spring-zeebe-
 
 Prefix: `camunda.migrator`
 
-| Property               | Type      | Description                                                                                                                                                        |
-| :--------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.page-size`           | `number`  | Number of records to process in each page. Default: `100`                                                                                                          |
-| `.job-type`            | `string`  | Job type for actual job activation. Default: `migrator`.                                                                                                           |
-| `.validation-job-type` | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely. |
-| `.auto-ddl`            | `boolean` | Automatically create/update migrator database schema. Default: `false`                                                                                             |
-| `.table-prefix`        | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
-| `.data-source`         | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
-| `.database-vendor`     | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
-| `.interceptors`        | `array`   | List of custom variable interceptors to apply during migration. Each interceptor must implement the `VariableInterceptor` interface.                               |
+| Property                       | Type      | Description                                                                                                                                                        |
+| :----------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.page-size`                   | `number`  | Number of records to process in each page. Default: `100`                                                                                                          |
+| `.job-type`                    | `string`  | Job type for actual job activation. Default: `migrator`.                                                                                                           |
+| `.validation-job-type`         | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely. |
+| `.auto-ddl`                    | `boolean` | Automatically create/update migrator database schema. Default: `false`                                                                                             |
+| `.table-prefix`                | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
+| `.data-source`                 | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
+| `.database-vendor`             | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
+| `.interceptors`                | `array`   | List of custom variable interceptors to apply during migration. Each interceptor must implement the `VariableInterceptor` interface.                               |
+| `.interceptors.[0].class-name` | `string`  | Defines the variable interceptor class.                                                                                                                            |
+| `.interceptors.[0].properties` | `map`     | Defines the variable interceptor properties as `key:value` pairs.                                                                                                  |
 
 ## `camunda.migrator.c7.data-source`
 

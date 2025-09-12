@@ -18,7 +18,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -31,7 +31,7 @@ Use Camunda 8 APIs and clients to build, automate, and monitor your applications
 :::info Upgrading to Camunda 8.8
 
 - Existing customers can upgrade APIs & tools to 8.8 using the [APIs & tools migration guide](/apis-tools/migration-manuals/index.md).
-- See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 :::
 
