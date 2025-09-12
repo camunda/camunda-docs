@@ -15,6 +15,43 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 30
+
+### Publication date
+
+September ?th, 2025
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+The embedded Netty was affected by [CVE-2025-58056](https://nvd.nist.gov/vuln/detail/CVE-2025-58056), an HTTP request
+smuggling vulnerability in Netty. Incorrect parsing of chunked transfer encoding could allow attackers to craft
+malicious requests that are interpreted inconsistently by proxies and Netty.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist 8.7.0 - 8.7.12 or 8.5.0 - 8.5.22
+- Zeebe 8.7.0 - 8.7.12 or 8.5.0 - 8.5.24
+- Operate 8.7.0 - 8.7.12 or 8.5.0 - 8.5.20
+- Optimize 8.7.0 - 8.7.9 or 8.6.0 - 8.6.16
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist 8.7.13, 8.5.23
+- Zeebe 8.7.13, 8.5.25
+- Operate 8.7.13, 8.5.21
+- Optimize 8.7.10, 8.6.17
+
 ## Notice 29
 
 ### Publication date
