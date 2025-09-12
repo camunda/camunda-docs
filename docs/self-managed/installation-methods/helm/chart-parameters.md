@@ -32,7 +32,7 @@ Each section controls a specific area of the chart.
 | `optimize`   | Configures the Optimize web application             |
 | `webModeler` | Configures the Web Modeler service                  |
 
-### Bitnami subcharts (testing only)
+### Bitnami subcharts
 
 | Section                | Purpose                                                                             |
 | ---------------------- | ----------------------------------------------------------------------------------- |
@@ -41,9 +41,8 @@ Each section controls a specific area of the chart.
 | `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) |
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
-:::caution
-The Bitnami subcharts listed above are included for convenience but are **not intended for production use**.  
-They are recommended only for testing.
+:::info
+The Bitnami subcharts listed above are provided for development and testing convenience only. For production environments, we recommend deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—giving you greater operational control and flexibility.
 :::
 
 ### Observability
