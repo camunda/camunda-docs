@@ -1,38 +1,16 @@
 export const configs = [
-  /*   {
-    name: "camunda.system.cpu-thread-count",
-    legacy: [
-      "zeebe.broker.threads.cpuThreadCount",
-      "broker.threads.cpuThreadCount",
-    ],
-    types: ["1-to-1"],
-  }, 
-    {
-    name: "data.secondary-storage.type",
-    legacy: [
-      "camunda.database.type",
-      "camunda.operate.database",
-      "camunda.tasklist.database",
-      "zeebe.broker.exporters.camundaexporter.args.connect.type",
-    ],
-    types: ["Breaking change (double configuration)"],
-  },
-
-  */
-
   // API keys
-
   {
     name: "camunda.api.grpc.address",
     legacy: ["zeebe.gateway.network.host", "zeebe.broker.gateway.network.host"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.port",
     legacy: ["zeebe.gateway.network.port", "zeebe.broker.gateway.network.port"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.min-keep-alive-interval",
@@ -41,7 +19,7 @@ export const configs = [
       "zeebe.broker.gateway.network.minKeepAliveInterval",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.max-message-size",
@@ -50,7 +28,7 @@ export const configs = [
       "zeebe.broker.gateway.network.maxMessageSize",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.ssl.enabled",
@@ -59,7 +37,7 @@ export const configs = [
       "zeebe.broker.gateway.security.enabled",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.ssl.certificate",
@@ -68,7 +46,7 @@ export const configs = [
       "zeebe.broker.gateway.security.certificateChainPath",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.ssl.certificate-private-key",
@@ -77,7 +55,7 @@ export const configs = [
       "zeebe.broker.gateway.security.privateKeyPath",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.ssl.key-store.file-path",
@@ -86,7 +64,7 @@ export const configs = [
       "zeebe.broker.gateway.security.keyStore.filePath",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.ssl.key-store.password",
@@ -95,7 +73,7 @@ export const configs = [
       "zeebe.broker.gateway.security.keyStore.password",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.interceptors.id",
@@ -104,7 +82,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].id",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.interceptors.jar-path",
@@ -113,7 +91,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].jarPath",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.interceptors.class-name",
@@ -122,7 +100,7 @@ export const configs = [
       "zeebe.broker.gateway.interceptors.[x].className",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.management-threads",
@@ -131,7 +109,7 @@ export const configs = [
       "zeebe.broker.gateway.threads.managementThreads",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.long-polling.enabled",
@@ -140,7 +118,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.enabled",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.long-polling.timeout",
@@ -149,7 +127,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.timeout",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.long-polling.timeout",
@@ -158,7 +136,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.probeTimeout",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.long-polling.min-empty-responses",
@@ -167,7 +145,7 @@ export const configs = [
       "zeebe.broker.gateway.longPolling.minEmptyResponses",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
 
   {
@@ -177,7 +155,7 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].id",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.filters.jar-path",
@@ -186,7 +164,7 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].jarPath",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.filters.class-name",
@@ -195,43 +173,43 @@ export const configs = [
       "zeebe.broker.gateway.filters.[x].className",
     ],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.process-cache.max-size",
     legacy: ["camunda.rest.processCache.maxSize"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.process-cache.expiration-idle",
     legacy: ["camunda.rest.processCache.expirationIdleMillis"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.grpc.rest.executor.core-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.corePoolSizeMultiplier"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.executor.max-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.maxPoolSizeMultiplier"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.executor.keep-alive",
     legacy: ["camunda.rest.apiExecutor.keepAliveSeconds"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
   {
     name: "camunda.api.rest.executor.queue-capacity",
     legacy: ["camunda.rest.apiExecutor.queueCapacity"],
     types: ["1-to-1"],
-    area: ["Api"],
+    area: ["API"],
   },
 
   // Cluster keys
@@ -518,7 +496,6 @@ export const configs = [
       "camunda.database.type",
       "camunda.operate.database",
       "camunda.tasklist.database",
-      "zeebe.broker.exporters.camundaexporter.args.connect.type",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -529,7 +506,6 @@ export const configs = [
       "camunda.database.url",
       "camunda.operate.elasticsearch.url",
       "camunda.tasklist.elasticsearch.url",
-      "zeebe.broker.exporters.camundaexporter.args.connect.url",
       "camunda.operate.zeebeElasticsearch.url",
       "camunda.tasklist.zeebeElasticsearch.url",
     ],
@@ -542,7 +518,6 @@ export const configs = [
       "camunda.database.clusterName",
       "camunda.operate.elasticsearch.clusterName",
       "camunda.tasklist.elasticsearch.clusterName",
-      "zeebe.broker.exporters.camundaexporter.args.connect.clusterName",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -553,7 +528,6 @@ export const configs = [
       "camunda.database.username",
       "camunda.operate.elasticsearch.username",
       "camunda.tasklist.elasticsearch.username",
-      "zeebe.broker.exporters.camundaexporter.args.connect.username",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -564,7 +538,6 @@ export const configs = [
       "camunda.database.password",
       "camunda.operate.elasticsearch.password",
       "camunda.tasklist.elasticsearch.password",
-      "zeebe.broker.exporters.camundaexporter.args.connect.password",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -575,7 +548,6 @@ export const configs = [
       "camunda.database.indexPrefix",
       "camunda.tasklist.elasticsearch.indexPrefix",
       "camunda.operate.elasticsearch.indexPrefix",
-      "zeebe.broker.exporters.camundaexporter.args.index.indexPrefix",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -587,7 +559,6 @@ export const configs = [
       "camunda.database.url",
       "camunda.operate.opensearch.url",
       "camunda.tasklist.opensearch.url",
-      "zeebe.broker.exporters.camundaexporter.args.connect.url",
       "(camunda.operate.zeebeOpensearch.url)",
       "(camunda.tasklist.zeebeOpensearch.url)",
     ],
@@ -600,7 +571,6 @@ export const configs = [
       "camunda.database.clusterName",
       "camunda.operate.opensearch.clusterName",
       "camunda.tasklist.opensearch.clusterName",
-      "zeebe.broker.exporters.camundaexporter.args.connect.clusterName",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -611,7 +581,6 @@ export const configs = [
       "camunda.database.username",
       "camunda.operate.opensearch.username",
       "camunda.tasklist.opensearch.username",
-      "zeebe.broker.exporters.camundaexporter.args.connect.username",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -622,17 +591,13 @@ export const configs = [
       "camunda.database.password",
       "camunda.operate.opensearch.password",
       "camunda.tasklist.opensearch.password",
-      "zeebe.broker.exporters.camundaexporter.args.connect.password",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
     name: "camunda.data.secondary-storage.opensearch.security.enabled",
-    legacy: [
-      "camunda.database.security.enabled",
-      "zeebe.broker.exporters.camundaexporter.args.connect.security.enabled",
-    ],
+    legacy: ["camunda.database.security.enabled"],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
@@ -642,7 +607,6 @@ export const configs = [
       "camunda.database.security.certificatePath",
       "camunda.tasklist.opensearch.ssl.certificatePath",
       "camunda.operate.opensearch.ssl.certificatePath",
-      "zeebe.broker.exporters.camundaexporter.args.connect.security.certificatePath",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -653,7 +617,6 @@ export const configs = [
       "camunda.database.security.verifyHostname",
       "camunda.tasklist.opensearch.ssl.verifyHostname",
       "camunda.operate.opensearch.ssl.verifyHostname",
-      "zeebe.broker.exporters.camundaexporter.args.connect.security.verifyHostname",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -664,7 +627,6 @@ export const configs = [
       "camunda.database.security.selfSigned",
       "camunda.tasklist.elasticsearch.ssl.selfSigned",
       "camunda.operate.elasticsearch.ssl.selfSigned",
-      "zeebe.broker.exporters.camundaexporter.args.connect.security.selfSigned",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
@@ -675,7 +637,6 @@ export const configs = [
       "camunda.database.indexPrefix",
       "camunda.tasklist.opensearch.indexPrefix",
       "camunda.operate.opensearch.indexPrefix",
-      "zeebe.broker.exporters.camundaexporter.args.index.indexPrefix",
     ],
     types: ["Breaking change (double configuration)"],
     area: ["Data"],
