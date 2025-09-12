@@ -14,10 +14,6 @@ During data archive, data is moved to a dated index (e.g., `operate-variable_202
 All data present in the Database (from both **main** and **dated** indices) is visible from the UI.
 :::
 
-## Archive period
-
-By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/operate/importer-and-archiver.md#archive-period) configuration parameter.
-
 ## Data cleanup
 
 The amount of stored data can grow significantly over time. Therefore, we recommend implementing a data cleanup strategy.
