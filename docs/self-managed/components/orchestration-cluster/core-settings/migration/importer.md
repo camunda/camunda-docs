@@ -23,8 +23,8 @@ Modules can be run together or separately in any combination and can be scaled. 
 
 | Configuration parameter | Description                                | Default value |
 | ----------------------- | ------------------------------------------ | ------------- |
-| `*.importerEnabled`     | When true, the Importer module is enabled. | true          |
-| `*.webappEnabled`       | When true, the Webapp module is enabled.   | true          |
+| `*.importerEnabled`     | When true, the Importer module is enabled. | false         |
+| `*.webappEnabled`       | When true, the web app module is enabled.  | false         |
 
 :::note
 `*` can be replaced with `camunda.operate` or `camunda.tasklist` depending on the deployment context, but both are now part of the Orchestration Cluster.
