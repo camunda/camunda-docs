@@ -110,6 +110,7 @@ These limitations mean you are using only a subset of Camunda’s capabilities. 
 
 Consider `noSecondaryStorage` mode **only** in specific situations, such as:
 
+- **Local development with C8Run**: For developers who want to run Zeebe locally without the overhead of secondary storage components, C8Run supports this mode by setting the `camunda.database.type=none` environment variable.
 - **Specialized technical requirements** that prevent the use of secondary storage.
 - **Temporary migration scenarios** where minimal orchestration functionality is needed during a transition period.
 - **Resource-constrained environments** where deploying the full platform is not feasible.
