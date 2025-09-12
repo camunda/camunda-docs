@@ -15,7 +15,7 @@ export const configs = [
       "camunda.tasklist.database",
       "zeebe.broker.exporters.camundaexporter.args.connect.type",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
   },
 
   */
@@ -341,7 +341,7 @@ export const configs = [
       "camunda.operate.backup.repositoryName",
       "camunda.tasklist.backup.repositoryName",
     ],
-    types: ["1-to-1", "Double-configuration"],
+    types: ["1-to-1", "Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -520,7 +520,7 @@ export const configs = [
       "camunda.tasklist.database",
       "zeebe.broker.exporters.camundaexporter.args.connect.type",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -533,7 +533,7 @@ export const configs = [
       "camunda.operate.zeebeElasticsearch.url",
       "camunda.tasklist.zeebeElasticsearch.url",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -544,7 +544,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.clusterName",
       "zeebe.broker.exporters.camundaexporter.args.connect.clusterName",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -555,7 +555,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.username",
       "zeebe.broker.exporters.camundaexporter.args.connect.username",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -566,7 +566,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.password",
       "zeebe.broker.exporters.camundaexporter.args.connect.password",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -577,7 +577,7 @@ export const configs = [
       "camunda.operate.elasticsearch.indexPrefix",
       "zeebe.broker.exporters.camundaexporter.args.index.indexPrefix",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
 
@@ -591,7 +591,7 @@ export const configs = [
       "(camunda.operate.zeebeOpensearch.url)",
       "(camunda.tasklist.zeebeOpensearch.url)",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -602,7 +602,7 @@ export const configs = [
       "camunda.tasklist.opensearch.clusterName",
       "zeebe.broker.exporters.camundaexporter.args.connect.clusterName",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -613,7 +613,7 @@ export const configs = [
       "camunda.tasklist.opensearch.username",
       "zeebe.broker.exporters.camundaexporter.args.connect.username",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -624,7 +624,7 @@ export const configs = [
       "camunda.tasklist.opensearch.password",
       "zeebe.broker.exporters.camundaexporter.args.connect.password",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -633,7 +633,7 @@ export const configs = [
       "camunda.database.security.enabled",
       "zeebe.broker.exporters.camundaexporter.args.connect.security.enabled",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -644,7 +644,7 @@ export const configs = [
       "camunda.operate.opensearch.ssl.certificatePath",
       "zeebe.broker.exporters.camundaexporter.args.connect.security.certificatePath",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -655,7 +655,7 @@ export const configs = [
       "camunda.operate.opensearch.ssl.verifyHostname",
       "zeebe.broker.exporters.camundaexporter.args.connect.security.verifyHostname",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -666,7 +666,7 @@ export const configs = [
       "camunda.operate.elasticsearch.ssl.selfSigned",
       "zeebe.broker.exporters.camundaexporter.args.connect.security.selfSigned",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {
@@ -677,7 +677,7 @@ export const configs = [
       "camunda.operate.opensearch.indexPrefix",
       "zeebe.broker.exporters.camundaexporter.args.index.indexPrefix",
     ],
-    types: ["Double-configuration"],
+    types: ["Breaking change (double configuration)"],
     area: ["Data"],
   },
   {

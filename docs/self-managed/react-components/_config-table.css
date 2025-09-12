@@ -7,9 +7,8 @@
 .config-table {
   width: 100%;
   border-collapse: collapse;
-  overflow-x: auto;
   overflow-y: hidden;
-  font-size: 95%;
+  font-size: 90%;
 }
 
 .config-table th,
@@ -125,10 +124,17 @@
   color: #e1d9cd;
 }
 
-.badge--double-configuration {
-  background-color: #0ba7b9;
+.badge--breaking-change-double-configuration- {
+  background-color: #da1e28;
   color: #fff;
   margin-top: 10px;
+  width: 140px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: left;
+  line-height: 1.5;
 }
 
 .badge--default:hover {
@@ -193,17 +199,6 @@
   margin: 0;
   list-style: disc;
   line-height: 1.8;
-}
-
-.config-type-badges .badge,
-.config-table td .badge {
-  white-space: nowrap; /* prevent wrapping */
-  display: inline-flex;
-  align-items: center;
-}
-/* Optional: ensure long hyphenated types don't break */
-.config-type-badges .badge {
-  word-break: keep-all;
 }
 
 .sortable-header:hover {

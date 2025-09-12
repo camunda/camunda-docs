@@ -2,7 +2,7 @@ import "./_config-table.css";
 import React, { useState } from "react";
 import { configs } from "./_config-table-data.js";
 
-const TYPE_OPTIONS = ["1-to-1", "Double-configuration"];
+const TYPE_OPTIONS = ["1-to-1", "Breaking change (double configuration)"];
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -127,7 +127,7 @@ const SearchableTable = () => {
           const classSuffix =
             t === "1-to-1"
               ? "1-to-1"
-              : t === "Double-configuration"
+              : t === "Breaking change (double configuration)"
                 ? "double-configuration"
                 : "default";
           return (
