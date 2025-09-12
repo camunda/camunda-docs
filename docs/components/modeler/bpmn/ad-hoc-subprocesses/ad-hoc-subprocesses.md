@@ -16,9 +16,7 @@ multiple times, in any order, or skipped.
 If elements depend on each other, the elements can be connected by a sequence flow to build a structured sequence
 within the ad-hoc sub-process.
 
-When a process instance reaches an ad-hoc sub-process, it [activates the inner elements](#activate-an-element) and
-completes the ad-hoc sub-process depending on the [completion condition](#completion). After completion, the process
-instance takes the outgoing sequence flows.
+An ad-hoc sub-process can be handled [internally by Zeebe](#bpmn-implementation), or by using [a Job worker](#job-worker-implementation).
 
 ### Constraints
 
@@ -27,7 +25,13 @@ An ad-hoc sub-process has the following constraints:
 - Must have at least one activity
 - Must not have start events or end events
 
-## Activate an element
+## BPMN implementation
+
+An ad-hoc sub-process can be handled in Zeebe internally. This is the default behavior when modeling an ad-hoc sub-process.
+You can model which [elements to activate](#activate-an-element) and when the sub-process is [completed](#completion).
+Alternatively, you could use the [ad-hoc sub-process API](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) to activate elements manually.
+
+### Activate an element
 
 An ad-hoc sub-process can define an expression `activeElementsCollection` that should return a
 [list](../../feel/language-guide/feel-data-types.md#list) of strings. Each string in the list should match to an ID of
@@ -49,7 +53,7 @@ Currently, it is not possible to activate elements dynamically after the ad-hoc 
 entering the subprocess.
 :::
 
-## Completion
+### Completion
 
 An ad-hoc sub-process can define an optional `completionCondition` [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md)
 that is evaluated every time an inner element is completed.
@@ -63,22 +67,19 @@ A `cancelRemainingInstances` boolean attribute can be configured to influence th
 - If set to `true` (default value), all remaining active instances of inner elements are terminated and the ad-hoc sub-process is directly completed.
 - If set to `false`, the ad-hoc sub-process waits for the completion of all active instances before completing.
 
-## BPMN implementation
-
-An ad-hoc sub-process can be handled in Zeebe internally. This is the default behavior when modeling an ad-hoc sub-process.
-You can model which [elements to activate](#activate-an-element) and when the sub-process is [completed](#completion).
-Alternatively, you could use the [ad-hoc sub-process API](/apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities.api.mdx) to activate elements manually.
-
 ## Job worker implementation
 
-An ad-hoc sub-process can be handled using a [Job worker](/components/concepts/job-workers.md). You can define the sub-process to be handles by a Job worker by giving it a task definition.
+An ad-hoc sub-process can be handled using a [Job worker](/components/concepts/job-workers.md). You can define the sub-process to be handled by a Job worker by giving it a task definition.
+The worker can control the ad-hoc sub-process by activating the inner elements, and by deciding when the ad-hoc sub-process is completed.
 
 If the ad-hoc sub-process is defined as a job worker, it will create a Job upon activation. The Job worker must decide what the next step is.
 To do this it can use the `adHocSubProcessElements` variable (see [Special ad-hoc sub-process variables](#special-ad-hoc-sub-process-variables)).
 
 When a process instance reaches an ad-hoc sub-process with a Job worker implementation:
 
-1. Zeebe creates a corresponding Job and wait for its completion.
+![A sequence diagram showing the flow of how a job worker interacts with an ad-hoc sub-process.](assets/ad-hoc-subprocess-job-sequence-diagram.png)
+
+1. Zeebe creates a corresponding Job and waits for its completion.
 2. The Job worker decides which elements to activate and completes the Job with an [`adHocSubProcess` Job result](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx).
 3. Zeebe activates the elements from the Job result.
 4. As soon as any of the flows inside the ad-hoc sub-process completes, Zeebe creates a new Job for the ad-hoc sub-process.
@@ -111,7 +112,8 @@ The variable contains a list of activatable elements. Each of these elements con
 - `properties`: The properties defined on the element.
 - `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function.
 
-:::info Updating the value of the `adHocSubProcessElements` variable can lead to unexpected behavior. It is not recommended to update this variable.
+:::info
+Updating the value of the `adHocSubProcessElements` variable can lead to unexpected behavior. It is not recommended to update this variable.
 :::
 
 ## Variable mappings
