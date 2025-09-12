@@ -66,7 +66,7 @@ The migration happens for every index, for which it detects exactly **one** olde
 
 - If migration fails, you can retry it. All applied steps are stored and only those steps are applied that haven't been executed yet.
 - Operate should not be running while migration is happening.
-- In the case version update is performed in the cluster with several Operate nodes, only one node ([Webapp module](importer-and-archiver.md)) must execute data migration. The others must be stopped and started only after migration is fully finished.
+- In the case version update is performed in the cluster with several Operate nodes, only one node ([Webapp module](/self-managed/components/orchestration-cluster/core-settings/migration/importer.md)) must execute data migration. The others must be stopped and started only after migration is fully finished.
 
 #### Configure migration
 

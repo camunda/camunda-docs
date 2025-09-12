@@ -23,10 +23,6 @@ The data representing process instance state becomes immutable after the process
 All Tasklist data present in Elasticsearch (from both **main** and **dated** indices) are visible from the UI.
 :::
 
-## Archive period
-
-The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
-
 ## Data cleanup
 
 In case of intensive Zeebe usage, the amount of data can grow significantly overtime. Therefore, you should consider the data cleanup strategy.
