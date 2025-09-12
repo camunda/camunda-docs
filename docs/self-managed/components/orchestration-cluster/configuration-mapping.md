@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 import SearchableTable from '../../react-components/\_config-table.js';
 
-Configuration key changes for Orchestration Cluster components as part of unified configuration in Camunda 8.8.
+Configuration key changes for Orchestration Cluster components included with Camunda 8.8 unified configuration.
 
 ## About Camunda 8.8 unified configuration keys
 
@@ -24,7 +24,7 @@ Only a partial set of unified configuration keys are introduced in Camunda 8.8, 
 
 ### Backwards compatibility
 
-Backwards compatibility between legacy keys and new keys in 8.8 works as follows:
+Backwards compatibility between existing legacy keys and new keys in 8.8 works as follows:
 
 | Type                                                                                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | :------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -33,7 +33,16 @@ Backwards compatibility between legacy keys and new keys in 8.8 works as follows
 
 ### Recommended actions
 
-Camunda recommends you replace any existing legacy key(s) outlined in this table with the matching new key.
+As part of upgrading from 8.7 to 8.8, Camunda recommends you replace the legacy key(s) outlined in this table with the equivalent new key.
+
+You can also use environment variables to convert and override these properties as required.
+
+For example:
+
+| Key/property                               | Environment variable                    |
+| :----------------------------------------- | :-------------------------------------- |
+| `camunda.api.grpc.address`                 | `CAMUNDA_API_GRPC_ADDRESS`              |
+| `camunda.api.grpc.min-keep-alive-interval` | `CAMUNDA_API_GRPC_MINKEEPALIVEINTERVAL` |
 
 ## Camunda 8.8 keys and legacy key changes
 
