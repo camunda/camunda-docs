@@ -97,6 +97,10 @@ Additional upgrade considerations are necessary for deployments that use custom 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
 See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
+#### C8Run port number change to 8088
+
+The default port number for C8Run is now 8088 whereas installations prior to 8.8 used port 8080. This change was made to align between the Helm chart and Docker Compose installation methods as well as to avoid port conflicts when developing Job Workers locally which default to port 8080.
+
 #### Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->
