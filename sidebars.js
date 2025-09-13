@@ -147,6 +147,7 @@ module.exports = {
             "components/best-practices/development/routing-events-to-processes",
             "components/best-practices/development/testing-process-definitions",
             "components/best-practices/development/local-development-with-element-templates",
+            "components/best-practices/development/secondary-storage-management",
           ],
           Modeling: [
             "components/best-practices/modeling/creating-readable-process-models",
