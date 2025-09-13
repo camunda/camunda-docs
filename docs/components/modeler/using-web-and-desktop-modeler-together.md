@@ -73,7 +73,10 @@ Camunda recommends storing shared templates in a separate repository:
 | Detects versions based on separate files. To support multiple versions, maintain different files with distinct names (e.g., `element-template-v1.json`, `element-template-v2.json`). Otherwise, templates may appear as [missing](/components/modeler/desktop-modeler/element-templates/using-templates.md#missing-templates). | Supports evolving a single template file. Simply update the file and [publish](/components/connectors/manage-connector-templates.md#manage-published-connector-templates) new [versions](/components/modeler/element-templates/defining-templates.md#template-versioning). |
 
 :::warning
-If you rely on Desktop Modeler, you must create separate files for each template version. Web Modeler alone does not have this limitation.
+
+- Desktop Modeler can have multiple templates defined in a single file, which is good practice when defining multiple versions of the same template.
+- Web Modeler only supports defining one template per file, as storing template versions in a file is not needed (Web Modeler automatically tracks version history).
+
 :::
 
 ## Frequently asked questions
