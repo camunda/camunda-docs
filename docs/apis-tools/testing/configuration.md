@@ -125,6 +125,214 @@ public class MyProcessTest {
 
 </Tabs>
 
+### Multi-tenancy
+
+Multi-tenancy is disabled by default. You can enable multi-tenancy in the following way:
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    multitenancy-enabled: true
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+Register the JUnit extension manually and use the fluent builder:
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension().withMultitenancyEnabled();
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+By enabling multi-tenancy, the runtime enables Basic Auth security and creates a default user `demo` with admin rights
+to interact with the runtime.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+A process test using multi-tenancy could look like the following example:
+
+```java
+@SpringBootTest(properties = {"camunda.process-test.multitenancy-enabled=true"})
+@CamundaSpringProcessTest
+public class MyProcessTest {
+
+    private static final String DEFAULT_USERNAME = "demo";
+
+    private static final String TENANT_ID_1 = "tenant-1";
+    private static final String TENANT_ID_2 = "tenant-2";
+
+    @Autowired private CamundaClient client;
+    @Autowired private CamundaProcessTestContext processTestContext;
+
+    private CamundaClient clientForTenant1;
+
+    @BeforeEach
+    void setupTenants() {
+        // create tenants
+        client.newCreateTenantCommand().tenantId(TENANT_ID_1).name(TENANT_ID_1).send().join();
+        client.newCreateTenantCommand().tenantId(TENANT_ID_2).name(TENANT_ID_2).send().join();
+
+        // assign the default user to the tenants
+        client
+            .newAssignUserToTenantCommand()
+            .username(DEFAULT_USERNAME)
+            .tenantId(TENANT_ID_1)
+            .send()
+            .join();
+        client
+            .newAssignUserToTenantCommand()
+            .username(DEFAULT_USERNAME)
+            .tenantId(TENANT_ID_2)
+            .send()
+            .join();
+
+        // create a client for tenant 1
+        clientForTenant1 =
+            processTestContext.createClient(
+                clientBuilder -> clientBuilder.defaultTenantId(TENANT_ID_1));
+    }
+
+    @Test
+    void createProcessInstance() {
+        // given
+        clientForTenant1
+            .newDeployResourceCommand()
+            .addResourceFromClasspath("bpmn/order-process.bpmn")
+            .send()
+            .join();
+
+        // when
+        final var processInstance =
+            clientForTenant1
+                .newCreateInstanceCommand()
+                .bpmnProcessId("order-process")
+                .latestVersion()
+                .variable("order_id", "order-1")
+                .send()
+                .join();
+
+        // then
+        assertThatProcessInstance(processInstance).isCreated();
+
+        Assertions.assertThat(processInstance.getTenantId()).isEqualTo(TENANT_ID_1);
+    }
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+A process test using multi-tenancy could look like the following example:
+
+```java
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+            new CamundaProcessTestExtension().withMultitenancyEnabled();
+
+    private static final String DEFAULT_USERNAME = "demo";
+
+    private static final String TENANT_ID_1 = "tenant-1";
+    private static final String TENANT_ID_2 = "tenant-2";
+
+    private CamundaClient client;
+    private CamundaProcessTestContext processTestContext;
+
+    private CamundaClient clientForTenant1;
+
+    @BeforeEach
+    void setupTenants() {
+        // create tenants
+        client.newCreateTenantCommand().tenantId(TENANT_ID_1).name(TENANT_ID_1).send().join();
+        client.newCreateTenantCommand().tenantId(TENANT_ID_2).name(TENANT_ID_2).send().join();
+
+        // assign the default user to the tenants
+        client
+            .newAssignUserToTenantCommand()
+            .username(DEFAULT_USERNAME)
+            .tenantId(TENANT_ID_1)
+            .send()
+            .join();
+        client
+            .newAssignUserToTenantCommand()
+            .username(DEFAULT_USERNAME)
+            .tenantId(TENANT_ID_2)
+            .send()
+            .join();
+
+        // create a client for tenant 1
+        clientForTenant1 =
+            processTestContext.createClient(
+                clientBuilder -> clientBuilder.defaultTenantId(TENANT_ID_1));
+    }
+
+    @Test
+    void createProcessInstance() {
+        // given
+        clientForTenant1
+            .newDeployResourceCommand()
+            .addResourceFromClasspath("bpmn/order-process.bpmn")
+            .send()
+            .join();
+
+        // when
+        final var processInstance =
+            clientForTenant1
+                .newCreateInstanceCommand()
+                .bpmnProcessId("order-process")
+                .latestVersion()
+                .variable("order_id", "order-1")
+                .send()
+                .join();
+
+        // then
+        assertThatProcessInstance(processInstance).isCreated();
+
+        Assertions.assertThat(processInstance.getTenantId()).isEqualTo(TENANT_ID_1);
+    }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::info
+You should assign the default user (`demo`) to all tenants to ensure that the assertions can access all data.
+:::
+
 ## Remote runtime
 
 Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running on your machine.
