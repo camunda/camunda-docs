@@ -186,6 +186,8 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/model-recommentations-agentic",
           ],
         },
         {
