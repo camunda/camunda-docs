@@ -12,6 +12,8 @@ The Bitnami subcharts listed above are provided for development and testing conv
 Refer to [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for more details.
 :::
 
+If you nevertheless decide to run Bitnami-based subcharts in production, Camunda strongly recommends using the **vendor-supported enterprise images**. This guide explains how to create registry secrets and install Camunda with enterprise images.
+
 ## Why Use Enterprise Images?
 
 Enterprise images:
