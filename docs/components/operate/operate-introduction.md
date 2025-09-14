@@ -1,6 +1,6 @@
 ---
 id: operate-introduction
-title: Introduction
+title: Introduction to Operate
 description: "Operate is a tool managing, monitoring, and troubleshooting your processes."
 ---
 

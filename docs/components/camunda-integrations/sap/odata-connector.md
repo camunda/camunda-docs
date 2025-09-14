@@ -60,7 +60,7 @@ Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) 
 
 Use the command `csap setup` to guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for odata \
@@ -75,6 +75,7 @@ Follow these steps:
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
+
    - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
 

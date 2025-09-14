@@ -97,6 +97,12 @@ Additional upgrade considerations are necessary for deployments that use custom 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
 See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
+##### Secret management improvements and deprecations
+
+Camunda 8.8 introduces a consistent secret pattern for Helm charts. The legacy secret configuration are deprecated and will be removed with 8.9, but remain functional during the transition period.
+
+See the [secret management guide](/self-managed/installation-methods/helm/configure/secret-management.md) for migration instructions and examples.
+
 #### Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->
@@ -307,9 +313,18 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 
 :::note
 
+- The new `CamundaClient` uses REST as the default communication protocol, explicitly use the configuration option `preferRestOverGrpc=false` to switch to gRPC as the default protocol. (Note: job streaming is only supported via gRPC, but can be used alongside REST for other operations)
 - If you need to continue using the old `ZeebeClient`, you can use the new version 8.8 `CamundaClient` artifact without issues, as it still contains the related `ZeebeClient` classes. Those classes are marked as deprecated, so you can easily spot code you need to adjust to the `CamundaClient`.
 - The old `zeebe-client-java` artifact is now relocation-only, so your build system is redirected to the new `camunda-client-java` artifact. We will discontinue the old artifact in version 8.10 and recommend using the new one.
 - The Zeebe Java client will not be developed further and will only receive bug fixes while version 8.7 is officially supported.
+
+:::
+
+The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
+
+:::info
+
+The new Camunda Spring Boot Starter provides the `CamundaClient` when requested. The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC. If you want to continue using gRPC by default with the `CamundaClient`, you need to explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
 
 :::
 

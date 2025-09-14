@@ -70,6 +70,14 @@ For example, the completed ad-hoc sub-process configuration would look as follow
 
 ![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
 
+#### Configure an input mapping for the tool call result variable
+
+To prevent interference between tool calls, create an [input mapping](../../concepts/variables.md#input-mappings) for the `toolCallResult` variable. This ensures the variable is created as a local variable within the ad-hoc sub-process.
+
+1. In the **Inputs** section of the ad-hoc sub-process properties panel, add a new entry.
+2. In the **Local variable name** field, enter `toolCallResult` (or use your custom variable name if you changed it earlier).
+3. Leave the **Variable assignment value** field blank.
+
 ## Example response interaction feedback loop {#response-loop}
 
 Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.

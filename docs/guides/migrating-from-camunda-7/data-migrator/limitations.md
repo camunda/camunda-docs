@@ -155,10 +155,6 @@ Processes with active multi-instance elements can currently not be migrated. We 
 
 The history migration has the following limitations.
 
-### History cleanup
-
-The history cleanup due date is migrated if the C7 instance has a removal time.
-
 ### Process instance
 
 - Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
@@ -167,12 +163,6 @@ The history cleanup due date is migrated if the C7 instance has a removal time.
 - As a result, you cannot query for the history of a subprocess or call activity using the
   parent process instance key.
 - See https://github.com/camunda/camunda-bpm-platform/issues/5359
-
-### Tenants
-
-- C7's `null` tenant is migrated to C8's `<default>` tenant.
-- All other `tenantId`s will be migrated as-is.
-- Read more about [multi-tenancy](/components/concepts/multi-tenancy.md#the-tenant-identifier) in Camunda 8.
 
 ### DMN
 

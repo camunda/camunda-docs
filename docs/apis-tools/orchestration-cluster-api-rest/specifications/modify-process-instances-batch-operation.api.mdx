@@ -1,11 +1,11 @@
 ---
 id: modify-process-instances-batch-operation
 title: "Create a batch operation to modify process instances"
-description: "<MarkerEventuallyConsistentExtension />"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create a batch operation to modify process instances"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztPe1y2ziSr4Ji5UcyJ0uyk0wSTS5Xiq3MasdfZStJzVquGCJbEsYkwACgHK1LVfv3/t8j3JPtk9w1QFKUSMl2EidOjKmaGYsEu4FGo7/QQF96mo6U1zrxDqXwQSnCuNKU++Cd1jwRg6SaCd4NvJYXiYANp2m7btpMvabaHx9kDb2aF4DyJYvNr5bX531+crJ9sH/cPe519rf/bHXedfZ7b9u7p6f4bs8AJVESahaHQOKlbqh6nx8z7gMRPJyWX5MLpsekvd3rvusQpakG4lNOBkBMdxkENUL5lIzYBHifD1moQSoyFDJtTSUQNuJCQkAoD4iYgJQsCICTIJGMj4geM0UGOEySE6Te511OfMG1pEoTLYhifBRmWH3TaN68RpgmTBEuNImFUmwQAn5Eg4BMqGQUf+OYZOJje0WEtKCmZDAlEEIEXJNzmCJiA8qSowArUUD0GPLGLCBiaJ4okUgfzOg0lSPQ9T7v4aCYIoHgQKiacn8sBReJCqc181EsxUgiqVNyakn9cwhIoixNwJIkn/k/YEqGUkTmlQQVC65SnFnbOT0M7RNFgAexYFyThw3TYiNvoRqXJfizR/U+cpiEjwko/VoEU691aX4yCYHX0jKBmoezAlzjKxrHYToZjb8UMuSlp/wxRBT/0tMYvJYnBn+Br0uc2xuXuZFY/kFyBzBkHLmSXIyZP67gTC3OgSuixiIJA8uREwhqfU4VuYAwJFSRiMYx0nNh7i1A6ms2KUxnDncOUIOMGKc6ZV3zXZ9zuFj7lQGMHxlixhJprhkoJIkdH/61SIxl6UAUUOmPU3rUvZpHw/Bg6LVObv7l8jSsgvSaqooZuRLc4gCVplLvUA3lMeKEm9ckoBrWjQm/39AsMt1B4FMrhoYJzmowwY4FWc98GtMBCxn2oKp/gkOKJH2jNIodr+YNhYyo9lpekOHDz5kOsVXnE/U1iXCNlFh3D58iB46BTGiYAAFsHU7r3qx2mYNoZz1NZ30ZTP4+x39tMj+Aj2UCb4/BP7eyFz4mNGQZ3VJ5M2EBBLbDBQzryDGreQ/4FagY/4rI4BNTWq3Ex6zA9RMpcfXl3GE/K+AZCBEC5QbmSJfh/S6BGkEzpqhmophKplDWfPEIRlWsv4Aum56vizesGOWuuLiVMYZVYywgu50RMn4VX+T8EKULFC0TMaxAW+QVKiWdejWPaYhUQW+t7c9sNjudCwsUWD0WwRuzfA/Tbniz01nNAx6slofAAycNnTR00tBJw/shDY1TWC0Ly6anvkIyLvnKx9i+w5PodgXlF8rEm5jyOCDloQ5JIgwiWD/cq3nbB3uHu51eZ8ereb3O0V53v40/CpOwijZmGj5DKq+k9bcU0t+fcl9LA9yFkdyGevlmYum7kM2Ie3YOVXLxRmNeGCxCTDkDQ3bHSRwLiUGHCxYGPpUB8cdUUt9E1qiEFrb6hZz9ctbKAf4TpKgRwaFmQltZuG/+Yd188l+FT0zjNKyWtzM9eF+BNw1TgfJpbLqmx2RA/XMVUjWupZxvCdYiZ/3+L2c2mJQRdZedlxTCgtaoonqVBhlT1eU+C9IQ1BIPLs/D+zHosdHETJU1zJgqQomE0MR4WAoWKciFRvPV08Ap1xifrVJZ9i3p7qxb0seGQ+60TvosjWCRV4aorgvrNVXML5BhGeK3Nvtvy8L/4aXt0nAMnYTu3hw9x3j4l+OfGY5dzx1OUH9NQV0U1VaiVQnnbLOlgs8rTfy8/TUmf8U8cxpdY5r3aZTzXYbUCHgznWYvw4lvJ76d+Hbi+76K76oNWitoynJzVitsC59YGZzJ0gKmd+kX7/BFqVdmyos2/x8wrdYb55ByfYURX1+QrEuye6o0RBsj4LjLDYEBhCSklWDy0NZhuV81Dz7RKDbD2tp6uvnsxYvnm49/fdF89uTXNcb/PwAGQDp8hJvZEtJUAezGw7/TCSWh4COiQDIasn/iPrNKxeijilBgPseCj7BPa9wn8/orxHlM2sGXCPT7PgUrNJIjyw+tUN1kFibzm5sTjvpF6s+M5xVTXCcVDaodMZqtqkV/DDPgnD51+vTuToHTp06f/uST6fTpndGnHZvne119upwW/AX6dBnUAqkrurWC1M9/ffb8xV0gdUWXP0ufluHcmj69F1Nwc316T8hyP/TpfZjMu6tP7wX1rT5dPG20KqFi+RyTy6xwW3Nua85tzd3zrTk8RiKlkHugFB2tOkuCLUhkm+RJbVpklEZPx0lTJ02dNHXS9L5L0zFVR6AlA7ULw4qzQvO04XnSGiYLDykLISB/iUF6M4K0UEgIQ13N/LBoEx+vPgBjL0xIma58wpwqJXxGdUasYt+KDsQq+d6p6MgPfFomHc4XZfqvIsnnHpJZSeK7cEjm1gl222djvsEAfmjl9y2p5U7C3N5JmCqqV7oEabsVsZRMg3R3vlh1ONfAuQY/unR0rsF9l7DXdg2WBHDxuOFqN6G092sOF/LyqcKqZZA16mAM529UjbdFsMJLyOHZeM+YqjHxRQC1Cik/T5deJ927XMMI5JJ4/2LJzizY4pYG4/rx1neS9Wl3yEPTiUffQ0SvpMhXF9prMd39a0XWdv+27hRZi/RrXihyBaLbuE1kLcpvrYJXd2bRDk7lUpWQtrdqlsjElDbdoiNVJz06UoSDjYHbi+esYCMhaA3yN+w+JzSMx5QnEUjmqxo5+3BWI2cb+J/WmVFwZ/Wz30gIfPT/Wujf//2/ZLPZrBhkPhSrpF/26OjVyWlxx/bEG7PReEOLxEg7CREEzN7qebrSi2vjYOpkHyBQtzOO+Y7yAO+eBKU+nMO0tbn1+ElxWD06WrMZjG9nNS/h7GMCXTsUe1tkRD+lvzebC+2PQRsrLHuE1w8u5WPZmX/DIAyU2WdelMypatvBmyLZul3lzNUJ8pZuY9n5O87fcf6O83fKUnQ/PVB/LTmKJz+dJHWS1ElSJ0mdJF2SpO9AKkPoawrTiW3vYjUuVuNiNS5W85PEalaJRYwZ3FAymmCIszadtemsTWdtOmtzUayuPpxalqeffy41gDgUUwgqoFadBl7s3urzS0/uxPmlyk5/ybUPC5Bu7aDqfZyTm59bvZ9Uuj1d+MWnH+/hhCxoc0fAzyAg6sdZqVX1juHVhouoqMVmMKL5RsJ0P5kiUE5Nvbi0Qt1IiiRW6NgNGM/L9h0ckVCMmF8nHYrnWA1WwrhZY2aesSYgoF2T3jgeQAwc03mwLmBWzS/FkRklbGhNydycixCKopopLMBozJOeiDdCmEBIhmbwOayzB0KeET+kWL8QizEudbm9v2P7TP79r/8hEVDO+KhFHuoCQFPT8ZFp+rBg1FrQ+esoUak/VO/zlwP5qs9fQvSqY7ms9bIB0Svs6tnZGdYK7PPLPiekb0uC9L0W6aepyX2vZt9kl6/jy82tx+nTB0LigxP8Rcgl6VdtBFt46YsPk82+R2a1m3yx1fdqpF+8bR4b4J42mSGc0z6fmbGktR6zyaqoUzim2pinL5OQKD0N4T/7XkyDgPHRBp4baZGtZvzpNxJROWK8+KjvvUJcL0OWf4g8uWF+bCBvt0jAlI8NTaFNTpDkloyG4Db9+2UjZNeHNKaTwtX2aQhDCwN6c+uxgXsziMiMhkAEGCbMtexMfDZBzMfrEPtM+iFg85eYG/eqYr5fNswbXEo4sDmrmPGhy5CP8TbRbdlpQgrZbwsct/QNMt8i8Ql52UhCOw/2Wfo7XX7xq32hoUXemqWOUagQPqV4HuAALXxf8MB0E9l4SlgUY2gjBmk0CPehZqqfGv/Gp4nxIBgnJp1lIsIkwkJmEyYFxwxIlTo519JurnylK9j2NcJJrmCbK9h2fVyuYJsrX+mkoZOGTho6aejKV7ryla58pStf6cpXuq1aV77S5dS4nBqXU+Nyan42Qe3KVzrx7cS3E99OfP+s4tuVr/zZKrG4clvffwpcuS1Xbusnn8y7Wx7kXlDfla90+vT+TIHTp06f/uST6fTpndGnrnylK1/5c0+BK1/pylf+5JN5d/XpvaC+K1/ptubc1pzbmnNbc658pZOmTpo6aeqk6feWpq585Q9/WsaVr7zh0RJXvtKVr3TlK++s4nLlK51r4FwD5xo41+C7uwaufKUrieBKIriSCK4kwl0tieDKV7ryla58pfN3nL/j/B3n77jylU6SOknqJKmTpHdLkrrylS5W42I1LlZzv2M1rnylszadtemsTWdtuvKVP2TJNFe+8g7OiStf6cpX/ngT4spXfikBb1K+cu0F47Yp8nMkJoBPZeIjnoo5KL4l9tUAzeeLMcOSfDbzRxE1FkkYoElAfc0m6aXiaSvlixhsWUn7IL/7tvCdb1zj4PpZvqt6RgmOan6Stk5MkUU2b46WVEg0yIhxPHdA0UvyTYnOpSMLfU41sROdZUYFZhzZKAklHC7KGVDGM8A6njmWwBThpJpoKkeQX68RXK0Tl/BXWzrdneXjE1g7skDfeUfWuZEIKhIBhBtmQeEsBqaMKc/gVh7UDio4fL7G2kgspqcfNpu/ngs18MoJv0GW3LBAm88cas6Cd3akS5eILs9wmRCrF/OeCNiQ+YbV98QEXi+eNp9zPQqFRbS5JVcSA9dDt4jqCD4moLT1mzwJKhZcWQ7eajavd+hdWhjkgqqiQPAF12kWIo3jMEXfwFKwZoH4Y4hoNYYUyjKmq1fd4qn91MOYM9Pcf/hO6qLgm5YLFCUJCyrutV2tUHkVgaq15JPHW5teMXllmU5lvH9AHg4ooSldkNAzg6qaSxzuSjgVyzI99bHd3t/u7H44PDrY7hwff+juH/fwiVfzjjrHB7vvOh+6+9vdnc5+z6t5e93fj9q9TlXrvYOd7ps/q97sdPAwSdWb9s7Oh3fto2779S7+fHu4g8ALT9JPdzrb3ePuwf6Hnc6b7n631z3YL8MtvDtdNQFIvfycSnWTbbskjkAlYbZcn6xaoaV7EpeXrD0XWCd7QgIJQFMWmrDEPKCR1rDOJAIZiGBqowEr1nUsxSCE6D+uWt9t9DWxZYo3K5pNc3vAYj85erNNXjx5+uz04VjrWLUajYuLi7oc+hsQMC1kXchRQw59/BfbPUKbASSYkraoUAJb45aGZC4kiIrBR1lYOGhuOoN8uFDHdoWE0Smjr17FkpXdbPL2qEtMGjQbTtHeKaE23wwpTm7LowOR6NYgpPzcm3PEVfGqNlFJFFFZjOIVEKTVzJJrhcurLtf+W693SCwIk8FthFCWtI2IcBAR4yzCJfyk2TTZdPbXr83mDGHijF9jJJzApzik3HLr0nAYJ9Gcb+s2H90y+leaGSHZiC3jrXtLhjw+3LEjytbjZvV6zDRkiME2DBOygNAE0yB1unxQ5ZlO0NB4sWOgAUgzVe/fv99ozxvD4uIqhT/dAnUL1C3QVQv0cZnf3wg5YEEAxuecr1WGOxIa3UxxsdagdevKrat7vq6eVhmibW7yYiTyoT37JXwTtzUBpTC3UjPc6cJzRqZba26trVprGP4FPRaB1/JioQzrUD32Wl4jXU4b+Q0sjagQ9vFqngI5MTblyaWXyNBreZd2/cxajcblWCg9a13itvWsMdnyloqj4Wu7zjL+CYVPw7HtQ3ke8QUvFDE7kLhhrVP/cztMFKZUHXWOe+R3quGCmlwTD9EvonnefN6sxIBNrwG9fdglduSWOwsSI0OBS78ShW18UyQmiq/ATyTT02MEYUn4GqgEiaZ8gYNS3AaT2bcyjbxa+sebjK/+/r5nWAMlXxq0ey2CaSeL9lxmgUGUinjoase4Ct5Wc+vJRvPZxtaL3ubT1tPN1tbzevPZ5j9MqCW4ulFaAHt+C8dCPVN7ZmpedHS+IArMc5IVvSu+NVXscrfltLq2UtUl3KsLR6xuXXUtdtWFpOVLPwuBqYUL7ebPl69msiSpvkVpTsXCXRgLoFYe5bZgV5y7bmYnDNef2as8gDZHv+JkxZoGecJw84q0uTUwqibD7Og9ENLwjuNmx80/OjebfbLyvu1JxT5h5XbU8g5buZHBwPhQGN2S2g/VGqt92EWmzUbrNeubqcVNfaN8U/7eplHCA5ruhkA6ZGs5ZNbyiOlxMqj7Imr4tnn+f6ZUAsqblayhw64x6nwRRQk35gluTdsjwhnO58S3vUVzL2Q+cAUVXdu1b0g6O2Sz3rxJFwehGDQiyngjRaEa2+29t/s77Y3d7nZn/7izsVlv1vUne/QXDa6I8mI/TFSe0FKAXQtirK9pKRavli2Ny7mz42Hm3snJ9sH+cfe419nf/rPVedfZ771t756e4rs9CzPPDSwBr/f5McOIv+BhBW5LZrtu0/v70qRAaytCUDNpoCM2Ad7n1qSwya22Ne4RsBEX6MXhlrqYgJQmekKCRFrTlqnSRk+fdzGRnWtJlTbnwm3OYtFCnTevEZbHX2KhFBuEgB/RIMizEIqpAcrkS1rSDKb5BjMmDfZ514Cy5CjAShQsXoMSZGZeuueHo7Prrt7nNhlBkcCkA6gp98dScJGocFrLzPeRRFKn5NSS+ucQkCR3b0tbk2QoRbS4yWJwVuywpv4Q8CAWjGvysGFabOQtVOOyBH/2aMHV1PBJN+KQMpMTZZbIZeo7nHgl38HsLxe8h9Na6gGceJeXA6rgrQxnM3z8MQE59Vonp3Mtib9mWQzbSLlzIxa3LZ9vmM3Cudos7Q7jLqn9ou37EOu1bU8LHtHhwTFuB+JeFY4uMurEk/QCtQe98FoeJpHGedaMeXbphZSPEqsILUz85/8AvCP6cQ==
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
@@ -34,7 +34,8 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension />
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Modify multiple process instances.
 Since only process instances with ACTIVE state can be modified, any given
@@ -485,19 +486,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           description: "The key of this process instance.",
                           oneOf: [
                             {
+                              description:
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
                               allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  format: "Camunda Key",
-                                  description:
-                                    "System-assigned entity key (Java long serialized as string)",
-                                  title: "CamundaKey",
-                                },
-                                {
-                                  description:
-                                    "Key for a process instance. Only use values returned by the system.",
-                                  format: "ProcessInstanceKey",
-                                  example: "2251799813690746",
+                                  title: "LongKey",
                                 },
                               ],
                               title: "ProcessInstanceKey",
@@ -509,37 +507,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               type: "object",
                               properties: {
                                 $eq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a process instance. Only use values returned by the system.",
-                                      format: "ProcessInstanceKey",
-                                      example: "2251799813690746",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ProcessInstanceKey",
                                 },
                                 $neq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a process instance. Only use values returned by the system.",
-                                      format: "ProcessInstanceKey",
-                                      example: "2251799813690746",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ProcessInstanceKey",
@@ -554,19 +546,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches any of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -577,19 +566,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches none of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -603,19 +589,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           description: "The parent process instance key.",
                           oneOf: [
                             {
+                              description:
+                                "System-generated key for a process instance.",
+                              format: "ProcessInstanceKey",
+                              example: "2251799813690746",
                               allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  format: "Camunda Key",
-                                  description:
-                                    "System-assigned entity key (Java long serialized as string)",
-                                  title: "CamundaKey",
-                                },
-                                {
-                                  description:
-                                    "Key for a process instance. Only use values returned by the system.",
-                                  format: "ProcessInstanceKey",
-                                  example: "2251799813690746",
+                                  title: "LongKey",
                                 },
                               ],
                               title: "ProcessInstanceKey",
@@ -627,37 +610,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               type: "object",
                               properties: {
                                 $eq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a process instance. Only use values returned by the system.",
-                                      format: "ProcessInstanceKey",
-                                      example: "2251799813690746",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ProcessInstanceKey",
                                 },
                                 $neq: {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a process instance. Only use values returned by the system.",
-                                      format: "ProcessInstanceKey",
-                                      example: "2251799813690746",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ProcessInstanceKey",
@@ -672,19 +649,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches any of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -695,19 +669,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches none of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -721,18 +692,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           description: "The parent element instance key.",
                           oneOf: [
                             {
+                              description:
+                                "System-generated key for a element instance.",
+                              format: "ElementInstanceKey",
+                              example: "2251799813686789",
                               allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  format: "Camunda Key",
-                                  description:
-                                    "System-assigned entity key (Java long serialized as string)",
-                                  title: "CamundaKey",
-                                },
-                                {
-                                  description:
-                                    "Key for a element instance. Only use values returned by the system.",
-                                  format: "ElementInstanceKey",
+                                  title: "LongKey",
                                 },
                               ],
                               title: "ElementInstanceKey",
@@ -744,35 +713,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               type: "object",
                               properties: {
                                 $eq: {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a element instance. Only use values returned by the system.",
-                                      format: "ElementInstanceKey",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ElementInstanceKey",
                                 },
                                 $neq: {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
                                   allOf: [
                                     {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
                                       type: "string",
-                                      format: "Camunda Key",
-                                      description:
-                                        "System-assigned entity key (Java long serialized as string)",
-                                      title: "CamundaKey",
-                                    },
-                                    {
-                                      description:
-                                        "Key for a element instance. Only use values returned by the system.",
-                                      format: "ElementInstanceKey",
+                                      title: "LongKey",
                                     },
                                   ],
                                   title: "ElementInstanceKey",
@@ -787,18 +752,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches any of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a element instance. Only use values returned by the system.",
-                                        format: "ElementInstanceKey",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ElementInstanceKey",
@@ -809,18 +772,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     "Checks if the property matches none of the provided values.",
                                   type: "array",
                                   items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a element instance. Only use values returned by the system.",
-                                        format: "ElementInstanceKey",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ElementInstanceKey",
@@ -1224,16 +1185,17 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           ],
                         },
                         tags: {
-                          description: "List of tags",
+                          description:
+                            "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                           type: "array",
+                          format: "string<Tag>[]",
+                          example: ["high-touch", "remediation"],
                           items: {
-                            type: "string",
                             description:
                               "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
-                            minLength: 1,
-                            maxLength: 100,
-                            pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                             example: "business_key:1234",
+                            format: "Tag",
+                            type: "string",
                             title: "Tag",
                           },
                           uniqueItems: true,
@@ -1529,19 +1491,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                       description: "The process definition key.",
                       oneOf: [
                         {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
                           allOf: [
                             {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
-                              format: "Camunda Key",
-                              description:
-                                "System-assigned entity key (Java long serialized as string)",
-                              title: "CamundaKey",
-                            },
-                            {
-                              description:
-                                "Key for a process definition. Only use values returned by the system.",
-                              format: "ProcessDefinitionKey",
-                              example: "2251799813686749",
+                              title: "LongKey",
                             },
                           ],
                           title: "ProcessDefinitionKey",
@@ -1552,37 +1511,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           type: "object",
                           properties: {
                             $eq: {
+                              description:
+                                "System-generated key for a deployed process definition.",
+                              format: "ProcessDefinitionKey",
+                              example: "2251799813686749",
                               allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  format: "Camunda Key",
-                                  description:
-                                    "System-assigned entity key (Java long serialized as string)",
-                                  title: "CamundaKey",
-                                },
-                                {
-                                  description:
-                                    "Key for a process definition. Only use values returned by the system.",
-                                  format: "ProcessDefinitionKey",
-                                  example: "2251799813686749",
+                                  title: "LongKey",
                                 },
                               ],
                               title: "ProcessDefinitionKey",
                             },
                             $neq: {
+                              description:
+                                "System-generated key for a deployed process definition.",
+                              format: "ProcessDefinitionKey",
+                              example: "2251799813686749",
                               allOf: [
                                 {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
                                   type: "string",
-                                  format: "Camunda Key",
-                                  description:
-                                    "System-assigned entity key (Java long serialized as string)",
-                                  title: "CamundaKey",
-                                },
-                                {
-                                  description:
-                                    "Key for a process definition. Only use values returned by the system.",
-                                  format: "ProcessDefinitionKey",
-                                  example: "2251799813686749",
+                                  title: "LongKey",
                                 },
                               ],
                               title: "ProcessDefinitionKey",
@@ -1595,19 +1548,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                             $in: {
                               type: "array",
                               items: {
+                                description:
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
                                 allOf: [
                                   {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
                                     type: "string",
-                                    format: "Camunda Key",
-                                    description:
-                                      "System-assigned entity key (Java long serialized as string)",
-                                    title: "CamundaKey",
-                                  },
-                                  {
-                                    description:
-                                      "Key for a process definition. Only use values returned by the system.",
-                                    format: "ProcessDefinitionKey",
-                                    example: "2251799813686749",
+                                    title: "LongKey",
                                   },
                                 ],
                                 title: "ProcessDefinitionKey",
@@ -1616,19 +1566,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                             $notIn: {
                               type: "array",
                               items: {
+                                description:
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
                                 allOf: [
                                   {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
                                     type: "string",
-                                    format: "Camunda Key",
-                                    description:
-                                      "System-assigned entity key (Java long serialized as string)",
-                                    title: "CamundaKey",
-                                  },
-                                  {
-                                    description:
-                                      "Key for a process definition. Only use values returned by the system.",
-                                    format: "ProcessDefinitionKey",
-                                    example: "2251799813686749",
+                                    title: "LongKey",
                                   },
                                 ],
                                 title: "ProcessDefinitionKey",
@@ -2080,19 +2027,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   "The key of this process instance.",
                                 oneOf: [
                                   {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -2104,37 +2048,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     type: "object",
                                     properties: {
                                       $eq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a process instance. Only use values returned by the system.",
-                                            format: "ProcessInstanceKey",
-                                            example: "2251799813690746",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ProcessInstanceKey",
                                       },
                                       $neq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a process instance. Only use values returned by the system.",
-                                            format: "ProcessInstanceKey",
-                                            example: "2251799813690746",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ProcessInstanceKey",
@@ -2149,19 +2087,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches any of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a process instance. Only use values returned by the system.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ProcessInstanceKey",
@@ -2172,19 +2107,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches none of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a process instance. Only use values returned by the system.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ProcessInstanceKey",
@@ -2198,19 +2130,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 description: "The parent process instance key.",
                                 oneOf: [
                                   {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process instance. Only use values returned by the system.",
-                                        format: "ProcessInstanceKey",
-                                        example: "2251799813690746",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessInstanceKey",
@@ -2222,37 +2151,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     type: "object",
                                     properties: {
                                       $eq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a process instance. Only use values returned by the system.",
-                                            format: "ProcessInstanceKey",
-                                            example: "2251799813690746",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ProcessInstanceKey",
                                       },
                                       $neq: {
+                                        description:
+                                          "System-generated key for a process instance.",
+                                        format: "ProcessInstanceKey",
+                                        example: "2251799813690746",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a process instance. Only use values returned by the system.",
-                                            format: "ProcessInstanceKey",
-                                            example: "2251799813690746",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ProcessInstanceKey",
@@ -2267,19 +2190,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches any of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a process instance. Only use values returned by the system.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ProcessInstanceKey",
@@ -2290,19 +2210,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches none of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a process instance.",
+                                          format: "ProcessInstanceKey",
+                                          example: "2251799813690746",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a process instance. Only use values returned by the system.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ProcessInstanceKey",
@@ -2316,18 +2233,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 description: "The parent element instance key.",
                                 oneOf: [
                                   {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a element instance. Only use values returned by the system.",
-                                        format: "ElementInstanceKey",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ElementInstanceKey",
@@ -2339,35 +2254,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     type: "object",
                                     properties: {
                                       $eq: {
+                                        description:
+                                          "System-generated key for a element instance.",
+                                        format: "ElementInstanceKey",
+                                        example: "2251799813686789",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a element instance. Only use values returned by the system.",
-                                            format: "ElementInstanceKey",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ElementInstanceKey",
                                       },
                                       $neq: {
+                                        description:
+                                          "System-generated key for a element instance.",
+                                        format: "ElementInstanceKey",
+                                        example: "2251799813686789",
                                         allOf: [
                                           {
+                                            description:
+                                              "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            format: "Camunda Key",
-                                            description:
-                                              "System-assigned entity key (Java long serialized as string)",
-                                            title: "CamundaKey",
-                                          },
-                                          {
-                                            description:
-                                              "Key for a element instance. Only use values returned by the system.",
-                                            format: "ElementInstanceKey",
+                                            title: "LongKey",
                                           },
                                         ],
                                         title: "ElementInstanceKey",
@@ -2382,18 +2293,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches any of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a element instance.",
+                                          format: "ElementInstanceKey",
+                                          example: "2251799813686789",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a element instance. Only use values returned by the system.",
-                                              format: "ElementInstanceKey",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ElementInstanceKey",
@@ -2404,18 +2313,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           "Checks if the property matches none of the provided values.",
                                         type: "array",
                                         items: {
+                                          description:
+                                            "System-generated key for a element instance.",
+                                          format: "ElementInstanceKey",
+                                          example: "2251799813686789",
                                           allOf: [
                                             {
+                                              description:
+                                                "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              format: "Camunda Key",
-                                              description:
-                                                "System-assigned entity key (Java long serialized as string)",
-                                              title: "CamundaKey",
-                                            },
-                                            {
-                                              description:
-                                                "Key for a element instance. Only use values returned by the system.",
-                                              format: "ElementInstanceKey",
+                                              title: "LongKey",
                                             },
                                           ],
                                           title: "ElementInstanceKey",
@@ -2826,16 +2733,17 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 ],
                               },
                               tags: {
-                                description: "List of tags",
+                                description:
+                                  "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                 type: "array",
+                                format: "string<Tag>[]",
+                                example: ["high-touch", "remediation"],
                                 items: {
-                                  type: "string",
                                   description:
                                     "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
-                                  minLength: 1,
-                                  maxLength: 100,
-                                  pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                   example: "business_key:1234",
+                                  format: "Tag",
+                                  type: "string",
                                   title: "Tag",
                                 },
                                 uniqueItems: true,
@@ -3138,19 +3046,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                             description: "The process definition key.",
                             oneOf: [
                               {
+                                description:
+                                  "System-generated key for a deployed process definition.",
+                                format: "ProcessDefinitionKey",
+                                example: "2251799813686749",
                                 allOf: [
                                   {
+                                    description:
+                                      "Zeebe Engine resource key (Java long serialized as string)",
                                     type: "string",
-                                    format: "Camunda Key",
-                                    description:
-                                      "System-assigned entity key (Java long serialized as string)",
-                                    title: "CamundaKey",
-                                  },
-                                  {
-                                    description:
-                                      "Key for a process definition. Only use values returned by the system.",
-                                    format: "ProcessDefinitionKey",
-                                    example: "2251799813686749",
+                                    title: "LongKey",
                                   },
                                 ],
                                 title: "ProcessDefinitionKey",
@@ -3162,37 +3067,31 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 type: "object",
                                 properties: {
                                   $eq: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process definition. Only use values returned by the system.",
-                                        format: "ProcessDefinitionKey",
-                                        example: "2251799813686749",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessDefinitionKey",
                                   },
                                   $neq: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
                                     allOf: [
                                       {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
                                         type: "string",
-                                        format: "Camunda Key",
-                                        description:
-                                          "System-assigned entity key (Java long serialized as string)",
-                                        title: "CamundaKey",
-                                      },
-                                      {
-                                        description:
-                                          "Key for a process definition. Only use values returned by the system.",
-                                        format: "ProcessDefinitionKey",
-                                        example: "2251799813686749",
+                                        title: "LongKey",
                                       },
                                     ],
                                     title: "ProcessDefinitionKey",
@@ -3205,19 +3104,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   $in: {
                                     type: "array",
                                     items: {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
                                       allOf: [
                                         {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
-                                          format: "Camunda Key",
-                                          description:
-                                            "System-assigned entity key (Java long serialized as string)",
-                                          title: "CamundaKey",
-                                        },
-                                        {
-                                          description:
-                                            "Key for a process definition. Only use values returned by the system.",
-                                          format: "ProcessDefinitionKey",
-                                          example: "2251799813686749",
+                                          title: "LongKey",
                                         },
                                       ],
                                       title: "ProcessDefinitionKey",
@@ -3226,19 +3122,16 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   $notIn: {
                                     type: "array",
                                     items: {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
                                       allOf: [
                                         {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
-                                          format: "Camunda Key",
-                                          description:
-                                            "System-assigned entity key (Java long serialized as string)",
-                                          title: "CamundaKey",
-                                        },
-                                        {
-                                          description:
-                                            "Key for a process definition. Only use values returned by the system.",
-                                          format: "ProcessDefinitionKey",
-                                          example: "2251799813686749",
+                                          title: "LongKey",
                                         },
                                       ],
                                       title: "ProcessDefinitionKey",
@@ -3269,12 +3162,28 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                   sourceElementId: {
                     description:
                       "The ID of the element that should be terminated.",
-                    type: "string",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
                   },
                   targetElementId: {
                     description:
                       "The ID of the element that should be activated.",
-                    type: "string",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
                   },
                 },
                 required: ["sourceElementId", "targetElementId"],
@@ -3300,6 +3209,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
       content: {
         "application/json": {
           schema: {
+            description: "The created batch operation.",
             type: "object",
             properties: {
               batchOperationKey: {
@@ -3307,23 +3217,23 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                   {
                     oneOf: [
                       {
-                        type: "string",
-                        format: "Camunda Key",
-                        description:
-                          "System-assigned entity key (Java long serialized as string)",
-                        title: "CamundaKey",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
                       },
-                      {
-                        type: "string",
-                        format: "uuid",
-                        description:
-                          "Key for an batch operation. Only use values returned by the system.",
-                      },
+                      { type: "string", format: "uuid" },
                     ],
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
                     title: "BatchOperationKey",
                   },
-                  { description: "Key of the batch operation." },
                 ],
+                description: "Key of the batch operation.",
               },
               batchOperationType: {
                 description: "The type of the batch operation.",
