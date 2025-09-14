@@ -12,7 +12,9 @@ Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available i
 A **tenant** is a logical boundary for data within a Camunda 8 installation.  
 This enables multiple teams, departments, or clients to share a single environment while keeping data isolated.
 
-For an overview, see the [multi-tenancy concepts](../concepts/multi-tenancy.md).
+:::tip
+To learn more about tenants, see the [multi-tenancy concepts](../concepts/multi-tenancy.md).
+:::
 
 Tenants in the Orchestration Cluster are managed directly in [Identity](identity-introduction.md).  
 By default:
@@ -45,6 +47,16 @@ The `<default>` tenant is automatically created when Identity starts.
 4. Click the tenant to open details and manage assignments.
 
    ![tenant-management-tenant-details-users-tab](./img/tenant-management-tenant-details-users-tab.png)
+
+## Update and delete a tenant
+
+Tenants cannot be updated after creation. To change a tenant's details, you must delete it and create a new one with the corrected information.
+
+To delete a tenant, click on the Delete option in the list of tenant, and confirm the action.
+
+:::note
+The `<default>` tenant is a system entity and cannot be deleted.
+:::
 
 ## Tenant assignments
 
@@ -92,6 +104,10 @@ Assignments are managed in the tenant details page using the relevant tab.
    ![tenant-management-assigned-roles](./img/tenant-management-assigned-roles.png)
 
 ### Assign mapping rules
+
+:::note
+Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication on Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed).
+:::
 
 1. Open the **Mapping rules** tab.
 2. Click **Assign mapping rule**. Search for a mapping rule ID and confirm.
