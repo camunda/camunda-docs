@@ -11,14 +11,14 @@ const typeReplacements = {
   "java.lang.String": "string",
   "java.nio.file.Path": "file",
   "java.time.Duration": "duration",
-  "io.camunda.spring.client.properties.CamundaClientAuthProperties$AuthMethod":
+  "io.camunda.client.spring.properties.CamundaClientAuthProperties$AuthMethod":
     "enum[none, basic, oidc]",
   "java.net.URI": "url",
   "java.lang.Boolean": "boolean",
   "java.lang.Integer": "integer",
   "java.lang.Long": "integer",
   "org.springframework.util.unit.DataSize": "dataSize",
-  "io.camunda.spring.client.properties.CamundaClientProperties$ClientMode":
+  "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode":
     "enum[self-managed, saas]",
   "java.util.List<java.lang.String>": "array[string]",
   "java.net.URL": "url",

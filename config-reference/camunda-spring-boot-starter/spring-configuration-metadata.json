@@ -2,36 +2,36 @@
   "groups": [
     {
       "name": "camunda.client",
-      "type": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientProperties",
       "description": "Properties for the Camunda client.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
       "name": "camunda.client.auth",
-      "type": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "description": "Properties for authenticating the Camunda client.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "sourceMethod": "getAuth()"
     },
     {
       "name": "camunda.client.auth.client-assertion",
-      "type": "io.camunda.spring.client.properties.CamundaClientAuthClientAssertionProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientAuthClientAssertionProperties",
       "description": "Properties for OIDC authentication using a client assertion instead of a client secret.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "sourceMethod": "getClientAssertion()"
     },
     {
       "name": "camunda.client.cloud",
-      "type": "io.camunda.spring.client.properties.CamundaClientCloudProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientCloudProperties",
       "description": "Properties for connecting the Camunda client to SaaS. These are used to compose default connection details when the client is configured to `camunda.client.mode: saas`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "sourceMethod": "getCloud()"
     },
     {
       "name": "camunda.client.deployment",
-      "type": "io.camunda.spring.client.properties.CamundaClientDeploymentProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "description": "Properties for automatic deployment at startup.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "sourceMethod": "getDeployment()"
     },
     {
@@ -41,24 +41,17 @@
     },
     {
       "name": "camunda.client.worker",
-      "type": "io.camunda.spring.client.properties.CamundaClientWorkerProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
       "description": "Properties for the job workers being registered to the Camunda client.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "sourceMethod": "getWorker()"
     },
     {
       "name": "camunda.client.worker.defaults",
-      "type": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "type": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "description": "Global default properties for job workers registered to the Camunda client.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
       "sourceMethod": "getDefaults()"
-    },
-    {
-      "name": "camunda.client.worker.override",
-      "type": "java.util.Map",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientWorkerProperties",
-      "sourceMethod": "getOverride()"
     },
     {
       "name": "camunda.client.zeebe",
@@ -67,7 +60,7 @@
     },
     {
       "name": "camunda.client.zeebe.defaults",
-      "type": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "type": "io.camunda.client.annotation.value.JobWorkerValue",
       "description": "default properties for Zeebe job workers."
     },
     {
@@ -140,357 +133,363 @@
       "name": "camunda.client.auth.audience",
       "type": "java.lang.String",
       "description": "The resource for which the access token must be valid. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.client-assertion.keystore-key-alias",
       "type": "java.lang.String",
       "description": "The alias of the key containing the certificate used to sign the client assertion certificate. If not set, the first alias from the keystore is used.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthClientAssertionProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthClientAssertionProperties"
     },
     {
       "name": "camunda.client.auth.client-assertion.keystore-key-password",
       "type": "java.lang.String",
       "description": "The password of the key referenced by the alias. If not set, the keystore password is used.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthClientAssertionProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthClientAssertionProperties"
     },
     {
       "name": "camunda.client.auth.client-assertion.keystore-password",
       "type": "java.lang.String",
       "description": "The password of the referenced keystore.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthClientAssertionProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthClientAssertionProperties"
     },
     {
       "name": "camunda.client.auth.client-assertion.keystore-path",
       "type": "java.nio.file.Path",
       "description": "The path to the keystore where the client assertion certificate is stored.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthClientAssertionProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthClientAssertionProperties"
     },
     {
       "name": "camunda.client.auth.client-id",
       "type": "java.lang.String",
       "description": "The client ID to use when requesting an access token from the OAuth authorization server.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.client-secret",
       "type": "java.lang.String",
       "description": "The client secret to use when requesting an access token from the OAuth authorization server.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.connect-timeout",
       "type": "java.time.Duration",
       "description": "The connection timeout for requests to the OAuth credentials provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "defaultValue": "PT5S"
     },
     {
       "name": "camunda.client.auth.credentials-cache-path",
       "type": "java.lang.String",
       "description": "The path to the credentials cache file.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "defaultValue": "$HOME\/.camunda\/credentials"
     },
     {
       "name": "camunda.client.auth.keystore-key-password",
       "type": "java.lang.String",
       "description": "The keystore key password for the OAuth identity provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.keystore-password",
       "type": "java.lang.String",
       "description": "The keystore password for the OAuth identity provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.keystore-path",
       "type": "java.nio.file.Path",
       "description": "The path to the keystore for the OAuth identity provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.method",
-      "type": "io.camunda.spring.client.properties.CamundaClientAuthProperties$AuthMethod",
+      "type": "io.camunda.client.spring.properties.CamundaClientAuthProperties$AuthMethod",
       "description": "The authentication method to use. If not set, it is detected based on the presence of a username, password, client ID, and client secret. A default is set by `camunda.client.mode: saas`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.password",
       "type": "java.lang.String",
       "description": "The password to be use for basic authentication. A default is set by `camunda.client.auth.method: basic`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.read-timeout",
       "type": "java.time.Duration",
       "description": "The data read timeout for requests to the OAuth credentials provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "defaultValue": "PT5S"
     },
     {
       "name": "camunda.client.auth.resource",
       "type": "java.lang.String",
       "description": "The resource for which the access token must be valid.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.scope",
       "type": "java.lang.String",
       "description": "The scopes of the access token.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.token-url",
       "type": "java.net.URI",
       "description": "The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.truststore-password",
       "type": "java.lang.String",
       "description": "The truststore password for the OAuth identity provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.truststore-path",
       "type": "java.nio.file.Path",
       "description": "The path to the truststore for the OAuth identity provider.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.username",
       "type": "java.lang.String",
       "description": "The username to use for basic authentication. A default is set by `camunda.client.auth.method: basic`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.ca-certificate-path",
       "type": "java.lang.String",
       "description": "The path to a root Certificate Authority (CA) certificate to use instead of the certificate in the default store.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
       "name": "camunda.client.cloud.cluster-id",
       "type": "java.lang.String",
       "description": "The cluster ID the Camunda client connects to.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientCloudProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
     },
     {
       "name": "camunda.client.cloud.domain",
       "type": "java.lang.String",
       "description": "The domain the Camunda client connects to. Change this to connect to a non-production instance of Camunda Cloud.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientCloudProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
     },
     {
       "name": "camunda.client.cloud.port",
       "type": "java.lang.Integer",
       "description": "The port the Camunda client connects to.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientCloudProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
     },
     {
       "name": "camunda.client.cloud.region",
       "type": "java.lang.String",
       "description": "The region the Camunda client connects to.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientCloudProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
     },
     {
       "name": "camunda.client.deployment.enabled",
       "type": "java.lang.Boolean",
       "description": "Indicates if deployment uses the `@Deployment` annotation.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientDeploymentProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "defaultValue": true
     },
     {
       "name": "camunda.client.enabled",
       "type": "java.lang.Boolean",
       "description": "Enable or disable the Camunda client. If disabled, the client bean is not created.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": true
     },
     {
       "name": "camunda.client.execution-threads",
       "type": "java.lang.Integer",
       "description": "The number of threads for invocation of job workers.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": 1
     },
     {
       "name": "camunda.client.grpc-address",
       "type": "java.net.URI",
       "description": "The gRPC address of Camunda that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both `camunda.client.mode`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "http:\/\/0.0.0.0:26500"
     },
     {
       "name": "camunda.client.keep-alive",
       "type": "java.time.Duration",
       "description": "The time interval between keep-alive messages sent to the gateway.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
       "name": "camunda.client.max-message-size",
       "type": "org.springframework.util.unit.DataSize",
       "description": "A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "5MB"
     },
     {
       "name": "camunda.client.max-metadata-size",
       "type": "org.springframework.util.unit.DataSize",
       "description": "A custom `maxMetadataSize` sets the maximum inbound metadata size the client can receive from Camunda. It specifies the `maxInboundMetadataSize` of the gRPC channel.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "16KB"
     },
     {
       "name": "camunda.client.message-time-to-live",
       "type": "java.time.Duration",
       "description": "The default time-to-live for a message when no value is provided.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "PT1H"
     },
     {
       "name": "camunda.client.mode",
-      "type": "io.camunda.spring.client.properties.CamundaClientProperties$ClientMode",
+      "type": "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode",
       "description": "The client mode to use. If not set, `saas` mode is detected based on the presence of a `camunda.client.cloud.cluster-id`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
       "name": "camunda.client.override-authority",
       "type": "java.lang.String",
       "description": "Overrides the authority used with TLS virtual hosting to change hostname verification during the TLS handshake. It does not change the actual host connected to.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
       "name": "camunda.client.prefer-rest-over-grpc",
       "type": "java.lang.Boolean",
       "description": "If `true`, prefers REST over gRPC for operations supported by both protocols.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": true
     },
     {
       "name": "camunda.client.request-timeout",
       "type": "java.time.Duration",
       "description": "The request timeout to use when not overridden by a specific command.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "PT10S"
     },
     {
       "name": "camunda.client.request-timeout-offset",
       "type": "java.time.Duration",
       "description": "The request timeout client offset applies to commands that also pass the request timeout to the server. It ensures the client timeout occurs after the server timeout. For these commands, the client-side timeout equals the request timeout plus the offset.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "PT1S"
     },
     {
       "name": "camunda.client.rest-address",
       "type": "java.net.URI",
       "description": "The REST API address of the Camunda instance that the client can connect to. The address must be an absolute URL, including the scheme. An alternative default is set by both`camunda.client.mode`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "http:\/\/0.0.0.0:8080"
     },
     {
       "name": "camunda.client.tenant-id",
       "type": "java.lang.String",
       "description": "The tenant ID used for tenant-aware commands when no tenant ID is set.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "defaultValue": "<default>"
     },
     {
       "name": "camunda.client.worker.defaults.auto-complete",
       "type": "java.lang.Boolean",
       "description": "Enable or disable automatic job completion after method invocation.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.enabled",
       "type": "java.lang.Boolean",
       "description": "Enable or disable the job worker.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.fetch-variables",
       "type": "java.util.List<java.lang.String>",
       "description": "List of variable names to fetch on job activation. When set in defaults, it extends the list of variables to fetch from the annotation. When set in an override, it replaces the list of variables to fetch.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.force-fetch-all-variables",
       "type": "java.lang.Boolean",
       "description": "Sets whether all variables are fetched. Overrides `fetch-variables`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.max-jobs-active",
       "type": "java.lang.Integer",
       "description": "The maximum number of jobs exclusively activated for this worker at the same time.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": 32
     },
     {
       "name": "camunda.client.worker.defaults.max-retries",
       "type": "java.lang.Integer",
       "description": "The maximum number of retries before automatic responses (complete, fail, bpmn error) for jobs are no longer attempted.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.name",
       "type": "java.lang.String",
       "description": "The name of the worker owner. If set to default, it is generated as `${beanName}#${methodName}`.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "default"
     },
     {
       "name": "camunda.client.worker.defaults.poll-interval",
       "type": "java.time.Duration",
       "description": "The maximal interval between polls for new jobs.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "PT0.1S"
     },
     {
       "name": "camunda.client.worker.defaults.request-timeout",
       "type": "java.time.Duration",
       "description": "The request timeout for the activate job request used to poll for new jobs.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.stream-enabled",
       "type": "java.lang.Boolean",
       "description": "Opt-in feature flag that enables job streaming. When enabled, the job worker uses both streaming and polling to activate jobs. A long-lived stream eagerly pushes new jobs, and polling retrieves jobs created <em>before<\/em> any streams were opened.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": false
     },
     {
       "name": "camunda.client.worker.defaults.stream-timeout",
       "type": "java.time.Duration",
       "description": "If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
       "name": "camunda.client.worker.defaults.tenant-ids",
       "type": "java.util.List<java.lang.String>",
       "description": "Sets the tenants for which the job worker is registered. When set in defaults, it extends the list of tenant IDs from the annotation. When set in override, it replaces the list of tenant IDs.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": ["<default>"]
     },
     {
       "name": "camunda.client.worker.defaults.timeout",
       "type": "java.time.Duration",
       "description": "The time a job remains exclusively assigned to the worker.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
       "defaultValue": "PT5M"
     },
     {
       "name": "camunda.client.worker.defaults.type",
       "type": "java.lang.String",
       "description": "The type of jobs to work on.",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+    },
+    {
+      "name": "camunda.client.worker.override",
+      "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {
       "name": "camunda.client.auth.issuer",
       "type": "java.net.URI",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientAuthProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.auth.token-url"
@@ -499,7 +498,7 @@
     {
       "name": "camunda.client.cloud.base-url",
       "type": "java.lang.String",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientCloudProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.cloud.domain"
@@ -508,7 +507,7 @@
     {
       "name": "camunda.client.cluster-id",
       "type": "java.lang.String",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.cloud.cluster-id"
@@ -556,7 +555,7 @@
     {
       "name": "camunda.client.region",
       "type": "java.lang.String",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.cloud.region"
@@ -565,7 +564,7 @@
     {
       "name": "camunda.client.tenant-ids",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "io.camunda.spring.client.properties.CamundaClientProperties",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.tenant-ids"
@@ -601,7 +600,7 @@
     {
       "name": "camunda.client.zeebe.defaults.auto-complete",
       "type": "java.lang.Boolean",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.auto-complete"
@@ -610,7 +609,7 @@
     {
       "name": "camunda.client.zeebe.defaults.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.enabled"
@@ -619,7 +618,7 @@
     {
       "name": "camunda.client.zeebe.defaults.fetch-variables",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.fetch-variables"
@@ -628,7 +627,7 @@
     {
       "name": "camunda.client.zeebe.defaults.force-fetch-all-variables",
       "type": "java.lang.Boolean",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.force-fetch-all-variables"
@@ -637,7 +636,7 @@
     {
       "name": "camunda.client.zeebe.defaults.max-jobs-active",
       "type": "java.lang.Integer",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.max-jobs-active"
@@ -646,7 +645,7 @@
     {
       "name": "camunda.client.zeebe.defaults.max-retries",
       "type": "java.lang.Integer",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.max-retries"
@@ -655,7 +654,7 @@
     {
       "name": "camunda.client.zeebe.defaults.name",
       "type": "java.lang.String",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.name"
@@ -664,7 +663,7 @@
     {
       "name": "camunda.client.zeebe.defaults.poll-interval",
       "type": "java.time.Duration",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.poll-interval"
@@ -673,7 +672,7 @@
     {
       "name": "camunda.client.zeebe.defaults.request-timeout",
       "type": "java.time.Duration",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.request-timeout"
@@ -682,7 +681,7 @@
     {
       "name": "camunda.client.zeebe.defaults.stream-enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.stream-enabled"
@@ -691,7 +690,7 @@
     {
       "name": "camunda.client.zeebe.defaults.stream-timeout",
       "type": "java.time.Duration",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.stream-timeout"
@@ -700,7 +699,7 @@
     {
       "name": "camunda.client.zeebe.defaults.tenant-ids",
       "type": "java.util.List<java.lang.String>",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.tenant-ids"
@@ -709,7 +708,7 @@
     {
       "name": "camunda.client.zeebe.defaults.timeout",
       "type": "java.time.Duration",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.timeout"
@@ -718,7 +717,7 @@
     {
       "name": "camunda.client.zeebe.defaults.type",
       "type": "java.lang.String",
-      "sourceType": "io.camunda.spring.client.annotation.value.JobWorkerValue",
+      "sourceType": "io.camunda.client.annotation.value.JobWorkerValue",
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.worker.defaults.type"
