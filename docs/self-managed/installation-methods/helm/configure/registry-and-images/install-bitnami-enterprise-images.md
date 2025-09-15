@@ -9,14 +9,11 @@ By default, the Camunda Helm chart uses Bitnami open-source images.
 
 :::info
 **Important change since Camunda 8.8:**  
-In earlier versions, users sometimes relied on Bitnami subcharts in production.
+In earlier versions, users sometimes relied on Bitnami subcharts in production. Starting with 8.8, these subcharts are intended primarily for development and testing, unless your operational teams have expertise with Bitnami charts production deployments.
 
-Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami charts production deployments.  
-If you have previously used Bitnami subcharts in production with earlier Camunda versions, please review the implications for your existing setup.
+If you have previously used Bitnami subcharts in production with earlier Camunda versions, please review the implications for your existing setup. Refer to [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for more details.
 
 For production environments, we advise deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
-
-Refer to [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for more details.
 :::
 
 If you decide to run Bitnami-based subcharts in production, we strongly recommend using the **vendor-supported enterprise images**. This guide explains how to create registry secrets and install Camunda with enterprise images.
