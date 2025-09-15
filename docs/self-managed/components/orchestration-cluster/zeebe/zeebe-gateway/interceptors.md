@@ -87,7 +87,7 @@ dispatch to the broker.
 
 :::note
 
-Camunda 8 relies on [Identity](/self-managed/components/management-identity/manage-tenants.md) for tenant management.
+Camunda 8 relies on the [Orchestration Cluster Identity](/self-managed/components/management-identity/manage-tenants.md) for tenant management.
 Tenant-providing interceptors are only compatible with Zeebe, and should only be used when Zeebe is used as a standalone
 application.
 
@@ -95,8 +95,7 @@ Furthermore, as of 8.5.0, the Orchestration Cluster REST API part of Zeebe does 
 
 :::
 
-Zeebe supports [multi-tenancy](/components/concepts/multi-tenancy.md), or the ability for a single Zeebe installation to serve
-multiple distinct users/clients.
+Zeebe supports [multi-tenancy](/components/concepts/multi-tenancy.md), or the ability for a single Zeebe installation to serve multiple distinct users/clients.
 
 To ensure that clients can only access tenants they are authorized for, client requests
 need to provide a list of the tenants they are authorized for. If using the full Camunda 8 stack, this
