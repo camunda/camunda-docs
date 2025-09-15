@@ -106,9 +106,13 @@ In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flo
 
 ### Unified component configuration
 
-Camunda 8.8 introduces a unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
+Camunda 8.8 introduces unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
 
 In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
+
+:::note
+Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
+:::
 
 ## Identity, authentication, and authorization {#identity}
 
