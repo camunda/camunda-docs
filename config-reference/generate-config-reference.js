@@ -7,6 +7,12 @@ const configRefStrategies = {
   "camunda-spring-boot-starter": camundaSpringBootStarter,
 };
 
+const mapRegex = /java.util.Map<(.*),(.*)>/;
+
+const keyNames = {
+  "camunda.client.worker.override": "jobType",
+};
+
 const typeReplacements = {
   "java.lang.String": "string",
   "java.nio.file.Path": "file",
@@ -62,6 +68,7 @@ const generationConfig = {
   metadata: strategy.getMetadata(requestedVersion),
   filename: strategy.getFilename(requestedVersion),
   componentName: strategy.componentName,
+  useHelm: strategy.useHelm || false,
 };
 
 const template = fs.readFileSync(
@@ -103,11 +110,13 @@ const generateConfigReference = (config) => {
     });
   const metadata = {
     componentName: config.componentName,
+    useHelm: config.useHelm,
     groups: config.metadata.groups
       .map((group) => {
         const properties = config.metadata.properties
           .filter((property) => property.deprecation === undefined)
-          .filter((property) => property.sourceType === group.type);
+          .filter((property) => property.sourceType === group.type)
+          .filter((property) => property.name.startsWith(group.name));
         return {
           group,
           properties,
@@ -165,6 +174,32 @@ const runCommand = (command) => {
 };
 
 const preGenerateDocs = (config) => {
+  // move map properties to the groups
+  const mapProperties = config.metadata.properties.filter((property) =>
+    property.type.startsWith("java.util.Map")
+  );
+  mapProperties.forEach((property) => {
+    const found = property.type.match(mapRegex);
+    const keyType = found[1];
+    const valueType = found[2];
+    const keyName = keyNames[property.name] || "key";
+    const properties = config.metadata.properties
+      .filter((p) => p.sourceType === valueType)
+      .map((p) => JSON.parse(JSON.stringify(p)));
+    properties.forEach((p) => {
+      p.name = property.name + ".{" + keyName + "}." + p.name.split(".").pop();
+    });
+    config.metadata.properties.push(...properties);
+    config.metadata.groups.push({
+      name: property.name + ".{" + keyName + "}",
+      type: valueType,
+      description: property.description,
+      sourceType: property.sourceType,
+    });
+  });
+
+  console.log(config.metadata.groups);
+
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {
       property.type = typeReplacements[property.type];
@@ -179,14 +214,21 @@ const preGenerateDocs = (config) => {
       .toUpperCase()
       .replaceAll(/\./g, "_")
       .replaceAll(/-/g, "");
-    property.anchor = property.name.replaceAll(/\./g, "");
+    property.anchor = property.name
+      .replaceAll(/\./g, "")
+      .replaceAll(/-/g, "")
+      .replaceAll(/\{/g, "")
+      .replaceAll(/\}/g, "");
     if (property.deprecation && property.deprecation.replacement) {
       property.deprecation.replacementEnv = property.deprecation.replacement
         .toUpperCase()
         .replaceAll(/\./g, "_")
         .replaceAll(/-/g, "");
-      property.deprecation.replacementAnchor =
-        property.deprecation.replacement.replaceAll(/\./g, "");
+      property.deprecation.replacementAnchor = property.deprecation.replacement
+        .replaceAll(/\./g, "")
+        .replaceAll(/-/g, "")
+        .replaceAll(/\{/g, "")
+        .replaceAll(/\}/g, "");
     }
   });
 };

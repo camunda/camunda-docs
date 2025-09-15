@@ -1,10 +1,11 @@
 import React from "react";
 import { useLocation } from "@docusaurus/router";
 
-export default function Property({ defaultValue, groupId, property, env }) {
+export default function Property({ defaultValue, groupId, property, env, helm }) {
   const formats = {
     property,
     env,
+    helm
   };
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
