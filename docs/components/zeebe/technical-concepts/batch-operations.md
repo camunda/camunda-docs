@@ -6,10 +6,10 @@ description: How distributed batch operations work in Zeebe engine.
 
 Zeebe supports executing certain operations as batch operations:
 
-- Resolve incidents
-- Migrate process instances
-- Modify process instances
-- Cancel process instances
+- **Cancel process instances** (`CANCEL_PROCESS_INSTANCE`)
+- **Migrate process instances** (`MIGRATE_PROCESS_INSTANCE`)
+- **Modify process instances** (`MODIFY_PROCESS_INSTANCE`)
+- **Resolve incidents** (`RESOLVE_INCIDENT`)
 
 ## How do they work?
 
@@ -18,13 +18,122 @@ A Zeebe batch operation always consists of two parts:
 - **The command:**  
   The batch operation type determines the action performed on the process instances.  
   For example, the type `MIGRATE_PROCESS_INSTANCE` means process instances are migrated to a new process definition version.  
-  Some batch types require more details, such as a migration plan for process instance migration.
+  Some batch types require more details, such as a migration plan for process instance migration or a modification plan for process instance modifications.
 
 - **The batch operation items:**  
   The items are not directly defined at creation. Instead, a filter describes them.  
   This filter is applied to the configured secondary database (e.g., Elasticsearch) to identify matching process instances.
 
-### Distribution and eventual consistency
+## Batch operation lifecycle
+
+Batch operations follow a structured lifecycle with distinct phases:
+
+### 1. Creation phase
+
+- User submits a batch operation request with filter criteria
+- **Validation**
+- The operation is distributed to all partitions in the cluster
+- A **leader partition** is designated (the partition that first processes the creation command)
+- All other partitions become **follower partitions**
+- A unique batch operation key is generated and assigned
+
+#### Validation and rejection
+
+Before processing begins, the system performs several validation checks:
+
+- **Empty filter validation**: Filters cannot be empty or null
+- **Authorization validation**: User permissions are checked before operation creation
+- **Command-specific validation**: Each command type has specific requirements (e.g., migration plan validity)
+
+Failed validations result in immediate rejection with specific error codes and messages (e.g., `INVALID_ARGUMENT`, `NOT_AUTHORIZED`).
+
+### 2. Initialization phase
+
+- **Asynchronous processing**: The initialization runs in a separate scheduler component (not blocking the main stream processor)
+- **Concurrency control**: Only one initialization cycle runs at a time per partition using atomic execution flags
+- Each partition queries the secondary database using the provided filter
+- Results are paginated and split into manageable chunks to stay within the 4MB record size limit and prevent overloading exporters when processing individual records
+- Process instances are identified and prepared for processing
+- The total number of items to process is determined and fixed at this point
+- **State tracking**: The scheduler maintains state about currently initializing operations to prevent duplicate processing
+
+#### Dependency on secondary storage
+
+Although the broker's internal state stores process instance data, the secondary storage is queried because:
+
+- RocksDB (our internal state db) is a key-value store, not optimized for complex queries.
+- The secondary database (e.g., Elasticsearch) efficiently supports complex filtering.
+- The user interface enables filter-based batch creation, which RocksDB cannot support.
+- Pagination and large result set handling is better supported by secondary databases.
+
+### 3. Execution phase
+
+- Each partition processes its assigned items independently
+- Individual commands (e.g., `CANCEL`, `MIGRATE`) are executed on each process instance
+- Progress is tracked and can be monitored
+- Failed items are recorded with error details
+- **Fire-and-forget execution**: Individual operation commands are executed without waiting for their completion status
+
+### 4. Completion phase
+
+- Follower partitions report completion or failure to the leader partition
+- Leader partition aggregates results from all partitions
+- Final status is determined (`COMPLETED` if at least one partition succeeded, `FAILED` if all failed)
+
+## Error handling and recovery
+
+### Initialization failures
+
+Initialization can fail for several reasons:
+
+- **Network issues**: Connection problems with the secondary database
+- **Permission errors**: Insufficient authorization to query the database
+- **Configuration issues**: Secondary database not properly configured
+- **Query errors**: Invalid or malformed filter criteria
+
+**Error handling behavior:**
+
+- **Retryable errors**: Network issues, temporary database unavailability
+  - Uses exponential backoff with configurable retry limits
+  - Maximum delay and retry count can be configured
+- **Non-retryable errors**: Permission issues, configuration problems
+  - Fail immediately without retries
+- **Adaptive sizing**: If record size limits are exceeded, page sizes are automatically reduced
+
+### Execution failures
+
+Individual items may fail during execution for various reasons:
+
+- Process instance was completed or canceled after batch initialization
+- Incident was already resolved by another operation
+- Migration or modification plan is invalid for the specific instance
+- Authorization insufficient for the specific process instance
+
+Failed items are marked as `FAILED` and cannot be retried within the same batch operation.
+
+### Recovery strategies
+
+- **Retry failed batches**: Create a new batch operation with the same filter
+- **Partial recovery**: Use more specific filters to target only failed items
+- **Monitoring**: Use provided APIs to track which items failed and why
+
+## Lifecycle management
+
+Batch operations support several lifecycle management operations:
+
+### Suspend and Resume
+
+- **Suspend**: Temporarily stops execution of a running batch operation
+- **Resume**: Restarts execution of a suspended batch operation
+- Operations can be suspended during initialization or execution phases
+
+### Cancel
+
+- **Cancel**: Permanently stops a batch operation
+- Cannot be resumed once canceled
+- Partially processed items remain in their modified state
+
+## Distribution and eventual consistency
 
 ![distributed-batch-operation](assets/batch-operation.png)
 
@@ -34,77 +143,70 @@ When a batch operation starts:
 
 1. The batch operation (command + filter) is created and distributed to all partitions.
 2. Each partition processes the batch independently:
-   - It uses the filter to find relevant process instances in the secondary database.
+   - It uses the filter to query relevant process instances from the secondary database.
    - It applies the batch command to each matched instance.
 3. After all partitions finish, the final statuses are collected, and the batch is marked `COMPLETED`.
 
 This distributed, asynchronous approach allows parallel processing of many process instances.
 
-### Implications of distribution
+### Important considerations
 
-- **UI discrepancies:**  
-  When started from Operate UI, the displayed filtered instances may differ from those executed.  
-  The batch operation defines filter criteria, not an exact set of instances. By the time the engine applies the batch, search results may have changed.  
-  The number of instances to process is fixed at the batch start and does not include new instances created afterward.
+#### UI discrepancies
 
-- **Partition independence:**  
-  Each partition fetches and processes matching instances independently.  
-  At the start of very large batches, the total number of known items may vary until all partitions finish fetching.  
-  This is due to multiple paged queries to the secondary database.
+When started from Operate UI, the displayed filtered instances may differ from those executed.  
+ The batch operation defines filter criteria, not an exact set of instances. By the time the engine applies the batch, search results may have changed.  
+ The number of instances to process is fixed at the batch start and does not include new instances created afterward.
 
-### Why query the secondary database?
+#### Partition independence
 
-Although the broker’s internal RocksDB stores process instance data, the external database is queried because:
+Each partition fetches and processes matching instances independently.  
+ At the start of very large batches, the total number of known items may vary until all partitions finish fetching.  
+ This is due to multiple paged queries to the secondary database.
 
-- RocksDB is a key-value store, not optimized for complex queries.
-- The secondary database (e.g., Elasticsearch) efficiently supports complex filtering.
-- The user interface enables filter-based batch creation, which RocksDB cannot support.
+#### Leader-follower coordination
 
-### Failure handling
+The leader partition coordinates the overall operation status while follower partitions focus on execution.  
+ Inter-partition communication ensures consistent final status reporting.
 
-Batch operations may fail during **initialization** or **execution**.
-
-#### Initialization failures
-
-- Occur if a partition cannot fetch relevant items from the secondary database (e.g., network issues).
-- Only the affected partition fails; others continue processing normally.
-- Failed partitions may have incorrect item counts.
-- The API reports failed partitions in the batch status.
-- Failed batches cannot be retried but can be restarted with the same filter.
-
-#### Execution failures
-
-Failures may occur when a partition processes individual batch items. Examples include:
-
-- The process instance completed or was canceled after batch start.
-- The incident was resolved after batch start.
-- The migration or modification plan is invalid for the instance.
-
-Failed items are marked `FAILED` in the batch status and cannot be retried. To retry, create a new batch with the same filter.
-
-## How do I start and monitor a batch operation?
+## Creating and monitoring batch operations
 
 You can create batch operations using:
 
-- The [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), which provides REST endpoints to create, manage, and monitor batches.
-- The [Camunda Java client](/apis-tools/java-client/getting-started.md), which offers APIs for batch operations.
+- **[Operate UI](/components/operate/operate-introduction.md)**: Start batch operations directly from the Operate interface for process instances and incidents
+- **[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)**: REST endpoints to create, manage, and monitor batches programmatically
+- **[Camunda Java client](/apis-tools/java-client/getting-started.md)**: APIs for batch operations in Java applications
 
-These APIs also support suspending, resuming, or canceling ongoing batch operations.
-
-:::note  
-The [Operate UI](/components/operate/operate-introduction.md) currently allows creating batch operations only for itself. Starting Zeebe batch operations through Operate is planned for _Camunda 8.9_.  
+:::note
+Lifecycle management (suspend, resume, cancel) is only available via the REST API and Java client, not through Operate UI. More features may be added in future Operate versions.
 :::
 
 ### Technical monitoring
 
 Batch operation performance can be tracked via [Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md#grafana).
 
+**Key metrics to monitor:**
+
+- Initialization time and success rate
+- Execution throughput and latency
+- Error rates by type and partition
+- Resource utilization during batch processing
+- Secondary database query performance
+
 ## Authorization
 
 To execute a batch operation, users need two sets of permissions:
 
+### Batch operation permissions
+
 - Permission to create the batch operation.
-- Permission to read and modify the process instances (for example canceling or updating) targeted by the batch.
+- Permission to manage batch operations (suspend, resume, cancel).
+
+### Item-level permissions
+
+- Permission to read process instances and incidents from the secondary database.
+- Permission to execute the specific operation on each targeted process instance.
+
+Authorization claims are stored with the batch operation and used throughout its lifecycle.
 
 :::info
 See the [authorizations](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
@@ -112,11 +214,38 @@ See the [authorizations](/components/concepts/access-control/authorizations.md) 
 
 ## Performance impact
 
-Batch operations share cluster resources with regular process instances, affecting each other’s performance. Commands created by batch operations run with the same priority as user-generated commands.
+Batch operations share cluster resources with regular process instances, affecting each other's performance. Commands created by batch operations run with the same priority as user-generated commands.
 
-Large batch operations can temporarily impact cluster performance during:
+### Performance considerations
 
-- Batch creation in RocksDB.
-- Initialization, when partitions query the secondary database individually and in parallel.
+**During batch creation:**
 
+- RocksDB storage impact from batch metadata
+- Memory usage for operation state management
+
+**During initialization:**
+
+- Heavy querying of the secondary database
+- Network bandwidth usage for query results
+- Partition coordination overhead
+
+**During execution:**
+
+- Command processing load shared with regular operations
+- Potential backpressure on high-throughput scenarios
+- Resource contention with live process instances
+
+#### Best practices
+
+- **Timing**: Schedule large batch operations during low-traffic periods
+- **Sizing**: Break very large operations into smaller batches
+- **Monitoring**: Watch cluster performance metrics during batch execution
+- **Filtering**: Use precise filters to minimize unnecessary processing
+
+:::warning
+Large batch operations can temporarily impact cluster performance, especially during initialization when partitions query the secondary database individually and in parallel.
+:::
+
+:::warning
 Heavy querying of the secondary database can notably affect its performance, especially for large batches with broad filters.
+:::
