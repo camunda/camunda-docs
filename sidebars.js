@@ -1402,6 +1402,11 @@ module.exports = {
     {
       Concepts: [
         {
+          "Authentication and authorization": [
+            "self-managed/concepts/authentication/authentication",
+          ],
+        },
+        {
           type: "category",
           label: "Back up and restore",
           link: {
