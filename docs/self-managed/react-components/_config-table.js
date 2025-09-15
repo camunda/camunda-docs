@@ -99,17 +99,17 @@ const SearchableTable = () => {
     <div className="config-input">
       <input
         type="text"
-        placeholder="Find a configuration key"
+        placeholder="Find a configuration property"
         value={searchTerm}
         onChange={handleSearch}
         className="config-input-box"
-        aria-label="Search configuration keys"
+        aria-label="Search configuration properties"
       />
 
       <div
         className="filter-badges"
         role="toolbar"
-        aria-label="Filter configuration keys by type"
+        aria-label="Filter properties by type"
       >
         <span
           role="button"
@@ -167,14 +167,14 @@ const SearchableTable = () => {
                   onClick={() => handleSort("name")}
                   style={{ cursor: "pointer" }}
                 >
-                  New key (8.8){getSortIcon("name")}
+                  New property (8.8){getSortIcon("name")}
                 </th>
                 <th
                   className="sortable-header"
                   onClick={() => handleSort("legacy")}
                   style={{ cursor: "pointer" }}
                 >
-                  Legacy key(s) (8.7 and earlier){getSortIcon("legacy")}
+                  Legacy properties (8.7 and earlier){getSortIcon("legacy")}
                 </th>
                 <th
                   className="sortable-header"
@@ -250,7 +250,8 @@ const SearchableTable = () => {
       ) : (
         <div>
           <p className="config-no-results">
-            Sorry, no configuration keys were found matching those filters.
+            Sorry, no configuration properties were found matching those
+            filters.
           </p>
           <ul className="config-no-results-list">
             <li>Check your spelling.</li>
