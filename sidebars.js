@@ -49,6 +49,7 @@ module.exports = {
                 "guides/migrating-from-camunda-7/data-migrator/config-properties",
               ],
             },
+            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/troubleshooting",
           ],
         },
