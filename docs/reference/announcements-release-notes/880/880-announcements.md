@@ -97,6 +97,12 @@ Additional upgrade considerations are necessary for deployments that use custom 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
 See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
+##### Secret management improvements and deprecations
+
+Camunda 8.8 introduces a consistent secret pattern for Helm charts. The legacy secret configuration are deprecated and will be removed with 8.9, but remain functional during the transition period.
+
+See the [secret management guide](/self-managed/installation-methods/helm/configure/secret-management.md) for migration instructions and examples.
+
 #### Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->

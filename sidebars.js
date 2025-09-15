@@ -1222,13 +1222,23 @@ module.exports = {
                 //     "self-managed/installation-methods/helm/configure/authentication/basic",
                 //   ],
                 // },
-                "self-managed/installation-methods/helm/configure/air-gapped-installation",
                 "self-managed/installation-methods/helm/configure/application-configs",
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 "self-managed/installation-methods/helm/configure/add-extra-manifests",
-                "self-managed/installation-methods/helm/configure/registry-and-images",
                 "self-managed/installation-methods/helm/configure/license-key",
                 "self-managed/installation-methods/helm/configure/web-modeler-console-connectors",
+                {
+                  type: "category",
+                  label: "Registry and images",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/configure/registry-and-images/index",
+                  },
+                  items: [
+                    "self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation",
+                    "self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images",
+                  ],
+                },
                 {
                   Database: [
                     {
