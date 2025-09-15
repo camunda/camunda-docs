@@ -1512,7 +1512,6 @@ module.exports = {
                 {
                   Concepts: [
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
-                    "self-managed/components/orchestration-cluster/core-settings/concepts/authentication",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                   ],

@@ -1,6 +1,6 @@
 ---
 id: usage-metrics
-title: Orchestration cluster usage metrics
+title: Usage metrics
 description: "The orchestration cluster exposes usage metrics under the Actuator `usage-metrics` endpoint, accessible on the management port."
 ---
 
