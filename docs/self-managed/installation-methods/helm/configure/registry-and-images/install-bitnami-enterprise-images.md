@@ -70,7 +70,7 @@ This deploys Camunda with vendor-supported enterprise images, recommended for se
 
 ## Understanding CVEs in Bitnami images
 
-Customers may notice a high number of CVEs when scanning Bitnami images. This is expected and does not necessarily indicate a higher security risk. The reason is that Bitnami images bundle the application (e.g., PostgreSQL, Elasticsearch, Keycloak), a full OS layer, and supporting libraries. Vulnerability scanners therefore report CVEs across all of these components, including many that are low-severity, informational, or not exploitable in practice.
+Customers may notice a high number of CVEs when scanning Bitnami images. This is expected and does not necessarily indicate a higher security risk. The reason is that Bitnami images bundle the application (e.g., PostgreSQL, Elasticsearch, Keycloak), a full OS layer, and supporting libraries. Vulnerability scanners therefore report CVEs across all of these components.
 
 [Bitnami’s Open CVE Policy](https://docs.bitnami.com/kubernetes/open-cve-policy/) ensures that fixable CVEs are addressed when upstream patches become available, but open/unfixable CVEs remain until resolved by the operating system or application maintainers. As a result, even enterprise Bitnami images will continue to show high CVE counts, despite being patched against critical vulnerabilities.
 
