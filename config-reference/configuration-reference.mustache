@@ -13,10 +13,12 @@ Properties for the {{componentName}}.
 ## Properties
 
 <Tabs groupId="property-format" defaultValue="property" queryString values={
-
 [
 {label: 'Configuration property', value: 'property' },
 {label: 'Environment variable', value: 'env' },
+{{#useHelm}}
+{label: 'Helm chart value', value: 'helm' },
+{{/useHelm}}
 ]
 }>
 </Tabs>
@@ -42,7 +44,7 @@ Properties for the {{componentName}}.
 {{#properties}}
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"{{#helm}} helm="{{helm}}"{{/helm}}/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
 
 <td>
