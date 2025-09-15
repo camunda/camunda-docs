@@ -63,7 +63,7 @@ You can use these files individually or combine them with your own overrides.
 | `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                    |
 | `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                   |
 | `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda enterprise customers only.                                                                                   |
-| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see bitnami/containers#83267. Provided only as a temporary transition option. |
+| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see [bitnami/containers#83267](https://github.com/bitnami/containers/issues/83267). Provided only as a temporary transition option. |
 | `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                    |
 | `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                             |
 
