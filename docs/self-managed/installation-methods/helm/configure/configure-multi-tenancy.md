@@ -27,7 +27,7 @@ Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camund
 When using environment variables, you can enable multi-tenancy by setting the following variables:
 
 ```bash
-export CAMUNDA_SECURITY_MULTITENANCY_ENABLED=true
+export CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
 export CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
 ```
 
