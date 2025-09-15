@@ -109,7 +109,8 @@ This is the **recommended method for production environments**.
   <TabItem value="env" label="Environment variables">
 ```yaml
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
-```  </TabItem>
+``` 
+  </TabItem>
   <TabItem value="yaml" label="application.yaml" default>
 ```yaml
 camunda.security.authentication.method: oidc
