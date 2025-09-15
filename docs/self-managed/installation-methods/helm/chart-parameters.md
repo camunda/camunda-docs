@@ -38,7 +38,8 @@ The following tables show the top-level configuration sections in `values.yaml`.
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
 :::info
-The Bitnami subcharts above are provided for development and testing only. For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda.
+Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami charts production deployments.
+For production environments, we advise deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
 :::
 
 ### Observability
@@ -58,14 +59,14 @@ Check this page when installing or upgrading to ensure you use the latest option
 In addition to the default `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
 You can use these files individually or combine them with your own overrides.
 
-| File                         | Purpose                                                                                                                                                                           |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                    |
-| `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                   |
-| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda enterprise customers only.                                                                                   |
+| File                         | Purpose                                                                                                                                                                                                                                 |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                                                                          |
+| `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                                                                         |
+| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda enterprise customers only.                                                                                                                                         |
 | `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see [bitnami/containers#83267](https://github.com/bitnami/containers/issues/83267). Provided only as a temporary transition option. |
-| `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                    |
-| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                             |
+| `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                                                                          |
+| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                                                                                   |
 
 ### Creating your own values files
 
