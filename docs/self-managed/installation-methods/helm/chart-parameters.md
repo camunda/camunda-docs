@@ -5,15 +5,11 @@ title: Helm chart parameters
 description: Overview of Helm chart parameters for Camunda Self-Managed.
 ---
 
-Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation.  
-The main way to customize these parameters is by using a `values.yaml` file.
+Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.
 
-In Helm charts, the `values.yaml` file defines configuration for your deployment.  
-To tailor your installation to your needs, you can override parameters in this file or provide your own values file.  
-It’s best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
+In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It’s best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
 
-The following tables show the top-level configuration sections in `values.yaml`.  
-Each section controls a specific area of the chart.
+The following tables show the top-level configuration sections in `values.yaml`. Each section controls a specific area of the chart.
 
 ### Global and Orchestration cluster configuration
 
