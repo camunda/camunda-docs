@@ -81,7 +81,7 @@ All Tasklist API requests require authentication. To authenticate, generate a [J
    ```
 5. Capture the value of the `access_token` property and store it as your token.
 
-See the [Tasklist Configuration - Authentication](/self-managed/components/orchestration-cluster/core-settings/concepts/authentication.md) documentation for more information about this authentication method.
+For more information, see the deprecated [authentication configuration for Tasklist](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md).
 
 </TabItem>
 

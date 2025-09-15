@@ -14,8 +14,8 @@ This connector is compatible with both Camunda 8 SaaS and Camunda 8 Self-Managed
 
 You also need to obtain the Operate API client credentials. Follow the links below to learn more about API client configuration.
 
-- [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md)
-- [Authentication with a Self-Managed Operate deployment](/self-managed/components/orchestration-cluster/core-settings/concepts/authentication.md)
+- [API client configuration in Camunda 8 SaaS](/components/console/manage-clusters/manage-api-clients.md).
+- Authentication with a Self-Managed deployment.
 
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
