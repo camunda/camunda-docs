@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This guide explains how to assign users, groups, roles or clients permission to manage specific mapping rules. To learn how to create mapping rules themselves, see [Manage mapping rules](manage-mapping-rules.md).
 
 :::tip
-To learn more about the concept of mapping rules, see the [mapping rules documentation](../../concepts/access-control/mapping-rules.md).
+To learn more, see the [mapping rules concepts](../../concepts/access-control/mapping-rules.md).
 :::
 
 1. Log in to the Identity UI and navigate to the **Authorizations** tab.
