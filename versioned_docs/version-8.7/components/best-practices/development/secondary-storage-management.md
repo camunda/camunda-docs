@@ -35,7 +35,7 @@ The number of primary shards should be determined based on your data size and an
 
 ### Replicas
 
-- **Single Node Cluster**: Do not configure replicas when your Camunda system is running on a single node cluster. Replicas provide redundancy only when distributed across multiple nodes. On a single node, they do not offer additional protection and simply consume extra resources, in some cases preventing your node ever reporting as healthy.
+- **Single Node Cluster**: Do not configure replicas when your Camunda system is running on a single node cluster. Replicas provide redundancy only when distributed across multiple nodes. On a single node, the replicas will not be assigned, in some cases preventing your node ever reporting as healthy.
 - **Multiple Node Cluster**: In a multi-node cluster, it is advisable to configure at least one replica for each index. This ensures that if one node fails, the data remains accessible from another node, enhancing fault tolerance and availability.
 
 ## Backups
@@ -48,7 +48,9 @@ Regular backups of your secondary storage data are crucial for disaster recovery
 
 ## Index Templates
 
-Camunda uses index templates to define settings and mappings for indices. To ensure that your indices are created with the correct configurations, it is important to avoid:
+Camunda uses Index Templates to define settings and mappings for indices. To ensure that your indices are created with the correct configurations, it is important to avoid:
 
-- Using custom index templates that may conflict with Camunda's default templates. Templates with a higher priority than those set by Camunda can lead to unexpected behavior, such as creating indices with incorrect mappings.
-- Deleting or altering existing index templates without guidance from Camunda Support.
+- Using custom Index Templates that may conflict with Camunda's default templates. Templates with a higher priority than those set by Camunda can lead to unexpected behavior, such as creating indices with incorrect mappings.
+- Deleting or altering existing Index Templates without guidance from Camunda Support.
+
+If your Elasticsearch/OpenSearch provider includes a predefined wild card index template, it is advised that you set a high priority for the Camunda Index Templates to ensure they do not get overridden.
