@@ -2,17 +2,17 @@
 id: chart-parameters
 sidebar_label: Parameters
 title: Helm chart parameters
-description: "Overview of configuration options for the Camunda Helm chart"
+description: Overview of Helm chart parameters for Camunda Self-Managed.
 ---
 
-Helm chart parameters allow you to configure the different components and behavior of your Camunda Self-Managed installation.  
-The main mechanism for customizing these parameters is the `values.yaml` file.
+Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation.  
+The main way to customize these parameters is by using a `values.yaml` file.
 
 In Helm charts, the `values.yaml` file defines configuration for your deployment.  
-By overriding parameters in this file (or by providing your own values file), you can tailor the installation to your needs.  
-It is recommended to keep the original `values.yaml` unchanged and provide a separate file with your customizations.
+To tailor your installation to your needs, you can override parameters in this file or provide your own values file.  
+It’s best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
 
-The following tables provide an overview of the major **top-level configuration sections** in `values.yaml`.  
+The following tables show the top-level configuration sections in `values.yaml`.  
 Each section controls a specific area of the chart.
 
 ### Global and Orchestration cluster configuration
@@ -20,7 +20,7 @@ Each section controls a specific area of the chart.
 | Section         | Purpose                                                 |
 | --------------- | ------------------------------------------------------- |
 | `global`        | Configures shared settings that apply across components |
-| `orchestration` | Configures orchestration cluster settings               |
+| `orchestration` | Configures Orchestration cluster settings               |
 
 ### Other Camunda applications
 
@@ -42,47 +42,43 @@ Each section controls a specific area of the chart.
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
 :::info
-The Bitnami subcharts listed above are provided for development and testing convenience only. For production environments, we recommend deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—giving you greater operational control and flexibility.
+The Bitnami subcharts above are provided for development and testing only. For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda.
 :::
 
 ### Observability
 
-| Section                    | Purpose                                                                       |
-| -------------------------- | ----------------------------------------------------------------------------- |
-| `prometheusServiceMonitor` | Enables creation of a Prometheus ServiceMonitor resource for metrics scraping |
+| Section                    | Purpose                                                    |
+| -------------------------- | ---------------------------------------------------------- |
+| `prometheusServiceMonitor` | Creates a Prometheus `ServiceMonitor` resource for metrics |
 
 ## Where to find all chart parameters
 
-The full list of supported Helm chart parameters—including their default values and descriptions—is maintained on Artifact Hub:
+For a full list of supported Helm chart parameters, including default values and descriptions, see [Helm chart parameters on Artifact Hub](https://artifacthub.io/packages/helm/camunda/camunda-platform/#parameters).
 
-[View Helm chart parameters on Artifact Hub](https://artifacthub.io/packages/helm/camunda/camunda-platform/#parameters)
-
-We recommend consulting this page whenever you're installing or upgrading the platform, as it reflects the latest configuration options for all chart versions.
-
----
+Check this page when installing or upgrading to ensure you use the latest options for your chart version.
 
 ### Provided values files
 
-Alongside the main `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
-These files can be used individually or combined with your own overrides.
+In addition to the default `values.yaml`, the Helm chart repository includes several additional values files for special use cases.  
+You can use these files individually or combine them with your own overrides.
 
-| File                         | Purpose                                                                                                                                                                              |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `values.yaml`                | The default configuration. Contains all chart parameters with baseline values.                                                                                                       |
-| `values-local.yaml`          | Optimized for local development, for example on `kind` or Minikube. Adjusts resource requests and limits for smaller environments.                                                   |
-| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. This file is intended for Camunda enterprise customers only.                                                                |
-| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. (Deprecated — see bitnami/containers#83267. Provided only as a temporary transition option.) |
-| `values-latest.yaml`         | Tracks the latest available versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                             |
-| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                                |
+| File                         | Purpose                                                                                                                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                    |
+| `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                   |
+| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda enterprise customers only.                                                                                   |
+| `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see bitnami/containers#83267. Provided only as a temporary transition option. |
+| `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                    |
+| `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                             |
 
 ### Creating your own values files
 
-You can create your own override file (for example `my-overrides.yaml`) with custom settings.  
-This is the recommended way to adapt the configuration instead of editing the default `values.yaml` directly.
+To customize parameters, create an override file (for example, `my-overrides.yaml`) with custom settings.  
+This approach is recommended over editing `values.yaml` directly.
 
 ### Combining multiple values files
 
-Helm supports specifying multiple values files. You can layer them to build the configuration you need:
+Helm lets you specify multiple values files. You can layer them to build the configuration you need:
 
 ```bash
 helm install camunda camunda/camunda-platform \
@@ -91,5 +87,5 @@ helm install camunda camunda/camunda-platform \
   -f my-overrides.yaml
 ```
 
-If the same parameter is defined in more than one file, the value from the last file listed takes precedence.
-In the example above, settings from `my-overrides.yaml` overwrite values from both `values-enterprise.yaml` and `values.yaml`.
+If the same parameter is defined in more than one file, the value in the last file listed takes precedence.
+In the example above, settings from `my-overrides.yaml` overrides values from both `values-enterprise.yaml` and `values.yaml`.
