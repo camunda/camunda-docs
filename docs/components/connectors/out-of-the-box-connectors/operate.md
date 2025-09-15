@@ -38,7 +38,7 @@ Choose between **Camunda 8 SaaS** and **Camunda 8 Self-Managed** depending on yo
 
 ### SaaS clusters
 
-If you are using a SaaS cluster, you will be required to provide your **region Id** and **cluster Id**. You will see these values when you [create an API client](/components/console/manage-clusters/setup-client-connection-credentials.md) for your cluster.
+If you are using a SaaS cluster, you will be required to provide your **region Id** and **cluster Id**. You will see these values when you [create an API client](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your cluster.
 
 ### Self-Managed clusters
 
@@ -55,7 +55,7 @@ If you are testing this connector on your local machine with the Camunda 8 Docke
 ## Configure authentication
 
 For both SaaS and Self-Managed clusters, you need to provide **clientId** and **clientSecret**.
-You will see these values when you [create an API client](/components/console/manage-clusters/setup-client-connection-credentials.md) for your cluster.
+You will see these values when you [create an API client](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your cluster.
 
 For Self-Managed clusters, you can additionally specify the Operate **audience**.
 If you are using the default Identity configuration, leave the default `operate-api` value.

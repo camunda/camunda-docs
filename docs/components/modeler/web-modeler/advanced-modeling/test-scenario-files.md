@@ -12,7 +12,9 @@ They are stored in JSON format and can be created, edited, and managed directly 
 
 ## Create a test scenario file
 
-You can create a test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario), or by manually creating a **test scenario file** in Web Modeler.
+You can create a new test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario).
+
+You can also manage scenarios and update failing scenarios from Play.
 
 ## Manual editing
 
@@ -76,13 +78,29 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 }
 ```
 
+You can find the BPMN process ID in the properties panel, or in the first `<bpmn:process id=` field of the XML.
+
+![process ID in properties panel](img/process-id-properties-panel.png)
+
+The `processId` should be shorter than 255 characters and not contain whitespace.
+
 :::note
 Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
+:::
+
+:::caution
+If the BPMN diagram's process ID changes (or another process ID is added earlier in the BPMN file), the file's scenarios will not be used in the process's Play scenarios tab.
 :::
 
 ### Unlink a process
 
 To unlink the file from a process, remove the `processId` field or set it to `null`.
+
+:::caution
+Unlinking a file means its scenarios will not be shown in the Play scenarios tab for that process.
+
+To fix this, re-link the file by restoring the `processId` field.
+:::
 
 ## Instructions
 
@@ -91,26 +109,6 @@ To unlink the file from a process, remove the `processId` field or set it to `nu
 - **Variables**: Provide variables as JSON strings.
 - **Element IDs**: Reference specific BPMN elements in your process definition.
 - **Process definition IDs**: Identify which process definition to interact with.
-
-### Update variables
-
-Updates process variables during test execution.
-
-**Fields**
-
-| Field       | Required | Description                                       |
-| ----------- | -------- | ------------------------------------------------- |
-| `type`      | Yes      | Must be `"update-variables"`.                     |
-| `variables` | Yes      | A JSON string containing the variables to update. |
-
-**Example:**
-
-```json
-{
-  "type": "update-variables",
-  "variables": "{\"customerId\": \"12345\", \"amount\": 100.50}"
-}
-```
 
 ### Create process instance
 
@@ -305,6 +303,26 @@ Simulates a job failure by throwing an error during service task execution.
   "errorCode": "PAYMENT_FAILED",
   "jobType": "payment-service",
   "errorMessage": "Insufficient funds in customer account"
+}
+```
+
+### Update variables
+
+Updates process variables during test execution.
+
+**Fields**
+
+| Field       | Required | Description                                       |
+| ----------- | -------- | ------------------------------------------------- |
+| `type`      | Yes      | Must be `"update-variables"`.                     |
+| `variables` | Yes      | A JSON string containing the variables to update. |
+
+**Example:**
+
+```json
+{
+  "type": "update-variables",
+  "variables": "{\"customerId\": \"12345\", \"amount\": 100.50}"
 }
 ```
 

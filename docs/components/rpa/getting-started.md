@@ -46,9 +46,10 @@ Once you are happy with your script and have tested it locally, you can start au
 ### Link RPA task to BPMN
 
 1. **Deploy the RPA file**:
-   1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) for your Modeler.
-   2. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
-   3. Note the ID of your RPA script. You will need this in the next step.
+   1. If you haven't already, [set up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Modeler.
+   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../identity/role.md#assign-client-to-a-role).
+   3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
+   4. Note the ID of your RPA script. You will need this in the next step.
 
 2. **Add RPA to your process**:
    1. In Camunda Modeler, create a new BPMN file or open an existing one.

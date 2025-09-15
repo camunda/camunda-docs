@@ -71,7 +71,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
 </TabItem>
 <TabItem value="helm">
 ```
-global.security.authentication.method: oidc
+orchestration.security.authentication.method: oidc
 ```
 </TabItem>
 </Tabs>
@@ -107,13 +107,13 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
-global.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-global.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
+orchestration.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
+orchestration.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid"]
 ```
 </TabItem>
 </Tabs>
@@ -135,24 +135,24 @@ The following examples use HELM values notation. You can also apply these using 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
-global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.usernameClaim: "email"
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
+orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+orchestration.security.authentication.oidc.usernameClaim: "email"
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
 ```yaml
-global.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-global.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-global.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
-global.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-global.security.authentication.oidc.usernameClaim: "preferred_username"
-global.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-global.security.authentication.oidc.scope: ["openid", "profile", "email"]
+orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
+orchestration.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
+orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
+orchestration.security.authentication.oidc.usernameClaim: "preferred_username"
+orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
 </TabItem>
 </Tabs>
@@ -190,7 +190,7 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS[0]=<YOUR_USERNAME>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+orchestration.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
 ```
 </TabItem>
 </Tabs>
@@ -223,7 +223,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-global.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
+orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 ```
 </TabItem>
 </Tabs>
@@ -309,7 +309,7 @@ As per default authorizations are enabled, your application will only be able to
 ```
 
 </TabItem>
-<TabItem value="springclient" label="Camunda Spring Boot SDK">
+<TabItem value="springclient" label="Camunda Spring Boot Starter">
 1) Add the dependency to your Java Project:
 
 ```xml
