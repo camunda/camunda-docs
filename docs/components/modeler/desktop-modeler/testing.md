@@ -10,6 +10,8 @@ description: "Test implementation of a single BPMN task in Desktop Modeler."
 
 Task testing requires a REST connection to Camunda 8.8+ cluster. gRPC connections are not supported.
 
+When configuring a connection, make sure to **Remember credentials** or task testing won't be able to deploy the process.
+
 ## Testing a single activity
 
 Select a task that you want to test, then go to the Test tab in the bottom panel.
