@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 Mapping rules grant access to a tenant based on access token claim values. This guide details how to assign, update, or remove these rules.
 
 :::tip
-To learn more about mapping rules and tenants, see the [mapping rules documentation](manage-mapping-rules.md) and [tenant management documentation](/self-managed/components/orchestration-cluster/identity/manage-tenants.md).
+To learn more about mapping rules and tenants, see the [mapping rules](manage-mapping-rules.md) and [tenant management](/self-managed/components/orchestration-cluster/identity/manage-tenants.md) user guides.
 :::
 
 1. Log in to the Identity UI and go to the **Tenants** tab.
