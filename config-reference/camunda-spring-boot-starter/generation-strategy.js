@@ -1,7 +1,6 @@
 const fs = require("fs");
 const { execSync } = require("child_process");
 const metadataNext = require("./spring-configuration-metadata.json");
-const metadataForVersion = {};
 
 function getOutputDir(version) {
   if (version === undefined) {
@@ -47,6 +46,8 @@ const downloadReference = async (version) => {
   }
 };
 
+const componentName = "Camunda Spring Boot Starter";
+
 module.exports = {
   getOutputDir,
   getMetadata,
@@ -54,4 +55,5 @@ module.exports = {
   preGenerateDocs,
   postGenerateDocs,
   downloadReference,
+  componentName,
 };

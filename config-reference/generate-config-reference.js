@@ -61,6 +61,7 @@ const generationConfig = {
   outputDir: strategy.getOutputDir(requestedVersion),
   metadata: strategy.getMetadata(requestedVersion),
   filename: strategy.getFilename(requestedVersion),
+  componentName: strategy.componentName,
 };
 
 const template = fs.readFileSync(
@@ -101,6 +102,7 @@ const generateConfigReference = (config) => {
       );
     });
   const metadata = {
+    componentName: config.componentName,
     groups: config.metadata.groups
       .map((group) => {
         const properties = config.metadata.properties
@@ -166,6 +168,8 @@ const preGenerateDocs = (config) => {
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {
       property.type = typeReplacements[property.type];
+    } else {
+      console.log("No type replacement for " + property.type);
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
