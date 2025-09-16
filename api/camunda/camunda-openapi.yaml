@@ -4804,11 +4804,7 @@ paths:
         - Message
       operationId: searchCorrelatedMessages
       summary: Search correlated messages
-      description: |-
-
-
-        [[CONSISTENCY:EVENTUAL]]
-
+      description: |
         Search for correlated messages based on given criteria.
       requestBody:
         required: false
@@ -4897,7 +4893,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 file:
@@ -4932,7 +4927,13 @@ paths:
 
         Upload multiple documents to the Camunda 8 cluster.
 
-        The caller must provide a file name for each document, which will be used in case of a multi-status responseto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` headerof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. Theseare matched with the files based on index, and must have the same length as the files array.To pass homogenous metadata for all files, spread the metadata over the metadata array.  A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` headerof the file part. 
+        The caller must provide a file name for each document, which will be used in case of a multi-status response
+        to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
+        of the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These
+        are matched with the files based on index, and must have the same length as the files array.
+        To pass homogenous metadata for all files, spread the metadata over the metadata array.
+        A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header
+        of the file part.
 
         In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
         each of which contains the file name of the document that failed to upload and the reason for the failure.
@@ -4951,7 +4952,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 files:
@@ -4963,7 +4963,7 @@ paths:
                   minItems: 1
                 metadataList:
                   type: array
-                  description: Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.
+                  description: Optional JSON array; index aligns with each files entry. Takes precedence over per-file X-Document-Metadata headers when provided.
                   items:
                     $ref: "#/components/schemas/DocumentMetadata"
               required:
@@ -4972,9 +4972,11 @@ paths:
               files:
                 headers:
                   X-Document-Metadata:
-                    description: DEPRECATED - prefer metadataList.
                     schema:
                       $ref: "#/components/schemas/DocumentMetadata"
+                  X-Document-Id:
+                    schema:
+                      type: string
       responses:
         "201":
           description: All documents were uploaded successfully.
@@ -5538,7 +5540,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 resources:
@@ -5829,7 +5830,9 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            $ref: "#/components/schemas/BatchOperationKey"
+            type: string
+            format: string<BatchOperationKey>
+            description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
           description: The batch operation was found.
@@ -5904,7 +5907,9 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            $ref: "#/components/schemas/BatchOperationKey"
+            type: string
+            format: string<BatchOperationKey>
+            description: Zeebe Engine resource key (Java long serialized as string)
       requestBody:
         content:
           application/json: {}
@@ -5945,7 +5950,9 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            $ref: "#/components/schemas/BatchOperationKey"
+            type: string
+            format: string<BatchOperationKey>
+            description: Zeebe Engine resource key (Java long serialized as string)
       requestBody:
         content:
           application/json: {}
@@ -5988,7 +5995,9 @@ paths:
           description: |
             The key (or operate legacy ID) of the batch operation.
           schema:
-            $ref: "#/components/schemas/BatchOperationKey"
+            type: string
+            format: string<BatchOperationKey>
+            description: Zeebe Engine resource key (Java long serialized as string)
       requestBody:
         content:
           application/json: {}
@@ -6051,19 +6060,19 @@ components:
       type: string
     StartCursor:
       description: The start cursor in a search query result set.
-      format: base64
       type: string
+      format: base64
       example: WzIyNTE3OTk4MTM2ODcxMDJd
     EndCursor:
       description: The end cursor in a search query result set.
-      format: base64
       type: string
+      format: base64
       example: WzIyNTE3OTk4MTM2ODcxMDJd
     ProcessInstanceKey:
       description: System-generated key for a process instance.
       format: ProcessInstanceKey
-      example: "2251799813690746"
       type: string
+      example: "2251799813690746"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     DeploymentKey:
@@ -6081,8 +6090,8 @@ components:
     ProcessDefinitionKey:
       description: System-generated key for a deployed process definition.
       format: ProcessDefinitionKey
-      example: "2251799813686749"
       type: string
+      example: "2251799813686749"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     ProcessDefinitionId:
@@ -6093,8 +6102,8 @@ components:
     ElementInstanceKey:
       description: System-generated key for a element instance.
       format: ElementInstanceKey
-      example: "2251799813686789"
       type: string
+      example: "2251799813686789"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     ElementId:
@@ -6105,66 +6114,66 @@ components:
     FormKey:
       description: System-generated key for a deployed form.
       format: FormKey
-      example: "2251799813684365"
       type: string
+      example: "2251799813684365"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     VariableKey:
       description: System-generated key for a variable.
       format: VariableKey
-      example: "2251799813683287"
       type: string
+      example: "2251799813683287"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     ResourceKey:
+      description: The system-assigned key for this resource.
       type: string
+      format: ResourceKey
       oneOf:
         - $ref: "#/components/schemas/ProcessDefinitionKey"
         - $ref: "#/components/schemas/DecisionRequirementsKey"
         - $ref: "#/components/schemas/FormKey"
         - $ref: "#/components/schemas/DecisionDefinitionKey"
-      description: The system-assigned key for this resource.
-      format: ResourceKey
     ScopeKey:
       description: System-generated key for a scope.
       format: ScopeKey
-      example: "2251799813683890"
       type: string
+      example: "2251799813683890"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     IncidentKey:
       description: System-generated key for a incident.
       format: IncidentKey
-      example: "2251799813689432"
       type: string
+      example: "2251799813689432"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     JobKey:
       description: System-generated key for a job.
       format: JobKey
-      example: "2251799813653498"
       type: string
+      example: "2251799813653498"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     MessageSubscriptionKey:
       description: System-generated key for a message subscription.
       format: MessageSubscriptionKey
-      example: "2251799813632456"
       type: string
+      example: "2251799813632456"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     MessageCorrelationKey:
       description: System-generated key for a message correlation.
       format: MessageCorrelationKey
-      example: "2251799813634265"
       type: string
+      example: "2251799813634265"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     DecisionDefinitionKey:
       description: System-generated key for a decision definition.
       format: DecisionDefinitionKey
-      example: "2251799813326547"
       type: string
+      example: "2251799813326547"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     DecisionDefinitionId:
@@ -6175,8 +6184,8 @@ components:
     DecisionEvaluationInstanceKey:
       description: System-generated key for a decision evaluation instance.
       format: DecisionEvaluationInstanceKey
-      example: "2251799813684367"
       type: string
+      example: "2251799813684367"
       allOf:
         - $ref: "#/components/schemas/LongKey"
     DecisionEvaluationKey:
@@ -6184,51 +6193,52 @@ components:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for a decision evaluation.
       format: DecisionEvaluationKey
-      example: "2251792362345323"
       type: string
+      example: "2251792362345323"
     DecisionRequirementsKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for a deployed decision requirements definition.
       format: DecisionRequirementsKey
-      example: "2251799813683346"
       type: string
+      example: "2251799813683346"
     AuthorizationKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for an authorization.
       format: AuthorizationKey
-      example: "2251799813684332"
       type: string
+      example: "2251799813684332"
     MessageKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for an message.
       format: MessageKey
-      example: "2251799813683467"
       type: string
+      example: "2251799813683467"
     DecisionInstanceKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for a deployed decision instance.
       format: DecisionInstanceKey
-      example: "22517998136843567"
       type: string
+      example: "22517998136843567"
     SignalKey:
       allOf:
         - $ref: "#/components/schemas/LongKey"
       description: System-generated key for an signal.
       format: SignalKey
+      type: string
       example: "22517998136987467"
-      type: string
     BatchOperationKey:
-      format: BatchOperationKey | uuid
+      allOf:
+        - $ref: "#/components/schemas/LongKey"
       type: string
+      format: uuid
       description: System-generated key for an batch operation.
       example: "2251799813684321"
     TenantCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         tenantId:
           type: string
@@ -6249,7 +6259,10 @@ components:
       type: object
       properties:
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          type: string
+          description: The unique identifier of the tenant.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         name:
           type: string
           description: The name of the tenant.
@@ -6260,7 +6273,6 @@ components:
           example: Customer Service department business processes
     TenantUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           type: string
@@ -6312,7 +6324,6 @@ components:
         - field
     TenantSearchQueryRequest:
       description: Tenant search request
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6365,7 +6376,6 @@ components:
         - field
     UserTaskSearchQuery:
       description: User task search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6400,7 +6410,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       description: User task search query request.
-      additionalProperties: false
       type: object
       properties:
         sort:
@@ -6679,7 +6688,6 @@ components:
         - field
     VariableSearchQuery:
       description: Variable search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6707,7 +6715,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
           description: Tenant ID of this variable.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         isTruncated:
           description: Whether the value is truncated or not.
           type: boolean
@@ -6767,7 +6776,8 @@ components:
           type: string
         tenantId:
           description: Tenant ID of this variable.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         variableKey:
           allOf:
             - $ref: "#/components/schemas/VariableKey"
@@ -6800,7 +6810,6 @@ components:
         - field
     ProcessDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6841,7 +6850,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
           description: Tenant ID of this process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -6881,7 +6891,8 @@ components:
             - $ref: "#/components/schemas/ProcessDefinitionId"
         tenantId:
           description: Tenant ID of this process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -6916,7 +6927,6 @@ components:
     ProcessInstanceSearchQuery:
       description: Process instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6931,7 +6941,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
     ProcessInstanceIncidentSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7195,10 +7204,12 @@ components:
           description: Checks if the current property exists.
           type: boolean
         $in:
+          description: Checks if the property matches any of the provided values.
           type: array
           items:
             $ref: "#/components/schemas/ProcessDefinitionKey"
         $notIn:
+          description: Checks if the property matches none of the provided values.
           type: array
           items:
             $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -7654,7 +7665,6 @@ components:
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
-      additionalProperties: false
       properties:
         filter:
           description: The process definition statistics search filters.
@@ -7705,7 +7715,6 @@ components:
     CancelProcessInstanceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -7735,7 +7744,6 @@ components:
     ElementInstanceSearchQuery:
       description: Element instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7917,7 +7925,8 @@ components:
           type: boolean
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         elementInstanceKey:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
@@ -7981,7 +7990,6 @@ components:
         - field
     DecisionDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8013,7 +8021,8 @@ components:
           type: string
           description: the DMN ID of the decision requirements graph that the decision definition is part of.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision definition.
         decisionDefinitionKey:
           allOf:
@@ -8047,7 +8056,6 @@ components:
       required:
         - field
     IncidentSearchQuery:
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -8110,7 +8118,8 @@ components:
             - PENDING
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         incidentKey:
           allOf:
             - $ref: "#/components/schemas/IncidentKey"
@@ -8166,12 +8175,10 @@ components:
           type: string
         elementInstanceKey:
           description: The element instance key that received the message.
-          allOf:
-            - $ref: "#/components/schemas/ElementInstanceKey"
+          type: string
         messageKey:
           description: The message key.
-          allOf:
-            - $ref: "#/components/schemas/MessageKey"
+          type: string
         messageName:
           description: The name of the message.
           type: string
@@ -8181,24 +8188,19 @@ components:
           format: int32
         processDefinitionId:
           description: The process definition ID associated with this correlated message.
-          allOf:
-            - $ref: "#/components/schemas/ProcessDefinitionId"
+          type: string
         processDefinitionKey:
           description: The process definition key associated with this correlated message.
-          allOf:
-            - $ref: "#/components/schemas/ProcessDefinitionKey"
+          type: string
         processInstanceKey:
           description: The process instance key associated with this correlated message.
-          allOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
+          type: string
         subscriptionKey:
           description: The subscription key that received the message.
-          allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionKey"
+          type: string
         tenantId:
           description: The tenant ID associated with this correlated message.
-          allOf:
-            - $ref: "#/components/schemas/TenantId"
+          type: string
       required:
         - correlationKey
         - correlationTime
@@ -8212,7 +8214,6 @@ components:
         - tenantId
     CorrelatedMessageSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8267,7 +8268,7 @@ components:
         elementInstanceKey:
           description: The element instance key that received the message.
           allOf:
-            - $ref: "#/components/schemas/ElementInstanceFilter"
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         messageKey:
           description: The message key.
           allOf:
@@ -8287,7 +8288,7 @@ components:
         processDefinitionKey:
           description: The process definition key associated with this correlated message.
           allOf:
-            - $ref: "#/components/schemas/BasicStringFilter"
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         processInstanceKey:
           description: The process instance key associated with this correlated message.
           allOf:
@@ -8337,8 +8338,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
           description: The element instance key associated with this message subscription.
-        messageSubscriptionType:
-          $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+        messageSubscriptionState:
+          $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           type: string
@@ -8364,7 +8365,7 @@ components:
             - processInstanceKey
             - elementId
             - elementInstanceKey
-            - messageSubscriptionType
+            - messageSubscriptionState
             - lastUpdatedDate
             - messageName
             - correlationKey
@@ -8375,7 +8376,6 @@ components:
         - field
     MessageSubscriptionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8412,10 +8412,10 @@ components:
           description: The element instance key associated with this message subscription.
           allOf:
             - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
-        messageSubscriptionType:
-          description: The message subscription type.
+        messageSubscriptionState:
+          description: The message subscription state.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeFilterProperty"
+            - $ref: "#/components/schemas/MessageSubscriptionStateFilterProperty"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           allOf:
@@ -8432,35 +8432,37 @@ components:
           description: The unique external tenant ID.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-    MessageSubscriptionTypeFilterProperty:
-      description: MessageSubscriptionTypeEnum with full advanced search capabilities.
+    MessageSubscriptionStateFilterProperty:
+      description: MessageSubscriptionStateEnum with full advanced search capabilities.
       type: object
       oneOf:
         - type: string
           title: Exact match
           description: Matches the value exactly.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
-        - $ref: "#/components/schemas/AdvancedMessageSubscriptionTypeFilter"
-    MessageSubscriptionTypeEnum:
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
+        - $ref: "#/components/schemas/AdvancedMessageSubscriptionStateFilter"
+    MessageSubscriptionStateEnum:
       description: The type of message subscription.
       type: string
       enum:
+        - CORRELATED
         - CREATED
+        - DELETED
         - MIGRATED
-    AdvancedMessageSubscriptionTypeFilter:
+    AdvancedMessageSubscriptionStateFilter:
       title: Advanced filter
-      description: Advanced MessageSubscriptionTypeEnum filter
+      description: Advanced MessageSubscriptionStateEnum filter
       type: object
       properties:
         $eq:
           description: Checks for equality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $neq:
           description: Checks for inequality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -8468,7 +8470,7 @@ components:
           description: Checks if the property matches any of the provided values.
           type: array
           items:
-            $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $like:
           $ref: "#/components/schemas/LikeFilterProperty"
     IncidentResult:
@@ -8519,7 +8521,8 @@ components:
             - PENDING
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         incidentKey:
           allOf:
             - $ref: "#/components/schemas/IncidentKey"
@@ -8570,7 +8573,8 @@ components:
           type: string
           description: the DMN ID of the decision requirements graph that the decision definition is part of.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision definition.
         decisionDefinitionKey:
           allOf:
@@ -8588,6 +8592,7 @@ components:
         activeTenants:
           description: The amount of active tenants.
           type: integer
+          format: int64
         tenants:
           description: The usage metrics by tenants. Only available if request `withTenants` query parameter was `true`.
           type: object
@@ -8675,7 +8680,6 @@ components:
         - UNSPECIFIED
     AuthorizationRequest:
       type: object
-      additionalProperties: false
       properties:
         ownerId:
           description: The ID of the owner of the permissions.
@@ -8730,7 +8734,6 @@ components:
         - field
     AuthorizationSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8805,7 +8808,6 @@ components:
             $ref: "#/components/schemas/AuthorizationResult"
     UserRequest:
       type: object
-      additionalProperties: false
       required:
         - password
         - username
@@ -8828,7 +8830,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
           type: string
@@ -8840,7 +8843,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
           type: string
@@ -8865,7 +8869,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -8892,7 +8895,6 @@ components:
       required:
         - field
     MappingRuleSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9007,7 +9009,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
           type: string
@@ -9055,7 +9058,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantClientResult"
     TenantClientSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9082,7 +9084,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
     TenantUserSearchResult:
       type: object
       allOf:
@@ -9094,7 +9097,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantUserResult"
     TenantUserSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9136,7 +9138,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -9145,7 +9146,6 @@ components:
             $ref: "#/components/schemas/TenantGroupSearchQuerySortRequest"
     TenantGroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9157,7 +9157,6 @@ components:
       required:
         - field
     RoleCreateRequest:
-      additionalProperties: false
       type: object
       properties:
         roleId:
@@ -9236,7 +9235,6 @@ components:
         - field
     RoleSearchQueryRequest:
       description: Role search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9276,7 +9274,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
     RoleUserSearchResult:
       type: object
       allOf:
@@ -9387,7 +9386,6 @@ components:
         - field
     GroupCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         groupId:
           type: string
@@ -9452,7 +9450,6 @@ components:
           description: The group description.
     GroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9466,7 +9463,6 @@ components:
         - field
     GroupSearchQueryRequest:
       description: Group search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9507,7 +9503,8 @@ components:
       properties:
         username:
           description: The username of the user.
-          $ref: "#/components/schemas/Username"
+          allOf:
+            - $ref: "#/components/schemas/Username"
     GroupUserSearchResult:
       type: object
       allOf:
@@ -9596,7 +9593,6 @@ components:
         - name
     MappingRuleCreateRequest:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
       properties:
@@ -9784,7 +9780,6 @@ components:
             - dead
     UserTaskCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -9798,7 +9793,6 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
-      additionalProperties: false
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -9816,7 +9810,6 @@ components:
           nullable: true
     UserTaskUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/Changeset"
@@ -9879,7 +9872,6 @@ components:
           nullable: true
     ClockPinRequest:
       type: object
-      additionalProperties: false
       properties:
         timestamp:
           description: The exact time in epoch milliseconds to which the clock should be pinned.
@@ -9889,7 +9881,6 @@ components:
         - timestamp
     JobActivationRequest:
       type: object
-      additionalProperties: false
       properties:
         type:
           description: |
@@ -10015,7 +10006,8 @@ components:
           additionalProperties: true
         tenantId:
           description: The ID of the tenant that owns the job.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         jobKey:
           allOf:
             - $ref: "#/components/schemas/JobKey"
@@ -10094,7 +10086,6 @@ components:
           nullable: true
     JobFailRequest:
       type: object
-      additionalProperties: false
       properties:
         retries:
           description: |
@@ -10119,7 +10110,6 @@ components:
           type: object
     JobErrorRequest:
       type: object
-      additionalProperties: false
       properties:
         errorCode:
           description: |
@@ -10140,7 +10130,6 @@ components:
         - errorCode
     JobCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -10274,7 +10263,6 @@ components:
           nullable: true
     JobUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
@@ -10310,7 +10298,6 @@ components:
     JobSearchQuery:
       description: Job search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10541,7 +10528,8 @@ components:
           $ref: "#/components/schemas/JobStateEnum"
         tenantId:
           description: The tenant ID.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         type:
           description: The type of the job.
           type: string
@@ -10729,7 +10717,7 @@ components:
           default: 0
           minimum: 0
         limit:
-          description: The maximum number of items to return in one request. <=10,000 for Elasticsearch.
+          description: The maximum number of items to return in one request. <=10,000 for ElasticSearch.
           type: integer
           format: int32
           default: 100
@@ -10792,11 +10780,13 @@ components:
         startCursor:
           nullable: true
           description: The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
-          $ref: "#/components/schemas/StartCursor"
+          allOf:
+            - $ref: "#/components/schemas/StartCursor"
         endCursor:
           nullable: true
           description: The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.
-          $ref: "#/components/schemas/EndCursor"
+          allOf:
+            - $ref: "#/components/schemas/EndCursor"
       example:
         totalItems: 1
         hasMoreTotalItems: false
@@ -10818,7 +10808,6 @@ components:
         - field
     DecisionRequirementsSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10846,7 +10835,8 @@ components:
           type: string
           description: the DMN ID of the decision requirements.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision requirements.
         decisionRequirementsKey:
           allOf:
@@ -10867,7 +10857,6 @@ components:
             $ref: "#/components/schemas/DecisionRequirementsResult"
     DecisionRequirementsResult:
       type: object
-      additionalProperties: false
       properties:
         decisionRequirementsName:
           type: string
@@ -10883,7 +10872,8 @@ components:
           type: string
           description: The name of the resource from which this decision requirements was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision requirements.
         decisionRequirementsKey:
           allOf:
@@ -10896,7 +10886,6 @@ components:
         - $ref: "#/components/schemas/DecisionEvaluationByKey"
     DecisionEvaluationById:
       type: object
-      additionalProperties: false
       title: Decision evaluation by ID
       properties:
         decisionDefinitionId:
@@ -10912,13 +10901,13 @@ components:
           type: object
         tenantId:
           description: The tenant ID of the decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - decisionDefinitionId
     DecisionEvaluationByKey:
       type: object
       title: Decision evaluation by key
-      additionalProperties: false
       properties:
         decisionDefinitionKey:
           allOf:
@@ -10929,7 +10918,8 @@ components:
           type: object
         tenantId:
           description: The tenant ID of the decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - decisionDefinitionKey
     EvaluateDecisionResult:
@@ -10962,7 +10952,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of the evaluated decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionKey"
@@ -11009,7 +11000,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of the evaluated decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         matchedRules:
           description: The decision rules that matched within this decision evaluation.
           type: array
@@ -11097,7 +11089,6 @@ components:
         - field
     DecisionInstanceSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -11139,7 +11130,8 @@ components:
         decisionDefinitionType:
           $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision instance.
         decisionEvaluationKey:
           allOf:
@@ -11149,7 +11141,6 @@ components:
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
-          description: The key of the process definition.
         processInstanceKey:
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceKey"
@@ -11205,7 +11196,8 @@ components:
           type: string
           description: The result of the decision instance.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision instance.
         decisionEvaluationKey:
           allOf:
@@ -11274,7 +11266,6 @@ components:
       minimum: 1
     MessageCorrelationRequest:
       type: object
-      additionalProperties: false
       required:
         - name
         - correlationKey
@@ -11294,7 +11285,8 @@ components:
           type: object
         tenantId:
           description: the tenant for which the message is published
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
     MessageCorrelationResult:
       description: |
         The message key of the correlated message, as well as the first process instance key it
@@ -11315,7 +11307,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceKey"
     MessagePublicationRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           description: The name of the message.
@@ -11341,7 +11332,8 @@ components:
           type: object
         tenantId:
           description: The tenant of the message sender.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           nullable: true
       required:
         - name
@@ -11352,7 +11344,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID of the message.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         messageKey:
           allOf:
             - $ref: "#/components/schemas/MessageKey"
@@ -11461,7 +11454,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID associated with the deployment.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         deploymentKey:
           allOf:
             - $ref: "#/components/schemas/DeploymentKey"
@@ -11508,7 +11502,8 @@ components:
           type: string
           description: The resource name from which this process was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed process.
         processDefinitionKey:
           allOf:
@@ -11532,7 +11527,8 @@ components:
           type: string
           description: The DMN name of the decision, as parsed during deployment.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed decision.
         decisionRequirementsId:
           type: string
@@ -11564,7 +11560,8 @@ components:
           type: string
           description: The DMN name of the decision requirements, as parsed during deployment.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed decision requirements.
         resourceName:
           type: string
@@ -11591,7 +11588,8 @@ components:
           type: string
           description: The resource name from which this form was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed form.
         formKey:
           allOf:
@@ -11614,7 +11612,8 @@ components:
           type: string
           description: The resource name from which this resource was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed form.
         resourceKey:
           allOf:
@@ -11622,7 +11621,6 @@ components:
           description: The assigned key, which acts as a unique identifier for this Resource.
     IncidentResolutionRequest:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11633,12 +11631,70 @@ components:
       oneOf:
         - $ref: "#/components/schemas/ProcessInstanceCreationInstructionById"
         - $ref: "#/components/schemas/ProcessInstanceCreationInstructionByKey"
+    ProcessInstanceCreationInstructionBase:
+      type: object
+      properties:
+        variables:
+          description: |
+            JSON object that will instantiate the variables for the root variable scope
+            of the process instance.
+          type: object
+          additionalProperties: true
+        tenantId:
+          description: The tenant ID of the process definition.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
+        operationReference:
+          $ref: "#/components/schemas/OperationReference"
+        startInstructions:
+          description: |
+            List of start instructions. By default, the process instance will start at
+            the start event. If provided, the process instance will apply start instructions
+            after it has been created.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceCreationStartInstruction"
+        runtimeInstructions:
+          description: |
+            Runtime instructions (alpha). List of instructions that affect the runtime behavior of
+            the process instance. Refer to specific instruction types for more details.
+
+            This parameter is an alpha feature and may be subject to change
+            in future releases.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
+        awaitCompletion:
+          description: |
+            Wait for the process instance to complete. If the process instance completion does
+            not occur within the requestTimeout, the request will be closed. This can lead to a 504
+            response status. Disabled by default.
+          type: boolean
+          default: false
+        fetchVariables:
+          description: |
+            List of variables by name to be included in the response when awaitCompletion is set to true.
+            If empty, all visible variables in the root scope will be returned.
+          type: array
+          example: []
+          items:
+            type: string
+        requestTimeout:
+          description: |
+            Timeout (in ms) the request waits for the process to complete. By default or
+            when set to 0, the generic request timeout configured in the cluster is applied.
+          type: integer
+          format: int64
+          default: 0
+        tags:
+          $ref: "#/components/schemas/TagSet"
     ProcessInstanceCreationInstructionById:
       type: object
       title: Process creation by ID
       required:
         - processDefinitionId
-      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/ProcessInstanceCreationInstructionBase"
       properties:
         processDefinitionId:
           description: |
@@ -11651,70 +11707,13 @@ components:
           type: integer
           format: int32
           default: -1
-        variables:
-          description: |
-            JSON object that will instantiate the variables for the root variable scope
-            of the process instance.
-          type: object
-          additionalProperties: true
-        tenantId:
-          description: The tenant ID of the process definition.
-          $ref: "#/components/schemas/TenantId"
-        operationReference:
-          $ref: "#/components/schemas/OperationReference"
-        startInstructions:
-          description: |
-            List of start instructions. By default, the process instance will start at
-            the start event. If provided, the process instance will apply start instructions
-            after it has been created.
-          type: array
-          items:
-            $ref: "#/components/schemas/ProcessInstanceCreationStartInstruction"
-        runtimeInstructions:
-          description: |
-            Runtime instructions (alpha). List of instructions that affect the runtime behavior of
-            the process instance. Refer to specific instruction types for more details.
-
-            This parameter is an alpha feature and may be subject to change
-            in future releases.
-          type: array
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-            discriminator:
-              propertyName: type
-              mapping:
-                TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-        awaitCompletion:
-          description: |
-            Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. This can lead to a 504
-            response status. Disabled by default.
-          type: boolean
-          default: false
-        fetchVariables:
-          description: |
-            List of variables by name to be included in the response when awaitCompletion is set to true.
-            If empty, all visible variables in the root scope will be returned.
-          type: array
-          example: []
-          items:
-            type: string
-        requestTimeout:
-          description: |
-            Timeout (in ms) the request waits for the process to complete. By default or
-            when set to 0, the generic request timeout configured in the cluster is applied.
-          type: integer
-          format: int64
-          default: 0
-        tags:
-          $ref: "#/components/schemas/TagSet"
     ProcessInstanceCreationInstructionByKey:
       type: object
       title: Process creation by key
       required:
         - processDefinitionKey
-      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/ProcessInstanceCreationInstructionBase"
       properties:
         processDefinitionKey:
           allOf:
@@ -11722,64 +11721,6 @@ components:
           description: |
             The unique key identifying the process definition, for example, returned for a process in the
             deploy resources endpoint.
-        variables:
-          description: |
-            JSON object that will instantiate the variables for the root variable scope
-            of the process instance.
-          type: object
-          additionalProperties: true
-        tenantId:
-          description: The tenant ID of the process definition.
-          $ref: "#/components/schemas/TenantId"
-        operationReference:
-          $ref: "#/components/schemas/OperationReference"
-        startInstructions:
-          description: |
-            List of start instructions. By default, the process instance will start at
-            the start event. If provided, the process instance will apply start instructions
-            after it has been created.
-          type: array
-          items:
-            $ref: "#/components/schemas/ProcessInstanceCreationStartInstruction"
-        runtimeInstructions:
-          description: |
-            Runtime instructions (alpha). List of instructions that affect the runtime behavior of
-            the process instance. Refer to specific instruction types for more details.
-
-            This parameter is an alpha feature and may be subject to change
-            in future releases.
-          type: array
-          items:
-            oneOf:
-              - $ref: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-            discriminator:
-              propertyName: type
-              mapping:
-                TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-        awaitCompletion:
-          description: |
-            Wait for the process instance to complete. If the process instance completion does
-            not occur within the requestTimeout, the request will be closed. This can lead to a 504
-            response status. Disabled by default.
-          type: boolean
-          default: false
-        fetchVariables:
-          description: |
-            List of variables by name to be included in the response when awaitCompletion is set to true.
-            If empty, all visible variables in the root scope will be returned.
-          type: array
-          example: []
-          items:
-            type: string
-        requestTimeout:
-          description: |
-            Timeout (in ms) the request waits for the process to complete. By default or
-            when set to 0, the generic request timeout configured in the cluster is applied.
-          type: integer
-          format: int64
-          default: 0
-        tags:
-          $ref: "#/components/schemas/TagSet"
     ProcessInstanceCreationStartInstruction:
       type: object
       required:
@@ -11846,7 +11787,8 @@ components:
           example: 3
         tenantId:
           description: The tenant ID of the created process instance.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           example: <default>
         variables:
           additionalProperties: true
@@ -11867,7 +11809,6 @@ components:
           $ref: "#/components/schemas/TagSet"
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
-      additionalProperties: false
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -11895,7 +11836,6 @@ components:
         - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
-      additionalProperties: false
       description: |
         The migration instructions describe how to migrate a process instance from one process definition to another.
       properties:
@@ -11931,7 +11871,6 @@ components:
         - targetElementId
     ProcessInstanceModificationInstruction:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11999,7 +11938,6 @@ components:
         - elementInstanceKey
     SetVariableRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           description: JSON object representing the variables to set in the element’s scope.
@@ -12031,13 +11969,11 @@ components:
     DeleteResourceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
     SignalBroadcastRequest:
       type: object
-      additionalProperties: false
       properties:
         signalName:
           description: The name of the signal to broadcast.
@@ -12048,7 +11984,8 @@ components:
           type: object
         tenantId:
           description: The ID of the tenant that owns the signal.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - signalName
     SignalBroadcastResult:
@@ -12059,7 +11996,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID of the signal that was broadcast.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         signalKey:
           allOf:
             - $ref: "#/components/schemas/SignalKey"
@@ -12069,7 +12007,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID of the form.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         formId:
           description: The user-provided identifier of the form.
           type: string
@@ -12079,7 +12018,6 @@ components:
         version:
           description: The version of the the deployed form.
           type: integer
-          format: int64
         formKey:
           allOf:
             - $ref: "#/components/schemas/FormKey"
@@ -12102,7 +12040,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of this resource.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         resourceKey:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
@@ -12147,7 +12086,6 @@ components:
       required:
         - field
     BatchOperationSearchQuery:
-      additionalProperties: false
       description: Batch operation search request.
       type: object
       allOf:
@@ -12270,7 +12208,6 @@ components:
         - field
     BatchOperationItemSearchQuery:
       description: Batch operation item search request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -12462,8 +12399,8 @@ components:
           type: string
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
-      additionalProperties: false
-      description: The process instance filter that defines which process instances should be canceled.
+      description: |
+        The process instance filter that defines which process instances should be canceled.
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -12471,15 +12408,14 @@ components:
         - filter
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
-      additionalProperties: false
-      description: The process instance filter that defines which process instances should have their incidents resolved.
+      description: |
+        The process instance filter that defines which process instances should have their incidents resolved.
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
       required:
         - filter
     ProcessInstanceModificationBatchOperationRequest:
-      additionalProperties: false
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
@@ -12535,32 +12471,24 @@ components:
       format: TenantId
       type: string
     Username:
+      type: string
       example: swillis
       format: Username
       description: The unique name of a user.
-      type: string
     OperationMetadata:
       description: Information about the operation effect characteristics. Suitable for reasoning about the idempotency and safety of operations
       type: object
       discriminator:
         propertyName: kind
       oneOf:
-        - description: Command operation metadata
-          $ref: "#/components/schemas/CommandOperation"
-        - description: Query (read-only) operation metadata
-          $ref: "#/components/schemas/QueryOperation"
-        - description: Create operation metadata (resource creation)
-          $ref: "#/components/schemas/CreateOperation"
-        - description: Patch (partial update) operation metadata
-          $ref: "#/components/schemas/PatchOperation"
-        - description: Delete operation metadata
-          $ref: "#/components/schemas/DeleteOperation"
-        - description: Event operation metadata (fire-and-forget)
-          $ref: "#/components/schemas/EventOperation"
-        - description: Update (full idempotent update) operation metadata
-          $ref: "#/components/schemas/UpdateOperation"
-        - description: Batch command operation metadata
-          $ref: "#/components/schemas/BatchCommandOperation"
+        - $ref: "#/components/schemas/CommandOperation"
+        - $ref: "#/components/schemas/QueryOperation"
+        - $ref: "#/components/schemas/CreateOperation"
+        - $ref: "#/components/schemas/PatchOperation"
+        - $ref: "#/components/schemas/DeleteOperation"
+        - $ref: "#/components/schemas/EventOperation"
+        - $ref: "#/components/schemas/UpdateOperation"
+        - $ref: "#/components/schemas/BatchCommandOperation"
     CommandOperation:
       description: A non-idempotent state transition / process action
       type: object

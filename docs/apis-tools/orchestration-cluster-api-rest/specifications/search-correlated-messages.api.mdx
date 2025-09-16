@@ -1,18 +1,16 @@
 ---
 id: search-correlated-messages
 title: "Search correlated messages"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Search for correlated messages based on given criteria."
 sidebar_label: "Search correlated messages"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Search for correlated messages based on given criteria.
 
 <Heading
@@ -56,7 +51,6 @@ Search for correlated messages based on given criteria.
       "application/json": {
         schema: {
           type: "object",
-          additionalProperties: false,
           allOf: [
             {
               type: "object",
@@ -82,7 +76,7 @@ Search for correlated messages based on given criteria.
                             },
                             limit: {
                               description:
-                                "The maximum number of items to return in one request. <=10,000 for Elasticsearch.",
+                                "The maximum number of items to return in one request. <=10,000 for ElasticSearch.",
                               type: "integer",
                               format: "int32",
                               default: 100,
@@ -102,8 +96,8 @@ Search for correlated messages based on given criteria.
                                 {
                                   description:
                                     "The end cursor in a search query result set.",
-                                  format: "base64",
                                   type: "string",
+                                  format: "base64",
                                   example: "WzIyNTE3OTk4MTM2ODcxMDJd",
                                   title: "EndCursor",
                                 },
@@ -130,8 +124,8 @@ Search for correlated messages based on given criteria.
                                 {
                                   description:
                                     "The start cursor in a search query result set.",
-                                  format: "base64",
                                   type: "string",
+                                  format: "base64",
                                   example: "WzIyNTE3OTk4MTM2ODcxMDJd",
                                   title: "StartCursor",
                                 },
@@ -420,464 +414,51 @@ Search for correlated messages based on given criteria.
                         "The element instance key that received the message.",
                       allOf: [
                         {
-                          description: "Element instance filter.",
+                          description:
+                            "String property with basic advanced search capabilities.",
                           type: "object",
-                          properties: {
-                            processDefinitionId: {
-                              description:
-                                "The process definition ID associated to this element instance.",
-                              allOf: [
-                                {
-                                  description:
-                                    "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
-                                  format: "ProcessDefinitionId",
-                                  type: "string",
-                                  example: "new-account-onboarding-workflow",
-                                  title: "ProcessDefinitionId",
-                                },
-                              ],
-                            },
-                            state: {
-                              description:
-                                "State of element instance as defined set of values.",
-                              allOf: [
-                                {
-                                  description:
-                                    "ElementInstanceStateEnum property with full advanced search capabilities.",
-                                  type: "object",
-                                  oneOf: [
-                                    {
-                                      type: "string",
-                                      title: "Exact match",
-                                      description: "Matches the value exactly.",
-                                      allOf: [
-                                        {
-                                          description: "Element states",
-                                          enum: [
-                                            "ACTIVE",
-                                            "COMPLETED",
-                                            "TERMINATED",
-                                          ],
-                                          title: "ElementInstanceStateEnum",
-                                        },
-                                      ],
-                                    },
-                                    {
-                                      title: "Advanced filter",
-                                      description:
-                                        "Advanced ElementInstanceStateEnum filter.",
-                                      type: "object",
-                                      properties: {
-                                        $eq: {
-                                          description:
-                                            "Checks for equality with the provided value.",
-                                          allOf: [
-                                            {
-                                              description: "Element states",
-                                              enum: [
-                                                "ACTIVE",
-                                                "COMPLETED",
-                                                "TERMINATED",
-                                              ],
-                                              title: "ElementInstanceStateEnum",
-                                            },
-                                          ],
-                                        },
-                                        $neq: {
-                                          description:
-                                            "Checks for inequality with the provided value.",
-                                          allOf: [
-                                            {
-                                              description: "Element states",
-                                              enum: [
-                                                "ACTIVE",
-                                                "COMPLETED",
-                                                "TERMINATED",
-                                              ],
-                                              title: "ElementInstanceStateEnum",
-                                            },
-                                          ],
-                                        },
-                                        $exists: {
-                                          description:
-                                            "Checks if the current property exists.",
-                                          type: "boolean",
-                                        },
-                                        $in: {
-                                          description:
-                                            "Checks if the property matches any of the provided values.",
-                                          type: "array",
-                                          items: {
-                                            description: "Element states",
-                                            enum: [
-                                              "ACTIVE",
-                                              "COMPLETED",
-                                              "TERMINATED",
-                                            ],
-                                            title: "ElementInstanceStateEnum",
-                                          },
-                                        },
-                                        $like: {
-                                          type: "string",
-                                          description:
-                                            "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
-                                          title: "LikeFilterProperty",
-                                        },
-                                      },
-                                    },
-                                  ],
-                                  title: "ElementInstanceStateFilterProperty",
-                                },
-                              ],
-                            },
-                            type: {
-                              description:
-                                "Type of element as defined set of values.",
+                          oneOf: [
+                            {
                               type: "string",
-                              enum: [
-                                "UNSPECIFIED",
-                                "PROCESS",
-                                "SUB_PROCESS",
-                                "EVENT_SUB_PROCESS",
-                                "AD_HOC_SUB_PROCESS",
-                                "AD_HOC_SUB_PROCESS_INNER_INSTANCE",
-                                "START_EVENT",
-                                "INTERMEDIATE_CATCH_EVENT",
-                                "INTERMEDIATE_THROW_EVENT",
-                                "BOUNDARY_EVENT",
-                                "END_EVENT",
-                                "SERVICE_TASK",
-                                "RECEIVE_TASK",
-                                "USER_TASK",
-                                "MANUAL_TASK",
-                                "TASK",
-                                "EXCLUSIVE_GATEWAY",
-                                "INCLUSIVE_GATEWAY",
-                                "PARALLEL_GATEWAY",
-                                "EVENT_BASED_GATEWAY",
-                                "SEQUENCE_FLOW",
-                                "MULTI_INSTANCE_BODY",
-                                "CALL_ACTIVITY",
-                                "BUSINESS_RULE_TASK",
-                                "SCRIPT_TASK",
-                                "SEND_TASK",
-                                "UNKNOWN",
-                              ],
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
                             },
-                            elementId: {
-                              description:
-                                "The element ID for this element instance.",
-                              allOf: [
-                                {
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
                                   description:
-                                    "The model-defined id of an element.",
-                                  format: "ElementId",
+                                    "Checks for equality with the provided value.",
                                   type: "string",
-                                  example: "Activity_106kosb",
-                                  title: "ElementId",
                                 },
-                              ],
-                            },
-                            elementName: {
-                              type: "string",
-                              description:
-                                "The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.\n",
-                            },
-                            hasIncident: {
-                              type: "boolean",
-                              description:
-                                "Shows whether this element instance has an incident related to.",
-                            },
-                            tenantId: {
-                              example: "customer-service",
-                              description:
-                                "The unique identifier of the tenant.",
-                              format: "TenantId",
-                              type: "string",
-                              title: "TenantId",
-                            },
-                            elementInstanceKey: {
-                              allOf: [
-                                {
+                                $neq: {
                                   description:
-                                    "System-generated key for a element instance.",
-                                  format: "ElementInstanceKey",
-                                  example: "2251799813686789",
+                                    "Checks for inequality with the provided value.",
                                   type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "ElementInstanceKey",
                                 },
-                              ],
-                              description:
-                                "The assigned key, which acts as a unique identifier for this element instance.",
-                            },
-                            processInstanceKey: {
-                              allOf: [
-                                {
+                                $exists: {
                                   description:
-                                    "System-generated key for a process instance.",
-                                  format: "ProcessInstanceKey",
-                                  example: "2251799813690746",
-                                  type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "ProcessInstanceKey",
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
                                 },
-                              ],
-                              description:
-                                "The process instance key associated to this element instance.",
-                            },
-                            processDefinitionKey: {
-                              allOf: [
-                                {
+                                $in: {
                                   description:
-                                    "System-generated key for a deployed process definition.",
-                                  format: "ProcessDefinitionKey",
-                                  example: "2251799813686749",
-                                  type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "ProcessDefinitionKey",
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
                                 },
-                              ],
-                              description:
-                                "The process definition key associated to this element instance.",
-                            },
-                            incidentKey: {
-                              allOf: [
-                                {
+                                $notIn: {
                                   description:
-                                    "System-generated key for a incident.",
-                                  format: "IncidentKey",
-                                  example: "2251799813689432",
-                                  type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "IncidentKey",
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
                                 },
-                              ],
-                              description:
-                                "The key of incident if field incident is true.",
+                              },
                             },
-                            startDate: {
-                              description:
-                                "The start date of this element instance.",
-                              allOf: [
-                                {
-                                  description:
-                                    "Date-time property with full advanced search capabilities.",
-                                  type: "object",
-                                  oneOf: [
-                                    {
-                                      type: "string",
-                                      format: "date-time",
-                                      title: "Exact match",
-                                      description: "Matches the value exactly.",
-                                    },
-                                    {
-                                      title: "Advanced filter",
-                                      description: "Advanced date-time filter.",
-                                      type: "object",
-                                      properties: {
-                                        $eq: {
-                                          description:
-                                            "Checks for equality with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $neq: {
-                                          description:
-                                            "Checks for inequality with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $exists: {
-                                          description:
-                                            "Checks if the current property exists.",
-                                          type: "boolean",
-                                        },
-                                        $gt: {
-                                          description:
-                                            "Greater than comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $gte: {
-                                          description:
-                                            "Greater than or equal comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $lt: {
-                                          description:
-                                            "Lower than comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $lte: {
-                                          description:
-                                            "Lower than or equal comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $in: {
-                                          description:
-                                            "Checks if the property matches any of the provided values.",
-                                          type: "array",
-                                          items: {
-                                            type: "string",
-                                            format: "date-time",
-                                          },
-                                        },
-                                      },
-                                    },
-                                  ],
-                                  title: "DateTimeFilterProperty",
-                                },
-                              ],
-                            },
-                            endDate: {
-                              description:
-                                "The end date of this element instance.",
-                              allOf: [
-                                {
-                                  description:
-                                    "Date-time property with full advanced search capabilities.",
-                                  type: "object",
-                                  oneOf: [
-                                    {
-                                      type: "string",
-                                      format: "date-time",
-                                      title: "Exact match",
-                                      description: "Matches the value exactly.",
-                                    },
-                                    {
-                                      title: "Advanced filter",
-                                      description: "Advanced date-time filter.",
-                                      type: "object",
-                                      properties: {
-                                        $eq: {
-                                          description:
-                                            "Checks for equality with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $neq: {
-                                          description:
-                                            "Checks for inequality with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $exists: {
-                                          description:
-                                            "Checks if the current property exists.",
-                                          type: "boolean",
-                                        },
-                                        $gt: {
-                                          description:
-                                            "Greater than comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $gte: {
-                                          description:
-                                            "Greater than or equal comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $lt: {
-                                          description:
-                                            "Lower than comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $lte: {
-                                          description:
-                                            "Lower than or equal comparison with the provided value.",
-                                          type: "string",
-                                          format: "date-time",
-                                        },
-                                        $in: {
-                                          description:
-                                            "Checks if the property matches any of the provided values.",
-                                          type: "array",
-                                          items: {
-                                            type: "string",
-                                            format: "date-time",
-                                          },
-                                        },
-                                      },
-                                    },
-                                  ],
-                                  title: "DateTimeFilterProperty",
-                                },
-                              ],
-                            },
-                            elementInstanceScopeKey: {
-                              description:
-                                "The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.",
-                              oneOf: [
-                                {
-                                  description:
-                                    "System-generated key for a element instance.",
-                                  format: "ElementInstanceKey",
-                                  example: "2251799813686789",
-                                  type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "ElementInstanceKey",
-                                },
-                                {
-                                  description:
-                                    "System-generated key for a process instance.",
-                                  format: "ProcessInstanceKey",
-                                  example: "2251799813690746",
-                                  type: "string",
-                                  allOf: [
-                                    {
-                                      description:
-                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                      type: "string",
-                                      title: "LongKey",
-                                    },
-                                  ],
-                                  title: "ProcessInstanceKey",
-                                },
-                              ],
-                            },
-                          },
-                          title: "ElementInstanceFilter",
+                          ],
+                          title: "BasicStringFilterProperty",
                         },
                       ],
                     },
@@ -1151,38 +732,51 @@ Search for correlated messages based on given criteria.
                         "The process definition key associated with this correlated message.",
                       allOf: [
                         {
-                          title: "Advanced filter",
-                          description: "Basic advanced string filter.",
+                          description:
+                            "String property with basic advanced search capabilities.",
                           type: "object",
-                          properties: {
-                            $eq: {
-                              description:
-                                "Checks for equality with the provided value.",
+                          oneOf: [
+                            {
                               type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
                             },
-                            $neq: {
-                              description:
-                                "Checks for inequality with the provided value.",
-                              type: "string",
+                            {
+                              title: "Advanced filter",
+                              description: "Basic advanced string filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: { type: "string" },
+                                },
+                              },
                             },
-                            $exists: {
-                              description:
-                                "Checks if the current property exists.",
-                              type: "boolean",
-                            },
-                            $in: {
-                              description:
-                                "Checks if the property matches any of the provided values.",
-                              type: "array",
-                              items: { type: "string" },
-                            },
-                            $notIn: {
-                              description:
-                                "Checks if the property matches none of the provided values.",
-                              type: "array",
-                              items: { type: "string" },
-                            },
-                          },
+                          ],
+                          title: "BasicStringFilterProperty",
                         },
                       ],
                     },
@@ -1413,22 +1007,34 @@ Search for correlated messages based on given criteria.
                             example: false,
                           },
                           startCursor: {
-                            description:
-                              "The start cursor in a search query result set.",
-                            format: "base64",
-                            type: "string",
-                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                            title: "StartCursor",
                             nullable: true,
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The start cursor in a search query result set.",
+                                type: "string",
+                                format: "base64",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "StartCursor",
+                              },
+                            ],
                           },
                           endCursor: {
-                            description:
-                              "The end cursor in a search query result set.",
-                            format: "base64",
-                            type: "string",
-                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                            title: "EndCursor",
                             nullable: true,
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The end cursor in a search query result set.",
+                                type: "string",
+                                format: "base64",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "EndCursor",
+                              },
+                            ],
                           },
                         },
                         example: { totalItems: 1, hasMoreTotalItems: false },
@@ -1463,44 +1069,11 @@ Search for correlated messages based on given criteria.
                     elementInstanceKey: {
                       description:
                         "The element instance key that received the message.",
-                      allOf: [
-                        {
-                          description:
-                            "System-generated key for a element instance.",
-                          format: "ElementInstanceKey",
-                          example: "2251799813686789",
-                          type: "string",
-                          allOf: [
-                            {
-                              description:
-                                "Zeebe Engine resource key (Java long serialized as string)",
-                              type: "string",
-                              title: "LongKey",
-                            },
-                          ],
-                          title: "ElementInstanceKey",
-                        },
-                      ],
+                      type: "string",
                     },
                     messageKey: {
                       description: "The message key.",
-                      allOf: [
-                        {
-                          allOf: [
-                            {
-                              description:
-                                "Zeebe Engine resource key (Java long serialized as string)",
-                              type: "string",
-                              title: "LongKey",
-                            },
-                          ],
-                          description: "System-generated key for an message.",
-                          format: "MessageKey",
-                          example: "2251799813683467",
-                          type: "string",
-                          title: "MessageKey",
-                        },
-                      ],
+                      type: "string",
                     },
                     messageName: {
                       description: "The name of the message.",
@@ -1515,95 +1088,27 @@ Search for correlated messages based on given criteria.
                     processDefinitionId: {
                       description:
                         "The process definition ID associated with this correlated message.",
-                      allOf: [
-                        {
-                          description:
-                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
-                          format: "ProcessDefinitionId",
-                          type: "string",
-                          example: "new-account-onboarding-workflow",
-                          title: "ProcessDefinitionId",
-                        },
-                      ],
+                      type: "string",
                     },
                     processDefinitionKey: {
                       description:
                         "The process definition key associated with this correlated message.",
-                      allOf: [
-                        {
-                          description:
-                            "System-generated key for a deployed process definition.",
-                          format: "ProcessDefinitionKey",
-                          example: "2251799813686749",
-                          type: "string",
-                          allOf: [
-                            {
-                              description:
-                                "Zeebe Engine resource key (Java long serialized as string)",
-                              type: "string",
-                              title: "LongKey",
-                            },
-                          ],
-                          title: "ProcessDefinitionKey",
-                        },
-                      ],
+                      type: "string",
                     },
                     processInstanceKey: {
                       description:
                         "The process instance key associated with this correlated message.",
-                      allOf: [
-                        {
-                          description:
-                            "System-generated key for a process instance.",
-                          format: "ProcessInstanceKey",
-                          example: "2251799813690746",
-                          type: "string",
-                          allOf: [
-                            {
-                              description:
-                                "Zeebe Engine resource key (Java long serialized as string)",
-                              type: "string",
-                              title: "LongKey",
-                            },
-                          ],
-                          title: "ProcessInstanceKey",
-                        },
-                      ],
+                      type: "string",
                     },
                     subscriptionKey: {
                       description:
                         "The subscription key that received the message.",
-                      allOf: [
-                        {
-                          description:
-                            "System-generated key for a message subscription.",
-                          format: "MessageSubscriptionKey",
-                          example: "2251799813632456",
-                          type: "string",
-                          allOf: [
-                            {
-                              description:
-                                "Zeebe Engine resource key (Java long serialized as string)",
-                              type: "string",
-                              title: "LongKey",
-                            },
-                          ],
-                          title: "MessageSubscriptionKey",
-                        },
-                      ],
+                      type: "string",
                     },
                     tenantId: {
                       description:
                         "The tenant ID associated with this correlated message.",
-                      allOf: [
-                        {
-                          example: "customer-service",
-                          description: "The unique identifier of the tenant.",
-                          format: "TenantId",
-                          type: "string",
-                          title: "TenantId",
-                        },
-                      ],
+                      type: "string",
                     },
                   },
                   required: [
