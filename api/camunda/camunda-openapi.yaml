@@ -4798,6 +4798,39 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
+  /correlated-messages/search:
+    post:
+      tags:
+        - Message
+      operationId: searchCorrelatedMessages
+      summary: Search correlated messages
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for correlated messages based on given criteria.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CorrelatedMessageSearchQuery"
+      responses:
+        "200":
+          description: The correlated messages search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CorrelatedMessageSearchQueryResult"
+        "400":
+          $ref: "#/components/responses/InvalidData"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
   /message-subscriptions/search:
     post:
       tags:
@@ -4864,6 +4897,7 @@ paths:
         content:
           multipart/form-data:
             schema:
+              additionalProperties: false
               type: object
               properties:
                 file:
@@ -4898,23 +4932,7 @@ paths:
 
         Upload multiple documents to the Camunda 8 cluster.
 
-        The caller must provide a file name for each document, which will be used in case of a multi-status response
-        to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
-        of the file part or in the `fileName` field of the metadata, which can be configured with
-        the `X-Document-Metadata` header for each file part. If both are provided, the `fileName` metadata field
-        takes precedence. For example, given the following headers for a file:
-        ```
-        Content-Disposition: form-data; name="files"; filename="bill.pdf"
-        X-Document-Metadata: {"fileName": "invoice.pdf", "size": 1234567}
-        ```
-
-        The filename will be `invoice.pdf`, but in the following example:
-        ```
-        Content-Disposition: form-data; name="files"; filename="bill.pdf"
-        X-Document-Metadata: {"size": 1234567}
-        ```
-
-        it would be `bill.pdf`.
+        The caller must provide a file name for each document, which will be used in case of a multi-status responseto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` headerof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. Theseare matched with the files based on index, and must have the same length as the files array.To pass homogenous metadata for all files, spread the metadata over the metadata array.  A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` headerof the file part. 
 
         In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
         each of which contains the file name of the document that failed to upload and the reason for the failure.
@@ -4933,6 +4951,7 @@ paths:
         content:
           multipart/form-data:
             schema:
+              additionalProperties: false
               type: object
               properties:
                 files:
@@ -4941,17 +4960,21 @@ paths:
                   items:
                     type: string
                     format: binary
+                  minItems: 1
+                metadataList:
+                  type: array
+                  description: Optional JSON array; index aligns with each files entry. Takes precedence over per-file X-Document-Metadata headers when provided.
+                  items:
+                    $ref: "#/components/schemas/DocumentMetadata"
               required:
                 - files
             encoding:
               files:
                 headers:
                   X-Document-Metadata:
+                    description: DEPRECATED - prefer metadataList.
                     schema:
                       $ref: "#/components/schemas/DocumentMetadata"
-                  X-Document-Id:
-                    schema:
-                      type: string
       responses:
         "201":
           description: All documents were uploaded successfully.
@@ -5512,6 +5535,7 @@ paths:
         content:
           multipart/form-data:
             schema:
+              additionalProperties: false
               type: object
               properties:
                 resources:
@@ -6189,6 +6213,7 @@ components:
       example: "2251799813684321"
     TenantCreateRequest:
       type: object
+      additionalProperties: false
       properties:
         tenantId:
           type: string
@@ -6220,6 +6245,7 @@ components:
           example: Customer Service department business processes
     TenantUpdateRequest:
       type: object
+      additionalProperties: false
       properties:
         name:
           type: string
@@ -6271,6 +6297,7 @@ components:
         - field
     TenantSearchQueryRequest:
       description: Tenant search request
+      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6323,6 +6350,7 @@ components:
         - field
     UserTaskSearchQuery:
       description: User task search query request.
+      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6357,6 +6385,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       description: User task search query request.
+      additionalProperties: false
       type: object
       properties:
         sort:
@@ -6635,6 +6664,7 @@ components:
         - field
     VariableSearchQuery:
       description: Variable search query request.
+      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6755,6 +6785,7 @@ components:
         - field
     ProcessDefinitionSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6870,6 +6901,7 @@ components:
     ProcessInstanceSearchQuery:
       description: Process instance search request.
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6884,6 +6916,7 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
     ProcessInstanceIncidentSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7606,6 +7639,7 @@ components:
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
+      additionalProperties: false
       properties:
         filter:
           description: The process definition statistics search filters.
@@ -7652,6 +7686,7 @@ components:
     CancelProcessInstanceRequest:
       type: object
       nullable: true
+      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -7681,6 +7716,7 @@ components:
     ElementInstanceSearchQuery:
       description: Element instance search request.
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7926,6 +7962,7 @@ components:
         - field
     DecisionDefinitionSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7991,6 +8028,7 @@ components:
       required:
         - field
     IncidentSearchQuery:
+      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -8084,6 +8122,165 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/IncidentResult"
+    CorrelatedMessageSearchQueryResult:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching correlated messages.
+          type: array
+          items:
+            $ref: "#/components/schemas/CorrelatedMessageResult"
+    CorrelatedMessageResult:
+      type: object
+      properties:
+        correlationKey:
+          description: The correlation key of the message.
+          type: string
+        correlationTime:
+          description: The time when the message was correlated.
+          type: string
+          format: date-time
+        elementId:
+          description: The element ID that received the message.
+          type: string
+        elementInstanceKey:
+          description: The element instance key that received the message.
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKey"
+        messageKey:
+          description: The message key.
+          allOf:
+            - $ref: "#/components/schemas/MessageKey"
+        messageName:
+          description: The name of the message.
+          type: string
+        partitionId:
+          description: The partition ID that correlated the message.
+          type: integer
+          format: int32
+        processDefinitionId:
+          description: The process definition ID associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionId"
+        processDefinitionKey:
+          description: The process definition key associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKey"
+        processInstanceKey:
+          description: The process instance key associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKey"
+        subscriptionKey:
+          description: The subscription key that received the message.
+          allOf:
+            - $ref: "#/components/schemas/MessageSubscriptionKey"
+        tenantId:
+          description: The tenant ID associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
+      required:
+        - correlationKey
+        - correlationTime
+        - elementId
+        - messageKey
+        - messageName
+        - partitionId
+        - processDefinitionId
+        - processInstanceKey
+        - subscriptionKey
+        - tenantId
+    CorrelatedMessageSearchQuery:
+      type: object
+      additionalProperties: false
+      allOf:
+        - $ref: "#/components/schemas/SearchQueryRequest"
+      properties:
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/CorrelatedMessageSearchQuerySortRequest"
+        filter:
+          description: The correlated messages search filters.
+          allOf:
+            - $ref: "#/components/schemas/CorrelatedMessageFilter"
+    CorrelatedMessageSearchQuerySortRequest:
+      type: object
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - correlationKey
+            - correlationTime
+            - elementId
+            - elementInstanceKey
+            - messageKey
+            - messageName
+            - partitionId
+            - processDefinitionId
+            - processDefinitionKey
+            - processInstanceKey
+            - subscriptionKey
+            - tenantId
+        order:
+          $ref: "#/components/schemas/SortOrderEnum"
+      required:
+        - field
+    CorrelatedMessageFilter:
+      description: Correlated messages search filter.
+      type: object
+      properties:
+        correlationKey:
+          description: The correlation key of the message.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        correlationTime:
+          description: The time when the message was correlated.
+          allOf:
+            - $ref: "#/components/schemas/DateTimeFilterProperty"
+        elementId:
+          description: The element ID that received the message.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        elementInstanceKey:
+          description: The element instance key that received the message.
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceFilter"
+        messageKey:
+          description: The message key.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        messageName:
+          description: The name of the message.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        partitionId:
+          description: The partition ID that correlated the message.
+          allOf:
+            - $ref: "#/components/schemas/IntegerFilterProperty"
+        processDefinitionId:
+          description: The process definition ID associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
+        processDefinitionKey:
+          description: The process definition key associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilter"
+        processInstanceKey:
+          description: The process instance key associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        subscriptionKey:
+          description: The subscription key that received the message.
+          allOf:
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
+        tenantId:
+          description: The tenant ID associated with this correlated message.
+          allOf:
+            - $ref: "#/components/schemas/StringFilterProperty"
     MessageSubscriptionSearchQueryResult:
       type: object
       allOf:
@@ -8159,6 +8356,7 @@ components:
         - field
     MessageSubscriptionSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8455,6 +8653,7 @@ components:
         - UNSPECIFIED
     AuthorizationRequest:
       type: object
+      additionalProperties: false
       properties:
         ownerId:
           description: The ID of the owner of the permissions.
@@ -8509,6 +8708,7 @@ components:
         - field
     AuthorizationSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8583,6 +8783,7 @@ components:
             $ref: "#/components/schemas/AuthorizationResult"
     UserRequest:
       type: object
+      additionalProperties: false
       required:
         - password
         - username
@@ -8642,6 +8843,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
+      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -8668,6 +8870,7 @@ components:
       required:
         - field
     MappingRuleSearchQueryRequest:
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -8830,6 +9033,7 @@ components:
           items:
             $ref: "#/components/schemas/TenantClientResult"
     TenantClientSearchQueryRequest:
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -8868,6 +9072,7 @@ components:
           items:
             $ref: "#/components/schemas/TenantUserResult"
     TenantUserSearchQueryRequest:
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -8909,6 +9114,7 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
+      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -8917,6 +9123,7 @@ components:
             $ref: "#/components/schemas/TenantGroupSearchQuerySortRequest"
     TenantGroupSearchQuerySortRequest:
       type: object
+      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -8928,6 +9135,7 @@ components:
       required:
         - field
     RoleCreateRequest:
+      additionalProperties: false
       type: object
       properties:
         roleId:
@@ -9006,6 +9214,7 @@ components:
         - field
     RoleSearchQueryRequest:
       description: Role search request.
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9156,6 +9365,7 @@ components:
         - field
     GroupCreateRequest:
       type: object
+      additionalProperties: false
       properties:
         groupId:
           type: string
@@ -9220,6 +9430,7 @@ components:
           description: The group description.
     GroupSearchQuerySortRequest:
       type: object
+      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9233,6 +9444,7 @@ components:
         - field
     GroupSearchQueryRequest:
       description: Group search request.
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9362,6 +9574,7 @@ components:
         - name
     MappingRuleCreateRequest:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
       properties:
@@ -9549,6 +9762,7 @@ components:
             - dead
     UserTaskCompletionRequest:
       type: object
+      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -9562,6 +9776,7 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
+      additionalProperties: false
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -9579,6 +9794,7 @@ components:
           nullable: true
     UserTaskUpdateRequest:
       type: object
+      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/Changeset"
@@ -9641,6 +9857,7 @@ components:
           nullable: true
     ClockPinRequest:
       type: object
+      additionalProperties: false
       properties:
         timestamp:
           description: The exact time in epoch milliseconds to which the clock should be pinned.
@@ -9649,6 +9866,7 @@ components:
         - timestamp
     JobActivationRequest:
       type: object
+      additionalProperties: false
       properties:
         type:
           description: |
@@ -9850,6 +10068,7 @@ components:
           nullable: true
     JobFailRequest:
       type: object
+      additionalProperties: false
       properties:
         retries:
           description: |
@@ -9873,6 +10092,7 @@ components:
           type: object
     JobErrorRequest:
       type: object
+      additionalProperties: false
       properties:
         errorCode:
           description: |
@@ -9893,6 +10113,7 @@ components:
         - errorCode
     JobCompletionRequest:
       type: object
+      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -10026,6 +10247,7 @@ components:
           nullable: true
     JobUpdateRequest:
       type: object
+      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
@@ -10060,6 +10282,7 @@ components:
     JobSearchQuery:
       description: Job search request.
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10566,6 +10789,7 @@ components:
         - field
     DecisionRequirementsSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10614,6 +10838,7 @@ components:
             $ref: "#/components/schemas/DecisionRequirementsResult"
     DecisionRequirementsResult:
       type: object
+      additionalProperties: false
       properties:
         decisionRequirementsName:
           type: string
@@ -10642,6 +10867,7 @@ components:
         - $ref: "#/components/schemas/DecisionEvaluationByKey"
     DecisionEvaluationById:
       type: object
+      additionalProperties: false
       title: Decision evaluation by ID
       properties:
         decisionDefinitionId:
@@ -10663,6 +10889,7 @@ components:
     DecisionEvaluationByKey:
       type: object
       title: Decision evaluation by key
+      additionalProperties: false
       properties:
         decisionDefinitionKey:
           allOf:
@@ -10841,6 +11068,7 @@ components:
         - field
     DecisionInstanceSearchQuery:
       type: object
+      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -11016,6 +11244,7 @@ components:
       minimum: 1
     MessageCorrelationRequest:
       type: object
+      additionalProperties: false
       required:
         - name
         - correlationKey
@@ -11056,6 +11285,7 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceKey"
     MessagePublicationRequest:
       type: object
+      additionalProperties: false
       properties:
         name:
           description: The name of the message.
@@ -11358,6 +11588,7 @@ components:
           description: The assigned key, which acts as a unique identifier for this Resource.
     IncidentResolutionRequest:
       type: object
+      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11608,6 +11839,7 @@ components:
           $ref: "#/components/schemas/TagSet"
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
+      additionalProperties: false
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -11635,6 +11867,7 @@ components:
         - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
+      additionalProperties: false
       description: |
         The migration instructions describe how to migrate a process instance from one process definition to another.
       properties:
@@ -11670,6 +11903,7 @@ components:
         - targetElementId
     ProcessInstanceModificationInstruction:
       type: object
+      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11737,6 +11971,7 @@ components:
         - elementInstanceKey
     SetVariableRequest:
       type: object
+      additionalProperties: false
       properties:
         variables:
           description: JSON object representing the variables to set in the element’s scope.
@@ -11768,11 +12003,13 @@ components:
     DeleteResourceRequest:
       type: object
       nullable: true
+      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
     SignalBroadcastRequest:
       type: object
+      additionalProperties: false
       properties:
         signalName:
           description: The name of the signal to broadcast.
@@ -11881,6 +12118,7 @@ components:
       required:
         - field
     BatchOperationSearchQuery:
+      additionalProperties: false
       description: Batch operation search request.
       type: object
       allOf:
@@ -12003,6 +12241,7 @@ components:
         - field
     BatchOperationItemSearchQuery:
       description: Batch operation item search request.
+      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -12194,8 +12433,8 @@ components:
           type: string
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
-      description: |
-        The process instance filter that defines which process instances should be canceled.
+      additionalProperties: false
+      description: The process instance filter that defines which process instances should be canceled.
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -12203,14 +12442,15 @@ components:
         - filter
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
-      description: |
-        The process instance filter that defines which process instances should have their incidents resolved.
+      additionalProperties: false
+      description: The process instance filter that defines which process instances should have their incidents resolved.
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
       required:
         - filter
     ProcessInstanceModificationBatchOperationRequest:
+      additionalProperties: false
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
