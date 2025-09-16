@@ -8,23 +8,31 @@ Before setting up the SAP integration, ensure you have the following in place:
 
 ## Camunda setup
 
-- **Camunda 8.5+**
-  - Works with both Camunda SaaS and Self-Managed deployments.
-  - For Self-Managed: Ensure outbound connectivity from your environment to SAP BTP.
-  - For SaaS: Configure [hybrid connectors](/components/connectors/use-connectors-in-hybrid-mode.md) to securely connect to SAP systems.
+- **Camunda 8.5+**  
+  Minimum versions vary by component:
+  - **OData and RFC connectors:** 8.6+
+  - **BTP plugin:** 8.6+
+  - **Task Center integration:** 8.8+
+  - **Event Mesh integration:** 8.8+
+
+  Works with both Camunda SaaS and Self-Managed deployments:
+  - **Self-Managed:** Ensure outbound connectivity from your environment to SAP BTP.
+  - **SaaS:** Configure [hybrid connectors](/components/connectors/use-connectors-in-hybrid-mode.md) to securely connect to SAP systems.
 
 ## SAP setup
 
 - An **SAP BTP subaccount** with the following enabled:
   - [Cloud Foundry Runtime](https://discovery-center.cloud.sap/serviceCatalog/cloud-foundry-runtime?region=all)
   - [(Free) Destination Service](https://discovery-center.cloud.sap/serviceCatalog/destination?region=all&service_plan=lite&commercialModel=btpea) for system and service connectivity
-  - [(Free) Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all) (if using on-premises SAP S/4HANA or ECC)
+  - [(Free) Connectivity Service](https://discovery-center.cloud.sap/serviceCatalog/connectivity-service?region=all) (required for on-premises SAP S/4HANA or ECC)
   - [SAP Cloud Connector](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector) configured to bridge on-premises systems with BTP
 
-- **Optional services, depending on your scenario:**
+- **Additional services, depending on your scenario:**
   - [SAP Event Mesh](https://discovery-center.cloud.sap/serviceCatalog/event-mesh) for event-driven communication between Camunda and SAP.
   - [SAP Task Center](https://discovery-center.cloud.sap/serviceCatalog/task-center) to surface Camunda Tasklist items directly in SAP Fiori.
-  - [PostgreSQL on SAP BTP, hyperscaler option](https://discovery-center.cloud.sap/serviceCatalog/postgresql-hyperscaler-option?region=all) for the BTP plugin.
+
+- **Required for the BTP plugin:**
+  - [PostgreSQL on SAP BTP, hyperscaler option](https://discovery-center.cloud.sap/serviceCatalog/postgresql-hyperscaler-option?region=all)
 
 ## Authentication and connectivity
 
@@ -36,4 +44,4 @@ Before setting up the SAP integration, ensure you have the following in place:
 
 ## Tooling
 
-- The [CSAP CLI](./csap-cli.md) installed to prepare and deploy integration modules.
+- The [CSAP CLI](./csap-cli.md), a self-contained binary that runs on any platform without installation, only requiring you to copy it to the target machine.
