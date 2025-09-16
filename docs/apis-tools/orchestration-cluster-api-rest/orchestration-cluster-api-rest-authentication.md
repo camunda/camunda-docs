@@ -99,9 +99,11 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 <TabItem value="self-managed">
 
-1. **Register a client in your Identity Provider (IdP).**  
+1. **Configure Orchestration Cluster for OIDC-based Authentication.**  
+   Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+2. **Register a client in your Identity Provider (IdP).**  
    An IdP manages digital identities and authentication, such as Keycloak, Azure Entra (formerly Azure AD), Okta, or similar systems.
-2. **Use the credentials (client ID and secret) to request an Access Token.**  
+3. **Use the credentials (client ID and secret) to request an Access Token.**  
    The example below shows Keycloak configuration (the endpoint URL will vary based on your IdP):
 
 ```shell
@@ -112,7 +114,7 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 --data-urlencode 'grant_type=client_credentials'
 ```
 
-3. Use the access token from the response in your API requests:
+4. Use the access token from the response in your API requests:
 
 ```shell
 curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
