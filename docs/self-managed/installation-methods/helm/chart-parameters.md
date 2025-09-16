@@ -39,7 +39,7 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 :::info
 Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami chart production deployments.
-For production environments, we recommend deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
+For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
 :::
 
 ### Observability
