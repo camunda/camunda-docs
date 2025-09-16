@@ -13,7 +13,7 @@ In **Camunda 8 SaaS**, mapping rules are not configurable. They are automaticall
 
 In **Camunda 8 Self-Managed**, you may need to configure mapping rules in two components:
 
-- **Orchestration Cluster Identity**: Manage permissions within an [orchestration cluster](../../orchestration-cluster.md). Use mapping rules to assign users to [user groups](../../identity/group.md) and [roles](../../identity/role.md), grant [authorizations](../../identity/authorization.md), and associate them with specific [tenants](/self-managed/components/orchestration-cluster/identity/manage-tenants.md).
+- **Orchestration Cluster Identity**: Manage permissions within an [orchestration cluster](../../orchestration-cluster.md). Use mapping rules to assign users to [user groups](../../identity/group.md) and [roles](../../identity/role.md), grant [authorizations](../../identity/authorization.md), and associate them with specific [tenants](../../identity/tenant.md).
 
   - Mapping rules are available for Orchestration Cluster Identity only when using [OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md). They do not apply to other authentication methods, such as basic authentication.
 

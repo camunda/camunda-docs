@@ -108,6 +108,7 @@ Prepare your remote runtime:
 
 2. **Enable the management clock endpoint**  
    See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
+
    - Create an `application.yaml` file in the root `/c8run` directory.
    - Add:
      ```yaml
@@ -164,6 +165,7 @@ Now, it's time to migrate your process tests.
 First, migrate the general test class structure:
 
 1. **Replace annotations and types**
+
    - Replace `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
    - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
 
