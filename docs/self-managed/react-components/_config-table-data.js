@@ -321,6 +321,9 @@ export const configs = [
     ],
     types: ["1-to-1", "Breaking change (double configuration)"],
     area: ["Data"],
+    notes: [
+      "Starting with 8.8, the same repository must be used for both Operate and Tasklist.",
+    ],
   },
   {
     name: "camunda.data.backup.snapshot-timeout",
@@ -540,6 +543,30 @@ export const configs = [
       "camunda.tasklist.elasticsearch.password",
     ],
     types: ["Breaking change (double configuration)"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.security.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.security.certificate-path",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.security.verify-hostname",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.security.self-signed",
+    legacy: ["N/A"],
+    types: ["New"],
     area: ["Data"],
   },
   {
@@ -787,5 +814,81 @@ export const configs = [
     legacy: ["zeebe.broker.experimental.versionCheckRestrictionEnabled"],
     types: ["1-to-1"],
     area: ["System"],
+  },
+  // Spring profile keys
+  {
+    name: "spring.profiles.active",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Spring Profile"],
+  },
+  // Server keys
+  {
+    name: "server.address",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "server.port",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "server.ssl.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "server.ssl.certificate",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "server.ssl.certificate-private-key",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  // Management keys
+  {
+    name: "management.server",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "management.server.address",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "management.server.port",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "management.server.ssl.enabled",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  {
+    name: "management.endpoint",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Server"],
+  },
+  // License keys
+  {
+    name: "license.key",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Licensing"],
   },
 ];

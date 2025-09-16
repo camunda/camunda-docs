@@ -101,13 +101,14 @@
 }
 
 .badge--1-to-1 {
-  background-color: var(--ifm-color-success);
+  background-color: #ff8b00;
   color: #fff;
   margin-top: 10px;
 }
 [data-theme="dark"] .badge--1-to-1 {
-  background-color: #005d5d;
-  color: #bae6ff;
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
 }
 [data-theme="dark"] .badge--unsupported {
   background-color: #9a4e00;
@@ -123,6 +124,11 @@
   background-color: #0ba7b9;
   color: #e1d9cd;
 }
+[data-theme="dark"] .badge--new {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
 
 .badge--breaking-change-double-configuration- {
   background-color: #da1e28;
@@ -135,6 +141,17 @@
   display: inline-block;
   text-align: left;
   line-height: 1.5;
+}
+
+.badge--new {
+  background-color: var(--ifm-color-success);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0.125rem;
 }
 
 .badge--default:hover {
@@ -186,6 +203,15 @@
   color: #fff;
 }
 
+.badge--active--new,
+.badge--active--new:hover {
+  background-color: #007bff !important;
+  color: #fff !important;
+}
+[data-theme="dark"] .badge--active--new {
+  background-color: #007bff;
+  color: #fff;
+}
 .config-type .badge:nth-of-type(1) {
   margin-left: 0;
   margin-bottom: 5px;
@@ -212,4 +238,13 @@
 /* Optional: Add active state for when clicking */
 .sortable-header:active {
   background-color: var(--ifm-color-emphasis-200);
+}
+
+.config-notes {
+  margin-top: 0.5rem;
+}
+
+.config-note {
+  font-size: 0.875rem;
+  margin: 0.25rem 0;
 }

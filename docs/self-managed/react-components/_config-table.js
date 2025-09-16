@@ -2,7 +2,11 @@ import "./_config-table.css";
 import React, { useState } from "react";
 import { configs } from "./_config-table-data.js";
 
-const TYPE_OPTIONS = ["1-to-1", "Breaking change (double configuration)"];
+const TYPE_OPTIONS = [
+  "1-to-1",
+  "Breaking change (double configuration)",
+  "New",
+];
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -129,7 +133,9 @@ const SearchableTable = () => {
               ? "1-to-1"
               : t === "Breaking change (double configuration)"
                 ? "double-configuration"
-                : "default";
+                : t === "New"
+                  ? "new"
+                  : "default";
           return (
             <span
               key={t}
@@ -205,18 +211,31 @@ const SearchableTable = () => {
                     <td>{areaArray.length > 0 ? areaArray.join(", ") : "-"}</td>
                     <td className="config-table-name">
                       <code>{config.name}</code>
+                      {config.notes && config.notes.length > 0 && (
+                        <div className="config-notes">
+                          {config.notes.map((note, noteIndex) => (
+                            <p key={noteIndex} className="config-note">
+                              {note}
+                            </p>
+                          ))}
+                        </div>
+                      )}
                     </td>
                     <td>
                       {legacyArray.length > 1 ? (
                         <ul className="config-legacy-list">
                           {legacyArray.map((l) => (
                             <li key={l}>
-                              <code>{l}</code>
+                              {l === "N/A" ? <em>{l}</em> : <code>{l}</code>}
                             </li>
                           ))}
                         </ul>
                       ) : legacyArray.length === 1 ? (
-                        <code>{legacyArray[0]}</code>
+                        legacyArray[0] === "N/A" ? (
+                          <em>{legacyArray[0]}</em>
+                        ) : (
+                          <code>{legacyArray[0]}</code>
+                        )
                       ) : (
                         <em>-</em>
                       )}
