@@ -69,6 +69,7 @@ const generationConfig = {
   filename: strategy.getFilename(requestedVersion),
   componentName: strategy.componentName,
   useHelm: strategy.useHelm || false,
+  baseDir: strategy.baseDir,
 };
 
 const template = fs.readFileSync(
@@ -257,7 +258,11 @@ const steps = {
     () => runCommand(`prettier --write ${generationConfig.outputDir}`),
     () => runCommand(`prettier --write ${generationConfig.outputDir}`),
   ],
-  download: [() => strategy.downloadReference(generationConfig.version)],
+  download: [
+    () => strategy.downloadReference(generationConfig.version),
+    () => runCommand(`prettier --write ${generationConfig.baseDir}`),
+    () => runCommand(`prettier --write ${generationConfig.baseDir}`),
+  ],
 };
 
 // Run the steps!
