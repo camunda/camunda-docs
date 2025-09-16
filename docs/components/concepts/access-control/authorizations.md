@@ -154,6 +154,10 @@ This includes CRUD operations to the following resources:
 
 These permissions should be strictly limited to trusted system administrators who are responsible for managing user access control.
 
+### No validation of owner and resource IDs
+
+When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time. This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed). However, users need to keep this in mind when setting up new users, groups, roles, etc and verify that the ID of the new entity does not accidentally match an existing authorization.
+
 ## Default roles
 
 Camunda provides predefined roles to simplify access management:
