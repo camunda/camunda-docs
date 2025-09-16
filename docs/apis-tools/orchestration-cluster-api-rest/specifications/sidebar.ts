@@ -502,6 +502,12 @@ const sidebar: SidebarsConfig = {
           label: "Correlate message",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-messages",
+          label: "Search correlated messages",
+          className: "api-method post",
+        },
       ],
     },
     {
