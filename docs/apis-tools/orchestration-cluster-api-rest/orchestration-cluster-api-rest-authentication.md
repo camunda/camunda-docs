@@ -9,28 +9,26 @@ import TabItem from "@theme/TabItem";
 
 This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
 
-# Authentication methods for the Orchestration Cluster REST API
-
 The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration:
 
 - **No Authentication**
 - **Basic Authentication**
-- **OIDC Access Token Authentication**
+- **OIDC-based Authentication**
 
 ## When to use each method
 
 - **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments with C8 Run when authentication is enabled.
-- **OIDC Access Token Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
+- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
+- **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC Access Token |
-| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | -------------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
-| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
-| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
-| SaaS                                                                                   | OIDC Access Token      | ❌                      | ❌                  | ✅ (required)              |
+| Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
+| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
+| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 # Authenticate API calls
 
@@ -65,9 +63,9 @@ Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-## OIDC Access Token Authentication using Client Credentials
+## OIDC-based Authentication using Client Credentials
 
-OIDC Access Token Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+OIDC-based Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },
@@ -127,9 +125,9 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [context
 
 </Tabs>
 
-## OIDC access token authentication using X.509 client certificates
+## OIDC-based Authentication using X.509 client certificates
 
-For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) enforces mutual TLS (mTLS).
+For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) is configured to use the [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523).
 
 **For Java applications**  
 The Java client supports automatic OIDC access token retrieval using X.509 client certificates. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/getting-started.md#oidc-access-token-authentication-with-x509-client-certificate) for complete configuration details.

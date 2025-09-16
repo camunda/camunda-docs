@@ -4,7 +4,16 @@ title: Getting started
 description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project."
 ---
 
-:::info Deprecated Spring Zeebe SDK
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+This project allows you to leverage Camunda Orchestration Cluster APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) in your Spring Boot project.
+
+:::info Public API
+The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
+:::
+
+:::note Deprecated Spring Zeebe SDK
 Starting with 8.8, the Camunda Spring Boot Starter replaces the Spring Zeebe SDK. The Camunda Spring Boot Starter will rely on the new Camunda Java client,
 designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
@@ -15,12 +24,6 @@ designed to enhance the user experience and introduce new features while maintai
 
 For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter).
 :::
-
-:::info Public API
-The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.
-:::
-
-This project allows you to leverage Camunda APIs ([gRPC](/apis-tools/zeebe-api/grpc.md) and [REST](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)) in your Spring Boot project. Later on, we’ll expand the Camunda Spring Boot Starter to deliver an SDK that provides a unified experience for interacting with all Camunda APIs in Java Spring.
 
 ## Version compatibility
 
@@ -102,35 +105,71 @@ camunda:
 
 ### Self-Managed
 
-:::note
-Camunda is configured with URLs (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
-:::
+Choose the authentication method and gRPC and REST address based on your environment:
 
-If you set up a Self-Managed cluster with Identity, Keycloak is used as the default Identity provider. As long as the port config (from Docker Compose or port-forward with Helm charts) is the default, you must configure the accompanying Spring profile and client credentials:
+<Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
+{label: 'No Authentication', value: 'no-auth' },
+{label: 'Basic Authentication', value: 'basic-auth' },
+{label: 'OIDC-based Authentication', value: 'oidc' },
+]}>
+
+<TabItem value="no-auth">
+By default, no authentication will be used.
+
+To explicitly activate this method, you can set:
 
 ```yaml
 camunda:
   client:
     mode: self-managed
     auth:
-      client-id: <your client id>
-      client-secret: <your client secret>
-```
-
-If you have different endpoints for your applications or want to disable a client, configure the following:
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    tenant-id: <default>
-    auth:
-      client-id: <your client id>
-      client-secret: <your client secret>
-      token-url: https://my-keycloak/auth/realms/camunda-platform/protocol/openid-connect/token
+      method: none
     grpc-address: https://my-grpc-address
     rest-address: https://my-rest-address
 ```
+
+</TabItem>
+<TabItem value="basic-auth">
+To activate basic authentication, you can set:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      method: basic
+      username: <your username>
+      password: <your password>
+    grpc-address: https://my-grpc-address
+    rest-address: https://my-rest-address
+```
+
+</TabItem>
+<TabItem value="oidc">
+To activate OIDC-based authentication, you can set:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    auth:
+      method: oidc
+      client-id: <your client id>
+      client-secret: <your client secret>
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: <your audience>
+      scope: <your scope>
+    grpc-address: https://my-grpc-address
+    rest-address: https://my-rest-address
+```
+
+You can follow a detailed guide on how to set up OIDC-based authentication in the [Orchestration Cluster Identity Provider guide](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+</TabItem>
+</Tabs>
+
+:::note
+Camunda is configured with URLs (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
+:::
 
 ## Obtain the Camunda client
 

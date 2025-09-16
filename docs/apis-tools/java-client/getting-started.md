@@ -10,7 +10,9 @@ import TabItem from "@theme/TabItem";
 
 The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you are orchestrating microservices, managing human tasks, or visualizing process data, this client provides everything needed to interact with the Orchestration Cluster programmatically.
 
+:::info Public API
 The Camunda Java Client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). Minor and patch releases will not introduce breaking changes.
+:::
 
 ## What is the Camunda Java Client?
 
@@ -73,9 +75,9 @@ Instantiate a client to connect to your Camunda 8 cluster. Choose the [authentic
 <Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
 {label: 'No Authentication', value: 'no-auth' },
 {label: 'Basic Authentication', value: 'basic-auth' },
-{label: 'OIDC Access Token Authentication - Self-Managed', value: 'oidc-self-managed' },
-{label: 'OIDC Access Token Authentication - SaaS', value: 'oidc-saas' },
-{label: 'OIDC Access Token Authentication with X.509 Client Certificate', value: 'x509' },
+{label: 'OIDC-based Authentication - Self-Managed', value: 'oidc-self-managed' },
+{label: 'OIDC-based Authentication - SaaS', value: 'oidc-saas' },
+{label: 'OIDC-based Authentication with Client Certificate', value: 'x509' },
 ]}>
 
 <TabItem value="no-auth">
@@ -195,7 +197,7 @@ The client will automatically read the environment variables and configure the a
 
 <TabItem value="oidc-self-managed">
 
-**Use for:** Self-Managed production environments with OIDC access token authentication.
+**Use for:** Self-Managed production environments with OIDC-based authentication.
 
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
