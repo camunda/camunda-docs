@@ -83,6 +83,8 @@ To generate your own properties reference from here, you need to define a strate
 - define a `generation-strategy.js`. It should have this structure:
 
 ```js
+const baseDir = "./config-reference/..."; // path to your config reference base directory
+
 function getOutputDir(version) {
   if (version === undefined) {
     return ""; // return the path to your version next output dir
@@ -105,7 +107,9 @@ const postGenerateDocs = async (generationConfig) => {}; // apply some customiza
 
 const downloadReference = async (version) => {}; // ensure that the reference you return in `getMetadata(version)` is in place and up-to-date
 
-const componentName = "Camunda Spring Boot Starter";
+const componentName = ""; // the human readable name of your component
+
+const useHelm = false; // whether the generated documentation would refer to helm values as well. In that case, each property needs a field called "helm"
 
 module.exports = {
   getOutputDir,
@@ -115,6 +119,7 @@ module.exports = {
   postGenerateDocs,
   downloadReference,
   componentName,
+  baseDir,
 };
 ```
 
