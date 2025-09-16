@@ -19,10 +19,10 @@ Encryption at rest ensures that data stored on physical media (for example, disk
 
 Camunda 8 SaaS supports the following options:
 
-- **Provider-managed encryption (default):** Data encrypted with an encryption key supplied by the cloud provider (AWS, GCP).
-- **Camunda-managed software key:** Data encrypted with a Camunda-managed key at the software protection level.
-- **Camunda-managed hardware key:** Data encrypted with a Camunda-managed key at the hardware (HSM) protection level.
-- **External:** Use your own encryption key from a supported cloud KMS provider, such as AWS KMS.
+- **Provider-managed encryption (default):** Data encrypted with an encryption key supplied by the cloud provider (Amazon, Google).
+- **Camunda-managed software key:** Data encrypted with a Camunda-managed key at the software protection level (Google KMS).
+- **Camunda-managed hardware key:** Data encrypted with a Camunda-managed key at the hardware (HSM) protection level (Google KMS).
+- **External:** Use your own encryption key from a supported cloud KMS provider, currently **Amazon KMS** only.
 
 For a full comparison, see [encryption at rest](/components/saas/encryption-at-rest.md).
 
@@ -58,9 +58,9 @@ No. Backups always use the default provider-managed encryption.
 
 ### What are external encryption keys?
 
-External encryption keys allow you to supply an encryption key from a supported Cloud Key Management Service (KMS) provider, such as AWS KMS, to encrypt Camunda 8 SaaS cluster data. Amazon KMS is currently the only supported KMS provider.
+External encryption keys allow you to supply an encryption key from a supported cloud Key Management Service (KMS) provider, currently **Amazon KMS**, to encrypt Camunda 8 SaaS cluster data.
 
-You retain full control over the key lifecycle, including rotation and revocation.
+You retain full control over the key lifecycle, including rotation and revocation. You are responsible for monitoring key usage and access using **Amazon CloudTrail** and **Amazon CloudWatch**.
 
 ### Which plans support external encryption?
 
@@ -68,15 +68,15 @@ External encryption is available for **enterprise plans only**.
 
 ### Can I revoke access to my encryption key?
 
-Yes. If you revoke access to the key in your KMS provider, Camunda will immediately lose the ability to decrypt cluster data.
+Yes. If you revoke access to the key in Amazon KMS, Camunda will immediately lose the ability to decrypt cluster data. Restoring access or configuring a new key is required to regain cluster functionality.
 
 ### Does Camunda store my encryption key?
 
-No. Camunda never stores your encryption key. Access is granted through standard cloud KMS integrations.
+No. Camunda never stores your encryption key. Access is granted through standard Amazon KMS integrations.
 
 ### Where can I find setup instructions?
 
-See [external encryption setup guide](/components/saas/byok/aws-kms-setup.md) for configuration steps.
+See the [External Encryption Setup Guide](/components/saas/byok/aws-kms-setup.md) for configuration steps, including creating and associating Amazon KMS keys with your cluster.
 
 ## Other questions
 
@@ -86,8 +86,12 @@ Encryption at rest has minimal impact on performance because encryption and decr
 
 ### Can I use different encryption keys for each cluster?
 
-Yes. Each cluster can have its own encryption key, whether provider-managed, Camunda-managed, or External.
+Yes. Each cluster can have its own encryption key, whether provider-managed, Camunda-managed, or external.
 
 ### Is encryption in transit also supported?
 
 Yes. All connections to Camunda 8 SaaS use TLS encryption for data in transit.
+
+### Are there cost implications for using external encryption keys?
+
+Yes. Using external encryption keys incurs charges directly in your Amazon account for KMS key storage, API calls, and CloudTrail logging. For more details, see [Cost Implications and Troubleshooting](/components/saas/byok/cost-and-troubleshooting.md).
