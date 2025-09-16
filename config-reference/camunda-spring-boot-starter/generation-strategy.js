@@ -2,6 +2,8 @@ const fs = require("fs");
 const { execSync } = require("child_process");
 const metadataNext = require("./spring-configuration-metadata.json");
 
+const baseDir = "./config-reference/camunda-spring-boot-starter";
+
 function getOutputDir(version) {
   if (version === undefined) {
     return "docs/apis-tools/camunda-spring-boot-starter";
@@ -24,22 +26,22 @@ const postGenerateDocs = async (generationConfig) => {};
 
 const downloadReference = async (version) => {
   if (version === undefined) {
-    execSync("mvn -f ./config-reference/spring-sdk/pom.xml");
+    execSync(`mvn -f ${baseDir}/pom.xml`);
     fs.copyFileSync(
-      "./config-reference/spring-sdk/target/dependency/META-INF/spring-configuration-metadata.json",
-      "./config-reference/spring-sdk/spring-configuration-metadata.json"
+      `${baseDir}/target/dependency/META-INF/spring-configuration-metadata.json`,
+      `${baseDir}/spring-configuration-metadata.json`
     );
-    fs.rmSync("./config-reference/spring-sdk/target", {
+    fs.rmSync(`${baseDir}/target`, {
       recursive: true,
       force: true,
     });
   } else {
-    execSync(`mvn -f ./config-reference/spring-sdk/${version}/pom.xml`);
+    execSync(`mvn -f ${baseDir}/${version}/pom.xml`);
     fs.copyFileSync(
-      `./config-reference/spring-sdk/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
-      `./config-reference/spring-sdk/${version}/spring-configuration-metadata.json`
+      `${baseDir}/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
+      `${baseDir}/${version}/spring-configuration-metadata.json`
     );
-    fs.rmSync(`./config-reference/spring-sdk/${version}/target`, {
+    fs.rmSync(`${baseDir}/${version}/target`, {
       recursive: true,
       force: true,
     });
@@ -56,4 +58,5 @@ module.exports = {
   postGenerateDocs,
   downloadReference,
   componentName,
+  baseDir,
 };
