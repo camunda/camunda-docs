@@ -63,7 +63,7 @@ To migrate existing connectors, consider the following options:
 
 ### Multi-tenancy
 
-There are several differences between how [multi-tenancy](/self-managed/concepts/multi-tenancy.md) works in Camunda 7 and Camunda 8:
+There are several differences between how [multi-tenancy](/components/concepts/multi-tenancy.md) works in Camunda 7 and Camunda 8:
 
 1. The [one engine per tenant approach from Camunda 7](https://docs.camunda.org/manual/develop/user-guide/process-engine/multi-tenancy/#one-process-engine-per-tenant) isn't possible with Camunda 8. Camunda 8 only provides multi-tenancy through a tenant identifier.
 2. In Camunda 7, users can deploy shared resources (processes, decisions, and forms) available to all tenants. In Camunda 8, there are no shared resources. This will be added in the future.

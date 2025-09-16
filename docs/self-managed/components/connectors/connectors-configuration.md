@@ -316,7 +316,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Identity](/self-managed/components/management-identity/managing-tenants.md).
+The connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Identity](/components/identity/tenant.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
@@ -390,9 +390,9 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../installation-methods/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
 
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
 ## Logging
 

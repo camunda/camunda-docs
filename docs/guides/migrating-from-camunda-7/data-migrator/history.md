@@ -60,3 +60,13 @@ The following requirements and limitations apply:
 | `HISTORY_FLOW_NODE`           | Flow node instances  |
 | `HISTORY_DECISION_INSTANCE`   | Decision instances   |
 | `HISTORY_DECISION_DEFINITION` | Decision definitions |
+
+## History cleanup
+
+The history cleanup date is migrated if the C7 instance has a removal time.
+
+## Tenants
+
+- C7's `null` tenant is migrated to C8's `<default>` tenant.
+- All other `tenantId`s will be migrated as-is.
+- For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.

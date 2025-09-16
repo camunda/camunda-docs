@@ -4,7 +4,7 @@ title: "Groups"
 description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
 ---
 
-Use groups and roles to manage and organize user access in Camunda 8.
+Use groups to manage and organize user access in Camunda 8.
 
 ## About groups
 
