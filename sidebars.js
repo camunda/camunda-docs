@@ -550,6 +550,7 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
+            "components/operate/userguide/access",
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -573,6 +574,7 @@ module.exports = {
             id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -591,6 +593,7 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
+            "components/identity/access",
             "components/identity/user",
             "components/identity/group",
             "components/identity/role",

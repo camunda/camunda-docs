@@ -8,7 +8,7 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in the [Orchestration Cluster](/components/orchestration-cluster.md).
+Tasklist provides a user-friendly interface for managing and completing user tasks that require manual interaction. It shows you all user tasks that appear in processes running in the [Orchestration Cluster](/components/orchestration-cluster.md).
 
 The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
 
@@ -67,10 +67,6 @@ The diagram indicates the version of the process instance in which the task was 
 
 This feature is available for diagrams deployed on version 8.6 or higher.
 :::
-
-#### Resource-based access (RBA)
-
-If your organization has RBA enabled, the process diagram will be displayed only to users that have permission to view process and decision definitions.
 
 ## Filtering
 
