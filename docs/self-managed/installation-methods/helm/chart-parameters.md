@@ -11,12 +11,12 @@ In Helm charts, the `values.yaml` file defines configuration for your deployment
 
 The following tables show the **top-level configuration sections** in `values.yaml`. Each section controls a specific area of the chart.
 
-### Global and Orchestration cluster configuration
+### Global and orchestration cluster configuration
 
 | Section         | Purpose                                                 |
 | --------------- | ------------------------------------------------------- |
 | `global`        | Configures shared settings that apply across components |
-| `orchestration` | Configures Orchestration cluster settings               |
+| `orchestration` | Configures orchestration cluster settings               |
 
 ### Other Camunda applications
 
@@ -38,8 +38,8 @@ The following tables show the **top-level configuration sections** in `values.ya
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
 :::info
-Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami charts production deployments.
-For production environments, we advise deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
+Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami chart production deployments.
+For production environments, we recommend deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
 :::
 
 ### Observability
@@ -63,7 +63,7 @@ You can use these files individually or combine them with your own overrides.
 | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `values.yaml`                | The default configuration. Includes all chart parameters with baseline values.                                                                                                                                                          |
 | `values-local.yaml`          | Optimized for local development (for example, kind or Minikube). Adjusts resource requests and limits for smaller environments.                                                                                                         |
-| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda enterprise customers only.                                                                                                                                         |
+| `values-enterprise.yaml`     | Switches Bitnami subcharts to Camunda Enterprise images. For Camunda Enterprise customers only.                                                                                                                                         |
 | `values-bitnami-legacy.yaml` | Uses the archived Bitnami open-source images for subcharts instead of the default ones. Deprecated; see [bitnami/containers#83267](https://github.com/bitnami/containers/issues/83267). Provided only as a temporary transition option. |
 | `values-latest.yaml`         | Tracks the latest versions of applications and subcharts. This may include breaking changes and is intended for early testing.                                                                                                          |
 | `values-digest.yaml`         | Uses the latest snapshot images referenced by digest (for internal development only).                                                                                                                                                   |
@@ -84,5 +84,4 @@ helm install camunda camunda/camunda-platform \
   -f my-overrides.yaml
 ```
 
-If the same parameter is defined in more than one file, the value in the last file listed takes precedence.
-In the example above, settings from `my-overrides.yaml` overrides values from both `values-enterprise.yaml` and `values.yaml`.
+If the same parameter is defined in more than one file, the value in the last file listed takes precedence. In the example above, settings from `my-overrides.yaml` override values from both `values-enterprise.yaml` and `values.yaml`.
