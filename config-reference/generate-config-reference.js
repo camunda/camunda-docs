@@ -1,10 +1,10 @@
 const { execSync } = require("child_process");
-const springSdk = require("./spring-sdk/generation-strategy");
+const camundaSpringBootStarter = require("./camunda-spring-boot-starter/generation-strategy");
 const fs = require("fs");
 const mustache = require("mustache");
 const { config } = require("process");
 const configRefStrategies = {
-  "spring-sdk": springSdk,
+  "camunda-spring-boot-starter": camundaSpringBootStarter,
 };
 
 const typeReplacements = {

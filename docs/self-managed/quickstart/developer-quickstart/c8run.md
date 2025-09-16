@@ -97,7 +97,7 @@ These web interfaces are available at:
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
 - **Orchestration Cluster REST API:** http://localhost:8080/v2/
-- **Inbound Connectors API:** http://localhost:8085/
+- **Inbound Connectors API:** http://localhost:8086/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
 - **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
@@ -130,6 +130,12 @@ To add a custom connector:
 2. Place the element template in the appropriate folder for your installation. See [Search Paths](/components/modeler/desktop-modeler/search-paths/search-paths.md) for more information.
 
 Once configured, your connectors are available for use in Modeler.
+
+### Configure Connector secrets
+
+Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
+
+When starting C8Run with the `--docker` option, add the connector secrests to the `connector-secrets.txt` file in the docker-compose folder.
 
 ### Use Camunda APIs
 

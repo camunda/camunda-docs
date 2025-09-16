@@ -133,6 +133,7 @@ The `validation-job-type` feature solves this by allowing you to use a FEEL expr
 The migrator supports two job type configurations with fallback behavior:
 
 - **`job-type`**: Used for actual job activation.
+
   - This is the primary job type used when activating jobs in Camunda 8.
   - It is required for the migrator to function correctly.
 

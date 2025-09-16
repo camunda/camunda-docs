@@ -194,9 +194,21 @@ For additional details on Identity secrets during installation, visit the [insta
 
 ## Document Store secrets
 
-Document Store secrets are configured using direct `existingSecret` references with multiple key specifications for different credential components.
+Document Store secrets now follow the structured `secret:` pattern introduced in Camunda 8.8+, with separate secret configurations for each credential component.
 
-| **Secret**                         | **Chart values key**                                                                                                                                                                | **Purpose**                                                                                                                                    |
+### Secrets using the new pattern (Camunda 8.8+)
+
+| **Secret**                               | **Chart values key**                                   | **Purpose**                                                      |
+| ---------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| **AWS Document Store Access Key ID**     | `global.documentStore.type.aws.accessKeyId.secret`     | AWS access key ID for S3 document storage authentication         |
+| **AWS Document Store Secret Access Key** | `global.documentStore.type.aws.secretAccessKey.secret` | AWS secret access key for S3 document storage authentication     |
+| **GCP Document Store Service Account**   | `global.documentStore.type.gcp.secret`                 | GCP service account JSON for GCS document storage authentication |
+
+### Secrets using the legacy pattern (deprecated)
+
+The following legacy fields are deprecated in Camunda 8.8+ but remain functional during the transition period:
+
+| **Secret**                         | **Chart values key (deprecated)**                                                                                                                                                   | **Purpose**                                                                                                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **AWS Document Store Credentials** | `global.documentStore.type.aws.existingSecret`, `global.documentStore.type.aws.accessKeyIdKey`, `global.documentStore.type.aws.secretAccessKeyKey`                                  | AWS credentials for S3 document storage (requires multiple keys: access key ID and secret access key)                                          |
 | **GCP Document Store Credentials** | `global.documentStore.type.gcp.existingSecret`, `global.documentStore.type.gcp.credentialsKey`, `global.documentStore.type.gcp.mountPath`, `global.documentStore.type.gcp.fileName` | GCP service account JSON for GCS document storage (single key containing JSON file, with additional mount configuration for file-based access) |
@@ -256,6 +268,39 @@ global:
       console:
         secret:
           inlineSecret: "my-plaintext-secret"
+```
+
+### Scenario 3: Migrating AWS Document Store secrets
+
+This scenario applies when migrating from the legacy single-secret AWS document store configuration to the new separate secrets pattern.
+
+**Legacy configuration:**
+
+```yaml
+global:
+  documentStore:
+    type:
+      aws:
+        existingSecret: "aws-credentials"
+        accessKeyIdKey: "awsAccessKeyId"
+        secretAccessKeyKey: "awsSecretAccessKey"
+```
+
+**New configuration (using separate secrets):**
+
+```yaml
+global:
+  documentStore:
+    type:
+      aws:
+        accessKeyId:
+          secret:
+            existingSecret: "aws-access-key-secret"
+            existingSecretKey: "access-key-id"
+        secretAccessKey:
+          secret:
+            existingSecret: "aws-secret-key-secret"
+            existingSecretKey: "secret-access-key"
 ```
 
 ## TLS certificates

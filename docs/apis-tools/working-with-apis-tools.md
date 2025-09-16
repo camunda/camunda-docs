@@ -18,7 +18,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Use Camunda 8 APIs and clients to build, automate, and monitor your applications. Use the official Camunda clients and SDKs (Java, Spring, and Node.js) to simplify API usage and speed up development.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with the Camunda Java Client" href="../java-client/getting-started/" style={{marginBottom: '30px', marginTop: '20px'}}>Get started with the Camunda Java Client</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

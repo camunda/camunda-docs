@@ -7,7 +7,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import Property from "@site/src/components/Property";
 
-Properties for the Camunda Spring SDK.
+Properties for the Camunda Spring Boot Starter.
 
 ## Properties
 
@@ -1029,7 +1029,7 @@ Deprecated properties for the Camunda client.
   <a href="#camundaclientcloudcluster-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1040,7 +1040,7 @@ Deprecated properties for the Camunda client.
   <a href="#camundaclientcloudregion"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.region" env="CAMUNDA_CLIENT_CLOUD_REGION"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1051,7 +1051,7 @@ Deprecated properties for the Camunda client.
   <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1078,7 +1078,7 @@ Deprecated properties for authenticating the Camunda client.
   <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1105,7 +1105,7 @@ Deprecated properties for connecting the Camunda client to SaaS. These are used 
   <a href="#camundaclientclouddomain"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.domain" env="CAMUNDA_CLIENT_CLOUD_DOMAIN"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1132,9 +1132,7 @@ Deprecated properties for identity settings.
   <a href="#camundaclientauthaudience"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.audience" env="CAMUNDA_CLIENT_AUTH_AUDIENCE"/></a>
 </td>
 <td>
-
 Identity is now part of Camunda.
-
 </td>
 </tr>
 <tr>
@@ -1145,9 +1143,7 @@ Identity is now part of Camunda.
   
 </td>
 <td>
-
 Identity is now part of Camunda.
-
 </td>
 </tr>
 <tr>
@@ -1158,9 +1154,7 @@ Identity is now part of Camunda.
   <a href="#camundaclientenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.enabled" env="CAMUNDA_CLIENT_ENABLED"/></a>
 </td>
 <td>
-
 Identity is now part of Camunda.
-
 </td>
 </tr>
 <tr>
@@ -1171,9 +1165,7 @@ Identity is now part of Camunda.
   <a href="#camundaclientauthscope"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.scope" env="CAMUNDA_CLIENT_AUTH_SCOPE"/></a>
 </td>
 <td>
-
 Identity is now part of Camunda.
-
 </td>
 </tr>
 </tbody>
@@ -1200,7 +1192,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientauthaudience"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.audience" env="CAMUNDA_CLIENT_AUTH_AUDIENCE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1211,7 +1203,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1222,7 +1214,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientca-certificate-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1233,7 +1225,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.enabled" env="CAMUNDA_CLIENT_ENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1244,7 +1236,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientexecution-threads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1255,7 +1247,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1266,7 +1258,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientkeep-alive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1277,7 +1269,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientmax-message-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1288,7 +1280,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientmax-metadata-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-metadata-size" env="CAMUNDA_CLIENT_MAXMETADATASIZE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1299,7 +1291,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientmessage-time-to-live"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1310,7 +1302,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientoverride-authority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1321,7 +1313,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientprefer-rest-over-grpc"><Property defaultValue="property" groupId="property-format" property="camunda.client.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_PREFERRESTOVERGRPC"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1332,7 +1324,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1343,7 +1335,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1354,7 +1346,7 @@ Deprecated properties for Zeebe client settings.
   <a href="#camundaclientauthscope"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.scope" env="CAMUNDA_CLIENT_AUTH_SCOPE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1381,7 +1373,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsauto-complete"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.auto-complete" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_AUTOCOMPLETE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1392,7 +1384,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_ENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1403,7 +1395,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsfetch-variables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.fetch-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FETCHVARIABLES"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1414,7 +1406,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsforce-fetch-all-variables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FORCEFETCHALLVARIABLES"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1425,7 +1417,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsmax-jobs-active"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1436,7 +1428,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsmax-retries"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-retries" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXRETRIES"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1447,7 +1439,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsname"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.name" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_NAME"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1458,7 +1450,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultspoll-interval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1469,7 +1461,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.request-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_REQUESTTIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1480,7 +1472,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsstream-enabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1491,7 +1483,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultsstream-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1502,7 +1494,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1513,7 +1505,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultstimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1524,7 +1516,7 @@ Deprecated default properties for Zeebe job workers.
   <a href="#camundaclientworkerdefaultstype"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.type" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TYPE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1551,7 +1543,7 @@ Deprecated deployment properties for Zeebe.
   <a href="#camundaclientdeploymentenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.deployment.enabled" env="CAMUNDA_CLIENT_DEPLOYMENT_ENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1582,7 +1574,7 @@ Deprecated common client properties.
   <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1593,7 +1585,7 @@ Deprecated common client properties.
   <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1604,7 +1596,7 @@ Deprecated common client properties.
   <a href="#camundaclientauthclient-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1615,7 +1607,7 @@ Deprecated common client properties.
   <a href="#camundaclientauthclient-secret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1626,7 +1618,7 @@ Deprecated common client properties.
   <a href="#camundaclientenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.enabled" env="CAMUNDA_CLIENT_ENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1637,7 +1629,7 @@ Deprecated common client properties.
   <a href="#camundaclientauthpassword"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.password" env="CAMUNDA_CLIENT_AUTH_PASSWORD"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1648,9 +1640,7 @@ Deprecated common client properties.
   <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
-
 The REST address is the unified endpoint for all interaction with Camunda.
-
 </td>
 </tr>
 <tr>
@@ -1661,7 +1651,7 @@ The REST address is the unified endpoint for all interaction with Camunda.
   <a href="#camundaclientauthusername"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.username" env="CAMUNDA_CLIENT_AUTH_USERNAME"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1688,9 +1678,7 @@ Deprecated Keycloak-specific properties.
   
 </td>
 <td>
-
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
-
 </td>
 </tr>
 <tr>
@@ -1701,9 +1689,7 @@ There is no keycloak-specific configuration for Camunda; the issuer is provided 
   <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
-
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
-
 </td>
 </tr>
 <tr>
@@ -1714,9 +1700,7 @@ There is no keycloak-specific configuration for Camunda; the issuer is provided 
   <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
-
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
-
 </td>
 </tr>
 </tbody>
@@ -1743,9 +1727,7 @@ Deprecated Zeebe client properties.
   
 </td>
 <td>
-
 Only the environment variables belonging to the Spring SDK are applied.
-
 </td>
 </tr>
 <tr>
@@ -1756,9 +1738,7 @@ Only the environment variables belonging to the Spring SDK are applied.
   <a href="#camundaclientmode"><Property defaultValue="property" groupId="property-format" property="camunda.client.mode" env="CAMUNDA_CLIENT_MODE"/></a>
 </td>
 <td>
-
 Client modes are now available.
-
 </td>
 </tr>
 <tr>
@@ -1769,7 +1749,7 @@ Client modes are now available.
   <a href="#camundaclientworkerdefaultsstream-enabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1780,7 +1760,7 @@ Client modes are now available.
   <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1791,7 +1771,7 @@ Client modes are now available.
   <a href="#camundaclienttenant-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-id" env="CAMUNDA_CLIENT_TENANTID"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1802,7 +1782,7 @@ Client modes are now available.
   <a href="#camundaclientenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.enabled" env="CAMUNDA_CLIENT_ENABLED"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1813,7 +1793,7 @@ Client modes are now available.
   <a href="#camundaclientrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1840,7 +1820,7 @@ Deprecated Zeebe broker properties.
   <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1851,7 +1831,7 @@ Deprecated Zeebe broker properties.
   <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1862,7 +1842,7 @@ Deprecated Zeebe broker properties.
   <a href="#camundaclientkeep-alive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1873,7 +1853,7 @@ Deprecated Zeebe broker properties.
   <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -1900,7 +1880,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1911,7 +1891,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientclouddomain"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.domain" env="CAMUNDA_CLIENT_CLOUD_DOMAIN"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1922,7 +1902,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientauthclient-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1933,7 +1913,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientauthclient-secret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1944,7 +1924,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientcloudcluster-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1955,7 +1935,7 @@ Deprecated Zeebe cloud connection properties.
   <a href="#camundaclientauthcredentials-cache-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.credentials-cache-path" env="CAMUNDA_CLIENT_AUTH_CREDENTIALSCACHEPATH"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1966,9 +1946,7 @@ Deprecated Zeebe cloud connection properties.
   
 </td>
 <td>
-
 The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
-
 </td>
 </tr>
 <tr>
@@ -1979,7 +1957,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <a href="#camundaclientcloudregion"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.region" env="CAMUNDA_CLIENT_CLOUD_REGION"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -1990,7 +1968,7 @@ The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
   <a href="#camundaclientauthscope"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.scope" env="CAMUNDA_CLIENT_AUTH_SCOPE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -2017,7 +1995,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientworkerdefaultspoll-interval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2028,7 +2006,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientworkerdefaultstimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TIMEOUT"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -2055,7 +2033,7 @@ Deprecated Zeebe message properties.
   <a href="#camundaclientmax-message-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2066,7 +2044,7 @@ Deprecated Zeebe message properties.
   <a href="#camundaclientmessage-time-to-live"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
@@ -2093,7 +2071,7 @@ Deprecated Zeebe security properties.
   <a href="#camundaclientca-certificate-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2104,7 +2082,7 @@ Deprecated Zeebe security properties.
   <a href="#camundaclientoverride-authority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2115,9 +2093,7 @@ Deprecated Zeebe security properties.
   
 </td>
 <td>
-
 plaintext is now determined by the URL protocol (HTTP or HTTPS).
-
 </td>
 </tr>
 </tbody>
@@ -2144,7 +2120,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientworkerdefaultsname"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.name" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_NAME"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2155,7 +2131,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientworkerdefaultstype"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.type" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TYPE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2166,7 +2142,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientworkerdefaultsmax-jobs-active"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 <tr>
@@ -2177,7 +2153,7 @@ Deprecated Zeebe job worker properties.
   <a href="#camundaclientexecution-threads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
 </td>
 <td>
-
+N/A
 </td>
 </tr>
 </tbody>
