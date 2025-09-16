@@ -1,3 +1,5 @@
+const baseDir = "./config-reference/orchestration-cluster";
+
 const helmValuesMap = {
   "camunda.security.authentication.method":
     "orchestration.security.authentication.method",
@@ -41,4 +43,5 @@ module.exports = {
   downloadReference,
   componentName,
   useHelm,
+  baseDir,
 };
