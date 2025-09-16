@@ -294,7 +294,7 @@ Development and testing scenarios that are performance-sensitive may
 or use
 [OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
 
-## Finding containers available image versions
+## Find available container image versions
 
 When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
 
