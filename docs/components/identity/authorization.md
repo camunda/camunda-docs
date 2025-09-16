@@ -12,7 +12,7 @@ An authorization grants an **owner** access to a **resource** and defines the sp
 Each authorization specifies which permissions (e.g., `READ`, `UPDATE`, `DELETE`) the owner has on the resource.
 
 :::tip
-To learn more, see the [authorization concepts](/components/concepts/access-control/authorizations.md).
+To learn more, see the [authorization concepts](/components/concepts/access-control/authorizations.md). For authorizations to take effect, they need to be [enabled in your cluster configuration](/components/concepts/access-control/authorizations.md#configuration).
 :::
 
 ## Create an authorization
