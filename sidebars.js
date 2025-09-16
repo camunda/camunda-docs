@@ -94,6 +94,7 @@ module.exports = {
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/mapping-rules",
+            "components/concepts/multi-tenancy",
           ],
         },
         "components/concepts/job-workers",
@@ -595,6 +596,7 @@ module.exports = {
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/tenant",
             {
               "Mapping rules": [
                 "components/identity/mapping-rules/manage-mapping-rules",
@@ -1455,7 +1457,11 @@ module.exports = {
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
-        "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/elasticsearch-without-cluster-privileges",
+        "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
         {
           Privileges: [
             "self-managed/concepts/elasticsearch-privileges",
@@ -1466,36 +1472,10 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
       Components: [
-        {
-          type: "category",
-          label: "Components upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
         {
           type: "category",
           label: "Orchestration Cluster",
@@ -1629,7 +1609,6 @@ module.exports = {
               items: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
-                "self-managed/components/orchestration-cluster/identity/manage-tenants",
               ],
             },
           ],
@@ -1735,8 +1714,8 @@ module.exports = {
                     "self-managed/components/management-identity/access-management/manage-permissions",
                   ],
                 },
-                "self-managed/components/management-identity/managing-tenants",
                 "self-managed/components/management-identity/mapping-rules",
+                "self-managed/components/management-identity/manage-tenants",
               ],
             },
             {
@@ -1785,6 +1764,31 @@ module.exports = {
                 "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
                 "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
                 "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Components upgrade",
+          link: {
+            type: "doc",
+            id: "self-managed/components/components-upgrade/introduction",
+          },
+          items: [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
               ],
             },
           ],
