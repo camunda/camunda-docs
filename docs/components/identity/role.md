@@ -6,6 +6,10 @@ description: "Learn how to manage roles in an orchestration cluster."
 
 A role is a collection of [authorizations](authorization.md) that defines a set of permissions. Roles are used to grant users the system and data access they need to fulfill a certain responsibility. A role can be assigned to [users](user.md) directly or through a [group](group.md) they are a member of.
 
+:::info
+The Orchestration Cluster creates [a set of default roles](../concepts/access-control/authorizations.md#default-roles) on startup.
+:::
+
 ## Create a role
 
 To create a role:
@@ -13,26 +17,13 @@ To create a role:
 1. Log in to Identity in your cluster, and click on the **Roles** tab.
 2. Click on the **Create role** button, and provide the following role details:
    - **Role ID**: The unique identifier for the role.
-   - **Name**: The name of the role.
-   - **Description**: A description of the role.
+   - **Role name**: The name of the role.
+   - **Description**: An optional description of the role.
 3. Click on the **Create role** button.
 
 The role is created and can now be assigned to users or groups.
 
 ![identity-create-role-tab](./img/create-role-tab.png)
-
-## Update a role
-
-To update a role:
-
-1. Log in to Identity in your cluster, and click on the **Roles** tab.
-2. Click on the **pencil icon** next to the role you want to update.
-3. Update the role details:
-   - **Name**: The name of the role.
-   - **Description**: A description of the role.
-4. Click on the **Save** button.
-
-The role details are updated.
 
 ## Delete a role
 
@@ -77,6 +68,32 @@ To remove users from a role:
 5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.
 
 The user is removed from the role and loses any permissions that were granted through it.
+
+## Manage groups
+
+### Assign groups to a role
+
+To assign groups to a role:
+
+1. Log in to Identity in your cluster, and click on the **Roles** tab.
+2. Click on the role you want to assign users to.
+3. Click on the **Groups** tab.
+4. Click on the **Assign group** button.
+5. Type the id of the group you want to assign to the role, and click on the **Assign group** button.
+
+The group is assigned to the role and inherits its permissions.
+
+### Remove groups from a role
+
+To remove groups from a role:
+
+1. Log in to Identity in your cluster, and click on the **Roles** tab.
+2. Click on the role you want to remove groups from.
+3. Click on the **Groups** tab.
+4. Click on the **Remove** button next to the group you want to remove from the role.
+5. Confirm the removal by clicking on the **Remove** button in the confirmation dialog.
+
+The group is removed from the role and loses any permissions that were granted through it.
 
 ## Manage clients
 
