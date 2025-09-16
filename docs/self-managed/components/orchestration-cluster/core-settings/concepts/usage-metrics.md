@@ -5,36 +5,38 @@ description: "The orchestration cluster exposes usage metrics under the Actuator
 ---
 
 :::warning Deprecated endpoints
-With the 8.8 release, Camunda announces [deprecated usage metrics actuator endpoints](#deprecated-usage-metrics-actuator-endpoints). Scheduled for removal in the 8.10 release. Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended).
+As of the 8.8 release, the actuator usage metrics endpoints are **deprecated** and will be removed in the 8.10 release.  
+Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
 :::
 
-## Usage Metrics Endpoint (Recommended)
+## Usage metrics endpoint (recommended)
 
-### What It Does
+### Overview
 
-Fetches usage metrics for a specific date range, including:
+The usage metrics endpoint retrieves metrics for a specific date range, including:
 
 - **Process instances:** Total created
 - **Decision instances:** Total executed
-- **User Tasks assigned:** Total unique assignees
+- **User tasks assigned:** Total unique assignees
 - **Active tenants:** Total active tenants
 - **Tenants:** List of active tenants with per-tenant metrics
 
-> **Export Interval:**
-> Usage metrics are exported every 5 minutes by default. This may cause a short delay in reported metrics.
+> **Export interval**  
+> Usage metrics are exported every 5 minutes by default. This may cause a short delay in reported metrics.  
+> You can adjust this interval in `application.properties` or via environment variables:
 >
 > ```properties
 > zeebe.broker.experimental.engine.usageMetrics.exportInterval=5m
 > ```
 
-### API
+### API details
 
-| Parameter     | Required | Description                  | Format/Default                |
-| ------------- | -------- | ---------------------------- | ----------------------------- |
-| `startTime`   | Yes      | Start of date range          | `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` |
-| `endTime`     | Yes      | End of date range            | `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` |
-| `tenantId`    | No       | Filter by tenant             | String                        |
-| `withTenants` | No       | Include per-tenant breakdown | `false` (default)             |
+| Parameter     | Required | Description                  | Format / Default                         |
+| ------------- | -------- | ---------------------------- | ---------------------------------------- |
+| `startTime`   | Yes      | Start of date range          | ISO 8601: `2025-09-16T12:30:45.123+0000` |
+| `endTime`     | Yes      | End of date range            | ISO 8601: `2025-09-16T12:30:45.123+0000` |
+| `tenantId`    | No       | Filter by tenant             | String                                   |
+| `withTenants` | No       | Include per-tenant breakdown | `false` (default)                        |
 
 **Endpoint:**
 
@@ -93,17 +95,16 @@ _Response:_
 }
 ```
 
-## Using effectively
+## Best practices for monitoring
 
 - Monitor overall cluster activity by combining process, decision, and task metrics.
-- Track trends over time to understand resource usage and user engagement.
-- Integrate metrics into dashboards or automation scripts for centralized monitoring.
+- Track trends over time to better understand resource usage and user engagement.
+- Integrate metrics into dashboards or automation scripts for centralized monitoring and alerting.
 
----
+## Deprecated usage metrics actuator endpoints
 
-## Deprecated Usage Metrics Actuator Endpoints
-
-> **Deprecated:** The following endpoints are deprecated as of 8.8 and will be removed in 8.10. Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended).
+As of 8.8, the following actuator endpoints are **deprecated** and will be removed in the 8.10 release.  
+Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
 
 | Endpoint                                     | Description                | Status     |
 | -------------------------------------------- | -------------------------- | ---------- |
