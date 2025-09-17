@@ -54,6 +54,13 @@
       "sourceMethod": "getDefaults()"
     },
     {
+      "name": "camunda.client.worker.override",
+      "type": "java.util.Map",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
+      "sourceMethod": "getOverride()"
+    },
+    {
       "name": "camunda.client.zeebe",
       "type": "io.camunda.spring.client.properties.common.ZeebeClientProperties",
       "description": "Properties for Zeebe client settings."
@@ -479,12 +486,6 @@
       "type": "java.lang.String",
       "description": "The type of jobs to work on.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
-    },
-    {
-      "name": "camunda.client.worker.override",
-      "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {
       "name": "camunda.client.auth.issuer",
