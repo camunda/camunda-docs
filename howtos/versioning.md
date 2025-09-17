@@ -25,7 +25,9 @@ When a version is archived, it is removed from the main docs, isolated on a bran
 
 ### Archival steps
 
-See [this 8.3 archival issue](https://github.com/camunda/camunda-docs/issues/5564) and [this 8.4 archival issue](https://github.com/camunda/camunda-docs/issues/6628) for an example of all required steps.
+Examples: See [this 8.3 archival issue](https://github.com/camunda/camunda-docs/issues/5564) and [this 8.4 archival issue](https://github.com/camunda/camunda-docs/issues/6628) for an example of all required steps.
+
+Video: You can also view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival)
 
 #### Step 1: Make sure the new archive version is not published in main
 
@@ -44,9 +46,9 @@ For example, for the 8.5 docs archival, you would create a new branch named `uns
 1. On the `unsupported/x.xx` branch:
    1. Confirm the version number to be archived at the top of the `./hacks/isolateVersion/allSteps.sh` script.
    2. Run the `./hacks/isolateVersion/allSteps.sh` script. This automates a handful of basic steps; see the script for more details.
-      - For the sake of review-ability, consider breaking these changes into multiple PRs. See [this very large PR](https://github.com/camunda/camunda-docs/pull/5586) and [this much smaller PR](https://github.com/camunda/camunda-docs/pull/5587) as examples.
-   3. Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step.
-   4. Merge these PRs.
+      - This creates a large set of commits, with a subset of large deletion commits, and smaller commits. You can review this using the GitHub Commits interface (see video). See [this very large PR](https://github.com/camunda/camunda-docs/pull/5586) and [this much smaller PR](https://github.com/camunda/camunda-docs/pull/5587) as examples of the types of commits involved.
+   3. Make the manual changes described by the output of the `allSteps.sh` script in a new PR. See [this PR](https://github.com/camunda/camunda-docs/pull/6586) as an example. You may need to remove generated API reference docs, and tidy up any broken links in this step, to get the build green and successful.
+   4. Merge all these PRs.
    5. After they're all merged, confirm that these changes publish to the associated staging location: `https://stage.unsupported.docs.camunda.io/x.xx/`.
    6. Publish the production release for the archived version, by adding a tag to the HEAD of the `unsupported/x.xx` branch.
       1. Create a new tag after the last one for that version. Name the tag `x.xx.0` where `x.xx` is the version number. For example, for the 8.4 archival, as `8.4.30` was the last tag used, we created a new `8.4.31` to use for the archival.
@@ -67,7 +69,7 @@ Congratulations! You should now have removed the archived version from the docs,
 
 ### Archived for posterity: 8.3 archival steps
 
-Note that there was a difference in the process between 8.3 and 8.4 archival, so these 8.3 steps simply remain for posterity.
+Note that there was a difference in the process between 8.3 and 8.4 archival, so these 8.3 steps remain here for reference/posterity.
 
 1. Create a new branch named `unsupported/x.xx` where `x.xx` is the version to be archived. The branch should be created from the latest commit on the `main` branch.
 2. On the `main` branch:
