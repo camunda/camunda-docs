@@ -1,6 +1,6 @@
 ---
 id: zeebe-overview
-title: "Zeebe"
+title: "Introduction to Zeebe"
 sidebar_label: "Introduction"
 description: "Zeebe is the workflow engine powering Camunda 8. While written in Java, you do not need to be a Java developer to use Zeebe."
 ---
