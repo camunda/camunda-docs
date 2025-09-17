@@ -5,16 +5,36 @@ title: Helm charts components configuration
 description: "Learn how to configure individual components in Helm charts."
 ---
 
-We moved to using `application.yaml` as the default configuration mechanism, and exposed some options for easier override.
+:::note
 
-Before, we set many environment variables as uppercase variants of the Spring option names. This can be confusing as most of our documentation is written with the Spring `application.properties`
-or `application.yaml` names in mind. We would also run into problems where components released a feature, but the Helm chart would not expose the option under a key.
+- Starting with Helm chart version 8.5, `application.yaml` is the default configuration mechanism.
+- Earlier versions required environment variables for configuration.
+  :::
 
-## Process with environment variables (before 8.5)
+This page explains how to configure Camunda components in Helm charts. It describes the shift from environment variables to `application.yaml`, and shows how to apply configuration options and custom files.
 
-Previously, if you wanted to customize the application configurations you would need to know how [Spring would read properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html).
+## Prerequisites
 
-Take the following configuration option, for example:
+- A deployed Camunda Helm chart release.
+- Access to the `values.yaml` file.
+- Basic understanding of Spring Boot configuration (`application.yaml` or `application.properties`).
+
+## Configuration
+
+### Parameters
+
+| Key                                  | Type   | Description                                                                                                             |
+| ------------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `<componentName>.configuration`      | string | Full application configuration content (for example, the contents of `application.yaml`).                               |
+| `<componentName>.extraConfiguration` | map    | Additional configuration files. Keys are filenames, values are file contents. Mounted into the container at `./config`. |
+
+### Environment variables (before 8.5)
+
+Before version 8.5, configuration relied on environment variables. Many variables were uppercase versions of Spring option names. This caused confusing because most of the documentation used the Spring `application.properties` or `application.yaml` formats.
+
+It also caused issues when components added new features that the Helm chart didn’t expose as keys. To customize configurations, you had to understand how [Spring reads properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html).
+
+For example, the following configuration:
 
 ```yaml
 camunda.operate:
@@ -22,13 +42,13 @@ camunda.operate:
     numberOfShards: 3
 ```
 
-This would be rewritten using uppercase letters with underscores separating them:
+was rewritten using uppercase letters with underscores:
 
 ```bash
 CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS=3
 ```
 
-This would then be supplied in the Helm chart `values.yaml`:
+and supplied in the Helm chart `values.yaml`:
 
 ```yaml
 operate:
@@ -37,22 +57,24 @@ operate:
       value: "3"
 ```
 
-This method is still applicable for newer versions of the Helm chart, and if an environment variable is supplied in addition to the underlying `application.yaml` configuration, the environment variable will take precedence.
+This method still works in newer versions of the Helm chart. If both an environment variable and an `application.yaml` setting are defined, the environment variable takes precedence.
 
-:::note
-Because the underlying application could be from a variety of frameworks, the configuration file may be a YAML, a TOML, or many other different file types. Therefore, this option must be supplied as a string. In Helm, using the pipe denotes a [multiline string](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
+::: note
+Because components may use different frameworks, configuration files can be YAML, TOML, or other formats. In Helm, provide these values as strings. Use the pipe (`|`) symbol to define [multiline strings](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
 :::
 
-## Exposed options (after 8.5)
+### Configuration options (after 8.5)
 
-This change exposes two new Helm `values.yaml` options:
+Two Helm values are available for component configuration:
 
 - `<componentName>.configuration`
 - `<componentName>.extraConfiguration`
 
-### componentName.configuration
+#### componentName.configuration
 
-The `configuration` option is equivalent to an application configuration file. For example, `application.yaml`:
+Use `<componentName>.configuration` to define an application configuration file directly in `values.yaml`.
+
+For example, `application.yaml`:
 
 ```yaml
 operate:
@@ -85,11 +107,10 @@ operate:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
-### componentName.extraConfiguration
+#### componentName.extraConfiguration
 
-The `extraConfiguration` option is used to supply extra configuration files.
-
-To use it, specify a key of the filename you want the option to have, where the value is the contents of that file. The most common use case for this would be supplying a `log4j2.xml` file. When the Helm chart reads this option, it mounts it on the current directory's `./config` folder:
+Use `<componentName>.extraConfiguration` to provide additional configuration files.
+Each key is the filename, and each value is the file content. A common use case is providing a custom `log4j2.xml` file. When the Helm chart processes this option, it mounts the file under the `./config` directory:
 
 ```xml
 operate:
@@ -120,9 +141,9 @@ operate:
       </Configuration>
 ```
 
-## Default properties set by the helm chart
+### Default properties
 
-The `helm template` command generates the application's default configuration, allowing you to only update the values required by your setup. Use the following command to generate the default configuration, substituting in the name of your release:
+The `helm template` command generates the application's default configuration. You only need to update the values required for your setup. To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -131,7 +152,7 @@ helm template <your-release-name> \
     --show-only templates/operate/configmap.yaml
 ```
 
-The `--show-only` flag prints out the `configmap` to the console:
+The `--show-only` flag prints the `configmap`. Copy the `application.yml` content and place it under the appropriate `<component>.configuration` key in `values.yaml`.
 
 ```yaml
 # Source: camunda-platform/templates/operate/configmap.yaml
@@ -205,61 +226,13 @@ data:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
-Then, take the contents under `application.yml` and put it under the `operate.configuration` section in `values.yaml`.
+## Practical example: migrating from environment variables to a configuration file
 
-## Where to search for configuration options
+This example shows how to convert a Zeebe backup configuration from environment variables to the `application.yaml` file format.
 
-- [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md)
-- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
-- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
-- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
-- [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md)
-- [Console](/self-managed/components/console/configuration/configuration.md)
-- [Connectors](/self-managed/components/connectors/connectors-configuration.md)
-- [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
-- [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)
+### Step 1: Review the existing environment variable configuration
 
-## Limitations
-
-Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
-
-## Conflicting options
-
-Suppose we have a `values.yaml` with the following:
-
-```yaml
-zeebe:
-  env:
-    - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
-      value: "zeebetest1"
-
-  configuration: |
-    zeebe:
-      broker:
-        data:
-          backup:
-            s3:
-              bucketName: "zeebeOtherBucketName"
-      ...
-```
-
-Notice how both the environment variable and the configuration file are configuring the same option with conflicting settings. The environment variable has the bucket name set as `zeebetest1` and the `configuration` option has the bucket name as `zeebeOtherBucketName`. Which option will override the other?
-
-In this case, the environment variable will take priority, because in the [Spring Documentation: Externalized Configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) which lists the precedence ranking:
-
-`10. OS environment variables`
-
-is higher in the list than
-
-`12. Profile-specific application properties outside of your packaged jar (application-{profile}.properties and YAML variants)`
-
-Therefore, the environment variable value `zeebetest1` will be used as the bucket name.
-
-## Practical example:
-
-### How to change from specifying environment variables to a custom file
-
-Let's suppose you wanted to configure Zeebe for backups. Previously, we added environment variables to provide this behavior:
+To configure Zeebe backups, earlier charts required environment variables:
 
 ```yaml
 zeebe:
@@ -286,9 +259,9 @@ zeebe:
       value: zeebebackup
 ```
 
-This configuration will still work. However, if you want to switch to the configuration file format, you first need to get the existing configuration file that the Helm chart generates.
+### Step 2: Generate the default configuration file
 
-The following will render the configuration file and fill in the Helm values:
+Run the following command to render the default configuration file and fill in Helm values:
 
 ```bash
 helm template \
@@ -297,7 +270,7 @@ helm template \
     --show-only templates/zeebe/configmap.yaml
 ```
 
-Your `application.yml` section should evaluate similar to the following:
+The output includes an `application.yml` section similar to:
 
 ```yaml
 zeebe:
@@ -335,12 +308,13 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Next, for each environment variable, we need to find the configuration option in the [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md) section of our documentation.
+### Step 3: Map environment variables to configuration properties
 
-For `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`, we will search this page for anything relating to S3 or bucket name. In this case, the option is in [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3)
-with the name `zeebe.broker.data.backup.s3.bucketName`.
+For each environment variable, find the corresponding property in the [Zeebe configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md).
 
-In our `config` file, add the `data` section under `zeebe.broker`:
+For example, the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME` maps to the property `zeebe.broker.data.backup.s3.bucketName`, documented under [Zeebe S3 Backup](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackups3).
+
+Add the property to the configuration file. Add the `data` section under `zeebe.broker`:
 
 ```yaml
 zeebe:
@@ -382,7 +356,9 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Follow the same process for each of the environment variables. The resulting configuration is:
+### Step 4: Repeat for all environment variables
+
+Follow the same process for each environment variable. The resulting configuration looks like this:
 
 ```yaml
 zeebe:
@@ -432,7 +408,9 @@ zeebe:
       ioThreadCount: "3"
 ```
 
-Take that snippet and put it under `zeebe.configuration` in `values.yaml`:
+### Step 5: Add the configuration to `values.yaml`
+
+Finally, place the updated configuration under `zeebe.configuration` in `values.yaml`:
 
 ```yaml
 zeebe:
@@ -483,3 +461,51 @@ zeebe:
           cpuThreadCount: "3"
           ioThreadCount: "3"
 ```
+
+## Troubleshooting
+
+### Conflicting options
+
+If both an environment variable and a configuration file define the same option, the environment variable takes precedence.
+
+Example:
+
+```yaml
+zeebe:
+  env:
+    - name: ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME
+      value: "zeebetest1"
+
+  configuration: |
+    zeebe:
+      broker:
+        data:
+          backup:
+            s3:
+              bucketName: "zeebeOtherBucketName"
+      ...
+```
+
+Here, the bucket name is set twice. The environment variable `zeebetest1` overrides the configuration file `zeebeOtherBucketName`. See [Spring externalized configuration](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html) for precedence details.
+
+### Limitations
+
+Customizing the `configuration` option will replace the entire contents of the configuration file. During upgrades, if the `configuration` option remains and if there are any application-level breaking changes to the configuration file format, this may cause the application component to crash.
+
+- The `configuration` option replaces the entire configuration file. During upgrades, if the file format changes, the component may fail to start until the configuration is updated.
+- Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
+- Mixing env and configuration for the same property without realizing precedence can lead to unexpected results.
+
+## References
+
+For more details on where to find configuration options for specific components, see the following pages:
+
+- [Zeebe Broker](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
+- [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
+- [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
+- [Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md)
+- [Console](/self-managed/components/console/configuration/configuration.md)
+- [Connectors](/self-managed/components/connectors/connectors-configuration.md)
+- [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
+- [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)
