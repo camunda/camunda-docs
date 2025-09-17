@@ -5,7 +5,9 @@ sidebar_label: "Mapping rules"
 description: "Map your auth data to Camunda-specific data using mapping rules."
 ---
 
-Use mapping rules to dynamically assign Identity entities to your users based on claims in your JWT tokens.
+Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens.
+
+Mapping rules are only available when Management Identity is configured with the [OIDC-based authentication](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
 
 ## About mapping rules
 
@@ -16,8 +18,7 @@ You can assign two types of entities with mapping rules:
 
 :::note
 
-- Mapping rules are only available for Camunda 8 Self-Managed using [OIDC-based authentication](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
-- A `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to allow an initial user access to the Identity interface. Once you have access to the Identity interface, configure the additional mapping rules to ensure your users have the correct access to the Camunda components.
+A `Default` mapping rule is created during startup using the [IDENTITY_INITIAL_CLAIM_NAME and IDENTITY_INITIAL_CLAIM_VALUE environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to allow an initial user access to the Identity interface. Once you have access to the Identity interface, configure the additional mapping rules to ensure your users have the correct access to the Camunda components.
 
 :::
 
@@ -39,6 +40,7 @@ You can assign two types of entities with mapping rules:
    :::note
 
    The operator option is used to define how we evaluate the rules against your tokens. The options are:
+
    - **Contains**: Used for array-based claims, such as a list of roles.
    - **Equals**: Used for string-based claims, such as a string ID.
 
