@@ -5,7 +5,7 @@ title: Configure Helm chart components
 description: "Learn how to configure individual Camunda components in Helm charts."
 ---
 
-This page explains how to configure Camunda components in Helm charts. It describes the shift from environment variables to `application.yaml`, and shows how to apply configuration options and custom files.
+This page explains how to configure Camunda components in Helm charts. You can define options in `values.yaml` and provide custom files for additional configuration.
 
 ## Prerequisites
 
@@ -102,7 +102,7 @@ operate:
 
 ### Default properties
 
-The `helm template` command generates the application's default configuration. It’s best practice to keep the original values.yaml unchanged and [maintain a separate file with your custom settings](self-managed/installation-methods/helm/chart-parameters/#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+The `helm template` command generates the application's default configuration. Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/installation-methods/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -453,7 +453,7 @@ Customizing the `configuration` option will replace the entire contents of the c
 
 - The `configuration` option replaces the entire configuration file. During upgrades, if the file format changes, the component may fail to start until the configuration is updated.
 - Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
-- Mixing env and configuration for the same property without realizing precedence can lead to unexpected results.
+- Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
 
 ## References
 
