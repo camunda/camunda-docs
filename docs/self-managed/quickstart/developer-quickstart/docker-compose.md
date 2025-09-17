@@ -50,24 +50,32 @@ docker compose -f docker-compose-core.yaml up -d
 
 ### Access components
 
-Running components can be accessed with the username `demo` and password `demo`:
+You can log in to all web interfaces using with the default credentials:
+
+- **Username:** `demo`
+- **Password:** `demo`
+
+#### Orchestration Cluster
 
 - Operate: [http://localhost:8088/operate](http://localhost:8088/operate)
 - Tasklist: [http://localhost:8088/tasklist](http://localhost:8088/tasklist)
-- Optimize: [http://localhost:8083](http://localhost:8083)
+- Identity: [http://localhost:8088/identity](http://localhost:8088/identity)
+- Orchestration Cluster REST API: `http://localhost:8088/v2`
+- Zeebe API (gRPC): `localhost:26500`
+
+#### Management and Modeling components
+
 - Console: [http://localhost:8087](http://localhost:8087)
-- Identity: [http://localhost:8084](http://localhost:8084)
+- Optimize: [http://localhost:8083](http://localhost:8083)
+- Management Identity: [http://localhost:8084](http://localhost:8084)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
+
+#### External Dependencies
+
 - Elasticsearch: [http://localhost:9200](http://localhost:9200)
-
-Keycloak is used to manage users and can be accessed with the username `admin` and password `admin`:
-
+  Elasticsearch is used by Orchestration Cluster (as secondary storage) and Optimize.
 - Keycloak: [http://localhost:18080/auth/](http://localhost:18080/auth/)
-
-The Orchestration Cluster is available using gRPC:
-
-- Cluster endpoint: `localhost:26500`
-- v2 REST API: `http://localhost:8088/v2`
+  Keycloak is used to manage users and can be accessed with the username `admin` and password `admin`.
 
 ### Stop Camunda 8
 
