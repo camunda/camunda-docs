@@ -5,7 +5,7 @@ title: Run custom connectors in Helm charts
 description: "Deploy and run custom connectors in a Camunda Helm Kubernetes cluster."
 ---
 
-You can deploy a custom Connector in your Helm Kubernetes cluster along with the Connectors bundle.
+You can deploy a custom connector in your Helm Kubernetes cluster along with the connectors bundle.
 
 The default runtime loads connectors from the classpath using the Java Service Provider Interface (SPI). For the custom connectors, there is a dedicated folder
 in the Connectors Docker image `/opt/custom`. Any JAR placed in this folder is included in the runtime classpath.
@@ -15,7 +15,7 @@ This page explains how to place your custom connector JAR in `/opt/custom`.
 ## Prerequisites
 
 - A custom connector built as a **fat JAR** (JAR with dependencies).  
-  For more details on creating and building custom connectors, see [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
+  For details on creating and building custom connectors, see [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
   Example JAR name used in this guide:  
   `custom-connector-0.0.1-with-dependencies.jar`
@@ -26,7 +26,7 @@ This page explains how to place your custom connector JAR in `/opt/custom`.
 
 ## Configure the Helm chart
 
-Update the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters) to download the JAR into `/opt/custom` before the Connectors runtime starts:
+Update the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters) to download the JAR into `/opt/custom` before the connectors runtime starts:
 
 ```yaml
 connectors:
