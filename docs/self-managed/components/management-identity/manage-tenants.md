@@ -5,9 +5,13 @@ sidebar_label: "Tenants for Optimize"
 description: "Manage tenants within Management Identity to support data isolation in Optimize."
 ---
 
-Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants — such as departments, teams, or external clients — while maintaining per-tenant isolation of data and processes in a shared environment. To learn more, refer to the [multi-tenancy concepts](/components/concepts/multi-tenancy.md).
+Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants, such as departments, teams, or external clients, while maintaining per-tenant isolation of data and processes in a shared environment.
 
-Tenants managed within Management Identity apply **only to Optimize**, allowing you to isolate data access for reports and dashboards.
+:::tip
+To learn more, refer to the [multi-tenancy concepts](/components/concepts/multi-tenancy.md).
+:::
+
+Tenants managed within Management Identity **apply only to [Optimize](../optimize/overview.md)**, allowing you to isolate data access for reports and dashboards.
 
 If you are using multi-tenancy for an Orchestration Cluster, you can also enable and configure tenants in Management Identity to ensure data isolation in Optimize. For information on managing tenants for the Orchestration Cluster, see the [Orchestration Cluster tenants documentation](/components/identity/tenant.md).
 

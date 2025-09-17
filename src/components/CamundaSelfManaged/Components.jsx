@@ -62,7 +62,7 @@ const Components = () => {
       icon: IdentityIcon,
       description:
         "Manage Camunda users, groups, roles, permissions, and applications.",
-      link: "/self-managed/components/management-identity/what-is-identity",
+      link: "/self-managed/components/management-identity/overview",
     },
   ];
 

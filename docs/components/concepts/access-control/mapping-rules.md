@@ -17,7 +17,7 @@ In **Camunda 8 Self-Managed**, you may need to configure mapping rules in two co
 
   - Mapping rules are available for Orchestration Cluster Identity only when using [OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md). They do not apply to other authentication methods, such as basic authentication.
 
-- **Management Identity**: Manage access to components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md). Mapping rules in [Management Identity](/self-managed/components/management-identity/what-is-identity.md) assign users to roles and tenants, granting access to those components. To learn more, see the [guide on managing mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md).
+- **Management Identity**: Manage access to components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md). Mapping rules in [Management Identity](/self-managed/components/management-identity/overview.md) assign users to roles and tenants, granting access to those components. To learn more, see the [guide on managing mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md).
 
 ## How to use mapping rules
 

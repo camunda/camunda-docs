@@ -140,7 +140,7 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 
 - [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) — browser-based BPMN editor
 - [Console](/self-managed/components/console/overview.md) — administrative interface
-- [Management Identity](/self-managed/components/management-identity/what-is-identity.md) — centralized access control
+- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control
 
 This namespace also includes **Keycloak**, which serves as the Identity Provider (IdP) for Management Identity.
 

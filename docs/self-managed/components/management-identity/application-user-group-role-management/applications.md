@@ -6,21 +6,18 @@ sidebar_label: "Applications"
 
 import ApplicationImg from '../img/add-application-modal-2.png';
 
-In Identity, an application represents an entity that can request Identity to authenticate a user or a service.
+In Management Identity, an application represents an entity that can request Management Identity to authenticate a user or a service for accessing management components (Web Modeler, Console, and Optimize).
 
 ## About applications
 
-Camunda 8 provides a set of preconfigured applications:
+Camunda 8 provides a set of preconfigured applications. The following applications are managed by Management Identity:
 
-- Connectors
-- Identity
-- Operate
+- Console
 - Optimize
-- Tasklist
 - Web Modeler
-- Zeebe
+- Management Identity
 
-As an Identity user you can also add your own custom applications. For example, you can provide a service with M2M access to a Orchestration Cluster REST API, such as a custom job worker.
+As a Management Identity user you can also add your own custom applications. For example, you can provide a service with M2M access to management component APIs, such as a custom application that needs to access Optimize or Web Modeler APIs.
 
 ## Application types
 
@@ -65,7 +62,7 @@ The application type is selected when you [create an application](#add-an-applic
 
 ## Application permissions
 
-You can control the access an application has in Camunda 8 by [assigning permissions](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
+You can control the access an application has to Camunda 8 management components by [assigning permissions](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the application.
 
 :::info
 For an overview of permissions available, see [available permissions](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions).
