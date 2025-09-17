@@ -1,14 +1,14 @@
 ---
 id: authentication-to-management-components
-title: Authentication to Management Components on Self-Managed
-sidebar_label: "Authentication to Management Components"
-description: "Learn about authentication methods for the Management Components on Self-Managed and how to choose the right one for your environment."
+title: Authentication to Management and Modeling Components on Self-Managed
+sidebar_label: "Authentication to Management and Modeling Components"
+description: "Learn about authentication methods for Management and Modeling Components on Self-Managed and how to choose the right one for your environment."
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Camunda 8 management components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md).
+Authentication to the Camunda 8 management and modeling components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md).
 
 Management Identity relies on the **OpenID Connect (OIDC)** and **OAuth 2.0** protocols for secure authentication and authorization. It supports three primary scenarios:
 
@@ -34,7 +34,7 @@ For details, see the guide on how to [connect to an existing Keycloak instance](
 
 You can configure the built-in Keycloak to act as an identity broker, connecting to an external corporate Identity Provider. This allows you to leverage your existing user base from providers that support protocols like **SAML**, **LDAP**, or **OpenID Connect**.
 
-In this scenario, Keycloak remains the direct IdP for Camunda management components, but it delegates the authentication process to your configured external provider.
+In this scenario, Keycloak remains the direct IdP for Camunda management and modeling components, but it delegates the authentication process to your configured external provider.
 
 - **User authentication:** Users are redirected from Keycloak's login page to your external IdP.
 - **User management:** Users are managed in your external IdP and federated into Keycloak.

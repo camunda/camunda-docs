@@ -2,19 +2,19 @@
 id: manage-roles
 title: Manage roles
 sidebar_label: "Roles"
-description: "Use Management Identity to manage roles for Camunda 8 management components (Web Modeler, Console, Optimize)"
+description: "Use Management Identity to manage roles for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)"
 ---
 
-Use roles in Management Identity to simplify and standardize access control for Camunda 8 management components (Web Modeler, Console, and Optimize), help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
+Use roles in Management Identity to simplify and standardize access control for Camunda 8 management and modeling components (Web Modeler, Console, and Optimize), help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
 ## About roles
 
-- Roles define the actions a user or application can perform in Camunda 8 management components by grouping together a set of related [permissions](../access-management/manage-permissions.md).
+- Roles define the actions a user or application can perform in Camunda 8 management and modeling components by grouping together a set of related [permissions](../access-management/manage-permissions.md).
 - You can assign roles [directly to a user](#assign-a-role-to-a-user) or [using groups](../application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
 
 ## Default roles
 
-Management Identity includes a set of default roles that are available out-of-the-box. These roles are designed to cover common use cases and can be assigned to users and groups to grant them access to different management components.
+Management Identity includes a set of default roles that are available out-of-the-box. These roles are designed to cover common use cases and can be assigned to users and groups to grant them access to different management and modeling components.
 
 The following table lists the default roles and their descriptions:
 

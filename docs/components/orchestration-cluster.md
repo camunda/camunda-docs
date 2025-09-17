@@ -7,7 +7,7 @@ description: ""
 
 The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. It includes:
 
-- [Zeebe] as the workflow engine.
+- Zeebe as the workflow engine.
 - Operate for monitoring and troubleshooting process instances running in Zeebe.
 - Tasklist for interacting with user tasks (assigning, completing, and so on).
 - Identity for managing the integrated authentication and authorization.

@@ -10,7 +10,7 @@ import IdentityLoginImg from './img/identity-login-page.png';
 Get started with Management Identity in Self-Managed by learning how to open and log in to the Management Identity interface.
 
 :::note
-Management Identity is included in the [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm](/self-managed/installation-methods/helm/install.md) and [Manual installation](/self-managed/installation-methods/manual/install.md) based deployment of Camunda 8 Self-Managed. With the default configuration, Management Identity uses an included Keycloak container/pod.
+Management Identity is included in the [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/installation-methods/helm/install.md) deployments of Camunda 8 Self-Managed. With the default configuration, Management Identity uses an included Keycloak container/pod.
 :::
 
 ## Log in to Management Identity
@@ -47,7 +47,7 @@ You are directed to the home page once you have successfully logged in.
 
 ## Next steps
 
-Once you are able to log in to Management Identity, you can start managing authentication, access, and authorization for your Camunda 8 users, resources, and APIs.
+Once you log in to Management Identity, you can start managing authentication, access and permissions to Web Modeler, Console and Optimize.
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)

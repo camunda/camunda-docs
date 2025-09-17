@@ -2,7 +2,7 @@
 id: overview
 title: "Management Identity"
 sidebar_label: "Overview"
-description: "Management Identity is the component within the Camunda 8 Self-Managed responsible for authentication and authorization for Web Modeler, Console and Optimize."
+description: "Management Identity is the component within Camunda 8 Self-Managed responsible for authentication and authorization for Web Modeler, Console and Optimize."
 ---
 
 The Management Identity component in Camunda 8 Self-Managed is used to manage authentication, access, and authorization for components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md) ([Console](../console/overview.md), [Web Modeler](../modeler/web-modeler/overview.md), and [Optimize](../optimize/overview.md)).
@@ -11,7 +11,7 @@ The Management Identity component in Camunda 8 Self-Managed is used to manage au
 Management Identity is separate from the [Identity component within the Orchestration Cluster](/self-managed/components/orchestration-cluster/identity/overview.md), which handles authentication for Zeebe, Operate, Tasklist, and Orchestration Cluster API.
 :::
 
-Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/installation-methods/helm/install.md) and [Manual installation](/self-managed/installation-methods/manual/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/installation-methods/helm/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
 - Administrators can use Management Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.
 - Management Identity supports both users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) with secure authorization based on OAuth 2.0 standards.
@@ -53,7 +53,7 @@ Control who can access what by assigning permissions through roles.
 
 ### Multi-tenancy
 
-Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. Multi-tenancy is currently supported only for Optimize.
+Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/identity/tenant.md).
 
 - [Manage tenants for Optimize](manage-tenants.md)
 

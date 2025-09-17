@@ -5,7 +5,7 @@ sidebar_label: "Access and permissions"
 description: "Learn how to manage access and permissions for Web Modeler, Console, and Optimize using Management Identity."
 ---
 
-With Management Identity, you can manage and control access to management component REST APIs and custom applications using permissions and roles.
+With Management Identity, you can manage and control access to management and modeling component REST APIs and custom applications using permissions and roles.
 
 This section describes how to manage access to Web Modeler, Console, and Optimize. For access control to Orchestration Cluster components and their resources, refer to the [Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md) instead.
 
@@ -13,17 +13,13 @@ This section describes how to manage access to Web Modeler, Console, and Optimiz
 
 When using and managing permissions, it is important to understand the following key concepts:
 
-- APIs represent the different Camunda 8 management components, such as Web Modeler, Optimize, and so on.
+- APIs represent the different Camunda 8 management and modeling components, such as Web Modeler, Optimize, and so on.
 - Each [API defines its own set of permissions](#permissions) that to control API access.
 - Permissions are [organized using roles](./manage-permissions.md#manage-permissions-for-roles) that can be assigned to users either directly or via Groups.
 - You can also [assign permissions to your custom application](./manage-permissions.md#manage-application-permissions), such as a job worker for example.
 
 :::tip
 For detailed instructions, see the [guide about managing permissions](./manage-permissions.md).
-:::
-
-:::note
-In the Orchestration Cluster you can use [authorizations](/components/concepts/access-control/authorizations.md) to grant more fine-grained access control to Orchestration Cluster resources.
 :::
 
 ## Permissions

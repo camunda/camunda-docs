@@ -26,7 +26,7 @@ Camunda 8's Orchestration Cluster provides a fine-grained authorization system f
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-Authorizations apply only to the orchestration cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
+Authorizations apply only to the Orchestration Cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
 :::
 
 ## How authorization works

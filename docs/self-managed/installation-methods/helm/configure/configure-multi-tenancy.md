@@ -8,7 +8,7 @@ description: "Learn how to configure multi-tenancy in Camunda 8."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::caution
+:::note
 Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled through [Orchestation Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 :::
 

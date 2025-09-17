@@ -40,13 +40,13 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 <h3>Steps</h3>
 
-1. Identify what management components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
-2. In your OIDC provider, **create an application for each of the management components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
    - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
      :::note
      Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
      :::
-3. For each management component, ensure the appropriate application type is used:
+3. For each management and modeling components, ensure the appropriate application type is used:
    - Web applications requiring confidential access/a confidential client:
      - **Optimize**
      - **Management Identity**
@@ -146,7 +146,7 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 Ensure you register a new application for each component.
 :::
 
-1. Identify what management components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
 2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
 3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
 4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
@@ -251,7 +251,7 @@ Once set, your initial claim name and value cannot be updated using environment 
 
 Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent), front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
 
-For authentication, the management components use the scopes `email`, `openid`, `offline_access`, `profile`,
+For authentication, the management and modeling components use the scopes `email`, `openid`, `offline_access`, `profile`,
 and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must ensure that either there is an [admin consent flow configured](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent) process.
 
 The client should be configured to support `grant_type`:
