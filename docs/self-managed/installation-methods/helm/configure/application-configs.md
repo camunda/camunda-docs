@@ -5,12 +5,6 @@ title: Configure Helm chart components
 description: "Learn how to configure individual Camunda components in Helm charts."
 ---
 
-:::note
-
-- Starting with Helm chart version 8.5, `application.yaml` is the default configuration mechanism.
-- Earlier versions required environment variables for configuration.
-  :::
-
 This page explains how to configure Camunda components in Helm charts. It describes the shift from environment variables to `application.yaml`, and shows how to apply configuration options and custom files.
 
 ## Prerequisites
@@ -28,42 +22,7 @@ This page explains how to configure Camunda components in Helm charts. It descri
 | `<componentName>.configuration`      | string | Full application configuration content (for example, the contents of `application.yaml`).                               |
 | `<componentName>.extraConfiguration` | map    | Additional configuration files. Keys are filenames, values are file contents. Mounted into the container at `./config`. |
 
-### Environment variables (before 8.5)
-
-Before version 8.5, configuration relied on environment variables. Many variables were uppercase versions of Spring option names. This caused confusing because most of the documentation used the Spring `application.properties` or `application.yaml` formats.
-
-It also caused issues when components added new features that the Helm chart didn’t expose as keys. To customize configurations, you had to understand how [Spring reads properties](https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/html/boot-features-external-config.html).
-
-For example, the following configuration:
-
-```yaml
-camunda.operate:
-  elasticsearch:
-    numberOfShards: 3
-```
-
-was rewritten using uppercase letters with underscores:
-
-```bash
-CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS=3
-```
-
-and supplied in the Helm chart `values.yaml`:
-
-```yaml
-operate:
-  env:
-    - name: CAMUNDA_OPERATE_ELASTICSEARCH_NUMBEROFSHARDS
-      value: "3"
-```
-
-This method still works in newer versions of the Helm chart. If both an environment variable and an `application.yaml` setting are defined, the environment variable takes precedence.
-
-::: note
-Because components may use different frameworks, configuration files can be YAML, TOML, or other formats. In Helm, provide these values as strings. Use the pipe (`|`) symbol to define [multiline strings](https://helm.sh/docs/chart_template_guide/yaml_techniques/#controlling-spaces-in-multi-line-strings).
-:::
-
-### Configuration options (after 8.5)
+### Configuration options
 
 Two Helm values are available for component configuration:
 
@@ -143,7 +102,7 @@ operate:
 
 ### Default properties
 
-The `helm template` command generates the application's default configuration. You only need to update the values required for your setup. To generate the default configuration, replace `<your-release-name>` with your release name and run:
+The `helm template` command generates the application's default configuration. It’s best practice to keep the original values.yaml unchanged and [maintain a separate file with your custom settings](self-managed/installation-methods/helm/chart-parameters/#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
