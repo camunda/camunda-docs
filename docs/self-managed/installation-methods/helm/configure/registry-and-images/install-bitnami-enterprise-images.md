@@ -2,14 +2,23 @@
 id: install-bitnami-enterprise-images
 sidebar_label: Bitnami enterprise images
 title: Install Bitnami enterprise images
-description: Configure the Camunda Helm chart to use vendor-supported enterprise images and pull secrets.
+description: Configure the Camunda Helm chart to use vendor-supported enterprise images, understand CVE reporting, and set expectations on vulnerabilities.
 ---
 
-By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install Camunda with enterprise images.
+By default, the Camunda Helm chart uses Bitnami open-source images.
 
-### Install with vendor enterprise images
+:::info
+**Important change since Camunda 8.8:**  
+In earlier versions, users sometimes relied on Bitnami subcharts in production. Starting with 8.8, these subcharts are intended primarily for development and testing, unless your operational teams have expertise with Bitnami charts production deployments.
 
-By default, the Camunda Helm chart uses [open-source images provided by Bitnami](https://github.com/bitnami/containers). For production environments, Camunda recommends using vendor enterprise images. These images are hardened, patched, and supported versions of the open-source images.
+If you have previously used Bitnami subcharts in production with earlier Camunda versions, please review the implications for your existing setup. Refer to [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for more details.
+
+For production environments, we advise deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
+:::
+
+If you decide to run Bitnami-based subcharts in production, we strongly recommend using the **vendor-supported enterprise images**. This guide explains how to create registry secrets and install Camunda with enterprise images.
+
+## Why Use enterprise images?
 
 Enterprise images:
 
@@ -17,9 +26,9 @@ Enterprise images:
 - Include critical CVE patches and security hardening
 - Come with extended vendor support
 - Are hosted in a private registry: `registry.camunda.cloud`
-- Are available only to Camunda customers
+- Are available only to Camunda customers with an enterprise subscription
 
-#### Create a Kubernetes registry secret
+## Create a Kubernetes registry secret
 
 To access the private registry, create a Kubernetes `docker-registry` secret using your Camunda Enterprise credentials:
 
@@ -58,3 +67,21 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 ```
 
 This deploys Camunda with vendor-supported enterprise images, recommended for secure and stable production environments.
+
+## Understanding CVEs in Bitnami images
+
+Customers may notice a high number of CVEs when scanning Bitnami images. This is expected and does not necessarily indicate a higher security risk. The reason is that Bitnami images bundle the application (e.g., PostgreSQL, Elasticsearch, Keycloak), a full OS layer, and supporting libraries. Vulnerability scanners therefore report CVEs across all of these components.
+
+[Bitnami’s Open CVE Policy](https://docs.bitnami.com/kubernetes/open-cve-policy/) ensures that fixable CVEs are addressed when upstream patches become available, but open/unfixable CVEs remain until resolved by the operating system or application maintainers. As a result, even enterprise Bitnami images will continue to show high CVE counts, despite being patched against critical vulnerabilities.
+
+For Camunda users, the most important considerations are:
+
+- Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami charts production deployments.
+- For production, Camunda recommends deploying PostgreSQL, Elasticsearch, and Keycloak independently or as managed services.
+- If you are already running Bitnami subcharts in production (e.g., from 8.7), Camunda strongly recommends switching to Enterprise Bitnami images, as they include critical CVE patches and vendor support.
+- For critical environments that require CVE patching with an SLA, please consider alternative options such as managed services, other secure images, or engage with each vendor directly for enterprise support and official deployment options.
+
+### Limitations
+
+- Enterprise Bitnami images may still show CVEs due to OS-level vulnerabilities.
+- If your compliance requirements mandate near-zero CVEs, these images may not be sufficient.

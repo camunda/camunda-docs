@@ -17,11 +17,13 @@ To generate a connector template:
    ![Create the new connector template](./img/configure-template-details.png)
 
 1. Select the template starting point.
+
    - **Start from API definition**: Import an existing API definition file as a starting point for the template. If you select this option, the **Import data source** section is shown below the template details.
 
    - **Start from blank**: Start from a blank template.
 
 1. Configure the template details in the **Configure template details** section.
+
    - **Name:** Enter a clear and easily understood name for the template. For example, include the brand name if the template connects to a service or tool, or indicate the template's main feature.
 
    - **Description:** Enter a description for the template. For example, describe the template's main features and benefits.
@@ -35,8 +37,10 @@ To generate a connector template:
    :::
 
 1. If you selected the **Start from API definition** option, the **Import data source** section is shown. Select and upload an API definition. JSON and YAML file formats are supported, with a maximum file size limit of 1024 KB.
+
    1. Select the format you are going to upload (OpenAPI or Postman).
    1. Upload the API definition.
+
       - **Import from URL**: Enter the URL for the API definition you want to import, and click **Import icon**.
       - **Upload file**: Drag and drop a file into the upload area, or click the link and select a file to upload.
 
