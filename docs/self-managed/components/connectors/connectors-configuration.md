@@ -27,20 +27,167 @@ This guide provides configuration properties in the form of environment variable
 For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
 :::
 
-## Connecting to Zeebe and the Orchestration Cluster REST API
+## Configure the Orchestration Cluster connection for Self-Managed
 
-<Tabs groupId="configuration" defaultValue="saas" queryString values={
-[
-{label: 'Connecting to Camunda 8 SaaS', value: 'saas' },
-{label: 'Connecting to Camunda 8 Self-Managed', value: 'sm' },
-]
-}>
+### Connection URL
 
-<TabItem value='saas'>
+To connect to the Orchestration Cluster, you need to provide the following configuration:
+
+<Tabs groupId="connection-url" defaultValue="environment-variables" queryString values={[
+{label: 'Environment variables', value: 'environment-variables' },
+{label: 'Application.yaml', value: 'application-yaml' },
+]}>
+<TabItem value="environment-variables">
+
+```bash
+CAMUNDA_CLIENT_MODE=self-managed
+CAMUNDA_CLIENT_GRPCADDRESS=http://localhost:26500
+CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
+```
+
+</TabItem>
+<TabItem value="application-yaml">
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+    grpc-address: http://localhost:26500
+    rest-address: http://localhost:8080
+```
+
+</TabItem>
+</Tabs>
+
+### HTTPS Configuration
+
+If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
+
+<Tabs groupId="https-config" defaultValue="environment-variables" queryString values={[
+{label: 'Environment variables', value: 'environment-variables' },
+{label: 'Application.yaml', value: 'application-yaml' },
+]}>
+<TabItem value="environment-variables">
+
+```bash
+CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
+```
+
+</TabItem>
+<TabItem value="application-yaml">
+
+```yaml
+camunda:
+  client:
+    ca-certificate-path: /path/to/certificate.pem
+```
+
+</TabItem>
+</Tabs>
+
+### Authentication Methods
+
+Choose the authentication method for your environment:
+
+<Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
+{label: 'No Authentication', value: 'no-auth' },
+{label: 'Basic Authentication', value: 'basic-auth' },
+{label: 'OIDC-based Authentication', value: 'oidc' },
+]}>
+
+<TabItem value="no-auth">
+By default, no authentication will be used.
+
+**Environment variables**
+
+```bash
+CAMUNDA_CLIENT_AUTH_METHOD=none
+```
+
+**Application.yaml**
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: none
+```
+
+</TabItem>
+<TabItem value="basic-auth">
+To activate basic authentication:
+
+**Environment variables**
+
+```bash
+CAMUNDA_CLIENT_AUTH_METHOD=oidc
+CAMUNDA_CLIENT_AUTH_USERNAME=<your username>
+CAMUNDA_CLIENT_AUTH_PASSWORD=<your password>
+```
+
+**Application.yaml**
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: basic
+      username: <your username>
+      password: <your password>
+```
+
+</TabItem>
+<TabItem value="oidc">
+To activate OIDC-based authentication:
+
+**Environment variables**
+
+```bash
+CAMUNDA_CLIENT_AUTH_METHOD=oidc
+CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
+CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
+CAMUNDA_CLIENT_AUTH_TOKENURL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+CAMUNDA_CLIENT_AUTH_AUDIENCE=<your client id of Orchestration Cluster or configured audience>
+CAMUNDA_CLIENT_AUTH_SCOPE=<your client id of Orchestration Cluster or configured audience>
+```
+
+**Application.yaml**
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: oidc
+      client-id: <your client id>
+      client-secret: <your client secret>
+      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+      audience: <your client id of Orchestration Cluster or configured audience>
+      scope: <your client id of Orchestration Cluster or configured audience>
+```
+
+**Notes for Microsoft Entra ID**:
+
+- Instead of `scope: CLIENT_ID_OC`, use: `scope: CLIENT_ID_OC + "/.default"`.
+- The `token-url` is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+
+:::note Audience Validation
+If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::
+
+</TabItem>
+</Tabs>
+
+See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started#self-managed) for more information on authentication properties.
+
+## Configure the Orchestration Cluster connection for SaaS
 
 To use Camunda 8 SaaS, specify the connection properties:
 
-##### Environment variables
+<Tabs groupId="saas-config" defaultValue="saas-environment-variables" queryString values={[
+{label: 'Environment variables', value: 'saas-environment-variables' },
+{label: 'Application.yaml', value: 'saas-application-yaml' },
+]}>
+<TabItem value="saas-environment-variables">
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
@@ -50,7 +197,8 @@ CAMUNDA_CLIENT_CLOUD_REGION=bru-2
 CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
-##### YAML configuration
+</TabItem>
+<TabItem value="saas-application-yaml">
 
 ```yaml
 camunda:
@@ -64,75 +212,10 @@ camunda:
       cluster-id: xxx
 ```
 
-If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
-
-</TabItem>
-
-<TabItem value='sm'>
-
-Specify the connection properties to connect to a self-managed Zeebe instance:
-
-##### Environment variables
-
-```bash
-CAMUNDA_CLIENT_MODE=self-managed
-CAMUNDA_CLIENT_GRPCADDRESS=http://localhost:26500
-CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
-```
-
-##### YAML configuration
-
-```yaml
-camunda:
-  client:
-    mode: self-managed
-    grpc-address: http://localhost:26500
-    rest-address: http://localhost:8080
-```
-
-If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
-
-##### Environment variables
-
-```bash
-CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
-```
-
-##### YAML configuration
-
-```yaml
-camunda:
-  client:
-    ca-certificate-path: /path/to/certificate.pem
-```
-
-Depending on the authentication method used by the Zeebe instance, you may need to provide authentication properties:
-
-##### Environment variables
-
-```bash
-CAMUNDA_CLIENT_AUTH_CLIENTID=xxx
-CAMUNDA_CLIENT_AUTH_CLIENTSECRET=xxx
-CAMUNDA_CLIENT_AUTH_TOKENURL=http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-CAMUNDA_CLIENT_AUTH_AUDIENCE=zeebe-api
-```
-
-##### YAML configuration
-
-```yaml
-camunda:
-  client:
-    auth:
-      client-id: xxx
-      client-secret: xxx
-      token-url: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
-      audience: zeebe-api
-```
-
-See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started#self-managed) for more information on authentication properties.
-
 </TabItem>
 </Tabs>
+
+If you are connecting a local connector runtime to a SaaS cluster, you may want to review our [guide to using connectors in hybrid mode](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 ## Manual discovery of connectors
 
