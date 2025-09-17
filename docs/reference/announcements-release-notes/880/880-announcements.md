@@ -119,7 +119,7 @@ Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeeb
 
 #### Elasticsearch and OpenSearch replica default increased to 1
 
-Starting in 8.8, the default replica count for Camunda indices in Elasticsearch and OpenSearch changes from 0 to 1. This ensures that if a node goes down, Camunda is not blocked by a temporary outage of the secondary data store. This change increases storage requirements:
+Starting in 8.8, the default replica count for Camunda indices in Elasticsearch and OpenSearch changes from 0 to 1. This ensures that if an Elasticsearch node goes down, Camunda is not blocked by a temporary outage of the secondary data store. This change increases storage requirements:
 
 - **Single-node clusters:** Running with one node turns the cluster state yellow (replicas unassigned). Run at least two master-eligible nodes.
 - **Multi-node clusters:** Increase disk capacity to at least 2.5× the previously used disk capacity (accounts for watermarks, overhead, and growth).
