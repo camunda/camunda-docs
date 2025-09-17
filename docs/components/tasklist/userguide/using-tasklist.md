@@ -8,11 +8,7 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in [Zeebe](/components/zeebe/zeebe-overview.md).
-
-:::info
-When a user is granted Tasklist access, the user has full access to the respective process instance data.
-:::
+Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in the [Orchestration Cluster](/components/orchestration-cluster.md).
 
 The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
 

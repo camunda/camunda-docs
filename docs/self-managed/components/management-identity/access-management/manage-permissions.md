@@ -1,11 +1,11 @@
 ---
 id: manage-permissions
 title: Manage permissions
-sidebar_label: "Permissions"
-description: "Use Identity to manage permissions for a role"
+sidebar_label: "Manage permissions"
+description: "Use Management Identity to manage permissions for roles and applications"
 ---
 
-Manage permissions for roles and applications in Identity.
+This guide describes how to manage permissions for roles and applications in Management Identity:
 
 - You can grant permissions to either [roles](../application-user-group-role-management/manage-roles.md) or [applications](../application-user-group-role-management/applications.md).
 - When a permission is granted to a role, all users assigned to the role and members of a group with the assigned role, are granted the respective access.

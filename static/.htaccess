@@ -170,11 +170,11 @@ RewriteRule ^docs/next/self-managed/identity/access-management/?$ /docs/next/sel
 RewriteRule ^docs/next/self-managed/identity/application-user-group-role-management/?$ /docs/next/self-managed/components/management-identity/application-user-group-role-management/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/authentication/?$ /docs/next/self-managed/components/management-identity/authentication/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/configuration/?$ /docs/next/self-managed/components/management-identity/configuration/ [R=301,L]
-RewriteRule ^docs/next/self-managed/identity/identity-first-steps/?$ /docs/next/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/identity-first-steps/?$ /docs/next/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/managing-tenants/?$ /docs/next/self-managed/components/management-identity/manage-tenants/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/mapping-rules/?$ /docs/next/self-managed/components/management-identity/mapping-rules/ [R=301,L]
 RewriteRule ^docs/next/self-managed/identity/miscellaneous/?$ /docs/next/self-managed/components/management-identity/miscellaneous/ [R=301,L]
-RewriteRule ^docs/next/self-managed/identity/what-is-identity/?$ /docs/next/self-managed/components/management-identity/what-is-identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/identity/what-is-identity/?$ /docs/next/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/modeler/?$ /docs/next/self-managed/components/modeler/ [R=301,L]
 RewriteRule ^docs/next/self-managed/optimize-deployment/?$ /docs/next/self-managed/components/optimize/ [R=301,L]
 RewriteRule ^docs/next/self-managed/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/ [R=301,L]
@@ -309,7 +309,7 @@ RewriteRule ^docs/next/self-managed/components/management-identity/deployment/st
 RewriteRule ^docs/next/self-managed/components/management-identity/deployment/resource-management/?$ /docs/next/self-managed/components/management-identity/miscellaneous/resource-management/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/?$ /docs/next/self-managed/components/management-identity/miscellaneous/troubleshoot-identity/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/access-control/apis/?$ /docs/next/self-managed/components/management-identity/access-management/access-management-overview [R=301,L]
-RewriteRule ^docs/next/self-managed/components/management-identity/install-identity/?$ /docs/next/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/management-identity/install-identity/?$ /docs/next/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/next/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 RewriteRule ^docs/next/self-managed/concepts/mapping-rules/?$ /docs/next/components/concepts/access-control/mapping-rules/ [R=301,L]
@@ -452,7 +452,7 @@ RewriteRule ^docs/self-managed/components/management-identity/deployment/startin
 RewriteRule ^docs/self-managed/components/management-identity/deployment/resource-management/?$ /docs/self-managed/components/management-identity/miscellaneous/resource-management/ [R=301,L]
 RewriteRule ^docs/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/?$ /docs/self-managed/components/management-identity/miscellaneous/troubleshoot-identity/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/apis/?$ /docs/self-managed/components/management-identity/access-management/access-management-overview [R=301,L]
-RewriteRule ^docs/self-managed/components/management-identity/install-identity/?$ /docs/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
+RewriteRule ^docs/self-managed/components/management-identity/install-identity/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Restructure Identity Docs (8.6)
