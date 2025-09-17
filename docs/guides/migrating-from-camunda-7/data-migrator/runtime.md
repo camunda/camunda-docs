@@ -90,7 +90,7 @@ The migrator validates each process instance before migration and will skip inst
 | Missing flow node elements            | The Camunda 7 instance is at a flow node that does not exist in the deployed Camunda 8 model.                    |
 | Missing None Start Event              | The Camunda 8 process definition does not have a process-level None Start Event.                                 |
 | Missing `migrator` execution listener | The Camunda 8 process definition does not have an execution listener of type `migrator` on the None Start Event. |
-| Multi-tenancy                         | The enant ids are not configured in the Data Migrator.                                                           |
+| Multi-tenancy                         | The tenant ids are not configured in the Data Migrator.                                                           |
 
 When a process instance is skipped:
 
