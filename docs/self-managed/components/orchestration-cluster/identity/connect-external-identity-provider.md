@@ -234,7 +234,7 @@ orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/identity/mapping-rules/manage-mapping-rules.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/identity/mapping-rules.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 

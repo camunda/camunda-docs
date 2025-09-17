@@ -84,7 +84,7 @@ You can also assign the client to existing [groups](./group.md) or [roles](./rol
 
 This method is ideal when you need to dynamically assign permissions based on claims in the OIDC access token, such as scopes or custom claims.
 
-1. [Create a mapping rule](/components/identity/mapping-rules/manage-mapping-rules.md#add-a-mapping-rule) that matches a claim from your client's access token.
+1. [Create a mapping rule](/components/identity/mapping-rules.md#add-a-mapping-rule) that matches a claim from your client's access token.
 2. [Create authorizations](/components/identity/authorization.md#create-an-authorization) for the mapping rule with the following specifics:
    - As the **Owner type**, select `Mapping Rule`.
    - In the **Owner ID** field, enter the **Mapping Rule ID** that you chose in the previous step.

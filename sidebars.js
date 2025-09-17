@@ -599,14 +599,8 @@ module.exports = {
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/mapping-rules",
             "components/identity/tenant",
-            {
-              "Mapping rules": [
-                "components/identity/mapping-rules/manage-mapping-rules",
-                "components/identity/mapping-rules/mapping-rule-authorizations",
-                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
-              ],
-            },
           ],
         },
       ],
