@@ -33,7 +33,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 ### Prerequisites
 
-Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Zeebe` and `Operate` scopes. Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
+Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Orchestration Cluster REST API` scope. Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
 
 To use secrets managed by the SaaS environment, add the `Secrets` scope.
 

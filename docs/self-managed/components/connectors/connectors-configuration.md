@@ -17,7 +17,8 @@ You can configure the connector runtime environment in the following ways:
 Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Orchestration Cluster REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration that can be set in the Camunda Spring Boot Starter can also be set in the connector runtime environment.
+To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md).
+Any configuration that can be set in the Camunda Spring Boot Starter can also be set in the connector runtime environment.
 
 Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe) for a full list of configuration options.
 
@@ -154,6 +155,36 @@ Specifying optional values allows you to override `@OutboundConnector`-provided 
 CONNECTOR_HTTPJSON_FUNCTION=io.camunda.connector.http.rest.HttpJsonFunction
 CONNECTOR_HTTPJSON_TYPE=non-default-httpjson-task-type
 ```
+
+## Disabling Individual Connectors
+
+To disable individual connectors you can provide a comma separated list to `CONNECTOR_INBOUND_DISABLED`
+and `CONNECTOR_OUTBOUND_DISABLED` respectively. These list must contain the _connector type_ (e.g. `io.camunda:http-json:1`).
+To disable two outbound connectors, you can set the environment variable as follows:
+
+```bash
+CONNECTOR_OUTBOUND_DISABLED=io.camunda:example:1,com.acme:custom-connector:2
+```
+
+This can be found as the `<zeebe:taskDefinition type="io.camunda:http-json:1"/>` in the BPMN XML, the `zeebe:taskDefinition`
+property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/http/rest/element-templates/http-json-connector.json#L48)
+or in the `OutboundConnector` annotation for outbound connectors.
+The inbound connector type can be found as `<zeebe:property name="inbound.type" value="io.camunda:webhook:1" />`,
+the `inbound.type` property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/webhook/element-templates/webhook-connector-start-message.json#L51)
+or in the `InboundConnector` annotation.
+
+## Disabling connector discovery
+
+:::warning
+We do not guarantee that all the Camunda provided connectors will be discovered via SPI.
+If you want to have a connector runtime without out-of-the-box connectors, we recommend building a custom runtime with only the connectors you want to use.
+:::
+
+To disable the discovery of connectors via SPI or environment variables as explained [in this section](#manual-discovery-of-connectors),
+set the following environment variables: `CONNECTOR_INBOUND_DISCOVERY_DISABLED` and `CONNECTOR_OUTBOUND_DISCOVERY_DISABLED`.
+
+Note that this does not prevent the registration of connectors via Spring Beans or
+other mechanisms.
 
 ## Secrets
 

@@ -19,13 +19,14 @@ import TabItem from '@theme/TabItem';
 
 Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to web components and APIs. This system applies to:
 
-- **Zeebe**
-- **Operate**
-- **Tasklist**
-- **Orchestration Cluster APIs** (e.g., V2 API)
+- [Zeebe](../../zeebe/zeebe-overview.md)
+- [Identity](../../identity/identity-introduction.md)
+- [Operate](../../operate/operate-introduction.md)
+- [Tasklist](../../tasklist/introduction-to-tasklist.md)
+- [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-Authorizations apply only to the orchestration cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
+Authorizations apply only to the Orchestration Cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
 :::
 
 ## How authorization works
