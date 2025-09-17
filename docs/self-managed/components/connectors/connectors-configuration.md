@@ -168,7 +168,7 @@ CONNECTOR_OUTBOUND_DISABLED=io.camunda:example:1,com.acme:custom-connector:2
 
 This can be found as the `<zeebe:taskDefinition type="io.camunda:http-json:1"/>` in the BPMN XML, the `zeebe:taskDefinition`
 property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/http/rest/element-templates/http-json-connector.json#L48)
-or in the `OutboundConnector` annotation for outbound connectors. 
+or in the `OutboundConnector` annotation for outbound connectors.
 The inbound connector type can be found as `<zeebe:property name="inbound.type" value="io.camunda:webhook:1" />`,
 the `inbound.type` property [in the element template](https://github.com/camunda/connectors/blob/8d2304754e202b56ae8c821746e99e1e9ef50c73/connectors/webhook/element-templates/webhook-connector-start-message.json#L51)
 or in the `InboundConnector` annotation.
