@@ -203,15 +203,16 @@ The client will automatically read the environment variables and configure the a
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-private static final String AUDIENCE = "[Audience]";
+private static final String AUDIENCE = "[Client ID OC]";
+private static final String SCOPE = "[Client ID OC]";
 private static final String CLIENT_ID = "[Client ID]";
 private static final String CLIENT_SECRET = "[Client Secret]";
 
 public static void main(String[] args) {
-
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
             .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
             .audience(AUDIENCE)
+            .scope(SCOPE)
             .clientId(CLIENT_ID)
             .clientSecret(CLIENT_SECRET)
             .build();
@@ -228,6 +229,15 @@ public static void main(String[] args) {
     }
 }
 ```
+
+**Notes for Microsoft Entra ID**:
+
+- Instead of `scope=CLIENT_ID_OC`, use: `scope=CLIENT_ID_OC + "/.default"`.
+- The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+
+:::note Audience Validation
+If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::
 
 **What this code does**
 

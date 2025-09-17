@@ -119,36 +119,38 @@ To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/)
 </TabItem>
 <TabItem value='self-managed'>
 
-1. **Configure Orchestration Cluster for OIDC-based Authentication.**  
-   Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
-
-2. **Register a client in your Identity Provider.**  
-   Create a client (application) in your Identity Provider for the Tasklist API.
-
+1. **Configure Orchestration Cluster for OIDC-based Authentication.**
+   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+   - Note the **client ID** or configured values of **audiences** of the Orchestration Cluster for audience validation (usually the same as the client ID you used when configuring the Orchestration Cluster) as **CLIENT_ID_OC**.
+2. **Register a client in your Identity Provider (IdP).**
+   - Create a new application/client in your IdP.
+   - Configure the necessary scopes (for example, `openid`).
+   - Create a new client secret.
+   - Note the **client ID**, **client secret**, and **authorization URI** as these are required to obtain an access token.
 3. **Use the credentials (client ID and secret) to request an Access Token.**  
-   The example below shows Keycloak configuration (the endpoint URL will vary based on your Identity Provider):
+   The example below shows Keycloak configuration (the authorization URI will vary based on your Identity Provider):
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode "client_id=${CLIENT_ID}" \
 --data-urlencode "client_secret=${CLIENT_SECRET}" \
+--data-urlencode "audience=${CLIENT_ID_OC}" \
+--data-urlencode "scope=${CLIENT_ID_OC}" \
 --data-urlencode 'grant_type=client_credentials'
 ```
 
-A successful authentication response looks like the following:
-
-```json
-{
-  "access_token": "<TOKEN>",
-  "expires_in": 300,
-  "refresh_expires_in": 0,
-  "token_type": "Bearer",
-  "not-before-policy": 0
-}
-```
+**Note for Microsoft Entra ID**: Instead of `scope=${CLIENT_ID_OC}`, use: `scope=${CLIENT_ID_OC}/.default`. The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
 4. **Capture the value of the `access_token` property and store it as your token.**
+
+:::note Audience Validation
+If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::
+
+:::note Authorizations
+If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+:::
 
 </TabItem>
 

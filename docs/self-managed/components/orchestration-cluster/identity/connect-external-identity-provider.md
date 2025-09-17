@@ -390,37 +390,6 @@ Note: You can run the Connector Runtime simply using Helm or Docker Image.
 </TabItem>
 </Tabs>
 
-#### Identity Provider Example Configurations
-
-<Tabs groupId="idpExamples" defaultValue="entraid">
-<TabItem value="entraid" label="Microsoft EntraID">
-
-```java
-private static final String clientId = "<YOUR_CLIENT_ID>";
-private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
-private static final String authorizationServer = "https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
-private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>" + "/.default";
-private static final String clusterGrpcLocal = "grpc://localhost:26500";
-private static final String clusterRestLocal = "http://localhost:8080";
-```
-
-</TabItem>
-<TabItem value="keycloak" label="Keycloak">
-
-```java
-private static final String clientId = "<YOUR_CLIENT_ID>";
-private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
-private static final String authorizationServer = "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>/protocol/openid-connect/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
-private static final String ocAudience = "<YOUR_CLIENT_ID>";
-private static final String clusterGrpcLocal = "grpc://localhost:26500";
-private static final String clusterRestLocal = "http://localhost:8080";
-```
-
-</TabItem>
-</Tabs>
-
 ## Troubleshooting
 
 - Check the logs for authentication errors.
