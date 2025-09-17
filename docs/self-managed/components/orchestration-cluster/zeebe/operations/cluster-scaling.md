@@ -8,12 +8,12 @@ Zeebe allows scaling an existing cluster by adding or removing brokers and by ad
 
 Zeebe provides a REST API to manage the cluster scaling. The cluster management API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/3.1.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway.
 
-:::warning
-Partition scaling is currently experimental, some functionalities may not work yet. Do not use on a production cluster.
+:::important
+Partition count can only be increased and not decreased.
 :::
 
 :::important
-Partition count can only be increased and not decreased.
+Backups are disallowed during scaling partitions, but can be taken before or after scaling. A backup taken before scaling partitions can be only restored to a cluster configured with the partition count before scaling. After restoring from the backup, you can request scaling again to the desired partition count.
 :::
 
 ## Scale up brokers
@@ -59,7 +59,7 @@ zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-pjgfd                  1/1     Runnin
 
 ### 2. Send scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to re-distribute partitions to the new brokers. For that, send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
+Now we should tell Zeebe to add new brokers to the cluster and add or re-distribute partitions to the new brokers. For that, send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
 
 If running on Kubernetes, and if you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
@@ -74,12 +74,57 @@ Depending on whether you want to add new partitions or not, send the appropriate
 Run the following to send the request to the Zeebe Gateway:
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
--H 'Content-Type: application/json' \
--d '["0", "1", "2", "3", "4", "5"]'
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "brokers": {
+          "add": [3,4,5]
+        }
+      }'
 ```
 
-Here, `0`, `1`, and `2` are the ids of initial brokers, and `3`, `4`, and `5` are the newly-added brokers.
+Here `3`, `4`, and `5` are the newly-added brokers.
+
+#### 2.b Scaling brokers and partitions
+
+Run the following to send the request to the Zeebe Gateway to add 3 new brokers to the cluster and set the number of partition to 6.
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "brokers": {
+          "add": [3,4,5]
+        },
+        "partitions": {
+          "count": 6,
+          "replicationFactor": 3
+        }
+      }'
+```
+
+#### 2.b Scaling only partitions
+
+If you don't intend to add new brokers to the cluster, you can skip the `"brokers"` section:
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "partitions": {
+          "count": 6,
+          "replicationFactor": 3
+        }
+      }'
+```
+
+You can omit `"replicationFactor"` if you don't want to change it.
 
 The response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology as shown below:
 
@@ -145,666 +190,6 @@ The response to this request would contain a `changeId`, `currentTopology`, plan
 
 ```
 
-#### 2.b Scaling brokers and partitions
-
-:::warning
-Partition scaling is still an experimental feature, it is required to set `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_ENABLEPARTITIONSCALING=true` to enable it.
-:::
-
-Run the following to send the request to the Zeebe Gateway to add 3 new brokers to the cluster and set the number of partition to 6.
-
-```
-curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
-   -H 'accept: application/json' \
-   -H 'Content-Type: application/json' \
-   -d '{
-        "brokers": {
-          "add": [3,4,5]
-        },
-        "partitions": {
-          "count": 6,
-          "replicationFactor": 3
-        }
-      }'
-```
-
-If you don't intend to add new brokers to the cluster, you can skip the `"brokers"` section:
-
-```
-curl -X 'PATCH' \
-   'http://localhost:9600/actuator/cluster' \
-   -H 'accept: application/json' \
-   -H 'Content-Type: application/json' \
-   -d '{
-        "partitions": {
-          "count": 6,
-          "replicationFactor": 3
-        }
-      }'
-```
-
-  <details>
-
-    <summary> Example response</summary>
-
-```json
-{
-  "changeId": 2,
-  "currentTopology": [
-    {
-      "id": 1,
-      "state": "ACTIVE",
-      "version": 0,
-      "lastUpdatedAt": "0001-01-01T00:00:00.000+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "state": "ACTIVE",
-      "version": 0,
-      "lastUpdatedAt": "0001-01-01T00:00:00.000+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 0,
-      "state": "ACTIVE",
-      "version": 0,
-      "lastUpdatedAt": "0001-01-01T00:00:00.000+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "plannedChanges": [
-    {
-      "operation": "BROKER_ADD",
-      "brokerId": 3,
-      "brokers": []
-    },
-    {
-      "operation": "BROKER_ADD",
-      "brokerId": 4,
-      "brokers": []
-    },
-    {
-      "operation": "BROKER_ADD",
-      "brokerId": 5,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 3,
-      "partitionId": 2,
-      "priority": 1,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_LEAVE",
-      "brokerId": 0,
-      "partitionId": 2,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 3,
-      "partitionId": 3,
-      "priority": 2,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 4,
-      "partitionId": 3,
-      "priority": 1,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_LEAVE",
-      "brokerId": 1,
-      "partitionId": 3,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_LEAVE",
-      "brokerId": 0,
-      "partitionId": 3,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_BOOTSTRAP",
-      "brokerId": 3,
-      "partitionId": 4,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 4,
-      "partitionId": 4,
-      "priority": 2,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 5,
-      "partitionId": 4,
-      "priority": 1,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_BOOTSTRAP",
-      "brokerId": 4,
-      "partitionId": 5,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 5,
-      "partitionId": 5,
-      "priority": 2,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 0,
-      "partitionId": 5,
-      "priority": 1,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_BOOTSTRAP",
-      "brokerId": 5,
-      "partitionId": 6,
-      "priority": 3,
-      "brokers": []
-    },
-    {
-      "operation": "AWAIT_REDISTRIBUTION",
-      "brokerId": 5,
-      "brokers": []
-    },
-    {
-      "operation": "AWAIT_RELOCATION",
-      "brokerId": 5,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 0,
-      "partitionId": 6,
-      "priority": 2,
-      "brokers": []
-    },
-    {
-      "operation": "PARTITION_JOIN",
-      "brokerId": 1,
-      "partitionId": 6,
-      "priority": 1,
-      "brokers": []
-    }
-  ],
-  "expectedTopology": [
-    {
-      "id": 1,
-      "state": "ACTIVE",
-      "version": 4,
-      "lastUpdatedAt": "2025-07-04T08:10:22.984+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 6,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "state": "ACTIVE",
-      "version": 0,
-      "lastUpdatedAt": "0001-01-01T00:00:00.000+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 3,
-      "state": "ACTIVE",
-      "version": 8,
-      "lastUpdatedAt": "2025-07-04T08:10:22.982+0000",
-      "partitions": [
-        {
-          "id": 2,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 4,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "state": "ACTIVE",
-      "version": 8,
-      "lastUpdatedAt": "2025-07-04T08:10:22.983+0000",
-      "partitions": [
-        {
-          "id": 3,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 4,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 5,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "state": "ACTIVE",
-      "version": 8,
-      "lastUpdatedAt": "2025-07-04T08:10:22.983+0000",
-      "partitions": [
-        {
-          "id": 4,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 5,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 6,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "id": 0,
-      "state": "ACTIVE",
-      "version": 8,
-      "lastUpdatedAt": "2025-07-04T08:10:22.984+0000",
-      "partitions": [
-        {
-          "id": 1,
-          "state": "ACTIVE",
-          "priority": 3,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 5,
-          "state": "ACTIVE",
-          "priority": 1,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "id": 6,
-          "state": "ACTIVE",
-          "priority": 2,
-          "config": {
-            "exporting": {
-              "exporters": [
-                {
-                  "id": "CamundaExporter",
-                  "state": "ENABLED"
-                }
-              ]
-            }
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-  </details>
 ### 3. Query the Zeebe Gateway to monitor progress of scaling
 
 The scaling operation can take a while because data needs to be moved to the newly-added brokers. Therefore, you have to monitor the status by querying Zeebe and sending the following GET request to the Zeebe Gateway:
@@ -850,7 +235,7 @@ curl -L 'http://localhost:8080/v2/topology' \
 The response would show that partitions are distributed to new brokers:
 
 <details>
-  <summary>Example response for broker scaling</summary>
+  <summary>Example response</summary>
 
 ```json
 {
@@ -1003,162 +388,6 @@ The response would show that partitions are distributed to new brokers:
 
 </details>
 
-<details>
-
-    <summary> Example response for scaling brokers and partitions </summary>
-
-```json
-{
-  "brokers": [
-    {
-      "nodeId": 2,
-      "host": "zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    },
-    {
-      "nodeId": 1,
-      "host": "zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "leader",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    },
-    {
-      "nodeId": 0,
-      "host": "zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 1,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "follower",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    },
-    {
-      "nodeId": 3,
-      "host": "zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 2,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    },
-    {
-      "nodeId": 5,
-      "host": "zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 6,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    },
-    {
-      "nodeId": 4,
-      "host": "zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-core",
-      "port": 26501,
-      "partitions": [
-        {
-          "partitionId": 3,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 4,
-          "role": "follower",
-          "health": "healthy"
-        },
-        {
-          "partitionId": 5,
-          "role": "leader",
-          "health": "healthy"
-        }
-      ],
-      "version": "SNAPSHOT"
-    }
-  ],
-  "clusterSize": 6,
-  "partitionsCount": 6,
-  "replicationFactor": 3,
-  "gatewayVersion": "SNAPSHOT",
-  "lastCompletedChangeId": "2"
-}
-```
-
-</details>
-
 ## Scale down
 
 We will explain how to scale down a Zeebe cluster via an example of scaling from cluster size 6 to cluster size 3. We assume the cluster is running with 6 brokers.
@@ -1178,12 +407,16 @@ kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 ```
 
 ```
-curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
--H 'Content-Type: application/json' \
--d '["0", "1", "2"]'
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "brokers": {
+          "remove": [3,4,5]
+        }
+      }'
 ```
-
-Here `0`,`1`, and `2` are the brokers that should remain after scaling down. Brokers `3`, `4`, and `5` will be shut down after scaling down.
 
 Similar to scaling up, the response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology.
 
@@ -1396,14 +629,102 @@ After scaling down the statefulset, you may have to delete the PVCs manually.
 
 ## Considerations
 
-1. Scaling up or down involves moving data around and choosing new leaders for the moved partitions. Hence, it can have a slight impact on the system, depending on the load when the scaling is executed. The ideal strategy is to scale in advance when you anticipate a higher load.
-2. To make use of this feature, we recommend to provision more partitions than required when you set up the cluster.
+- Scaling up or down involves moving data around and choosing new leaders for the moved partitions. Hence, it can have a slight impact on the system, depending on the load when the scaling is executed. The ideal strategy is to scale in advance when you anticipate a higher load.
+- It is recommended to take backups before scaling.
 
 ## API reference
 
 OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
 
+### Reconfiguration API
+
+This API allows to reconfigure cluster by adding or removing brokers, adding more partitions, or
+changing the replicationFactor. This can be used instead of the Scale API.
+
+:::note
+This endpoint does not respect the **fixed** partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used, the partitions are redistributed using `ROUND_ROBIN` strategy.
+:::
+
+#### Request
+
+```
+PATCH actuator/cluster
+{
+  brokers: {
+    add: [<brokerIds>]
+    remove: [<brokerIds>]
+    count: <integer>
+  }
+  {
+    partitions: {
+      count: <integer>
+      replicationFactor: <integer>
+    }
+  }
+}
+
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "brokers": {
+          "add": [3,4,5]
+        },
+        "partitions": {
+          "count": 6,
+          "replicationFactor": 3
+        }
+      }'
+```
+
+</details>
+
+##### Dry run
+
+You can also do a dry run without actually executing the reconfiguration by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false.
+
+##### Force
+
+:::caution
+This is a dangerous operation and must be used with caution. When not used correctly, split-brain scenarios or unhealthy, unrecoverable clusters may result.
+:::
+
+Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
+
+This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
+
+:::note
+Do not send more than one force request at a time.
+:::
+
+The following request reconfigures the cluster by force removing the specified brokers.
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/actuator/cluster?force=true' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "brokers": {
+          "remove": [0,2]
+        }
+      }'
+```
+
+This operation does not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have a reduced number of replicas for the affected partitions.
+
 ### Scale request API
+
+:::note
+See also the Reconfiguration API
+:::
 
 To scale up or down, use the following request to change the cluster size and redistribute the partitions.
 
