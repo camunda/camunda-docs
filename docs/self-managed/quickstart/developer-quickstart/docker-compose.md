@@ -75,7 +75,7 @@ You can log in to all web interfaces using with the default credentials:
 - Elasticsearch: [http://localhost:9200](http://localhost:9200)
   Elasticsearch is used by Orchestration Cluster (as secondary storage) and Optimize.
 - Keycloak: [http://localhost:18080/auth/](http://localhost:18080/auth/)
-  Keycloak is used to manage users for Management and Modeling components and can be accessed with the username `admin` and password `admin`. Users for the Orchestration Cluster are mangaed within the Orchestration Cluster itself.
+  Keycloak is used to manage users for Management and Modeling components. Users for the Orchestration Cluster are mangaed within the Orchestration Cluster itself. Keycloak can be accessed with the username `admin` and password `admin`.
 
 ### Stop Camunda 8
 
