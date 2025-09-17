@@ -245,23 +245,3 @@ The following advanced configuration options can be provided via environment var
 ## Next steps
 
 Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
-
-## Troubleshooting
-
-### User creation
-
-User creation in Identity only happens on the first startup. This means:
-
-- If you want to add a user using the --username and --password options, or
-- If you want to seed users at startup via configuration in `application.yaml`,
-
-then you must ensure that Elasticsearch starts fresh. Otherwise, Identity will reuse the existing indices and skip creating new users.
-
-Tip: If you are testing locally, delete the existing Elasticsearch indices before restarting C8Run:
-
-```bash
-# Example: delete indices to reset Identity state
-curl -XDELETE 'http://localhost:9200/identity*'
-```
-
-After clearing the indices, restart C8Run with your configuration or command-line options, and the users will be created as expected.
