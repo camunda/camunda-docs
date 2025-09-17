@@ -68,7 +68,7 @@ implementation 'io.camunda:camunda-client-java:${camunda.version}'
 
 Use the latest version from [Maven Central](https://search.maven.org/artifact/io.camunda/camunda-client-java).
 
-### Step 2: Connect to your Camunda 8 cluster
+### Step 2a: Configure the Orchestration Cluster connection for Self-Managed
 
 Instantiate a client to connect to your Camunda 8 cluster. Choose the [authentication method](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) based on your environment:
 
@@ -76,7 +76,6 @@ Instantiate a client to connect to your Camunda 8 cluster. Choose the [authentic
 {label: 'No Authentication', value: 'no-auth' },
 {label: 'Basic Authentication', value: 'basic-auth' },
 {label: 'OIDC-based Authentication - Self-Managed', value: 'oidc-self-managed' },
-{label: 'OIDC-based Authentication - SaaS', value: 'oidc-saas' },
 {label: 'OIDC-based Authentication with Client Certificate', value: 'x509' },
 ]}>
 
@@ -272,65 +271,6 @@ The client will automatically read the environment variables and configure the a
   :::
 
 </TabItem>
-
-<TabItem value="oidc-saas">
-
-**Use for:** Camunda 8 SaaS environments.
-Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
-
-```java
-private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";
-private static final String CAMUNDA_CLIENT_ID = "[Client ID from Console]";
-private static final String CAMUNDA_CLIENT_SECRET = "[Client Secret from Console]";
-private static final String CAMUNDA_CLUSTER_REGION = "[Cluster Region from Console]";
-
-public static void main(String[] args) {
-
-    try (CamundaClient client = CamundaClient.newCloudClientBuilder()
-            .withClusterId(CAMUNDA_CLUSTER_ID)
-            .withClientId(CAMUNDA_CLIENT_ID)
-            .withClientSecret(CAMUNDA_CLIENT_SECRET)
-            .withRegion(CAMUNDA_CLUSTER_REGION)
-            .build()) {
-
-        // Test the connection
-        client.newTopologyRequest().send().join();
-        System.out.println("Connected to Camunda 8!");
-    }
-}
-```
-
-**What this code does**
-
-1. **Sets up SaaS authentication** – Configures the client to connect to Camunda 8 SaaS using your cluster credentials.
-2. **Builds a cloud client** – Creates a client optimized for SaaS with automatic endpoint discovery.
-3. **Connects to your cluster** – Uses your cluster ID and region to locate and connect to the correct SaaS instance.
-4. **Tests the connection** – Verifies SaaS authentication by requesting cluster topology information.
-
-**Environment variables option**  
-You can also set connection details via environment variables to create the client more simply:
-
-```bash
-export ZEEBE_GRPC_ADDRESS='[Zeebe gRPC Address from Console]'
-export ZEEBE_REST_ADDRESS='[Zeebe REST Address from Console]'
-export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
-export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
-export CAMUNDA_CLIENT_ID='[Client ID from Console]'
-export CAMUNDA_CLIENT_SECRET='[Client Secret from Console]'
-```
-
-```java
-CamundaClient client = CamundaClient.newClientBuilder().build();
-```
-
-The client will automatically read the environment variables and configure the appropriate authentication method.
-
-:::note
-Ensure addresses are in absolute URI format: `scheme://host(:port)`.
-:::
-
-</TabItem>
-
 <TabItem value="x509">
 
 **Use for:** Production environments with X.509 certificate-based authentication.
@@ -426,6 +366,62 @@ Refer to your identity provider documentation for configuring X.509 authenticati
 </TabItem>
 
 </Tabs>
+
+### Step 2b: Configure the Orchestration Cluster connection for SaaS
+
+**Use for:** Camunda 8 SaaS environments.
+Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+
+```java
+private static final String CAMUNDA_CLUSTER_ID = "[Cluster ID from Console]";
+private static final String CAMUNDA_CLIENT_ID = "[Client ID from Console]";
+private static final String CAMUNDA_CLIENT_SECRET = "[Client Secret from Console]";
+private static final String CAMUNDA_CLUSTER_REGION = "[Cluster Region from Console]";
+
+public static void main(String[] args) {
+
+    try (CamundaClient client = CamundaClient.newCloudClientBuilder()
+            .withClusterId(CAMUNDA_CLUSTER_ID)
+            .withClientId(CAMUNDA_CLIENT_ID)
+            .withClientSecret(CAMUNDA_CLIENT_SECRET)
+            .withRegion(CAMUNDA_CLUSTER_REGION)
+            .build()) {
+
+        // Test the connection
+        client.newTopologyRequest().send().join();
+        System.out.println("Connected to Camunda 8!");
+    }
+}
+```
+
+**What this code does**
+
+1. **Sets up SaaS authentication** – Configures the client to connect to Camunda 8 SaaS using your cluster credentials.
+2. **Builds a cloud client** – Creates a client optimized for SaaS with automatic endpoint discovery.
+3. **Connects to your cluster** – Uses your cluster ID and region to locate and connect to the correct SaaS instance.
+4. **Tests the connection** – Verifies SaaS authentication by requesting cluster topology information.
+
+**Environment variables option**  
+You can also set connection details via environment variables to create the client more simply:
+
+```bash
+export ZEEBE_GRPC_ADDRESS='[Zeebe gRPC Address from Console]'
+export ZEEBE_REST_ADDRESS='[Zeebe REST Address from Console]'
+export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
+export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
+export CAMUNDA_CLIENT_ID='[Client ID from Console]'
+export CAMUNDA_CLIENT_SECRET='[Client Secret from Console]'
+```
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder().build();
+```
+
+The client will automatically read the environment variables and configure the appropriate authentication method.
+
+:::note
+Ensure addresses are in absolute URI format: `scheme://host(:port)`.
+:::
 
 ### Step 3: Start building your process application
 

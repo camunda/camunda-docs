@@ -92,34 +92,9 @@ If you are using IntelliJ:
 Settings > Build, Execution, Deployment > Compiler > Java Compiler
 ```
 
-### Step 3: Configure the Camunda 8 connection
+### Step 3a: Configure the Orchestration Cluster connection for Self-Managed
 
 Set up your connection and authentication in `application.yaml` as shown below. Choose the mode and authentication method for your environment.
-
-<Tabs groupId="mode" defaultValue="saas" queryString values={[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value="saas">
-
-**SaaS example (`application.yaml`):**
-
-```yaml
-camunda:
-  client:
-    mode: saas
-    auth:
-      client-id: <your client id>
-      client-secret: <your client secret>
-    cloud:
-      cluster-id: <your cluster id>
-      region: <your cluster region id>
-```
-
-</TabItem>
-
-<TabItem value="self-managed">
 
 Choose the authentication method and gRPC/REST address for your environment:
 
@@ -189,9 +164,21 @@ If you have configured the audiences property for the Orchestration Cluster (`ca
 </TabItem>
 </Tabs>
 
-</TabItem>
+### Step 3b: Configure the Orchestration Cluster connection for SaaS
 
-</Tabs>
+Set up your connection and authentication in `application.yaml` as shown below:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+    auth:
+      client-id: <your client id>
+      client-secret: <your client secret>
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your cluster region id>
+```
 
 :::note
 Ensure all addresses use absolute URI format: `scheme://host(:port)`.
