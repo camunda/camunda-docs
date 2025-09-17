@@ -1,16 +1,18 @@
 ---
 id: get-process-instance-sequence-flows
 title: "Get process instance sequence flows"
-description: "Get sequence flows taken by the process instance."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get process instance sequence flows"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/Ss7OCVTWpTz0aa8qf5I1SapazvtwfUBBFciYhKggaVljYb/vQOAlGSKcdROpycdNBSJxb5d7HsAuStGfG5ZcsMujBZoLUhliSuB7DZiukLDSWo1zVjC5kit0bS1ucL7GpXA80IvLItYhlYYWbkZLGHvkcC2FjBzJkD8DhWkS6Acoeohjv5SLGIVN7xEQuOiWjHFS2QJq54C/4pLFjHpUCpOOYuYwftaGsxYQqbGfijXOQK3Vs4VZnCHS9CzwRAiWORS5MAFWeAWONRK3tcIMkNFcibRwEwboFza3fhZxKzIseQsWTFaVi5wS0aqOWuaWxejrbSyaN34q/HYXXbj7Lvtr6FBWxfkwIRWhIqcG15VhRS+VvEX63yttmJ5CtKvdB/gvkazhC5YB9TmotMvKMjVyDhmkAyZSMLSDufy1POWK24M9yUcnvt8iFtL8HxkdoufjsL9qgzR5CnS9HTEmmiIfns5W1NtkC4bx6c4k0q6iXu77txl66kObdjpvrkP+GwXAAssUdG+jlpzmJ5u5PJkYSOnrsroB5lhBlJ5Nf508fFTF4NHJVS8A90FCaNfx9jix1qFESNJBW4oNrSVXXp6sWZPc/u7E8xmUhOxN8+IO6ScceIgLShN8MALmT0j6MrotMDyu28JewIXwRIyJC4LCLJwSx0M07DWN5fnJ/Djm7c/3L7IiSqbxPFisRiZmTjCTJI2I23msZkJ93N2L0dwnaNBKPkSUgSeZZ4dvICN4MBWKORMCiDdba4+GFeDsLc/r9YwukuvmTYlJ5aw2sgdtk3g8+W0256XUs13of2cGXfVSRhPdU1JWnB1xzbl/RanJ2DrsuRm++DYAmgiZolTvZUGk4pwjmY7fqno9atBvfx8fX0BwQUIneGTQ8YBuSRKqWRZlyx5Mx5HrOSP4e778bhxPl3F98hEAT5WBVeeWv10pIJSG2z54xNbvw/8N5XRRs5lH3fUV6Z7eBoy6gR1PCwod+6jJSi4uLNBScBryh1qkA8Igz4IXtiDyA4iO4js6yJ7vcv3c21SmWWoPD3XemuPLl4UeoGHw+ugq4Ouvqqrt0NvgxMFbpWN4yEaow1oIWpjMHPfoMX6ZbzDboUXuHjQ2kFrB63taq2JWImU67Zd5dtJlLOExa2ajroobbza/ahv4u4D8mjWtrQsmoeuF1WbgiVsFVTVJHG8yrWlJllV2lATP7iSPXAjeVoEorrhoL6OVYUWvPCPh6rrBlzDq8v6NyNytBR6cHBS1JbQwOXZ1TW854QL3n7va9ODeTd+Nx7+wteG9vA+uZhCyDxwdmsf6SDchjDcQPHG/xTEN8gsitpIWl45F2EJU+QGzaR2VVzzqsX2SO4+GLGo/XPese2XP689YaSaaT+9Jc7zQbkqorEho/HoeJewF1OvO6HLslZ+81VzWEjKgcMJL2uVcXgHIvh1iiykQGW9NNqGZmf2IYzAHwERjkeucIFp3Z47l5TX6UjoMhZh2vqaFjqNSy5V3ELY+GTy8fOn08nRh+nJ2aers6Pj0XhEj+QXotKWSq624nBN2m90HPv5rzbHz7/s8bZlJHykuCq4VI5kPudVK9gbtiNYFrFksA3c0+xt1Oruhq1WKbf42RRN4x77xiZLbm43MvW6zqR1/zOWzHhh+83j7XRfXLZt5pfwv7WUBxera6Oqpd9zitrdsYjdufbhULuyuW0iliPP0Picg+FECKxoy8VOH9nJcr2lvj9zevobiohxJQ==
+api: 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
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Get sequence flows taken by the process instance.
 
 <Heading
@@ -49,7 +54,12 @@ Get sequence flows taken by the process instance.
       required: true,
       description:
         "The assigned key of the process instance, which acts as a unique identifier for this process instance.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -80,25 +90,79 @@ Get sequence flows taken by the process instance.
                       description: "The sequence flow ID.",
                     },
                     processInstanceKey: {
-                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
                       description: "The key of this process instance.",
                     },
                     processDefinitionKey: {
-                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
                       description: "The process definition key.",
                     },
                     processDefinitionId: {
-                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
                       description: "The process definition ID.",
                     },
                     elementId: {
-                      type: "string",
                       description:
                         "The element ID for this sequence flow, as provided in the BPMN process.",
+                      allOf: [
+                        {
+                          description: "The model-defined id of an element.",
+                          format: "ElementId",
+                          type: "string",
+                          example: "Activity_106kosb",
+                          title: "ElementId",
+                        },
+                      ],
                     },
                     tenantId: {
-                      description: "The tenant ID for this sequence flow.",
+                      example: "customer-service",
+                      description: "The unique identifier of the tenant.",
+                      format: "TenantId",
                       type: "string",
+                      title: "TenantId",
                     },
                   },
                   title: "ProcessInstanceSequenceFlowResult",
@@ -153,6 +217,7 @@ Get sequence flows taken by the process instance.
     },
     "401": {
       description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
       content: {
         "application/problem+json": {
           schema: {

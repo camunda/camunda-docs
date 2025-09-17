@@ -105,7 +105,7 @@ If multiple user task listeners of the same `eventType` (such as multiple `assig
 
 User task listeners are implemented using [job workers](/components/concepts/job-workers.md), similar to execution listeners and service task jobs. The job worker processes the task listener job, can apply corrections, and may optionally deny the lifecycle transition.
 
-See [open a job worker](/apis-tools/java-client-examples/job-worker-open.md) for an example of how to create a job worker and handler that can also process user task listener jobs.
+See the [job worker documentation](/apis-tools/java-client/job-worker.md) for examples of how to create a job worker and handler that can also process user task listener jobs.
 
 ### Accessing user task data
 

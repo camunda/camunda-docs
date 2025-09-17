@@ -1,13 +1,13 @@
 ---
 id: orchestration-cluster-api-rest-data-fetching
 title: "Data fetching"
-description: "Learn about fetching data using the Orchestration Cluster API."
+description: "Learn about fetching data using the Orchestration Cluster REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Orchestration Cluster API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants. Each search-enabled endpoint supports rich filtering, sorting, and pagination so you can quickly find the data that matters most.
+The Orchestration Cluster REST API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants. Each search-enabled endpoint supports rich filtering, sorting, and pagination so you can quickly find the data that matters most.
 
 The sections below explain how to structure a search request and interpret the response format.
 
@@ -20,7 +20,7 @@ The following examples support search via POST endpoints, each with its own set 
 - Users (`POST /v2/users/search`)
 - Batch operations (`POST /v2/batch-operations/search`)
 
-Refer to the [interactive Orchestration Cluster API Explorer][camunda-api-explorer] for the full attribute lists.
+Refer to the [interactive Orchestration Cluster REST API Explorer](./specifications/orchestration-cluster-api.info.mdx) for the full attribute lists.
 
 ## Supported operations
 
@@ -41,11 +41,32 @@ GET /v2/user-tasks/:userTaskKey
 
 ## Data consistency
 
-All search and retrieval endpoints (GET and POST) return near-real-time data consistency guarantees. Results reflect the current state of runtime and historic data that has been processed by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+Endpoints in the Orchestration Cluster API are classified as either **strongly consistent** or **eventually consistent**.  
+This distinction applies to the _data behind the endpoint_, not the endpoint's functionality itself.
+
+- **Strongly consistent endpoints** return data that reflects the real-time state of the system.
+- **Eventually consistent endpoints** return data exported by the [Camunda Exporter](../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md). This data may lag behind the real-time state until the exporter processes it, so it becomes consistent only after a delay.
+
+Each endpoint is clearly labeled with its consistency type so you can account for this behavior in your applications.
+
+### Why consistency matters
+
+If eventual consistency is not handled properly, it can lead to unexpected results.
+
+For example:
+
+1. A resource is created using a strongly consistent endpoint.
+2. An _immediate_ request to an eventually consistent endpoint for the same resource might return:
+   - `404 Not Found` for a `GET` request, or
+   - an empty result set for a search request.
+
+This happens because the eventually consistent endpoint has not yet synced the new data. A later request will return the correct result once the data export completes.
+
+If your application does not account for eventual consistency, you may encounter **non-deterministic runtime behavior**. Code paths that work reliably during development or testing may fail intermittently in production, especially under load, if this characteristic is ignored.
 
 ## User task support
 
-The Orchestration Cluster API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
+The Orchestration Cluster REST API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
 
@@ -130,7 +151,7 @@ This limits the result set returned in the response to 3 items, no matter how ma
 
 To provide an easy yet expressive way for users to search for and filter resources, search requests can contain more advanced filter criteria than fields being _equal_ to a target value.
 
-For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the Orchestration Cluster API specification.
+For example, this allows searching using logical (and, in) and comparison operators (greater than, less than). The list of generally supported advanced filter operators is described below. The supported operators depend on the endpoint and the type of the filter attribute. All endpoints document available operators for each attribute in the Orchestration Cluster REST API specification.
 
 #### Conditional Operators
 

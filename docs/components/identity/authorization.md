@@ -1,30 +1,41 @@
 ---
 id: authorization
-title: Authorization
-description: "Learn how to manage authorizations in your Orchestration cluster."
+title: Authorizations
+description: "Learn how to manage authorizations to an orchestration cluster."
 ---
 
-Authorizations are managed through permissions that can be assigned to [users](user.md), [groups](group.md), [roles](role.md), clients, and mapping rules.
+An authorization grants an **owner** access to a **resource** and defines the specific **permissions** they have.
 
-To learn more about authorizations, see [authorizations](/components/concepts/access-control/authorizations.md).
+- The **owner** is the entity that receives permissions, like [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](./mapping-rules/manage-mapping-rules.md).
+- The **resource** is the object that the permissions apply to, like process definition, decision definition, or system. See the full list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
+
+Each authorization specifies which permissions (e.g., `READ`, `UPDATE`, `DELETE`) the owner has on the resource.
+
+:::tip
+To learn more, see the [authorization concepts](/components/concepts/access-control/authorizations.md).
+:::
 
 ## Create an authorization
 
 To create a new authorization:
 
 1. Log in to Identity in your cluster, and click on the **Authorizations** tab.
-2. Select the resource type on the left side of the screen, and click **Create authorization**.
-3. Provide the following information for your authorization:
-   - **Owner type:** The entity (user, group, role, client, or mapping) to which you want to assign permissions.
-   - **Owner ID:** The ID of the owner to which you want to assign permissions.
-   - **Resource type:** A dropdown pre-populated with the selected resource type.
-   - **Resource ID**: The ID of the resource to which the owner's permissions apply.
-4. Select the permissions this authorization will grant.
-5. Click on the **Create authorization** button to finish.
+2. Select a resource type from the list on the left, and click **Create authorization**.
+3. Provide the following information:
+   - **Owner type**: The entity to which you want to assign permissions, such as a User, Group, Role, Client, or Mapping rule.
+   - **Owner ID**: The unique ID of the owner.
+   - **Resource type**: The selected resource type.
+   - **Resource ID**: The ID of the resource. Use `*` to grant permissions for all resources of the selected type.
+4. Select the permissions you want to grant.
+5. Click **Create authorization**.
 
-The authorization is then created, and the user, group, role, client, or mapping is granted the permission to perform the action on the specified resource.
+The authorization is created, and the owner is granted the specified permissions.
 
 ![identity-create-authorization-tab](./img/create-authorization-tab.png)
+
+## Update an authorization
+
+Authorizations cannot be updated after they are created. To edit an authorization, you must first [delete](#delete-an-authorization) the existing one and then create a new authorization with the updated permissions.
 
 ## Delete an authorization
 
@@ -32,7 +43,7 @@ To delete an authorization:
 
 1. Log in to Identity in your cluster, and click on the **Authorizations** tab.
 2. Select the resource type of the authorization you want to delete.
-3. Click on the **Delete** button next to the authorization you want to delete.
-4. Confirm the deletion by clicking **Delete** button in the confirmation dialog.
+3. In the list, find the authorization you want to remove and click the **Delete** button next to it.
+4. Confirm the deletion by clicking **Delete** in the confirmation dialog.
 
-The authorization is deleted, and the user, group, role, client, or mapping no longer has permission to perform the action on the specified resource.
+The authorization is deleted, and the owner no longer has the permissions granted by it.

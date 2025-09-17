@@ -1,16 +1,18 @@
 ---
 id: get-mapping-rule
 title: "Get a mapping rule"
-description: "Gets the mapping rule with the given ID."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get a mapping rule"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/Ss7e0qmtCinTpvyprEdV50k9ThOenB9gMCViAQEGGBpW6Phf+8sQcWSpaROp0cfNBSJxT7s7nv4WiGrRcTiCt+qpjFuAaG1hNcZ+oaCYuPdtMQCF8SDwYW0Z1hS1ME0YoAFnhFH4Iqg3vACt4ar/uvC3JCD6cnob4cZNiqompiC4K7QqZqwwPre/bTEDI34bRRXmGGgL60JVGLBoaWH4JcVwfQE/Hx3BOxhQTzCDKOuqFZYrJCXjeBFDsYtsOuuxX9svIsUpf3FeCyPXYzt2FSEQNwGRyXEVmuKcd5auxQw7R2TY3GjmsYa3Scy/xTF12p3LH72iTRLaoKknU0aibbK1O/69Dwc9r4cSCLXWei7Svi1akbYZcnXR2XbRzq7EdNvenP/aVBDAnsP2+V+lKudGo+w6zJkw1Z6bvDzgmJrGbtO2o/Gh/vrKayiyGCV/hwlYFOCarkix0PFQAcq5VXZ+J26NsHPLNU/7dZ3G3QC58kSSmJlLKS6g4qQDGdUgnFwdfH6GH47evnr9bOKuYlFnt/e3o7CXB9QadiHkQ+LPMy1/MTu+QguKwqSmCXMCFRZGsFUFu4ZBbEhbeZGSyEli8OwQTKflPl9OqbW3UrNfagVY4FtMDuFm8CHiymYPovzpchnB7rvM1dSsQLVzLdczKxyn/G+uP9GjwnEtq5VWK4Zsg3QZRhZcbsRBhrHtKCwOX7j+OcXe6n3++XlOSQXoH1JMPcBuDJxDSRB1MaZuq2xOBqPheB36e2X8bgTn1LxR0TigO4aq1wi4INwjIPaBxr40wdmXGTl9P9VGR/MwjzE3RbaQOKTFNFaZEePmTTXC8KW+vu51HmGuW9d+aSzJ5096exbOnu5b3MycSBZDsJDCsEH8Fq3IVAJt5WxvXvZn6yxh4UvcfFJa09ae9LartZkj0pc+eH0059buMIC82HxOpAlLearrbWsk6MGhZv14aYNFgtcJfV0RZ6vKh+5K1aND9zlN1KaGxWMmtlESGlOKluzx3qtbP95XxWlYXOP/WfQFUVORzc4tm1kCnBx+v4SzhTTrVr2GRb4bZhX41fjvQhi+gjvk/MppMgTNzfmizWECH8vRDL+UZD+6BZJt8Hw8r24SCmckQoUJq1U6yt/BuweSd6TEWbDn9drVv3x12VPDOPmvu8+EOT7g5IqUogpovHocJeY59NeX9rXdev6SdYt0n5IwbGqW1cqeAU6+RXlWaPJxV4Cwwl5bfYmtcDHhAiHIylcYtp6bl0YrtrZSPs616nb1+fM+lleK+PyASLmx5O3H96dTA7eTI9P370/PTgcjUd8x30iGh+5Vm5jHGfEoLY2dg/DXd2vKj92NTAUi+mO88Yq44RKfWSrQX5XuCU/zLDYPkpeZ4OGrnC1mqlIH4LtOvn8paWwxOLq+l5yvUZLE+V/icVc2fjwemEzlmcXw0XEc3jUpcPecIaPyi177fcncsQMP9Ny5xqku+4yrEiVFPqhJpuJ1tTwRu+dSwZRxtfZ6+xUKP0PKQQu/w==
+api: eJztWE1z2zYQ/SsYnJKpLMqpk6a8qbLiqpM4Hlu2pyPrAIErEQkIMMDStobD/95ZgIwlS0mdTm71QSOJWO7bj/fwVXMUK8/TGf8gylKZFXOVBj7vcVuCE6ismWQ85SvA1uCcxns8Ay+dKsmAp/zG3JjZbPTx9GJyMR2fjv5Ox1fj0+nl8P18TmMngJ5hDqzYQGF3CvPwdKVuwbDJcf/G8B4vhRMFIDiKq+ZGFMBTXjzATzLe44pwS4E573EHXyrlIOMpugoeBzfNgU2OmV3uRoCWrQD7vMe9zKEQPK05rkvC8+iUWfGmmZN/X1rjwdP4q8GAvnYxtnMTnjnAyhnImK+kBO+XldZrApPWIBgkN6IstZKh0MknT77q3Vjs4hNIpNI4aguqGInUQhWnoTyPw95XAypkV4XwKqVfiLLPm170dSV09URnt2T6TW/mPwW1WcDgZrvnT/K3v9F93jQ9jgo1vb7B5HPwlUbeNDR+NDjc31niF3hkWsjPnlJXGRMV5mCw7R2TDjL6K7SnDucgskDgml9fXx8MH4xhb4e/sq35JjtKZxcail92WbId8JCdRUuWAQqlWWQPE55FwwVkTBk2O383Yr8fvf5t/iJHLH2aJHd3d323lAeQKbSub90qcUtJH7J72WfTHBxVds0WwESWKcIUmj3wkvkSpFoqSXSgNrRhM0o06vv7pI6ju61eWlcI5CmvnNrp/JBdnk+YCh1YrqnrO9DhnaWgbqdcLGyF6UIL85k/EOPf+DVkvioK4dYdxbYBmh73KLDaSIMrg7ACtxm/Mvjrq73c/XM6PWPRBZM2A7a0jmGufAdESRTKqKIqeHo0GJBC7uO/N4NBQz6p40/IxDC4L7UwkbyP0lGGFdZBy5+QmDIehZE/qzPWqZV6jLst0pbExzGjTqBHT5l6u2Vla/oIM7KxyJa2Mtl3ZuFnnT3r7H+us9f7tjhDw6jKjngIzlnHrJSVc5Cxu1zp4J52OR12u2hGLj5r7Vlrz1rb1RptcgFz256xwukHc57ypF28DmhJ80m9tZY1dGABd9sdkSqnecrrqJ4mTZI6tx6btC6twya5pdbcCqfEQkdC0nBUWccebaXQ4fG+LtLA5k79o5M5eIwHRDbSlUdw7Hx8MWUnAuFOrEOFCX4b5u3g7WAvApk+wfvwbMJi5pGbG/NFB0HC3wsRjX8UJBwAPcjKKVxfkItYwj9AOHC0sd/gT4sdkOj/IhjxXvvjXceqv66ngRjKLG14vSXI/qCGZxNqIDgfkxn0D9spVchQ3/aIPBJFZTLBxmalDEBL5UiObjpcKcyrRV/aIpHR/Ou38r4Cz5sdup9NgmqlLYrKhKnbrOIuS7AO8y2TMVrSs1YSjIc9ob2PI+wqJsMO+4MfCXGh7SIphDJJC+GT0fDD5enx8OD9ZDQ+vRgfHPYHfbzHUN7SeiyE2YjjBJCJre3iY6rUD2vVz73WaCmCcI9JqYUyVOmQed2Kfsa3RM97PN0+Ac97rXJnvK4XwsOl001Dj79U4NY8nc0fhB5mhkx5+p3xdCm0f3w1spnri/P2EuUle9KFyd502ofCrMOME24TOO/xz7DeucJp5k13Tg6hRpuhlFDixts7FySkx69z5smYhPQPEnx7VA==
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -31,6 +33,9 @@ import Heading from "@theme/Heading";
   path={"/mapping-rules/{mappingRuleId}"}
   context={"endpoint"}
 ></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Gets the mapping rule with the given ID.
 
@@ -74,10 +79,13 @@ Gets the mapping rule with the given ID.
                 type: "string",
                 description: "The value of the claim to map.",
               },
-              name: { type: "string", description: "The name of the mapping." },
+              name: {
+                type: "string",
+                description: "The name of the mapping rule.",
+              },
               mappingRuleId: {
                 type: "string",
-                description: "The ID of the mapping.",
+                description: "The ID of the mapping rule.",
               },
             },
             title: "MappingRuleResult",
@@ -87,6 +95,7 @@ Gets the mapping rule with the given ID.
     },
     "401": {
       description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
       content: {
         "application/problem+json": {
           schema: {

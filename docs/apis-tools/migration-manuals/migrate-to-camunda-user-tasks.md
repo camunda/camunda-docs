@@ -1,6 +1,7 @@
 ---
 id: migrate-to-camunda-user-tasks
 title: Migrate to Camunda user tasks
+sidebar_label: "Camunda user tasks"
 description: "Learn how to migrate job worker-based user tasks to Camunda user tasks."
 ---
 
@@ -72,7 +73,7 @@ To make an informed decision, you should understand the differences between both
         <th style={{ textAlign: "center" }} colspan={3}>API</th>
     </tr>
     <tr>
-        <th style={{ textAlign: "end" }}>Supports Orchestration cluster API</th>
+        <th style={{ textAlign: "end" }}>Supports Orchestration Cluster REST API</th>
         <td>
             <YesItem />
             <TableTextSmall>Full support</TableTextSmall>
@@ -167,7 +168,7 @@ We recommend you migrate process-by-process, allowing you to thoroughly test the
 
 Repeat these steps for all user tasks in the process. Then, deploy the process to your development cluster and test it by running the process and ensuring your custom task applications work.
 
-## How Tasklist API (V1) compares to Orchestration cluster API (V2)
+## How Tasklist API (V1) compares to Orchestration Cluster REST API (V2)
 
 :::note
 The Tasklist REST API is [deprecated with the 8.8 release and will be deleted with the 8.10 release](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis).
@@ -179,7 +180,7 @@ The following table provides a breakdown of which operations are supported in wh
     <tr>
         <th style={{ textAlign: "end" }}>Operation</th>
         <th>Tasklist API</th>
-        <th>Orchestration cluster API</th>
+        <th>Orchestration Cluster REST API</th>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Query tasks</th>
@@ -229,7 +230,7 @@ The following table outlines the respective endpoints. Click the endpoints to fo
     <tr>
         <th style={{ textAlign: "end" }}>Operation</th>
         <th>Tasklist API</th>
-        <th>Orchestration cluster API</th>
+        <th>Orchestration Cluster REST API</th>
     </tr>
     <tr>
         <th style={{ textAlign: "end" }}>Query user tasks</th>
@@ -362,7 +363,7 @@ docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 {
 type:"link",
 href:"/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/",
-label: "Orchestration cluster API (REST)",
+label: "Orchestration Cluster API (REST)",
 docId:"apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview"
 }
 ]}/>

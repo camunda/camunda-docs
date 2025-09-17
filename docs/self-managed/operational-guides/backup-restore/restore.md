@@ -1,7 +1,7 @@
 ---
 id: restore
-sidebar_label: Backup restore
-title: Camunda backup restoration
+title: "Restore a backup"
+sidebar_label: "Restore a backup"
 keywords: ["backup", "backups", "restore"]
 description: "Learn how to restore a Camunda 8 Self-Managed backup."
 ---
@@ -435,14 +435,14 @@ In a manual setup, you can simply stop all components.
 If you are using the Camunda Helm chart with an embedded Elasticsearch, you can achieve this by (for example) disabling all other components in the `values.yml`.
 
 ```yaml
-elsaticsearch:
+elasticsearch:
   enabled: true
 
 connectors:
   enabled: false
 optimize:
   enabled: false
-core:
+orchestration:
   enabled: false
 ```
 
@@ -665,7 +665,7 @@ It will overwrite the start command of the resulting Zeebe pod, executing a rest
 It's important that the backup is configured for Zeebe to be able to restore from the backup!
 
 ```yaml
-core:
+orchestration:
    enabled: true
    env:
    # Environment variables to overwrite the Zeebe startup behavior
@@ -685,7 +685,7 @@ core:
    ...
 
 # assuming you're using the inbuilt Elasticsearch, otherwise should be set to false
-elsaticsearch:
+elasticsearch:
    enabled: true
 
 connectors:
@@ -699,7 +699,7 @@ optimize:
 Alternative approach to overwriting the startup behaviour to restore the partitions.
 
 ```yaml
-core:
+orchestration:
    enabled: true
    command: ["/usr/local/camunda/bin/restore", "--backupId=$BACKUP_ID"] # Change the $BACKUP_ID to your actual value
    env:
@@ -714,6 +714,8 @@ core:
 If you're not using the Camunda Helm chart, you can use a similar approach natively with Kubernetes to overwrite the command.
 
 The application will exit and restart the pod and will be interpreted by Kubernetes as a `crashloop`. This is an expected behavior. The restore application will not try to restore the state again since the partitions were already restored to the persistent disk.
+
+After removing the temporary restore command or unsetting the `ZEEBE_RESTORE` and related backup ID environment variable to restore Zeebe’s default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
 

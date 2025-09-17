@@ -1,16 +1,18 @@
 ---
 id: create-tenant
 title: "Create tenant"
-description: "Creates a new tenant."
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWd9v2zYQ/lcO3MM2zLGcLt06vXlpu2Xo2iBxNwxZHk7U2WJLkSpJ2fEM/e/DkVLi1E6aAXt0gMCWeLqf33ekTxsRcOFFfiVmZNAEcT0StiGHQVlzVopcSEcYqF8diZK8dKrhZZGL07joAcHQCkIUGouRcPSpJR9+tuVa5BshrQlkAn/FptFKRvXZB89KNsLLimrkb2HdkMiFLT6QZGuNY2eCIh9Xo3726lbSB6fMYsevWUXQGvWpJaCbQM6g7r2Ds5eiGwmDNT1NDUuCnUOo6DbA7jPBp+jZurOjrksZU45KLsVtnL2f1yMRVNBsINUhpf0iJVl0958PrqV4wzfW+JS5Z5Nj/tj1qk/KCj2kQpfgWynJ+3mr9ZpreSjeF4u3vzq+1bE43UicTCb78984u1QllVBiQFAejA2wRK3KR1LfOFtoqr/bLcF9A1M4T5JQUkClIZUG0PcBFVSCMnB18foUfjp5/uP1N1UIjc+zbLVajd1cHlGpgnVj6xaZm0v+Z7lvxzCryBHUuIaCAMtSsU3UcFd08A1JNVcSgo0Z690GTvf4byNGX0JMXN0tz9y6GoPIRevUTrWm8P7iDFRJJqj5WpnFrun4zBy5OrnAwrYhLzSaj+Kukl/CxBR8W9fo1gMa7hvoRsIHDO1WGEKZQAty2/4rE75/thdvv85m55BUgLQlwdw6CJXygyEOolZG1W0t8pPJZCRqvElXP0wmEeJc8SdEYoBuGo0Gt8E9hKMM1NZRj58YmDI+oJH/V2WsUwv1ud37rOpB/DJFNBDq+128v7auUGVJJsIT+k1oYBVqbVd04NWBVwdePcKrk128v7UB5rY15cArb1snKZ4azO3agVcHXh149QCvnu87AE4NcJbjAZecsw6slK1zVMKqUjqq56P4YLvf0BIWD1w7cO3Atf1c23M25Mx5cksliQ+EkWYm6DW0BpeoNBaaGLnKR+BW2DRkwBq9BmvA2/qWfh5WEd/sk1/7QHX/09lDgfJj48j7ltctNI6WZEISJbck9zXXrG7acLeNepg7W0NBHDbdVNj6QOUIcGlVyfdilj0t2egclW4d+TGcakUmeEDHqqStazL8QzJYiEZb1HoNjoJbQ6is3/If54EcYHTXzufQkFO2HMNftgWJBjSh64sbKRD9vxdbTbJCo3wNnIochtZQWunHEuvWlDhWNl5nHLA17Gz2D1FBWSBZGSVRH0lrJDXBZ0MfPLpredlXFZpSK7M4umf70P4O7e/Q/h5qf91I1BQqy6PbxvoIHQyVyEWWJlZejETqRTz23YjWaZGLTSJKl2fZprI+dPmmsS502ZKrsESnuEHGovFyItQAFG0l6ioZ2y0YL2zP4d45WZEPacQMp5rbnYOLV5cz+AUDrXAdk8nm75t5MXkx2WuBRZ+gfXp+1nfhBMOt1jCYYI7vNZGE/6uRrrvmZMvWqbC+ZBUphQWhIzdtuS63UOltR0t8nYTEqP/yegDQb3/OIga4xV3czdlf3WDd9AS9HbXe4S/NTB+Cen87Ynhuo44eYY+Hytgg55OSyfh4F9nnZ5GgvD+1JnZps4CVChUgnKaNAl6ATHqZulpJMj7G0fs8iL1JK/BHsgjHY4ZDwu/QnBcqVG0xlrbO+m3o9rPQtshqVCbrTfjsdPr7+7cvp0dvzk5fvb18dXQ8nozDTYjpZfLUaLb9iLt8P/j9PNKtlxwPvhXpCx3oJmSNRmU44dH/TU/SYfbveeafiHYlNpsCPb13uuv49qeW3FrkV9d3vOSrbiQqwpJcZPVHWrMjyaWjGRtmcd2yAztj/G40PDGVvB8/Knu91WHO313OGKH9e57alvyMwxW/A8KVyIXg90n8dAR+vLcRGs2ixQXLJp389y8kkTlC
+api: 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
 sidebar_class_name: "post api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Creates a new tenant.
 
 <Heading
@@ -50,10 +55,15 @@ Creates a new tenant.
       "application/json": {
         schema: {
           type: "object",
+          additionalProperties: false,
           properties: {
             tenantId: {
               type: "string",
-              description: "The unique external tenant ID",
+              description:
+                "The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].",
+              minLength: 1,
+              maxLength: 256,
+              pattern: "^[A-Za-z0-9_@.+-]+$",
             },
             name: { type: "string", description: "The name of the tenant." },
             description: {
@@ -82,13 +92,21 @@ Creates a new tenant.
             type: "object",
             properties: {
               tenantId: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
                 type: "string",
-                description: "The unique external tenant ID",
+                title: "TenantId",
               },
-              name: { type: "string", description: "The name of the tenant." },
+              name: {
+                type: "string",
+                description: "The name of the tenant.",
+                example: "Customer Service Department",
+              },
               description: {
                 type: "string",
                 description: "The description of the tenant.",
+                example: "Customer Service department business processes",
               },
             },
             title: "TenantCreateResult",
@@ -219,6 +237,7 @@ Creates a new tenant.
         },
       },
     },
+    "409": { description: "Tenant with this id already exists." },
     "500": {
       description: "An internal error occurred while processing the request.\n",
       content: {

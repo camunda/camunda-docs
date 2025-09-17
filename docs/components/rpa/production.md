@@ -22,7 +22,7 @@ When running an RPA worker with Camunda SaaS, you can add access to [connector s
 
 To do this:
 
-1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) with both the `Zeebe` and `Secrets` scope.
+1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) with both the `Orchestration Cluster API` and `Administration API - Resource: Secrets` scopes.
 2. Use them in the worker config by adding the secrets endpoint to your `rpa-worker.properties` file:
 
 ```properties
@@ -100,7 +100,7 @@ camunda.rpa.zeebe.worker-tags=default,playwright
 
 ## Installation and setup guide
 
-An RPA worker acts as a specialized job worker designed to run outside the main Camunda orchestration cluster.
+An RPA worker acts as a specialized job worker designed to run outside the main Camunda Orchestration Cluster.
 
 ### Prerequisites
 

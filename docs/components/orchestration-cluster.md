@@ -1,21 +1,21 @@
 ---
 id: orchestration-cluster
-title: Orchestration cluster
-sidebar_label: Orchestration cluster
+title: Orchestration Cluster
+sidebar_label: Orchestration Cluster
 description: ""
 ---
 
-Get started with using the [Orchestration cluster](/reference/glossary.md#orchestration-cluster) components.
+Get started with using the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) components.
 
-## About the Orchestration cluster
+## About the Orchestration Cluster
 
-The Orchestration cluster is the core component of Camunda 8, powering the automation and orchestration of processes. An Orchestration cluster includes:
+The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. The Orchestration Cluster includes:
 
 - Zeebe as the workflow engine.
 - Operate for monitoring and troubleshooting process instances running in Zeebe.
 - Tasklist for interacting with user tasks (assigning, completing, and so on).
 - Identity for managing the integrated authentication and authorization.
-- APIs for interacting with the Orchestration cluster programmatically.
+- APIs for interacting with the Orchestration Cluster programmatically.
 
 ## Zeebe
 

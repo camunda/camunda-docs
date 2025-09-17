@@ -22,6 +22,25 @@ The current version of the active process and all its dependencies, like called 
 
 In SaaS, Play uses connector secrets from your selected cluster. connector secrets are not currently supported in Self-Managed.
 
+## Authorizations
+
+If [authorizations](/components/identity/authorization.md) are enabled on the cluster where you will run Play, the following permissions are required for each action:
+
+| Resource Type       | Permission                                       | Allowed action                                                                                                  |
+| ------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| Resource            | CREATE                                           | Deploy a process                                                                                                |
+| Process definition  | CREATE_PROCESS_INSTANCE                          | Start a process instance                                                                                        |
+| Process definition  | READ_PROCESS_INSTANCE                            | View process instance(s)                                                                                        |
+| Process definition  | READ_USER_TASK                                   | Get information about a user task                                                                               |
+| Process definition  | UPDATE_USER_TASK                                 | Complete a user task                                                                                            |
+| Process definition  | UPDATE_PROCESS_INSTANCE                          | Complete a service task, Throw error from a service task, Apply modifications, Set variables, Resolve incidents |
+| Decision definition | READ_DECISION_DEFINITION, READ_DECISION_INSTANCE | View decision instance in Operate (SaaS only)                                                                   |
+| Message             | CREATE                                           | Publish a message                                                                                               |
+
+### Limitations {#authorizations-limitations}
+
+- Fine-grained authorizations are not supported. If the **Resource ID** is not \* when defining authorizations, the user will not have access to any resources.
+
 ## Get started with Play
 
 ![play process definition view](img/play-definition.png)
@@ -33,6 +52,10 @@ Click a **start event's** play button to begin your process. Open the button's m
 Alternatively, save example data to the BPMN file directly from the modal in Play to reuse it in future sessions or share it with others.
 
 Play presents this example data in a readable JSON format, as illustrated below. See [data handling](/components/modeler/data-handling.md) for additional details.
+
+:::note
+Play will only consider the first executable process ID in the BPMN file.
+:::
 
 ![play example data](img/play-example-data.png)
 
@@ -102,17 +125,27 @@ For example, you can validate your process by creating and rerunning scenarios f
 Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
 :::
 
+Scenarios are stored in [test scenario files](advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+
+Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
+
+If multiple test scenario files are linked to the same process ID, Play will use:
+
+- The test scenario file with the earliest name alphabetically
+- If multiple test scenario files have the same name, the one that was most recently updated
+
 ### Save scenario
 
 To save a scenario:
 
 1. Execute a path in your process.
 1. Click **Save scenario** in the process instance header.
+1. A new [test scenario file](advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
 
 ![Save a scenario](img/play-save-scenario.png)
 
 :::tip
-To view your saved scenarios click **View all** beneath the Scenarios column in the process instance header.
+To view your saved scenarios in Play, click **View all** beneath the Scenarios column in the process instance header.
 :::
 
 ### Scenario coverage
@@ -123,6 +156,10 @@ Scenario coverage is calculated as the percentage of flow nodes in your process 
 - Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
 
 ![Scenario coverage](img/play-coverage.png)
+
+:::warning
+Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](advanced-modeling/test-scenario-files.md).
+:::
 
 ### Run scenario
 
@@ -135,10 +172,10 @@ You can run scenarios on the process definition page by clicking either the **Ru
 
 ### Limitations {#scenarios-limitations}
 
-- Scenarios are stored in the browser's local storage, making them accessible only in the current browser and not usable outside of Play, in a different browser, or by a collaborator.
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
+- Processes with multiple start events are not supported. If a process has multiple start events, Play only considers the first start event in the BPMN XML, and scenarios will only run from that start event.
 
 ## Modify a process instance
 
@@ -206,7 +243,7 @@ For more information about terms, refer to our [licensing and terms page](https:
 ### Camunda 8 SaaS
 
 In Camunda 8 SaaS, Play is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
-Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges.
+Additionally, within their organization, users need to have a [role](/components/console/manage-organization/manage-users.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 

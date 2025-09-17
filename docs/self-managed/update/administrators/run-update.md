@@ -1,97 +1,75 @@
 ---
-id: run-admin-update
-title: "Run update"
-description: "High-level administrator checklist for executing a Camunda 8.8 update."
+id: run-admin-upgrade
+title: "Perform an upgrade"
+description: "Administrator checklist for executing a Camunda 8.8 Self-Managed upgrade."
 ---
 
 import DocCardList from '@theme/DocCardList';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-# Run the update
+This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure you have completed all steps in [Prepare for upgrade](./prepare-for-update.md) before continuing.
 
-This page guides **platform administrators** through the _execution phase_ of an update to **Camunda 8.8 Self-Managed**.  
-It assumes you have completed all steps in [**Prepare for update**](./prepare-for-update.md) and that you have:
+## Step 1: Confirm prerequisites
 
-- A tested backup and rollback plan
-- A confirmed maintenance window
-- A defined deployment method (Helm chart or Docker images)
+First, confirm you have completed the following prerequisites:
 
-> For detailed command-line instructions, refer to the technical guides linked below.
+| Prerequisite | Description                                                                 |
+| :----------- | :-------------------------------------------------------------------------- |
+| Test upgrade | Confirm that the upgrade runs successfully in a non-production environment. |
+| Backups      | Backups created and verified .                                              |
+| Secrets      | Export required secrets (Operate, Tasklist, Identity, etc.).                |
 
-## Step 1 – Confirm prerequisites
+## Step 2: Perform upgrade
 
-- ✅ Test environment updated without errors
-- ✅ Backups validated
-- ✅ Required secrets exported (Operate, Tasklist, Identity, etc.)
-- ✅ Team responsibilities and runbooks shared
+Perform an upgrade as follows.
 
-## Step 2 – Choose your execution path
+<Tabs groupId="installation" defaultValue="helm" queryString values={
+[
+{label: 'Helm chart', value: 'helm', },
+{label: 'Docker Compose', value: 'docker', },
+]
+}>
 
-### Helm chart upgrade
+<TabItem value='helm'>
 
-If you are using Kubernetes with the Camunda Helm chart, follow the dedicated update instructions:
+### Helm chart
 
-<DocCardList items={[{type:"link", href:"/docs/next/self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880/", label: "Helm chart Upgrade: 8.7 to 8.8", docId:"self-managed/installation-methods/helm/upgrade/upgrade-hc-870-880"}
-]}/>
+To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-managed/installation-methods/helm/upgrade/helm-870-880.md) for detailed instructions.
+The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
 
-Consult the Helm guide for upgrade options, secret handling, and migration job monitoring.
-
-### Docker images
-
-Ensure you download the latest images.  
-For offline environments, see [Air-gapped installation](../../installation-methods/helm/configure/air-gapped-installation.md).
-
-For production deployments using Docker images:
-
-:::info Docker vs. Docker Compose
-Docker images are supported for production use on Linux systems.  
-Camunda-provided Docker Compose files are intended for **development environments only** and should not be used in production.
-
-For production environments, we recommend using Kubernetes or developing a custom deployment process using Infrastructure as Code tools (e.g., Terraform, Ansible, CloudFormation).
+:::note
+If you maintain custom deployment scripts, use the official Helm charts as a technical reference.
 :::
 
-## Step 3 – Run the update with Helm
+</TabItem>
+<TabItem value='docker'>
 
-```bash
-# Pull latest chart metadata
-helm repo update
+### Docker Compose
 
-# Execute upgrade (values.yaml contains your secrets & overrides)
-helm upgrade camunda-platform camunda/camunda-platform \
-  --version 13.0.1 \
-  --values upgrade-880-values.yaml \
-  --namespace camunda
-```
+Camunda-provided Docker Compose files are only intended for development and testing purposes, and **are not recommended for production environments**. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
-## Step 4 – Validate platform health
+Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
-After a successful upgrade:
+For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
-- Confirm pod readiness and Helm release status.
-- Verify component versions via Operate.
-- Run your post-update validation suite.  
-  _(Add link to validation steps if available.)_
-
-## Step 5 – Perform post-update tasks
-
-- Notify application teams that the platform is ready.
-- Monitor resource usage and error rates for 24–48 hours.
-- Document lessons learned and close the change ticket.
+</TabItem>
+</Tabs>
 
 ## Next steps
 
-After completing the platform update:
+After completing the upgrade to 8.8, you should:
 
-1. **Monitor platform stability** during the application rollout phase.
-2. **Support development teams** with any application deployment issues.
-3. **Update monitoring and alerting** to reflect Camunda 8.8 changes.
-4. **Document lessons learned** and refine internal procedures.
-5. **Plan your next update cycle** using a similar approach.
-6. **Clean up backups** in line with your retention policy.
+1. **Monitor cluster health and application stability** during the application rollout phase.
+2. **Update monitoring dashboards and alerts for Camunda 8.8** to reflect Camunda 8.8 changes.
+3. **Document lessons learned** and refine internal procedures.
+4. **Plan your next update cycle** using a similar approach.
+5. **Clean up backups** in line with your retention policy.
 
-## Additional resources
+## Useful resources
 
-- **[Helm chart upgrade guide: 8.7 → 8.8](../../installation-methods/helm/upgrade/helm-870-880.md)** – Full step-by-step Helm upgrade guide
-- **[Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md)** – How to gather troubleshooting data
-- **[Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md)** – Recommended backup workflows
-- **[Troubleshooting guides](../../operational-guides/troubleshooting.md)** – Common issues and resolution steps
-- **[Supported environments matrix](../../../reference/supported-environments.md)** – Compatibility details for components and infrastructure
+- [Helm chart upgrade guide: 8.7 to 8.8](../../installation-methods/helm/upgrade/helm-870-880.md): Full step-by-step Helm upgrade guide.
+- [Collecting diagnostics](../../installation-methods/helm/operational-tasks/diagnostics.md): How to gather troubleshooting data.
+- [Backup and restore guide](../../operational-guides/backup-restore/backup-and-restore.md): Recommended backup workflows.
+- [Troubleshooting guides](../../operational-guides/troubleshooting.md): Common issues and resolution steps.
+- [Supported environments matrix](../../../reference/supported-environments.md): Compatibility details for components and infrastructure.

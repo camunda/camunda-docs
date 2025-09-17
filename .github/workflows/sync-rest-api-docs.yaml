@@ -11,23 +11,23 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: camunda/camunda-docs
           path: docs
 
-      - name: Checkout Camunda repository
-        uses: actions/checkout@v4
+      - name: Checkout Camunda Specification repository
+        uses: actions/checkout@v5
         with:
-          repository: camunda/camunda
+          repository: camunda/camunda-orchestration-cluster-api
           path: rest-spec
-          sparse-checkout: zeebe/gateway-protocol/src/main/proto/rest-api.yaml
+          sparse-checkout: specification/rest-api.yaml
           sparse-checkout-cone-mode: false
 
       - name: Sync documentation
         run: |
           cd docs
-          mv ../rest-spec/zeebe/gateway-protocol/src/main/proto/rest-api.yaml api/camunda/camunda-openapi.yaml
+          mv ../rest-spec/specification/rest-api.yaml api/camunda/camunda-openapi.yaml
           npm i
           npm run api:generate:camunda
           if git diff-index --quiet HEAD; then

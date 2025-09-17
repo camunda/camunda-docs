@@ -2,17 +2,17 @@
 id: orchestration-cluster-api-tutorial
 title: Beginner tutorial
 sidebar_label: Beginner
-description: "New to the Orchestration cluster API? Step through our tutorial to list all roles, create a role, retrieve a role, and delete a role."
+description: "New to the Orchestration Cluster REST API? Step through our tutorial to list all roles, create a role, retrieve a role, and delete a role."
 ---
 
 <span class="badge badge--beginner">Beginner</span>
 
-In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration cluster API, such as listing all roles, creating a role, retrieving a role, and deleting a role.
+In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster REST API, such as listing all roles, creating a role, retrieving a role, and deleting a role.
 
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/components/console/manage-clusters/create-cluster.md).
-- Upon cluster creation, [create your first client](/components/console/manage-clusters/setup-client-connection-credentials.md). Ensure you check the `Zeebe` client scope box.
+- Upon cluster creation, [create your first client](/components/console/manage-clusters/manage-api-clients.md#create-a-client). Ensure you check the `Zeebe` client scope box.
 
 :::note
 Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
@@ -276,4 +276,4 @@ Having trouble configuring your API calls or want to examine an example of the c
 
 ## Next steps
 
-You can script several additional API calls as outlined in the [Orchestration cluster API reference material](./orchestration-cluster-api-rest-overview.md).
+You can script several additional API calls as outlined in the [Orchestration Cluster REST API reference material](./orchestration-cluster-api-rest-overview.md).

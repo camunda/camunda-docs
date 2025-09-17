@@ -28,6 +28,8 @@ Example path: `http://localhost:8080/v2/`
 
 See [the interactive Camunda 8 REST API Explorer][camunda-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Camunda 8 REST API.
 
+You can also directly [download the OpenAPI specification](https://github.com/camunda/camunda-docs/blob/main/api/camunda/version-8.7/camunda-openapi.yaml) to generate your own client.
+
 ### Deployment API
 
 You can change the `maxMessageSize` default value of 4MB in the [Gateway](../../self-managed/zeebe-deployment/configuration/gateway.md#zeebegatewaynetwork) and [Broker](../../self-managed/zeebe-deployment/configuration/broker.md#zeebebrokernetwork) configuration.

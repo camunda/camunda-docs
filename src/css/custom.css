@@ -478,6 +478,16 @@ body {
   border: 2px solid #333;
 }
 
+/* Search bar general */
+
+/* As we now show the breadcrumbs with full path,
+we make it less bold compared to the search keyword */
+.DocSearch-Hit-source {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: unset !important;
+}
+
 /* Landing page search bar */
 
 .homeSearch {
@@ -644,6 +654,60 @@ h3 .badge:nth-of-type(1) {
   color: #000000;
   margin-left: 4px;
   vertical-align: text-top;
+}
+
+.badge--consistent {
+  background-color: var(--ifm-color-success);
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+.badge--eventually-consistent {
+  background-color: #ff8b00;
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+[data-theme="dark"] .badge--eventually-consistent {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--consistent {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+
+/* HTTP Method badges */
+.badge--get,
+.badge--post,
+.badge--delete,
+.badge--patch {
+  color: white;
+  text-transform: uppercase;
+}
+
+.badge--get {
+  background-color: var(--ifm-color-primary);
+}
+
+.badge--post {
+  background-color: var(--openapi-code-green);
+}
+
+.badge--delete {
+  background-color: var(--openapi-code-red);
+}
+
+.badge--patch {
+  background-color: var(--openapi-code-orange);
 }
 
 /* Between mobile and desktop sizes, the nav bar gets a little scrunchy. Scale things down a bit to make more space. */
@@ -864,6 +928,13 @@ span.callout + p::after {
 }
 .theme-doc-markdown img.img-500 {
   width: 500px;
+}
+.theme-doc-markdown img.img-100 {
+  width: 90px;
+  border: none;
+  max-height: 90px;
+  margin: 0;
+  padding: 0;
 }
 
 /* Transparent image background */
@@ -1303,6 +1374,47 @@ ul ul .table-of-contents__link--active {
   border-right: 0;
 }
 
+/* Migration table */
+
+.table-migration {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.table-migration thead th {
+  background-color: var(--ifm-table-stripe-background);
+  font-weight: var(--ifm-table-head-font-weight);
+  text-align: left;
+  width: 50%;
+}
+
+.table-migration tbody tr {
+  background-color: transparent;
+}
+
+.table-migration tbody tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.table-migration th,
+.table-migration td {
+  width: 50%;
+}
+
+.table-migration .badge {
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.table-migration .badge:not(:first-child) {
+  margin-top: 8px;
+}
+
+.table-migration code {
+  background: transparent;
+  border: none;
+}
+
 /* Glossary page links */
 .alphabet-navigation {
   display: flex;
@@ -1333,4 +1445,136 @@ ul ul .table-of-contents__link--active {
 .letter-link:not(:has(a)) {
   opacity: 0.5;
   cursor: default;
+}
+/* Style for custom Detail collapsbiles - for example used in /docs/reference/announcements-release-notes/860/860-release-notes.md */
+.changelog-dropdown {
+  border: none !important;
+  background: transparent;
+  padding: 0.2rem 0;
+  margin: 0.3rem 0;
+  box-shadow: none;
+}
+
+.changelog-dropdown[open] {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.changelog-dropdown summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  padding: 0.1rem 0;
+  outline: none;
+}
+
+.changelog-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Highlighted labels */
+.label-highlight {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.2rem;
+}
+
+.label-highlight.yellow {
+  background-color: #ffd600;
+  color: #000;
+}
+
+.label-highlight.orange {
+  background-color: #fc5d0d;
+  color: #fff;
+}
+
+.label-highlight.red {
+  background-color: #da1e28;
+  color: #fff;
+}
+
+h3.subheading {
+  margin-bottom: 40px;
+  margin-top: -10px;
+  font-weight: normal;
+}
+@media (max-width: 996px) {
+  .hero-topic {
+    display: none;
+  }
+  h3.subheading {
+    margin-bottom: 20px;
+  }
+}
+.button--hero--topic {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+  color: #fff !important;
+  transition: all 0.3s;
+}
+
+.button--hero--topic:hover {
+  background-color: #0050e6;
+  border-color: #0050e6;
+  color: #fff !important;
+}
+
+.button--hero--topic::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
+    12px;
+  margin-left: 8px; /* spacing between text and icon */
+}
+
+.button--hero--topic:hover::after,
+.button--hero--topic:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .button--hero--topic {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .button--hero--topic:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black) !important;
+  border: 1px solid #171c29;
+}
+
+.link-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.link-arrow::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right.png") no-repeat center / 12px 12px;
+  margin-left: 6px; /* spacing between text and icon */
+}
+
+.link-arrow:hover::after,
+.link-arrow:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .link-arrow::after {
+  background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
+    12px;
 }

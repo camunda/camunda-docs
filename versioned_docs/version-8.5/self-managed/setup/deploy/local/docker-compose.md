@@ -42,7 +42,7 @@ For Camunda versions earlier than 8.6, the `docker compose up -d` command is onl
 Running `docker compose up -d` starts all Camunda components, including Identity. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also contains additional configuration files for lightweight development.
 
 - **docker-compose.yaml:** Contains the following Camunda 8 Components: Zeebe, Operate, Tasklist, Connectors, Optimize, Identity, Elasticsearch, Keycloak, and PostgreSQL.
-- **docker-compose-core.yaml:** Contains Camunda 8 Orchestration cluster components: Zeebe, Tasklist, Operate, and Connectors.
+- **docker-compose-core.yaml:** Contains Camunda 8 Orchestration Cluster components: Zeebe, Tasklist, Operate, and Connectors.
 
 To start Camunda with an alternate configuration, specify a file using the following command:
 

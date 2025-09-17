@@ -1,6 +1,7 @@
 ---
 id: google-gke
 title: "Google GKE"
+sidebar_label: "Google"
 description: "Deploy Camunda 8 Self-Managed on Google GKE, a managed container service to run and scale Kubernetes applications in the cloud or on-premises."
 ---
 

@@ -1,16 +1,18 @@
 ---
 id: get-resource-content
 title: "Get resource content"
-description: "Returns the content of a deployed resource."
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get resource content"
 hide_title: true
 hide_table_of_contents: true
-api: eJztV99v2zYQ/lcO99RiquV26ZbpzXDTLFvbBU6yPaR5oKmzxUYiFfIYRzD0vw8kZcexg6IFBuylD4Ys8Xjf/fg+6rRGFkuHxTXOyBlvJeFNhqYlK1gZfVZigUvizeLUaCbNmGFJTlrVBiMscEbsrXbAFYFMNmAWIKCktjYdlWAHD6PPuigKpRfms556a0lz3WXAlXJAumyNClt13YHzbWssO5idT7bbXdr/WWOGrbCiISYb4l+jFg1hgRvLP6nDDFWIrhVcYYaW7ryyVGLB1tN+CpcVgdfqzhPcUgeqJM1q0Sm9jFlt48cMnayoEViskbs2YDq2Si+x728CimuNduTC+pvxOFwOkTbuttVSDpyXkpxb+LruwMaKUhnwBpvgSbRtrWTsTf7FBXfrr4TT9xkejY8OQ3gsKKwUVzHDpbonHXNfCQfaMCyM118LoLVmXlPz02Eg+2jnyRJKYqFqMPMvJBmEg2Q4pxKUhuvZ+yn8dvT215sXFXPrijxfrVYju5CvqFRs7MjYZW4XMvyC3csRXFZkCRrRwZxAlKUKmKKG1gYSsyIHriWpFkoCm5joEDaEao0ik4a6pbACs7abH6u6X90MF8Y2grFAb9WBIiZwNTs7YNET6LhnIXwdfIi58VzMa6Fvsc+QFdfPgu6jON80wnZBbYcAfYaOBfudNFBppiXZ3fiV5p/fHPgONP398vIckguQpiRYGJu0OgCFJBqlVeMbLI7G4wwb8ZDufhmP++AzdPwbMtFAD20tdKTWfjpKQ2MsDfyJiSntWGj5X3XGWLVU+7gj7B97gQOJ36WMkrrePifwiYZQZRt4SNYaC0bKcNaVsKpUHd0HpT+eLXeeHCcu/tDaD6390Nqh1voMG+LKDBNJfP9zhQXm29kgX++8/PtcbocVR/Z+MyZ4W2OB66SfvsjzdWUc98U6DBt9fh+acy+sEvM6UTIsJ51t+FMbKer4+Lk+hoUwi2zy+8vKihyngQqmtXdMFmYnF5dwKphWoos1DvBPYY7Hx+NnEYLpN3ifnJ9Byjyxc+fE2EAE6T8LkYy/FyQOQI6kt4q7i+AilXBOwpKd+NCvLYMG7IgU7pMRZsOf9xte/fHPZaRGmBnj9oEiXw8qdJGsSxmNR68PqXl+FhUmTdN4HY9ZvUzTkICpaLwuBRyDTH6D9molSbsogmHW3Jh9SCvwd0KE16PQuMS0zem6VFz5+UiaJpdp2/Y6r808b4TS+QDh8unk49Wnd5NXH86mJ58uTl69Ho1H/MCxEK1x3Ai9E8cp8cFEuZ/w+vHN8v+M60PbmR44b2uhdCBlrNF6kPL1dnh3mGHxdJLfRH+TDYq8xvV6Lhxd2brvw+M7T7bD4vrmUcBR8aVy4X+JxULUbn/w363Li9nwifASvuNz4NnEhodCd/E8qX24wwxvqdv7SOlv+gwrEiXZGG6ymEhJLe/sPZj8g9a2J+LpSRDJv7kczE0=
+api: eJztWFtv2zYU/isEn1pMsZzEuenNc9LMXZYYtrthc/xAU8cSW4pUSCqOZui/DyTlq9ysAQasD30wbIuH5/vOlTxaYkMSjaMJHoKWhaKApwGWOShimBT9GEc4AbNa7ElhQBgc4Bg0VSy3QjjCj+JRTCa9h/tRfzS+ue/9GY3Gw4f72+nUrgzBFEpoZFJA1GtAco4IiiHnsoQYqVp/61FEUcTEXD6KXqEUCMPLAJmUaQQiziWzWwUvkS7yXCqj0XDQXW/Xfv+jwAHOiSIZGFDWuiUWJAMc4ZXkr1DiADPLPScmxQFW8FQwBTGOjCpg38BxCqgQ7KkA9AVKxGIQhs1LJhJn1Zo/DrCmKWQER0tsytxiaqOYSHCApYCHuWOzq3xUagPZUQLCuh1iBzGXattDuZIUtEYxzJlgdqPFmkuVEYMjPPDL1+tVbyC8kCznlsTJydnxxdXV5fHp+eX5RecKBw16hPOD9P4CmAG6EQkTG0sdx3cfyTNBXIoEaVCMcPY3xIho5HW+PwBimHF87qRILMdqunl20IgqWP5/zN4epxgo00wKVOdTBsJ8NWrXtfBwS/a1wJ2eds5fYf41ddaFb7fEstxh+0Gq7DV2ndPzs+8xrVa83+iGOo7/ErpvqbjTk/OzzsX36JrDVjQz37Y/7Z1FtGaJ2PKVa87bDXDto+FOs11hbj+tLJQCnUuhQdueedJu268m/NoNqxOEaaQLahvGvOC8RMqdMhBbCrWM1UTynDPqTrPws7bqll9t0VVVVQHutDtNCptDBi2YSV3XT9gzCOeHBdFISIPmshCvEciVnHHIfmoS2UcbeEkUgyGMIzn7DNTYQHvBGcSICTQZfuihq87ZxfRdakyuozBcLBYtNadHEDMjVUuqJFRzaj9W7n0LjVNQgDJSohkgEscu7ITbEyYHZRhopHOgbM4oMtIZWtNG1lstd7rWfvO07Gm73rzxavMAXGdGoVjjDtFFn4b9xsm6A+32zEnBrQ4yk4WJZpyIL7hap1cTdB9FF1lGVGlvIE2AKsDaEFNsmYGZMJCA2ubPhDk9aei2afrLeDxAXgWiMoZNidRA1oiMCZYVGY467XaAM/Li/52325XVaSP+DZYIBC85J8Kl1r45TKBMKqjzxxnGhDZE0P8qMlKxhO3jtnBV7Rzo9uG1t8hX19mhAu8KZL2sbB6CUlIhSam9/8VokTIOq+vP5r71VIA2Phd/1NqPWvtRa81aqwKcgUllPcO5mcikOMLhel4Kl1sDURXS9XinQT2vRqdCcRzhpa+fKgrDZSq1qaKlHcCq8NkG55koRmbcp6Rd9nW2yh8uKeHu8aE42gU7n63se1A0BW38CIp6vNAGFBrejMbolhhYkNL52MLvwly2L9sHEazoN2jvDvrIW+6zc6tjrCBs6R+E8MJvBXEXIA20UMyUI6vCu/BnIApUt7DxWmdQje2Q7P+ZE8JB/ePDKq8+/jF2qWHnaLe9TpHDpLqDvg0gKO2NabeO66ZKqPNvPTr3SFaImNTXUqiT2SfHqiEmzKTFrEVlFlIvvv5mWhegcdVI+EHf1S2VWVYI17xF4u9YBK0wLxH1bG1Fc0ZBaDhA7c6voN+9Mei41X4LxRmXszAjTIQ1hA573d8+3V93j+76vZv70c3RcavdMi/GuTeX2mREbPG4BdO4p+4ny3JzXn2Pr03qVDPwYsKcEyZsxJwHl3X7mKxfomgc4Gj3jcrKtmlQd4EJXi5nRMMnxavKPn4qQJU4mkw3TcNPQEzb3zGO5oTr/Rcw2157V8+38Xv0htcyBw2rHxJRuh7GC/sPB/gLlHsvi6ppFeAUSAzK0fUSXUohN1t7G9OGre91F769sYX5D2oDvPE=
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns the content of a deployed resource.
 :::info
 Currently, this endpoint only supports RPA resources.
@@ -51,7 +56,76 @@ Currently, this endpoint only supports RPA resources.
       in: "path",
       required: true,
       description: "The unique key identifying the resource.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        oneOf: [
+          {
+            description:
+              "System-generated key for a deployed process definition.",
+            format: "ProcessDefinitionKey",
+            example: "2251799813686749",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "ProcessDefinitionKey",
+          },
+          {
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            description:
+              "System-generated key for a deployed decision requirements definition.",
+            format: "DecisionRequirementsKey",
+            example: "2251799813683346",
+            type: "string",
+            title: "DecisionRequirementsKey",
+          },
+          {
+            description: "System-generated key for a deployed form.",
+            format: "FormKey",
+            example: "2251799813684365",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "FormKey",
+          },
+          {
+            description: "System-generated key for a decision definition.",
+            format: "DecisionDefinitionKey",
+            example: "2251799813326547",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "DecisionDefinitionKey",
+          },
+        ],
+        description: "The system-assigned key for this resource.",
+        format: "ResourceKey",
+        title: "ResourceKey",
+      },
     },
   ]}
 ></ParamsDetails>

@@ -1,6 +1,8 @@
 // Why is this swizzled?
-//   To override the `href` of `link rel=canonical`, so that we are properly
-//   canonicalizing our content for search engines.
+//   - To override the `href` of `link rel=canonical`, so that we are properly
+//     canonicalizing our content for search engines.
+//   - To add a `meta` tag for `docsearch:page_rank`, which is used by Algolia's
+//     crawler to prioritize search results.
 // Swizzled from version 3.7.0.
 
 import React, { type ReactNode } from "react";
@@ -41,11 +43,17 @@ export default function MetadataWrapper(props: Props): ReactNode {
     fullCanonicalUrl = `${customFields.canonicalUrlRoot}${canonicalPath}`;
   }
 
+  // Get the page rank from front matter, defaulting to 0 if not set.
+  // Higher page rank means higher priority in search results.
+  // This is parsed by Algolia's crawler to prioritize search results.
+  const pageRank = currentDoc.frontMatter.page_rank || 0;
+
   return (
     <>
       <Metadata {...props} />
       <Head>
         <link rel="canonical" href={fullCanonicalUrl} />
+        <meta name="docsearch:page_rank" content={pageRank} />
       </Head>
     </>
   );

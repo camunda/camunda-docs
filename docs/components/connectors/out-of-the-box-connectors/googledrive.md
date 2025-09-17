@@ -59,7 +59,7 @@ To upload a file, take the following steps:
 4. In the **Document** section, input the variable name to which the document is assigned.
 
 :::note
-To work with documents you must upload them first, [using the Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
+To work with documents you must upload them first, [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
 The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
 :::
 
@@ -161,6 +161,8 @@ credentials.refresh(auth_req)
 # Print token
 print(credentials.token)
 ```
+
+When using shared drives, you must use an Oauth client instead of a service account. The service account does not have access to shared drives.
 
 #### Example 2: Obtaining bearer and refresh tokens with OAuth client
 

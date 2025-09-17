@@ -78,6 +78,7 @@ and process values).
 | indexSuffixDatePattern        | This suffix will be appended to every index created by the exporter; The pattern is based on the Java [DateTimeFormater](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html) and supports the same syntax. This is useful when indexes should be created in a different interval, like hourly instead of daily. | `"yyyy-MM-dd'"` |
 | numberOfShards                | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                         | 3               |
 | numberOfReplicas              | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                 | 0               |
+| templatePriority              | The [priority](https://www.elastic.co/docs/manage-data/data-store/templates) used for the index templates created by the exporter. This is only available for 8.7.11 and later versions                                                                                                                                                                           | 20              |
 | command                       | If `true` command records will be exported                                                                                                                                                                                                                                                                                                                        | `false`         |
 | event                         | If `true` event records will be exported                                                                                                                                                                                                                                                                                                                          | `true`          |
 | rejection                     | If `true` rejection records will be exported                                                                                                                                                                                                                                                                                                                      | `false`         |
@@ -253,7 +254,6 @@ signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
-
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
@@ -285,7 +285,6 @@ signed using trusted root certificate authorities.
     ```
 
     Then, specify the following properties when running the application:
-
     - `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 

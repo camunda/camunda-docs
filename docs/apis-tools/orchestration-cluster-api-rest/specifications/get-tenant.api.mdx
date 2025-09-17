@@ -1,16 +1,18 @@
 ---
 id: get-tenant
 title: "Get tenant"
-description: "Retrieves a single tenant by tenant ID."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/Ss7OCVTRpQTp0150/ir6qSJx1Hag+vDElyJSECAAZaWNRr+9w4I0lYkObFnetTBI5IL7NuP90Bz14Jx4UV2LWZk0LC4SYStySEra6aFyMSCuDcloiAvnaqDTWTiitgpuiUPCF6ZhSbgbiXkq+FqejoSiajRYUVMLiCthcGKRCbikmkhEqGCvxq5FIlw9K1RjgqRsWtoG3RWEjRGfWsIVEGG1VyRAzsHLgf4gOhlSRWKbC14VQcwz06ZhWjbm4Dga2s8+WB/PR6Hn12UPoMlenB9pgX4Rkryft5ovQo40homw8ED1rVWsitc+sUHN+uNMLb8R9+e0MkShnhAMVXBax+zzb+QDHWvXegJqxhxLN92ZvsK1acQNoxEmzxU/Em7+zLTHZMzqDdb2m6tf0YwG4aRaENQijXd1+SKfKNZtG0wHT/Wm9rZW1VQAQUygvJgLMMtalX8oCm1s7mm6pefNWcCl3ElFMSoNMQ+APo++JwKUAaur85P4Pfjt7/dvCiZa5+l6XK5HLm5fEWFYutG1i1SN5fhL6x7OYJZSY6gwhXkBFgUKmCihocOg69JqrmSwLYjdR82hAqP/jU/pUe07nZkbl2FLDLROLXToAl8vpoOilops9iF7vbMMXQnE5jbhrNco/kqHnr4MxpMwDdVhW41CPZ7gDYRnpGbjTSEMkwLcpvxK8NvXu+l2B+z2SVEFyBtQTC3DrhUfgAKSVTKqKqpRHY8Hieiwrt49+t43LE6dPwJmRigu1qj6ai1nY4yUFlHPX+6xJTxjEb+X52xTi3UNu73eupJfBozGgR1tF9Q4dAlz6BRfvVRSYANlwE1ygekoy4I1P4gsoPIDiJ7XGRvdvl+bl2uioJMR897vfWvLtTaLunw8jro6qCrH+jq+NH/pIOI5rYxBwkdJHSQ0KMServvg2piIFS5+8Yj56wDK2XjHBWwLJXu3IeP3gG7f3dFLh60dtDaQWu7WmsTURGXth+hdUMwLkUm0jgH8el6mMa0YV5F7nYYjzVOi0yso2TaLE3XpfXcZuvaOm7T29CPW3QKcx1ZGMxRWgNltJWou8f7WhcMYSY0pPTRyZI8x6EfnOjGMzm4Ovs0gwtkWuKqK2uA/x7m3fjdeC9CWPoE75PLKcTMIyE3DokBIqh9L0Rc/FyQbv7nSTZO8epTcBFLmBM6cpMmtOieND12hxTu4yKR9BfnA5X+/GfWsUGZue2296z4cVChi+R8zGg8Otpl4+W0E5W0VdWY7mQ1C1gqLgHhBKvGFAjvQEa/QW5aSTKeHoaEYlj2Plrg74gIR6PQuMi04UBdKC6bfCRtlcq47f431zZPK1Qm7SF8ejL56/OH08mr99OTsw+fzl4djcYjvuOuELX1XKHZiOOCuB8Abqe5fniFPGOi3HeI6Y7TWqMygT9dOuteaNf9tNOLRGT3g8+bpFfLtVivc/T02em2DY+/NeRWIru+eRBXp8ZC+XBdiGyO2m/Pozejf3HVT65fwhOn1Huz6B+iWXU61024E4n4SqvNoXl70yaiJCzIdXFG80RKqnlj485UOgjg/mS6OAvM/Q9d+0w1
+api: eJztWU1v2zgQ/SsDnlqsYjltdrerm9d1u1500yBxGixcHyhqbLGlSJUcxTEE/fcFRSl2YqcfQA978MGwJH7MG773SGhUM+Irx5I5m6HmmtgiYqZEy0kaPc1YwlZIXVPEMnTCytK3sYR91B/1fD5+f341vZpNzsf/JpMPk/PZ9ejdYuHbLpGsxFt0wMFJvVII1M4E6aa/mr4esIiV3PICCa1HUjPNC2QJC12mGYuY9PFKTjmLmMUvlbSYsYRshRFzIseCs6RmeMeLUvmhonJkCrQnDu2tFLiHfZYjVFp+qRBkhprkUqIFswTKe5Qe2NLYgpPvv8VCm9KHcGSlXvl7SW3M+y5Ns/AoXWm0Q+eBvRgO/d8+hG4V1tyB7VYrA1cJgc4tK6U2HoQwmlCTn4GXpZKiJSf+5Pw09U7+j+YPczvkVuTQ4wFJWAy2aZj0EwrPbWk97yQD4kBBvZfskyn4AX7aLQfjjgO4ChxAhiW3VPhUmmjL7v+IuEfBfiD9nYbvXgVIKyc1OgelNZ5xdKxpHuO6RFcpYk3jm86eElJpza3MMIOMEwfpQBuCW65k9hUFldakCotfvqWkEVyEnpAhcakgiAa46/JOMQOpYX75Zgx/nP36++JZTlS6JI7X6/XALsUJZpKMHRi7iu1S+J/v93wAsxwtQsE3kCLwLJM+JlewlSO4EoVcSgFkWpY72ODJGXzU39RyaN0n814jlZV73I7g+nLaS2wj9Wo/dDtmyT07CeOpqShJFdef2ZbDbyloBK4qCm43vYIfBmgi5ohTtZMGk5pwhXYXv9T08sVBdf41m11AmAKEyRCWxgLl0vWBfBKF1LKoCpacDYcRK/hduPttOGwN4Rn/jkw04F2puG6l9TgdqaEwFjv9tIlJ7Yhr8bOYMVau5OO4gwd+6kT8OmTUG+r0sKH8KYOOQHHx2QUnAa8o91GDfUBYbEFw5fwy5siz9gSr2c3Nzclo2xkfmuthti2Mo0GPBj0a9LBBX+7r/Y2xqcwy1K08773aHXtcKbPG48F39NXRV1/x1dmTrwzeREtT6aOFjhY6WuhJC/166GVspMGvsvU6RGuNBSNEZS1msM6lwv5dr4/dnV1Bi0evHb129Nq+15qIFUi56eqRbcWQcpawOJRfXFz35aSGRczXjvpaYmUVS1gdLNMkcVznxlGT1KWx1MS3no9bbiVPVVChbw7W6iWjjOCqfXyIOt/gi199Su+tyNFRqKDCWFWO0MLl5GoGbznhmm/aZfXhH4Z5NXw1PBjBd/2O2UcXUwiZB0HubBJ9CO/2gyFC5x8N0hY6HYrKStpc+SnCEv6J3KL1L8A7oulit5H8fdp2YlF38aaX0t83s1YNUi9NO7xTxWFQo4upJxCtC8kMB6fdPsoFbQuZbMyLSmccJnolNWKn3yCOfg9cScqrdCBMEYvQ/f5fOlf56tyexi+mrVWFKYpKt/u1XsFaUg4c+pivQAS03sRKCtQOD0B7F1rgQ0gGTgfDH4GYKpPGBZc67kK4eDz65/r89ejk3XQ8Ob+anJwOhgO6o3Z5S+Oo4HoHx1ukrpr5WCL19mD6iUX/TheEdxSXikvtl7dNt+7sPe+KxI5FLLmvFy+izqNzVtcpd3htVdP4x18qtBuWzBdbS7d7QCadv85YsuTK4Veye3bZfVx4Dk8h7B5yvWl3DlX5Oxaxz7jZ/WbRLJq+JNRiCM0jIbCknYF7BX1vqfu97u3Ee+E/NPHcnQ==
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Retrieves a single tenant by tenant ID.
 
 <Heading
@@ -47,8 +52,13 @@ Retrieves a single tenant by tenant ID.
       name: "tenantId",
       in: "path",
       required: true,
-      description: "The unique identifier of the tenant.",
-      schema: { type: "string" },
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -67,14 +77,22 @@ Retrieves a single tenant by tenant ID.
             description: "Tenant search response item.",
             type: "object",
             properties: {
-              name: { type: "string", description: "The tenant name." },
-              tenantId: {
+              name: {
                 type: "string",
-                description: "The unique external tenant ID.",
+                description: "The tenant name.",
+                example: "Customer Service department",
+              },
+              tenantId: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
+                type: "string",
+                title: "TenantId",
               },
               description: {
                 type: "string",
                 description: "The tenant description.",
+                example: "Customer Service department business processes",
               },
             },
             title: "TenantResult",
@@ -125,6 +143,7 @@ Retrieves a single tenant by tenant ID.
     },
     "401": {
       description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
       content: {
         "application/problem+json": {
           schema: {

@@ -1,8 +1,12 @@
 import React from "react";
 import "./styles.css";
 import { activeVersionURLPath as linkBase } from "../Versions";
-import ClusterManagementIcon from "./icons/cluster-management.svg";
-import ClusterOrchestrationIcon from "./icons/cluster-orchestration.svg";
+import ModelerIcon from "./icons/icon-modeler.svg";
+import ClusterOrchestrationIcon from "./icons/icon-orchestration-cluster.svg";
+import ConnectorsIcon from "./icons/icon-connectors.svg";
+import OptimizeIcon from "./icons/icon-optimize.svg";
+import ConsoleIcon from "./icons/icon-console.svg";
+import IdentityIcon from "./icons/icon-identity.svg";
 
 const ComponentCard = ({ link, title, icon: Icon, description }) => {
   return (
@@ -19,19 +23,46 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
 const Components = () => {
   const componentItems = [
     {
-      title: "Camunda Management Cluster",
-      icon: ClusterManagementIcon,
+      title: "Orchestration cluster",
+      icon: ClusterOrchestrationIcon,
       description:
-        "Central components that can work with multiple Camunda orchestration clusters",
-      // The link should point to the management cluster documentation which is not there yet.
+        "The core component that powers automation and process orchestration.",
+      link: "/self-managed/components/orchestration-cluster/overview",
+    },
+    {
+      title: "Connectors",
+      icon: ConnectorsIcon,
+      description:
+        "Connect processes to external systems, applications, and data.",
+      link: "/self-managed/components/connectors/overview",
+    },
+    {
+      title: "Optimize",
+      icon: OptimizeIcon,
+      description:
+        "Business intelligence and analytics for enterprise customers.",
+      link: "/self-managed/components/optimize/overview",
+    },
+    {
+      title: "Web Modeler",
+      icon: ModelerIcon,
+      description:
+        "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
       link: "/self-managed/components/modeler/web-modeler/overview",
     },
     {
-      title: "Camunda Orchestration Cluster",
-      icon: ClusterOrchestrationIcon,
+      title: "Console",
+      icon: ConsoleIcon,
       description:
-        "Workers components cluster for workflow execution that could be deployed multiple times",
-      link: "/self-managed/components/orchestration-cluster/overview",
+        "Manage and monitor your Camunda 8 Self-Managed deployments.",
+      link: "/self-managed/components/console/overview",
+    },
+    {
+      title: "Management Identity",
+      icon: IdentityIcon,
+      description:
+        "Manage Camunda users, groups, roles, permissions, and applications.",
+      link: "/self-managed/components/management-identity/what-is-identity",
     },
   ];
 
@@ -39,11 +70,10 @@ const Components = () => {
     <div className="sm-components">
       <h2>Components</h2>
       <p>
-        A reference for Camunda 8 components, including the management and
-        orchestration clusters, detailed configuration guidance for each
-        component, and application upgrade instructions.
+        Camunda 8 components reference, including detailed configuration
+        guidance and application upgrade instructions.
       </p>
-      <div className="sm-grid-2">
+      <div className="sm-grid">
         {componentItems.map((item, index) => (
           <ComponentCard
             key={index}

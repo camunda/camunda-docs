@@ -47,9 +47,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 
 ## License configuration
 
-import Licensing from '../../../../self-managed/react-components/licensing.md'
-
-<Licensing/>
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
 ## OIDC configuration
 
@@ -87,9 +85,7 @@ for `WEBMODELER`, which is`web-modeler`.
 
 ## Database configuration
 
-Identity requires a database to store information
-about resource authorization
-and [multi-tenancy](/self-managed/concepts/multi-tenancy.md).
+Identity requires a database to store information about resource authorization and [multi-tenancy](/components/concepts/multi-tenancy.md).
 
 | Environment variable         | Description                                         |
 | :--------------------------- | :-------------------------------------------------- |
@@ -134,10 +130,10 @@ steps:
 
 Identity uses feature flag environment variables to enable and disable features; the supported flags are:
 
-| Environment variable         | Description                                   | Default value |
-| :--------------------------- | :-------------------------------------------- | :------------ |
-| RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature. | false         |
-| MULTITENANCY_ENABLED         | Controls the multi-tenancy feature.           | false         |
+| Environment variable         | Description                                      | Default value |
+| :--------------------------- | :----------------------------------------------- | :------------ |
+| RESOURCE_PERMISSIONS_ENABLED | Controls the resource authorizations feature.    | false         |
+| MULTITENANCY_ENABLED         | Controls the multi-tenancy feature for Optimize. | false         |
 
 :::note
 Setting either of the feature flags to `true` requires a database connection. To configure a database

@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Best Practices
 description: "These practices are condensed experience using BPMN and DMN on the Camunda toolstack, and are a mix of conceptual and practical implementation information."
 ---
 
@@ -48,6 +48,9 @@ type:"link", href:"/docs/next/components/best-practices/development/routing-even
 },
 {
 type:"link", href:"/docs/next/components/best-practices/development/testing-process-definitions/", label: "Testing Process Definitions", docId:"components/best-practices/development/testing-process-definitions"
+},
+{
+type:"link", href:"/docs/next/components/best-practices/development/local-development-with-element-templates/", label: "Local development with element templates and C8 Run", docId:"components/best-practices/development/local-development-with-element-templates"
 }
 ]}/>
 

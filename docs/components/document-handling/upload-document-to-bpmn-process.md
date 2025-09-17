@@ -5,7 +5,7 @@ description: "Learn how to build a form for document upload, upload a document f
 keywords: ["document handling"]
 ---
 
-You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound connectors](#upload-a-document-via-inbound-webhook-connector), and the [Orchestration cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx).
+You can implement document uploads in your BPMN processes using [forms](#build-a-form-for-document-upload), [inbound connectors](#upload-a-document-via-inbound-webhook-connector), and the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx).
 
 ## Build a form for document upload
 
@@ -147,12 +147,12 @@ The result variable will have the following structure:
 }
 ```
 
-## Upload a document using the Orchestration cluster API
+## Upload a document using the Orchestration Cluster REST API
 
-You can also upload a document to your Camunda 8 cluster using the Orchestration cluster API.
+You can also upload a document to your Camunda 8 cluster using the Orchestration Cluster REST API.
 
 :::note
 This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/concepts/document-handling/configuration/index.md).
 :::
 
-Learn more about [uploading a single document](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) and [uploading multiple documents](/apis-tools/orchestration-cluster-api-rest/specifications/create-documents.api.mdx) using the Orchestration cluster API.
+Learn more about [uploading a single document](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) and [uploading multiple documents](/apis-tools/orchestration-cluster-api-rest/specifications/create-documents.api.mdx) using the Orchestration Cluster REST API.

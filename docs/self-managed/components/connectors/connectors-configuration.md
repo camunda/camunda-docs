@@ -14,20 +14,20 @@ You can configure the connector runtime environment in the following ways:
 - The secrets that should be available to the connectors.
 
 :::note
-Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Orchestration cluster REST API and Zeebe.
+Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Orchestration Cluster REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Orchestration cluster REST API**, the connector runtime uses the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md). Any configuration that can be set in the Camunda Spring Boot SDK can also be set in the connector runtime environment.
+To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration that can be set in the Camunda Spring Boot Starter can also be set in the connector runtime environment.
 
-Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/configuration.md#zeebe) for a full list of configuration options.
+Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe) for a full list of configuration options.
 
 :::note
-This guide provides configuration properties in the form of environment variables, while the Camunda Spring Boot SDK documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
+This guide provides configuration properties in the form of environment variables, while the Camunda Spring Boot Starter documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
 
 For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
 :::
 
-## Connecting to Zeebe and the Orchestration cluster REST API
+## Connecting to Zeebe and the Orchestration Cluster REST API
 
 <Tabs groupId="configuration" defaultValue="saas" queryString values={
 [
@@ -129,7 +129,7 @@ camunda:
       audience: zeebe-api
 ```
 
-See the [Camunda Spring Boot SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started#self-managed) for more information on authentication properties.
+See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started#self-managed) for more information on authentication properties.
 
 </TabItem>
 </Tabs>
@@ -240,7 +240,7 @@ to inject multiple secrets at once.
 
 <TabItem value='manual'>
 
-In the [manual setup](/self-managed/installation-methods/manual/install.md#run-connectors), inject secrets during connector execution by providing
+In the [manual setup](/self-managed/installation-methods/manual/install.md#connectors-1), inject secrets during connector execution by providing
 them as environment variables before starting the runtime environment. You can, for example, export them beforehand as follows:
 
 ```bash
@@ -316,7 +316,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Identity](/self-managed/components/management-identity/managing-tenants.md).
+The connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Identity](/components/identity/tenant.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
@@ -384,15 +384,15 @@ configuration of job workers.
 
 ### Inbound Connector configuration
 
-The Connector Runtime fetches process definitions from the Orchestration cluster REST API, and executes all inbound connectors within those processes independently of the outbound connector configuration without any additional configuration required from the user.
+The Connector Runtime fetches process definitions from the Orchestration Cluster REST API, and executes all inbound connectors within those processes independently of the outbound connector configuration without any additional configuration required from the user.
 
 To restrict the Connector Runtime inbound connector feature to a single tenant or multiple tenants, use Identity and assign the tenants the connector application should have access to.
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/concepts/multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../installation-methods/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
 
-Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/self-managed/concepts/multi-tenancy.md).
+Find more information (including links to individual component configuration) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 
 ## Logging
 

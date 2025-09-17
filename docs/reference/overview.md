@@ -5,29 +5,31 @@ sidebar_label: Reference
 slug: /reference/
 ---
 
-This section contains general reference material for Camunda 8.
+import "./react-components/\_release-table.css";
+import ReleasesGrid from './react-components/\_release-card';
+import { gettingStartedCards, securityCards } from './react-components/\_release-card-data';
+import AskAi from './react-components/\_banner-ask-ai.md'
 
-## Support
+General Camunda 8 reference material, including release, security, licensing, and support information.
 
-- [Announcements](/reference/announcements-release-notes/880/880-announcements.md) - Stay up to date on versioning changes, end of maintenance updates, OpenSearch support, and other updates.
-- [Release notes](/reference/announcements-release-notes/880/880-release-notes.md) - Learn where you can find release notes for components of Camunda 8.
-- [Auto-updates](auto-updates.md) - Learn about the SaaS cluster auto-update feature.
-- [Service status](status.md) - Camunda 8 SaaS is a hosted service for the Camunda 8 stack that runs on the Google Cloud Platform (GCP). When availability changes, Camunda provides you with a current service status.
-- [Supported environments](supported-environments.md) - Learn more about supported environments across your web browser, Desktop Modeler, clients, Camunda 8 Self-Managed, and the Camunda 7 and Optimize version matrix.
-- [Dependencies & third party libraries](dependencies.md) - A complete list of all dependencies and third-party libraries for all the components of Camunda 8, including Self-Managed.
-- [Alpha features](/components/early-access/alpha/alpha-features.md) - Use alpha features to learn about upcoming changes, try them out, and share feedback.
+## Release announcements and release notes
 
-## Security and license information
+Keep up-to-date with upcoming, current, and past Camunda releases.
 
-- [Licenses](licenses.md) - Take a closer look at licensing information for all components of Camunda 8.
-- [Security notices](notices.md) - Learn about Camunda's security notices after fixes are available.
+<ReleasesGrid releases={gettingStartedCards} />
 
-:::note Release policy
-Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) with some specific clarifications across provisioning in SaaS and Self-Managed.
+:::info Release policy
+Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) and specific clarifications about provisioning in SaaS and Self-Managed.
 :::
 
-## Additional resources
+## Security, licensing, and support information
 
-- [Regions](regions.md) - When you create a cluster in Camunda 8 SaaS, specify a region for that cluster.
-- [Usage metrics](/reference/data-collection/usage-metrics.md) - Understand the three main usage metrics that have an impact on Camunda 8 pricing.
-- [Glossary](glossary.md) - Have a closer look at common terminology used across Camunda 8 documentation.
+Reference information including published security notices, licensing, supported environments, and source code access.
+
+<ReleasesGrid releases={securityCards} />
+
+## Support and feedback
+
+[Get support](contact.md) for Camunda or send us your feedback.
+
+<AskAi/>

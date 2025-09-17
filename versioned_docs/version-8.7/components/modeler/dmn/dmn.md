@@ -12,11 +12,7 @@ Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 
 
 Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. You can change the type of an element in place by clicking on the element and selecting the **Change element** menu icon. Use the properties panel on the right side to change the name or ID of the DMN diagram.
 
-## Demo
-
-![Demo](assets/desktop-modeler-dmn/demo.gif)
-
-The demo above shows how to model a decision table. After creating a decision and morphing it into a decision table, you can start editing the table by clicking the overlay on the upper left corner of the decision. Using the overview in the decision table view, you can jump between decision tables.
+After creating a decision and morphing it into a decision table, you can start editing the table by clicking the overlay on the upper left corner of the decision. Using the overview in the decision table view, you can jump between decision tables.
 
 ## DMN coverage
 

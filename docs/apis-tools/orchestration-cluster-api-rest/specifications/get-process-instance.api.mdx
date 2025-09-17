@@ -1,16 +1,18 @@
 ---
 id: get-process-instance
 title: "Get process instance"
-description: "Get the process instance by the process instance key."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get process instance"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWcFy2zYQ/RUMTsmUluTEbVPeNLaSqk0cj60kB9cHkFyJiEGAAZaWNRr+e2cBUnYoWlbT3qqDRiK4fIvFvregFmuOYuF4fM0vrEnBOSa1Q6FT4DcRNyVYgdLoacZjvgBsjKatTcQzcKmVJRnxmL8DZJgDKztgLFn1j9/CavCX5hEvhRUFIFiazJprUQCPefm9vz9hxSMuyVMpMOcRt/CtkhYyHqOtoDud2VMuecRdmkMheLzmuCrJl0Mr9YLX9Q3ButJoB47uvxqN6GsPaOmYq1Iam1dKrZgFrKyGjPylRiNoJCRRlkqmfmGHXx3BrR9N53s/3bQwB8KmOWtnyCRCQfhNFCb5CinSglrKHsoQQzPVM5hLLduMdkPftXzZ5kk2PRvwOtqGPPc5+0FQSng/7GewToZFapClRliA3Rf6LgDQIs2NLQQGiNevdrmbicUPx9I4ZCgWPiSHwuKZwD1Xx5uzTCB8N2UaOEJZAEGCzvYHBJ09A+ewAXuOfGTnOPmvCqoa49PZ9POER/z044eL95PZ5IxHfDa5/DA9H9PFTcRRooIHsFbLVwQ1IZg64rlwU53KrBFIE1JijAKht2L6kgPmYBnm0m2LMBeOCWZBCYSMyQaWGcu0QZ8PBC007quAYN1h/eOKtBfKLayYmfdPuZ/3e0P3MNDXuNpXVdDdqr0/sH/6iQq6QZ8oKEDjj6JDeLyLXj9JnEtwlUJe12RzsqM238kMPPEFFWZtkN0JJXcV49KaREHx03NFecwugiXLAIVULFRdJigJZJh45rHry7en7LeTn3+9eZEjli4eDpfL5cDO0yPIJBo7MHYxtPOUPmT3csBmOVhghVixBJjIMp9QodhDPWeuhFTOZcrQtLuqnwytedhNd28G4e52jja1obJyK2Vj9ulyyryW5Hwl9WLbtX9mLig7MReJqTBOlNC3/CGZzxFjzFxVFMI2Yuk6aEpV5Xp3g0517yPd77PZBQsQLDUZsLl5qCPkiIIopJYF1beT0SjihbgPV7+MRjVhUsb3iEQzuC+V0J5a3XCkZoWx0PDHB7Z58fpvMmOsXMiu3y1h0eBZiKgV1HG/oOhNCxwyJdJbF5TERIU5eQ3yYakFPwmh3EFkB5EdRPa0yF5v8/2tsYnMMtCenhu9NVuXUMosd/6TOOjqoKv/va5O9vynvpSYe+yFvAP/vsyWIihtbip90NlBZwedPamzn/v+dY01o1W2xEOw1lhm0rSyFjK2zKXaiLD13WxwgYsHrR20dtDattbqiBeAuWn6775RjjmP+bBR01E7Szdcb/emamp0g71r2+qVVTzm6yCjOh4O17lxWMfr0lish3eUozthpUhUYCbdDnJraaRMKpQf7ksn3aBWbhvmR5vm4DCcIrBTVTkEyy4nVzP2TiAsRdNJMrbj5s3ozai/bWQs7oE+vpiyEHkg6aPC0bqgCtDfgPXG/9SJPzhwkFZW4uqKIMISJiAs2HFFadsQqfHtPflWpzfiUfPjbUuvP77MPEOknhv/eMOU3ZOiLLZdcz4aHG8z9GLqhZaaoqi0r7Z6EV6KBDsVRaUzwd6wNOCSBJVMQTuvheZspjV7H+6wpnHOjgeUuMC0tsguJOZVMkhNMUzDY5vvRJlkWAiph40LNzwdf/h0fjY+ej89nZxfTY6OB6MB3qNfiNI4LIR+NA86c+q+33UDXj9sMP/ijKrJHcI9DkslpCZm+UDXjSyv+ZYsecTjnqbxTdRo65qv14lw8MmquqbhbxXYFY+vbx6k6LWbSUe/Mx7PhXLds67HEb64bE7FXrJdJ2C94TSDQq98KVAVXfGI31Jbt6/7Xd9Q/x5EBtZPMxiO0xRKfASxdeZFatmUtncTovnfdG/tLw==
+api: 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
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Get the process instance by the process instance key.
 
 <Heading
@@ -48,7 +53,12 @@ Get the process instance by the process instance key.
       in: "path",
       required: true,
       description: "The process instance key.",
-      schema: { type: "string" },
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -66,10 +76,26 @@ Get the process instance by the process instance key.
           schema: {
             description: "Process instance search response item.",
             type: "object",
+            required: [
+              "processDefinitionId",
+              "processDefinitionName",
+              "processDefinitionVersion",
+              "startDate",
+              "state",
+              "hasIncident",
+              "tenantId",
+              "processInstanceKey",
+              "processDefinitionKey",
+              "tags",
+            ],
             properties: {
               processDefinitionId: {
+                description:
+                  "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                format: "ProcessDefinitionId",
                 type: "string",
-                description: "The process definition ID.",
+                example: "new-account-onboarding-workflow",
+                title: "ProcessDefinitionId",
               },
               processDefinitionName: {
                 type: "string",
@@ -104,22 +130,111 @@ Get the process instance by the process instance key.
                 description:
                   "Whether this process instance has a related incident or not.",
               },
-              tenantId: { type: "string", description: "The tenant ID." },
-              processInstanceKey: {
+              tenantId: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
                 type: "string",
+                title: "TenantId",
+              },
+              processInstanceKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a process instance.",
+                    format: "ProcessInstanceKey",
+                    example: "2251799813690746",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessInstanceKey",
+                  },
+                ],
                 description: "The key of this process instance.",
               },
               processDefinitionKey: {
-                type: "string",
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a deployed process definition.",
+                    format: "ProcessDefinitionKey",
+                    example: "2251799813686749",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessDefinitionKey",
+                  },
+                ],
                 description: "The process definition key.",
               },
               parentProcessInstanceKey: {
-                type: "string",
+                allOf: [
+                  {
+                    description: "System-generated key for a process instance.",
+                    format: "ProcessInstanceKey",
+                    example: "2251799813690746",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessInstanceKey",
+                  },
+                ],
                 description: "The parent process instance key.",
               },
               parentElementInstanceKey: {
-                type: "string",
+                allOf: [
+                  {
+                    description: "System-generated key for a element instance.",
+                    format: "ElementInstanceKey",
+                    example: "2251799813686789",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ElementInstanceKey",
+                  },
+                ],
                 description: "The parent element instance key.",
+              },
+              tags: {
+                description:
+                  "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                type: "array",
+                format: "string<Tag>[]",
+                example: ["high-touch", "remediation"],
+                items: {
+                  description:
+                    "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                  example: "business_key:1234",
+                  format: "Tag",
+                  type: "string",
+                  title: "Tag",
+                },
+                uniqueItems: true,
+                maxItems: 10,
+                title: "TagSet",
               },
             },
             title: "ProcessInstanceResult",
@@ -170,6 +285,7 @@ Get the process instance by the process instance key.
     },
     "401": {
       description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
       content: {
         "application/problem+json": {
           schema: {

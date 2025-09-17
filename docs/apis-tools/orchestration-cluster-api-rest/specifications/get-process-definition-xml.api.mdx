@@ -1,16 +1,18 @@
 ---
 id: get-process-definition-xml
 title: "Get process definition XML"
-description: "Returns process definition as XML."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get process definition XML"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWFtv2zYU/isHfGoxRXLadMv0ZqRply3pgjTdAmR5oMgjiw1FqiRlxzD03weS8iW23GXA9uYHw7qQ5zu3j6S+BXF0Ykl+T66NZmgtcCyFEk5oRR4Sohs01N9ccJKTCbp+2PvVqLurS5IQjpYZ0YRpOblB1xplodmxCdTC3dVl+pciCWmooTU6NN6BBVG0RpKTZhvhN5yThAhvuKGuIgkx+K0VBjnJnWlxG/22QqDWiolCDo84B12Cq3DAmwRmlWAVUOas94xCq8S3FkFwVE6UAg2U2oCrxCqYlCTEsgprSvIFcfPG+2ydEWpCuu7BO2cbrSxa//7NaOT/dh28u7rc7xcIC7Zl/mnZSjkHExKKPOaNaeVQuYCPTy57qqW/3u9V1yXkzehk2JMB+Bm1UOpWcShaB1yjBaUdVHSK6+pte9FI6mv0T36c7MtIY/RUcOTAqaM+Ax5ySqXg6XM02jRSsNCVWWN0IbH+4avVW9jPAcZwHUcCR0eFBF18ReZ80ePAAjkIBfc3H87g55N3Pz28qpxrbJ5ls9ksNSU7Qi6cNqk2k8yUzP/8uNcp3FZoEGo6hwKBch5ySKUPqEHjBFqwDTJRCgZOL0senPEJitnsUxXd8txYTV4ncjuhCSm1qakjOWmN2GHhGL7cXCxbeS7UZBc6zClpK70NWujW5YWk6pF0CXHCyUHQbRTb1jU1mzTbAOgSYh117UYYRCiHEzSb/gvl3r7Zse3b4pfb22uIJoBpjs8I6YF8ELVQom5rkp+MRgmp6VO8+3E06rxNX/EXRKIAnxpJVWit7XCEglob7PsnBCaUdVSx/6oy2oiJ2MZNSbeuBemb+H2MaEmo42FC+VUSrQNJ2aONTALausqjRvoAMxicoNIeSHYg2YFk+0n2drffP2hTCM5RhfZc8a3fuqiUeoaHzevAqwOvvsOrPadSjkzYcBYVrgo2J2KKKpzn/fHUMywcUVO4WkdmgZqNk6RQYebyRA6F5vOdw+uBkQdGHhi5YuS7oe+zsQKfZeP7EI3RBjRjrTHI/Re0XH1ELrH7rfDAtQPXDlzbx7UuITW6SvfKWhDEXEVykvVsOlpLMjZbDOliXdB+EmLRTJcyWmskycki0qnLs2xRaeu6fNFo47ps6ms1pUbQQsYO9a8j7ZbtJDWjMjweKqt/4bW6Zbi/G1ahdVEnhDPZWocGbs4/38JH6nBG5yHlHv45zOnodDSI4Ie+wPr4+gJi5LFZNxaQJYRfCQYh4uB/CxIEPousNcLNP3sTMYUFUoNm3PryrRqqxw5I/j4OIkl/8WHZZr/+eRs6RahSh+l9x3zfKV9FNDZGNEqPdzv1+iIQjum6blVYddUkHqconNG6VZzCKbBo11NRCobKBk70Wuxy2GV8A39ERDhOfeFipy0X24lwVVukTNcZi9NW/4XURVZTobIewmZn46svn96Pjy4vzs4/fT4/Ok5HqXtyIRGNtq6masOPj+iGdMoB7Xmx3m5eKkP35doQMbs+tkXPyHsywEiSkHyPVu1J+ZD0xLoni0VBLX4xsuv8428tmjnJ7x/WPAzE5cL6a07ykkq7LWtvBvbqphfAX8P/L3YPpqd/SNU8rCay9XckIY843yfhdw9dQiqkHE0INw4dM4aN2zCyUrQ91Vbr48dzz5G/Ae3wjvY=
+api: eJztWW1v2zYQ/isHfmoxxXbabOuEYYDnup3bJA0Sp+nm+gNFni02FKmSlB3P0H8fSMkvseW+AMU++YNhvRz53B2f50SdlsTRqSXxiFwZzdBa4DgRSjihFRlHROdoqD8ZcBKTKbra7OXa6sPFOYkIR8uMyMOwmHxUH9Vo1Ht3eTO4GfYve3/H/ff9y+Ft93w89veu0RVGWcj3MIFa+HBx3vqoSERyamiGDo13cEkUzZDEJN/14C0uSESEB86pS0lEDH4uhEFOYmcK3PVumCJQa8VUIYd7XICegEuxwZsI5qlgKVDmrPeMQqHE5wJBcFROTAQamGgDLhVNwbRIRCxLMaMkXhK3yL371hmhpiQiE20y6tZXft/L7Ftc/LGX2n8QE4S+mgqFYNDqwjAMUTx5Q2cUpFZTsGgEleJf5N7rav6npCzHPjU218qi9S4963T83356PlycH84KCAu2YP7qpJByASYsJ/Jq1ZhWDpULIeODaz9k0h8fSkRZlmVEnnXOmj1pgJ9TCxNdKA5J4YBrtKC0g5TOcMOdXS9yST1DvubH2aGM5EbPBEcOnDrqM+AhZ1QK3nqMRvNcChY0086NTiRmP32yegf7MUAXripL4OiokKCTT8icX7zKMEEOQsHo+lUPfjv7+dfxk9S53Mbt9nw+b5kJO0EunDYtbaZtM2H+5+2etmCYokHI6AISBMp5yCGVPqAcjRNowebIxEQwcHq15MEZn6Aqm3WqKre8MteDN4n8AsMLI/aI3IXb68FKSAuhpvvQYcyEFtLPQRNduDiRVN2TMiJOONkIuotiiyyjZlvkWwBlRKyjrtgKgwjlcIpm23+h3PNne3N7Wvw1HF5BNQUwzfFROfBAPohMKJEVGYnPOp2IZPShOvul0yn9nH7FvyESBfiQS6oCtXbDEQoybbDmTwhMKOuoYj9qZbQRU7GL2yLlZi1ITeKXVUQrQZ02C8rXaLQOJGX3tlIS0MKlHrWSDzCDwQkqrU9jipSHZ8GS3N3dnXQ3xvgVYR8FehToUaCHBPp8n++vtEkE56gCPddarR97VEo9x+OD76iro66+oKsDO1qOTNiwjxUuDXNOxQxV2MP7ra1XWNjetuBiE5kFarZ2oUKFkavdPCSaL/Y2vkdFHhV5VORakT83vdt1FfgsG89DNEYb0IwVxiD37/5y/QK6wq4fhUetHbV21NohrZURydCluu4ZhlaeS0lM2rWaTjbtHNteNnX0ytA3iohFM1s1AAsjSUyWlZzKuN1eptq6Ml7m2riyPfNrNaNG0ERWDPW3K9mt6CQ1ozJcblpWf8N3GVfhvjMsReuqDij0ZGEdGrju3wzhNXU4p4uQcg//GOZF50WnEcGbfsPs3asBVJFXZN0qICsIXwkaISrj7wUJzUGLrDDCLW78FFUK/0Rq0Ph37S1C1dgByZ8nwYhE9cGrFc3e3A0DU4Sa6DC8ZkyzU92rgV9ANLYKptM6rWssZSG/dQO4R7NCcVo3QbHmdkWOVX2cCpcWSYvprM0q8/W/sLZAS8o9/l8NgoyZzrJChVquptUmjcIK8wWwylsvcCkYKosNrp1Xd+B9FQyctjrf42IiddLOqFDtGsK2e92L28uX3ZPzQa9/edM/OW11Wu7BhfTm2rqMqi0/XqNr6pw29OqXm4fYj2rb1yTZaruWdezLug6MSEMdIBGJD/T2fSkYR7WcR2S5TKjFWyPL0l/+XKBZkHg03qg/lAsurD/mJJ5QaXc/A2wH/uS6/mDwFP7XjwONmaovUrUI5UwW/oxE5B4Xh75+lONy1R4LkVemXcYwd1uTrNvxXuvrAv2670X6HxeyCXM=
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns process definition as XML.
 
 <Heading
@@ -48,8 +53,13 @@ Returns process definition as XML.
       in: "path",
       required: true,
       description:
-        "The assigned key of the process definition, which acts as a unique identifier for this process.",
-      schema: { type: "string" },
+        "The assigned key of the process definition, which acts as a unique identifier for this process definition.",
+      schema: {
+        type: "string",
+        format: "string<ProcessDefinitionKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -112,6 +122,7 @@ Returns process definition as XML.
     },
     "401": {
       description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
       content: {
         "application/problem+json": {
           schema: {

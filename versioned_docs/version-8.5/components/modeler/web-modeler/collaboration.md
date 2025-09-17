@@ -142,7 +142,7 @@ Whether you are in a presentation or if others are in the same diagram as you ar
    ![attention grabber](img/attention-grabber.png)
 
 2. Drop the pointer by clicking anywhere on the canvas.
-   ![attention grabber gif](img/attention-grabber-pointer-pulse.gif)
+   ![attention grabber](img/attention-grabber-pointer-pulse.png)
 
 The pointer will pulsate to draw attention and will match your avatar color.
 It can also be seen in real-time by others that are looking at the same diagram as you.

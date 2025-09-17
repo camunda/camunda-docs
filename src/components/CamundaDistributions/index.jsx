@@ -3,8 +3,5 @@ export { default as DockerCompose } from "./DockerCompose";
 export {
   default as HelmChartInstall,
   HelmChartValuesFileLocalLink,
-} from "./Helm";
-export {
-  default as HelmChartInstall,
-  HelmChartValuesFileLocalLink,
+  HelmChartValuesFileBitnamiLegacyLink,
 } from "./Helm";
