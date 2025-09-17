@@ -5,33 +5,130 @@ description: "The orchestration cluster exposes usage metrics under the Actuator
 ---
 
 :::warning Deprecated endpoints
-With the 8.8 release, Camunda announces the deprecation of the following usage metrics endpoints. Scheduled for removal in the 8.10 release. Use the new endpoint, [/v2/system/usage-metrics](/apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
+As of the 8.8 release, the actuator usage metrics endpoints are **deprecated** and will be removed in the 8.10 release.  
+Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
 :::
 
-The orchestration cluster provides usage metrics via the `usage-metrics` Actuator endpoint. This endpoint is available on the management port, configurable with `management.server.port` (default: 8080).
+## Usage metrics endpoint (recommended)
 
-Metrics are generally grouped into three categories:
+### Overview
 
-- **Process instances** – number of process instances created.
-- **Decision instances** – number of executed decision instances.
-- **Task assignments** – number of active users and assigned tasks.
+The usage metrics endpoint retrieves metrics for a specific date range, including:
 
-All endpoints accept the query parameters:
+- **Process instances:** Total created
+- **Decision instances:** Total executed
+- **User tasks assigned:** Total unique assignees
+- **Active tenants:** Total active tenants
+- **Tenants:** List of active tenants with per-tenant metrics
 
-- `startTime`
-- `endTime`
+> **Export interval**  
+> Usage metrics are exported every 5 minutes by default. This may cause a short delay in reported metrics.  
+> You can adjust this interval in `application.properties` or via environment variables:
+>
+> ```properties
+> zeebe.broker.experimental.engine.usageMetrics.exportInterval=5m
+> ```
 
-The format for both parameters is `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` (e.g., `"1970-11-14T10:50:26.963-0100"`).
+### API details
 
-## Process instances
+| Parameter     | Required | Description                  | Format / Default                         |
+| ------------- | -------- | ---------------------------- | ---------------------------------------- |
+| `startTime`   | Yes      | Start of date range          | ISO 8601: `2025-09-16T12:30:45.123+0000` |
+| `endTime`     | Yes      | End of date range            | ISO 8601: `2025-09-16T12:30:45.123+0000` |
+| `tenantId`    | No       | Filter by tenant             | String                                   |
+| `withTenants` | No       | Include per-tenant breakdown | `false` (default)                        |
 
-Retrieve the total number of process instances created within a given time range:
+**Endpoint:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}
+http://<host>:<port>/v2/system/usage-metrics?startTime={startTime}&endTime={endTime}&tenantId={tenantId}&withTenants={withTenants}
 ```
 
-**Sample response:**
+More info: [usage metrics API](/apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx)
+
+### Examples
+
+**Without tenant breakdown:**
+
+```
+http://<host>:<port>/v2/system/usage-metrics?startTime={startTime}&endTime={endTime}&withTenants=false
+```
+
+_Response:_
+
+```json
+{
+  "processInstances": 5,
+  "decisionInstances": 23,
+  "activeTenants": 2,
+  "assignees": 3,
+  "tenants": {}
+}
+```
+
+**With tenant breakdown:**
+
+```
+http://<host>:<port>/v2/system/usage-metrics?startTime={startTime}&endTime={endTime}&withTenants=true
+```
+
+_Response:_
+
+```json
+{
+  "processInstances": 5,
+  "decisionInstances": 23,
+  "activeTenants": 2,
+  "assignees": 3,
+  "tenants": {
+    "tenant1": {
+      "processInstances": 1,
+      "decisionInstances": 2,
+      "assignees": 1
+    },
+    "tenant2": {
+      "processInstances": 4,
+      "decisionInstances": 21,
+      "assignees": 3
+    }
+  }
+}
+```
+
+## Best practices for monitoring
+
+- Monitor overall cluster activity by combining process, decision, and task metrics.
+- Track trends over time to better understand resource usage and user engagement.
+- Integrate metrics into dashboards or automation scripts for centralized monitoring and alerting.
+
+## Deprecated usage metrics actuator endpoints
+
+As of 8.8, the following actuator endpoints are **deprecated** and will be removed in the 8.10 release.  
+Use the [new usage metrics endpoint](#usage-metrics-endpoint-recommended) instead.
+
+| Endpoint                                     | Description                | Status     |
+| -------------------------------------------- | -------------------------- | ---------- |
+| `/actuator/usage-metrics/process-instances`  | Total process instances    | Deprecated |
+| `/actuator/usage-metrics/decision-instances` | Total decision instances   | Deprecated |
+| `/actuator/usage-metrics/assignees`          | Unique user task assignees | Deprecated |
+
+**All endpoints accept:**
+
+- `startTime` (optional)
+- `endTime` (optional)
+- `tenantId` (optional)
+
+Format: `yyyy-MM-dd'T'HH:mm:ss.SSSZZ` (e.g., `1970-11-14T10:50:26.963-0100`)
+
+### Examples
+
+**Process instances:**
+
+```
+http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+```
+
+_Response:_
 
 ```json
 {
@@ -39,15 +136,13 @@ http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTi
 }
 ```
 
-## Decision instances
-
-Retrieve the total number of decision instances executed within a given time range:
+**Decision instances:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+http://<host>:<port>/actuator/usage-metrics/decision-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
 ```
 
-**Sample response:**
+_Response:_
 
 ```json
 {
@@ -55,35 +150,22 @@ http://<host>:<port>/actuator/usage-metrics/process-instances?startTime={startTi
 }
 ```
 
-`tenantId` is optional and can be used to filter the results for a specific tenant.
-
-## Task assignments
-
-Retrieve the number of unique users assigned to tasks within a given time range, including a list of usernames:
+**Task assignments:**
 
 ```
-http://<host>:<port>/actuator/usage-metrics/decision-instances?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
+http://<host>:<port>/actuator/usage-metrics/assignees?startTime={startTime}&endTime={endTime}&tenantId={tenantId}
 ```
 
-**Sample response:**
+_Response:_
 
 ```json
 {
-  "total": 2,
-  "assignees": ["john.lennon", "oprah.winfrey"]
+  "total": 2
 }
 ```
-
-This endpoint allows reconciliation of users across multiple cluster components and provides insights into active task participants.
-
-`tenantId` is optional and can be used to filter the results for a specific tenant.
-
-## Using usage metrics effectively
-
-- Monitor overall cluster activity by combining process, decision, and task metrics.
-- Track trends over time to understand resource usage and user engagement.
-- Integrate metrics into dashboards or automation scripts for centralized monitoring.
 
 :::warning Breaking change
 Assignees list removed from response.
 :::
+
+This endpoint allows reconciliation of users across multiple cluster components and provides insights into active task participants.
