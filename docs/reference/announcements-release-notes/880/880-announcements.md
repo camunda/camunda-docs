@@ -182,6 +182,22 @@ The old builder pattern (`Activity.newBuilder()`) is **deprecated** and will be 
 
 The new `ActivityBuilder` interface provides a more flexible and fluent API for logging activities in inbound connectors.
 
+#### Harmonized Error Contexts for jobError and bpmnError in Connectors
+
+With this release, we have harmonized the error context structures returned by the jobError and bpmnError functions in connectors to align with the corresponding error handling in Camunda core.
+
+This update ensures that connector errors now follow the same conventions and structure as errors handled by the core engine, supporting greater consistency across process modeling and execution.
+
+Updated context structure:
+
+bpmnError now returns an entry containing: `errorType`, `errorCode` `errorMessage` `variables`
+jobError now returns an entry containing : `errorType`, `errorMessage`, `variables`, `retries`, `retryBackoff`
+
+These changes do not introduce new fields or richer context, but instead ensure that error data is structured and surfaced consistently between connectors and Camunda core.
+This makes error handling more predictable, especially for teams working across both domains.
+
+Developers and integrators should review any custom connector logic to take full advantage of the new fields and adapt error handling as necessary.
+
 ### Removed: Starter plan <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 
 The Camunda SaaS Starter plan is no longer available.
