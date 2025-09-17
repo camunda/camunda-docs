@@ -134,6 +134,7 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode "client_id=${CLIENT_ID}" \
 --data-urlencode "client_secret=${CLIENT_SECRET}" \
+--data-urlencode "audience=${CLIENT_ID_OC}" \
 --data-urlencode "scope=${CLIENT_ID_OC}" \
 --data-urlencode 'grant_type=client_credentials'
 ```
