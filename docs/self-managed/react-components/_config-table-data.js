@@ -886,7 +886,7 @@ export const configs = [
   },
   // License keys
   {
-    name: "license.key",
+    name: "camunda.license.key",
     legacy: ["N/A"],
     types: ["New"],
     area: ["Licensing"],
