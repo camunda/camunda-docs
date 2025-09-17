@@ -78,7 +78,7 @@ Refer to the example array below:
 
 ## Upload a document when using any connector
 
-Documents available for download from an unprotected URL can be added to a process in any connector by specifying them like this:
+Documents available for download from an unprotected URL can be added to a process in any connector by specifying them. For example:
 
 ```json
 {
@@ -88,7 +88,7 @@ Documents available for download from an unprotected URL can be added to a proce
 }
 ```
 
-The `name` field is optional. If it is not provided the filename is taken from `content-type` and `content-dispotition` http headers, a random UUID will be used as a fallback.
+The `name` field is optional. If not provided, the filename is taken from `content-type` and `content-dispotition` http headers, and a random UUID will be used as a fallback.
 
 ## Upload a document via inbound webhook connector
 

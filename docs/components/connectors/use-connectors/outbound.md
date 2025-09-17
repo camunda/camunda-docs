@@ -53,4 +53,4 @@ If necessary, the **retry backoff** property can be made visible and editable in
 
 ## Downloading documents
 
-To download documents without an additional step, check out [this](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector)
+To download documents without an additional step, review [uploading a document when using connectors](/components/document-handling/upload-document-to-bpmn-process.md#upload-a-document-when-using-any-connector).
