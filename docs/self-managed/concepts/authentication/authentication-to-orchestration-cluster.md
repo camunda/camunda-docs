@@ -10,80 +10,42 @@ import TabItem from '@theme/TabItem';
 
 Authentication to the Orchestration Cluster components and their resources is managed by [Identity](../../components/orchestration-cluster/identity/overview.md). It includes components like [Zeebe](/components/zeebe/zeebe-overview.md), [Operate](/components/operate/operate-introduction.md), [Tasklist](/components/tasklist/introduction-to-tasklist.md), and [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-Camunda 8' Orchestration Cluster supports the following authentication methods for all Self-Managed installation methods:
+Camunda 8's Orchestration Cluster supports two authentication methods:
 
-- [Basic authentication with unprotected APIs](#no-authentication-for-apis)
-- [Basic authentication](#full-basic-authentication)
+- [Basic Authentication](#basic-authentication)
 - [OIDC](#oidc)
 
 ### Comparison of authentication methods
 
-|                                                | **Recommended use**    | **API access**             | **Web UI access**     | **User management**            | **Security** |
-| ---------------------------------------------- | ---------------------- | -------------------------- | --------------------- | ------------------------------ | ------------ |
-| **Basic authentication with unprotected APIs** | Local development      | No authentication required | Username and password | Via Identity                   | Low          |
-| **Basic authentication**                       | Development or testing | Username and password      | Username and password | Via Identity                   | Medium       |
-| **OIDC**                                       | Production             | OAuth 2.0 (via IdP)        | OIDC (via IdP)        | Via External Identity Provider | High         |
+|                          | **API access**        | **Web UI access**     | **User management**            |
+| ------------------------ | --------------------- | --------------------- | ------------------------------ |
+| **Basic authentication** | Username and password | Username and password | Via Identity                   |
+| **OIDC**                 | OAuth 2.0 (via IdP)   | OIDC (via IdP)        | Via External Identity Provider |
+
+Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for development purposes, which can be applied to either method.
 
 ## Basic authentication
 
-With the Basic authentication, API and web component access are protected by username and password. User management is handled within the built-in Identity service. This method offers two main configuration scenarios, controlled by the `Unprotected API` property.
+With Basic Authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Identity service.
 
-### Unprotected APIs
+This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/installation-methods/helm/index.md) and [Manual installation](/self-managed/installation-methods/manual/install.md).
 
-In this scenario, API access is unprotected for easier development, while web components remain secured with basic authentication.
-
-This is the default for local development environments like [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md).
-It should never be used in production environments.
-
-#### Example configuration
-
-<Tabs groupId="option" defaultValue="env">
-  <TabItem value="env" label="Environment variables">
-```yaml
-CAMUNDA_SECURITY_AUTHENTICATION_METHOD=basic
-CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=true
-```
-  </TabItem>
-  <TabItem value="yaml" label="application.yaml" default>
-```yaml
-camunda.security.authentication.method: basic
-camunda.security.authentication.unprotected-api: true
-```
-  </TabItem>
-  <TabItem value="helm" label="Helm values">
-```yaml
-orchestration.security.authentication.method=basic
-orchestration.security.authentication.unprotectedApi=true
-```
-  </TabItem>
-</Tabs>
-
-### Full basic authentication
-
-Both APIs and web components are protected with username and password.
-
-This is the default authentication method for [Helm charts](/self-managed/installation-methods/helm/index.md) and [Manual installation](/self-managed/installation-methods/manual/install.md).
-It is typically used in development or testing environments.
-
-#### Example configuration
+### Example configuration
 
 <Tabs  groupId="option" defaultValue="env">
   <TabItem value="env" label="Environment variables">
 ```yaml
 CAMUNDA_SECURITY_AUTHENTICATION_METHOD=basic
-CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
 ```
   </TabItem>
   <TabItem value="yaml" label="application.yaml" default>
 ```yaml
 camunda.security.authentication.method: basic
-camunda.security.authentication.unprotected-api: false
 ```
   </TabItem>
   <TabItem value="helm" label="Helm values">
 ```yaml
 orchestration.security.authentication.method=basic
-orchestration.security.authentication.unprotectedApi=false
 ```
   </TabItem>
 </Tabs>
@@ -106,18 +68,18 @@ For a secure, production-ready setup, we **strongly recommend using [OIDC](#oidc
 With OIDC, authentication is delegated to an [external Identity Provider (IdP)](/components/concepts/access-control/connect-to-identity-provider.md) using **OpenID Connect (OIDC)**. This is the **recommended method for production environments**.
 
 - [Users](/components/identity/user.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
-- [User groups](/components/identity/group.md) can be managed in Identity or configured to use groups from your IdP.
+- [User groups](/components/identity/group.md) can be managed in Identity or [configured to use groups from your IdP](/self-managed/components/orchestration-cluster/identity/bring-your-own-groups.md).
 - [Clients](/components/identity/client.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
-
-:::tip
-For the details, see the guide how to [connect Orchestration Cluster Identity to an external IdP](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
-:::
 
 Using OIDC provides several security benefits:
 
 - **Centralized user management:** Manage all users and their access from a single, central IdP.
 - **Single Sign-On (SSO):** Provide a seamless login experience for your users across multiple applications.
 - **Enhanced security:** Enforce MFA, password rotation policies, and other advanced security measures offered by your IdP.
+
+:::tip
+For the details, see the guide how to [connect Orchestration Cluster Identity to an external IdP](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+:::
 
 ### Example configuration
 
@@ -139,4 +101,36 @@ orchestration.security.authentication.method=oidc
   </TabItem>
 </Tabs>
 
-When the OIDC authentication method is enabled, additional configuration values must be set. See the [OIDC configuration](../../components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration) for the details.
+When the OIDC authentication method is enabled, additional configuration values must be set. See the [supported OIDC configuration properties](../../components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration) for the details.
+
+## Unprotected API mode
+
+In this mode, API access is unprotected with no authentication required for APIs. This mode can be enabled with both **Basic Authentication** and **OIDC**.
+
+By default, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) are configured in the **unprotected API mode** for a quick start with local development.
+
+This mode should never be used in production environments.
+
+:::note
+If you need to use authorizations for access control, you must protect APIs by disabling the unprotected API mode. To learn more, see the documentation on [Orchestration Cluster authorization](../../../components/concepts/access-control/authorizations.md).
+:::
+
+### Example configuration
+
+<Tabs groupId="option" defaultValue="env">
+  <TabItem value="env" label="Environment variables">
+```yaml
+CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=true
+```
+  </TabItem>
+  <TabItem value="yaml" label="application.yaml" default>
+```yaml
+camunda.security.authentication.unprotected-api: true
+```
+  </TabItem>
+  <TabItem value="helm" label="Helm values">
+```yaml
+orchestration.security.authentication.unprotectedApi=true
+```
+  </TabItem>
+</Tabs>

@@ -40,18 +40,25 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 <h3>Steps</h3>
 
-1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-   :::note
-   Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
-   :::
-2. For all management components, ensure the appropriate application type is used:
-   - **Optimize, Management Identity, Web Modeler API:** Web applications requiring confidential access/a confidential client
-   - **Console, Web Modeler UI:** Single-page applications requiring public access/a public client
-3. Make a note of the following values for each application you create:
+1. Identify what management components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+2. In your OIDC provider, **create an application for each of the management components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+   - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
+     :::note
+     Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+     :::
+3. For each management component, ensure the appropriate application type is used:
+   - Web applications requiring confidential access/a confidential client:
+     - **Optimize**
+     - **Management Identity**
+     - **Web Modeler API**
+   - Web applications requiring confidential access/a confidential client:
+     - **Console**
+     - **Web Modeler UI**
+4. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables or Helm values for the component you are configuring an app for:
+5. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
@@ -139,17 +146,23 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 Ensure you register a new application for each component.
 :::
 
-1. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each** component you would like to connect. Web Modeler requires two applications: one for the UI, and one for the API.
-2. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
-3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
-   - **Web**: Optimize, Management Identity, Web Modeler API
-   - **Single-page application**: Console, Web Modeler UI
-4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
+1. Identify what management components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
+4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
+   - **Web**:
+     - Optimize
+     - Management Identity
+     - Web Modeler API
+   - **Single-page application**:
+     - Console
+     - Web Modeler UI
+5. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
    :::note
    Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
    :::
-5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
-6. Set the following environment variables or Helm values for the component you are configuring an app for:
+6. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
+7. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.

@@ -22,9 +22,9 @@ This is the default authentication setup for Self-Managed installation methods, 
 
 In this scenario:
 
-- **User authentication:** Users log in through the built-in IdP's login page.
+- **User authentication:** Users log in through the Keycloak's login page.
 - **Application authentication:** Applications authenticate using Machine-to-Machine (M2M) tokens.
-- **User management:** Administrators manage users, groups, roles, and permissions within the built-in IdP.
+- **User management:** Administrators manage users, groups, roles, and permissions within Keycloak.
 
 This method is convenient for getting started quickly and is suitable for environments that do not need to integrate with an existing corporate identity management system.
 
@@ -38,7 +38,7 @@ In this scenario, Keycloak remains the direct IdP for Camunda management compone
 
 - **User authentication:** Users are redirected from Keycloak's login page to your external IdP.
 - **User management:** Users are managed in your external IdP and federated into Keycloak.
-- **Application authentication:** Applications use M2M tokens issued by the built-in Keycloak.
+- **Application authentication:** Applications use M2M tokens issued by Keycloak.
 
 This method is useful when you need to integrate with an IdP that does not use OIDC, or when you want to use Keycloak's advanced features to manage roles and map claims from your external provider.
 
