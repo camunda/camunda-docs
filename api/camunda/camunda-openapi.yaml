@@ -11802,6 +11802,7 @@ components:
       type: object
       required:
         - afterElementId
+        - type
       properties:
         afterElementId:
           description: |
@@ -11809,6 +11810,12 @@ components:
           example: Activity_106kosb
           allOf:
             - $ref: "#/components/schemas/ElementId"
+        type:
+          type: string
+          description: |
+            The type of the runtime instruction. For this instruction, it must be TERMINATE_PROCESS_INSTANCE.
+          example: TERMINATE_PROCESS_INSTANCE
+          default: TERMINATE_PROCESS_INSTANCE
     CreateProcessInstanceResult:
       required:
         - processDefinitionId
