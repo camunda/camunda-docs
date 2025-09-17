@@ -627,7 +627,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `retryBackoff`: Duration _(optional)_, defaults to the configured retry backoff
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
