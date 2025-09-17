@@ -17,12 +17,12 @@ This guide covers conceptually what your pipeline needs to do, from obtaining cr
 
 Before building your pipeline, ensure you have the following:
 
-| Prerequisite                                                                                                                    | Purpose                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| [A repository](<https://en.wikipedia.org/wiki/Repository_(version_control)>)                                                    | Store all element templates                                                     |
-| System of record                                                                                                                | Track which templates are required in each cluster and which projects need them |
-| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                             |
-| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                              |
+| Prerequisite                                                                                                                    | Purpose                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                             | Store all element templates                                                                                                                                                                                                                                   |
+| Template state management                                                                                                       | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which projects depend on them. This source acts as the single source of truth for template deployments. |
+| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                                                                                                                                                                                                           |
+| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                                                                                                                                                                                                            |
 
 For simplicity, this guide assumes:
 
@@ -44,7 +44,7 @@ These guides show you how to configure them depending on the environment you are
 
 ### Job Workers
 
-As part of the pipeline, you may spin up a service that will connect to a Camunda cluster to perform specific tasks. For example, you can use the [Spring Boot Camunda Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) to start a custom connector.
+As part of the pipeline, you may spin up a service that will connect to a Camunda cluster to perform specific tasks. For example, you can use the [Spring Boot Camunda Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) to start a job worker.
 
 Recommended resources:
 

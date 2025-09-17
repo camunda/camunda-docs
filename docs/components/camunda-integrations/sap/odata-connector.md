@@ -41,8 +41,13 @@ WebIDESystem: <SAP system ID>
 WebIDEUsage: odata_gen
 ```
 
-:::danger
-The SAP OData connector currently only supports `BasicAuthentication` as the Authentication type for the Destination.
+:::info
+The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing — that is, scenarios without user tasks in the execution path.
+
+Use `BasicAuthentication` or any `OAuth2`-based mechanism.
+
+`PrincipalPropagation` is not supported because it requires a user-bound security context. Camunda user tasks do not expose a JWT (for example, as a transient variable) that the connector can forward at runtime.
+
 :::
 
 ## Configuration and deployment
@@ -60,7 +65,7 @@ Configure the OData connector via [the `csap` cli](./csap-cli.md) (recommended) 
 
 Use the command `csap setup` to guide you interactively.
 
-- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) are sourced in your shell environment, this will do the configuration for you:
+- Assuming your [Camunda cluster's API credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) are sourced in your shell environment, this will do the configuration for you:
 
 ```shell
 csap setup --for odata \
@@ -75,6 +80,7 @@ Follow these steps:
 1. Find the matching [Docker image](https://hub.docker.com/r/camunda/sap-odata-connector/tags) for the targeted Camunda 8 SaaS version.  
    The version follows the format `<C8 version major>.<C8 version minor>.<OData connector version>`.  
    Examples:
+
    - `8.6.0` is the OData connector in version `0` for C8 SaaS version `8.6`
    - `8.5.1` is the OData connector in version `1` for C8 SaaS version `8.5`
 

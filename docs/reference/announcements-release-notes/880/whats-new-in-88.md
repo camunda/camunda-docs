@@ -115,12 +115,12 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 The Orchestration Cluster [Identity](/components/identity/identity-introduction.md) component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
 
 :::note
-With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/what-is-identity.md) (formerly "Identity") component.
+With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
 :::
 
 ### Identity and Management Identity
 
-In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/what-is-identity.md) are two separate components used for Identity management, each with distinct areas of responsibility.
+In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/overview.md) are two separate components used for Identity management, each with distinct areas of responsibility.
 
 <table>
     <thead>

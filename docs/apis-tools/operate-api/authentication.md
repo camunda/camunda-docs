@@ -18,7 +18,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
 ]}>
 <TabItem value='saas'>
 
-1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
+1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
 2. Add permissions to this client for **Operate**.
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
@@ -81,7 +81,7 @@ All Operate REST API requests require authentication. To authenticate, generate 
    ```
 5. Capture the value of the `access_token` property and store it as your token.
 
-See the [Operate Configuration - Authentication](/self-managed/components/orchestration-cluster/core-settings/concepts/authentication.md) documentation for more information about this authentication method.
+For more information, see the deprecated [authentication configuration for Operate](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).
 
 </TabItem>
 

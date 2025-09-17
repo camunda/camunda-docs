@@ -5,9 +5,9 @@ const metadataForVersion = {};
 
 function getOutputDir(version) {
   if (version === undefined) {
-    return "docs/apis-tools/spring-zeebe-sdk";
+    return "docs/apis-tools/camunda-spring-boot-starter";
   } else {
-    return `versioned_docs/version-${version}/apis-tools/spring-zeebe-sdk`;
+    return `versioned_docs/version-${version}/apis-tools/camunda-spring-boot-starter`;
   }
 }
 const getMetadata = (version) => {
