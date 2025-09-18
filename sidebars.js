@@ -550,6 +550,7 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
+            "components/operate/userguide/access-control",
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -573,6 +574,7 @@ module.exports = {
             id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access-control",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -591,19 +593,14 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
+            "components/identity/access-control",
             "components/identity/user",
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/mapping-rules",
             "components/identity/tenant",
-            {
-              "Mapping rules": [
-                "components/identity/mapping-rules/manage-mapping-rules",
-                "components/identity/mapping-rules/mapping-rule-authorizations",
-                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
-              ],
-            },
           ],
         },
       ],

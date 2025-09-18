@@ -5,9 +5,7 @@ sidebar_label: "Tenants"
 description: "Manage tenants within the Orchestration Cluster Identity to logically separate your infrastructure."
 ---
 
-:::info
-Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available in Camunda 8 SaaS.
-:::
+<span class="badge badge--platform">Self-Managed only</span>
 
 A **tenant** is a logical boundary for data within a Camunda 8 installation.  
 This enables multiple teams, departments, or clients to share a single environment while keeping data isolated.
@@ -65,7 +63,7 @@ You can assign the following entities to a tenant:
 - [Users](user.md)
 - [Groups](group.md)
 - [Roles](role.md)
-- [Mapping rules](./mapping-rules/manage-mapping-rules.md)
+- [Mapping rules](mapping-rules.md)
 - [Clients](client.md)
 
 Assignments are managed in the tenant details page using the relevant tab.
