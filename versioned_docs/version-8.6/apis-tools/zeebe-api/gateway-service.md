@@ -1010,6 +1010,86 @@ Returned if:
 - No incident with the given key exists.
 - No incident with the given key was found for the tenants the user is authorized to work with.
 
+## `StreamActivatedJobs` RPC
+
+Opens a long living stream for the given job type, worker name, job timeout, and fetch variables. This will cause available
+jobs in the engine to be activated and pushed down this stream.
+
+See the [job worker's technical reference](/components/concepts/job-workers.md) for more on this.
+
+### Input `StreamActivatedJobsRequest`
+
+```protobuf
+message StreamActivatedJobsRequest {
+  // the job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition
+  // type="payment-service" />)
+  string type = 1;
+  // the name of the worker activating the jobs, mostly used for logging purposes
+  string worker = 2;
+  // a job returned after this call will not be activated by another call until the
+  // timeout (in ms) has been reached
+  int64 timeout = 3;
+  // a list of variables to fetch as the job variables; if empty, all visible variables at
+  // the time of activation for the scope of the job will be returned
+  repeated string fetchVariable = 5;
+  // a list of identifiers of tenants for which to stream jobs
+  repeated string tenantIds = 6;
+}
+```
+
+### Output: a stream of `ActivatedJob`
+
+```protobuf
+message ActivatedJob {
+  // the key, a unique identifier for the job
+  int64 key = 1;
+  // the type of the job (should match what was requested)
+  string type = 2;
+  // the job's process instance key
+  int64 processInstanceKey = 3;
+  // the bpmn process ID of the job process definition
+  string bpmnProcessId = 4;
+  // the version of the job process definition
+  int32 processDefinitionVersion = 5;
+  // the key of the job process definition
+  int64 processDefinitionKey = 6;
+  // the associated task element ID
+  string elementId = 7;
+  // the unique key identifying the associated task, unique within the scope of the
+  // process instance
+  int64 elementInstanceKey = 8;
+  // a set of custom headers defined during modelling; returned as a serialized
+  // JSON document
+  string customHeaders = 9;
+  // the name of the worker which activated this job
+  string worker = 10;
+  // the amount of retries left to this job (should always be positive)
+  int32 retries = 11;
+  // when the job can be activated again, sent as a UNIX epoch timestamp
+  int64 deadline = 12;
+  // JSON document, computed at activation time, consisting of all visible variables to
+  // the task scope
+  string variables = 13;
+  // the ID of the tenant that owns the job
+  string tenantId = 14;
+}
+```
+
+### Errors
+
+#### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- Type is blank (empty string, null)
+- Timeout less than 1 (ms)
+- If multi-tenancy is enabled, and `tenantIds` is empty (empty list)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantIds` is not empty (empty list), or has an ID other than `<default>`
+
 ## `SetVariables` RPC
 
 Updates all the variables of a particular scope (e.g. process instance, flow element instance) from the given JSON document.
@@ -1261,83 +1341,3 @@ Returned if:
 Returned if:
 
 - The job is not active.
-
-## `StreamActivatedJobs` RPC
-
-Opens a long living stream for the given job type, worker name, job timeout, and fetch variables. This will cause available
-jobs in the engine to be activated and pushed down this stream.
-
-See the [job worker's technical reference](/components/concepts/job-workers.md) for more on this.
-
-### Input `StreamActivatedJobsRequest`
-
-```protobuf
-message StreamActivatedJobsRequest {
-  // the job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition
-  // type="payment-service" />)
-  string type = 1;
-  // the name of the worker activating the jobs, mostly used for logging purposes
-  string worker = 2;
-  // a job returned after this call will not be activated by another call until the
-  // timeout (in ms) has been reached
-  int64 timeout = 3;
-  // a list of variables to fetch as the job variables; if empty, all visible variables at
-  // the time of activation for the scope of the job will be returned
-  repeated string fetchVariable = 5;
-  // a list of identifiers of tenants for which to stream jobs
-  repeated string tenantIds = 6;
-}
-```
-
-### Output: a stream of `ActivatedJob`
-
-```protobuf
-message ActivatedJob {
-  // the key, a unique identifier for the job
-  int64 key = 1;
-  // the type of the job (should match what was requested)
-  string type = 2;
-  // the job's process instance key
-  int64 processInstanceKey = 3;
-  // the bpmn process ID of the job process definition
-  string bpmnProcessId = 4;
-  // the version of the job process definition
-  int32 processDefinitionVersion = 5;
-  // the key of the job process definition
-  int64 processDefinitionKey = 6;
-  // the associated task element ID
-  string elementId = 7;
-  // the unique key identifying the associated task, unique within the scope of the
-  // process instance
-  int64 elementInstanceKey = 8;
-  // a set of custom headers defined during modelling; returned as a serialized
-  // JSON document
-  string customHeaders = 9;
-  // the name of the worker which activated this job
-  string worker = 10;
-  // the amount of retries left to this job (should always be positive)
-  int32 retries = 11;
-  // when the job can be activated again, sent as a UNIX epoch timestamp
-  int64 deadline = 12;
-  // JSON document, computed at activation time, consisting of all visible variables to
-  // the task scope
-  string variables = 13;
-  // the ID of the tenant that owns the job
-  string tenantId = 14;
-}
-```
-
-### Errors
-
-#### GRPC_STATUS_INVALID_ARGUMENT
-
-Returned if:
-
-- Type is blank (empty string, null)
-- Timeout less than 1 (ms)
-- If multi-tenancy is enabled, and `tenantIds` is empty (empty list)
-- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
-  - The tenant ID is blank (empty string, null)
-  - The tenant ID is longer than 31 characters
-  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
-- If multi-tenancy is disabled, and `tenantIds` is not empty (empty list), or has an ID other than `<default>`
