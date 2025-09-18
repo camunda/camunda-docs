@@ -317,3 +317,7 @@ CSRF tokens when using OIDC or Basic authentication methods.
 :::caution
 Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
 :::
+
+import SecondaryStorage from './partials/\_secondary-storage.md'
+
+<SecondaryStorage />
