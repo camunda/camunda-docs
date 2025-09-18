@@ -111,7 +111,7 @@ To use the FEEL Playground for prompting:
 1. In the popup FEEL editor, enter details regarding your prompt.
 1. Once satisfied with your prompt, click **Use expression** to use it in your FEEL expression.
 
-<img src={PlaygroundPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
+   <img src={PlaygroundPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
 
 ### LLM provider specific prompting
 
