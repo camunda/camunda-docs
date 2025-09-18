@@ -12,6 +12,8 @@ import PlaygroundIconErrorImg from './assets/feel-playground-validation-error.pn
 import PlaygroundExampleInvalidImg from './assets/feel-playground-example-invalid-expression.png';
 import PlaygroundExampleJsonWarningImg from './assets/feel-playground-example-warning-json.png';
 import PlaygroundExampleJsonErrorImg from './assets/feel-playground-example-error-json.png';
+import PlaygroundPromptingExampleImg from './assets/feel-playground-prompting-example.png';
+import PlaygroundModelSpecificPromptingExampleImg from './assets/feel-playground-provider-specific-prompting-example.png';
 
 Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
 
@@ -94,3 +96,27 @@ Hover over a status icon to see more information, such as the reason why the FEE
 - In this example, the **Context** shows an error status to indicate it did not pass validation.
 - The error is caused by an extra comma character after the last key-pair, which is not a valid JSON format.
 - Hovering over the icon provides more detail on what is causing the error, for example "Invalid JSON: Expected double-quoted property name in JSON at position 98 (line 7 column 1)".
+
+## Prompting in FEEL Playground {#prompting}
+
+FEEL Playground supports prompting to help you write better FEEL expressions.
+
+To use the FEEL Playground for prompting:
+
+1. Open the properties panel of a diagram element containing the FEEL expression you want to validate.
+1. To open the popup FEEL editor, click **fx** on the FEEL expression field, and click the **Open popup editor** icon in the field.
+
+   <img src={PlaygroundOpenImg} alt="click fx on the FEEL expression field, and click the Open popup editor icon in the field" class="img-500"/>
+
+1. In the popup FEEL editor, enter details regarding your prompt.
+1. Once satisfied with your prompt, click **Use expression** to use it in your FEEL expression.
+
+<img src={PlaygroundPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
+
+### LLM provider specific prompting
+
+Prompting supports prompt creation for specific LLM providers.
+
+A prompt like **Please create a prompt for a classification agent that needs to classify text received by a customer to a list of "sentiment". My model is OpenAI o3.** will take into account that user asked for a ChatGPT specific prompt.
+
+<img src={PlaygroundModelSpecificPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
