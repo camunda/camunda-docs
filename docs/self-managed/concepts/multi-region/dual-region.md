@@ -179,14 +179,6 @@ Data specific to each region (not replicated through Zeebe):
 - **Operate**: Uncompleted batch operations
 - **Tasklist**: Task assignments
 
-:::warning Data Loss Impact
-
-This region-specific data will be permanently lost during a region failure and cannot be recovered.
-
-This occurs because the [operational failback procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback) requires creating a complete Elasticsearch backup from the surviving region and restoring it to the recreated region, which overwrites any region-specific data that was not replicated through Zeebe. Plan your operational procedures accordingly.
-
-:::
-
 ## Requirements and limitations
 
 ### Installation environment
@@ -219,17 +211,6 @@ The following Zeebe brokers and replication configuration are supported:
 Zeebe creates partitions in a [round-robin fashion](/components/zeebe/technical-concepts/partitions.md#partition-distribution). The Helm charts ensures that all brokers with even numbers (0, 2, 4, 6, ...) are created in the same region. The brokers with uneven numbers (1, 3, 5, 7, ...) are created in the other region.
 
 This numbering and the round-robin partition distribution assures the even replication across the two regions.
-
-### Performance considerations
-
-Dual-region setups introduce additional latency and complexity that can impact performance:
-
-- **Network latency**: All Raft communication between brokers occurs across regions, adding network latency to consensus operations
-- **Throughput impact**: Cross-region replication may reduce overall throughput compared to single-region deployments
-- **Resource overhead**: Each region requires full resource allocation, effectively doubling infrastructure costs
-- **Monitoring complexity**: Performance metrics and alerting must account for cross-region dependencies
-
-Consider these factors when sizing your dual-region deployment and setting performance expectations.
 
 ### Camunda 8 dual-region limitations
 
@@ -287,7 +268,6 @@ When a region becomes unavailable, the Zeebe cluster loses quorum (half of broke
 :::warning Immediate Impact
 Region failure results in **immediate service interruption**:
 
-- All workflow processing stops
 - No new process instances can be started
 - Running process instances are suspended
 - User interfaces become unavailable (if primary region is lost)
