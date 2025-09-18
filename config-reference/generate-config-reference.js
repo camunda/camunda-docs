@@ -70,6 +70,7 @@ const generationConfig = {
   componentName: strategy.componentName,
   useHelm: strategy.useHelm || false,
   baseDir: strategy.baseDir,
+  additionalProperties: strategy.getAdditionalProperties(requestedVersion),
 };
 
 const template = fs.readFileSync(
@@ -176,30 +177,32 @@ const runCommand = (command) => {
 
 const preGenerateDocs = (config) => {
   // move map properties to the groups
-  const mapProperties = config.metadata.properties.filter((property) =>
-    property.type.startsWith("java.util.Map")
+  const complexProperties = config.metadata.properties.filter(
+    (property) =>
+      property.type.startsWith("java.util.Map") ||
+      (property.type.startsWith("java.util.List") &&
+        typeReplacements[property.type] === undefined)
   );
-  mapProperties.forEach((property) => {
-    const found = property.type.match(mapRegex);
-    const keyType = found[1];
-    const valueType = found[2];
-    const keyName = keyNames[property.name] || "key";
-    const properties = config.metadata.properties
-      .filter((p) => p.sourceType === valueType)
-      .map((p) => JSON.parse(JSON.stringify(p)));
-    properties.forEach((p) => {
-      p.name = property.name + ".{" + keyName + "}." + p.name.split(".").pop();
-    });
-    config.metadata.properties.push(...properties);
+  console.log(`Found ${complexProperties.length} complex properties`);
+  complexProperties.forEach((property) => {
+    config.metadata.properties.splice(
+      config.metadata.properties.indexOf(property),
+      1
+    );
+    const properties = config.additionalProperties.filter(
+      (p) => p.name === property.name
+    )[0];
+    console.log(...properties.properties);
+    config.metadata.properties.push(...properties.properties);
+    console.log(config.metadata.properties);
     config.metadata.groups.push({
-      name: property.name + ".{" + keyName + "}",
-      type: valueType,
+      name: properties.placeHolderName,
+      type: properties.sourceType,
       description: property.description,
       sourceType: property.sourceType,
     });
+    console.log(config.metadata.groups);
   });
-
-  console.log(config.metadata.groups);
 
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {

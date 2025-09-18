@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { execSync } = require("child_process");
 const metadataNext = require("./spring-configuration-metadata.json");
+const additionalProperties = require("./additional-properties.json");
 
 const baseDir = "./config-reference/camunda-spring-boot-starter";
 
@@ -18,6 +19,13 @@ const getMetadata = (version) => {
     return require(`./${version}/spring-configuration-metadata.json`);
   }
 };
+const getAdditionalProperties = (version) => {
+  if (version === undefined) {
+    return additionalProperties;
+  } else {
+    return require(`./${version}/additional-properties.json`);
+  }
+};
 const getFilename = (version) => {
   return "properties-reference.md";
 };
@@ -31,6 +39,16 @@ const downloadReference = async (version) => {
       `${baseDir}/target/dependency/META-INF/spring-configuration-metadata.json`,
       `${baseDir}/spring-configuration-metadata.json`
     );
+    if (
+      fs.existsSync(
+        `${baseDir}/target/dependency/META-INF/additional-properties.json`
+      )
+    ) {
+      fs.copyFileSync(
+        `${baseDir}/target/dependency/META-INF/additional-properties.json`,
+        `${baseDir}/additional-properties.json`
+      );
+    }
     fs.rmSync(`${baseDir}/target`, {
       recursive: true,
       force: true,
@@ -40,6 +58,10 @@ const downloadReference = async (version) => {
     fs.copyFileSync(
       `${baseDir}/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
       `${baseDir}/${version}/spring-configuration-metadata.json`
+    );
+    fs.copyFileSync(
+      `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`,
+      `${baseDir}/${version}/additional-properties.json`
     );
     fs.rmSync(`${baseDir}/${version}/target`, {
       recursive: true,
@@ -59,4 +81,5 @@ module.exports = {
   downloadReference,
   componentName,
   baseDir,
+  getAdditionalProperties,
 };

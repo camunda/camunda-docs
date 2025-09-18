@@ -19,6 +19,7 @@ const getMetadata = (version) => {
     return myVersionedMetadata; // return metadata json for versioned version
   }
 };
+const getAdditionalProperties = (version) => []; // return additional properties to be merged into the metadata
 const getFilename = (version) => {
   return "properties-reference.md"; // return the file name for your markdown
 };
@@ -44,4 +45,5 @@ module.exports = {
   componentName,
   useHelm,
   baseDir,
+  getAdditionalProperties,
 };
