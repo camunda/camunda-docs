@@ -19,6 +19,8 @@ Because basic authentication is enabled by default, components that depend on Ma
 - Optimize
   :::
 
+### Default users
+
 Two users are created by default:
 
 - demo
