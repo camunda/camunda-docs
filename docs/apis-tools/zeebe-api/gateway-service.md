@@ -542,146 +542,6 @@ Returned if:
 
 - The deleted resource is a process definition, and there are running instances for this process definition.
 
-## `EvaluateDecision` RPC
-
-Evaluates a decision. You specify the decision to evaluate either by
-using its unique KEY (as returned by DeployResource), or using the decision
-ID. When using the decision ID, the latest deployed version of the decision
-is used.
-
-:::note
-When you specify both the decision ID and KEY, the ID is used to find the decision to be evaluated.
-:::
-
-### Input: `EvaluateDecisionRequest`
-
-```protobuf
-message EvaluateDecisionRequest {
-  // the unique key identifying the decision to be evaluated (e.g. returned
-  // from a decision in the DeployResourceResponse message)
-  int64 decisionKey = 1;
-  // the ID of the decision to be evaluated
-  string decisionId = 2;
-  // JSON document that will instantiate the variables for the decision to be
-  // evaluated; it must be a JSON object, as variables will be mapped in a
-  // key-value fashion, e.g. { "a": 1, "b": 2 } will create two variables,
-  // named "a" and "b" respectively, with their associated values.
-  // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
-  // JSON document is an array and not an object.
-  string variables = 3;
-  // the tenant identifier of the decision
-  string tenantId = 4;
-}
-```
-
-### Output: `EvaluateDecisionResponse`
-
-```protobuf
-message EvaluateDecisionResponse {
-  // the unique key identifying the decision which was evaluated (e.g. returned
-  // from a decision in the DeployResourceResponse message)
-  int64 decisionKey = 1;
-  // the ID of the decision which was evaluated
-  string decisionId = 2;
-  // the name of the decision which was evaluated
-  string decisionName = 3;
-  // the version of the decision which was evaluated
-  int32 decisionVersion = 4;
-  // the ID of the decision requirements graph that the decision which was
-  // evaluated is part of.
-  string decisionRequirementsId = 5;
-  // the unique key identifying the decision requirements graph that the
-  // decision which was evaluated is part of.
-  int64 decisionRequirementsKey = 6;
-  // JSON document that will instantiate the result of the decision which was
-  // evaluated; it will be a JSON object, as the result output will be mapped
-  // in a key-value fashion, e.g. { "a": 1 }.
-  string decisionOutput = 7;
-  // a list of decisions that were evaluated within the requested decision evaluation
-  repeated EvaluatedDecision evaluatedDecisions = 8;
-  // an optional string indicating the ID of the decision which
-  // failed during evaluation
-  string failedDecisionId = 9;
-  // an optional message describing why the decision which was evaluated failed
-  string failureMessage = 10;
-  // the tenant identifier of the evaluated decision
-  string tenantId = 11;
-  // the unique key identifying this decision evaluation
-  int64 decisionInstanceKey = 12;
-}
-
-message EvaluatedDecision {
-  // the unique key identifying the decision which was evaluated (e.g. returned
-  // from a decision in the DeployResourceResponse message)
-  int64 decisionKey = 1;
-  // the ID of the decision which was evaluated
-  string decisionId = 2;
-  // the name of the decision which was evaluated
-  string decisionName = 3;
-  // the version of the decision which was evaluated
-  int32 decisionVersion = 4;
-  // the type of the decision which was evaluated
-  string decisionType = 5;
-  // JSON document that will instantiate the result of the decision which was
-  // evaluated; it will be a JSON object, as the result output will be mapped
-  // in a key-value fashion, e.g. { "a": 1 }.
-  string decisionOutput = 6;
-  // the decision rules that matched within this decision evaluation
-  repeated MatchedDecisionRule matchedRules = 7;
-  // the decision inputs that were evaluated within this decision evaluation
-  repeated EvaluatedDecisionInput evaluatedInputs = 8;
-  // the tenant identifier of the evaluated decision
-  string tenantId = 9;
-}
-
-message EvaluatedDecisionInput {
-  // the id of the evaluated decision input
-  string inputId = 1;
-  // the name of the evaluated decision input
-  string inputName = 2;
-  // the value of the evaluated decision input
-  string inputValue = 3;
-}
-
-message EvaluatedDecisionOutput {
-  // the ID of the evaluated decision output
-  string outputId = 1;
-  // the name of the evaluated decision output
-  string outputName = 2;
-  // the value of the evaluated decision output
-  string outputValue = 3;
-}
-
-message MatchedDecisionRule {
-  // the ID of the matched rule
-  string ruleId = 1;
-  // the index of the matched rule
-  int32 ruleIndex = 2;
-  // the evaluated decision outputs
-  repeated EvaluatedDecisionOutput evaluatedOutputs = 3;
-}
-```
-
-### Errors
-
-#### GRPC_STATUS_INVALID_ARGUMENT
-
-Returned if:
-
-- No decision with the given key exists (if decisionKey was given).
-- No decision with the given decision ID exists (if decisionId was given).
-- Both decision ID and decision KEY were provided, or are missing.
-- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
-- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
-  - The tenant ID is blank (empty string, null)
-  - The tenant ID is longer than 31 characters
-  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
-- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
-
-#### GRPC_STATUS_PERMISSION_DENIED
-
-- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
-
 ## `DeployResource` RPC
 
 Deploys one or more resources (e.g. processes, decision models or forms) to Zeebe.
@@ -811,6 +671,146 @@ Returned if:
   - The resource type is not supported (e.g. supported resources include BPMN and DMN files)
   - The content is not deserializable (e.g. detected as BPMN, but it's broken XML)
   - The content is invalid (e.g. an event-based gateway has an outgoing sequence flow to a task)
+- If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
+- If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
+  - The tenant ID is blank (empty string, null)
+  - The tenant ID is longer than 31 characters
+  - The tenant ID contains anything other than alphanumeric characters, dot (.), dash (-), or underscore (\_)
+- If multi-tenancy is disabled, and `tenantId` is not blank (empty string, null), or has an ID other than `<default>`
+
+#### GRPC_STATUS_PERMISSION_DENIED
+
+- If multi-tenancy is enabled, and an unauthorized tenant ID is provided
+
+## `EvaluateDecision` RPC
+
+Evaluates a decision. You specify the decision to evaluate either by
+using its unique KEY (as returned by DeployResource), or using the decision
+ID. When using the decision ID, the latest deployed version of the decision
+is used.
+
+:::note
+When you specify both the decision ID and KEY, the ID is used to find the decision to be evaluated.
+:::
+
+### Input: `EvaluateDecisionRequest`
+
+```protobuf
+message EvaluateDecisionRequest {
+  // the unique key identifying the decision to be evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision to be evaluated
+  string decisionId = 2;
+  // JSON document that will instantiate the variables for the decision to be
+  // evaluated; it must be a JSON object, as variables will be mapped in a
+  // key-value fashion, e.g. { "a": 1, "b": 2 } will create two variables,
+  // named "a" and "b" respectively, with their associated values.
+  // [{ "a": 1, "b": 2 }] would not be a valid argument, as the root of the
+  // JSON document is an array and not an object.
+  string variables = 3;
+  // the tenant identifier of the decision
+  string tenantId = 4;
+}
+```
+
+### Output: `EvaluateDecisionResponse`
+
+```protobuf
+message EvaluateDecisionResponse {
+  // the unique key identifying the decision which was evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision which was evaluated
+  string decisionId = 2;
+  // the name of the decision which was evaluated
+  string decisionName = 3;
+  // the version of the decision which was evaluated
+  int32 decisionVersion = 4;
+  // the ID of the decision requirements graph that the decision which was
+  // evaluated is part of.
+  string decisionRequirementsId = 5;
+  // the unique key identifying the decision requirements graph that the
+  // decision which was evaluated is part of.
+  int64 decisionRequirementsKey = 6;
+  // JSON document that will instantiate the result of the decision which was
+  // evaluated; it will be a JSON object, as the result output will be mapped
+  // in a key-value fashion, e.g. { "a": 1 }.
+  string decisionOutput = 7;
+  // a list of decisions that were evaluated within the requested decision evaluation
+  repeated EvaluatedDecision evaluatedDecisions = 8;
+  // an optional string indicating the ID of the decision which
+  // failed during evaluation
+  string failedDecisionId = 9;
+  // an optional message describing why the decision which was evaluated failed
+  string failureMessage = 10;
+  // the tenant identifier of the evaluated decision
+  string tenantId = 11;
+  // the unique key identifying this decision evaluation
+  int64 decisionInstanceKey = 12;
+}
+
+message EvaluatedDecision {
+  // the unique key identifying the decision which was evaluated (e.g. returned
+  // from a decision in the DeployResourceResponse message)
+  int64 decisionKey = 1;
+  // the ID of the decision which was evaluated
+  string decisionId = 2;
+  // the name of the decision which was evaluated
+  string decisionName = 3;
+  // the version of the decision which was evaluated
+  int32 decisionVersion = 4;
+  // the type of the decision which was evaluated
+  string decisionType = 5;
+  // JSON document that will instantiate the result of the decision which was
+  // evaluated; it will be a JSON object, as the result output will be mapped
+  // in a key-value fashion, e.g. { "a": 1 }.
+  string decisionOutput = 6;
+  // the decision rules that matched within this decision evaluation
+  repeated MatchedDecisionRule matchedRules = 7;
+  // the decision inputs that were evaluated within this decision evaluation
+  repeated EvaluatedDecisionInput evaluatedInputs = 8;
+  // the tenant identifier of the evaluated decision
+  string tenantId = 9;
+}
+
+message EvaluatedDecisionInput {
+  // the id of the evaluated decision input
+  string inputId = 1;
+  // the name of the evaluated decision input
+  string inputName = 2;
+  // the value of the evaluated decision input
+  string inputValue = 3;
+}
+
+message EvaluatedDecisionOutput {
+  // the ID of the evaluated decision output
+  string outputId = 1;
+  // the name of the evaluated decision output
+  string outputName = 2;
+  // the value of the evaluated decision output
+  string outputValue = 3;
+}
+
+message MatchedDecisionRule {
+  // the ID of the matched rule
+  string ruleId = 1;
+  // the index of the matched rule
+  int32 ruleIndex = 2;
+  // the evaluated decision outputs
+  repeated EvaluatedDecisionOutput evaluatedOutputs = 3;
+}
+```
+
+### Errors
+
+#### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- No decision with the given key exists (if decisionKey was given).
+- No decision with the given decision ID exists (if decisionId was given).
+- Both decision ID and decision KEY were provided, or are missing.
 - If multi-tenancy is enabled, and `tenantId` is blank (empty string, null)
 - If multi-tenancy is enabled, and an invalid tenant ID is provided. A tenant ID is considered invalid if:
   - The tenant ID is blank (empty string, null)
