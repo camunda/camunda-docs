@@ -1,6 +1,6 @@
 ---
 id: authentication-and-authorization
-sidebar_label: Authentication and Authorization
+sidebar_label: Authentication and authorization
 title: Configure authentication and authorization in Helm charts
 description: Learn how to configure authentication and authorization for Camunda Helm charts.
 ---
