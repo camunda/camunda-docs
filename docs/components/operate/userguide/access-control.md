@@ -1,6 +1,6 @@
 ---
-id: access
-title: Access
+id: access-control
+title: Access Control
 description: "Grant users access to work with Operate."
 ---
 
