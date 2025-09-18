@@ -2,15 +2,30 @@
 id: manage-roles
 title: Manage roles
 sidebar_label: "Roles"
-description: "Use Identity to manage roles"
+description: "Use Management Identity to manage roles for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)"
 ---
 
-Use roles to simplify and standardize access control across your system, help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
+Use roles in Management Identity to simplify and standardize access control for Camunda 8 management and modeling components (Web Modeler, Console, and Optimize), help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
 ## About roles
 
-- Roles define the actions a user or application can perform in Camunda 8 by grouping together a set of related [permissions](../access-management/manage-permissions.md).
+- Roles define the actions a user or application can perform in Camunda 8 management and modeling components by grouping together a set of related [permissions](../access-management/manage-permissions.md).
 - You can assign roles [directly to a user](#assign-a-role-to-a-user) or [using groups](../application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
+
+## Default roles
+
+Management Identity includes a set of default roles that are available out-of-the-box. These roles are designed to cover common use cases and can be assigned to users and groups to grant them access to different management and modeling components.
+
+The following table lists the default roles and their descriptions:
+
+| Name                | Description                                                                                                                                 |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts.                                 |
+| Management Identity | Provides full access to [Management Identity](../overview.md).                                                                              |
+| Console             | Provides full access to [Console](../../console/overview.md).                                                                               |
+| Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                                                               |
+| Web Modeler         | Grants access to [Web Modeler](../../modeler/web-modeler/overview.md) for creating and collaborating on projects.                           |
+| Web Modeler Admin   | Grants full access to [Web Modeler](../../modeler/web-modeler/overview.md), including all projects and the ability to manage collaborators. |
 
 ## Add a role
 

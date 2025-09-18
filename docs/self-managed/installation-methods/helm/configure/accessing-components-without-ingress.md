@@ -97,4 +97,4 @@ If you deploy process definitions, they will appear in the dashboard. Then, you 
 You can deploy and create new instances using the Zeebe clients.
 
 You can also trigger **Connectors** inbound webhook, given you deployed one.
-You can do so with the following example: `curl -X POST -H "Content-Type: application/json" -d '{"myId": 123456, "myMessage": "Hello, world!"}' http://localhost:8088/inbound/<YOUR_WEBHOOK_ID>`.
+You can do so with the following example: `curl -X POST -H "Content-Type: application/json" -d '{"myId": 123456, "myMessage": "Hello, world!"}' http://localhost:8086/inbound/<YOUR_WEBHOOK_ID>`.
