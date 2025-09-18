@@ -8,8 +8,8 @@ description: "Learn how to configure multi-tenancy in Camunda 8."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-:::caution
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled [through Identity](/self-managed/components/management-identity/what-is-identity.md).
+:::note
+Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled through [Orchestation Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 :::
 
 To configure multi-tenancy you must enable the multi-tenancy flag either in the [Helm charts](/self-managed/installation-methods/helm/install.md)
@@ -27,7 +27,7 @@ Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camund
 When using environment variables, you can enable multi-tenancy by setting the following variables:
 
 ```bash
-export CAMUNDA_SECURITY_MULTITENANCY_ENABLED=true
+export CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
 export CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
 ```
 
@@ -67,7 +67,7 @@ Once the Zeebe application is assigned to the tenant, you should be able to:
 - Successfully retry jobs in Operate.
 - Retrieve jobs from the correct tenant context.
 
-For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/components/management-identity/managing-tenants.md#assign-applications-to-a-tenant-1).
+For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/components/management-identity/manage-tenants.md#assign-applications-to-a-tenant-1).
 
 ### Tenant requirement for job actions
 

@@ -104,9 +104,9 @@ Batch operation performance can be tracked via [Grafana dashboards](/self-manage
 To execute a batch operation, users need two sets of permissions:
 
 - Permission to create the batch operation.
-- Permission to read and act on the process instances targeted by the batch.
+- Permission to read and modify the process instances (for example canceling or updating) targeted by the batch.
 
-For detailed authorization info, see [Authorization](/components/identity/authorization.md).
+See the [documentation on the authorization concept](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
 
 ## Performance impact
 

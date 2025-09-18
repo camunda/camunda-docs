@@ -656,6 +656,35 @@ h3 .badge:nth-of-type(1) {
   vertical-align: text-top;
 }
 
+.badge--consistent {
+  background-color: var(--ifm-color-success);
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+.badge--eventually-consistent {
+  background-color: #ff8b00;
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+[data-theme="dark"] .badge--eventually-consistent {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--consistent {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
+}
+
 /* HTTP Method badges */
 .badge--get,
 .badge--post,

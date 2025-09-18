@@ -94,6 +94,7 @@ module.exports = {
             "components/concepts/access-control/authorizations",
             "components/concepts/access-control/connect-to-identity-provider",
             "components/concepts/access-control/mapping-rules",
+            "components/concepts/multi-tenancy",
           ],
         },
         "components/concepts/job-workers",
@@ -549,6 +550,7 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
+            "components/operate/userguide/access-control",
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -572,6 +574,7 @@ module.exports = {
             id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access-control",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -590,18 +593,14 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
+            "components/identity/access-control",
             "components/identity/user",
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
-            {
-              "Mapping rules": [
-                "components/identity/mapping-rules/manage-mapping-rules",
-                "components/identity/mapping-rules/mapping-rule-authorizations",
-                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
-              ],
-            },
+            "components/identity/mapping-rules",
+            "components/identity/tenant",
           ],
         },
       ],
@@ -1222,13 +1221,23 @@ module.exports = {
                 //     "self-managed/installation-methods/helm/configure/authentication/basic",
                 //   ],
                 // },
-                "self-managed/installation-methods/helm/configure/air-gapped-installation",
                 "self-managed/installation-methods/helm/configure/application-configs",
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 "self-managed/installation-methods/helm/configure/add-extra-manifests",
-                "self-managed/installation-methods/helm/configure/registry-and-images",
                 "self-managed/installation-methods/helm/configure/license-key",
                 "self-managed/installation-methods/helm/configure/web-modeler-console-connectors",
+                {
+                  type: "category",
+                  label: "Registry and images",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/installation-methods/helm/configure/registry-and-images/index",
+                  },
+                  items: [
+                    "self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation",
+                    "self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images",
+                  ],
+                },
                 {
                   Database: [
                     {
@@ -1392,6 +1401,12 @@ module.exports = {
     {
       Concepts: [
         {
+          Authentication: [
+            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
+            "self-managed/concepts/authentication/authentication-to-management-components",
+          ],
+        },
+        {
           type: "category",
           label: "Back up and restore",
           link: {
@@ -1445,7 +1460,11 @@ module.exports = {
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
-        "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/exporters",
+        "self-managed/concepts/elasticsearch-privileges",
+        "self-managed/concepts/elasticsearch-without-cluster-privileges",
+        "self-managed/concepts/opensearch-privileges",
+        "self-managed/operational-guides/data-purge",
         {
           Privileges: [
             "self-managed/concepts/elasticsearch-privileges",
@@ -1456,36 +1475,10 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
       Components: [
-        {
-          type: "category",
-          label: "Components upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/components/components-upgrade/introduction",
-          },
-          items: [
-            "self-managed/components/components-upgrade/870-to-880",
-            "self-managed/components/components-upgrade/860-to-870",
-            "self-managed/components/components-upgrade/850-to-860",
-            "self-managed/components/components-upgrade/840-to-850",
-            "self-managed/components/components-upgrade/830-to-840",
-            {
-              Elasticsearch: [
-                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
-              ],
-            },
-            {
-              Keycloak: [
-                "self-managed/components/components-upgrade/keycloak/keycloak-update",
-              ],
-            },
-          ],
-        },
         {
           type: "category",
           label: "Orchestration Cluster",
@@ -1521,6 +1514,7 @@ module.exports = {
             },
             {
               Zeebe: [
+                "self-managed/components/orchestration-cluster/zeebe/overview",
                 {
                   "Zeebe Gateway": [
                     "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/overview",
@@ -1610,16 +1604,10 @@ module.exports = {
               ],
             },
             {
-              type: "category",
-              label: "Identity",
-              link: {
-                type: "doc",
-                id: "self-managed/components/orchestration-cluster/identity/overview",
-              },
-              items: [
+              Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
-                "self-managed/components/orchestration-cluster/identity/manage-tenants",
+                "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
             },
           ],
@@ -1678,10 +1666,10 @@ module.exports = {
           label: "Management Identity",
           link: {
             type: "doc",
-            id: "self-managed/components/management-identity/what-is-identity",
+            id: "self-managed/components/management-identity/overview",
           },
           items: [
-            "self-managed/components/management-identity/identity-first-steps",
+            "self-managed/components/management-identity/get-started",
             {
               type: "category",
               label: "Configuration",
@@ -1690,16 +1678,16 @@ module.exports = {
                 id: "self-managed/components/management-identity/configuration/identity-configuration-overview",
               },
               items: [
-                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
-                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
               ],
             },
             "self-managed/components/management-identity/authentication",
             {
               type: "category",
-              label: "Manage Identity",
+              label: "Management",
               items: [
                 {
                   type: "category",
@@ -1725,8 +1713,8 @@ module.exports = {
                     "self-managed/components/management-identity/access-management/manage-permissions",
                   ],
                 },
-                "self-managed/components/management-identity/managing-tenants",
                 "self-managed/components/management-identity/mapping-rules",
+                "self-managed/components/management-identity/manage-tenants",
               ],
             },
             {
@@ -1775,6 +1763,31 @@ module.exports = {
                 "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
                 "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
                 "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Components upgrade",
+          link: {
+            type: "doc",
+            id: "self-managed/components/components-upgrade/introduction",
+          },
+          items: [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              Elasticsearch: [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8",
+              ],
+            },
+            {
+              Keycloak: [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update",
               ],
             },
           ],

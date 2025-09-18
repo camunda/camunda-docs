@@ -239,8 +239,8 @@ kubectl logs -f <POD_NAME>
 - **Zeebe gateway** is deployed as a stateless service. It supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
 - **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
-- **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/air-gapped-installation.md).
-- **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Registry and images](/self-managed/installation-methods/helm/configure/registry-and-images.md).
+- **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation.md).
+- **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 
 ## Additional resources
 
