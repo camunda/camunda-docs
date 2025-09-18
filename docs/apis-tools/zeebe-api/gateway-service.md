@@ -508,6 +508,40 @@ Returned if:
 
 - If multi-tenancy is enabled, and an unauthorized tenant ID is provided
 
+## `DeleteResource` RPC
+
+### Input `DeleteResourceRequest`
+
+```protobuf
+message DeleteResourceRequest {
+  // The key of the resource that should be deleted. This can either be the key
+  // of a process definition, the key of a decision requirements definition or the key of a form.
+  int64 resourceKey = 1;
+}
+```
+
+### Output: `DeleteResourceResponse`
+
+```protobuf
+message DeleteResourceResponse {
+}
+```
+
+### Errors
+
+#### GRPC_STATUS_NOT_FOUND
+
+Returned if:
+
+- No resource exists with the given key.
+- No resource was found with the given key for the tenants the user is authorized to work with.
+
+#### GRPC_STATUS_FAILED_PRECONDITION
+
+Returned if:
+
+- The deleted resource is a process definition, and there are running instances for this process definition.
+
 ## `EvaluateDecision` RPC
 
 Evaluates a decision. You specify the decision to evaluate either by
@@ -1337,40 +1371,6 @@ Returned if:
 Returned if:
 
 - The job is not active.
-
-## `DeleteResource` RPC
-
-### Input `DeleteResourceRequest`
-
-```protobuf
-message DeleteResourceRequest {
-  // The key of the resource that should be deleted. This can either be the key
-  // of a process definition, the key of a decision requirements definition or the key of a form.
-  int64 resourceKey = 1;
-}
-```
-
-### Output: `DeleteResourceResponse`
-
-```protobuf
-message DeleteResourceResponse {
-}
-```
-
-### Errors
-
-#### GRPC_STATUS_NOT_FOUND
-
-Returned if:
-
-- No resource exists with the given key.
-- No resource was found with the given key for the tenants the user is authorized to work with.
-
-#### GRPC_STATUS_FAILED_PRECONDITION
-
-Returned if:
-
-- The deleted resource is a process definition, and there are running instances for this process definition.
 
 ## `StreamActivatedJobs` RPC
 
