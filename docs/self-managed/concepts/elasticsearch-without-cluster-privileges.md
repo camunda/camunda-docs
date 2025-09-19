@@ -35,24 +35,27 @@ Create a custom configuration for the schema manager with the following values:
 
 ```yaml
 camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        # Example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
+        username: camunda-admin
+        password: camunda123
+        url: https://localhost:9200
+        # If custom SSL configuration is necessary
+        security:
+          enabled: true
+          self-signed: true
+          verify-hostname: false
+          certificate-path: PATH_TO_CA_CERT
+  # Optional, only if ILM is enabled
   database:
-    type: elasticsearch
-    # Example assuming an existing user called 'camunda-admin' who has 'superuser' privileges
-    username: camunda-admin
-    password: camunda123
-    url: https://localhost:9200
-    # If custom SSL configuration is necessary
-    security:
-      enabled: true
-      selfSigned: true
-      verifyHostname: false
-      certificatePath: PATH_TO_CA_CERT
-    # Optional, only if ILM is enabled
     retention:
       enabled: true
 # Optional, only if legacy Elasticsearch exporter is used
 zeebe.broker.exporters.elasticsearch:
-  className: io.camunda.zeebe.exporter.ElasticsearchExporter
+  class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
   args:
     url: https://localhost:9200
     index:
@@ -65,7 +68,7 @@ zeebe.broker.exporters.elasticsearch:
       password: camunda123
 ```
 
-For additional configuration options, see the [common database configuration guide](#TODO link to common database configuration page after it is created).
+For additional configuration options, see the [common secondary storage configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
 #### Start the schema manager
 
@@ -139,93 +142,65 @@ Create a configuration for the Camunda single application with the following val
 
 ```yaml
 camunda:
-  database:
+  data:
+    secondary-storage:
     type: elasticsearch
-    # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
-    username: camunda-app
-    password: camunda123
-    url: https://localhost:9200
-    # If custom SSL configuration is necessary
-    security:
-      enabled: true
-      selfSigned: true
-      verifyHostname: false
-      certificatePath: PATH_TO_CA_CERT
+    elasticsearch:
+      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
+      username: camunda-app
+      password: camunda123
+      url: https://localhost:9200
+      # If custom SSL configuration is necessary
+      security:
+        enabled: true
+        self-signed: true
+        verify-hostname: false
+        certificate-path: PATH_TO_CA_CERT
+  database:
     schema-manager:
       createSchema: false
+  # only required for upgrades from 8.7
   tasklist:
-    elasticsearch:
-      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
-      username: camunda-app
-      password: camunda123
-      healthCheckEnabled: false
-      url: https://localhost:9200
-      # If custom SSL configuration is necessary
-      ssl:
-        selfSigned: true
-        verifyHostname: false
-        certificatePath: PATH_TO_CA_CERT
-    zeebeElasticsearch:
+    zeebe-elasticsearch:
       username: camunda-app
       password: camunda123
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned: true
-        verifyHostname: false
-        certificatePath: PATH_TO_CA_CERT
+        self-signed: true
+        verify-hostname: false
+        certificate-path: PATH_TO_CA_CERT
+  # only required for upgrades from 8.7
   operate:
-    elasticsearch:
-      # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
-      username: camunda-app
-      password: camunda123
-      healthCheckEnabled: false
-      url: https://localhost:9200
-      # If custom SSL configuration is necessary
-      ssl:
-        selfSigned: true
-        verifyHostname: false
-        certificatePath: PATH_TO_CA_CERT
-    zeebeElasticsearch:
+    zeebe-elasticsearch:
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       username: camunda-app
       password: camunda123
       url: https://localhost:9200
       # If custom SSL configuration is necessary
       ssl:
-        selfSigned: true
-        verifyHostname: false
-        certificatePath: PATH_TO_CA_CERT
+        self-signed: true
+        verify-hostname: false
+        certificate-path: PATH_TO_CA_CERT
 zeebe.broker.exporters:
-  camundaExporter:
-    className: io.camunda.zeebe.exporter.CamundaExporter
+  camundaexporter:
+    class-name: io.camunda.zeebe.exporter.CamundaExporter
     args:
       createSchema: false
-      connect:
-        url: https://localhost:8080
-        # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
-        username: camunda-app
-        password: camunda123
-        # If custom SSL configuration is necessary
-        security:
+      history:
+        # Optional, only if ILM is enabled
+        retention:
           enabled: true
-          selfSigned: true
-          verifyHostname: false
-          certificatePath: PATH_TO_CA_CERT
-        history:
-          # Optional, only if ILM is enabled
-          retention:
-            enabled: true
   # Optional, only if legacy Elasticsearch exporter is used
   elasticsearch:
-    className: io.camunda.zeebe.exporter.ElasticsearchExporter
+    class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
     args:
       url: https://localhost:9200
       index:
-        createTemplate: false
+        create-template: false
       retention:
         enabled: false
-        managePolicy: false
+        manage-policy: false
       # Example assuming an existing user called 'camunda-app' with the privileges described in 2.1
       authentication:
         username: camunda-app
@@ -286,26 +261,26 @@ orchestration:
     [...] # Any other custom config.
     camunda.database:
       schema-manager:
-        createSchema: false
+        create-schema: false
     camunda.tasklist:
       elasticsearch:
-        healthCheckEnabled: false
+        health-check-enabled: false
     camunda.operate:
       elasticsearch:
-        healthCheckEnabled: false
+        health-check-enabled: false
     zeebe.broker.exporters:
-      camundaExporter:
-        className: io.camunda.zeebe.exporter.CamundaExporter
+      camundaexporter:
+        class-name: io.camunda.zeebe.exporter.CamundaExporter
         args:
-          createSchema: false
+          create-schema: false
       elasticsearch:
-        className: io.camunda.zeebe.exporter.ElasticsearchExporter
+        class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
         args:
           index:
-            createTemplate: false
+            create-template: false
           retention:
             enabled: false
-            managePolicy: false
+            manage-policy: false
     [...] # Any other custom config.
 ```
 
@@ -336,7 +311,6 @@ If no migration is required, you can keep the application running at version `N`
 1. Current state: Camunda single application is running at version `N` (for example, 8.7) and processing traffic with its indices in Elasticsearch.
 
 2. Verification: Check the upgrade documentation for version `N → N+1` (for example, 8.7 → 8.8) to determine if migrations are required.
-
    - If migrations are not required, continue while keeping `N` running.
    - If migrations are required, schedule downtime and stop the application before running migration steps.
 
@@ -364,7 +338,7 @@ This staged approach reduces or eliminates downtime for minor upgrades that requ
 
 You can use the standalone schema manager to roll out certain index template setting changes without granting cluster privileges to the continuously running Camunda application.
 
-Supported settings (see [configuration references](../components/orchestration-cluster/core-settings/overview.md) and the [Elasticsearch exporter configuration](../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
+Supported settings (see [configuration references](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings) and the [Elasticsearch exporter configuration](../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
 
 - **numberOfShards** (Operate / Tasklist / Camunda / Zeebe Elasticsearch exporter) — static: applies only to new indices created after the change. Existing indices keep their shard count.
 - **numberOfReplicas** (Operate / Tasklist / Camunda) — dynamic: applied to existing indices and index templates.
@@ -383,26 +357,24 @@ Use the standalone schema manager if you need to:
 
 1. Prepare a schema manager configuration that includes the new settings.
 
-   - For Operate and Tasklist version 8.7.11+, set `updateSchemaSettings: true`.
-
    Example configuration:
 
    ```yaml
    zeebe.broker.exporters.elasticsearch:
-     className: io.camunda.zeebe.exporter.ElasticsearchExporter
+     class-name: io.camunda.zeebe.exporter.ElasticsearchExporter
      args:
        index:
-         createTemplate: true
-         numberOfShards: 3 # affects only new Zeebe record indices
-         numberOfReplicas: 1 # affects only new Zeebe record indices
-         templatePriority: 25 # optional, overrides default priority 20
+         create-template: true
+         number-of-shards: 3 # affects only new Zeebe record indices
+         number-of-replicas: 1 # affects only new Zeebe record indices
+         template-priority: 25 # optional, overrides default priority 20
         ... # other settings
    camunda:
      database:
        index:
-         numberOfShards: 1 # only new Operate/Tasklist/Camunda indices
-         numberOfReplicas: 1 # updates existing Operate/Tasklist/Camunda indices
-         templatePriority: 25 # optional, overrides default priority 0
+         number-of-shards: 1 # only new Operate/Tasklist/Camunda indices
+         number-of-replicas: 1 # updates existing Operate/Tasklist/Camunda indices
+         template-priority: 25 # optional, overrides default priority 0
         ... # other settings
    ```
 
@@ -443,17 +415,19 @@ camunda:
     backup:
       # Example assuming an existing snapshot repository 'els-test'
       repository-name: els-test
-  database:
-    # Example assuming an existing user called 'camunda-admin' who has 'snapshot_user' privileges
-    username: camunda-admin
-    password: camunda123
-    url: https://localhost:9200
-    # If custom SSL configuration is necessary
-    security:
-      enabled: true
-      selfSigned: true
-      verifyHostname: false
-      certificatePath: PATH_TO_CA_CERT
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        # Example assuming an existing user called 'camunda-admin' who has 'snapshot_user' privileges
+        username: camunda-admin
+        password: camunda123
+        url: https://localhost:9200
+        # If custom SSL configuration is necessary
+        security:
+          enabled: true
+          self-signed: true
+          verify-hostname: false
+          certificate-path: PATH_TO_CA_CERT
 ```
 
 For additional configuration options, see the [common database configuration guide](#TODO link to common database configuration page after it is created).
