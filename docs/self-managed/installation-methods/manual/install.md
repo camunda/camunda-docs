@@ -17,7 +17,7 @@ This page guides you through the manual installation of Camunda 8 on a local mac
     - Windows, macOS, and other operating systems are supported for development only and not for production.
   - Java Virtual Machine. See [supported environments](/reference/supported-environments.md) for version details.
   - Configure the web applications to use an available port. By default, the Orchestration Cluster listens on port 8080.
-- Secondary datastore
+- Secondary storage
   - Elasticsearch or Amazon OpenSearch. See [supported environments](/reference/supported-environments.md) for version details.
     - For Elasticsearch deployment options, see the [Elasticsearch documentation](https://www.elastic.co/docs/deploy-manage/deploy).
 
@@ -25,7 +25,7 @@ For suggested minimum hardware requirements and networking, see the [manual refe
 
 :::tip Performance on musl-based distributions
 
-There are known performance limitations on systems that use `musl` instead of `glibc`, because Java relies on `glibc` for running native libraries. For example, Alpine Linux, which uses `musl`, has shown performance degradation of up to 20% compared to Debian or Ubuntu in benchmark tests.
+There are known performance limitations on systems that use `musl` instead of `glibc`, because Java relies on `glibc` for running native libraries. For example, Alpine Linux, which uses `musl`, has shown performance degradation compared to Debian or Ubuntu in benchmark tests.
 
 :::
 
@@ -48,7 +48,7 @@ To install these components, use one of the supported methods:
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
-Orchestration cluster:
+Orchestration Cluster:
 
 - File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
 - [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/versions) - Select a version, then click **Browse** to view downloadable files such as `.zip` or `.tar.gz`.
@@ -78,22 +78,22 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 Review the following reference architectures for deployment guidance:
 
 - [Manual reference architecture](/self-managed/reference-architecture/manual.md) - Provides an overview of the environment and requirements.
-- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the secondary datastore.
+- [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the secondary storage.
 
-## Orchestration cluster
+## Orchestration Cluster
 
-For background, see the [Orchestration cluster glossary entry](/reference/glossary.md#orchestration-cluster).  
+For background, see the [Orchestration Cluster glossary entry](/reference/glossary.md#orchestration-cluster).  
 For architecture details, review the [architecture](/self-managed/reference-architecture/reference-architecture.md#architecture).  
-For configuration details, see the [Orchestration cluster components](/self-managed/components/orchestration-cluster/overview.md).
+For configuration details, see the [Orchestration Cluster components](/self-managed/components/orchestration-cluster/overview.md).
 
-### Configure the Orchestration cluster
+### Configure the Orchestration Cluster
 
-By default, the configuration uses a single-node Orchestration cluster with a local Elasticsearch instance as the secondary datastore. If this setup matches your environment, no additional configuration is required.
+By default, the configuration uses a single-node orchestration cluster with a local Elasticsearch instance as the secondary storage. If this setup matches your environment, no additional configuration is required.
 
 If you plan to:
 
 - Add more nodes to the cluster
-- Use a different or external secondary datastore
+- Use a different external secondary storage
 - Enable Connectors
 - Apply a license key
 
@@ -101,106 +101,38 @@ You need to make targeted configuration changes. The following sections outline 
 
 For detailed configuration options and advanced setup guidance, refer to each component’s documentation under the [Orchestration cluster section](/self-managed/components/orchestration-cluster/overview.md).
 
-#### Configure the datastore
+:::note
 
-Set the datastore value to `elasticsearch` or `opensearch`, and remove any fields that do not apply to your selection.
+Configuration is being unified across components. Some changes will only take effect in future versions, so you may see a mix of old and new configuration options.
 
-If your security settings require authentication for the secondary datastore, configure both `username` and `password`.
+:::
+
+#### Configure the secondary storage
+
+Set the secondary storage type value to `elasticsearch` or `opensearch`. Remove fields that do not apply to your selection.
+
+If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-For detailed configuration options, see the following component documentation:
+The following configuration defines how the Orchestration Cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
 
-- [Operate configuration for Elasticsearch or OpenSearch](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#elasticsearch-or-opensearch)
-- [Tasklist configuration for Elasticsearch or OpenSearch](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#elasticsearch-or-opensearch)
-- [Camunda Exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configuration)
+For detailed configuration options, see the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
 
-**Operate connection (Elasticsearch or OpenSearch)**
-
-This configuration defines how Operate connects to the secondary datastore (Elasticsearch or OpenSearch).
-It is also used by the legacy Zeebe exporter.
-
-:::note
-
-In new setups, the old exporter is no longer in use. However, you must still configure it to avoid blocking execution during startup.
-
-:::
-
 ```bash
-CAMUNDA_OPERATE_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
+CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=elasticsearch|opensearch # defaults to elasticsearch
 
 # Elasticsearch
-CAMUNDA_OPERATE_ELASTICSEARCH_URL=http://localhost:9200
-CAMUNDA_OPERATE_ELASTICSEARCH_USERNAME=
-CAMUNDA_OPERATE_ELASTICSEARCH_PASSWORD=
-CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_URL=http://localhost:9200
-CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_USERNAME=
-CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_PASSWORD=
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL=http://localhost:9200
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_USERNAME=
+CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_PASSWORD=
 
 # OpenSearch
-CAMUNDA_OPERATE_OPENSEARCH_URL=http://localhost:9200
-CAMUNDA_OPERATE_OPENSEARCH_USERNAME=
-CAMUNDA_OPERATE_OPENSEARCH_PASSWORD=
-CAMUNDA_OPERATE_ZEEBEOPENSEARCH_URL=http://localhost:9200
-CAMUNDA_OPERATE_ZEEBEOPENSEARCH_USERNAME=
-CAMUNDA_OPERATE_ZEEBEOPENSEARCH_PASSWORD=
-```
-
-**Tasklist connection (Elasticsearch or OpenSearch)**
-
-This configuration defines how Tasklist connects to the secondary datastore (Elasticsearch or OpenSearch).
-It is also used by the legacy Zeebe exporter.
-
-:::note
-
-In new setups, the old exporter is no longer in use. However, you must still configure it to avoid blocking execution during startup.
-
-:::
-
-```bash
-CAMUNDA_TASKLIST_DATABASE=elasticsearch|opensearch # defaults to elasticsearch
-
-# Elasticsearch
-CAMUNDA_TASKLIST_ELASTICSEARCH_URL=http://localhost:9200
-CAMUNDA_TASKLIST_ELASTICSEARCH_USERNAME=
-CAMUNDA_TASKLIST_ELASTICSEARCH_PASSWORD=
-CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_URL=http://localhost:9200
-CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_USERNAME=
-CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_PASSWORD=
-
-# OpenSearch
-CAMUNDA_TASKLIST_OPENSEARCH_URL=http://localhost:9200
-CAMUNDA_TASKLIST_OPENSEARCH_USERNAME=
-CAMUNDA_TASKLIST_OPENSEARCH_PASSWORD=
-CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_URL=http://localhost:9200
-CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_USERNAME=
-CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_PASSWORD=
-```
-
-**Orchestration cluster connection (Elasticsearch or OpenSearch)**
-
-  <!-- TODO: No team has documented this, already reached out -->
-
-```bash
-# defaults to elasticsearch
-CAMUNDA_DATABASE_TYPE=elasticsearch|opensearch
-CAMUNDA_DATABASE_URL=http://localhost:9200
-CAMUNDA_DATABASE_USERNAME=
-CAMUNDA_DATABASE_PASSWORD=
-```
-
-**Camunda Exporter**
-
-Required for Zeebe to export data to the secondary datastore, which is then used by Operate and Tasklist.
-
-```bash
-ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_CLASSNAME=io.camunda.exporter.CamundaExporter
-ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_TYPE=elasticsearch|opensearch # defaults to elasticsearch
-ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_URL=http://localhost:9200
-ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_USERNAME=
-ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_PASSWORD=
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_URL=http://localhost:9200
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_USERNAME=
+CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_PASSWORD=
 ```
 
   </TabItem>
@@ -208,63 +140,19 @@ ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CONNECT_PASSWORD=
 
 ```yaml
 camunda:
-  database:
+  data:
     type: elasticsearch|opensearch # defaults to elasticsearch
-    url: http://localhost:9200
-    username:
-    password:
-  operate:
-    database: elasticsearch|opensearch # defaults to elasticsearch
-    # Elasticsearch
-    elasticsearch:
-      url: http://localhost:9200
-      username:
-      password:
-    zeebe-elasticsearch:
-      url: http://localhost:9200
-      username:
-      password:
-    # OpenSearch
-    opensearch:
-      url: http://localhost:9200
-      username:
-      password:
-    zeebe-opensearch:
-      url: http://localhost:9200
-      username:
-      password:
-  tasklist:
-    database: elasticsearch|opensearch # defaults to elasticsearch
-    # Elasticsearch
-    elasticsearch:
-      url: http://localhost:9200
-      username:
-      password:
-    zeebe-elasticsearch:
-      url: http://localhost:9200
-      username:
-      password:
-    # OpenSearch
-    opensearch:
-      url: http://localhost:9200
-      username:
-      password:
-    zeebe-opensearch:
-      url: http://localhost:9200
-      username:
-      password:
-
-zeebe:
-  broker:
-    exporters:
-      camunda-exporter:
-        class-name: io.camunda.exporter.CamundaExporter
-        args:
-          connect:
-            type: elasticsearch|opensearch # defaults to elasticsearch
-            url: http://localhost:9200
-            username:
-            password:
+    secondary-storage:
+      # Elasticsearch
+      elasticsearch:
+        url: http://localhost:9200
+        username:
+        password:
+      # OpenSearch
+      opensearch:
+        url: http://localhost:9200
+        username:
+        password:
 ```
 
   </TabItem>
@@ -274,7 +162,7 @@ zeebe:
 
 This example shows a 3-broker cluster.
 
-- Set `cluster-size` to `3`.
+- Set `size` to `3`.
 - Assign a unique `node-id` to each broker, starting from `0` and incrementing up to the total number of brokers (`0`, `1`, `2`).
 - Use the same `initial-contact-points` on all brokers.
 
@@ -284,21 +172,24 @@ For more details, see the [Zeebe broker cluster configuration](/self-managed/com
   <TabItem value="env" label="Environment variables">
 
 ```bash
-ZEEBE_BROKER_CLUSTER_CLUSTERSIZE=3
+CAMUNDA_CLUSTER_SIZE=3
+CAMUNDA_CLUSTER_NODEID=0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
 ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS=HOST_0:26502,HOST_1:26502,HOST_2:26502
-ZEEBE_BROKER_CLUSTER_NODEID=0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
 ```
 
   </TabItem>
   <TabItem value="spring" label="application.yaml">
 
 ```yaml
+camunda:
+  cluster:
+    size: 3
+    node-id: 0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
+
 zeebe:
   broker:
     cluster:
-      cluster-size: 3
       initial-contact-points: [HOST_0:26502, HOST_1:26502, HOST_2:26502]
-      node-id: 0 # unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive).
 ```
 
   </TabItem>
@@ -306,7 +197,7 @@ zeebe:
 
 #### Configure Connectors authentication
 
-Connectors require authentication to use their full capabilities. By default, the Orchestration cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
+Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
 If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
 
@@ -371,9 +262,9 @@ camunda:
 
 </Tabs>
 
-### Run the Orchestration cluster
+### Run the Orchestration Cluster
 
-Once you've downloaded the Orchestration cluster distribution, extract it into a folder.
+Once you've downloaded the Orchestration Cluster distribution, extract it into a folder.
 
 1. Extract the files using your GUI or CLI:
 
@@ -393,9 +284,9 @@ Once you've downloaded the Orchestration cluster distribution, extract it into a
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Run the Orchestration cluster as a service
+### Run the Orchestration Cluster as a service
 
-This example shows how to run the Orchestration cluster as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment. The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
+This example shows how to run the Orchestration Cluster as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment. The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
 
 1. Create a `systemd` service file named `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
 
@@ -428,7 +319,7 @@ View logs with:
 journalctl -e -u camunda
 ```
 
-### Verify the Orchestration cluster
+### Verify the Orchestration Cluster
 
 Check the logs for a successful startup message, such as:
 
@@ -501,7 +392,7 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 
 </details>
 
-Check the health status of the Orchestration cluster with the actuator endpoint:
+Check the health status of the Orchestration Cluster with the actuator endpoint:
 
 ```bash
 curl localhost:9600/actuator/health
@@ -552,13 +443,13 @@ For configuration options, see the [Connectors components documentation](/self-m
 
 ### Configure Connectors
 
-If you run Connectors on the same machine as the Orchestration cluster, change the default port (`8080`) to avoid conflicts.
+If you run Connectors on the same machine as the Orchestration Cluster, change the default port (`8080`) to avoid conflicts.
 
-Connectors require authentication to communicate with the Orchestration cluster REST API and Zeebe.
+Connectors require authentication to communicate with the Orchestration Cluster REST API and Zeebe.
 
 By default, Connectors connect to:
 
-- `localhost:8080` (Orchestration cluster REST API)
+- `localhost:8080` (Orchestration Cluster REST API)
 - `localhost:26500` (Zeebe)
 
 <Tabs>
