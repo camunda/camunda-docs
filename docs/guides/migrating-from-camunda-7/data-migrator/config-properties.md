@@ -34,6 +34,7 @@ Prefix: `camunda.migrator`
 | `.table-prefix`                | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
 | `.data-source`                 | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
 | `.database-vendor`             | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
+| `.tenantIds`                   | `string`  | Comma-separated list of tenant ids for which process instances should be migrated. Example: `tenant1, tenant2, tenant3`. Default: _(empty)_                        |
 | `.interceptors`                | `array`   | List of custom variable interceptors to apply during migration. Each interceptor must implement the `VariableInterceptor` interface.                               |
 | `.interceptors.[0].class-name` | `string`  | Defines the variable interceptor class.                                                                                                                            |
 | `.interceptors.[0].properties` | `map`     | Defines the variable interceptor properties as `key:value` pairs.                                                                                                  |
