@@ -68,7 +68,7 @@ import LiveBenchModelFilter from '../react-components/livebench-model-filter'
 Benchmarks powered by **LiveBench** — _“LiveBench: A Challenging, Contamination-Free LLM Benchmark”_ (White et al., ICLR 2025). Used under a Creative Commons license.
 
 :::note  
-LiveBench rankings update continuously. The link always shows the most recent evaluation results.  
+[LiveBench](https://livebench.ai/#/) rankings update continuously. The link always shows the most recent evaluation results.  
 :::
 
 Example:
