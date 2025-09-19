@@ -15,9 +15,15 @@ Task testing runs your task within the actual process diagram where it's modeled
 
 **Important:** Task testing executes tasks with live data. Any configured actions (emails, API calls, database changes, payments) will actually run. Use caution in production environments.
 
-To test a task, you need a connection to an orchestration cluster or other deployment target. The entire process will be deployed automatically prior to running the test. The connection requirements for Desktop Modeler and Web Modeler are slightly different; see the relevant pages for details.
+## Prerequesites
+
+To test a task, you need a connection to an active Camunda 8.8 or above orchestration cluster. The entire process will be deployed automatically prior to running the test. The connection requirements for Desktop Modeler and Web Modeler are slightly different; see the relevant pages for details.
 
 Once you've run a test, you can view the deployed instance in Operate for further information about task execution.
+
+## Supported elements
+
+Task testing supports running a single BPMN task. It doesn't support subprocesses, call activities or events.
 
 ## Related
 
