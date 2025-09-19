@@ -1,28 +1,32 @@
 ---
 id: running-custom-connectors
 sidebar_label: Custom connectors
-title: Helm chart custom connectors running
-description: "Run custom connectors in your Helm Kubernetes cluster."
+title: Run custom connectors in Helm charts
+description: "Deploy and run custom connectors in a Camunda Helm Kubernetes cluster."
 ---
 
-You can deploy your custom **Connector** in your Helm Kubernetes cluster along with Connectors Bundle.
+You can deploy a custom connector in your Helm Kubernetes cluster along with the connectors bundle.
 
-The default runtime loads connectors from classpath via SPI. For the custom connectors, there is a dedicated folder
-inside a **Connectors** Docker image `/opt/custom`; any JAR placed here is included in the classpath.
+The default runtime loads connectors from the classpath using the Java Service Provider Interface (SPI). For the custom connectors, there is a dedicated folder
+in the Connectors Docker image `/opt/custom`. Any JAR placed in this folder is included in the runtime classpath.
 
-This page explains how to put your custom connector into the `/opt/custom`.
+This page explains how to place your custom connector JAR in `/opt/custom`.
 
 ## Prerequisites
 
-Start with [creating and building](/components/connectors/custom-built-connectors/connector-sdk.md) a 'fat' JAR (JAR with dependencies) of your custom **Connector**. For the purpose of
-this guide, let's consider the custom **Connector** name `custom-connector-0.0.1-with-dependencies.jar`.
+- A custom connector built as a **fat JAR** (JAR with dependencies).  
+  For details on creating and building custom connectors, see [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
-Then, place the JAR somewhere accessible by Helm during installation. For the purpose of this guide,
-let's consider the path to the **Connector** is `https://my.host:80/dist/custom-connector-0.0.1-with-dependencies.jar`.
+  Example JAR name used in this guide:  
+  `custom-connector-0.0.1-with-dependencies.jar`
 
-## Modify connectors config
+- A hosting location accessible by Helm during installation.  
+  Example path used in this guide:  
+  `https://my.host:80/dist/custom-connector-0.0.1-with-dependencies.jar`
 
-Modify the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters):
+## Configure the Helm chart
+
+Update the values of the [Camunda Helm charts](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters) to download the JAR into `/opt/custom` before the connectors runtime starts:
 
 ```yaml
 connectors:
@@ -47,14 +51,15 @@ connectors:
       subPath: custom-connector-0.0.1-with-dependencies.jar
 ```
 
-After modification, you can run [Helm install](/self-managed/installation-methods/helm/install.md#install-camunda-helm-chart) as usual.
-These changes copy a custom connector JAR before the connector runtime starts.
+After updating the values, run [Helm install](/self-managed/installation-methods/helm/install.md#install-camunda-helm-chart) as usual.
 
-The `appropriate/curl` is not the only image option for the `initContainers`. There are other `curl`-based alternatives you can use; for example, `curlimages/curl`. Check `args` configuration with your vendor.
+::: note
+The `appropriate/curl` image is not the only image option for the `initContainers`. You can use other `curl`-based images, such as `curlimages/curl`. Adjust the `args` to match the image you choose.
+:::
 
 ## Troubleshooting
 
-If your custom connector won't start, consider the following troubleshooting steps:
+If your custom connector does not start:
 
-- Make sure your connector is present in the `/opt/custom` folder in the pod.
-- Make sure the original connector and the one in `/opt/custom` are the same. Usually, file size check is sufficient, but in some cases you may want to have a checksum comparison.
+- Verify that your connector JAR is present in the `/opt/custom` folder in the pod.
+- Confirm that the original connector JAR matches the one in `/opt/custom`. A file size check is often sufficient, but you can also compare checksums if needed.
