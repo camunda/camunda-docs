@@ -117,7 +117,7 @@ export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default
 ```
 
 ```java
-CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build();
+CamundaClient client = CamundaClient.newClientBuilder().build();
 ```
 
 The client will automatically read the environment variables and configure the appropriate authentication method.
@@ -148,9 +148,6 @@ public static void main(String[] args) {
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            // uncomment to use an unencrypted transport (plain http)
-            // we advise to use encrypted connections to not leak credentials
-            // .usePlaintext()
             .credentialsProvider(credentialsProvider)
             .build()) {
 
