@@ -16,6 +16,12 @@ Partition count can only be increased and not decreased.
 Backups are disallowed during scaling partitions, but can be taken before or after scaling. A backup taken before scaling partitions can be only restored to a cluster configured with the partition count before scaling. After restoring from the backup, you can request scaling again to the desired partition count.
 :::
 
+## Considerations
+
+- Scaling operations occur while the cluster remains online. During scaling, data is redistributed and new leaders are elected for affected partitions. Existing partitions continue processing data, but you may observe a temporary performance impact until scaling completes. To minimize disruption, plan scaling activities ahead of anticipated increases in load.
+- When adding new partitions or brokers, existing partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the number of partitions assigned to each broker, potentially increasing the load per broker. To preview the resulting partition distribution, use the API endpoints in [dry run](#dry-run) mode.
+- Always take backups before performing scaling operations.
+
 ## Scale up brokers
 
 The following shows how to scale up a Zeebe cluster using an example of scaling from cluster size 3 to cluster size 6. The target partition count is 6.
@@ -69,6 +75,8 @@ kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 
 Depending on whether you want to add new partitions or not, send the appropriate requests to the gateway (section 2.a or 2.b)
 
+If you want to verify how the partitions will be distributed after the change, you can call the endpoints in [dry run](#dry-run) mode.
+
 #### 2.a Scale brokers only
 
 Run the following to send the request to the Zeebe Gateway:
@@ -107,7 +115,7 @@ curl -X 'PATCH' \
       }'
 ```
 
-#### 2.b Scaling only partitions
+#### 2.c Scaling only partitions
 
 If you don't intend to add new brokers to the cluster, you can skip the `"brokers"` section:
 
@@ -626,11 +634,6 @@ zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-dkk9v                  1/1     Runnin
 :::note
 After scaling down the statefulset, you may have to delete the PVCs manually.
 :::
-
-## Considerations
-
-- Scaling up or down involves moving data around and choosing new leaders for the moved partitions. Hence, it can have a slight impact on the system, depending on the load when the scaling is executed. The ideal strategy is to scale in advance when you anticipate a higher load.
-- It is recommended to take backups before scaling.
 
 ## API reference
 
