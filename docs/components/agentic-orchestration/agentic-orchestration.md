@@ -31,7 +31,7 @@ Get started with agentic orchestration.
 - [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
 - [AI agents](ai-agents.md): Learn how to build and integrate AI agents into your end-to-end processes.
 - [Model selection](choosing-right-model-agentic.md): How to select the right LLM or foundation model for orchestrating agentic AI workflows.
-- [Model recommendations](model-recommentations-agentic.md): Prompting recommendations when using models for agentic process.
+- [Model recommendations](model-recommendations-agentic.md): Prompting recommendations when using models for agentic process.
 
 :::tip
 Ready to get started? Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.

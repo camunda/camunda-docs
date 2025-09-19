@@ -1,5 +1,5 @@
 ---
-id: model-recommentations-agentic
+id: model-recommendations-agentic
 title: Model recommendations for agentic process
 description: Prompting recommendations when using models for agentic process
 ---
@@ -60,7 +60,7 @@ Constructing effective prompts is critical for guiding the model in an agentic p
 
 Additionally, provide in-context examples (few-shot prompting) to demonstrate how to handle edge cases, compliance requirements, or specific output formats. For example, if your agent should refuse certain requests, show a mini dialogue in the prompt where a user asks something non-compliant and the assistant gives a safe refusal.
 
-By including 2–3 well-crafted examples covering alternative handling and edge cases, you set a clear expectation for the AI. If output needs to follow a structured format, you can illustrate that format in the prompt. Even better, configure the connector’s [response format](/docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/#response) options to enforce JSON or parsed text responses. This ensures consistency across executions and reduces reliance on the model “guessing” the format.
+By including 2–3 well-crafted examples covering alternative handling and edge cases, you set a clear expectation for the AI. If output needs to follow a structured format, you can illustrate that format in the prompt. Even better, configure the connector’s [response format](/docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent#response) options to enforce JSON or parsed text responses. This ensures consistency across executions and reduces reliance on the model “guessing” the format.
 
 - **Define when and how the agent should seek user input:**  
   In your system or prompt instructions, clarify the criteria for the AI to loop in a human. You might say, “If the user’s request is unclear or more information is needed, the assistant should ask a follow-up question via the customer communication tool.”
