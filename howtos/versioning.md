@@ -27,7 +27,7 @@ When a version is archived, it is removed from the main docs, isolated on a bran
 
 Examples: See [this 8.3 archival issue](https://github.com/camunda/camunda-docs/issues/5564) and [this 8.4 archival issue](https://github.com/camunda/camunda-docs/issues/6628) for an example of all required steps.
 
-Video: You can also view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival)
+Video: You can also view a video of the archival process in the documentation team Google Drive folder (requires access to Teams > Documentation > Processes > Archival).
 
 #### Step 1: Make sure the new archive version is not published in main
 
