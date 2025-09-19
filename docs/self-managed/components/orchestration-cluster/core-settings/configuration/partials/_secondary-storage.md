@@ -56,6 +56,10 @@ Do **not** set both providers to `true` simultaneously.
   </TabItem>
 </Tabs>
 
+:::note
+Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
+:::
+
 #### Secure connection (HTTPS / TLS)
 
 To connect to a secured (`https`) Elasticsearch or OpenSearch cluster for secondary storage:
@@ -71,10 +75,6 @@ To connect to a secured (`https`) Elasticsearch or OpenSearch cluster for second
 :::note
 Import the certificate (or its issuing CA) into the JVM trust store if it is not already trusted.  
 For Kubernetes-based deployments, mount a trust store and point `certificatePath` to it.  
-:::
-
-:::note
-Set `indexPrefix` only if you need to separate secondary storage indices from other indices in the same cluster (for example, when multiple Camunda environments share one cluster). Leave blank (`-`) to use the default.
 :::
 
 ### Index & retention settings
@@ -138,13 +138,31 @@ Use simplified suffix formats unless strict ISO-8601 compliance is required.
 :::
 
 :::note
+Replica count changes (`number-of-replicas` and per-index overrides):
+
+- Applied to existing indices on the next application restart (their settings are updated in place).
+- Also written to the index templates so that newly created indices inherit the new replica configuration.
+
+Shard count changes (`number-of-shards` and per-index overrides):
+
+- Update only the index templates, affecting indices created _after_ the change.
+- The existing indices keep their original shard layout
+
+Template priority changes adjust which template wins when multiple patterns match; the effect is only for indices created _after_ the change.
+:::
+
+:::note
+Some Elasticsearch and OpenSearch may ship predefined wildcard (`*` pattern) index templates with their own priorities. Assign a **strictly higher** priority to the Camunda index templates to ensure Camunda's mappings and settings win when multiple templates match the same index name. If the priority is not higher, provider wildcard templates may override shard/replica defaults, analyzers, or field mappings, leading to unexpected index behavior.
+:::
+
+:::note
 
 Maps (for example, shards/replicas overrides) are key-value objects:
 
 ```yaml
 camunda.database.index.shards-by-index-name:
-  my-custom-index: 3
-  another-index: 5
+  list-view: 3
+  task: 2
 ```
 
 :::
