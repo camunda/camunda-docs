@@ -46,10 +46,10 @@ An agentic process might pause or wait for events, causing the context to reset 
 Constructing effective prompts is critical for guiding the model in an agentic process. Keep these guidelines in mind:
 
 - **Leverage vendor-specific best practices:**  
-  Each model has recommended prompting techniques. Use the official guides for the toolcalling-capable vendors:
+  Each model has recommended prompting techniques. Use the official guides:
   - [Anthropic Claude](https://docs.anthropic.com/claude/docs)
-  - [OpenAI GPT / reasoning models (o3, o4, GPT-4, GPT-5, ChatGPT)](https://platform.openai.com/docs/guides/prompt-engineering)
-  - [Google Gemini (Vertex AI)](https://cloud.google.com/vertex-ai/generative-ai/docs/models)
+  - [OpenAI GPT / reasoning models](https://platform.openai.com/docs/guides/prompt-engineering)
+  - [Google Gemini](https://cloud.google.com/vertex-ai/generative-ai/docs/models)
   - [Cohere Command-R](https://docs.cohere.com/docs/the-cohere-platform)
   - [Meta Llama](https://llama.meta.com/docs/)
   - [Mistral / Mixtral / Codestral](https://docs.mistral.ai/)
