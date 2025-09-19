@@ -103,22 +103,20 @@ For detailed configuration options and advanced setup guidance, refer to each co
 
 :::note
 
-Configuration is being unified across components. Some changes will only take effect in future versions, so you may encounter a mix of old and new configuration options.
+Configuration is being unified across components. Some changes will only take effect in future versions, so you may see a mix of old and new configuration options.
 
 :::
 
 #### Configure the secondary storage
 
-Set the secondary storage type value to `elasticsearch` or `opensearch`, and remove any fields that do not apply to your selection.
+Set the secondary storage type value to `elasticsearch` or `opensearch`. Remove fields that do not apply to your selection.
 
 If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-The following configuration defines how the Camunda Orchestration Cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
+The following configuration defines how the orchestration cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
 
-For detailed configuration options, see the following component documentation:
-
-- [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
+For detailed configuration options, see the [Orchestration cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
