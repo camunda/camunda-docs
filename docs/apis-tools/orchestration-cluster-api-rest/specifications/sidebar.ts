@@ -136,6 +136,12 @@ const sidebar: SidebarsConfig = {
           label: "Get cluster topology",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
+          label: "Get cluster status",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -498,8 +504,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-message-subscriptions",
-          label: "Search message subscriptions",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-messages",
+          label: "Search correlated messages",
           className: "api-method post",
         },
       ],

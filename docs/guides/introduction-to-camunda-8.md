@@ -17,7 +17,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human tasks and APIs using connectors.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first local Camunda 8 project</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first local Camunda 8 project" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first local Camunda 8 project</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

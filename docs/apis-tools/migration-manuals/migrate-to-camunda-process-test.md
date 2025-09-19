@@ -35,7 +35,7 @@ Be aware that there are differences between ZPT and CPT in both API and behavior
 
 First, update your Maven dependency.
 
-- **If you use ZPT with Camunda Spring Boot SDK integration**  
+- **If you use ZPT with Camunda Spring Boot Starter integration**  
   (`artifactId: spring-boot-starter-camunda-test` or `spring-boot-starter-camunda-test-testcontainer`),  
   replace it with **CPT’s Spring integration module**.
 
@@ -45,7 +45,7 @@ First, update your Maven dependency.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -108,6 +108,7 @@ Prepare your remote runtime:
 
 2. **Enable the management clock endpoint**  
    See [prerequisites](/apis-tools/testing/configuration.md#prerequisites-1):
+
    - Create an `application.yaml` file in the root `/c8run` directory.
    - Add:
      ```yaml
@@ -120,7 +121,7 @@ Prepare your remote runtime:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -154,7 +155,7 @@ Now, it's time to migrate your process tests.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>
@@ -164,6 +165,7 @@ Now, it's time to migrate your process tests.
 First, migrate the general test class structure:
 
 1. **Replace annotations and types**
+
    - Replace `@ZeebeSpringTest` with `@CamundaSpringProcessTest`
    - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
 
@@ -253,7 +255,7 @@ This is the equivalent CPT test class:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]
 }>

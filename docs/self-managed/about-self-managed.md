@@ -1,6 +1,6 @@
 ---
 id: about-self-managed
-title: "What is Camunda 8 Self-Managed?"
+title: "Camunda 8 Self-Managed"
 sidebar_label: "Camunda 8 Self-Managed"
 description: "Step through everything you need to download, configure, and work with components of Camunda 8 Self-Managed, a self-hosted alternative to using Camunda 8 SaaS."
 keywords:
@@ -33,7 +33,7 @@ import OverviewImg from './assets/hero-self-managed.png';
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Developer and administrator quickstart" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

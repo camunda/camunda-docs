@@ -63,7 +63,7 @@ To migrate existing connectors, consider the following options:
 
 ### Multi-tenancy
 
-There are several differences between how [multi-tenancy](/self-managed/concepts/multi-tenancy.md) works in Camunda 7 and Camunda 8:
+There are several differences between how [multi-tenancy](/components/concepts/multi-tenancy.md) works in Camunda 7 and Camunda 8:
 
 1. The [one engine per tenant approach from Camunda 7](https://docs.camunda.org/manual/develop/user-guide/process-engine/multi-tenancy/#one-process-engine-per-tenant) isn't possible with Camunda 8. Camunda 8 only provides multi-tenancy through a tenant identifier.
 2. In Camunda 7, users can deploy shared resources (processes, decisions, and forms) available to all tenants. In Camunda 8, there are no shared resources. This will be added in the future.
@@ -89,7 +89,7 @@ This is visualized on the left-hand side of the following image. With Camunda 8,
 
 - Java
 - Spring Boot
-- [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) (embedding the Zeebe client)
+- [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md) (embedding the Zeebe client)
 - Glue code implemented as workers (being Spring beans)
 
 ![Diagram showing the spring boot architecture](../img/architecture-spring-boot.png)
@@ -112,7 +112,7 @@ You can find a complete Java Spring Boot example, showing the Camunda 7 process 
 
 The programming models of Camunda 7 and Camunda 8 are very similar if you program in Java and use Spring.
 
-For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md)):
+For example, a worker in Camunda 8 can be implemented as follows (using the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md)):
 
 ```java
 @JobWorker(type = "payment")
@@ -132,7 +132,7 @@ public void retrievePayment(ActivatedJob job) {
 
 <!--
 :::note
-JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Spring Zeebe SDK documentation](../../apis-tools/spring-zeebe-sdk/getting-started.md).
+JUnit testing with an embedded in-memory engine is also possible with Camunda 8, see the [Camunda Spring Boot Starter documentation](../../apis-tools/camunda-spring-boot-starter/getting-started.md).
 :::
 -->
 
@@ -152,7 +152,7 @@ Camunda 8 doesn't provide integration into Jakarta EE application servers like C
 
 ### CDI or OSGI
 
-Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot SDK](../../apis-tools/spring-zeebe-sdk/getting-started.md) may be provided in the future.
+Due to limited adoption, there is no support for CDI or OSGI in Camunda 8. A lightweight integration layer comparable to the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md) may be provided in the future.
 
 ### Polyglot applications (C#, Node.js)
 

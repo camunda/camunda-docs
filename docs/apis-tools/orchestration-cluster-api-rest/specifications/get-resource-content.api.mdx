@@ -1,11 +1,11 @@
 ---
 id: get-resource-content
 title: "Get resource content"
-description: "<MarkerStronglyConsistentExtension />"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get resource content"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWN9v2zYQ/lcOfGoxxXLStE305jlplq5LAsfdMCR+oKmzxYYiFf5Iohn63weSsuzYXtFufViBPhiWxOPdd8fvjjwuiKVzQ7IbMkKjnGZIJglRFWpquZLnOcnIHO1ycKikRWlJQnI0TPPKC5GM3MpbeXMzvLy4Pr8en14M/8yux6PLi7PJxI+M0DotDdgCgUUNoGZAIcdKqBpz0K3+3q3MsozLmbqVQ6c1SivqBGzBDaDMK8X9VClqMK6qlLYGRleDbrqJ828lSUhFNS3RovbeLYikJZKMLCV/xZokhHvsFbUFSYjGe8c15iSz2uGmg+MCwUl+7xDusAaeo7R8VnM5D151+ElCDCuwpCRbECXxchasUyHaJ1tXHoexmss5SchM6ZJakpEhLZ3MKURkz61f18ZiuUeN4XOJOXjjtg5IXrynDxSEknMwqDkV/C/MgRqIFl6ShFhuBa4seANNstgw8SvWMFMaKFRaMTQGcpxxyf1wDy59yJ1BeKDCoQEdVhRzmNbBfxMA9tb9uYpqTjot0TF8omUV4BwcvN5/e3x8tP/qzdGbt4fHpJmssO6c7VF/T5HMkXHDlYSWWyVK+5/jetIqHa3pDEDWovePMt9ZAD2ifxWkd0qXm0Hpvn1nQehY9I2Is5FTO2iznXXbxbDz/Q7rBB4LzgqgzBrvKl2WyrZMctTBl1DGR2ulssM2WivL64ieffcDGk2lpEHj6+tBv+//tsEty3G323ADxjFfUWZOiLoLlwfRynhNtKoEZ2HnSz8Zr26xVs6fU6VpmiYhh/3DbQirDQkeuS3Cgsz5A8rAkEdqQCoLM+Xk5wBUWk0Flj9tA9m0dhUlIUdLuQA1/YTM+oWIglPMgUu4Gb0bwvHh67eTF4W1lcnS9PHxsadnbA9zbpXuKT1P9Yz5n5d72YNxgRqhpDVMEWieB1JQ4feICrXlaMBUyPiMM7AqONrCBh+tXtiJ27hFWH5n7iavovqZRHSabyXgAD6Ozrd24Wemw5wZdcLroFPlbDYVVN6RpqPXttFNK8aVJdW1P61sG2gSYiy1bs0NwqXFOep1/FzaVwdbuj1NfxmPryCqAKZyXCVJa8g7UXLJS1eS7LDfT0hJn+Lbm36/8Tr9in+BJxLwqRJUBmptusMllEpjy5/gGJfGUsm+1coozed8026PNM2zHd9/PIkexex6vSvBBxJ8lLXnIWqtNCjG/Fkx92VI4PIAszqb3Ts0NnLxR679yLUfubada01CSrSFavu90D/ZgmQk7XqrdLHWPDUp61pBg/ph2WY5LUhGFjF/mixNF4UytskWvllr0ge/OA9UczoVkZJ+OObZkj9CMSrC513r6Ad8L7f071KzAo2N7SoMhTMWNYxOr8dwRi0+0jrE2Jt/buaof9TfacGLfoH2wdU5RM8jO9cqxtKET/2dJqLw1xoJByCDzGlu62uvIobwZ6Qa9cD59eoY1NoOlvz7NAiRpH14t+TV+z/GgRq+5w7TW4rsBjW4OvcLiNpEZ/q9/baoUhbi27bZy8PzqZxzidiSOZJjWRDn3BZu2mOqTFkU7/65MQ4NabYIf3Ue8papsnQyFG85j2csCkubR8AiWp/RgjOUBndA+xBH4PfoDOz3+l8DcSrUNC0pl2lrwqTDwW8fL04Gex/Oh6cX16d7+71+zz7ZEN5KGVtSuYbjDO3WOXWTLIvVfvV/vGJpqWbxyaaVoFz6FQsRXLTl46a7cDEkIdnz25elb5OkrQI3ZLGYUoMftWga//neoa5JdjNZFY1QZXJu/HNOshkVZvOyZj1qL9oWOH8JX3GFs9Ox9iOVdahhwvk3kpA7rDculppJk5ACaY46wI0SA8awsmtzt7oNn99dFT479Yn5N/OF12c=
+api: eJztWFtv2zYU/isEn1pMsZzEuenNc9LMXZYYtrthc/xAU8cSW4pUSCqOZui/DyTlq9ysAQasD30wbIuH5/vOlTxaYkMSjaMJHoKWhaKApwGWOShimBT9GEc4AbNa7ElhQBgc4Bg0VSy3QjjCj+JRTCa9h/tRfzS+ue/9GY3Gw4f72+nUrgzBFEpoZFJA1GtAco4IiiHnsoQYqVp/61FEUcTEXD6KXqEUCMPLAJmUaQQiziWzWwUvkS7yXCqj0XDQXW/Xfv+jwAHOiSIZGFDWuiUWJAMc4ZXkr1DiADPLPScmxQFW8FQwBTGOjCpg38BxCqgQ7KkA9AVKxGIQhs1LJhJn1Zo/DrCmKWQER0tsytxiaqOYSHCApYCHuWOzq3xUagPZUQLCuh1iBzGXattDuZIUtEYxzJlgdqPFmkuVEYMjPPDL1+tVbyC8kCznlsTJydnxxdXV5fHp+eX5RecKBw16hPOD9P4CmAG6EQkTG0sdx3cfyTNBXIoEaVCMcPY3xIho5HW+PwBimHF87qRILMdqunl20IgqWP5/zN4epxgo00wKVOdTBsJ8NWrXtfBwS/a1wJ2eds5fYf41ddaFb7fEstxh+0Gq7DV2ndPzs+8xrVa83+iGOo7/ErpvqbjTk/OzzsX36JrDVjQz37Y/7Z1FtGaJ2PKVa87bDXDto+FOs11hbj+tLJQCnUuhQdueedJu268m/NoNqxOEaaQLahvGvOC8RMqdMhBbCrWM1UTynDPqTrPws7bqll9t0VVVVQHutDtNCptDBi2YSV3XT9gzCOeHBdFISIPmshCvEciVnHHIfmoS2UcbeEkUgyGMIzn7DNTYQHvBGcSICTQZfuihq87ZxfRdakyuozBcLBYtNadHEDMjVUuqJFRzaj9W7n0LjVNQgDJSohkgEscu7ITbEyYHZRhopHOgbM4oMtIZWtNG1lstd7rWfvO07Gm73rzxavMAXGdGoVjjDtFFn4b9xsm6A+32zEnBrQ4yk4WJZpyIL7hap1cTdB9FF1lGVGlvIE2AKsDaEFNsmYGZMJCA2ubPhDk9aei2afrLeDxAXgWiMoZNidRA1oiMCZYVGY467XaAM/Li/52325XVaSP+DZYIBC85J8Kl1r45TKBMKqjzxxnGhDZE0P8qMlKxhO3jtnBV7Rzo9uG1t8hX19mhAu8KZL2sbB6CUlIhSam9/8VokTIOq+vP5r71VIA2Phd/1NqPWvtRa81aqwKcgUllPcO5mcikOMLhel4Kl1sDURXS9XinQT2vRqdCcRzhpa+fKgrDZSq1qaKlHcCq8NkG55koRmbcp6Rd9nW2yh8uKeHu8aE42gU7n63se1A0BW38CIp6vNAGFBrejMbolhhYkNL52MLvwly2L9sHEazoN2jvDvrIW+6zc6tjrCBs6R+E8MJvBXEXIA20UMyUI6vCu/BnIApUt7DxWmdQje2Q7P+ZE8JB/ePDKq8+/jF2qWHnaLe9TpHDpLqDvg0gKO2NabeO66ZKqPNvPTr3SFaImNTXUqiT2SfHqiEmzKTFrEVlFlIvvv5mWhegcdVI+EHf1S2VWVYI17xF4u9YBK0wLxH1bG1Fc0ZBaDhA7c6voN+9Mei41X4LxRmXszAjTIQ1hA573d8+3V93j+76vZv70c3RcavdMi/GuTeX2mREbPG4BdO4p+4ny3JzXn2Pr03qVDPwYsKcEyZsxJwHl3X7mKxfomgc4Gj3jcrKtmlQd4EJXi5nRMMnxavKPn4qQJU4mkw3TcNPQEzb3zGO5oTr/Rcw2157V8+38Xv0htcyBw2rHxJRuh7GC/sPB/gLlHsvi6ppFeAUSAzK0fUSXUohN1t7G9OGre91F769sYX5D2oDvPE=
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
@@ -34,7 +34,8 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension />
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Returns the content of a deployed resource.
 :::info
@@ -56,21 +57,20 @@ Currently, this endpoint only supports RPA resources.
       required: true,
       description: "The unique key identifying the resource.",
       schema: {
+        type: "string",
         oneOf: [
           {
+            description:
+              "System-generated key for a deployed process definition.",
+            format: "ProcessDefinitionKey",
+            example: "2251799813686749",
+            type: "string",
             allOf: [
               {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
-                format: "Camunda Key",
-                description:
-                  "System-assigned entity key (Java long serialized as string)",
-                title: "CamundaKey",
-              },
-              {
-                description:
-                  "Key for a process definition. Only use values returned by the system.",
-                format: "ProcessDefinitionKey",
-                example: "2251799813686749",
+                title: "LongKey",
               },
             ],
             title: "ProcessDefinitionKey",
@@ -78,60 +78,52 @@ Currently, this endpoint only supports RPA resources.
           {
             allOf: [
               {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
-                format: "Camunda Key",
-                description:
-                  "System-assigned entity key (Java long serialized as string)",
-                title: "CamundaKey",
-              },
-              {
-                description:
-                  "Key for a decision requirements definition. Only use values returned by the system.",
-                format: "DecisionRequirementsKey",
+                title: "LongKey",
               },
             ],
+            description:
+              "System-generated key for a deployed decision requirements definition.",
+            format: "DecisionRequirementsKey",
+            example: "2251799813683346",
+            type: "string",
             title: "DecisionRequirementsKey",
           },
           {
+            description: "System-generated key for a deployed form.",
+            format: "FormKey",
+            example: "2251799813684365",
+            type: "string",
             allOf: [
               {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
-                format: "Camunda Key",
-                description:
-                  "System-assigned entity key (Java long serialized as string)",
-                title: "CamundaKey",
-              },
-              {
-                description:
-                  "Key for a form. Only use values returned by the system.",
-                format: "FormKey",
+                title: "LongKey",
               },
             ],
             title: "FormKey",
           },
           {
+            description: "System-generated key for a decision definition.",
+            format: "DecisionDefinitionKey",
+            example: "2251799813326547",
+            type: "string",
             allOf: [
               {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
-                format: "Camunda Key",
-                description:
-                  "System-assigned entity key (Java long serialized as string)",
-                title: "CamundaKey",
-              },
-              {
-                description:
-                  "Key for a decision definition. Only use values returned by the system.",
-                format: "DecisionDefinitionKey",
+                title: "LongKey",
               },
             ],
             title: "DecisionDefinitionKey",
           },
-          {
-            description:
-              "The assigned key, which acts as a unique identifier for this Resource.",
-            format: "ResourceKey",
-          },
         ],
+        description: "The system-assigned key for this resource.",
+        format: "ResourceKey",
         title: "ResourceKey",
       },
     },

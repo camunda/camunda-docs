@@ -76,7 +76,7 @@ OIDC Access Token Authentication is the recommended method for production and re
 
 <TabItem value="saas">
 
-1. [Create client credentials](/components/console/manage-clusters/setup-client-connection-credentials.md) in the Camunda Console.
+1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console.
 2. Use the credentials to request an Access Token:
 
 ```shell
@@ -144,4 +144,4 @@ When using official Camunda clients (Java client or Spring Boot Starter), token 
 **Learn more:**
 
 - [Camunda Java client authentication and token management](./../java-client/getting-started.md)
-- [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](./../spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection)
+- [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)

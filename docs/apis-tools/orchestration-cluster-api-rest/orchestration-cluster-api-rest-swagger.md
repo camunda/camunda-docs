@@ -94,7 +94,7 @@ For detailed authentication setup instructions, see the [Authentication guide](.
 ### Understanding the interface
 
 - **Endpoints are grouped by resource type** - Find process-related operations under "Process Instances", task operations under "User Tasks", etc.
-- **Required parameters are marked** - Look for the red asterisk (*) next to required fields
+- **Required parameters are marked** - Look for the red asterisk (\*) next to required fields
 - **Example values are provided** - Use the "Example Value" links to populate request bodies quickly
 - **Response schemas are documented** - Expand the response sections to understand the data structure
 
@@ -149,7 +149,7 @@ camunda:
 
 After exploring the API with Swagger UI:
 
-- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
+- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
 - **Review the complete API reference** in the [Overview](./orchestration-cluster-api-rest-overview.md)
 - **Set up proper authentication** following the [Authentication guide](./orchestration-cluster-api-rest-authentication.md)
 - **Learn advanced querying** with [Data Fetching and Search](./orchestration-cluster-api-rest-data-fetching.md)
