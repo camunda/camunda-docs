@@ -33,6 +33,7 @@ Prefix: `camunda.migrator`
 | `.auto-ddl`            | `boolean` | Automatically create/update migrator database schema. Default: `false`                                                                                             |
 | `.table-prefix`        | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
 | `.data-source`         | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
+| `.tenantIds`           | `string`  | Comma-separated list of tenant ids for which process instances should be migrated. Example: `tenant1, tenant2, tenant3`. Default: _(empty)_                        |
 | `.database-vendor`     | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
 | `.interceptors`        | `array`   | List of variable interceptors (built-in and custom) to configure during migration.                                                                                 |
 
