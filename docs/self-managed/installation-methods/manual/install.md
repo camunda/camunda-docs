@@ -48,7 +48,7 @@ To install these components, use one of the supported methods:
 
 Download the required Camunda 8 artifacts from the following sources. Make sure that all artifacts use the same minor version to ensure compatibility.
 
-Orchestration cluster:
+Orchestration Cluster:
 
 - File names follow the pattern `camunda-zeebe-x.y.z.(zip|tar.gz)`.
 - [Maven Central](https://central.sonatype.com/artifact/io.camunda/camunda-zeebe/versions) - Select a version, then click **Browse** to view downloadable files such as `.zip` or `.tar.gz`.
@@ -80,15 +80,15 @@ Review the following reference architectures for deployment guidance:
 - [Manual reference architecture](/self-managed/reference-architecture/manual.md) - Provides an overview of the environment and requirements.
 - [Amazon EC2](/self-managed/installation-methods/manual/cloud-providers/amazon/aws-ec2.md) - A reference architecture built on Amazon Web Services (AWS) using Elastic Compute Cloud (EC2) with Ubuntu, and Amazon OpenSearch as the secondary storage.
 
-## Orchestration cluster
+## Orchestration Cluster
 
-For background, see the [Orchestration cluster glossary entry](/reference/glossary.md#orchestration-cluster).  
+For background, see the [Orchestration Cluster glossary entry](/reference/glossary.md#orchestration-cluster).  
 For architecture details, review the [architecture](/self-managed/reference-architecture/reference-architecture.md#architecture).  
-For configuration details, see the [Orchestration cluster components](/self-managed/components/orchestration-cluster/overview.md).
+For configuration details, see the [Orchestration Cluster components](/self-managed/components/orchestration-cluster/overview.md).
 
-### Configure the Orchestration cluster
+### Configure the Orchestration Cluster
 
-By default, the configuration uses a single-node Orchestration cluster with a local Elasticsearch instance as the secondary storage. If this setup matches your environment, no additional configuration is required.
+By default, the configuration uses a single-node orchestration cluster with a local Elasticsearch instance as the secondary storage. If this setup matches your environment, no additional configuration is required.
 
 If you plan to:
 
@@ -114,9 +114,9 @@ Set the secondary storage type value to `elasticsearch` or `opensearch`. Remove 
 If your security settings require authentication for the secondary storage, configure both `username` and `password`.
 Omit these fields if authentication is not required.
 
-The following configuration defines how the orchestration cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
+The following configuration defines how the Orchestration Cluster connects to secondary storage (Elasticsearch or OpenSearch). This applies to the included Operate, Tasklist, Identity, and Camunda Exporter.
 
-For detailed configuration options, see the [Orchestration cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
+For detailed configuration options, see the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/overview.md)
 
 <Tabs>
   <TabItem value="env" label="Environment variables">
@@ -197,7 +197,7 @@ zeebe:
 
 #### Configure Connectors authentication
 
-Connectors require authentication to use their full capabilities. By default, the Orchestration cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
+Connectors require authentication to use their full capabilities. By default, the Orchestration Cluster uses basic authentication. You can configure the cluster to automatically create a user with the necessary permissions at startup.
 
 If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
 
@@ -262,9 +262,9 @@ camunda:
 
 </Tabs>
 
-### Run the Orchestration cluster
+### Run the Orchestration Cluster
 
-Once you've downloaded the Orchestration cluster distribution, extract it into a folder.
+Once you've downloaded the Orchestration Cluster distribution, extract it into a folder.
 
 1. Extract the files using your GUI or CLI:
 
@@ -284,9 +284,9 @@ Once you've downloaded the Orchestration cluster distribution, extract it into a
 Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings don’t affect startup or functionality, except that Web Modeler is limited to five users. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 :::
 
-### Run the Orchestration cluster as a service
+### Run the Orchestration Cluster as a service
 
-This example shows how to run the Orchestration cluster as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment. The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
+This example shows how to run the Orchestration Cluster as a [`systemd`](https://systemd.io/) service on Ubuntu. Adjust the paths, user, and group as needed for your environment. The example uses a file with environment variables, but you can adapt it to use an `application.yaml` instead.
 
 1. Create a `systemd` service file named `camunda.service` and adjust it fit your own paths, user and group in `/etc/systemd/system/camunda.service`.
 
@@ -319,7 +319,7 @@ View logs with:
 journalctl -e -u camunda
 ```
 
-### Verify the Orchestration cluster
+### Verify the Orchestration Cluster
 
 Check the logs for a successful startup message, such as:
 
@@ -392,7 +392,7 @@ curl -u username:password -L 'http://localhost:8080/v2/topology' \
 
 </details>
 
-Check the health status of the Orchestration cluster with the actuator endpoint:
+Check the health status of the Orchestration Cluster with the actuator endpoint:
 
 ```bash
 curl localhost:9600/actuator/health
@@ -443,13 +443,13 @@ For configuration options, see the [Connectors components documentation](/self-m
 
 ### Configure Connectors
 
-If you run Connectors on the same machine as the Orchestration cluster, change the default port (`8080`) to avoid conflicts.
+If you run Connectors on the same machine as the Orchestration Cluster, change the default port (`8080`) to avoid conflicts.
 
-Connectors require authentication to communicate with the Orchestration cluster REST API and Zeebe.
+Connectors require authentication to communicate with the Orchestration Cluster REST API and Zeebe.
 
 By default, Connectors connect to:
 
-- `localhost:8080` (Orchestration cluster REST API)
+- `localhost:8080` (Orchestration Cluster REST API)
 - `localhost:26500` (Zeebe)
 
 <Tabs>
