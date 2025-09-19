@@ -1356,6 +1356,8 @@ message TopologyResponse {
   int32 replicationFactor = 4;
   // gateway version
   string gatewayVersion = 5;
+  // the cluster's unique ID
+  string clusterId = 6;
 }
 
 message BrokerInfo {
