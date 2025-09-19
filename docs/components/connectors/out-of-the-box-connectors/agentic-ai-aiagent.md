@@ -33,6 +33,61 @@ New to agentic orchestration?
 
 :::
 
+## Concepts
+
+## Implementations
+
+The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases. You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the **AI Agent Process** implementation due to the simplified configuration and support for event sub-processes.
+
+### AI Agent Process
+
+Builds on the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an ad-hoc sub-process and provides an integrated solution
+to handle the tool resolution and feedback loop. It is the recommended implementation type for most use cases offering:
+
+- Simplified configuration as the tool feedback loop is handled internally
+- Support for handling of event sub-processes within the ad-hoc sub-process
+
+Restrictions when using the AI Agent Process:
+
+- Given the BPMN semantics, the ad-hoc sub-process needs to contain at least one activity. Therefore, it is not possible to create an AI Agent process without any tools.
+- As the tool calling feedback loop is implicitely handled within the AI Agent execution, you have less control over the tool calls.
+
+A basic AI agent process can look like the following. By configuring the connector, the AI Agent implementation will resolve the available tools and activate them as needed to reach the agent's goal. Opposed to the AI Agent Task implementation, the process implementation supports handling of event sub-processes within the ad-hoc sub-process (see [Event Handling](#event-handling)).
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process.bpmn" />
+
+This pattern can be combined with a user feedback loop for verification or follow-up interactions. Instead of the showcased user task, this could also be another LLM as a judge or any other task validating the agent's response.
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process-user-feedback-loop.bpmn" />
+
+### AI Agent Task
+
+This is the original implementation type relying on a BPMN service task in combination with a multi-instance ad-hoc sub-process.
+
+Opposed to the AI Agent Proces implementation, this implementation type requires you to model the feedback loop explicitly in the BPMN diagram, leading to more complex configuration. It is suited for:
+
+- Simple, one-shot tasks using the AI Agent connector as a generic LLM connector without any tool calling.
+- Advanced use cases where you want to model the feedback loop explicitly, for example to pre-/post-process tool calls for approval or auditing.
+
+A very simple example of using the AI Agent Task connector for a non-agentic task:
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-simple.bpmn" />
+
+By adding a multi-instance ad-hoc sub-process and gateways to create tool feedback loop, the connector can be made agentic. The connector will be able to call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as toolbox:
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-feedback-loop.bpmn" />
+
+The process can be further enhanced to add a user feedback loop outside the tool calling loop. When the AI Agent completes its task and does not request any tool calls, its response
+can be verified with a task (such as a user task or another LLM as a judge) and the process can be set up to loop back to the AI Agent if necessary.
+
+This allows for example to create a user-in-the-loop process (such as a chat) where the user can ask follow-up questions:
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-user-feedback-loop.bpmn" />
+
+When more control over the feedback loop is needed, this can be considered, for example when modeling the tool feedback loop with additional tasks such as approval or auditing of tool calls.
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-feedback-loop-advanced.bpmn" />
+
 ## How to use this connector
 
 This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector task repeatedly looped back to during an AI agent process.
