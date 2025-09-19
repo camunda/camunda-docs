@@ -19,15 +19,15 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 
 ## When to use each method
 
-- **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments with C8 Run when authentication is enabled.
+- **No Authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use in production environments.
+- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments with Camunda 8 Run when authentication is enabled.
 - **OIDC Access Token Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
 | Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC Access Token |
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | -------------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
+| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
 | [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
 | SaaS                                                                                   | OIDC Access Token      | ❌                      | ❌                  | ✅ (required)              |

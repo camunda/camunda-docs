@@ -89,7 +89,7 @@ in the next minor release**.
 
 ### Content Type Headers
 
-We support the following 3 content types in C8 API:
+We support the following three content types in Camunda 8 API:
 
 - `application/json`:
   - Endpoints accept and return objects with key attributes as default `string`.
