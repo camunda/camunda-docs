@@ -4897,7 +4897,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 file:
@@ -4951,7 +4950,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 files:
@@ -5538,7 +5536,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 resources:
@@ -6228,7 +6225,6 @@ components:
       example: "2251799813684321"
     TenantCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         tenantId:
           type: string
@@ -6260,7 +6256,6 @@ components:
           example: Customer Service department business processes
     TenantUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           type: string
@@ -6312,7 +6307,6 @@ components:
         - field
     TenantSearchQueryRequest:
       description: Tenant search request
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6365,7 +6359,6 @@ components:
         - field
     UserTaskSearchQuery:
       description: User task search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6400,7 +6393,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       description: User task search query request.
-      additionalProperties: false
       type: object
       properties:
         sort:
@@ -6679,7 +6671,6 @@ components:
         - field
     VariableSearchQuery:
       description: Variable search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6800,7 +6791,6 @@ components:
         - field
     ProcessDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6916,7 +6906,6 @@ components:
     ProcessInstanceSearchQuery:
       description: Process instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6931,7 +6920,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
     ProcessInstanceIncidentSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7654,7 +7642,6 @@ components:
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
-      additionalProperties: false
       properties:
         filter:
           description: The process definition statistics search filters.
@@ -7705,7 +7692,6 @@ components:
     CancelProcessInstanceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -7735,7 +7721,6 @@ components:
     ElementInstanceSearchQuery:
       description: Element instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7981,7 +7966,6 @@ components:
         - field
     DecisionDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8047,7 +8031,6 @@ components:
       required:
         - field
     IncidentSearchQuery:
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -8212,7 +8195,6 @@ components:
         - tenantId
     CorrelatedMessageSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8337,8 +8319,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
           description: The element instance key associated with this message subscription.
-        messageSubscriptionType:
-          $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+        messageSubscriptionState:
+          $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           type: string
@@ -8364,7 +8346,7 @@ components:
             - processInstanceKey
             - elementId
             - elementInstanceKey
-            - messageSubscriptionType
+            - messageSubscriptionState
             - lastUpdatedDate
             - messageName
             - correlationKey
@@ -8375,7 +8357,6 @@ components:
         - field
     MessageSubscriptionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8412,10 +8393,10 @@ components:
           description: The element instance key associated with this message subscription.
           allOf:
             - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
-        messageSubscriptionType:
-          description: The message subscription type.
+        messageSubscriptionState:
+          description: The message subscription state.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeFilterProperty"
+            - $ref: "#/components/schemas/MessageSubscriptionStateFilterProperty"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           allOf:
@@ -8432,35 +8413,37 @@ components:
           description: The unique external tenant ID.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-    MessageSubscriptionTypeFilterProperty:
-      description: MessageSubscriptionTypeEnum with full advanced search capabilities.
+    MessageSubscriptionStateFilterProperty:
+      description: MessageSubscriptionStateEnum with full advanced search capabilities.
       type: object
       oneOf:
         - type: string
           title: Exact match
           description: Matches the value exactly.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
-        - $ref: "#/components/schemas/AdvancedMessageSubscriptionTypeFilter"
-    MessageSubscriptionTypeEnum:
-      description: The type of message subscription.
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
+        - $ref: "#/components/schemas/AdvancedMessageSubscriptionStateFilter"
+    MessageSubscriptionStateEnum:
+      description: The state of message subscription.
       type: string
       enum:
+        - CORRELATED
         - CREATED
+        - DELETED
         - MIGRATED
-    AdvancedMessageSubscriptionTypeFilter:
+    AdvancedMessageSubscriptionStateFilter:
       title: Advanced filter
-      description: Advanced MessageSubscriptionTypeEnum filter
+      description: Advanced MessageSubscriptionStateEnum filter
       type: object
       properties:
         $eq:
           description: Checks for equality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $neq:
           description: Checks for inequality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -8468,7 +8451,7 @@ components:
           description: Checks if the property matches any of the provided values.
           type: array
           items:
-            $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $like:
           $ref: "#/components/schemas/LikeFilterProperty"
     IncidentResult:
@@ -8675,7 +8658,6 @@ components:
         - UNSPECIFIED
     AuthorizationRequest:
       type: object
-      additionalProperties: false
       properties:
         ownerId:
           description: The ID of the owner of the permissions.
@@ -8730,7 +8712,6 @@ components:
         - field
     AuthorizationSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8805,7 +8786,6 @@ components:
             $ref: "#/components/schemas/AuthorizationResult"
     UserRequest:
       type: object
-      additionalProperties: false
       required:
         - password
         - username
@@ -8865,7 +8845,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -8892,7 +8871,6 @@ components:
       required:
         - field
     MappingRuleSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9055,7 +9033,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantClientResult"
     TenantClientSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9094,7 +9071,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantUserResult"
     TenantUserSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9136,7 +9112,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -9145,7 +9120,6 @@ components:
             $ref: "#/components/schemas/TenantGroupSearchQuerySortRequest"
     TenantGroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9157,7 +9131,6 @@ components:
       required:
         - field
     RoleCreateRequest:
-      additionalProperties: false
       type: object
       properties:
         roleId:
@@ -9236,7 +9209,6 @@ components:
         - field
     RoleSearchQueryRequest:
       description: Role search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9387,7 +9359,6 @@ components:
         - field
     GroupCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         groupId:
           type: string
@@ -9452,7 +9423,6 @@ components:
           description: The group description.
     GroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9466,7 +9436,6 @@ components:
         - field
     GroupSearchQueryRequest:
       description: Group search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9596,7 +9565,6 @@ components:
         - name
     MappingRuleCreateRequest:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
       properties:
@@ -9784,7 +9752,6 @@ components:
             - dead
     UserTaskCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -9798,7 +9765,6 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
-      additionalProperties: false
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -9816,7 +9782,6 @@ components:
           nullable: true
     UserTaskUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/Changeset"
@@ -9879,7 +9844,6 @@ components:
           nullable: true
     ClockPinRequest:
       type: object
-      additionalProperties: false
       properties:
         timestamp:
           description: The exact time in epoch milliseconds to which the clock should be pinned.
@@ -9889,7 +9853,6 @@ components:
         - timestamp
     JobActivationRequest:
       type: object
-      additionalProperties: false
       properties:
         type:
           description: |
@@ -10094,7 +10057,6 @@ components:
           nullable: true
     JobFailRequest:
       type: object
-      additionalProperties: false
       properties:
         retries:
           description: |
@@ -10119,7 +10081,6 @@ components:
           type: object
     JobErrorRequest:
       type: object
-      additionalProperties: false
       properties:
         errorCode:
           description: |
@@ -10140,7 +10101,6 @@ components:
         - errorCode
     JobCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -10274,7 +10234,6 @@ components:
           nullable: true
     JobUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
@@ -10310,7 +10269,6 @@ components:
     JobSearchQuery:
       description: Job search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10818,7 +10776,6 @@ components:
         - field
     DecisionRequirementsSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10867,7 +10824,6 @@ components:
             $ref: "#/components/schemas/DecisionRequirementsResult"
     DecisionRequirementsResult:
       type: object
-      additionalProperties: false
       properties:
         decisionRequirementsName:
           type: string
@@ -10896,7 +10852,6 @@ components:
         - $ref: "#/components/schemas/DecisionEvaluationByKey"
     DecisionEvaluationById:
       type: object
-      additionalProperties: false
       title: Decision evaluation by ID
       properties:
         decisionDefinitionId:
@@ -10918,7 +10873,6 @@ components:
     DecisionEvaluationByKey:
       type: object
       title: Decision evaluation by key
-      additionalProperties: false
       properties:
         decisionDefinitionKey:
           allOf:
@@ -10934,6 +10888,19 @@ components:
         - decisionDefinitionKey
     EvaluateDecisionResult:
       type: object
+      required:
+        - decisionDefinitionId
+        - decisionDefinitionName
+        - decisionDefinitionVersion
+        - decisionRequirementsId
+        - output
+        - failedDecisionDefinitionId
+        - failedMessage
+        - decisionDefinitionKey
+        - tenantId
+        - decisionRequirementsKey
+        - decisionEvaluationKey
+        - evaluatedDecisions
       properties:
         decisionDefinitionId:
           description: The ID of the decision which was evaluated.
@@ -11097,7 +11064,6 @@ components:
         - field
     DecisionInstanceSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -11274,7 +11240,6 @@ components:
       minimum: 1
     MessageCorrelationRequest:
       type: object
-      additionalProperties: false
       required:
         - name
         - correlationKey
@@ -11315,7 +11280,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceKey"
     MessagePublicationRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           description: The name of the message.
@@ -11622,7 +11586,6 @@ components:
           description: The assigned key, which acts as a unique identifier for this Resource.
     IncidentResolutionRequest:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11638,7 +11601,6 @@ components:
       title: Process creation by ID
       required:
         - processDefinitionId
-      additionalProperties: false
       properties:
         processDefinitionId:
           description: |
@@ -11714,7 +11676,6 @@ components:
       title: Process creation by key
       required:
         - processDefinitionKey
-      additionalProperties: false
       properties:
         processDefinitionKey:
           allOf:
@@ -11875,7 +11836,6 @@ components:
           $ref: "#/components/schemas/TagSet"
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
-      additionalProperties: false
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -11903,7 +11863,6 @@ components:
         - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
-      additionalProperties: false
       description: |
         The migration instructions describe how to migrate a process instance from one process definition to another.
       properties:
@@ -11939,7 +11898,6 @@ components:
         - targetElementId
     ProcessInstanceModificationInstruction:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -12007,7 +11965,6 @@ components:
         - elementInstanceKey
     SetVariableRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           description: JSON object representing the variables to set in the element’s scope.
@@ -12039,13 +11996,11 @@ components:
     DeleteResourceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
     SignalBroadcastRequest:
       type: object
-      additionalProperties: false
       properties:
         signalName:
           description: The name of the signal to broadcast.
@@ -12155,7 +12110,6 @@ components:
       required:
         - field
     BatchOperationSearchQuery:
-      additionalProperties: false
       description: Batch operation search request.
       type: object
       allOf:
@@ -12278,7 +12232,6 @@ components:
         - field
     BatchOperationItemSearchQuery:
       description: Batch operation item search request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -12470,7 +12423,6 @@ components:
           type: string
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should be canceled.
       properties:
         filter:
@@ -12479,7 +12431,6 @@ components:
         - filter
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should have their incidents resolved.
       properties:
         filter:
@@ -12487,7 +12438,6 @@ components:
       required:
         - filter
     ProcessInstanceModificationBatchOperationRequest:
-      additionalProperties: false
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
