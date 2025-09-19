@@ -99,24 +99,24 @@ Hover over a status icon to see more information, such as the reason why the FEE
 
 ## Prompting in FEEL Playground {#prompting}
 
-FEEL Playground supports prompting to help you write better FEEL expressions.
+Use prompting in FEEL Playground to help you write FEEL expressions.
 
-To use the FEEL Playground for prompting:
+To prompt in FEEL Playground:
 
-1. Open the properties panel of a diagram element containing the FEEL expression you want to validate.
-1. To open the popup FEEL editor, click **fx** on the FEEL expression field, and click the **Open popup editor** icon in the field.
+1. Open the properties panel of a diagram element that contains the FEEL expression you want to validate.
+1. In the FEEL expression field, click **fx**, then click **Open popup editor**.
 
    <img src={PlaygroundOpenImg} alt="click fx on the FEEL expression field, and click the Open popup editor icon in the field" class="img-500"/>
 
-1. In the popup FEEL editor, enter details regarding your prompt.
-1. Once satisfied with your prompt, click **Use expression** to use it in your FEEL expression.
+1. In the popup editor, enter your prompt details.
+1. Click **Use expression** to use your prompt in your FEEL expression.
 
    <img src={PlaygroundPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
 
-### LLM provider specific prompting
+### LLM provider-specific prompting
 
 Prompting supports prompt creation for specific LLM providers.
 
-A prompt like **Please create a prompt for a classification agent that needs to classify text received by a customer to a list of "sentiment". My model is OpenAI o3.** will take into account that user asked for a ChatGPT specific prompt.
+For example, a prompt like **"Please create a prompt for a classification agent that needs to classify text received by a customer to a list of "sentiment". My model is OpenAI o3."** will take into account that user asked for a ChatGPT specific prompt.
 
 <img src={PlaygroundModelSpecificPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
