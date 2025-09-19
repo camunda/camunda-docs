@@ -92,7 +92,6 @@ public static void main(String[] args) {
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            .usePlaintext()
             .build()) {
 
         // Test the connection
@@ -165,7 +164,7 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Sets up username/password authentication** – Configures the client to use basic credentials.
-2. **Builds a secure client** – Establishes an encrypted connection to the cluster (default).
+2. **Builds a secure client** – Establishes an unencrypted connection to the cluster.
 3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
 4. **Tests the connection** – Verifies authentication by requesting cluster topology information.
 
@@ -235,7 +234,7 @@ public static void main(String[] args) {
 - The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
 :::note Audience Validation
-If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
 :::
 
 **What this code does**
@@ -405,8 +404,8 @@ public static void main(String[] args) {
 You can also set connection details via environment variables to create the client more simply:
 
 ```bash
-export ZEEBE_GRPC_ADDRESS='[Zeebe gRPC Address from Console]'
-export ZEEBE_REST_ADDRESS='[Zeebe REST Address from Console]'
+export CAMUNDA_GRPC_ADDRESS='[Orchestration Cluster gRPC Address from Console]'
+export CAMUNDA_REST_ADDRESS='[Orchestration Cluster REST Address from Console]'
 export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
 export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
 export CAMUNDA_CLIENT_ID='[Client ID from Console]'

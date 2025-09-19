@@ -58,7 +58,7 @@ curl --user username:password \
 ```
 
 :::note
-Basic Authentication only supports a very small number of API requests per second, and may not be suitable for production use.
+Basic Authentication checks the password with every request and is a costly operation. It therefore only supports a low number of API requests per second, and may not be fit your production requirements.
 Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
@@ -132,7 +132,7 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 Replace the `${BASE_URL}` based on the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
 
 :::note Audience Validation
-If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
 :::
 
 :::note Authorizations

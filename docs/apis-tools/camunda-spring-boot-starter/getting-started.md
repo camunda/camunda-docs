@@ -54,8 +54,6 @@ Add the Camunda Spring Boot Starter to your project:
 </dependency>
 ```
 
-Additionally, you can find the [source on GitHub](https://github.com/camunda/camunda/tree/main/clients/spring-boot-starter-camunda-sdk/src/main).
-
 ### Step 2: Enable the Java Compiler `-parameters` flag (optional)
 
 If you want to use parameter names for process variables without specifying annotation values, enable the Java compiler flag `-parameters`.
@@ -158,7 +156,7 @@ camunda:
 - The `token-url` is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
 :::note Audience Validation
-If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
 :::
 
 </TabItem>
