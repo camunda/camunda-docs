@@ -7,9 +7,26 @@ description: "Zeebe clients use gRPC to communicate with the cluster. Activate j
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 
-[Zeebe](/components/zeebe/zeebe-overview.md) clients use [gRPC](https://grpc.io/) to communicate with the Zeebe cluster. A cross-platform and high-performance remote procedure call (RPC) framework, gRPC offers benefits for microservices architectures, such as bidirectional data streaming and support for high performance use cases. Using this API may be beneficial with Zeebe because it offers advantages for low-latency and high-throughput use cases.
+You can use [gRPC](https://grpc.io/) — a high-performance, cross-platform remote procedure call (RPC) framework — to communicate with the Orchestration Cluster.
+
+## Why use gRPC?
+
+Using this API may be beneficial if your use-case requires low-latency or high-throughput communication.
+
+Benefits of gRPC include:
+
+- Low-latency, high-throughput communication
+- Bidirectional streaming for efficient microservices integration
+- Ideal for scalable, event-driven process automation
+
+## Key capabilities
+
+- Activate jobs
+- Create and cancel process instances
+- Manage workflows and more
 
 See [Zeebe API RPCs](gateway-service.md) for all available operations. Additionally, review [technical error handling](/apis-tools/zeebe-api/technical-error-handling.md) for a closer look at business logic errors, or [Postman](https://www.postman.com/camundateam/camunda-8-postman/collection/jzgs776/zeebe-api-grpc?action=share&creator=11465105) to experiment with the API.
 
-To authorize the Zeebe API (gRPC) in a [Self-Managed](/self-managed/about-self-managed.md) setup,
-see [client authorization](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md).
+## Authentication
+
+Authentication for the Zeebe API (gRPC) depends on your environment and how you deploy Camunda 8. You can find more details in the [Authentication guide](./zeebe-api-authentication.md).

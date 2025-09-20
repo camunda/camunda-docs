@@ -12,10 +12,10 @@ In this tutorial, we'll step through examples to highlight the capabilities of t
 ## Prerequisites
 
 - If you haven't done so already, [create a cluster](/components/console/manage-clusters/create-cluster.md).
-- Upon cluster creation, [create your first client](/components/console/manage-clusters/manage-api-clients.md#create-a-client). Ensure you check the `Zeebe` client scope box.
+- Upon cluster creation, [create your first client](/components/console/manage-clusters/manage-api-clients.md#create-a-client). Ensure you check the `Orchestration Cluster API` client scope box.
 
 :::note
-Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can also download the client information to your computer.
+Make sure you keep the generated client credentials in a safe place. The **Client secret** will not be shown again. For your convenience, you can download the client information to your computer.
 :::
 
 - In this tutorial, we utilize a JavaScript-written [GitHub repository](https://github.com/camunda/camunda-api-tutorials) to write and run requests. Clone this repo before getting started.
@@ -41,9 +41,7 @@ These keys will be consumed by the `auth.js` file to execute the OAuth protocol,
 Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
-
 In this tutorial, we will execute arguments to list all roles, create a role, retrieve a role, and delete a role. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
-
 :::
 
 ## List all roles (POST)
@@ -52,7 +50,7 @@ First, let's script an API call to list all existing roles.
 
 To do this, take the following steps:
 
-1. In the file named `camunda-8.js`, outline the authentication and authorization configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
+1. In the file named `camunda-8.js`, outline the authentication configuration in the first few lines. This will pull in your `.env` variables to obtain an access token before making any API calls:
 
 ```javascript
 const authorizationConfiguration = {
@@ -71,7 +69,7 @@ async function listRoles() {
 }
 ```
 
-4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Zeebe API URL beneath your call for an access token by defining `camundaApiUrl`:
+4. Using your generated client credentials from [prerequisites](#prerequisites), capture your Orchestration Cluster REST API URL beneath your call for an access token by defining `camundaApiUrl`:
 
 ```javascript
 const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;

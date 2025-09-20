@@ -20,7 +20,7 @@ Swagger UI is particularly useful for API discovery, development, and testing wo
 Before using Swagger UI, ensure you have:
 
 - **A running Camunda 8 Orchestration Cluster:** SaaS or Self-Managed
-- **Appropriate [access permissions](../../components/concepts/access-control/authorizations.md)** (if authentication is enabled)
+- **Appropriate [access permissions](../../components/concepts/access-control/authorizations.md)** to the resources you want to manage via the API (if authorizations are enabled).
 
 ## Accessing Swagger UI
 
@@ -69,8 +69,8 @@ Click the **Authorize** button in Swagger UI to manually configure authenticatio
 
 **To obtain a Bearer token:**
 
-- **SaaS**: Follow the [OIDC Access Token Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for SaaS
-- **Self-Managed**: Follow the [OIDC Access Token Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for Self-Managed
+- **SaaS**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for SaaS
+- **Self-Managed**: Follow the [OIDC-based Authentication guide](./orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials) for Self-Managed
 
 #### Basic Authentication
 
@@ -78,7 +78,7 @@ Click the **Authorize** button in Swagger UI to manually configure authenticatio
 2. In the **Basic** section, enter your username and password
 3. Click **Authorize** to apply
 
-**Note:** Basic Authentication is only available for Self-Managed deployments and is not recommended for production.
+**Note:** Basic Authentication is only available for Self-Managed deployments.
 
 For detailed authentication setup instructions, see the [Authentication guide](./orchestration-cluster-api-rest-authentication.md).
 
