@@ -1505,9 +1505,13 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
                   ],
                 },
-                // {
-                //   Concepts: [],
-                // },
+                {
+                  Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/monitoring",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
+                  ],
+                },
                 // {
                 //   Migration: [],
                 // },
