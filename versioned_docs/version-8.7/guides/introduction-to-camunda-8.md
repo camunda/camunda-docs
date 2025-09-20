@@ -57,3 +57,5 @@ After getting started with Camunda, get to know the platform through the followi
 Additionally, Camunda hosts a section of [Best Practices](/components/best-practices/best-practices-overview.md). A mix of conceptual and practical implementation information, this section hosts our condensed experience using BPMN and DMN on the Camunda tool stack collected by consulting engagement with our customers and feedback from the community.
 
 You can also learn more about Camunda 8 by reviewing the Camunda Academy courses [introducing Camunda 8](https://academy.camunda.com/camunda-intro/) and [providing an overview of Camunda 8](https://academy.camunda.com/c8-overview/).
+
+
