@@ -19,21 +19,25 @@ will not be deleted (that is up to the administrator.) A [retention](./camunda-e
 
 ## Configuration
 
-Enable the exporter by configuring the `className` in your [broker configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexporters):
+Camunda Exporter is enabled by default if secondary storage is configured to use elasticsearch or opensearch. Refer the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` properties defined in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
-```yaml
-exporters:
-  camundaexporter:
-    className: io.camunda.exporter.CamundaExporter
-    args:
-    # Refer to the table below for the available args options
+In addition, the following properties can be configured via the exporter `args`.
+
 ```
+zeebe:
+  brokers:
+    exporters:
+      # Camunda Exporter ----------
+      # An example configuration for the camunda exporter:
+      #
+      # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
+      # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
+      # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
+      #
+      camundaexporter:
+        args:
 
-:::note
-As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
-:::
-
-Configure the exporter by providing `args`. See the tables below for configuration options and default values, or review the [example YAML configuration](#example).
+```
 
 | Option       | Description                                                                                                       | Default |
 | ------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
@@ -46,7 +50,7 @@ Configure the exporter by providing `args`. See the tables below for configurati
 ### Options
 
 <Tabs groupId="configuration" defaultValue="index" queryString
-values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
+values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
 
@@ -57,14 +61,9 @@ versions of Elasticsearch and/or OpenSearch are supported in a Camunda 8 Self-Ma
 
 | Option         | Description                                                                                                                   | Default                     |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| type           | the type of the underlying search engine to export to. Accepted values are `elasticsearch` or `opensearch`.                   | elasticsearch               |
-| clusterName    | The name of the Elasticsearch/OpenSearch cluster to export to.                                                                | elasticsearch               |
 | dateFormat     | Defines a custom date format that should be used for fetching date data from the engine (should be the same as in the engine) | yyyy-MM-dd'T'HH:mm:ss.SSSZZ |
 | socketTimeout  | Defines the socket timeout in milliseconds, which is the timeout for waiting for data.                                        |                             |
 | connectTimeout | Determines the timeout in milliseconds until a connection is established.                                                     |                             |
-| username       | Username used to authenticate.                                                                                                |                             |
-| password       | Password used to authenticate.                                                                                                |                             |
-| security       | Refer to [Security](./camunda-exporter.md?configuration=security#options) for security configuration.                         |                             |
 
 :::note
 If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
@@ -72,22 +71,10 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 </TabItem>
 
-<TabItem value="security">
-
-| Option          | Description                                                                                       | Default |
-| --------------- | ------------------------------------------------------------------------------------------------- | ------- |
-| enabled         | If `true`, enables the security (ssl) features for the exporter.                                  | false   |
-| certificatePath | The file path to the SSL certificate used for secure communication with Elasticsearch/OpenSearch. |         |
-| verifyHostname  | If `true`, the hostname of the SSL certificate will be validated.                                 | true    |
-| selfSigned      | If `true`, allows the use of self-signed SSL certificates.                                        | false   |
-
-</TabItem>
-
 <TabItem value="index">
 
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| prefix                | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                     |         |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 1       |
 | numberOfReplicas      | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for created index.                           | 0       |
 | variableSizeThreshold | Defines a threshold for variable size. Variables exceeding this threshold are split into two properties: `FULL_VALUE` (full content, not indexed) and `VALUE` (truncated content, indexed). | 8191    |
@@ -180,30 +167,17 @@ exporters:
   # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
   #
   camundaexporter:
-    className: io.camunda.exporter.CamundaExporter
-
     args:
       connect:
-        type: elasticsearch
-        url: http://localhost:9200
-        clusterName: elasticsearch
         dateFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZZ
         socketTimeout: 1000
         connectTimeout: 1000
-        username: elastic
-        password: changeme
-        security:
-          enabled: false
-          certificatePath: /path/to/certificate
-          verifyHostname: true
-          selfSigned: false
 
       bulk:
         delay: 5
         size: 1000
 
       index:
-        prefix:
         numberOfShards: 3
         numberOfReplicas: 0
 
