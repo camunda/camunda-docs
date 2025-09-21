@@ -35,7 +35,7 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 The new Camunda Java Client replaces the Zeebe Java Client as the official Java library for building process applications that integrate with Camunda 8. This client provides everything needed to interact with the Orchestration Cluster programmatically, whether you are orchestrating microservices, managing human tasks, or visualizing process data.
 
-<p><a href="../../../../apis-tools/java-client/getting-started/" class="link-arrow">Camunda Java client</a></p>
+To learn more, see [getting started with the Camunda Java client](/apis-tools/java-client/getting-started.md).
 
 ## Helm charts
 
@@ -49,15 +49,19 @@ The new Camunda Java Client replaces the Zeebe Java Client as the official Java 
 
 ## Robotic Process Automation (RPA)
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects RPA">Robotic Process Automation (RPA)</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects RPA">RPA</span></div>
 
 ### RPA worker offline installer
 
 <!-- https://github.com/camunda/product-hub/issues/2786 -->
 
+An offline installer package for the [RPA](/components/rpa/overview.md) worker allows installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
+
 ### RPA multi-file script support
 
 <!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+RPA supports multi-file script support to allow you to organize scripts modularly, reuse common automation components, and integrate existing Robot Framework scripts. The execution engine fully supports multi-file scripts and linked resources, improving scalability, maintainability, and flexibility for enterprise automation projects.
 
 ## React to expired messages with a custom exporter
 
