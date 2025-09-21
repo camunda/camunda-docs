@@ -1,7 +1,10 @@
 ---
 id: 880-release-notes
-title: "Release notes"
+title: "8.8 Release notes"
+sidebar_label: Release notes
 description: "Release notes for 8.8, including alphas"
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 keywords:
   [
     "product development lifecycle",
@@ -11,13 +14,11 @@ keywords:
   ]
 ---
 
-These release notes identify the new features included in 8.8, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
-## 8.8 minor
-
-| Scheduled release date | Scheduled end of maintenance | Changelog(s) | Release blog | Update guide |
-| ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
-| 14 October 2025        | 13 April 2027                | -            | -            | -            |
+| Scheduled release date | Scheduled end of maintenance | Changelog(s) | Release blog | Upgrade guides                                                                                 |
+| ---------------------- | ---------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025        | 13 April 2027                | -            | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -26,6 +27,130 @@ These release notes identify the new features included in 8.8, including [alpha 
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
+
+## Camunda Java client
+
+<!-- https://github.com/camunda/product-hub/issues/2248 -->
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs & tools">APIs & tools</span></div>
+
+The new Camunda Java Client replaces the Zeebe Java Client as the official Java library for building process applications that integrate with Camunda 8. This client provides everything needed to interact with the Orchestration Cluster programmatically, whether you are orchestrating microservices, managing human tasks, or visualizing process data.
+
+<p><a href="../../../../apis-tools/java-client/getting-started/" class="link-arrow">Camunda Java client</a></p>
+
+## Helm charts
+
+### Inject arbitrary configurations for existing resources into Helm Charts
+
+<!-- https://github.com/camunda/product-hub/issues/2697 -->
+
+### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+## Robotic Process Automation (RPA)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects RPA">Robotic Process Automation (RPA)</span></div>
+
+### RPA worker offline installer
+
+<!-- https://github.com/camunda/product-hub/issues/2786 -->
+
+### RPA multi-file script support
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+## React to expired messages with a custom exporter
+
+<!-- https://github.com/camunda/product-hub/issues/2796 -->
+
+## Run process segment
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+## Provide resilient batch operations managed by Zeebe
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
+## Camunda Spring Boot SDK
+
+<!-- https://github.com/camunda/product-hub/issues/2249 -->
+
+## Operate and Tasklist API deprecation
+
+<!-- https://github.com/camunda/product-hub/issues/2838 -->
+
+## Swagger UI for C8 API
+
+<!-- https://github.com/camunda/product-hub/issues/2645 -->
+
+## Orchestration Cluster API
+
+### Provide Query API for User task, Process and Decision data
+
+<!-- https://github.com/camunda/product-hub/issues/2244 -->
+<!-- https://github.com/camunda/product-hub/issues/2245 -->
+
+### Advanced Task Queries
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Advanced task queries are coming in the 8.8 release and will be available for local and process variables.
+https://docs.camunda.io/docs/next/apis-tools/camunda-api-rest/specifications/search-user-tasks/. It was implemented as a part of the unified C8 REST API.
+
+## Connectors
+
+### Azure Blob Storage connector
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+### Google Cloud storage connector
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+### CSV connector
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+### Hubspot Connector
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+### MCP Client connector
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+### Vector DB connector
+
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
+<!-- https://github.com/camunda/product-hub/issues/2779 -->
+
+### Fetch latest process definitions
+
+<!-- https://github.com/camunda/product-hub/issues/2572 -->
+
+## Console
+
+<!-- https://github.com/camunda/product-hub/issues/1933 -->
+
+## Replay Scenarios
+
+<!-- https://github.com/camunda/product-hub/issues/1314 -->
+
+## Console SM: Docker distribution
+
+<!-- https://github.com/camunda/product-hub/issues/2242 -->
+
+## Camunda 8 Run - Support 8.8 architecture
+
+<!-- https://github.com/camunda/product-hub/issues/2641 -->
+
+## Camunda Process Test with H2 as a data layer
+
+<!-- https://github.com/camunda/product-hub/issues/2687 -->
+
+## IDP structured extraction
+
+<!-- https://github.com/camunda/product-hub/issues/2694 -->
 
 ## 8.8.0-alpha8
 
@@ -275,7 +400,7 @@ To learn more, see [Google Cloud storage connector](/components/connectors/out-o
 
 <!-- https://github.com/camunda/product-hub/issues/2712 -->
 
-#### MCP Client connector (early access) <span class="badge badge--medium" title="This feature is in early access">early access</span>
+#### MCP Client connector <span class="badge badge--medium" title="This feature is in early access">early access</span>
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 

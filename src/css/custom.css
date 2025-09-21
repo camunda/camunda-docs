@@ -629,6 +629,13 @@ h3 .badge:nth-of-type(1) {
   color: #ffffff;
   vertical-align: middle;
 }
+.release .badge--long,
+.release .badge--medium {
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  margin-right: 5px;
+  vertical-align: middle;
+}
 
 .badge--platform {
   background-color: #fc5d0d;
