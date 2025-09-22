@@ -60,11 +60,11 @@ Restrictions when using the AI Agent Process:
 
 A basic AI agent process can look like the following. By configuring the connector, the AI Agent implementation will resolve the available tools and activate them as needed to reach the agent's goal. Opposed to the AI Agent Task implementation, the process implementation supports handling of event sub-processes within the ad-hoc sub-process (see [Event Handling](#event-handling)).
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process.bpmn" />
+![AI Agent Process](../img/ai-agent-process.png)
 
 This pattern can be combined with a user feedback loop for verification or follow-up interactions. Instead of the showcased user task, this could also be another LLM as a judge or any other task validating the agent's response.
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process-user-feedback-loop.bpmn" />
+![AI Agent Process with user feedback loop](../img/ai-agent-process-user-feedback-loop.png)
 
 ### AI Agent Task
 
@@ -77,22 +77,22 @@ Opposed to the AI Agent Proces implementation, this implementation type requires
 
 A very simple example of using the AI Agent Task connector for a non-agentic task:
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-simple.bpmn" />
+![Simple AI Agent Task](../img/ai-agent-task-simple.png)
 
 By adding a multi-instance ad-hoc sub-process and gateways to create tool feedback loop, the connector can be made agentic. The connector will be able to call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as toolbox:
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-feedback-loop.bpmn" />
+![AI Agent Task with tool calling feedback loop](../img/ai-agent-task-feedback-loop.png)
 
 The process can be further enhanced to add a user feedback loop outside the tool calling loop. When the AI Agent completes its task and does not request any tool calls, its response
 can be verified with a task (such as a user task or another LLM as a judge) and the process can be set up to loop back to the AI Agent if necessary.
 
 This allows for example to create a user-in-the-loop process (such as a chat) where the user can ask follow-up questions:
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-user-feedback-loop.bpmn" />
+![AI Agent Task with user feedback loop](../img/ai-agent-task-user-feedback-loop.png)
 
 When more control over the feedback loop is needed, this can be considered, for example when modeling the tool feedback loop with additional tasks such as approval or auditing of tool calls.
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-feedback-loop-advanced.bpmn" />
+![AI Agent Task with advanced tool calling feedback loop](../img/ai-agent-task-feedback-loop-advanced.png)
 
 ## Concepts
 
@@ -104,7 +104,7 @@ is able to reach its goal.
 For example, the following diagram shows a tool calling loop modeled with the [AI Agent Task](#ai-agent-task) implementation type. The process loops back to the AI Agent connector task from the ad-hoc sub-process until the agent decides no further tool calls are needed.
 With the [AI Agent Process](#ai-agent-process) implementation type, the tool calling loop is handled internally and therefore not explicitly modeled in the BPMN diagram.
 
-![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
+![AI Agent feedback loop](../img/ai-agent-loop-overview.png)
 
 1. A request is made to the AI agent connector task, where the LLM determines what action to take.
 1. If the AI agent decides that further action is needed, the process enters the ad-hoc sub-process and calls any tools deemed necessary to satisfactorily resolve the request.
