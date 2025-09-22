@@ -121,7 +121,7 @@ The `restapi` component sends certain events (e.g. "file updated", "comment adde
 
 ### Identity / Keycloak
 
-Web Modeler integrates with Identity and Keycloak for authentication and authorization (using OAuth 2.0 + OpenID Connect) as well as user management.
+Web Modeler integrates with [Management Identity](/self-managed/components/management-identity/overview.md) and Keycloak for authentication and authorization (using OAuth 2.0 + OpenID Connect) as well as user management.
 
 | Environment variable                                       | Description                                                                                                                                                                                                                                                                             | Example value                                                                             |
 | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
