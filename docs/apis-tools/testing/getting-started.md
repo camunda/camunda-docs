@@ -27,7 +27,9 @@ tests.
 
 ## Prerequisites
 
-- Java 8+ / 17+ (for Camunda Spring Boot Starter)
+- Java:
+  - For the Camunda Java client: 8+
+  - For the Camunda Spring Boot Starter: 17+
 - [JUnit 5](https://junit.org/junit5/)
 
 For the default [Testcontainers runtime](configuration.md#testcontainers-runtime):
@@ -36,9 +38,12 @@ For the default [Testcontainers runtime](configuration.md#testcontainers-runtime
 
 ## Install
 
-We have two variations of CPT: for the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/getting-started.md). Choose the one depending on which library you use in your process application.
+CPT has two variations:
 
-Add the following dependency to your Maven project:
+- For the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
+- For the [Camunda Java client](/apis-tools/java-client/getting-started.md)
+
+Choose the one depending on which library you use in your process application.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -46,6 +51,8 @@ Add the following dependency to your Maven project:
 ]}>
 
 <TabItem value='spring-sdk'>
+
+Add the following dependency to your Maven project:
 
 ```xml
 <dependency>
@@ -58,6 +65,8 @@ Add the following dependency to your Maven project:
 </TabItem>
 
 <TabItem value='java-client'>
+
+Add the following dependency to your Maven project:
 
 ```xml
 <dependency>
@@ -194,3 +203,20 @@ You can dive deeper into the library and read more about:
 ## Examples
 
 Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
+
+## Process Test Coverage
+
+After a test run, CPT prints the coverage of your BPMN processes to the log and generates a detailed HTML and JSON
+report. You can use the report to identify untested paths in your processes and to increase your test coverage.
+
+A link to the HTML report is printed in the log:
+
+```
+Process coverage: io.camunda.InvoiceApprovalTest
+========================
+- Process_InvoiceApproval: 100%
+
+ Coverage report: file:///my/home/projects/my-process-application/target/coverage-report/report.html
+```
+
+![An example process test coverage HTML report](assets/process-coverage-report.png)
