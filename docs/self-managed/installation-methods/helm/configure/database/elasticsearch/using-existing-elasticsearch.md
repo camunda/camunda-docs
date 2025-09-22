@@ -11,6 +11,14 @@ Managing elasticsearch installations externally (without enabling the elasticsea
 
 This guide steps through using an existing Elasticsearch instance.
 
+### Prerequisites
+
+At a minimum, before configuring this, you should know the following about your existing Elasticsearch instance:
+
+1. The url to access the cluster
+2. Will you need authentication, and if so, what are the credentials?
+3. Will the TLS be publicly verified or will you need to provide a certificate?
+
 ### Configuration
 
 #### Parameters
@@ -50,7 +58,8 @@ global:
     external: true
     auth:
       username: elastic
-      password: pass
+      secret:
+        inlineSecret: pass
     url:
       protocol: http
       host: elastic.example.com
@@ -88,7 +97,8 @@ global:
       existingSecret: elastic-jks
     auth:
       username: elastic
-      password: pass
+      secret:
+        inlineSecret: pass
     url:
       protocol: https
       host: elastic.example.com
@@ -116,7 +126,8 @@ global:
     external: true
     auth:
       username: elastic
-      password: pass
+      secret:
+        inlineSecret: pass
     url:
       protocol: https
       host: elastic.example.com
@@ -125,14 +136,6 @@ global:
 elasticsearch:
   enabled: false
 ```
-
-### Prerequisites
-
-At a minimum, before configuring this, you should know the following about your existing Elasticsearch instance:
-
-1. The url to access the cluster
-2. Will you need authentication, and if so, what are the credentials?
-3. Will the TLS be publicly verified or will you need to provide a certificate?
 
 ### Troubleshooting
 
