@@ -438,7 +438,7 @@ Despite these limits, you must closely monitor your LLM API usage and cost, and 
 
 <TabItem value='process'>
 
-Configures how the AI Agent process should behave when handling results from an [event subprocess](../../../components/modeler/bpmn/event-subprocesses).
+Configures how the AI Agent process should behave when handling results from an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
 The **Event handling behavior** field can be set to one of options:
 
@@ -644,6 +644,12 @@ Specify connector execution retry behavior if execution fails.
 ### Execution listeners
 
 Add and manage [execution listeners](/components/concepts/execution-listeners.md) to allow users to react to events in the workflow execution lifecycle by executing custom logic.
+
+## Event handling
+
+With an **AI Agent Process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event. See [event handling](#event-handling) for more details.
+
+To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow. The content of this variable will be added to the LLM API call as a user message following any tool call results.
 
 ## Additional resources
 
