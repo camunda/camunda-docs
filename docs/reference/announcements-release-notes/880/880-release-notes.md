@@ -32,15 +32,19 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-- MCP connector
-- Vector DB connector
-- AI Agent connector
+### Connectors
 
-### Ad-hoc sub-process dynamic activation using job workers
+[Camunda Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) is enhanced with the following new connectors:
+
+- [AI Agent connector](#ai-agent-connector): Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities.
+- [MCP connector](#mcp-client-connector): Enable Camunda processes and AI agents to auto-discover and invoke external tools.
+- [Vector DB connector](#vector-database-connector): Enable embedding, storing, and retrieving Large Language Model (LLM) embeddings.
+
+### Dynamic activation of ad-hoc sub-processes using job workers
 
 <!-- https://github.com/camunda/product-hub/issues/2631 -->
 
-Ad-hoc sub-process elements can now be activated by job workers:
+Ad-hoc sub-process elements can be activated by job workers:
 
 - Define a task in the process model.
 - When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
@@ -73,25 +77,27 @@ The Camunda Spring Boot Starter replaces the Spring Zeebe SDK to simplify intera
 
 ### Process instance tags
 
-Introduce optional, immutable **process instance tags** set at creation for lightweight routing, correlation, and future prioritization without inspecting large variable payloads.
+Introduce optional, immutable **process instance tags** set at creation for lightweight routing, correlation, and future prioritization without inspecting large variable payloads. See [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).
 
-For a full feature overview see [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).
+<p><a href="../../../../components/concepts/process-instance-creation/" class="link-arrow">Process instance creation</a></p>
 
 ### Public API
 
-The new [Public API](/reference/public-api.md) documentation outlines what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
+Find out what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
 
 - The public API is the official contract between Camunda and its users under SemVer.
 - No breaking changes will be made to the public API in minor or patch releases.
 - You can safely build on these interfaces with the expectation of stability and backward compatibility.
 
+<p><a href="../../../../reference/public-api/" class="link-arrow">Public API</a></p>
+
 ### Run process segment
 
 <!-- https://github.com/camunda/product-hub/issues/2453 -->
 
-This feature allows developers to manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+Manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
 
-<p><a href="../../../../components/concepts/process-instance-creation.md#run-process-segment/" class="link-arrow">Run process segment</a></p>
+<p><a href="../../../../components/concepts/process-instance-creation/#run-process-segment" class="link-arrow">Run process segment</a></p>
 
 ## Camunda Process Test
 
@@ -101,12 +107,12 @@ This feature allows developers to manually execute and test individual tasks or 
 
 <!-- https://github.com/camunda/product-hub/issues/2687 -->
 
-Camunda Process Test now supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
+Camunda Process Test supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
 
 - H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
 - H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
 
-To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools/testing/getting-started.md).
+<p><a href="../../../../apis-tools/testing/getting-started" class="link-arrow">Camunda Process Test</a></p>
 
 ## Connectors
 
@@ -169,6 +175,16 @@ Enable embedding, storing, and retrieving Large Language Model (LLM) embeddings.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/embeddings-vector-db" class="link-arrow">Vector database connector</a></p>
 
+### Email connector `Message-ID`
+
+<!-- https://github.com/camunda/connectors/pull/4657 -->
+
+The Email connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+
+:::note
+This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
+:::
+
 ### Intrinsic functions
 
 <!-- https://github.com/camunda/camunda-docs/pull/5934 -->
@@ -178,7 +194,7 @@ A new `getJson` intrinsic function accepts a document and an optional FEEL expre
 - The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
 - If not provided, the whole document is returned as a JSON object.
 
-To learn more, see [intrinsic functions](/components/connectors/use-connectors/intrinsic-functions.md).
+<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
 
 ### Job header binding
 
@@ -192,7 +208,7 @@ Use the `@Header` annotation to bind a header value (for example, a FEEL express
 
 The SQL connector now supports Oracle Database connections.
 
-See [SQL connector](/components/connectors/out-of-the-box-connectors/sql.md) for more information.
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/sql" class="link-arrow">SQL connector</a></p>
 
 ### Unlock element template fields
 
@@ -202,49 +218,26 @@ See [SQL connector](/components/connectors/out-of-the-box-connectors/sql.md) for
 - Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
-### Email connector
-
-<!-- https://github.com/camunda/connectors/pull/4657 -->
-
-The Email connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
-
-For example:
-
-```json
-{
-  "sent": true,
-  "subject": "Email subject"
-  "messageId": "<abc123@clientdomain.com>"
-}
-```
-
-:::note
-This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
-:::
-
 ## Console
 
-<!-- https://github.com/camunda/product-hub/issues/1933 -->
+<div class="release"><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Connector manage and run supports multiple runtimes <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Console">Console</span> {#connector-management}
+### Connector manage and run supports multiple runtimes
 
 <!-- https://github.com/camunda/product-hub/issues/2750 -->
+<!-- https://github.com/camunda/product-hub/issues/1933 -->
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+<p><a href="../../../../components/console/manage-clusters/manage-connectors" class="link-arrow">Manage your connectors</a></p>
 
 ### Docker distribution
 
 <!-- https://github.com/camunda/product-hub/issues/2242 -->
 
-Console is now available as a Self-Managed Docker distribution:
+Console is now available as a Self-Managed Docker distribution. Deploy Camunda Console using a Docker image, run Console outside Kubernetes using Docker Compose or other container services, and use Console with Camunda 8 clusters deployed via Docker.
 
-- Deploy Camunda Console using a Docker image
-- Run Console outside Kubernetes using Docker Compose or other container services
-- Use Console with Camunda 8 clusters deployed via Docker
-
-See [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md) for setup instructions.
+<p><a href="../../../../self-managed/quickstart/developer-quickstart/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
 
 ### Usage metrics for licence model and tenant
 
@@ -252,13 +245,74 @@ See [Docker Compose developer quickstart](/self-managed/quickstart/developer-qui
 
 Usage metrics now support per-tenant reporting and align with Camunda’s updated licensing model based on the number of tenants.
 
-## Console SM: Docker distribution
+## Desktop Modeler
 
-<!-- https://github.com/camunda/product-hub/issues/2242 -->
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-## Exporters
+### Settings
 
-<div class="release"><span class="badge badge--medium" title="This feature affects exporters">Exporters</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+<!-- https://github.com/camunda/product-hub/issues/2491 -->
+
+The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, as well as other options that were previously only available as flags.
+
+<p><a href="../../../../components/modeler/desktop-modeler/settings/settings" class="link-arrow">Desktop Modeler settings</a></p>
+
+## Helm chart deployment
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Camunda provides alternative container images to the previous Bitnami images, offering better security and faster patch delivery. From 8.8, these are the default supported images.
+
+- These images are hosted on `registry.camunda.cloud`.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file.
+
+<p><a href="../../../../self-managed/installation-methods/helm/install" class="link-arrow">Install Camunda with Helm</a></p>
+
+### Configurable volumes
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
+
+## Intelligent document processing (IDP)
+
+<div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+### Structured data form extraction
+
+<!-- https://github.com/camunda/product-hub/issues/2694 -->
+
+You can use form-based structured document extraction to capture data from structured documents.
+
+- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+
+## Optimize
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Amazon OpenSearch support
+
+<!-- https://github.com/camunda/product-hub/issues/2473 -->
+
+Camunda 8 Self-Managed now fully supports the use of Amazon OpenSearch with Optimize.
+
+## Orchestration Cluster
+
+### Migrate taken sequence flows flowing to the joining gateway
+
+<!-- https://github.com/camunda/product-hub/issues/2913 -->
+
+Enhanced migration now supports taken sequence flows leading to joining gateways:
+
+- Define migration plans mapping active elements and taken sequence flows
+- Configure plans via Operate UI or API
 
 ### Camunda Exporter
 
@@ -271,185 +325,6 @@ To learn more about this feature, see the [Camunda Exporter documentation](/self
 Camunda now introduces a mechanism to react to expired messages. The original message is retrieved from the primary storage upon message expiration and the expiry event is enhanced with the original message. Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
 
 With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently. By providing an enhanced event and re-publish flow, this feature strengthens reliability and transparency in business processes without requiring a major upgrade or modifying existing exporters.
-
-## Helm chart deployment
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-### Configurable volumes
-
-<!-- https://github.com/camunda/product-hub/issues/2597 -->
-
-The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
-
-### Inject arbitrary configurations for existing resources into Helm Charts
-
-<!-- https://github.com/camunda/product-hub/issues/2697 -->
-
-### Alternative container images
-
-<!-- https://github.com/camunda/product-hub/issues/2826 -->
-
-Camunda provides alternative container images to the previous Bitnami images, offering better security and faster patch delivery. From 8.8, these are the default supported images.
-
-- These images are hosted on `registry.camunda.cloud`.
-- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
-
-## Intelligent document processing (IDP)
-
-### Form extraction <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects IDP">IDP</span>
-
-You can use form-based structured document extraction to capture data from structured documents.
-
-- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
-- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
-
-To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
-
-### IDP structured extraction
-
-<!-- https://github.com/camunda/product-hub/issues/2694 -->
-
-## Modeler
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-### Desktop Modeler settings <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2491 -->
-
-The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, along with other options that were previously only available as flags.
-
-To learn more about these settings, see [Desktop Modeler settings](/components/modeler/desktop-modeler/settings/settings.md).
-
-### Version description<span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-<!-- https://github.com/camunda/web-modeler/issues/12057 -->
-
-Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
-
-To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
-
-### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-<!-- https://github.com/camunda/web-modeler/issues/13707 -->
-
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
-
-- To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
-
-To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
-
-### Element template support for all tasks <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2606 -->
-
-You can now save any configured task as a reusable element template directly from the Web Modeler properties panel:
-
-- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates
-- Edit templates to adjust input/output bindings, validation rules, categories, and more
-- Publish templates to your project or organization for reuse
-
-See [save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
-
-Additional support includes:
-
-- `zeebe:assignmentDefinition` for assigning users or groups
-- `zeebe:priorityDefinition` for setting task priorities (integer or FEEL expression)
-- `zeebe:taskSchedule` for templating task scheduling configurations
-
-### Migrate taken sequence flows flowing to the joining gateway
-
-<!-- https://github.com/camunda/product-hub/issues/2913 -->
-
-Enhanced migration now supports taken sequence flows leading to joining gateways:
-
-- Define migration plans mapping active elements and taken sequence flows
-- Configure plans via Operate UI or API
-
-### Low-code Process Testing
-
-<!-- https://github.com/camunda/product-hub/issues/2610 -->
-
-You can now save and rerun versioned test scenarios in Web Modeler:
-
-- Supports user tasks, connectors, and basic branching logic
-- Ideal for process developers and CoEs
-- Enables behavior-driven development with Camunda Process Test
-
-### RDBMS support for Oracle and MS SQL in Self-Managed
-
-<!-- https://github.com/camunda/product-hub/issues/2558 -->
-
-Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
-
-### Test scenario files
-
-<!-- https://github.com/camunda/product-hub/issues/2894 -->
-
-You can now save, export, and share test scenarios:
-
-- Portable, Git-syncable files enable quick creation of Camunda Process Test scenarios
-
-### Username claim configuration
-
-<!-- https://github.com/camunda/web-modeler/issues/9292 -->
-
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
-
-### Bitbucket sync <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2507 -->
-
-Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitbucket.org/product/), in addition to GitHub, GitLab, and Azure DevOps.
-
-- This helps customers who use Jira for their development processes.
-- Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
-
-To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
-
-### Azure DevOps integration for Git sync <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/git-sync.md) that allows for direct syncing with Azure repositories.
-
-<!-- https://github.com/camunda/product-hub/issues/2580 -->
-
-### FEEL Copilot <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
-
-To learn more about this feature, see [FEEL Copilot](/components/early-access/alpha/feel-copilot/feel-copilot.md).
-
-:::note
-The FEEL Copilot is released as an [early access alpha feature](/components/early-access/alpha/alpha-features.md) to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
-:::
-
-<!-- https://github.com/camunda/web-modeler/issues/14223 -->
-
-### FEEL Playground <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
-
-Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
-
-To learn more about this feature, see [FEEL Playground](/components/modeler/feel/feel-playground.md).
-
-<!-- https://github.com/camunda/camunda-docs/issues/5611 -->
-
-## Replay Scenarios
-
-<!-- https://github.com/camunda/product-hub/issues/1314 -->
-
-## Optimize
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-### Amazon OpenSearch Optimize support
-
-<!-- https://github.com/camunda/product-hub/issues/2473 -->
-
-Camunda 8 Self-Managed now fully supports the use of Amazon OpenSearch with Optimize.
-
-## Orchestration Cluster
 
 ### Process instance migration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
 
@@ -639,6 +514,88 @@ This event triggers when a user task is canceled (e.g., by a boundary event or p
 | Operate UI insights               | A “Canceling” event is shown in the listener tab. Incidents are highlighted for visibility.               |
 
 To learn more, see [user task listeners](/components/concepts/user-task-listeners.md).
+
+## Web Modeler
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Git sync Azure DevOps and Bitbucket integration
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
+
+<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+
+### Cluster basic authentication
+
+<!-- https://github.com/camunda/web-modeler/issues/13707 -->
+
+As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+
+- Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+
+<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
+
+### Element template support for all tasks
+
+<!-- https://github.com/camunda/product-hub/issues/2606 -->
+
+You can now save any configured task as a reusable element template directly from the Web Modeler properties panel:
+
+- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates
+- Edit templates to adjust input/output bindings, validation rules, categories, and more
+- Publish templates to your project or organization for reuse
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+
+### FEEL Copilot
+
+<!-- https://github.com/camunda/web-modeler/issues/14223 -->
+
+Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
+
+<p><a href="../../../../components/early-access/alpha/feel-copilot/" class="link-arrow">FEEL Copilot</a></p>
+
+### FEEL Playground
+
+Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
+
+<p><a href="../../../../components/modeler/feel/feel-playground/" class="link-arrow">FEEL Playground</a></p>
+
+<!-- https://github.com/camunda/camunda-docs/issues/5611 -->
+
+### Low-code process testing
+
+<!-- https://github.com/camunda/product-hub/issues/2610 -->
+
+You can now save and rerun versioned test scenarios in Web Modeler:
+
+- Supports user tasks, connectors, and basic branching logic
+- Ideal for process developers and CoEs
+- Enables behavior-driven development with Camunda Process Test
+
+### RDBMS support for Oracle and MS SQL in Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/2558 -->
+
+Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
+
+### Username claim configuration
+
+<!-- https://github.com/camunda/web-modeler/issues/9292 -->
+
+Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+
+### Version description
+
+<!-- https://github.com/camunda/web-modeler/issues/12057 -->
+
+Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
+
+<p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
 
 ## 8.8.0-alpha8
 
