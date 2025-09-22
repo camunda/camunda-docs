@@ -79,7 +79,7 @@ A very simple example of using the AI Agent Task connector for a non-agentic tas
 
 ![Simple AI Agent Task](../img/ai-agent-task-simple.png)
 
-By adding a multi-instance ad-hoc sub-process and gateways to create tool feedback loop, the connector can be made agentic. The connector will be able to call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as toolbox:
+By adding a multi-instance ad-hoc sub-process and gateways to create a tool feedback loop, the connector can be made agentic. The connector will be able to call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as toolbox:
 
 ![AI Agent Task with tool calling feedback loop](../img/ai-agent-task-feedback-loop.png)
 
@@ -90,7 +90,7 @@ This allows for example to create a user-in-the-loop process (such as a chat) wh
 
 ![AI Agent Task with user feedback loop](../img/ai-agent-task-user-feedback-loop.png)
 
-When more control over the feedback loop is needed, this can be considered, for example when modeling the tool feedback loop with additional tasks such as approval or auditing of tool calls.
+When more control over the feedback loop is needed, it is possible to model pre-/post-processing of tool calls with additional tasks such as approval or auditing of tool calls.
 
 ![AI Agent Task with advanced tool calling feedback loop](../img/ai-agent-task-feedback-loop-advanced.png)
 
