@@ -33,7 +33,13 @@ New to agentic orchestration?
 
 :::
 
-## Concepts
+## Prerequisites
+
+The following prerequisites are required to use this connector:
+
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
 ## Implementations
 
@@ -88,11 +94,15 @@ When more control over the feedback loop is needed, this can be considered, for 
 
 <div bpmn="components/agentic-orchestration/ai-agents/ai-agent-task-feedback-loop-advanced.bpmn" />
 
-## How to use this connector
+## Concepts
 
-This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector task repeatedly looped back to during an AI agent process.
+### Feedback loop
 
-For example, the following diagram shows a tool calling loop:
+This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector implementation repeatedly being executed based on tool call results or user feedback until it
+is able to reach its goal.
+
+For example, the following diagram shows a tool calling loop modeled with the [AI Agent Task](#ai-agent-task) implementation type. The process loops back to the AI Agent connector task from the ad-hoc sub-process until the agent decides no further tool calls are needed.
+With the [AI Agent Process](#ai-agent-process) implementation type, the tool calling loop is handled internally and therefore not explicitly modeled in the BPMN diagram.
 
 ![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
 
@@ -100,7 +110,7 @@ For example, the following diagram shows a tool calling loop:
 1. If the AI agent decides that further action is needed, the process enters the ad-hoc sub-process and calls any tools deemed necessary to satisfactorily resolve the request.
 1. The process loops back and re-enters the AI agent connector task, where the LLM decides (with contextual memory) if more action is needed before the process can continue. The process loops repeatedly in this manner until the AI agent decides it is complete, and passes the AI agent response to the next step in the process.
 
-### Feedback loop use cases
+#### Feedback loop use cases
 
 Typical feedback loop use cases for this connector include the following:
 
@@ -112,11 +122,15 @@ Typical feedback loop use cases for this connector include the following:
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
 
-An important concept to understand is the use of the **Agent context** process variable to store information required for allowing re-entry to the AI Agent connector task with the same context as before. This variable is mapped as both an **input** and **output** variable of the connector and updates with each agent execution.
+### Agent context
 
-:::important
-When modelling an AI Agent, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
-:::
+An important concept to understand is the use of the **Agent context** process variable to store information required for allowing re-entry to the AI Agent connector task with the same context as before.
+
+Depending on the used implementation type, the Agent context needs to be configured differently in the model:
+
+- With the [**AI Agent Process**](#ai-agent-process) implementation type, the agent context is kept within the subprocess scope. Therefore, you only need to configure the agent context when the agent should pick up an existing conversation, for example to model a user feedback loop as used in the [quickstart example](../../../guides/getting-started-agentic-orchestration.md). In this case, you must align the configured agent context variable with the used result variable/expression so that the context update is
+  correctly passed to the next execution of the AI Agent connector task.
+- With the [**AI Agent Task**](#ai-agent-task) implementation type, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
 
 ### Example conversation
 
@@ -142,15 +156,11 @@ Tool Call Result: {"Create_Credit_Card": {"success": true}}
 AI Agent: John Doe's credit card has been created successfully.
 ```
 
-## Prerequisites
-
-The following prerequisites are required to use this connector:
-
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
-
 ## Configuration
+
+:::note
+Some options are different or only applicable to one of the [implementations](#implementations). These options are marked accordingly.
+:::
 
 ### Model Provider
 
