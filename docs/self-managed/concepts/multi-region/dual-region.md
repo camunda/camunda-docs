@@ -174,10 +174,6 @@ This numbering and the round-robin partition distribution assures the even repli
 | Zeebe Cluster Scaling | Not supported.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | Web Modeler           | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the orchestration clusters.                                                                                                                                                                                                                                                                                                            |
 
-### Identity configuration for dual-region
-
-Identity, including multi-tenancy and Role-Based Access Control (RBAC), is currently unavailable in this setup.
-
 ### Infrastructure and deployment platform considerations
 
 Multi-region setups come with inherent complexities, and it is essential to fully understand these challenges before selecting a dual-region configuration.
