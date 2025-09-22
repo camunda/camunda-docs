@@ -6,7 +6,7 @@ description: "Configuration property changes and backwards compatibility informa
 hide_table_of_contents: true
 ---
 
-import SearchableTable from '../../react-components/\_config-table.js';
+import SearchableTable from '../../../../react-components/\_config-table.js';
 
 Changes to component configuration properties introduced in Camunda 8.8.
 
