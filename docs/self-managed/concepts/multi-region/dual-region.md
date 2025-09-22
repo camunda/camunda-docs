@@ -96,26 +96,12 @@ Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.o
 
 ### Component requirements
 
-#### Zeebe
-
-- **Mode**: Active-active
-- **Requirement**: All brokers in both regions must be running
-- **Function**: Leaders and followers distributed across regions
-- **Data replication**: Continuous across all brokers
-
-#### Elasticsearch
-
-- **Mode**: Active-active
-- **Requirement**: Both clusters must be running
-- **Function**: Receives exports from Zeebe continuously
-- **Critical**: If secondary region Elasticsearch is down, Zeebe exporters may fail globally
-
-#### Operate and Tasklist
-
-- **Mode**: Active-passive (user traffic only)
-- **Requirement**: Both instances must be running and importing data
-- **Function**: Both regions maintain up-to-date data, only primary serves users
-- **Data loss risk**: If not running, data may be lost after Zeebe retention period
+| Component     | Mode                          | Requirement                             | Function                                                                                    |
+| ------------- | ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Zeebe         | Active-active                 | All brokers in both regions must run    | Leaders and followers distributed across regions. Continuous replication across brokers.    |
+| Elasticsearch | Active-active                 | Both clusters must run                  | Receives exports from Zeebe continuously. Zeebe exporters may fail if secondary ES is down. |
+| Operate       | Active-passive (user traffic) | Both instances must run and import data | Maintains up-to-date data; only primary serves users.                                       |
+| Tasklist      | Active-passive (user traffic) | Both instances must run and import data | Maintains up-to-date data; only primary serves users.                                       |
 
 ### User traffic
 
@@ -137,7 +123,7 @@ Traffic redirection must be performed as part of the complete failover procedure
 
 The currently supported Camunda 8 Self-Managed components are:
 
-- Zeebe (workflow engine)
+- Zeebe (process automation engine)
 - Elasticsearch (database)
 - Operate
 - Tasklist
@@ -265,7 +251,7 @@ Simultaneously upgrading both regions can result in a loss of quorum for partiti
 
 In a dual-region setup, loss of either region affects Camunda 8's processing capability due to quorum requirements.
 
-When a region becomes unavailable, the Zeebe cluster loses quorum (half of brokers unreachable) and **immediately stops processing** new data. This affects all components as they cannot update or process new workflows until the failover procedure completes.
+When a region becomes unavailable, the Zeebe cluster loses quorum (half of brokers unreachable) and **immediately stops processing** new data. This affects all components as they cannot update or process new processes until the failover procedure completes.
 
 :::warning Immediate Impact
 Region failure results in **immediate service interruption**:
@@ -286,12 +272,12 @@ You must monitor for region failures and execute the necessary [operational proc
 If the primary region is lost:
 
 - **Service disruption**: User traffic is unavailable
-- **Workflow engine halt**: Processing stops due to quorum loss
+- **Zeebe halt**: Processing stops due to quorum loss
 - **Data loss**: Region-specific data such as batch operations and task assignments is lost
 
 #### Recovery steps for primary region loss
 
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the workflow engine.
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
 2. **Traffic rerouting:** Redirect user traffic to the secondary region (now primary).
 3. **Data and task management**:
    - Reassign uncompleted tasks lost from the previous primary region.
@@ -302,7 +288,7 @@ If the primary region is lost:
 
 If the secondary region is lost:
 
-- **Workflow engine halt**: Processing stops due to quorum loss.
+- **Zeebe halt**: Processing stops due to quorum loss.
 - **No user impact**: Traffic continues to be served by the primary region during recovery.
 
 #### Recovery steps for secondary region loss
