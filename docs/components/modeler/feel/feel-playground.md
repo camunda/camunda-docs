@@ -117,6 +117,6 @@ To prompt in FEEL Playground:
 
 Prompting supports prompt creation for specific LLM providers.
 
-For example, a prompt like **"Please create a prompt for a classification agent that needs to classify text received by a customer to a list of "sentiment". My model is OpenAI o3."** will take into account that user asked for a ChatGPT specific prompt.
+For example, a prompt like **"Please create a prompt for a classification agent that needs to classify text received by a customer to a list of "sentiment". My model is OpenAI o3."** is treated as an OpenAI-specific prompt.
 
 <img src={PlaygroundModelSpecificPromptingExampleImg} alt="Example image showing the FEEL Playground Sample Data and Result of a FEEL expression validation" class="img-600"/>
