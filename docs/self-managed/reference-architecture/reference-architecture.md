@@ -43,36 +43,95 @@ The Orchestration Cluster is the core of Camunda.
 
 The following components are bundled into a single artifact:
 
-- [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
-- [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): A service for managing user authentication and authorization.
+- [Zeebe](/components/zeebe/zeebe-overview.md): The process automation engine powering Camunda 8.
+- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting workflows.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for managing and completing human tasks.
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): Service for authentication and authorization.
 
-Thematically close to the Orchestration Cluster are the following components:
+Tightly integrated with the Orchestration Cluster:
 
-- [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
-- [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting the Orchestration Cluster with external systems and services.
+- [Optimize](/components/optimize/what-is-optimize.md): Analytics tool for workflow reporting and insights.
+- [Connectors](/components/connectors/introduction.md): Pre-built integrations for external systems.
 
-Each component within the Orchestration Cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
-
-This design ensures that all components are in sync, working collectively to maintain consistent state management, data integrity, and smooth process orchestration across the entire cluster. This architecture ensures reliable process execution with clear boundaries between each workflow engine's operation.
+This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
 #### Web Modeler and Console
 
 ![Web Modeler and Console](./img/management-cluster.jpg)
 
-Web Modeler and Console are designed to interact with multiple Orchestration Clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
+Web Modeler and Console are designed to interact with multiple Orchestration Clusters:
 
-- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple Orchestration Clusters.
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
+- [Console](/components/console/introduction-to-console.md): Central management interface for monitoring and managing multiple Orchestration Clusters.
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): Web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
+- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
 
-Additionally, Web Modeler and Console require the following:
+**Important**: Web Modeler and Console use a separate Management Identity deployment, distinct from the embedded Identity in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Identity.
 
-- [Management Identity](/self-managed/components/management-identity/overview.md): A service for managing user authentication and authorization.
+:::tip New in Camunda 8.8
+Starting with Camunda 8.8, Identity and Management Identity have been redesigned to provide clearer separation of concerns and improved flexibility.
+:::
 
-Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
+#### Identity vs Management Identity
 
-For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
+The following table outlines the key differences between Identity and Management Identity:
+
+<table>
+    <thead>
+        <tr>
+            <th width="50%">Identity</th>
+            <th width="50%">Management Identity</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td width="50%">
+                <p>Access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.</p>
+                <ul>
+                    <li>
+                        <p><strong>Unified access management:</strong> Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any orchestration dependency on Management Identity.</p>
+                    </li>
+                    <li>
+                        <p><strong>Authentication:</strong> Supports three authentication modes:</p>
+                        <ul>
+                             <li><p><strong>No Authentication:</strong> No authentication required for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                            <li><p><strong>Basic Authentication:</strong> Basic authentication for API access. Form-based authentication in the UI. Users and groups are managed in Identity.</p></li>
+                            <li><p><strong>OIDC:</strong> OpenID Connect with any compatible Identity Provider (for example, Keycloak, Microsoft EntraID, Okta).</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p><strong>Authorizations per resource:</strong> <a href="/components/concepts/access-control/authorizations.md">Authorizations</a> provide fine-grained access control to Orchestration Cluster resources such as process instances, tasks, and decisions, applied consistently across components and APIs</p>
+                    </li>
+                    <li>
+                        <p><strong>Decoupling from Keycloak:</strong> Keycloak is treated as a standard external Identity Provider integrated via OIDC, making it easier to use other providers without special integration.</p>
+                    </li>
+                    <li>
+                        <p><strong>Tenant-Management:</strong> Tenants are directly managed within the Orchestration Cluster, allowing for Tenants per Cluster.</p>
+                    </li>
+                </ul>
+            </td>
+            <td width="50%">
+                <p>Continues to manage access for platform components such as Web Modeler, Console, and Optimize.</p>
+                <ul>
+                    <li>
+                        <p>Remains responsible for managing access to platform components such as Web Modeler, Console, and Optimize.</p>
+                    </li>
+                    <li>
+                        <p><strong>Authentication:</strong> Supports two authentication modes:</p>
+                        <ul>
+                            <li><p><strong>Direct Keycloak integration:</strong> (default).</p></li>
+                            <li><p><strong>OIDC:</strong> OpenID Connect with any compatible Identity Provider  (for example, Keycloak, Microsoft EntraID, Okta).</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p><strong>Tenant-Management:</strong> No longer manages Tenants for the Orchestration Cluster components. Tenants only apply to Optimize.</p>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+For production environments, use an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) to connect both environments.
 
 ### Databases
 

@@ -39,13 +39,20 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ## Architecture
 
-<!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
+In addition to the infrastructure diagram provided in the [Terraform setup guide](./terraform-setup.md), this section installs Camunda 8 following the architecture presented in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md):
 
-Note the [existing architecture](/self-managed/about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+- **Orchestration Cluster**: Core process execution engine with Zeebe, Operate, Tasklist, and Identity
+- **Web Modeler and Console**: Management and design tools with Web Modeler, Console, and Management Identity
+- **Keycloak as OIDC provider**: Used as a demonstration example of an OIDC Identity Provider (this can be replaced with any compatible OIDC provider)
 
-Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
+To demonstrate how to deploy with a custom domain, we also present the following additional stack:
 
-![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
+- **cert-manager**: Automates TLS certificate management from [Let's Encrypt](https://letsencrypt.org/)
+- **external-dns**: Handles DNS record management in Route53 for domain ownership confirmation
+
+:::info Single namespace deployment
+This installation guide uses a single Kubernetes namespace for simplicity, as the deployment is done via a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components) which recommends separating Orchestration Cluster and Web Modeler/Console into different namespaces for production environments to improve isolation and enable independent scaling.
+:::
 
 ## Export environment variables
 
