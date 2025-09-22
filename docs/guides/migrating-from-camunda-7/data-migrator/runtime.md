@@ -204,6 +204,38 @@ This approach ensures that:
 - Externally started process instances continue their normal execution flow through the `noop` job worker.
 - Both types of instances can coexist in the same Camunda 8 environment.
 
+## Tenants
+
+- Camunda 7 process instances assigned to no tenant (`tenantId=null`) tenant are migrated to Camunda 8 with `<default>` tenant.
+- The default behavior is to migrate only process instances without assigned tenant ID.
+- When migrating process instances, the migrator can be configured to handle specific tenants
+  throughout the migration process. Defining tenant IDs ensures that only process instances
+  associated with those tenants are migrated.
+
+### How Multi-Tenancy Works
+
+1. **Validation**: Pre-migration validation ensures target tenant deployments exist in Camunda 8
+2. **Tenant Preservation**: Process instances maintain their original tenant association during
+   migration
+3. **Job Activation**: The migrator fetches jobs only for the configured tenants and the default
+   tenant when activating jobs
+
+### Example
+
+Use the `camunda.migrator.tenantIds` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
+to specify which tenants should be included in the
+migration process. This property accepts a comma-separated list of tenant identifiers and doesn't
+need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
+
+```yaml
+camunda:
+  migrator:
+    tenantIds: tenant-1, tenant-2, tenant-3
+```
+
+With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`
+and `<default>` will be migrated. Instances associated with other tenants will be skipped.
+
 ## Dropping the migration mapping schema
 
 The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instances.
