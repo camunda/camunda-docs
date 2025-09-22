@@ -19,7 +19,7 @@ will not be deleted (that is up to the administrator.) A [retention](./camunda-e
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use elasticsearch or opensearch. Refer the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` properties defined in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+Camunda Exporter is enabled by default if secondary storage is configured to use elasticsearch or opensearch. Refer the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` properties defined in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
 In addition, the following properties can be configured via the exporter `args`.
 
@@ -45,7 +45,7 @@ zeebe:
 | index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
 | bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
 | history      | Refer to [History](./camunda-exporter.md?configuration=history#options) for the retention configuration options.  |         |
-| createSchema | If `true` missing indexes will be created automatically.                                                          | true    |
+| createSchema | If `true`, the schema readiness is checked before start exporting                                                 | true    |
 
 ### Options
 
