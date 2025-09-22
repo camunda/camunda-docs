@@ -576,11 +576,11 @@ module.exports = {
           items: [
             "components/tasklist/userguide/access-control",
             "components/tasklist/userguide/using-tasklist",
-            "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
+            "components/tasklist/api-versions",
             "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
           ],
@@ -1606,7 +1606,7 @@ module.exports = {
             },
             {
               Identity: [
-                "self-managed/components/orchestration-cluster/identity/overview",
+                "self-managed/components/orchestration-cluster/identity/initial-setup",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
