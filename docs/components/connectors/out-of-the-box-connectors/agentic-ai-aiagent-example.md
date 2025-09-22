@@ -22,7 +22,7 @@ The configuration depends on the specific [implementation type](agentic-ai-aiage
 <TabItem value='process'>
 As the **AI Agent Process** implementation creates implicitely creates a tools feedback loop, it is sufficient to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process.bpmn" />
+![AI Agent Process](../img/ai-agent-process.png)
 
 After adding the element, configure the connection to your model provider and adapt the system and user prompts as needed.
 
@@ -31,7 +31,7 @@ After adding the element, configure the connection to your model provider and ad
 <TabItem value='task'>
 First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
 
-![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
+![AI Agent Task with tool calling feedback loop](../img/ai-agent-task-feedback-loop.png)
 
 After adding the element, configure the connection to your model provider and adapt the system and user prompts as needed.
 
@@ -102,7 +102,7 @@ As a final step, the element must be configured to activate the ad-hoc sub-proce
 
 For example, the completed ad-hoc sub-process configuration would look as follows:
 
-![agenticai-ad-hoc-sub-process-multi-instance.png](../img/agenticai-ad-hoc-sub-process-multi-instance.png)
+![AI Agent ad-hoc sub-process multi-instance configuration](../img/ai-agent-ad-hoc-sub-process-multi-instance.png)
 
 #### Configure an input mapping for the tool call result variable
 
@@ -131,14 +131,14 @@ For example, your **User Prompt** field could contain the following FEEL express
 
 With the **AI Agent Process** implementation, the user feedback needs to be modeled to loop back to the AI Agent ad-hoc sub-process:
 
-<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process-user-feedback-loop.bpmn" />
+![AI Agent Process with user feedback loop](../img/ai-agent-process-user-feedback-loop.png)
 
 </TabItem>
 
 <TabItem value='task'>
 With the **AI Agent Task** implementation, the user feedback needs to be modeled to loop back to the AI Agent task:
 
-![agenticai-user-feedback-loop.png](../img/agenticai-user-feedback-loop.png)
+![AI Agent Task with user feedback loop](../img/ai-agent-task-user-feedback-loop.png)
 </TabItem>
 
 </AiAgentImplementationTabs>
@@ -156,7 +156,7 @@ When resolving the available tools within an ad-hoc sub-process, the AI Agent wi
 
 For example, in the following image the activities marked in green are the ones that will be considered as tools:
 
-![agenticai-tool-resolution.png](../img/agenticai-tool-resolution.png)
+![AI Agent tool resolution](../img/ai-agent-tool-resolution.png)
 
 You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
@@ -228,7 +228,7 @@ You can use the `fromAi` function in:
 
 For example, the following image shows an example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
 
-![agenticai-tool-resolution-fromAi.png](../img/agenticai-tool-resolution-fromAi.png)
+![AI Agent fromAi tool resolution](../img/ai-agent-tool-resolution-fromAi.png)
 
 #### `fromAi` examples
 
