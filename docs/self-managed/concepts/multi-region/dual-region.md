@@ -94,15 +94,6 @@ The visual representation shows both regions as operational. Any grayed-out appe
 
 Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers. Zeebe exports data to Elasticsearch instances in both regions. Operate and Tasklist in both regions import data but only the primary region serves users.
 
-### Component requirements
-
-| Component     | Mode                          | Requirement                             | Function                                                                                    |
-| ------------- | ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Zeebe         | Active-active                 | All brokers in both regions must run    | Leaders and followers distributed across regions. Continuous replication across brokers.    |
-| Elasticsearch | Active-active                 | Both clusters must run                  | Receives exports from Zeebe continuously. Zeebe exporters may fail if secondary ES is down. |
-| Operate       | Active-passive (user traffic) | Both instances must run and import data | Maintains up-to-date data; only primary serves users.                                       |
-| Tasklist      | Active-passive (user traffic) | Both instances must run and import data | Maintains up-to-date data; only primary serves users.                                       |
-
 ### User traffic
 
 The system operates with active-passive user traffic routing. You must designate one region as primary and ensure all user traffic is directed there. The secondary region remains fully operational but does not serve user requests.
@@ -128,44 +119,14 @@ The currently supported Camunda 8 Self-Managed components are:
 - Operate
 - Tasklist
 
-#### Zeebe
+#### Component requirements
 
-Zeebe operates in **active-active** mode with data replication between all brokers across regions. Both regions host leaders and followers for different partitions, requiring all brokers to be operational for proper functioning.
-
-Key points:
-
-- Leaders and followers distributed across both regions
-- Continuous data replication via Raft protocol
-- Both regions required for quorum maintenance
-- Can handle region failure without data loss when properly configured
-
-#### Elasticsearch
-
-Elasticsearch operates in **active-active** mode for data ingestion, with two separate, independent Elasticsearch clusters—one in each region. Zeebe directly exports data to both Elasticsearch clusters simultaneously, ensuring data replication without requiring inter-Elasticsearch communication.
-
-Important considerations:
-
-- Each region has its own independent Elasticsearch cluster
-- Zeebe exports identical data to both clusters continuously and directly
-- Both clusters must be operational to prevent export failures across the entire system
-- Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication
-- The clusters do not communicate with each other—replication happens at the Zeebe level
-
-#### Operate and Tasklist
-
-These components run in **active-passive** mode for user traffic but **must be operational in both regions** for data import and processing.
-
-Critical requirements:
-
-- Both instances must run continuously to import data from Elasticsearch
-- Only primary region serves user traffic
-- Both regions maintain synchronized data state
-- Data loss possible if secondary region stops importing
-
-Data specific to each region (not replicated through Zeebe):
-
-- **Operate**: Uncompleted batch operations
-- **Tasklist**: Task assignments
+| Component     | Mode                          | Requirement                             | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                                         |
+| ------------- | ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| Zeebe         | Active-active                 | All brokers in both regions must run    | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                                   |
+| Elasticsearch | Active-active                 | Both clusters must run                  | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                                              |
+| Operate       | Active-passive (user traffic) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations</li></ul>                                                                                                                                                                     | Data loss possible if secondary region stops importing (data may be lost after Zeebe retention period) |
+| Tasklist      | Active-passive (user traffic) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments</li></ul>                                                                                                                                                                                 | Data loss possible if secondary region stops importing (data may be lost after Zeebe retention period) |
 
 ## Requirements and limitations
 
