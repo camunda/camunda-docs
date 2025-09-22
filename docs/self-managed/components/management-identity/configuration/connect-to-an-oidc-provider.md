@@ -51,7 +51,7 @@ configuration](#component-specific-configuration) to ensure the components are c
      - **Optimize**
      - **Management Identity**
      - **Web Modeler API**
-   - Web applications requiring confidential access/a confidential client:
+   - Web applications requiring public access/a public client:
      - **Console**
      - **Web Modeler UI**
 4. Make a note of the following values for each application you create:
