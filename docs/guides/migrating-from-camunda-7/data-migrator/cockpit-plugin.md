@@ -6,25 +6,28 @@ description: "Web-based interface for viewing information about skipped entities
 ---
 
 :::warning Experimental feature
-The Cockpit plugin is an **experimental** feature and should be used with caution in production environments.
+* The Cockpit plugin is an **experimental** feature and we don't recommend using it in production environments.
+* You can read more about limitations in the [limitations](/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin.md#cockpit-plugin) section.
 :::
 
-The Cockpit plugin provides a web-based interface for viewing information about skipped entities during the migration process. It integrates with Camunda 7 Cockpit to give you visibility into which process instances, variables, or other entities were skipped during migration and the reasons why.
+The Cockpit plugin provides a web-based interface for viewing information about skipped and migrated runtime and history data. It integrates with Camunda 7 Cockpit to give you visibility into which runtime process instances or history data (like variables, flow nodes, etc.) were successfully migrated or skipped during migration and the reasons why.
 
 For more information on Camunda 7 plugins, see the [Camunda 7 documentation](https://docs.camunda.org/manual/latest/webapps/cockpit/extend/plugins/).
 
 ## Prerequisites
 
-To use the Cockpit plugin, run the migrator with the following setting:
+* Camunda 7 Webapps are deployed, running, and accessible.
+* The Cockpit plugin requires running the migrator with `save-skip-reason` enabled.
+  * The plugin doesn't show skip reasons without this setting because they are not stored.
+* To use the Cockpit plugin, run the migrator with the following setting:
+    ```yaml
+    camunda.migrator:
+      save-skip-reason: true
+    ```
 
-```yaml
-camunda.migrator:
-  save-skip-reason: true
-```
-
-:::info Required configuration
-The Cockpit plugin requires running the migrator with `save-skip-reason` enabled.  
-Without this setting, skip reasons will not be saved to the database, and the plugin will have no data to display.
+:::warning Heads-Up
+* Saving the skip reason could result in a large amount of data being stored additionally in your database, depending on the order of magnitude of the data to be migrated or potentially skipped.
+* We recommend testing your migration in a QA environment before running the Data Migrator against your production database.
 :::
 
 ## Installation
@@ -36,10 +39,11 @@ Without this setting, skip reasons will not be saved to the database, and the pl
    mvn clean install
    ```
 
-2. **Deploy the plugin** to your Camunda 7 installation by copying the generated JAR file into the Camunda 7 plugins directory.  
-   For example, in the Tomcat distribution, the path is `/camunda-bpm-ee-tomcat-<Camunda7Version>-ee/server/apache-tomcat-<TomcatVersion>/webapps/camunda/WEB-INF/lib/`.
+2. **Deploy the plugin** to your Camunda 7 installation by copying the generated JAR file into the Camunda 7 plugins directory. For example the paths are:
+   * For Tomcat: `./camunda-bpm-ee-tomcat-<camunda-7-version>-ee/server/apache-tomcat-<tomcat-version>/webapps/camunda/WEB-INF/lib/`.
+   * For Run: `./camunda-bpm-run-ee-<camunda-7-version>-ee/configuration/userlib/`.
 
-3. **Inspect skipped entities in Cockpit** once the plugin has been deployed.
+3. **Inspect skipped and migrated data in Cockpit** once the plugin has been deployed.
 
 ## Using the Cockpit plugin
 
@@ -47,7 +51,7 @@ After installation and configuration, the Cockpit plugin provides:
 
 - **Skipped entity overview**: View all entities that were skipped during migration.
 - **Detailed skip reasons**: Understand why specific entities were not migrated.
-- **Migration status tracking**: Monitor the overall progress and health of your migration.
+- **Migration status tracking**: See data that has been migrated successfully.
 
 ## Limitations
 

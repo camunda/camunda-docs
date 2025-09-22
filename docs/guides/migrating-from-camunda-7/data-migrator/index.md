@@ -64,4 +64,4 @@ You can track progress and releases in the repository: https://github.com/camund
 
 ## Cockpit Plugin
 
-The [Cockpit plugin](cockpit-plugin.md) provides a web-based interface to view information about skipped entities during the migration process (experimental).
+The [Cockpit plugin](cockpit-plugin.md) provides a web-based interface to view information about skipped and migrated data during the migration process (experimental).
