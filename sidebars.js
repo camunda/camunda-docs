@@ -1363,12 +1363,17 @@ module.exports = {
                 {
                   type: "category",
                   label: "Red Hat OpenShift",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift",
-                  },
                   items: [
-                    "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift-dual-region",
+                    {
+                      type: "doc",
+                      label: "Single Region",
+                      id: "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift",
+                    },
+                    {
+                      type: "doc",
+                      label: "Dual Region",
+                      id: "self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift-dual-region",
+                    },
                   ],
                 },
               ],
