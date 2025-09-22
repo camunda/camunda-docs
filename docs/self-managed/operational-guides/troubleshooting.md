@@ -117,11 +117,11 @@ AZURE_SDK_SHARED_THREADPOOL_USEVIRTUALTHREADS=false
 
 ## Enable Azure logging for troubleshooting
 
-When using Azure Blob Storage as a backup store, you can enable logging to 
+When using Azure Blob Storage as a backup store, you can enable logging to
 troubleshoot issues with the Azure SDK. To do this, go through the following steps:
 
-1. Add logging for azure SDK, and set it to debug through the zeebe broker 
-   loggers endpoint: 
+1. Add logging for azure SDK, and set it to debug through the zeebe broker
+   loggers endpoint:
 
 `curl 'http://localhost:9600/actuator/loggers/com.azure' -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel":"debug"}'`
 
@@ -293,3 +293,16 @@ Development and testing scenarios that are performance-sensitive may
 [disable authentication entirely](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development),
 or use
 [OIDC Authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-access-token-authentication-using-client-credentials).
+
+## Find available container image versions
+
+When working with custom registries or air-gapped environments, you may need to verify which image versions are available before deployment. Use [skopeo](https://github.com/containers/skopeo) to list available tags:
+
+```shell
+# For open source images (no authentication required)
+skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe | jq '.RepoTags'
+
+# For enterprise images (requires authentication)
+skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
+skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
+```

@@ -1,19 +1,19 @@
 ---
 id: troubleshoot-identity
-title: "Troubleshooting Identity"
-sidebar_label: "Troubleshoot Identity"
-description: "Learn about solutions to common issues in Identity, such as complications connecting to Keycloak."
+title: "Troubleshooting Management Identity"
+sidebar_label: "Troubleshooting"
+description: "Learn about solutions to common issues in Management Identity, such as complications connecting to Keycloak."
 ---
 
-Troubleshoot common issues with Identity in a Self-Managed deployment.
+Troubleshoot common issues with Management Identity in a Self-Managed deployment.
 
-## Identity pod crashloops/continually restarts
+## Management Identity pod crashloops/continually restarts
 
-If the Identity pod crash loops, or the pod continually restarts, it is likely that there is an issue with the connection to Keycloak.
+If the Management Identity pod crash loops, or the pod continually restarts, it is likely that there is an issue with the connection to Keycloak.
 
 ### Solution
 
-1. Find the name of the Identity pod by running:
+1. Find the name of the Management Identity pod by running:
 
    ```
    kubectl get pods
@@ -43,10 +43,10 @@ If the Identity pod crash loops, or the pod continually restarts, it is likely t
    2022-07-04 15:52:09.252  WARN 1 --- [main] i.c.i.i.k.config.KeycloakConfiguration   : Retrying...
    ```
 
-## Identity is unable to connect to Keycloak
+## Management Identity is unable to connect to Keycloak
 
-If you are seeing an error message like the one below in your Identity service logs, there is an issue with the connection
-Identity is trying to make and the Keycloak service:
+If you are seeing an error message like the one below in your Management Identity service logs, there is an issue with the connection
+Management Identity is trying to make and the Keycloak service:
 
 ```
 2022-07-04 15:52:04.250 ERROR 1 --- [main] i.c.i.i.k.config.KeycloakConfiguration   : Failure #1. Unable to connect to Keycloak.
@@ -55,7 +55,7 @@ Identity is trying to make and the Keycloak service:
 This can be caused by:
 
 - The Keycloak service has not started/is not ready.
-- Identity making requests from an external IP address.
+- Management Identity making requests from an external IP address.
 
 See details on resolving these issues below.
 
@@ -71,9 +71,9 @@ Keycloak is ready to accept connections when the following log lines are visible
 15:24:24,100 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ```
 
-When the Keycloak service is ready for connections, start (or restart) the Identity pod.
+When the Keycloak service is ready for connections, start (or restart) the Management Identity pod.
 
-### Solution 2: Identity making requests from an external IP address
+### Solution 2: Management Identity making requests from an external IP address
 
 By default, Keycloak requires TLS on requests that originate from what it considers to be an external source. The Keycloak
 documentation for [setting up SSL](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) maintains
@@ -86,9 +86,9 @@ these options:
    ranges that Keycloak expects.
 2. If configuring the IP ranges is not an option, it is possible to disable the SSL requirement in Keycloak itself by completing the following steps:
    1. In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
-   2. Restart the Identity service.
+   2. Restart the Management Identity service.
    3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
-   4. Restart the Identity service again. Identity should now start successfully
+   4. Restart the Management Identity service again. Management Identity should now start successfully
 
 :::danger warning
 We would only recommend that requirements for SSL are disabled in a development environment.
