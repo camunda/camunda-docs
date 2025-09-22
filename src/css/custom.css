@@ -638,7 +638,7 @@ h3 .badge:nth-of-type(1) {
 }
 
 .release + h3 {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
 
 .badge--platform {
