@@ -14,11 +14,11 @@ We recommend using v2 for all new projects and migrating existing applications f
 
 ## Tasklist based on v2 API
 
-Tasklist v2 API integrates with the Orchestration Cluster API, providing a more robust and performant experience.
+Tasklist v2 uses the Orchestration Cluster API, providing a more robust and performant experience.
 
 Key benefits of using v2 include:
 
-- **Improved performance:** The v2 API is optimized for faster performance and response times.
+- **Improved performance:** The Orchestration Cluster API is optimized for faster performance and response times.
 - **Recommended user task implementation:** It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job
   worker-based user tasks](components/modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
 - **Unified API:** It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md).

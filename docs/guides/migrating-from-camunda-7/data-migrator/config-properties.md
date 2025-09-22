@@ -25,18 +25,47 @@ Read more about Camunda Client [configuration options](/apis-tools/camunda-sprin
 
 Prefix: `camunda.migrator`
 
-| Property                       | Type      | Description                                                                                                                                                        |
-| :----------------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.page-size`                   | `number`  | Number of records to process in each page. Default: `100`                                                                                                          |
-| `.job-type`                    | `string`  | Job type for actual job activation. Default: `migrator`.                                                                                                           |
-| `.validation-job-type`         | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely. |
-| `.auto-ddl`                    | `boolean` | Automatically create/update migrator database schema. Default: `false`                                                                                             |
-| `.table-prefix`                | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
-| `.data-source`                 | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
-| `.database-vendor`             | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
-| `.interceptors`                | `array`   | List of custom variable interceptors to apply during migration. Each interceptor must implement the `VariableInterceptor` interface.                               |
-| `.interceptors.[0].class-name` | `string`  | Defines the variable interceptor class.                                                                                                                            |
-| `.interceptors.[0].properties` | `map`     | Defines the variable interceptor properties as `key:value` pairs.                                                                                                  |
+| Property               | Type      | Description                                                                                                                                                        |
+| :--------------------- | :-------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.page-size`           | `number`  | Number of records to process in each page. Default: `100`                                                                                                          |
+| `.job-type`            | `string`  | Job type for actual job activation. Default: `migrator`.                                                                                                           |
+| `.validation-job-type` | `string`  | Job type for validation purposes. Optional: falls back to `job-type` if not defined. Set to `DISABLED` to disable job type execution listener validation entirely. |
+| `.auto-ddl`            | `boolean` | Automatically create/update migrator database schema. Default: `false`                                                                                             |
+| `.table-prefix`        | `string`  | Optional prefix for migrator database tables. Default: _(empty)_                                                                                                   |
+| `.data-source`         | `string`  | Choose if the migrator schema is created in the `C7` or `C8` data source. Default: `C7`                                                                            |
+| `.tenantIds`           | `string`  | Comma-separated list of tenant ids for which process instances should be migrated. Example: `tenant1, tenant2, tenant3`. Default: _(empty)_                        |
+| `.database-vendor`     | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
+| `.interceptors`        | `array`   | List of variable interceptors (built-in and custom) to configure during migration.                                                                                 |
+
+## `camunda.migrator.interceptors.[n]`
+
+Prefix: `camunda.migrator.interceptors.[n]`
+
+| Property     | Type      | Description                                                                                                                                   |
+| :----------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| `class-name` | `string`  | **Required.** Fully qualified class name of the interceptor (built-in or custom).                                                             |
+| `enabled`    | `boolean` | Whether the interceptor is enabled. Default: `true` for all interceptors.                                                                     |
+| `properties` | `map`     | Custom properties (key:value pairs) to configure the interceptor. Properties call setter methods on the interceptor class and pass the value. |
+
+### Built-in interceptors
+
+The following built-in interceptors are available and can be disabled:
+
+**Validators (reject unsupported types):**
+
+- `io.camunda.migrator.impl.interceptor.ByteArrayVariableValidator`
+- `io.camunda.migrator.impl.interceptor.FileVariableValidator`
+- `io.camunda.migrator.impl.interceptor.ObjectJavaVariableValidator`
+
+**Transformers (convert supported types):**
+
+- `io.camunda.migrator.impl.interceptor.PrimitiveVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.NullVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.DateVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.ObjectJsonVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.ObjectXmlVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.SpinJsonVariableTransformer`
+- `io.camunda.migrator.impl.interceptor.SpinXmlVariableTransformer`
 
 ## `camunda.migrator.c7.data-source`
 
