@@ -9,28 +9,26 @@ import TabItem from "@theme/TabItem";
 
 This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
 
-# Authentication methods for the Orchestration Cluster REST API
-
 The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration:
 
 - **No Authentication**
 - **Basic Authentication**
-- **OIDC Access Token Authentication**
+- **OIDC-based Authentication**
 
 ## When to use each method
 
 - **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments with C8 Run when authentication is enabled.
-- **OIDC Access Token Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
+- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
+- **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | Supports No Auth        | Supports Basic Auth | Supports OIDC Access Token |
-| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | -------------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
-| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
-| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
-| SaaS                                                                                   | OIDC Access Token      | ❌                      | ❌                  | ✅ (required)              |
+| Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
+| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
+| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 # Authenticate API calls
 
@@ -60,14 +58,14 @@ curl --user username:password \
 ```
 
 :::note
-Basic Authentication only supports a very small number of API requests per second, and may not be suitable for production use.
+Basic Authentication checks the password with every request and is a costly operation. It therefore only supports a low number of API requests per second, and may not be fit your production requirements.
 Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-## OIDC Access Token Authentication using Client Credentials
+## OIDC-based Authentication using Client Credentials
 
-OIDC Access Token Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
+OIDC-based Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={[
 {label: 'SaaS', value: 'saas' },
@@ -101,20 +99,30 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [Context
 
 <TabItem value="self-managed">
 
-1. **Register a client in your Identity Provider (IdP).**  
-   An IdP manages digital identities and authentication, such as Keycloak, Azure Entra (formerly Azure AD), Okta, or similar systems.
-2. **Use the credentials (client ID and secret) to request an Access Token.**  
-   The example below shows Keycloak configuration (the endpoint URL will vary based on your IdP):
+1. **Configure Orchestration Cluster for OIDC-based Authentication.**
+   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+   - Note the **client ID** or configured values of **audiences** of the Orchestration Cluster for audience validation (usually the same as the client ID you used when configuring the Orchestration Cluster) as **CLIENT_ID_OC**.
+2. **Register a client in your Identity Provider (IdP).**
+   - Create a new application/client in your IdP.
+   - Configure the necessary scopes (for example, `openid`).
+   - Create a new client secret.
+   - Note the **client ID**, **client secret**, and **authorization URI** as these are required to obtain an access token.
+3. **Use the credentials (client ID and secret) to request an Access Token.**  
+   The example below shows Keycloak configuration (the authorization URI will vary based on your Identity Provider):
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode "client_id=${CLIENT_ID}" \
 --data-urlencode "client_secret=${CLIENT_SECRET}" \
+--data-urlencode "audience=${CLIENT_ID_OC}" \
+--data-urlencode "scope=${CLIENT_ID_OC}" \
 --data-urlencode 'grant_type=client_credentials'
 ```
 
-3. Use the access token from the response in your API requests:
+**Note for Microsoft Entra ID**: Instead of `scope=${CLIENT_ID_OC}`, use: `scope=${CLIENT_ID_OC}/.default`. The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+
+4. **Use the access token from the response in your API requests.**
 
 ```shell
 curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
@@ -123,13 +131,21 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 Replace the `${BASE_URL}` based on the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
 
+:::note Audience Validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::
+
+:::note Authorizations
+If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+:::
+
 </TabItem>
 
 </Tabs>
 
-## OIDC access token authentication using X.509 client certificates
+## OIDC-based Authentication using X.509 client certificates
 
-For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) enforces mutual TLS (mTLS).
+For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) is configured to use the [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523).
 
 **For Java applications**  
 The Java client supports automatic OIDC access token retrieval using X.509 client certificates. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/getting-started.md#oidc-access-token-authentication-with-x509-client-certificate) for complete configuration details.
@@ -141,7 +157,12 @@ Refer to your identity provider's documentation for obtaining tokens using X.509
 
 When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
 
-**Learn more:**
+## Troubleshooting
+
+- Check the logs for authentication errors.
+- Verify your access token includes the correct audience if audience validation is configured.
+
+## Learn more
 
 - [Camunda Java client authentication and token management](./../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)
