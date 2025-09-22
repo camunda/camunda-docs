@@ -36,6 +36,7 @@ Prefix: `camunda.migrator`
 | `.tenantIds`           | `string`  | Comma-separated list of tenant ids for which process instances should be migrated. Example: `tenant1, tenant2, tenant3`. Default: _(empty)_                        |
 | `.database-vendor`     | `string`  | Database vendor for migrator schema. Options: `h2`, `postgresql`, `oracle`. Default: Automatically detected.                                                       |
 | `.interceptors`        | `array`   | List of variable interceptors (built-in and custom) to configure during migration.                                                                                 |
+| `.save-skip-reason`    | `boolean` | Whether to persist skip reasons for entities that could not be migrated. Required when using the Cockpit plugin. Default: `false`.                                 |
 
 ## `camunda.migrator.interceptors.[n]`
 
