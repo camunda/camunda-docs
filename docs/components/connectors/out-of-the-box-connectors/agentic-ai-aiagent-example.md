@@ -5,26 +5,60 @@ title: Example AI Agent connector integration
 description: AI agent connector implementing a feedback loop using for user interactions and toolcalls with an LLM.
 ---
 
+import AiAgentImplementationTabs from '../react-components/\_ai-agent-implementation-tabs';
+import TabItem from "@theme/TabItem";
+
 This worked example shows how you can integrate an AI Agent connector into a feedback loop model.
 
 ## About this worked example
 
 This worked example demonstrates how you can use the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
 
-## Example tools feedback loop {#tools-loop}
+The configuration depends on the specific [implementation type](agentic-ai-aiagent.md#implementations). Specific sections are marked accordingly.
 
+## Create an AI Agent element
+
+<AiAgentImplementationTabs>
+<TabItem value='process'>
+As the **AI Agent Process** implementation creates implicitely creates a tools feedback loop, it is sufficient to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process.bpmn" />
+
+After adding the element, configure the connection to your model provider and adapt the system and user prompts as needed.
+
+</TabItem>
+
+<TabItem value='task'>
 First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
 
 ![aiagent-tools-loop-empty.png](../img/agenticai-tools-loop-empty.png)
 
-### Add ad-hoc sub-process and loop
+After adding the element, configure the connection to your model provider and adapt the system and user prompts as needed.
 
-1. An ad-hoc sub-process is added and marked as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
+It is important to align the **Agent context** field and the result variable. The following defaults should be set to ensure re-entering the process will pick up the previous context value:
+
+- **Agent context**: `agent.context`
+- **Result variable**: `agent`
+
+</TabItem>
+</AiAgentImplementationTabs>
+
+## Example tools feedback loop {#tools-loop}
+
+<AiAgentImplementationTabs>
+
+<TabItem value='process'>
+As the **AI Agent Process** implementation creates implicitely creates a tools feedback loop, no further configuration is needed to connect the agent to its tools.
+</TabItem>
+
+<TabItem value='task'>
+### Configure ad-hoc sub-process and loop
+
+1. The ad-hoc sub-process is marked as [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
 
 1. A descriptive ID is configured for the ad-hoc sub-process. This can then be configured in the **Ad-hoc sub-process ID** field in the AI Agent connector [tools](agentic-ai-aiagent.md#tools) section.
 
 1. A loop is modeled into the sub-process and back to the AI Agent connector.
-
    - The `no` flow of the `Contains tool calls?` gateway is marked as the default flow.
 
    - The `yes` flow condition is configured to activate when the AI Agent response contains a list of tool calls. For example, if the suggested default values for the [result variable/expression](#result-variableexpression) are used, this condition could be configured as follows:
@@ -78,6 +112,9 @@ To prevent interference between tool calls, create an [input mapping](../../conc
 2. In the **Local variable name** field, enter `toolCallResult` (or use your custom variable name if you changed it earlier).
 3. Leave the **Variable assignment value** field blank.
 
+</TabItem>
+</AiAgentImplementationTabs>
+
 ## Example response interaction feedback loop {#response-loop}
 
 Similar to the tools feedback loop, another feedback loop acting on the agent response can be added by re-entering the AI Agent connector with new information. You must model your user prompt so that it adds the follow-up data instead of the initial request.
@@ -88,7 +125,23 @@ For example, your **User Prompt** field could contain the following FEEL express
 =if (is defined(followUpInput)) then followUpInput else initialUserInput
 ```
 
+<AiAgentImplementationTabs>
+
+<TabItem value='process'>
+
+With the **AI Agent Process** implementation, the user feedback needs to be modeled to loop back to the AI Agent ad-hoc sub-process:
+
+<div bpmn="components/agentic-orchestration/ai-agents/ai-agent-process-user-feedback-loop.bpmn" />
+
+</TabItem>
+
+<TabItem value='task'>
+With the **AI Agent Task** implementation, the user feedback needs to be modeled to loop back to the AI Agent task:
+
 ![agenticai-user-feedback-loop.png](../img/agenticai-user-feedback-loop.png)
+</TabItem>
+
+</AiAgentImplementationTabs>
 
 :::note
 How you model this type of feedback loop greatly depends on your specific use case.
@@ -101,18 +154,29 @@ How you model this type of feedback loop greatly depends on your specific use ca
 
 When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
 
-For example, in the following image the activities marked in red are the ones that will be considered as tools:
+For example, in the following image the activities marked in green are the ones that will be considered as tools:
 
 ![agenticai-tool-resolution.png](../img/agenticai-tool-resolution.png)
 
 You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
-To resolve available tools the AI Agent connector:
+To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly:
 
-- Reads the BPMN model and looks up the ad-hoc sub-process using the configured ID. If not found, the connector throws an error.
+<AiAgentImplementationTabs>
+<TabItem value='process'>
+When using the **AI Agent Process** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
+</TabItem>
+
+<TabItem value='task'>
+When using the **AI Agent Task** implementation, the connector reads the BPMN model directly to resolve the tools:
+
+- It reads the BPMN model and looks up the ad-hoc sub-process using the configured ID. If not found, the connector throws an error.
 - Iterates over all activities within the ad-hoc sub-process and checks that they are root nodes (no incoming flows) and not boundary events.
 - For each activity found, analyzes the input/output mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
 - Creates a tool definition for each activity found, and passes these tool definitions to the LLM as part of the prompt.
+
+</TabItem>
+</AiAgentImplementationTabs>
 
 :::note
 Refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and [OpenAI](https://platform.openai.com/docs/guides/function-calling) documentation for examples of how tool/function calling works in combination with an LLM.
@@ -214,12 +278,11 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 ### Tool Call Responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
-set its output to the variable configured as `content` when setting up
-the [multi-instance execution](#tools-loop). This variable is typically named `toolCallResult`
-and can be used from every tool call within the ad-hoc sub-process as the multi-instance execution takes care of
-isolating individual tool calls.
+set its output to a predefined variable name. For the **AI Agent Process** implementation, this variable is predefined as
+`toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](#tools-loop),
+but is also typically named `toolCallResult`.
 
-Depending on the used task, this can be achieved in multiple ways, as:
+Depending on the used task, setting the variable content can be achieved in multiple ways:
 
 - A [result variable](../use-connectors/index.md#result-variable) or
   a [result expression](../use-connectors/index.md#result-expression) containing a `toolCallResult` key
@@ -230,6 +293,10 @@ Depending on the used task, this can be achieved in multiple ways, as:
 Tool call results can be either primitive values (for example, a string) or complex ones, such as
 a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) that is serialized to a JSON
 string before passing it to the LLM.
+
+As most LLMs expect _some_ form of response to a tool call, the AI Agent will return a constant string indicating that the tool
+was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
+the tool.
 
 #### Document support
 
