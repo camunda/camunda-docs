@@ -31,7 +31,7 @@ See the [secondary storage documentation](/self-managed/components/orchestration
 ## Zeebe Elasticsearch or OpenSearch importer
 
 :::note
-Version 8.8: The importer is only required for brownfield deployments (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices, so the importer can be disabled for subsequent restarts/deployments.
+**Version 8.8:** The importer is required only for brownfield deployments (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
 :::
 
 For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
@@ -68,18 +68,18 @@ camunda.tasklist:
 
 ## Intra-cluster secure connection
 
-You can enable intra-cluster TLS secured connections between Tasklist and Zeebe by applying the following configuration properties.
+You can enable intra-cluster TLS-secured connections between Tasklist and Zeebe by applying the following configuration properties:
 
-| Name                                                | Description                                                                                                         | Example value                     |
-| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------- |
-| zeebe.gateway.cluster.initialContactPoints          | Zeebe Gateway initial contact points.                                                                               | [gateway-0:26502,gateway-1:26502] |
-| zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
-| zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
-| zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
-| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | tasklist                          |
-| zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | tasklist                          |
+| Name                                                  | Description                                                                                                  | Example value                       |
+| :---------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------- |
+| `zeebe.gateway.cluster.initialContactPoints`          | Zeebe Gateway initial contact points.                                                                        | `[gateway-0:26502,gateway-1:26502]` |
+| `zeebe.gateway.cluster.security.enabled`              | Enables secure connections via Transport Layer Security (TLS).                                               | `true`                              |
+| `zeebe.gateway.cluster.security.certificateChainPath` | Path to the certificate used by Zeebe. Required if the certificate isn't registered in the operating system. | `/path/to/cert.pem`                 |
+| `zeebe.gateway.cluster.security.privateKeyPath`       | Path to the certificate's private key used by Zeebe.                                                         | `/path/to/private.key`              |
+| `zeebe.gateway.cluster.advertisedHost`                | Advertised hostname in the cluster.                                                                          | `tasklist`                          |
+| `zeebe.gateway.cluster.memberId`                      | Member ID for the cluster.                                                                                   | `tasklist`                          |
 
-For extended configuration and guidelines, refer to [secure cluster communication](../zeebe/security/secure-cluster-communication.md) and [gateway configuration](../zeebe/configuration/gateway.md).
+For extended configuration and guidelines, refer to [Secure cluster communication](../zeebe/security/secure-cluster-communication.md) and [Gateway configuration](../zeebe/configuration/gateway.md).
 
 ## Monitoring and health probes
 
