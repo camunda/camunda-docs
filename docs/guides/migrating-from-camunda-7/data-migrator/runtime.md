@@ -206,7 +206,7 @@ This approach ensures that:
 
 ## Tenants
 
-- Camunda 7 process instances assigned to no tenant (`tenantId=null`) tenant are migrated to Camunda 8 with `<default>` tenant.
+- Camunda 7 process instances assigned to no tenant (`tenantId=null`) are migrated to Camunda 8 with `<default>` tenant.
 - The default behavior is to migrate only process instances without assigned tenant ID.
 - When migrating process instances, the migrator can be configured to handle specific tenants
   throughout the migration process. Defining tenant IDs ensures that only process instances
