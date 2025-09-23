@@ -1,10 +1,13 @@
 ---
 id: choosing-right-model-agentic
-title: Model selection for your agentic process
+title: Choosing the right LLM
+sidebar_label: Choosing the right LLM
 description: How to select the right LLM or foundation model for orchestrating agentic AI workflows.
 ---
 
-Choosing the right Large Language Model (LLM) for your agentic workflow is key to ensuring your AI agent reliably executes tasks in a Camunda process. The ideal model should handle tools effectively, follow instructions consistently, and complete actions successfully.
+Choose the right Large Language Model (LLM) to ensure your AI agent reliably executes tasks in a Camunda process.
+
+## About this guide
 
 This guide covers:
 
@@ -15,9 +18,11 @@ This guide covers:
 
 ## Measuring agent performance
 
+The ideal model should handle tools effectively, follow instructions consistently, and complete actions successfully.
+
 When evaluating models for your agentic process, focus on three core capabilities:
 
-- **Tool usage:** How accurately does the model choose and use the right tools? Poor tool usage can lead to failed tasks or wasted steps.
+- **Tool usage:** How accurately does the model choose and use the right tools? Poor tool usage leads to failed tasks or wasted steps.
 - **Action completion:** Does the agent fully achieve the goals of each task without manual intervention?
 - **Instruction adherence:** Does the model follow your prompts, policies, and constraints as expected?
 
@@ -34,7 +39,7 @@ One such benchmark is **LiveBench**, which avoids common pitfalls such as test d
 LiveBench evaluates LLMs across multiple skill areas. Each metric represents a core capability:
 
 | Metric                             | What it measures                                        | When it matters                                  |
-| ---------------------------------- | ------------------------------------------------------- | ------------------------------------------------ |
+| :--------------------------------- | :------------------------------------------------------ | :----------------------------------------------- |
 | **Reasoning**                      | Logical thinking and stepwise problem-solving           | Strategic planning, multi-step workflows         |
 | **Math**                           | Numerical accuracy and quantitative reasoning           | Finance, analytics, reporting                    |
 | **Coding**                         | Code generation and debugging                           | Dev tools, automation scripts                    |
@@ -49,10 +54,12 @@ Different models excel in different areas. For instance, a model might rank high
 
 Use this decision framework to narrow down your options before comparing benchmark scores:
 
-- **Hosting:** Cloud-only vs. on-premises deployment. For compliance-heavy or air-gapped environments, self-hostable open-source models are preferred.
-- **Data sensitivity:** Workflows handling PII or confidential data may require private deployments or self-hosting to meet data control requirements.
-- **Cost vs. speed:** Larger models offer higher accuracy but often with higher latency and cost. Balance performance against SLAs and budgets.
-- **Accuracy vs. openness:** Proprietary models often lead in benchmark accuracy. Open-source models provide flexibility, fine-tuning, and offline use cases.
+| Consideration             | Description                                                                                                                             |
+| :------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| **Hosting**               | Cloud-only vs. on-premises deployment. For compliance-heavy or air-gapped environments, self-hostable open-source models are preferred. |
+| **Data sensitivity**      | Workflows handling PII or confidential data may require private deployments or self-hosting to meet data control requirements.          |
+| **Cost vs. speed**        | Larger models offer higher accuracy but often with higher latency and cost. Balance performance against SLAs and budgets.               |
+| **Accuracy vs. openness** | Proprietary models often lead in benchmark accuracy. Open-source models provide flexibility, fine-tuning, and offline use cases.        |
 
 Once you filter by these constraints, benchmark scores like LiveBench’s help compare accuracy and capability across remaining candidates.
 
@@ -65,13 +72,15 @@ import LiveBenchModelFilter from '../react-components/livebench-model-filter'
 <LiveBenchModelFilter/>
 <br/>
 
-Benchmarks powered by **LiveBench** — _“LiveBench: A Challenging, Contamination-Free LLM Benchmark”_ (White et al., ICLR 2025). Used under a Creative Commons license.
+:::caution livebench tool
 
-:::note  
-[LiveBench](https://livebench.ai/#/) rankings update continuously. The link always shows the most recent evaluation results.  
+- Benchmarks are powered by **LiveBench** — _“LiveBench: A Challenging, Contamination-Free LLM Benchmark”_ (White et al., ICLR 2025). Used under a Creative Commons license.
+- [LiveBench](https://livebench.ai/#/) rankings update continuously. The link always shows the most recent evaluation results.
+- This tool is provided for illustration purposes only to help you choose the right LLM for your agentic processes.
+
 :::
 
-Example:
+### Example
 
 - **On-premises + cost-sensitive:** Likely shows open-source models ranked by accuracy.
 - **High accuracy + less cost concern:** Surfaces top proprietary models.
@@ -84,7 +93,7 @@ Model choice should align with:
 2. **LiveBench scores** for skills relevant to your workflow
 3. **Practical constraints** like hosting, privacy, cost, and accuracy needs
 
-With a clear framework and benchmarked data, you can confidently select the LLM or foundation model to power your Camunda agent.
+A clear framework and benchmarked data helps you choose an LLM or foundation model to power your Camunda agent.
 
 ## Sources
 
