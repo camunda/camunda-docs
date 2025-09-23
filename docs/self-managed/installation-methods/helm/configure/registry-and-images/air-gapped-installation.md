@@ -8,6 +8,14 @@ description: "Camunda 8 Self-Managed installation in an air-gapped environment"
 The [Camunda Helm chart](/self-managed/installation-methods/helm/install.md) may assist in an air-gapped environment. By default, the Docker images are fetched via Docker Hub.
 With the dependencies in third-party Docker images and Helm charts, additional steps are required to make all charts available as outlined in this resource.
 
+:::info Bitnami images in air-gapped environments
+
+For air-gapped deployments, you'll need to mirror Bitnami infrastructure images if you choose to use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication). Note that these components are only required if you're not using external managed services or separately deployed infrastructure.
+
+For comprehensive information about Bitnami image types and security considerations, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+
+:::
+
 To find out the necessary Docker images for your Helm release, note that the required images depend on the values you specify for your deployment. You can get an overview of all required images by running the following command:
 
 ```shell
@@ -20,16 +28,33 @@ helm template camunda/camunda-platform -f values.yaml | grep 'image:'
 
 The following images must be available in your air-gapped environment:
 
+**Camunda images:**
+
 - [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
+
+**Infrastructure images (choose one option):**
+
+_Option A: Open-source Bitnami images (default)_
+
 - [bitnami/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
 - [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
 - [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
+
+_Option B: Enterprise Bitnami Premium images (recommended for production)_
+
+- `registry.camunda.cloud/bitnamipremium/postgresql` (requires enterprise credentials)
+- `registry.camunda.cloud/bitnamipremium/keycloak` (requires enterprise credentials)
+- `registry.camunda.cloud/bitnamipremium/os-shell` (requires enterprise credentials)
+- `registry.camunda.cloud/bitnamipremium/elasticsearch` (requires enterprise credentials)
+
+**Optional components:**
+
 - [Web Modeler images](/self-managed/installation-methods/docker/docker.md#component-images):
   - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
   - [camunda/web-modeler-webapp](https://hub.docker.com/r/camunda/web-modeler-webapp)
@@ -52,6 +77,34 @@ docker pull registry.camunda.cloud/camunda/zeebe:latest
 docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest
 ```
+
+### Accessing enterprise images with Skopeo
+
+For enterprise customers using Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker to be installed locally:
+
+```shell
+# Copy Bitnami Premium PostgreSQL image
+skopeo copy --src-creds=<your-username>:<your-password> \
+  docker://registry.camunda.cloud/vendor-ee/postgresql:16.6.0-debian-12-r0 \
+  docker://your-private-registry.com/bitnami/postgresql:16.6.0-debian-12-r0
+
+# Copy Bitnami Premium Elasticsearch image
+skopeo copy --src-creds=<your-username>:<your-password> \
+  docker://registry.camunda.cloud/vendor-ee/elasticsearch:8.11.4-debian-12-r0 \
+  docker://your-private-registry.com/bitnami/elasticsearch:8.11.4-debian-12-r0
+
+# Copy Bitnami Premium Keycloak image
+skopeo copy --src-creds=<your-username>:<your-password> \
+  docker://registry.camunda.cloud/vendor-ee/keycloak:26.0.7-debian-12-r0 \
+  docker://your-private-registry.com/bitnami/keycloak:26.0.7-debian-12-r0
+```
+
+**Configuration notes:**
+
+- Replace `<your-username>` and `<your-password>` with your Camunda Enterprise LDAP credentials
+- Replace `your-private-registry.com` with your actual private registry URL
+- Use the specific image tags that match your Helm chart version requirements
+- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md)
 
 ## Required Helm charts
 

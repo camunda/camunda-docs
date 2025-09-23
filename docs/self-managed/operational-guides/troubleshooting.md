@@ -6,11 +6,26 @@ description: "Troubleshooting considerations in Platform deployment."
 
 ## Helm chart security warning
 
-Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears because Bitnami charts emit such messages when the underlying image is replaced.
+Due to [recent changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart. This warning appears because Bitnami charts now emit security messages when the underlying image is replaced or modified.
 
-Camunda repackages the Bitnami distribution with [Camunda Keycloak](https://github.com/camunda/keycloak) for Identity. **This is not a security risk in itself.**
+### Why this warning appears
 
-To accommodate this, the Helm option `allowInsecureImages` is enabled by default in the Camunda Helm chart to support the use of Camunda Keycloak:
+Camunda repackages the standard Bitnami Keycloak distribution with [Camunda-specific Keycloak](https://github.com/camunda/keycloak) for Identity integration. This customization adds Camunda identity themes.
+
+The Bitnami Helm chart detects this image replacement and emits a security warning as a precautionary measure.
+
+### This is not a security risk
+
+**Important**: The security warning does not indicate an actual security vulnerability. Camunda's Keycloak image:
+
+- Is based on the official Bitnami Keycloak image
+- Includes only Camunda-specific configuration layers
+- Undergoes the same security review process as other Camunda components
+- Receives regular updates aligned with upstream Bitnami releases
+
+### Configuration to suppress warnings
+
+To accommodate this image replacement, the Helm option `allowInsecureImages` is enabled by default in the Camunda Helm chart for Keycloak:
 
 ```yaml
 identityKeycloak:
@@ -19,7 +34,7 @@ identityKeycloak:
       allowInsecureImages: true
 ```
 
-If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts. For example:
+If you're using your own Docker registry to host application images, you should also enable this option for any Bitnami-based third-party dependencies, such as PostgreSQL or Elasticsearch sub-charts:
 
 ```yaml
 identityKeycloak:
