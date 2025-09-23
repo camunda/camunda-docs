@@ -294,7 +294,8 @@ void shouldThrowBpmnErrorFromJob() {
 You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and
 completes it. If no user task exists, the command fails.
 
-You can identify the user task by its BPMN element ID or using a [UserTaskSelector](assertions.md#user-task-assertions).
+You can identify the user task by its BPMN element ID or using
+a [UserTaskSelector](assertions.md#with-user-task-selector).
 
 When to use it:
 
