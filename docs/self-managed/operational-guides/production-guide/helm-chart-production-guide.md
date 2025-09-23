@@ -19,11 +19,11 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
   - **Amazon Aurora PostgreSQL**: For persistent data storage required for the Web Modeler component. For step-by-step instructions, see the [Aurora PostgreSQL module setup](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup) guide.
-  - **Amazon OpenSearch**: The secondary datastore for Zeebe, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
+  - **Amazon OpenSearch**: The secondary datastore for the Orchestration Cluster, the Camunda 8 process orchestration engine. For step-by-step instructions, see the [OpenSearch](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain) guide.
   - **AWS Simple Active Directory**: For simple OIDC authentication. See the [AWS Simple Active Directory](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html) documentation for more information.
 - **Ingress NGINX**: Ensure the [ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
-- **Amazon S3** - An additional bucket to store backup files of the Zeebe brokers.
+- **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
 
 Ensure all prerequisites are in place to avoid issues during installation or when upgrading in a production environment.
@@ -51,7 +51,7 @@ kubectl create namespace orchestration
 
 - **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
-- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/components/orchestration-cluster/zeebe/overview.md), the Camunda web applications ([Operate](/self-managed/components/orchestration-cluster/operate/overview.md), [Tasklist](/self-managed/components/orchestration-cluster/tasklist/overview.md), and [Optimize](/self-managed/components/optimize/overview.md)), along with [Connectors](/self-managed/components/connectors/overview.md).
+- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), the Camunda web applications ([Operate](/self-managed/components/orchestration-cluster/operate/overview.md), [Tasklist](/self-managed/components/orchestration-cluster/tasklist/overview.md), and [Optimize](/self-managed/components/optimize/overview.md)), along with [Connectors](/self-managed/components/connectors/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -99,10 +99,10 @@ global:
       secretName: camunda-platform
 ```
 
-Optionally, you can configure Ingress for the Zeebe [gRPC API](/apis-tools/zeebe-api/grpc.md):
+Optionally, you can configure Ingress for the Orchestration Cluster [gRPC API](/apis-tools/zeebe-api/grpc.md):
 
 ```yaml
-zeebe:
+orchestration:
   ingress:
     grpc:
       enabled: true
@@ -260,7 +260,7 @@ For more information on connecting to external databases, the following guides a
   - Using Amazon OpenSearch service [through IRSA](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
-## Camunda Zeebe configuration
+## Orchestration Cluster configuration
 
 :::note
 At this point, you should be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL.
@@ -272,7 +272,7 @@ The next steps focus on the Camunda application-specific configurations suitable
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The following example configures an ILM policy for Zeebe, and can be added to your `orchestration-values.yaml`:
+The following example configures an ILM policy for the Orchestration Cluster, and can be added to your `orchestration-values.yaml`:
 
 ```yaml
 orchestration:
@@ -296,7 +296,7 @@ After following the above steps, you should already have a solid base for runnin
 
 The following resources and configuration options are important to keep in mind regarding scaling:
 
-- To scale Zeebe, the following values can be modified:
+- To scale the Orchestration Cluster, the following values can be modified:
 
   ```yaml
   orchestration:
@@ -306,14 +306,14 @@ The following resources and configuration options are important to keep in mind 
   ```
 
   - `orchestration.clusterSize`: to the amount of brokers to configure
-  - `orchestration.partitionCount`: how many [Zeebe partitions](/components/zeebe/technical-concepts/partitions.md) are configured for each cluster
+  - `orchestration.partitionCount`: how many [Orchestration Cluster partitions](/components/zeebe/technical-concepts/partitions.md) are configured for each cluster
   - `orchestration.replicationFactor`: the [number of replicas](/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to
 
   :::note
   `orchestration.partitionCount` does not yet support dynamic scaling. You will not be able to modify this property. It is better to over-provision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
   :::
 
-- Ensure the resources (CPU and memory) are appropriate for your workload size. For example, the resource limits can be changed for Zeebe by modifying the following values:
+- Ensure the resources (CPU and memory) are appropriate for your workload size. For example, the resource limits can be changed for the Orchestration Cluster by modifying the following values:
 
   ```yaml
   orchestration:
@@ -354,7 +354,7 @@ The following resources and configuration options are important to keep in mind 
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
 
-- It is possible to set a `podDisruptionBudget`, as in the following example for the Zeebe:
+- It is possible to set a `podDisruptionBudget`, as in the following example for the Orchestration Cluster:
 
   ```yaml
   orchestration:
@@ -386,7 +386,7 @@ The following resources and configuration options are important to keep in mind 
 
 - When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/components/components-upgrade/introduction.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
 
-  The following is an example configuration for Zeebe to create persistent storage:
+  The following is an example configuration for the Orchestration Cluster to create persistent storage:
 
   ```yaml
   orchestration:
@@ -439,7 +439,7 @@ The following resources and configuration options are important to keep in mind 
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).
-- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. The following example show the default configuration for Zeebe:
+- It is possible to modify either the `containerSecurityContext` or the `podSecurityContext`. The following example show the default configuration for the Orchestration Cluster:
 
   ```yaml
   podSecurityContext:
