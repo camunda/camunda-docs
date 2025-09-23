@@ -90,7 +90,7 @@ The migrator validates each process instance before migration and will skip inst
 | Missing flow node elements            | The Camunda 7 instance is at a flow node that does not exist in the deployed Camunda 8 model.                    |
 | Missing None Start Event              | The Camunda 8 process definition does not have a process-level None Start Event.                                 |
 | Missing `migrator` execution listener | The Camunda 8 process definition does not have an execution listener of type `migrator` on the None Start Event. |
-| Multi-tenancy                         | Runtime migration is not supported for tenant-associated instances.                                              |
+| Multi-tenancy                         | The tenant ids are not configured in the Data Migrator.                                                          |
 
 When a process instance is skipped:
 
@@ -133,7 +133,6 @@ The `validation-job-type` feature solves this by allowing you to use a FEEL expr
 The migrator supports two job type configurations with fallback behavior:
 
 - **`job-type`**: Used for actual job activation.
-
   - This is the primary job type used when activating jobs in Camunda 8.
   - It is required for the migrator to function correctly.
 
@@ -204,3 +203,25 @@ This approach ensures that:
 - Process instances started by the Data Migrator are handled by the `migrator` job worker.
 - Externally started process instances continue their normal execution flow through the `noop` job worker.
 - Both types of instances can coexist in the same Camunda 8 environment.
+
+## Dropping the migration mapping schema
+
+The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instances.
+
+If you wish to drop this table after migration is completed, you can use the `--drop-schema` flag when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped).
+
+```bash
+# Migrate and drop the migration mapping schema on shutdown if migration was succcesful
+./start.sh --runtime --drop-schema
+```
+
+If you wish to drop the table regardless of the migration status, you can use the `--force` flag in combination with `--drop-schema`. This will perform the drop in all cases.
+
+```bash
+# Migrate and force drop the migration mapping schema on shutdown
+./start.sh --runtime --drop-schema --force
+```
+
+:::warning
+Using `--force` can lead to data loss. Use with caution.
+:::

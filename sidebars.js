@@ -550,6 +550,7 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
+            "components/operate/userguide/access-control",
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -573,6 +574,7 @@ module.exports = {
             id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access-control",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -591,19 +593,14 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
+            "components/identity/access-control",
             "components/identity/user",
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/mapping-rules",
             "components/identity/tenant",
-            {
-              "Mapping rules": [
-                "components/identity/mapping-rules/manage-mapping-rules",
-                "components/identity/mapping-rules/mapping-rule-authorizations",
-                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
-              ],
-            },
           ],
         },
       ],
@@ -1269,6 +1266,7 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
                 "self-managed/installation-methods/helm/configure/secret-management",
+                "self-managed/installation-methods/helm/configure/authentication-and-authorization",
                 //license key
                 //image registry to include air gapped below and enterprise images
               ],
@@ -1404,6 +1402,12 @@ module.exports = {
     {
       Concepts: [
         {
+          Authentication: [
+            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
+            "self-managed/concepts/authentication/authentication-to-management-components",
+          ],
+        },
+        {
           type: "category",
           label: "Back up and restore",
           link: {
@@ -1511,6 +1515,7 @@ module.exports = {
             },
             {
               Zeebe: [
+                "self-managed/components/orchestration-cluster/zeebe/overview",
                 {
                   "Zeebe Gateway": [
                     "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/overview",
@@ -1600,15 +1605,10 @@ module.exports = {
               ],
             },
             {
-              type: "category",
-              label: "Identity",
-              link: {
-                type: "doc",
-                id: "self-managed/components/orchestration-cluster/identity/overview",
-              },
-              items: [
+              Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
             },
           ],
@@ -1667,10 +1667,10 @@ module.exports = {
           label: "Management Identity",
           link: {
             type: "doc",
-            id: "self-managed/components/management-identity/what-is-identity",
+            id: "self-managed/components/management-identity/overview",
           },
           items: [
-            "self-managed/components/management-identity/identity-first-steps",
+            "self-managed/components/management-identity/get-started",
             {
               type: "category",
               label: "Configuration",
@@ -1679,16 +1679,16 @@ module.exports = {
                 id: "self-managed/components/management-identity/configuration/identity-configuration-overview",
               },
               items: [
-                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
-                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
               ],
             },
             "self-managed/components/management-identity/authentication",
             {
               type: "category",
-              label: "Manage Identity",
+              label: "Management",
               items: [
                 {
                   type: "category",

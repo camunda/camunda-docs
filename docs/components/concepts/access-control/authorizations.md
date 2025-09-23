@@ -19,13 +19,14 @@ import TabItem from '@theme/TabItem';
 
 Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to web components and APIs. This system applies to:
 
-- **Zeebe**
-- **Operate**
-- **Tasklist**
-- **Orchestration Cluster APIs** (e.g., V2 API)
+- [Zeebe](../../zeebe/zeebe-overview.md)
+- [Identity](../../identity/identity-introduction.md)
+- [Operate](../../operate/operate-introduction.md)
+- [Tasklist](../../tasklist/introduction-to-tasklist.md)
+- [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-Authorizations apply only to the orchestration cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
+Authorizations apply only to the Orchestration Cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
 :::
 
 ## How authorization works
@@ -152,6 +153,10 @@ This includes CRUD operations to the following resources:
 - **Tenant**
 
 These permissions should be strictly limited to trusted system administrators who are responsible for managing user access control.
+
+### No validation of owner and resource IDs
+
+When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time. This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed). However, users need to keep this in mind when setting up new users, groups, roles, etc and verify that the ID of the new entity does not accidentally match an existing authorization.
 
 ## Default roles
 

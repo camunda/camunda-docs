@@ -17,8 +17,6 @@ The runtime migration has the following limitations.
   - You cannot migrate running instances when you have configured history level to `NONE` or a custom history level that doesn't create historic process instances.
   - The minimum supported history level is `ACTIVITY`.
 - You must add an execution listener of type `migrator` to all your start events.
-- Multi-tenancy is currently not supported. A runtime process instance can only be migrated if it is not associated with a tenant.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5315
 - Migration of users, groups, or tenants as well as authorizations is currently not supported.
   - You must ensure that the users, groups, and authorizations are already migrated to Camunda 8 before migrating process instances.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5175
@@ -143,9 +141,9 @@ Processes with active multi-instance elements can currently not be migrated. We 
 - Event subprocesses with interrupting start events can cause unexpected behavior during migration if triggered at the wrong moment. This includes timer, message, and signal start events.
 - What can go wrong:
   - A task that already ran in Camunda 7 might run again in Camunda 8.
-  - The process might end up in the wrong state after migration — for example, being one step behind what you see in C7.
+  - The process might end up in the wrong state after migration — for example, being one step behind what you see in Camunda 7.
 - When could it happen:
-  - This can occur when a process instance is already inside an event subprocess in C7, and the start event of that same subprocess is accidentally triggered again in Camunda 8 during migration.
+  - This can occur when a process instance is already inside an event subprocess in Camunda 7, and the start event of that same subprocess is accidentally triggered again in Camunda 8 during migration.
 - How to prevent it:
   - Don't correlate messages or send signals during migration.
   - Temporarily adjust timer start events in event subprocesses to ensure they do not trigger during migration (see the section on timer events for more details).
