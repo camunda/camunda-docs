@@ -5,7 +5,7 @@ title: Use external Elasticsearch with Helm
 description: "Learn how to use an external Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
 
-This guide steps through using an external Elasticsearch instance.
+This guide explains how to connect Camunda 8 to an external Elasticsearch instance.
 
 By default, the [Helm chart deployment](/self-managed/installation-methods/helm/install.md) creates a new Elasticsearch instance. You can also connect to an external Elasticsearch instance, either in the same Kubernetes cluster or outside it.
 
