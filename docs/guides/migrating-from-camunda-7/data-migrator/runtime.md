@@ -222,7 +222,7 @@ This approach ensures that:
 
 ### Example
 
-Use the `camunda.migrator.tenantIds` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
+Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
 to specify which tenants should be included in the
 migration process. This property accepts a comma-separated list of tenant identifiers and doesn't
 need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
@@ -230,7 +230,7 @@ need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
 ```yaml
 camunda:
   migrator:
-    tenantIds: tenant-1, tenant-2, tenant-3 # There's no need to specify `<default>` tenant id, as it included by default.
+    tenant-ids: tenant-1, tenant-2, tenant-3 # There's no need to specify `<default>` tenant id, as it included by default.
 ```
 
 With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`
