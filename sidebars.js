@@ -39,6 +39,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
             "guides/migrating-from-camunda-7/data-migrator/variables",
+            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
             {
               type: "category",
@@ -1268,6 +1269,7 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
                 "self-managed/installation-methods/helm/configure/secret-management",
+                "self-managed/installation-methods/helm/configure/authentication-and-authorization",
                 //license key
                 //image registry to include air gapped below and enterprise images
               ],
