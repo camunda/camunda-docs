@@ -141,14 +141,6 @@ Store and retrieve documents within Camunda workflows using Azure Blob Storage. 
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/azure-blob-storage/" class="link-arrow">Azure Blob Storage connector</a></p>
 
-### Google Cloud storage connector
-
-<!-- https://github.com/camunda/product-hub/issues/2712 -->
-
-Store and retrieve documents directly within Camunda workflows, streamlining document management without custom development.
-
-<p><a href="../../../../components/connectors/out-of-the-box-connectors/google-cloud-storage/" class="link-arrow">Google Cloud storage connector</a></p>
-
 ### CSV connector (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/2398 -->
@@ -156,6 +148,14 @@ Store and retrieve documents directly within Camunda workflows, streamlining doc
 Read, filter, transform, and write CSV data within processes. Reduces technical debt, accelerates development, and broadens integration capabilities with native support for this universal data format.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/csv/" class="link-arrow">CSV connector</a></p>
+
+### Google Cloud storage connector
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+Store and retrieve documents directly within Camunda workflows, streamlining document management without custom development.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/google-cloud-storage/" class="link-arrow">Google Cloud storage connector</a></p>
 
 ### Hubspot Connector
 
