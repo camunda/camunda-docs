@@ -174,7 +174,6 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    ``` -->
 
    The actual configuration properties can be reviewed:
-
    - [in the Operate configuration documentation](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#zeebe-broker-connection),
    - [in the Tasklist configuration documentation](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#zeebe-broker-connection),
    - [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
