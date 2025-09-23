@@ -39,6 +39,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
             "guides/migrating-from-camunda-7/data-migrator/variables",
+            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
             {
               type: "category",

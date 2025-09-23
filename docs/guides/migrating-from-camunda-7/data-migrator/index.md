@@ -61,3 +61,7 @@ As part of this step, you might also need to extract big payloads and binaries (
 ## Repository
 
 You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-data-migrator
+
+## Cockpit Plugin
+
+The [Cockpit plugin](cockpit-plugin.md) provides a web-based interface to view information about skipped and migrated data during the migration process (experimental).
