@@ -79,12 +79,7 @@ The reason to to enable internal keyclaok is if you do not have an external IdP 
 
 In the perspective of the Orchestration Cluster, the internal Keycloak component will be treated as an external identity provider. Therefore, some extra configuration is required in the Orchestration Cluster.
 
-Also, management identity will also need to be configured to properly connect to internal Keycloak.
-
-:::warning Enabling Ingress
-Since the Orchestration Cluster needs an external URL endpoint to connect to internal Keyclaok, it is required to enable ingress on the Camunda Helm chart. In this example, our ingress host will be called `camunda.com`.
-The following configurations will assume that you have Ingress enabled on the Camunda Helm chart.
-:::
+Also, management identity, Connectors, and the Orchestration Cluster will also need to be configured to properly connect to internal Keycloak.
 
 Make sure to create a secret that will have all of the relevant secret keys listed, so it can be used for the below configurations. For this example, a `camunda-credentials` Kubernetes secret is created with the following keys:
 
@@ -133,9 +128,7 @@ global:
   identity:
     auth:
       enabled: true
-      publicIssuerUrl: "https://camunda.com/auth/realms/camunda-platform"
-      identity:
-        redirectUrl: "https://camunda.com/identity"
+
 identity:
   enabled: true
   firstUser:
@@ -157,7 +150,6 @@ orchestration:
     authentication:
       method: oidc
       oidc:
-        redirectUrl: "https://camunda.com/orchestration"
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-orchestration-client-token"
@@ -188,23 +180,34 @@ global:
   identity:
     auth:
       enabled: true
-      publicIssuerUrl: "https://camunda.com/auth/realms/camunda-platform"
-      identity:
-        redirectUrl: "https://camunda.com/identity"
+
 identity:
   enabled: true
   firstUser:
     existingSecret: "camunda-credentials"
     existingSecretKey: "identity-firstuser-password"
+
+identityKeycloak:
+  enabled: true
+  postgresql:
+    auth:
+      existingSecret: "camunda-credentials"
+      secretKeys:
+        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
+        userPasswordKey: "identity-keycloak-postgresql-user-password"
+  auth:
+    existingSecret: "camunda-credentials"
+    passwordSecretKey: "identity-keycloak-admin-password"
+
 orchestration:
   security:
     authentication:
       method: oidc
       oidc:
-        redirectUrl: "https://camunda.com/orchestration"
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-orchestration-client-token"
+
 connectors:
   security:
     authentication:
@@ -212,6 +215,16 @@ connectors:
         secret:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-connectors-client-token"
+```
+
+### Connecting to The Cluster
+
+To connect to the cluster, you can run the following port forward commands:
+
+```bash
+kubectl port-forward svc/camunda-zeebe-gateway 8082:8080
+kubectl port-forward svc/camunda-keycloak 18080:80
+kubectl port-forward svc/camunda-identity 8084:80
 ```
 
 ## External Identity Provider
