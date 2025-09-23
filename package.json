@@ -47,7 +47,7 @@
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "clsx": "^2.1.1",
     "docusaurus-plugin-openapi-docs": "^4.4.0",
-    "docusaurus-theme-openapi-docs": "^4.4.0",
+    "docusaurus-theme-openapi-docs": "git+https://github.com/jwulf/docusaurus-openapi-docs.git#oneOf-format-display-package",
     "mixpanel-browser": "^2.64.0",
     "mustache": "^4.2.0",
     "pushfeedback-react": "^0.1.63",
