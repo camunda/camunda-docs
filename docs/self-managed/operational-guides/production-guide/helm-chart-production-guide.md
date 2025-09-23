@@ -206,7 +206,7 @@ global:
     auth:
       username: user
       secret:
-        existingSecret: elasticsearch-credentials
+        existingSecret: opensearch-credentials
         existingSecretKey: password
     url:
       protocol: https
@@ -684,7 +684,7 @@ global:
     auth:
       username: user
       secret:
-        existingSecret: elasticsearch-credentials
+        existingSecret: opensearch-credentials
         existingSecretKey: password
     url:
       protocol: https
