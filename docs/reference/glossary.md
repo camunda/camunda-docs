@@ -305,9 +305,7 @@ A [Camunda workflow](#workflow) uses this type of connector to retrieve data fro
 
 ### Process
 
-The general business construct — what you want to automate. In runtime discussions, _process_ may be used as shorthand for deploying a process definition and starting an instance.
-
-- [Processes](/components/concepts/processes.md)
+The general business construct — what you want to automate. In runtime discussions, [_process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
 ### Process definition
 
@@ -318,16 +316,16 @@ Identified by:
 - **process ID**: Identifier from the model, not guaranteed to be unique across deployments
 - **version**: Version number of the deployed process definition
 
-The engine uses process definitions to start process instances.
+The engine uses process definitions to start [process instances](/components/concepts/process-instance-creation.md).
 
 ### Process instance
 
-A single execution of a process definition. Can be active, completed, or terminated.  
+A [process instance](/components/concepts/process-instance-creation.md) is a single execution of a process definition. Can be active, completed, or terminated.  
 Identified uniquely by its **processInstanceKey**.
 
 Each instance carries metadata from its originating process definition (process ID, version, and processDefinitionKey).
 
-- [Processes](/components/concepts/processes.md)
+In runtime discussions, [_process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
 ### Process instance tag
 
@@ -345,7 +343,7 @@ A process instance variable represents the execution state (i.e data) of a proce
 
 ### Process model
 
-The BPMN representation of a process, created in a BPMN file (for example, in Modeler).
+The BPMN representation of a [process](/components/concepts/processes.md), created in a BPMN file (for example, in Modeler).
 
 Identified by its **process ID** (`bpmn:process id` attribute).
 
