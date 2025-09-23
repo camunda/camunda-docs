@@ -241,7 +241,7 @@ kubectl logs -f <POD_NAME>
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation.md).
 - **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
-- **Infrastructure deployment alternatives**: Starting with Camunda 8.8, Bitnami sub-charts are disabled by default. For production deployments, consider using [vendor-supported infrastructure deployment methods](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md) with official operators for PostgreSQL, Elasticsearch, and Keycloak.
+- **Infrastructure deployment alternatives**: For production deployments, consider using [vendor-supported infrastructure deployment methods](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md) with official operators for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Additional resources
 

@@ -53,23 +53,7 @@ Before proceeding with this guide, ensure you have:
 
 This deployment approach separates infrastructure management from application deployment:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Kubernetes Cluster                          │
-├─────────────────────────────────────────────────────────────────┤
-│ Infrastructure Layer (Vendor-supported)                        │
-│ ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐     │
-│ │   PostgreSQL    │ │  Elasticsearch  │ │    Keycloak     │     │
-│ │ (CloudNativePG) │ │     (ECK)       │ │ (Keycloak Ops)  │     │
-│ └─────────────────┘ └─────────────────┘ └─────────────────┘     │
-├─────────────────────────────────────────────────────────────────┤
-│ Application Layer (Helm-managed)                               │
-│ ┌─────────────────────────────────────────────────────────────┐ │
-│ │              Camunda Platform 8                            │ │
-│ │   (Zeebe, Operate, Tasklist, Optimize, etc.)              │ │
-│ └─────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+![Vendor-supported infrastructure architecture](assets/vendor-components-arch.jpg)
 
 ## Infrastructure components
 
