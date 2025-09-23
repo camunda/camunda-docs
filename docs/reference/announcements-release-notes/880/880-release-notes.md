@@ -229,7 +229,7 @@ The SQL connector now supports Oracle Database connections.
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-<p><a href="../../../../components/console/manage-clusters/manage-connectors" class="link-arrow">Manage your connectors</a></p>
+<p><a href="../../../../components/console/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
 
 ### Docker distribution
 
@@ -255,7 +255,7 @@ Usage metrics now support per-tenant reporting and align with Camunda’s update
 
 The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, as well as other options that were previously only available as flags.
 
-<p><a href="../../../../components/modeler/desktop-modeler/settings/settings" class="link-arrow">Desktop Modeler settings</a></p>
+<p><a href="../../../../components/modeler/desktop-modeler/settings/" class="link-arrow">Desktop Modeler settings</a></p>
 
 ## Helm chart deployment
 
