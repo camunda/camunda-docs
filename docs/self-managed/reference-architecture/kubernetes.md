@@ -44,7 +44,7 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Identity) with tightly integrated components (Optimize, Connectors)
-- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, Management Identity) for creating and monitoring processes across multiple clusters
+- **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, as well as monitoring the health of Orchestration Clusters
 
 Learn how these components communicate and interact with each other.
 :::
@@ -151,7 +151,7 @@ This namespace also includes **Keycloak** as an example OIDC Identity Provider (
 
 :::warning Identity separation
 
-Web Modeler and Console use a separate Management Identity deployment, distinct from the embedded Identity in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Identity.
+Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity), which is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients, OIDC must be used.
 :::
 
 The **Orchestration Cluster** can be configured to authenticate via **OIDC** by connecting to the **Management Identity** service deployed in this namespace.

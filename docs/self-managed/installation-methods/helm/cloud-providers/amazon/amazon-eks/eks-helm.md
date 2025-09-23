@@ -49,6 +49,7 @@ To demonstrate how to deploy with a custom domain, we also present the following
 
 - **cert-manager**: Automates TLS certificate management from [Let's Encrypt](https://letsencrypt.org/)
 - **external-dns**: Handles DNS record management in Route53 for domain ownership confirmation
+- **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
 :::info Single namespace deployment
 This installation guide uses a single Kubernetes namespace for simplicity, as the deployment is done via a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components) which recommends separating Orchestration Cluster and Web Modeler/Console into different namespaces for production environments to improve isolation and enable independent scaling.

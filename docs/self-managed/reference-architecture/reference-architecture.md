@@ -43,15 +43,15 @@ The Orchestration Cluster is the core of Camunda.
 
 The following components are bundled into a single artifact:
 
-- [Zeebe](/components/zeebe/zeebe-overview.md): The process automation engine powering Camunda 8.
-- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting workflows.
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for managing and completing human tasks.
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): Service for authentication and authorization.
+- [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
+- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
 
 Tightly integrated with the Orchestration Cluster:
 
-- [Optimize](/components/optimize/what-is-optimize.md): Analytics tool for workflow reporting and insights.
-- [Connectors](/components/connectors/introduction.md): Pre-built integrations for external systems.
+- [Optimize](/components/optimize/what-is-optimize.md): Business intelligence tool for analyzing bottlenecks and examining improvements in automated processes.
+- [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
