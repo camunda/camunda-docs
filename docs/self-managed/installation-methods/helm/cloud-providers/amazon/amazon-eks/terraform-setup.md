@@ -1004,7 +1004,6 @@ Export `REMOTE_HOST`, `REMOTE_PORT`, and `LOCAL_PORT` with the component-specifi
    [socat](http://www.dest-unreach.org/socat/) (_SOcket CAT_) is a command-line tool that relays data between two network endpoints.
 
    In this command:
-
    - `tcp-listen:$REMOTE_PORT,fork,reuseaddr` listens on the specified port in the pod and can handle multiple connections.
    - `tcp-connect:$REMOTE_HOST:$REMOTE_PORT` forwards all incoming traffic to the internal component endpoint.
 
