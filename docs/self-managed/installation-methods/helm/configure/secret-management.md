@@ -38,6 +38,10 @@ For Camunda 8.7 and earlier versions, the legacy pattern uses direct `existingSe
 
 Some components use Bitnami subcharts for database services (PostgreSQL), which follow their own authentication patterns that differ from the main Camunda secret structure. These use the standard Bitnami PostgreSQL Helm chart pattern with `existingSecret` and `secretKeys` containing `adminPasswordKey` and `userPasswordKey`.
 
+:::tip Alternative deployment approach
+Starting with Camunda 8.8, Bitnami sub-charts are disabled by default. For production deployments, consider using [vendor-supported infrastructure deployment methods](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md) with official operators, which provide their own secret management patterns and eliminate the need for Bitnami subchart configurations.
+:::
+
 The following Bitnami subchart configurations are available:
 
 - **`identityPostgresql.auth`** - PostgreSQL database for Identity service

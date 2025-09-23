@@ -1223,6 +1223,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/installation-methods/helm/configure/application-configs",
+                "self-managed/installation-methods/helm/configure/vendor-supported-infrastructure",
                 "self-managed/installation-methods/helm/configure/running-custom-connectors",
                 "self-managed/installation-methods/helm/configure/add-extra-manifests",
                 "self-managed/installation-methods/helm/configure/license-key",
