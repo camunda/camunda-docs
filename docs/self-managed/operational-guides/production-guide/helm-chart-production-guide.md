@@ -49,9 +49,9 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview/), [Console](/self-managed/components/console/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview/) components.
+- **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
-- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/components/orchestration-cluster/zeebe/overview.md), the Camunda web applications ([Operate](/self-managed/components/orchestration-cluster/operate/overview/), [Tasklist](/self-managed/components/orchestration-cluster/tasklist/overview/), and [Optimize](/self-managed/components/optimize/overview/)), along with [Connectors](/self-managed/components/connectors/overview/).
+- **Namespace `orchestration`**: We will install [Zeebe](/self-managed/components/orchestration-cluster/zeebe/overview.md), the Camunda web applications ([Operate](/self-managed/components/orchestration-cluster/operate/overview.md), [Tasklist](/self-managed/components/orchestration-cluster/tasklist/overview.md), and [Optimize](/self-managed/components/optimize/overview.md)), along with [Connectors](/self-managed/components/connectors/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -113,13 +113,13 @@ zeebe:
         secretName: camunda-platform-zeebe-grpc
 ```
 
-More information can be found in the [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup/) guide.
+More information can be found in the [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md) guide.
 
 ### Identity provider integration
 
 Once secure HTTPS connections are enabled and correctly configured via Ingress, the next stage to consider is configuring authentication.
 
-This example uses AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory, and is compatible with our [Microsoft Entra ID](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/) guide.
+This example uses AWS Simple Active Directory, which provides a subset implementation of a Microsoft Active Directory, and is compatible with our [Microsoft Entra ID](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md) guide.
 
 The following is an example configuration to add to your `values.yaml` files:
 
@@ -128,77 +128,60 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
 :::
 
 ```yaml
-  identity:
-    auth:
-      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-      publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-      type: MICROSOFT
-      identity:
-        clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
-        existingSecret:
-          name: oidc-certificate-identity  #secret from the certificate that was created in the Active Directory
+identity:
+  auth:
+    issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+    issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+    tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
+    jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
+    publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+    type: MICROSOFT
+    identity:
+      clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
+      secret:
+        existingSecret: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
         existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000" #same as client ID
-        redirectUrl: https://management-host.com/identity
-        initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
-      operate:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-operate
+      audience: "00000000-0000-0000-0000-000000000000" #same as client ID
+      redirectUrl: https://management-host.com/identity
+      initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
+    optimize:
+      clientId: "00000000-0000-0000-0000-000000000000"
+      secret:
+        existingSecret: oidc-certificate-optimize
         existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/operate
-      optimize:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-optimize
+      audience: "00000000-0000-0000-0000-000000000000"
+      redirectUrl: https://orchestration-host.com/optimize
+    orchestration:
+      clientId: "00000000-0000-0000-0000-000000000000"
+      secret:
+        existingSecret: oidc-certificate-zeebe
         existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/optimize
-      tasklist:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-tasklist
+      audience: "00000000-0000-0000-0000-000000000000"
+    connectors:
+      clientId: "00000000-0000-0000-0000-000000000000"
+      secret:
+        existingSecret: oidc-certificate-connectors
         existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/tasklist
-      zeebe:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-zeebe
+      audience: "00000000-0000-0000-0000-000000000000"
+      clientApiAudience: "00000000-0000-0000-0000-000000000000"
+      tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
+    console:
+      clientId: "00000000-0000-0000-0000-000000000000"
+      wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+      audience: "00000000-0000-0000-0000-000000000000"
+      secret:
+        existingSecret: oidc-certificate-console
         existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-      connectors:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-connectors
-        existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        clientApiAudience: "00000000-0000-0000-0000-000000000000"
-        tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
-      console:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
-        audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
-        redirectUrl: https://management-host.com
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-console-client-password
-      webModeler:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        audience: "00000000-0000-0000-0000-000000000000"
-        clientApiAudience: "00000000-0000-0000-0000-000000000000"
-        publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://modeler.management-host.com
+      redirectUrl: https://management-host.com
+    webModeler:
+      clientId: "00000000-0000-0000-0000-000000000000"
+      audience: "00000000-0000-0000-0000-000000000000"
+      clientApiAudience: "00000000-0000-0000-0000-000000000000"
+      publicApiAudience: "00000000-0000-0000-0000-000000000000"
+      redirectUrl: https://modeler.management-host.com
 ```
 
-For more information, see how to [connect to an OpenID Connect provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/).
+For more information, see how to [connect to an OpenID Connect provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
 
 ### Connect external databases
 
@@ -222,7 +205,8 @@ global:
     enabled: true
     auth:
       username: user
-      password: pass
+      secret:
+        inlineSecret: pass
     url:
       protocol: https
       host: opensearch.example.com
@@ -244,8 +228,9 @@ identity:
     port: 5432
     username: identity_user
     database: identity_db
-    existingSecret: identity-db-secret
-    existingSecretPasswordKey: database-password
+    secret:
+      existingSecret: identity-db-secret
+      existingSecretKey: database-password
 ```
 
 :::note
@@ -261,16 +246,17 @@ webModeler:
   externalDatabase:
     url: jdbc:postgresql://external-postgres-host:5432/camunda_db
     user: web_modeler_user
-    existingSecret: webm-odeler-db-secret
-    existingSecretPasswordKey: database-password
+    secret:
+      existingSecret: web-modeler-db-secret
+      existingSecretKey: database-password
 ```
 
 Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret containing the password. This approach allows the Camunda Helm chart to reference credentials stored securely in your cluster, rather than hardcoding sensitive data in values files or templates.
 
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
-- Using an [existing Elasticsearch instance](/self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch/)
-- Using [Amazon OpenSearch service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch/)
+- Using an [existing Elasticsearch instance](/self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch.md)
+- Using [Amazon OpenSearch service](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md)
   - Using Amazon OpenSearch service [through IRSA](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
@@ -289,7 +275,7 @@ An index lifecycle management (ILM) policy in OpenSearch is crucial for efficien
 The following example configures an ILM policy for Zeebe, and can be added to your `orchestration-values.yaml`:
 
 ```yaml
-zeebe:
+orchestration:
   retention:
     enabled: true
     minimumAge: 30d
@@ -313,24 +299,24 @@ The following resources and configuration options are important to keep in mind 
 - To scale Zeebe, the following values can be modified:
 
   ```yaml
-  zeebe:
+  orchestration:
     clusterSize: "3"
     partitionCount: "3"
     replicationFactor: "3"
   ```
 
-  - `zeebe.clusterSize`: to the amount of brokers to configure
-  - `zeebe.partitionCount`: how many [Zeebe partitions](/components/zeebe/technical-concepts/partitions.md) are configured for each cluster
-  - `zeebe.replicationFactor`: the [number of replicas](/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to
+  - `orchestration.clusterSize`: to the amount of brokers to configure
+  - `orchestration.partitionCount`: how many [Zeebe partitions](/components/zeebe/technical-concepts/partitions.md) are configured for each cluster
+  - `orchestration.replicationFactor`: the [number of replicas](/components/zeebe/technical-concepts/partitions.md#replication) that each partition replicates to
 
   :::note
-  `zeebe.partitionCount` does not yet support dynamic scaling. You will not be able to modify this property. It is better to over-provision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
+  `orchestration.partitionCount` does not yet support dynamic scaling. You will not be able to modify this property. It is better to over-provision the partitions to allow potential growth as dynamic partitioning isn't possible yet.
   :::
 
 - Ensure the resources (CPU and memory) are appropriate for your workload size. For example, the resource limits can be changed for Zeebe by modifying the following values:
 
   ```yaml
-  zeebe:
+  orchestration:
     resources:
       requests:
         cpu: 800m
@@ -371,7 +357,7 @@ The following resources and configuration options are important to keep in mind 
 - It is possible to set a `podDisruptionBudget`, as in the following example for the Zeebe:
 
   ```yaml
-  zeebe:
+  orchestration:
     podDisruptionBudget:
       enabled: false
       minAvailable: 0
@@ -383,9 +369,9 @@ The following resources and configuration options are important to keep in mind 
 
   ```yaml
   global:
-  secrets:
-    autoGenerated: true
-    name: camunda-credentials
+    secrets:
+      autoGenerated: true
+      name: camunda-credentials
   ```
 
   This generates a secret called `camunda-credentials`. It will include all the needed secret values for the Camunda Helm chart. The `camunda-credentials` generated secret will not be deleted if the Helm chart is uninstalled.
@@ -403,14 +389,13 @@ The following resources and configuration options are important to keep in mind 
   The following is an example configuration for Zeebe to create persistent storage:
 
   ```yaml
-  zeebe:
+  orchestration:
     extraVolumes:
-      extraVolumes:
-        - name: persistent-state
-          emptyDir: {}
-      extraVolumeMounts:
-        - name: persistent-state
-          mountPath: /mount
+      - name: persistent-state
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: persistent-state
+        mountPath: /mount
   ```
 
 <!-- This seems very specific to the application. I might remove this: -->
@@ -437,7 +422,7 @@ The following resources and configuration options are important to keep in mind 
   connectors:
     serviceAccount:
       enabled: false
-  zeebe:
+  orchestration:
     serviceAccount:
       enabled: false
   optimize:
@@ -507,7 +492,7 @@ global:
   secrets:
     autoGenerated: true
     name: camunda-test-credentials
-  Ingress:
+  ingress:
     enabled: true
     className: nginx
     host: management-host.com
@@ -524,44 +509,30 @@ global:
       type: MICROSOFT
       identity:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-identity
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-identity
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: https://management-host.com/identity
         initialClaimValue: "00000000-0000-0000-0000-000000000000"
-      operate:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-operate
-        existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/operate
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-optimize
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-optimize
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: https://orchestration-host.com/optimize
-      tasklist:
+      orchestration:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-tasklist
-        existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/tasklist
-      zeebe:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-zeebe
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-zeebe
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
       connectors:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-connectors
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-connectors
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         tokenScope: "00000000-0000-0000-0000-000000000000/.default"
@@ -569,13 +540,10 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-console
+          existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         audience: "00000000-0000-0000-0000-000000000000"
@@ -585,17 +553,18 @@ global:
 identity:
   contextPath: /identity
   firstUser:
-    existingSecret: camunda-credentials
-    existingSecretKey: identity-user-password
+    secret:
+      existingSecret: camunda-credentials
+      existingSecretKey: identity-user-password
   externalDatabase:
     enabled: true
     host: external-postgres-host
     port: 5432
     username: identity_user
     database: identity_db
-    existingSecret: identity-db-secret
-    existingSecretPasswordKey: database-password
-
+    secret:
+      existingSecret: identity-db-secret
+      existingSecretKey: database-password
 
 webModeler:
   enabled: true
@@ -607,14 +576,15 @@ webModeler:
   externalDatabase:
     url: jdbc:postgresql://external-postgres-host:5432/camunda_db
     user: camunda_user
-    existingSecret: camunda-db-secret
-    existingSecretPasswordKey: database-password
+    secret:
+      existingSecret: camunda-db-secret
+      existingSecretKey: database-password
 
 prometheusServiceMonitor:
   enabled: true
   labels:
     release: kube-prometheus-stack
-zeebe:
+orchestration:
   enabled: false
 optimize:
   enabled: false
@@ -638,62 +608,56 @@ console:
           releases:
             - name: camunda
               namespace: management
-              version: 12.x.x
+              version: 13.x.x
               components:
                 - name: Console
                   id: console
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://management-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
                 - name: Identity
                   id: identity
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://management-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://management-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camunda
               namespace: orchestration
-              version: 12.x
+              version: 13.x
               components:
                 - name: Operate
                   id: operate
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://orchestration-host.com/operate
-                  readiness: http://camunda-operate.orchestration:9600/operate/actuator/health/readiness
-                  metrics: http://camunda-operate.orchestration:9600/operate/actuator/prometheus
+                  readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
+                  metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
                   id: optimize
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://orchestration-host.com/optimize
                   readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
                   metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
                 - name: Tasklist
                   id: tasklist
-                  version: 8.7.x
+                  version: 8.8.x
                   url: https://orchestration-host.com/tasklist
-                  readiness: http://camunda-tasklist.orchestration:9600/tasklist/actuator/health/readiness
-                  metrics: http://camunda-tasklist.orchestration:9600/tasklist/actuator/prometheus
-                - name: Zeebe Gateway
-                  id: zeebeGateway
-                  version: 8.7.x
+                  readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
+                  metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
+                - name: Orchestration Cluster
+                  id: orchestration
+                  version: 8.8.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
                     http: https://orchestration-host.com/zeebe
-                  readiness: http://camunda-zeebe-gateway.orchestration:9600/zeebe/actuator/health/readiness
-                  metrics: http://camunda-zeebe-gateway.orchestration:9600/zeebe/actuator/prometheus
-                - name: Zeebe
-                  id: zeebe
-                  version: 8.7.x
                   readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
-
 ```
 
 ### Example orchestration configuration
@@ -705,7 +669,7 @@ global:
   secrets:
     autoGenerated: true
     name: camunda-test-credentials
-  Ingress:
+  ingress:
     enabled: true
     className: nginx
     host: orchestration-host.com
@@ -718,7 +682,8 @@ global:
     enabled: true
     auth:
       username: user
-      password: pass
+      secret:
+        inlineSecret: pass
     url:
       protocol: https
       host: opensearch.example.com
@@ -733,43 +698,29 @@ global:
       issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
       tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
       jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-      operate:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-operate
-        existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/operate
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-optimize
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-optimize
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: https://orchestration-host.com/optimize
-      tasklist:
+      orchestration:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-tasklist
-        existingSecretKey: certificate-secret-data
-        audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://orchestration-host.com/tasklist
-      zeebe:
-        clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-zeebe
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-zeebe
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
       connectors:
         clientId: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-connectors
-        existingSecretKey: certificate-secret-data
+        secret:
+          existingSecret: oidc-certificate-connectors
+          existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         tokenScope: "00000000-0000-0000-0000-000000000000/.default"
-zeebe:
-  contextPath: /zeebe
+orchestration:
+  contextPath: /orchestration
   ingress:
     grpc:
       enabled: true
@@ -805,12 +756,12 @@ elasticsearch:
 
 ### Upgrade and maintenance
 
-- Make sure to follow our [upgrade guide](/self-managed/installation-methods/helm/upgrade/upgrade/) when performing the upgrade on your Helm chart.
+- Make sure to follow our [upgrade guide](/self-managed/installation-methods/helm/upgrade/index.md) when performing the upgrade on your Helm chart.
 - Secrets are not auto-generated by default in the Camunda Helm chart. It is important to not override this default behavior on upgrade.
 
 ### Adding more orchestration clusters
 
-To configure multiple Camunda orchestration clusters in multiple namespaces, we recommend you to follow our guide for [multi-namespace deployments](/self-managed/installation-methods/helm/configure/multi-namespace-deployment/). This is the most recommended approach to allow you to set up various environments using the Camunda Orchestration Cluster.
+To configure multiple Camunda orchestration clusters in multiple namespaces, we recommend you to follow our guide for [multi-namespace deployments](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md). This is the most recommended approach to allow you to set up various environments using the Camunda Orchestration Cluster.
 
 ### Running benchmarks
 
