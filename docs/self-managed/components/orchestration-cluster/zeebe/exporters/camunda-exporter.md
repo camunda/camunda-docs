@@ -8,20 +8,19 @@ description: "Use the Camunda Exporter to export Zeebe records to Elasticsearch/
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Camunda Exporter exports Zeebe records directly to Elasticsearch/OpenSearch. Unlike the Elasticsearch and OpenSearch exporters, records are exported in the format required by Operate and Tasklist, and configuring additional importers or data transformations is not required.
+The Camunda Exporter exports Zeebe records directly to Elasticsearch or OpenSearch. Unlike the Elasticsearch and OpenSearch exporters, it exports records in the format required by Operate and Tasklist, so you don’t need to configure additional importers or data transformations.
 
-Using the Camunda Exporter can increase process instance throughput, and can reduce the latency of changes appearing in Operate and Tasklist.
+Using the Camunda Exporter can increase process instance throughput and reduce the latency of changes appearing in Operate and Tasklist.
 
 :::note
-When exporting, indexes are created as required, and will not be created twice if they already exist. However, once disabled, they
-will not be deleted (that is up to the administrator.) A [retention](./camunda-exporter.md?configuration=retention#options) policy can be configured to automatically delete data after a certain number of days.
+When exporting, indexes are created as required and not recreated if they already exist. However, disabling the exporter does not delete indexes. Administrators must handle deletions. You can configure a [retention policy](./camunda-exporter.md?configuration=retention#options) to automatically delete data after a set number of days.
 :::
 
 ## Configuration
 
-Camunda Exporter is enabled by default if secondary storage is configured to use elasticsearch or opensearch. Refer the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` properties defined in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
-In addition, the following properties can be configured via the exporter `args`.
+You can also configure the following properties using exporter `args`:
 
 ```
 zeebe:
@@ -39,13 +38,13 @@ zeebe:
 
 ```
 
-| Option       | Description                                                                                                       | Default |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options. |         |
-| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
-| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
-| history      | Refer to [History](./camunda-exporter.md?configuration=history#options) for the retention configuration options.  |         |
-| createSchema | If `true`, the schema readiness is checked before start exporting                                                 | true    |
+| Option       | Description                                                                                           | Default |
+| ------------ | ----------------------------------------------------------------------------------------------------- | ------- |
+| connect      | Connection configuration options. See [Connect](./camunda-exporter.md?configuration=connect#options). |         |
+| index        | Index configuration options. See [Index](./camunda-exporter.md?configuration=index#options).          |         |
+| bulk         | Bulk configuration options. See [Bulk](./camunda-exporter.md?configuration=bulk#options).             |         |
+| history      | Retention configuration options. See [History](./camunda-exporter.md?configuration=history#options).  |         |
+| createSchema | If `true`, checks schema readiness before exporting.                                                  | true    |
 
 ### Options
 
