@@ -54,6 +54,17 @@ Ad-hoc sub-process elements can be activated by job workers:
 
 <div class="release"><span class="badge badge--medium" title="This feature affects APIs & tools">APIs & tools</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
+### APIs
+
+Use the Orchestration Cluster REST API to interact programmatically with the Orchestration Cluster.
+
+- This replaces component APIs (Operate API, Tasklist API, Zeebe API, and much of Identity API) with a single set of endpoints.
+- This unified API supports both organizational (SaaS) and Self-Managed deployments.
+- This is now the default and recommended integration point for developers, operators, and automation solutions.
+- You can also use a Swagger UI to interact with this API.
+
+<p><a href="../../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/" class="link-arrow">Orchestration Cluster API</a></p>
+
 ### Camunda Java client
 
 <!-- https://github.com/camunda/product-hub/issues/2248 -->
@@ -61,6 +72,17 @@ Ad-hoc sub-process elements can be activated by job workers:
 The new Camunda Java Client replaces the Zeebe Java Client as the official Java library for building process applications that integrate with Camunda 8. This client provides everything you need to programmatically interact with the Orchestration Cluster, whether you are orchestrating microservices, managing human tasks, or visualizing process data.
 
 <p><a href="../../../../apis-tools/java-client/getting-started/" class="link-arrow">Get started with the Camunda Java client</a></p>
+
+### Camunda Process Test H2 data layer support
+
+<!-- https://github.com/camunda/product-hub/issues/2687 -->
+
+Camunda Process Test supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
+
+- H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
+- H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
+
+<p><a href="../../../../apis-tools/testing/getting-started" class="link-arrow">Camunda Process Test</a></p>
 
 ### Camunda Spring Boot Starter
 
@@ -98,21 +120,6 @@ Find out what’s included in Camunda 8's public API, the policies around versio
 Manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
 
 <p><a href="../../../../components/concepts/process-instance-creation/#run-process-segment" class="link-arrow">Run process segment</a></p>
-
-## Camunda Process Test
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Process Test">Camunda Process Test</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
-
-### H2 data layer support
-
-<!-- https://github.com/camunda/product-hub/issues/2687 -->
-
-Camunda Process Test supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
-
-- H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
-- H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
-
-<p><a href="../../../../apis-tools/testing/getting-started" class="link-arrow">Camunda Process Test</a></p>
 
 ## Connectors
 
@@ -239,6 +246,22 @@ Console is now available as a Self-Managed Docker distribution. Deploy Camunda C
 
 <p><a href="../../../../self-managed/quickstart/developer-quickstart/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
 
+### Encryption (BYOK)
+
+The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (KMS) allows you to configure Camunda 8 SaaS to use a customer-managed key stored in your own Amazon account. This ensures you retain ownership, control, and visibility throughout the key lifecycle, including creation, rotation, and audit logging.
+
+- Camunda 8 SaaS encrypts all cluster data at rest to protect customer workloads. By default, encryption is managed using cloud provider–supplied keys. While this satisfies many organizations, some (especially in regulated industries) require full control over their encryption keys.
+- This feature is currently available only for customers provisioning their Camunda 8 SaaS clusters in AWS regions. Support for additional cloud providers may be added in the future.
+
+### Regions
+
+A new Singapore (ap-southeast-1) region is available for SaaS clusters on Amazon Web Services. Use this region to:
+
+- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
+- Keep cluster data within Singapore to support your local data residency and compliance needs.
+
+<p><a href="../../../../components/saas/regions" class="link-arrow">Regions</a></p>
+
 ### Usage metrics for licence model and tenant
 
 <!-- https://github.com/camunda/product-hub/issues/1979 -->
@@ -278,6 +301,20 @@ Camunda provides alternative container images to the previous Bitnami images, of
 
 The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
 
+## Integrations
+
+### SAP
+
+### ServiceNow
+
+Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.
+
+The ServiceNow integration allows you to:
+
+- **Manage ServiceNow data**: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
+- **Trigger ServiceNow flows**: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+- **Orchestrate ITSM processes**: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+
 ## Intelligent document processing (IDP)
 
 <div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
@@ -305,6 +342,47 @@ Camunda 8 Self-Managed now fully supports the use of Amazon OpenSearch with Opti
 
 ## Orchestration Cluster
 
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Identity">Identity</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Architecture
+
+The primary architectural change in 8.8 is the consolidation of the core Zeebe, Operate, Tasklist, and Identity components into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
+
+This impacts how Camunda 8 is deployed, managed, and scaled.
+
+- The Orchestration Cluster (previously automation cluster) is now the core component of Camunda 8.
+- Use the Orchestration Cluster REST API to interact programmatically with the Orchestration Cluster.
+- The new unified exporter architecture improves cluster management and data migration, bringing importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also harmonized.
+- The unified configuration for Orchestration Cluster components allows you to define cluster and component behavior.
+
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+
+### Dynamic partition scaling
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster in Self-Managed.
+
+- Scaling can be performed concurrently when the cluster is running, with zero downtime.
+- New process instances also start on new partitions, distributing cluster load evenly across partitions.
+- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+
+<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
+
+:::caution
+This feature is not yet fully compatible with backup/restore.
+:::
+
+### Identity and Management Identity
+
+In Camunda 8.8, Orchestration Cluster Identity and Management Identity are two separate components used for Identity management, each with distinct areas of responsibility.
+
+- **Identity**: Access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.
+- **Management Identity**: Continues to manage access for platform components such as Web Modeler, Console, and Optimize.
+
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+
 ### Migrate taken sequence flows flowing to the joining gateway
 
 <!-- https://github.com/camunda/product-hub/issues/2913 -->
@@ -314,65 +392,6 @@ Enhanced migration now supports taken sequence flows leading to joining gateways
 - Define migration plans mapping active elements and taken sequence flows
 - Configure plans via Operate UI or API
 
-### Camunda Exporter
-
-The new Camunda Exporter brings the importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also harmonized.
-
-To learn more about this feature, see the [Camunda Exporter documentation](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
-
-### React to expired messages with a custom exporter
-
-Camunda now introduces a mechanism to react to expired messages. The original message is retrieved from the primary storage upon message expiration and the expiry event is enhanced with the original message. Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
-
-With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently. By providing an enhanced event and re-publish flow, this feature strengthens reliability and transparency in business processes without requiring a major upgrade or modifying existing exporters.
-
-### Process instance migration <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
-
-Enhanced process instance migration allows you to solve problems with process definitions and use the latest process improvements.
-
-You can now migrate the following:
-
-- Compensation boundary event subscriptions
-- Escalation boundary events
-- Escalation event subprocesses
-
-To learn more about migration, see [process instance migration](/components/concepts/process-instance-migration.md).
-
-<!-- https://github.com/camunda/product-hub/issues/1314 -->
-
-### Swagger UI for C8 API
-
-<!-- https://github.com/camunda/product-hub/issues/2645 -->
-
-### Provide Query API for User task, Process and Decision data
-
-<!-- https://github.com/camunda/product-hub/issues/2244 -->
-<!-- https://github.com/camunda/product-hub/issues/2245 -->
-
-### Advanced Task Queries
-
-<!-- https://github.com/camunda/product-hub/issues/2398 -->
-
-Advanced task queries are coming in the 8.8 release and will be available for local and process variables.
-https://docs.camunda.io/docs/next/apis-tools/camunda-api-rest/specifications/search-user-tasks/. It was implemented as a part of the unified C8 REST API.
-
-### Orchestration Cluster Identity
-
-<!-- https://github.com/camunda/product-hub/issues/2222 -->
-
-**Self-Managed Identity Management**:
-
-- Create and manage users, groups, roles, and memberships directly in Identity’s database
-- Integrate external providers like Keycloak or Microsoft Entra via OIDC
-- Assign resource-level permissions using RBAC
-- Map users, groups, and roles to resources using token claims and application/client mappings
-- Simplify migration with built-in tools
-
-**SaaS enhancements**:
-
-- Integrate organizational identity providers for centralized user management
-- Assign roles, groups, and authorizations per cluster
-
 ### Orchestration Cluster scaling
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
@@ -381,6 +400,23 @@ Add Zeebe partitions to a running cluster in SaaS to increase capacity without d
 
 - New partitions start processing tasks immediately
 - Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
+
+### Process instance migration
+
+<!-- https://github.com/camunda/product-hub/issues/1314 -->
+
+Enhanced process instance migration allows you to solve problems with process definitions and use the latest process improvements. You can now migrate compensation boundary event subscriptions, escalation boundary events, and escalation event subprocesses.
+
+<p><a href="../../../../components/concepts/process-instance-migration/" class="link-arrow">Process instance migration</a></p>
+
+### React to expired messages with a custom exporter
+
+You can now use a custom exporter to react to expired messages.
+
+- The original message is retrieved from primary storage upon expiration, and the expiry event enhanced with the original message.
+- Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
+
+With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently.
 
 ### Run Orchestration Cluster without secondary storage
 
@@ -392,7 +428,21 @@ You can now run Orchestration Cluster in "Zeebe-only" mode without secondary sto
 - Enable by setting `camunda.database.type=none`
 - Starts only the required Zeebe components
 
-### Zeebe-managed resilient batch operations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
+### User task listeners
+
+<!-- https://github.com/camunda/product-hub/issues/2126 -->
+
+Task lifecycle management is enhanced with user task listeners, allowing users to react to specific user task lifecycle events.
+
+- Process designers can now model task listeners for different events, such as `assigning` and `completing`.
+- Developers can use the same job infrastructure to activate and complete task listener jobs.
+- Operations engineers can easily check details of active and completed task listeners within instances, and efficiently resolve task listener incidents.
+
+This enhancement streamlines operations and ensures smoother incident handling, improving time to unblock process execution.
+
+<p><a href="../../../../components/concepts/user-task-listeners/" class="link-arrow">User task listeners</a></p>
+
+### Zeebe-managed resilient batch operations
 
 All batch operations, such as canceling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
 
@@ -401,23 +451,6 @@ All batch operations, such as canceling or resolving incidents in bulk, are now 
 - By moving batch operations to the core engine, multi-region deployments gain reliability and resilience.
 
 <!-- https://github.com/camunda/product-hub/issues/2420 -->
-
-### Dynamic partition scaling <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span>
-
-<!-- https://github.com/camunda/product-hub/issues/2226 -->
-
-You can now add new Zeebe partitions to a running cluster.
-
-- Scaling can be performed concurrently when the cluster is running, with zero downtime.
-- New process instances also start on new partitions, distributing cluster load evenly across partitions.
-- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
-- New partitions do not take part in correlating messages/signals, except for message/signal start events.
-
-To learn more, see [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md).
-
-:::caution
-This feature is not yet fully compatible with backup/restore.
-:::
 
 ## Robotic Process Automation (RPA)
 
@@ -434,86 +467,6 @@ RPA supports multi-file script support to allow you to organize scripts modularl
 <!-- https://github.com/camunda/product-hub/issues/2786 -->
 
 An offline installer package for the [RPA](/components/rpa/overview.md) worker allows installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
-
-## SaaS
-
-### Singapore region available for SaaS on Amazon Web Services <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
-
-A new Singapore (ap-southeast-1) region is now available for SaaS clusters on Amazon Web Services. Use this region to:
-
-- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
-- Keep cluster data within Singapore to support your local data residency and compliance needs.
-
-To learn more about supported SaaS regions, see [regions](/components/saas/regions.md).
-
-## User task listeners
-
-### User task listeners <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Modeler">Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span>
-
-Task lifecycle management is enhanced with user task listeners, allowing users to react to specific user task lifecycle events.
-
-- Process designers can now model task listeners for different events, such as `assigning` and `completing`.
-- Developers can use the same job infrastructure to activate and complete task listener jobs.
-- Operations engineers can easily check details of active and completed task listeners within instances, and efficiently resolve task listener incidents.
-
-This enhancement streamlines operations and ensures smoother incident handling, improving time to unblock process execution.
-
-To learn more about this feature, see [user task listeners](/components/concepts/user-task-listeners.md).
-
-<!-- https://github.com/camunda/product-hub/issues/2126 -->
-
-### Advanced User Task Listeners for Updating Events <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span> {#listeners}
-
-Advanced User Task Listeners for Updating Events allow you to define listeners that trigger whenever certain task properties or variables change.
-
-- These listeners generate jobs similar to other event-based task listeners, granting direct access to task data as well as the ability to accept or roll back updates (in certain scenarios).
-- Operators can also view, manage, and resolve incidents caused by these listeners in Operate, ensuring a unified and transparent approach to handling task changes.
-
-To learn more about this feature, see [advanced user task listeners for updating events](/components/concepts/user-task-listeners.md).
-
-<!-- https://github.com/camunda/product-hub/issues/2398 -->
-
-### metadata and filtering <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
-
-With this release, user task listener jobs are improved as follows:
-
-- Task metadata is now directly embedded in the task listener jobs' properties instead of being exposed as custom headers. This includes attributes such as `assignee`, `dueDate` or `userTaskKey`.
-- User tasks can now be filtered using partial user task states to understand the current lifecycle state of the user task fully.
-
-These improvements simplify job worker development, reduce errors, and enable better observability of the user task lifecycle.
-
-<!-- https://github.com/camunda/product-hub/issues/2993 -->
-
-### User task listener types <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span>
-
-New user task listener types are available:
-
-#### `creating` event
-
-<!-- https://github.com/camunda/product-hub/issues/2625 -->
-
-This event triggers before a user task is created.
-
-| Functionality                  | Description                                                                                                      |
-| :----------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| Configurable creation listener | Executes logic before a task appears to users. Task is visible only after all listener jobs finish.              |
-| Controlled task initialization | The creation continues only after listeners succeed. Incidents are raised if logic fails, enabling safe retries. |
-| Operate UI insights            | A “Creating” event appears in the listener tab in Operate. Incidents are flagged for troubleshooting.            |
-| Assign user task               | Assign a task programmatically during creation, useful when assignment depends on an external system.            |
-
-#### `canceling` event
-
-<!-- https://github.com/camunda/product-hub/issues/2657 -->
-
-This event triggers when a user task is canceled (e.g., by a boundary event or process termination).
-
-| Functionality                     | Description                                                                                               |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| Configurable cancelation listener | Executes logic when a task is canceled. Allows inspection or modification of task data before completion. |
-| Consistent lifecycle control      | Cancelation waits for listener logic to complete. Failures can raise incidents for safe retry.            |
-| Operate UI insights               | A “Canceling” event is shown in the listener tab. Incidents are highlighted for visibility.               |
-
-To learn more, see [user task listeners](/components/concepts/user-task-listeners.md).
 
 ## Web Modeler
 
