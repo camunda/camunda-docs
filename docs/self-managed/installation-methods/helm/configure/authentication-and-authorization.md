@@ -147,6 +147,8 @@ The `identity.firstUser` means the first user that will be created within intern
 
 ### Configure The Orchestration Cluster
 
+Once Management Identity has correctly configured Keycloak, it will be possible for the Orchestration Cluster to connect to internal Keycloak. The Orchestration cluster will treat internal Keycloak as an external identity provider and connect through OIDC.
+
 Here is the configuration for the Orchestration Cluster:
 
 ```yaml
@@ -162,6 +164,8 @@ orchestration:
 ```
 
 ### Configure The Connectors Component
+
+The connectors component needs to know how to connect to the orchestration cluster. This is why it is neccessary to enter in the OIDC configurations for the connectors component. So the Connectors component can connect using the default configured Connectors client using OIDC and not using basic auth, for example.
 
 Here is the configuration for the Connectors component:
 
@@ -209,3 +213,5 @@ connectors:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-connectors-client-token"
 ```
+
+## External Identity Provider
