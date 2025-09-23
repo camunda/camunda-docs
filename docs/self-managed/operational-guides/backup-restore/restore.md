@@ -401,7 +401,7 @@ For the Zeebe partitions backup, you will need to check your configured backup s
 Zeebe creates a folder for each Partition ID and subfolder in this with each backup ID.
 
 :::warning
-Using the Zeebe Management Backup API is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
+Using the [Zeebe Management Backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
 :::
 
 <details>

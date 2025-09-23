@@ -67,7 +67,7 @@ As noted in the [Management API](backup-and-restore.md#management-api) section, 
       export OPENSEARCH_SNAPSHOT_REPOSITORY="camunda" # the name of your snapshot repository
       export OPENSEARCH_ENDPOINT="" # highly dependent on your environment
 
-      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-core:9600"
+      export ORCHESTRATION_CLUSTER_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-zeebe-gateway:9600"
       export OPTIMIZE_MANAGEMENT_API="http://$CAMUNDA_RELEASE_NAME-optimize:8092"
       ```
 
@@ -411,7 +411,7 @@ By default, the indices are prefixed with `zeebe-record`. If you have configured
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
 
-      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has finished. However, to double-check that the backup completed successfully, you can perform the following verification:
+      Using `?wait_for_completion=true` in the previous call, as outlined, ensures that the request only returns once the backup has completed. However, to double-check that the backup completed successfully, you can perform the following verification:
 
       The following uses the [Elasticsearch snapshot API](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status-2) to get the snapshot status.
 
