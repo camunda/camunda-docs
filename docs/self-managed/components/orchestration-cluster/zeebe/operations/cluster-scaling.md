@@ -70,7 +70,7 @@ Now we should tell Zeebe to add new brokers to the cluster and add or re-distrib
 If running on Kubernetes, and if you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
 ```
-kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
+kubectl port-forward svc/camunda-gateway 9600:9600
 ```
 
 Depending on whether you want to add new partitions or not, send the appropriate requests to the gateway (section 2.a or 2.b)
@@ -230,7 +230,7 @@ This step is optional, but it is useful when you are testing to see if scaling w
 Port-forward to access the Zeebe Gateway if required:
 
 ```
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
+kubectl port-forward svc/camunda-gateway 8080:8080
 ```
 
 Run the following command to see the current status of the cluster:
@@ -752,7 +752,7 @@ The input is a list of _all_ broker ids that will be in the final cluster after 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers' \
 -H 'Content-Type: application/json' \
--d '["0", "1", "2", "3"]'
+-d '[0, 1, 2, 3]'
 ```
 
 </details>
@@ -764,7 +764,7 @@ You can also do a dry run without actually executing the scaling by specifying t
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?dryRun=true' \
 -H 'Content-Type: application/json' \
--d '["0", "1", "2", "3"]'
+-d '[0, 1, 2, 3]'
 ```
 
 ##### Replication factor
@@ -776,7 +776,7 @@ The new replicas are assigned to the brokers based on the round robin partition 
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?replicationFactor=4' \
 -H 'Content-Type: application/json' \
--d '["0", "1", "2", "3"]'
+-d '[0, 1, 2, 3]'
 ```
 
 ##### Force remove brokers
@@ -798,7 +798,7 @@ The following request force removes all brokers that are _not_ provided in the r
 ```
 curl --request POST 'http://localhost:9600/actuator/cluster/brokers?force=true' \
 -H 'Content-Type: application/json' \
--d '["0", "1", "2"]'
+-d '[0, 1, 2]'
 ```
 
 This operation does not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have a reduced number of replicas for the affected partitions.
