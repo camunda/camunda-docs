@@ -1,19 +1,19 @@
 ---
 id: using-existing-elasticsearch
 sidebar_label: Existing Elasticsearch
-title: Helm chart existing Elasticsearch usage
-description: "Learn how to use an existing Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
+title: Helm chart external Elasticsearch usage
+description: "Learn how to use an external Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
 
-By default, the [Helm chart deployment](/self-managed/installation-methods/helm/install.md) creates a new Elasticsearch instance, but it's possible to use an existing Elasticsearch instance either inside the same Kubernetes cluster or outside of it.
+This guide steps through using an external Elasticsearch instance.
+
+By default, the [Helm chart deployment](/self-managed/installation-methods/helm/install.md) creates a new Elasticsearch instance, but it's possible to use an external Elasticsearch instance either inside the same Kubernetes cluster or outside of it.
 
 Managing elasticsearch installations externally (without enabling the elasticsearch subchart) is recommended for production deployments because it allows for more flexibility when it comes to scaling, backups, and upgrades of elasticsearch without affecting the rest of the camunda installation.
 
-This guide steps through using an existing Elasticsearch instance.
-
 ### Prerequisites
 
-At a minimum, before configuring this, you should know the following about your existing Elasticsearch instance:
+At a minimum, before configuring this, you should know the following about your external Elasticsearch instance:
 
 1. The url to access the cluster
 2. Will you need authentication, and if so, what are the credentials?
@@ -26,7 +26,7 @@ At a minimum, before configuring this, you should know the following about your 
 | values.yaml option                                  | type    | default                             | description                                                                               |
 | --------------------------------------------------- | ------- | ----------------------------------- | ----------------------------------------------------------------------------------------- |
 | `global.elasticsearch.enabled`                      | boolean | `true`                              | Enable or disable all components connecting to elasticsearch                              |
-| `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an existing Elasticsearch instance.                           |
+| `global.elasticsearch.external.true`                | boolean | `false`                             | Set to `true` to connect to an external Elasticsearch instance.                           |
 | `global.elasticsearch.auth.username`                | string  | `""`                                | HTTP Basic username for Elasticsearch authentication.                                     |
 | `global.elasticsearch.auth.password`                | string  | `""`                                | HTTP Basic password for Elasticsearch authentication.                                     |
 | `global.elasticsearch.tls.enabled`                  | boolean | `false`                             | Does Elasticsearch listen on TLS                                                          |
@@ -40,7 +40,7 @@ At a minimum, before configuring this, you should know the following about your 
 
 #### Example usage
 
-##### Connecting to existing Elasticsearch without a certificate
+##### Connecting to external Elasticsearch without a certificate
 
 By default, `global.elasticsearch.url.protocol` is set to `http`. This makes it possible to connect to Elasticsearch through `http`.
 
@@ -69,7 +69,7 @@ elasticsearch:
   enabled: false
 ```
 
-##### Connecting to existing Elasticsearch with a self-signed certificate
+##### Connecting to external Elasticsearch with a self-signed certificate
 
 If a self-signed certificate is used and only `https` requests are accepted in the Elasticsearch cluster, then the following steps can be applied:
 
@@ -108,7 +108,7 @@ elasticsearch:
   enabled: false
 ```
 
-##### Connecting to existing Elasticsearch with a publicly trusted certificate
+##### Connecting to external Elasticsearch with a publicly trusted certificate
 
 This configuration should work with any managed Elasticsearch. We have specifically tested this configuration using Elastic Cloud on Google Cloud.
 
