@@ -230,7 +230,7 @@ need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
 ```yaml
 camunda:
   migrator:
-    tenantIds: tenant-1, tenant-2, tenant-3
+    tenantIds: tenant-1, tenant-2, tenant-3 # There's no need to specify `<default>` tenant id, as it included by default.
 ```
 
 With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`
