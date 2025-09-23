@@ -10,10 +10,11 @@ import IconDataImg from "../img/icon-reference-data.png";
 
 export const gettingStartedCards = [
   {
-    link: "./announcements-release-notes/overview/",
-    title: "Release announcements and release notes",
+    link: "./announcements-release-notes/880/whats-new-in-88/",
+    title: "What's new in Camunda 8.8",
     image: IconReleasesImg,
-    description: "Announcements and release notes for all supported versions.",
+    description:
+      "Important changes to consider when planning your 8.8 upgrade.",
   },
   {
     link: "./announcements-release-notes/880/880-announcements/",

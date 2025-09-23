@@ -18,6 +18,8 @@ Keep up-to-date with upcoming, current, and past Camunda releases.
 
 <ReleasesGrid releases={gettingStartedCards} />
 
+<p style={{paddingBottom: '10px'}}><a href="./announcements-release-notes/overview/" class="link-arrow">Release announcements and release notes</a></p>
+
 :::info Release policy
 Learn about the [Camunda release policy](/reference/announcements-release-notes/release-policy.md) and specific clarifications about provisioning in SaaS and Self-Managed.
 :::
