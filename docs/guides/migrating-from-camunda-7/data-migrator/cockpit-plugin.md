@@ -17,12 +17,7 @@ For more information on Camunda 7 plugins, see the [Camunda 7 documentation](htt
 
 ## Prerequisites
 
-:::warning Database Configuration Requirement
-The Cockpit plugin **only works** when the Data Migrator creates the migration schema in the Camunda 7 database (default behavior), or when both Camunda 7 and Camunda 8 databases point to the same database instance.
-
-Since the Cockpit plugin runs within Camunda 7, it can only access databases that Camunda 7 is connected to. For an example, see the [Data Migrator setup example](config-examples.md#data-migrator).
-:::
-
+- **Database Configuration**: The plugin can only access databases that Camunda 7 is connected to, so the migration schema needs to be created in the Camunda 7 database (default behavior), or both Camunda 7 and Camunda 8 databases must point to the same database instance. For an example, see the [Data Migrator setup example](config-examples.md#data-migrator).
 - Camunda 7 Webapps are deployed, running, and accessible.
 - Migration schema is available in Camunda 7 database.
 - The Cockpit plugin requires running the migrator with `save-skip-reason` enabled.
