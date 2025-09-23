@@ -752,7 +752,7 @@ identityKeycloak:
   enabled: false
 webModeler:
   enabled: false
-postgresql:
+webModelerPostgresql:
   enabled: false
 elasticsearch:
   enabled: false
