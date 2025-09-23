@@ -21,12 +21,12 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 :::
 
-## Changes in supported environments
+## Supported environment changes
 
 ### General changes
 
 <div className="release-announcement-row">
-<span className="badge badge--medium">Change</span>
+<span className="badge badge--long">Change</span>
 <div>
   
 #### Elasticsearch and OpenSearch minimal supported versions

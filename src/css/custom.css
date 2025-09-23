@@ -1586,8 +1586,9 @@ h3 + .release-announcement-row {
 .release-announcement-row {
   display: flex;
   align-items: flex-start;
-  gap: 50px;
+  gap: 40px;
   margin-bottom: 2rem;
+  border-bottom: 1px solid #dedede;
 }
 
 .release-announcement-row .badge {
