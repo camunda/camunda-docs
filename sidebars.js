@@ -1295,6 +1295,11 @@ module.exports = {
               //also to include backup and restore, and scaling
             },
             {
+              "Production guides": [
+                "self-managed/operational-guides/production-guide/helm-chart-production-guide",
+              ],
+            },
+            {
               type: "category",
               label: "Cloud providers",
               link: {
