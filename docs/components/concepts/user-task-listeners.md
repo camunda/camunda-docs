@@ -258,7 +258,7 @@ User task listeners have the following limitations:
 
 User task listeners are designed for use with [Tasklist v2](components/tasklist/api-versions.md) and the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use Tasklist v2 with the Orchestration Cluster API.
+While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use Tasklist v2 and the Orchestration Cluster API.
 
 - **Tasklist v1 does not list tasks with pending task listeners**: If a task's lifecycle transition is blocked by a pending task listener, Tasklist v1 does not display the task in the task queue. However, Tasklist v1 can still show the details of such a task.
 - **Tasklist v1 incorrectly lists creating tasks when filtering for the "all" status (open and completed)**: If a task's creation is blocked by a pending task listener, Tasklist v1 includes it in the task queue when filtering for the "all" status, even though the task has not yet been created.
