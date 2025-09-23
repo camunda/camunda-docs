@@ -306,7 +306,6 @@ The module is locally sourced in your clone. Any changes you make to the module 
    ```
 
    In this configuration:
-
    - Replace `principal_arn` with the ARN of the IAM user or role.
    - Use `policy_associations` to define policies for fine-grained access control.
 
