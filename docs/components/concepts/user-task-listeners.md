@@ -256,13 +256,14 @@ User task listeners have the following limitations:
 
 ### Limitations for Tasklist v1
 
-User task listeners is designed for usage with [Tasklist v2](components/tasklist/api-versions.md) and the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
-While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use it in combination with Tasklist v2 and the Orchestration Cluster API.
+User task listeners are designed for use with [Tasklist v2](components/tasklist/api-versions.md) and the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-- **Tasklist v1 does not list tasks with pending task listeners**: If a task's lifecycle transition is blocked by a pending task listener, Tasklist v1 does not list the task in the task queue. Tasklist v1 can still show the details of such a task.
-- **Tasklist v1 incorrectly list creating tasks when filtering for the all status (open and completed)**: If a task's creation is blocked by a pending task listener, Tasklist v1 lists it in the task queue when filtering for the all status (open and completed) even though the task has not yet been created.
-- **Tasklist v1 API is unable to filter for tasks with pending task listeners**: The deprecated Tasklist API is unable to filter for the following task states when searching tasks: `CREATING`, `ASSIGNING`, `UPDATING`, `COMPLETING`, `CANCELING`. Tasks in such states are included in the response when not filtering by state.
-- **Tasklist v1 API responses may not reflect corrections applied by task listeners**: If a user task listener corrects the user task data, then this is not reflected in the responses of the deprecated Tasklist API operation that triggered the listener. Corrected data is included in responses to requests made later with eventual consistency.
+While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use Tasklist v2 with the Orchestration Cluster API.
+
+- **Tasklist v1 does not list tasks with pending task listeners**: If a task's lifecycle transition is blocked by a pending task listener, Tasklist v1 does not display the task in the task queue. However, Tasklist v1 can still show the details of such a task.
+- **Tasklist v1 incorrectly lists creating tasks when filtering for the "all" status (open and completed)**: If a task's creation is blocked by a pending task listener, Tasklist v1 includes it in the task queue when filtering for the "all" status, even though the task has not yet been created.
+- **Tasklist v1 API cannot filter for tasks with pending task listeners**: The deprecated Tasklist API cannot filter for the following task states when searching tasks: `CREATING`, `ASSIGNING`, `UPDATING`, `COMPLETING`, `CANCELING`. Tasks in these states are included in responses when not filtering by state.
+- **Tasklist v1 API responses may not reflect corrections applied by task listeners**: If a user task listener modifies the user task data, this is not reflected in the response of the deprecated Tasklist API operation that triggered the listener. Corrected data is included in responses to requests made later, consistent with eventual consistency.
 
 ## Related resources
 
