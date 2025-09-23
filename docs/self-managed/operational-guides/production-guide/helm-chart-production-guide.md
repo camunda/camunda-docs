@@ -636,7 +636,7 @@ console:
                 - name: Operate
                   id: operate
                   version: 8.8.x
-                  url: https://orchestration-host.com/operate
+                  url: https://orchestration-host.com/orchestration/operate
                   readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
                 - name: Optimize
@@ -648,7 +648,7 @@ console:
                 - name: Tasklist
                   id: tasklist
                   version: 8.8.x
-                  url: https://orchestration-host.com/tasklist
+                  url: https://orchestration-host.com/orchestration/tasklist
                   readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
                 - name: Orchestration Cluster
@@ -656,7 +656,7 @@ console:
                   version: 8.8.x
                   urls:
                     grpc: https://zeebe-orchestration-host.com
-                    http: https://orchestration-host.com/zeebe
+                    http: https://orchestration-host.com/orchestration
                   readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
 ```
