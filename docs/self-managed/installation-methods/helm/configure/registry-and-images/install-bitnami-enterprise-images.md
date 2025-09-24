@@ -40,9 +40,8 @@ Due to [security policy changes](https://github.com/bitnami/charts/issues/30850)
 
 Camunda currently provides **Premium images** exclusively. Key points:
 
-- **Available:** Debian-based Premium images in the `vendor-ee` repository
+- **Available:** Debian-based Premium images in the `vendor-ee` repository (Camunda provides only these for consistency)
 - **Not available:** PhotonOS-based Secure images are not provided by Camunda
-- **Focus:** Camunda continues to provide only Debian-based Premium images for consistency
 
 ## Benefits of enterprise images
 
