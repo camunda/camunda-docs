@@ -87,9 +87,9 @@ Prefix: `camunda.migrator.c7.data-source`
 
 Prefix: `camunda.migrator.c8`
 
-| Property          | Type     | Description                                                                            |
-| :---------------- | :------- | :------------------------------------------------------------------------------------- |
-| `.deployment-dir` | `string` | Define directory which resources like BPMN processes are automatically deployed to C8. |
+| Property          | Type     | Description                                                                                                                                                  |
+| :---------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.deployment-dir` | `string` | Define directory which resources like BPMN processes are automatically deployed to C8. In case multi-tenancy is enabled, please perform a manual deployment. |
 
 ## `camunda.migrator.c8.data-source`
 
