@@ -26,7 +26,7 @@ In earlier versions, users sometimes relied on Bitnami subcharts in production. 
 
 ## Understanding Bitnami image offerings
 
-Due to [security policy changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts, Camunda transitioned from open-source Bitnami images to enterprise-grade alternatives available only to customers, which requires an additional values file mentioned below.
+Due to [security policy changes](https://github.com/bitnami/charts/issues/30850) in Bitnami's Helm charts, Camunda transitioned from open-source Bitnami images to enterprise-grade alternatives available only to customers. These enterprise images require an additional values file mentioned below.
 
 ### Available image types
 
