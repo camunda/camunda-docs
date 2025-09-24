@@ -504,6 +504,12 @@ export const configs = [
     area: ["Data"],
   },
   {
+    name: "camunda.data.secondary-storage.autoconfigure-camunda-exporter",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.secondary-storage.elasticsearch.url",
     legacy: [
       "camunda.database.url",
