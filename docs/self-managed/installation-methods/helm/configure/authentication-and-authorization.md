@@ -79,7 +79,7 @@ You should enable the internal Keycloak if you don’t have an external IdP but 
 
 In the perspective of the Orchestration Cluster, the internal Keycloak component will be treated as an external identity provider. Therefore, some extra configuration is required in the Orchestration Cluster.
 
-Also, management identity, Connectors, and the Orchestration Cluster will also need to be configured to properly connect to internal Keycloak.
+In addition, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against the internal Keycloak.
 
 Make sure to create a secret that will have all of the relevant secret keys listed, so it can be used for the below configurations. For this example, a `camunda-credentials` Kubernetes secret is created with the following keys:
 
