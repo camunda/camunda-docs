@@ -31,7 +31,7 @@ When the process definition is deleted or replaced with a newer version, the con
 :::note
 The connector Runtime currently fetches only the **latest version** of each process definition.
 
-Previously activated inbound connectors for older versions of a process definition are deactivated when a new version of the process definition is deployed.
+Previously activated inbound connectors for older versions of a process definition are deactivated when a new version of the process definition is deployed. You can [migrate older versions](../../concepts/process-instance-migration) to the latest version to keep using inbound connectors.
 :::
 
 ![Inbound connectors](img/inbound-connectors.png)
