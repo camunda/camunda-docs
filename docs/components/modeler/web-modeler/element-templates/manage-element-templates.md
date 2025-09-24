@@ -19,7 +19,7 @@ You can create and manage [element templates](/components/concepts/element-templ
 
 ## Create an element template
 
-To create a new element template, follow the steps described in [Generate an element template](/components/connectors/custom-built-connectors/connector-template-generator.md#generate-a-connector-template).
+To create a new element template, follow the steps described in [Generate an element template](/components/connectors/custom-built-connectors/element-template-generator.md#generate-a-connector-template).
 
 You will be taken to the **Element template editor** screen.
 In this screen, you can define the element template by writing the template JSON.
@@ -34,7 +34,6 @@ The components of the editor interface are as follows:
 
   :::info
   Starting with 8.8, the following properties are not managed by Web Modeler anymore, and you can freely edit them:
-
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
   - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
