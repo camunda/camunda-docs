@@ -49,9 +49,9 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
-- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), the Camunda web applications ([Operate](/self-managed/components/orchestration-cluster/operate/overview.md), [Tasklist](/self-managed/components/orchestration-cluster/tasklist/overview.md), and [Optimize](/self-managed/components/optimize/overview.md)), along with [Connectors](/self-managed/components/connectors/overview.md).
+- **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), and [Connectors](/self-managed/components/connectors/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
@@ -588,7 +588,8 @@ prometheusServiceMonitor:
 orchestration:
   enabled: false
 optimize:
-  enabled: false
+  enabled: true
+  contextPath: /optimize
 connectors:
   enabled: false
 elasticsearch:
@@ -740,12 +741,11 @@ orchestration:
       authentication:
         method: oidc
 
-optimize:
-  contextPath: /optimize
-
 connectors:
   contextPath: /connectors
 
+optimize:
+  enabled: false
 identity:
   enabled: false
 identityKeycloak:
