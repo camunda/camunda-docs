@@ -8,7 +8,7 @@ description: "Management Identity is the component within Camunda 8 Self-Managed
 The Management Identity component in Camunda 8 Self-Managed is used to manage authentication, access, and authorization for components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md) ([Console](../console/overview.md), [Web Modeler](../modeler/web-modeler/overview.md), and [Optimize](../optimize/overview.md)).
 
 :::note
-Management Identity is separate from the [Identity component within the Orchestration Cluster](/self-managed/components/orchestration-cluster/identity/overview.md), which handles authentication for Zeebe, Operate, Tasklist, and Orchestration Cluster API.
+Management Identity is separate from the [Identity component within the Orchestration Cluster](/components/identity/identity-introduction.md), which handles authentication for Zeebe, Operate, Tasklist, and Orchestration Cluster API.
 :::
 
 Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/installation-methods/helm/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).

@@ -1,6 +1,6 @@
 ---
 id: using-tasklist
-title: Overview
+title: Getting familiar with Tasklist
 description: "Use Tasklist to manage and complete tasks that require manual interaction."
 ---
 
@@ -66,9 +66,9 @@ To group tasks and quickly find relevant assignments, use [task filters](./using
 
 [![tasklist-default-filters](img/task-filters/tasklist-default-filters.png "Task filters")](./using-filters.md)
 
-## Ordering
+## Sorting
 
-Click the order icon ![order-icon](img/order-icon.png) to order the tasks. You can arrange them by the date of creation, due date, follow-up date, or priority.
+Click the Sorting icon to sort the tasks. You can arrange them by the date of creation, due date, follow-up date, or priority.
 
 The follow-up date defines the latest time you should start working on a task. The due date provides a deadline for when the task should be finished.
 

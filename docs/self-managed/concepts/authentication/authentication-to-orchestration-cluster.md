@@ -8,7 +8,7 @@ description: "Learn about authentication methods for the Orchestration Cluster o
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Orchestration Cluster components and their resources is managed by [Identity](../../components/orchestration-cluster/identity/overview.md). It includes components like [Zeebe](/components/zeebe/zeebe-overview.md), [Operate](/components/operate/operate-introduction.md), [Tasklist](/components/tasklist/introduction-to-tasklist.md), and [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+Authentication to the Orchestration Cluster components and their resources is managed by [Identity](/components/identity/identity-introduction.md). It includes components like [Zeebe](/components/zeebe/zeebe-overview.md), [Operate](/components/operate/operate-introduction.md), [Tasklist](/components/tasklist/introduction-to-tasklist.md), and [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 Camunda 8's Orchestration Cluster supports two authentication methods:
 

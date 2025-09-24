@@ -133,7 +133,7 @@ get `(&(objectClass=user)(userPrincipalName={0}))`.
 
 <TabItem value="identity">
 
-[Identity](../identity/overview.md) provides authentication and authorization functionality along with user
+[Identity](/components/identity/identity-introduction.md) provides authentication and authorization functionality along with user
 management.
 
 ## Enable Identity

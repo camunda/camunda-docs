@@ -187,7 +187,7 @@ RewriteRule ^docs/next/self-managed/console-deployment/installation/?$ /docs/nex
 RewriteRule ^docs/next/self-managed/modeler/web-modeler/installation/?$ /docs/next/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/operate-deployment/install-and-start/?$ /docs/next/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/optimize-deployment/install-and-start/?$ /docs/next/self-managed/components/optimize/overview/ [R=301,L]
-RewriteRule ^docs/next/self-managed/orchestration-identity/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-identity/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 RewriteRule ^docs/next/self-managed/tasklist-deployment/install-and-start/?$ /docs/next/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
 RewriteRule ^docs/next/self-managed/update/index/?$ /docs/next/self-managed/components/components-update/introduction/ [R=301,L]
 # Installation methods

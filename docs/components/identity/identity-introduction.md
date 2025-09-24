@@ -31,4 +31,4 @@ Depending on your setup, Identity allows you to manage the following entities to
 
 ## Identity on Self-Managed
 
-For documentation on deploying Identity as part of Camunda 8 Self-Managed, refer to the [configuration guides](/self-managed/components/orchestration-cluster/identity/overview.md).
+For documentation on deploying Identity as part of Camunda 8 Self-Managed, refer to the [configuration guide](/self-managed/components/orchestration-cluster/identity/initial-setup.md).
