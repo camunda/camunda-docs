@@ -536,48 +536,13 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 | Keycloak (Local)         | `camunda-keycloak-no-domain-values.yml` | Local development OIDC configuration       | Camunda deployment |
 | Keycloak (Production)    | `camunda-keycloak-domain-values.yml`    | Production OIDC configuration              | Camunda deployment |
 
-:::tip File organization
-Create a dedicated folder for your deployment (e.g., `camunda-operator-deployment/`) and organize files by component:
-
-```
-camunda-operator-deployment/
-├── infrastructure/
-│   ├── postgresql-clusters.yml
-│   ├── elasticsearch-cluster.yml
-│   └── keycloak-instance-*.yml
-└── camunda-values/
-    ├── camunda-elastic-values.yml
-    ├── camunda-identity-values.yml
-    ├── camunda-webmodeler-values.yml
-    └── camunda-keycloak-*.yml
-```
-
-:::
-
 ### Pre-deployment checklist
 
-Before proceeding with Camunda Platform deployment, verify you have completed all steps:
+Before deploying Camunda Platform:
 
-#### Infrastructure deployment checklist
-
-- [ ] PostgreSQL clusters deployed and running
-- [ ] Elasticsearch cluster deployed and healthy
-- [ ] Keycloak instance deployed and accessible
-- [ ] All infrastructure components verified (see [Verification section](#verify-infrastructure-deployment))
-
-#### Configuration files checklist
-
-- [ ] `camunda-elastic-values.yml` saved locally
-- [ ] `camunda-identity-values.yml` saved locally
-- [ ] `camunda-webmodeler-values.yml` saved locally (if using Web Modeler)
-- [ ] Appropriate Keycloak values file saved locally:
-  - [ ] `camunda-keycloak-no-domain-values.yml` (for local development)
-  - [ ] `camunda-keycloak-domain-values.yml` (for production)
+- [ ] All infrastructure components deployed (PostgreSQL, Elasticsearch, Keycloak)
+- [ ] Configuration files saved locally from previous sections
 - [ ] Authentication secrets generated (see next section)
-
-:::note Ready to deploy?
-All checkboxes above should be checked before proceeding to Helm deployment. Missing steps may cause deployment failures.
-:::
 
 ### Generate authentication secrets
 
@@ -755,8 +720,6 @@ If you're migrating from existing Bitnami sub-chart deployments:
 3. **Migrate data**: Transfer data to vendor-supported services
 4. **Update configuration**: Switch Camunda configuration to use new services
 5. **Cleanup**: Remove old sub-chart deployments once migration is complete
-
-This vendor-supported approach provides a **future-proof architecture** that doesn't depend on deprecated Bitnami sub-charts
 
 ## Additional resources
 
