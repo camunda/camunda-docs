@@ -16,12 +16,15 @@ The Bitnami Helm chart detects this image replacement and emits a security warni
 
 ### This is not a security risk
 
-**Important**: The security warning does not indicate an actual security vulnerability. Camunda's Keycloak image:
+**Important**: The security warning does not indicate an actual security vulnerability. This warning can appear in two scenarios:
 
-- Is based on the official Bitnami Keycloak image
-- Includes only Camunda-specific configuration layers
-- Undergoes the same security review process as other Camunda components
-- Receives regular updates aligned with upstream Bitnami releases
+1. **Camunda-built images** (like Keycloak): These are built on top of official Bitnami images with only Camunda-specific additions (Identity theme, AWS wrapper). They undergo the same security review process as other Camunda components.
+
+2. **Standard Bitnami images**: When using Bitnami subcharts for PostgreSQL or Elasticsearch, the images themselves are secure but may show CVE warnings due to their comprehensive OS layer.
+
+In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
+
+For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
 
 ### Configuration to suppress warnings
 
