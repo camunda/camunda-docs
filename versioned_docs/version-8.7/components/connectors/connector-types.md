@@ -37,7 +37,7 @@ If your Camunda 8 installation doesn't include Operate, you can only use outboun
 :::note
 The connector Runtime currently fetches only the **latest version** of each process definition.
 
-Previously activated inbound connectors for older versions of a process definition are deactivated when a new version of the process definition is deployed. You can [migrate older versions](../../concepts/process-instance-migration) to the latest version to keep using inbound connectors.
+Deploying a new process definition version deactivates inbound connectors from older versions. [Migrate older versions](../../concepts/process-instance-migration) if the new inbound connector configuration won't correlate messages for existing instances.
 :::
 
 ![Inbound connectors](img/inbound-connectors.png)
