@@ -467,7 +467,7 @@ An approved invoice can't get archived:
 
 ```java
 @Test
-  public void testArchiveSystemError() throws Exception {
+public void testArchiveSystemError() throws Exception {
     final HashMap<String, Object> variables = new HashMap<String, Object>();
     variables.put("approver", "Zee");
     variables.put("invoice", objectMapper.readTree(invoiceJson));
@@ -558,63 +558,51 @@ In the invoice approval example, the `Send invoice rejection` task leverages an 
 </bpmn:serviceTask>
 ```
 
-Now you can run a Mock for the REST endpoint. Because CPT uses Testcontainers, you also need to run a container for the mock - the connector runtime cannot access any mock directly spun up in the JUnit test. You can use [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/). Therefore:
+You can mock the REST endpoint using the Spring Boot integration of [WireMock](http://wiremock.org/), allowing you to stub the endpoint in your JUnit test and make it accessible to the TestContainers runtime.
 
-1. Add the required [Testcontainers Mockserver Module](https://java.testcontainers.org/modules/mockserver/) dependencies to your test case (`org.testcontainers:mockserver` and `org.mock-server:mockserver-client-java` at the time of writing) .
-2. Start the mockserver early in the test lifecycle, so that you can capture the URL for the mock (which typically gets a random PORT).
-3. Use the secrets in Camunda to configure the endpoint of the REST call, which is best practice anyway to configure the URL in the environment. In the test you need to set it to the URL of the mock.
+1. Add the required [WireMock Spring Boot](https://wiremock.org/docs/spring-boot/) dependency to your project (`org.wiremock.integrations:wiremock-spring-boot`).
+2. Add the annotation `@EnableWireMock` to your test class to start the WireMock server.
+3. Use the secrets in Camunda to configure the endpoint of the REST call, which is best practice anyway to configure the URL in the environment. In the test you need to set it to the URL containing of the hostname `host.testcontainers.internal` and the WireMock server port.
 4. Make sure the connector runtime is enabled in the test case, so that the out-of-the-box REST connector is executed.
+5. Expose the WireMock server port to the TestContainers runtime before running the test case.
 
 Here is the relevant source code:
 
 ```java
+@EnableWireMock
 @SpringBootTest(
     properties = {
-      "camunda.client.worker.defaults.enabled=false",
-      "io.camunda.process.test.connectors-enabled=true"
+        "camunda.client.worker.defaults.enabled=false",
+        "camunda.process-test.connectors-enabled=true",
+        "camunda.process-test.connectors-secrets.INVOICE_REJECTION_URL="
+            + "http://host.testcontainers.internal:${wiremock.server.port}"
     })
-@CamundaSpringProcessTest
-@Testcontainers
 public class InvoiceApprovalIntegrationTest {
 
-  public static final DockerImageName MOCKSERVER_IMAGE =
-      DockerImageName.parse("mockserver/mockserver")
-          .withTag("mockserver-" + MockServerClient.class.getPackage().getImplementationVersion());
-  static MockServerContainer mockServer = new MockServerContainer(MOCKSERVER_IMAGE);
-  static {  // ensures it's ready before property injection in overrideSecrets() - @Container comes too late
-    mockServer.start();
-  }
+  @Value("${wiremock.server.port}")
+  private int wireMockPort;
 
-  @DynamicPropertySource
-  static void overrideSecrets(DynamicPropertyRegistry registry) {
-    final String baseUrl = "http://" + mockServer.getHost() + ":" + mockServer.getServerPort();
-    registry.add("io.camunda.process.test.connectors-secrets.INVOICE_REJECTION_URL", () -> baseUrl);
+  @BeforeEach
+  void setup() {
+    Testcontainers.exposeHostPorts(wireMockPort);
   }
 
   @Test
   public void testRejectionPath() throws Exception {
     // configure mock behavior
-    final MockServerClient mockServerClient = new MockServerClient(mockServer.getHost(), mockServer.getServerPort());
-    mockServerClient
-        .when(request().withMethod("POST").withPath("/reject"))
-        .respond(response().withStatusCode(200).withBody("ok"));
+    stubFor(post("/reject").willReturn(aResponse().withStatus(200).withBody("ok")));
 
     // Now drive the test case as in a unit test shown above ...
 
     // Verify the mock was called
-    mockServerClient.verify(
-        request()
-            .withMethod("POST")
-            .withBody(
-                json(
+    verify(
+        postRequestedFor(urlEqualTo("/reject"))
+            .withRequestBody(
+                equalToJson(
                     """
-            {
-              "invoiceId": "INV-1001",
-              "rejectionReason": "it is a test case :-)"
-            }
-          """,
-                    MediaType.APPLICATION_JSON))
-            .withPath("/reject"),
-        VerificationTimes.once());
+                    {
+                      "invoiceId": "INV-1001",
+                      "rejectionReason": "it is a test case :-)"
+                    }""")));
   }
 ```
