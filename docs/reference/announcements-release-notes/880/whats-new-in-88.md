@@ -223,7 +223,7 @@ Resource authorizations, groups, and roles formerly managed via Console are repl
 - These are automatically migrated during the Camunda 8.8 upgrade to preserve your existing Access Management configuration at the time of the update.
 - After upgrading a cluster to 8.8, changes to resource authorizations and roles made in Console no longer affect the 8.8 cluster.
 - Users and clients are created and managed in Console, with their authorizations managed via the Orchestration Cluster.
-- Console cluster settings in 8.8 allow toggling Orchestration Cluster authorizations. They are enabled by default for any migrated cluster. The automated migration ensures that your users and clients can access the UIs and APIs like before.
+- Console cluster settings in 8.8 allow you to toggle Orchestration Cluster authorizations. Authorizations are enabled by default for any migrated cluster. The automated migration ensures that your users and clients can access the UIs and APIs as before.
 
 The following table summarizes where Identity entities are managed in Camunda 8.8 SaaS:
 
