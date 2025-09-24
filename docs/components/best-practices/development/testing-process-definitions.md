@@ -228,27 +228,27 @@ You can use the same [utilities from Camunda Process Test](../../../apis-tools/t
 
 ```java
 // Define the mock
-final AtomicBoolean addInvoiceJobWorkerCalled = new AtomicBoolean(false);
-processTestContext
-    .mockJobWorker("add-invoice-to-accounting")
-    .withHandler(
-        (jobClient, job) -> {
-            addInvoiceJobWorkerCalled.set(true);
-            // check input mapping
-            assertEquals("INV-1001", job.getVariablesAsMap().get("invoiceId"));
-            jobClient
-                .newCompleteCommand(job)
-                // .variables(null) //  We could now also simulate setting some response values
-                .send()
-                .join();
-        });
+final JobWorkerMock addInvoiceJobWorkerMock =
+    processTestContext
+        .mockJobWorker("add-invoice-to-accounting")
+        .withHandler(
+            (jobClient, job) -> {
+                jobClient
+                    .newCompleteCommand(job)
+                    // .variables(null) //  We could now also simulate setting some response values
+                    .send()
+                    .join();
+            });
 
 // ... drive the process ...
 
 // and assert:
-assertThat(addInvoiceJobWorkerCalled.get())
+assertThat(addInvoiceJobWorkerMock.getInvocations())
     .as("add-invoice-to-accounting job worker called")
-    .isTrue();
+    .isEqualTo(1);
+
+assertThat(addInvoiceJobWorkerMock.getActivatedJobs().get(0).getVariablesAsMap())
+    .containsEntry("invoiceId", "INV-1001");
 ```
 
 ### Drive the process and assert the state
