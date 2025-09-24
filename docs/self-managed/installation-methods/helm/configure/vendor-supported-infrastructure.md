@@ -127,18 +127,20 @@ Ensure you source this environment setup before running any deployment scripts i
 
 Each infrastructure component should be deployed individually in the following order:
 
-| Order | Component            | Dependencies | Purpose                                                              |
-| ----- | -------------------- | ------------ | -------------------------------------------------------------------- |
-| 1     | **PostgreSQL**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
-| 2     | **Elasticsearch**    | None         | Data storage for orchestration cluster components                    |
-| 3     | **Keycloak**         | PostgreSQL   | Authentication and identity management                               |
-| 4     | **Camunda Platform** | All above    | Deploy using Helm with vendor-supported infrastructure               |
+| Order | Component                                      | Dependencies | Purpose                                                              |
+| ----- | ---------------------------------------------- | ------------ | -------------------------------------------------------------------- |
+| 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
+| 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Data storage for orchestration cluster components                    |
+| 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
+| 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with vendor-supported infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
 :::
 
 ---
+
+## PostgreSQL deployment
 
 ### Overview
 
@@ -551,6 +553,11 @@ Create the required secrets for Camunda Platform authentication. For detailed gu
 ### Helm deployment
 
 Deploy Camunda Platform using the infrastructure configuration files you saved from previous sections:
+
+```bash
+# Set the desired Helm chart version - see https://helm.camunda.io/camunda-platform/version-matrix/
+export HELM_CHART_VERSION=13.0.0  # Replace with your desired version
+```
 
 <Tabs groupId="camunda-deployment">
   <TabItem value="with-domain" label="With external domain" default>
