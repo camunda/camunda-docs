@@ -49,7 +49,7 @@ kubectl create namespace management
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management`:** We will install [Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), and [Connectors](/self-managed/components/connectors/overview.md).
 
@@ -217,9 +217,9 @@ elasticsearch:
   enabled: false
 ```
 
-#### Connect to an external database for Identity
+#### Connect to an external database for Management Identity
 
-The following example `values.yaml` configures Identity with an external Amazon Aurora PostgreSQL database:
+The following example `values.yaml` configures Management Identity with an external Amazon Aurora PostgreSQL database:
 
 ```yaml
 identity:
@@ -351,6 +351,7 @@ The following resources and configuration options are important to keep in mind 
   ```
 
   This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
+
   - High availability: If one node fails, other nodes running the same component remain unaffected.
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
