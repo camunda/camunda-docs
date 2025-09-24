@@ -569,6 +569,8 @@ You can mock the REST endpoint using the Spring Boot integration of [WireMock](h
 Here is the relevant source code:
 
 ```java
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+
 @EnableWireMock
 @SpringBootTest(
     properties = {
@@ -577,6 +579,7 @@ Here is the relevant source code:
         "camunda.process-test.connectors-secrets.INVOICE_REJECTION_URL="
             + "http://host.testcontainers.internal:${wiremock.server.port}"
     })
+@CamundaSpringProcessTest
 public class InvoiceApprovalIntegrationTest {
 
   @Value("${wiremock.server.port}")
