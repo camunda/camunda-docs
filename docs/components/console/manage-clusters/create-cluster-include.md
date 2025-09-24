@@ -46,7 +46,13 @@ To learn more about the differences between **development clusters** and **produ
 
 You can decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
-Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page. By default, `dev` and `test` clusters have [authorization-based access control](/components/concepts/access-control/authorizations.md) disabled and `stage` and `prod` have it enabled. You can change this setting during cluster creation and at any later time.
+### Tags
+
+Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`.
+
+- Assigning a tag makes it easier for team members to clearly distinguish between different stages of the software development lifecycle.
+- Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
+- [Authorization-based access control](/components/concepts/access-control/authorizations.md) is disabled by default for `dev` and `test` clusters, and enabled for `stage` and `prod` clusters. You can change this setting during and after cluster creation.
 
 :::info
 Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.
