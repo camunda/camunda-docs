@@ -8,7 +8,7 @@ toc_max_heading_level: 3
 
 import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
-Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release are summarized below.
+Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release.
 
 | Minor release date | Scheduled end of maintenance | Changelog(s) | Release blog | Upgrade guides                                                                                 |
 | ------------------ | ---------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------- |
@@ -411,13 +411,13 @@ See [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/compon
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
+<span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
   
 #### Helm chart: Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in 8.6 and is removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/installation-methods/helm/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 
@@ -545,7 +545,7 @@ User tasks with a job worker implementation are deprecated and no longer support
 </div>
 <div className="release-announcement-content">
   
-#### Starter plan removed
+#### Removed: Starter plan
 
 The Camunda SaaS Starter plan is no longer available.
 
