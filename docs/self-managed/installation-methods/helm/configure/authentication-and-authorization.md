@@ -70,7 +70,7 @@ In Helm, arrays must be overwritten in full. The default array must be configure
 
 ## Internal Keycloak
 
-The reason to to enable internal keyclaok is if you do not have an external IdP and you would like to use the other components that are disabled by default in the Camunda Helm chart, such as:
+You should enable the internal Keycloak if you don’t have an external IdP but want to use additional Camunda components that are disabled by default in the Camunda Helm chart, such as:
 
 - Management Identity
 - Console
