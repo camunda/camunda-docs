@@ -34,7 +34,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 ![Architecture Diagram](./img/architecture.png)
 
-For more information refer to the Camunda 8 [kubernetes reference architectures](/self-managed/reference-architecture/kubernetes/#kubernetes).
+For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
 
 ## Installation and configuration
 
