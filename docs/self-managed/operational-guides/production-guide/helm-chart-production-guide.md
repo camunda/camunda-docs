@@ -30,11 +30,11 @@ Ensure all prerequisites are in place to avoid issues during installation or whe
 
 ## Architecture overview
 
-For more information about the Camunda 8 architecture, refer to the [Self-Managed overview](/self-managed/about-self-managed.md#architecture) and Camunda 8 [reference architectures](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
-
-Below is the high-level architecture diagram for the base production setup:
+This is the high-level architecture diagram for our production setup, as illustrated below:
 
 ![Architecture Diagram](./img/architecture.png)
+
+For more information refer to the Camunda 8 [kubernetes reference architectures](/self-managed/reference-architecture/kubernetes/#kubernetes).
 
 ## Installation and configuration
 
@@ -45,11 +45,11 @@ After following the [prerequisites](#prerequisites), you should have an EKS clus
 To get started, create two namespaces:
 
 ```bash
-kubectl create namespace management
+kubectl create namespace management-and-modeling
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and all the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
+- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), [Console](/self-managed/components/console/overview.md), [Optimize](/self-managed/components/optimize/overview.md), and the [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md) components.
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), and [Connectors](/self-managed/components/connectors/overview.md).
 
@@ -61,7 +61,7 @@ For more information on the difference between the Orchestration Cluster and the
 
 ### Install the Helm chart
 
-As there will be a Helm deployment in each namespace, create your own `management-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
+As there will be a Helm deployment in each namespace, create your own `management-and-modeling-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
@@ -70,9 +70,9 @@ The Camunda Helm chart can be installed in each namespace using the following co
 helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
-# This will install the latest Camunda Helm chart in the management namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management \
-    --values management-values.yaml
+# This will install the latest Camunda Helm chart in the management-and-modeling namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management-and-modeling \
+    --values management-and-modeling-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
@@ -142,7 +142,7 @@ identity:
         existingSecret: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
         existingSecretKey: certificate-secret-data
       audience: "00000000-0000-0000-0000-000000000000" #same as client ID
-      redirectUrl: https://management-host.com/identity
+      redirectUrl: https://management-and-modeling-host.com/identity
       initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
     optimize:
       clientId: "00000000-0000-0000-0000-000000000000"
@@ -172,13 +172,13 @@ identity:
       secret:
         existingSecret: oidc-certificate-console
         existingSecretKey: certificate-secret-data
-      redirectUrl: https://management-host.com
+      redirectUrl: https://management-and-modeling-host.com
     webModeler:
       clientId: "00000000-0000-0000-0000-000000000000"
       audience: "00000000-0000-0000-0000-000000000000"
       clientApiAudience: "00000000-0000-0000-0000-000000000000"
       publicApiAudience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://modeler.management-host.com
+      redirectUrl: https://modeler.management-and-modeling-host.com
 ```
 
 For more information, see how to [connect to an OpenID Connect provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
@@ -267,7 +267,7 @@ For more information on connecting to external databases, the following guides a
 At this point, you should be able connect to your platform through HTTPS, correctly authenticate users using AWS Simple Active Directory, and have connected to external databases such as Amazon OpenSearch and Amazon PostgreSQL.
 :::
 
-The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
+The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-and-modeling-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
 
 ### Elasticsearch/OpenSearch index retention
 
@@ -484,9 +484,9 @@ The following resources and configuration options are important to keep in mind 
 
 The following is a complete configuration example, taking all the above sections into consideration.
 
-### Example management configuration
+### Example management-and-modeling configuration
 
-The following example `management-values.yaml` is provided to the `management` [namespace](#namespace-setup):
+The following example `management-and-modeling-values.yaml` is provided to the `management-and-modeling` [namespace](#namespace-setup):
 
 ```yaml
 global:
@@ -496,7 +496,7 @@ global:
   ingress:
     enabled: true
     className: nginx
-    host: management-host.com
+    host: management-and-modeling-host.com
     tls:
       enabled: true
       secretName: camunda-platform
@@ -514,7 +514,7 @@ global:
           existingSecret: oidc-certificate-identity
           existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://management-host.com/identity
+        redirectUrl: https://management-and-modeling-host.com/identity
         initialClaimValue: "00000000-0000-0000-0000-000000000000"
       optimize:
         clientId: "00000000-0000-0000-0000-000000000000"
@@ -544,13 +544,13 @@ global:
         secret:
           existingSecret: oidc-certificate-console
           existingSecretKey: certificate-secret-data
-        redirectUrl: https://management-host.com
+        redirectUrl: https://management-and-modeling-host.com
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         audience: "00000000-0000-0000-0000-000000000000"
         clientApiAudience: "00000000-0000-0000-0000-000000000000"
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
-        redirectUrl: https://modeler.management-host.com
+        redirectUrl: https://modeler.management-and-modeling-host.com
 identity:
   contextPath: /identity
   firstUser:
@@ -609,25 +609,25 @@ console:
           method: plain
           releases:
             - name: camunda
-              namespace: management
+              namespace: management-and-modeling
               version: 13.x.x
               components:
                 - name: Console
                   id: console
                   version: 8.8.x
-                  url: https://management-host.com/
+                  url: https://management-and-modeling-host.com/
                   readiness: http://camunda-console.oidc:9100/health/readiness
                   metrics: http://camunda-console.oidc:9100/prometheus
                 - name: Identity
                   id: identity
                   version: 8.8.x
-                  url: https://management-host.com/identity
+                  url: https://management-and-modeling-host.com/identity
                   readiness: http://camunda-identity.oidc:82/actuator/health
                   metrics: http://camunda-identity.oidc:82/actuator/prometheus
                 - name: WebModeler WebApp
                   id: webModelerWebApp
                   version: 8.8.x
-                  url: https://management-host.com/modeler
+                  url: https://management-and-modeling-host.com/modeler
                   readiness: http://camunda-web-modeler-webapp.oidc:8071/health/readiness
                   metrics: http://camunda-web-modeler-webapp.oidc:8071/metrics
             - name: camunda
@@ -693,7 +693,7 @@ global:
       port: 443
   identity:
     service:
-      url: "http://management-identity.management.svc.cluster.local:80/identity"
+      url: "http://management-identity.management-and-modeling.svc.cluster.local:80/identity"
     auth:
       type: MICROSOFT
       issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
