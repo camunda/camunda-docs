@@ -152,7 +152,12 @@ This namespace also includes **Keycloak** as an example OIDC Identity Provider (
 :::warning Identity separation
 
 Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity), which is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients, OIDC must be used.
-:::
+
+For configuration details, see:
+
+- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
+- [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+  :::
 
 The **Orchestration Cluster** can be configured to authenticate via **OIDC** by connecting to the **Management Identity** service deployed in this namespace.
 
