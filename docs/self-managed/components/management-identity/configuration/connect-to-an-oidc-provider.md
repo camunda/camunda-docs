@@ -10,12 +10,13 @@ import TabItem from "@theme/TabItem";
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-To enable a smoother integration with your existing systems, Camunda supports connecting Management Identity to an OpenID Connect (OIDC) authentication provider. A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
-
-This guide steps through the configuration required to connect Camunda to your authentication provider.
+Connect Management Identity to an OpenID Connect (OIDC) authentication provider for integration with your existing system.
 
 :::note
-To connect to a Keycloak authentication provider, see our guide on [using an existing Keycloak](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+
+- A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
+- To connect to a Keycloak authentication provider, see [connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+
 :::
 
 ## Prerequisites
