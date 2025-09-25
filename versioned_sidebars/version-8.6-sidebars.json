@@ -620,8 +620,7 @@
             "components/best-practices/development/dealing-with-problems-and-exceptions",
             "components/best-practices/development/handling-data-in-processes",
             "components/best-practices/development/routing-events-to-processes",
-            "components/best-practices/development/testing-process-definitions",
-            "components/best-practices/development/secondary-storage-management"
+            "components/best-practices/development/testing-process-definitions"
           ],
           "Modeling": [
             "components/best-practices/modeling/creating-readable-process-models",
@@ -1742,7 +1741,8 @@
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges"
+        "self-managed/concepts/opensearch-privileges",
+        "self-managed/concepts/secondary-storage-management"
       ]
     },
     {
