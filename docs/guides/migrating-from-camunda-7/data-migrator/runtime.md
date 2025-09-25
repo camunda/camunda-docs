@@ -210,8 +210,9 @@ This approach ensures that:
 - The default behavior is to migrate only process instances without assigned tenant.
 - When migrating process instances, the migrator can be configured to handle specific tenants
   throughout the migration process. Defining tenant IDs ensures that only process instances
-  associated with those tenants are migrated. Make sure to create the tenants in Camunda 8 before
-  starting the migration.
+  associated with those tenants are migrated.
+  - Make sure to create the tenants in Camunda 8 before starting the migration.
+  - Add `Authentication configuration for the client` and assign the user to the all of the tenants
 
 ### How Multi-Tenancy Works
 
