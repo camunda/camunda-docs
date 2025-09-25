@@ -42,13 +42,13 @@ The authorization system is built on the principle of **least privilege**.
 
 This model is enforced across both web components and API requests.
 
+### Owners, resources, and permissions
+
 At its core, an authorization grants an **owner** specific **permissions** on a **resource**. For example:
 
 - User `john.doe` can be authorized to create new users.
 - Group `devOps` can be authorized to delete the group `sales`.
 - Role `processOwner` can be authorized to deploy and run all processes.
-
-### Owners, resources, and permissions
 
 #### Owners
 

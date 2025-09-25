@@ -1,10 +1,14 @@
 ---
 id: authorization
 title: Authorizations
-description: "Learn how to manage authorizations to an orchestration cluster."
+description: "Learn how to manage authorizations to an Orchestration Cluster."
 ---
 
 import AuthImg from './img/create-authorization-tab.png';
+
+Create and manage your Orchestration Cluster authorizations.
+
+## About authorizations
 
 An authorization grants an **owner** access to a **resource** and defines the specific **permissions** they have.
 
@@ -23,9 +27,9 @@ To learn more, see [Orchestration Cluster authorization](/components/concepts/ac
 
 To create a new authorization:
 
-1. Log in to Identity in your cluster, and click on the **Authorizations** tab.
+1. Log in to Identity in your cluster, and select the **Authorizations** tab.
 2. Select a resource type from the list on the left, and click **Create authorization**.
-3. Provide the following information:
+3. Enter the following information:
    - **Owner type**: The entity to which you want to assign permissions, such as a User, Group, Role, Client, or Mapping rule.
    - **Owner ID**: The unique ID of the owner.
    - **Resource type**: The selected resource type.
@@ -47,7 +51,7 @@ To edit an authorization, [delete](#delete-an-authorization) the existing author
 
 To delete an authorization:
 
-1. Log in to Identity in your cluster, and click on the **Authorizations** tab.
+1. Log in to Identity in your cluster, and select the **Authorizations** tab.
 2. Select the resource type of the authorization you want to delete.
 3. In the list, find the authorization you want to remove and click **Delete**.
 4. Confirm the deletion by clicking **Delete** in the confirmation dialog.
