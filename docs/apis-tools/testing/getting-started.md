@@ -38,7 +38,7 @@ For the default [Testcontainers runtime](configuration.md#testcontainers-runtime
 
 ## Install
 
-CPT has two variations:
+CPT has two variants:
 
 - For the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
 - For the [Camunda Java client](/apis-tools/java-client/getting-started.md)

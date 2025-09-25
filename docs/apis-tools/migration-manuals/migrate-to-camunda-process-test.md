@@ -249,6 +249,7 @@ class MyProcessTest {
 First, migrate the general test class structure:
 
 1. **Replace annotations and types**
+
    - Replace `@ZeebeProcessTest` with `@CamundaProcessTest`
    - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
 
@@ -540,7 +541,7 @@ CamundaAssert.assertThatProcessInstance(byKey(correlateMessageResponse.getProces
 
 ZPT provides the `InspectionUtility` to locate process instances and pass them to assertions. Some assertions also include methods to extract related entities, such as `extractingProcessInstance()` or `extractingLatestIncident()`.
 
-CPT offers a similar utility via the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector`), which can be used with `CamundaAssert.assertThatProcessInstance()`. For other entities, you can use the Camunda client to search for the entity and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
+CPT offers a similar utility via the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector), which can be used with `CamundaAssert.assertThatProcessInstance()`. For other entities, you can use the Camunda client to search for the entity and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
 
 ```java
 // ZPT:

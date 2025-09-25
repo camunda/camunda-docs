@@ -58,7 +58,7 @@ camunda:
     camunda-exposed-ports:
       - 9000
     # Change the Camunda logger name
-    camundaLoggerName: tc.camunda
+    camunda-logger-name: tc.camunda
     # Enable Connectors
     connectors-enabled: true
     # Change the Connectors Docker image
@@ -72,10 +72,10 @@ camunda:
     connectors-secrets:
       secret_1: value_1
     # Expose additional Connectors ports
-    connectorsExposedPorts:
+    connectors-exposed-ports:
       - 9010
     # Change the Connectors logger name
-    connectorsLoggerName: tc.connectors
+    connectors-logger-name: tc.connectors
 ```
 
 </TabItem>
@@ -175,8 +175,8 @@ camunda:
     multi-tenancy-enabled: true
 ```
 
-By enabling multi-tenancy, the runtime enables Basic Auth security and creates a default user `demo` with admin rights
-to interact with the runtime.
+By enabling multi-tenancy, the runtime enables Basic Auth security and creates a default user with username/password
+`demo` with admin rights to interact with the runtime.
 
 A process test using multi-tenancy could look like the following example:
 
@@ -280,8 +280,8 @@ public class MyProcessTest {
 }
 ```
 
-By enabling multi-tenancy, the runtime enables Basic Auth security and creates a default user `demo` with admin rights
-to interact with the runtime.
+By enabling multi-tenancy, the runtime enables Basic Auth security and creates a default user with username/password
+`demo` with admin rights to interact with the runtime.
 
 A process test using multi-tenancy could look like the following example:
 

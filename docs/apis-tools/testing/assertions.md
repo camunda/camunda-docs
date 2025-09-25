@@ -111,7 +111,7 @@ assertThatProcessInstance(byKey(processInstanceKey)).isActive();
 assertThatProcessInstance(byProcessId("my-process")).isActive();
 
 // by parent process instance key
-assertThatProcessInstance(byParentProcesInstanceKey(parentProcessInstanceKey)).isActive();
+assertThatProcessInstance(byParentProcessInstanceKey(parentProcessInstanceKey)).isActive();
 
 // combine selectors
 assertThatProcessInstance(
