@@ -1,6 +1,6 @@
 ---
 id: docker-compose
-title: "Developer quickstart - Docker Compose"
+title: "Developer quickstart with Docker Compose"
 sidebar_label: "Docker Compose"
 description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster on Docker Compose"
 ---
@@ -9,17 +9,21 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import {DockerCompose} from "@site/src/components/CamundaDistributions";
 
-A Docker Compose configuration to run Camunda Self-Managed components (Orchestration Cluster, Optimize, Console, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+Get started with a Docker Compose configuration to run Camunda Self-Managed components (Orchestration Cluster, Optimize, Console, and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-While the [Docker images](/self-managed/installation-methods/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed for developers to run a local environment and are not intended for production use. For production, we recommend [Kubernetes](/self-managed/installation-methods/helm/install.md).
+While the [Docker images](/self-managed/installation-methods/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed for developers to run a local environment and are not intended for production use. For production, Camunda recommends [Kubernetes](/self-managed/installation-methods/helm/install.md).
 :::
 
 ## Prerequisites
 
-- **Docker Compose:** Version 1.27.0 or higher (supports the [latest compose specification](https://docs.docker.com/compose/compose-file/)).
-- **Docker:** Version 20.10.16 or higher.
-- **Keycloak:** (Local development only). Configure Keycloak to resolve to 127.0.0.1 on your local machine and set `KEYCLOAK_HOST=keycloak` in the `.env` file for token refresh and logout functionality.
+The following prerequisites are required to run Camunda Self-Managed via Docker Compose:
+
+| Prerequisite   | Description                                                                                                                                                                               |
+| :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Docker Compose | Version 1.27.0 or higher (supports the [latest compose specification](https://docs.docker.com/compose/compose-file/)).                                                                    |
+| Docker         | Version 20.10.16 or higher.                                                                                                                                                               |
+| Keycloak       | (Local development only) Configure Keycloak to resolve to 127.0.0.1 on your local machine and set `KEYCLOAK_HOST=keycloak` in the `.env` file for token refresh and logout functionality. |
 
 ## Run Camunda 8 with Docker Compose
 
@@ -28,19 +32,21 @@ To start a complete Camunda 8 Self-Managed environment locally:
 1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
 2. Run the following command in the extracted directory:
 
-```shell
-docker compose up -d
-```
+   ```shell
+   docker compose up -d
+   ```
 
-3. Wait for the environment to initialize. This may take several minutes. Monitor the logs, especially the Keycloak container log, to ensure the components have started.
+3. Wait for the environment to initialize (this can take several minutes). Monitor the logs (especially the Keycloak container log) to ensure the components have started.
 
 ### Configuration options
 
 Running `docker compose up -d` starts all Camunda components. The [Camunda Distributions repository](https://github.com/camunda/camunda-distributions) also includes additional configuration files for lightweight development.
 
-- **docker-compose.yaml:** Contains all Camunda 8 components for a full-stack deployment, including the Orchestration Cluster, Connectors, Optimize, Console, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL.
-- **docker-compose-core.yaml:** Contains only the Camunda 8 Orchestration Cluster components and Connectors.
-- **docker-compose-web-modeler.yaml:** Contains the standalone Camunda 8 Web Modeler installation. For more information, see the [Web Modeler instructions](#web-modeler).
+| Configuration File              | Description                                                                                                                                                                              |
+| :------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker-compose.yaml             | Contains all Camunda 8 components for a full-stack deployment, including the Orchestration Cluster, Connectors, Optimize, Console, Elasticsearch, Keycloak, Web Modeler, and PostgreSQL. |
+| docker-compose-core.yaml        | Contains only the Camunda 8 Orchestration Cluster components and Connectors.                                                                                                             |
+| docker-compose-web-modeler.yaml | Contains the standalone Camunda 8 Web Modeler installation. For more information, see the [Web Modeler instructions](#web-modeler).                                                      |
 
 To start Camunda with an alternate configuration, specify the configuration file using the following command:
 
@@ -50,24 +56,36 @@ docker compose -f docker-compose-core.yaml up -d
 
 ### Access components
 
-Running components can be accessed with the username `demo` and password `demo`:
+You can log in to the component web interfaces with the default credentials:
 
-- Operate: [http://localhost:8088/operate](http://localhost:8088/operate)
-- Tasklist: [http://localhost:8088/tasklist](http://localhost:8088/tasklist)
-- Optimize: [http://localhost:8083](http://localhost:8083)
-- Console: [http://localhost:8087](http://localhost:8087)
-- Identity: [http://localhost:8084](http://localhost:8084)
-- Web Modeler: [http://localhost:8070](http://localhost:8070)
-- Elasticsearch: [http://localhost:9200](http://localhost:9200)
+- **Username:** `demo`
+- **Password:** `demo`
 
-Keycloak is used to manage users and can be accessed with the username `admin` and password `admin`:
+#### Orchestration Cluster
 
-- Keycloak: [http://localhost:18080/auth/](http://localhost:18080/auth/)
+| Component                      | URL                                                              |
+| :----------------------------- | :--------------------------------------------------------------- |
+| Operate                        | [http://localhost:8088/operate](http://localhost:8088/operate)   |
+| Tasklist                       | [http://localhost:8088/tasklist](http://localhost:8088/tasklist) |
+| Identity                       | [http://localhost:8088/identity](http://localhost:8088/identity) |
+| Orchestration Cluster REST API | `http://localhost:8088/v2`                                       |
+| Zeebe API (gRPC)               | `localhost:26500`                                                |
 
-The Orchestration Cluster is available using gRPC:
+#### Management and modeling components
 
-- Cluster endpoint: `localhost:26500`
-- v2 REST API: `http://localhost:8088/v2`
+| Component           | URL                                            |
+| :------------------ | :--------------------------------------------- |
+| Console             | [http://localhost:8087](http://localhost:8087) |
+| Optimize            | [http://localhost:8083](http://localhost:8083) |
+| Management Identity | [http://localhost:8084](http://localhost:8084) |
+| Web Modeler         | [http://localhost:8070](http://localhost:8070) |
+
+#### External dependencies
+
+| Component     | URL                                                          | Description                                                                                                                                                                                              |
+| :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster (as secondary storage) and Optimize.                                                                                                                                   |
+| Keycloak      | [http://localhost:18080/auth/](http://localhost:18080/auth/) | Used to manage users for Management and Modeling components. Users for the Orchestration Cluster are managed within the Orchestration Cluster itself. Access with username `admin` and password `admin`. |
 
 ### Stop Camunda 8
 
@@ -78,10 +96,10 @@ docker compose down -v
 ```
 
 :::caution
-This will also delete any data you created.
+This will also delete any data you have created.
 :::
 
-To tear down the environment and keep any data, run the following command:
+To tear down the environment and keep your data, run the following command:
 
 ```shell
 docker compose down
@@ -92,7 +110,7 @@ docker compose down
 ### Web Modeler
 
 :::info
-Non-production installations of Web Modeler are limited to five collaborators per project. Refer to the [licensing documentation](/reference/licenses.md) for more information.
+Non-production installations of Web Modeler are limited to five collaborators per project. See [licensing](/reference/licenses.md).
 :::
 
 #### Standalone setup
@@ -113,7 +131,7 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 
 #### Deploy or execute a process
 
-The local orchestration cluster started using the provided `docker-compose.yaml` is pre-configured in Web Modeler.
+The local orchestration cluster started by the provided `docker-compose.yaml` is pre-configured in Web Modeler.
 
 #### Emails
 
@@ -141,7 +159,7 @@ By default, the Orchestration Cluster REST API is publicly accessible without re
 
 ## Connectors
 
-Both the full and lightweight Docker Compose files include a configuration for [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide related connector templates for modeling.
+Both the full and lightweight Docker Compose files include a configuration for [Camunda connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md). Refer to the [Connector installation guide](/self-managed/components/connectors/overview.md) for details on how to provide related connector templates for modeling.
 
 ### Connector secrets
 
@@ -149,7 +167,7 @@ Secrets can be added into the connector runtime using the included `connector-se
 
 ### Custom connectors
 
-To add custom connectors, create a new Docker image bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
+To add custom connectors, create a new Docker image, bundling them as described in the [Connectors repository](https://github.com/camunda/connectors).
 
 Alternatively, you can mount new connector JARs as volumes into the `/opt/app` folder by adding this to the Docker Compose file. Keep in mind that connector JARs must include all necessary dependencies inside the JAR.
 

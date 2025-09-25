@@ -40,7 +40,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 ### Prerequisites
 
 - **A Camunda 8 Orchestration Cluster**
-  - For local development, use [C8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
+  - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/installation-methods/helm/install.md) or [manual installation](/self-managed/installation-methods/manual/install.md).
 
 - **A client to send API requests**

@@ -52,24 +52,24 @@ The runtime migration typically follows these phases:
 
 ### 1. Preparation
 
-- Stop C7 process execution to avoid starting new instances during migration.
+- Stop Camunda 7 process execution to avoid starting new instances during migration.
 - Migrate BPMN models using the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
-- Add required `migrator` execution listeners to None Start Events in C8 models.
-- Adjust C8 models to comply with migration limitations.
-- Test migrated models in a C8 environment.
-- Back up your C7 database before migration.
+- Add required `migrator` execution listeners to None Start Events in Camunda 8 models.
+- Adjust Camunda 8 models to comply with migration limitations.
+- Test migrated models in a Camunda 8 environment.
+- Back up your Camunda 7 database before migration.
 
 ### 2. Migration
 
-- Deploy C8 process models and resources to the target environment.
+- Deploy Camunda 8 process models and resources to the target environment.
 - Configure the migrator with proper database connections and settings.
 - Start the migrator and monitor progress through logs.
 - Verify results in Camunda 8 Operate.
 - Handle skipped instances by reviewing and addressing validation failures.
 - After successful migration, clean up models if needed:
-  - Remove `migrator` execution listeners from C8 models.
+  - Remove `migrator` execution listeners from Camunda 8 models.
   - Revert temporary model changes.
-  - Migrate instances to the latest version of C8 models if appropriate.
+  - Migrate instances to the latest version of Camunda 8 models if appropriate.
 
 ### 3. Validation
 
@@ -85,12 +85,12 @@ The migrator validates each process instance before migration and will skip inst
 
 | Skip reason                           | Condition (why it is skipped)                                                                                    |
 | :------------------------------------ | :--------------------------------------------------------------------------------------------------------------- |
-| Missing C8 process definition         | No corresponding Camunda 8 process definition is found for the Camunda 7 process ID.                             |
+| Missing Camunda 8 process definition  | No corresponding Camunda 8 process definition is found for the Camunda 7 process ID.                             |
 | Multi-instance activities             | The process instance has active multi-instance activities.                                                       |
 | Missing flow node elements            | The Camunda 7 instance is at a flow node that does not exist in the deployed Camunda 8 model.                    |
 | Missing None Start Event              | The Camunda 8 process definition does not have a process-level None Start Event.                                 |
 | Missing `migrator` execution listener | The Camunda 8 process definition does not have an execution listener of type `migrator` on the None Start Event. |
-| Multi-tenancy                         | Runtime migration is not supported for tenant-associated instances.                                              |
+| Multi-tenancy                         | The tenant ids are not configured in the Data Migrator.                                                          |
 
 When a process instance is skipped:
 
@@ -101,9 +101,9 @@ When a process instance is skipped:
 
 ### Common resolution steps
 
-1. Deploy the missing C8 process definition
+1. Deploy the missing Camunda 8 process definition
 1. Wait for multi-instance activities to complete
-1. Ensure all active flow nodes in the C7 process have corresponding elements in the C8 process
+1. Ensure all active flow nodes in the Camunda 7 process have corresponding elements in the Camunda 8 process
 1. Modify process instance to a supported state
 
 ## Usage examples
@@ -121,9 +121,9 @@ When a process instance is skipped:
 
 ## Job type configuration
 
-During migration, the Data Migrator starts new C8 process instances and sets a special `legacyId` variable to link them to their original C7 process instances. The migrator uses execution listeners on start events for its internal migration logic.
+During migration, the Data Migrator starts new Camunda 8 process instances and sets a special `legacyId` variable to link them to their original Camunda 7 process instances. The migrator uses execution listeners on start events for its internal migration logic.
 
-However, if users manually start new C8 process instances on models that still have these migration execution listeners, those instances won't have the `legacyId` variable. This creates a problem:
+However, if users manually start new Camunda 8 process instances on models that still have these migration execution listeners, those instances won't have the `legacyId` variable. This creates a problem:
 
 - The migrator would try to migrate process instances that don't need migration
 - This could cause errors or unexpected behavior
@@ -203,3 +203,57 @@ This approach ensures that:
 - Process instances started by the Data Migrator are handled by the `migrator` job worker.
 - Externally started process instances continue their normal execution flow through the `noop` job worker.
 - Both types of instances can coexist in the same Camunda 8 environment.
+
+## Tenants
+
+- Camunda 7 process instances assigned to no tenant (`tenantId=null`) are migrated to Camunda 8 with `<default>` tenant.
+- The default behavior is to migrate only process instances without assigned tenant ID.
+- When migrating process instances, the migrator can be configured to handle specific tenants
+  throughout the migration process. Defining tenant IDs ensures that only process instances
+  associated with those tenants are migrated.
+
+### How Multi-Tenancy Works
+
+1. **Validation**: Pre-migration validation ensures target tenant deployments exist in Camunda 8
+2. **Tenant Preservation**: Process instances maintain their original tenant association during
+   migration
+3. **Job Activation**: The migrator fetches jobs only for the configured tenants and the default
+   tenant when activating jobs
+
+### Example
+
+Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
+to specify which tenants should be included in the
+migration process. This property accepts a comma-separated list of tenant identifiers and doesn't
+need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
+
+```yaml
+camunda:
+  migrator:
+    tenant-ids: tenant-1, tenant-2, tenant-3 # There's no need to specify `<default>` tenant id, as it included by default.
+```
+
+With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`
+and `<default>` will be migrated. Instances associated with other tenants will be skipped.
+
+## Dropping the migration mapping schema
+
+The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instances.
+
+If you wish to drop this table after migration is completed, you can use the `--drop-schema` flag when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped).
+
+```bash
+# Migrate and drop the migration mapping schema on shutdown if migration was succcesful
+./start.sh --runtime --drop-schema
+```
+
+If you wish to drop the table regardless of the migration status, you can use the `--force` flag in combination with `--drop-schema`. This will perform the drop in all cases.
+
+```bash
+# Migrate and force drop the migration mapping schema on shutdown
+./start.sh --runtime --drop-schema --force
+```
+
+:::warning
+Using `--force` can lead to data loss. Use with caution.
+:::
