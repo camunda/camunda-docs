@@ -5,6 +5,8 @@ title: Configure authentication and authorization in Helm charts
 description: Learn how to configure authentication and authorization for Camunda Helm charts.
 ---
 
+This page explains how to configure authentication and authorization in Camunda Helm charts. It covers the default basic authentication, how to add users and roles, and how to enable internal Keycloak or connect to an external identity provider.
+
 ## Basic authentication
 
 Camunda Helm charts use basic authentication by default. No additional configuration is required.
@@ -70,27 +72,18 @@ In Helm, arrays must be overwritten in full. The default array must be configure
 
 ## Internal Keycloak
 
-You should enable the internal Keycloak if you don’t have an external IdP but want to use additional Camunda components that are disabled by default in the Camunda Helm chart, such as:
+Internal Keycloak is the Keycloak instance deployed as part of the Camunda Helm chart. From the Orchestration Cluster’s perspective, it behaves like an external OIDC provider, but it is bundled and managed within your cluster. This requires extra configuration in the Orchestration Cluster.
 
-- Management Identity
-- Console
-- Web Modeler
-- Optimize
+Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart. In addition, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against internal Keycloak.
 
-In the perspective of the Orchestration Cluster, the internal Keycloak component will be treated as an external identity provider. Therefore, some extra configuration is required in the Orchestration Cluster.
+For details on connecting to an external IdP such as Keycloak, see  
+[Using external Keycloak](/self-managed/installation-methods/helm/configure/using-external-keycloak.md).
 
-In addition, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against the internal Keycloak.
+### Create a secret
 
-Make sure to create a secret that will have all of the relevant secret keys listed, so it can be used for the below configurations. For this example, a `camunda-credentials` Kubernetes secret is created with the following keys:
+Create a secret that contains all required keys. For example, the following command creates a `camunda-credentials` secret:
 
-- identity-keycloak-postgresql-admin-password
-- identity-keycloak-postgresql-user-password
-- identity-keycloak-admin-password
-- identity-connectors-client-token
-
-Here is a `kubectl` command to create the secret:
-
-```yaml
+```bash
 kubectl create secret generic camunda-credentials \
 --from-literal=identity-keycloak-postgresql-admin-password=w8QYyElF3f \
 --from-literal=identity-keycloak-postgresql-user-password=w8QYyElF3f \
@@ -99,9 +92,16 @@ kubectl create secret generic camunda-credentials \
 --from-literal=identity-connectors-client-token=w8QYyElF3f
 ```
 
-### Enable Internal Keycloak
+This secret includes the following keys:
 
-Here is a configuration on how to enable internal Keycloak:
+- `identity-keycloak-postgresql-admin-password`
+- `identity-keycloak-postgresql-user-password`
+- `identity-keycloak-admin-password`
+- `identity-connectors-client-token`
+
+### Enable internal Keycloak
+
+Enable the Keycloak subchart and configure it to use the secret:
 
 ```yaml
 identityKeycloak:
@@ -117,11 +117,11 @@ identityKeycloak:
     passwordSecretKey: "identity-keycloak-admin-password"
 ```
 
-### Enable and Configure Management Identity
+### Configure Management Identity
 
-The next step is to configure the Management Identity component so Management Identity can configure internal Keycloak before startup. This is a required step for internal Keycloak to be configured correctly. For example, without this step you would not see the "Camunda Realm" on Keycloak. It is the job of Management Identity to create this realm among other entites within Internal Keycloak.
+Management Identity configures internal Keycloak before startup. For example, it creates the Camunda Realm and other required entities. Without this step, you won’t see the Camunda Realm in Keycloak.
 
-Here is the configuration for Management Identity:
+Management Identity configuration:
 
 ```yaml
 global:
@@ -136,13 +136,13 @@ identity:
     existingSecretKey: "identity-firstuser-password"
 ```
 
-The `identity.firstUser` means the first user that will be created within internal Keycloak. This user can be used to login to the Camunda Platform.
+`identity.firstUser` defines the first user created in internal Keycloak. Use this user to log in to Camunda.
 
-### Configure The Orchestration Cluster
+### Configure the Orchestration Cluster
 
-Once Management Identity has correctly configured Keycloak, it will be possible for the Orchestration Cluster to connect to internal Keycloak. The Orchestration cluster will treat internal Keycloak as an external identity provider and connect through OIDC.
+Once Management Identity has configured Keycloak, the Orchestration Cluster can connect to internal Keycloak. The Orchestration cluster treats internal Keycloak as an external IdP and connects through OIDC.
 
-Here is the configuration for the Orchestration Cluster:
+Orchestration Cluster configuration:
 
 ```yaml
 orchestration:
@@ -155,11 +155,11 @@ orchestration:
           existingSecretKey: "identity-orchestration-client-token"
 ```
 
-### Configure The Connectors Component
+### Configure the Connectors component
 
-The connectors component needs to know how to connect to the orchestration cluster. This is why it is neccessary to enter in the OIDC configurations for the connectors component. So the Connectors component can connect using the default configured Connectors client using OIDC and not using basic auth, for example.
+Connectors must be configured with OIDC to connect to the Orchestration Cluster. This ensures they use the default Connectors client using OIDC instead of basic authentication.
 
-Here is the configuration for the Connectors component:
+Connectors component configuration:
 
 ```yaml
 connectors:
@@ -171,9 +171,9 @@ connectors:
           existingSecretKey: "identity-connectors-client-token"
 ```
 
-### Bringing it All Together
+### Full configuration example
 
-Here is the full configuration file for enabling Internal Keycloak:
+Full configuration file to enable internal Keycloak:
 
 ```yaml
 global:
@@ -217,9 +217,9 @@ connectors:
           existingSecretKey: "identity-connectors-client-token"
 ```
 
-### Connecting to The Cluster
+### Connect to the cluster
 
-To connect to the cluster, you can run the following port forward commands:
+Use port forwarding to connect to the cluster:
 
 ```bash
 kubectl port-forward svc/camunda-zeebe-gateway 8082:8080
@@ -227,4 +227,18 @@ kubectl port-forward svc/camunda-keycloak 18080:80
 kubectl port-forward svc/camunda-identity 8084:80
 ```
 
-## External Identity Provider
+## External identity provider
+
+Instead of using internal Keycloak, you can configure Camunda to connect to an external IdP, such as an external Keycloak, Microsoft Entra ID, or Okta.
+
+See [Helm chart OpenID Connect provider setup](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) for details.
+
+### References
+
+- [Helm chart OpenID Connect provider setup](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md)
+- [Connect Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Using external Keycloak](/self-managed/installation-methods/helm/configure/using-external-keycloak.md)
+- Management Identity:
+  - [Connect Management Identity to an identity provider](docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+  - [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md)
+  - [Configure an external IdP provider](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md)
