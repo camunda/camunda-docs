@@ -233,7 +233,7 @@ Instead of using internal Keycloak, you can configure Camunda to connect to an e
 
 See [Helm chart OpenID Connect provider setup](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) for details.
 
-### References
+## References
 
 - [Helm chart OpenID Connect provider setup](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md)
 - [Connect Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
