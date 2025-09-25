@@ -389,7 +389,7 @@ Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeeb
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Elasticsearch and OpenSearch: Replica default increased to 1
 
 Starting in 8.8, the default replica count for Camunda indices in Elasticsearch and OpenSearch changes from 0 to 1. This ensures that if an Elasticsearch node goes down, Camunda is not blocked by a temporary outage of the secondary data store. This change increases storage requirements:
@@ -426,6 +426,26 @@ New migration guides are also provided to support you when migrating from a prev
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Orchestration cluster: Docker image unification
+
+Starting with 8.8, the [Orchestration Cluster](/reference/glossary/#orchestration-cluster) is provided as a [unified Docker image](https://hub.docker.com/r/camunda/camunda): `camunda/camunda`.
+
+This new image combines the cluster’s key components — Zeebe, Operate, Tasklist, Identity, and the cluster’s APIs — into a single artifact that can be started with different profiles.
+As a result, the following Docker images are deprecated as of 8.8:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
 </div>
 </div>
