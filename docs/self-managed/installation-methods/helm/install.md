@@ -54,7 +54,7 @@ helm install camunda camunda/camunda-platform --version 12  \
 
 Specifying only the major chart version (for example, `12`) installs the latest available `12.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
 
-If you are unsure which chart version corresponds to your desired Camunda application version, run:
+If you are unsure which chart version corresponds to your Camunda application version, run:
 
 ```shell
 helm search repo -l camunda/camunda-platform
