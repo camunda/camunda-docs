@@ -1257,7 +1257,7 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
+                "self-managed/installation-methods/helm/configure/using-external-keycloak",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
