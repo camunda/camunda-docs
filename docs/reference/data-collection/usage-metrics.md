@@ -36,15 +36,11 @@ You can access the **Billing** page by selecting **Organization Management** in 
 
 Some Enterprise agreements require the following indices from Elasticsearch for at least 18 months:
 
-For Operate and Tasklist, the metrics are stored in the `operate-metric-1.0.0_` and `tasklist-metric-1.0.0_` indices respectively.
+Usage metrics are stored in the `camunda-usage-metric` and `camunda-usage-metric-tu` indices.
 :::
 
-On Camunda 8 Self-Managed, you can get the usage metrics in Operate and Tasklist.
+On Camunda 8 Self-Managed, you can get the usage metrics via the [Get usage metrics system API][].
+For more details about usage metrics, visit the [Usage Metrics concept][] page.
 
-For **root process instances**, **decision instances**, and **task users**, follow the steps provided in the [usage metrics](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).
-
-:::note
-If you are not running Tasklist or Operate, there is currently no way to retrieve usage metrics until future releases. Regardless, the metrics still need to be factored into any enterprise agreement and count towards any task user pricing.
-:::
-
-With Console installed, it may be easier to access usage metrics from Operate and Tasklist. Perform the steps described above via the corresponding [Console usage metrics documentation](../../self-managed/components/console/usage-metrics.md).
+[Usage Metrics concept]: ../../self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md
+[Get usage metrics system API]: ../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx
