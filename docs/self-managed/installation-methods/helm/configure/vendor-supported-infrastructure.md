@@ -383,9 +383,16 @@ The Keycloak deployment provides:
 - **Authentication path**: Configured to serve under `/auth` path prefix
 - **Flexible domain support**: Options for local development, [nginx-ingress](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
 - **Resource optimization**: Sized appropriately for typical Camunda authentication loads
+- **Custom Ingress management**: Uses dedicated Ingress manifests integrated within the operator configuration for subpath management constraints
 
 **Use cases in Camunda 8:**
 Keycloak serves as the OIDC authentication provider for Management Identity, handling user authentication, authorization, and client credentials management for system integrations.
+
+### Ingress management
+
+Due to subpath management constraints, the Keycloak operator's built-in Ingress configuration is disabled in favor of dedicated Ingress manifests. This approach provides better control over path routing and TLS certificate management when serving Keycloak under the `/auth` path prefix.
+
+The dedicated Ingress configuration is integrated directly within the operator manifest to ensure proper deployment coordination and resource management.
 
 ### Installation
 
