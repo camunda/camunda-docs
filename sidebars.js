@@ -1482,6 +1482,8 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
+        "self-managed/concepts/secondary-storage-management",
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
