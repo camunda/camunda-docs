@@ -72,12 +72,11 @@ In Helm, arrays must be overwritten in full. The default array must be configure
 
 ## Internal Keycloak
 
-Internal Keycloak is the Keycloak instance deployed as part of the Camunda Helm chart. From the Orchestration Cluster’s perspective, it behaves like an external OIDC provider, but it is bundled and managed within your cluster. This requires extra configuration in the Orchestration Cluster.
+The Camunda Helm chart can deploy an internal Keycloak instance that acts as the identity management service for authentication and authorization. This instance is bundled into your cluster and behaves like an external OIDC provider from the Orchestration Cluster’s perspective. The internal Keycloak is automatically configured by the Management Identity component with a realm and several entities to simplify setup and reduce the learning curve.
 
-Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart. In addition, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against internal Keycloak.
+Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart. In this case, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against internal Keycloak.
 
-For details on connecting to an external IdP such as Keycloak, see  
-[Using external Keycloak](/self-managed/installation-methods/helm/configure/using-external-keycloak.md).
+If you prefer to run Keycloak as an external IdP and disable the internal one, see [Using external Keycloak](/self-managed/installation-methods/helm/configure/using-external-keycloak.md).
 
 ### Create a secret
 
