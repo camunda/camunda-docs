@@ -72,7 +72,7 @@ You can assign the following entities to a tenant:
 
 You can manage these assignments by selecting the relevant tab on the tenant details page.
 
-### Assign users
+### Assign users to a tenant
 
 1. Select the **Users** tab.
 2. Click **Assign user**. In the modal, enter the username and confirm.
@@ -83,7 +83,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 
    ![tenant-management-assigned-users](./img/tenant-management-assigned-users.png)
 
-### Assign groups
+### Assign groups to a tenant
 
 1. Select the **Groups** tab.
 2. Click **Assign group**. Search for a group ID and confirm.
@@ -94,7 +94,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 
    ![tenant-management-assigned-groups](./img/tenant-management-assigned-groups.png)
 
-### Assign roles
+### Assign roles to a tenant
 
 1. Select the **Roles** tab.
 2. Click **Assign role**. Search for a role ID and confirm.
@@ -105,7 +105,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 
    ![tenant-management-assigned-roles](./img/tenant-management-assigned-roles.png)
 
-### Assign mapping rules
+### Assign mapping rules to a tenant
 
 :::note
 Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed).
@@ -120,7 +120,7 @@ Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is on
 
    ![tenant-management-assigned-mapping-rules](./img/tenant-management-assigned-mapping-rules.png)
 
-### Assign clients
+### Assign clients to a tenant
 
 1. Select the **Clients** tab.
 2. Click **Assign client**. Enter the client ID and confirm.

@@ -23,7 +23,7 @@ For authorization to be applied, it must be [enabled in your cluster configurati
 To learn more, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
 :::
 
-## Create authorization
+## Create an authorization
 
 To create a new authorization:
 
@@ -41,13 +41,13 @@ The authorization is created, and the owner is granted the specified permissions
 
 <img src={AuthImg} alt="Create authorization tab" class="img-700"/>
 
-## Update authorization
+## Update an authorization
 
 Authorizations cannot be updated after they are created.
 
 To edit an authorization, [delete](#delete-an-authorization) the existing authorization and create a new authorization with the updated permissions.
 
-## Delete authorization
+## Delete an authorization
 
 To delete an authorization:
 
