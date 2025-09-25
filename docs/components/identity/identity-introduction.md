@@ -21,7 +21,7 @@ Identity includes the following features:
 
 ## Manage access
 
-Depending on your setup, Identity allows you to manage the following entities and control Orchestration Cluster access:
+Depending on your setup, Identity allows you to manage Orchestration Cluster access as follows:
 
 | Entity                             | Description                                                                                                                         | Availability      |
 | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :---------------- |
