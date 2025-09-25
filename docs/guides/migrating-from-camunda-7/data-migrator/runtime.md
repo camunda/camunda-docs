@@ -207,10 +207,11 @@ This approach ensures that:
 ## Tenants
 
 - Camunda 7 process instances assigned to no tenant (`tenantId=null`) are migrated to Camunda 8 with `<default>` tenant.
-- The default behavior is to migrate only process instances without assigned tenant ID.
+- The default behavior is to migrate only process instances without assigned tenant.
 - When migrating process instances, the migrator can be configured to handle specific tenants
   throughout the migration process. Defining tenant IDs ensures that only process instances
-  associated with those tenants are migrated.
+  associated with those tenants are migrated. Make sure to create the tenants in Camunda 8 before
+  starting the migration.
 
 ### How Multi-Tenancy Works
 
@@ -223,18 +224,17 @@ This approach ensures that:
 ### Example
 
 Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
-to specify which tenants should be included in the
-migration process. This property accepts a comma-separated list of tenant identifiers and doesn't
-need to add the `<default>` tenant explicitly, as it is included out-of-the-box.
+to specify which tenants should be included in the migration process. This property accepts a
+comma-separated list of tenant identifiers.
 
 ```yaml
 camunda:
   migrator:
-    tenant-ids: tenant-1, tenant-2, tenant-3 # There's no need to specify `<default>` tenant id, as it included by default.
+    tenant-ids: tenant-1, tenant-2, tenant-3
 ```
 
-With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`
-and `<default>` will be migrated. Instances associated with other tenants will be skipped.
+With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`,
+and `<default>` will be created and migrated. Instances associated with other tenants will be skipped.
 
 ## Dropping the migration mapping schema
 
