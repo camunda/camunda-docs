@@ -1243,7 +1243,7 @@ module.exports = {
                   Database: [
                     {
                       Elasticsearch: [
-                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch",
                         "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
