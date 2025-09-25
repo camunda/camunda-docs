@@ -552,6 +552,7 @@ global:
         publicApiAudience: "00000000-0000-0000-0000-000000000000"
         redirectUrl: https://modeler.management-and-modeling-host.com
 identity:
+  enabled: true
   contextPath: /identity
   firstUser:
     secret:
