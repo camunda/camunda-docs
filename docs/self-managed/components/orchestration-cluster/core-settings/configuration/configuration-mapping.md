@@ -43,6 +43,41 @@ You can define configuration properties as environment variables using [Spring B
 | `camunda.api.grpc.address`                 | `CAMUNDA_API_GRPC_ADDRESS`              |
 | `camunda.api.grpc.min-keep-alive-interval` | `CAMUNDA_API_GRPC_MINKEEPALIVEINTERVAL` |
 
+### Example
+
+In this example, an application uses the following legacy configuration:
+
+```
+camunda.database.url=http://prod-db.com:54321
+camunda.operate.opensearch.url=http://prod-db.com:54321
+camunda.tasklist.opensearch.url=http://prod-db.com:54321
+```
+
+#### Option 1: Strict migration
+
+The recommended strict migration approach is to remove the legacy properties and add the corresponding new property:
+
+```
+camunda.data.secondary-storage.opensearch.url=http://prod-db.com:54321
+```
+
+#### Option 2: Double configuration
+
+However, for a double configuration, you can just add the new property without removing the legacy properties:
+
+```
+camunda.data.secondary-storage.opensearch.url=http://prod-db.com:54321
+camunda.database.url=http://prod-db.com:54321
+camunda.operate.opensearch.url=http://prod-db.com:54321
+camunda.tasklist.opensearch.url=http://prod-db.com:54321
+```
+
+As long as the values match, this is a valid configuration. The application will start with a warning in the log.
+
+:::tip
+When migrating a breaking key to the unified configuration, as long as it supports the double configuration option, you can use either of these migration approaches.
+:::
+
 ## Camunda 8.8 property changes
 
 The following table shows new properties introduced in 8.8 and any related legacy properties.
