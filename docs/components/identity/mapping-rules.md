@@ -17,7 +17,7 @@ Mapping rules provide flexible access to Orchestration Cluster resources based o
 To learn more, see [mapping rules](../concepts/access-control/mapping-rules.md).
 :::
 
-## Create mapping rule
+## Create a mapping rule
 
 To create a mapping rule:
 
@@ -33,7 +33,7 @@ You can now assign the role to groups, roles, or tenants, or create and apply au
 
 <img src={MapImg} alt="Create a mapping rule" class="img-600"/>
 
-## Update mapping rule
+## Update a mapping rule
 
 To update a mapping rule:
 
@@ -44,7 +44,7 @@ To update a mapping rule:
 
 <img src={EditMapImg} alt="Update a mapping rule" class="img-800"/>
 
-## Delete mapping rule
+## Delete a mapping rule
 
 To delete a mapping rule:
 
