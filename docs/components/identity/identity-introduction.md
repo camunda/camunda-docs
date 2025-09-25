@@ -4,31 +4,33 @@ title: Introduction to Identity
 description: "Identity provides unified identity management and authorizations for an orchestration cluster."
 ---
 
-Identity is an integrated component of the [Orchestration Cluster](../orchestration-cluster.md) responsible for managing authentication, authorization, and entities within Camunda 8. It provides a unified and secure way to control access to all Orchestration Cluster components, including Zeebe, Operate, Tasklist, and APIs.
+Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Identity component to manage Camunda 8 authentication, authorization, and entities.
 
-## Key concepts
+## About Identity
 
-- **Unified access management:** Authentication and authorizations are handled by an orchestration cluster across all its components and APIs. This eliminates dependencies on external identity components for core orchestration capabilities.
-- **Flexible authentication:** Identity supports three authentication modes:
-  - **No Authentication:** Useful for local development and testing.
-    - This authentication mode is available only on Self-Managed deployment.
-  - **Basic Authentication:** Simple user/password-based authentication for APIs.
-    - This authentication mode is available only on Self-Managed deployment.
-  - **OIDC:** Integration with an OpenID Connect-compatible provider (e.g., Keycloak, Microsoft Entra ID, Okta).
-- **Fine-grained authorizations:** [Authorizations](authorization.md) provide granular control over resources like process instances, user tasks, and decisions, ensuring a robust security model.
-- **Tenant management:** Multi-tenancy is managed directly within an orchestration cluster, allowing for clear separation of resources.
-  - Multi-tenancy is available only on [Self-Managed deployment](tenant.md)
+Identity provides a unified and secure way to control access to all Orchestration Cluster components, including Zeebe, Operate, Tasklist, and APIs.
 
-## Access management
+Identity includes the following features:
 
-Depending on your setup, Identity allows you to manage the following entities to control access to your orchestration cluster:
+| Feature                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Unified access management   | Authentication and authorizations are handled by an orchestration cluster across all its components and APIs. This eliminates dependencies on external identity components for core orchestration capabilities.                                                                                                                                                                                                                                                                                                    |
+| Flexible authentication     | Identity supports three authentication modes: <p><ul><li><p>**No Authentication:** Useful for local development and testing. Useful for local development and testing. Only available for Self-Managed deployments.</p></li><li><p>**Basic Authentication:** Simple user/password-based authentication for APIs. Only available for Self-Managed deployments.</p></li><li><p>**OIDC:** Integration with an OpenID Connect-compatible provider (for example, Keycloak, Microsoft Entra ID, Okta).</p></li></ul></p> |
+| Fine-grained authorizations | [Authorizations](authorization.md) provide granular control over resources like process instances, user tasks, and decisions, ensuring a robust security model.                                                                                                                                                                                                                                                                                                                                                    |
+| Tenant management           | Multi-tenancy is managed directly within an orchestration cluster, allowing for clear separation of resources.                                                                                                                                                                                                                                                                                                                                                                                                     |
 
-- **[Users](user.md):** Individuals who can access to Camunda 8 applications and perform actions based on their permissions.
-- **[Groups](group.md):** Collections of users that simplify access management by allowing permissions to be granted to teams collectively.
-- **[Roles](role.md):** Sets of permissions that define what actions can be performed on specific resources. Roles can be assigned to users or groups.
-- **[Authorizations](authorization.md):** The specific permissions that connect users, groups, or roles with resources and actions (e.g `READ`, `UPDATE`, `DELETE`).
-- **[Tenants](tenant.md):** A mechanism for isolating data within a single Camunda 8 cluster, which is useful for multi-tenancy applications. (Self-Managed only).
+## Manage access
 
-## Identity on Self-Managed
+Depending on your setup, Identity allows you to manage the following entities and control Orchestration Cluster access:
 
-For documentation on deploying Identity as part of Camunda 8 Self-Managed, refer to the [configuration guides](/self-managed/components/orchestration-cluster/identity/overview.md).
+| Entity                             | Description                                                                                                                         | Availability      |
+| :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :---------------- |
+| [Users](user.md)                   | Individuals who can access applications and perform actions based on their permissions.                                             | All deployments   |
+| [Groups](group.md)                 | Simplify access management by granting permissions collectively to groups of users.                                                 | All deployments   |
+| [Roles](role.md)                   | Sets of permissions to define what actions can be performed on specific resources. Roles can be assigned to users and groups.       | All deployments   |
+| [Authorizations](authorization.md) | The specific permissions that connect users, groups, or roles with resources and actions (for example, `READ`, `UPDATE`, `DELETE`). | All deployments   |
+| [Tenants](tenant.md)               | Isolate data within a single cluster. This is useful for multi-tenancy applications.                                                | Self-Managed only |
+
+:::info Identity in Self-Managed
+For documentation on deploying Identity as part of Camunda 8 Self-Managed, see [Identity in Self-Managed](/self-managed/components/orchestration-cluster/identity/overview.md).
+:::
