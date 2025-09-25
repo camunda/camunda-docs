@@ -438,7 +438,7 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 #### Orchestration cluster: Docker image unification
 
-Starting with 8.8, the [Orchestration Cluster](/components/orchestration-cluster/) is provided as a [unified Docker image](https://hub.docker.com/r/camunda/camunda): `camunda/camunda`.
+Starting with 8.8, the [Orchestration Cluster](../../../self-managed/components/orchestration-cluster/) is provided as a [unified Docker image](https://hub.docker.com/r/camunda/camunda): `camunda/camunda`.
 
 As a result, the following Docker images are deprecated as of 8.8:
 
