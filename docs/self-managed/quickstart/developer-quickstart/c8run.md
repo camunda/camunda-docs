@@ -217,21 +217,38 @@ Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://l
 
 ### Start external Elasticsearch
 
-To start Elasticsearch outside of Camunda 8 Run, use the `--disable-elasticsearch` flag at startup. This prevents Camunda 8 Run from starting its own Elasticsearch instance.
+By default, Camunda 8 Run starts with an embedded Elasticsearch.
+To use an external instance, run Camunda 8 Run without its built-in Elasticsearch and connect it to your own instance.
 
-The following command starts an external Elasticsearch instance using `docker run`:
+1. Start a single-node Elasticsearch container with security disabled:
 
-```bash
-docker run \
-    -m 1GB \
-    -d \
-    --name elasticsearch \
-    -p 9200:9200 \
-    -p 9300:9300 \
-    -e "discovery.type=single-node" \
-    -e "xpack.security.enabled=false" \
-    elasticsearch:8.15.2
-```
+   ```bash
+   docker run \
+       -m 1GB \
+       -d \
+       --name elasticsearch \
+       -p 9200:9200 \
+       -p 9300:9300 \
+       -e "discovery.type=single-node" \
+       -e "xpack.security.enabled=false" \
+       elasticsearch:8.15.2
+   ```
+
+1. Configure Camunda 8 Run by creating an `application.yaml` file that points to your external Elasticsearch:
+
+   ```yaml
+   camunda:
+     data:
+       secondary-storage:
+         elasticsearch:
+           url: "http://127.0.0.1:9200/"
+   ```
+
+1. Start Camunda 8 Run with the `--disable-elasticsearch` flag to prevent it from starting its own instance, and provide your config:
+
+   ```bash
+   ./start.sh --disable-elasticsearch --config application.yaml
+   ```
 
 ### Environment variables
 
