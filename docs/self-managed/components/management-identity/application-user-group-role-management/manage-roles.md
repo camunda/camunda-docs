@@ -5,9 +5,11 @@ sidebar_label: "Roles"
 description: "Use Management Identity to manage roles for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)"
 ---
 
-Use roles in Management Identity to simplify and standardize access control for Camunda 8 management and modeling components (Web Modeler, Console, and Optimize), help enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
+Use Management Identity roles to simplify and standardize access control for Camunda 8 management and modeling components (Web Modeler, Console, and Optimize).
 
 ## About roles
+
+Roles help you to enforce consistent permission sets, reduce errors, and scale access management as your organization grows.
 
 - Roles define the actions a user or application can perform in Camunda 8 management and modeling components by grouping together a set of related [permissions](../access-management/manage-permissions.md).
 - You can assign roles [directly to a user](#assign-a-role-to-a-user) or [using groups](../application-user-group-role-management/manage-groups.md#assign-roles-to-a-group).
