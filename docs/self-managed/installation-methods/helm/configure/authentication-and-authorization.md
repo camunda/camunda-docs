@@ -239,6 +239,6 @@ See [Helm chart OpenID Connect provider setup](/self-managed/installation-method
 - [Connect Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [Using external Keycloak](/self-managed/installation-methods/helm/configure/using-external-keycloak.md)
 - Management Identity:
-  - [Connect Management Identity to an identity provider](docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+  - [Connect Management Identity to an identity provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
   - [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md)
   - [Configure an external IdP provider](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md)
