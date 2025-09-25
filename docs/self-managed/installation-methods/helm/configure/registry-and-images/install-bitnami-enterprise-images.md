@@ -30,17 +30,17 @@ Due to [security policy changes](https://github.com/bitnami/charts/issues/30850)
 
 ### Available image types
 
-| Image Type      | Registry Path      | Base OS         | Support Level                            | Target Use                 |
-| --------------- | ------------------ | --------------- | ---------------------------------------- | -------------------------- |
-| **Open-source** | `bitnamilegacy/*`  | Debian          | Community-maintained                     | Development/Testing        |
-| **Premium**     | `bitnamipremium/*` | Debian          | Enterprise support with security patches | Production                 |
-| **Secure**      | `bitnamisecure/*`  | VMware PhotonOS | Minimal attack surface                   | High-security environments |
+| Image Type      | Registry Path                                                 | Base OS         | Support Level                            | Target Use                 |
+| --------------- | ------------------------------------------------------------- | --------------- | ---------------------------------------- | -------------------------- |
+| **Open-source** | `bitnamilegacy/*`                                             | Debian          | Community-maintained                     | Development/Testing        |
+| **Premium**     | `bitnamipremium/*` <br/>(Camunda proxied through `vendor-ee`) | Debian          | Enterprise support with security patches | Production                 |
+| **Secure**      | `bitnamisecure/*`                                             | VMware PhotonOS | Minimal attack surface                   | High-security environments |
 
 ### Why Camunda uses Premium images
 
 Camunda currently provides **Premium images** exclusively. Key points:
 
-- **Available:** Debian-based Premium images in the `vendor-ee` repository (Camunda provides only these for consistency)
+- **Available:** Debian-based Premium images in the `vendor-ee` [repository of Camunda](https://registry.camunda.cloud/) (Camunda provides only these for consistency)
 - **Not available:** PhotonOS-based Secure images are not provided by Camunda
 
 ## Benefits of enterprise images

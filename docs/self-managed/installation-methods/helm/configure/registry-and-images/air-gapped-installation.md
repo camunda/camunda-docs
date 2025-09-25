@@ -7,14 +7,6 @@ description: Install Camunda 8 Self-Managed in an air-gapped environment.
 
 The [Camunda Helm chart](/self-managed/installation-methods/helm/install.md) supports installation in air-gapped environments. By default, Docker images are pulled from Docker Hub. Because the chart depends on third-party images and charts, additional steps are required to make all charts available in your environment.
 
-:::info Bitnami images in air-gapped environments
-
-For air-gapped deployments, you must mirror Bitnami infrastructure images if you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication). These components are required only if you're not using external managed services or separately deployed infrastructure.
-
-For details about Bitnami image types and security considerations, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
-
-:::
-
 ## Prerequisites
 
 - A private Docker registry accessible from your air-gapped environment
@@ -48,22 +40,6 @@ The following images must be available in your air-gapped environment:
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
 
-**Infrastructure images (choose one option):**
-
-_Option A: Open-source Bitnami images (default)_
-
-- [bitnami/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
-- [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
-- [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
-- [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
-
-_Option B: Enterprise Bitnami Premium images (recommended for production)_
-
-- `registry.camunda.cloud/bitnamipremium/postgresql` (requires enterprise credentials)
-- `registry.camunda.cloud/bitnamipremium/keycloak` (requires enterprise credentials)
-- `registry.camunda.cloud/bitnamipremium/os-shell` (requires enterprise credentials)
-- `registry.camunda.cloud/bitnamipremium/elasticsearch` (requires enterprise credentials)
-
 **Optional components:**
 
 - [Web Modeler images](/self-managed/installation-methods/docker/docker.md#component-images):
@@ -72,6 +48,40 @@ _Option B: Enterprise Bitnami Premium images (recommended for production)_
   - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
 - [Console images](/self-managed/installation-methods/docker/docker.md#component-images):
   - `console/console-sm`
+
+**Infrastructure images:**
+
+:::info When are infrastructure images needed?
+For air-gapped deployments, you must mirror Bitnami infrastructure images **only if** you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication).
+
+Skip this section if you're using external managed services or separately deployed infrastructure.
+:::
+
+Choose one of the following image options:
+
+#### Option A: Open-source Bitnami images (community default)
+
+- [bitnami/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
+- [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
+- [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
+- [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
+
+:::warning Not recommended for production
+These open-source images are the community default but are **not recommended** for production environments due to security and support limitations. Customers should transition to Option B or use managed infrastructure services.
+:::
+
+#### Option B: Enterprise Bitnami Premium images (recommended)
+
+- `registry.camunda.cloud/vendor-ee/postgresql` (requires enterprise credentials)
+- `registry.camunda.cloud/vendor-ee/keycloak` (requires enterprise credentials)
+- `registry.camunda.cloud/vendor-ee/os-shell` (requires enterprise credentials)
+- `registry.camunda.cloud/vendor-ee/elasticsearch` (requires enterprise credentials)
+
+:::tip Enterprise benefits
+The `vendor-ee` registry provides proxied access to Bitnami Premium images from Broadcom, offering enhanced security patches, enterprise support, and compliance features.
+
+For detailed configuration and installation instructions, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+:::
 
 A helper script is available in the [camunda-helm-respository](https://github.com/camunda/camunda-platform-helm/blob/c6a6e0c327f2acb8746802fbe03b3774b8284de3/scripts/download-chart-docker-images.sh) to pull and save Docker images.
 
