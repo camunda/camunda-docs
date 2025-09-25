@@ -9,11 +9,18 @@ import TabItem from "@theme/TabItem";
 
 You can run your process test with [Connectors](/components/connectors/introduction.md) to verify the integration with external systems or the configuration of the connector tasks in your processes.
 
-For more unit-focused tests, mock the interaction; for example, by completing connector jobs with an expected result.
+For more unit-focused tests, mock the interaction; for example,
+by [completing connector jobs](utilities.md#mock-job-workers) with an expected result.
+
+:::note
+The instructions on this page are based on the default Testcontainer runtime. If you are using a remote runtime, consult
+the relevant distribution documentation, such
+as [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#use-built-in-and-custom-connectors).
+:::
 
 ## Enable connectors
 
-By default, the connectors are disabled. You need to change the runtime configuration to enable them.
+By default, the connectors are disabled. You need to change the configuration in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -24,20 +31,19 @@ By default, the connectors are disabled. You need to change the runtime configur
 
 <TabItem value='spring-sdk'>
 
-Set the following property in your `application.yml` (or `application.properties`):
+In your `application.yml` (or `application.properties`):
 
 ```yaml
-io:
-  camunda:
-    process:
-      test:
-        connectors-enabled: true
+camunda:
+  process-test:
+    # Enable connectors
+    connectors-enabled: true
 ```
 
-Or, set the property directly on your test class:
+Or, directly on your test class:
 
 ```java
-@SpringBootTest(properties = {"io.camunda.process.test.connectors-enabled=true"})
+@SpringBootTest(properties = {"camunda.process-test.connectors-enabled=true"})
 @CamundaSpringProcessTest
 public class MyProcessTest {
     //
@@ -48,7 +54,14 @@ public class MyProcessTest {
 
 <TabItem value='java-client'>
 
-Register the JUnit extension in your test class with enabled connectors:
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Enable Connectors
+connectorsEnabled=true
+```
+
+Or, register the JUnit extension manually and use the fluent builder:
 
 ```java
 // No annotation: @CamundaProcessTest
@@ -56,7 +69,9 @@ public class MyProcessTest {
 
     @RegisterExtension
     private static final CamundaProcessTestExtension EXTENSION =
-        new CamundaProcessTestExtension().withConnectorsEnabled(true);
+        new CamundaProcessTestExtension()
+            // Enable Connectors
+            .withConnectorsEnabled(true);
 }
 ```
 
@@ -66,7 +81,8 @@ public class MyProcessTest {
 
 ## Connector secrets
 
-If you use [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) in your processes, you can define them in the test runtime.
+If you use [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) in your processes, you can
+add the secrets to the test runtime in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -77,27 +93,25 @@ If you use [Connectors secrets](/components/connectors/use-connectors/index.md#u
 
 <TabItem value='spring-sdk'>
 
-Add your secrets under the following property in your `application.yml` (or `application.properties`):
+In your `application.yml` (or `application.properties`):
 
 ```yaml
-io:
-  camunda:
-    process:
-      test:
-        connectors-enabled: true
-        connectors-secrets:
-          GITHUB_TOKEN: ghp_secret
-          SLACK_TOKEN: xoxb-secret
+camunda:
+  process-test:
+    connectors-enabled: true
+    connectors-secrets:
+      GITHUB_TOKEN: ghp_secret
+      SLACK_TOKEN: xoxb-secret
 ```
 
-Or, set the property directly on your test class:
+Or, on your test class:
 
 ```java
 @SpringBootTest(
     properties = {
-        "io.camunda.process.test.connectors-enabled=true",
-        "io.camunda.process.test.connectors-secrets.GITHUB_TOKEN=ghp_secret",
-        "io.camunda.process.test.connectors-secrets.SLACK_TOKEN=xoxb-secret"
+        "camunda.process-test.connectors-enabled=true",
+        "camunda.process-test.connectors-secrets.GITHUB_TOKEN=ghp_secret",
+        "camunda.process-test.connectors-secrets.SLACK_TOKEN=xoxb-secret"
     }
 )
 @CamundaSpringProcessTest
@@ -110,7 +124,16 @@ public class MyProcessTest {
 
 <TabItem value='java-client'>
 
-Add your secrets when you register the JUnit extension:
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+connectorsEnabled=true
+
+connectorsSecrets.GITHUB_TOKEN=ghp_secret
+connectorsSecrets.SLACK_TOKEN=xoxb-secret
+```
+
+Or, via JUnit extension:
 
 ```java
 // No annotation: @CamundaProcessTest
@@ -223,8 +246,8 @@ under the hostname `host.testcontainers.internal`.
 @WireMockTest(httpPort = 9999)
 @SpringBootTest(
     properties = {
-        "io.camunda.process.test.connectors-enabled=true",
-        "io.camunda.process.test.connectors-secrets.BASE_URL=http://host.testcontainers.internal:9999"
+        "camunda.process-test.connectors-enabled=true",
+        "camunda.process-test.connectors-secrets.BASE_URL=http://host.testcontainers.internal:9999"
     })
 @CamundaSpringProcessTest
 public class MyProcessTest {
@@ -308,14 +331,15 @@ public class MyProcessTest {
 </Tabs>
 
 :::tip
-You can configure the URL of an outbound connector
-using [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) to replace it in your process
-tests, for example, URL = `"{{secrets.BASE_URL}}" + "/test"`.
+You can configure the URL of an outbound connector in your BPMN process
+using [Connectors secrets](/components/connectors/use-connectors/index.md#using-secrets) to replace it in the
+tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/test"`.
 :::
 
 ## Custom connectors
 
-To use a custom connectors bundle, replace the connectors in the test runtime.
+By default, the runtime uses the Camunda connectors bundle in the same version as the Maven module. You can change the
+version or use a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
 [
@@ -326,23 +350,30 @@ To use a custom connectors bundle, replace the connectors in the test runtime.
 
 <TabItem value='spring-sdk'>
 
-Set the Docker image name and version of your custom connector bundle under the following properties in your `application.yml` (or `application.properties`):
+In your `application.yml` (or `application.properties`):
 
 ```yaml
-io:
-  camunda:
-    process:
-      test:
-        connectors-enabled: true
-        connectors-docker-image-name: my-org/my-connectors
-        connectors-docker-image-version: 1.0.0
+camunda:
+  process-test:
+    connectors-enabled: true
+    connectors-docker-image-name: my-org/my-connectors
+    connectors-docker-image-version: 1.0.0
 ```
 
 </TabItem>
 
 <TabItem value='java-client'>
 
-Set the Docker image name and version of your custom connector bundle when you register the JUnit extension:
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+connectorsEnabled=true
+
+connectorsDockerImageName=my-org/my-connectors
+connectorsDockerImageVersion=1.0.0
+```
+
+Or, via JUnit extension:
 
 ```java
 // No annotation: @CamundaProcessTest

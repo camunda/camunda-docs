@@ -9,7 +9,7 @@ Troubleshoot common issues with Management Identity in a Self-Managed deployment
 
 ## Management Identity pod crashloops/continually restarts
 
-If the Management Identity pod crash loops, or the pod continually restarts, it is likely that there is an issue with the connection to Keycloak.
+If the Management Identity pod crash loops, or the pod continually restarts, it is likely there is an issue with the Keycloak connection.
 
 ### Solution
 
@@ -79,17 +79,18 @@ By default, Keycloak requires TLS on requests that originate from what it consid
 documentation for [setting up SSL](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) maintains
 a list of what they consider to be an external IP address under the `external requests` section.
 
-The solution to this issue will depend largely on your environment. However, as a starting point we would suggest you consider
+The solution to this issue depends largely on your environment. As a starting point, consider
 these options:
 
-1. Configure the communication between the services (for example in a cluster) to use IP ranges that fall within the
-   ranges that Keycloak expects.
-2. If configuring the IP ranges is not an option, it is possible to disable the SSL requirement in Keycloak itself by completing the following steps:
-   1. In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
-   2. Restart the Management Identity service.
-   3. In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
-   4. Restart the Management Identity service again. Management Identity should now start successfully
+- Configure communication between the services (for example in a cluster) to use IP ranges within the
+  ranges Keycloak expects.
+
+- If configuring IP ranges is not an option, you can disable the SSL requirement in Keycloak itself:
+  1.  In the `master` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
+  2.  Restart the Management Identity service.
+  3.  In the `camunda-platform` realm, set `Require SSL` to `none` by following the steps in [SSL modes](https://www.keycloak.org/docs/latest/server_admin/#_ssl_modes) for your version of Keycloak.
+  4.  Restart the Management Identity service again. Management Identity should now start successfully.
 
 :::danger warning
-We would only recommend that requirements for SSL are disabled in a development environment.
+Camunda would only recommend that requirements for SSL are disabled in a development environment.
 :::
