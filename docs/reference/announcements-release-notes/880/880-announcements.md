@@ -438,7 +438,7 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 #### Orchestration cluster: Docker image unification
 
-Starting with 8.8, the [Orchestration Cluster](/reference/glossary/#orchestration-cluster) is provided as a [unified Docker image](https://hub.docker.com/r/camunda/camunda): `camunda/camunda`.
+Starting with 8.8, the [Orchestration Cluster](/components/orchestration-cluster/) is provided as a [unified Docker image](https://hub.docker.com/r/camunda/camunda): `camunda/camunda`.
 
 This new image combines the cluster’s key components - Zeebe, Operate, Tasklist, the new Identity application, and the cluster’s APIs - into a single artifact that can be started with different profiles.
 As a result, the following Docker images are deprecated as of 8.8:
