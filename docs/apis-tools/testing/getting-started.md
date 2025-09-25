@@ -126,7 +126,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
@@ -178,7 +178,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
