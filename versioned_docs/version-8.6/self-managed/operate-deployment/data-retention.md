@@ -27,6 +27,13 @@ All Operate data present in Elasticsearch (from both **main** and **dated** indi
 
 The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
 
+## Rollover Interval
+
+Process instances are archived into buckets based on some rollover interval, by default this value is `1d` therefore a process instance which completed
+at yyyy-mm-dd would be archived into a historical index which that date as a suffix, meaning there would be one historical index per day.
+
+This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter
+
 ## Data cleanup
 
 In case of intensive Zeebe usage, the amount of data can grow significantly overtime. Therefore, you should consider the data cleanup strategy.
