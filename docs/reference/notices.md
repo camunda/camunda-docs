@@ -19,7 +19,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ### Publication date
 
-September ?th, 2025
+October 14th, 2025
 
 ### Products affected
 
@@ -27,6 +27,7 @@ September ?th, 2025
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
+- Camunda Identity
 
 ### Impact
 
@@ -42,6 +43,7 @@ You are using:
 - Zeebe 8.7.0 - 8.7.12 or 8.5.0 - 8.5.24
 - Operate 8.7.0 - 8.7.12 or 8.5.0 - 8.5.20
 - Optimize 8.7.0 - 8.7.9 or 8.6.0 - 8.6.16
+- Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
 
 ### Solution
 
@@ -51,6 +53,7 @@ Camunda has provided the following releases which contain the fix:
 - Zeebe 8.7.13, 8.5.25
 - Operate 8.7.13, 8.5.21
 - Optimize 8.7.10, 8.6.17
+- Identity 8.7.7, 8.6.20, 8.5.22
 
 ## Notice 29
 
