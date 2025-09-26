@@ -398,7 +398,7 @@ The dedicated Ingress configuration is integrated directly within the operator m
 
 **Prerequisites**:
 
-- Ensure environment variables are sourced (see [Environment setup](#prerequisites-environment-setup))
+- Ensure environment variables are sourced (see [Environment setup](#step-2-environment-setup))
 - PostgreSQL must be deployed first (Keycloak requires database)
 
 The Keycloak deployment follows these steps, automated via the `keycloak/deploy.sh` script:
