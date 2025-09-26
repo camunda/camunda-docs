@@ -69,6 +69,16 @@ kubectl port-forward svc/camunda-keycloak 18080:80
 The name of the Keycloak service will be truncated after 20 characters if Keycloak 16 is used, for example: `svc/long-release-name-ke`
 :::
 
+:::note Keycloak Operator deployment
+If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md)), use this command instead:
+
+```bash
+kubectl port-forward svc/keycloak-service 18080:8080
+```
+
+Note the different service name (`keycloak-service`) and port mapping (`18080:8080`).
+:::
+
 Finally, you can access each app pointing your browser at:
 
 - Operate: [http://localhost:8081](http://localhost:8081)
