@@ -502,6 +502,15 @@ Configure Camunda to use Keycloak with external domain.
 https://github.com/camunda/camunda-deployment-references/blob/feature/operator-playground/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
 ```
 
+:::note Domain configuration step
+This configuration file contains `${CAMUNDA_DOMAIN}` placeholder variables that must be replaced with your actual domain before deployment.
+
+**Options for domain injection:**
+
+- **Automatic substitution**: Use `envsubst < camunda-keycloak-domain-values.yml > camunda-keycloak-domain-values-final.yml` (requires `CAMUNDA_DOMAIN` environment variable)
+- **Manual replacement**: Replace all instances of `${CAMUNDA_DOMAIN}` with your actual domain name in `camunda-keycloak-domain-values.yml`
+  :::
+
 **Use case**: Production setup with external domain and proper OIDC configuration.
 
 **Installation**: Add `-f camunda-keycloak-domain-values.yml` to your Helm install command.
