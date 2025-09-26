@@ -5,9 +5,7 @@ title: Helm chart external Keycloak usage
 description: "Learn how to use an external Keycloak instance in Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of applications: Camunda applications (Orchestration cluster, Connectors, Optimize etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../about-self-managed.md#architecture) documentation for more information on the different types of applications.
-
-This guide steps through using an external Keycloak instance, which is part of [Management Identity](/self-managed/components/management-identity/overview.md). By default, [Helm chart deployment](../install.md) creates a new Keycloak instance, but it's possible to use an external Keycloak instance either inside the same Kubernetes cluster or outside of it.
+The [Helm chart deployment](/self-managed/installation-methods/helm/install.md) can optionally install an internal Keycloak instance using [Bitnami subcharts](../../configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying a external Keycloak or any other OIDC provider separately from the Camunda Helm charts. This guide steps through using an external Keycloak instance.
 
 ## Prerequisites
 
