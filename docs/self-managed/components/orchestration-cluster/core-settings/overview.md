@@ -23,6 +23,15 @@ This section includes:
 - **Migration and legacy information:** Guidance related to upgrading and migrating to version 8.8+, including notes on deprecated features and legacy support.
 - **Cross-component topics:** Information on shared aspects such as HTTP security headers, authentication mechanisms, data retention policies, and usage metrics.
 
+:::caution Camunda 8.9 unified configuration breaking changes
+
+Only the first partial set of unified configuration properties is introduced in Camunda 8.8.
+
+- All remaining unified property changes will be completed by Camunda 8.9.
+- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section.
+
+:::
+
 ## How this section relates to component docs
 
 - Component-specific docs will continue to exist for UI, user guides, and other unique features.

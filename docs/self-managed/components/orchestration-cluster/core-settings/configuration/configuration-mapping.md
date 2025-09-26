@@ -18,8 +18,13 @@ In Camunda 8.8, the [unified configuration for Orchestration Cluster components]
 - This means some configuration properties have changed or are replaced with new properties.
 - For example, the new `camunda.system.cpu-thread-count` property replaces `zeebe.broker.threads.cpuThreadCount`.
 
-:::note
-Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
+:::caution Camunda 8.9 unified configuration breaking changes
+
+Only the first partial set of unified configuration properties is introduced in Camunda 8.8.
+
+- All remaining unified property changes will be completed by Camunda 8.9.
+- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section.
+
 :::
 
 ### New properties and backwards compatibility
