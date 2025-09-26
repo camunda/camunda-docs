@@ -9,6 +9,10 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
 
+:::note
+By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+:::
+
 ## Prerequisites
 
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/installation-methods/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
