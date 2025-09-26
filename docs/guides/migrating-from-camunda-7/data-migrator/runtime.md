@@ -235,7 +235,7 @@ camunda:
 ```
 
 With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`,
-and `<default>` will be created and migrated. Instances associated with other tenants will be skipped.
+and the default tenant will be created and migrated. Instances associated with other tenants will be skipped.
 
 ## Dropping the migration mapping schema
 
