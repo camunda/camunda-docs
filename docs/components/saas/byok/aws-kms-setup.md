@@ -78,7 +78,49 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
   ],
   "Resource": "*"
 }
-```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Enable IAM User Permissions",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::<customer-aws-account>:root"
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "Allow Camunda tenant IAM Role basic key access",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<tenant-role-arn>"
+      },
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncrypt*",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey*"
+
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "<tenant-role-arn>"
+      },
+      "Action": [
+        "kms:CreateGrant",
+        "kms:ListGrants",
+        "kms:RevokeGrant"
+       ],
+      "Resource": "*"
+    }
+  ]
+}
 
 :::warning Key policy warnings
 
