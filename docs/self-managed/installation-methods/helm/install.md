@@ -67,7 +67,7 @@ This command lists all available chart versions and their corresponding applicat
 Run the following command to locally port-forward the orchestration cluster pod to access the UI:
 
 ```bash
-kubectl port-forward svc/camunda-core 8080:8080
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
 Use the following URLs to access the orchestration cluster UIs:
