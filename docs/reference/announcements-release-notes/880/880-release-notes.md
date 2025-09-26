@@ -16,9 +16,9 @@ keywords:
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
-| Minor release date | Scheduled end of maintenance | Changelog(s) | Release blog | Upgrade guides                                                                                 |
-| ------------------ | ---------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027                | -            | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                                 |
+| ------------------ | ---------------------------- | --------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027                | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -565,6 +565,16 @@ Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
 <p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
+
+### Technical Changelogs for all 8.8.x releases
+
+<details className="changelog-dropdown">
+  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
 
 ## 8.8.0-alpha8
 
