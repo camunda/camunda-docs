@@ -26,7 +26,7 @@ Before starting, you will need:
 | `global.identity.keycloak.realm`                  | string  | `"/realms/camunda-platform"` | Keycloak realm (must start with "/realms/" followed by the name of the realm)        |
 | `global.identity.keycloak.url.protocol`           | string  | `""`                         | Keycloak url scheme (http or https)                                                  |
 | `global.identity.keycloak.url.host`               | string  | `""`                         | Hostname of Keycloak instance                                                        |
-| `global.identity.keycloak.url.port`               | integer | ``                           | Port number of Keycloak                                                              |
+| `global.identity.keycloak.url.port`               | string  | `""`                         | Port number of Keycloak                                                              |
 | `global.identity.keycloak.auth.adminUser`         | string  | `""`                         | Name of the admin user for Keycloak                                                  |
 | `global.identity.keycloak.auth.existingSecret`    | string  | `""`                         | Name of Kubernetes Secret contianing                                                 |
 | `global.identity.keycloak.auth.existingSecretKey` | string  | `""`                         | Hostname of the database                                                             |
