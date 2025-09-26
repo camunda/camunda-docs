@@ -432,6 +432,29 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Orchestration Cluster: Unified component configuration
+
+Introduced a new unified configuration with a shared YAML schema across Orchestration cluster components.
+
+- Camunda 8.8 introduces a unified configuration with a shared YAML schema across Orchestration cluster components. This allows you to define all essential cluster and component behavior in a single, centralized configuration system.
+
+- In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
+
+This means some configuration properties have changed or are replaced with new properties.
+
+:::note
+Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
