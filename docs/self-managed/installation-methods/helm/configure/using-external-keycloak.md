@@ -22,6 +22,7 @@ Before starting, you will need:
 
 | values.yaml option                                | type    | default                      | description                                                                          |
 | ------------------------------------------------- | ------- | ---------------------------- | ------------------------------------------------------------------------------------ |
+| `global.security.authentication.method`           | string  | `"basic"`                    | Type of authentication (basic or oidc)                                               |
 | `global.identity.keycloak.contextPath`            | string  | `"/auth"`                    | Keycloak url path prefix. "/auth" means all urls start with http://hostname/auth/... |
 | `global.identity.keycloak.realm`                  | string  | `"/realms/camunda-platform"` | Keycloak realm (must start with "/realms/" followed by the name of the realm)        |
 | `global.identity.keycloak.url.protocol`           | string  | `""`                         | Keycloak url scheme (http or https)                                                  |
@@ -39,6 +40,9 @@ The only change required to use the external Keycloak is configuring the followi
 ```yaml
 # File: external-keycloak-values.yaml
 global:
+  security:
+    authentication:
+      method: "oidc"
   identity:
     keycloak:
       url:
