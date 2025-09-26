@@ -18,7 +18,7 @@ This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/api
 - Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
 
 :::info
-To learn more about the unified REST API, see [the official blog announcement]([https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/)).
+To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
 :::
 
 :::note
