@@ -107,6 +107,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @CamundaSpringProcessTest
+@Deployment(resources = "classpath:my-process.bpmn")
 public class MyProcessTest {
 
     @Autowired private CamundaClient client;
@@ -114,12 +115,7 @@ public class MyProcessTest {
 
     @Test
     void shouldCreateProcessInstance() {
-        // given
-        client
-                .newDeployResourceCommand()
-                .addResourceFromClasspath("my-process.bpmn")
-                .send()
-                .join();
+        // given process definition is deployed
 
         // when
         final ProcessInstanceEvent processInstance =
