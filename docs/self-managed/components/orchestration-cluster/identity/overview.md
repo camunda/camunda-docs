@@ -1,6 +1,6 @@
 ---
 id: overview
-title: Identity on Self-Managed
+title: Identity in Self-Managed
 sidebar_label: "Overview"
 description: "Learn how Identity is bundled with your default orchestration cluster."
 ---
