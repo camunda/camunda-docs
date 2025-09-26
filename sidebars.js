@@ -1243,7 +1243,7 @@ module.exports = {
                   Database: [
                     {
                       Elasticsearch: [
-                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch",
                         "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
@@ -1257,7 +1257,7 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
+                "self-managed/installation-methods/helm/configure/using-external-keycloak",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
@@ -1294,6 +1294,11 @@ module.exports = {
                 "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
               ],
               //also to include backup and restore, and scaling
+            },
+            {
+              "Production guides": [
+                "self-managed/operational-guides/production-guide/helm-chart-production-guide",
+              ],
             },
             {
               type: "category",
@@ -1477,6 +1482,8 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
+        "self-managed/concepts/secondary-storage-management",
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1639,6 +1646,7 @@ module.exports = {
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
+                    "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
                   Troubleshooting: [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",

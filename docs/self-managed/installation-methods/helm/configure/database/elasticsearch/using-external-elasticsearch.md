@@ -1,6 +1,6 @@
 ---
-id: using-existing-elasticsearch
-sidebar_label: Existing Elasticsearch
+id: using-external-elasticsearch
+sidebar_label: External Elasticsearch
 title: Use external Elasticsearch with Helm
 description: "Learn how to use an external Elasticsearch instance in Camunda 8 Self-Managed Helm chart deployment."
 ---
