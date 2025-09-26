@@ -16,7 +16,7 @@ Roles are used to grant users the system and data access required to fulfill a c
 The Orchestration Cluster creates [a set of default roles](../concepts/access-control/authorizations.md#default-roles) on startup. If deleted, default roles are automatically recreated on cluster startup.
 :::
 
-## Create role
+## Create a role
 
 To create a role:
 
@@ -31,7 +31,7 @@ The role is created and can now be assigned to users or groups.
 
 <img src={CreateRoleImg} alt="Create a role" class="img-700"/>
 
-## Delete role
+## Delete a role
 
 To delete a role:
 
