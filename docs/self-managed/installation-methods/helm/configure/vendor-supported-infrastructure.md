@@ -526,7 +526,7 @@ With all infrastructure components deployed and configured, you can now deploy C
 
 **Prerequisites**:
 
-- Ensure environment variables are sourced (see [Environment setup](#prerequisites-environment-setup))
+- Ensure environment variables are sourced (see [Environment setup](#step-2-environment-setup))
 - All infrastructure components (PostgreSQL, Elasticsearch, Keycloak) must be deployed first
 - Save all configuration files from previous sections locally
 
