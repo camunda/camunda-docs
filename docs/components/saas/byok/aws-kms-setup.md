@@ -121,6 +121,7 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
     }
   ]
 }
+```
 
 :::warning Key policy warnings
 
