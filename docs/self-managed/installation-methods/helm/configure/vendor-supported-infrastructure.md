@@ -162,7 +162,7 @@ If you don't plan to use certain components (for example, Web Modeler), you can 
 
 ### Installation
 
-**Prerequisites**: Ensure environment variables are sourced (see [Environment setup](#prerequisites-environment-setup))
+**Prerequisites**: Ensure environment variables are sourced (see [Environment setup](#step-2-environment-setup))
 
 The PostgreSQL deployment follows these steps, automated via the `postgresql/deploy.sh` script:
 
