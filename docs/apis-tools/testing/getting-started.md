@@ -113,8 +113,13 @@ public class MyProcessTest {
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
-        // given: the processes are deployed
+    void shouldCreateProcessInstance() {
+        // given
+        client
+                .newDeployResourceCommand()
+                .addResourceFromClasspath("my-process.bpmn")
+                .send()
+                .join();
 
         // when
         final ProcessInstanceEvent processInstance =
@@ -160,7 +165,7 @@ public class MyProcessTest {
     private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
+    void shouldCreateProcessInstance() {
         // given
         client
             .newDeployResourceCommand()
