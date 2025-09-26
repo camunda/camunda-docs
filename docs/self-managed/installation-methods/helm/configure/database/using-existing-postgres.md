@@ -4,32 +4,22 @@ title: "Use external PostgreSQL"
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 
-This guide steps through using an external PostgreSQL instance. By default, [Helm chart deployment](/self-managed/setup/overview.md) creates a new PostgreSQL instance, but it's possible to use an external, external PostgreSQL Service instead.
-
-Three Camunda 8 Self-Managed components use PostgreSQL:
-
-- Identity
-- Keycloak
-- Web Modeler
+The [Helm chart deployment](/self-managed/installation-methods/helm/install.md) can optionally install an internal PostgreSQL using [Bitnami subcharts](../../configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
 
 ## Prerequisites
 
-### Supported version
+- **Running external PostgreSQL service**
+- **Connection details:** following sample values are used in this guide (replace them with your own):
 
-To confirm the supported version of PostgreSQL, check the [supported environments](/reference/supported-environments.md) page.
+```yaml
+host: `db.example.com`
+port: `5432`
+username: `postgres`
+password: `examplePassword`
+```
 
-### Authentication
-
-Make sure you have the following information for your external PostgreSQL instance. For the sake of this guide, sample values will be used:
-
-- host: `db.example.com`
-- port: `5432`
-- username: `postgres`
-- password: `examplePassword`
-
-### Database setup
-
-Ensure you have created the relevant databases in your PostgreSQL instance. For this guide, we will create the following databases:
+- **Supported versions:**: Check the [supported environments](/reference/supported-environments.md) page to confirm which PostgreSQL versions are supported.
+- **Database setup:** Ensure the required databases exist in your PostgreSQL instance. For this guide, create the following databases:
 
 ```SQL
 CREATE DATABASE "web-modeler";
@@ -37,19 +27,16 @@ CREATE DATABASE "keycloak";
 CREATE DATABASE "identity";
 ```
 
-### Creating Kubernetes secrets
-
-Once you have confirmed the above, create a Kubernetes secret for the database password so you do not have to refer to sensitive information in plain text within your `values.yaml`.
-
-A secret for the external PostgreSQL instance can be created like this:
+- **Kubernetes secrests:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
 
 ```bash
 kubectl create secret generic camunda-psql-db --from-literal=password=examplePassword -n camunda
 ```
 
-This secret will exist outside the Helm chart and will not be affected on subsequent `helm upgrade` commands.
-
 ## Configuration
+
+Three Camunda 8 Self-Managed components require PostgreSQL: Identity, Keycloak, and Web Modeler.
+Each of these components must be configured to connect to the external PostgreSQL instance.
 
 ### Parameters
 
