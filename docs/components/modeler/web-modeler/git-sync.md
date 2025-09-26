@@ -266,7 +266,7 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 
 :::info Atlassian Data Center End of Life
 
-Bitbucket Data Center reaches its end of life on March 28, 2029, see [Atlassian's announcement](https://www.atlassian.com/licensing/data-center-end-of-life).
+Bitbucket Data Center reaches its end of life on March 28, 2029. See [Atlassian's announcement](https://www.atlassian.com/licensing/data-center-end-of-life).
 Consider migrating to Bitbucket Cloud or another supported Git provider for continued support and updates.
 
 :::
@@ -274,7 +274,7 @@ Consider migrating to Bitbucket Cloud or another supported Git provider for cont
 :::warning Limitations
 
 Due to [limitations in the Bitbucket Data Center API](https://jira.atlassian.com/browse/BSERV-14381), Web Modeler cannot push file deletions to Bitbucket Data Center repositories.
-If you delete, move or rename files in Web Modeler, the original will remain in the remote repository after synchronization.
+If you delete, move, or rename files in Web Modeler, the original will remain in the remote repository after synchronization.
 
 :::
 
@@ -297,7 +297,7 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
    - **Access token:** The repository, project, or workspace access token you generated.
-   - **Bitbucket API Base URL:** (optional - _**SaaS only**_) The base URL of your Bitbucket installation's REST API (for example `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
+   - **Bitbucket API Base URL:** (optional - _**SaaS only**_) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
