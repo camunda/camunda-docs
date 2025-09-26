@@ -293,7 +293,7 @@ Elasticsearch serves as the primary database for Camunda 8 orchestration cluster
 
 ### Installation
 
-**Prerequisites**: Ensure environment variables are sourced (see [Environment setup](#prerequisites-environment-setup))
+**Prerequisites**: Ensure environment variables are sourced (see [Environment setup](#step-2-environment-setup))
 
 The Elasticsearch deployment follows these steps, automated via the `elasticsearch/deploy.sh` script:
 
