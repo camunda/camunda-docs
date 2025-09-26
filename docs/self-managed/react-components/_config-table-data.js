@@ -130,15 +130,6 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.long-polling.timeout",
-    legacy: [
-      "zeebe.gateway.longPolling.probeTimeout",
-      "zeebe.broker.gateway.longPolling.probeTimeout",
-    ],
-    types: ["1-to-1"],
-    area: ["API"],
-  },
-  {
     name: "camunda.api.grpc.long-polling.min-empty-responses",
     legacy: [
       "zeebe.gateway.longPolling.minEmptyResponses",

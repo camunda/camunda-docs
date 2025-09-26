@@ -12,6 +12,234 @@ As a Spring Boot application, the Orchestration Cluster supports standard
 
 The following configurations apply to all components within the Orchestration Cluster.
 
+## API
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property                                  | Description | Default value               |
+| :--------------------------------------------------------- | :---------- | :-------------------------- |
+| `camunda.api.grpc.address`                                 | -           | `0.0.0.0`                   |
+| `camunda.api.grpc.port`                                    | -           | `26500`                     |
+| `camunda.api.grpc.min-keep-alive-interval`                 | -           | `30s`                       |
+| `camunda.api.grpc.max-message-size`                        | -           | `30MB`                      |
+| `camunda.api.grpc.ssl.enabled`                             | -           | `true`                      |
+| `camunda.api.grpc.ssl.certificate`                         | -           | `/path/to/my/cert.pem`      |
+| `camunda.api.grpc.ssl.certificate-private-key`             | -           | `/path`                     |
+| `camunda.api.grpc.ssl.key-store.file-path`                 | -           | `/path/to/keystore`         |
+| `camunda.api.grpc.ssl.key-store.password`                  | -           | -                           |
+| `camunda.api.grpc.interceptors.id`                         | -           | `'id1'`                     |
+| `camunda.api.grpc.interceptors.jar-path`                   | -           | `'./lib/myInterceptor.jar'` |
+| `camunda.api.grpc.interceptors.class-name`                 | -           | `'MyGrpcInterceptor'`       |
+| `camunda.api.grpc.management-threads`                      | -           | `1`                         |
+| `camunda.api.grpc.long-polling.enabled`                    | -           | `true`                      |
+| `camunda.api.grpc.long-polling.timeout`                    | -           | `20000`                     |
+| `camunda.api.grpc.long-polling.min-empty-responses`        | -           | `'10s'`                     |
+| `camunda.api.rest.filters.id`                              | -           | `'id1'`                     |
+| `camunda.api.rest.filters.jar-path`                        | -           | `'./lib/myFilter.jar'`      |
+| `camunda.api.rest.filters.class-name`                      | -           | `'MyRestFilter'`            |
+| `camunda.api.rest.process-cache.max-size`                  | -           | `100`                       |
+| `camunda.api.rest.process-cache.expiration-idle`           | -           | `null`                      |
+| `camunda.api.grpc.rest.executor.core-pool-size-multiplier` | -           | `1`                         |
+| `camunda.api.rest.executor.max-pool-size-multiplier`       | -           | `2`                         |
+| `camunda.api.rest.executor.keep-alive`                     | -           | `'60s'`                     |
+| `camunda.api.rest.executor.queue-capacity`                 | -           | `64`                        |
+
+</TabItem>
+</Tabs>
+
+## Cluster
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property                        | Description | Default value |
+| :----------------------------------------------- | :---------- | :------------ |
+| `camunda.cluster.metadata.sync-delay`            | -           | `'10s'`       |
+| `camunda.cluster.metadata.sync-request-timeout`  | -           | `'2s'`        |
+| `camunda.cluster.metadata.gossip-fanout`         | -           | `2`           |
+| `camunda.cluster.network.host`                   | -           | `null`        |
+| `camunda.cluster.node-id`                        | -           | `0`           |
+| `camunda.cluster.partition-count`                | -           | `1`           |
+| `camunda.cluster.replication-factor`             | -           | `1`           |
+| `camunda.cluster.size`                           | -           | `1`           |
+| `camunda.cluster.raft.priority-election-enabled` | -           | `true`        |
+| `camunda.cluster.raft.flush-enabled`             | -           | `true`        |
+| `camunda.cluster.raft.flush-delay`               | -           | `0s`          |
+| `camunda.cluster.raft.heartbeat-interval`        | -           | `'250ms'`     |
+| `camunda.cluster.raft.election-timeout`          | -           | `'2.5s'`      |
+
+</TabItem>
+</Tabs>
+
+## Data
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property                                                | Description                 | Default value             |
+| :----------------------------------------------------------------------- | :-------------------------- | :------------------------ |
+| `camunda.data.snapshot-period`                                           | -                           | `'5m'`                    |
+| `camunda.data.export.distribution-interval`                              | -                           | `'15s'`                   |
+| `camunda.data.export.skip-records`                                       | -                           | `[]`                      |
+| `camunda.data.backup.repository-name`                                    | -                           | `''`                      |
+| `camunda.data.backup.snapshot-timeout`                                   | -                           | `0`                       |
+| `camunda.data.backup.incomplete-check-timeout`                           | -                           | `5m`                      |
+| `camunda.data.backup.store`                                              | -                           | `'NONE'`                  |
+| `camunda.data.backup.s3.bucket-name`                                     | -                           | `-`                       |
+| `camunda.data.backup.s3.endpoint`                                        | -                           | `-`                       |
+| `camunda.data.backup.s3.region`                                          | -                           | `-`                       |
+| `camunda.data.backup.s3.access-key`                                      | -                           | `-`                       |
+| `camunda.data.backup.s3.secret-key`                                      | -                           | `-`                       |
+| `camunda.data.backup.s3.api-call-timeout`                                | -                           | `'180s'`                  |
+| `camunda.data.backup.s3.force-path-style-access`                         | -                           | `false`                   |
+| `camunda.data.backup.s3.compression`                                     | -                           | `-`                       |
+| `camunda.data.backup.s3.max-concurrent-connections`                      | -                           | `50`                      |
+| `camunda.data.backup.s3.connection-acquisition-timeout`                  | -                           | `'45s'`                   |
+| `camunda.data.backup.s3.base-path`                                       | -                           | `-`                       |
+| `camunda.data.backup.s3.support-legacy-md5`                              | -                           | `-`                       |
+| `camunda.data.backup.gcs.bucket-name`                                    | -                           | `-`                       |
+| `camunda.data.backup.gcs.host`                                           | -                           | `'AUTO'`                  |
+| `camunda.data.backup.gcs.auth`                                           | -                           | `-`                       |
+| `camunda.data.backup.azure.endpoint`                                     | -                           | `-`                       |
+| `camunda.data.backup.azure.account-name`                                 | -                           | `-`                       |
+| `camunda.data.backup.azure.account-key`                                  | -                           | `-`                       |
+| `camunda.data.backup.azure.connection-string`                            | -                           | `-`                       |
+| `camunda.data.backup.azure.base-path`                                    | -                           | `-`                       |
+| `camunda.data.backup.azure.create-container`                             | -                           | `true`                    |
+| `camunda.data.backup.azure.sas-token.type`                               | -                           | `-`                       |
+| `camunda.data.backup.azure.sas-token.value`                              | -                           | `-`                       |
+| `camunda.data.backup.filesystem.base-path`                               | -                           | `-`                       |
+| `camunda.data.secondary-storage.type`                                    | elasticsearch or opensearch | `'elasticsearch'`         |
+| `camunda.data.secondary-storage.autoconfigure-camunda-exporter`          | -                           | `true`                    |
+| `camunda.data.secondary-storage.elasticsearch.url`                       | -                           | `'http://localhost:9200'` |
+| `camunda.data.secondary-storage.elasticsearch.cluster-name`              | -                           | `'elasticsearch'`         |
+| `camunda.data.secondary-storage.elasticsearch.username`                  | -                           | `''`                      |
+| `camunda.data.secondary-storage.elasticsearch.password`                  | -                           | `''`                      |
+| `camunda.data.secondary-storage.elasticsearch.security.enabled`          | -                           | `false`                   |
+| `camunda.data.secondary-storage.elasticsearch.security.certificate-path` | -                           | `''`                      |
+| `camunda.data.secondary-storage.elasticsearch.security.verify-hostname`  | -                           | `true`                    |
+| `camunda.data.secondary-storage.elasticsearch.security.self-signed`      | -                           | `false`                   |
+| `camunda.data.secondary-storage.elasticsearch.index-prefix`              | -                           | `''`                      |
+| `camunda.data.secondary-storage.opensearch.url`                          | -                           | `'http://localhost:9200'` |
+| `camunda.data.secondary-storage.opensearch.cluster-name`                 | -                           | `'elasticsearch'`         |
+| `camunda.data.secondary-storage.opensearch.username`                     | -                           | `''`                      |
+| `camunda.data.secondary-storage.opensearch.password`                     | -                           | `''`                      |
+| `camunda.data.secondary-storage.opensearch.security.enabled`             | -                           | `false`                   |
+| `camunda.data.secondary-storage.opensearch.security.certificate-path`    | -                           | `''`                      |
+| `camunda.data.secondary-storage.opensearch.security.verify-hostname`     | -                           | `true`                    |
+| `camunda.data.secondary-storage.opensearch.security.self-signed`         | -                           | `false`                   |
+| `camunda.data.secondary-storage.opensearch.index-prefix`                 | -                           | `''`                      |
+| `camunda.data.primary-storage.directory`                                 | -                           | `'./data'`                |
+| `camunda.data.primary-storage.runtime-directory`                         | -                           | `''`                      |
+| `camunda.data.primary-storage.disk.monitoring-interval`                  | -                           | `'1s'`                    |
+| `camunda.data.primary-storage.disk.monitoring-enabled`                   | -                           | `true`                    |
+| `camunda.data.primary-storage.disk.free-space.processing`                | -                           | `'2GB'`                   |
+| `camunda.data.primary-storage.disk.free-space.replication`               | -                           | `'1GB'`                   |
+| `camunda.data.primary-storage.logstream.log-segment-size`                | -                           | `'128MB'`                 |
+| `camunda.data.primary-storage.logstream.log-index-density`               | -                           | `100`                     |
+| `camunda.data.primary-storage.rocksdb.statistics-enabled`                | -                           | `false`                   |
+| `camunda.data.primary-storage.rocksdb.access-metrics`                    | -                           | `none`                    |
+| `camunda.data.primary-storage.rocksdb.memory-limit`                      | -                           | `'512MB'`                 |
+| `camunda.data.primary-storage.rocksdb.max-open-files`                    | -                           | `-1`                      |
+| `camunda.data.primary-storage.rocksdb.max-write-buffer-number`           | -                           | `6`                       |
+| `camunda.data.primary-storage.rocksdb.min-write-buffer-number-to-merge`  | -                           | `3`                       |
+| `camunda.data.primary-storage.rocksdb.io-rate-bytes-per-second`          | -                           | `0`                       |
+| `camunda.data.primary-storage.rocksdb.wal-disabled`                      | -                           | `true`                    |
+| `camunda.data.primary-storage.rocksdb.sst-partitioning-enabled`          | -                           | `true`                    |
+
+</TabItem>
+</Tabs>
+
+## System
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property                     | Description | Default value |
+| :-------------------------------------------- | :---------- | :------------ |
+| `camunda.system.cpu-thread-count`             | -           | `2`           |
+| `camunda.system.io-thread-count`              | -           | `2`           |
+| `camunda.system.clock-controlled`             | -           | `false`       |
+| `camunda.system.actor.idle.max-spins`         | -           | -             |
+| `camunda.system.actor.idle.max-yields`        | -           | -             |
+| `camunda.system.actor.idle.max-park-period`   | -           | -             |
+| `camunda.system.upgrade.enable-version-check` | -           | `true`        |
+
+</TabItem>
+</Tabs>
+
+## Spring profile
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property | Description | Default value                    |
+| :------------------------ | :---------- | :------------------------------- |
+| `spring.profiles.active`  | -           | broker,identity,operate,tasklist |
+
+</TabItem>
+</Tabs>
+
+## Server
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property            | Description | Default value          |
+| :----------------------------------- | :---------- | :--------------------- |
+| `server.address`                     | -           | `0.0.0.0`              |
+| `server.port`                        | -           | `8443`                 |
+| `server.ssl.enabled`                 | -           | `true`                 |
+| `server.ssl.certificate`             | -           | `/path/to/my/cert.pem` |
+| `server.ssl.certificate-private-key` | -           | `/path`                |
+
+</TabItem>
+</Tabs>
+
+## Management
+
+The following variables are used to
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property       | Description | Default value   |
+| :------------------------------ | :---------- | :-------------- |
+| `management.server.address`     | -           | `0.0.0.0`       |
+| `management.server.port`        | -           | `9600`          |
+| `management.server.ssl.enabled` | -           | `true`          |
+| `management.endpoint`           | -           | `some-endpoint` |
+
+</TabItem>
+</Tabs>
+
+## Licensing
+
+Installations of Camunda 8 Self-Managed which require a license can provide their license key to the components. See [licensing](./licensing.md).
+
+<Tabs>
+  <TabItem value="application.yaml" label="application.yaml">
+
+| Application.yaml property | Description | Default value |
+| :------------------------ | :---------- | :------------ |
+| `camunda.license.key`     | -           | `''`          |
+
+</TabItem>
+</Tabs>
+
 ## Authentication
 
 <!-- Updates must be made to ALL tables below. Tables are sorted alphabetically by property name. -->
