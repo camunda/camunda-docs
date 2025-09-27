@@ -226,6 +226,10 @@ kubectl port-forward svc/camunda-keycloak 18080:80
 kubectl port-forward svc/camunda-identity 8084:80
 ```
 
+:::note Keycloak Operator deployment
+If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead for the Keycloak service.
+:::
+
 ## External identity provider
 
 Instead of using internal Keycloak, you can configure Camunda to connect to an external IdP, such as an external Keycloak, Microsoft Entra ID, or Okta.

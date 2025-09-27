@@ -294,6 +294,10 @@ Some components are not enabled by default in this deployment. For more informat
 
 If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
 
+:::tip Alternative: Vendor-supported Elasticsearch deployment  
+Instead of using Bitnami subcharts for internal Elasticsearch, consider using [Elastic Cloud on Kubernetes (ECK)](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md#elasticsearch-deployment) for production-grade Elasticsearch clusters with automated scaling, upgrades, and security configuration.
+:::
+
 <details>
 <summary>Show configuration changes to disable external OpenSearch usage</summary>
 
@@ -313,6 +317,10 @@ elasticsearch:
 #### Use internal PostgreSQL instead of the managed Aurora
 
 If you prefer not to use an external PostgreSQL service, you can switch to the internal PostgreSQL deployment. In this case, you will need to configure the Helm chart as follows and remove certain configurations related to the external database and service account:
+
+:::tip Alternative: Vendor-supported PostgreSQL deployment
+Instead of using Bitnami subcharts for internal PostgreSQL, consider using [CloudNativePG operator](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md#postgresql-deployment) for production-grade PostgreSQL clusters with automated backup, monitoring, and scaling capabilities.
+:::
 
 <details>
 <summary>Show configuration changes to disable external database usage</summary>

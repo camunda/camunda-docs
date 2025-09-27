@@ -16,6 +16,10 @@ If you have previously used Bitnami subcharts in production with earlier Camunda
 For production environments, we advise deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
 :::
 
+:::note Alternative: Vendor-supported Infrastructure
+For a more robust production approach, consider using vendor-supported deployment methods instead of Bitnami sub-charts. This approach uses official Kubernetes operators (CloudNativePG, ECK, Keycloak Operator) that provide enterprise-grade features and vendor support. See [Deploy infrastructure with vendor-supported methods](/self-managed/installation-methods/helm/configure/vendor-supported-infrastructure.md) for detailed instructions.
+:::
+
 If you decide to run Bitnami-based subcharts in production, we strongly recommend using the **vendor-supported enterprise images**. This guide explains how to create registry secrets and install Camunda with enterprise images.
 
 ## Why Use enterprise images?

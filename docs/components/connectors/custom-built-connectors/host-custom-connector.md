@@ -107,6 +107,10 @@ and forwarded Zeebe, Operate, and Keycloak ports:
 - `kubectl port-forward svc/camunda-operate 8081:80`
 - `kubectl port-forward svc/camunda-keycloak 18080:80`
 
+:::note Keycloak Operator deployment
+If you're using Keycloak deployed via the Keycloak Operator, use `kubectl port-forward svc/keycloak-service 18080:8080` instead for the Keycloak service.
+:::
+
 Now, you need to obtain both Zeebe and connectors' Operate OAuth clients. You can do it with `kubectl get secret camunda-zeebe-identity-secret -o jsonpath="{.data.*}" | base64 --decode`
 and `kubectl get secret camunda-connectors-identity-secret -o jsonpath="{.data.*}" | base64 --decode` respectively.
 
