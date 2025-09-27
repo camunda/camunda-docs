@@ -1764,6 +1764,7 @@ module.exports = {
             {
               "Migration & update": [
                 "self-managed/components/optimize/migration-update/camunda-8/instructions",
+                "self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8",
                 "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
                 "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
                 "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
