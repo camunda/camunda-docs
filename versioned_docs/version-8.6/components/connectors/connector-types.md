@@ -38,6 +38,12 @@ Inbound Connectors currently rely on [Operate](../../operate/operate-introductio
 If your Camunda 8 installation doesn't include Operate, you can only use outbound Connectors.
 :::
 
+:::note
+The connector Runtime currently fetches only the **latest version** of each process definition.
+
+Deploying a new process definition version deactivates inbound connectors from older versions. [Migrate older versions](../../concepts/process-instance-migration) if the new inbound connector configuration won't correlate messages for existing instances.
+:::
+
 ![Inbound Connectors](img/inbound-connectors.png)
 
 Use inbound Connectors if something needs to happen within the workflow engine because of an external event in the third-party system. For example, because a Slack message was published, or a REST endpoint is called.

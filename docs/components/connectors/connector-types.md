@@ -29,9 +29,9 @@ The connector object created during deployment will be kept active as long as th
 When the process definition is deleted or replaced with a newer version, the connector object will be removed or updated as well.
 
 :::note
-Inbound connectors currently rely on [Operate](../../operate/operate-introduction) API to retrieve the information about deployed process definitions.
+The connector Runtime currently fetches only the **latest version** of each process definition.
 
-If your Camunda 8 installation doesn't include Operate, you can only use outbound connectors.
+Deploying a new process definition version deactivates inbound connectors from older versions. [Migrate older versions](../../concepts/process-instance-migration) if the new inbound connector configuration won't correlate messages for existing instances.
 :::
 
 ![Inbound connectors](img/inbound-connectors.png)
