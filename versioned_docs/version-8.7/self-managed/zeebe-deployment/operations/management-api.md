@@ -116,7 +116,7 @@ Starting from version 8.7.12, this API is available. In earlier versions, removi
 To delete an exporter permanently from the system, first remove the configuration of the exporter from the application. Then send the following request to the gateway's management API:
 
 ```
-POST actuator/exporters/{exporterId}/delete
+DELETE actuator/exporters/{exporterId}
 ```
 
 If the configuration is deleted, the exporter remains in the system but enters a blocked state. This prevents log compaction and thus increases the disk usage. To fully remove the exporter, it must be deleted using the management API, which ensures that no references to the exporter persist. If you wish to re-add the exporter, restore its configuration in the application properties and restart the system.
