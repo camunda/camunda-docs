@@ -52,6 +52,18 @@ This ILM Policy works on Elasticsearch 7 as well, and can function as a replacem
 Only indices containing dates in their suffix may be deleted.
 :::
 
+:::warning Limitation: ILM configuration updates are not applied automatically
+
+If you update the value of `ilmMinAgeForDeleteArchivedIndices` in the `application.yml` after deployment, the change will **not** be applied to the existing ILM policy used by Tasklist. This is a known issue.
+
+To change the ILM settings after installation, you must manually update the corresponding ILM policy in Elasticsearch. Be aware that if Camunda 8 is installed without ILM configured initially, applying ILM later may lead to issues unless handled carefully and manually.
+
+Zeebe does correctly apply ILM updates via configuration, but Tasklist does not.
+
+For reliable ILM behavior, Camunda recommends configuring `ilmMinAgeForDeleteArchivedIndices` during initial installation and verifying the applied policy in Elasticsearch.
+
+:::
+
 ### OpenSearch
 
 OpenSearch does not support the Index Lifecycle Management (ILM) Policy, and instead uses Index State Management (ISM). The same environment variables that are used to activate ILM on Elasticsearch can be used to activate ISM on OpenSearch.
