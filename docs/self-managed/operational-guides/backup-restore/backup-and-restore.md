@@ -11,8 +11,19 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application. For details, see the [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application).
 :::
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './react-components/\_card-data';
+
+Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
+
+## About this guide
+
+This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. Automate backup and restore procedures with tools that meet your organization’s requirements.
 
 :::info
 
@@ -26,16 +37,7 @@ Depending on context, we may refer to a specific subcomponent of the Orchestrati
 
 :::
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
-import { overviewCards } from './react-components/\_card-data';
-
-Use the backup feature to back up and restore your Camunda 8 Self-Managed components and cluster.
-
-## About this guide
-
-This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
+This guide includes procedures to:
 
 - Regularly [back up](./backup.md) the state of the Orchestration Cluster and Optimize without any downtime. You can also back up and restore Web Modeler data.
 
@@ -51,9 +53,9 @@ This guide covers how to back up and restore your Camunda 8 Self-Managed compone
 
 ## Why you should use backup and restore
 
-The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
+The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch or OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
 
-For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
+For example, using Elasticsearch or OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
 
 The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe to ensure a **consistent snapshot** of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
