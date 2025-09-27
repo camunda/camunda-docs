@@ -58,6 +58,7 @@ Add the following dependency to your Maven project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-spring</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -72,6 +73,7 @@ Add the following dependency to your Maven project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-java</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -105,14 +107,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @CamundaSpringProcessTest
+@Deployment(resources = "classpath:my-process.bpmn")
 public class MyProcessTest {
 
     @Autowired private CamundaClient client;
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
-        // given: the processes are deployed
+    void shouldCreateProcessInstance() {
+        // given process definition is deployed
 
         // when
         final ProcessInstanceEvent processInstance =
@@ -124,7 +127,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
@@ -158,7 +161,7 @@ public class MyProcessTest {
     private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
+    void shouldCreateProcessInstance() {
         // given
         client
             .newDeployResourceCommand()
@@ -176,7 +179,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
