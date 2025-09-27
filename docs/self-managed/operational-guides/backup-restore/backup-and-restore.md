@@ -11,7 +11,19 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+:::
+
+:::info
+
+With Camunda 8.8, the architecture was updated. For clarity, the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) now consists of:
+
+- Zeebe
+- Web Applications (Operate and Tasklist)
+- Identity
+
+Depending on context, we may refer to a specific subcomponent of the Orchestration Cluster where appropriate.
+
 :::
 
 import Tabs from '@theme/Tabs';
@@ -25,7 +37,7 @@ Use the backup feature to back up and restore your Camunda 8 Self-Managed compon
 
 This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
 
-- Regularly [back up](./backup.md) the state of your Zeebe, Web Applications (Operate, Tasklist), and Optimize components without any downtime. You can also back up and restore Web Modeler data.
+- Regularly [back up](./backup.md) the state of the Orchestration Cluster and Optimize without any downtime. You can also back up and restore Web Modeler data.
 
 - [Restore](./restore.md) a cluster from a backup if any failures occur that cause data loss.
 
@@ -39,7 +51,7 @@ This guide covers how to back up and restore your Camunda 8 Self-Managed compone
 
 ## Why you should use backup and restore
 
-The Camunda 8 components Zeebe, Web Applications (Operate, Tasklist), and Optimize store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
+The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
 
 For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
 
@@ -88,7 +100,7 @@ To learn more about how to configure these settings, refer to the prerequisites 
 
 ## Considerations
 
-The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup ID must be an integer and greater than the previous backups.
+The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
 
 :::note
 We recommend using the unix timestamp as the backup ID.
@@ -107,7 +119,7 @@ As of Camunda 8.8, configuring Operate and Tasklist with different repository na
 :::
 
 :::warning breaking changes
-As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` and `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` (Web Applications) and `/actuator/backupRuntime` (Zeebe). The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::
 
 ### Management API
@@ -133,7 +145,7 @@ Since the services are bound to your local machine, you **cannot reuse the same 
 ```bash
 export CAMUNDA_RELEASE_NAME="camunda"
 # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-core 9600:9600 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
 ```
@@ -154,7 +166,7 @@ export CAMUNDA_RELEASE_NAME="camunda"
 # temporary overwrite of curl, can be removed with `unalias curl` again
 alias curl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
-curl $CAMUNDA_RELEASE_NAME-core:9600/actuator/health
+curl $CAMUNDA_RELEASE_NAME-zeebe-gateway:9600/actuator/health
 curl $CAMUNDA_RELEASE_NAME-optimize:8092/actuator/health
 curl $CAMUNDA_RELEASE_NAME-elasticsearch:9200/_cluster/health
 ```
@@ -191,19 +203,19 @@ Setting the `contextPath` in the Helm chart for Optimize will not overwrite the 
 <summary>Example</summary>
 <summary>
 
-If you are defining the `contextPath` for Operate in the Camunda Helm chart:
+If you are defining the `contextPath` for the Orchestration Cluster in the Camunda Helm chart:
 
 ```bash
 orchestration:
-   contextPath: /core
+   contextPath: /example
 ```
 
-A call to the management API of Operate would look like the following example:
+A call to the management API of the Orchestration Cluster would look like the following example:
 
 ```bash
 ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
 
-curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/core/health
+curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/example/actuator/health
 ```
 
 Without the `contextPath` it would just be:
@@ -211,7 +223,7 @@ Without the `contextPath` it would just be:
 ```bash
 ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
 
-curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/health
+curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 ```
 
 </summary>
