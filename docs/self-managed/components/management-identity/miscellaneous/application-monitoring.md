@@ -1,15 +1,15 @@
 ---
 id: application-monitoring
-title: "Monitoring Identity"
-sidebar_label: "Monitoring Identity"
+title: "Monitor Management Identity"
+sidebar_label: "Monitoring"
 description: "Understand how the Identity component operates in exposing the following endpoints."
 ---
 
-Monitor the health and operation of the Identity component in your Self-Managed deployment.
+Monitor the health and operation of the Management Identity component in your Self-Managed deployment.
 
 ## Monitoring endpoints
 
-You can use the following default exposed endpoints to monitor how the Identity component is operating.
+You can use the following default exposed endpoints to monitor how the Management Identity component is operating.
 
 | Endpoint               | Default port | Purpose                                                                    |
 | :--------------------- | :----------- | :------------------------------------------------------------------------- |

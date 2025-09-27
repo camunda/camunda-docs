@@ -2,7 +2,7 @@
 id: authentication
 title: "Authentication"
 sidebar_label: "Authentication"
-description: "Learn how Identity authenticates users or clients via log-in screen or M2M tokens."
+description: "Learn how Management Identity authenticates users or clients via log-in screen or M2M tokens."
 ---
 
 Depending on your [configuration](/self-managed/components/management-identity/configuration/identity-configuration-overview.md), users and applications authenticate with Camunda 8 via the IdP using the [OAuth 2.0 protocol](https://oauth.net/2/), using either a login page or [M2M tokens](#m2m-machine-to-machine-authentication).
@@ -21,7 +21,7 @@ The following prerequisites are required for M2M authentication:
 
 | Prerequisite                                                                                                       | Description                            |
 | :----------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| [Identity](/self-managed/components/management-identity/what-is-identity.md)                                       | A running Identity service.            |
+| [Management Identity](/self-managed/components/management-identity/overview.md)                                    | A running Management Identity service. |
 | [Application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) | An application for your service.       |
 | Client ID                                                                                                          | The client ID of your application.     |
 | Client secret                                                                                                      | The client secret of your application. |
@@ -29,7 +29,7 @@ The following prerequisites are required for M2M authentication:
 
 ### Generate a token
 
-In the following example, the Keycloak instance that supports Identity can be found via `http://localhost:18080`. This might be different for your Identity configuration, adjust the host name (and port if required) if required.
+In the following example, the Keycloak instance that supports Management Identity can be found via `http://localhost:18080`. This might be different for your Management Identity configuration, adjust the host name (and port if required) if required.
 
 To request a token, use the following cURL command, replacing the placeholders with your application details:
 

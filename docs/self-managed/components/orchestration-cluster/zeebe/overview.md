@@ -1,15 +1,17 @@
 ---
 id: overview
-title: "Overview"
+title: "Zeebe on Self-Managed"
 sidebar_label: "Overview"
 description: "About Zeebe"
 ---
 
+<!--
 :::danger
 Zeebe does not support network file systems (NFS) other types of network storage volumes at this time. Usage of NFS may cause data corruption.
 :::
+-->
 
-Refer to the [installation guide](/self-managed/setup/overview.md) for details on how to install Zeebe in a private cloud or on your own hardware.
+[Zeebe](/components/zeebe/zeebe-overview.md) is the process automation engine component within the Orchestration Cluster.
 
 Within this section you will find detailed information about:
 

@@ -243,14 +243,14 @@ paths:
           $ref: "#/components/responses/InvalidData"
         "404":
           description: |
-            The job with the given jobKey is not found.
+            The job with the given jobKey is not found. It was completed by another worker, or the process instance itself was canceled.
           content:
             application/problem+json:
               schema:
                 $ref: "#/components/schemas/ProblemDetail"
         "409":
           description: |
-            The job with the given key is in the wrong state currently. More details are provided in the response body.
+            The job with the given key is in the wrong state (i.e: not ACTIVATED or ACTIVATABLE). The job was failed by another worker with retries = 0, and the process is now in an incident state.
           content:
             application/problem+json:
               schema:
@@ -654,12 +654,13 @@ paths:
         - Tenant
       operationId: unassignUserFromTenant
       summary: Unassign a user from a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Unassigns the user from the specified tenant. The user can no longer access tenant data.
+        Unassigns the user from the specified tenant.
+        The user can no longer access tenant data.
       parameters:
         - name: tenantId
           in: path
@@ -820,12 +821,13 @@ paths:
         - Tenant
       operationId: assignClientToTenant
       summary: Assign a client to a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assign the client to the specified tenant. The client can then access tenant data and perform authorized actions.
+        Assign the client to the specified tenant.
+        The client can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
@@ -860,12 +862,13 @@ paths:
         - Tenant
       operationId: unassignClientFromTenant
       summary: Unassign a client from a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Unassigns the client from the specified tenant. The client can no longer access tenant data.
+        Unassigns the client from the specified tenant.
+        The client can no longer access tenant data.
       parameters:
         - name: tenantId
           in: path
@@ -980,7 +983,7 @@ paths:
     post:
       tags:
         - Tenant
-      operationId: searchMappingsForTenant
+      operationId: searchMappingRulesForTenant
       summary: Search mapping rules for tenant
       description: |-
 
@@ -1013,12 +1016,13 @@ paths:
         - Tenant
       operationId: assignGroupToTenant
       summary: Assign a group to a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assigns a group to a specified tenant. Group members (users, clients) can then access tenant data and perform authorized actions.
+        Assigns a group to a specified tenant.
+        Group members (users, clients) can then access tenant data and perform authorized actions.
       parameters:
         - name: tenantId
           in: path
@@ -1053,12 +1057,13 @@ paths:
         - Tenant
       operationId: unassignGroupFromTenant
       summary: Unassign a group from a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Unassigns a group from a specified tenant. Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
+        Unassigns a group from a specified tenant.
+        Members of the group (users, clients) will no longer have access to the tenant's data - except they are assigned directly to the tenant.
       parameters:
         - name: tenantId
           in: path
@@ -1094,12 +1099,13 @@ paths:
         - Tenant
       operationId: assignRoleToTenant
       summary: Assign a role to a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assigns a role to a specified tenant. Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
+        Assigns a role to a specified tenant.
+        Users, Clients or Groups, that have the role assigned, will get access to the tenant's data and can perform actions according to their authorizations.
       parameters:
         - name: tenantId
           in: path
@@ -1134,12 +1140,14 @@ paths:
         - Tenant
       operationId: unassignRoleFromTenant
       summary: Unassign a role from a tenant
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Unassigns a role from a specified tenant. Users, Clients or Groups, that have the role assigned, will no longer have access to the tenant's data - unless they are assigned directly to the tenant.
+        Unassigns a role from a specified tenant.
+        Users, Clients or Groups, that have the role assigned, will no longer have access to the
+        tenant's data - unless they are assigned directly to the tenant.
       parameters:
         - name: tenantId
           in: path
@@ -1422,15 +1430,13 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The form is successfully returned.
+          description: The form is successfully returned.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/FormResult"
         "204":
-          description: |
-            The user task was found, but no form is associated with it.
+          description: The user task was found, but no form is associated with it.
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -1508,8 +1514,7 @@ paths:
               $ref: "#/components/schemas/UserTaskSearchQuery"
       responses:
         "200":
-          description: |
-            The user task search result.
+          description: The user task search result.
           content:
             application/json:
               schema:
@@ -1581,8 +1586,7 @@ paths:
               $ref: "#/components/schemas/VariableSearchQuery"
       responses:
         "200":
-          description: |
-            The variable search result.
+          description: The variable search result.
           content:
             application/json:
               schema:
@@ -1618,8 +1622,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The variable is successfully returned.
+          description: The variable is successfully returned.
           content:
             application/json:
               schema:
@@ -1653,8 +1656,10 @@ paths:
         When the clock is pinned, it remains at the specified time and does not advance.
         To change the time, the clock must be pinned again with a new timestamp.
 
+        :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
+        :::
       requestBody:
         required: true
         content:
@@ -1686,8 +1691,10 @@ paths:
         This operation is useful for returning the clock to
         normal behavior after it has been pinned to a specific time.
 
+        :::note
         This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
         in future releases.
+        :::
       responses:
         "204":
           description: The clock was successfully reset to the system time.
@@ -1715,8 +1722,7 @@ paths:
               $ref: "#/components/schemas/ProcessDefinitionSearchQuery"
       responses:
         "200":
-          description: |
-            The process definition search result.
+          description: The process definition search result.
           content:
             application/json:
               schema:
@@ -1745,15 +1751,15 @@ paths:
         - name: processDefinitionKey
           in: path
           required: true
-          description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
+          description: |
+            The assigned key of the process definition, which acts as a unique identifier for this process definition.
           schema:
             type: string
             format: string<ProcessDefinitionKey>
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The process definition is successfully returned.
+          description: The process definition is successfully returned.
           content:
             application/json:
               schema:
@@ -1796,15 +1802,13 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The XML of the process definition is successfully returned.
+          description: The XML of the process definition is successfully returned.
           content:
             text/xml:
               schema:
                 type: string
         "204":
-          description: |
-            The process definition was found but does not have XML.
+          description: The process definition was found but does not have XML.
           content:
             text/plain:
               schema:
@@ -1849,15 +1853,13 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The form is successfully returned.
+          description: The form is successfully returned.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/FormResult"
         "204":
-          description: |
-            The process was found, but no form is associated with it.
+          description: The process was found, but no form is associated with it.
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -2535,8 +2537,7 @@ paths:
               $ref: "#/components/schemas/ElementInstanceSearchQuery"
       responses:
         "200":
-          description: |
-            The element instance search result.
+          description: The element instance search result.
           content:
             application/json:
               schema:
@@ -2572,8 +2573,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The element instance is successfully returned.
+          description: The element instance is successfully returned.
           content:
             application/json:
               schema:
@@ -2613,8 +2613,7 @@ paths:
               $ref: "#/components/schemas/DecisionDefinitionSearchQuery"
       responses:
         "200":
-          description: |
-            The decision definition search result.
+          description: The decision definition search result.
           content:
             application/json:
               schema:
@@ -2694,8 +2693,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The XML of the decision definition is successfully returned.
+          description: The XML of the decision definition is successfully returned.
           content:
             text/xml:
               schema:
@@ -2735,8 +2733,7 @@ paths:
               $ref: "#/components/schemas/DecisionRequirementsSearchQuery"
       responses:
         "200":
-          description: |
-            The decision requirements search result.
+          description: The decision requirements search result.
           content:
             application/json:
               schema:
@@ -2772,8 +2769,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The decision requirements is successfully returned.
+          description: The decision requirements is successfully returned.
           content:
             application/json:
               schema:
@@ -2816,8 +2812,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The XML of the decision requirements is successfully returned.
+          description: The XML of the decision requirements is successfully returned.
           content:
             text/xml:
               schema:
@@ -2857,8 +2852,7 @@ paths:
               $ref: "#/components/schemas/DecisionInstanceSearchQuery"
       responses:
         "200":
-          description: |
-            The decision instance search result.
+          description: The decision instance search result.
           content:
             application/json:
               schema:
@@ -2893,8 +2887,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The decision instance is successfully returned.
+          description: The decision instance is successfully returned.
           content:
             application/json:
               schema:
@@ -3141,7 +3134,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/AuthorizationSearchQuery"
-        required: true
       responses:
         "200":
           description: The authorization search result.
@@ -3406,12 +3398,13 @@ paths:
         - Role
       operationId: assignRoleToUser
       summary: Assign a role to a user
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
+        Assigns the specified role to the user.
+        The user will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3453,13 +3446,13 @@ paths:
         - Role
       operationId: unassignRoleFromUser
       summary: Unassign a role from a user
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
         Unassigns a role from a user.
-         The user will no longer inherit the authorizations associated with this role.
+        The user will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3496,13 +3489,13 @@ paths:
         - Role
       operationId: assignRoleToClient
       summary: Assign a role to a client
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
         Assigns the specified role to the client.
-         The client will inherit the authorizations associated with this role.
+        The client will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3544,12 +3537,13 @@ paths:
         - Role
       operationId: unassignRoleFromClient
       summary: Unassign a role from a client
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-         Unassigns the specified role from the client.  The client will no longer inherit the authorizations associated with this role.
+        Unassigns the specified role from the client.
+        The client will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3623,12 +3617,13 @@ paths:
         - Role
       operationId: assignRoleToGroup
       summary: Assign a role to a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-         Assigns the specified role to the group.  Every member of the group (user or client) will inherit the authorizations associated with this role.
+        Assigns the specified role to the group.
+        Every member of the group (user or client) will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -3670,12 +3665,13 @@ paths:
         - Role
       operationId: unassignRoleFromGroup
       summary: Unassign a role from a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
+        Unassigns the specified role from the group.
+        All group members (user or client) no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -4227,12 +4223,13 @@ paths:
         - Group
       operationId: assignUserToGroup
       summary: Assign a user to a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assigns a user to a group, making the user a member of the group. Group members inherit the group authorizations, roles, and tenant assignments.
+        Assigns a user to a group, making the user a member of the group.
+        Group members inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
@@ -4274,13 +4271,13 @@ paths:
         - Group
       operationId: unassignUserFromGroup
       summary: Unassign a user from a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
         Unassigns a user from a group.
-         The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
+        The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -4317,12 +4314,13 @@ paths:
         - Group
       operationId: assignClientToGroup
       summary: Assign a client to a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
-        Assigns a client to a group, making it a member of the group. Members of the group inherit the group authorizations, roles, and tenant assignments.
+        Assigns a client to a group, making it a member of the group.
+        Members of the group inherit the group authorizations, roles, and tenant assignments.
       parameters:
         - name: groupId
           in: path
@@ -4364,13 +4362,13 @@ paths:
         - Group
       operationId: unassignClientFromGroup
       summary: Unassign a client from a group
-      description: |-
+      description: |
 
 
         [[CONSISTENCY:STRONG]]
 
         Unassigns a client from a group.
-         The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
+        The client is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
       parameters:
         - name: groupId
           in: path
@@ -4705,7 +4703,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MappingRuleSearchQueryRequest"
-        required: true
       responses:
         "200":
           description: The mapping rule search result.
@@ -4798,31 +4795,31 @@ paths:
           $ref: "#/components/responses/InternalServerError"
         "503":
           $ref: "#/components/responses/ServiceUnavailable"
-  /correlated-messages/search:
+  /correlated-message-subscriptions/search:
     post:
       tags:
-        - Message
-      operationId: searchCorrelatedMessages
-      summary: Search correlated messages
+        - Message subscription
+      operationId: searchCorrelatedMessageSubscriptions
+      summary: Search correlated message subscriptions
       description: |-
 
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for correlated messages based on given criteria.
+        Search correlated message subscriptions based on given criteria.
       requestBody:
         required: false
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CorrelatedMessageSearchQuery"
+              $ref: "#/components/schemas/CorrelatedMessageSubscriptionSearchQuery"
       responses:
         "200":
-          description: The correlated messages search result.
+          description: The correlated message subscriptions search result.
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CorrelatedMessageSearchQueryResult"
+                $ref: "#/components/schemas/CorrelatedMessageSubscriptionSearchQueryResult"
         "400":
           $ref: "#/components/responses/InvalidData"
         "401":
@@ -4897,7 +4894,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 file:
@@ -4919,6 +4915,8 @@ paths:
                 $ref: "#/components/schemas/DocumentReference"
         "400":
           $ref: "#/components/responses/InvalidData"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
   /documents/batch:
     post:
       tags:
@@ -4932,7 +4930,13 @@ paths:
 
         Upload multiple documents to the Camunda 8 cluster.
 
-        The caller must provide a file name for each document, which will be used in case of a multi-status responseto identify which documents failed to upload. The file name can be provided in the `Content-Disposition` headerof the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. Theseare matched with the files based on index, and must have the same length as the files array.To pass homogenous metadata for all files, spread the metadata over the metadata array.  A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` headerof the file part. 
+        The caller must provide a file name for each document, which will be used in case of a multi-status response
+        to identify which documents failed to upload. The file name can be provided in the `Content-Disposition` header
+        of the file part or in the `fileName` field of the metadata. You can add a parallel array of metadata objects. These
+        are matched with the files based on index, and must have the same length as the files array.
+        To pass homogenous metadata for all files, spread the metadata over the metadata array.
+        A filename value provided explicitly via the metadata array in the request overrides the `Content-Disposition` header
+        of the file part.
 
         In case of a multi-status response, the response body will contain a list of `DocumentBatchProblemDetail` objects,
         each of which contains the file name of the document that failed to upload and the reason for the failure.
@@ -4951,7 +4955,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 files:
@@ -4963,7 +4966,8 @@ paths:
                   minItems: 1
                 metadataList:
                   type: array
-                  description: Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.
+                  description: |
+                    Optional JSON array of metadata object whose index aligns with each file entry. The metadata array must have the same length as the files array.
                   items:
                     $ref: "#/components/schemas/DocumentMetadata"
               required:
@@ -4991,6 +4995,8 @@ paths:
                 $ref: "#/components/schemas/DocumentCreationBatchResponse"
         "400":
           $ref: "#/components/responses/InvalidData"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
   /documents/{documentId}:
     get:
       tags:
@@ -5011,9 +5017,7 @@ paths:
           required: true
           description: The ID of the document to download.
           schema:
-            type: string
-            format: string<DocumentId>
-            description: Document Id that uniquely identifies a document.
+            $ref: "#/components/schemas/DocumentId"
         - name: storeId
           in: query
           required: false
@@ -5036,8 +5040,7 @@ paths:
                 type: string
                 format: binary
         "404":
-          description: |
-            The document with the given ID was not found.
+          description: The document with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -5063,9 +5066,7 @@ paths:
           required: true
           description: The ID of the document to delete.
           schema:
-            type: string
-            format: string<DocumentId>
-            description: Document Id that uniquely identifies a document.
+            $ref: "#/components/schemas/DocumentId"
         - name: storeId
           in: query
           required: false
@@ -5073,11 +5074,10 @@ paths:
           schema:
             type: string
       responses:
-        "200":
+        "204":
           description: The document was deleted successfully.
         "404":
-          description: |
-            The document with the given ID was not found.
+          description: The document with the given ID was not found.
           content:
             application/problem+json:
               schema:
@@ -5104,9 +5104,7 @@ paths:
           required: true
           description: The ID of the document to link.
           schema:
-            type: string
-            format: string<DocumentId>
-            description: Document Id that uniquely identifies a document.
+            $ref: "#/components/schemas/DocumentId"
         - name: storeId
           in: query
           required: false
@@ -5195,7 +5193,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UserSearchQueryRequest"
-        required: true
       responses:
         "200":
           description: The user search result.
@@ -5338,7 +5335,7 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Creates a new user and assign the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
+        Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
       requestBody:
         content:
           application/json:
@@ -5418,8 +5415,7 @@ paths:
             description: Zeebe Engine resource key (Java long serialized as string)
       responses:
         "200":
-          description: |
-            The incident is successfully returned.
+          description: The incident is successfully returned.
           content:
             application/json:
               schema:
@@ -5455,7 +5451,7 @@ paths:
         - name: startTime
           in: query
           required: true
-          description: The start date for usage metrics, including this date.
+          description: The start date for usage metrics, including this date. Value in ISO 8601 format.
           schema:
             type: string
             format: date-time
@@ -5463,7 +5459,7 @@ paths:
         - name: endTime
           in: query
           required: true
-          description: The end date for usage metrics, including this date.
+          description: The end date for usage metrics, including this date. Value in ISO 8601 format.
           schema:
             type: string
             format: date-time
@@ -5483,8 +5479,7 @@ paths:
             default: false
       responses:
         "200":
-          description: |
-            The usage metrics search result.
+          description: The usage metrics search result.
           content:
             application/json:
               schema:
@@ -5538,7 +5533,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 resources:
@@ -6109,6 +6103,11 @@ components:
       type: string
       allOf:
         - $ref: "#/components/schemas/LongKey"
+    FormId:
+      description: The user-defined id for the form
+      type: string
+      format: FormId
+      example: Form_1nx5hav
     VariableKey:
       description: System-generated key for a variable.
       format: VariableKey
@@ -6228,7 +6227,6 @@ components:
       example: "2251799813684321"
     TenantCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         tenantId:
           type: string
@@ -6260,7 +6258,6 @@ components:
           example: Customer Service department business processes
     TenantUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           type: string
@@ -6312,7 +6309,6 @@ components:
         - field
     TenantSearchQueryRequest:
       description: Tenant search request
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6365,7 +6361,6 @@ components:
         - field
     UserTaskSearchQuery:
       description: User task search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6400,7 +6395,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       description: User task search query request.
-      additionalProperties: false
       type: object
       properties:
         sort:
@@ -6537,7 +6531,7 @@ components:
           items:
             $ref: "#/components/schemas/UserTaskStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     VariableValueFilterProperty:
       type: object
       properties:
@@ -6679,7 +6673,6 @@ components:
         - field
     VariableSearchQuery:
       description: Variable search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -6707,25 +6700,23 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
           description: Tenant ID of this variable.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         isTruncated:
           description: Whether the value is truncated or not.
           type: boolean
         variableKey:
           description: The key for this variable.
-          oneOf:
-            - $ref: "#/components/schemas/VariableKey"
-            - $ref: "#/components/schemas/AdvancedVariableKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/VariableKeyFilterProperty"
         scopeKey:
           description: The key of the scope of this variable.
-          oneOf:
-            - $ref: "#/components/schemas/ScopeKey"
-            - $ref: "#/components/schemas/AdvancedScopeKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ScopeKeyFilterProperty"
         processInstanceKey:
           description: The key of the process instance of this variable.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
     VariableSearchQueryResult:
       description: Variable search query response.
       type: object
@@ -6767,7 +6758,8 @@ components:
           type: string
         tenantId:
           description: Tenant ID of this variable.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         variableKey:
           allOf:
             - $ref: "#/components/schemas/VariableKey"
@@ -6800,7 +6792,6 @@ components:
         - field
     ProcessDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6823,7 +6814,9 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         isLatestVersion:
           description: |
-            Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
+            Whether to only return the latest version of each process definition.
+            When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`.
+            The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`.
           type: boolean
         resourceName:
           description: Resource name of this process definition.
@@ -6841,7 +6834,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         tenantId:
           description: Tenant ID of this process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -6881,7 +6875,8 @@ components:
             - $ref: "#/components/schemas/ProcessDefinitionId"
         tenantId:
           description: Tenant ID of this process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -6916,7 +6911,6 @@ components:
     ProcessInstanceSearchQuery:
       description: Process instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -6931,7 +6925,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceFilter"
     ProcessInstanceIncidentSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7019,7 +7012,7 @@ components:
         - type: object
           properties:
             $like:
-              $ref: "#/components/schemas/LikeFilterProperty"
+              $ref: "#/components/schemas/LikeFilter"
     AdvancedProcessInstanceStateFilter:
       title: Advanced filter
       description: Advanced ProcessInstanceStateEnum filter.
@@ -7042,7 +7035,7 @@ components:
           items:
             $ref: "#/components/schemas/ProcessInstanceStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     AdvancedElementInstanceStateFilter:
       title: Advanced filter
       description: Advanced ElementInstanceStateEnum filter.
@@ -7065,16 +7058,20 @@ components:
           items:
             $ref: "#/components/schemas/ElementInstanceStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     AdvancedDecisionDefinitionKeyFilter:
       title: Advanced filter
       description: Advanced DecisionDefinitionKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/DecisionDefinitionKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionDefinitionKey"
         $neq:
-          $ref: "#/components/schemas/DecisionDefinitionKey"
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/DecisionDefinitionKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7088,6 +7085,16 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DecisionDefinitionKey"
+    DecisionDefinitionKeyFilterProperty:
+      description: DecisionDefinitionKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/DecisionDefinitionKey"
+        - $ref: "#/components/schemas/AdvancedDecisionDefinitionKeyFilter"
     AdvancedDateTimeFilter:
       title: Advanced filter
       description: Advanced date-time filter.
@@ -7142,7 +7149,7 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedStringFilter"
-    LikeFilterProperty:
+    LikeFilter:
       type: string
       description: |
         Checks if the property matches the provided like value.
@@ -7188,29 +7195,49 @@ components:
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/ProcessDefinitionKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKey"
         $neq:
-          $ref: "#/components/schemas/ProcessDefinitionKey"
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
         $in:
+          description: Checks if the property matches any of the provided values.
           type: array
           items:
             $ref: "#/components/schemas/ProcessDefinitionKey"
         $notIn:
+          description: Checks if the property matches none of the provided values.
           type: array
           items:
             $ref: "#/components/schemas/ProcessDefinitionKey"
+    ProcessDefinitionKeyFilterProperty:
+      description: ProcessDefinitionKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKey"
+        - $ref: "#/components/schemas/AdvancedProcessDefinitionKeyFilter"
     AdvancedProcessInstanceKeyFilter:
       title: Advanced filter
       description: Advanced ProcessInstanceKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/ProcessInstanceKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKey"
         $neq:
-          $ref: "#/components/schemas/ProcessInstanceKey"
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7224,15 +7251,29 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ProcessInstanceKey"
+    ProcessInstanceKeyFilterProperty:
+      description: ProcessInstanceKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKey"
+        - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
     AdvancedElementInstanceKeyFilter:
       title: Advanced filter
       description: Advanced ElementInstanceKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/ElementInstanceKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKey"
         $neq:
-          $ref: "#/components/schemas/ElementInstanceKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7246,15 +7287,29 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ElementInstanceKey"
+    ElementInstanceKeyFilterProperty:
+      description: ElementInstanceKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKey"
+        - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
     AdvancedVariableKeyFilter:
       title: Advanced filter
       description: Advanced VariableKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/VariableKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/VariableKey"
         $neq:
-          $ref: "#/components/schemas/VariableKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/VariableKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7268,15 +7323,29 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/VariableKey"
+    VariableKeyFilterProperty:
+      description: VariableKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/VariableKey"
+        - $ref: "#/components/schemas/AdvancedVariableKeyFilter"
     AdvancedScopeKeyFilter:
       title: Advanced filter
       description: Advanced ScopeKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/ScopeKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ScopeKey"
         $neq:
-          $ref: "#/components/schemas/ScopeKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ScopeKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7290,15 +7359,29 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ScopeKey"
+    ScopeKeyFilterProperty:
+      description: ScopeKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ScopeKey"
+        - $ref: "#/components/schemas/AdvancedScopeKeyFilter"
     AdvancedMessageSubscriptionKeyFilter:
       title: Advanced filter
       description: Advanced MessageSubscriptionKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/MessageSubscriptionKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/MessageSubscriptionKey"
         $neq:
-          $ref: "#/components/schemas/MessageSubscriptionKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/MessageSubscriptionKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7312,15 +7395,29 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/MessageSubscriptionKey"
+    MessageSubscriptionKeyFilterProperty:
+      description: MessageSubscriptionKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/MessageSubscriptionKey"
+        - $ref: "#/components/schemas/AdvancedMessageSubscriptionKeyFilter"
     AdvancedJobKeyFilter:
       title: Advanced filter
       description: Advanced JobKey filter.
       type: object
       properties:
         $eq:
-          $ref: "#/components/schemas/JobKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/JobKey"
         $neq:
-          $ref: "#/components/schemas/JobKey"
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/JobKey"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -7334,6 +7431,16 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/JobKey"
+    JobKeyFilterProperty:
+      description: JobKey property with full advanced search capabilities.
+      type: object
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/JobKey"
+        - $ref: "#/components/schemas/AdvancedJobKeyFilter"
     BaseProcessInstanceFilterFields:
       description: Base process instance search filter.
       type: object
@@ -7364,19 +7471,16 @@ components:
             $ref: "#/components/schemas/VariableValueFilterProperty"
         processInstanceKey:
           description: The key of this process instance.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
         parentProcessInstanceKey:
           description: The parent process instance key.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
         parentElementInstanceKey:
           description: The parent element instance key.
-          oneOf:
-            - $ref: "#/components/schemas/ElementInstanceKey"
-            - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKeyFilterProperty"
         batchOperationId:
           description: The batch operation ID.
           allOf:
@@ -7470,9 +7574,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         processDefinitionKey:
           description: The process definition key.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessDefinitionKey"
-            - $ref: "#/components/schemas/AdvancedProcessDefinitionKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKeyFilterProperty"
     ProcessInstanceFilter:
       description: Process instance search filter.
       allOf:
@@ -7589,12 +7692,14 @@ components:
           $ref: "#/components/schemas/TagSet"
     ProcessInstanceStateEnum:
       description: Process instance states
+      type: string
       enum:
         - ACTIVE
         - COMPLETED
         - TERMINATED
     ElementInstanceStateEnum:
       description: Element states
+      type: string
       enum:
         - ACTIVE
         - COMPLETED
@@ -7654,7 +7759,6 @@ components:
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
-      additionalProperties: false
       properties:
         filter:
           description: The process definition statistics search filters.
@@ -7705,7 +7809,6 @@ components:
     CancelProcessInstanceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -7735,7 +7838,6 @@ components:
     ElementInstanceSearchQuery:
       description: Element instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -7829,7 +7931,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/DateTimeFilterProperty"
         elementInstanceScopeKey:
-          description: The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.
+          type: string
+          description: |
+            The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.
           oneOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
             - $ref: "#/components/schemas/ProcessInstanceKey"
@@ -7917,7 +8021,8 @@ components:
           type: boolean
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         elementInstanceKey:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
@@ -7981,7 +8086,6 @@ components:
         - field
     DecisionDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8013,8 +8117,9 @@ components:
           type: string
           description: the DMN ID of the decision requirements graph that the decision definition is part of.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision definition.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionKey"
@@ -8047,7 +8152,6 @@ components:
       required:
         - field
     IncidentSearchQuery:
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -8110,7 +8214,8 @@ components:
             - PENDING
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         incidentKey:
           allOf:
             - $ref: "#/components/schemas/IncidentKey"
@@ -8141,17 +8246,17 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/IncidentResult"
-    CorrelatedMessageSearchQueryResult:
+    CorrelatedMessageSubscriptionSearchQueryResult:
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
       properties:
         items:
-          description: The matching correlated messages.
+          description: The matching correlated message subscriptions.
           type: array
           items:
-            $ref: "#/components/schemas/CorrelatedMessageResult"
-    CorrelatedMessageResult:
+            $ref: "#/components/schemas/CorrelatedMessageSubscriptionResult"
+    CorrelatedMessageSubscriptionResult:
       type: object
       properties:
         correlationKey:
@@ -8180,15 +8285,15 @@ components:
           type: integer
           format: int32
         processDefinitionId:
-          description: The process definition ID associated with this correlated message.
+          description: The process definition ID associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionId"
         processDefinitionKey:
-          description: The process definition key associated with this correlated message.
+          description: The process definition key associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
         processInstanceKey:
-          description: The process instance key associated with this correlated message.
+          description: The process instance key associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/ProcessInstanceKey"
         subscriptionKey:
@@ -8196,7 +8301,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/MessageSubscriptionKey"
         tenantId:
-          description: The tenant ID associated with this correlated message.
+          description: The tenant ID associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/TenantId"
       required:
@@ -8210,9 +8315,8 @@ components:
         - processInstanceKey
         - subscriptionKey
         - tenantId
-    CorrelatedMessageSearchQuery:
+    CorrelatedMessageSubscriptionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8220,12 +8324,12 @@ components:
           description: Sort field criteria.
           type: array
           items:
-            $ref: "#/components/schemas/CorrelatedMessageSearchQuerySortRequest"
+            $ref: "#/components/schemas/CorrelatedMessageSubscriptionSearchQuerySortRequest"
         filter:
-          description: The correlated messages search filters.
+          description: The correlated message subscriptions search filters.
           allOf:
-            - $ref: "#/components/schemas/CorrelatedMessageFilter"
-    CorrelatedMessageSearchQuerySortRequest:
+            - $ref: "#/components/schemas/CorrelatedMessageSubscriptionFilter"
+    CorrelatedMessageSubscriptionSearchQuerySortRequest:
       type: object
       properties:
         field:
@@ -8248,8 +8352,8 @@ components:
           $ref: "#/components/schemas/SortOrderEnum"
       required:
         - field
-    CorrelatedMessageFilter:
-      description: Correlated messages search filter.
+    CorrelatedMessageSubscriptionFilter:
+      description: Correlated message subscriptions search filter.
       type: object
       properties:
         correlationKey:
@@ -8267,7 +8371,7 @@ components:
         elementInstanceKey:
           description: The element instance key that received the message.
           allOf:
-            - $ref: "#/components/schemas/ElementInstanceFilter"
+            - $ref: "#/components/schemas/ElementInstanceKeyFilterProperty"
         messageKey:
           description: The message key.
           allOf:
@@ -8281,15 +8385,15 @@ components:
           allOf:
             - $ref: "#/components/schemas/IntegerFilterProperty"
         processDefinitionId:
-          description: The process definition ID associated with this correlated message.
+          description: The process definition ID associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
         processDefinitionKey:
-          description: The process definition key associated with this correlated message.
+          description: The process definition key associated with this correlated message subscription.
           allOf:
-            - $ref: "#/components/schemas/BasicStringFilter"
+            - $ref: "#/components/schemas/BasicStringFilterProperty"
         processInstanceKey:
-          description: The process instance key associated with this correlated message.
+          description: The process instance key associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
         subscriptionKey:
@@ -8297,7 +8401,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
         tenantId:
-          description: The tenant ID associated with this correlated message.
+          description: The tenant ID associated with this correlated message subscription.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
     MessageSubscriptionSearchQueryResult:
@@ -8337,8 +8441,8 @@ components:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
           description: The element instance key associated with this message subscription.
-        messageSubscriptionType:
-          $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+        messageSubscriptionState:
+          $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           type: string
@@ -8364,7 +8468,7 @@ components:
             - processInstanceKey
             - elementId
             - elementInstanceKey
-            - messageSubscriptionType
+            - messageSubscriptionState
             - lastUpdatedDate
             - messageName
             - correlationKey
@@ -8375,7 +8479,6 @@ components:
         - field
     MessageSubscriptionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8395,7 +8498,7 @@ components:
         messageSubscriptionKey:
           description: The message subscription key associated with this message subscription.
           allOf:
-            - $ref: "#/components/schemas/AdvancedMessageSubscriptionKeyFilter"
+            - $ref: "#/components/schemas/MessageSubscriptionKeyFilterProperty"
         processDefinitionId:
           description: The process definition ID associated with this message subscription.
           allOf:
@@ -8403,7 +8506,7 @@ components:
         processInstanceKey:
           description: The process instance key associated with this message subscription.
           allOf:
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
         elementId:
           description: The element ID associated with this message subscription.
           allOf:
@@ -8411,11 +8514,11 @@ components:
         elementInstanceKey:
           description: The element instance key associated with this message subscription.
           allOf:
-            - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
-        messageSubscriptionType:
-          description: The message subscription type.
+            - $ref: "#/components/schemas/ElementInstanceKeyFilterProperty"
+        messageSubscriptionState:
+          description: The message subscription state.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeFilterProperty"
+            - $ref: "#/components/schemas/MessageSubscriptionStateFilterProperty"
         lastUpdatedDate:
           description: The last updated date of the message subscription.
           allOf:
@@ -8432,35 +8535,37 @@ components:
           description: The unique external tenant ID.
           allOf:
             - $ref: "#/components/schemas/StringFilterProperty"
-    MessageSubscriptionTypeFilterProperty:
-      description: MessageSubscriptionTypeEnum with full advanced search capabilities.
+    MessageSubscriptionStateFilterProperty:
+      description: MessageSubscriptionStateEnum with full advanced search capabilities.
       type: object
       oneOf:
         - type: string
           title: Exact match
           description: Matches the value exactly.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
-        - $ref: "#/components/schemas/AdvancedMessageSubscriptionTypeFilter"
-    MessageSubscriptionTypeEnum:
-      description: The type of message subscription.
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
+        - $ref: "#/components/schemas/AdvancedMessageSubscriptionStateFilter"
+    MessageSubscriptionStateEnum:
+      description: The state of message subscription.
       type: string
       enum:
+        - CORRELATED
         - CREATED
+        - DELETED
         - MIGRATED
-    AdvancedMessageSubscriptionTypeFilter:
+    AdvancedMessageSubscriptionStateFilter:
       title: Advanced filter
-      description: Advanced MessageSubscriptionTypeEnum filter
+      description: Advanced MessageSubscriptionStateEnum filter
       type: object
       properties:
         $eq:
           description: Checks for equality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $neq:
           description: Checks for inequality with the provided value.
           allOf:
-            - $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            - $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $exists:
           description: Checks if the current property exists.
           type: boolean
@@ -8468,9 +8573,9 @@ components:
           description: Checks if the property matches any of the provided values.
           type: array
           items:
-            $ref: "#/components/schemas/MessageSubscriptionTypeEnum"
+            $ref: "#/components/schemas/MessageSubscriptionStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     IncidentResult:
       type: object
       properties:
@@ -8519,7 +8624,8 @@ components:
             - PENDING
         tenantId:
           description: The tenant ID of the incident.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         incidentKey:
           allOf:
             - $ref: "#/components/schemas/IncidentKey"
@@ -8570,8 +8676,9 @@ components:
           type: string
           description: the DMN ID of the decision requirements graph that the decision definition is part of.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision definition.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionKey"
@@ -8588,6 +8695,7 @@ components:
         activeTenants:
           description: The amount of active tenants.
           type: integer
+          format: int64
         tenants:
           description: The usage metrics by tenants. Only available if request `withTenants` query parameter was `true`.
           type: object
@@ -8614,6 +8722,7 @@ components:
           format: int64
     PermissionTypeEnum:
       description: Specifies the type of permissions.
+      type: string
       enum:
         - ACCESS
         - CREATE
@@ -8648,6 +8757,7 @@ components:
         - DELETE_DECISION_INSTANCE
     ResourceTypeEnum:
       description: The type of resource to add/remove permissions to/from.
+      type: string
       enum:
         - AUTHORIZATION
         - MAPPING_RULE
@@ -8665,6 +8775,7 @@ components:
         - ROLE
         - DOCUMENT
     OwnerTypeEnum:
+      type: string
       description: The type of the owner of permissions.
       enum:
         - USER
@@ -8675,29 +8786,24 @@ components:
         - UNSPECIFIED
     AuthorizationRequest:
       type: object
-      additionalProperties: false
       properties:
         ownerId:
           description: The ID of the owner of the permissions.
           type: string
         ownerType:
-          description: The type of the owner of the permissions.
-          type: object
-          allOf:
-            - $ref: "#/components/schemas/OwnerTypeEnum"
+          $ref: "#/components/schemas/OwnerTypeEnum"
         resourceId:
           description: The ID of the resource to add permissions to.
           type: string
         resourceType:
           description: The type of resource to add permissions to.
-          type: object
+          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
         permissionTypes:
           type: array
           description: The permission types to add.
           items:
-            type: string
             allOf:
               - $ref: "#/components/schemas/PermissionTypeEnum"
       required:
@@ -8730,7 +8836,6 @@ components:
         - field
     AuthorizationSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -8751,10 +8856,7 @@ components:
           description: The ID of the owner of permissions.
           type: string
         ownerType:
-          description: The type of the owner of permissions.
-          type: object
-          allOf:
-            - $ref: "#/components/schemas/OwnerTypeEnum"
+          $ref: "#/components/schemas/OwnerTypeEnum"
         resourceIds:
           description: The IDs of the resource to search permissions for.
           type: array
@@ -8762,7 +8864,7 @@ components:
             type: string
         resourceType:
           description: The type of resource to search permissions for.
-          type: object
+          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
     AuthorizationResult:
@@ -8772,13 +8874,10 @@ components:
           description: The ID of the owner of permissions.
           type: string
         ownerType:
-          description: The type of the owner of permissions.
-          type: object
-          allOf:
-            - $ref: "#/components/schemas/OwnerTypeEnum"
+          $ref: "#/components/schemas/OwnerTypeEnum"
         resourceType:
-          description: The type of resource that owner have permissions.
-          type: object
+          description: The type of resource that the permissions relate to.
+          type: string
           allOf:
             - $ref: "#/components/schemas/ResourceTypeEnum"
         resourceId:
@@ -8788,7 +8887,8 @@ components:
           description: Specifies the types of the permissions.
           type: array
           items:
-            $ref: "#/components/schemas/PermissionTypeEnum"
+            allOf:
+              - $ref: "#/components/schemas/PermissionTypeEnum"
         authorizationKey:
           allOf:
             - $ref: "#/components/schemas/AuthorizationKey"
@@ -8805,11 +8905,6 @@ components:
             $ref: "#/components/schemas/AuthorizationResult"
     UserRequest:
       type: object
-      additionalProperties: false
-      required:
-        - password
-        - username
-        - email
       properties:
         password:
           description: The password of the user.
@@ -8823,11 +8918,13 @@ components:
         email:
           description: The email of the user.
           type: string
+      required:
+        - username
+        - password
     UserCreateResult:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
@@ -8839,7 +8936,6 @@ components:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
@@ -8865,7 +8961,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -8892,7 +8987,6 @@ components:
       required:
         - field
     MappingRuleSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -8903,7 +8997,7 @@ components:
           items:
             $ref: "#/components/schemas/MappingRuleSearchQuerySortRequest"
         filter:
-          description: The mapping search filters.
+          description: The mapping rule search filters.
           allOf:
             - $ref: "#/components/schemas/MappingRuleFilter"
     UserFilter:
@@ -8934,10 +9028,10 @@ components:
           description: The value of the claim to match.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
         mappingRuleId:
           type: string
-          description: The ID of the mapping.
+          description: The ID of the mapping rule.
     CamundaUserResult:
       type: object
       required:
@@ -9006,7 +9100,6 @@ components:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
         name:
           description: The name of the user.
@@ -9055,7 +9148,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantClientResult"
     TenantClientSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9081,7 +9173,6 @@ components:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
     TenantUserSearchResult:
       type: object
@@ -9094,7 +9185,6 @@ components:
           items:
             $ref: "#/components/schemas/TenantUserResult"
     TenantUserSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9136,7 +9226,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -9145,7 +9234,6 @@ components:
             $ref: "#/components/schemas/TenantGroupSearchQuerySortRequest"
     TenantGroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9157,7 +9245,6 @@ components:
       required:
         - field
     RoleCreateRequest:
-      additionalProperties: false
       type: object
       properties:
         roleId:
@@ -9236,7 +9323,6 @@ components:
         - field
     RoleSearchQueryRequest:
       description: Role search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9275,7 +9361,6 @@ components:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
     RoleUserSearchResult:
       type: object
@@ -9387,7 +9472,6 @@ components:
         - field
     GroupCreateRequest:
       type: object
-      additionalProperties: false
       properties:
         groupId:
           type: string
@@ -9452,7 +9536,6 @@ components:
           description: The group description.
     GroupSearchQuerySortRequest:
       type: object
-      additionalProperties: false
       properties:
         field:
           description: The field to sort by.
@@ -9466,7 +9549,6 @@ components:
         - field
     GroupSearchQueryRequest:
       description: Group search request.
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       type: object
@@ -9506,7 +9588,6 @@ components:
       type: object
       properties:
         username:
-          description: The username of the user.
           $ref: "#/components/schemas/Username"
     GroupUserSearchResult:
       type: object
@@ -9589,20 +9670,19 @@ components:
           description: The value of the claim to map.
         name:
           type: string
-          description: The name of the mapping.
+          description: The name of the mapping rule.
       required:
         - claimName
         - claimValue
         - name
     MappingRuleCreateRequest:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
       properties:
         mappingRuleId:
           type: string
-          description: The unique ID of the mapping.
+          description: The unique ID of the mapping rule.
       required:
         - mappingRuleId
     MappingRuleUpdateRequest:
@@ -9784,7 +9864,6 @@ components:
             - dead
     UserTaskCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -9798,7 +9877,6 @@ components:
           nullable: true
     UserTaskAssignmentRequest:
       type: object
-      additionalProperties: false
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
@@ -9816,7 +9894,6 @@ components:
           nullable: true
     UserTaskUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/Changeset"
@@ -9879,7 +9956,6 @@ components:
           nullable: true
     ClockPinRequest:
       type: object
-      additionalProperties: false
       properties:
         timestamp:
           description: The exact time in epoch milliseconds to which the clock should be pinned.
@@ -9889,7 +9965,6 @@ components:
         - timestamp
     JobActivationRequest:
       type: object
-      additionalProperties: false
       properties:
         type:
           description: |
@@ -10015,7 +10090,8 @@ components:
           additionalProperties: true
         tenantId:
           description: The ID of the tenant that owns the job.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         jobKey:
           allOf:
             - $ref: "#/components/schemas/JobKey"
@@ -10031,7 +10107,8 @@ components:
         elementInstanceKey:
           allOf:
             - $ref: "#/components/schemas/ElementInstanceKey"
-          description: The unique key identifying the associated task, unique within the scope of the process instance.
+          description: |
+            The unique key identifying the associated task, unique within the scope of the process instance.
         kind:
           $ref: "#/components/schemas/JobKindEnum"
         listenerEventType:
@@ -10094,7 +10171,6 @@ components:
           nullable: true
     JobFailRequest:
       type: object
-      additionalProperties: false
       properties:
         retries:
           description: |
@@ -10119,7 +10195,6 @@ components:
           type: object
     JobErrorRequest:
       type: object
-      additionalProperties: false
       properties:
         errorCode:
           description: |
@@ -10140,7 +10215,6 @@ components:
         - errorCode
     JobCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -10167,24 +10241,24 @@ components:
             - userTask
             - adHocSubProcess
           default: userTask
+      oneOf:
+        - $ref: "#/components/schemas/JobResultUserTask"
+        - $ref: "#/components/schemas/JobResultAdHocSubProcess"
     JobResultUserTask:
       type: object
       nullable: true
-      allOf:
-        - $ref: "#/components/schemas/JobResult"
-        - type: object
-          properties:
-            denied:
-              type: boolean
-              description: |
-                Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.
-              nullable: true
-            deniedReason:
-              type: string
-              description: The reason provided by the user task listener for denying the work.
-              nullable: true
-            corrections:
-              $ref: "#/components/schemas/JobResultCorrections"
+      properties:
+        denied:
+          type: boolean
+          description: |
+            Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.
+          nullable: true
+        deniedReason:
+          type: string
+          description: The reason provided by the user task listener for denying the work.
+          nullable: true
+        corrections:
+          $ref: "#/components/schemas/JobResultCorrections"
     JobResultCorrections:
       type: object
       description: |
@@ -10239,25 +10313,22 @@ components:
     JobResultAdHocSubProcess:
       type: object
       nullable: true
-      allOf:
-        - $ref: "#/components/schemas/JobResult"
-        - type: object
-          properties:
-            activateElements:
-              type: array
-              description: Indicates which elements need to be activated in the ad-hoc subprocess.
-              items:
-                $ref: "#/components/schemas/JobResultActivateElement"
-            isCompletionConditionFulfilled:
-              type: boolean
-              description: Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.
-              default: false
-              nullable: false
-            isCancelRemainingInstances:
-              type: boolean
-              description: Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.
-              default: false
-              nullable: false
+      properties:
+        activateElements:
+          type: array
+          description: Indicates which elements need to be activated in the ad-hoc subprocess.
+          items:
+            $ref: "#/components/schemas/JobResultActivateElement"
+        isCompletionConditionFulfilled:
+          type: boolean
+          description: Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.
+          default: false
+          nullable: false
+        isCancelRemainingInstances:
+          type: boolean
+          description: Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.
+          default: false
+          nullable: false
     JobResultActivateElement:
       type: object
       properties:
@@ -10274,7 +10345,6 @@ components:
           nullable: true
     JobUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/JobChangeset"
@@ -10310,7 +10380,6 @@ components:
     JobSearchQuery:
       description: Job search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10359,7 +10428,7 @@ components:
       type: object
       properties:
         deadline:
-          description: If this is set, when the job can next be activated.
+          description: When the job can next be activated.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/DateTimeFilterProperty"
@@ -10373,9 +10442,8 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         elementInstanceKey:
           description: The element instance key associated with the job.
-          oneOf:
-            - $ref: "#/components/schemas/ElementInstanceKey"
-            - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKeyFilterProperty"
         endTime:
           description: When the job ended.
           allOf:
@@ -10397,9 +10465,8 @@ components:
           nullable: true
         jobKey:
           description: The key, a unique identifier for the job.
-          oneOf:
-            - $ref: "#/components/schemas/JobKey"
-            - $ref: "#/components/schemas/AdvancedJobKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/JobKeyFilterProperty"
         kind:
           description: The kind of the job.
           allOf:
@@ -10414,14 +10481,12 @@ components:
             - $ref: "#/components/schemas/StringFilterProperty"
         processDefinitionKey:
           description: The process definition key associated with the job.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessDefinitionKey"
-            - $ref: "#/components/schemas/AdvancedProcessDefinitionKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionKeyFilterProperty"
         processInstanceKey:
           description: The process instance key associated with the job.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
         retries:
           description: The number of retries left.
           allOf:
@@ -10540,7 +10605,6 @@ components:
         state:
           $ref: "#/components/schemas/JobStateEnum"
         tenantId:
-          description: The tenant ID.
           $ref: "#/components/schemas/TenantId"
         type:
           description: The type of the job.
@@ -10550,6 +10614,7 @@ components:
           type: string
     JobStateEnum:
       description: The state of the job.
+      type: string
       enum:
         - CANCELED
         - COMPLETED
@@ -10562,6 +10627,7 @@ components:
     JobKindEnum:
       description: The job kind.
       example: BPMN_ELEMENT
+      type: string
       enum:
         - BPMN_ELEMENT
         - EXECUTION_LISTENER
@@ -10570,6 +10636,7 @@ components:
     JobListenerEventTypeEnum:
       example: UNSPECIFIED
       description: The listener event type of the job.
+      type: string
       enum:
         - ASSIGNING
         - CANCELING
@@ -10586,6 +10653,7 @@ components:
         - type: string
           title: Exact match
           description: Matches the value exactly.
+          format: JobStateEnum
           allOf:
             - $ref: "#/components/schemas/JobStateEnum"
         - $ref: "#/components/schemas/AdvancedJobStateFilter"
@@ -10611,7 +10679,7 @@ components:
           items:
             $ref: "#/components/schemas/JobStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     JobKindFilterProperty:
       description: JobKindEnum property with full advanced search capabilities.
       type: object
@@ -10644,7 +10712,7 @@ components:
           items:
             $ref: "#/components/schemas/JobKindEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     JobListenerEventTypeFilterProperty:
       description: JobListenerEventTypeEnum property with full advanced search capabilities.
       type: object
@@ -10677,7 +10745,7 @@ components:
           items:
             $ref: "#/components/schemas/JobListenerEventTypeEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     ProblemDetail:
       description: |
         A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
@@ -10688,22 +10756,26 @@ components:
           format: uri
           description: A URI identifying the problem type.
           default: about:blank
+          example: about:blank
         title:
           type: string
           description: A summary of the problem type.
+          example: Bad Request
         status:
           type: integer
           format: int32
           description: The HTTP status code for this problem.
+          example: 400
           minimum: 400
           maximum: 600
         detail:
           type: string
           description: An explanation of the problem in more detail.
+          example: Request property [maxJobsToActivates] cannot be parsed
         instance:
           type: string
-          format: uri
-          description: A URI identifying the origin of the problem.
+          description: A URI path identifying the origin of the problem.
+          example: /v2/jobs/activation
     SearchQueryRequest:
       type: object
       properties:
@@ -10729,7 +10801,7 @@ components:
           default: 0
           minimum: 0
         limit:
-          description: The maximum number of items to return in one request. <=10,000 for Elasticsearch.
+          description: The maximum number of items to return in one request.
           type: integer
           format: int32
           default: 100
@@ -10790,13 +10862,13 @@ components:
           type: boolean
           example: false
         startCursor:
-          nullable: true
           description: The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.
-          $ref: "#/components/schemas/StartCursor"
+          allOf:
+            - $ref: "#/components/schemas/StartCursor"
         endCursor:
-          nullable: true
           description: The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.
-          $ref: "#/components/schemas/EndCursor"
+          allOf:
+            - $ref: "#/components/schemas/EndCursor"
       example:
         totalItems: 1
         hasMoreTotalItems: false
@@ -10818,7 +10890,6 @@ components:
         - field
     DecisionRequirementsSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -10846,8 +10917,9 @@ components:
           type: string
           description: the DMN ID of the decision requirements.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision requirements.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionRequirementsKey:
           allOf:
             - $ref: "#/components/schemas/DecisionRequirementsKey"
@@ -10867,7 +10939,6 @@ components:
             $ref: "#/components/schemas/DecisionRequirementsResult"
     DecisionRequirementsResult:
       type: object
-      additionalProperties: false
       properties:
         decisionRequirementsName:
           type: string
@@ -10883,8 +10954,9 @@ components:
           type: string
           description: The name of the resource from which this decision requirements was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision requirements.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionRequirementsKey:
           allOf:
             - $ref: "#/components/schemas/DecisionRequirementsKey"
@@ -10896,7 +10968,6 @@ components:
         - $ref: "#/components/schemas/DecisionEvaluationByKey"
     DecisionEvaluationById:
       type: object
-      additionalProperties: false
       title: Decision evaluation by ID
       properties:
         decisionDefinitionId:
@@ -10912,28 +10983,41 @@ components:
           type: object
         tenantId:
           description: The tenant ID of the decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - decisionDefinitionId
     DecisionEvaluationByKey:
       type: object
       title: Decision evaluation by key
-      additionalProperties: false
       properties:
         decisionDefinitionKey:
-          allOf:
-            - $ref: "#/components/schemas/DecisionDefinitionKey"
+          $ref: "#/components/schemas/DecisionDefinitionKey"
         variables:
           description: The message variables as JSON document.
           additionalProperties: true
           type: object
         tenantId:
           description: The tenant ID of the decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - decisionDefinitionKey
     EvaluateDecisionResult:
       type: object
+      required:
+        - decisionDefinitionId
+        - decisionDefinitionName
+        - decisionDefinitionVersion
+        - decisionRequirementsId
+        - output
+        - failedDecisionDefinitionId
+        - failureMessage
+        - decisionDefinitionKey
+        - tenantId
+        - decisionRequirementsKey
+        - decisionEvaluationKey
+        - evaluatedDecisions
       properties:
         decisionDefinitionId:
           description: The ID of the decision which was evaluated.
@@ -10962,7 +11046,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of the evaluated decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionKey"
@@ -11009,7 +11094,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of the evaluated decision.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         matchedRules:
           description: The decision rules that matched within this decision evaluation.
           type: array
@@ -11097,7 +11183,6 @@ components:
         - field
     DecisionInstanceSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
       properties:
@@ -11139,8 +11224,9 @@ components:
         decisionDefinitionType:
           $ref: "#/components/schemas/DecisionDefinitionTypeEnum"
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision instance.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionEvaluationKey:
           allOf:
             - $ref: "#/components/schemas/DecisionEvaluationKey"
@@ -11156,14 +11242,12 @@ components:
           description: The key of the process instance.
         decisionDefinitionKey:
           description: The key of the decision.
-          oneOf:
-            - $ref: "#/components/schemas/DecisionDefinitionKey"
-            - $ref: "#/components/schemas/AdvancedDecisionDefinitionKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/DecisionDefinitionKeyFilterProperty"
         elementInstanceKey:
           description: The key of the element instance this decision instance is linked to.
-          oneOf:
-            - $ref: "#/components/schemas/ElementInstanceKey"
-            - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ElementInstanceKeyFilterProperty"
     DecisionInstanceSearchQueryResult:
       type: object
       allOf:
@@ -11205,8 +11289,9 @@ components:
           type: string
           description: The result of the decision instance.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the decision instance.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionEvaluationKey:
           allOf:
             - $ref: "#/components/schemas/DecisionEvaluationKey"
@@ -11246,6 +11331,7 @@ components:
                 The matched rules of the decision instance.
     DecisionDefinitionTypeEnum:
       description: The type of the decision.
+      type: string
       enum:
         - DECISION_TABLE
         - LITERAL_EXPRESSION
@@ -11253,6 +11339,7 @@ components:
         - UNKNOWN
     DecisionInstanceStateEnum:
       description: The state of the decision instance.
+      type: string
       enum:
         - EVALUATED
         - FAILED
@@ -11274,10 +11361,8 @@ components:
       minimum: 1
     MessageCorrelationRequest:
       type: object
-      additionalProperties: false
       required:
         - name
-        - correlationKey
       properties:
         name:
           description: |
@@ -11294,7 +11379,8 @@ components:
           type: object
         tenantId:
           description: the tenant for which the message is published
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
     MessageCorrelationResult:
       description: |
         The message key of the correlated message, as well as the first process instance key it
@@ -11315,7 +11401,6 @@ components:
             - $ref: "#/components/schemas/ProcessInstanceKey"
     MessagePublicationRequest:
       type: object
-      additionalProperties: false
       properties:
         name:
           description: The name of the message.
@@ -11341,18 +11426,18 @@ components:
           type: object
         tenantId:
           description: The tenant of the message sender.
-          $ref: "#/components/schemas/TenantId"
-          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - name
-        - correlationKey
     MessagePublicationResult:
       description: The message key of the published message.
       type: object
       properties:
         tenantId:
           description: The tenant ID of the message.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         messageKey:
           allOf:
             - $ref: "#/components/schemas/MessageKey"
@@ -11461,7 +11546,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID associated with the deployment.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         deploymentKey:
           allOf:
             - $ref: "#/components/schemas/DeploymentKey"
@@ -11508,8 +11594,9 @@ components:
           type: string
           description: The resource name from which this process was parsed.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed process.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         processDefinitionKey:
           allOf:
             - $ref: "#/components/schemas/ProcessDefinitionKey"
@@ -11532,8 +11619,9 @@ components:
           type: string
           description: The DMN name of the decision, as parsed during deployment.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed decision.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         decisionRequirementsId:
           type: string
           description: |
@@ -11564,8 +11652,9 @@ components:
           type: string
           description: The DMN name of the decision requirements, as parsed during deployment.
         tenantId:
-          $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the deployed decision requirements.
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         resourceName:
           type: string
           description: The resource name from which this decision requirements was parsed.
@@ -11579,7 +11668,8 @@ components:
       type: object
       properties:
         formId:
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/FormId"
           description: |
             The form ID, as parsed during deployment, together with the version forms a
             unique identifier for a specific form.
@@ -11592,7 +11682,6 @@ components:
           description: The resource name from which this form was parsed.
         tenantId:
           $ref: "#/components/schemas/TenantId"
-          description: The tenant ID of the deployed form.
         formKey:
           allOf:
             - $ref: "#/components/schemas/FormKey"
@@ -11615,14 +11704,12 @@ components:
           description: The resource name from which this resource was parsed.
         tenantId:
           $ref: "#/components/schemas/TenantId"
-          description: The tenant ID of the deployed form.
         resourceKey:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
           description: The assigned key, which acts as a unique identifier for this Resource.
     IncidentResolutionRequest:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -11638,7 +11725,6 @@ components:
       title: Process creation by ID
       required:
         - processDefinitionId
-      additionalProperties: false
       properties:
         processDefinitionId:
           description: |
@@ -11659,7 +11745,8 @@ components:
           additionalProperties: true
         tenantId:
           description: The tenant ID of the process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         operationReference:
           $ref: "#/components/schemas/OperationReference"
         startInstructions:
@@ -11679,12 +11766,7 @@ components:
             in future releases.
           type: array
           items:
-            oneOf:
-              - $ref: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-            discriminator:
-              propertyName: type
-              mapping:
-                TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
+            $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
         awaitCompletion:
           description: |
             Wait for the process instance to complete. If the process instance completion does
@@ -11714,7 +11796,6 @@ components:
       title: Process creation by key
       required:
         - processDefinitionKey
-      additionalProperties: false
       properties:
         processDefinitionKey:
           allOf:
@@ -11730,7 +11811,8 @@ components:
           additionalProperties: true
         tenantId:
           description: The tenant ID of the process definition.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         operationReference:
           $ref: "#/components/schemas/OperationReference"
         startInstructions:
@@ -11750,12 +11832,7 @@ components:
             in future releases.
           type: array
           items:
-            oneOf:
-              - $ref: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-            discriminator:
-              propertyName: type
-              mapping:
-                TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
+            $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
         awaitCompletion:
           description: |
             Wait for the process instance to complete. If the process instance completion does
@@ -11794,41 +11871,36 @@ components:
             For now, however, the start instruction is implicitly a "startBeforeElement" instruction
           allOf:
             - $ref: "#/components/schemas/ElementId"
-    RuntimeInstructionType:
-      type: string
-      description: |
-        The type of the runtime instruction. For now, only TERMINATE_PROCESS_INSTANCE is supported.
-      enum:
-        - TERMINATE_PROCESS_INSTANCE
     ProcessInstanceCreationRuntimeInstruction:
       type: object
+      description: Runtime instructions
       required:
         - type
       properties:
         type:
-          $ref: "#/components/schemas/RuntimeInstructionType"
+          description: The type of the runtime instruction
+          type: string
+          enum:
+            - TERMINATE_PROCESS_INSTANCE
+      oneOf:
+        - $ref: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
       discriminator:
         propertyName: type
         mapping:
           TERMINATE_PROCESS_INSTANCE: "#/components/schemas/ProcessInstanceCreationTerminateInstruction"
-      description: |
-        Base type for all runtime instructions.
     ProcessInstanceCreationTerminateInstruction:
-      description: Terminate the process
-      allOf:
-        - $ref: "#/components/schemas/ProcessInstanceCreationRuntimeInstruction"
-        - type: object
-          required:
-            - afterElementId
-          properties:
-            afterElementId:
-              description: |
-                The ID of the element that, once completed or terminated, will cause the process to be terminated.
-              example: Activity_106kosb
-              allOf:
-                - $ref: "#/components/schemas/ElementId"
+      description: |
+        Terminates the process instance after a specific BPMN element is completed or terminated.
+      type: object
+      required:
+        - afterElementId
+      properties:
+        afterElementId:
           description: |
-            Terminates the process instance after a specific BPMN element is completed or terminated.
+            The ID of the element that, once completed or terminated, will cause the process to be terminated.
+          example: Activity_106kosb
+          allOf:
+            - $ref: "#/components/schemas/ElementId"
     CreateProcessInstanceResult:
       required:
         - processDefinitionId
@@ -11853,8 +11925,9 @@ components:
           format: int32
           example: 3
         tenantId:
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
           description: The tenant ID of the created process instance.
-          $ref: "#/components/schemas/TenantId"
           example: <default>
         variables:
           additionalProperties: true
@@ -11875,7 +11948,6 @@ components:
           $ref: "#/components/schemas/TagSet"
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
-      additionalProperties: false
       properties:
         filter:
           $ref: "#/components/schemas/ProcessInstanceFilter"
@@ -11903,7 +11975,6 @@ components:
         - mappingInstructions
     ProcessInstanceMigrationInstruction:
       type: object
-      additionalProperties: false
       description: |
         The migration instructions describe how to migrate a process instance from one process definition to another.
       properties:
@@ -11939,7 +12010,6 @@ components:
         - targetElementId
     ProcessInstanceModificationInstruction:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
@@ -12007,7 +12077,6 @@ components:
         - elementInstanceKey
     SetVariableRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           description: JSON object representing the variables to set in the element’s scope.
@@ -12039,13 +12108,11 @@ components:
     DeleteResourceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "#/components/schemas/OperationReference"
     SignalBroadcastRequest:
       type: object
-      additionalProperties: false
       properties:
         signalName:
           description: The name of the signal to broadcast.
@@ -12056,7 +12123,8 @@ components:
           type: object
         tenantId:
           description: The ID of the tenant that owns the signal.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
       required:
         - signalName
     SignalBroadcastResult:
@@ -12067,7 +12135,8 @@ components:
       properties:
         tenantId:
           description: The tenant ID of the signal that was broadcast.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         signalKey:
           allOf:
             - $ref: "#/components/schemas/SignalKey"
@@ -12077,10 +12146,12 @@ components:
       properties:
         tenantId:
           description: The tenant ID of the form.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         formId:
           description: The user-provided identifier of the form.
-          type: string
+          allOf:
+            - $ref: "#/components/schemas/FormId"
         schema:
           description: The form content.
           type: object
@@ -12110,7 +12181,8 @@ components:
           type: string
         tenantId:
           description: The tenant ID of this resource.
-          $ref: "#/components/schemas/TenantId"
+          allOf:
+            - $ref: "#/components/schemas/TenantId"
         resourceKey:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
@@ -12155,7 +12227,6 @@ components:
       required:
         - field
     BatchOperationSearchQuery:
-      additionalProperties: false
       description: Batch operation search request.
       type: object
       allOf:
@@ -12218,7 +12289,7 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationTypeEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     BatchOperationStateFilterProperty:
       description: BatchOperationStateEnum property with full advanced search capabilities.
       type: object
@@ -12251,16 +12322,18 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     BatchOperationStateEnum:
-      description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      description: The batch operation state.
+      type: string
       enum:
-        - CREATED
         - ACTIVE
-        - SUSPENDED
-        - COMPLETED
-        - PARTIALLY_COMPLETED
         - CANCELED
+        - COMPLETED
+        - CREATED
+        - FAILED
+        - PARTIALLY_COMPLETED
+        - SUSPENDED
     BatchOperationItemSearchQuerySortRequest:
       type: object
       properties:
@@ -12278,7 +12351,6 @@ components:
         - field
     BatchOperationItemSearchQuery:
       description: Batch operation item search request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "#/components/schemas/SearchQueryRequest"
@@ -12306,9 +12378,8 @@ components:
             - $ref: "#/components/schemas/BasicStringFilterProperty"
         processInstanceKey:
           description: The process instance key of the processed item.
-          oneOf:
-            - $ref: "#/components/schemas/ProcessInstanceKey"
-            - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
+          allOf:
+            - $ref: "#/components/schemas/ProcessInstanceKeyFilterProperty"
         state:
           type: string
           description: The state of the batch operation.
@@ -12346,9 +12417,10 @@ components:
           items:
             $ref: "#/components/schemas/BatchOperationItemStateEnum"
         $like:
-          $ref: "#/components/schemas/LikeFilterProperty"
+          $ref: "#/components/schemas/LikeFilter"
     BatchOperationItemStateEnum:
       description: The state, one of ACTIVE, COMPLETED, TERMINATED.
+      type: string
       enum:
         - ACTIVE
         - COMPLETED
@@ -12376,13 +12448,13 @@ components:
           description: The state of the batch operation.
           type: string
           enum:
-            - CREATED
             - ACTIVE
-            - SUSPENDED
-            - COMPLETED
-            - PARTIALLY_COMPLETED
             - CANCELED
-            - INCOMPLETED
+            - COMPLETED
+            - CREATED
+            - FAILED
+            - PARTIALLY_COMPLETED
+            - SUSPENDED
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
         startDate:
@@ -12470,7 +12542,6 @@ components:
           type: string
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should be canceled.
       properties:
         filter:
@@ -12479,7 +12550,6 @@ components:
         - filter
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should have their incidents resolved.
       properties:
         filter:
@@ -12487,7 +12557,6 @@ components:
       required:
         - filter
     ProcessInstanceModificationBatchOperationRequest:
-      additionalProperties: false
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
@@ -12547,208 +12616,6 @@ components:
       format: Username
       description: The unique name of a user.
       type: string
-    OperationMetadata:
-      description: Information about the operation effect characteristics. Suitable for reasoning about the idempotency and safety of operations
-      type: object
-      discriminator:
-        propertyName: kind
-      oneOf:
-        - description: Command operation metadata
-          $ref: "#/components/schemas/CommandOperation"
-        - description: Query (read-only) operation metadata
-          $ref: "#/components/schemas/QueryOperation"
-        - description: Create operation metadata (resource creation)
-          $ref: "#/components/schemas/CreateOperation"
-        - description: Patch (partial update) operation metadata
-          $ref: "#/components/schemas/PatchOperation"
-        - description: Delete operation metadata
-          $ref: "#/components/schemas/DeleteOperation"
-        - description: Event operation metadata (fire-and-forget)
-          $ref: "#/components/schemas/EventOperation"
-        - description: Update (full idempotent update) operation metadata
-          $ref: "#/components/schemas/UpdateOperation"
-        - description: Batch command operation metadata
-          $ref: "#/components/schemas/BatchCommandOperation"
-    CommandOperation:
-      description: A non-idempotent state transition / process action
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - command
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: false
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
-    QueryOperation:
-      description: A pure read operation. May return a different state with each call, but causes no effect with each call.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - query
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: true
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: true
-      required:
-        - kind
-    CreateOperation:
-      description: Creates a new resource. The duplicatePolicy describes what happens when you make the same request more than once.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - create
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called. Explicit override; otherwise inferred from duplicatePolicy.
-          type: boolean
-          default: false
-        safe:
-          description: Safe operations do not mutate state.
-          type: boolean
-          default: false
-        duplicatePolicy:
-          description: |-
-            Server behavior when the identical create request is repeated:
-             - conflict (subsequent identical request → 409; creates none; NOT idempotent)
-             - return-existing (subsequent identical request → 200/201 with same representation; idempotent)
-             - ignore (subsequent identical request → 2xx minimal body, no new resource; idempotent)
-             - upsert (creates if absent, otherwise updates in place producing same final state; idempotent)
-             - merge (each call adds/accumulates something; NOT idempotent)
-             - batch-partial (mixed: per item may create or conflict; whole-call classification becomes non-idempotent unless every item stabilized)
-          type: string
-          enum:
-            - conflict
-            - return-existing
-            - ignore
-            - upsert
-            - merge
-            - batch-partial
-        idempotencyMechanism:
-          description: "How this operation calculates idempotency: - natural-key (server uses unique natural key(s) in body/path) - body-hash (semantic or byte hash dedupe) - idempotency-key (client supplies Idempotency-Key header) - server-token (client obtains token then submits) - none (default)"
-          type: string
-          enum:
-            - natural-key
-            - body-hash
-            - idempotency-key
-            - server-token
-            - none
-          default: none
-        idempotencyScope:
-          description: Scope within which idempotency applies (resource = same logical resource identity, request = exact same payload, key+payload = Idempotency-Key + payload tuple).
-          type: string
-          enum:
-            - resource
-            - request
-            - key+payload
-          default: request
-      required:
-        - kind
-        - duplicatePolicy
-    PatchOperation:
-      description: Updates a resource.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - patch
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: false
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
-    DeleteOperation:
-      description: Deletes a resource.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - delete
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: true
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
-    EventOperation:
-      description: Fire-and-forget notification. May fan out.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - event
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: false
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
-    UpdateOperation:
-      description: Updates a resource.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - update
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: true
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
-    BatchCommandOperation:
-      description: Updates a resource.
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-            - batch-command
-        idempotent:
-          description: Idempotent operations cause at-most one effect regardless of how many times that are called.
-          type: boolean
-          default: true
-        safe:
-          description: Safe operations do not mutate the state of the Camunda engine.
-          type: boolean
-          default: false
-      required:
-        - kind
   responses:
     InternalServerError:
       description: |
@@ -12779,6 +12646,13 @@ components:
         application/problem+json:
           schema:
             $ref: "#/components/schemas/ProblemDetail"
+    UnsupportedMediaType:
+      description: |
+        The server cannot process the request because the media type (Content-Type) of the request payload is not supported  by the server for the requested resource and method.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
     ServiceUnavailable:
       description: |
         The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .
@@ -12791,3 +12665,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+    basicAuth:
+      type: http
+      scheme: basic
