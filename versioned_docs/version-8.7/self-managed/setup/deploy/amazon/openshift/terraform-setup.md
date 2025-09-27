@@ -218,7 +218,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
 5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
@@ -493,7 +492,6 @@ This section applies if you have previously created a private cluster and want t
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
-
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
