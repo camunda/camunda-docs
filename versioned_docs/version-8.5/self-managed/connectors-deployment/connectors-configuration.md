@@ -248,6 +248,15 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 </TabItem>
 </Tabs>
 
+## Truststore
+
+If your connector runtime needs to connect to external systems over HTTPS, you might need to provide a custom truststore.
+
+To configure the truststore, use the following environment variables:
+
+- `JAVAX_NET_SSL_TRUSTSTORE`: Path to the truststore file (e.g., `/path/to/truststore.jks`)
+- `JAVAX_NET_SSL_TRUSTSTOREPASSWORD`: Password for the truststore
+
 ## Multi-tenancy
 
 The Connector Runtime supports multiple tenants for inbound and outbound Connectors.

@@ -55,6 +55,20 @@ logging:
     name: logs/camunda-7-to-8-data-migrator.log
 ```
 
+## Cockpit plugin
+
+### Plugin not visible in Cockpit
+
+- Ensure the plugin JAR is placed in the correct Camunda 7 plugins directory.
+- Check Camunda 7 logs for any plugin loading errors.
+- Restart Camunda 7 after deploying the plugin.
+
+### No skip data displayed
+
+- Confirm `save-skip-reason: true` is set in the migrator configuration.
+- Verify migration has been run with this setting enabled.
+- Check database connectivity between the plugin and the migrator database.
+
 ## Getting help
 
 - Use the [Camunda forum](https://forum.camunda.io/c/c7-to-c8/).
