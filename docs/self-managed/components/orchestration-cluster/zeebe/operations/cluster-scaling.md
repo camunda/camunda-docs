@@ -997,7 +997,8 @@ The response would show that partitions are distributed to new brokers:
   "clusterSize": 6,
   "partitionsCount": 6,
   "replicationFactor": 3,
-  "gatewayVersion": "8.8.0"
+  "gatewayVersion": "8.8.0",
+  "clusterId": "clusterId"
 }
 ```
 
@@ -1153,7 +1154,8 @@ The response would show that partitions are distributed to new brokers:
   "partitionsCount": 6,
   "replicationFactor": 3,
   "gatewayVersion": "SNAPSHOT",
-  "lastCompletedChangeId": "2"
+  "lastCompletedChangeId": "2",
+  "clusterId": "clusterId"
 }
 ```
 
@@ -1363,7 +1365,8 @@ The response would show that the partitions are moved away from brokers `3`, `4`
    "clusterSize": 3,
    "partitionsCount": 6,
    "replicationFactor": 3,
-   "gatewayVersion": "8.8.0"
+   "gatewayVersion": "8.8.0",
+   "clusterId": "clusterId"
 }
 ```
 
