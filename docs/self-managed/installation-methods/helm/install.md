@@ -36,21 +36,31 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 
 ### Install a specific version (optional)
 
-The Camunda 8 Helm chart automatically selects the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because the Helm chart and application components are released independently, minor version differences may occur.
+By default, the Camunda Helm chart installs the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because Helm chart and application versions are released independently, their version numbers differ. For details, see the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-To install the latest version of the chart and its application dependencies, run the following command:
+To install the latest version of the chart and its application dependencies, run:
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-To install a previous version, run:
+To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.7 is `12`:
 
 ```shell
-helm install camunda camunda/camunda-platform --version 8.7 \
+helm install camunda camunda/camunda-platform --version 12  \
     --values https://helm.camunda.io/camunda-platform/values/values-v8.7.yaml
 ```
+
+Specifying only the major chart version (for example, `12`) installs the latest available `12.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
+
+If you are unsure which chart version corresponds to your Camunda application version, run:
+
+```shell
+helm search repo -l camunda/camunda-platform
+```
+
+This command lists all available chart versions and their corresponding application versions.
 
 ### Access the orchestration cluster
 
