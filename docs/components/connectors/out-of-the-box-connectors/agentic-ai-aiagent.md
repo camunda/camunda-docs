@@ -5,6 +5,9 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop for user interactions and tool calls with an LLM.
 ---
 
+import AiAgentImplementationTabs from '../react-components/\_ai-agent-implementation-tabs';
+import TabItem from "@theme/TabItem";
+
 Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
 
 ## About this connector
@@ -17,7 +20,7 @@ Core features include:
 
 | Feature              | Description                                                                                                                                                                                                                                                                         |
 | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| LLM provider support | Supports a range of LLM providers, such as OpenAI and Anthropic.                                                                                                                                                                                                                    |
+| LLM provider support | Supports a range of LLM providers, such as Anthropic, Amazon Bedrock, Google Gemini, and OpenAI.                                                                                                                                                                                    |
 | Memory               | Provides conversational/short-term memory handling to enable feedback loops. For example, this allows a user to ask follow-up questions to an AI agent response.                                                                                                                    |
 | Tool calling         | Support for an AI agent to interact with tasks within an ad-hoc sub-process, allowing use of all Camunda features such as connectors and user tasks (human-in-the-loop). Automatic **tool resolution** allows an AI agent to identify the tools available in an ad-hoc sub-process. |
 
@@ -30,19 +33,84 @@ New to agentic orchestration?
 
 :::
 
-## How to use this connector
+## Prerequisites
 
-This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector task repeatedly looped back to during an AI agent process.
+The following prerequisites are required to use this connector:
 
-For example, the following diagram shows a tool calling loop:
+| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
 
-![agenticai-ai-agent-loop-overview.png](../img/agenticai-ai-agent-loop-overview.png)
+## Implementations
+
+The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases. You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the **AI Agent Process** implementation due to the simplified configuration and support for event sub-processes.
+
+### AI Agent Process
+
+Builds on the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an ad-hoc sub-process and provides an integrated solution
+to handle the tool resolution and feedback loop. It is the recommended implementation type for most use cases offering:
+
+- Simplified configuration as the tool feedback loop is handled internally
+- Support for handling of event sub-processes within the ad-hoc sub-process
+
+Restrictions when using the AI Agent Process:
+
+- Given the BPMN semantics, the ad-hoc sub-process needs to contain at least one activity. Therefore, it is not possible to create an AI Agent process without any tools.
+- As the tool calling feedback loop is implicitely handled within the AI Agent execution, you have less control over the tool calls.
+
+A basic AI agent process can look like the following. By configuring the connector, the AI Agent implementation will resolve the available tools and activate them as needed to reach the agent's goal. Opposed to the AI Agent Task implementation, the process implementation supports handling of event sub-processes within the ad-hoc sub-process (see [Event Handling](#event-handling)).
+
+![AI Agent Process](../img/ai-agent-process.png)
+
+This pattern can be combined with a user feedback loop for verification or follow-up interactions. Instead of the showcased user task, this could also be another LLM as a judge or any other task validating the agent's response.
+
+![AI Agent Process with user feedback loop](../img/ai-agent-process-user-feedback-loop.png)
+
+### AI Agent Task
+
+This is the original implementation type relying on a BPMN service task in combination with a multi-instance ad-hoc sub-process.
+
+Opposed to the AI Agent Proces implementation, this implementation type requires you to model the feedback loop explicitly in the BPMN diagram, leading to more complex configuration. It is suited for:
+
+- Simple, one-shot tasks using the AI Agent connector as a generic LLM connector without any tool calling.
+- Advanced use cases where you want to model the feedback loop explicitly, for example to pre-/post-process tool calls for approval or auditing.
+
+A very simple example of using the AI Agent Task connector for a non-agentic task:
+
+![Simple AI Agent Task](../img/ai-agent-task-simple.png)
+
+By adding a multi-instance ad-hoc sub-process and gateways to create a tool feedback loop, the connector can be made agentic. The connector will be able to call tools until it reaches its goal or a configured limit. The multi-instance ad-hoc sub-process acts as toolbox:
+
+![AI Agent Task with tool calling feedback loop](../img/ai-agent-task-feedback-loop.png)
+
+The process can be further enhanced to add a user feedback loop outside the tool calling loop. When the AI Agent completes its task and does not request any tool calls, its response
+can be verified with a task (such as a user task or another LLM as a judge) and the process can be set up to loop back to the AI Agent if necessary.
+
+This allows for example to create a user-in-the-loop process (such as a chat) where the user can ask follow-up questions:
+
+![AI Agent Task with user feedback loop](../img/ai-agent-task-user-feedback-loop.png)
+
+When more control over the feedback loop is needed, it is possible to model pre-/post-processing of tool calls with additional tasks such as approval or auditing of tool calls.
+
+![AI Agent Task with advanced tool calling feedback loop](../img/ai-agent-task-feedback-loop-advanced.png)
+
+## Concepts
+
+### Feedback loop
+
+This connector is typically used in a [feedback loop](agentic-ai-aiagent-example.md), with the connector implementation repeatedly being executed based on tool call results or user feedback until it
+is able to reach its goal.
+
+For example, the following diagram shows a tool calling loop modeled with the [AI Agent Task](#ai-agent-task) implementation type. The process loops back to the AI Agent connector task from the ad-hoc sub-process until the agent decides no further tool calls are needed.
+With the [AI Agent Process](#ai-agent-process) implementation type, the tool calling loop is handled internally and therefore not explicitly modeled in the BPMN diagram.
+
+![AI Agent feedback loop](../img/ai-agent-loop-overview.png)
 
 1. A request is made to the AI agent connector task, where the LLM determines what action to take.
 1. If the AI agent decides that further action is needed, the process enters the ad-hoc sub-process and calls any tools deemed necessary to satisfactorily resolve the request.
 1. The process loops back and re-enters the AI agent connector task, where the LLM decides (with contextual memory) if more action is needed before the process can continue. The process loops repeatedly in this manner until the AI agent decides it is complete, and passes the AI agent response to the next step in the process.
 
-### Feedback loop use cases
+#### Feedback loop use cases
 
 Typical feedback loop use cases for this connector include the following:
 
@@ -54,11 +122,15 @@ Typical feedback loop use cases for this connector include the following:
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
 
-An important concept to understand is the use of the **Agent context** process variable to store information required for allowing re-entry to the AI Agent connector task with the same context as before. This variable is mapped as both an **input** and **output** variable of the connector and updates with each agent execution.
+### Agent context
 
-:::important
-When modelling an AI Agent, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
-:::
+An important concept to understand is the use of the **Agent context** process variable to store information required for allowing re-entry to the AI Agent connector task with the same context as before.
+
+Depending on the used implementation type, the Agent context needs to be configured differently in the model:
+
+- With the [**AI Agent Process**](#ai-agent-process) implementation type, the agent context is kept within the subprocess scope. Therefore, you only need to configure the agent context when the agent should pick up an existing conversation, for example to model a user feedback loop as used in the [quickstart example](../../../guides/getting-started-agentic-orchestration.md). In this case, you must align the configured agent context variable with the used result variable/expression so that the context update is
+  correctly passed to the next execution of the AI Agent connector task.
+- With the [**AI Agent Task**](#ai-agent-task) implementation type, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
 
 ### Example conversation
 
@@ -84,15 +156,11 @@ Tool Call Result: {"Create_Credit_Card": {"success": true}}
 AI Agent: John Doe's credit card has been created successfully.
 ```
 
-## Prerequisites
-
-The following prerequisites are required to use this connector:
-
-| Prerequisite                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up your LLM model provider and authentication | <p>Prior to using this connector, you must have previously set up an account with access and authentication details for the supported LLM model provider you want to use.</p><p>For example:<ul><li><p>To use an LLM model provided by Amazon Bedrock, you must have an AWS account with an access key and secret key to execute `Converse` actions.</p></li><li><p>For OpenAI, you must configure the [OpenAI model](https://platform.openai.com/docs/models) and obtain an OpenAI API key to use for authentication.</p></li></ul></p> |
-
 ## Configuration
+
+:::note
+Some options are different or only applicable to one of the [implementations](#implementations). These options are marked accordingly.
+:::
 
 ### Model Provider
 
@@ -267,6 +335,13 @@ To learn more about storing, tracking, and managing documents in Camunda 8, see 
 
 ### Tools
 
+<AiAgentImplementationTabs>
+
+<TabItem value='process'>
+This section is only applicable to the **AI Agent Task** implementation.
+</TabItem>
+
+<TabItem value='task'>
 Specify the tool resolution for an accompanying ad-hoc sub-process.
 
 | Field                 | Required | Description                                                                                                                                                                                                                                                                                                                     |
@@ -281,15 +356,40 @@ Specify the tool resolution for an accompanying ad-hoc sub-process.
 
 :::
 
+</TabItem>
+
+</AiAgentImplementationTabs>
+
 ### Memory
 
-Configure the agent's short-term/conversational memory. Depending on your use case, you can store the conversation memory in different storage backends.
+Configure the agent's short-term/conversational memory.
 
-| Field               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent context       | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>**Avoid** reusing the agent context variable across different agent tasks. Define a dedicated [result variable](#output-mapping) name for each agent instead and align it in the context and the result configuration.</p><p>Example: `=agent.context`, `=anotherAgent.context`</p> |
-| Memory storage type | Yes      | <p>Specify how the conversation memory should be stored.</p><ul><li>In Process (part of agent context): conversation messages will be stored as process variable and be subject to [variable size limitations](../../concepts/variables.md). This is the default value.</li><li>Camunda Document Storage: messages will be stored as a JSON document in [document storage](../../document-handling/getting-started.md).</li><li>Custom Implementation (Hybrid/Self-Managed only): a custom storage implementation using a customized connector runtime.</li></ul>                                                                                                                                                                                                        |
-| Context window size | No       | <p>Specify the maximum number of messages to pass to the LLM on every call. Defaults to `20` if not configured.</p><ul><li>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</li><li>When the conversation exceeds the configured context window size, the oldest messages from past feedback loops are omitted from the model API call first.</li><li>The system prompt is always kept in the list of messages passed to the LLM.</li></ul>                                                                                                                                                                                                                                                                       |
+The configuration of the **Agent context** field depends on the used AI agent implementation:
+
+<AiAgentImplementationTabs>
+<TabItem value='process'>
+
+| Field         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| :------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Agent context | No       | <p>As the process implementation keeps the agent context within the subprocess scope, it is only necessary to configure the agent context when the agent should pick up an existing conversation, for example to model a user feedback loop as used in the [quickstart example](../../../guides/getting-started-agentic-orchestration.md).</p><p>Should be used in combination with the **Include agent context** setting in the [response](#response) section and be aligned with the used result variable.</p><p>Example: `=agent.context`, `=anotherAgent.context`</p> |
+
+</TabItem>
+
+<TabItem value='task'>
+
+| Field         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent context | Yes      | <p>Specify an agent context variable to store all relevant data for the agent to support a feedback loop between user requests, tool calls, and LLM responses. Make sure this variable points to the `context` variable that is returned from the agent response.</p><p>This is an important variable required to make a feedback loop work correctly. This variable must be aligned with the Output mapping **Result variable** and **Result expression** for this connector.</p><p>**Avoid** reusing the agent context variable across different agent tasks. Define a dedicated [result variable](#output-mapping) name for each agent instead and align it in the context and the result configuration.</p><p>Example: `=agent.context`, `=anotherAgent.context`</p> |
+
+</TabItem>
+</AiAgentImplementationTabs>
+
+Depending on your use case, you can store the conversation memory in different storage backends.
+
+| Field               | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Memory storage type | Yes      | <p>Specify how the conversation memory should be stored.</p><ul><li>In Process (part of agent context): conversation messages will be stored as process variable and be subject to [variable size limitations](../../concepts/variables.md). This is the default value.</li><li>Camunda Document Storage: messages will be stored as a JSON document in [document storage](../../document-handling/getting-started.md).</li><li>Custom Implementation (Hybrid/Self-Managed only): a custom storage implementation using a customized connector runtime.</li></ul> |
+| Context window size | No       | <p>Specify the maximum number of messages to pass to the LLM on every call. Defaults to `20` if not configured.</p><ul><li>Configuring this is a trade-off between cost/tokens and the context window supported by the used model.</li><li>When the conversation exceeds the configured context window size, the oldest messages from past feedback loops are omitted from the model API call first.</li><li>The system prompt is always kept in the list of messages passed to the LLM.</li></ul>                                                                |
 
 #### In-process storage
 
@@ -332,6 +432,45 @@ Set limits for the agent interaction to prevent unexpected behavior or unexpecte
 Despite these limits, you must closely monitor your LLM API usage and cost, and set appropriate limits on the provider side.
 :::
 
+### Event handling
+
+<AiAgentImplementationTabs>
+
+<TabItem value='process'>
+
+Configures how the AI Agent process should behave when handling results from an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
+
+The **Event handling behavior** field can be set to one of options:
+
+- [Wait for tool call results](#wait-for-tool-call-results) (default)
+- [Interrupt tool calls](#interrupt-tool-calls)
+
+Assuming the agent requested to execute tools `A` and `B` and tool `B` already being completed, the following describes how each option behaves when an event is received.
+
+#### Wait for tool call results
+
+The process waits for all tool calls to complete before handling the event. For the example above, the following sequence of messages would be sent to the LLM after both tools complete:
+
+- Tool A: `Tool A result`
+- Tool B: `Tool B result`
+- Event message: `Content from event message`
+
+#### Interrupt tool calls
+
+When an event is received while other tool calls are still in progress, the process will cancel the tool execution and directly return a list of messages to the LLM:
+
+- Tool A: `Tool A execution was cancelled`
+- Tool B: `Tool B result`
+- Event message: `Content from event message`
+
+</TabItem>
+
+<TabItem value='task'>
+This section is only applicable to the **AI Agent Process** implementation.
+</TabItem>
+
+</AiAgentImplementationTabs>
+
 ### Response
 
 Configure the response format by specifying how the model should return its output (text or JSON) and how the connector should process and handle the returned response.
@@ -341,10 +480,11 @@ The outcome of an LLM call is stored as an **assistant message** designed to con
 - This message always contains a single text content block for the currently supported providers/models.
 - The connector returns the **first content block** when handling the response, either as a text string or as a parsed JSON object.
 
-| Field                     | Required | Description                                                                                                                                                                                                    |
-| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response format           | Yes      | <p>Instructs the model which response format to return.</p><p><ul><li>This can be either text or JSON.</li><li>JSON format support varies by provider and model.</li></ul></p>                                 |
-| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p> |
+| Field                     | Required | Description                                                                                                                                                                                                                                                                                                       |
+| :------------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response format           | Yes      | <p>Instructs the model which response format to return.</p><p><ul><li>This can be either text or JSON.</li><li>JSON format support varies by provider and model.</li></ul></p>                                                                                                                                    |
+| Include assistant message | No       | <p>Returns the entire message returned by the LLM as `responseMessage`, including any additional content blocks and metadata.</p><p>Select this option if you need more than just the first response text.</p>                                                                                                    |
+| Include agent context     | No       | <p>Returns the agent context variable as part of the response object.</p><p>Necessary when modeling a user feedback loop in combination with an AI agent process as otherwise the context will only be kept in the process' internal state.</p><p>Only applicable to the **AI Agent Process** implementation.</p> |
 
 #### Text response format
 
@@ -450,12 +590,23 @@ agent.responseMessage.content[type = "text"][1].text
 
 ### Output mapping
 
-Specify the process variables that you want to map and export the AI Agent connector response into.
+Specify the process variables that you want to map and export the AI Agent connector response into. The available fields depend on the implementation:
 
-| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :---------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields. Set this to a unique value for every agent task in your process.</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p><p>Response fields depend on how the [Response](#response) is configured: <ul><li><p>`responseText`: The last response text provided by the LLM if the **Response Format** is set to "Text".</p></li><li><p>`responseJson`: The last response text provided by the LLM, parsed as a JSON object if the **Response Format** is set to "JSON" or if the **Parse text as JSON** option is enabled.</p></li><li><p>`responseMessage`: The assistant message provided by the LLM if the **Include assistant message** option is enabled.</p></li></ul></p> |
-| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+<AiAgentImplementationTabs>
+<TabItem value='process'>
+
+| Field           | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :-------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Result variable | Yes      | <p>The result of the AI Agent connector is a context containing the following fields, depending on how the [Response](#response) is configured. Set this to a unique value for every agent in your process to avoid interference between agents.</p><p><ul><li><p>`context`: The updated **agent context** if the **Include agent context** option is enabled.</p></li><li><p>`responseText`: The last response text provided by the LLM if the **Response Format** is set to `Text`.</p></li><li><p>`responseJson`: The last response text provided by the LLM, parsed as a JSON object if the **Response Format** is set to `JSON` or if the **Parse text as JSON** option is enabled.</p></li><li><p>`responseMessage`: The assistant message provided by the LLM if the **Include assistant message** option is enabled.</p></li></ul></p> |
+
+</TabItem>
+
+<TabItem value='task'>
+
+| Field             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Result variable   | Yes      | <p>The result of the AI Agent connector is a context containing the following fields. Set this to a unique value for every agent task in your process to avoid interference between agents.</p><p><ul><li><p>`context`: The updated **Agent Context**. Make sure you map this to a process variable and re-inject this variable in the **Agent Context** input field if your AI agent is part of a feedback loop.</p></li><li><p>`toolCalls`: Tool call requests provided by the LLM that need to be routed to the ad-hoc sub-process.</p></li></ul></p><p>Response fields depend on how the [Response](#response) is configured: <ul><li><p>`responseText`: The last response text provided by the LLM if the **Response Format** is set to `Text`.</p></li><li><p>`responseJson`: The last response text provided by the LLM, parsed as a JSON object if the **Response Format** is set to `JSON` or if the **Parse text as JSON** option is enabled.</p></li><li><p>`responseMessage`: The assistant message provided by the LLM if the **Include assistant message** option is enabled.</p></li></ul></p> |
+| Result expression | No       | In addition, you can choose to unpack the content of the response into multiple process variables using the **Result expression** field, as a [FEEL Context Expression](/components/concepts/expressions.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 :::tip
 To model your first AI Agent, you can use the default result variable (`agent`) and
@@ -469,6 +620,9 @@ unexpected results between different agents.
 :::info
 To learn more about output mapping, see [variable/response mapping](/components/connectors/use-connectors/index.md#variableresponse-mapping).
 :::
+
+</TabItem>
+</AiAgentImplementationTabs>
 
 ### Error handling
 
@@ -490,6 +644,12 @@ Specify connector execution retry behavior if execution fails.
 ### Execution listeners
 
 Add and manage [execution listeners](/components/concepts/execution-listeners.md) to allow users to react to events in the workflow execution lifecycle by executing custom logic.
+
+## Event handling
+
+With an **AI Agent Process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event. See [event handling](#event-handling) for more details.
+
+To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow. The content of this variable will be added to the LLM API call as a user message following any tool call results.
 
 ## Additional resources
 
