@@ -34,19 +34,19 @@ For the tool versions used, check the [.tool-versions](https://github.com/camund
 
 ## Architecture
 
-This section installs Camunda 8 following the architecture presented in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md):
+This section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). The architecture includes the following core components:
 
-- **Orchestration Cluster**: Core process execution engine with Zeebe, Operate, Tasklist, and Identity
-- **Web Modeler and Console**: Management and design tools with Web Modeler, Console, and Management Identity
-- **Keycloak as OIDC provider**: Used as a demonstration example of an OIDC Identity Provider (this can be replaced with any compatible OIDC provider)
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
-For OpenShift deployments, we also present the following OpenShift-specific configurations:
+For OpenShift deployments, the following OpenShift-specific configurations are also included:
 
 - **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
-- **Security Context Constraints (SCCs)**: OpenShift's security framework for controlling pod and container permissions
+- **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
 
 :::info Single namespace deployment
-This installation guide uses a single Kubernetes namespace for simplicity, as the deployment is done via a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components) which recommends separating Orchestration Cluster and Web Modeler/Console into different namespaces for production environments to improve isolation and enable independent scaling.
+This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
 :::
 
 ## Deploy Camunda 8 via Helm charts

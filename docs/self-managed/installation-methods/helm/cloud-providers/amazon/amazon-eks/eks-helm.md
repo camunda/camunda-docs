@@ -39,20 +39,22 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ## Architecture
 
-In addition to the infrastructure diagram provided in the [Terraform setup guide](./terraform-setup.md), this section installs Camunda 8 following the architecture presented in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md):
+In addition to the infrastructure diagram provided in the [Terraform setup guide](./terraform-setup.md), this section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md).
 
-- **Orchestration Cluster**: Core process execution engine with Zeebe, Operate, Tasklist, and Identity
-- **Web Modeler and Console**: Management and design tools with Web Modeler, Console, and Management Identity
-- **Keycloak as OIDC provider**: Used as a demonstration example of an OIDC Identity Provider (this can be replaced with any compatible OIDC provider)
+The architecture includes the following core components:
 
-To demonstrate how to deploy with a custom domain, we also present the following additional stack:
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
-- **cert-manager**: Automates TLS certificate management from [Let's Encrypt](https://letsencrypt.org/)
-- **external-dns**: Handles DNS record management in Route53 for domain ownership confirmation
+To demonstrate how to deploy with a custom domain, the following stack is also included:
+
+- **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
+- **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
 - **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
 
 :::info Single namespace deployment
-This installation guide uses a single Kubernetes namespace for simplicity, as the deployment is done via a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components) which recommends separating Orchestration Cluster and Web Modeler/Console into different namespaces for production environments to improve isolation and enable independent scaling.
+This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
 :::
 
 ## Export environment variables
