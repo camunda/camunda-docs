@@ -40,6 +40,14 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between these components:
+
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Identity) with tightly integrated components (Optimize, Connectors).
+- **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
+
+See the reference architecture for details on how these components communicate.
+:::
+
 _Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
 [![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
@@ -52,10 +60,6 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 :::
 
 ### Kubernetes
-
-:::note
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between the Orchestration Cluster and Web Modeler and Console, including details on how they communicate.
-:::
 
 A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
 
@@ -142,9 +146,18 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 - [Console](/self-managed/components/console/overview.md) — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
-This namespace also includes **Keycloak**, which serves as the Identity Provider (IdP) for Management Identity.
+This namespace also includes Keycloak as an example OIDC Identity Provider (IdP) for Management Identity. You can replace Keycloak with any compatible OIDC provider to meet your organization's requirements.
 
-The **Orchestration Cluster** can be configured to authenticate via **OIDC** by connecting to the **Management Identity** service deployed in this namespace.
+:::warning Identity separation
+Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Identity in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
+:::
+
+For configuration details, see:
+
+- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
+- [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+
+The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
 
 ## Requirements
 
