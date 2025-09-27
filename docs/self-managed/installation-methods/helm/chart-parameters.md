@@ -37,10 +37,18 @@ The following tables show the **top-level configuration sections** in `values.ya
 | `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) |
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
-:::info
-Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami chart production deployments.
-For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
-:::
+#### Bitnami subcharts guidance
+
+**Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.
+
+**Production environments**: Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you:
+
+- Use your preferred deployment method and operational tooling
+- Leverage managed services such as AWS RDS, Azure Database, or Google Cloud SQL
+- Manage infrastructure lifecycle independently of Camunda applications
+- Implement your organization's security, backup, and monitoring standards
+
+If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 
