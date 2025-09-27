@@ -40,7 +40,7 @@ Additionally, you need the following:
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
 - Download and unzip or clone the [repository](https://github.com/camunda/camunda-platform-tutorials), then navigate to:  
-  `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`
+  `camunda-platform-tutorials/quick-start/task-listeners/worker-java`
 
 ## Step 1: Create a process with a user task in Modeler
 
@@ -51,7 +51,7 @@ Additionally, you need the following:
 ![Web modeler showing a process with user task](./assets/user-task-listeners-guide/1-process-with-user-task.png)
 
 :::note
-In this guide, you can also use the example BPMN from the repo located in `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java/src/main/resources/Quick_Start_Task_Listeners.bpmn`.
+In this guide, you can also use the example BPMN from the repo located in `camunda-platform-tutorials/quick-start/task-listeners/worker-java/src/main/resources/Quick_Start_Task_Listeners.bpmn`.
 In that case, just explore the BPMN using the steps below, but do not adjust the model in steps 2-4.
 :::
 
@@ -124,7 +124,7 @@ Next, we'll run the listener application to execute our external logic, and comp
 
 Next, we’ll create a worker that listens to the user task's events by associating it with the **Listener type** we specified on the task listener in the BPMN diagram.
 
-1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/task-listener-java`) in your IDE.
+1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/worker-java`) in your IDE.
 2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster).
 3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
 4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
