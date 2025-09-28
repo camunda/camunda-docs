@@ -11,9 +11,7 @@ import { HelmChartValuesFileLocalLink } from "@site/src/components/CamundaDistri
 
 This quickstart guides platform engineers and DevOps practitioners through deploying **Camunda 8 Self-Managed** to a local Kubernetes cluster using [Kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/).
 
-You can deploy Camunda 8 Self-Managed on your Kubernetes local cluster for development purposes using [kind](https://kind.sigs.k8s.io/).
-
-In this guide, we will use **kind**. However, the concept is the same for other tools like K3s, minikube, or MicroK8s. The goal in this guide is to reduce the resources required by Camunda components so they can work on a personal machine.
+The same approach also works with other lightweight Kubernetes distributions such as K3s, minikube, or MicroK8s. To make the deployment run smoothly on a personal machine, the guide provides a `values-local.yaml` file that lowers the resource requirements of Camunda components
 
 ## Preparation
 
@@ -65,19 +63,27 @@ helm install camunda-platform camunda/camunda-platform --version $HELM_CHART_VER
     -f values-local.yaml
 ```
 
-This will deploy Camunda 8 components (Orchestration Cluster, Optimize, and Connectors), but with a set of parameters tailored to a local environment setup.
+This setup deploys the Orchestration Cluster, using parameters optimized for running in a local environment.
 
-Depending on your machine hardware and internet connection speed, the services might take some time to get started as it will download the Docker images of all Camunda 8 components to your local kind cluster.
+Depending on your machine’s hardware and internet connection, startup may take a few minutes while the required Docker images are pulled into your local Kind cluster.
 
-4. Check that each pod is running and ready with `kubectl get pods`. If one or more of your pods are pending for long time, it means it cannot be scheduled onto a node. Usually, this happens because there are insufficient resources that prevent it. Use the `kubectl describe <POD NAME>` command to check its status.
+4. Verify that all pods are running and ready by executing:
+
+```bash
+kubectl get pods
+```
+
+If one or more pods remain in the Pending state for an extended period, they may not be scheduled onto a node due to insufficient resources. To investigate further, run:
+
+```bash
+kubectl describe <POD_NAME>
+```
 
 ## Connecting to Camunda 8 components
 
-Camunda services deployed in a Kubernetes cluster are not accessible from outside the cluster. To connect to your Camunda 8 cluster, use either port-forwarding or Kubernetes Ingress.
+By default, services deployed in a Kubernetes cluster are not exposed outside the cluster. To connect to your Camunda 8 deployment, you can either use port-forwarding or set up a Kubernetes Ingress.
 
-:::note
-The setup described here skips Identity setup and uses a default basic authentication with username and password as 'demo/demo'.
-:::
+This quickstart uses basic authentication with the default credentials demo/demo.
 
 <Tabs groupId="c8-connectivity" defaultValue="port-forward" queryString values={
 [
