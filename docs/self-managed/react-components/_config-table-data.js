@@ -310,10 +310,10 @@ export const configs = [
       "camunda.operate.backup.repositoryName",
       "camunda.tasklist.backup.repositoryName",
     ],
-    types: ["1-to-1", "Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
     notes: [
-      "Starting with 8.8, the same repository must be used for both Operate and Tasklist.",
+      "Note: Starting with 8.8, the same repository must be used for both Operate and Tasklist.",
     ],
   },
   {
@@ -491,7 +491,7 @@ export const configs = [
       "camunda.operate.database",
       "camunda.tasklist.database",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -508,7 +508,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.url",
       "zeebe.broker.exporters.camundaexporter.args.connect.url",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -518,7 +518,7 @@ export const configs = [
       "camunda.operate.elasticsearch.clusterName",
       "camunda.tasklist.elasticsearch.clusterName",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -528,7 +528,7 @@ export const configs = [
       "camunda.operate.elasticsearch.username",
       "camunda.tasklist.elasticsearch.username",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -538,7 +538,7 @@ export const configs = [
       "camunda.operate.elasticsearch.password",
       "camunda.tasklist.elasticsearch.password",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -572,7 +572,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.indexPrefix",
       "camunda.operate.elasticsearch.indexPrefix",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
 
@@ -584,7 +584,7 @@ export const configs = [
       "camunda.tasklist.opensearch.url",
       "zeebe.broker.exporters.camundaexporter.args.connect.url",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -594,7 +594,7 @@ export const configs = [
       "camunda.operate.opensearch.clusterName",
       "camunda.tasklist.opensearch.clusterName",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -604,7 +604,7 @@ export const configs = [
       "camunda.operate.opensearch.username",
       "camunda.tasklist.opensearch.username",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -614,13 +614,13 @@ export const configs = [
       "camunda.operate.opensearch.password",
       "camunda.tasklist.opensearch.password",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
     name: "camunda.data.secondary-storage.opensearch.security.enabled",
     legacy: ["camunda.database.security.enabled"],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -630,7 +630,7 @@ export const configs = [
       "camunda.tasklist.opensearch.ssl.certificatePath",
       "camunda.operate.opensearch.ssl.certificatePath",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -640,7 +640,7 @@ export const configs = [
       "camunda.tasklist.opensearch.ssl.verifyHostname",
       "camunda.operate.opensearch.ssl.verifyHostname",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -650,7 +650,7 @@ export const configs = [
       "camunda.tasklist.elasticsearch.ssl.selfSigned",
       "camunda.operate.elasticsearch.ssl.selfSigned",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {
@@ -660,7 +660,7 @@ export const configs = [
       "camunda.tasklist.opensearch.indexPrefix",
       "camunda.operate.opensearch.indexPrefix",
     ],
-    types: ["Breaking change (double configuration)"],
+    types: ["Breaking change"],
     area: ["Data"],
   },
   {

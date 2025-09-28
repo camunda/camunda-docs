@@ -120,7 +120,7 @@
   color: #fff;
   margin-top: 10px;
 }
-[data-theme="dark"] .badge--double-configuration {
+[data-theme="dark"] .badge--breaking-change {
   background-color: #0ba7b9;
   color: #e1d9cd;
 }
@@ -130,16 +130,16 @@
   border: 1px solid #009d9a;
 }
 
-.badge--breaking-change-double-configuration- {
+.badge--breaking-change {
   background-color: #da1e28;
   color: #fff;
   margin-top: 10px;
-  width: 140px;
+  width: 105px;
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;
   display: inline-block;
-  text-align: left;
+  text-align: center;
   line-height: 1.5;
 }
 
