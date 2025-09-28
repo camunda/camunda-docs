@@ -128,7 +128,7 @@ const SearchableTable = () => {
             t === "1-to-1"
               ? "1-to-1"
               : t === "Breaking change"
-                ? "Breaking change"
+                ? "breaking-change"
                 : t === "New"
                   ? "new"
                   : "default";
