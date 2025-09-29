@@ -7,3 +7,8 @@ page_rank: 90
 ---
 
 In this section, find details on the Self-Managed installation methods.
+
+import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
+import { overviewCards } from './react-components/\_card-data';
+
+<ZeebeGrid zeebe={overviewCards} />

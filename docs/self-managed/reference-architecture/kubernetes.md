@@ -97,8 +97,8 @@ For high availability, we recommend a minimum of **four Kubernetes nodes** to en
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-- The default three-node Orchestration Cluster
-- Other Camunda 8 components (e.g., Web Modeler, Identity, Tasklist)
+- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Identity)
+- Other Camunda 8 components (Web Modeler, Management Identity, Console, Optimize)
 
 Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
 
@@ -178,7 +178,7 @@ Networking is largely managed through services and load balancers. The following
 - Firewall rules for:
   - `80`: Web UI (Console, Management Identity, Keycloak, Web Modeler)
   - `82`: Metrics (Management Identity)
-  - `8080`: REST/Web UI (Connectors, Keycloak, Orchestration Cluster)
+  - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
   - `8071`, `8091`: Management (Web Modeler)
   - `8092`: Management (Optimize)
   - `9100`: Management (Console)
@@ -223,7 +223,7 @@ annotations:
 
 The Helm chart required for deploying on Kubernetes is [publicly available](https://helm.camunda.io/).
 
-Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
+Camunda maintains the required Docker images consumed by the Helm chart. These images are available on [DockerHub](https://hub.docker.com/u/camunda) or [Camunda Enterprise Registry](https://registry.camunda.cloud). The `Dockerfile` and its default configuration are available as part of the [Camunda repository](https://github.com/camunda/camunda/blob/main/Dockerfile).
 
 ### Database
 
