@@ -677,11 +677,9 @@ orchestration:
    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
      value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
    # all the envs related to the backup store as outlined in the prerequisites
-   - name: ZEEBE_BROKER_DATA_BACKUP_STORE
+   - name: CAMUNDA_DATA_BACKUP_STORE
      value: "S3" # just as an example
-   - name: CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME
-     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
-   - name: CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME
+   - name: CAMUNDA_DATA_BACKUP_REPOSITORYNAME
      value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
    ...
 
