@@ -539,7 +539,7 @@ The following [agentic orchestration](/components/agentic-orchestration/agentic-
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
-The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md), providing automated user interaction and tool selection.
+The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md), providing automated user interaction and tool selection.
 
 This connector provides:
 

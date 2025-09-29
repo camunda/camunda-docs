@@ -20,7 +20,7 @@ Due to this overhead, the MCP Remote Client connector is primarily intended for 
 
 ## Modeling
 
-1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md). Do not configure any tools within the ad-hoc sub-process yet.
 2. Install the [MCP Remote Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/tags/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-remote-client-outbound-connector.json).
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Remote Client** element template you installed in step 2.
 4. In the **HTTP Connection** section of the properties panel, configure the **SSE URL** to point to the HTTP with SSE endpoint of your MCP server (typically ending in `/sse`).

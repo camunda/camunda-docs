@@ -136,7 +136,7 @@ this for your specific use case varies on the connector runtime you are using.
 
 ## Modeling
 
-1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example.md). Do not configure any tools within the ad-hoc sub-process yet.
 2. Install the [MCP Client element template](https://github.com/camunda/connectors/blob/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
 3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template you installed in step 2.
 4. In the **MCP Client** section of the properties panel, configure the **Client ID** to match the value of the MCP client you used in the runtime configuration (example: `filesystem`).

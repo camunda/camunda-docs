@@ -648,7 +648,29 @@ module.exports = {
                     id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent",
                   },
                   items: [
-                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example",
+                    {
+                      type: "category",
+                      label: "AI Agent Process",
+                      link: {
+                        type: "doc",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process",
+                      },
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example",
+                      ],
+                    },
+                    {
+                      type: "category",
+                      label: "AI Agent Task",
+                      link: {
+                        type: "doc",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task",
+                      },
+                      items: [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
+                      ],
+                    },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
