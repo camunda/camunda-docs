@@ -13,7 +13,7 @@ import {C8Run} from "@site/src/components/CamundaDistributions";
 Camunda 8 Run is not supported for production use.
 :::
 
-Camunda 8 Run enables you to run [Orchestration cluster](../../../reference/glossary/#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run enables you to run [Orchestration cluster](../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
