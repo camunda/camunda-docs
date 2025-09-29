@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: Getting started
-description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project."
+description: "Integrate Camunda 8 APIs (gRPC and REST) into your Spring Boot project for orchestration, automation, and data processing."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -17,20 +17,20 @@ The Camunda Spring Boot Starter is part of the Camunda 8 [public API](/reference
 **The Camunda Spring Boot Starter replaces the Spring Zeebe SDK as of version 8.8.**
 
 - Uses the new Camunda Java Client under the hood
-- REST is the default protocol (gRPC configurable)
+- REST is the default protocol (gRPC is configurable)
 - Spring Zeebe SDK will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
-See our [migration guide](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter) for details.
+See the [migration guide](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter) for details.
 :::
 
-## What can you build with it?
+## What you can build with it
 
-Use the Camunda Spring Boot Starter to build:
+With the Camunda Spring Boot Starter, you can build:
 
 - **Job workers** that perform automated tasks and call external systems (APIs, databases, file systems)
 - **Integration services** that connect Camunda processes with existing systems or third-party services
-- **Data processing applications** that leverage process data for visualization, analytics, or business intelligence
+- **Data processing applications** that use process data for visualization, analytics, or business intelligence
 
 ## Version compatibility
 
@@ -150,13 +150,20 @@ camunda:
     rest-address: https://my-rest-address
 ```
 
-**Notes for Microsoft Entra ID**:
+**Notes for Microsoft Entra ID**
 
-- Instead of `scope: CLIENT_ID_OC`, use: `scope: CLIENT_ID_OC + "/.default"`.
-- The `token-url` is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+- Use `scope: CLIENT_ID_OC + "/.default"` instead of `scope: CLIENT_ID_OC`.
+- The `token-url` is typically in the format:
 
-:::note Audience Validation
-If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+```
+https://login.microsoftonline.com/
+<tenant_id>/oauth2/v2.0/token
+```
+
+:::note Audience validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+
+Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
 :::
 
 </TabItem>
@@ -230,7 +237,7 @@ public void handleJobFoo() {
 }
 ```
 
-See [the configuration documentation](/apis-tools/camunda-spring-boot-starter/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+See the [configuration documentation](/apis-tools/camunda-spring-boot-starter/configuration.md) for a detailed discussion of parameters and configuration options for job workers.
 
 ### Write test cases
 
@@ -241,16 +248,16 @@ Refer to [Camunda Process Test](../testing/getting-started.md) to write test cas
 - **Full Orchestration Cluster 8 API support:** Access all Orchestration Cluster API capabilities, including process deployment, management, job handling, and querying process data.
 - **Multiple authentication methods:** Supports no authentication (development), basic authentication, and OIDC access tokens for production environments.
 - **Automatic token management:** Handles authentication token acquisition and renewal automatically—no manual token management required.
-- **Protocol flexibility:** Choose between REST and gRPC protocols depending on your requirements and infrastructure.
+- **Protocol flexibility:** Choose between REST and gRPC protocols based on your requirements and infrastructure.
 
 ## Next steps and resources
 
 **Learn the fundamentals**
 
-- [Process testing](../testing/getting-started.md) – Test your processes with Camunda Process Test
-- [Getting Started Tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Modeler, Operate, and Spring SDK
+- [Process testing](../testing/getting-started.md) – Test your processes with Camunda Process Test.
+- [Getting started tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Modeler, Operate, and Spring SDK.
 
 **Need help?**
 
-- [Camunda Community Forum](https://forum.camunda.io/) – Get help from the community
-- [GitHub repository](https://github.com/camunda/camunda) – Report issues and contribute
+- [Camunda Community Forum](https://forum.camunda.io/) – Get help from the community.
+- [GitHub repository](https://github.com/camunda/camunda) – Report issues and contribute.

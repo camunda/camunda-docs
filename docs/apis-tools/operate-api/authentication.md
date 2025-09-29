@@ -1,38 +1,38 @@
 ---
 id: operate-api-authentication
 title: Authentication
-description: "Authentication requirements for accessing the Operate REST API."
+description: "Learn about authentication methods for accessing the Operate REST API and when to use each option."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Operate REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
+This page describes the available authentication methods for accessing the Operate REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
 
-The Operate REST API supports three authentication methods depending on your environment and configuration:
+The Operate REST API supports three authentication methods based on your environment and configuration:
 
-- **No Authentication**
-- **Basic Authentication**
-- **OIDC-based Authentication**
+- **No authentication**
+- **Basic authentication**
+- **OIDC-based authentication**
 
 ## When to use each method
 
-- **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
-- **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
+- **No authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use this option in production environments.
+- **Basic authentication**: Use for simple username/password protection, typically in development or testing environments where authentication is enabled.
+- **OIDC-based authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
 | Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
-# Authenticate API calls
+## Authenticate API calls
 
-## No Authentication (Local Development)
+### No Authentication (Local Development)
 
 By default, Camunda 8 Run and Docker Compose expose the Tasklist REST API without authentication for local development. You can make API requests directly:
 
@@ -42,7 +42,7 @@ curl --request POST http://localhost:8080/v1/process-instances/search \
    --data-raw '{}'
 ```
 
-## Basic Authentication
+### Basic Authentication
 
 Basic Authentication uses username and password credentials. To set it up:
 
@@ -67,7 +67,7 @@ Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-## OIDC-based Authentication
+### OIDC-based Authentication
 
 To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
@@ -118,16 +118,18 @@ To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/)
 </TabItem>
 <TabItem value='self-managed'>
 
-1. **Configure Orchestration Cluster for OIDC-based Authentication.**
-   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
-   - Note the **client ID** or configured values of **audiences** of the Orchestration Cluster for audience validation (usually the same as the client ID you used when configuring the Orchestration Cluster) as **CLIENT_ID_OC**.
-2. **Register a client in your Identity Provider (IdP).**
-   - Create a new application/client in your IdP.
-   - Configure the necessary scopes (for example, `openid`).
+1. **Configure Orchestration Cluster for OIDC-based authentication**
+   - Configure your Orchestration Cluster with your identity provider by following the steps in [Set up OIDC-based authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+   - Note the **client ID** or configured **audiences** values for audience validation. This is usually the same as the client ID used when configuring the Orchestration Cluster and will be referred to as **CLIENT_ID_OC**.
+
+2. **Register a client in your identity provider (IdP)**
+   - Create a new application or client in your IdP.
+   - Configure the required scopes (for example, `openid`).
    - Create a new client secret.
-   - Note the **client ID**, **client secret**, and **authorization URI** as these are required to obtain an access token.
-3. **Use the credentials (client ID and secret) to request an Access Token.**  
-   The example below shows Keycloak configuration (the authorization URI will vary based on your Identity Provider):
+   - Note the **client ID**, **client secret**, and **authorization URI**—these are required to obtain an access token.
+
+3. **Use the credentials (client ID and secret) to request an access token**  
+   The example below shows Keycloak configuration. The authorization URI will vary based on your identity provider:
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
@@ -143,13 +145,16 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 
 4. **Capture the value of the `access_token` property and store it as your token.**
 
-:::note Audience Validation
-If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::note Audience validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+
+Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
 :::
 
 :::note Authorizations
-If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+If authorizations are enabled, your application can only retrieve the topology. Other requests require you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. Use your `client ID` when setting up authorizations.
 :::
+
 </TabItem>
 
 </Tabs>

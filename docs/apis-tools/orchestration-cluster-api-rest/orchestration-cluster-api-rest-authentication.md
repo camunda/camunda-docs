@@ -1,38 +1,38 @@
 ---
 id: orchestration-cluster-api-rest-authentication
 title: "Authentication"
-description: "Step through authentication options that can be used to access the Orchestration Cluster REST API."
+description: "Step through authentication options for accessing the Orchestration Cluster REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It outlines when to use each method and how to configure your API requests for secure and appropriate access.
+This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
 
 The Orchestration Cluster REST API supports three authentication methods depending on your environment and configuration:
 
-- **No Authentication**
-- **Basic Authentication**
-- **OIDC-based Authentication**
+- **No authentication**
+- **Basic authentication**
+- **OIDC-based authentication**
 
 ## When to use each method
 
-- **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
-- **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
+- **No authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use in production environments.
+- **Basic authentication**: Use for simple username/password protection, typically in development or testing environments where authentication is enabled.
+- **OIDC-based authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
+| Distribution                                                                           | Default Authentication | No auth support         | Basic auth support | OIDC-based auth support |
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
-# Authenticate API calls
+## Authenticate API calls
 
-## No Authentication (Local Development)
+### No authentication (local development)
 
 By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster REST API without authentication for local development. You can make API requests directly:
 
@@ -40,7 +40,7 @@ By default, Camunda 8 Run and Docker Compose expose the Orchestration Cluster RE
 curl http://localhost:8080/v2/topology
 ```
 
-## Basic Authentication
+### Basic Authentication
 
 Basic Authentication uses username and password credentials. To set it up:
 
@@ -63,7 +63,7 @@ Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-## OIDC-based Authentication using Client Credentials
+### OIDC-based Authentication using client credentials
 
 OIDC-based Authentication is the recommended method for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
 
@@ -75,7 +75,7 @@ OIDC-based Authentication is the recommended method for production and required 
 <TabItem value="saas">
 
 1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the Camunda Console.
-2. Use the credentials to request an Access Token:
+2. Use the credentials to request an access token:
 
 ```shell
 curl --request POST ${CAMUNDA_OAUTH_URL} \
@@ -86,29 +86,31 @@ curl --request POST ${CAMUNDA_OAUTH_URL} \
     --data-urlencode "client_secret=${CAMUNDA_CLIENT_SECRET}"
 ```
 
-3. Use the Access Token from the response in your API requests:
+3. Use the access token from the response in your API requests:
 
 ```shell
 curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
      ${BASE_URL}/topology
 ```
 
-Replace the `${BASE_URL}` based on the address of your cluster. See the [Context paths](orchestration-cluster-api-rest-overview.md#context-paths) for SaaS URL formats.
+Replace the `${BASE_URL}` based on the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for SaaS URL formats.
 
 </TabItem>
 
 <TabItem value="self-managed">
 
-1. **Configure Orchestration Cluster for OIDC-based Authentication.**
-   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
-   - Note the **client ID** or configured values of **audiences** of the Orchestration Cluster for audience validation (usually the same as the client ID you used when configuring the Orchestration Cluster) as **CLIENT_ID_OC**.
-2. **Register a client in your Identity Provider (IdP).**
-   - Create a new application/client in your IdP.
-   - Configure the necessary scopes (for example, `openid`).
+1. **Configure the Orchestration Cluster for OIDC-based authentication**
+   - Configure your Orchestration Cluster with your identity provider by following the steps in [Set up OIDC-based authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+   - Note the **client ID** or configured **audiences** values for audience validation. This is usually the same as the client ID used when configuring the Orchestration Cluster and will be referred to as **CLIENT_ID_OC**.
+
+2. **Register a client in your identity provider (IdP)**
+   - Create a new application or client in your IdP.
+   - Configure the required scopes (for example, `openid`).
    - Create a new client secret.
-   - Note the **client ID**, **client secret**, and **authorization URI** as these are required to obtain an access token.
-3. **Use the credentials (client ID and secret) to request an Access Token.**  
-   The example below shows Keycloak configuration (the authorization URI will vary based on your Identity Provider):
+   - Note the **client ID**, **client secret**, and **authorization URI**—these are required to obtain an access token.
+
+3. **Use the credentials (client ID and secret) to request an access token**  
+   The example below shows Keycloak configuration. The authorization URI will vary based on your identity provider:
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
@@ -129,23 +131,25 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
      ${BASE_URL}/topology
 ```
 
-Replace the `${BASE_URL}` based on the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
+Replace `${BASE_URL}` with the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
 
-:::note Audience Validation
-If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::note Audience validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+
+Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
 :::
 
 :::note Authorizations
-If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+If authorizations are enabled, your application can only retrieve the topology. Other requests require you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. Use your `client ID` when setting up authorizations.
 :::
 
 </TabItem>
 
 </Tabs>
 
-## OIDC-based Authentication using X.509 client certificates
+## OIDC-based authentication using X.509 client certificates
 
-For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in self-managed environments where your identity provider (such as Keycloak) is configured to use the [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523).
+For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in Self-Managed environments where your identity provider (such as Keycloak) is configured to use the [RFC 7523](https://datatracker.ietf.org/doc/html/rfc7523) standard.
 
 **For Java applications**  
 The Java client supports automatic OIDC access token retrieval using X.509 client certificates. Configure the necessary keystore and truststore settings via code or environment variables. See [Java client authentication](../java-client/getting-started.md#oidc-access-token-authentication-with-x509-client-certificate) for complete configuration details.
@@ -155,14 +159,14 @@ Refer to your identity provider's documentation for obtaining tokens using X.509
 
 ## Automatic token management in official clients
 
-When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You don't need to manually obtain or refresh tokens—the clients handle this based on your configuration.
+When using official Camunda clients (Java client or Spring Boot Starter), token acquisition and renewal are handled automatically. You do not need to manually obtain or refresh tokens—the clients handle this based on your configuration.
 
 ## Troubleshooting
 
-- Check the logs for authentication errors.
-- Verify your access token includes the correct audience if audience validation is configured.
+- Check logs for authentication errors.
+- Verify your access token includes the correct audience if audience validation is enabled.
 
 ## Learn more
 
-- [Camunda Java client authentication and token management](./../java-client/getting-started.md)
+- [Camunda Java client authentication and token management](../java-client/getting-started.md)
 - [Camunda Spring Boot Starter: Configuring the Camunda 8 connection](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)

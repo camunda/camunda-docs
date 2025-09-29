@@ -225,13 +225,19 @@ public static void main(String[] args) {
 }
 ```
 
-**Notes for Microsoft Entra ID**:
+**Notes for Microsoft Entra ID**
 
-- Instead of `scope=CLIENT_ID_OC`, use: `scope=CLIENT_ID_OC + "/.default"`.
-- The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+- Use `scope=CLIENT_ID_OC + "/.default"` instead of `scope=CLIENT_ID_OC`.
+- The authorization URI is typically in the format:
 
-:::note Audience Validation
-If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+```
+https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
+```
+
+:::note Audience validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+
+Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
 :::
 
 **What this code does**
