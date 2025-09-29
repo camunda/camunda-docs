@@ -65,11 +65,11 @@ Based on this, we can look in the [matrix versioning of 8.8](https://helm.camund
 
 The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
 
-| Prerequisite        | Description                                                                                                                                                                                                                                            |
-| :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Clean state/data    | Elasticsearch/OpenSearch is set up and running with a clean state and no data on it.                                                                                                                                                                   |
-| Snapshot repository | Elasticsearch/OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites).                                                                  |
-| Sizing              | Elasticsearch/OpenSearch should be sized the same or larger than before. For example, restoring indices with two default replicas to a cluster with fewer data nodes than previously may prevent shards from being assigned, causing restore failures. |
+| Prerequisite        | Description                                                                                                                                                                                                                      |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clean state/data    | Elasticsearch or OpenSearch is set up and running with a clean state and no data on it.                                                                                                                                          |
+| Snapshot repository | Elasticsearch or OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites).                                         |
+| Sizing              | Elasticsearch or OpenSearch should be sized the same or larger than the original cluster. Restoring to a smaller cluster (for example, with fewer data nodes) can prevent shards from being assigned and cause restore failures. |
 
 ### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
