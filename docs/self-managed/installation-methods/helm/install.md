@@ -72,40 +72,6 @@ helm search repo -l camunda/camunda-platform
 
 This command lists all available chart versions and their corresponding application versions.
 
-### Access the orchestration cluster
-
-Run the following command to locally port-forward the orchestration cluster pod to access the UI:
-
-```bash
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
-```
-
-Use the following URLs to access the orchestration cluster UIs:
-
-```bash
-http://localhost:8080/identity
-http://localhost:8080/operate
-http://localhost:8080/tasklist
-```
-
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
-
-For basic authentication use the default credentials:
-
-```
-username: demo
-password: demo
-```
-
-### Access Camunda services
-
-By default, Camunda services deployed in a Kubernetes cluster are not accessible from outside the cluster. You can expose these services externally in the following ways:
-
-- **Port forwarding:** Direct traffic from your local machine to the cluster to access Camunda services. See [Access components without Ingress](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md).
-- **Ingress configuration:** Use the NGINX Ingress controller to manage external service access. See [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md).
-- **Amazon EKS installation:** If you are deploying Camunda 8 on an Amazon EKS cluster, see [Install Camunda 8 on EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-- **Microsoft Azure Kubernetes Service (AKS) installation:** If you are deploying Camunda 8 on an Microsoft AKS cluster, see [Install Camunda 8 on AKS](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm/)
-
 ## Full Cluster
 
 <!-- TODO: Add links to doc pages that explain each component. -->
@@ -233,6 +199,31 @@ Installing all components in a cluster requires downloading all related Docker i
 For more information about enabling other components, see [Enable Web Modeler, Console, and Connectors](/self-managed/installation-methods/helm/configure/web-modeler-console-connectors.md).
 
 <!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
+
+## Access the components
+
+Run the following command to locally port-forward the orchestration cluster pod to access the UI:
+
+```bash
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
+```
+
+Use the following URLs to access the orchestration cluster UIs:
+
+```bash
+http://localhost:8080/identity
+http://localhost:8080/operate
+http://localhost:8080/tasklist
+```
+
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+
+For basic authentication use the default credentials:
+
+```
+username: demo
+password: demo
+```
 
 ## Troubleshoot installation issues
 
