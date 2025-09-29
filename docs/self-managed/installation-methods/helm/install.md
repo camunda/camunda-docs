@@ -270,6 +270,8 @@ kubectl logs -f <POD_NAME>
 
 - [Helm chart Amazon OpenSearch service usage](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of the default Elasticsearch.
 - [Getting started with document handling](/self-managed/concepts/document-handling/overview.md) — configure document storage and management in Camunda 8.
+- [Production installation](/self-managed/installation-methods/helm/production-guide.md) — configure and install the helm chart for production environments.
+- [Helm Configuration](/self-managed/installation-methods/helm/configure) - customize your installation by modifying the Helm chart configuration.
 
 <!--## Next steps
 
