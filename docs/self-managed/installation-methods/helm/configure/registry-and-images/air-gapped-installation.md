@@ -52,7 +52,7 @@ The following images must be available in your air-gapped environment:
 **Infrastructure images:**
 
 :::info When are infrastructure images needed?
-For air-gapped deployments, you must mirror Bitnami infrastructure images **only if** you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication).
+For air-gapped deployments, you must mirror Bitnami infrastructure images only if you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication).
 
 Skip this section if you're using external managed services or separately deployed infrastructure.
 :::
@@ -67,7 +67,7 @@ Choose one of the following image options:
 - [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 
 :::warning Not recommended for production
-These open-source images are the community default but are **not recommended** for production environments due to security and support limitations. Customers should transition to Option B or use managed infrastructure services.
+These open-source images are the community default but are not recommended for production environments due to security and support limitations. Customers should transition to Option B or use managed infrastructure services.
 :::
 
 #### Option B: Enterprise Bitnami Premium images (recommended)

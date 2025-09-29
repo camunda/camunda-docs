@@ -5,6 +5,8 @@ title: Install Bitnami enterprise images
 description: Configure the Camunda Helm chart to use vendor-supported enterprise images, understand CVE reporting, and set expectations on vulnerabilities.
 ---
 
+This page explains how to configure the Camunda Helm chart to use Bitnami enterprise images for production environments, including guidance on security, CVE reporting, and installation steps.
+
 ## Overview
 
 By default, the Camunda Helm chart uses Bitnami open-source images. However, for production environments that require enhanced security and vendor support, enterprise images are available.
@@ -22,7 +24,7 @@ In earlier versions, some users relied on Bitnami subcharts in production. Start
 - Gain greater operational control and flexibility
   :::
 
-If you decide to use Bitnami-based subcharts in production, Camunda strongly recommend using vendor-supported enterprise images. This guide explains how to configure and install Camunda with these enterprise images.
+If you use Bitnami-based subcharts in production, Camunda strongly recommend using vendor-supported enterprise images. This guide explains how to configure and install Camunda with these enterprise images.
 
 ## Understanding Bitnami image offerings
 
@@ -36,7 +38,7 @@ Due to [Bitnami chart security policy changes](https://github.com/bitnami/charts
 | **Premium**     | `bitnamipremium/*` <br/>(Camunda proxied through `vendor-ee`) | Debian          | Enterprise support with security patches | Production                 |
 | **Secure**      | `bitnamisecure/*`                                             | VMware PhotonOS | Minimal attack surface                   | High-security environments |
 
-### Why Camunda provides Premium images
+### Why Camunda uses Premium images
 
 Camunda currently provides **Premium images** only.
 
