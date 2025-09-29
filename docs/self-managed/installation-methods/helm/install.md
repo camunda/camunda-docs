@@ -78,9 +78,7 @@ http://localhost:8080/operate
 http://localhost:8080/tasklist
 ```
 
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Enable other components (optional)](#enable-other-components-optional) section.
-
-For basic authentication use the default credentials:
+By default, basic authentication is configured in the orchestration cluster. Use the default credentials:
 
 ```
 username: demo
@@ -94,13 +92,16 @@ By default, Camunda services deployed in a Kubernetes cluster are not accessible
 - **Port forwarding:** Direct traffic from your local machine to the cluster to access Camunda services. See [Access components without Ingress](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md).
 - **Ingress configuration:** Use the NGINX Ingress controller to manage external service access. See [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md).
 - **Amazon EKS installation:** If you are deploying Camunda 8 on an Amazon EKS cluster, see [Install Camunda 8 on EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-- **Microsoft Azure Kubernetes Service (AKS) installation:** If you are deploying Camunda 8 on an Microsoft AKS cluster, see [Install Camunda 8 on AKS](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm/)
 
-## Enable other components (optional)
+## Enable other components
+
+:::note
+This step is optional.
+:::
 
 <!-- TODO: Add links to doc pages that explain each component. -->
 
-The following components run outside the orchestration cluster and are disable by default in Helm Charts:
+The following components run outside the orchestration cluster:
 
 - Optimize
 - Web Modeler
@@ -108,14 +109,14 @@ The following components run outside the orchestration cluster and are disable b
 - Management Identity
 - Keycloak
 
-These components do not support basic authentication, so you must use any OIDC provider. In the following example, we use Keycloak as a locally running OIDC provider. The values file will deploy all Camunda 8 components.
+These components are disabled by default. They do not support basic authentication, so you must use another method such as Keycloak or OIDC. In this example, we use Keycloak.
 
 <!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
 
 Because the default configuration of the Helm chart uses basic authentication, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
 
-- Enable Keycloak to provide another method of authentication via OIDC.
-- Enable other Camunda components that run alongside the orchestration cluster.
+- Enable Keycloak to provide another method of authentication.
+- Enable other Camunda components that run outside the orchestration cluster.
 
 <!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
 
@@ -245,14 +246,11 @@ kubectl logs -f <POD_NAME>
 
 ## Notes and requirements
 
+- **Zeebe gateway** is deployed as a stateless service. It supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
 - **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation.md).
 - **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
-
-## Next steps
-
-- Explore the [Camunda Reference Architectures](/self-managed/reference-architecture/) to learn how to run Camunda 8 in production.
 
 ## Additional resources
 
