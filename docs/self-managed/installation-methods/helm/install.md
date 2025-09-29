@@ -55,14 +55,14 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.7 is `12`:
+To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
 
 ```shell
-helm install camunda camunda/camunda-platform --version 12  \
-    --values https://helm.camunda.io/camunda-platform/values/values-v8.7.yaml
+helm install camunda camunda/camunda-platform --version 13 \
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.8.yaml
 ```
 
-Specifying only the major chart version (for example, `12`) installs the latest available `12.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
+Specifying only the major chart version (for example, `13`) installs the latest available `13.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
 
 If you are unsure which chart version corresponds to your Camunda application version, run:
 
