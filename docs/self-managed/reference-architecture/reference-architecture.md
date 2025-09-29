@@ -105,7 +105,7 @@ While some guides explain how to deploy databases with Camunda, the recommendati
 
 High availability (HA) ensures that a system remains operational even when components fail. All components can run in HA mode, but Optimize requires special consideration: the importer/archiver must run on only one replica at a time. See the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for details.
 
-For cloud environments, consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails.
+Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails.
 
 For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
