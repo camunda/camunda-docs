@@ -65,10 +65,11 @@ Based on this, we can look in the [matrix versioning of 8.8](https://helm.camund
 
 The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
 
-| Prerequisite        | Description                                                                                                                                                                           |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Clean state/data    | Elasticsearch/OpenSearch is set up and running with a clean state and no data on it.                                                                                                  |
-| Snapshot repository | Elasticsearch/OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites). |
+| Prerequisite        | Description                                                                                                                                                                                                                                            |
+| :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clean state/data    | Elasticsearch/OpenSearch is set up and running with a clean state and no data on it.                                                                                                                                                                   |
+| Snapshot repository | Elasticsearch/OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites).                                                                  |
+| Sizing              | Elasticsearch/OpenSearch should be sized the same or larger than before. For example, restoring indices with two default replicas to a cluster with fewer data nodes than previously may prevent shards from being assigned, causing restore failures. |
 
 ### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
@@ -457,7 +458,7 @@ The following uses the [Elasticsearch CAT API](https://www.elastic.co/docs/api/d
 
 ```bash
 for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$ELASTIC_ENDPOINT/$index"
 done

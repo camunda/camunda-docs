@@ -284,7 +284,9 @@ while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq 
 
 You can create this backup using the respective Snapshots API.
 
-By default, the indices are prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch/OpenSearch exporter in Zeebe, use this instead.
+By default, the old Elasticsearch/OpenSearch exporter create indices prefixed with `zeebe-record`. If you have configured a different prefix when configuring Elasticsearch/OpenSearch exporter in Zeebe, use this instead.
+
+This is still relevant in case you're running Optimize that utilizes the former exporters.
 
    <Tabs groupId="search-engine">
       <TabItem value="elasticsearch" label="Elasticsearch" default>
