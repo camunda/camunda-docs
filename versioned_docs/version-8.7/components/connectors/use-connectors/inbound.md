@@ -149,7 +149,7 @@ Here are some examples of how this option will affect the behavior of the connec
   </thead>
   <tbody>
     <tr>
-      <td>Webhook Connectors</td>
+      <td>Webhook Connector</td>
       <td>Return a success response (200)</td>
       <td>Return an error response (422, or specific HTTP status code depending on the error)</td>
     </tr>
@@ -164,7 +164,7 @@ Here are some examples of how this option will affect the behavior of the connec
       <td>Reject the message</td>
     </tr>
     <tr>
-      <td>SQS Connector</td>
+      <td>AWS SQS Connector</td>
       <td>Delete the message from the queue</td>
       <td>Do not delete the message from the queue</td>
     </tr>
