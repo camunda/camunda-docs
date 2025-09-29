@@ -407,7 +407,7 @@ To learn more, see [Orchestration Cluster REST API](/apis-tools/orchestration-cl
 <!-- https://github.com/camunda/camunda-docs/pull/5942 -->
 <!-- https://github.com/camunda/camunda-docs/pull/6068 -->
 
-- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
 - **Conversation history storage**: History can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) rather than in process variables—allowing longer histories without process variable size limits.
 
 To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
