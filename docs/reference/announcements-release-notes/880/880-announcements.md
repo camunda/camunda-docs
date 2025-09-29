@@ -268,7 +268,28 @@ The Assignees list is removed from the response.
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
+#### Tasklist v1 UI mode configuration
+
+Tasklist v1 remains available for the UI until Camunda 8.10, providing continued access to the legacy interface during the migration period.
+
+To run Tasklist UI in v1 mode, set the following environment variable:
+
+```bash
+CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
+```
+
+This configuration option allows you to maintain the v1 user experience while planning your migration to v2. For detailed differences between v1 and v2 modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+   
 #### Public API definition for greater platform stability
 
 To enhance predictability and offer a more stable experience for developers, Camunda introduced the official [public API definition for Camunda 8](/reference/public-api.md).
