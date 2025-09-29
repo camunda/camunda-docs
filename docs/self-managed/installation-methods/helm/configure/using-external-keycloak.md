@@ -5,7 +5,7 @@ title: Helm chart external Keycloak usage
 description: "Learn how to use an external Keycloak instance in Camunda 8 Self-Managed deployment."
 ---
 
-The [Helm chart deployment](/self-managed/installation-methods/helm/install.md) can optionally install an internal Keycloak instance using [Bitnami subcharts](../../configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying a external Keycloak or any other OIDC provider separately from the Camunda Helm charts. This guide steps through using an external Keycloak instance.
+The [Helm chart deployment](/self-managed/installation-methods/helm/install.md) can optionally install an internal Keycloak instance using [Bitnami subcharts](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying a external Keycloak or any other OIDC provider separately from the Camunda Helm charts. This guide steps through using an external Keycloak instance.
 
 ## Prerequisites
 
