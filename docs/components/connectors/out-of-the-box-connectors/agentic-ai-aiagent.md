@@ -132,6 +132,10 @@ Depending on the used implementation type, the Agent context needs to be configu
   correctly passed to the next execution of the AI Agent connector task.
 - With the [**AI Agent Task**](#ai-agent-task) implementation type, you must align the agent context input variable and the response variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
 
+### Response format {#response}
+
+The AI Agent connector can be configured to instruct the used LLM to respond in a structured JSON format and to parse the JSON structure into a FEEL context accordingly. This allows the LLM to return structured data that can be easily processed in the BPMN process.
+
 ### Example conversation
 
 The following is a high-level example conversation with the AI Agent connector, including both user and tool feedback loops. The conversational awareness provided by the agent context allows use cases such as the user only responding with `Yes, please proceed`, with the agent understanding what to do next.
