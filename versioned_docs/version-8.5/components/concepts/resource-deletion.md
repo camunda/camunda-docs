@@ -4,11 +4,15 @@ title: "Resource deletion"
 description: "Use resource deletion to remove process definitions and decision requirements graphs from Camunda."
 ---
 
+:::info
+Resource deletions are currently not reflected in secondary storage. As a result you still see the deleted resources in Operate and Tasklist.
+The resource does not actually exist. Starting an instance of the resource will yield an error.
+:::
+
 There are several reasons to delete resources from a cluster:
 
 1. **It frees up storage space**, as Zeebe no longer needs to keep track of this definition in its state.
-2. **It improves the overview in Operate**, as deleted processes are no longer shown in the UI.
-3. **It is more secure**, as it prevents creation of process instances for a faulty process definition.
+2. **It is more secure**, as it prevents creation of process instances for a faulty process definition.
 
 You can use resource deletion to remove resources from Camunda. There are two types of resources that can
 be deleted:
