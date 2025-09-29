@@ -23,8 +23,8 @@ In this guide, you will:
 
 - Run Camunda 8 in either a local development environment (using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)) or [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup).
 - Deploy and start a business process using either [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda 8 Run, or [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) with Camunda 8 SaaS.
-- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction/reasoning capabilities for the AI agent.
-- Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
+- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide interaction/reasoning capabilities for the AI agent.
+- Define the tools the AI agent should use as activities within the ad-hoc sub-process.
 
 Once you have completed this guide, you will have an example running AI agent and Camunda 8 process.
 
@@ -67,7 +67,7 @@ An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subp
 - It allows an AI agent to dynamically select and run tools (available actions) based on the current context and requirements.
 - It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
 
-In this guide’s example, the process uses an ad-hoc sub-process within a [tool-calling feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases). The AI Agent connector lets the LLM choose from the tools in that sub-process.
+The AI Agent connector lets the LLM choose from the tools in that sub-process and dynamically orchestrates tool calling and request handling.
 
 ## Step 1: Install the example model blueprint
 
@@ -75,13 +75,13 @@ To start building your first AI agent, you can use a pre-built Camunda blueprint
 
 ### SaaS
 
-1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
+1. Navigate to the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
 1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
 1. The blueprint BPMN diagram opens in Web Modeler.
 
 ### Self-Managed (local environment)
 
-1. Navigate to the [Example AI Agent](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
+1. Navigate to the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
 1. Click **For SM** and download the blueprint files from the repository.
 1. Open the blueprint BPMN diagram in Desktop Modeler or in Web Modeler.
 
@@ -111,7 +111,7 @@ How you configure these secrets depends if you are running Camunda 8 SaaS or a S
 
 ## Step 3: Configure the AI Agent connector (optional)
 
-In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
+In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` ad-hoc sub-process. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 

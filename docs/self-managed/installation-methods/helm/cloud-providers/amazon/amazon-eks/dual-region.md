@@ -131,7 +131,7 @@ This contains the declaration of the two clusters. One of them has an explicit p
 
 For a multi-region setup, you need to have the [virtual private cloud (VPC)](https://aws.amazon.com/vpc/) peered to route traffic between regions using private IPv4 addresses and not publicly route the traffic and expose it. For more information, review the [AWS documentation on VPC peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html).
 
-VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/). VPC peering has no bandwidth limit and a lower latency than a transit gateway. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
+For dual- or tri-region setups, VPC peering is preferred over [transit gateways](https://aws.amazon.com/transit-gateway/) as it is simpler to manage and has fewer AWS limitations. Other AWS networking options remain valid - choose what best fits your environment. For a complete comparison, review the [AWS documentation](https://docs.aws.amazon.com/whitepapers/latest/building-scalable-secure-multi-vpc-network-infrastructure/transit-vpc-solution.html#peering-vs).
 
 The previously mentioned [Camunda module](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/eks-cluster) will automatically create a VPC per cluster.
 

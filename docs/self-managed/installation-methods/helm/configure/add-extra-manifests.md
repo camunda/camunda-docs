@@ -1,17 +1,15 @@
 ---
 id: add-extra-manifests
 sidebar_label: Custom manifests
-title: Helm chart custom Kubernetes manifests injection
-description: "Learn how to add extra Kubernetes manifests to Helm deployments by defining them in the values.yaml file."
+title: Add custom Kubernetes manifests in Helm charts
+description: Learn how to add extra Kubernetes manifests to Helm deployments by defining them in the values.yaml file.
 ---
 
-## Overview
+Add extra Kubernetes manifests to the Camunda 8 [Helm chart](/self-managed/installation-methods/helm/install.md) by defining them in the `values.yaml` file. Use this to include resources such as ConfigMaps, Deployments, or Services.
 
-When using the Camunda 8 [Helm chart](/self-managed/installation-methods/helm/install.md), data can be injected into the `values.yaml` file, enabling the addition of extra Kubernetes manifests. This feature is particularly useful for adding custom manifests by including additional Kubernetes resources such as ConfigMaps, Deployments, or Services.
+## Configuration
 
-## Usage
-
-Extra manifests are defined within your `values.yaml` file using the following syntax:
+Define extra manifests in your `values.yaml` file under `global.extraManifests`. The key accepts a list of Kubernetes manifests.
 
 ```yaml
 global:
@@ -34,11 +32,11 @@ global:
 
 For more information, see the Kubernetes [object documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/).
 
-## Manipulate manifests
+### Manipulate manifests
 
-The Camunda Helm chart is highly customizable and can be deployed in different setups. However, in some cases, you may need to adjust the rendered Kubernetes manifests directly (for example, when a feature is not supported in the chart template).
+If you need to adjust rendered manifests directly (for example, when the chart template does not support a feature), use [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post-rendering). Post rendering lets you manipulate, configure, or validate manifests before Helm installs them.
 
-In those cases, [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post-rendering) lets you manipulate, configure, or validate rendered manifests before Helm installs them. Post rendering is a good way to quickly add missing features to the chart. You can also raise a feature request for your use case.
+Use post rendering for quick workarounds, but also consider raising a feature request for your use case.
 
 ## Best practices
 
@@ -48,5 +46,5 @@ In those cases, [Helm Post Rendering](https://helm.sh/docs/topics/advanced/#post
 
 ## Troubleshooting
 
-- **Syntax errors**: Check for indentation issues or missing colons in key-value pairs.
+- **Syntax errors**: Check for syntax errors such as indentation issues or missing colons in key-value pairs.
 - **Manifest validation**: Verify that each manifest is valid and correctly formatted according to Kubernetes specifications.
