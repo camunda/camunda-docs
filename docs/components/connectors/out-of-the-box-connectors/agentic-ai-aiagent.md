@@ -28,7 +28,7 @@ Core features include:
 
 New to agentic orchestration?
 
-- See the [example AI Agent connector integration](agentic-ai-aiagent-task-example.md) for a worked example of a simple Agent AI feedback loop model.
+- See the [example AI Agent connector integration](agentic-ai-aiagent-process-example.md) for a worked example of a simple Agent AI feedback loop model.
 - See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
 
 :::
@@ -100,7 +100,7 @@ When more control over the feedback loop is needed, it is possible to model pre-
 
 ### Feedback loop
 
-This connector is typically used in a [feedback loop](agentic-ai-aiagent-task-example.md), with the connector implementation repeatedly being executed based on tool call results or user feedback until it
+This connector is typically used in a feedback loop, with the connector implementation repeatedly being executed based on tool call results or user feedback until it
 is able to reach its goal.
 
 For example, the following diagram shows a tool calling loop modeled with the [AI Agent Task](#ai-agent-task) implementation type. The process loops back to the AI Agent connector task from the ad-hoc sub-process until the agent decides no further tool calls are needed.
@@ -116,10 +116,10 @@ With the [AI Agent Process](#ai-agent-process) implementation type, the tool cal
 
 Typical feedback loop use cases for this connector include the following:
 
-| Use case                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| :----------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Tool calling](agentic-ai-aiagent-task-example.md#tools-loop)            | <p>In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools and their input parameters, and pass these tool definitions to the LLM.</p><p><ul><li><p>The LLM generates a response, that might include tool calls (a request to call a tool paired with the input parameters).</p></li><li><p>If tool calls are requested, model the process to pass these tool calls to the ad-hoc sub-process and to return the tool call results to the AI Agent task by modelling the feedback loop.</p></li></ul></p> |
-| [Response interaction](agentic-ai-aiagent-task-example.md#response-loop) | After returning a response (and without calling any tools), model the process to act upon the response. For example, present the response to a user who can then ask follow-up questions back to the AI Agent connector.                                                                                                                                                                                                                                                                                                                        |
+| Use case             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tool calling         | <p>In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools and their input parameters, and pass these tool definitions to the LLM.</p><p><ul><li><p>The LLM generates a response, that might include tool calls (a request to call a tool paired with the input parameters).</p></li><li><p>If tool calls are requested, model the process to pass these tool calls to the ad-hoc sub-process and to return the tool call results to the AI Agent task by modelling the feedback loop.</p></li></ul></p> |
+| Response interaction | After returning a response (and without calling any tools), model the process to act upon the response. For example, present the response to a user who can then ask follow-up questions back to the AI Agent connector.                                                                                                                                                                                                                                                                                                                        |
 
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
@@ -346,10 +346,10 @@ This section is only applicable to the **AI Agent Task** implementation.
 <TabItem value='task'>
 Specify the tool resolution for an accompanying ad-hoc sub-process.
 
-| Field                 | Required | Description                                                                                                                                                                                                                                                                                                                          |
-| :-------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ad-hoc sub-process ID | No       | <p>Specify the element ID of the ad-hoc sub-process to use for tool resolution (see [Tool Resolution](agentic-ai-aiagent-task-example.md#tool-resolution)).</p><p>When entering the AI Agent connector, the connector resolves the tools available in the ad-hoc sub-process, and passes these to the LLM as part of the prompt.</p> |
-| Tool call results     | No       | <p>Specify the results collection of the ad-hoc sub-process multi-instance execution.</p><p>Example: `=toolCallResults`</p>                                                                                                                                                                                                          |
+| Field                 | Required | Description                                                                                                                                                                                                                                                                                                               |
+| :-------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ad-hoc sub-process ID | No       | <p>Specify the element ID of the ad-hoc sub-process to use for tool resolution (see [Tool Definitions](agentic-ai-aiagent-tool-definitions.md)).</p><p>When entering the AI Agent connector, the connector resolves the tools available in the ad-hoc sub-process, and passes these to the LLM as part of the prompt.</p> |
+| Tool call results     | No       | <p>Specify the results collection of the ad-hoc sub-process multi-instance execution.</p><p>Example: `=toolCallResults`</p>                                                                                                                                                                                               |
 
 :::note
 

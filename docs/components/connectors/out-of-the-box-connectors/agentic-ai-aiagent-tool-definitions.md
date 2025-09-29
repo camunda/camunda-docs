@@ -16,7 +16,9 @@ For example, in the following image the activities marked in green are the ones 
 
 You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
-To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly:
+## Tool Resolution
+
+To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly. The approach depends on the chosen AI Agent implementation:
 
 <AiAgentImplementationTabs>
 <TabItem value='process'>
