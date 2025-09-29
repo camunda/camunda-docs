@@ -35,7 +35,7 @@ For details, see the full list of [Helm values](https://artifacthub.io/packages/
 
 For guidance on sizing and deployment patterns, see the [Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md).
 
-When you install the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, by default only the Orchestration Cluster components (Zeebe, Operate, Tasklist, and Identity) are installed. Other components from the reference architecture, such as Web Modeler and Console, can be enabled with additional configuration.
+When you install the [camunda-platform](https://artifacthub.io/packages/helm/camunda/camunda-platform) Helm chart, the default installation includes the Orchestration Cluster components (Zeebe, Operate, Tasklist, and Identity). Other components from the reference architecture, such as Web Modeler and Console, require additional configuration and an external Identity Provider (IdP).
 
 ## Versioning
 
