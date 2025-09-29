@@ -47,13 +47,15 @@ Use the following names and values for the Identity SDK to ensure proper authent
 
 ## License configuration
 
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
+See [licensing](/self-managed/components/orchestration-cluster/core-settings/configuration/licensing.md).
 
 ## OIDC configuration
 
-Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider. For example, to use your Microsoft Entra unique account ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
+Claims are name/value pairs used to represent an individual identity. Configure your initial claim and value to match the claim used with your OIDC provider.
 
-:::note
+For example, to use your Microsoft Entra unique account ID, set `IDENTITY_INITIAL_CLAIM_NAME` to `oid`, and `IDENTITY_INITIAL_CLAIM_VALUE` to the ID.
+
+:::caution
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 

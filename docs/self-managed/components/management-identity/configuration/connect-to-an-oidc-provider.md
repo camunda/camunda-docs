@@ -10,12 +10,13 @@ import TabItem from "@theme/TabItem";
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-To enable a smoother integration with your existing systems, Camunda supports connecting to an OpenID Connect (OIDC) authentication provider. A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
-
-This guide steps through the configuration required to connect Camunda to your authentication provider.
+Connect Management Identity to an OpenID Connect (OIDC) authentication provider for integration with your existing system.
 
 :::note
-To connect to a Keycloak authentication provider, see our guide on [using an existing Keycloak](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+
+- A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
+- To connect to a Keycloak authentication provider, see [connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+
 :::
 
 ## Prerequisites
@@ -40,18 +41,25 @@ configuration](#component-specific-configuration) to ensure the components are c
 
 <h3>Steps</h3>
 
-1. In your OIDC provider, create an application for each of the components you want to connect. The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
-   :::note
-   Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
-   :::
-2. For all Components, ensure the appropriate application type is used:
-   - **Operate, Tasklist, Optimize, Identity, Web Modeler API:** Web applications requiring confidential access/a confidential client
-   - **Console, Web Modeler UI:** Single-page applications requiring public access/a public client
-3. Make a note of the following values for each application you create:
+1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+   - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
+     :::note
+     Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
+     :::
+3. For each management and modeling components, ensure the appropriate application type is used:
+   - Web applications requiring confidential access/a confidential client:
+     - **Optimize**
+     - **Management Identity**
+     - **Web Modeler API**
+   - Web applications requiring confidential access/a confidential client:
+     - **Console**
+     - **Web Modeler UI**
+4. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
    - Audience
-4. Set the following environment variables or Helm values for the component you are configuring an app for:
+5. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
@@ -123,7 +131,7 @@ You can also [store the client secrets in a Kubernetes secret](/self-managed/ins
 </Tabs>
 
 :::note
-Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
+Once set, you cannot update your initial claim name and value using environment variables or Helm values. You must change these values directly in the database.
 :::
 
 <h3>Additional considerations</h3>
@@ -139,17 +147,23 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 Ensure you register a new application for each component.
 :::
 
-1. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each** component you would like to connect. Web Modeler requires two applications: one for the UI, and one for the API.
-2. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
-3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
-   - **Web**: Operate, Tasklist, Optimize, Identity, Web Modeler API
-   - **Single-page application**: Console, Web Modeler UI
-4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
+1. Identify what management and modeling components you need to use in Camunda 8: [Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), [Optimize](../../optimize/overview.md).
+2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
+4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
+   - **Web**:
+     - Optimize
+     - Management Identity
+     - Web Modeler API
+   - **Single-page application**:
+     - Console
+     - Web Modeler UI
+5. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
    :::note
    Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
    :::
-5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
-6. Set the following environment variables or Helm values for the component you are configuring an app for:
+6. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
+7. Set the following environment variables or Helm values for the component you are configuring an app for:
 
 :::note
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
@@ -231,21 +245,15 @@ global:
 </Tabs>
 
 :::danger
-Once set, your initial claim name and value cannot be updated using environment or Helm values, and must be changed directly in the database.
+Once set, your initial claim name and value cannot be updated using environment variables or Helm values, and must be changed directly in the database.
 :::
 
 <h3>Additional considerations</h3>
 
-Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
-front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
+Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent), front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
 
-For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`,
-and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must
-ensure that either there is
-an [admin consent flow configured](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow)
-or grant consent on behalf of your users using
-the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
-process.
+For authentication, the management and modeling components use the scopes `email`, `openid`, `offline_access`, `profile`,
+and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must ensure that either there is an [admin consent flow configured](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent) process.
 
 The client should be configured to support `grant_type`:
 
@@ -267,20 +275,17 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 
 ### Component-specific configuration
 
-| Component   | Redirect URI                                                                                                                           | Notes/Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Identity    | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Operate     | **Microsoft Entra ID:** <br/> `https://<OPERATE_URL>/identity-callback` <br/><br/> **Helm:** <br/> `https://<OPERATE_URL>`             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Optimize    | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                                                                                                                                                                                                |
-| Tasklist    | **Microsoft Entra ID:** <br/> `https://<TASKLIST_URL>/identity-callback` <br/><br/> **Helm:** <br/> `https://<TASKLIST_URL>`           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Web Modeler | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `webapp` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `OAUTH2_JWKS_URL=[provider-jwks-url]`<br/> `OAUTH2_TOKEN_AUDIENCE=[ui-audience]`<br/> `OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/> `OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for the `restapi` component:<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`. |
-| Console     | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Zeebe       | no redirect URI                                                                                                                        | Instead, include `tokenScope:"<Azure-AppRegistration-ClientID> /.default "`. This refers to the Helm value `global.identity.auth.zeebe.tokenScope`, which should be set to the displayed value.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Connectors  |                                                                                                                                        | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/> `ZEEBE_CLIENT_SECRET=[client-secret]`<br/> `ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/> `ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/> `ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/> `CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/> `CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/> `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`       |
+| Component           | Redirect URI                                                                                                                           | Notes/Limitations                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Management Identity | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                                                                                                                                                                                                |
+| Web Modeler         | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `webapp` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `OAUTH2_JWKS_URL=[provider-jwks-url]`<br/> `OAUTH2_TOKEN_AUDIENCE=[ui-audience]`<br/> `OAUTH2_TOKEN_ISSUER=[provider-issuer]`<br/> `OAUTH2_TYPE=[provider-type]`<br/><br/> Required configuration variables for the `restapi` component:<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`. |
+| Console             | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Connectors          |                                                                                                                                        | Connectors act as a client in the OIDC flow. <br/><br/> For outbound-only mode (when `CAMUNDA_CONNECTOR_POLLING_ENABLED` is `false`), only Zeebe client properties are required: <br/> `ZEEBE_CLIENT_ID=[client-id]`<br/> `ZEEBE_CLIENT_SECRET=[client-secret]`<br/> `ZEEBE_AUTHORIZATION_SERVER_URL=[provider-issuer]`<br/> `ZEEBE_TOKEN_AUDIENCE=[Zeebe audience]`<br/> `ZEEBE_TOKEN_SCOPE=[Zeebe scope]` (optional)<br/><br/> For inbound mode, Operate client properties are required:<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_IDENTITY_AUDIENCE=[Operate audience]`<br/> `CAMUNDA_IDENTITY_CLIENT_ID=[client-id]`<br/> `CAMUNDA_IDENTITY_CLIENT_SECRET=[client-secret]`<br/> `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=[provider-issuer]`       |
 
 ## Supported and unsupported OIDC features
 
-When using [Identity](/self-managed/components/management-identity/what-is-identity.md) with an OIDC provider, not all features of authentication and authorization are available. The following table lists OIDC supported and unsupported features.
+When using [Management Identity](/self-managed/components/management-identity/overview.md) with an OIDC provider, not all features of authentication and authorization are available. The following table lists OIDC supported and unsupported features.
 
 | Feature name                                             | Description                                                                                                                                                                                                                                                                                                                          |                              Availability                               |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------: |

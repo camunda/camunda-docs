@@ -68,7 +68,7 @@ Web Modeler and Console are designed to interact with multiple Orchestration Clu
 
 Additionally, Web Modeler and Console require the following:
 
-- [Management Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
+- [Management Identity](/self-managed/components/management-identity/overview.md): A service for managing user authentication and authorization.
 
 Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
 

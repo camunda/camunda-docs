@@ -117,6 +117,20 @@ Alternative container images to the previously used Bitnami open source images a
 
 Using more than one isolated Elasticsearch/OpenSearch instance for exported Zeebe, Operate, and Tasklist data is no longer supported. If your environment uses multiple Elasticsearch/OpenSearch instances, you must manually migrate the data from each to a single Elasticsearch/OpenSearch cluster before updating to Camunda 8.8. The migration should target Zeebe, Operate, and Tasklist indices, index templates, aliases, and ILM policies.
 
+#### Elasticsearch and OpenSearch replica default increased to 1
+
+Starting in 8.8, the default replica count for Camunda indices in Elasticsearch and OpenSearch changes from 0 to 1. This ensures that if an Elasticsearch node goes down, Camunda is not blocked by a temporary outage of the secondary data store. This change increases storage requirements:
+
+- **Single-node clusters:** Running with one node turns the cluster state yellow (replicas unassigned). Run at least two master-eligible nodes.
+- **Multi-node clusters:** Increase disk capacity to at least 2.5× the previously used disk capacity (accounts for watermarks, overhead, and growth).
+
+To revert to 0 replicas, set:
+
+- YAML: `camunda.database.index.numberOfReplicas: 0`
+- Env var: `CAMUNDA_DATABASE_INDEX_NUMBER_OF_REPLICAS=0`
+
+See [Elasticsearch changes in Components update 8.7 to 8.8](/self-managed/components/components-upgrade/870-to-880.md#elasticsearch).
+
 ### Supported versions for Elasticsearch
 
 As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no longer supports older Elasticsearch versions. See [supported environments](/reference/supported-environments.md).
@@ -126,6 +140,10 @@ As of the 8.8 release, Camunda is compatible with Elasticsearch 8.16+ and no lon
 As of the 8.8 release, Camunda is compatible with Amazon OpenSearch 2.17+ and no longer supports older Amazon OpenSearch versions. See [supported environments](/reference/supported-environments.md).
 
 ## Key changes
+
+### Play job-based user tasks
+
+User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above. Consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 
 ### Connector SDK
 

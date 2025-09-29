@@ -39,6 +39,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
             "guides/migrating-from-camunda-7/data-migrator/variables",
+            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
             {
               type: "category",
@@ -550,6 +551,7 @@ module.exports = {
             id: "components/operate/operate-introduction",
           },
           items: [
+            "components/operate/userguide/access-control",
             "components/operate/userguide/basic-operate-navigation",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
@@ -573,6 +575,7 @@ module.exports = {
             id: "components/tasklist/introduction-to-tasklist",
           },
           items: [
+            "components/tasklist/userguide/access-control",
             "components/tasklist/userguide/using-tasklist",
             "components/tasklist/api-versions",
             "components/tasklist/userguide/managing-tasks",
@@ -591,19 +594,14 @@ module.exports = {
             id: "components/identity/identity-introduction",
           },
           items: [
+            "components/identity/access-control",
             "components/identity/user",
             "components/identity/group",
             "components/identity/role",
             "components/identity/authorization",
             "components/identity/client",
+            "components/identity/mapping-rules",
             "components/identity/tenant",
-            {
-              "Mapping rules": [
-                "components/identity/mapping-rules/manage-mapping-rules",
-                "components/identity/mapping-rules/mapping-rule-authorizations",
-                "components/identity/mapping-rules/assign-mapping-rules-to-tenants",
-              ],
-            },
           ],
         },
       ],
@@ -1245,7 +1243,7 @@ module.exports = {
                   Database: [
                     {
                       Elasticsearch: [
-                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch",
+                        "self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch",
                         "self-managed/installation-methods/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
@@ -1259,7 +1257,7 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/installation-methods/helm/configure/using-existing-keycloak",
+                "self-managed/installation-methods/helm/configure/using-external-keycloak",
                 {
                   Ingress: [
                     "self-managed/installation-methods/helm/configure/ingress-setup",
@@ -1269,6 +1267,7 @@ module.exports = {
                 "self-managed/installation-methods/helm/configure/configure-multi-tenancy",
                 "self-managed/installation-methods/helm/configure/multi-namespace-deployment",
                 "self-managed/installation-methods/helm/configure/secret-management",
+                "self-managed/installation-methods/helm/configure/authentication-and-authorization",
                 //license key
                 //image registry to include air gapped below and enterprise images
               ],
@@ -1295,6 +1294,11 @@ module.exports = {
                 "self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure",
               ],
               //also to include backup and restore, and scaling
+            },
+            {
+              "Production guides": [
+                "self-managed/operational-guides/production-guide/helm-chart-production-guide",
+              ],
             },
             {
               type: "category",
@@ -1404,6 +1408,12 @@ module.exports = {
     {
       Concepts: [
         {
+          Authentication: [
+            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
+            "self-managed/concepts/authentication/authentication-to-management-components",
+          ],
+        },
+        {
           type: "category",
           label: "Back up and restore",
           link: {
@@ -1472,6 +1482,8 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
+        "self-managed/concepts/secondary-storage-management",
+        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1511,6 +1523,7 @@ module.exports = {
             },
             {
               Zeebe: [
+                "self-managed/components/orchestration-cluster/zeebe/overview",
                 {
                   "Zeebe Gateway": [
                     "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/overview",
@@ -1600,15 +1613,10 @@ module.exports = {
               ],
             },
             {
-              type: "category",
-              label: "Identity",
-              link: {
-                type: "doc",
-                id: "self-managed/components/orchestration-cluster/identity/overview",
-              },
-              items: [
+              Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
             },
           ],
@@ -1638,6 +1646,7 @@ module.exports = {
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
+                    "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
                   Troubleshooting: [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
@@ -1667,10 +1676,10 @@ module.exports = {
           label: "Management Identity",
           link: {
             type: "doc",
-            id: "self-managed/components/management-identity/what-is-identity",
+            id: "self-managed/components/management-identity/overview",
           },
           items: [
-            "self-managed/components/management-identity/identity-first-steps",
+            "self-managed/components/management-identity/get-started",
             {
               type: "category",
               label: "Configuration",
@@ -1679,16 +1688,16 @@ module.exports = {
                 id: "self-managed/components/management-identity/configuration/identity-configuration-overview",
               },
               items: [
-                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
-                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
                 "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
                 "self-managed/components/management-identity/configuration/alternative-db",
               ],
             },
             "self-managed/components/management-identity/authentication",
             {
               type: "category",
-              label: "Manage Identity",
+              label: "Management",
               items: [
                 {
                   type: "category",
@@ -1755,6 +1764,7 @@ module.exports = {
             {
               "Migration & update": [
                 "self-managed/components/optimize/migration-update/camunda-8/instructions",
+                "self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8",
                 "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
                 "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
                 "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",

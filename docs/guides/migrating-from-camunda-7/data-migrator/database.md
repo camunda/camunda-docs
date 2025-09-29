@@ -19,6 +19,11 @@ Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS histo
 The database vendor is automatically detected but can be overridden using the `database-vendor` property.
 :::
 
+## Transaction isolation level
+
+The required isolation level to run the Data Migrator with is `READ COMMITTED`.
+Other transaction isolation levels are not supported and might lead to unexpected behavior.
+
 ## Compatibility
 
 The migrator supports the following SQL databases:

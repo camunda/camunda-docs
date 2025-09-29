@@ -220,10 +220,6 @@ If you set the `Content-Type` header to `multipart/form-data`, only body fields 
 When you are making a PUT, POST, or PATCH request, you might need to provide a body.
 You can provide a body for your request under the **Payload** section in the **Request body** field.
 
-:::note
-Secrets are currently not supported in the body of a **REST connector**.
-:::
-
 ```
 = {
      "temp": 25,

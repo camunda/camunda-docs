@@ -63,10 +63,10 @@ The following requirements and limitations apply:
 
 ## History cleanup
 
-The history cleanup date is migrated if the C7 instance has a removal time.
+The history cleanup date is migrated if the Camunda 7 instance has a removal time.
 
 ## Tenants
 
-- C7's `null` tenant is migrated to C8's `<default>` tenant.
+- Camunda 7's `null` tenant is migrated to Camunda 8's `<default>` tenant.
 - All other `tenantId`s will be migrated as-is.
 - For details, see [multi-tenancy](/components/concepts/multi-tenancy.md#tenant-identifier) in Camunda 8.
