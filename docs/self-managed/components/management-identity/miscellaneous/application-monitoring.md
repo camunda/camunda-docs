@@ -9,7 +9,7 @@ Monitor the health and operation of the Management Identity component in your Se
 
 ## Monitoring endpoints
 
-You can use the following default exposed endpoints to monitor how the Identity component is operating.
+You can use the following default exposed endpoints to monitor how the Management Identity component is operating.
 
 | Endpoint               | Default port | Purpose                                                                    |
 | :--------------------- | :----------- | :------------------------------------------------------------------------- |

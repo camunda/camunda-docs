@@ -106,7 +106,9 @@ To execute a batch operation, users need two sets of permissions:
 - Permission to create the batch operation.
 - Permission to read and modify the process instances (for example canceling or updating) targeted by the batch.
 
-See the [documentation on the authorization concept](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
+:::info
+See the [authorizations](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
+:::
 
 ## Performance impact
 

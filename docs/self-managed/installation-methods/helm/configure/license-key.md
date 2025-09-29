@@ -7,7 +7,9 @@ description: Configure an enterprise license key for Camunda components using He
 
 Use this page to configure an enterprise license key for Camunda 8 components. You can either enter the key directly in your `values.yaml` file or reference an existing Kubernetes secret.
 
-## Helm configuration
+## Configuration
+
+### Helm values
 
 Camunda 8 components consume enterprise license information through the following Helm configuration:
 
@@ -22,7 +24,7 @@ global:
     existingSecretKey:
 ```
 
-## Provide the key directly
+### Provide the key directly
 
 Enter your license key directly in `global.license.key`.
 
@@ -35,7 +37,7 @@ global:
       ---------------  END CAMUNDA LICENSE KEY  ---------------
 ```
 
-## Provide the key with a secret
+### Provide the key with a secret
 
 You can also store the license key in a Kubernetes secret and reference it from `values.yaml`.
 For more details on working with secrets, see [Secret management](/self-managed/installation-methods/helm/configure/secret-management.md).

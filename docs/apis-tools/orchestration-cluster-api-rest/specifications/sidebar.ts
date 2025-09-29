@@ -502,18 +502,18 @@ const sidebar: SidebarsConfig = {
           label: "Correlate message",
           className: "api-method post",
         },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-messages",
-          label: "Search correlated messages",
-          className: "api-method post",
-        },
       ],
     },
     {
       type: "category",
       label: "Message subscription",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-message-subscriptions",
+          label: "Search correlated message subscriptions",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-message-subscriptions",
@@ -913,7 +913,7 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mappings-for-tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
           label: "Search mapping rules for tenant",
           className: "api-method post",
         },
