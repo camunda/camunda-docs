@@ -33,7 +33,7 @@ Camunda publishes [supported environments](/reference/supported-environments.md)
 
 ## Architecture
 
-### Orchestration Cluster vs Web Modeler anf Console
+### Orchestration Cluster vs Web Modeler and Console
 
 When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster, Web Modeler, and Console Self-Managed. These components serve different purposes and include distinct elements.
 
