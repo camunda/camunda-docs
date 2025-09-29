@@ -43,11 +43,13 @@ The following prerequisites are required to use this connector:
 
 ## Implementations
 
-The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases. You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the **AI Agent Process** implementation due to the simplified configuration and support for event sub-processes.
+The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases. You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the [**AI Agent Process**](#ai-agent-process) implementation due to the simplified configuration and support for event sub-processes.
+
+Both variants are available with a dedicated element template which can be applied to the respective BPMN element.
 
 ### AI Agent Process
 
-Builds on the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an ad-hoc sub-process and provides an integrated solution
+The [AI Agent Process](./agentic-ai-aiagent-process.md) implementation leverages the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) and provides an integrated solution
 to handle the tool resolution and feedback loop. It is the recommended implementation type for most use cases offering:
 
 - Simplified configuration as the tool feedback loop is handled internally
@@ -68,7 +70,7 @@ This pattern can be combined with a user feedback loop for verification or follo
 
 ### AI Agent Task
 
-This is the original implementation type relying on a BPMN service task in combination with a multi-instance ad-hoc sub-process.
+The [AI Agent Task](./agentic-ai-aiagent-task.md) implementation is the original variant relying on a BPMN [service task](../../../components/modeler/bpmn/service-tasks/service-tasks.md) in combination with a multi-instance ad-hoc sub-process.
 
 Opposed to the AI Agent Proces implementation, this implementation type requires you to model the feedback loop explicitly in the BPMN diagram, leading to more complex configuration. It is suited for:
 
