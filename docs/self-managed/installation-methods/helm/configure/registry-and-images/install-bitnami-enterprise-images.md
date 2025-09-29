@@ -129,7 +129,6 @@ If vendors assess that a vulnerability has no practical impact, Camunda may acce
 
 ### Expected behavior: high CVE counts
 
-:::info Why Bitnami images show many CVEs
 Bitnami images typically show high CVE counts in security scans. This is expected because they include multiple layers:
 
 - **Application layer:** PostgreSQL, Elasticsearch, Keycloak
@@ -139,7 +138,8 @@ Bitnami images typically show high CVE counts in security scans. This is expecte
 
 Vulnerability scanners report CVEs across all layers, which inflates counts even when images are secure and up-to-date.
 
-**Mitigation strategy:** To reduce CVE exposure, Camunda recommends using managed services (AWS RDS, Azure Database, Google Cloud SQL) instead of Bitnami subcharts in production.
+:::tip
+To reduce CVE exposure, Camunda recommends using managed services (AWS RDS, Azure Database, Google Cloud SQL) instead of Bitnami subcharts in production.
 :::
 
 ### Bitnami's CVE management approach
@@ -150,12 +150,12 @@ Vulnerability scanners report CVEs across all layers, which inflates counts even
 - Open or unfixable CVEs remain until resolved by OS or application maintainers
 - Critical vulnerabilities receive priority with expedited security updates
 
-**Result:** Even enterprise Bitnami Premium images will continue to show CVE counts, despite being patched against critical vulnerabilities.
+Even enterprise Bitnami Premium images will continue to show CVE counts, despite being patched against critical vulnerabilities.
 
-:::warning Important limitations
+### Important limitations
+
 When working with Bitnami images, be aware of these constraints:
 
 - **CVE persistence:** Enterprise Bitnami images may still show CVEs due to OS-level vulnerabilities
 - **Compliance gaps:** If your requirements mandate near-zero CVEs, these images may not be sufficient
 - **Alternative needed:** Consider managed services or custom-built minimal images for high-security environments
-  :::
