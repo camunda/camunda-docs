@@ -5,8 +5,6 @@ title: Example AI Agent Task connector integration
 description: Example integration using the AI Agent Task connector to implement a feedback loop for user interactions and tool calls with an LLM.
 ---
 
-This worked example shows how you can integrate an AI Agent Task connector into a feedback loop model.
-
 ## About this worked example
 
 This worked example demonstrates how you can use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
@@ -108,3 +106,7 @@ How you model this type of feedback loop greatly depends on your specific use ca
 - The example feedback loop expects a simple feedback action based on a user task, but this could also interact with other process flows or another agent process.
 - Instead of the user task, you could also use another LLM connector to verify the response of the AI Agent. For an example of this pattern, see the [fraud detection example](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/service-task/fraud-detection).
   :::
+
+## Additional resources
+
+- The connectors repository contains a set of [ready-made examples](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/service-task) using the AI Agent Task connector.
