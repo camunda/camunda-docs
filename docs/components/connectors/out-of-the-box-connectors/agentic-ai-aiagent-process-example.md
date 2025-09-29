@@ -5,19 +5,21 @@ title: Example AI Agent Process connector integration
 description: Example integration using the AI Agent Process connector to implement a feedback loop for user interactions and tool calls with an LLM.
 ---
 
-## About this worked example
+import AgentProcessImg from '../img/ai-agent-process.png';
 
-This worked example demonstrates how you can use the [AI Agent Process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
+This worked example demonstrates how to use the [AI Agent Process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
 
 ## Create an AI Agent element
 
-As the **AI Agent Process** implementation creates implicitely creates a tools feedback loop, it is sufficient to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
+As the **AI Agent Process** implementation implicitly creates a tools feedback loop, you only need to add an ad-hoc sub-process with an applied AI Agent connector template to the process.
 
-Consult the [tool definitions](./agentic-ai-aiagent-tool-definitions.md) documentation on how to model the tools available to the AI agent.
+:::info
+For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
+:::
 
-![AI Agent Process](../img/ai-agent-process.png)
+<img src={AgentProcessImg} alt="AI Agent Process" class="img-700"/>
 
-After adding the element, open the properties panel to configure the connection to your model provider and adapt the system and user prompts as needed.
+After adding the element, open the properties panel to configure the connection to your model provider, and modify the system and user prompts as required.
 
 ## Example response interaction feedback loop {#response-loop}
 

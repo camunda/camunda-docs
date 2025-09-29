@@ -13,14 +13,14 @@ Assuming the agent requested to execute tools `A` and `B` and tool `B` already b
 
 The process waits for all tool calls to complete before handling the event. For the example above, the following sequence of messages would be sent to the LLM after both tools complete:
 
-- Tool A: `Tool A result`
-- Tool B: `Tool B result`
-- Event message: `Content from event message`
+1. Tool A: `Tool A result`
+1. Tool B: `Tool B result`
+1. Event message: `Content from event message`
 
 #### Interrupt tool calls
 
 When an event is received while other tool calls are still in progress, the process will cancel the tool execution and directly return a list of messages to the LLM:
 
-- Tool A: `Tool A execution was cancelled`
-- Tool B: `Tool B result`
-- Event message: `Content from event message`
+1. Tool A: `Tool A execution was cancelled`
+1. Tool B: `Tool B result`
+1. Event message: `Content from event message`

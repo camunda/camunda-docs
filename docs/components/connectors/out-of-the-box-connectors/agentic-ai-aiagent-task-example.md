@@ -5,17 +5,19 @@ title: Example AI Agent Task connector integration
 description: Example integration using the AI Agent Task connector to implement a feedback loop for user interactions and tool calls with an LLM.
 ---
 
-## About this worked example
+import AgentTaskImg from '../img/ai-agent-task-feedback-loop.png';
 
-This worked example demonstrates how you can use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
+This worked example demonstrates how to use the [AI Agent Task connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) and an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to model AI Agent [tools and response interaction feedback loops](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop-use-cases).
 
 ## Create an AI Agent element
 
 First, an AI Agent connector is added and configured in the process diagram. Next, an ad-hoc sub-process is added in a feedback loop to connect the agent to the tools it needs.
 
-Consult the [tool definitions](./agentic-ai-aiagent-tool-definitions.md) documentation on how to model the tools available to the AI agent.
+:::info
+For more information on how to model the tools available to the AI agent, see [tool definitions](./agentic-ai-aiagent-tool-definitions.md).
+:::
 
-![AI Agent Task with tool calling feedback loop](../img/ai-agent-task-feedback-loop.png)
+<img src={AgentTaskImg} alt="AI Agent Task with tool calling feedback loop" class="img-700"/>
 
 After adding the element, open the properties panel to configure the connection to your model provider and adapt the system and user prompts as needed.
 
@@ -28,7 +30,7 @@ It is important to align the **Agent context** field and the result variable. Th
 
 ### Configure ad-hoc sub-process and loop
 
-1. The ad-hoc sub-process is marked as [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
+1. The ad-hoc sub-process is marked as a [parallel multi-instance](../../modeler/bpmn/multi-instance/multi-instance.md). This allows the process to execute the tools in parallel, and wait for all tool calls to complete before continuing with the process.
 
 1. A descriptive ID is configured for the ad-hoc sub-process. This can then be configured in the **Ad-hoc sub-process ID** field in the AI Agent connector [tools](agentic-ai-aiagent.md#tools) section.
 
