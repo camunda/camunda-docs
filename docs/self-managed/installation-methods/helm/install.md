@@ -34,15 +34,16 @@ By default, the Camunda Helm chart uses Bitnami open-source images. For producti
    ```bash
    namespace/orchestration created
    ```
-1. To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
+2. To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
    ```bash
    helm repo add camunda https://helm.camunda.io
    helm repo update
    ```
-1. Install the Helm chart on your namespace:
+3. Install the Helm chart on your namespace:
    ```bash
    helm install camunda camunda/camunda-platform -n orchestration
    ```
+4. [Access the components](#access-the-components)
 
 ### Install a specific version (optional)
 
