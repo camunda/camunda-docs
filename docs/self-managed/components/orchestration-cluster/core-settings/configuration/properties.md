@@ -182,7 +182,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - secondary storage ElasticSearch
+## Database - secondary storage Elasticsearch
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
