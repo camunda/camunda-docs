@@ -5,6 +5,8 @@ title: Install Camunda with Helm
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm charts.
 ---
 
+import { HelmInstallOverviewMethods } from "@site/src/components/HelmInstallOverviewMethods";
+
 Use this guide to install Camunda 8 Self-Managed with the orchestration cluster, and optionally enable additional components.
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
@@ -18,7 +20,11 @@ By default, the Camunda Helm chart uses Bitnami open-source images. For producti
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/installation-methods/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
-## Install the orchestration cluster
+## Overview
+
+<HelmInstallOverviewMethods/>
+
+## Orchestration Cluster only
 
 1. Create a namespace to install the platform on Kubernetes:
    ```bash
@@ -82,7 +88,7 @@ http://localhost:8080/operate
 http://localhost:8080/tasklist
 ```
 
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Enable other components (optional)](#enable-other-components-optional) section.
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
 
 For basic authentication use the default credentials:
 
@@ -100,7 +106,7 @@ By default, Camunda services deployed in a Kubernetes cluster are not accessible
 - **Amazon EKS installation:** If you are deploying Camunda 8 on an Amazon EKS cluster, see [Install Camunda 8 on EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
 - **Microsoft Azure Kubernetes Service (AKS) installation:** If you are deploying Camunda 8 on an Microsoft AKS cluster, see [Install Camunda 8 on AKS](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/aks-helm/)
 
-## Enable other components (optional)
+## Full Cluster
 
 <!-- TODO: Add links to doc pages that explain each component. -->
 
