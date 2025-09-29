@@ -506,7 +506,7 @@ Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_i
 
 :::note
 
-The JSON response format is currently only supported for OpenAI models. Use the text response format in combination with
+The JSON response format is currently only supported for OpenAI and Google Vertex AI models. Use the text response format in combination with
 the **Parse text as JSON** option for other providers.
 
 :::
