@@ -5,7 +5,7 @@ title: AI Agent Tool Definitions
 description: Tool definitions for AI agents using the fromAi() function syntax
 ---
 
-import AiAgentImplementationTabs from '../react-components/\_ai-agent-implementation-tabs';
+import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
@@ -20,7 +20,15 @@ You can use any BPMN elements and connectors as tools and to model sub-flows wit
 
 To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly. The approach depends on the chosen AI Agent implementation:
 
-<AiAgentImplementationTabs>
+<Tabs
+groupId="ai-agent-implementation"
+defaultValue="process"
+queryString
+values={[
+{ label: "AI Agent Process", value: "process" },
+{ label: "AI Agent Task", value: "task" },
+]}>
+
 <TabItem value='process'>
 When using the **AI Agent Process** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
 </TabItem>
@@ -34,7 +42,7 @@ When using the **AI Agent Task** implementation, the connector reads the BPMN mo
 4. Creates a tool definition for each activity found, and passes these tool definitions to the LLM as part of the prompt.
 
 </TabItem>
-</AiAgentImplementationTabs>
+</Tabs>
 
 :::note
 Refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and [OpenAI](https://platform.openai.com/docs/guides/function-calling) documentation for examples of how tool/function calling works in combination with an LLM.

@@ -5,9 +5,6 @@ title: Example AI Agent Task connector integration
 description: Example integration using the AI Agent Task connector to implement a feedback loop for user interactions and tool calls with an LLM.
 ---
 
-import AiAgentImplementationTabs from '../react-components/\_ai-agent-implementation-tabs';
-import TabItem from "@theme/TabItem";
-
 This worked example shows how you can integrate an AI Agent Task connector into a feedback loop model.
 
 ## About this worked example
