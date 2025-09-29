@@ -19,7 +19,17 @@ import ConfigurationErrorHandling from './agentic-ai/aiagent/configuration/\_err
 import ConfigurationRetries from './agentic-ai/aiagent/configuration/\_retries.md';
 import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/\_execution-listeners.md';
 
+Implements an AI agent using an ad-hoc sub-process with an applied AI Agent connector template. This implementation creates an implicit feedback loop for tool calls and agent responses by leveraging the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md).
+
+For more details and usage examples see [AI Agent Process](./agentic-ai-aiagent.md#ai-agent-process). The [example integration](agentic-ai-aiagent-process-example.md) outlines how to model an agentic AI process using the AI Agent Process implementation.
+
 ![AI Agent Process](../img/ai-agent-process.png)
+
+## Event handling
+
+With an **AI Agent Process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event. See [event handling](#configuration-event-handling) for more details.
+
+To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow. The content of this variable will be added to the LLM API call as a user message following any tool call results.
 
 ## Configuration
 
@@ -35,11 +45,3 @@ import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/
 <ConfigurationErrorHandling />
 <ConfigurationRetries />
 <ConfigurationExecutionListeners />
-
-## Event handling
-
-With an **AI Agent Process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event. See [event handling](#event-handling) for more details.
-
-To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow. The content of this variable will be added to the LLM API call as a user message following any tool call results.
-
-## Limitations
