@@ -549,10 +549,10 @@ In addition to GitHub and GitLab, Web Modeler now supports integration with Azur
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
@@ -1326,7 +1326,7 @@ To learn more about versioning your diagrams, see [versions](components/modeler/
 As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 
