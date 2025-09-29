@@ -1,7 +1,7 @@
 ---
 id: connectors-configuration
 title: Configuration
-description: "Configure the connector runtime environment based on the Zeebe instance to connect to, the connector functions to run, and secrets available to the connectors."
+description: "Configure the connector runtime environment based on the Zeebe instance, the connector functions to run, and available secrets."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -9,29 +9,29 @@ import TabItem from "@theme/TabItem";
 
 You can configure the connector runtime environment in the following ways:
 
-- The Zeebe instance to connect to.
-- The connector functions to run.
-- The secrets that should be available to the connectors.
+- Specify the Zeebe instance to connect to.
+- Define the connector functions to run.
+- Provide the secrets that should be available to the connectors.
 
 :::note
-Starting from version 8.8, the connector runtime no longer requires a connection to Operate. The connector runtime now only depends on the Orchestration Cluster REST API and Zeebe.
+Starting from version 8.8, the connector runtime no longer requires a connection to Operate. It now depends only on the Orchestration Cluster REST API and Zeebe.
 :::
 
-To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration that can be set in the Camunda Spring Boot Starter can also be set in the connector runtime environment.
+To connect to **Zeebe** and the **Orchestration Cluster REST API**, the connector runtime uses the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md). Any configuration available in the Spring Boot Starter can also be applied to the connector runtime environment.
 
-Below are some of the most common configuration options for the connector runtime. Refer to the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe) for a full list of configuration options.
+Below are some of the most common configuration options for the connector runtime. For a complete list, see the [Camunda Spring Boot Starter configuration reference](/apis-tools/camunda-spring-boot-starter/configuration.md#zeebe).
 
 :::note
-This guide provides configuration properties in the form of environment variables, while the Camunda Spring Boot Starter documentation uses Java configuration properties. The two formats are interchangeable, and you can use the Java configuration properties in the connector runtime environment as well.
+This guide presents configuration properties as environment variables, while the Camunda Spring Boot Starter documentation uses Java configuration properties. The two formats are interchangeable. You can also use Java configuration properties in the connector runtime environment.
 
-For example, the Java configuration property `camunda.client.grpc-address` can be set in the connector runtime environment as an environment variable called `CAMUNDA_CLIENT_GRPCADDRESS`.
+For example, the Java configuration property `camunda.client.grpc-address` can be set as the environment variable `CAMUNDA_CLIENT_GRPCADDRESS` in the connector runtime.
 :::
 
 ## Configure the Orchestration Cluster connection for Self-Managed
 
 ### Connection URL
 
-To connect to the Orchestration Cluster, you need to provide the following configuration:
+To connect to the Orchestration Cluster, provide the following configuration:
 
 <Tabs groupId="connection-url" defaultValue="environment-variables" queryString values={[
 {label: 'Environment variables', value: 'environment-variables' },
@@ -59,7 +59,7 @@ camunda:
 </TabItem>
 </Tabs>
 
-### HTTPS Configuration
+### HTTPS configuration
 
 If using an HTTPS connection, you may need to provide a certificate to validate the gateway's certificate chain.
 
@@ -85,7 +85,7 @@ camunda:
 </TabItem>
 </Tabs>
 
-### Authentication Methods
+### Authentication methods
 
 Choose the authentication method for your environment:
 
@@ -165,13 +165,13 @@ camunda:
       scope: <your client id of Orchestration Cluster or configured audience>
 ```
 
-**Notes for Microsoft Entra ID**:
+**Notes for Microsoft Entra ID**
 
 - Instead of `scope: CLIENT_ID_OC`, use: `scope: CLIENT_ID_OC + "/.default"`.
-- The `token-url` is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+- The `token-url` is typically formatted as: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
-:::note Audience Validation
-If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
+:::note Audience validation
+If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Ensure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the configuration. This is often the client ID you used when setting up the Orchestration Cluster.
 :::
 
 </TabItem>
@@ -399,7 +399,7 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Multi-tenancy
 
-The connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Identity](/components/identity/tenant.md).
+The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Identity](/components/identity/tenant.md).
 
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all

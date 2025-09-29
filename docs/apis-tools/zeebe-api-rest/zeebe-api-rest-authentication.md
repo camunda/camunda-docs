@@ -17,7 +17,7 @@ The Zeebe REST API supports three authentication methods depending on your envir
 
 ## When to use each method
 
-- **No Authentication**: Use only for local development with C8 Run or Docker Compose when security is not required. Never use in production environments.
+- **No Authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use in production environments.
 - **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
 - **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
@@ -25,14 +25,14 @@ The Zeebe REST API supports three authentication methods depending on your envir
 
 | Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
-| [C8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)                  | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
-# Authenticate API calls
+## Authenticate API calls
 
-## No Authentication (Local Development)
+### No Authentication (Local Development)
 
 By default, Camunda 8 Run and Docker Compose expose the Zeebe REST API without authentication for local development. You can make API requests directly:
 
@@ -40,7 +40,7 @@ By default, Camunda 8 Run and Docker Compose expose the Zeebe REST API without a
 curl http://localhost:8080/v1/topology
 ```
 
-## Basic Authentication
+### Basic Authentication
 
 Basic Authentication uses username and password credentials. To set it up:
 
@@ -63,7 +63,7 @@ Please see
 [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-## OIDC-based Authentication
+### OIDC-based Authentication
 
 To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 

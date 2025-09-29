@@ -7,8 +7,6 @@ description: "Step through authentication options that can be used to access the
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Zeebe API (gRPC) Authentication
-
 This page describes the available authentication methods for accessing the Zeebe API (gRPC) in the Orchestration Cluster. Similar to the Orchestration Cluster REST API, the Zeebe API supports three authentication methods:
 
 - **No Authentication**
