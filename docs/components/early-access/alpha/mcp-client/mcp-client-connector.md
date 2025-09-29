@@ -93,7 +93,7 @@ this for your specific use case varies on the connector runtime you are using.
        <!-- .... -->
 
        <properties>
-           <version.connectors>8.8.0-alpha6</version.connectors>
+           <version.connectors>8.8.0</version.connectors>
        </properties>
 
        <dependencies>

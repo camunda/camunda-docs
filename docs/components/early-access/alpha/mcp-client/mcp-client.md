@@ -203,4 +203,4 @@ Here is an example setup with a filesystem MCP server (see [examples](#examples)
 
 ## Examples
 
-A ready-to-go example using both connector types and a human-in-the-loop interaction is available in the [connectors repository](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent-chat-mcp). See its [README](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/examples/ai-agent-chat-mcp/README.md) for further details on the necessary configuration.
+A ready-to-go example using both connector types and a human-in-the-loop interaction is available in the [connectors repository](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/ad-hoc-sub-process/ai-agent-chat-mcp). See its [README](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/examples/ai-agent/ad-hoc-sub-process/ai-agent-chat-mcp/README.md) for further details on the necessary configuration.
