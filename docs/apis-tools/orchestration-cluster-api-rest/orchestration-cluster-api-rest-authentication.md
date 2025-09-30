@@ -130,6 +130,10 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 Replace `${BASE_URL}` with the address of your cluster. See the [context paths](orchestration-cluster-api-rest-overview.md#context-paths) for Self-Managed URL formats.
 
+</TabItem>
+
+</Tabs>
+
 ## OIDC-based authentication using X.509 client certificates
 
 For advanced security scenarios, you can obtain OIDC access tokens using X.509 client certificates. This method is typically required in Self-Managed environments where your identity provider (such as Keycloak) enforces mutual TLS (mTLS).
