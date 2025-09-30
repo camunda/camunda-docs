@@ -136,7 +136,7 @@ With this 8.8 change, the source of truth for Identity and Access Management for
 
 ### Tenant interceptors
 
-In Camunda 8.8, Tenant Interceptors are not supported. If you are using Tenant Interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [Tenant management](/components/identity/tenant.md) approach to continue using this feature.
+In Camunda 8.8, Tenant Interceptors are not supported. If you are using Tenant Interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [Tenant management](/components/identity/tenant.md).
 
 - Administrators must migrate their Tenants into the Cluster using either the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx), or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
 - Tenant assignment can be achieved with either, direct assignment to [users](/components/identity/tenant.md#assign-users-to-a-tenant), [clients](/components/identity/tenant.md#assign-clients-to-a-tenant), or [mapping rules](/components/identity/tenant.md#assign-mapping-rules-to-a-tenant).
