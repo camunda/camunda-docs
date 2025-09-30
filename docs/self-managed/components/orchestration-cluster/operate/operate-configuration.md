@@ -128,6 +128,15 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
   }'
 ```
 
+This setting will prevent Elasticsearch from generating excessive deprecation warning logs like:
+
+```
+"Deprecated field [from] used, this field is unused and will be removed entirely"
+"Deprecated field [to] used, this field is unused and will be removed entirely"
+"Deprecated field [include_lower] used, this field is unused and will be removed entirely"
+"Deprecated field [include_upper] used, this field is unused and will be removed entirely"
+```
+
 ### Settings for OpenSearch
 
 #### Settings to connect to a secured OpenSearch instance
