@@ -1,25 +1,48 @@
 ---
 id: using-external-keycloak
 sidebar_label: External Keycloak
-title: Helm chart existing Keycloak usage
-description: "Learn how to use an existing Keycloak instance in Camunda 8 Self-Managed deployment."
+title: Use external Keycloak with the Helm chart
+description: "Learn how to use an external Keycloak instance in a Camunda 8 Self-Managed deployment."
 ---
 
-Camunda 8 Self-Managed has two different types of applications: Camunda applications (Operate, Optimize, Tasklist, etc.) and non-Camunda applications (such as Keycloak and Elasticsearch). For more details, review the [architecture](../../../about-self-managed.md#architecture) documentation for more information on the different types of applications.
+The Helm chart deployment can install an internal Keycloak instance using [Bitnami subcharts](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
 
-This guide steps through using an existing Keycloak instance, which is part of [Management Identity](/self-managed/components/management-identity/overview.md). By default, [Helm chart deployment](../install.md) creates a new Keycloak instance, but it's possible to use an existing Keycloak instance either inside the same Kubernetes cluster or outside of it.
+For production environments, Camunda recommends deploying an external Keycloak instance (or another OIDC provider) separately from the Camunda Helm chart. This guide explains how to connect Camunda 8 Self-Managed to an external Keycloak.
 
-## Preparation
+## Prerequisites
 
-Configure your existing Keycloak realm according to the following guide: [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+Before you begin, ensure you have:
 
-## Values file
+- A Keycloak instance deployed with a realm configured. See [Connect to an external Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
+- An admin username and password for Keycloak.
 
-The only change required to use the existing Keycloak is configuring the following values in the Camunda 8 Self-Managed Helm chart:
+## Configuration
+
+### Parameters
+
+| values.yaml option                                | type    | default                      | description                                                                                       |
+| ------------------------------------------------- | ------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| `global.security.authentication.method`           | string  | `"basic"`                    | Authentication type (basic or oidc).                                                              |
+| `global.identity.keycloak.contextPath`            | string  | `"/auth"`                    | Keycloak URL path prefix. For example, `/auth` means all URLs start with `http://hostname/auth/`. |
+| `global.identity.keycloak.realm`                  | string  | `"/realms/camunda-platform"` | Keycloak realm. Must start with `/realms/` followed by the realm name.                            |
+| `global.identity.keycloak.url.protocol`           | string  | `""`                         | Keycloak URL scheme (`http` or `https`).                                                          |
+| `global.identity.keycloak.url.host`               | string  | `""`                         | Hostname of the Keycloak instance.                                                                |
+| `global.identity.keycloak.url.port`               | string  | `""`                         | Port number of the Keycloak instance.                                                             |
+| `global.identity.keycloak.auth.adminUser`         | string  | `""`                         | Admin username for Keycloak.                                                                      |
+| `global.identity.keycloak.auth.existingSecret`    | string  | `""`                         | Name of the Kubernetes Secret containing the admin password.                                      |
+| `global.identity.keycloak.auth.existingSecretKey` | string  | `""`                         | Key within the Secret that stores the admin password.                                             |
+| `identityKeycloak.enabled`                        | boolean | `false`                      | Enable or disable the Keycloak subchart deployment.                                               |
+
+### Example usage
+
+To use an external Keycloak, update your `values.yaml` file with the following:
 
 ```yaml
-# File: existing-keycloak-values.yaml
+# File: external-keycloak-values.yaml
 global:
+  security:
+    authentication:
+      method: "oidc"
   identity:
     keycloak:
       url:
@@ -37,8 +60,12 @@ identityKeycloak:
   enabled: false
 ```
 
-Then, use the custom values file to [deploy Camunda 8](../install.md) as usual.
+[Deploy Camunda 8](../install.md) using the custom values file:
 
 ```sh
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f existing-keycloak-values.yaml
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f external-keycloak-values.yaml
 ```
+
+## References
+
+- [Connect to an external Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md)
