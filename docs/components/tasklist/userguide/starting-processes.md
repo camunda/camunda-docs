@@ -18,6 +18,10 @@ Using **Additional filters** it is possible to filter processes by other attribu
 - Requires form input to start: Filters processes to ones which have a [linked or embedded Camunda Form](/components/modeler/web-modeler/advanced-modeling/form-linking.md) on the start event.
 - Does not require form input to start: Filter process to ones which do not have a Camunda Form on the start event.
 
+:::info Tasklist V2 filtering limitations
+When using Tasklist V2 mode, process filtering is currently limited to searching by process definition ID. Advanced filtering by process name and other attributes shown above is not available in V2. If you require advanced filtering, consider using [Tasklist V1 mode](/components/tasklist/api-versions.md#switching-between-V1-and-V2-modes) during the migration period.
+:::
+
 To start a process, click **Start process** on the process you want to start.
 
 ![tasklist-processes-start](img/tasklist-processes-start.png)
@@ -46,7 +50,11 @@ For all the above scenarios, contact your administrator to understand why no pro
 
 ## Start public processes via form
 
-<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+<span class="badge badge--cloud">Camunda 8 SaaS only</span> <span class="badge badge--caution">Tasklist V1 only</span>
+
+:::warning Tasklist V2 limitation
+Public start forms are not available when using Tasklist V2 mode. If you require public start forms, you can [switch to Tasklist V1 mode](/components/tasklist/api-versions.md#switching-between-V1-and-V2-modes) during the migration period.
+:::
 
 Tasklist offers a convenient method to start processes with a form using a public URL. This functionality relies on process configuration performed in [Web Modeler](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md), enabling users to create and manage processes.
 
