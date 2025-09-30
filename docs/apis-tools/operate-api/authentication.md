@@ -1,13 +1,14 @@
 ---
 id: operate-api-authentication
 title: Authentication
-description: "Learn about authentication methods for accessing the Operate REST API and when to use each option."
+description: "Authentication requirements for accessing the Operate REST API."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes the available authentication methods for accessing the Operate REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
+All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.  
+This page describes the available authentication methods for accessing the Operate REST API and when to use each method.
 
 The Operate REST API supports three authentication methods based on your environment and configuration:
 
@@ -17,9 +18,9 @@ The Operate REST API supports three authentication methods based on your environ
 
 ## When to use each method
 
-- **No authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use this option in production environments.
-- **Basic authentication**: Use for simple username/password protection, typically in development or testing environments where authentication is enabled.
-- **OIDC-based authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
+- **No authentication**: Only for local development with Camunda 8 Run or Docker Compose. Never use in production.
+- **Basic authentication**: For username/password protection in development or testing environments.
+- **OIDC-based authentication**: Required for SaaS and recommended for Self-Managed production clusters.
 
 ## Authentication support matrix
 
@@ -34,7 +35,7 @@ The Operate REST API supports three authentication methods based on your environ
 
 ### No Authentication (Local Development)
 
-By default, Camunda 8 Run and Docker Compose expose the Tasklist REST API without authentication for local development. You can make API requests directly:
+By default, Camunda 8 Run and Docker Compose expose the Operate REST API without authentication for local development. You can make API requests directly:
 
 ```shell
 curl --request POST http://localhost:8080/v1/process-instances/search \
@@ -44,15 +45,13 @@ curl --request POST http://localhost:8080/v1/process-instances/search \
 
 ### Basic Authentication
 
-Basic Authentication uses username and password credentials. To set it up:
+Basic Authentication uses username and password credentials.
 
-**For Camunda 8 Run:**
-Enable Basic Auth by configuring authentication in your `application.yaml`. For detailed steps, see the [Camunda 8 Run documentation on enabling authentication](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
+**For Camunda 8 Run:** Enable Basic Auth in your `application.yaml`. See [Camunda 8 Run docs](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
 
-**For Helm:**
-Basic Auth is enabled by default for the Tasklist REST API.
+**For Helm:** Basic Auth is enabled by default for the Operate REST API.
 
-Once authentication is enabled, include your username and password in each API request. You can use an existing user or the default user `demo`/`demo`:
+Once authentication is enabled, include your username and password in each API request. You can use an existing user or the default `demo/demo`:
 
 ```shell
 curl --user username:password \
@@ -62,14 +61,13 @@ curl --user username:password \
 ```
 
 :::note
-Basic Authentication checks the password with every request and is a costly operation. It therefore only supports a low number of API requests per second, and may not be fit your production requirements.
-Please see
-[Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
+Basic Authentication checks the password with every request, which can limit API request throughput. It may not be suitable for production.  
+See [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
 ### OIDC-based Authentication
 
-To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
+All production environments (SaaS or Self-Managed) require OIDC-based authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
 ### Generate a token
 

@@ -93,11 +93,11 @@ To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/)
 4. Execute an authentication request to the token issuer:
    ```bash
    curl --request POST ${CAMUNDA_OAUTH_URL} \
-       --header 'Content-Type: application/x-www-form-urlencoded' \
-       --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode 'audience=tasklist.camunda.io' \
-       --data-urlencode "client_id=${CAMUNDA_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_CLIENT_SECRET}"
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'grant_type=client_credentials' \
+    --data-urlencode 'audience=zeebe.camunda.io' \
+    --data-urlencode "client_id=${CAMUNDA_CLIENT_ID}" \
+    --data-urlencode "client_secret=${CAMUNDA_CLIENT_SECRET}"
    ```
    A successful authentication response looks like the following:
    ```json

@@ -115,11 +115,12 @@ Replace the `${BASE_URL}` based on the address of your cluster. See the [context
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
 --header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode "client_id=${CLIENT_ID}" \
---data-urlencode "client_secret=${CLIENT_SECRET}" \
---data-urlencode "audience=${CLIENT_ID_OC}" \
---data-urlencode "scope=${CLIENT_ID_OC}" \
+--data-urlencode "client_id=${CLIENT_ID}" \        # Your client ID in the identity provider
+--data-urlencode "client_secret=${CLIENT_SECRET}" \ # The corresponding client secret
+--data-urlencode "audience=${CLIENT_ID_OC}" \       # The audience configured in the Orchestration Cluster
+--data-urlencode "scope=${CLIENT_ID_OC}" \          # Usually the same as the audience; depends on IdP configuration
 --data-urlencode 'grant_type=client_credentials'
+
 ```
 
 **Note for Microsoft Entra ID**: Instead of `scope=${CLIENT_ID_OC}`, use: `scope=${CLIENT_ID_OC}/.default`. The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
