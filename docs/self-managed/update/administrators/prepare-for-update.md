@@ -40,7 +40,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Tasklist UI mode configuration</td>
-    <td><p>Tasklist v1 UI mode remains available as a configuration option during the migration period.</p><p><ul><li>To use Tasklist v1 UI, set <code>CAMUNDA_TASKLIST_V2_MODE_ENABLED=false</code> environment variable.</li><li>V1 mode provides continued access to legacy interface and features during transition.</li><li>Review <a href="/components/tasklist/api-versions.md">Tasklist API versions</a> to understand differences between v1 and v2 modes.</li><li>Plan migration to v2 mode for full feature compatibility.</li></ul></p></td>
+    <td><p>Tasklist v1 UI mode remains available as a configuration option during the migration period.</p><p><ul><li>To use Tasklist v1 UI, set <code>CAMUNDA_TASKLIST_V2_MODE_ENABLED=false</code> environment variable.</li><li>V1 mode provides continued access to legacy interface and features during transition.</li><li>Review <a href="../../../components/tasklist/api-versions.md">Tasklist API versions</a> to understand differences between v1 and v2 modes.</li><li>Plan migration to v2 mode for full feature compatibility.</li></ul></p></td>
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
