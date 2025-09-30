@@ -47,20 +47,18 @@ This example assumes the cluster was deployed with the following configurations,
 If you have deployed Zeebe using [Helm](/self-managed/installation-methods/helm/install.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
-kubectl scale statefulset zeebe-scaling-demo --replicas=6
+kubectl scale statefulset camunda --replicas=6
 ```
 
 You can see new pods being created when running `kubectl get pods`. The new brokers will be assigned ids `3`, `4`, and `5` respectively.
 
 ```
-zeebe-scaling-demo-zeebe-0                                        1/1     Running    0          3m24s
-zeebe-scaling-demo-zeebe-1                                        1/1     Running    0          3m24s
-zeebe-scaling-demo-zeebe-2                                        1/1     Running    0          3m24s
-zeebe-scaling-demo-zeebe-3                                        0/1     Init:0/1   0          11s
-zeebe-scaling-demo-zeebe-4                                        0/1     Init:0/1   0          11s
-zeebe-scaling-demo-zeebe-5                                        0/1     Init:0/1   0          11s
-zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-jvbjc                  1/1     Running    0          3m24s
-zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-pjgfd                  1/1     Running    0          3m24s
+camunda-zeebe-0                                        1/1     Running    0          3m24s
+camunda-zeebe-1                                        1/1     Running    0          3m24s
+camunda-zeebe-2                                        1/1     Running    0          3m24s
+camunda-zeebe-3                                        0/1     Init:0/1   0          11s
+camunda-zeebe-4                                        0/1     Init:0/1   0          11s
+camunda-zeebe-5                                        0/1     Init:0/1   0          11s
 ```
 
 ### 2. Send scale request to the Zeebe Gateway
@@ -70,7 +68,7 @@ Now we should tell Zeebe to add new brokers to the cluster and add or re-distrib
 If running on Kubernetes, and if you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
 
 ```
-kubectl port-forward svc/camunda-gateway 9600:9600
+kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 ```
 
 Depending on whether you want to add new partitions or not, send the appropriate requests to the gateway (section 2.a or 2.b)
@@ -250,7 +248,7 @@ The response would show that partitions are distributed to new brokers:
   "brokers": [
     {
       "nodeId": 0,
-      "host": "zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-0.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -273,7 +271,7 @@ The response would show that partitions are distributed to new brokers:
     },
     {
       "nodeId": 1,
-      "host": "zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-1.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -296,7 +294,7 @@ The response would show that partitions are distributed to new brokers:
     },
     {
       "nodeId": 2,
-      "host": "zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-2.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -319,7 +317,7 @@ The response would show that partitions are distributed to new brokers:
     },
     {
       "nodeId": 3,
-      "host": "zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-3.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -342,7 +340,7 @@ The response would show that partitions are distributed to new brokers:
     },
     {
       "nodeId": 4,
-      "host": "zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-4.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -365,7 +363,7 @@ The response would show that partitions are distributed to new brokers:
     },
     {
       "nodeId": 5,
-      "host": "zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+      "host": "camunda-zeebe-5.camunda-zeebe",
       "port": 26501,
       "partitions": [
         {
@@ -471,7 +469,7 @@ The response would show that the partitions are moved away from brokers `3`, `4`
 {
    "brokers": [{
          "nodeId": 0,
-         "host": "zeebe-scaling-demo-zeebe-0.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-0.camunda-zeebe.camunda",
          "port": 26501,
          "partitions": [{
                "partitionId": 1,
@@ -507,7 +505,7 @@ The response would show that the partitions are moved away from brokers `3`, `4`
       },
       {
          "nodeId": 1,
-         "host": "zeebe-scaling-demo-zeebe-1.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-1.camunda-zeebe.camunda",
          "port": 26501,
          "partitions": [{
                "partitionId": 1,
@@ -544,7 +542,7 @@ The response would show that the partitions are moved away from brokers `3`, `4`
       },
       {
          "nodeId": 2,
-         "host": "zeebe-scaling-demo-zeebe-2.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-2.camunda-zeebe",
          "port": 26501,
          "partitions": [{
                "partitionId": 1,
@@ -581,21 +579,21 @@ The response would show that the partitions are moved away from brokers `3`, `4`
       },
       {
          "nodeId": 3,
-         "host": "zeebe-scaling-demo-zeebe-3.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-3.camunda-zeebe",
          "port": 26501,
          "partitions": [],
          "version": "8.8.0"
       },
       {
          "nodeId": 4,
-         "host": "zeebe-scaling-demo-zeebe-4.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-4.camunda-zeebe",
          "port": 26501,
          "partitions": [],
          "version": "8.8.0"
       },
       {
          "nodeId": 5,
-         "host": "zeebe-scaling-demo-zeebe-5.zeebe-scaling-demo-zeebe.zeebe-scaling-demo",
+         "host": "camunda-zeebe-5.camunda-zeebe",
          "port": 26501,
          "partitions": [],
          "version": "8.8.0"
@@ -623,11 +621,9 @@ kubectl scale statefulset <zeebe-statefulset> --replicas=3
 When monitoring the pods via `kubectl get pods`, we can see that pods 3, 4, and 5 have been terminated.
 
 ```
-zeebe-scaling-demo-zeebe-0                                        1/1     Running     0          9m55s
-zeebe-scaling-demo-zeebe-1                                        1/1     Running     0          9m55s
-zeebe-scaling-demo-zeebe-2                                        1/1     Running     0          9m50s
-zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-8vvnf                  1/1     Running     0          9m38s
-zeebe-scaling-demo-zeebe-gateway-b79b9cdbc-dkk9v                  1/1     Running     0          9m38s
+camunda-zeebe-0                                        1/1     Running     0          9m55s
+camunda-zeebe-1                                        1/1     Running     0          9m55s
+camunda-zeebe-2                                        1/1     Running     0          9m50s
 
 ```
 
