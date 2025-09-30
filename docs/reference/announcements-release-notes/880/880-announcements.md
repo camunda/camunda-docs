@@ -271,7 +271,7 @@ The Assignees list is removed from the response.
 
 #### Tasklist v1 UI mode configuration
 
-Tasklist v1 remains available for the UI until Camunda 8.10, providing continued access to the legacy interface during the migration period.
+Tasklist v1 remains available for the UI until Camunda 8.10, allowing continued access to the legacy interface during the migration period.
 
 To run Tasklist UI in v1 mode, set the following environment variable:
 
@@ -279,7 +279,7 @@ To run Tasklist UI in v1 mode, set the following environment variable:
 CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
 ```
 
-This configuration option allows you to maintain the v1 user experience while planning your migration to v2. For detailed differences between v1 and v2 modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
+This configuration setting allows you to continue using the v1 user experience while planning your migration to v2. To learn more about the differences between v1 and v2 modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
 
 </div>
 </div>
