@@ -179,7 +179,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.rest.executor.core-pool-size-multiplier",
+    name: "camunda.api.rest.executor.core-pool-size-multiplier",
     legacy: ["camunda.rest.apiExecutor.corePoolSizeMultiplier"],
     types: ["1-to-1"],
     area: ["API"],
