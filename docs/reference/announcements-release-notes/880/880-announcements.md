@@ -279,7 +279,7 @@ To run Tasklist UI in v1 mode, set the following environment variable:
 CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
 ```
 
-This configuration setting allows you to continue using the v1 user experience while planning your migration to v2. To learn more about the differences between v1 and v2 modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
+This configuration setting allows you to continue using the v1 user experience while planning your migration to v2.
 
 </div>
 </div>
