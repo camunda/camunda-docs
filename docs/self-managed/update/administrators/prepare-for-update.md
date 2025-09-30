@@ -62,6 +62,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td>Identity, authentication, and authorization</td>
     <td colspan="2">Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster. See [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</td>    
 </tr>
+<tr>
+    <td>Zeebe Gateway</td>
+    <td>Tenant-Providing interceptors are not supported and should be replaced with built-in [Tenant management](/components/identity/tenant.md)</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
 </table>
 
 ### Identity, authentication, and authorization
