@@ -8,19 +8,13 @@ description: "Authentication options for accessing the Tasklist REST API."
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes authentication methods for accessing the Tasklist REST API. It explains when to use each method and how to configure your API requests for secure and appropriate access.
+This page describes authentication methods for accessing the Tasklist REST API and explains how to configure your API requests for secure access.
 
 The Tasklist REST API supports three authentication methods depending on your environment:
 
 - **No authentication**
 - **Basic authentication**
 - **OIDC-based authentication**
-
-## When to use each method
-
-- **No authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic authentication**: Use for simple username/password protection, typically in development or testing environments where authentication is enabled.
-- **OIDC-based authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
 
 ## Authentication support matrix
 
@@ -31,9 +25,9 @@ The Tasklist REST API supports three authentication methods depending on your en
 | [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
-# Authenticate API calls
+## Authenticate API calls
 
-## No authentication (local development)
+### No authentication (local development)
 
 By default, Camunda 8 Run and Docker Compose expose the Tasklist REST API without authentication. You can make API requests directly:
 
@@ -43,7 +37,7 @@ curl --request POST http://localhost:8080/v1/tasks/search \
    --data-raw '{}'
 ```
 
-## Basic authentication
+### Basic authentication
 
 Basic authentication uses username and password credentials. To set it up:
 
@@ -66,11 +60,11 @@ curl --user username:password \
 Basic authentication checks the password with every request, which is resource-intensive. It may not meet production requirements for high request volumes. See [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md).
 :::
 
-## OIDC-based authentication
+### OIDC-based authentication
 
 To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-### Generate a token
+#### Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -161,7 +155,7 @@ If authorizations are enabled, your application will only be able to retrieve th
 </TabItem>
 </Tabs>
 
-### Use a token
+#### Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
@@ -209,6 +203,6 @@ A successful response includes [matching tasks](./specifications/search-tasks.ap
 ]
 ```
 
-### Token expiration
+#### Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.

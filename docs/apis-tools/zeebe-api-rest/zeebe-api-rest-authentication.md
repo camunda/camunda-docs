@@ -15,12 +15,6 @@ The Zeebe REST API supports three authentication methods depending on your envir
 - **Basic Authentication**
 - **OIDC-based Authentication**
 
-## When to use each method
-
-- **No Authentication**: Use only for local development with Camunda 8 Run or Docker Compose when security is not required. Never use in production environments.
-- **Basic Authentication**: Use for simple username/password protection, typically in development or testing environments when authentication is enabled.
-- **OIDC-based Authentication**: Use for production environments, SaaS, or any environment requiring secure, standards-based authentication. This method is required for SaaS and recommended for all Self-Managed clusters in production.
-
 ## Authentication support matrix
 
 | Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
@@ -67,7 +61,7 @@ Please see
 
 To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
 
-### Generate a token
+#### Generate a token
 
 <Tabs groupId="environment" defaultValue="saas" queryString values={
 [
@@ -151,7 +145,7 @@ If authorizations are enabled, your application will only be able to retrieve th
 
 </Tabs>
 
-### Use a token
+#### Use a token
 
 Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
 
@@ -200,6 +194,6 @@ A successful response includes [information about the cluster](/apis-tools/zeebe
 }
 ```
 
-### Token expiration
+#### Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
