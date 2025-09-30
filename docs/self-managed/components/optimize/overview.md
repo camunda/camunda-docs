@@ -1,6 +1,7 @@
 ---
 id: overview
-title: Getting started with Optimize
+title: Optimize on Self-Managed
+sidebar_label: Overview
 description: "All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements."
 ---
 

@@ -20,7 +20,8 @@ Select your Git repository host:
 {label: 'GitHub', value: 'github' },
 {label: 'GitLab', value: 'gitlab' },
 {label: 'Azure', value: 'azure' },
-{label: 'Bitbucket', value: 'bitbucket' },
+{label: 'Bitbucket Cloud', value: 'bitbucket' },
+{label: 'Bitbucket Data Center', value: 'bitbucket-data-center' },
 ]}>
 
 <TabItem value='github'>
@@ -238,19 +239,15 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
   - `repositories:read`
   - `repositories:write`
 
-<h3>Configure Bitbucket in Web Modeler</h3>
+<h3>Configure Bitbucket Cloud in Web Modeler</h3>
 
-:::note
-Web Modeler currently only supports Bitbucket Cloud.
-:::
-
-1. In Web Modeler, navigate to the process application you want to connect to Bitbucket, and click **Connect repository**.
+1. In Web Modeler, navigate to the process application you want to connect to Bitbucket Cloud, and click **Connect repository**.
 
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
    - **Access token:** The repository, project, or workspace access token you generated.
-   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda-worksapce/my-repository`. The URL must not include the `.git` extension or any folder path.
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
 
@@ -264,6 +261,56 @@ When synchronizing for the first time with a remote repository that already cont
 
 Once successful, your project will display a new **Sync with Bitbucket** button.
 
+</TabItem>
+<TabItem value='bitbucket-data-center'>
+
+:::info Atlassian Data Center End of Life
+
+Bitbucket Data Center reaches its end of life on March 28, 2029. See [Atlassian's announcement](https://www.atlassian.com/licensing/data-center-end-of-life).
+Consider migrating to Bitbucket Cloud or another supported Git provider for continued support and updates.
+
+:::
+
+:::warning Limitations
+
+Due to [limitations in the Bitbucket Data Center API](https://jira.atlassian.com/browse/BSERV-14381), Web Modeler cannot push file deletions to Bitbucket Data Center repositories.
+If you delete, move, or rename files in Web Modeler, the original will remain in the remote repository after synchronization.
+
+:::
+
+<h3>Create a new access token</h3>
+
+Web Modeler requires an access token to sync changes with your Bitbucket Data Center repository.
+You can use one of the following token types:
+
+- **Repository access token** (recommended)
+- Project access token
+- User access token
+
+Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html) to generate a new repository access token for your repository with the **Repository write** permission.
+
+<h3>Configure Bitbucket Data Center in Web Modeler</h3>
+
+1. In Web Modeler, navigate to the process application you want to connect to Bitbucket Data Center, and click **Connect repository**.
+
+2. Select the **Bitbucket** tile at the top of the modal.
+
+3. Fill in the **Configure Bitbucket** modal with the following information:
+   - **Access token:** The repository, project, or workspace access token you generated.
+   - **Bitbucket API Base URL:** (optional - _**SaaS only**_) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
+   - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
+   - **Branch name:** The branch to use for merging and managing changes.
+   - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+
+4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
+
+5. Click **Save Configuration**.
+
+:::note
+When synchronizing for the first time with a remote repository that already contains commits, ensure Web Modeler has assigned the correct main process.
+:::
+
+Once successful, your project will display a new **Sync with Bitbucket** button.
 </TabItem>
 </Tabs>
 

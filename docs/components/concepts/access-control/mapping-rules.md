@@ -5,7 +5,7 @@ sidebar_label: "Mapping rules"
 description: "Map authentication entities from your Identity Provider (IdP) to Camunda-specific entities using mapping rules."
 ---
 
-Mapping rules are used to dynamically manage access control by [connecting your Identity Provider](connect-to-identity-provider.md) and mapping claims from a JWT access token to Identity entities in Camunda 8.
+Mapping rules are used to dynamically manage access control by [connecting your Identity Provider](connect-to-identity-provider.md) and mapping claims from a JWT access token to [Identity](/components/identity/identity-introduction.md) entities in Camunda 8.
 
 ## Support for mapping rules in SaaS and Self-Managed
 
@@ -17,7 +17,7 @@ In **Camunda 8 Self-Managed**, you may need to configure mapping rules in two co
 
   - Mapping rules are available for Orchestration Cluster Identity only when using [OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md). They do not apply to other authentication methods, such as basic authentication.
 
-- **Management Identity**: Manage access to components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md). Mapping rules in [Management Identity](/self-managed/components/management-identity/what-is-identity.md) assign users to roles and tenants, granting access to those components. To learn more, see the [guide on managing mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md).
+- **Management Identity**: Manage access to components like [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Console](/self-managed/components/console/overview.md), and [Optimize](/self-managed/components/optimize/overview.md). Mapping rules in [Management Identity](/self-managed/components/management-identity/overview.md) assign users to roles and tenants, granting access to those components. To learn more, see the [guide on managing mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md).
 
 ## How to use mapping rules
 
@@ -69,6 +69,6 @@ In this case, the mapping rule matches against an array of objects. Depending on
 
 For more details on configuring mapping rules in a Self-Managed environment, see:
 
-- [Manage mapping rules in Orchestration Cluster Identity](../../identity/mapping-rules/manage-mapping-rules.md)
+- [Manage mapping rules in Orchestration Cluster Identity](../../identity/mapping-rules.md)
 - [Manage mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md)
 - [Manage mapping rules via API](/apis-tools/orchestration-cluster-api-rest/specifications/create-mapping-rule.api.mdx)

@@ -407,7 +407,7 @@ To learn more, see [Orchestration Cluster REST API](/apis-tools/orchestration-cl
 <!-- https://github.com/camunda/camunda-docs/pull/5942 -->
 <!-- https://github.com/camunda/camunda-docs/pull/6068 -->
 
-- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
+- **Structured outputs/JSON mode**: [Configurable response formats](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md#response) allow you to choose whether the connector returns plain text or JSON for downstream processing. For some models, you can define a JSON schema for returned data.
 - **Conversation history storage**: History can now be stored in [Camunda's document storage](../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#memory) rather than in process variables—allowing longer histories without process variable size limits.
 
 To learn more, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
@@ -539,7 +539,7 @@ The following [agentic orchestration](/components/agentic-orchestration/agentic-
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 
-The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md), providing automated user interaction and tool selection.
+The AI Agent connector enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#feedback-loop), providing automated user interaction and tool selection.
 
 This connector provides:
 
@@ -781,7 +781,7 @@ To learn more about this connector, see [HubSpot connector](/components/connecto
 | :------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | 11 March 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha2)</li></ul> | [Release blog](https://camunda.com/blog/2025/03/camunda-alpha-release-march-2025/) |
 
-### Camunda Spring Boot Starter for the C8 REST API
+### Camunda Spring Boot Starter for the Camunda 8 REST API
 
 A Spring Boot Starter is provided for the Orchestration Cluster REST API to unify process management, user tasks, and identity features under a single dedicated starter. This simplifies the interaction between a Spring Boot application and Camunda 8, allowing you to:
 
@@ -804,7 +804,7 @@ To learn more about this feature, see the [API documentation](/self-managed/quic
 
 ### Identity management updates <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-The [Identity service](/self-managed/components/management-identity/what-is-identity.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
+The [Identity service](/self-managed/components/management-identity/overview.md) is enhanced to deliver greater flexibility, control, and security for both Self-Managed and SaaS users. These updates are part of our broader effort to streamline the platform’s architecture.
 
 #### Cluster-level identity management
 

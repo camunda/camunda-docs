@@ -1,6 +1,6 @@
 ---
 id: group
-title: User groups
+title: Groups
 description: "Learn how to manage user group access to an orchestration cluster."
 ---
 

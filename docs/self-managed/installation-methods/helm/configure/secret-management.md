@@ -87,9 +87,7 @@ These secrets are necessary when integrating Camunda with third-party services.
 | **WebModeler External Database Password** | `webModeler.restapi.externalDatabase.secret` | Password for external PostgreSQL if using an external DB for Web Modeler |
 | **SMTP Password**                         | `webModeler.restapi.mail.secret`             | SMTP credentials for sending email notifications                         |
 | **External Elasticsearch Auth**           | `global.elasticsearch.auth.secret`           | Password for external Elasticsearch authentication (basic auth)          |
-| **External Elasticsearch TLS Cert**       | `global.elasticsearch.tls.secret`            | TLS certificate for external Elasticsearch over SSL                      |
 | **External OpenSearch Auth**              | `global.opensearch.auth.secret`              | Password for external OpenSearch authentication (basic auth)             |
-| **External OpenSearch TLS Cert**          | `global.opensearch.tls.secret`               | TLS certificate for external OpenSearch over SSL                         |
 
 ## How to configure secrets
 
@@ -307,6 +305,14 @@ global:
 
 For TLS-enabled services, you'll need to configure certificate secrets.
 
+### Secrets using the legacy pattern (all versions)
+
+| **Secret**                          | **Chart values key**                      | **Purpose**                                         |
+| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
+| **Console TLS Certificate**         | `console.tls.existingSecret`              | TLS certificate for Console web application         |
+| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret` | TLS certificate for external Elasticsearch over SSL |
+| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`    | TLS certificate for external OpenSearch over SSL    |
+
 ### Ingress TLS
 
 Configure TLS for Camunda services exposed via Ingress:
@@ -321,16 +327,14 @@ global:
 
 ### External service TLS
 
-For external Elasticsearch or OpenSearch with TLS, use the new secret pattern:
+For external Elasticsearch or OpenSearch with TLS, configure the TLS certificate using the legacy pattern:
 
 ```yaml
 global:
   elasticsearch:
     tls:
       enabled: true
-      secret:
-        existingSecret: elasticsearch-tls-secret
-        existingSecretKey: tls.crt
+      existingSecret: elasticsearch-tls-secret
 ```
 
 ### Console TLS (legacy pattern)

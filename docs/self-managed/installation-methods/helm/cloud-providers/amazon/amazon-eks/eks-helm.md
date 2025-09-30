@@ -39,13 +39,23 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ## Architecture
 
-<!-- TODO: update Arch to include Aurora and OpenSearch both text and diagram (https://github.com/camunda/team-infrastructure-experience/issues/409) -->
+In addition to the infrastructure diagram provided in the [Terraform setup guide](./terraform-setup.md), this section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md).
 
-Note the [existing architecture](/self-managed/about-self-managed.md#architecture) extended by deploying a Network Load Balancer with TLS termination within the [ingress](https://kubernetes.github.io/ingress-nginx/user-guide/tls/) below.
+The architecture includes the following core components:
 
-Additionally, two components ([external-dns](https://github.com/kubernetes-sigs/external-dns) and [cert-manager](https://cert-manager.io/)) handle requesting the TLS certificate from [Let's Encrypt](https://letsencrypt.org/) and configuring Route53 to confirm domain ownership and update the DNS records to expose the Camunda 8 deployment.
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
 
-![Camunda 8 Self-Managed AWS Architecture Diagram](./assets/camunda-8-self-managed-architecture-aws.png)
+To demonstrate how to deploy with a custom domain, the following stack is also included:
+
+- **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
+- **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
+- **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
+
+:::info Single namespace deployment
+This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
+:::
 
 ## Export environment variables
 
@@ -488,7 +498,7 @@ First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
 ### Generate an M2M token using Identity
 
-Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/identity-first-steps.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/overview.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
 Below is a summary of the necessary instructions:
 

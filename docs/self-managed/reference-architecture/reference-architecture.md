@@ -5,35 +5,37 @@ sidebar_label: "Overview"
 description: "Learn about the Self-Managed reference architectures and how they can help you get started."
 ---
 
-Reference architectures provide a comprehensive blueprint for designing and implementing scalable, robust, and adaptable systems. The reference architectures published here offer guidance to help enterprise architects, developers, and IT managers streamline deployments and improve system reliability.
+Reference architectures provide a blueprint for designing and implementing scalable, robust, and adaptable systems. The reference architectures published here help enterprise architects, developers, and IT managers streamline deployments and improve system reliability.
 
 ## Overview
 
-Reference architectures are not a one-size-fits-all solution, and each organization has unique requirements and constraints that may necessitate modifications to the provided blueprints.
+Reference architectures are not a one-size-fits-all solution. Each organization has unique requirements and constraints that may require modifications to the provided blueprints.
 
-While these reference architectures offer a solid foundation and best practices, they should be adapted to fit the specific needs of your project. Use them as a starting point to start your Camunda 8 implementation process, but be prepared to make adjustments to ensure they align with your goals and infrastructure.
+Use these reference architectures as a starting point for your Camunda 8 implementation. Adapt them to ensure they align with your goals and infrastructure.
 
 ### Target users
 
-- **Enterprise architects**: To design and plan the overall system structure.
-- **Developers**: To understand the components and their interactions.
-- **IT managers**: To ensure the system meets business requirements and is maintainable.
+- **Enterprise architects**: Design and plan the overall system structure.
+- **Developers**: Understand the components and their interactions.
+- **IT managers**: Ensure the system meets business requirements and is maintainable.
 
 ### Key benefits
 
-- **Accelerated deployment**: Predefined best practices and guidelines simplify the deployment process, reducing the time and effort required to set up a reliable workflow automation solution.
-- **Consistency**: Ensures consistency across deployments by standardizing system components and their configurations, which helps reduce the risk of errors and simplifies maintenance.
-- **Enhanced security**: Reference architectures incorporate best practices for securing Camunda 8 deployments, ensuring that sensitive data and processes are protected through standard security measures like encryption, authentication, and access controls.
+- **Accelerated deployment**: Predefined best practices simplify setup, reducing time and effort to deploy a reliable workflow automation solution.
+- **Consistency**: Standardized components and configurations reduce errors and simplify maintenance.
+- **Enhanced security**: Incorporates best practices for securing Camunda 8 deployments, including encryption, authentication, and access controls.
 
 ### Support considerations
 
-Deviations from the reference architecture are unavoidable. However, such changes will introduce additional complexity, making troubleshooting more difficult. When modifications are required, ensure they are well-documented to facilitate future maintenance and troubleshooting more quickly. Camunda publishes [supported environment](/reference/supported-environments.md) information to help you navigate supported configurations.
+Deviations from the reference architecture are expected. However, changes can introduce additional complexity, making troubleshooting more difficult. When modifications are required, document them to support future maintenance and troubleshooting.
+
+Camunda publishes [supported environments](/reference/supported-environments.md) to help you navigate supported configurations.
 
 ## Architecture
 
-### Orchestration Cluster vs Web Modeler, Console, and Optimize
+### Orchestration Cluster vs Web Modeler and Console
 
-When designing a reference architecture, it's essential to understand the differences between an Orchestration Cluster and Web Modeler and Console Self-Managed. These components play crucial roles in the deployment and operation of processes, but they serve different purposes and include distinct components.
+When designing a reference architecture, it's essential to understand the differences between Orchestration Cluster, Web Modeler, and Console Self-Managed. These components serve different purposes and include distinct elements.
 
 #### Orchestration Cluster
 
@@ -43,101 +45,113 @@ The Orchestration Cluster is the core of Camunda.
 
 The following components are bundled into a single artifact:
 
-- [Zeebe](/components/zeebe/zeebe-overview.md): A workflow engine for orchestrating microservices and managing stateful, long-running business processes.
-- [Operate](/components/operate/operate-introduction.md): A monitoring tool for visualizing and troubleshooting workflows running in Zeebe.
-- [Tasklist](/components/tasklist/introduction-to-tasklist.md): A user interface for managing and completing human tasks within workflows.
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): A service for managing user authentication and authorization.
+- [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
+- [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
+- [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
+- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
 
-Thematically close to the Orchestration Cluster are the following components:
+Tightly integrated with the Orchestration Cluster:
 
-- [Optimize](/components/optimize/what-is-optimize.md): An analytics tool for generating reports and insights based on workflow data.
-- [Connectors](/components/connectors/introduction.md): Pre-built integrations for connecting the Orchestration Cluster with external systems and services.
+- [Optimize](/components/optimize/what-is-optimize.md): Business intelligence tool for analyzing bottlenecks and examining improvements in automated processes.
+- [Connectors](/components/connectors/introduction.md): Reusable building blocks for easily connecting processes to external systems, applications, and data.
 
-Each component within the Orchestration Cluster is part of an integrated system that works together to provide end-to-end process orchestration. These components form a unified cluster that is tightly integrated to ensure seamless communication and data flow.
-
-This design ensures that all components are in sync, working collectively to maintain consistent state management, data integrity, and smooth process orchestration across the entire cluster. This architecture ensures reliable process execution with clear boundaries between each workflow engine's operation.
+This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
 #### Web Modeler and Console
 
 ![Web Modeler and Console](./img/management-cluster.jpg)
 
-Web Modeler and Console are designed to interact with multiple Orchestration Clusters. Console offers tools and interfaces for administrators to monitor clusters, and Web Modeler allows developers to create and deploy BPMN models.
+Web Modeler and Console are designed to interact with multiple orchestration clusters:
 
-- [Console](/components/console/introduction-to-console.md): A central management interface for monitoring and managing multiple Orchestration Clusters.
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): A web-based tool for designing and deploying workflow models to any available Orchestration Cluster.
+- [Console](/components/console/introduction-to-console.md): Central management interface for monitoring and managing multiple orchestration clusters.
+- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): Web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
 
-Additionally, Web Modeler and Console require the following:
+:::note Identity separation
+Web Modeler and Console use a separate Management Identity deployment, distinct from the embedded Identity in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Identity.  
+:::
 
-- [Management Identity](/self-managed/components/management-identity/what-is-identity.md): A service for managing user authentication and authorization.
+:::tip New in Camunda 8.8
+Starting with Camunda 8.8, Identity and Management Identity have been redesigned for clearer separation of concerns and improved flexibility.
+:::
 
-Unlike the Orchestration Cluster, Web Modeler and Console run a separate and dedicated Management Identity deployment. This is not the same as the embedded Identity in the Orchestration Cluster. Optimize also relies on Management Identity and will not function without it. It is not compatible with the embedded Orchestration Cluster Identity.
+#### Identity vs Management Identity
 
-For production environments, using an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) is recommended to connect the two environments.
+The following table outlines the key differences between Identity and Management Identity:
+
+| Category                  | Identity                                                                                                                                                                                                                                                                                                                                                                                                                                             | Management Identity                                                                                                                                                                          |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Scope                     | Provides access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.                                                                                                                                                                                                                                                                                       | Manages access for platform components such as Web Modeler, Console, and Optimize.                                                                                                           |
+| Unified access management | Authentication and authorizations are handled directly by the Orchestration Cluster across all components and APIs, eliminating any dependency on Management Identity.                                                                                                                                                                                                                                                                               | Continues to manage access for Web Modeler, Console, and Optimize.                                                                                                                           |
+| Authentication            | <ul><li><strong>No authentication</strong>: No authentication required for API access. Form-based login in the UI. Users and groups are managed in Identity.</li><li><strong>Basic authentication</strong>: API access with basic authentication. Form-based login in the UI. Users and groups are managed in Identity.</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> | <ul><li><strong>Direct Keycloak integration</strong> (default).</li><li><strong>OIDC</strong>: Any compatible identity provider (for example, Keycloak, Microsoft Entra ID, Okta).</li></ul> |
+| Authorizations            | Fine-grained [authorizations](/components/concepts/access-control/authorizations.md) provide consistent access control for process instances, tasks, and decisions across components and APIs.                                                                                                                                                                                                                                                       |                                                                                                                                                                                              |
+| Keycloak integration      | Treated as a standard external identity provider integrated via OIDC, making it easier to use other providers without special integration.                                                                                                                                                                                                                                                                                                           | Default Keycloak integration, with OIDC available for other providers.                                                                                                                       |
+| Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                               | No longer manages tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                              |
+
+For production environments, use an external [identity provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md) to connect both environments.
 
 ### Databases
 
 Databases can be deployed as part of the Camunda clusters, but using external databases or managed services offers several advantages:
 
-- **Flexibility**: Allows you to choose the database technology that best fits your needs and existing infrastructure while choosing one of the [supported environments](/reference/supported-environments.md#component-requirements).
-- **Scalability**: External databases can be scaled independently of the Camunda components, providing better performance and resource management.
-- **Maintenance**: Simplifies the maintenance and upgrade processes, as database management can be handled separately.
-- **Compliance**: Ensures that you can adhere to specific data governance and compliance requirements.
+- **Flexibility**: Choose the database technology that fits your needs and existing infrastructure. See [supported environments](/reference/supported-environments.md#component-requirements).
+- **Scalability**: External databases can be scaled independently of Camunda components for better performance and resource management.
+- **Maintenance**: Database management, including upgrades, can be handled separately.
+- **Compliance**: External databases support specific governance and compliance requirements.
 
-While some guides go into detail on how to deploy databases together with Camunda, the recommendation is to maintain this outside of Camunda.
-
-By decoupling databases from Camunda, you gain greater control and customization over your data storage and management strategies.
+While some guides explain how to deploy databases with Camunda, the recommendation is to manage databases externally for greater control and flexibility.
 
 ### High availability (HA)
 
-High availability (HA) ensures that a system remains operational and accessible even in the event of component failures. While all components are equipped to be run in a highly available manner. Optimize requires extra considerations when run in HA mode as the importer / archiver should only run once across all replicas. Related settings can be found as part of the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings).
+High availability (HA) ensures that a system remains operational even when components fail. All components can run in HA mode, but Optimize requires special consideration: the importer/archiver must run on only one replica at a time. See the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for details.
 
-While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
+Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails.
 
-If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
+For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
-If running a single instance is preferred, make sure to implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) since resilience will be limited.
+If running a single instance, implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md), as resilience will be limited.
 
 ## Available reference architectures
 
-:::note Documentation Update in Progress
-This is a work in progress as the existing documentation is updated to provide better general guidance on the topic. The Docker documentation may point to older guides.
+:::note Documentation update in progress
+This documentation is being updated to provide clearer general guidance. Some Docker documentation may still point to older guides.
 :::
 
-Choosing the right reference architecture depends on various factors such as the organization's goals, existing infrastructure, and specific requirements. The following guides are available to help choose and guide deployments:
+Choose a reference architecture based on factors such as your organization’s goals, infrastructure, and requirements. Use the following guides to plan your deployment:
 
 ### Kubernetes
 
-Kubernetes is a powerful orchestration platform for containerized applications. Using a reference architecture for Kubernetes can help organizations deploy and manage their applications more effectively. It provides guidelines for setting up clusters, managing workloads, and ensuring high availability and scalability. This approach is ideal for organizations looking to leverage the benefits of containerization and self-healing capabilities.
+Kubernetes is a powerful orchestration platform for containerized applications. A Kubernetes reference architecture provides guidelines for setting up clusters, managing workloads, and ensuring high availability and scalability.
 
-- Ideal for organizations adopting containerization and microservices (see [Cloud Native computing foundation](https://www.cncf.io/)).
+- Ideal for organizations adopting containerization and microservices (see [Cloud Native Computing Foundation](https://www.cncf.io/)).
 - Suitable for dynamic scaling and high availability.
-- Best for teams with experience in managing containerized environments.
-- A steeper learning curve but offers scalable and highly resilient platform.
+- Best for teams experienced in managing containerized environments.
+- Offers high resilience but comes with a steep learning curve.
 
-For more information and guides, see the reference for [Kubernetes](/self-managed/reference-architecture/kubernetes.md).
+See [Kubernetes deployment overview](/self-managed/reference-architecture/kubernetes.md).
 
 ### Containers
 
-Containers, such as Docker, offer a middle ground between the manual and Kubernetes approaches. They provide a lightweight, portable, and consistent runtime environment, making it easier to develop, test, and deploy applications across different environments. Containers encapsulate an application and its dependencies, ensuring that it runs reliably regardless of where it is deployed.
+Containers, such as Docker, provide a portable and consistent runtime environment. They simplify development, testing, and deployment across environments by encapsulating applications and their dependencies.
 
-- Advisable as a middle ground between manual and Kubernetes. Profit from containerization while not having the whole overhead of Kubernetes.
+- A middle ground between manual setups and Kubernetes that provides the benefits of containerization without the overhead of Kubernetes.
 - Containers can run on any system that supports the container runtime, ensuring consistency across development, testing, and production environments.
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
-For more information and guides, see the reference for [containers](/self-managed/installation-methods/docker/docker.md).
+See [Camunda Docker images](/self-managed/installation-methods/docker/docker.md).
 
 ### Manual (bare metal/virtual machines)
 
-For organizations that prefer traditional infrastructure, reference architectures for bare metal or virtual machines (VMs) offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
+For organizations that prefer traditional infrastructure, bare metal or VM-based reference architectures offer a structured approach to system deployment. These architectures provide best practices for setting up physical servers or VMs, configuring networks, and managing storage using Infrastructure as Service cloud providers. They are suitable for environments where containerization or use of Kubernetes services may not be feasible.
 
-- Suitable for organizations requiring use of IaaS, bare metal, and other traditional infrastructures.
+- Suitable for IaaS, bare metal, or traditional infrastructures.
 - Ideal for traditional setups needing highly customized security, strict data residency, or industry-specific regulatory compliance.
 - Applicable for high availability but requires more detailed planning.
 - Best for teams with expertise in managing physical servers or virtual machines.
 
-For more information and guides, see the reference for [manual setups](/self-managed/installation-methods/index.md).
+See [Manual deployment overview](/self-managed/reference-architecture/manual.md).
 
 ### Local development
 
-While the above options are suitable for trying out Camunda 8 locally, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) provides a simplified, developer-focused experience.
+For local evaluation or development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a simplified distribution for developers.
