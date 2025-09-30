@@ -5,29 +5,17 @@ sidebar_label: AWS Textract
 description: Extract printed text, handwriting, layout elements, and data from any document.
 ---
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
-
-:::info
-The **Amazon Textract connector** is available for `8.6.0` or later.
-:::
-
 The **Amazon Textract connector** allows you to integrate your BPMN service with [Amazon Textract](https://aws.amazon.com/textract/) to extract text from documents.
 
 ## Prerequisites
 
-To use this connector, you'll need an **AWS IAM Access Key** and **Secret Key** with the appropriate Textract permissions. Refer to the [AWS Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html) for setup instructions.
+To use this connector, you'll need an **AWS IAM Access Key** and **Secret Key** with the appropriate permissions:
 
-:::note
-Use **Camunda secrets** to avoid exposing your AWS IAM credentials as plain text. See [manage secrets](components/console/manage-clusters/manage-secrets.md).
-:::
+- grant `AmazonTextractFullAccess` policy (mandatory)
+- grant `AmazonS3ReadOnlyAccess` policy (mandatory, if using S3 as document source)
+- grant `AmazonS3FullAccess` policy (optional, if you want to use S3 as output location for asynchronous execution)
 
-## Create an Amazon Textract connector task
-
-<ConnectorTask/>
-
-## Make your Amazon Textract connector executable
-
-To execute the connector, you must ensure all mandatory fields are correctly filled.
+Refer to the [AWS Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html) for setup instructions, if needed.
 
 ### Authentication
 
@@ -40,6 +28,10 @@ Select an authentication type from the **Authentication** dropdown:
 
 2. **Default Credentials Chain** (hybrid/Self-Managed only): Select this option if your system uses implicit authentication methods such as role-based access, environment variables, or files on the target host. This method is only applicable for Self-Managed or hybrid environments. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
 
+:::note
+Use Camunda secrets to avoid exposing your token credentials as plain text. Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+:::
+
 ### Configure AWS region
 
 Set the AWS **Region** where the Textract service is hosted:
@@ -50,40 +42,36 @@ Set the AWS **Region** where the Textract service is hosted:
 Ensure the region matches the location of your Textract service and S3 buckets to reduce latency and meet compliance requirements. For a full list of AWS regions, refer to [AWS Regional Data](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
 :::
 
-### Configure input
+### Configure input document
+
+In this mode, you can select the document location using **Document location type** field.
+
+#### S3
+
+- **Document Bucket**: Enter the **S3 Bucket** that contains the document to be processed. Ensure the bucket has the correct permissions to allow Textract to access the document.
+- **Document path**: Enter the **S3 Document Path** to the file you want to process. This should include the full path from the bucket root to the document. Make sure the document path is properly structured and accessible by the Textract service.
+- **Document version** (optional): Specify the **Document Version** if you need to process a specific version of the document. If unspecified, the latest version of the document is processed. Document versioning is useful for tracking changes over time or processing a specific document iteration.
+
+#### Camunda Document
+
+- **Document**: Select the document from the Camunda document store.
+  :::note Only PNG and JPEG formats are supported. Only real-time execution is supported.
+
+### Configure operation
 
 #### Execution types
 
 Select the desired execution type from the **Execution Type** dropdown:
 
-- **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
+- **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data. Real-time execution with **S3** document location only supports single-page PDFs. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution.
 
-  In this mode, you can select the document location using **Document location type** field.
+- **Polling**: The **Polling** starts a document analysis and polls for the result every five seconds. Once the result is available the process continues. This method is suitable for larger documents if blocking further jobs, while the analysis is performed, is acceptable.
 
-  - S3
-  - Camunda Document
+- **Asynchronous**: Use **Asynchronous** execution when processing large or complex documents that do not require immediate results. This method allows you to submit a document for analysis and receive results at a later time, making it ideal for background processing or batch operations. The results are writting to a s3 bucket.
+  The output location needs to be configured:
 
-  :::note
-  **Real-time** execution with **S3** document location only supports single-page PDFs. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution. For more information, refer to [real-time PDF processing](https://aws.amazon.com/about-aws/whats-new/2022/01/amazon-textract-pdf-processing-jpeg-encoded-images/).
-  :::
-
-  :::note
-  **Real-time** execution with **Camunda Document** location supports only PNG or JPEG formats.
-  :::
-
-- **Polling**: The **Polling** execution type collects data in chunks. After processing the document, it returns a token that allows you to retrieve the next result. This method is ideal for multi-page documents or large files that take longer to process.
-
-  Polling continues retrieving results until the entire document is processed or until there are no more tokens remaining.
-
-  :::note
-  Use **Polling** for documents that exceed the limitations of **Real-time** execution.
-  :::
-
-- **Asynchronous**
-
-  Use **Asynchronous** execution when processing large or complex documents that do not require immediate results. This method allows you to submit a document for analysis and receive results at a later time, making it ideal for background processing or batch operations.
-
-  **Asynchronous** execution offers more flexibility than real-time or polling execution, as it allows you to process documents without waiting for immediate responses. This is particularly useful for larger files or when handling multiple documents simultaneously.
+  - **Output S3 Bucket**: The bucket where the processed document's output will be stored.
+  - **Output S3 Prefix**: The prefix under which the output will be saved.
 
   In this mode, you can configure the following optional fields:
 
@@ -92,18 +80,6 @@ Select the desired execution type from the **Execution Type** dropdown:
   - **KMS Key ID**: The KMS key used to encrypt inference results.
   - **Notification Channel Role ARN**: The Amazon SNS role ARN for publishing the operation's completion status. Also requires the **Notification Channel SNS Topic ARN** field.
   - **Notification Channel SNS Topic ARN**: The SNS topic ARN for publishing the operation's completion status. Also requires the **Notification Channel Role ARN** field.
-  - **Output S3 Bucket**: The bucket where the processed document's output will be stored.
-  - **Output S3 Prefix**: The prefix under which the output will be saved. Also requires the **Output S3 Bucket** field.
-
-  For example, you can use optional fields to set up notifications for when the processing is complete, or to define specific output locations for results.
-
-#### Document Bucket
-
-Enter the **S3 Bucket** that contains the document to be processed. Ensure the bucket has the correct permissions to allow Textract to access the document.
-
-#### Document path
-
-Enter the **S3 Document Path** to the file you want to process. This should include the full path from the bucket root to the document. Make sure the document path is properly structured and accessible by the Textract service.
 
 #### Feature types
 
@@ -115,19 +91,6 @@ Select one or more **Feature Types** from the following options:
 - **Analyze Layout**: Analyzes and extracts layout elements such as lines and words, and their spatial relationships.
 
 At least one feature type must be selected, and choosing multiple options can provide richer data extraction results depending on your document’s format.
-
-#### Document version (optional)
-
-Specify the **Document Version** if you need to process a specific version of the document. If unspecified, the latest version of the document is processed. Document versioning is useful for tracking changes over time or processing a specific document iteration.
-
-#### Document
-
-Mandatory only for **Real-time** execution with **Camunda Document** location type.
-
-:::note
-To work with document you must upload them first, [using the Camunda 8 REST API](/apis-tools/camunda-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
-:::
 
 ## Response
 
