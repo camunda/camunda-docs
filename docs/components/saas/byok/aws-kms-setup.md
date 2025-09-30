@@ -56,30 +56,6 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
 
 ```json
 {
-  "Sid": "Allow Camunda Cluster Amazon Role basic key access",
-  "Effect": "Allow",
-  "Principal": {
-    "AWS": "<your-cluster-role-arn>"
-  },
-  "Action": [
-    "kms:DescribeKey",
-    "kms:GenerateDataKey*",
-    "kms:Decrypt"
-  ],
-  "Resource": "*"
-},
-{
-  "Sid": "Allow Camunda Cluster Amazon Role to create grants for provisioning encrypted EBS volumes",
-  "Effect": "Allow",
-  "Principal": {
-    "AWS": "<your-cluster-role-arn>"
-  },
-  "Action": [
-    "kms:CreateGrant"
-  ],
-  "Resource": "*"
-}
-{
   "Version": "2012-10-17",
   "Statement": [
     {
