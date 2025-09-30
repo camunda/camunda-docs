@@ -417,19 +417,20 @@ The new `ActivityBuilder` interface provides a more flexible and fluent API for 
   
 #### Harmonized Error Contexts for jobError and bpmnError in Connectors
 
-With this release, we have harmonized the error context structures returned by the jobError and bpmnError functions in connectors to align with the corresponding error handling in Camunda core.
+With the Camunda 8.8 release, Camunda has harmonized the error context structures returned by the `jobError` and `bpmnError` functions in connectors to align with the corresponding error handling in Camunda core.
 
-This update ensures that connector errors now follow the same conventions and structure as errors handled by the core engine, supporting greater consistency across process modeling and execution.
+This ensures that connector errors now follow the same conventions and structure as errors handled by the core engine, supporting greater consistency across process modeling and execution.
 
 Updated context structure:
 
-bpmnError now returns an entry containing: `errorType`, `errorCode` `errorMessage` `variables`
-jobError now returns an entry containing : `errorType`, `errorMessage`, `variables`, `retries`, `retryBackoff`
-
-These changes do not introduce new fields or richer context, but instead ensure that error data is structured and surfaced consistently between connectors and Camunda core.
-This makes error handling more predictable, especially for teams working across both domains.
+- `bpmnError` now returns an entry containing: `errorType`, `errorCode` `errorMessage` `variables`
+- `jobError` now returns an entry containing : `errorType`, `errorMessage`, `variables`, `retries`, `retryBackoff`
 
 Developers and integrators should review any custom connector logic to take full advantage of the new fields and adapt error handling as necessary.
+
+:::note
+These changes do not introduce new fields or richer context, but instead ensure that error data is structured and surfaced consistently between connectors and Camunda core. This makes error handling more predictable, especially for teams working across both domains.
+:::
 
 </div>
 </div>
