@@ -338,6 +338,12 @@ If you choose not to use this module, you must either provide a managed PostgreS
 Additionally, you must delete the `db.tf` file in the `terraform/cluster` directory of your chosen reference. Otherwise, it will create the resources.
 :::
 
+In the [reference architecture](/self-managed/reference-architecture/reference-architecture.md), PostgreSQL database is required for Web Modeler and Keycloak (used here as an OIDC provider example). These components require persistent storage for user data, configuration, and authentication information.
+
+:::note Management Identity and multi-tenancy
+Management Identity also requires PostgreSQL, but only when multi-tenancy is enabled, which is not used in this reference architecture. For more information, see [Multi-tenancy](/components/concepts/multi-tenancy.md).
+:::
+
 We separated the cluster and PostgreSQL modules to offer you more customization options.
 
 #### Set up the Aurora PostgreSQL module
@@ -405,6 +411,8 @@ Additionally, you must delete the `opensearch.tf` file within the `terraform/clu
 :::
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
+
+The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
 
 :::note Migration to OpenSearch is not supported
 

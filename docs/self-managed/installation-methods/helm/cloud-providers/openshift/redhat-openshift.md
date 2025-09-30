@@ -32,6 +32,23 @@ Additional informational and high-level overview based on Kubernetes as upstream
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
+## Architecture
+
+This section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md). The architecture includes the following core components:
+
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
+
+For OpenShift deployments, the following OpenShift-specific configurations are also included:
+
+- **OpenShift Routes**: Native OpenShift way to expose services externally (alternative to standard Kubernetes Ingress)
+- **Security Context Constraints (SCCs)**: Security framework for controlling pod and container permissions
+
+:::info Single namespace deployment
+This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
+:::
+
 ## Deploy Camunda 8 via Helm charts
 
 ### Configure your deployment

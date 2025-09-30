@@ -1,6 +1,6 @@
 ---
 id: overview
-title: Identity on Self-Managed
+title: Identity in Self-Managed
 sidebar_label: "Overview"
 description: "Learn how Identity is bundled with your default orchestration cluster."
 ---
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 Identity is included by default with the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) in all Self-Managed installation methods. Within a cluster, Identity provides unified, cluster-level identity management and authorization.
 
 :::info
-The following guides cover Identity configuration in Self-Managed environments. For information on using and managing Identity, see [these user guides](/components/identity/identity-introduction.md).
+The following guides cover Identity configuration in Self-Managed environments. For information on using and managing Identity, see [Identity user guides](/components/identity/identity-introduction.md).
 :::
 
 ## Initial setup
@@ -27,21 +27,20 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 To modify the [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 :::note
-In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
-:::
 
-:::note
-As a Spring Boot application, the Orchestration Cluster supports standard
-[Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+- In Helm installations, API authentication and authorization are enabled by default. You can adjust these settings in `application.yaml` or using environment variables.
+- As a Spring Boot application, the Orchestration Cluster supports standard
+  [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) methods. [Review configurations which apply to all components within the Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+
 :::
 
 ## Configure initial users
 
-If users are managed within the Orchestration Cluster (i.e., without an external Identity Provider), you can create an initial user in three ways:
+If users are managed within the Orchestration Cluster (that is, without an external Identity Provider), you can create an initial user in three ways:
 
-- Through the [Orchestration Cluster UI](#option-1-orchestration-cluster-ui)
-- Through the [Setup endpoint of the Orchestration Cluster REST API](#option-2-setup-rest-api)
-- Through the [configuration](#option-3-configuration)
+- Using the [Orchestration Cluster UI](#option-1-orchestration-cluster-ui)
+- Using the [Setup endpoint of the Orchestration Cluster REST API](#option-2-setup-rest-api)
+- Using the [configuration](#option-3-configuration)
 
 :::warning
 After completing the initial setup, ensure at least one user remains assigned to the `admin` role.  
@@ -50,7 +49,7 @@ If no admin user exists, a third party could create a new admin account and gain
 
 ### Option 1: Create an initial admin user in Orchestration Cluster UI {#option-1-orchestration-cluster-ui}
 
-If no admin user exists, the orchestration cluster web applications display a screen for creating the initial user:
+If no admin user exists, the orchestration cluster web applications show a screen for creating the initial user:
 
 ![identity-create-initial-user](./img/create-initial-user.png)
 
@@ -73,7 +72,7 @@ with the following JSON request body:
 }
 ```
 
-This endpoint is only available as long as **no user is assigned to the `admin` role**.
+This endpoint is only available if **no user is assigned to the `admin` role**.
 
 ### Option 3: Define initial users via the configuration{#option-3-configuration}
 
@@ -111,7 +110,7 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=<The email address of the first us
 </Tabs>
 
 :::note
-By default, a user is not assigned to any roles and therefore has no permissions. See the next section to learn how to assign a user to a role via configuration.
+By default, a user is not assigned to any roles and therefore has no permissions. See the following section to learn how to assign a user to a role via configuration.
 :::
 
 #### Assign users, clients, groups, or mapping rules to roles via configuration
