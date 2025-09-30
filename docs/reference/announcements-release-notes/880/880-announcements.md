@@ -454,6 +454,44 @@ To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Exporter
+
+Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
+
+![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
+
+With the Camunda 8.8 release, a new Camunda Exporter is introduced:
+
+- Importing and archiving logic of web components (Tasklist and Operate) is brought closer to the distributed platform (Zeebe).
+- Benefits include simplified installation, scalability enabled for the web applications, reduced latency when showing runtime and historical data, and reduced data duplication (resource consumption).
+
+![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
+
+The new Camunda Exporter helps Camunda achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
+
+:::info
+To learn more, see the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
+:::
+
+#### Harmonized index schema
+
+The existing data schema in the secondary storage has been harmonized, to be used by all Camunda components.
+
+- This removes unnecessary duplications over multiple indices due to the previous architecture.
+- With this change, several Operate indices can and will be used by Tasklist.
+- New indices have been created to integrate Identity into the system.
+
+![Harmonized indices schema](../../img/harmonized-indices-schema.png)
+
+</div>
+</div>
+
 ### Deployment
 
 <div className="release-announcement-row">
@@ -663,26 +701,3 @@ The Camunda SaaS Starter plan is no longer available.
 
 </div>
 </div>
-
-<!-- ### Camunda Exporter <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
-
-Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by the Elasticsearch (ES) or OpenSearch (OS) exporters.
-
-![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
-
-With the Camunda 8.8 release, a new Camunda Exporter is introduced. That brings the importing and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). This simplifies the installation, enables scalability for the web applications, reduces latency when showing runtime and historical data, and reduces data duplication (resource consumption).
-
-![brown-field-without-optimize](../../img/brown-field-orchestration-cluster-without-optimize.png)
-
-The new Camunda Exporter helps us achieve a more streamlined architecture, better performance, and improved stability (especially concerning ES/OS).
-For more details about this project, see the related [blog post](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
-
-### Harmonized index schema
-
-The existing data schema in the secondary storage has been harmonized, to be used by all Camunda components.
-
-- This removes unnecessary duplications over multiple indices due to the previous architecture.
-- With this change, several Operate indices can and will be used by Tasklist.
-- New indices have been created to integrate Identity into the system.
-
-![Harmonized indices schema](../../img/harmonized-indices-schema.png) -->
