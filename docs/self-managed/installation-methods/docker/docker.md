@@ -3,7 +3,7 @@ id: docker
 sidebar_label: Docker
 title: Camunda Docker images
 keywords: ["camunda docker"]
-description: Learn about multi-platform support, configuration, Docker images, and Docker Compose.
+description: Learn about supported Camunda Docker images, platform support, and the recommended production alternatives.
 ---
 
 Camunda provides [official Docker images](https://hub.docker.com/u/camunda) for all major components.
