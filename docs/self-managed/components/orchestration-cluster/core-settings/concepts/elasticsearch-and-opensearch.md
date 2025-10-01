@@ -21,26 +21,30 @@ To connect to a secured (HTTPS) Elasticsearch or OpenSearch instance:
 - **URL protocol**: Use `https` instead of `http`.
 - **Authentication**: Set a valid username/password combination for basic authentication.
 - **AWS credentials**: For Amazon OpenSearch, set `awsEnabled` to `true` to use AWS credentials instead of basic auth.
-- **SSL/TLS**: SSL settings such as `selfSigned` or disabling hostname verification should only be used if connection issues occur.
+- **SSL/TLS**: SSL settings such as `self-signed` or disabling hostname verification should only be used if connection issues occur.
 - **JVM certificates**: Certificates may need to be imported into the JVM runtime.
 
 You can specify either `host` and `port` (deprecated) or `url` (recommended).
 
 ## Common configuration options
 
-| Name             | Description                                  | Default value                                  |
-| ---------------- | -------------------------------------------- | ---------------------------------------------- |
-| cluster-name     | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
-| url              | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
-| username         | Username to access the cluster REST API      | -                                              |
-| password         | Password to access the cluster REST API      | -                                              |
-| certificate-path | Path to SSL certificate                      | -                                              |
-| self-signed      | Certificate is self-signed                   | false                                          |
-| verify-hostname  | Validate hostname for SSL                    | false                                          |
-| awsEnabled       | Use AWS credentials (OpenSearch only)        | false                                          |
-| index-prefix     | Prefix for index names                       | operate / tasklist                             |
-| numberOfShards   | Number of shards for all indices             | 1                                              |
-| numberOfReplicas | Number of replicas for all indices           | 0                                              |
+:::note
+`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`.
+:::
+
+| Name                                             | Description                                  | Default value                                  |
+| ------------------------------------------------ | -------------------------------------------- | ---------------------------------------------- |
+| `camunda.data.{ES/OS}.cluster-name`              | Name of the Elasticsearch/OpenSearch cluster | elasticsearch / opensearch                     |
+| `camunda.data.{ES/OS}.url`                       | URL of the cluster REST API                  | [http://localhost:9200](http://localhost:9200) |
+| `camunda.data.{ES/OS}.username`                  | Username to access the cluster REST API      | -                                              |
+| `camunda.data.{ES/OS}.password`                  | Password to access the cluster REST API      | -                                              |
+| `camunda.data.{ES/OS}.security.certificate-path` | Path to SSL certificate                      | -                                              |
+| `camunda.data.{ES/OS}.security.self-signed`      | Certificate is self-signed                   | false                                          |
+| `camunda.data.{ES/OS}.security.verify-hostname`  | Validate hostname for SSL                    | false                                          |
+| awsEnabled                                       | Use AWS credentials (OpenSearch only)        | false                                          |
+| `camunda.data.{ES/OS}.index-prefix`              | Prefix for index names                       | operate / tasklist                             |
+| `camunda.data.{ES/OS}.number-of-shards`          | Number of shards for all indices             | 1                                              |
+| `camunda.data.{ES/OS}.number-of-replicas`        | Number of replicas for all indices           | 0                                              |
 
 :::note
 Shard and replica settings are applied on first startup or during version updates. After indices are created, they can be adjusted in the cluster template and applied to new indices.
@@ -50,27 +54,28 @@ Shard and replica settings are applied on first startup or during version update
 
 ```yaml
 camunda:
-  elasticsearch:
-    clusterName: elasticsearch
-    url: https://localhost:9200
-    ssl:
-      selfSigned: true
+  data:
+    secondary-storage:
+      elasticsearch:
+        cluster-name: elasticsearch
+        url: https://localhost:9200
+        security:
+          self-signed: true
 
-  opensearch:
-    clusterName: opensearch
-    url: https://localhost:9200
-    ssl:
-      selfSigned: true
-    awsEnabled: false
+      opensearch:
+        cluster-name: opensearch
+        url: https://localhost:9200
+        security:
+          self-signed: true
 ```
 
 ## Database selection (optional)
 
 Some components may require explicit configuration of which database to use:
 
-| Name             | Description                                              | Default value |
-| ---------------- | -------------------------------------------------------- | ------------- |
-| camunda.database | Database to connect to (`elasticsearch` or `opensearch`) | elasticsearch |
+| Name           | Description                                              | Default value |
+| -------------- | -------------------------------------------------------- | ------------- |
+| `camunda.data` | Database to connect to (`elasticsearch` or `opensearch`) | elasticsearch |
 
 ## Disable Elasticsearch deprecation logging
 
@@ -88,5 +93,5 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
 
 ## Notes
 
-- Settings like `selfSigned`, SSL verification, or AWS credentials apply depending on your deployment environment.
+- Settings like `self-signed`, SSL verification, or AWS credentials apply depending on your deployment environment.
 - Templates for indices are created automatically during first startup or upgrades. Manual adjustments to shards, replicas, or index settings can be made in the cluster templates.
