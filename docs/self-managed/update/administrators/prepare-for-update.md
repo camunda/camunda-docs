@@ -64,7 +64,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Zeebe Gateway</td>
-    <td>Tenant-Providing interceptors are not supported and should be replaced with built-in [Tenant management](/components/identity/tenant.md)</td>
+    <td>Tenant-providing interceptors are not supported and should be replaced with built-in [tenant management](/components/identity/tenant.md).</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>
