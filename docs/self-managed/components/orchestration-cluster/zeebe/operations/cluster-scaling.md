@@ -9,18 +9,17 @@ Zeebe allows scaling an existing cluster by adding or removing brokers and by ad
 Zeebe provides a REST API to manage the cluster scaling. The cluster management API is a custom endpoint available via [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/3.1.x/reference/htmlsingle/#actuator.endpoints). This is accessible via the management port of the gateway.
 
 :::important
-Partition count can only be increased and not decreased.
-:::
 
-:::important
-Backups are disallowed during scaling partitions, but can be taken before or after scaling. A backup taken before scaling partitions can be only restored to a cluster configured with the partition count before scaling. After restoring from the backup, you can request scaling again to the desired partition count.
-:::
+- Partition count can only be increased and not decreased.
+- Backups are disallowed during partition scaling but can be taken before or after. A backup taken before scaling can only be restored to a cluster with the same partition count. After restoring, you can request scaling again to the desired partition count.
+  :::
 
 ## Considerations
 
-- Scaling operations occur while the cluster remains online. During scaling, data is redistributed and new leaders are elected for affected partitions. Existing partitions continue processing data, but you may observe a temporary performance impact until scaling completes. To minimize disruption, plan scaling activities ahead of anticipated increases in load.
-- When adding new partitions or brokers, existing partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the number of partitions assigned to each broker, potentially increasing the load per broker. To preview the resulting partition distribution, use the API endpoints in [dry run](#dry-run) mode.
-- Always take backups before performing scaling operations.
+- Scaling operations occur while the cluster remains online. During scaling, data is redistributed and new leaders are elected for affected partitions.
+- Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
+- When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
+- Always take a backup before scaling to ensure you can restore if needed.
 
 ## Scale up brokers
 
@@ -63,17 +62,17 @@ camunda-zeebe-5                                        0/1     Init:0/1   0     
 
 ### 2. Send scale request to the Zeebe Gateway
 
-Now we should tell Zeebe to add new brokers to the cluster and add or re-distribute partitions to the new brokers. For that, send a POST request to the Zeebe Gateway's management endpoint. See [API reference](#api-reference) for more details.
+Send a POST request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
 
-If running on Kubernetes, and if you haven't set up Ingress, you can first port-forward to access the Zeebe Gateway in your local machine:
+If you are running on Kubernetes and haven’t set up Ingress, port-forward to access the Zeebe Gateway on your local machine:
 
 ```
 kubectl port-forward svc/camunda-zeebe-gateway 9600:9600
 ```
 
-Depending on whether you want to add new partitions or not, send the appropriate requests to the gateway (section 2.a or 2.b)
+Choose the appropriate request depending on whether you are adding new partitions (see section 2.a or 2.b).
 
-If you want to verify how the partitions will be distributed after the change, you can call the endpoints in [dry run](#dry-run) mode.
+Verify partition distribution after scaling by calling the endpoints in [dry run](#dry-run) mode.
 
 #### 2.a Scale brokers only
 
@@ -130,9 +129,9 @@ curl -X 'PATCH' \
       }'
 ```
 
-You can omit `"replicationFactor"` if you don't want to change it.
+You can omit `replicationFactor` if you don't want to change it.
 
-The response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology as shown below:
+The response includes a `changeId`, `currentTopology`, planned changes, and the expected topology, as shown below:
 
 ```
 {
@@ -637,11 +636,10 @@ OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda
 
 ### Reconfiguration API
 
-This API allows to reconfigure cluster by adding or removing brokers, adding more partitions, or
-changing the replicationFactor. This can be used instead of the Scale API.
+This API lets you reconfigure a cluster by adding or removing brokers, adding partitions, or changing the `replicationFactor`. You can use this instead of the Scale API.
 
 :::note
-This endpoint does not respect the **fixed** partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used, the partitions are redistributed using `ROUND_ROBIN` strategy.
+This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
 :::
 
 #### Request
@@ -687,23 +685,23 @@ curl -X 'PATCH' \
 
 ##### Dry run
 
-You can also do a dry run without actually executing the reconfiguration by specifying the request parameter `dryRun` to `true` as follows. By default, `dryRun` is set to false.
+You can do a dry run without executing the reconfiguration by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
 
 ##### Force
 
 :::caution
-This is a dangerous operation and must be used with caution. When not used correctly, split-brain scenarios or unhealthy, unrecoverable clusters may result.
+This is a dangerous operation and must be used with caution. Incorrect use may result in split-brain scenarios or an unhealthy, unrecoverable cluster.
 :::
 
-Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
+Usually, changes can only be made when all brokers are up. If some brokers are unreachable, you can remove them from the cluster by setting the `force` request parameter to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
 
 :::note
-Do not send more than one force request at a time.
+Don’t send more than one `force` request at a time.
 :::
 
-The following request reconfigures the cluster by force removing the specified brokers.
+Example request:
 
 ```
 curl -X 'PATCH' \
@@ -717,18 +715,18 @@ curl -X 'PATCH' \
       }'
 ```
 
-This operation does not re-distribute the partitions that were in the removed brokers. As a result, the resulting cluster will have a reduced number of replicas for the affected partitions.
+This operation doesn’t redistribute the partitions from the removed brokers. The resulting cluster has fewer replicas for the affected partitions.
 
 ### Scale request API
 
 :::note
-See also the Reconfiguration API
+See also the [Reconfiguration API](#reconfiguration-api).
 :::
 
-To scale up or down, use the following request to change the cluster size and redistribute the partitions.
+Use this endpoint to scale a cluster up or down by changing the cluster size and redistributing partitions.
 
 :::note
-This endpoint does not respect the **fixed** partitioning scheme configured via `zeebe.broker.experimental.partitioning`. When this endpoint is used, the partitions are redistributed using `ROUND_ROBIN` strategy.
+This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
 :::
 
 #### Request
