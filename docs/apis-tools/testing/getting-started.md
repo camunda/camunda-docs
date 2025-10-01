@@ -107,7 +107,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @CamundaSpringProcessTest
-@Deployment(resources = "classpath:my-process.bpmn")
 public class MyProcessTest {
 
     @Autowired private CamundaClient client;
@@ -138,6 +137,18 @@ public class MyProcessTest {
 - (_optional_) Inject a preconfigured `CamundaClient` to interact with the Camunda runtime.
 - (_optional_) Inject a `CamundaProcessTestContext` to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
+
+The Spring test requires a Spring Boot process application in the same package. Usually, the process
+application [deploys the process resources](/apis-tools/camunda-spring-boot-starter/getting-started.md#deploy-process-models)
+using the annotation `@Deployment`.
+
+If you have no process application yet, you can add a minimal one inside the test class as follows:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+static class TestProcessApplication {}
+```
 
 </TabItem>
 
