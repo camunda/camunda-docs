@@ -18,17 +18,19 @@ Before you begin, make sure you have:
 | Technical familiarity | Some experience with Amazon console, IAM roles, and KMS is recommended.    |
 
 :::warning Important
+
 - Deleting or disabling your KMS key will make your cluster and data inaccessible.
 - Key management is performed fully on the customer side in Amazon KMS. Camunda cannot rotate your encryption keys.
-:::
+  :::
 
 ## Step 1: Create a Camunda 8 SaaS cluster
 
 1. Sign in to the [Camunda Console](https://console.camunda.io/).
 2. Navigate to the **Cluster** section and click **Create New Cluster**.
 3. For **Region**, select an Amazon region where you want your cluster deployed.
-4. If desired, choose **Single region** or **Dual region**.  
-   - For **Dual region**, your key setup will require multi-Region keys in AWS.
+4. If desired, choose **Single region** or **Dual region**.
+   - For **Dual region**, you must create one key per region. The keys do not need to be replicated; they can be separate keys as long as they are in the correct regions.
+   - Full support for dual-region encryption is still under discussion. Check with your Camunda contact for the latest status.
 5. Under **Encryption at rest**, choose **External**.
 6. Click **Create cluster**.
 
@@ -40,19 +42,29 @@ After creation, the Console displays an **Amazon Role ARN** unique to your Camun
 
 ## Step 2: Create and configure a KMS key in Amazon
 
-Follow these steps in your Amazon account:
+You can create your KMS key in three ways:
+
+- **CLI**: Use the CLI script template provided in the Console. Populate the script with your AWS access keys and variables; it will return the ARN you need to input in the Console.
+- **AWS CloudFormation**: Use the provided templates.
+  - _One-click deployment_: Launches with predefined parameters and prompts you to execute the CloudFormation stack.
+  - _Manual deployment_: Download and apply the YAML templates yourself.
+  - For **dual region**, note that one-click deployment requires sequential execution of two templates, where the second depends on outputs from the first.
+- **Manual**: Use the procedure described below.
+
+### Manual creation steps
 
 1. Open the **Amazon KMS console**.
-2. Click **Create key**.
-3. Choose **Symmetric** key type.
-4. Select the **Region** matching your Camunda cluster.  
-   - For **Dual region**, create the key as a **multi-Region** key and ensure replication in the same secondary region as the cluster.
-5. Click **Next: Key administrators** and assign at least one administrator.
-6. Click **Next: Key usage permissions**. Grant your Camunda cluster Amazon Role access.
+2. From the AWS console **Region selector** (top navigation bar), select the Region matching your Camunda cluster.
+   - For dual region, select the correct region for each cluster region and create a key in each.
+3. Click **Create key**.
+4. Choose **Symmetric** key type and **Encrypt and decrypt** key usage.
+5. Click **Next: Key administrators** and assign any required key administrators.
+   - If skipped, the root account is applied by default.
+6. Click **Next: Key usage permissions**. Compare and apply the missing policy statements provided in your Camunda cluster's **encryption at rest** view within the **Manual key creation** tab.
 
-### Example KMS key policy
+### KMS key policy
 
-Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
+Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer-aws-account>` with the AWS account ID where the KMS key is created:
 
 ```json
 {
@@ -88,11 +100,7 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
       "Principal": {
         "AWS": "<tenant-role-arn>"
       },
-      "Action": [
-        "kms:CreateGrant",
-        "kms:ListGrants",
-        "kms:RevokeGrant"
-      ],
+      "Action": ["kms:CreateGrant", "kms:ListGrants", "kms:RevokeGrant"],
       "Resource": "*"
     }
   ]
@@ -100,14 +108,14 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
 ```
 
 :::warning Key policy guidance
+
 - Ensure you do not restrict the Camunda cluster Amazon Role from required KMS actions; otherwise, encryption will fail.
-- For dual region clusters, replicate keys in the correct secondary region.
-- After a key is created, core details cannot be modified. However, replication in additional regions is always possible later.
+- Key rotation must be managed in AWS KMS; Camunda cannot rotate your keys.
 - Any revocation of access immediately breaks the Camunda cluster.
-:::
+  :::
 
 7. Click **Finish** to create the key.
-8. Copy the **Key ARN**; you will need it in the Camunda Console.
+8. Copy the **KMS Key ARN**; you will need it in the Camunda Console.
 
 :::note
 [Insert screenshot of Amazon KMS key details showing Key ARN]
@@ -116,8 +124,8 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
 ## Step 3: Associate KMS key with Camunda cluster
 
 1. Return to the Camunda Console.
-2. On the cluster details page, locate the **KMS Key ARN** input field.  
-   - For **Dual region**, two fields will be available—enter the correct key for each region.
+2. On the cluster details page, locate the **KMS Key ARN** input field.
+   - For dual region, two fields will be available—enter the correct key for each region.
 3. Paste your Amazon KMS Key ARN(s) from Step 2.
 4. Confirm and apply the key. The Camunda Operator provisions storage using your key for:
    - Document handling storage
@@ -126,12 +134,16 @@ Replace `<your-cluster-role-arn>` with the Amazon Role ARN from Step 1:
    - Elasticsearch persistent disks
 
 :::note
+Once a key is applied, it cannot be edited or replaced—even if the key was invalid or encryption failed. To change keys, you must create a new cluster.
+:::
+
+:::note
 [Insert screenshot showing KMS Key ARN input in cluster details]
 :::
 
 ## Step 4: Verify encryption and logging
 
-After associating your Amazon KMS key with the Camunda cluster, follow these steps to ensure encryption is correctly applied and operations are logged.
+After associating your Amazon KMS key with the Camunda cluster, verify that encryption is working as expected.
 
 ### Verify encryption
 
