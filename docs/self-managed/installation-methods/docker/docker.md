@@ -12,7 +12,7 @@ Camunda provides [official Docker images](https://hub.docker.com/u/camunda) for 
 
 Docker images are suitable for production deployments.
 
-However, the provided [Docker Compose files](../../quickstart/developer-quickstart/docker-compose/) are intended only for quick start, development, and testing. They are not designed for production deployments.
+By contrast, the provided [Docker Compose files](../../quickstart/developer-quickstart/docker-compose/) are intended only for quick start, development, and testing.
 
 For production, we recommend using [Kubernetes with Helm](../helm/install.md). Advanced users can create their own hardened Docker Compose configuration, but this requires additional effort.
 
