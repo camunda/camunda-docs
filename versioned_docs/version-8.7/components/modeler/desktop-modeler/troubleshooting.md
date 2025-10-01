@@ -75,7 +75,7 @@ You try to connect to Zeebe from both Desktop Modeler _and_ community-supported 
 Ensure your computer has access to the (remote) network.
 
 :::tip
-If you run against a Camunda 8 free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
+If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
 :::
 
 ### The connection to Zeebe happens through a proxy
