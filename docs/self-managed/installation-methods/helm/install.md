@@ -43,7 +43,18 @@ By default, the Camunda Helm chart uses Bitnami open-source images. For producti
    ```bash
    helm install camunda camunda/camunda-platform -n orchestration
    ```
-4. [Access the components](#access-the-components)
+4. Access the components
+
+Use port-forward to [access the components](#access-the-components)
+
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+
+For basic authentication, use the default credentials:
+
+```
+username: demo
+password: demo
+```
 
 ### Install a specific version (optional)
 
@@ -77,7 +88,7 @@ This command lists all available chart versions and their corresponding applicat
 
 <!-- TODO: Add links to doc pages that explain each component. -->
 
-The following components run outside the orchestration cluster and are disable by default in Helm Charts:
+The following components run outside the orchestration cluster and are disabled by default in Helm Charts:
 
 - Optimize
 - Web Modeler
@@ -109,16 +120,17 @@ global:
       publicIssuerUrl: "http://localhost:18080/auth/realms/camunda-platform"
       webModeler:
         redirectUrl: "http://localhost:8070"
-        secret:
-          existingSecret: "camunda-credentials"
       console:
         redirectUrl: "http://localhost:8087"
         secret:
           existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-console-client-token"
       optimize:
         redirectUrl: "http://localhost:8083"
         secret:
           existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-optimize-client-token"
+
       #######################
       # Orchestration Group
       #######################
@@ -126,9 +138,11 @@ global:
         redirectUrl: "http://localhost:8080"
         secret:
           existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-orchestration-client-token"
       connectors:
         secret:
           existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-connectors-client-token"
   security:
     authentication:
       method: oidc
@@ -136,7 +150,9 @@ global:
 identity:
   enabled: true
   firstUser:
-    existingSecret: "camunda-credentials"
+    secret:
+      existingSecret: "camunda-credentials"
+      existingSecretKey: "identity-firstuser-password"
 
 identityKeycloak:
   enabled: true
@@ -205,27 +221,25 @@ For more information about enabling other components, see [Enable Web Modeler, C
 
 ## Access the components
 
-Run the following command to locally port-forward the orchestration cluster pod to access the UI:
+To access the Camunda user interfaces locally, first port-forward the required services in separate terminals:
 
 ```bash
+kubectl port-forward svc/camunda-keycloak 18080:80
 kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 ```
 
-Use the following URLs to access the orchestration cluster UIs:
+Retrieve the default credentials for the `demo` user with the following command:
 
 ```bash
-http://localhost:8080/identity
+kubectl get secret camunda-credentials -o jsonpath='{.data.identity-firstuser-password}' | base64 -d
+```
+
+After port-forwarding is active, open the UIs in your browser:
+
+```bash
 http://localhost:8080/operate
 http://localhost:8080/tasklist
-```
-
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
-
-For basic authentication use the default credentials:
-
-```
-username: demo
-password: demo
+http://localhost:8080/identity
 ```
 
 ## Troubleshoot installation issues
@@ -236,7 +250,7 @@ Verify that each pod is running and ready. If a pod is pending, it cannot be sch
 kubectl describe pods <POD_NAME>
 ```
 
-If the `describe` output does not help, check the pod logs by running:
+If `describe` does not help, check the pod logs by running:
 
 ```shell
 kubectl logs -f <POD_NAME>
