@@ -51,15 +51,15 @@ These secrets are used by Camunda applications and must be configured manually w
 
 ### Secrets using the new pattern (Camunda 8.8+)
 
-| **Secret**                              | **Chart values key**                        | **Purpose**                                             |
-| --------------------------------------- | ------------------------------------------- | ------------------------------------------------------- |
-| **Enterprise License Key**              | `global.license.secret`                     | Camunda Enterprise License Key                          |
-| **Identity First User Password**        | `identity.firstUser.secret`                 | Default user password (`demo/demo`)                     |
-| **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`         | OAuth admin client secret for administrative operations |
-| **OAuth Client Secret (Console)**       | `global.identity.auth.console.secret`       | OAuth client secret for Console                         |
-| **OAuth Client Secret (Connectors)**    | `global.identity.auth.connectors.secret`    | OAuth client secret for connectors                      |
-| **OAuth Client Secret (Orchestration)** | `global.identity.auth.orchestration.secret` | OAuth client secret for Orchestration Cluster           |
-| **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`      | OAuth client secret for Optimize                        |
+| **Secret**                              | **Chart values key**                                | **Purpose**                                             |
+| --------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- |
+| **Enterprise License Key**              | `global.license.secret`                             | Camunda Enterprise License Key                          |
+| **Identity First User Password**        | `identity.firstUser.secret`                         | Default user password (`demo/demo`)                     |
+| **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`                 | OAuth admin client secret for administrative operations |
+| **OAuth Client Secret (Console)**       | `global.identity.auth.console.secret`               | OAuth client secret for Console                         |
+| **OAuth Client Secret (Connectors)**    | `connectors.security.authentication.oidc.secret`    | OAuth client secret for connectors                      |
+| **OAuth Client Secret (Orchestration)** | `orchestration.security.authentication.oidc.secret` | OAuth client secret for Orchestration Cluster           |
+| **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`              | OAuth client secret for Optimize                        |
 
 ### Secrets using Bitnami subchart patterns (all versions)
 
