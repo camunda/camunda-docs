@@ -176,7 +176,7 @@ The [Cockpit plugin](/guides/migrating-from-camunda-7/data-migrator/cockpit-plug
 - The migration schema has no authorization mechanism. Anyone with authenticated access to the Camunda 7 Cockpit can see the Cockpit Plugin and read the migration schema.
 - If the migration of a process instance or any other entity is skipped for multiple reasons, only one reason is stored and displayed.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5389
-- The skip reason is currently only stored for the initial migration attempt. If migration fails again after retry, the skip reason is not updated.
+- For historic data migration the skip reason is currently only stored for the initial migration attempt. If migration fails again after retry, the skip reason is not updated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5390
 - There are currently some UI inconsistencies. See:
   - https://github.com/camunda/camunda-bpm-platform/issues/5422

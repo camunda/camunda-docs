@@ -65,10 +65,11 @@ Based on this, we can look in the [matrix versioning of 8.8](https://helm.camund
 
 The following specific prerequisites are required when restoring Elasticsearch/OpenSearch:
 
-| Prerequisite        | Description                                                                                                                                                                           |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Clean state/data    | Elasticsearch/OpenSearch is set up and running with a clean state and no data on it.                                                                                                  |
-| Snapshot repository | Elasticsearch/OpenSearch are configured with the same snapshot repository as used for backup, using the documentation linked in [prerequisites](backup-and-restore.md#prerequisites). |
+| Prerequisite        | Description                                                                                                                                                                                                                      |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Clean state/data    | Elasticsearch or OpenSearch is set up and running with a clean state and no existing data.                                                                                                                                       |
+| Snapshot repository | Elasticsearch or OpenSearch is configured to use the same snapshot repository as the backup. See [prerequisites](backup-and-restore.md#prerequisites).                                                                           |
+| Sizing              | Elasticsearch or OpenSearch should be sized the same or larger than the original cluster. Restoring to a smaller cluster (for example, with fewer data nodes) can prevent shards from being assigned and cause restore failures. |
 
 ### 1. Restore [Templates](https://www.elastic.co/docs/manage-data/data-store/templates)
 
@@ -401,7 +402,7 @@ For the Zeebe partitions backup, you will need to check your configured backup s
 Zeebe creates a folder for each Partition ID and subfolder in this with each backup ID.
 
 :::warning
-Using the Zeebe Management Backup API is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
+Using the [Zeebe Management Backup API](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md#list-backups-api) is the recommended method for listing available backups, as it ensures the backups are complete and valid. Manually identifying backup IDs can result in restoring an incomplete backup, which will fail the restore process. If this occurs, you will need to choose a different backup ID and repeat the restore process for all components with the new backup ID, including the datastore, to avoid mismatched backup windows and potential data loss.
 :::
 
 <details>
@@ -457,7 +458,7 @@ The following uses the [Elasticsearch CAT API](https://www.elastic.co/docs/api/d
 
 ```bash
 for index in $(curl -s "$ELASTIC_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$ELASTIC_ENDPOINT/$index"
 done
@@ -676,11 +677,9 @@ orchestration:
    - name: ZEEBE_RESTORE_FROM_BACKUP_ID
      value: "$BACKUP_ID" # Change the $BACKUP_ID to your actual value
    # all the envs related to the backup store as outlined in the prerequisites
-   - name: ZEEBE_BROKER_DATA_BACKUP_STORE
+   - name: CAMUNDA_DATA_BACKUP_STORE
      value: "S3" # just as an example
-   - name: CAMUNDA_TASKLIST_BACKUP_REPOSITORYNAME
-     value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
-   - name: CAMUNDA_OPERATE_BACKUP_REPOSITORYNAME
+   - name: CAMUNDA_DATA_BACKUP_REPOSITORYNAME
      value: camunda # Change to name of the repository in Elasticsearch/OpenSearch
    ...
 
