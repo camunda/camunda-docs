@@ -141,6 +141,10 @@ You can begin migrating to the [Orchestration Cluster REST API](/apis-tools/orch
 | Camunda 8.9  | These APIs remain available but deprecated, and not recommended for new implementations. |
 | Camunda 8.10 | These APIs are removed.                                                                  |
 
+:::info
+To learn more about the differences between Tasklist v1 and v2 UI modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
+:::
+
 </div>
 </div>
 
@@ -259,27 +263,6 @@ The Assignees list is removed from the response.
 
 - These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 - The Operate and Tasklist usage metrics endpoints are scheduled for removal in the 8.10 release.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Tasklist v1 UI mode configuration
-
-Tasklist v1 remains available for the UI until Camunda 8.10, allowing continued access to the legacy interface during the migration period.
-
-To run Tasklist UI in v1 mode, set the following environment variable:
-
-```bash
-CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
-```
-
-This configuration setting allows you to continue using the v1 user experience while planning your migration to v2. To learn more about the differences between v1 and v2 modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
 
 </div>
 </div>
