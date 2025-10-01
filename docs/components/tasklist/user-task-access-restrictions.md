@@ -7,7 +7,7 @@ description: "Control the level of access a user or group has to perform tasks i
 
 User task access restrictions allow you to ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md). These restrictions are based on the candidate users and groups defined in a BPMN diagram.
 
-:::info
+:::caution
 User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
 :::
 
