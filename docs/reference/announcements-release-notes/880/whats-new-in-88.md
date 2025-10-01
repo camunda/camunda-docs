@@ -66,7 +66,7 @@ The simplest Camunda 8.8 Self-Managed deployment runs as a single Java applicati
 
 :::info
 
-- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
 - Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
