@@ -112,7 +112,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.long-polling.enabled",
+    name: "camunda.api.long-polling.enabled",
     legacy: [
       "zeebe.gateway.longPolling.enabled",
       "zeebe.broker.gateway.longPolling.enabled",
@@ -121,7 +121,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.long-polling.timeout",
+    name: "camunda.api.long-polling.timeout",
     legacy: [
       "zeebe.gateway.longPolling.timeout",
       "zeebe.broker.gateway.longPolling.timeout",
@@ -130,7 +130,16 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.long-polling.min-empty-responses",
+    name: "camunda.api.long-polling.probe-timeout",
+    legacy: [
+      "zeebe.gateway.longPolling.probeTimeout",
+      "zeebe.broker.gateway.longPolling.probeTimeout",
+    ],
+    types: ["1-to-1"],
+    area: ["API"],
+  },
+  {
+    name: "camunda.api.long-polling.min-empty-responses",
     legacy: [
       "zeebe.gateway.longPolling.minEmptyResponses",
       "zeebe.broker.gateway.longPolling.minEmptyResponses",
