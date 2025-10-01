@@ -7,7 +7,7 @@ description: "Control the level of access a user or group has to perform tasks i
 
 User task access restrictions allow you to ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md). These restrictions are based on the candidate users and groups defined in a BPMN diagram.
 
-:::info
+:::caution
 User task access restrictions are only supported with the Tasklist v1 API. For more information, see the documentation on [Tasklist API versions](api-versions.md#user-task-access-restrictions-and-the-tasklist-api).
 :::
 
@@ -32,4 +32,4 @@ You can enable/disable user task access restrictions from the [cluster settings 
 
 When activated, tasks assigned to users or candidate groups are only visible to the assigned user or respective group members. When deactivated, every user can see any task, regardless of the assignment.
 
-This configuration does not affect API users. When retrieving tasks using the APIs, all tasks are returned.
+This configuration does not affect OIDC API clients. When retrieving tasks using such a client, all tasks are returned.

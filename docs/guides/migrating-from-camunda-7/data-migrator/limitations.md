@@ -17,8 +17,6 @@ The runtime migration has the following limitations.
   - You cannot migrate running instances when you have configured history level to `NONE` or a custom history level that doesn't create historic process instances.
   - The minimum supported history level is `ACTIVITY`.
 - You must add an execution listener of type `migrator` to all your start events.
-- Multi-tenancy is currently not supported. A runtime process instance can only be migrated if it is not associated with a tenant.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5315
 - Migration of users, groups, or tenants as well as authorizations is currently not supported.
   - You must ensure that the users, groups, and authorizations are already migrated to Camunda 8 before migrating process instances.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5175
@@ -99,7 +97,7 @@ Camunda 8 does not support [asynchronous continuation before or after](https://d
 
 #### Call activity
 
-To migrate a subprocess that is started from a call activity, the migrator must set the `legacyId` variable for the subprocess. This requires propagating the parent variables. This can be achieved by updating the C8 call activity in one of the following ways:
+To migrate a subprocess that is started from a call activity, the migrator must set the `legacyId` variable for the subprocess. This requires propagating the parent variables. This can be achieved by updating the Camunda 8 call activity in one of the following ways:
 
 - Set `propagateAllParentVariables` to `true` (this is the default) in the `zeebe:calledElement` extension element.
 - Or, if `propagateAllParentVariables` is set to `false`, provide an explicit input mapping:
@@ -123,17 +121,17 @@ Processes with active multi-instance elements can currently not be migrated. We 
   - Timers with [cycles](/components/modeler/bpmn/timer-events/timer-events.md#time-cycle)): ensure the cycle is significantly longer than the migration time frame and/or use a start time that lies outside the migration time frame.
 - Note that during deployment and/or migration, the timers may be restarted. If business logic requires you to avoid resetting timer cycles/duration, you need to apply a workaround:
   - Timers with cycles:
-    - Add a start time to your cycle definition that is equal to the moment in time when the currently running C7 timer is next due.
+    - Add a start time to your cycle definition that is equal to the moment in time when the currently running Camunda 7 timer is next due.
     - You must still ensure that the start time lies outside the migration time frame.
   - Timers with durations:
     - Non-interrupting timer boundary events:
-      - Switch to cycle definition with a start time that is equal to the moment in time when the currently running C7 timer is next due and add a "repeat once" configuration.
+      - Switch to cycle definition with a start time that is equal to the moment in time when the currently running Camunda 7 timer is next due and add a "repeat once" configuration.
       - This way, for the first post migration run, the timer will trigger at the start time.
       - For all subsequent runs, the defined cycle duration will trigger the timer. The "repeat once" instruction ensures it only fires once, similar to a duration timer.
       - You must still ensure that the start time lies outside the migration time frame.
     - Interrupting boundary and intermediate catching events:
-      - Add a variable to your C7 instance that contains the leftover duration until the next timer is due.
-      - In your C8 model, adjust the timer duration definition to use an expression: if the variable is set, the value of this variable should be used for the duration. If the variable is not set or does not exist, you may configure a default duration.
+      - Add a variable to your Camunda 7 instance that contains the leftover duration until the next timer is due.
+      - In your Camunda 8 model, adjust the timer duration definition to use an expression: if the variable is set, the value of this variable should be used for the duration. If the variable is not set or does not exist, you may configure a default duration.
       - This way, for the first post migration run the variable will exist and the timer will set its duration accordingly.
       - For all subsequent runs, the variable will not exist and the default duration will be used.
       - Again, you must ensure the leftover duration for the first post migration run lies outside the migration time frame.
@@ -143,9 +141,9 @@ Processes with active multi-instance elements can currently not be migrated. We 
 - Event subprocesses with interrupting start events can cause unexpected behavior during migration if triggered at the wrong moment. This includes timer, message, and signal start events.
 - What can go wrong:
   - A task that already ran in Camunda 7 might run again in Camunda 8.
-  - The process might end up in the wrong state after migration — for example, being one step behind what you see in C7.
+  - The process might end up in the wrong state after migration — for example, being one step behind what you see in Camunda 7.
 - When could it happen:
-  - This can occur when a process instance is already inside an event subprocess in C7, and the start event of that same subprocess is accidentally triggered again in C8 during migration.
+  - This can occur when a process instance is already inside an event subprocess in Camunda 7, and the start event of that same subprocess is accidentally triggered again in Camunda 8 during migration.
 - How to prevent it:
   - Don't correlate messages or send signals during migration.
   - Temporarily adjust timer start events in event subprocesses to ensure they do not trigger during migration (see the section on timer events for more details).
@@ -170,3 +168,19 @@ The history migration has the following limitations.
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
 - Decision instance `inputs` and `outputs` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364
+
+## Cockpit plugin
+
+The [Cockpit plugin](/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin.md) has the following limitations:
+
+- The migration schema has no authorization mechanism. Anyone with authenticated access to the Camunda 7 Cockpit can see the Cockpit Plugin and read the migration schema.
+- If the migration of a process instance or any other entity is skipped for multiple reasons, only one reason is stored and displayed.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5389
+- For historic data migration the skip reason is currently only stored for the initial migration attempt. If migration fails again after retry, the skip reason is not updated.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5390
+- There are currently some UI inconsistencies. See:
+  - https://github.com/camunda/camunda-bpm-platform/issues/5422
+  - https://github.com/camunda/camunda-bpm-platform/issues/5423
+  - https://github.com/camunda/camunda-bpm-platform/issues/5424
+- The Cockpit plugin doesn't have extensive test coverage yet so we cannot guarantee a high level of stability and therefore don't claim it to be production-ready.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5404

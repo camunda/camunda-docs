@@ -68,6 +68,6 @@ In this case, the mapping rule matches against an array of objects. Depending on
 
 For more details on configuring mapping rules in a Self-Managed environment, see:
 
-- [Manage mapping rules in Orchestration Cluster Identity](../../identity/mapping-rules/manage-mapping-rules.md)
+- [Manage mapping rules in Orchestration Cluster Identity](../../identity/mapping-rules.md)
 - [Manage mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md)
 - [Manage mapping rules via API](/apis-tools/orchestration-cluster-api-rest/specifications/create-mapping-rule.api.mdx)

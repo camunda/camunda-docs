@@ -66,7 +66,7 @@ The simplest Camunda 8.8 Self-Managed deployment runs as a single Java applicati
 
 :::info
 
-- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
 - Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
@@ -223,6 +223,7 @@ Resource authorizations, groups, and roles formerly managed via Console are repl
 - These are automatically migrated during the Camunda 8.8 upgrade to preserve your existing Access Management configuration at the time of the update.
 - After upgrading a cluster to 8.8, changes to resource authorizations and roles made in Console no longer affect the 8.8 cluster.
 - Users and clients are created and managed in Console, with their authorizations managed via the Orchestration Cluster.
+- Console cluster settings in 8.8 allow you to toggle Orchestration Cluster authorizations. Authorizations are enabled by default for any migrated cluster. The automated migration ensures that your users and clients can access the UIs and APIs as before.
 
 The following table summarizes where Identity entities are managed in Camunda 8.8 SaaS:
 
@@ -241,12 +242,10 @@ The following table summarizes where Identity entities are managed in Camunda 8.
 After you deploy all Camunda 8 components in a Self-Managed environment, you will continue to use Management Identity for Web Modeler, Console, and Optimize, but use Orchestration Cluster Identity for Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API.
 
 - Roles and permissions for Orchestration Cluster components (previously managed in Management Identity), are now replaced by the new authorizations and roles defined within Orchestration Cluster Identity.
-
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
-
+- Authorization checks are enabled by default for any migrated cluster using the Helm chart. The automated migration ensures that your users and clients can access the UIs and APIs like before.
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
-
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:

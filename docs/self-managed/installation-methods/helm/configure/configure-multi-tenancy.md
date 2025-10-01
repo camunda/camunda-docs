@@ -1,81 +1,66 @@
 ---
 id: configure-multi-tenancy
 sidebar_label: Multi-tenancy
-title: Helm chart multi-tenancy configuration
+title: Configure multi-tenancy in Helm chart
 description: "Learn how to configure multi-tenancy in Camunda 8."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+Multi-tenancy lets you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8 cluster. This ensures separation while reducing infrastructure overhead by running multiple tenants on a shared installation.
+
+This page explains how to configure multi-tenancy in both Management Identity and [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md). It also shows the defaults, how to enable or enforce tenant checks, and how to resolve common issues.
+
+## Prerequisites
+
+- A running Camunda 8 Self-Managed deployment with authentication enabled.
+
 :::note
-Multi-tenancy is currently only available for Camunda 8 Self-Managed with authentication enabled through [Orchestation Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
+Multi-tenancy requires authentication in the Orchestration Cluster Identity. If authentication is disabled, multi-tenancy does not work.
 :::
 
-To configure multi-tenancy you must enable the multi-tenancy flag either in the [Helm charts](/self-managed/installation-methods/helm/install.md)
-**or** via environment variables.
+## Configuration
 
-<Tabs groupId="memberType" defaultValue="helm" queryString values={[{label: 'Helm Charts', value: 'helm', },{label: 'Environment Variables', value: 'environment', }]} >
-<TabItem value="helm">
+Multi-tenancy behavior differs depending on the identity component:
 
-When using Helm charts, you can enable multi-tenancy globally with the flag `global.multitenancy.enabled`.
-Visit [the Helm chart configuration](https://artifacthub.io/packages/helm/camunda/camunda-platform#global-parameters) for additional details.
+- **Management Identity:** Disabled by default. You must enable it. Once enabled, tenant checks are automatically enforced (all requests are validated against the active tenant configuration).
 
-</TabItem>
-<TabItem value="environment">
+- **Orchestration Cluster Identity:** Enabled by default, with a default tenant created. Tenant checks are not enforced unless explicitly enabled.
 
-When using environment variables, you can enable multi-tenancy by setting the following variables:
+### Parameters
 
-```bash
-export CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
-export CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
+| values.yaml option                          | type    | default | description                                                                          |
+| ------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------ |
+| `global.multitenancy.enabled`               | boolean | `false` | (Management Identity) Enable multi-tenancy globally.                                 |
+| `orchestration.multitenancy.checks.enabled` | boolean | `false` | (Orchestration Cluster Identity) Enforce tenant validation across requests.          |
+| `orchestration.multitenancy.api.enabled`    | boolean | `true`  | (Orchestration Cluster Identity) Enable the multi-tenancy API for tenant management. |
+
+### Example usage
+
+**Management Identity**
+
+Enable multi-tenancy in Management Identity:
+
+```yaml
+global:
+  multitenancy:
+    enabled: true
 ```
 
-</TabItem>
-</Tabs>
+**Orchestration Cluster Identity**
 
-:::danger
-Disabling multi-tenancy can lead to unexpected behavior if previously enabled with active tenants
+Enable tenant checks and the multi-tenancy API:
+
+```yaml
+orchestration:
+  multitenancy:
+    checks:
+      enabled: true # Enforces tenant checks in all components
+    api:
+      enabled: true # Enables multi-tenancy API for tenant management
+```
+
+:::warning
+Disabling multi-tenancy after it has been enabled can cause unexpected behavior if active tenants exist.
 :::
-
-## Troubleshooting
-
-### Zeebe is unable to retrieve jobs for a tenant, unable to assign a task to yourself, or Operate retry is not functioning
-
-If multi-tenancy is enabled, you may encounter the following issues:
-
-- **Zeebe is unable to retrieve jobs for a tenant** when canceling or retrying via **Operate** or **Tasklist**.
-- You see the error `Task could not be assigned - Service is not reachable` when attempting to assign a task to yourself in **Tasklist**.
-- **Retry operations in Operate do not function** as expected.
-
-These issues typically occur because the **Zeebe client used by Operate and Tasklist does not have access to the required tenant(s).** This access must be explicitly granted.
-
-#### How to fix it
-
-You can resolve these issues by ensuring the **Zeebe application is assigned to the tenant** where the task or job resides. To do this:
-
-1. **Log in to Camunda Identity.**
-2. In the left-hand menu, go to **Tenants**.
-3. Click on the tenant that is experiencing the issue.
-4. Navigate to the **Applications** tab.
-5. Ensure that the checkbox for **Zeebe** is selected.
-6. Click **Save** if any changes were made.
-
-Once the Zeebe application is assigned to the tenant, you should be able to:
-
-- Assign tasks to yourself in Tasklist.
-- Successfully retry jobs in Operate.
-- Retrieve jobs from the correct tenant context.
-
-For additional details, refer to the documentation on [assigning applications to a tenant](/self-managed/components/management-identity/manage-tenants.md#assign-applications-to-a-tenant-1).
-
-### Tenant requirement for job actions
-
-In single-tenant deployments, Operate and Tasklist can cancel or retry jobs without requiring tenant specification. However, in multi-tenant mode, this behavior changes: **a tenant must always be explicitly provided**.
-
-This is a known limitation based on how the applications are built—there is no current workaround.
-
-### Identity usage for Zeebe client connections
-
-Although Operate and Tasklist each have their own Keycloak identities (`operate`, `tasklist`), both internally use a Zeebe client to connect to Zeebe (particularly relevant for versions before 8.8).  
-This client must be configured with its own credentials (commonly labeled `zeebe`) and **should not reuse the application's identity**. While it may appear that credentials are shared, the Zeebe client is meant to use a separate, purpose-specific identity.

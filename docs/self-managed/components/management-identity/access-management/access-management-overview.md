@@ -7,7 +7,9 @@ description: "Learn how to manage access and permissions for Web Modeler, Consol
 
 With Management Identity, you can manage and control access to management and modeling component REST APIs and custom applications using permissions and roles.
 
+:::note
 This section describes how to manage access to Web Modeler, Console, and Optimize. For access control to Orchestration Cluster components and their resources, refer to the [Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md) instead.
+:::
 
 ## About permissions
 

@@ -8,8 +8,6 @@ import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications
 import TaskTileSpecification from '../img/task-tile-specification.png';
 import styles from "./styles.module.css";
 
-Tasklist provides a user-friendly interface for managing and completing tasks that require manual interaction. It shows you all user tasks that appear in processes running in the [Orchestration Cluster](/components/orchestration-cluster.md).
-
 The user interaction with a task may involve making updates, adding variables, filling out a [Camunda Form](/components/modeler/forms/utilizing-forms.md), or simply reviewing and completing the task.
 
 User tasks can be automatically assigned to users and groups in the BPMN process, or they must be self-assigned from Tasklist.
@@ -61,16 +59,6 @@ If the task doesn’t have a form, it will display task variables.
 From the task detail page you can switch to the **Process** tab. This provides a visual representation of the BPMN diagram the task is part of, and may help you understand how an individual task fits into the larger workflow, what activities happened earlier, and what’s coming next.
 
 ![tasklist-process-diagram](./img/tasklist-task-details-process-diagram.png "Process diagram preview")
-
-:::note
-The diagram indicates the version of the process instance in which the task was initiated.
-
-This feature is available for diagrams deployed on version 8.6 or higher.
-:::
-
-#### Resource-based access (RBA)
-
-If your organization has RBA enabled, the process diagram will be displayed only to users that have permission to view process and decision definitions.
 
 ## Filtering
 

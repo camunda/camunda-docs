@@ -33,6 +33,6 @@ Tasklist is a ready-to-use application to rapidly implement business processes a
 
 ## Identity
 
-Identity is responsible for managing authentication, authorization, and entities within Camunda 8.
+Identity is responsible for managing authentication, authorization, and access-related entities within the Orchestration Cluster.
 
 - [Learn more about Identity](/components/identity/identity-introduction.md)

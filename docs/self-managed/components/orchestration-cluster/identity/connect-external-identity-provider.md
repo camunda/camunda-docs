@@ -13,10 +13,10 @@ Configure Identity to use an external identity provider (IdP) via OpenID Connect
 
 You can configure IdP integration to control authentication and authorization for both the web components and machine-to-machine (M2M) API access (for connectors and workers).
 
-| Access type                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web components](#web-components)                      | <p>Users authenticate via the OIDC [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth).</p><p><ul><li><p>Users are redirected to your IdP to log in, and Camunda receives a token to establish the session.</p></li><li><p>Claims from the token are used to identify the user's username, and (optionally) groups for easier assignment and management.</p></li><li><p>Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.</p></li></ul></p><p>As user information is not stored in the Orchestration Cluster using OIDC, features such as user search and user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Identity UI.</p> |
-| [Machine-to-machine (M2M) API access](#m2m-api-access) | <p>Connectors, job workers or other implementations that use the Orchestration Cluster REST or gRPC APIs (for example, by using one of the Camunda Clients) do not use the browser-based authorization code flow.</p><p>Instead, they authenticate using client credentials. The authentication method for Camunda Clients is separate from the interactive user login and typically requires additional configuration in your IdP and Camunda.</p>                                                                                                                                                                                                                                                                                                                                      |
+| Access type                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Web components](#web-components)                                         | <p>Users authenticate via the OIDC [Authorization Code Flow](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth).</p><p><ul><li><p>Users are redirected to your IdP to log in, and Camunda receives a token to establish the session.</p></li><li><p>Claims from the token are used to identify the user's username, and (optionally) groups for easier assignment and management.</p></li><li><p>Mapping Rules can be used to map token claims to Camunda roles, authorizations, or tenants.</p></li></ul></p><p>As user information is not stored in the Orchestration Cluster using OIDC, features such as user search and user validation on assigning authorizations or tenants and user management are not available in the Orchestration Cluster Identity UI.</p> |
+| [Machine-to-machine (M2M) API access](#machine-to-machine-m2m-api-access) | <p>Connectors, job workers or other implementations that use the Orchestration Cluster REST or gRPC APIs (for example, by using one of the Camunda Clients) use the [OAuth Client Credentials Flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4) to obtain a JWT access token for authentication.</p><p>This authentication method for Camunda Clients is separate from the interactive user login and typically requires additional configuration in your IdP and Camunda.</p>                                                                                                                                                                                                                                                                                            |
 
 ## Web components
 
@@ -43,7 +43,7 @@ Before configuring Camunda, you must first prepare your IdP:
 5. Note the **client ID**, **client secret**, and **issuer URI** as these are required during Camunda configuration.
 
 :::note
-For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), [configure](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration) your IdP to include it in the token, and update the Camunda configuration.
+For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), configure your IdP to include it in the token, and update the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration).
 :::
 
 ### Step 2: Choose your deployment and configuration method
@@ -139,7 +139,7 @@ orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
 orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
-orchestration.security.authentication.oidc.usernameClaim: "email"
+orchestration.security.authentication.oidc.usernameClaim: "oid"
 orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
@@ -179,31 +179,35 @@ To allow users to access the Orchestration Cluster UI, you can assign the "Admin
 <TabItem value="yaml">
 
 ```yaml
-camunda.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+camunda.security.initialization.defaultRoles.admin.users: [<YOUR_USERNAME>]
 ```
 
 </TabItem>
 <TabItem value="env">      
 ```
-CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS[0]=<YOUR_USERNAME>
+CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=<YOUR_USERNAME>
 ```
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.initialization.defaultRoles.admin.users[0]: <YOUR_USERNAME>
+orchestration.security.initialization.defaultRoles.admin.users: [ <YOUR_USERNAME> ]
 ```
 </TabItem>
 </Tabs>
 
-1. Replace `<YOUR_USERNAME>` with the username provided by your IdP (matching the claim configured as `username-claim`).
+1. Replace `<YOUR_USERNAME>` with the username provided by your IdP (matching the value of the claim configured as `username-claim`).
 1. Restart your Orchestration Cluster and verify that the chosen user has the Admin Role, for example by visiting `localhost:8080/identity/roles/admin/users`.
 1. If the username is shown, continue configuring your own groups, mapping rules, or setting up [authorizations](../../../../components/concepts/access-control/authorizations.md) for other users.
 
+:::tip
+For more details on assigning users to the default roles, see the [corresponding documentation](overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration).
+:::
+
 ### (Optional) Step 8: Configure bring your own groups
 
-You can manage groups in the Orchestration Cluster or bring groups that you have already configured in your IdP:
+You can manage groups in the Orchestration Cluster or bring groups that you have already configured in your IdP. For the latter, proceed as follows:
 
-1. Configure your IdP to include a groups claim in the token (for example, `groups` or `roles`). The value should be an strings array.
+1. Configure your IdP to include a groups claim in the token (for example, `groups` or `roles`). The value should be an array of Strings where each entry is the ID of a group.
 1. Set the `groups-claim` property in your Camunda configuration to match the claim name. Similar to the `username-claim`, you can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the groups claim in the token (for example, `$['camundaorg']['groups']`).
 
 You can then use these groups for role and authorization assignment, and tenant assignment.
@@ -230,29 +234,76 @@ orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
 
 ### (Optional) Step 9: Mapping rules
 
-You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) for more information on how to define mapping rules.
+You can use mapping rules for advanced scenarios, such as mapping IdP claims to Camunda roles, authorizations, or tenants. See [mapping rules documentation](components/identity/mapping-rules.md) for more information on how to define mapping rules.
 
 ## Machine-to-machine (M2M) API access
 
-Configure Identity so your connectors, job workers, or other applications using the Orchestration Cluster REST or gRPC API can use your IdP to authenticate to the Orchestration Cluster.
+Configure job workers, connectors, or custom client applications to use the Orchestration Cluster REST or gRPC API with OAuth access tokens provided by your Identity Provider.
 
 ### Prerequisites
 
-- Camunda 8 Orchestration Cluster (Self-Managed) configured against the same IdP (as above).
-- Access to an OIDC-compliant Identity Provider (for example, Keycloak, Auth0, Okta, Microsoft EntraID).
+- The Orchestration Cluster (Self-Managed) user interface is [configured against your IdP](#user-interface).
 - Client credentials (client ID, client secret, authorization server URI) from your IdP.
 
-### Step 1: Prepare your IdP
+### Step 1: Configure the OIDC client id claim
 
-Before configuring Camunda, you must first prepare your IdP:
+When it receives a request with an access token, the Orchestration Cluster needs to identify the client based on a claim in the token's payload. You can determine this claim by applying the following setting to the Orchestration Cluster:
+
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]}>
+<TabItem value="yaml">
+
+```yaml
+camunda.security.authentication.oidc.client-id-claim: <YOUR_CLIENTIDCLAIM>
+```
+
+</TabItem>
+<TabItem value="env">
+```
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM=<YOUR_CLIENTIDCLAIM>
+```
+</TabItem>
+<TabItem value="helm">
+```yaml
+orchestration.security.authentication.oidc.clientIdClaim: <YOUR_CLIENTIDCLAIM>
+```
+</TabItem>
+</Tabs>
+
+As an example, assume that your client's access token payload looks like this:
+
+```json
+{
+  "sub": "client123",
+  "client-identifier": "123"
+}
+```
+
+If you have set `camunda.security.authentication.oidc.client-id-claim` to `client-identifier`, then the Orchestration Cluster will use `123` as your client's ID when it applies memberships in groups, roles, and tenants, as well as authorizations.
+
+When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, a token is matched as follows:
+
+1. If the client id claim is present, the request is treated as a client request with the corresponding ID.
+1. If the client id is not present, the request is treated as a user request with the corresponding username matching the username-claim.
+1. If neither the client id claim nor the username claim are set, then the request is rejected.
+
+We recommend to set client id claim and username claim as follows:
+
+- The client id claim should not be the same as the username claim.
+- The client id claim should be a claim that is not present in user access tokens. For this reason, it should not be set to a default claim (such as `sub`).
+- For ease of use, the client id claim's value should be the client id from the Identity Provider. This way, you can use the same value across both your Identity Provider and the Orchestration Cluster as the identifier of your client.
+
+### Step 2: Prepare your IdP
+
+Next, configure a client in your IdP:
 
 1. Register a new application/client for your job worker in your IdP.
    - Create a new application/client in your IdP.
    - Configure the necessary scopes (for example, `openid`).
    - Create a new client secret.
+   - Ensure that the client's access tokens include the client id claim as configured in the previous step.
 2. Note the **client ID**, **client secret**, and **authorization URI** as these are required during Camunda configuration.
 
-### Step 2: Configure your worker application
+### Step 3: Configure your worker application
 
 Depending on your application type (for example, standalone Java application, Spring Boot application), the configuration steps may vary.
 
