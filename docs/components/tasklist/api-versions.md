@@ -10,7 +10,7 @@ Tasklist can be used in two modes: V1 (legacy) and V2:
 - Tasklist V1 is based on the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 - Tasklist V2 is based on the new [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-**Camunda recommend using v2 for all new projects and migrating existing applications from v1.**
+**Camunda recommend using V2 for all new projects and migrating existing applications from V1.**
 
 ## Tasklist based on V2 API
 
@@ -22,7 +22,7 @@ Key benefits of using V2 include:
 - **Recommended user task implementation:** It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job
   worker-based user tasks](../modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
 - **Unified API:** It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md).
-- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes. While you can use v1 in combination with user task listeners, there are some [limitations](components/concepts/user-task-listeners.md#limitations-for-tasklist-v1). For the best experience, use v2 and the Orchestration Cluster REST API.
+- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes. While you can use V1 in combination with user task listeners, there are some [limitations](components/concepts/user-task-listeners.md#limitations-for-tasklist-V1). For the best experience, use V2 and the Orchestration Cluster REST API.
 
 ## Migration from V1 to V2
 
