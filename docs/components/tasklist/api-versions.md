@@ -33,7 +33,7 @@ The following features are only available in Tasklist API V1 and are not support
 
 - Job worker-based user tasks
 - Draft variables
-- User task access restrictions (replaced by [authorization-based access control](../concepts/access-control/authorizations.md))
+- User task access restrictions (currently not supported; see [authorization-based access control](../concepts/access-control/authorizations.md) for interim access management)
 - Public start forms
 - Advanced process filtering (currently limited to search by process definition ID)
 - Task context description
@@ -57,7 +57,7 @@ The Tasklist V1 UI mode will remain available until Camunda 8.10, allowing time 
 
 ### Candidate groups and users
 
-In Tasklist V2, specifying candidate groups and candidate users in BPMN process definitions currently has no effect on task visibility or assignment. User task permissions are not yet available in the Orchestration Cluster Identity.
+In Tasklist V2, specifying candidate groups and candidate users in BPMN process definitions currently has no effect on task visibility or assignment.
 
 If you need to restrict task visibility based on candidate users and groups, use [user task access restrictions](./user-task-access-restrictions.md) with Tasklist V1 mode, or use [authorization-based access control](../concepts/access-control/authorizations.md) for fine-grained access management in V2.
 
@@ -83,6 +83,6 @@ For detailed configuration options, including YAML configuration, see the [Taskl
 
 ### User task access restrictions
 
-[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist V1 API. This feature is permanently V1-only and will not be available in V2.
+[User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist V1 API and are currently not supported in V2.
 
 In Tasklist V2, use [authorization-based access control](../concepts/access-control/authorizations.md) to manage user permissions and task visibility instead.
