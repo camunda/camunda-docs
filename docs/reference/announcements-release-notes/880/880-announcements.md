@@ -141,6 +141,10 @@ You can begin migrating to the [Orchestration Cluster REST API](/apis-tools/orch
 | Camunda 8.9  | These APIs remain available but deprecated, and not recommended for new implementations. |
 | Camunda 8.10 | These APIs are removed.                                                                  |
 
+:::warning Impact on user task access restrictions
+[User task access restrictions](/components/tasklist/user-task-access-restrictions.md) are only supported with the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply.
+:::
+
 :::info
 To learn more about the differences between Tasklist v1 and v2 UI modes, see [Tasklist API versions](/components/tasklist/api-versions.md).
 :::
