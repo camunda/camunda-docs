@@ -369,10 +369,10 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.initialization`
 
-| Property                                         | Description                                                                          | Default value |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initiation.users`        | List of users to initialize (each with username, password, name, email).             |               |
-| `orchestration.security.initiation.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
+| Property                                             | Description                                                                          | Default value |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------- |
+| `orchestration.security.initialization.users`        | List of users to initialize (each with username, password, name, email).             |               |
+| `orchestration.security.initialization.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
 
 ### `orchestration.security.multiTenancy`
 
