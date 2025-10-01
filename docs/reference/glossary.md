@@ -305,7 +305,7 @@ A [Camunda workflow](#workflow) uses this type of connector to retrieve data fro
 
 ### Process
 
-The general business construct — what you want to automate. In Camunda it is [modeled using BPMN](#process-model) before it gets [deployed to the engine](#process-definition) and [started](#process-instance).
+The general business construct — what you want to automate. In Camunda it is [modeled using BPMN](#process-model) before it gets [deployed to](#process-definition) and [executed by](#process-instance) the engine.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
