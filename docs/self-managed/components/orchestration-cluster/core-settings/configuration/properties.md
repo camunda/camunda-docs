@@ -702,7 +702,7 @@ script-src-attr 'none'.
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
+| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `spring.profiles`
 
@@ -818,6 +818,7 @@ script-src-attr 'none'.
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`    | The email address of the first user. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`     | The name of the first user.          |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD` | The password of the first user.      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME` | The username of the first user.      |               |
 
 ### `CAMUNDA_SECURITY_MULTITENANCY`
 
@@ -830,7 +831,7 @@ script-src-attr 'none'.
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `SPRING_PROFILES`
 
