@@ -10,7 +10,7 @@ Tasklist can be used in two modes: v1 (legacy) and v2:
 - Tasklist v1 is based on the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 - Tasklist v2 is based on the new [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-We recommend using v2 for all new projects and migrating existing applications from v1.
+**Camunda recommend using v2 for all new projects and migrating existing applications from v1.**
 
 ## Tasklist based on v2 API
 
@@ -41,3 +41,13 @@ Ensure your application does not rely on these features before upgrading to the 
 ### User task access restrictions
 
 [User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist v1 API. This feature is not yet available with the v2 (Orchestration Cluster) API.
+
+### Configure Tasklist UI mode
+
+If required, you can access the Tasklist legacy interface until Camunda 8.10. This allows you to continue using the v1 user experience while planning your migration to v2.
+
+To run the Tasklist UI in v1 mode, set the following environment variable:
+
+```bash
+CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
+```

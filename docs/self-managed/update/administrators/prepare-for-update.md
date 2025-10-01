@@ -39,6 +39,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
+    <td>Tasklist UI mode configuration</td>
+    <td><p>Tasklist v1 UI mode remains available as a configuration option during the migration period.</p><p><ul><li>To use Tasklist v1 UI, set <code>CAMUNDA_TASKLIST_V2_MODE_ENABLED=false</code> environment variable.</li><li>V1 mode provides continued access to legacy interface and features during transition.</li><li>Review <a href="../../../../components/tasklist/api-versions">Tasklist API versions</a> to understand differences between v1 and v2 modes.</li><li>Plan migration to v2 mode for full feature compatibility.</li></ul></p></td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
     <td>Data and exporters</td>
     <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
