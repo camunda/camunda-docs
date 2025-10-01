@@ -76,7 +76,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.interceptors.id",
+    name: "camunda.api.grpc.interceptors[].id",
     legacy: [
       "zeebe.gateway.interceptors.[x].id",
       "zeebe.broker.gateway.interceptors.[x].id",
@@ -85,7 +85,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.interceptors.jar-path",
+    name: "camunda.api.grpc.interceptors[].jar-path",
     legacy: [
       "zeebe.gateway.interceptors.[x].jarPath",
       "zeebe.broker.gateway.interceptors.[x].jarPath",
@@ -94,7 +94,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.grpc.interceptors.class-name",
+    name: "camunda.api.grpc.interceptors[].class-name",
     legacy: [
       "zeebe.gateway.interceptors.[x].className",
       "zeebe.broker.gateway.interceptors.[x].className",
