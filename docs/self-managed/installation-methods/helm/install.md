@@ -131,18 +131,6 @@ global:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
 
-      #######################
-      # Orchestration Group
-      #######################
-      orchestration:
-        redirectUrl: "http://localhost:8080"
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-orchestration-client-token"
-      connectors:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-connectors-client-token"
   security:
     authentication:
       method: oidc
@@ -173,7 +161,6 @@ connectors:
   enabled: true
   security:
     authentication:
-      method: oidc
       oidc:
         secret:
           existingSecret: "camunda-credentials"
