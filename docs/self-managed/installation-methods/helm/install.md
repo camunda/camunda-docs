@@ -109,24 +109,26 @@ global:
       publicIssuerUrl: "http://localhost:18080/auth/realms/camunda-platform"
       webModeler:
         redirectUrl: "http://localhost:8070"
+        secret:
+          existingSecret: "camunda-credentials"
       console:
         redirectUrl: "http://localhost:8087"
-        existingSecret:
-          name: "camunda-credentials"
+        secret:
+          existingSecret: "camunda-credentials"
       optimize:
         redirectUrl: "http://localhost:8083"
-        existingSecret:
-          name: "camunda-credentials"
+        secret:
+          existingSecret: "camunda-credentials"
       #######################
       # Orchestration Group
       #######################
       orchestration:
         redirectUrl: "http://localhost:8080"
-        existingSecret:
-          name: "camunda-credentials"
+        secret:
+          existingSecret: "camunda-credentials"
       connectors:
-        existingSecret:
-          name: "camunda-credentials"
+        secret:
+          existingSecret: "camunda-credentials"
   security:
     authentication:
       method: oidc
