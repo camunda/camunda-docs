@@ -350,9 +350,15 @@ You can use form-based structured document extraction to capture data from struc
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Data migration tool enhancements
+### Data migration tool
 
-- You can now migrate compensation boundary event subscriptions, escalation boundary events, and escalation event subprocesses. The migration tool also tries to convert simple JUEL expressions automatically to FEEL expressions.
+The Data Migrator allows copying running process instances from Camunda 7 to Camunda 8. Some highlights:
+
+* Copy running process instances (state-preserving).
+* Copy process variables and their values.
+* Handle problematic instances gracefully with retry options.
+* Write custom code to intercept variable migration.
+
 
 <p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Learn more about the data migration tool</a></p>
 
