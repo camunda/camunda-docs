@@ -12,5 +12,5 @@ This section provides two installation paths:
 - **[Quick install with Helm](./quick-install)**:  
   Use this guide to get up and running with default Helm chart values. Ideal for testing, evaluation, or early development.
 
-- **[Install for production](./production-guide)**:  
+- **[Install for production](./production)**:  
   Use this guide to deploy Camunda 8 in a secure, production-ready Kubernetes environment. Includes configuration for TLS, external databases, OIDC, and multi-namespace deployments.
