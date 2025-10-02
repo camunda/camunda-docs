@@ -494,6 +494,9 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
+# Restructure Agentic AI docs
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/ [R=301,L]
+
 # Restructure Backup and restore guide
 RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]

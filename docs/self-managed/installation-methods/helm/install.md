@@ -5,16 +5,26 @@ title: Install Camunda with Helm
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm charts.
 ---
 
+import { HelmInstallOverviewMethods } from "@site/src/components/HelmInstallOverviewMethods";
+
 Use this guide to install Camunda 8 Self-Managed with the orchestration cluster, and optionally enable additional components.
 
 <!-- TODO: add links to explain the orchestration cluster and management cluster -->
+
+:::note
+By default, the Camunda Helm chart uses Bitnami open-source images. For production environments, Camunda recommends switching to vendor-supported enterprise images. This guide explains how to create registry secrets and install [Camunda with enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+:::
 
 ## Prerequisites
 
 - **Kubernetes cluster**: A functioning Kubernetes cluster with [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) access and block-storage persistent volumes for stateful components. See [Cloud providers](/self-managed/installation-methods/helm/cloud-providers/index.md) for instructions to create a Kubernetes cluster.
 - **Helm**: The Helm CLI installed. See [Installing Helm](https://helm.sh/docs/intro/install/).
 
-## Install the orchestration cluster
+## Overview
+
+<HelmInstallOverviewMethods/>
+
+## Orchestration Cluster only
 
 1. Create a namespace to install the platform on Kubernetes:
    ```bash
@@ -24,74 +34,50 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
    ```bash
    namespace/orchestration created
    ```
-1. To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
+2. To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
    ```bash
    helm repo add camunda https://helm.camunda.io
    helm repo update
    ```
-1. Install the Helm chart on your namespace:
+3. Install the Helm chart on your namespace:
    ```bash
    helm install camunda camunda/camunda-platform -n orchestration
    ```
+4. [Access the components](#access-the-components)
 
 ### Install a specific version (optional)
 
-The Camunda 8 Helm chart automatically selects the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because the Helm chart and application components are released independently, minor version differences may occur.
+By default, the Camunda Helm chart installs the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because Helm chart and application versions are released independently, their version numbers differ. For details, see the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
 
-To install the latest version of the chart and its application dependencies, run the following command:
+To install the latest version of the chart and its application dependencies, run:
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
     --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
 ```
 
-To install a previous version, run:
+To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
 
 ```shell
-helm install camunda camunda/camunda-platform --version 8.7 \
-    --values https://helm.camunda.io/camunda-platform/values/values-v8.7.yaml
+helm install camunda camunda/camunda-platform --version 13 \
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.8.yaml
 ```
 
-### Access the orchestration cluster
+Specifying only the major chart version (for example, `13`) installs the latest available `13.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
 
-Run the following command to locally port-forward the orchestration cluster pod to access the UI:
+If you are unsure which chart version corresponds to your Camunda application version, run:
 
-```bash
-kubectl port-forward svc/camunda-core 8080:8080
+```shell
+helm search repo -l camunda/camunda-platform
 ```
 
-Use the following URLs to access the orchestration cluster UIs:
+This command lists all available chart versions and their corresponding application versions.
 
-```bash
-http://localhost:8080/identity
-http://localhost:8080/operate
-http://localhost:8080/tasklist
-```
-
-By default, basic authentication is configured in the orchestration cluster. Use the default credentials:
-
-```
-username: demo
-password: demo
-```
-
-### Access Camunda services
-
-By default, Camunda services deployed in a Kubernetes cluster are not accessible from outside the cluster. You can expose these services externally in the following ways:
-
-- **Port forwarding:** Direct traffic from your local machine to the cluster to access Camunda services. See [Access components without Ingress](/self-managed/installation-methods/helm/configure/accessing-components-without-ingress.md).
-- **Ingress configuration:** Use the NGINX Ingress controller to manage external service access. See [Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md).
-- **Amazon EKS installation:** If you are deploying Camunda 8 on an Amazon EKS cluster, see [Install Camunda 8 on EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-
-## Enable other components
-
-:::note
-This step is optional.
-:::
+## Full Cluster
 
 <!-- TODO: Add links to doc pages that explain each component. -->
 
-The following components run outside the orchestration cluster:
+The following components run outside the orchestration cluster and are disable by default in Helm Charts:
 
 - Optimize
 - Web Modeler
@@ -99,14 +85,14 @@ The following components run outside the orchestration cluster:
 - Management Identity
 - Keycloak
 
-These components are disabled by default. They do not support basic authentication, so you must use another method such as Keycloak or OIDC. In this example, we use Keycloak.
+These components do not support basic authentication, so you must use any OIDC provider. In the following example, we use Keycloak as a locally running OIDC provider. The values file will deploy all Camunda 8 components.
 
 <!-- TODO: Add a suitable link to explain what a values.yaml file is. -->
 
 Because the default configuration of the Helm chart uses basic authentication, you need to create a [values.yaml](https://helm.sh/docs/chart_template_guide/values_files/) file to modify the default configuration to:
 
-- Enable Keycloak to provide another method of authentication.
-- Enable other Camunda components that run outside the orchestration cluster.
+- Enable Keycloak to provide another method of authentication via OIDC.
+- Enable other Camunda components that run alongside the orchestration cluster.
 
 <!-- TODO: Remove setting existingSecret in favor of autoGenerate secrets -->
 
@@ -114,35 +100,33 @@ Create a file called `camunda-values.yaml` with the following content:
 
 ```yaml
 global:
+  secrets:
+    autoGenerated: true
+    name: "camunda-credentials"
   identity:
     auth:
       enabled: true
-      #needs to be added in base values.yaml
-      publicIssuerUrl: "http://camunda-keycloak/auth/realms/camunda-platform"
-      admin:
-        enabled: true
-        existingSecret:
-          name: "integration-test-credentials"
+      publicIssuerUrl: "http://localhost:18080/auth/realms/camunda-platform"
       webModeler:
-        redirectUrl: "http://camunda-modeler"
+        redirectUrl: "http://localhost:8070"
       console:
-        redirectUrl: "http://camunda-console"
+        redirectUrl: "http://localhost:8087"
         existingSecret:
-          name: "integration-test-credentials"
+          name: "camunda-credentials"
       optimize:
-        redirectUrl: "http://camunda-optimize"
+        redirectUrl: "http://localhost:8083"
         existingSecret:
-          name: "integration-test-credentials"
+          name: "camunda-credentials"
       #######################
       # Orchestration Group
       #######################
       orchestration:
-        redirectUrl: "http://camunda-core:8080"
+        redirectUrl: "http://localhost:8080"
         existingSecret:
-          name: "integration-test-credentials"
+          name: "camunda-credentials"
       connectors:
         existingSecret:
-          name: "integration-test-credentials"
+          name: "camunda-credentials"
   security:
     authentication:
       method: oidc
@@ -150,26 +134,32 @@ global:
 identity:
   enabled: true
   firstUser:
-    existingSecret: "integration-test-credentials"
+    existingSecret: "camunda-credentials"
 
 identityKeycloak:
   enabled: true
   postgresql:
     auth:
-      existingSecret: "integration-test-credentials"
+      existingSecret: "camunda-credentials"
       secretKeys:
         adminPasswordKey: "identity-keycloak-postgresql-admin-password"
         userPasswordKey: "identity-keycloak-postgresql-user-password"
   auth:
-    existingSecret: "integration-test-credentials"
+    existingSecret: "camunda-credentials"
     passwordSecretKey: "identity-keycloak-admin-password"
 
 optimize:
   enabled: true
 
 connectors:
-  inbound:
-    mode: oauth
+  enabled: true
+  security:
+    authentication:
+      method: oidc
+      oidc:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-connectors-client-token"
 
 webModeler:
   enabled: true
@@ -182,7 +172,7 @@ webModeler:
 webModelerPostgresql:
   enabled: true
   auth:
-    existingSecret: "integration-test-credentials"
+    existingSecret: "camunda-credentials"
     secretKeys:
       adminPasswordKey: "webmodeler-postgresql-admin-password"
       userPasswordKey: "webmodeler-postgresql-user-password"
@@ -192,23 +182,14 @@ orchestration:
   clusterSize: "1"
   partitionCount: "1"
   replicationFactor: "1"
-  env:
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_0_MAPPINGID
-      value: "demo-user-mapping"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_0_CLAIMNAME
-      value: "preferred_username"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_0_CLAIMVALUE
-      value: "demo"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_1_MAPPINGID
-      value: "connectors-client-mapping"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_1_CLAIMNAME
-      value: "client_id"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_MAPPINGS_1_CLAIMVALUE
-      value: "connectors"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_MAPPINGS_0
-      value: "demo-user-mapping"
-    - name: CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_MAPPINGS_1
-      value: "connectors-client-mapping"
+  security:
+    authentication:
+      method: oidc
+      oidc:
+        redirectUrl: "http://localhost:8080"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-orchestration-client-token"
 
 console:
   enabled: true
@@ -219,6 +200,31 @@ Installing all components in a cluster requires downloading all related Docker i
 For more information about enabling other components, see [Enable Web Modeler, Console, and Connectors](/self-managed/installation-methods/helm/configure/web-modeler-console-connectors.md).
 
 <!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
+
+## Access the components
+
+Run the following command to locally port-forward the orchestration cluster pod to access the UI:
+
+```bash
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
+```
+
+Use the following URLs to access the orchestration cluster UIs:
+
+```bash
+http://localhost:8080/identity
+http://localhost:8080/operate
+http://localhost:8080/tasklist
+```
+
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+
+For basic authentication use the default credentials:
+
+```
+username: demo
+password: demo
+```
 
 ## Troubleshoot installation issues
 
@@ -236,11 +242,15 @@ kubectl logs -f <POD_NAME>
 
 ## Notes and requirements
 
-- **Zeebe gateway** is deployed as a stateless service. It supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
-- **Zeebe broker nodes** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
+- **Zeebe** supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
+- **Zeebe** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/installation-methods/helm/configure/registry-and-images/air-gapped-installation.md).
-- **Image sources**: By default, the Helm chart uses [open-source images from Bitnami](https://github.com/bitnami/containers). For enterprise installations, Camunda recommends using enterprise images. For instructions, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+- **Image sources**: By default, the Helm chart uses Bitnami open-source images for infrastructure dependencies (PostgreSQL, Elasticsearch, Keycloak). For production environments, Camunda recommends using Bitnami Premium images for enhanced security and vendor support. For detailed information about image types, CVE handling policies, and installation procedures, see [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+
+## Next steps
+
+- Explore the [Camunda Reference Architectures](/self-managed/reference-architecture/reference-architecture.md) to learn how to run Camunda 8 in production.
 
 ## Additional resources
 
@@ -252,6 +262,8 @@ kubectl logs -f <POD_NAME>
 
 - [Helm chart Amazon OpenSearch service usage](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of the default Elasticsearch.
 - [Getting started with document handling](/self-managed/concepts/document-handling/overview.md) — configure document storage and management in Camunda 8.
+- [Production installation](/self-managed/installation-methods/helm/production-guide.md) — configure and install the helm chart for production environments.
+- [Helm Configuration](/self-managed/installation-methods/helm/configure/index.md) - customize your installation by modifying the Helm chart configuration.
 
 <!--## Next steps
 

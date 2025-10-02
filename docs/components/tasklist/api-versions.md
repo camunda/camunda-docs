@@ -10,7 +10,7 @@ Tasklist can be used in two modes: v1 (legacy) and v2:
 - Tasklist v1 is based on the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md).
 - Tasklist v2 is based on the new [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-We recommend using v2 for all new projects and migrating existing applications from v1.
+**Camunda recommend using v2 for all new projects and migrating existing applications from v1.**
 
 ## Tasklist based on v2 API
 
@@ -22,7 +22,7 @@ Key benefits of using v2 include:
 - **Recommended user task implementation:** It uses the [Camunda user task implementation type](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks), which is the successor of the deprecated [Job
   worker-based user tasks](components/modeler/bpmn/user-tasks/user-tasks.md#job-worker-implementation).
 - **Unified API:** It aligns with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for a consistent development experience and fine-grained [access control](../concepts/access-control/access-control-overview.md).
-- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes.
+- **User task listeners:** [Camunda user tasks](../modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks) support [listeners](components/concepts/user-task-listeners.md) to programmatically react to task lifecycle changes. While you can use v1 in combination with user task listeners, there are some [limitations](components/concepts/user-task-listeners.md#limitations-for-tasklist-v1). For the best experience, use v2 and the Orchestration Cluster REST API.
 
 ## Migration from v1 to v2
 
@@ -41,3 +41,13 @@ Ensure your application does not rely on these features before upgrading to the 
 ### User task access restrictions
 
 [User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist v1 API. This feature is not yet available with the v2 (Orchestration Cluster) API.
+
+### Configure Tasklist UI mode
+
+If required, you can access the Tasklist legacy interface until Camunda 8.10. This allows you to continue using the v1 user experience while planning your migration to v2.
+
+To run the Tasklist UI in v1 mode, set the following environment variable:
+
+```bash
+CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
+```

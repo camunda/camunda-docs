@@ -58,6 +58,7 @@ Add the following dependency to your Maven project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-spring</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -72,6 +73,7 @@ Add the following dependency to your Maven project:
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-java</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -111,8 +113,8 @@ public class MyProcessTest {
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
-        // given: the processes are deployed
+    void shouldCreateProcessInstance() {
+        // given process definition is deployed
 
         // when
         final ProcessInstanceEvent processInstance =
@@ -124,7 +126,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
@@ -135,6 +137,18 @@ public class MyProcessTest {
 - (_optional_) Inject a preconfigured `CamundaClient` to interact with the Camunda runtime.
 - (_optional_) Inject a `CamundaProcessTestContext` to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
+
+The Spring test requires a Spring Boot process application in the same package. Usually, the process
+application [deploys the process resources](/apis-tools/camunda-spring-boot-starter/getting-started.md#deploy-process-models)
+using the annotation `@Deployment`.
+
+If you have no process application yet, you can add a minimal one inside the test class as follows:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+static class TestProcessApplication {}
+```
 
 </TabItem>
 
@@ -158,7 +172,7 @@ public class MyProcessTest {
     private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
+    void shouldCreateProcessInstance() {
         // given
         client
             .newDeployResourceCommand()
@@ -176,7 +190,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
