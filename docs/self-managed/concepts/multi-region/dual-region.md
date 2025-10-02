@@ -73,7 +73,7 @@ If the primary region fails, traffic must be redirected manually to the secondar
 
 :::caution
 
-Running dual-region setups requires developing, testing, and executing custom [operational procedures](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) matching your environments. This page outlines key points to consider.
+Running dual-region setups requires developing, testing, and executing custom [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) matching your environments. This page outlines key points to consider.
 
 :::
 
@@ -102,7 +102,7 @@ Traffic management responsibilities:
 
 - Configure DNS to route to primary region.
 - Implement health checks and failover procedures.
-- Manually redirect traffic during primary region failure in combination with the [operational failover procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover).
+- Manually redirect traffic during primary region failure in combination with the [operational failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
 
 :::warning Operation requirement
 
@@ -139,10 +139,10 @@ Amazon OpenSearch is **not supported** in dual-region configurations.
 #### Network requirements
 
 - Kubernetes clusters, services, and pods must not have overlapping CIDRs. Each cluster must use distinct CIDRs that do not conflict or overlap with those of any other cluster to avoid routing issues.
-- The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md) for AWS EKS.
+- The regions (for example, two Kubernetes clusters) must be able to communicate with each other (for example, via VPC peering). See [example implementation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md) for AWS EKS.
   - Kubernetes services in one cluster must be resolvable and reachable from the other cluster and vice-versa. This is essential for proper communication and functionality across regions:
-    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
-    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md).
+    - For AWS EKS setups, ensure DNS chaining is configured. Refer to the [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
+    - For OpenShift, [Submariner](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.11/html/networking/networking#submariner) is recommended for handling multi-cluster networking. Refer to the [OpenShift dual-region setup guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 - Maximum network round trip time (**RTT**) between regions should not exceed **100 ms**.
 - Required open ports between the two regions:
   - **9200** for Elasticsearch (for cross-region data pushed by Zeebe).
@@ -165,7 +165,7 @@ This numbering and the round-robin partition distribution assures the even repli
 
 | **Aspect**            | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Installation methods  | <p><ul><li>For Kubernetes we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/installation-methods/helm/install.md) installed in two Kubernetes clusters.</li><li>For other platforms, using alternative installation methods (for example, docker-compose) is not covered by our guides.</li></ul></p>                                                                                                                           |
+| Installation methods  | <p><ul><li>For Kubernetes we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) installed in two Kubernetes clusters.</li><li>For other platforms, using alternative installation methods (for example, docker-compose) is not covered by our guides.</li></ul></p>                                                                                                                       |
 | Traffic Management    | <p>Hybrid active-active/active-passive architecture:</p><p><ul><li>**Data Layer**: Active-active replication with zero RPO.</li><li>**User Traffic**: Active-passive routing to prevent conflicts.</li><li>**All Components**: Must be operational in both regions.</li></ul></p>                                                                                                                                                                                           |
 | Identity Support      | Identity, including multi-tenancy and role-based access control (RBAC), is currently unavailable in this setup.                                                                                                                                                                                                                                                                                                                                                             |
 | Optimize Support      | Not supported (requires Identity with specific configuration).                                                                                                                                                                                                                                                                                                                                                                                                              |
@@ -218,10 +218,10 @@ Region failure results in **immediate service interruption**:
 - User interfaces become unavailable if primary region is lost
   :::
 
-See the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) for recovery steps from region loss and re-establishment procedures.
+See the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) for recovery steps from region loss and re-establishment procedures.
 
 :::caution
-You must monitor for region failures and execute the necessary [operational procedures](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
+You must monitor for region failures and execute the necessary [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
 :::
 
 ### Primary region loss
@@ -234,12 +234,12 @@ If the primary region is lost:
 
 #### Recovery steps for primary region loss
 
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
 2. **Traffic rerouting:** Redirect user traffic to the secondary region (now primary).
 3. **Data and task management**:
    - Reassign uncompleted tasks lost from the previous primary region.
    - Recreate batch operations in Operate.
-4. **Permanent region setup:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback-phase) to create a new secondary region.
+4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to create a new secondary region.
 
 ### Secondary region loss
 
@@ -250,8 +250,8 @@ If the secondary region is lost:
 
 #### Recovery steps for secondary region loss
 
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failover) to temporarily recover and restore processing.
-2. **Permanent region setup:** Follow the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md#failback) to create a new secondary region.
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover) to temporarily recover and restore processing.
+2. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback) to create a new secondary region.
 
 :::note
 Unlike primary region loss, no user-facing data is lost and no traffic rerouting is necessary.
@@ -280,6 +280,6 @@ The **Recovery Time Objective (RTO)** estimates are based on our internal tests 
 
 ## Further resources
 
-- Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
+- Familiarize yourself with our [Amazon Elastic Kubernetes Service (EKS) setup guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md). This showcases an example blueprint setup in AWS that utilizes the managed EKS and VPC peering for a dual-region setup with Terraform.
   - The concepts in the guide are mainly cloud-agnostic, and the guide can be adopted by other cloud providers.
-- Familiarize yourself with the [operational procedure](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
+- Familiarize yourself with the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to understand how to proceed in the case of a total region loss and how to prepare yourself to ensure smooth operations.
