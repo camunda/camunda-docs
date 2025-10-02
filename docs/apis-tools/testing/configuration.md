@@ -147,7 +147,11 @@ public class MyProcessTest {
                     // Set additional Connectors environment variables
                     .withConnectorsEnv("env_1", "value_1")
                     // Set Connectors secrets
-                    .withConnectorsSecret("secret_1", "value_1");
+                    .withConnectorsSecret("secret_1", "value_1")
+                    // Overwrite other CamundaClientBuilder properties
+                    .withCamundaClientBuilderOverrides(clientBuilder -> {
+                        clientBuilder.defaultRequestTimeout(Duration.ofSeconds(60));
+                    });
 }
 ```
 
@@ -359,6 +363,97 @@ public class MyProcessTest {
 :::info
 You should assign the default user (`demo`) to all tenants to ensure that the assertions can access all data.
 :::
+
+## Configuring the Camunda Client
+
+CPT injects a fully configured CamundaClient and also uses an internal CamundaClient with the same configuration. If you
+wish to change its configuration, you may in the following way.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+The Spring context uses the configured `CamundaClientProperties` to initialize the CPT client. You can easily change the
+configuration by modifying your test's `application.yml` (or `application.properties`):.
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Set the client's REST address. Note that if RuntimeMode.MANAGED is set, this value will be overwritten by the Camunda runtime testcontainer.
+client.restAddress=http://0.0.0.0:8090
+# Set the client's gRPC address. Note that if RuntimeMode.MANAGED is set, this value will be overwritten by the Camunda runtime testcontainer.
+client.grpcAddress=http://0.0.0.0:8091
+# Set the client's request timeout 
+client.requestTimeout=PT60S
+# Set the client's request timeout offset 
+client.requestTimeoutOffset=PT59S
+# Set the client's tenantId (only works for non-remote test setups)
+client.tenantId=customTenantId
+# Set the time to live
+client.messageTimeToLive=PT58S
+# Set the max message size in kilobytes
+client.maxMessageSize=1000
+# Set the max metadata size in kilobytes
+client.maxMetadataSize=2000
+# Set the number of execution threads for concurrent requests
+client.executionThreads=8
+# Set the ca certificate path
+client.caCertificatePath=/path/to/file/
+# Set the client's keepAlive
+client.keepAlive=PT57S (default 45s)
+# Set the override authority
+client.overrideAuthority=customOverrideAuthority
+# Set whether the client uses Rest over gRPC (default is true)
+client.preferRestOverGrpc=true
+
+# Set the job worker's polling interval
+client.worker.pollInterval=PT1H
+# Set the job worker's timeout
+client.worker.timeout=PT2H
+# Set the maximum number of active jobs
+client.worker.maxJobsActive=10
+# Set the job worker's name
+client.worker.name=customWorkerName
+# Set the job worker's tenant ids (only works for non-remote test setups)
+client.worker.tenantIds[0]=customTenantA
+client.worker.tenantIds[1]=customTenantB
+# Enable job streaming instead of job polling (enabled by default)
+client.worker.streamEnabled=true
+```
+
+Alternatively, you can register the JUnit extension manually and use the fluent builder:
+
+```java
+package com.example;
+
+import io.camunda.process.test.api.CamundaProcessTestExtension;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+// No annotation: @CamundaProcessTest
+public class MyProcessTest {
+
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+            new CamundaProcessTestExtension()
+                    // Overwrite the CamundaClientBuilder's properties
+                    .withCamundaClientBuilderOverrides(clientBuilder -> {
+                        clientBuilder
+                                .defaultRequestTimeout(Duration.ofSeconds(60))
+                                .defaultJobPollInterval(Duration.ofSeconds(10));
+                    });
+}
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Remote runtime
 

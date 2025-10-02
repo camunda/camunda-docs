@@ -94,6 +94,9 @@ void shouldCompleteJob() {
         "timestamp", "2024-01-01T10:00:00Z"
     );
     processTestContext.mockJobWorker("send-email").thenComplete(variables);
+    
+    // 3) With example data specified in the Camunda Modeler
+    processTestContext.mockJobWorker("send-email").thenCompleteWithExampleData();
 
     // when: create a process instance
     // then: verify that the process instance completed all tasks
@@ -255,6 +258,9 @@ void shouldCompleteJob() {
     );
     processTestContext.completeJob("send-notification", variables);
 
+    // 3) With example data specified in the Camunda Modeler
+    processTestContext.completeJobWithExampleData();
+
     // then: verify that the process instance completed the task
 }
 ```
@@ -317,6 +323,9 @@ void shouldCompleteUserTask() {
 
     // 2) With selector by task name "Approve Request"
     processTestContext.completeUserTask(byTaskName("Approve Request"), variables);
+
+    // 3) With example data specified in the Camunda Modeler
+    processTestContext.completeUserTaskWithExampleData("task_approveRequest");
 
     // then: verify that the process instance is completed
 }
