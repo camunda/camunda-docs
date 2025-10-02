@@ -317,7 +317,7 @@ Prepare a Camunda minor version upgrade by running the standalone schema manager
 Upgrading from 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
 
 - [Components update 8.7 to 8.8](../components/components-upgrade/870-to-880.md)
-- [Helm chart upgrade guide: 8.7 to 8.8](../installation-methods/helm/upgrade/helm-870-880.md)
+- [Helm chart upgrade guide: 8.7 to 8.8](../deployment/helm/upgrade/helm-870-880.md)
 
 These steps may require stopping or scaling down the Camunda application before running the migration.
 :::
@@ -336,7 +336,6 @@ If no migration is required, you can keep the application running at version `N`
 1. Current state: Camunda single application is running at version `N` (for example, 8.7) and processing traffic with its indices in Elasticsearch.
 
 2. Verification: Check the upgrade documentation for version `N → N+1` (for example, 8.7 → 8.8) to determine if migrations are required.
-
    - If migrations are not required, continue while keeping `N` running.
    - If migrations are required, schedule downtime and stop the application before running migration steps.
 
@@ -382,7 +381,6 @@ Use the standalone schema manager if you need to:
 #### Procedure
 
 1. Prepare a schema manager configuration that includes the new settings.
-
    - For Operate and Tasklist version 8.7.11+, set `updateSchemaSettings: true`.
 
    Example configuration:
