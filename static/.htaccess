@@ -149,6 +149,13 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Rename Self-Managed installation methods (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Restructure Helm install (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+
 # Orchestration cluster restructure
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
 
@@ -316,13 +323,6 @@ RewriteRule ^docs/next/self-managed/concepts/mapping-rules/?$ /docs/next/compone
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/next/components/identity/mapping-rules/manage-mapping-rules/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/next/components/identity/mapping-rules/mapping-rule-authorizations/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/next/components/identity/mapping-rules/assign-mapping-rules-to-tenants/ [R=301,L]
-
-# Rename Self-Managed installation methods (8.8)
-RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
-
-# Restructure Helm install (8.8)
-RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
-RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
 
 # Microsoft AKS
 RewriteRule ^docs/next/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/next/self-managed/setup/deploy/azure/microsoft-aks/microsoft-aks/ [R=301,L]
