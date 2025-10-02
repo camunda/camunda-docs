@@ -157,6 +157,15 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/usa
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+
+# Rename Self-Managed installation methods (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Restructure Helm install (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+
+# Orchestration cluster restructure
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
 
 # Self-Managed Restructure
