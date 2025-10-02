@@ -137,8 +137,8 @@ Hidden fields - Example:
 
 There are two mechanisms to define the connector property behavior depending on whether the field is required or optional:
 
-- [“Not empty” constraint](/components/modeler/element-templates/template-properties/#validating-user-input-constraints): if activated, will display an error message if the user doesn’t fill in the field.
-- [Optional bindings](/components/modeler/element-templates/template-properties/#preventing-persisting-empty-values-optional): an optional binding will not be persisted in the BPMN XML if the corresponding property contains an empty string.
+- [“Not empty” constraint](/components/modeler/element-templates/template-properties.md#validating-user-input-constraints): if activated, will display an error message if the user doesn’t fill in the field.
+- [Optional bindings](/components/modeler/element-templates/template-properties.md#preventing-persisting-empty-values-optional): an optional binding will not be persisted in the BPMN XML if the corresponding property contains an empty string.
 
 ##### Mandatory FEEL vs. Optional FEEL
 
