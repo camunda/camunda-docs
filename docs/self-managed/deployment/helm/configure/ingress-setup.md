@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-The separate Ingress configuration was removed in Camunda 8.8. Use the combined Ingress setup in this guide.
+The separated Ingress configuration was removed in Camunda 8.8. Use the combined Ingress setup in this guide, or check the [separated Ingress migration](#separated-ingress-migration) section if you want to have a similar behaviour to the separated Ingress.
 :::
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. You can expose them externally with a combined Ingress setup.
@@ -118,6 +118,53 @@ After deployment, access the Camunda 8 components at:
 :::note
 This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable Web Modeler, Console, and Connectors](/self-managed/deployment/helm/configure/web-modeler-console-connectors.md).
 :::
+
+## Separated Ingress migration
+
+As the separated Ingress was removed in Camunda 8.8, there are two options for migration. First, the recommended option which is using the [combined Ingress method](#configuration). The other one is creating a simialr strecture using the `global.extraManifests` to add your own Ingress objects.
+
+The following section shows an example of adding one Ingress object (Optimize for example) and you can add more as you need.
+
+```yaml
+# values-separated-ingress.yaml
+global:
+  extraManifests:
+    - |
+      ---
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: camunda-platform-optimize
+        namespace: camunda-dev
+        annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: HTTP
+          nginx.ingress.kubernetes.io/proxy-body-size: 10m
+          nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+          nginx.ingress.kubernetes.io/proxy-buffering: "on"
+          nginx.ingress.kubernetes.io/rewrite-target: /
+          nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      spec:
+        ingressClassName: nginx
+        rules:
+        - host: optimize.example.com
+          http:
+            paths:
+            - backend:
+                service:
+                  name: camunda-platform-optimize
+                  port:
+                    number: 80
+              path: /
+              pathType: Prefix
+        tls:
+        - hosts:
+          - optimize.example.com
+          secretName: camunda-platform-optimize-tls
+    - |
+      [Add more Ingresses as needed]
+```
+
+Please note that, you need to create all resources required by the objects in `global.extraManifests`, such as the TLS secret `camunda-platform-optimize-tls`.
 
 ## Ingress controllers
 
