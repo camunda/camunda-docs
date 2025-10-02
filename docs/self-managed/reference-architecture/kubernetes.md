@@ -24,17 +24,17 @@ This section includes reference deployment architectures:
 
 ### Amazon EKS
 
-- [Amazon EKS single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
-- [Amazon EKS dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
+- [Amazon EKS single-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
+- [Amazon EKS dual-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
 
 ### Red Hat OpenShift on AWS (ROSA)
 
-- [ROSA single-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup.md): Standard production setup.
-- [ROSA dual-region](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): Advanced multi-region setup.
+- [ROSA single-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup.md): Standard production setup.
+- [ROSA dual-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): Advanced multi-region setup.
 
 ### Microsoft Azure
 
-- [Microsoft AKS single-region](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
+- [Microsoft AKS single-region](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
 
 For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
@@ -61,9 +61,9 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 
 ### Kubernetes
 
-A [multi-namespace deployment](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
+A [multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
 
-The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/installation-methods/helm/install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
+The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
 #### Orchestration Cluster
 
@@ -85,7 +85,7 @@ The Orchestration Cluster exposes two services:
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [multi-namespace deployment guide](/self-managed/installation-methods/helm/configure/multi-namespace-deployment.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace-deployment.md).
 
 ### High availability (HA)
 
@@ -169,7 +169,7 @@ For details on multi-region configurations, especially dual-region setups, refer
 
 We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/installation-methods/helm/install.md) that supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md) that supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 #### Minimum cluster requirements
 

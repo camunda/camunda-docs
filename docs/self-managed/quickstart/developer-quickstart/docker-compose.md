@@ -12,7 +12,7 @@ import {DockerCompose} from "@site/src/components/CamundaDistributions";
 Get started with a Docker Compose configuration to run Camunda Self-Managed components (Orchestration cluster, Optimize, Console, Web Modeler and Connectors). Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-While the [Docker images](/self-managed/installation-methods/docker/docker.md) are supported in production, the provided Docker Compose files are only for local development and testing. For production, Camunda recommends [Kubernetes](/self-managed/installation-methods/helm/install.md).
+While the [Docker images](/self-managed/deployment/docker/docker.md) are supported in production, the provided Docker Compose files are only for local development and testing. For production, Camunda recommends [Kubernetes](/self-managed/deployment/helm/install/quick-install.md).
 :::
 
 ## Prerequisites
