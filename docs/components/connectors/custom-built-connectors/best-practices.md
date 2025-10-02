@@ -4,7 +4,7 @@ title: Best practices for custom-built element templates and connectors
 description: Learn the best practices for creating and managing custom-built element templates and connectors in Web Modeler.
 ---
 
-## Best practices for creating element templates and connectors
+## Best practices for creating elements and connectors templates
 
 When creating custom-built element templates and connectors, consider the following best practices to ensure they are effective, user-friendly, and maintainable.
 
@@ -99,7 +99,7 @@ Always include a version number property, starting from 1. Increment this number
 {
   "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
   "name": "My Connector",
-  "id": "my.connector",
+  "id": "org.my.connector",
   "version": 1
 }
 ```
