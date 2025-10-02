@@ -346,6 +346,28 @@ You can use form-based structured document extraction to capture data from struc
 
 <p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
 
+## Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Data migration tool enhancements
+
+- You can now migrate compensation boundary event subscriptions, escalation boundary events, and escalation event subprocesses. The migration tool also tries to convert simple JUEL expressions automatically to FEEL expressions.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Learn more about the data migration tool</a></p>
+
+### Migration Analyzer & Diagram Converter
+
+- Migration Analyzer & Diagram Converter analyzes Camunda 7 BPMN/DMN models to list migration tasks, and can auto-convert them to Camunda 8 (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that output XLSX/CSV reports for prioritization and batch conversion.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Learn more about Migration Analyzer & Diagram Converter</a></p>
+
+### Code Conversion Utilities
+
+- Code Conversion Utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Learn more about Code Conversion Utilities</a></p>
+
 ## Optimize
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
