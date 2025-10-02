@@ -130,7 +130,8 @@ A successful response includes [information about the cluster](/apis-tools/zeebe
   "clusterSize": 3,
   "partitionsCount": 3,
   "replicationFactor": 3,
-  "gatewayVersion": "8.6.0"
+  "gatewayVersion": "8.6.0",
+  "clusterId": "cluster-123456"
 }
 ```
 
