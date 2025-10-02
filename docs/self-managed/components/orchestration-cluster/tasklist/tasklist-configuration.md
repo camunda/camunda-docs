@@ -142,7 +142,7 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
   }'
 ```
 
-This setting will prevent Elasticsearch from generating excessive deprecation warning logs like:
+This setting will prevent Elasticsearch from generating excessive deprecation warning logs, such as:
 
 ```
 "Deprecated field [from] used, this field is unused and will be removed entirely"
