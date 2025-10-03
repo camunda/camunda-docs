@@ -131,6 +131,15 @@ global:
           existingSecret: "camunda-credentials"
           existingSecretKey: "identity-optimize-client-token"
 
+      orchestration:
+        redirectUrl: "http://localhost:8080"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-orchestration-client-token"
+      connectors:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-connectors-client-token"
   security:
     authentication:
       method: oidc
@@ -161,6 +170,7 @@ connectors:
   enabled: true
   security:
     authentication:
+      method: oidc
       oidc:
         secret:
           existingSecret: "camunda-credentials"
@@ -200,34 +210,130 @@ console:
   enabled: true
 ```
 
+## Install and verify the deployment
+
 Installing all components in a cluster requires downloading all related Docker images to the Kubernetes nodes. The time required depends on your cloud provider and network speed.
 
-For more information about enabling other components, see [Enable Web Modeler, Console, and Connectors](/self-managed/deployment/helm/configure/web-modeler-console-connectors.md).
+1. **Install the Helm chart:**
 
-<!-- TODO: Add a section about port-forward. Currently, port-forward is not working because the redirect URIs are configured with the Kubernetes service names. If the redirect URIs are set to localhost, the orchestration cluster will be unhealthy since it cannot access Keycloak through localhost. -->
+   ```bash
+   helm upgrade --install \
+   camunda camunda-platform \
+     --repo https://helm.camunda.io \
+     --version 13.0.0 \
+     --namespace camunda \
+     -f camunda-values.yml
+   ```
 
-## Access the components
+2. **Wait for all pods to be ready:**
 
-To access the Camunda user interfaces locally, first port-forward the required services in separate terminals:
+   Monitor the pod status until all pods show `Running` and `Ready`:
+
+   ```bash
+   kubectl get pods -n camunda -w
+   ```
+
+   Wait until you see output similar to:
+
+   ```
+   NAME                                          READY   STATUS    RESTARTS   AGE
+   camunda-keycloak-0                           1/1     Running   0          5m
+   camunda-identity-6c8b7f4d9-xyz123           1/1     Running   0          5m
+   camunda-zeebe-0                              1/1     Running   0          5m
+   camunda-web-modeler-webapp-abc456-def789    1/1     Running   0          5m
+   ...
+   ```
+
+   Press `Ctrl+C` to stop monitoring once all pods are ready.
+
+## Get started with Web Modeler
+
+Follow this workflow to deploy your first process model and verify it works end-to-end:
+
+### 1. Set up port-forwarding
+
+Open separate terminal windows and run these commands to access the required services:
 
 ```bash
-kubectl port-forward svc/camunda-keycloak 18080:80
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
+# Terminal 1: Keycloak (for authentication)
+kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
+
+# Terminal 2: Web Modeler (for modeling)
+kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
+
+# Terminal 3: Zeebe Gateway (for deployment and process execution)
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
 ```
 
-Retrieve the default credentials for the `demo` user with the following command:
+### 2. Get your credentials
+
+Retrieve the password for the `demo` user:
 
 ```bash
-kubectl get secret camunda-credentials -o jsonpath='{.data.identity-firstuser-password}' | base64 -d
+kubectl get secret camunda-credentials -n camunda -o jsonpath='{.data.identity-firstuser-password}' | base64 -d
 ```
 
-After port-forwarding is active, open the UIs in your browser:
+### 3. Access Web Modeler
+
+1. Open your browser and navigate to [http://localhost:8070](http://localhost:8070)
+2. Log in with:
+   - **Username:** `demo`
+   - **Password:** (use the password retrieved in step 2)
+
+### 4. Create and deploy a process
+
+1. In Web Modeler, create a new BPMN diagram
+2. Design a simple process (or use the default process template)
+3. Click **Deploy & Run** to deploy your process to the Zeebe cluster
+
+### 6. Verify in Operate
+
+1. Set up port-forwarding for Operate in a new terminal:
+
+   ```bash
+   kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
+   ```
+
+2. Open [http://localhost:8080/operate](http://localhost:8080/operate) in your browser
+3. Log in with the same `demo` credentials
+4. Verify that your process instance appears in the dashboard and shows the expected flow
+
+## Access all components
+
+For complete access to all Camunda components, set up port-forwarding for all services:
 
 ```bash
-http://localhost:8080/operate
-http://localhost:8080/tasklist
-http://localhost:8080/identity
+# Core services
+kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
+kubectl port-forward svc/camunda-console 8087:80 -n camunda
+kubectl port-forward svc/camunda-identity 18081:80 -n camunda
+kubectl port-forward svc/camunda-optimize 8083:80 -n camunda
+kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
+kubectl port-forward svc/camunda-connectors 8085:8080 -n camunda
+kubectl port-forward svc/camunda-zeebe 26500:26500 -n camunda
 ```
+
+### Available URLs
+
+Once port-forwarding is active, access the UIs in your browser:
+
+| Component       | URL                                                              | Description                    |
+| --------------- | ---------------------------------------------------------------- | ------------------------------ |
+| **Operate**     | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor process instances      |
+| **Tasklist**    | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks            |
+| **Web Modeler** | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes    |
+| **Console**     | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs       |
+| **Identity**    | [http://localhost:18081](http://localhost:18081)                 | User and permission management |
+| **Keycloak**    | [http://localhost:18080](http://localhost:18080)                 | Authentication server          |
+| **Optimize**    | [http://localhost:8083](http://localhost:8083)                   | Process analytics              |
+| **Connectors**  | [http://localhost:8085](http://localhost:8085)                   | External system integrations   |
+
+### Database access (for administration)
+
+- **PostgreSQL (main):** `localhost:5432`
+- **PostgreSQL (Web Modeler):** `localhost:5433`
+- **Elasticsearch:** `localhost:9200`
 
 ## Troubleshoot installation issues
 
