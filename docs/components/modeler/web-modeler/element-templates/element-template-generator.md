@@ -6,14 +6,14 @@ description: Learn how to generate element or connector templates for easier cre
 
 You can configure and automatically generate a custom element template in Web Modeler.
 
-You can start from a **Call Activity** template, a **Task** template, or a **blank** template.
+### Best practices
 
-## Generate an element template
+When creating custom-built element templates, consider the best practices outlined in [Best practices for creating element templates and connectors](../../../connectors/custom-built-connectors/best-practices.md) to ensure they are effective, user-friendly, and maintainable.
 
-To generate an element template:
+## Generate a BPMN element template
 
 1. Select the Web Modeler project where you want to create the template.
-2. Click **Create new**, select **Element template**, and then choose the **BPMN element** tab to open the **Create new element template** screen.  
+2. Click **Create new**, select **Element template** to open the **Create new element template** screen.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-element-template-details.png)
 
 3. Select the template starting point:
@@ -23,8 +23,6 @@ To generate an element template:
    - **From blank**: Start from a blank template.
 
 ## Generate a connector template
-
-You can configure and automatically generate a custom [Connector template](/components/connectors/custom-built-connectors/connector-templates.md) in Web Modeler.
 
 You can start from a blank template or import an existing API definition such as an [OpenAPI specification](https://swagger.io/resources/open-api/), [Swagger specification](https://swagger.io/resources/open-api/), or a [Postman collection](https://www.postman.com/collection/). For example, download a Postman collection as a YAML file, import it into the generator, and choose which methods to include in the generated template.
 
@@ -56,7 +54,7 @@ To generate a connector template:
 5. If you selected **From API definition**, the **Import data source** section appears.
    1. Select the format to upload (OpenAPI or Postman).
    2. Upload the API definition:
-      - **Import from URL:** Enter the API definition URL and click **Import icon**.
+      - **Import file from URL:** Enter the API definition URL and click **Import icon**.
       - **Upload file:** Drag and drop a file into the upload area, or click the link to select a file.
 
    3. After importing, select which actions to include from the generated list of supported methods.  
@@ -66,10 +64,4 @@ To generate a connector template:
    For more information on working with and configuring connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
    :::
 
-### Create the template
-
-6. Click **Create template** to generate and open the new element template in the [element template editor](/components/connectors/manage-connector-templates.md).
-
-### Best practices
-
-When creating custom-built element templates and connectors, consider the best practices outlined in [Best practices for creating element templates and connectors](../../../connectors/custom-built-connectors/best-practices.md) to ensure they are effective, user-friendly, and maintainable.
+6. Click **Create template** to generate and open the new template in the [element template editor](/components/connectors/manage-connector-templates.md).

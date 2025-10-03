@@ -1,25 +1,25 @@
 ---
 id: best-practices
-title: Best practices for custom-built element templates and connectors
-description: Learn the best practices for creating and managing custom-built element templates and connectors in Web Modeler.
+title: Best practices for custom-built element templates
+description: Learn the best practices for creating and managing custom-built element templates in Web Modeler.
 ---
 
-When creating custom-built element templates and connectors, consider the following best practices to ensure they are effective, user-friendly, and maintainable.
+When creating custom-built element templates, consider the following best practices to ensure they are effective, user-friendly, and maintainable.
+
+:::note
+Connector templates are a specific type of [element template](/components/concepts/element-templates.md).
+:::
 
 ## Naming, description, and icon
 
 ### Sentence case
 
-- Outbound, inbound, intermediate, and element types are capitalized only at the beginning of a sentence or title.
-- Webhook, subscription, and polling are capitalized only at the beginning of a sentence or title.
-- In the middle of a sentence, capitalize:
-  - Brand names
-  - "Connector/s" when referring to the component
+Use sentence case when naming element and connector templates
 
 For example:
 
-- ❌ GitHub Webhook Intermediate Catch Event Connector
-- ✅ GitHub webhook intermediate catch event Connector
+- ❌ GitHub Webhook Intermediate Catch Event connector
+- ✅ GitHub webhook intermediate catch event connector
 
 ### Choosing a name
 
@@ -31,9 +31,9 @@ Keep descriptions brief and clear. Explain what the template does and why it’s
 
 ## Icon
 
-- **Prefer SVG format:** Use SVG files for icons, as they are scalable without losing quality.
-- **Size:** If SVG isn’t possible and PNG/JPEG is required, ensure the icon is 512x512 pixels.
-- **Check for official logo:** Use the official logo from the service website, or request a custom icon from the design team.
+- **Prefer SVG format:** Use SVG files for icons, as they are scalable without losing quality. If an SVG icon isn't available, PNG or JPEG format is acceptable, but may not display well.
+- **Size:** You can upload an image file with a maximum size of **8 KB**. If you need to use a PNG or JPEG icon, ensure it is **512x512** pixels. Icons appear as **18x18** pixels in the element on the modeling canvas, and as **32x32** pixels in the properties panel.
+- **Check for official logo:** Look for an official logo from the service website.
 - **License compliance:** Ensure icons have the appropriate license (Public Domain CC0 or Creative Commons CC BY) for commercial use.
 
 ## Properties panel UI
@@ -64,8 +64,9 @@ Example:
 - ❌ "Your application's Client ID from the OAuth client."
 - ✅ "UIPath OAuth Client ID: Retrieve from UIPath external apps configuration."
 
-## Inputs placeholders
+### Placeholders
 
+- Placeholders appear as lighter text inside input fields.
 - Use placeholders to indicate expected format or example input.
 - Avoid placeholders that duplicate the label.
 - Ensure placeholders are understandable and helpful.
@@ -90,7 +91,7 @@ Example:
 
 ### Versioning
 
-Always include a version number, starting from 1. Increment with each new version.
+If you plan to make changes to your template over time and want to support [template evolution](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#overview), include a version number property in your template, starting from 1. Templates with the same ID and different version values offer an upgrade path.
 
 ```json
 {
@@ -110,11 +111,11 @@ If you want to use a FEEL expression that references other variables, the proper
 
 - Follow the rules of the system you’re adding to.
 - Do not save secret information in the JSON.
-- Use the Connectors' [secret handling](/components/connectors/use-connectors/index.md#using-secrets).
+- Use the connectors' [secret handling](/components/connectors/use-connectors/index.md#using-secrets).
 
 ### Field types
 
-To ensure a good user experience, make templates intuitive and minimize errors.
+The following guidelines ensure templates are intuitive and designed to minimize errors. This helps to create a good user experience.
 
 #### Hidden vs. visible fields
 
@@ -135,6 +136,8 @@ There are two mechanisms to define property behavior depending on whether a fiel
 
 - [**“Not empty” constraint**](/components/modeler/element-templates/template-properties.md#validating-user-input-constraints): Displays an error if the field is left empty.
 - [**Optional bindings**](/components/modeler/element-templates/template-properties.md#preventing-persisting-empty-values-optional): Does not persist empty properties in the BPMN XML.
+
+  Use **optional bindings** when a property is not required and you want to avoid storing empty values in the BPMN XML. In most cases, required fields should use the 'Not empty' constraint for validation.
 
 #### Mandatory FEEL vs. optional FEEL
 
