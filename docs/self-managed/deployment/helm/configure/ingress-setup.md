@@ -123,7 +123,7 @@ This configuration shows only the Ingress-related values for `webModeler`and `Co
 
 As the separated Ingress was removed in Camunda 8.8, there are two options for migration:
 
-1. **Recommended:** Use the [combined ingress configuration](#configuration).
+1. **Recommended:** Use the [combined Ingress configuration](#configuration).
 2. **Alternative:** You can use global.extraManifests to define and deploy your own Ingress objects, providing functionality similar to the former separated Ingress setup.
 
 The example below demonstrates how to add an Ingress object for Optimize, replicating the separated Ingress behavior. You can apply the same approach to create additional Ingress objects for other components, as needed.
