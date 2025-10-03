@@ -68,5 +68,5 @@ To see the final result of a README file, select the **Preview** tab:
 
 ## Related resources
 
-- [Process applications](../process-applications.md)
+- [Process applications](../process-applications/process-applications.md)
 - [Process landscape visualization](../process-landscape-visualization.md)

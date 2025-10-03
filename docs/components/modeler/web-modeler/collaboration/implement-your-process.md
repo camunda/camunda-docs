@@ -14,4 +14,4 @@ The properties panel automatically opens when switching to the **Implement** mod
 
 Developers can switch between the modes as they like, and when they open a process template, it opens in **Implement**.
 
-![implement mode](img/implement-mode.png)
+![implement mode](../img/implement-mode.png)
