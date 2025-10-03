@@ -375,3 +375,9 @@ Assignees list removed from response.
 These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 
 Operate and Tasklist usage metrics endpoints are **scheduled for removal in the 8.10 release**.
+
+### Removed: Tenant-Providing interceptors
+
+With the **8.8 release**, Camunda announces the **removal of Tenant-Providing interceptors**.
+
+It is superseded by built-in [Tenant management](/components/identity/tenant.md) going forward.
