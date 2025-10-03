@@ -127,7 +127,7 @@ kubectl port-forward svc/<RELEASE-NAME>-keycloak 18080:80
 
 If you're using Keycloak deployed via the Keycloak Operator (such as in the [vendor-supported infrastructure guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md)), use `kubectl port-forward svc/keycloak-service 18080:8080` instead.
 
-Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/installation-methods/helm/configure/ingress-setup.md).
+Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress-setup.md).
 
 :::
 
