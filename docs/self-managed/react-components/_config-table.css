@@ -100,12 +100,12 @@
   background-color: #3f3f3f;
 }
 
-.badge--1-to-1 {
+.badge--direct-mapping {
   background-color: rgb(252, 93, 13);
   color: #fff;
   margin-top: 10px;
 }
-[data-theme="dark"] .badge--1-to-1 {
+[data-theme="dark"] .badge--direct-mapping {
   background-color: #9a4e00;
   color: #e1d9cd;
   border: 1px solid #9d7800;
@@ -174,12 +174,12 @@
   color: #fff;
 }
 
-.badge--active--1-to-1,
-.badge--active--1-to-1:hover {
+.badge--active--direct-mapping,
+.badge--active--direct-mapping:hover {
   background-color: #007bff !important;
   color: #fff !important;
 }
-[data-theme="dark"] .badge--active--1-to-1 {
+[data-theme="dark"] .badge--active--direct-mapping {
   background-color: #007bff;
   color: #fff;
 }
