@@ -207,6 +207,8 @@ The following configurations apply to all components within the Orchestration Cl
 
 ## Data - backup Azure
 
+### `camunda.data.backup.azure`
+
 <Tabs>
   <TabItem value="application.yaml" label="Configuration property">
 
@@ -226,12 +228,14 @@ The following configurations apply to all components within the Orchestration Cl
 
 ## Data - backup filesystem
 
+### `camunda.data.backup.filesystem`
+
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
 
-| Application.yaml property                  | Description                                                                                                                                                                                                                        | Default value |
-| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `camunda.data.backup.filesystem.base-path` | <p>The base directory path on the local filesystem where Camunda backup data will be stored when using filesystem-based backup storage.</p><p>This property is used when `camunda.data.backup.store` is set to `'FILESYSTEM'`.</p> | None          |
+| Application.yaml property                  | Description                                                    | Default value |
+| :----------------------------------------- | :------------------------------------------------------------- | :------------ |
+| `camunda.data.backup.filesystem.base-path` | <p>Set the base path to store all related backup files in.</p> | None          |
 
 </TabItem>
 </Tabs>
