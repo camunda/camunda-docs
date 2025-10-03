@@ -26,63 +26,77 @@ By default, the Camunda Helm chart uses Bitnami open-source images. For producti
 
 ## Orchestration Cluster only
 
-1. Create a namespace to install the platform on Kubernetes:
+By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+
+1. **Create a namespace to install the platform on Kubernetes:**
+
    ```bash
    kubectl create namespace orchestration
    ```
-   output:
+
+   Output:
+
    ```bash
    namespace/orchestration created
    ```
-2. To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
+
+2. **Add the Helm repository:**
+
+   To install the Camunda 8 Self-Managed [Helm chart](https://helm.sh/docs/topics/charts/), add the [Helm repository](https://helm.sh/docs/topics/chart_repository/) with the following command:
+
    ```bash
    helm repo add camunda https://helm.camunda.io
    helm repo update
    ```
-3. Install the Helm chart on your namespace:
+
+3. **Install the Helm chart:**
+
    ```bash
    helm install camunda camunda/camunda-platform -n orchestration
    ```
-4. Access the components
 
-Use port-forward to [access the components](#access-the-components)
+4. **Access the components:**
 
-By default, the Helm chart deploys the Camunda orchestration cluster with **basic authentication**, intended only for testing and development. In production, Camunda 8 is typically deployed together with additional applications such as Optimize, Web Modeler, and Console, which require **OIDC-based authentication** (for example, using Keycloak). For details, see the [Full Cluster](#full-cluster) section.
+   Use the default credentials:
 
-For basic authentication, use the default credentials:
+   ```
+   username: demo
+   password: demo
+   ```
 
-```
-username: demo
-password: demo
-```
+   Set up port-forwarding to access the services:
 
-### Install a specific version (optional)
+   ```bash
+   # Zeebe Gateway (for gRPC and REST API)
+   kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n orchestration
+   kubectl port-forward svc/camunda-zeebe-gateway 8088:8080 -n orchestration
 
-By default, the Camunda Helm chart installs the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because Helm chart and application versions are released independently, their version numbers differ. For details, see the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+   # Connectors
+   kubectl port-forward svc/camunda-connectors 8086:8080 -n orchestration
+   ```
 
-To install the latest version of the chart and its application dependencies, run:
+   **Verify the installation:**
 
-```shell
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
-    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
-```
+   Test the Zeebe Gateway connection:
 
-To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
+   ```bash
+   curl -u demo:demo http://localhost:8088/v2/topology
+   ```
 
-```shell
-helm install camunda camunda/camunda-platform --version 13 \
-    --values https://helm.camunda.io/camunda-platform/values/values-v8.8.yaml
-```
+   You should see a JSON response with the cluster topology information.
 
-Specifying only the major chart version (for example, `13`) installs the latest available `13.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
+   Available services:
 
-If you are unsure which chart version corresponds to your Camunda application version, run:
+   - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
+   - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
+   - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
+   - **Connectors:** [http://localhost:8086](http://localhost:8086) - External system integrations
+   - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
+   - **Zeebe Gateway (HTTP):** [http://localhost:8088](http://localhost:8088) - Zeebe REST API
 
-```shell
-helm search repo -l camunda/camunda-platform
-```
-
-This command lists all available chart versions and their corresponding application versions.
+   :::note
+   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
+   :::
 
 ## Full Cluster
 
@@ -210,22 +224,27 @@ console:
   enabled: true
 ```
 
-## Install and verify the deployment
+### Install and verify the deployment
 
 Installing all components in a cluster requires downloading all related Docker images to the Kubernetes nodes. The time required depends on your cloud provider and network speed.
 
-1. **Install the Helm chart:**
+1. **Create the namespace:**
 
    ```bash
-   helm upgrade --install \
-   camunda camunda-platform \
+   kubectl create namespace camunda
+   ```
+
+2. **Install the Helm chart:**
+
+   ```bash
+   helm upgrade --install camunda camunda/camunda-platform \
      --repo https://helm.camunda.io \
      --version 13.0.0 \
      --namespace camunda \
-     -f camunda-values.yml
+     -f camunda-values.yaml
    ```
 
-2. **Wait for all pods to be ready:**
+3. **Wait for all pods to be ready:**
 
    Monitor the pod status until all pods show `Running` and `Ready`:
 
@@ -246,11 +265,11 @@ Installing all components in a cluster requires downloading all related Docker i
 
    Press `Ctrl+C` to stop monitoring once all pods are ready.
 
-## Get started with Web Modeler
+### Get started with Web Modeler
 
 Follow this workflow to deploy your first process model and verify it works end-to-end:
 
-### 1. Set up port-forwarding
+#### 1. Set up port-forwarding
 
 Open separate terminal windows and run these commands to access the required services:
 
@@ -265,7 +284,7 @@ kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
 kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
 ```
 
-### 2. Get your credentials
+#### 2. Get your credentials
 
 Retrieve the password for the `demo` user:
 
@@ -273,20 +292,20 @@ Retrieve the password for the `demo` user:
 kubectl get secret camunda-credentials -n camunda -o jsonpath='{.data.identity-firstuser-password}' | base64 -d
 ```
 
-### 3. Access Web Modeler
+#### 3. Access Web Modeler
 
 1. Open your browser and navigate to [http://localhost:8070](http://localhost:8070)
 2. Log in with:
    - **Username:** `demo`
    - **Password:** (use the password retrieved in step 2)
 
-### 4. Create and deploy a process
+#### 4. Create and deploy a process
 
 1. In Web Modeler, create a new BPMN diagram
 2. Design a simple process (or use the default process template)
 3. Click **Deploy & Run** to deploy your process to the Zeebe cluster
 
-### 6. Verify in Operate
+#### 5. Verify in Operate
 
 1. Set up port-forwarding for Operate in a new terminal:
 
@@ -296,25 +315,29 @@ kubectl get secret camunda-credentials -n camunda -o jsonpath='{.data.identity-f
 
 2. Open [http://localhost:8080/operate](http://localhost:8080/operate) in your browser
 3. Log in with the same `demo` credentials
-4. Verify that your process instance appears in the dashboard and shows the expected flow
+4. Verify that your deployed process instance appears in the dashboard and shows the expected flow
 
-## Access all components
+### Access all components
 
 For complete access to all Camunda components, set up port-forwarding for all services:
 
 ```bash
-# Core services
+# Authentication
 kubectl port-forward svc/camunda-keycloak 18080:80 -n camunda
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
-kubectl port-forward svc/camunda-console 8087:80 -n camunda
 kubectl port-forward svc/camunda-identity 18081:80 -n camunda
+
+# Web interfaces
 kubectl port-forward svc/camunda-optimize 8083:80 -n camunda
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
+kubectl port-forward svc/camunda-console 8087:80 -n camunda
+
+# Zeebe and Connectors
+kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n camunda
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
 kubectl port-forward svc/camunda-connectors 8085:8080 -n camunda
-kubectl port-forward svc/camunda-zeebe 26500:26500 -n camunda
 ```
 
-### Available URLs
+#### Available URLs
 
 Once port-forwarding is active, access the UIs in your browser:
 
@@ -329,9 +352,9 @@ Once port-forwarding is active, access the UIs in your browser:
 | **Optimize**    | [http://localhost:8083](http://localhost:8083)                   | Process analytics              |
 | **Connectors**  | [http://localhost:8085](http://localhost:8085)                   | External system integrations   |
 
-### Database access (for administration)
+#### Database access (for administration)
 
-- **PostgreSQL (main):** `localhost:5432`
+- **PostgreSQL (Management Identity):** `localhost:5432`
 - **PostgreSQL (Web Modeler):** `localhost:5433`
 - **Elasticsearch:** `localhost:9200`
 
@@ -348,6 +371,34 @@ If `describe` does not help, check the pod logs by running:
 ```shell
 kubectl logs -f <POD_NAME>
 ```
+
+## Install a specific version
+
+By default, the Camunda Helm chart installs the latest version of the [Camunda 8 applications](/reference/supported-environments.md). Because Helm chart and application versions are released independently, their version numbers differ. For details, see the [Camunda 8 Helm Chart Version Matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
+
+To install the latest version of the chart and its application dependencies, run:
+
+```shell
+helm install camunda camunda/camunda-platform \
+    --values https://helm.camunda.io/camunda-platform/values/values-latest.yaml
+```
+
+To install a specific chart version, use the `--version` flag with the chart version number. For example, the chart version for Camunda 8.8 is `13`:
+
+```shell
+helm install camunda camunda/camunda-platform --version 13 \
+    --values https://helm.camunda.io/camunda-platform/values/values-v8.8.yaml
+```
+
+Specifying only the major chart version (for example, `13`) installs the latest available `13.x.y` release. You can also specify a minor version (for example, `12.6`) to install the latest `12.6.y` release.
+
+If you are unsure which chart version corresponds to your Camunda application version, run:
+
+```shell
+helm search repo -l camunda/camunda-platform
+```
+
+This command lists all available chart versions and their corresponding application versions.
 
 ## Notes and requirements
 
