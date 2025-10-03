@@ -41,9 +41,7 @@ These keys will be consumed by the `auth.js` file to execute the OAuth protocol,
 Examine the existing `.env.example` file for an example of how your `.env` file should look upon completion. Do not place your credentials in the `.env.example` file, as this example file is not protected by the `.gitignore`.
 
 :::note
-
 In this tutorial, we will execute arguments to list all roles, create a role, retrieve a role, and delete a role. You can examine the framework for processing these arguments in the `cli.js` file before getting started.
-
 :::
 
 ## List all roles (POST)
@@ -63,6 +61,7 @@ const authorizationConfiguration = {
 ```
 
 2. Examine the function `async function listRoles()` below this configuration. This is where you will script out your API call.
+
 3. Within the function, you must first generate an access token for this request, so your function should now look like the following:
 
 ```javascript
@@ -77,13 +76,13 @@ async function listRoles() {
 const camundaApiUrl = process.env.CAMUNDA_REST_ADDRESS;
 ```
 
-5. On the next line, script the API endpoint to list the existing roles:
+On the next line, script the API endpoint to list the existing roles:
 
 ```javascript
 const url = `${camundaApiUrl}/roles/search`;
 ```
 
-6. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
+5. Configure your POST request to the appropriate endpoint, including an authorization header based on the previously acquired `accessToken`:
 
 ```javascript
 const options = {
@@ -97,27 +96,21 @@ const options = {
 };
 ```
 
-7. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
+6. Call the endpoint, process the results from the API call, and emit an error message from the server if necessary:
 
 ```javascript
 try {
-  // Call the endpoint.
   const response = await axios(options);
-
-  // Process the results from the API call.
   const results = response.data;
-
-  // Emit roles to output.
   results.items.forEach((x) =>
     console.log(`Role Name: ${x.name}; key: ${x.key}`)
   );
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-8. In your terminal, run `node cli.js camunda8 list`.
+7. In your terminal, run `node cli.js camunda8 list`.
 
 :::note
 This `list` command is connected to the `listRoles` function at the bottom of the `camunda-8.js` file, and executed by the `cli.js` file. While we will work with roles in this tutorial, you may add additional arguments depending on the API calls you would like to make.
@@ -127,9 +120,7 @@ The existing roles (if any) will now output. If you have an invalid API name or 
 
 ## Create a role (POST)
 
-To create a role, take the following steps:
-
-1. Outline your function, similar to the steps above:
+1. Outline your function:
 
 ```javascript
 async function createRole([roleName]) {
@@ -155,30 +146,23 @@ const options = {
 };
 ```
 
-3. Process the results from the API call. For example:
+3. Process the results:
 
 ```javascript
 try {
   const response = await axios(options);
-
-  // Process the results from the API call.
   const newRole = response.data;
-
-  // Emit new role to output.
   console.log(`Role added! Name: ${roleName}. Key: ${newRole.roleKey}.`);
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `node cli.js camunda8 create <name>`, where `<name>` is the name of the new role.
+4. Run in your terminal `node cli.js camunda8 create <name>`.
 
 ## Retrieve a role (GET)
 
-To retrieve a role, take the following steps:
-
-1. Outline your function, similar to the steps above:
+1. Outline your function:
 
 ```javascript
 async function getRole([roleKey]) {
@@ -188,7 +172,7 @@ async function getRole([roleKey]) {
 }
 ```
 
-2. Configure the API call:
+2. Configure the API call.
 
 ```javascript
 const options = {
@@ -201,31 +185,23 @@ const options = {
 };
 ```
 
-3. Process the results from the API call. For example:
+3. Process the results:
 
 ```javascript
 try {
-  // Call the endpoint.
   const response = await axios(options);
-
-  // Process the results from the API call.
   const results = response.data;
-
-  // Emit role to output.
   console.log(`Role Name: ${results.name}; Key: ${results.key};`);
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `node cli.js camunda8 view <role>`, where `<role>` is the role key.
+4. Run in your terminal `node cli.js camunda8 view <role>`.
 
 ## Delete a role (DELETE)
 
-To delete a role, take the following steps:
-
-1. Outline your function, similar to the steps above:
+1. Outline your function:
 
 ```javascript
 async function deleteRole([roleKey]) {
@@ -248,27 +224,22 @@ const options = {
 };
 ```
 
-3. Process the results from the API call. For example:
+3. Process the results:
 
 ```javascript
 try {
-  // Call the delete endpoint.
   const response = await axios(options);
-
-  // Process the results from the API call.
   if (response.status === 204) {
     console.log("Role deleted!");
   } else {
-    // Emit an unexpected error message.
     console.error("Unable to delete this role!");
   }
 } catch (error) {
-  // Emit an error from the server.
   console.error(error.message);
 }
 ```
 
-4. In your terminal, run `node cli.js camunda8 delete <role>`, where `<role>` is the role key.
+4. Run in your terminal `node cli.js camunda8 delete <role>`.
 
 ## If you get stuck
 
