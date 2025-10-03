@@ -149,7 +149,7 @@ export const configs = [
   },
 
   {
-    name: "camunda.api.rest.filters.id",
+    name: "camunda.api.rest.filters[].id",
     legacy: [
       "zeebe.gateway.filters.[x].id",
       "zeebe.broker.gateway.filters.[x].id",
@@ -158,7 +158,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.rest.filters.jar-path",
+    name: "camunda.api.rest.filters[].jar-path",
     legacy: [
       "zeebe.gateway.filters.[x].jarPath",
       "zeebe.broker.gateway.filters.[x].jarPath",
@@ -167,7 +167,7 @@ export const configs = [
     area: ["API"],
   },
   {
-    name: "camunda.api.rest.filters.class-name",
+    name: "camunda.api.rest.filters[].class-name",
     legacy: [
       "zeebe.gateway.filters.[x].className",
       "zeebe.broker.gateway.filters.[x].className",
