@@ -18,14 +18,14 @@ Process applications support versioning, allowing you to create distinct version
 To create a process application version:
 
 1. Open any file in a process application, click on the **Create version** button in the **Versions** dropdown menu.
-   ![Create a version menu](img/versions/web-modeler-version-process-application-versions-menu.png)
+   ![Create a version menu](../img/versions/web-modeler-version-process-application-versions-menu.png)
 2. Enter a **Version tag** in the version creation modal.
-   ![Create a version modal](img/versions/web-modeler-version-create-process-application-version.png)
+   ![Create a version modal](../img/versions/web-modeler-version-create-process-application-version.png)
 3. Select the **Create** button.
 
 When you open the versions page (use the **Show versions** button in the **Versions** dropdown menu), you can now use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
 
-![Versions list with file navigation header buttons highlighted](img/versions/web-modeler-version-view-process-application-version.png)
+![Versions list with file navigation header buttons highlighted](../img/versions/web-modeler-version-view-process-application-version.png)
 
 ## Version actions
 
@@ -33,9 +33,9 @@ You can perform the following actions on a process application version:
 
 1. Restore as latest, useful for reverting changes, making further edits, [git syncing](/components/modeler/web-modeler/git-sync.md), downloading, or using Play.
 2. Edit
-3. Deploy, especially after the version has been [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review).
+3. Deploy, especially after the version has been [reviewed](./process-application-pipeline.md#review).
 4. Download
 5. Delete
 6. Copy, creates a new process application with the files from the version.
 
-![Version actions](img/versions/web-modeler-version-actions.png)
+![Version actions](../img/versions/web-modeler-version-actions.png)

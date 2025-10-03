@@ -430,22 +430,22 @@ module.exports = {
               label: "Process applications",
               link: {
                 type: "doc",
-                id: "components/modeler/web-modeler/process-applications",
+                id: "components/modeler/web-modeler/process-applications/process-applications",
               },
               items: [
-                "components/modeler/web-modeler/process-application-pipeline",
-                "components/modeler/web-modeler/create-a-process-application",
-                "components/modeler/web-modeler/deploy-process-application",
-                "components/modeler/web-modeler/process-application-versioning",
+                "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                "components/modeler/web-modeler/process-applications/create-a-process-application",
+                "components/modeler/web-modeler/process-applications/deploy-process-application",
+                "components/modeler/web-modeler/process-applications/process-application-versioning",
               ],
             },
             {
               Collaboration: [
-                "components/modeler/web-modeler/collaboration",
-                "components/modeler/web-modeler/collaborate-with-modes",
-                "components/modeler/web-modeler/design-your-process",
-                "components/modeler/web-modeler/implement-your-process",
-                "components/modeler/web-modeler/play-your-process",
+                "components/modeler/web-modeler/collaboration/collaboration",
+                "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                "components/modeler/web-modeler/collaboration/design-your-process",
+                "components/modeler/web-modeler/collaboration/implement-your-process",
+                "components/modeler/web-modeler/collaboration/play-your-process",
               ],
             },
             {
