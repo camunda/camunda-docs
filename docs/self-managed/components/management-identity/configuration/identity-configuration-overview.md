@@ -22,6 +22,6 @@ You can configure your Management Identity IdP using the following options:
 :::note
 
 - Management Identity relies on a PostgreSQL. When running Management Identity with an external OIDC provider, you can [connect to an alternative Database](./alternative-db.md) if your internal policies or compliance requirements prevent the use of PostgreSQL.
-- Keycloak is started as a component in a [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/installation-methods/helm/install.md) Camunda 8 self-managed deployment.
+- Keycloak is started as a component in a [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md) Camunda 8 self-managed deployment.
 
 :::
