@@ -293,7 +293,7 @@ Camunda provides alternative container images to the previous Bitnami images, of
 - These images are hosted on `registry.camunda.cloud`.
 - To use them, update your Helm deployment to reference the `values-images-ee.yml` file.
 
-<p><a href="../../../../self-managed/installation-methods/helm/install" class="link-arrow">Install Camunda with Helm</a></p>
+<p><a href="../../../../self-managed/deployment/helm/install" class="link-arrow">Install Camunda with Helm</a></p>
 
 ### Configurable volumes
 
@@ -319,8 +319,6 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ## Integrations
 
-### SAP
-
 ### ServiceNow
 
 Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.
@@ -345,6 +343,35 @@ You can use form-based structured document extraction to capture data from struc
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
 <p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+
+## Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--medium" title="This feature affects DCamunda 7 migration">Camunda 7 migration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Data migration tool
+
+Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.
+
+- Copy running process instances (state-preserving).
+- Copy process variables and their values.
+- Handle problematic instances gracefully with retry options.
+- Write custom code to intercept variable migration.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+
+### Migration Analyzer & Diagram Converter
+
+The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+
+It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+
+### Code conversion
+
+Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
 
 ## Optimize
 
@@ -998,7 +1025,7 @@ This feature is not yet fully compatible with backup/restore.
 Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
 
 - From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
-- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/deployment/helm/install/quick-install.md) for details.
 
 #### Configurable volumes
 
@@ -1162,7 +1189,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
