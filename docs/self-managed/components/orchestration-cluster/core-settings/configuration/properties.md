@@ -163,7 +163,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - backup S3
+## Data - backup S3
 
 ### `camunda.data.backup.s3`
 
@@ -188,21 +188,24 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - backup GCS
+## Data - backup GCS
+
+### `camunda.data.backup.gcs`
 
 <Tabs>
-  <TabItem value="application.yaml" label="application.yaml">
+  <TabItem value="application.yaml" label="Configuration property">
 
-| Application.yaml property             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Default value |
-| :------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------------ |
-| `camunda.data.backup.gcs.bucket-name` | <p>The name of the Google Cloud Storage (GCS) bucket where Camunda backup data will be stored.</p><p>This property is required when using GCS as your backup storage type (when `camunda.data.backup.store` is set to `'GCS'`). It works together with other GCS-specific backup properties to configure the complete GCS backup storage system.</p><p>You must ensure the specified bucket exists and that Camunda has the necessary permissions to read and write backup files to it.</p> | None          |
-| `camunda.data.backup.gcs.host`        | <p>The Google Cloud Storage (GCS) host endpoint for backup operations when using GCS as your backup storage type.</p><p>With the default value of `'AUTO'`, the system automatically determines the appropriate GCS endpoint to use.</p>                                                                                                                                                                                                                                                    | `'AUTO'`      |
-| `camunda.data.backup.gcs.auth`        | <p>Authentication settings for Google Cloud Storage (GCS) when using GCS as your backup storage type.</p><p>Common authentication methods for GCS include:</p><ul><li>Service account key files: JSON key files for service accounts</li><li>Application Default Credentials: Using default GCP authentication</li><li>Workload Identity: For Kubernetes environments with GKE</li></ul>                                                                                                    | None          |
+| Property                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Default value |
+| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.data.backup.gcs.bucket-name` | <p>Name of the bucket where the backup will be stored.</p><ul><li>The bucket must already exist.</li><li>The bucket must not be shared with other Zeebe clusters unless `basePath` is also set.</li></ul>                                                                                                                                                                                                                                                                                 | None          |
+| `camunda.data.backup.gcs.host`        | <p>When set, this overrides the host that the GCS client connects to.</p><p>By default, this is not set because the client can automatically discover the correct host to connect to.</p>                                                                                                                                                                                                                                                                                                 | `'AUTO'`      |
+| `camunda.data.backup.gcs.basePath`    | <p>When set, all blobs in the bucket will use this prefix. This is useful for using the same bucket for multiple Zeebe clusters.</p><p>In this scenario, the `basePath` must be unique. It should not start or end with a '`/`' character. It must be non-empty and not consist of only '`/`' characters.</p>                                                                                                                                                                             | None          |
+| `camunda.data.backup.gcs.auth`        | <p>Configures which authentication method is used for connecting to GCS.</p><p>Can be either `'auto'` or `'none'`.</p><ul><li>`'auto'`: The GCS client uses application default credentials which automatically discovers appropriate credentials from the [runtime environment](https://cloud.google.com/docs/authentication/application-default-credentials).</li><li><p>`'none'`: No authentication is attempted which is only applicable for testing with emulated GCS.</p></li></ul> | None          |
 
 </TabItem>
 </Tabs>
 
-## Database - backup Azure
+## Data - backup Azure
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
@@ -221,7 +224,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - backup filesystem
+## Data - backup filesystem
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
@@ -233,7 +236,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - secondary storage
+## Data - secondary storage
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
@@ -246,7 +249,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - secondary storage Elasticsearch
+## Data - secondary storage Elasticsearch
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
@@ -266,7 +269,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - secondary storage OpenSearch
+## Data - secondary storage OpenSearch
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
@@ -286,7 +289,7 @@ The following configurations apply to all components within the Orchestration Cl
 </TabItem>
 </Tabs>
 
-## Database - primary storage
+## Data - primary storage
 
 <Tabs>
   <TabItem value="application.yaml" label="application.yaml">
