@@ -126,5 +126,6 @@ therefore it would be archived into a historical index with a suffix of `yyyy-mm
 |-------------------------------------------|----------------------------------------|---------------|
 | camunda.operate.archiver.rolloverInterval | Interval for size of archived indices. | 1d            |
 
-Refer to [Elasticsearch calendar intervals](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-datehistogram-aggregation#calendar_intervals) 
+Refer to [Elasticsearch calendar intervals](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-datehistogram-aggregation#calendar_intervals)
+or [Opensearch Auto-interval date histogram](https://docs.opensearch.org/latest/aggregations/bucket/auto-interval-date-histogram/)
 for more information on possible values and their effects.
