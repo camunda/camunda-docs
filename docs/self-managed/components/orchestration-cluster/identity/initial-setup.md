@@ -8,62 +8,62 @@ description: "Learn how Identity is bundled with your default orchestration clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The default setup of [Orchestration Cluster Identity](/components/identity/identity-introduction.md) varies depending on the Self-Managed installation method you choose.
+The default setup of [Orchestration Cluster Identity](/components/identity/identity-introduction.md) depends on the Self-Managed installation method you choose.
 
 <Tabs groupId="installation" defaultValue="c8run" queryString values={
 [
-{label: 'C8 Run', value: 'c8run' },
-{label: 'Docker Compose', value: 'docker' },
-{label: 'Helm charts', value: 'helm' },
-{label: 'Manual', value: 'manual' }
+{label: 'C8 Run', value: 'c8run'},
+{label: 'Docker Compose', value: 'docker'},
+{label: 'Helm charts', value: 'helm'},
+{label: 'Manual', value: 'manual'}
 ]}>
 <TabItem value="c8run">
 
-For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), a cluster has the following initial configuration:
+For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) clusters:
 
 - **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **disabled** (API is in [unprotected mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode)).
+- **API access:** API authentication is **disabled** ([unprotected mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode)).
 - **Authorization:** Authorizations are **disabled**.
-- **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
-- **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
+- **Admin Role:** Predefined `admin` role exists with full permissions.
+- **Initial User:** `demo` / `demo` user with `admin` role.
 
 </TabItem>
 <TabItem value="docker">
 
-For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), a cluster has the following initial configuration:
+For [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) clusters, the configuration is identical to Camunda 8 Run:
 
-- **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **disabled** (API is in [unprotected mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode)).
-- **Authorization:** Authorizations are **disabled**.
-- **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
-- **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
+- **Authentication:** Basic authentication.
+- **API access:** Disabled.
+- **Authorization:** Disabled.
+- **Admin Role:** Predefined `admin` role.
+- **Initial User:** `demo` / `demo`.
 
 </TabItem>
 <TabItem value="helm">
 
-For [Helm](/self-managed/deployment/helm/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, a cluster has the following initial configuration:
+For [Helm](/self-managed/deployment/helm/index.md) installations:
 
 - **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **enabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is disabled).
+- **API access:** API authentication is **enabled** (unprotected API mode disabled).
 - **Authorization:** Authorizations are **enabled**.
-- **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
-- **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
+- **Admin Role:** Predefined `admin` role exists with full permissions.
+- **Initial User:** `demo` / `demo`.
 
 </TabItem>
 <TabItem value="manual">
 
-For [Helm](/self-managed/deployment/helm/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, a cluster has the following initial configuration:
+For [Manual](/self-managed/deployment/manual/install.md) installations, the configuration is the same as Helm:
 
-- **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **enabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is disabled).
-- **Authorization:** Authorizations are **enabled**.
-- **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
-- **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
+- **Authentication:** Basic authentication.
+- **API access:** API authentication **enabled**.
+- **Authorization:** Authorizations **enabled**.
+- **Admin Role:** Predefined `admin` role exists with full permissions.
+- **Initial User:** `demo` / `demo`.
 
 </TabItem>
 </Tabs>
 
-To modify the initial setup, see the [supported configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
+To modify the initial setup, see [supported configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md).
 
 ## Configure initial users
 
@@ -74,60 +74,58 @@ When you start using Identity, you can create the initial users in one of the fo
 - [Setup endpoint of the Orchestration Cluster REST API](#create-admin-user-via-setup-rest-api)
 
 :::warning
-After completing the initial setup, ensure at least one user remains assigned to the `admin` role.  
-If no admin user exists, a third party could create a new admin account and gain full access.
+Ensure at least one user remains assigned to the `admin` role. If no admin exists, a third party could gain full access.
 :::
 
-### Define initial users via the startup configuration{#configure-initial-users-via-configuration}
-
-To configure initial users programmatically, include the relevant definitions in your application configuration:
+### Define initial users via startup configuration {#configure-initial-users-via-configuration}
 
 <Tabs groupId="option" defaultValue="env" queryString values={
 [
-{label: 'Environment variables', value: 'env' },
-{label: 'application.yaml', value: 'application-yaml' },
-{label: 'Helm values', value: 'helm-values' },
+{label: 'Environment variables', value: 'env'},
+{label: 'application.yaml', value: 'application-yaml'},
+{label: 'Helm values', value: 'helm-values'}
 ]}>
 <TabItem value="env">
 
 ```shell
-CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME=<Your chosen username>
-CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD=<Your chosen password>
-CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME=<The name of the first user>
-CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=<The email address of the first user>
+CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME=<username>
+CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD=<password>
+CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME=<full name>
+CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=<email>
 
-# add more users as desired by repeating the variables with an incremented index,
-# like CAMUNDA_SECURITY_INITIALIZATION_USERS_1_USERNAME
+# add more users by incrementing the index (USERS_1, USERS_2, etc.)
 ```
 
 </TabItem>
+
 <TabItem value="application-yaml">
 
-```shell
-camunda.security.initialization.users[0].username: <Your chosen username>
-camunda.security.initialization.users[0].password: <Your chosen password>
-camunda.security.initialization.users[0].name: <The name of the first user>
-camunda.security.initialization.users[0].email: <The email address of the first user>
-
-# add more users as desired by repeating the variables with an incremented index,
-# like camunda.security.initialization.users[1].username
+```yaml
+camunda.security.initialization.users[0].username: <username>
+camunda.security.initialization.users[0].password: <password>
+camunda.security.initialization.users[0].name: <full name>
+camunda.security.initialization.users[0].email: <email>
+# add more users by incrementing the index
 ```
 
 </TabItem>
+
 <TabItem value="helm-values">
+
 ```yaml
 camunda:
   security:
     initialization:
       users:
-        - username: <Your chosen username>
-          password: <Your chosen password>
-          name: <The name of the first user>
-          email: <The email address of the first user>
-        # add more users to this list as desired
+        - username: <username>
+          password: <password>
+          name: <full name>
+          email: <email>
+        # add more users as needed
 ```
 
 </TabItem>
+
 </Tabs>
 
 :::note
@@ -136,7 +134,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 ### Create an initial admin user in Orchestration Cluster UI {#create-admin-user-via-orchestration-cluster-ui}
 
-For [Helm charts](/self-managed/deployment/helm/install/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, if an initial admin user is not defined in the configuration (or was removed from the configuration), the web components will automatically prompt you to create one on the first start:
+For [Helm charts](/self-managed/deployment/helm/install/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, if an initial admin user is not defined in the configuration (or was removed from the configuration), the web UI automatically prompts you to create one on the first start:
 
 ![identity-create-initial-user](./img/create-initial-user.png)
 
@@ -146,7 +144,7 @@ This user will be assigned to the `admin` role and granted all permissions in th
 This option does not apply to **Camunda 8 Run** and **Docker Compose** installations, as they come with a pre-configured `demo` user by default.
 :::
 
-### Create an initial admin user via the Setup endpoint of Orchestration Cluster REST API{#create-admin-user-via-setup-rest-api}
+### Create an initial admin user via the Setup endpoint of Orchestration Cluster REST API {#create-admin-user-via-setup-rest-api}
 
 As a programmatic alternative to the UI, you can create the first admin user by calling the Setup API endpoint. This is useful for automated or headless installations.
 
@@ -177,6 +175,7 @@ To assign users, clients, groups, or [mapping rules](/components/concepts/access
 {label: 'application.yaml', value: 'application-yaml' },
 {label: 'Helm values', value: 'helm-values' },
 ]}>
+
 <TabItem value="env">
 
 ```shell
@@ -185,24 +184,23 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_CLIENTS_0=<client id>
 CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_GROUPS_0=<group id>
 CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_MAPPINGS_0=<mapping id>
 
-# add more members as desired by repeating the variables with an incremented index,
-# like CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_USERS_1
+# add more members as desired by repeating the variables with an incremented index
 ```
 
 </TabItem>
+
 <TabItem value="application-yaml">
 
-```shell
+```yaml
 camunda.security.initialization.default-roles.<role>.users[0]: <username>
-camunda.security.initialization.default-roles.<role>.groups[0]: <client id>
-camunda.security.initialization.default-roles.<role>.clients[0]: <group id>
+camunda.security.initialization.default-roles.<role>.clients[0]: <client id>
+camunda.security.initialization.default-roles.<role>.groups[0]: <group id>
 camunda.security.initialization.default-roles.<role>.mappingrules[0]: <mapping id>
-
-# add more members as desired by repeating the variables with an incremented index,
-# like camunda.security.initialization.default-roles.<role>.users[1]
+# add more members as desired by incrementing the index
 ```
 
 </TabItem>
+
 <TabItem value="helm-values">
 
 ```yaml
@@ -213,16 +211,13 @@ camunda:
         <role>:
           users:
             - <username>
-            # add more users to this list as desired
           clients:
             - <client id>
-            # add more clients to this list as desired
           groups:
             - <group id>
-            # add more groups to this list as desired
           mappings:
             - <mapping id>
-            # add more mappings to this list as desired
+          # add more members as desired
 ```
 
 </TabItem>
@@ -230,7 +225,7 @@ camunda:
 
 Replace `<role>` with the ID of the role you want to configure.
 
-Here is an example how to configure a user `demo` to become a member of the admin role:
+### Example: assign user `demo` to the admin role
 
 <Tabs groupId="option" defaultValue="env" queryString values={
 [
@@ -245,13 +240,15 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=demo
 ```
 
 </TabItem>
+
 <TabItem value="application-yaml">
 
-```shell
-camunda.security.initialization.default-roles.admin.users[0]:demo
+```yaml
+camunda.security.initialization.default-roles.admin.users[0]: demo
 ```
 
 </TabItem>
+
 <TabItem value="helm-values">
 
 ```yaml
@@ -265,6 +262,7 @@ camunda:
 ```
 
 </TabItem>
+
 </Tabs>
 
 You can assign a user to multiple roles by listing them in the respective section of each role.
@@ -284,19 +282,21 @@ To enable them, you can apply the following configuration:
 <TabItem value="env">
 
 ```shell
-CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED-API=false
+CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTED_API=false
 CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
 ```
 
 </TabItem>
+
 <TabItem value="application-yaml">
 
-```shell
+```yaml
 camunda.security.authentication.unprotected-api: false
 camunda.security.authorizations.enabled: true
 ```
 
 </TabItem>
+
 <TabItem value="helm-values">
 
 ```yaml
@@ -309,4 +309,5 @@ camunda:
 ```
 
 </TabItem>
+
 </Tabs>
