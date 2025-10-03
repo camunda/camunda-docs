@@ -14,7 +14,7 @@ Docker images are suitable for production deployments.
 
 By contrast, the provided [Docker Compose files](../../quickstart/developer-quickstart/docker-compose/) are intended only for quick start, development, and testing.
 
-For production, we recommend using [Kubernetes with Helm](../helm/install.md). Advanced users can create their own hardened Docker Compose configuration, but this requires additional effort.
+For production, we recommend using [Kubernetes with Helm](../helm/install/quick-install.md). Advanced users can create their own hardened Docker Compose configuration, but this requires additional effort.
 
 ## Platform support
 
