@@ -126,7 +126,7 @@ const SearchableTable = () => {
           const active = selectedType === t;
           const classSuffix =
             t === "Direct mapping"
-              ? "Direct mapping"
+              ? "direct-mapping"
               : t === "Breaking change"
                 ? "breaking-change"
                 : t === "New"
