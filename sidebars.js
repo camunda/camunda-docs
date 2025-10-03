@@ -1266,7 +1266,11 @@ module.exports = {
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
-        "self-managed/quickstart/administrator-quickstart",
+        {
+          type: "link",
+          label: "For Administrators",
+          href: "/self-managed/deployment/helm/install/quick-install",
+        },
       ],
     },
     {
@@ -1414,6 +1418,11 @@ module.exports = {
                 id: "self-managed/deployment/helm/cloud-providers/index",
               },
               items: [
+                {
+                  type: "category",
+                  label: "Local",
+                  items: ["self-managed/deployment/helm/cloud-providers/kind"],
+                },
                 {
                   type: "category",
                   label: "Amazon",
