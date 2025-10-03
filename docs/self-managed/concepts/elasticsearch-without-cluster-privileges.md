@@ -317,7 +317,7 @@ Prepare a Camunda minor version upgrade by running the standalone schema manager
 Upgrading from 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
 
 - [Components update 8.7 to 8.8](../components/components-upgrade/870-to-880.md)
-- [Helm chart upgrade guide: 8.7 to 8.8](../installation-methods/helm/upgrade/helm-870-880.md)
+- [Helm chart upgrade guide: 8.7 to 8.8](../deployment/helm/upgrade/helm-870-880.md)
 
 These steps may require stopping or scaling down the Camunda application before running the migration.
 :::

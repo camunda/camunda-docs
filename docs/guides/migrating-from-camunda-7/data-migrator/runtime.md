@@ -133,6 +133,7 @@ The `validation-job-type` feature solves this by allowing you to use a FEEL expr
 The migrator supports two job type configurations with fallback behavior:
 
 - **`job-type`**: Used for actual job activation.
+
   - This is the primary job type used when activating jobs in Camunda 8.
   - It is required for the migrator to function correctly.
 
@@ -203,6 +204,39 @@ This approach ensures that:
 - Process instances started by the Data Migrator are handled by the `migrator` job worker.
 - Externally started process instances continue their normal execution flow through the `noop` job worker.
 - Both types of instances can coexist in the same Camunda 8 environment.
+
+## Tenants
+
+- Camunda 7 process instances assigned to no tenant (`tenantId=null`) are migrated to Camunda 8 with `<default>` tenant.
+- The default behavior is to migrate only process instances without assigned tenant.
+- When migrating process instances, the migrator can be configured to handle specific tenants
+  throughout the migration process. Defining tenant IDs ensures that only process instances
+  associated with those tenants are migrated.
+  - Make sure to create the tenants in Camunda 8 before starting the migration.
+  - Add `Authentication configuration for the client` and assign the user to the all of the tenants
+
+### How Multi-Tenancy Works
+
+1. **Validation**: Pre-migration validation ensures target tenant deployments exist in Camunda 8
+2. **Tenant Preservation**: Process instances maintain their original tenant association during
+   migration
+3. **Job Activation**: The migrator fetches jobs only for the configured tenants and the default
+   tenant when activating jobs
+
+### Example
+
+Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
+to specify which tenants should be included in the migration process. This property accepts a
+comma-separated list of tenant identifiers.
+
+```yaml
+camunda:
+  migrator:
+    tenant-ids: tenant-1, tenant-2, tenant-3
+```
+
+With this configuration, only process instances associated with `tenant-1`, `tenant-2`, `tenant-3`,
+and the default tenant will be created and migrated. Instances associated with other tenants will be skipped.
 
 ## Dropping the migration mapping schema
 

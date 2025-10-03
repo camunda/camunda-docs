@@ -7,7 +7,9 @@ description: "Map your auth data to Camunda-specific data using mapping rules."
 
 Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens.
 
-Mapping rules are only available when Management Identity is configured with the [OIDC-based authentication](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+:::note
+You can only use mapping rules if Management Identity is configured to use [OIDC-based authentication](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+:::
 
 ## About mapping rules
 

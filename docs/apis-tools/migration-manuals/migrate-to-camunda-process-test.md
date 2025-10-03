@@ -8,9 +8,11 @@ description: "Learn how to migrate from Zeebe Process Test to Camunda Process Te
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications. It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).  
-Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**.  
-See the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for details.
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your
+process applications. It is the successor to [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md) (ZPT).
+Starting with version **8.8**, ZPT is deprecated and will be removed in version **8.10**. See
+the [announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/) for
+details.
 
 This guide walks you through migrating your existing test cases from ZPT to CPT step-by-step.
 
@@ -89,16 +91,15 @@ Next, choose how you want to run CPT, considering your environment. CPT can be u
 ### ZPT with Testcontainers
 
 If you use ZPT with Testcontainers (
-`artifactId: zeebe-process-test-extension-testcontainer/spring-boot-starter-camunda-test-testcontainer`), then you can
-use CPT's default Testcontainers runtime without
-additional changes. Check the documentation on how to use CPT with Testcontainers [here](/apis-tools/testing/configuration.md#testcontainers-runtime)
+`artifactId: zeebe-process-test-extension-testcontainer` or `spring-boot-starter-camunda-test-testcontainer`), then you can
+use CPT's default [Testcontainers runtime](/apis-tools/testing/configuration.md#testcontainers-runtime) without
+additional changes.
 
 ### ZPT's embedded runtime
 
-If you use ZPT’s **embedded runtime**  
-(`artifactId: zeebe-process-test-extension` or `spring-boot-starter-camunda-test`),  
-switch to CPT’s [remote runtime](/apis-tools/testing/configuration.md#remote-runtime).  
-Choose this option only if you cannot install a Docker-API compatible container runtime (e.g., Docker on Linux or Docker Desktop).
+If you use ZPT’s embedded runtime (`artifactId: zeebe-process-test-extension` or `spring-boot-starter-camunda-test`),
+switch to CPT’s [remote runtime](/apis-tools/testing/configuration.md#remote-runtime). Choose this option only if you
+cannot install a Docker-API compatible container runtime (e.g., Docker on Linux or Docker Desktop).
 
 In this mode, CPT connects to a remote runtime, such as a local Camunda 8 Run running on your machine.
 Prepare your remote runtime:
@@ -206,61 +207,7 @@ class MyProcessTest {
 }
 ```
 
-</TabItem>
-
-<TabItem value='java-client'>
-
-First, migrate the general test class structure:
-
-- Replace the annotation `@ZeebeProcessTest` with `@CamundaProcessTest`.
-- Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`.
-- Remove the field for `RecordStream`. CPT does not provide direct access to records; instead, use the SDK to request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
-
-Below is an example of a ZPT test class:
-
-```java
-import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
-
-@ZeebeProcessTest
-class MyProcessTest {
-
-    private CamundaClient client;
-    private ZeebeTestEngine engine;
-    private RecordStream recordStream;
-
-    @Test
-    void shouldCompleteProcess() {
-      // given: the processes are deployed
-      final ProcessInstanceEvent processInstance = client
-              .newCreateInstanceCommand()
-              .bpmnProcessId("my-process")
-              .latestVersion()
-              .send()
-              .join();
-
-      // when: drive the process forward
-
-      // then
-      BpmnAssert.assertThat(processInstance)
-              .hasPassedElementsInOrder("start", "task1", "task2", "task3", "end")
-              .isCompleted();
-    }
-}
-```
-
-</TabItem>
-</Tabs>
-
 This is the equivalent CPT test class:
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={
-[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]
-}>
-
-<TabItem value='spring-sdk'>
 
 ```java
 import io.camunda.process.test.api.CamundaAssert;
@@ -298,6 +245,50 @@ class MyProcessTest {
 </TabItem>
 
 <TabItem value='java-client'>
+
+First, migrate the general test class structure:
+
+1. **Replace annotations and types**
+
+   - Replace `@ZeebeProcessTest` with `@CamundaProcessTest`
+   - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
+
+2. **Remove record stream fields**  
+   CPT does not provide direct access to records. Instead, use the SDK to request data from the [API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+Below is an example of a ZPT test class:
+
+```java
+import io.camunda.zeebe.process.test.extension.testcontainer.ZeebeProcessTest;
+
+@ZeebeProcessTest
+class MyProcessTest {
+
+    private CamundaClient client;
+    private ZeebeTestEngine engine;
+    private RecordStream recordStream;
+
+    @Test
+    void shouldCompleteProcess() {
+      // given: the processes are deployed
+      final ProcessInstanceEvent processInstance = client
+              .newCreateInstanceCommand()
+              .bpmnProcessId("my-process")
+              .latestVersion()
+              .send()
+              .join();
+
+      // when: drive the process forward
+
+      // then
+      BpmnAssert.assertThat(processInstance)
+              .hasPassedElementsInOrder("start", "task1", "task2", "task3", "end")
+              .isCompleted();
+    }
+}
+```
+
+This is the equivalent CPT test class:
 
 ```java
 import io.camunda.process.test.api.CamundaAssert;
@@ -442,19 +433,19 @@ assertion:
     </tr>
     <tr>
         <td><code>isWaitingForMessages()</code></td>
-        <td>Coming soon with 8.8</td>
+        <td>[isWaitingForMessage()](/apis-tools/testing/assertions.md#iswaitingformessage)</td>
     </tr>
     <tr>
         <td><code>isNotWaitingForMessages()</code></td>
-        <td>Coming soon with 8.8</td>
+        <td>[isNotWaitingForMessage()](/apis-tools/testing/assertions.md#isnotwaitingformessage)</td>
     </tr>
     <tr>
         <td><code>hasCorrelatedMessageByName()</code></td>
-        <td>Coming soon with 8.8</td>
+        <td>[hasCorrelatedMessage()](/apis-tools/testing/assertions.md#hascorrelatedmessage)</td>
     </tr>
     <tr>
         <td><code>hasCorrelatedMessageByCorrelationKey()</code></td>
-        <td>Coming soon with 8.8</td>
+        <td>[hasCorrelatedMessage()](/apis-tools/testing/assertions.md#hascorrelatedmessage)</td>
     </tr>
     <tr>
         <td><code>hasCalledProcess()</code></td>
@@ -522,9 +513,12 @@ ZPT has assertions for a published message using `BpmnAssert.assertThat()` with 
 
 CPT has no equivalent assertions. Instead, you could use
 a [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector) to find the correlated
-process instance, or use
+process instance and verify the correlation using
+a [message subscription assertion](/apis-tools/testing/assertions.md#hascorrelatedmessage).
+
+Alternatively, you could use
 the [correlate message API](/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message.api.mdx) that
-returns the process instance key.
+returns the process instance key in the response.
 
 ```java
 // ZPT:
@@ -547,7 +541,7 @@ CamundaAssert.assertThatProcessInstance(byKey(correlateMessageResponse.getProces
 
 ZPT provides the `InspectionUtility` to locate process instances and pass them to assertions. Some assertions also include methods to extract related entities, such as `extractingProcessInstance()` or `extractingLatestIncident()`.
 
-CPT offers a similar utility via the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector`), which can be used with `CamundaAssert.assertThatProcessInstance()`. For other entities, you can use the Camunda client to search for the entity and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
+CPT offers a similar utility via the [ProcessInstanceSelector](/apis-tools/testing/assertions.md#with-process-instance-selector), which can be used with `CamundaAssert.assertThatProcessInstance()`. For other entities, you can use the Camunda client to search for the entity and implement a [custom assertion](/apis-tools/testing/assertions.md#custom-assertions).
 
 ```java
 // ZPT:
@@ -593,7 +587,7 @@ When you’re ready, take the next steps to continue your journey:
 
 - Explore new [assertions](/apis-tools/testing/assertions.md)
 - Simplify your tests with new [utilities](/apis-tools/testing/utilities.md)
-- Generate process test coverage reports (coming soon)
+- Generate [process test coverage reports](/apis-tools/testing/getting-started.md#process-test-coverage)
 
 ## Troubleshooting
 
