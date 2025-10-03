@@ -24,19 +24,19 @@ const Installation = () => {
       icon: K8sIcon,
       description:
         "Deploy Camunda on Kubernetes using Helm charts for easy management.",
-      link: "/self-managed/installation-methods/helm/",
+      link: "/self-managed/deployment/helm/",
     },
     {
       title: "Docker",
       icon: DockerIcon,
       description: "Run individual Camunda components in Docker containers.",
-      link: "/self-managed/installation-methods/docker/",
+      link: "/self-managed/deployment/docker/",
     },
     {
       title: "Manual",
       icon: JarIcon,
       description: "Direct installation and configuration using JAR files.",
-      link: "/self-managed/installation-methods/manual/install/",
+      link: "/self-managed/deployment/manual/install/",
     },
   ];
 

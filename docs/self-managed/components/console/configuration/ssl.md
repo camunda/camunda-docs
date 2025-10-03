@@ -5,7 +5,7 @@ sidebar_label: "SSL"
 description: "Read details on additional SSL configuration for Console."
 ---
 
-By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend within the same [Docker](/self-managed/installation-methods/docker/docker.md) network or [Kubernetes](/self-managed/installation-methods/helm/install.md) cluster.
+By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.
 
 TLS-encrypted communication can be enabled by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 

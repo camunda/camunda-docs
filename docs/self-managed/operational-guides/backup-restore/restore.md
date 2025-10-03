@@ -660,7 +660,7 @@ If brokers were dynamically scaled between backup and restore, this is not an is
 <Tabs>
    <TabItem value="kubernetes" label="Kubernetes" default>
 
-Assuming you're using the official [Camunda Helm chart](/self-managed/installation-methods/helm/install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
+Assuming you're using the official [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md), you'll have to adjust your Helm `values.yml` to supply the following temporarily.
 
 It will overwrite the start command of the resulting Zeebe pod, executing a restore script.
 It's important that the backup is configured for Zeebe to be able to restore from the backup!

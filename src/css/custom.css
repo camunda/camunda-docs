@@ -629,6 +629,30 @@ h3 .badge:nth-of-type(1) {
   color: #ffffff;
   vertical-align: middle;
 }
+.badge--change {
+  background-color: #0075ff;
+  color: #ffffff;
+}
+.badge--deprecated {
+  background-color: #ffd600;
+  color: #000000;
+}
+
+.badge--breaking-change {
+  background-color: #ff1f00;
+  color: #ffffff;
+}
+.release .badge--long,
+.release .badge--medium {
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.release + h3 {
+  margin-top: 1rem;
+}
 
 .badge--platform {
   background-color: #fc5d0d;
@@ -1577,4 +1601,46 @@ h3.subheading {
 [data-theme="dark"] .link-arrow::after {
   background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
     12px;
+}
+
+h2 + .release-announcement-row {
+  margin-top: 40px;
+}
+
+h3 + .release-announcement-row {
+  margin-top: 40px;
+}
+
+.release-announcement-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 20px;
+}
+
+.release-announcement-row .badge {
+  flex-shrink: 0;
+  margin-top: 0.125rem; /* Slight adjustment to align with text baseline */
+}
+
+.release-announcement-row {
+  flex: 0 0 auto;
+}
+
+.release-announcement-row h4 {
+  margin-top: 0px;
+}
+
+.release-announcement-row span {
+  white-space: nowrap;
+}
+
+.release-announcement-badge {
+  width: 100px;
+}
+
+.release-announcement-content {
+  flex: 4;
 }

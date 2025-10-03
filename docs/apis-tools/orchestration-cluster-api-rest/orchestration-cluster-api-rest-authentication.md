@@ -29,7 +29,7 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------- | -------------------------- |
 | [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)   | ✅ (when configured)       |
-| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
+| [Helm](/self-managed/deployment/helm/install/quick-install.md)                         | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)        | ✅ (when configured)       |
 | SaaS                                                                                   | OIDC Access Token      | ❌                      | ❌                  | ✅ (required)              |
 
 # Authenticate API calls

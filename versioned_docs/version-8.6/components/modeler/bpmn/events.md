@@ -21,7 +21,7 @@ Currently supported events:
 - [Compensation events](compensation-events/compensation-events.md)
 
 :::note
-Not all the signal events are supported yet. For a complete overview of supported events, refer to the [BPMN coverage](../bpmn-coverage#events).
+Not all the events are supported yet. For a complete overview of supported events, refer to the [BPMN coverage](../bpmn-coverage#events).
 :::
 
 ## Events in general

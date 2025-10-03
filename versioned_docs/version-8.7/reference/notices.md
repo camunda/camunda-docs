@@ -8,13 +8,13 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
-## Notice 29
+### Notice 30
 
-### Publication date
+#### Publication date
 
 October 14th, 2025
 
-### Products affected
+#### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
@@ -22,13 +22,13 @@ October 14th, 2025
 - Camunda Optimize
 - Camunda Identity
 
-### Impact
+#### Impact
 
 The embedded Netty was affected by [CVE-2025-58056](https://nvd.nist.gov/vuln/detail/CVE-2025-58056), an HTTP request
 smuggling vulnerability in Netty. Incorrect parsing of chunked transfer encoding could allow attackers to craft
 malicious requests that are interpreted inconsistently by proxies and Netty.
 
-### How to determine if the installation is affected
+#### How to determine if the installation is affected
 
 You are using:
 
@@ -38,7 +38,7 @@ You are using:
 - Optimize 8.7.0 - 8.7.9 or 8.6.0 - 8.6.16
 - Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
 
-### Solution
+#### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -47,6 +47,36 @@ Camunda has provided the following releases which contain the fix:
 - Operate 8.7.13, 8.5.21
 - Optimize 8.7.10, 8.6.17
 - Identity 8.7.7, 8.6.20, 8.5.22
+
+### Notice 29
+
+#### Publication date
+
+October 3, 2025
+
+#### Products affected
+
+- Camunda Zeebe
+
+#### Impact
+
+Zeebe may be affected by [CVE-2024-41996](https://nvd.nist.gov/vuln/detail/CVE-2024-41996), which allows remote attackers to trigger expensive server-side DHE modular-exponentiation calculations, potentially causing asymmetric resource consumption and DoS attacks.
+
+#### How to determine if the installation is affected
+
+You are potentially affected if you have configured Zeebe to accept DHE or ECDHE cipher suites through the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable.
+
+Default Zeebe installations are not affected.
+
+#### Solution
+
+Configure the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable to exclude DHE and ECDHE cipher suites. For example:
+
+```
+server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA
+```
+
+There is no known mitigation other than disabling the use of DHE and ECDHE cipher suites.
 
 ### Notice 28
 

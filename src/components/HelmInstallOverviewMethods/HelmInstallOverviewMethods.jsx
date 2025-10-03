@@ -23,14 +23,14 @@ const HelmInstallOverviewMethods = () => {
       icon: UserDevIcon,
       description:
         "Deploys only a small set of necessary components (Orchestration Cluster and connectors). Quicker and good enough for most development and testing.",
-      link: "/self-managed/installation-methods/helm/install/#orchestration-cluster-only",
+      link: "/self-managed/deployment/helm/install/quick-install/#orchestration-cluster-onl",
     },
     {
       title: "Full Cluster",
       icon: UserOpsIcon,
       description:
         "Deploys Orchestration Cluster, Connectors, Management Identity, Console, and Optimize.",
-      link: "/self-managed/installation-methods/helm/install/#full-cluster",
+      link: "/self-managed/deployment/helm/install/quick-install/#full-cluster",
     },
   ];
 

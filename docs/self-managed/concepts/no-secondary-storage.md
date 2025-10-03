@@ -26,7 +26,7 @@ When secondary storage is disabled, you lose access to these advanced features (
 
 ## Configuration
 
-Using [Helm charts](../installation-methods/helm/install.md), you can set this flag in your `values.yaml` file:
+Using [Helm charts](/self-managed/deployment/helm/install/quick-install.md), you can set this flag in your `values.yaml` file:
 
 ```yaml
 global:
