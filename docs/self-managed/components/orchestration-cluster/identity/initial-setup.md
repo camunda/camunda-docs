@@ -12,7 +12,7 @@ The default setup of [Orchestration Cluster Identity](/components/identity/ident
 
 <Tabs groupId="installation" defaultValue="c8run" queryString values={
 [
-{label: 'C8 Run', value: 'c8run'},
+{label: 'Camunda 8 Run', value: 'c8run'},
 {label: 'Docker Compose', value: 'docker'},
 {label: 'Helm charts', value: 'helm'},
 {label: 'Manual', value: 'manual'}
