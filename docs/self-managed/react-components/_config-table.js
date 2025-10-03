@@ -2,7 +2,7 @@ import "./_config-table.css";
 import React, { useState } from "react";
 import { configs } from "./_config-table-data.js";
 
-const TYPE_OPTIONS = ["Direct mapping", "Breaking change", "New"];
+const TYPE_OPTIONS = ["Breaking change", "Direct mapping", "New"];
 
 const SearchableTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
