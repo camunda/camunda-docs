@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::caution
-The separated Ingress configuration was removed in Camunda 8.8. Use the combined Ingress setup in this guide, or check the [separated Ingress migration](#separated-ingress-migration) section if you want to have a similar behaviour to the separated Ingress.
+Starting with Camunda 8.8, the separated Ingress configuration is no longer supported. Instead, follow the combined Ingress setup described in this guide. If you want to replicate the behavior of the previous separated Ingress approach, check separated Ingress migration.
 :::
 
 Camunda 8 Self-Managed has multiple web applications and gRPC services. You can expose them externally with a combined Ingress setup.
