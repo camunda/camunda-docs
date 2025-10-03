@@ -157,6 +157,15 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/usa
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+
+# Rename Self-Managed installation methods (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Restructure Helm install (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+
+# Orchestration cluster restructure
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
 
 # Self-Managed Restructure
@@ -207,7 +216,7 @@ RewriteRule ^docs/next/self-managed/operational-guides/configure-multi-tenancy/?
 RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/next/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/configure-db-custom-headers/?$ /docs/next/self-managed/installation-methods/helm/configure/database/configure-db-custom-headers/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/configure-elasticsearch-prefix-indices/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/using-existing-elasticsearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/using-existing-elasticsearch/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/using-existing-elasticsearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-existing-opensearch/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/guides/?$ /docs/next/self-managed/installation-methods/helm/configure/guides/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/ingress-setup/?$ /docs/next/self-managed/installation-methods/helm/configure/ingress-setup/ [R=301,L]
@@ -286,9 +295,9 @@ RewriteRule ^docs/components/concepts/what-is-camunda-8/(.*)$ /docs/components/ 
 RewriteRule ^docs/8.7/components/concepts/what-is-camunda-8/(.*)$ /docs/8.7/components/ [R=301,L]
 
 # Restructure Identity Docs (8.8)
-RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/8.7/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
+RewriteRule ^docs/8.7/self-managed/setup/guides/using-existing-keycloak/?$ /docs/next/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/next/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/access-control/applications/?$ /docs/next/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/access-control/resource-authorizations/?$ /docs/next/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
@@ -431,7 +440,7 @@ RewriteRule ^docs/8.5/self-managed/components/management-identity/install-identi
 RewriteRule ^docs/8.5/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/8.5/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Restructure Identity Docs (8.7)
-RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/applications/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/access-control/resource-authorizations/?$ /docs/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
@@ -500,6 +509,9 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
+
+# Restructure Agentic AI docs
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/ [R=301,L]
 
 # Restructure Backup and restore guide
 RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
@@ -799,7 +811,7 @@ RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/connec
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/?$ /docs/self-managed/setup/guides/ingress-setup/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/?$ /docs/self-managed/setup/guides/multi-namespace-deployment/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/?$ /docs/self-managed/setup/guides/running-custom-connectors/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-existing-keycloak/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/self-managed/setup/guides/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/local-kubernetes-cluster/?$ /docs/self-managed/setup/deploy/local/local-kubernetes-cluster/ [R=301,L]
 

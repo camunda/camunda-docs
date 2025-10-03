@@ -17,7 +17,11 @@ keywords:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to web components and APIs. This system applies to:
+Camunda 8's Orchestration Cluster provides a fine-grained authorization system for controlling access to web components and APIs.
+
+## About Orchestration Cluster authorization
+
+This system only applies to the following Orchestration Cluster components:
 
 - [Zeebe](../../zeebe/zeebe-overview.md)
 - [Identity](../../identity/identity-introduction.md)
@@ -26,23 +30,25 @@ Camunda 8's Orchestration Cluster provides a fine-grained authorization system f
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-Authorizations apply only to the Orchestration Cluster components listed above. They do not apply to other Camunda services, such as Web Modeler or Optimize.
+These authorizations do not apply to other Camunda services, such as Web Modeler or Optimize.
 :::
 
 ## How authorization works
 
-The authorization system is built on the principle of least privilege.
-When enabled, no access is granted by default and all permissions must be explicitly assigned.
-There are no "deny" rules – if a permission is not explicitly granted, access is denied.
+The authorization system is built on the principle of **least privilege**.
+
+- When enabled, no access is granted by default, and all permissions must be explicitly assigned.
+- There are no "deny" rules – if a permission is not explicitly granted, access is denied.
+
 This model is enforced across both web components and API requests.
+
+### Owners, resources, and permissions
 
 At its core, an authorization grants an **owner** specific **permissions** on a **resource**. For example:
 
 - User `john.doe` can be authorized to create new users.
 - Group `devOps` can be authorized to delete the group `sales`.
 - Role `processOwner` can be authorized to deploy and run all processes.
-
-### Owners, resources, and permissions
 
 #### Owners
 
@@ -73,10 +79,10 @@ For example, a `Process Definition` resource has a `CREATE_PROCESS_INSTANCE` per
 
 ## Available resources
 
-The following table lists all resources that support authorization in Camunda 8 **Orchestration Cluster**, along with the available permissions per resource. This applies to Camunda 8 **Orchestration Cluster** (Zeebe, Operate, Tasklist, **Orchestration Cluster** APIs).
+The following table lists all resources that support authorization in the **Orchestration Cluster** (Zeebe, Operate, Tasklist, **Orchestration Cluster** APIs), as well as the available permissions per resource.
 
 | Resource type                        | Resource key example                   | Resource key type                    | Supported permissions                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------------------ | -------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| :----------------------------------- | :------------------------------------- | :----------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Authorization**                    | `*`                                    | All authorizations                   | `CREATE`, `READ`, `UPDATE`, `DELETE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | **Batch**                            | `*`                                    | All batches                          | `CREATE`, `CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE`, `CREATE_BATCH_OPERATION_RESOLVE_INCIDENT`, `CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE`, `CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION`, `CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION`, `READ`, `UPDATE` |
 | **Component**                        | `*`, `operate`, `tasklist`, `identity` | All components, component name       | `ACCESS`                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -104,7 +110,7 @@ In Camunda 8 SaaS, authorizations can be enabled or disabled per cluster. This s
 
 ### Self-Managed configuration
 
-In Self-Managed deployments, enable the authorization system using:
+In Self-Managed deployments, you can enable the authorization system using:
 
 <Tabs>
   <TabItem value="yaml" label="application.yaml" default>
@@ -154,6 +160,14 @@ This includes CRUD operations to the following resources:
 
 These permissions should be strictly limited to trusted system administrators who are responsible for managing user access control.
 
+### No validation of owner and resource IDs
+
+When you create an authorization, the Orchestration Cluster does not validate if the owner or the resource exists at that point in time.
+
+- This behavior provides flexibility to create authorizations for entities outside of the system (for example OIDC users) or for entities that will be created in the future (for example creating process definition authorizations before the process is deployed).
+
+- However, you should keep this in mind when setting up new users, groups, roles, and so on, and verify that the ID of the new entity does not accidentally match an existing authorization.
+
 ## Default roles
 
 Camunda provides predefined roles to simplify access management:
@@ -186,7 +200,7 @@ Users need specific permissions to access **Orchestration Cluster** web componen
 
 ### Resource access
 
-Within components, users need additional permissions for specific resources, e.g.:
+Within components, users need additional permissions for specific resources, for example:
 
 - **Process related**: Resource type `processDefinition`
   - `READ_PROCESS_DEFINITION` to view process models
@@ -195,13 +209,14 @@ Within components, users need additional permissions for specific resources, e.g
   - `MODIFY_PROCESS_INSTANCE` to modify running instances
   - `CANCEL_PROCESS_INSTANCE` to cancel running instances
   - `DELETE_PROCESS_INSTANCE` to delete completed instances
+
 - **Decision related**: Resource type `decisionDefinition`
   - `READ_DECISION_DEFINITION` to view DMN models
   - `CREATE_DECISION_INSTANCE` to execute decisions
 
 ### API access
 
-When implementing your own integrations (e.g., using a Camunda client), you should consider the following:
+When implementing your own integrations (for example, using a Camunda client), you should consider the following:
 
 - **Job workers**: Resource type `processDefinition`
   - `UPDATE_PROCESS_INSTANCE` to complete jobs for the specific process definitions

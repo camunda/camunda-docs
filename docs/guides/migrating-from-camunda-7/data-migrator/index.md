@@ -20,7 +20,7 @@ Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8
 The Data Migrator offers two modes of operation:
 
 - [Runtime migration](runtime.md): Migrate running process instances and continue execution in C8. Production-ready with Camunda 8.8.
-- [History migration](history.md): Copy audit (history) data to C8 (experimental). Not intended for production, currently an experimental feature.
+- [History migration](history.md): Copy audit (history) data to Camunda 8 (experimental). Not intended for production, currently an experimental feature.
 
 Migration details are summarized as follows:
 
@@ -52,7 +52,7 @@ With this approach, the duration of history migration doesn't block big bang mig
 
 ## Customization
 
-You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON).
+You might need to customize the data migration, especially if you used complex data formats in Camunda 7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON).
 
 As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
 
@@ -61,3 +61,7 @@ As part of this step, you might also need to extract big payloads and binaries (
 ## Repository
 
 You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-data-migrator
+
+## Cockpit Plugin
+
+The [Cockpit plugin](cockpit-plugin.md) provides a web-based interface to view information about skipped and migrated data during the migration process (experimental).

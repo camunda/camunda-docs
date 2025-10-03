@@ -5,7 +5,7 @@ sidebar_label: "Configure an external IdP using Keycloak"
 description: "Learn how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory."
 ---
 
-When using the default (built-in) Keycloack you can configure an external identity provider (IdP) for user authentication, such as OpenID Connect, SAML, LDAP, or Active Directory.
+If you are using the default (built-in) Keycloak you can configure an external identity provider (IdP) for user authentication, such as OpenID Connect, SAML, LDAP, or Active Directory.
 
 ## Configuration steps
 
@@ -17,7 +17,7 @@ When using the default (built-in) Keycloack you can configure an external identi
 
 2.  Click **Administrator Console** and log in using the Keycloak administrator credentials.
     - The default administrator username is `admin`.
-    - When deploying Camunda 8 with [Helm charts](/self-managed/setup/overview.md), you can extract the password as detailed in [secrets extraction](/self-managed/installation-methods/helm/upgrade/index.md#secrets-extraction).
+    - When deploying Camunda 8 with [Helm charts](/self-managed/setup/overview.md), you can extract the password as detailed in [secrets extraction](/self-managed/deployment/helm/upgrade/index.md#secrets-extraction).
     - Using the example [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) setup, the password is set via `KEYCLOAK_ADMIN_PASSWORD` environment variable and is `admin` per default.
 
 3.  Select the realm you are using with Camunda 8. By default, this is **Camunda-platform**.

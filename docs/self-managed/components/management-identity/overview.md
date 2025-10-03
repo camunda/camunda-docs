@@ -11,16 +11,18 @@ The Management Identity component in Camunda 8 Self-Managed is used to manage au
 Management Identity is separate from the [Identity component within the Orchestration Cluster](/self-managed/components/orchestration-cluster/identity/overview.md), which handles authentication for Zeebe, Operate, Tasklist, and Orchestration Cluster API.
 :::
 
-Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/installation-methods/helm/install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+## About Management Identity
 
-- Administrators can use Management Identity to manage users, groups, roles, permissions, and applications within the Camunda 8 platform.
-- Management Identity supports both users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) with secure authorization based on OAuth 2.0 standards.
-- Users can log in to Camunda 8 web components via an IdP login page. Applications can authenticate via machine-to-machine (M2M) tokens.
-- You can choose to integrate Management Identity with an [external OIDC provider](./configuration/connect-to-an-oidc-provider.md), [connect to an existing Keycloak instance](./configuration/connect-to-an-existing-keycloak.md), or [configure an external IdP using Keycloak](./configuration/configure-external-identity-provider.md).
+Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deployment/helm/install/quick-install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+
+- Administrators can use Management Identity to manage Camunda 8 users, groups, roles, permissions, and applications.
+- Users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) are supported, using secure authorization based on OAuth 2.0 standards.
+- Users log in to web components via an IdP login page. Applications authenticate via machine-to-machine (M2M) tokens.
+- You can integrate Management Identity with an [external OIDC provider](./configuration/connect-to-an-oidc-provider.md), [connect to an existing Keycloak instance](./configuration/connect-to-an-existing-keycloak.md), or [configure an external IdP using Keycloak](./configuration/configure-external-identity-provider.md).
 
 ## Get started
 
-If you're new to Management Identity, learn how to access and log in to Management Identity UI.
+If you're new to Management Identity, learn how to access and log in to the Management Identity UI.
 
 - [Get started with Management Identity](identity-first-steps.md)
 

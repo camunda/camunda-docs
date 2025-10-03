@@ -11,11 +11,13 @@ The assertions follow the style: `assertThat(object_to_test)` + expected propert
 Use the assertions by adding the following static imports in your test class:
 
 ```java
-import static io.camunda.process.test.api.CamundaAssert.assertThatProcessInstance;
+import static io.camunda.process.test.api.CamundaAssert.*;
 
 // optional:
+import static io.camunda.process.test.api.assertions.DecisionSelectors.*;
 import static io.camunda.process.test.api.assertions.ElementSelectors.*;
 import static io.camunda.process.test.api.assertions.ProcessInstanceSelectors.*;
+import static io.camunda.process.test.api.assertions.UserTaskSelectors.*;
 ```
 
 :::info Assertions are blocking
@@ -97,7 +99,9 @@ assertThat(processInstance).isActive();
 
 ### With process instance selector
 
-Use a predefined `ProcessInstanceSelector` from `io.camunda.process.test.api.assertions.ProcessInstanceSelectors` or a custom implementation to identify the process instance:
+Use a predefined `ProcessInstanceSelector` from `io.camunda.process.test.api.assertions.ProcessInstanceSelectors` or a
+custom implementation to identify the process instance. The assertion uses the first process instance that matches the
+selector.
 
 ```java
 // by process instance key
@@ -106,19 +110,17 @@ assertThatProcessInstance(byKey(processInstanceKey)).isActive();
 // by process ID
 assertThatProcessInstance(byProcessId("my-process")).isActive();
 
-// by parent process instance key.
-assertThatProcessInstance(byParentProcesInstanceKey(parentProcessInstanceKey)).isActive();
+// by parent process instance key
+assertThatProcessInstance(byParentProcessInstanceKey(parentProcessInstanceKey)).isActive();
 
-// combine selectors with and()
-assertThatProcessInstance(byProcessId("my-process").and(byParentProcesInstanceKey(parentProcessInstanceKey))).isActive();
+// combine selectors
+assertThatProcessInstance(
+        byProcessId("child-process").and(byParentProcessInstanceKey(processInstanceKey)))
+    .isActive();
 
 // custom selector implementation
 assertThatProcessInstance(processInstance -> { .. }).isActive();
 ```
-
-:::info Multiple matches
-The process instance selector selects the first available match in the event that multiple instances are discovered.
-:::
 
 ### isActive
 
@@ -192,9 +194,6 @@ assertThat(processInstance).hasActiveElements(byId("task_A"));
 
 // by BPMN element name
 assertThat(processInstance).hasActiveElements(byName("A"));
-
-// combine selectors with and()
-assertThat(processInstance).hasActiveElements(byId("task_A").and(byName("A")));
 
 // custom selector implementation
 assertThat(processInstance).hasActiveElements(element -> { .. });
@@ -285,7 +284,7 @@ assertThat(processInstance).hasTerminatedElement("task_A", 2);
 
 ## Variable assertions
 
-You can verify the process instance variables using `CamundaAssert.assertThat(processInstance)`. Local variables of BPMN elements are ignored.
+You can verify the process instance variables using `CamundaAssert.assertThat(processInstance)`.
 
 ### hasVariableNames
 
@@ -386,11 +385,58 @@ assertThat(processInstance).hasLocalVariableSatisfies(
     });
 ```
 
+## Process instance message assertions
+
+You can verify the message subscriptions of a process instance using `CamundaAssert.assertThat(processInstance)`.
+
+### isWaitingForMessage
+
+Assert that the process instance is waiting for the given message. The assertion fails if the process instance has no
+active message subscription for the given message name and optional correlation key.
+
+```java
+// 1) By message name
+assertThat(processInstance).isWaitingForMessage("message-name");
+
+// 2) By message name and correlation key
+assertThat(processInstance).isWaitingForMessage("message-name", "correlation-key");
+```
+
+### isNotWaitingForMessage
+
+Assert that the process instance is not waiting for the given message. The assertion fails if the process instance has
+an active message subscription for the given message name and optional correlation key.
+
+```java
+// 1) By message name
+assertThat(processInstance).isNotWaitingForMessage("message-name");
+
+// 2) By message name and correlation key
+assertThat(processInstance).isNotWaitingForMessage("message-name", "correlation-key");
+```
+
+### hasCorrelatedMessage
+
+Assert that the given message was correlated to the process instance. The assertion fails if the process instance has no
+correlated message subscription for the given message name and optional correlation key.
+
+```java
+// 1) By message name
+assertThat(processInstance).hasCorrelatedMessage("message-name");
+
+// 2) By message name and correlation key
+assertThat(processInstance).hasCorrelatedMessage("message-name", "correlation-key");
+```
+
 ## User task assertions
 
 You can verify the user task states and other properties using `CamundaAssert.assertThat()` or
-`CamundaAssert.assertThatUserTask()`. Use a predefined `UserTaskSelector` from
-`io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom implementation to identify the user task:
+`CamundaAssert.assertThatUserTask()`. Use a `UserTaskSelector` to identify the user task.
+
+### With user task selector
+
+Use a predefined `UserTaskSelector` from `io.camunda.process.test.api.assertions.UserTaskSelectors` or a custom
+implementation to identify the user task:
 
 ```java
 // by BPMN element ID
@@ -399,12 +445,12 @@ assertThatUserTask(byElementId("user-task-id")).isCompleted();
 // by user task name
 assertThatUserTask(byTaskName("User Task")).isCompleted();
 
-// you may optionally specify the process instance key:
+// by process instance key
+assertThatUserTask(byProcessInstanceKey(processInstanceKey)).isCompleted();
+
+// combined selectors
 assertThatUserTask(byElementId("user-task-id", processInstanceKey)).isCompleted();
 assertThatUserTask(byTaskName("User Task", processInstanceKey)).isCompleted();
-
-// combine selectors with and()
-assertThatUserTask(byTaskName("User Task").and(byElementId("user-task-id"))).isCompleted();
 
 // custom selector implementation
 assertThatUserTask(userTask -> { .. }).isCompleted();
@@ -565,15 +611,12 @@ assertThatDecision(byId("decision-id")).isEvaluated();
 // by decision name
 assertThatDecision(byName("Decision Name")).isEvaluated();
 
-// you may optionally specify the process instance key:
-assertThatDecision(byId("decision-id", processInstanceKey)).isEvaluated();
-assertThatDecision(byName("Decision Name", processInstanceKey)).isEvaluated();
-
 // by process instance key
 assertThatDecision(byProcessInstanceKey(processInstanceKey)).isEvaluated();
 
-// combine selectors with and()
-assertThatDecision(byName("Decision Name").and(byId("decision-id"))).isEvaluated();
+// combined selectors
+assertThatDecision(byId("decision-id", processInstanceKey)).isEvaluated();
+assertThatDecision(byName("Decision Name", processInstanceKey)).isEvaluated();
 
 // custom selector implementation
 assertThatDecision(decisionInstance -> { .. }).isEvaluated();

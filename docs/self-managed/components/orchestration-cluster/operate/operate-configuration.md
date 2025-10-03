@@ -28,7 +28,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 See the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
-## Zeebe Elasticsearch or OpenSearch importer
+## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
 **Version 8.8:** The importer is required only for brownfield deployments (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Operate indices. The importer can then be safely disabled for subsequent restarts or deployments.

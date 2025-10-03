@@ -16,7 +16,7 @@ All data present in the Database (from both **main** and **dated** indices) is v
 
 ## Archive period
 
-By default, the time between a process instance finishing and being moved to a dated index is one hour. This can be modified using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configurations) configuration parameter.
+The time between a process instance finishing and being moved to a dated index can be configured using the [waitPeriodBeforeArchiving](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md#configurations) parameter. Refer to that configuration for the current default value.
 
 ## Data cleanup
 
