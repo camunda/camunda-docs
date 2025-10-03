@@ -149,6 +149,13 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Rename Self-Managed installation methods (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Restructure Helm install (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+
 # Orchestration cluster restructure
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
 
@@ -493,6 +500,9 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
+
+# Restructure Agentic AI docs
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/ [R=301,L]
 
 # Restructure Backup and restore guide
 RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]

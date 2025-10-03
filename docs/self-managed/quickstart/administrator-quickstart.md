@@ -111,7 +111,7 @@ To get a full list of the deployed Camunda components and their network properti
 
 <TabItem value="ingress">
   
-Camunda 8 Self-Managed has multiple web applications and gRPC services. These can be accessed using Kubernetes Ingress. For more information, refer to the [Ingress setup guide](/self-managed/installation-methods/helm/configure/ingress-setup.md).
+Camunda 8 Self-Managed has multiple web applications and gRPC services. These can be accessed using Kubernetes Ingress. For more information, refer to the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress-setup.md).
 
 ## Prerequisites
 
@@ -210,4 +210,4 @@ This is a destructive action and will destroy all data of Camunda 8 in the local
 kind delete cluster --name camunda-platform-local
 ```
 
-For more details about deployment options, visit the full [Helm deployment guide](/self-managed/installation-methods/helm/install.md).
+For more details about deployment options, visit the full [Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md).

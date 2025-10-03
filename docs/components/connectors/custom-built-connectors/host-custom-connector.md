@@ -104,7 +104,7 @@ For the purpose of this section, imagine you installed Helm charts with `helm in
 and forwarded Zeebe, Operate, and Keycloak ports:
 
 - `kubectl port-forward svc/camunda-zeebe-gateway 26500:26500`
-- `kubectl port-forward svc/camunda-operate 8081:80`
+- `kubectl port-forward svc/camunda-zeebe-gateway 8080:8080`
 - `kubectl port-forward svc/camunda-keycloak 18080:80`
 
 :::note Keycloak Operator deployment
