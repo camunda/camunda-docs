@@ -680,12 +680,12 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `camunda.security.initialization.users`
 
-| Property                                             | Description                          | Default value               |
-| ---------------------------------------------------- | ------------------------------------ | --------------------------- | --- |
-| `camunda.security.initialization.users.[0].email`    | The email address of the first user. |
-| `camunda.security.initialization.users.[0].name`     |                                      | The name of the first user. |     |
-| `camunda.security.initialization.users.[0].password` | The password of the first user.      |                             |
-| `camunda.security.initialization.users.[0].username` | The username of the first user.      |                             |
+| Property                                             | Description                          | Default value |
+| ---------------------------------------------------- | ------------------------------------ | ------------- |
+| `camunda.security.initialization.users.[0].email`    | The email address of the first user. |               |
+| `camunda.security.initialization.users.[0].name`     | The name of the first user.          |               |
+| `camunda.security.initialization.users.[0].password` | The password of the first user.      |               |
+| `camunda.security.initialization.users.[0].username` | The username of the first user.      |               |
 
 ### `camunda.security.initialization.mappingrules`
 
@@ -804,12 +804,12 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
-| Property                                                             | Description                                  | Default value                         |
-| -------------------------------------------------------------------- | -------------------------------------------- | ------------------------------------- | --- |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_CLIENTS_0`      | Clients assigned to the `<role>` role.       |                                       |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_GROUPS_0`       |                                              | Groups assigned to the `<role>` role. |     |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_MAPPINGRULES_0` | Mapping rules assigned to the `<role>` role. |                                       |
-| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_USERS_0`        | Users assigned to the `<role>` role.         |                                       |
+| Property                                                             | Description                                  | Default value |
+| -------------------------------------------------------------------- | -------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_CLIENTS_0`      | Clients assigned to the `<role>` role.       |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_GROUPS_0`       | Groups assigned to the `<role>` role.        |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_MAPPINGRULES_0` | Mapping rules assigned to the `<role>` role. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<ROLE>_USERS_0`        | Users assigned to the `<role>` role.         |               |
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES`
 

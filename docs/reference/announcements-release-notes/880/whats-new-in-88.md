@@ -46,6 +46,10 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
     <td>**Summary**</td>
 </tr>
 <tr>
+    <td>[Agentic orchestration](#agentic-orchestration)</td>
+    <td>Improved agentic orchestration features and connectors.</td>
+</tr>
+<tr>
     <td>[Orchestration Cluster](#orchestration-cluster)</td>
     <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
@@ -70,6 +74,14 @@ The simplest Camunda 8.8 Self-Managed deployment runs as a single Java applicati
 - Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
+
+## Agentic orchestration
+
+Orchestrate trusted agents at scale using AI process agents, AI task agents, and advanced multi-agent orchestration.
+
+- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md): Build agents to operate autonomously within your end-to-end process and integrate with a variety of LLM providers such as Azure OpenAI or AWS Bedrock.
+
+- [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md): Support for multi-agent communication protocols (MCP). Agents and processes can auto-discover and invoke enterprise systems with full context. This unlocks more advanced coordination patterns while maintaining the governance and transparency enterprises require.
 
 ## Orchestration Cluster {#orchestration-cluster}
 
@@ -307,7 +319,21 @@ Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibi
 
 The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
-| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
-| [API and SDK upgrade guide](/apis-tools/migration-manuals/index.md)           | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
+| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                              |
+| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                               |
+| [APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)          | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</p>                      | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p> |
+
+## Migration from Camunda 7 to Camunda 8
+
+Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda 7 to Camunda 8.
+
+| What's new                                                                                                                            | Description                                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)                                                        | Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.                                                                                                                    |
+| [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter) | Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.         |
+| [Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)                                                                | Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents. |
+
+:::info
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
+:::

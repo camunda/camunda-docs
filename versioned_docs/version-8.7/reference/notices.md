@@ -8,6 +8,36 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 
 Camunda publishes security notices after fixes are available.
 
+### Notice 29
+
+#### Publication date
+
+October 3, 2025
+
+#### Products affected
+
+- Camunda Zeebe
+
+#### Impact
+
+Zeebe may be affected by [CVE-2024-41996](https://nvd.nist.gov/vuln/detail/CVE-2024-41996), which allows remote attackers to trigger expensive server-side DHE modular-exponentiation calculations, potentially causing asymmetric resource consumption and DoS attacks.
+
+#### How to determine if the installation is affected
+
+You are potentially affected if you have configured Zeebe to accept DHE or ECDHE cipher suites through the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable.
+
+Default Zeebe installations are not affected.
+
+#### Solution
+
+Configure the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable to exclude DHE and ECDHE cipher suites. For example:
+
+```
+server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA
+```
+
+There is no known mitigation other than disabling the use of DHE and ECDHE cipher suites.
+
 ### Notice 28
 
 #### Publication date

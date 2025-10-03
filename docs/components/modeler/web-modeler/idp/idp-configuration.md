@@ -85,7 +85,7 @@ Once you have completed all the required prerequisites, configure IDP in a suita
 If you are using AWS as your cloud provider, add the following AWS connector secrets required for IDP.
 
 - **SaaS:** Create and configure as [connector secrets](/components/console/manage-clusters/manage-secrets.md).
-- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/installation-methods/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/components/connectors/connectors-configuration.md#secrets).
+- **Self-Managed:** Connector secrets are generally provided as environment variables, set via `values.yaml` or the command line. Add these connector secrets as environment variables for the Tasklist and Zeebe components. To learn more about using connector secrets in Self-Managed, see [managing secrets in Helm charts](/self-managed/deployment/helm/configure/secret-management.md) and [secrets in manual installations](/self-managed/components/connectors/connectors-configuration.md#secrets).
 
 | Connector secret Key  | Required | Description                                                                                                                                                                                               |
 | :-------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -141,7 +141,6 @@ To use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) t
 1. [Install Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
 
 1. Navigate to the `docker-compose-8.x` folder in the new c8run directory.
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:
@@ -168,13 +167,12 @@ To learn more about using Camunda 8 Run to run Camunda Self-Managed locally, see
 
 ### Docker {#idp-docker-example}
 
-To use [Docker](/self-managed/installation-methods/docker/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
+To use [Docker](/self-managed/deployment/docker/docker.md) to deploy and run Camunda 8 with IDP in a local development environment:
 
 1. Ensure you have completed the IDP [Amazon Web Services (AWS) prerequisites](#prerequisites) and have obtained your AWS [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_).
 
 1. Download the latest Camunda Docker Compose release artifact from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
 1. In the extracted directory:
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:

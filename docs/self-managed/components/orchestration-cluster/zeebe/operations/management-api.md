@@ -79,7 +79,7 @@ When all partitions soft pause exporting, a successful response is received. If 
 
 The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.
 
-The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) operations.
+The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) operations.
 
 - **Enabled**: Records are exported to the exporter. The log is compacted only after the records are exported.
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
