@@ -32,5 +32,5 @@ Depending on your setup, Identity allows you to manage Orchestration Cluster acc
 | [Tenants](tenant.md)               | Isolate data within a single cluster. This is useful for multi-tenancy applications.                                                | Self-Managed only |
 
 :::info Identity in Self-Managed
-For documentation on deploying Identity as part of Camunda 8 Self-Managed, see [Identity in Self-Managed](/self-managed/components/orchestration-cluster/identity/overview.md).
+For documentation on deploying Identity as part of Camunda 8 Self-Managed, see [Identity in Self-Managed](/self-managed/components/orchestration-cluster/identity/initial-setup.md).
 :::

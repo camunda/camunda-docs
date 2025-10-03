@@ -8,7 +8,7 @@ description: "Learn how Identity is bundled with your default orchestration clus
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The default setup of Orchestration Cluster Identity varies depending on the Self-Managed installation method you choose.
+The default setup of [Orchestration Cluster Identity](/components/identity/identity-introduction.md) varies depending on the Self-Managed installation method you choose.
 
 <Tabs groupId="installation" defaultValue="c8run" queryString values={
 [
@@ -22,7 +22,7 @@ The default setup of Orchestration Cluster Identity varies depending on the Self
 For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), a cluster has the following initial configuration:
 
 - **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **disabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is enabled).
+- **API access:** API authentication is **disabled** (API is in [unprotected mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode)).
 - **Authorization:** Authorizations are **disabled**.
 - **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
 - **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
@@ -33,7 +33,7 @@ For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and 
 For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), a cluster has the following initial configuration:
 
 - **Authentication:** Basic authentication is used.
-- **API access:** API authentication is **disabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is enabled).
+- **API access:** API authentication is **disabled** (API is in [unprotected mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode)).
 - **Authorization:** Authorizations are **disabled**.
 - **Admin Role:** A predefined `admin` role exists with permissions to all Orchestration Cluster components and resources.
 - **Initial User:** An initial user with the **admin** role and credentials `demo`/`demo`.
@@ -41,7 +41,7 @@ For [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and 
 </TabItem>
 <TabItem value="helm">
 
-For [Helm](/self-managed/installation-methods/helm/index.md) and [Manual](/self-managed/installation-methods/manual/install.md) installations, a cluster has the following initial configuration:
+For [Helm](/self-managed/deployment/helm/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, a cluster has the following initial configuration:
 
 - **Authentication:** Basic authentication is used.
 - **API access:** API authentication is **enabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is disabled).
@@ -52,7 +52,7 @@ For [Helm](/self-managed/installation-methods/helm/index.md) and [Manual](/self-
 </TabItem>
 <TabItem value="manual">
 
-For [Helm](/self-managed/installation-methods/helm/index.md) and [Manual](/self-managed/installation-methods/manual/install.md) installations, a cluster has the following initial configuration:
+For [Helm](/self-managed/deployment/helm/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, a cluster has the following initial configuration:
 
 - **Authentication:** Basic authentication is used.
 - **API access:** API authentication is **enabled** ([unprotected API mode](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#unprotected-api-mode) is disabled).
@@ -136,7 +136,7 @@ By default, a user is not assigned to any roles and therefore has no permissions
 
 ### Create an initial admin user in Orchestration Cluster UI {#create-admin-user-via-orchestration-cluster-ui}
 
-For [Helm charts](../../../installation-methods/helm/install.md) and [Manual](../../../installation-methods/manual/install.md) installations, if an initial admin user is not defined in the configuration (or was removed from the configuration), the web components will automatically prompt you to create one on the first start:
+For [Helm charts](/self-managed/deployment/helm/install/index.md) and [Manual](/self-managed/deployment/manual/install.md) installations, if an initial admin user is not defined in the configuration (or was removed from the configuration), the web components will automatically prompt you to create one on the first start:
 
 ![identity-create-initial-user](./img/create-initial-user.png)
 
