@@ -58,14 +58,14 @@ With the correct configuration, Camunda 8 Self-Managed can be deployed on any [C
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/installation-methods/helm/install.md)
-- [Cloud service providers](/self-managed/installation-methods/helm/install.md) [recommended]
-  - [Amazon EKS](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/installation-methods/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
-  - [Google GKE](/self-managed/installation-methods/helm/cloud-providers/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/installation-methods/helm/cloud-providers/openshift/redhat-openshift.md)
-- [Docker](/self-managed/installation-methods/docker/docker.md) (`linux/amd64`)
-- [Manual](/self-managed/installation-methods/manual/install.md)
+- [Stock Kubernetes](/self-managed/deployment/helm/install/quick-install.md)
+- [Cloud service providers](/self-managed/deployment/helm/install/quick-install.md) [recommended]
+  - [Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
+  - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+  - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
+- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
+- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`)
+- [Manual](/self-managed/deployment/manual/install.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -107,7 +107,7 @@ Requirements for the components can be seen below:
 When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
 
 Due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
-for the index refresh interval, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html). More information on configuring Amazon OpenSearch can be found [here](/self-managed/installation-methods/helm/configure/database/using-existing-opensearch.md).
+for the index refresh interval, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html). More information on configuring Amazon OpenSearch can be found [here](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md).
 
 :::note Elasticsearch support
 Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).

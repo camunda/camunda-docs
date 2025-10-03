@@ -142,6 +142,15 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
   }'
 ```
 
+This setting will prevent Elasticsearch from generating excessive deprecation warning logs, such as:
+
+```
+"Deprecated field [from] used, this field is unused and will be removed entirely"
+"Deprecated field [to] used, this field is unused and will be removed entirely"
+"Deprecated field [include_lower] used, this field is unused and will be removed entirely"
+"Deprecated field [include_upper] used, this field is unused and will be removed entirely"
+```
+
 ## Zeebe Broker connection
 
 Tasklist needs a connection to the Zeebe Broker to start the import.
@@ -332,6 +341,49 @@ camunda:
     feature-flag:
       allow-non-self-assignment: true
 ```
+
+## Tasklist API mode configuration
+
+Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
+
+:::warning Deprecation notice
+Tasklist V1 mode is deprecated and will be removed in Camunda 8.10. We recommend migrating to V2 mode for all new projects and planning migration for existing applications.
+:::
+
+### Configuration
+
+You can configure the Tasklist mode using either environment variables or YAML configuration:
+
+**Environment variable:**
+
+```bash
+CAMUNDA_TASKLIST_V2_MODE_ENABLED=false
+```
+
+**YAML configuration:**
+
+```yaml
+camunda:
+  tasklist:
+    V2ModeEnabled: false
+```
+
+| Name                           | Description                                                                                                                     | Default value |
+| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :------------ |
+| camunda.tasklist.V2ModeEnabled | Enables Tasklist V2 mode using the Orchestration Cluster API. Set to `false` to use the legacy V1 mode during migration period. | true          |
+
+### When to use V1 mode
+
+Use V1 mode only during the migration period if your application relies on features that are not available in V2:
+
+- User task access restrictions
+- Draft variables
+- Public start forms
+- Advanced process filtering by name
+
+:::tip
+For a complete comparison of features and migration guidance, see [Tasklist API versions](/components/tasklist/api-versions.md).
+:::
 
 ## Backups
 
