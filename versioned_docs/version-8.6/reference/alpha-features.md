@@ -22,6 +22,7 @@ Limitations of alpha features and components include:
 - Not necessarily feature-complete.
 - Might lack full documentation.
 - No guaranteed updates to newer releases.
+- Alpha releases cannot be updated to newer releases and are not suitable for use in production.
 - Support based on SLAs agreed with you, but bugs are treated with the same priority as feature or help requests. See [Camunda Enterprise Support Guide](https://camunda.com/services/enterprise-support-guide/).
 - No maintenance service.
 - (SaaS) No availability targets.

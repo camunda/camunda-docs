@@ -36,15 +36,12 @@ Do _not_ disable it if you like to use Web Modeler, as it requires Camunda Ident
 
 First, port-forward for each application service:
 
-```
-kubectl port-forward svc/camunda-operate  8081:80
-
-kubectl port-forward svc/camunda-tasklist 8082:80
+```shell
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 
 kubectl port-forward svc/camunda-optimize 8083:80
 
 kubectl port-forward svc/camunda-connectors 8086:8080
-
 ```
 
 To be able to use Web Modeler, create additional port-forwardings for Web Modeler itself and Keycloak (assuming that Keycloak is installed as part of the Helm release):
@@ -71,8 +68,7 @@ The name of the Keycloak service will be truncated after 20 characters if Keyclo
 
 Finally, you can access each app pointing your browser at:
 
-- Operate: [http://localhost:8081](http://localhost:8081)
-- Tasklist: [http://localhost:8082](http://localhost:8082)
+- Orcestration: [http://localhost:8080](http://localhost:8080)
 - Optimize: [http://localhost:8083](http://localhost:8083)
 - Web Modeler: [http://localhost:8070](http://localhost:8070)
 - Console: [http://localhost:8087](http://localhost:8087)
