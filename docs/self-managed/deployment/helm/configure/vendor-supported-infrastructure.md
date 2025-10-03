@@ -21,7 +21,7 @@ As outlined in our strategy, Camunda reinforces building deployments on solid fo
 This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami sub-charts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
 
 :::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami sub-charts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+If you prefer to continue using Bitnami sub-charts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
 ## Why use vendor-supported deployment methods?
@@ -564,7 +564,7 @@ Before deploying Camunda Platform:
 
 ### Generate authentication secrets
 
-Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/installation-methods/helm/install.md) and [secret management documentation](/self-managed/installation-methods/helm/configure/secret-management.md).
+Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
 
 ### Helm deployment
 
@@ -759,7 +759,7 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Next steps
 
-- [Configure ingress and TLS](/self-managed/installation-methods/helm/configure/ingress-setup.md)
-- [Set up monitoring and observability](/self-managed/installation-methods/helm/configure/application-configs.md)
-- [Configure multi-tenancy](/self-managed/installation-methods/helm/configure/configure-multi-tenancy.md)
-- [Production deployment guide](/self-managed/installation-methods/helm/production-guide.md)
+- [Configure ingress and TLS](/self-managed/deployment/helm/configure/ingress-setup.md)
+- [Set up monitoring and observability](/self-managed/deployment/helm/configure/application-configs.md)
+- [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
+- [Production deployment guide](/self-managed/deployment/helm/install/production/index.md)
