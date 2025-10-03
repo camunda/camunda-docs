@@ -564,7 +564,7 @@ Before deploying Camunda Platform:
 
 ### Generate authentication secrets
 
-Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
+Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
 
 ### Helm deployment
 
