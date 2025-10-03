@@ -15,6 +15,62 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 29
+
+### Publication date
+
+October 3, 2025
+
+### Products affected
+
+- Camunda Zeebe
+
+### Impact
+
+Zeebe may be affected by [CVE-2024-41996](https://nvd.nist.gov/vuln/detail/CVE-2024-41996), which allows remote attackers to trigger expensive server-side DHE modular-exponentiation calculations, potentially causing asymmetric resource consumption and DoS attacks.
+
+### How to determine if the installation is affected
+
+You are potentially affected if you have configured Zeebe to accept DHE or ECDHE cipher suites through the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable.
+
+Default Zeebe installations are not affected.
+
+### Solution
+
+Configure the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable to exclude DHE and ECDHE cipher suites. For example:
+
+```
+server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA
+```
+
+There is no known mitigation other than disabling the use of DHE and ECDHE cipher suites.
+
+## Notice 28
+
+### Publication date
+
+September 9, 2025
+
+### Products affected
+
+- Camunda Optimize
+
+### Impact
+
+Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-2025-5115), which allows a remote attacker to repeatedly send malformed HTTP/2 frames that exhaust a Jetty server’s CPU and memory, causing a denial-of-service.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.8 or 8.6.0 - 8.6.15
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.9, 8.6.16
+
 ## Notice 27
 
 ### Publication date

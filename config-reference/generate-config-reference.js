@@ -1,24 +1,30 @@
 const { execSync } = require("child_process");
-const springSdk = require("./spring-sdk/generation-strategy");
+const camundaSpringBootStarter = require("./camunda-spring-boot-starter/generation-strategy");
 const fs = require("fs");
 const mustache = require("mustache");
 const { config } = require("process");
 const configRefStrategies = {
-  "spring-sdk": springSdk,
+  "camunda-spring-boot-starter": camundaSpringBootStarter,
+};
+
+const mapRegex = /java.util.Map<(.*),(.*)>/;
+
+const keyNames = {
+  "camunda.client.worker.override": "jobType",
 };
 
 const typeReplacements = {
   "java.lang.String": "string",
   "java.nio.file.Path": "file",
   "java.time.Duration": "duration",
-  "io.camunda.spring.client.properties.CamundaClientAuthProperties$AuthMethod":
+  "io.camunda.client.spring.properties.CamundaClientAuthProperties$AuthMethod":
     "enum[none, basic, oidc]",
   "java.net.URI": "url",
   "java.lang.Boolean": "boolean",
   "java.lang.Integer": "integer",
   "java.lang.Long": "integer",
   "org.springframework.util.unit.DataSize": "dataSize",
-  "io.camunda.spring.client.properties.CamundaClientProperties$ClientMode":
+  "io.camunda.client.spring.properties.CamundaClientProperties$ClientMode":
     "enum[self-managed, saas]",
   "java.util.List<java.lang.String>": "array[string]",
   "java.net.URL": "url",
@@ -61,6 +67,10 @@ const generationConfig = {
   outputDir: strategy.getOutputDir(requestedVersion),
   metadata: strategy.getMetadata(requestedVersion),
   filename: strategy.getFilename(requestedVersion),
+  componentName: strategy.componentName,
+  useHelm: strategy.useHelm || false,
+  baseDir: strategy.baseDir,
+  additionalProperties: strategy.getAdditionalProperties(requestedVersion),
 };
 
 const template = fs.readFileSync(
@@ -101,11 +111,14 @@ const generateConfigReference = (config) => {
       );
     });
   const metadata = {
+    componentName: config.componentName,
+    useHelm: config.useHelm,
     groups: config.metadata.groups
       .map((group) => {
         const properties = config.metadata.properties
           .filter((property) => property.deprecation === undefined)
-          .filter((property) => property.sourceType === group.type);
+          .filter((property) => property.sourceType === group.type)
+          .filter((property) => property.name.startsWith(group.name));
         return {
           group,
           properties,
@@ -163,9 +176,39 @@ const runCommand = (command) => {
 };
 
 const preGenerateDocs = (config) => {
+  // move map properties to the groups
+  const complexProperties = config.metadata.properties.filter(
+    (property) =>
+      property.type.startsWith("java.util.Map") ||
+      (property.type.startsWith("java.util.List") &&
+        typeReplacements[property.type] === undefined)
+  );
+  console.log(`Found ${complexProperties.length} complex properties`);
+  complexProperties.forEach((property) => {
+    config.metadata.properties.splice(
+      config.metadata.properties.indexOf(property),
+      1
+    );
+    const properties = config.additionalProperties.filter(
+      (p) => p.name === property.name
+    )[0];
+    console.log(...properties.properties);
+    config.metadata.properties.push(...properties.properties);
+    console.log(config.metadata.properties);
+    config.metadata.groups.push({
+      name: properties.placeHolderName,
+      type: properties.sourceType,
+      description: property.description,
+      sourceType: property.sourceType,
+    });
+    console.log(config.metadata.groups);
+  });
+
   config.metadata.properties.forEach((property) => {
     if (property.type in typeReplacements) {
       property.type = typeReplacements[property.type];
+    } else {
+      console.log("No type replacement for " + property.type);
     }
     property.defaultValue = JSON.stringify(property.defaultValue);
     if (property.defaultValue === undefined) {
@@ -175,14 +218,21 @@ const preGenerateDocs = (config) => {
       .toUpperCase()
       .replaceAll(/\./g, "_")
       .replaceAll(/-/g, "");
-    property.anchor = property.name.replaceAll(/\./g, "");
+    property.anchor = property.name
+      .replaceAll(/\./g, "")
+      .replaceAll(/-/g, "")
+      .replaceAll(/\{/g, "")
+      .replaceAll(/\}/g, "");
     if (property.deprecation && property.deprecation.replacement) {
       property.deprecation.replacementEnv = property.deprecation.replacement
         .toUpperCase()
         .replaceAll(/\./g, "_")
         .replaceAll(/-/g, "");
-      property.deprecation.replacementAnchor =
-        property.deprecation.replacement.replaceAll(/\./g, "");
+      property.deprecation.replacementAnchor = property.deprecation.replacement
+        .replaceAll(/\./g, "")
+        .replaceAll(/-/g, "")
+        .replaceAll(/\{/g, "")
+        .replaceAll(/\}/g, "");
     }
   });
 };
@@ -211,7 +261,11 @@ const steps = {
     () => runCommand(`prettier --write ${generationConfig.outputDir}`),
     () => runCommand(`prettier --write ${generationConfig.outputDir}`),
   ],
-  download: [() => strategy.downloadReference(generationConfig.version)],
+  download: [
+    () => strategy.downloadReference(generationConfig.version),
+    () => runCommand(`prettier --write ${generationConfig.baseDir}`),
+    () => runCommand(`prettier --write ${generationConfig.baseDir}`),
+  ],
 };
 
 // Run the steps!

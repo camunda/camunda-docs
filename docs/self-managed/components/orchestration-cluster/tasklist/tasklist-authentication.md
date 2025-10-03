@@ -19,7 +19,7 @@ By default, user storage in Elasticsearch is enabled.
 <TabItem value="elasticsearch">
 
 :::note
-User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/components/management-identity/what-is-identity.md) is required.
+User restrictions are not supported when using Elasticsearch for user storage. If you want to use user restrictions, [Identity](/self-managed/components/management-identity/overview.md) is required.
 :::
 
 In this mode, the user authenticates with a username and password stored in Elasticsearch.
@@ -66,7 +66,7 @@ More users can be added directly to Elasticsearch, to the index `tasklist-user-<
 
 <TabItem value="identity">
 
-[Identity](/self-managed/components/management-identity/what-is-identity.md) provides authentication and authorization functionality along with user management.
+[Identity](/self-managed/components/management-identity/overview.md) provides authentication and authorization functionality along with user management.
 
 ## Enable Identity
 
@@ -81,7 +81,7 @@ export SPRING_PROFILES_ACTIVE=identity-auth
 ## Configure Identity
 
 :::danger
-These configuration variables are deprecated. To connect using the updated values, see [Connecting to an OpenID Connect provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
+These configuration variables are deprecated. To connect using the updated values, see [Connecting to an OpenID Connect provider](/self-managed/deployment/helm/configure/connect-to-an-oidc-provider.md).
 :::
 
 Identity requires the following parameters:

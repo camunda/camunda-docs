@@ -26,8 +26,9 @@ Refers to a release made available between minor versions that allows you to pre
 
 :::note
 
+- Alpha releases cannot be updated to newer releases and are not suitable for use in production.
 - An alpha release can also be made available where the entire version is an alpha with [alpha limitations](/reference/alpha-features.md#alpha).
-- Additionally, "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
+- "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
 
 :::
 
@@ -74,7 +75,6 @@ You can use the **Alpha** channel to access [alpha features](/reference/alpha-fe
 
 - Provides alpha releases to preview and prepare for the next stable release.
 - Alpha releases provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Use an alpha release to test the upcoming minor release with your infrastructure.
-- Alpha releases cannot be updated to a newer release, and so are not suitable for use in production.
 
 ### Non-cluster components
 

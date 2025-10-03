@@ -46,6 +46,10 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
     <td>**Summary**</td>
 </tr>
 <tr>
+    <td>[Agentic orchestration](#agentic-orchestration)</td>
+    <td>Improved agentic orchestration features and connectors.</td>
+</tr>
+<tr>
     <td>[Orchestration Cluster](#orchestration-cluster)</td>
     <td>The Orchestration Cluster (previously automation cluster) is now the core Camunda 8 component.</td>
 </tr>
@@ -66,10 +70,18 @@ The simplest Camunda 8.8 Self-Managed deployment runs as a single Java applicati
 
 :::info
 
-- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md), [release notes](/reference/announcements-release-notes/880/880-release-notes.md), and the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for more detail on what's included in Camunda 8.8.
+- See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
 - Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
+
+## Agentic orchestration
+
+Orchestrate trusted agents at scale using AI process agents, AI task agents, and advanced multi-agent orchestration.
+
+- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md): Build agents to operate autonomously within your end-to-end process and integrate with a variety of LLM providers such as Azure OpenAI or AWS Bedrock.
+
+- [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md): Support for multi-agent communication protocols (MCP). Agents and processes can auto-discover and invoke enterprise systems with full context. This unlocks more advanced coordination patterns while maintaining the governance and transparency enterprises require.
 
 ## Orchestration Cluster {#orchestration-cluster}
 
@@ -115,12 +127,12 @@ In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Ope
 The Orchestration Cluster [Identity](/components/identity/identity-introduction.md) component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
 
 :::note
-With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/what-is-identity.md) (formerly "Identity") component.
+With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
 :::
 
 ### Identity and Management Identity
 
-In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/what-is-identity.md) are two separate components used for Identity management, each with distinct areas of responsibility.
+In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/overview.md) are two separate components used for Identity management, each with distinct areas of responsibility.
 
 <table>
     <thead>
@@ -223,6 +235,7 @@ Resource authorizations, groups, and roles formerly managed via Console are repl
 - These are automatically migrated during the Camunda 8.8 upgrade to preserve your existing Access Management configuration at the time of the update.
 - After upgrading a cluster to 8.8, changes to resource authorizations and roles made in Console no longer affect the 8.8 cluster.
 - Users and clients are created and managed in Console, with their authorizations managed via the Orchestration Cluster.
+- Console cluster settings in 8.8 allow you to toggle Orchestration Cluster authorizations. Authorizations are enabled by default for any migrated cluster. The automated migration ensures that your users and clients can access the UIs and APIs as before.
 
 The following table summarizes where Identity entities are managed in Camunda 8.8 SaaS:
 
@@ -241,12 +254,10 @@ The following table summarizes where Identity entities are managed in Camunda 8.
 After you deploy all Camunda 8 components in a Self-Managed environment, you will continue to use Management Identity for Web Modeler, Console, and Optimize, but use Orchestration Cluster Identity for Zeebe, Operate, Tasklist, and the Orchestration Cluster REST API.
 
 - Roles and permissions for Orchestration Cluster components (previously managed in Management Identity), are now replaced by the new authorizations and roles defined within Orchestration Cluster Identity.
-
 - The Identity Migration App that migrates these entities from Management Identity into Orchestration Cluster Identity must be run during your Camunda 8.7 to 8.8 upgrade. Instructions on enabling and configuring the Identity Migration App in the 8.7 to 8.8 migration guide are available for Helm and also docker-compose/bare Java deployments.
-
+- Authorization checks are enabled by default for any migrated cluster using the Helm chart. The automated migration ensures that your users and clients can access the UIs and APIs like before.
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic Authentication method.
-
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
@@ -304,7 +315,21 @@ Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibi
 
 The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
-| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                             |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                              |
-| [API and SDK upgrade guide](/apis-tools/migration-manuals/index.md)           | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and SDK transitions.</p>                        | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and SDKs.</li></ul></p> |
+| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                              |
+| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                               |
+| [APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)          | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</p>                      | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p> |
+
+## Migration from Camunda 7 to Camunda 8
+
+Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda 7 to Camunda 8.
+
+| What's new                                                                                                                            | Description                                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)                                                        | Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.                                                                                                                    |
+| [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter) | Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.         |
+| [Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)                                                                | Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents. |
+
+:::info
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
+:::

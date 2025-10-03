@@ -277,6 +277,13 @@ async function renderDiagrams() {
     ...Array.from(document.querySelectorAll("div[dmn]")),
   ];
 
+  // Minimal guard: if the page has no BPMN/DMN diagrams, skip processing and
+  // do not invoke scrollToHash (avoids errors for numeric-start anchors when
+  // querySelector would be used elsewhere or future changes reintroduce it).
+  if (diagramElements.length === 0) {
+    return;
+  }
+
   Promise.all(
     diagramElements.map(async (element) => {
       try {

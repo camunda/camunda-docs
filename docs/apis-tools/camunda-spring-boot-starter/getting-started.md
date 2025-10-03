@@ -8,7 +8,10 @@ description: "Leverage Camunda APIs (gRPC and REST) in your Spring Boot project.
 Starting with 8.8, the Camunda Spring Boot Starter replaces the Spring Zeebe SDK. The Camunda Spring Boot Starter will rely on the new Camunda Java client,
 designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
-**Note:** Spring Zeebe SDK will be removed in version 8.10. Please migrate to the new Camunda Spring Boot Starter before then.
+**Notes:**
+
+- The new Camunda Client (which is used by the Camunda Spring Boot Starter) uses REST as the default communication protocol. gRPC is still supported but requires additional configuration.
+- Spring Zeebe SDK will be removed in version 8.10. Please migrate to the new Camunda Spring Boot SDK before then.
 
 For more information, visit [announcements](/reference/announcements-release-notes/880/880-announcements.md#camunda-java-client-and-camunda-spring-boot-starter).
 :::
