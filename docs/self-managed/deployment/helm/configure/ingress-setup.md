@@ -166,7 +166,7 @@ global:
       [Add more Ingresses as needed]
 ```
 
-Please note that, you need to create all resources required by the objects in `global.extraManifests`, such as the TLS secret `camunda-platform-optimize-tls`.
+Please note that, you need to create all resources referenced by the objects in `global.extraManifests`, such as the TLS secret `camunda-platform-optimize-tls`.
 
 ## Ingress controllers
 
