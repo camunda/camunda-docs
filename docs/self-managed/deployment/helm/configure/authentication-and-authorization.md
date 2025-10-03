@@ -221,7 +221,7 @@ connectors:
 Use port forwarding to connect to the cluster:
 
 ```bash
-kubectl port-forward svc/camunda-zeebe-gateway 8082:8080
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 kubectl port-forward svc/camunda-keycloak 18080:80
 kubectl port-forward svc/camunda-identity 8084:80
 ```
