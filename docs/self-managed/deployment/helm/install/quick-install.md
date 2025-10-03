@@ -341,16 +341,19 @@ kubectl port-forward svc/camunda-connectors 8085:8080 -n camunda
 
 Once port-forwarding is active, access the UIs in your browser:
 
-| Component       | URL                                                              | Description                    |
-| --------------- | ---------------------------------------------------------------- | ------------------------------ |
-| **Operate**     | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor process instances      |
-| **Tasklist**    | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks            |
-| **Web Modeler** | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes    |
-| **Console**     | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs       |
-| **Identity**    | [http://localhost:18081](http://localhost:18081)                 | User and permission management |
-| **Keycloak**    | [http://localhost:18080](http://localhost:18080)                 | Authentication server          |
-| **Optimize**    | [http://localhost:8083](http://localhost:8083)                   | Process analytics              |
-| **Connectors**  | [http://localhost:8085](http://localhost:8085)                   | External system integrations   |
+| Component                | URL                                                              | Description                                                  |
+| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Zeebe Gateway (gRPC)** | [http://localhost:26500](http://localhost:26500)                 | Process deployment and execution                             |
+| **Zeebe Gateway (HTTP)** | [http://localhost:8080/](http://localhost:8080/)                 | Zeebe REST API                                               |
+| **Operate**              | [http://localhost:8080/operate](http://localhost:8080/operate)   | Monitor process instances                                    |
+| **Tasklist**             | [http://localhost:8080/tasklist](http://localhost:8080/tasklist) | Complete user tasks                                          |
+| **Web Modeler**          | [http://localhost:8070](http://localhost:8070)                   | Design and deploy processes                                  |
+| **Console**              | [http://localhost:8087](http://localhost:8087)                   | Manage clusters and APIs                                     |
+| **Identity**             | [http://localhost:8088/identity](http://localhost:8088/identity) | User and permission management for the orchestration cluster |
+| **Management Identity**  | [http://localhost:18081](http://localhost:18081)                 | User and permission management                               |
+| **Keycloak**             | [http://localhost:18080](http://localhost:18080)                 | Authentication server                                        |
+| **Optimize**             | [http://localhost:8083](http://localhost:8083)                   | Process analytics                                            |
+| **Connectors**           | [http://localhost:8085](http://localhost:8085)                   | External system integrations                                 |
 
 #### Database access (for administration)
 
