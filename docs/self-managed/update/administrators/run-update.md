@@ -53,7 +53,7 @@ If you maintain custom deployment scripts, use the official Helm charts as a tec
 
 Camunda-provided Docker Compose files are only intended for development and testing purposes, and **are not recommended for production environments**. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
-In 8.8 release default `docker-compose.yaml` file is now deploying Orchestration cluster and connectors inline with Helm Chart default configuration. In order to deploy Web Modeler use other Docker Compose configuration examples.
+In 8.8 release default `docker-compose.yaml` file is now deploying Orchestration cluster and connectors inline with chart default configuration. In order to deploy Web Modeler use other Docker Compose configuration examples.
 
 Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
