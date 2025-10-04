@@ -4,14 +4,14 @@ title: "Prepare for upgrade"
 description: "Prepare for an upgrade to Camunda 8.8 Self-Managed – Administrator guide."
 ---
 
-This guide is a starting point to get high level overview of preparation for an upgrade to Camunda 8.8: assess your infrastructure, review operational changes, and choose an upgrade strategy appropriate for your environment.
+This guide is a starting point to get high level overview of preparation for an upgrade to Camunda 8.8 Self-Managed: assess your infrastructure, review operational changes, and choose an upgrade strategy appropriate for your environment.
 
 ## Step 1: Evaluate your current setup
 
 | Area                         | Details                                                                                                                                                   |
 | :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade to the latest 8.7 patch before upgrading to 8.8.                                 |
-| Component version alignment  | Orchestration components such as Zeebe, Operate, Tasklist, and Identity must run the same version.                                                        |
+| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade to the latest 8.7.x patch before upgrading to 8.8.                               |
+| Component version alignment  | Orchestration components such as Zeebe, Operate, Tasklist, and Identity must run the same minor version. Update to the latest 8.7 patch version.          |
 | Configuration customizations | Identify non-default parameters and values in configuration files, ingress rules, external Elasticsearch/OpenSearch configurations, and custom exporters. |
 
 ## Step 2: Assess Camunda 8.8 changes and impact
@@ -35,7 +35,9 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Orchestration Cluster API</td>
-    <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p><ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li><li><p>For more information, see the blog post [upcoming API Changes in Camunda 8](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).</p></li></ul></p></td>
+    <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p>
+    <ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li>
+    <li><p>For more information, see the blog post [upcoming API Changes in Camunda 8](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
@@ -45,7 +47,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Data and exporters</td>
-    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices/storage.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
+    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices and additional disk space while data is moved to unified indices.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
@@ -78,12 +80,12 @@ The following table provides a high-level overview of the impact of these change
 </tr>
 <tr>
     <td>Access control and permissions</td>
-    <td>The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model. Run the Identity migration scripts during the upgrade to migrate authorizations.</td>
+    <td>The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model. We provide the Identity migration application that will help migrate data from 8.7 to 8.8. Helm charts run Identity migration application as part of upgrade process. If you are using custom deployment, please review Helm Charts Migration Jobs for reference.</td>
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
     <td>User groups, roles, tenants, and mapping rules</td>
-    <td>Now managed within [Orchestration Cluster Identity](/components/identity/identity-introduction.md), replacing the previous Management Identity setup. Run the Identity migration scripts during the upgrade to migrate entities.</td>
+    <td>Now managed within [Orchestration Cluster Identity](/components/identity/identity-introduction.md), replacing the previous Management Identity setup. We provide the Identity migration application that will help migrate data from 8.7 to 8.8. Helm charts run Identity migration application as part of upgrade process. If you are using custom deployment, please review Helm Charts Migration Jobs for reference..</td>
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
@@ -98,7 +100,7 @@ The following table provides a high-level overview of the impact of these change
 </tr>
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
-    <td>No longer supported. You must transition to using Basic authentication and re-create users in Orchestration Cluster Identity.</td>
+    <td>No longer supported. You must transition to using Basic authentication and re-create users in Orchestration Cluster Identity. See the documentation for [Tasklist authentication](../../components/orchestration-cluster/tasklist/tasklist-authentication.md) and [Operate authentication](../../components/orchestration-cluster/operate/operate-authentication.md) </td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 <tr>
@@ -116,14 +118,14 @@ Learn more about all Identity 8.8 changes in the [Identity section of what's new
 
 Check and verify your infrastructure compatibility for Camunda 8.8.
 
-| Area                     | 8.8 requirement                               | Action                                          |
-| :----------------------- | :-------------------------------------------- | :---------------------------------------------- |
-| Elasticsearch/OpenSearch | Elasticsearch ≥ 8.16 (OpenSearch TBD).        | Upgrade the cluster to the new version.         |
-| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage; test with load generator |
-| Storage                  | Same or higher IOPS as 8.7.                   | Check space for temporary migration file.       |
+| Area                     | 8.8 requirement                               | Action                                                                                                                                                           |
+| :----------------------- | :-------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Elasticsearch ≥ 8.16 (OpenSearch TBD).        | Upgrade the cluster to the new version. (check the [supported environments](../../../reference/supported-environments.md) matrix to confirm the minimum version) |
+| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage; test with load generator                                                                                                                  |
+| Storage                  | Same or higher IOPS as 8.7.                   | Check space for temporary migration file.                                                                                                                        |
 
 :::info Plan a performance test
-You should run a load test that simulates real production traffic, as component consolidation changes resource consumption. This ensures your cluster sizing is appropriate **before** you upgrade your production environment.
+You should run a load test that simulates real production traffic, as component consolidation changes resource consumption. See the [sizing guidelines](../../../reference/supported-environments.md#sizing) and [benchmarking recommendations](../../../reference/supported-environments.md#sizing) to determine appropriate cluster sizing before you upgrade your production environment.
 :::
 
 ## Next steps
