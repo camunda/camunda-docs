@@ -16,9 +16,9 @@ First, confirm you have completed the following prerequisites:
 
 | Prerequisite | Description                                                                 |
 | :----------- | :-------------------------------------------------------------------------- |
-| Test upgrade | Confirm that the upgrade runs successfully in a non-production environment. |
 | Backups      | Backups created and verified .                                              |
 | Secrets      | Export required secrets (Operate, Tasklist, Identity, etc.).                |
+| Test upgrade | Confirm that the upgrade runs successfully in a non-production environment. |
 
 ## Step 2: Perform upgrade
 
