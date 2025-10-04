@@ -139,7 +139,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
+| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `spring.profiles`
 
@@ -259,6 +259,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`    | The email address of the first user. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`     | The name of the first user.          |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD` | The password of the first user.      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME` | The username of the first user.      |               |
 
 ### `CAMUNDA_SECURITY_MULTITENANCY`
 
@@ -271,7 +272,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `SPRING_PROFILES`
 
@@ -300,13 +301,13 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 | Property                                                   | Description                                                      | Default value                        |
 | ---------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
+| `orchestration.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
 | `orchestration.security.authentication.oidc.clientId`      | The client ID for OIDC authentication.                           |                                      |
 | `orchestration.security.authentication.oidc.clientSecret`  | The client secret for OIDC authentication.                       |                                      |
+| `orchestration.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              |                                      |
 | `orchestration.security.authentication.oidc.issuerUri`     | The issuer URI for OIDC authentication.                          |                                      |
 | `orchestration.security.authentication.oidc.redirectUri`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
 | `orchestration.security.authentication.oidc.userNameClaim` | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `orchestration.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              |                                      |
-| `orchestration.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
 
 ### `orchestration.security.authorizations`
 
@@ -369,10 +370,10 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.initialization`
 
-| Property                                         | Description                                                                          | Default value |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initiation.users`        | List of users to initialize (each with username, password, name, email).             |               |
-| `orchestration.security.initiation.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
+| Property                                             | Description                                                                          | Default value |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------- |
+| `orchestration.security.initialization.users`        | List of users to initialize (each with username, password, name, email).             |               |
+| `orchestration.security.initialization.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
 
 ### `orchestration.security.multiTenancy`
 
