@@ -249,6 +249,7 @@ class MyProcessTest {
 First, migrate the general test class structure:
 
 1. **Replace annotations and types**
+
    - Replace `@ZeebeProcessTest` with `@CamundaProcessTest`
    - Replace the type `ZeebeTestEngine` with `CamundaProcessTestContext`
 
