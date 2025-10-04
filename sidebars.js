@@ -450,6 +450,7 @@ module.exports = {
             },
             {
               "Element templates": [
+                "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/manage-element-templates",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
@@ -818,7 +819,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom connectors",
+          label: "Custom element and connector templates",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
@@ -827,13 +828,12 @@ module.exports = {
             "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Connector templates",
+              label: "Element and connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
               },
               items: [
-                "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
