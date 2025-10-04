@@ -24,7 +24,7 @@ To revert or reapply changes, you can use the **undo** and **redo** buttons loca
 ![undo and redo buttons](img/undo-redo.png)
 
 :::info
-See undo/redo management limitations when [Collaborating](./collaboration.md#undoredo-management-limitations) and [Importing](./import-diagram.md#undoredo-management-limitations).
+See undo/redo management limitations when [Collaborating](collaboration/collaboration.md#undoredo-management-limitations) and [Importing](./import-diagram.md#undoredo-management-limitations).
 :::
 
 Use the canvas tools in the bottom right corner to interact with your diagram.
