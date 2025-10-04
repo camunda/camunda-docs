@@ -39,7 +39,7 @@ To create a shared project as a space for your organization's resources:
 
 ## Assign project and organization roles to collaborators
 
-To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/console/manage-organization/manage-users.md). For example, the **Developer** role is typically a good default option to provide the user with full access to Console, Operate, and Tasklist without deletion privileges.
+To understand what permissions each role has, review [access rights and permissions](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/console/manage-organization/manage-users.md).
 
 If you previously invited collaborators to your organization _and_ project in the section prior, select the three vertical dots to the right of the users' name and select **Edit user**. Check which roles the user should be assigned and select **Confirm**.
 
