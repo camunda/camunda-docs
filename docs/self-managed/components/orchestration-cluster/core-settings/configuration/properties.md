@@ -87,20 +87,21 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `camunda.security.authentication.oidc`
 
-| Property                                                 | Description                                                      | Default value                        |
-| -------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
-| `camunda.security.authentication.oidc.client-id`         | The client ID for OIDC authentication.                           |                                      |
-| `camunda.security.authentication.oidc.client-secret`     | The client secret for OIDC authentication.                       |                                      |
-| `camunda.security.authentication.oidc.issuer-uri`        | The issuer URI for OIDC authentication.                          |                                      |
-| `camunda.security.authentication.oidc.redirect-uri`      | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
-| `camunda.security.authentication.oidc.username-claim`    | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `camunda.security.authentication.oidc.groups-claim`      | The claim to use for groups in OIDC authentication.              |                                      |
-| `camunda.security.authentication.oidc.client-id-claim`   | The claim to use for clients in OIDC authentication.             |                                      |
-| `camunda.security.authentication.oidc.audiences`         | Comma-separated list of audiences to validate in the OIDC token. |                                      |
-| `camunda.security.authentication.oidc.scope`             | Comma-separated list of scopes to request in the OIDC token.     | `openid, profile`                    |
-| `camunda.security.authentication.oidc.jwk-set-uri`       | The authorization server’s JWK Set Uri.                          |                                      |
-| `camunda.security.authentication.oidc.authorization-uri` | The authorization server’s Authorization Uri.                    |                                      |
-| `camunda.security.authentication.oidc.token-uri`         | The authorization server’s Token Uri.                            |                                      |
+| Property                                                     | Description                                                                                                          | Default value                        |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `camunda.security.authentication.oidc.client-id`             | The client ID for OIDC authentication.                                                                               |                                      |
+| `camunda.security.authentication.oidc.client-secret`         | The client secret for OIDC authentication.                                                                           |                                      |
+| `camunda.security.authentication.oidc.issuer-uri`            | The issuer URI for OIDC authentication.                                                                              |                                      |
+| `camunda.security.authentication.oidc.redirect-uri`          | The redirect URI for OIDC authentication.                                                                            | `http://localhost:8080/sso-callback` |
+| `camunda.security.authentication.oidc.username-claim`        | The claim to use for the username in OIDC authentication.                                                            | `sub`                                |
+| `camunda.security.authentication.oidc.groups-claim`          | The claim to use for groups in OIDC authentication.                                                                  |                                      |
+| `camunda.security.authentication.oidc.client-id-claim`       | The claim to use for clients in OIDC authentication.                                                                 |                                      |
+| `camunda.security.authentication.oidc.audiences`             | Comma-separated list of audiences to validate in the OIDC token.                                                     |                                      |
+| `camunda.security.authentication.oidc.scope`                 | Comma-separated list of scopes to request in the OIDC token.                                                         | `openid, profile`                    |
+| `camunda.security.authentication.oidc.jwk-set-uri`           | The authorization server’s JWK Set Uri.                                                                              |                                      |
+| `camunda.security.authentication.oidc.authorization-uri`     | The authorization server’s Authorization Uri.                                                                        |                                      |
+| `camunda.security.authentication.oidc.token-uri`             | The authorization server’s Token Uri.                                                                                |                                      |
+| `camunda.security.authentication.oidc.prefer-username-claim` | Whether to prefer the username claim over the client ID claim. Default preference is client ID first, then username. | `false`                              |
 
 ### `camunda.security.initialization.default-roles`
 
@@ -167,20 +168,21 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC`
 
-| Property                                                | Description                                                      | Default value                        |
-| ------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`         | The client ID for OIDC authentication.                           |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`     | The client secret for OIDC authentication.                       |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`        | The issuer URI for OIDC authentication.                          |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`      | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM`    | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`      | The claim to use for groups in OIDC authentication.              |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM`    | The claim to use for clients in OIDC authentication.             |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`        | Comma-separated list of audiences to validate in the OIDC token. |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE`            | Comma-separated list of scopes to request in the OIDC token.     | `openid, profile`                    |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`        | The authorization server’s JWK Set Uri can be configured.        |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI` | The authorization server’s Authorization Uri can be configured.  |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`         | The authorization server’s Token Uri can be configured.          |                                      |
+| Property                                                   | Description                                                                                                          | Default value                        |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`            | The client ID for OIDC authentication.                                                                               |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`        | The client secret for OIDC authentication.                                                                           |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`           | The issuer URI for OIDC authentication.                                                                              |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`         | The redirect URI for OIDC authentication.                                                                            | `http://localhost:8080/sso-callback` |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM`       | The claim to use for the username in OIDC authentication.                                                            | `sub`                                |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`         | The claim to use for groups in OIDC authentication.                                                                  |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM`       | The claim to use for clients in OIDC authentication.                                                                 |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`           | Comma-separated list of audiences to validate in the OIDC token.                                                     |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE`               | Comma-separated list of scopes to request in the OIDC token.                                                         | `openid, profile`                    |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`           | The authorization server’s JWK Set Uri can be configured.                                                            |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI`    | The authorization server’s Authorization Uri can be configured.                                                      |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`            | The authorization server’s Token Uri can be configured.                                                              |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_PREFERUSERNAMECLAIM` | Whether to prefer the username claim over the client ID claim. Default preference is client ID first, then username. | `false`                              |
 
 ### `CAMUNDA_SECURITY_CSRF`
 
