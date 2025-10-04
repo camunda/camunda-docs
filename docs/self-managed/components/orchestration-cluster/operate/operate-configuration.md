@@ -26,13 +26,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Elasticsearch or OpenSearch
 
-Operate stores and reads data from Elasticsearch or OpenSearch.
-
-Set the `camunda.operate.database` to the appropriate database.
-
-Valid values are `elasticsearch` (default) and `opensearch`.
-
-Example as environment variable: `CAMUNDA_OPERATE_DATABASE=opensearch`.
+Review the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md).
 
 :::note
 As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](../../../deployment/index.md). A migration from previous versions or Elasticsearch environments is currently not supported.
@@ -348,30 +342,7 @@ camunda.operate:
 
 ## Monitoring Operate
 
-Operate includes [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready) inside. This provides the number of monitoring possibilities.
-
-Operate uses the following Actuator configuration by default:
-
-```yaml
-# Disable default health indicators
-# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-health-indicators
-management.health.defaults.enabled: false
-# enable Kubernetes health groups:
-# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-kubernetes-probes
-management.health.probes.enabled: true
-# enable several Actuator endpoints
-management.endpoints.web.exposure.include: health, prometheus, loggers, usage-metrics, backup
-```
-
-With this configuration, the following endpoints are available for use out of the box:
-
-`<server>:9600/actuator/prometheus` Prometheus metrics
-
-`<server>:9600/actuator/health/liveness` Liveness probe
-
-`<server>:9600/actuator/health/readiness` Readiness probe
-
-This configuration may be overwritten by changing the corresponding configuration parameters values.
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md).
 
 ## Logging
 
@@ -379,23 +350,4 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Backups
 
-You must configure the following on your chosen database:
-
-- [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
-- [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
-
-Operate is configured with the snapshot repository name to trigger database snapshots. This is important for coherent backups.
-
-:::info
-Learn more about the procedure and the need to trigger it through Camunda components in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
-:::
-
-Operate must be configured with the repository name:
-
-| Name                                  | Description                      | Default value |
-| ------------------------------------- | -------------------------------- | ------------- |
-| camunda.operate.backup.repositoryName | ES / OS snapshot repository name | -             |
-
-:::warning breaking change
-Configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories. Therefore, use the same `repositoryName` for both components.
-:::
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/backups.md).
