@@ -6,11 +6,11 @@ description: "Test implementation of a single BPMN task in Web Modeler."
 
 [Test a single task](../../concepts/testing.md) in Web Modeler.
 
-## Task Tester and Play
+## Task Testing and Play
 
-Task Tester and Play have several significant differences, summarized in the table below. Task Tester is best for when you're implementing a diagram and want to quickly check whether a task is configured correctly. Play is best for when you want to run more formal end-to-end tests with mock data, to check test coverage, and to save test scenarios for reuse.
+Task Testing and Play have several significant differences, summarized in the table below. Task Testing is best for when you're implementing a diagram and want to quickly check whether a task is configured correctly. Play is best for when you want to run more formal end-to-end tests with mock data, to check test coverage, and to save test scenarios for reuse.
 
-|                            | Task Tester                         | Play                                        |
+|                            | Task Testing                        | Play                                        |
 | -------------------------- | ----------------------------------- | ------------------------------------------- |
 | **Test scope**             | Single task                         | Element, process segment, or entire diagram |
 | **Best for**               | Quick implementation verification   | Formal end-to-end testing                   |
@@ -18,23 +18,22 @@ Task Tester and Play have several significant differences, summarized in the tab
 | **Saves test scenarios**   | No                                  | Yes                                         |
 | **Separate mode required** | No, lets you stay in Implement mode | Yes, requires switching to Play mode        |
 
-## Setting up Task Tester
+## Setting up Task Testing
 
-To run Task Tester, you'll need:
+To run Task Testing, you'll need:
 
 - An active Camunda 8.8+ cluster connection
 - Process deployment permissions on the target environment
-- A configured task with appropriate input/output variable mappings
 
 ## Testing a task
 
-To use Task Tester:
+To use Task Testing:
 
 1. Select and configure the task you want to test.
 2. Open the **Test** tab in the bottom panel.
-3. Enter the input variables in the left pane in JSON format.
+3. Enter the [process variables](../../concepts/variables.md) in the left pane in JSON format.
 
-**Tips for configuring input variables:**
+**Tips for configuring process variables:**
 
 - Use the Variables tab to see available variables from your process.
 - Ensure that the task configuration includes any required input variable mappings.
@@ -43,17 +42,21 @@ To use Task Tester:
 
 4. Click **Test task**.
 
-## Understanding the results
+## Test results
 
-The status of deployment and execution will be shown above the Results pane:
+After running a task, you'll see one of the following outcomes:
 
-- **Successful execution:** Output variables appear in the Results pane.
-- **Failed execution:** Error details and incident information are displayed.
-- **Partial success:** Task completes without technical errors but produces unexpected results, such as incorrect variable values or actions that don't behave as intended.
+### Successful execution
 
-Click **View in Operate** to see complete execution details, logs, and process instance information.
+When the task completes successfully, the results panel displays the process variables the task executed with.
 
-To reset the input variables to the preceding values, or to clear the Results area, click the **Refresh** button next to the respective pane name.
+### Task incident
+
+If an incident occurs during the execution, you will see its details as well as the process variables.
+
+### Error
+
+If the task execution fails due to an error, you will see the response message.
 
 ## Troubleshooting common issues
 
@@ -73,9 +76,3 @@ To reset the input variables to the preceding values, or to clear the Results ar
 
 - Confirm that variable mappings are configured on the task.
 - Check that the input variables match the expected names and types.
-
-# Test a task in Desktop Modeler
-
-## Setting up Task Tester
-
-## Using Task Tester
