@@ -116,7 +116,7 @@ After deployment, access the Camunda 8 components at:
 - **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
 
 :::note
-This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable Web Modeler, Console, and Connectors](/self-managed/deployment/helm/configure/web-modeler-console-connectors.md).
+This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable non-default components](/self-managed/deployment/helm/configure/enable-non-default-components.md).
 :::
 
 ## Separated Ingress migration

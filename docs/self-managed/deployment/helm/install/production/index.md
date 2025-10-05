@@ -113,7 +113,7 @@ orchestration:
         secretName: camunda-platform-zeebe-grpc
 ```
 
-More information can be found in the [Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md) guide.
+More information can be found in the [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) guide.
 
 ### Identity provider integration
 
