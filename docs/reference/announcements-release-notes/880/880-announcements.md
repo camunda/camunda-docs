@@ -42,6 +42,18 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 </div>
 <div className="release-announcement-content">
   
+#### PostgreSQL minimal supported versions
+PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x are now also supported for Management Identity.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Zeebe, Operate, Tasklist, and Identity must run on same minor and patch levels
 From version `8.8.0` onwards, the Zeebe, Operate, Tasklist, and Identity [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility.
 
