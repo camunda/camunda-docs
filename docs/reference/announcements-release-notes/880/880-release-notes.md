@@ -5,13 +5,8 @@ sidebar_label: Release notes
 description: "Release notes for 8.8, including alphas"
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-keywords:
-  [
-    "product development lifecycle",
-    "software development lifecycle",
-    "CI/CD",
-    "AI",
-  ]
+keywords: ["8.8 release notes", "release notes for 8.8", "release notes"]
+page_rank: 90
 ---
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
@@ -318,6 +313,8 @@ A new `commonLabels` value is now available and integrates with `camundaPlatform
 The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
 ## Integrations
+
+### SAP
 
 ### ServiceNow
 
