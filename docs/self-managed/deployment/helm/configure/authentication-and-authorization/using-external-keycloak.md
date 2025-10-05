@@ -1,7 +1,7 @@
 ---
 id: using-external-keycloak
 sidebar_label: External Keycloak
-title: Use external Keycloak with the Helm chart
+title: Helm chart external Keycloak setup
 description: "Learn how to use an external Keycloak instance in a Camunda 8 Self-Managed deployment."
 ---
 

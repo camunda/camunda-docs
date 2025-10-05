@@ -208,7 +208,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 <Tabs groupId="values">
   <TabItem value="with-domain-std" label="Standard with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -261,7 +261,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
   <TabItem value="with-domain-irsa" label="IRSA with domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
