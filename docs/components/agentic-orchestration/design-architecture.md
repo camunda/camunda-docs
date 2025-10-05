@@ -19,6 +19,16 @@ Follow these principles when planning your agentic orchestration solution:
 
 - **Observability and governance**: Use [Operate](/components/operate/operate-introduction.md) and [Optimize](/components/optimize/what-is-optimize.md) for visibility into your agentic orchestration processes.
 
+### Blend deterministic and dynamic orchestration
+
+Blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes allows you to take advantage of non-deterministic process orchestration without sacrificing predictability, customer experience, and compliance.
+
+For example, you could use an AI agent to enhance a Know Your Customer (KYC) process, where the AI agent:
+
+- Provides dynamic guidance and problem-solving to the person throughout the process.
+- Monitors for policy changes and dynamically changes the process execution in response.
+- Automatically adjusts risk level and takes action such as restricting account activity or dynamically adjusting spend limits.
+
 ### When to use deterministic or non-deterministic orchestration
 
 Agentic orchestration involves blending both deterministic and dynamic (AI-driven) process orchestration into your end-to-end processes. It is important to understand when to use each approach:
