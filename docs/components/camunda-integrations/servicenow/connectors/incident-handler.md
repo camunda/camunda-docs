@@ -33,7 +33,7 @@ The following fields are typically required:
 | **Authentication** | ServiceNow credentials (username and password) stored securely in Camunda Secrets and referenced in the connector configuration (e.g. `{{secrets.snUser}}`). |
 
 :::note
-Store credentials in [Camunda secrets](https://docs.camunda.io/docs/components/connectors/use-connectors/secrets/) and reference them using `{{secrets.<name>}}`.
+Store credentials in [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) and reference them using `{{secrets.<name>}}`.
 :::
 
 ![ServiceNow Incident Handler example](../img/incident-handler.png)  
