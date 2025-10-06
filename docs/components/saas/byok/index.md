@@ -6,7 +6,7 @@ description: "Learn more about Camunda integrations, including Camunda's Amazon 
 
 Camunda 8 SaaS encrypts all cluster data at rest to protect customer workloads. By default, encryption is managed using cloud provider–supplied keys. While this satisfies many organizations, some—especially in regulated industries—require full control over their encryption keys.
 
-This documentation focuses specifically on the Bring Your Own Key (BYOK) approach with **Amazon Key Management Service (KMS)**. This feature is currently available only for customers provisioning their Camunda 8 SaaS clusters in **AWS regions**. Support for additional cloud providers may be added in the future.
+This documentation focuses specifically on the **Bring Your Own Key (BYOK)** approach with **Amazon Key Management Service (KMS)**. This feature is currently **available only for clusters provisioned in AWS regions**. Support for additional cloud providers may be added in the future.
 
 With BYOK, you can configure Camunda 8 SaaS to use a **customer-managed key** stored in your own Amazon account. This ensures you retain ownership, control, and visibility throughout the key lifecycle, including creation, rotation, and audit logging.
 
@@ -22,7 +22,8 @@ Without BYOK, customers in these environments may need to accept a higher risk p
 
 ## Feature overview
 
-External encryption enables Camunda SaaS customers to configure their own Amazon KMS encryption keys for cluster data at rest.
+External encryption enables Camunda 8 SaaS customers to configure their own **Amazon KMS** encryption keys for cluster data at rest.  
+This option is **available only for clusters hosted in AWS regions**.
 
 **Supported storage types** (encrypted with customer-managed keys):
 
@@ -31,7 +32,7 @@ External encryption enables Camunda SaaS customers to configure their own Amazon
 - Zeebe persistent disks
 - Elasticsearch persistent disks
 
-**Supported operations**:
+**Supported operations** (for AWS-region clusters):
 
 - **Provisioning** — configure a customer-managed key when creating a cluster
 - **Audit logging** — view encryption and decryption activity in **Amazon CloudTrail**
@@ -42,6 +43,11 @@ External encryption enables Camunda SaaS customers to configure their own Amazon
 External encryption introduces a shared responsibility between Camunda and the customer.
 
 ### Customer responsibilities
+
+:::note Important configuration step
+Configuring your external encryption key in **Amazon KMS** is a critical part of the **Bring Your Own Key (BYOK)** setup.  
+For detailed guidance on cost implications and troubleshooting, see [external encryption key cost implications and troubleshooting](./cost-and-troubleshooting.md).
+:::
 
 - Create and manage the KMS key in your Amazon account
 - Ensure the key resides in the same **AWS region** as your Camunda 8 SaaS cluster

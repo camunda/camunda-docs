@@ -1,13 +1,13 @@
 ---
 id: faq
 title: "FAQ"
-description: "Frequently asked questions about encryption at rest, encryption key types, and External Encryption Keys in Camunda 8 SaaS."
+description: "Frequently asked questions about encryption at rest, encryption key types, and external encryption keys in Camunda 8 SaaS."
 keywords: ["encryption", "BYOK", "KMS", "encryption keys", "security", "FAQ"]
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-This page answers common questions about encryption at rest, encryption key types, and External Encryption Keys for Camunda 8 SaaS clusters.
+This page answers common questions about encryption at rest, encryption key types, and external encryption keys for Camunda 8 SaaS clusters.
 
 ## General questions
 
@@ -15,14 +15,18 @@ This page answers common questions about encryption at rest, encryption key type
 
 Encryption at rest ensures that data stored on physical media (for example, disks or backups) is encrypted, protecting it from unauthorized access if storage is compromised.
 
+:::note Applies to
+Encryption at rest applies to both **Orchestration clusters** and **Web Modeler** environments in Camunda 8 SaaS.
+:::
+
 ### Which encryption options are available in Camunda 8 SaaS?
 
-Camunda 8 SaaS supports the following options:
+Camunda 8 SaaS supports the following encryption options:
 
 - **Provider-managed encryption (default):** Data encrypted with an encryption key supplied by the cloud provider (Amazon, Google).
 - **Camunda-managed software key:** Data encrypted with a Camunda-managed key at the software protection level (Google KMS).
 - **Camunda-managed hardware key:** Data encrypted with a Camunda-managed key at the hardware (HSM) protection level (Google KMS).
-- **External:** Use your own encryption key from a supported cloud KMS provider, currently **Amazon KMS** only.
+- **External encryption key:** Use your own encryption key from a supported cloud Key Management Service (KMS) provider. Currently, this option is **available only for clusters hosted in the AWS region** using **Amazon KMS**.
 
 For a full comparison, see [encryption at rest](/components/saas/encryption-at-rest.md).
 
@@ -58,7 +62,7 @@ No. Backups always use the default provider-managed encryption.
 
 ### What are external encryption keys?
 
-External encryption keys allow you to supply an encryption key from a supported cloud Key Management Service (KMS) provider, currently **Amazon KMS**, to encrypt Camunda 8 SaaS cluster data.
+External encryption keys allow you to supply an encryption key from a supported cloud Key Management Service (KMS) provider—currently **Amazon KMS** for clusters hosted in the **AWS region**—to encrypt Camunda 8 SaaS cluster data.
 
 You retain full control over the key lifecycle, including rotation and revocation. You are responsible for monitoring key usage and access using **Amazon CloudTrail** and **Amazon CloudWatch**.
 
@@ -94,4 +98,4 @@ Yes. All connections to Camunda 8 SaaS use TLS encryption for data in transit.
 
 ### Are there cost implications for using external encryption keys?
 
-Yes. Using external encryption keys incurs charges directly in your Amazon account for KMS key storage, API calls, and CloudTrail logging. For more details, see [Cost Implications and Troubleshooting](/components/saas/byok/cost-and-troubleshooting.md).
+Yes. Using external encryption keys incurs charges directly in your Amazon account for KMS key storage, API calls, and CloudTrail logging. For more details, see [Cost implications and troubleshooting](/components/saas/byok/cost-and-troubleshooting.md).

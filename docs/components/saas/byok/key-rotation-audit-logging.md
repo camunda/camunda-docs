@@ -6,9 +6,13 @@ description: "Camunda cannot rotate customer-managed keys. Any key rotation must
 
 This page describes how key rotation and audit logging work when using **Amazon Bring Your Own Key (BYOK)** with Camunda 8.8.
 
+:::note Disclaimer
+This page includes references to **Amazon Web Services (AWS)** operations and behaviors, which are subject to change by the vendor. Camunda does not control or guarantee the accuracy of AWS features, APIs, or logging mechanisms. If AWS modifies these services, this documentation may become outdated.
+:::
+
 ## Key rotation
 
-With BYOK, you manage your own encryption keys in Amazon KMS. Camunda **cannot rotate the customer's KMS key**. The customer owns the key, and only the customer can rotate it in Amazon KMS.
+With BYOK, you manage your own encryption keys in **Amazon KMS**. Camunda **cannot rotate the customer's KMS key**. The customer owns the key, and only the customer can rotate it in Amazon KMS.
 
 ### Manual key rotation in Amazon KMS
 
@@ -16,7 +20,7 @@ Key rotation in Amazon KMS does **not change the Key ID**. When you enable autom
 
 Using KMS key rotation creates new key material for future encryptions while preserving access to previously encrypted data. Camunda does **not** automatically re-encrypt existing data. The customer is solely responsible for managing their key material.
 
-If you prefer to create a new KMS key instead of rotating an existing one, contact Camunda Support to update your cluster configuration. Customers cannot update encryption settings directly in Camunda SaaS.
+If you prefer to create a new KMS key instead of rotating an existing one, contact **Camunda Support** to update your cluster configuration. Customers cannot update encryption settings directly in Camunda SaaS.
 
 :::warning Key rotation caution
 
@@ -36,15 +40,15 @@ If you prefer to create a new KMS key instead of rotating an existing one, conta
 
 ## Audit logging
 
-Amazon KMS integrates with **Amazon CloudTrail** to provide detailed logs of all key usage. As a BYOK customer, you are responsible for monitoring and persisting these logs in your Amazon account.
+**Amazon KMS** integrates with **Amazon CloudTrail** to provide detailed logs of all key usage. As a BYOK customer, you are responsible for monitoring and persisting these logs in your Amazon account.
 
 ### What is logged
 
-- **CreateGrant** operations
+- **Encrypt**, **Decrypt**, **GenerateDataKey**, and **CreateGrant** operations
 - Any **failed attempts** due to denied access
 
 :::note Log visibility
-All KMS operations performed by Camunda appear in CloudTrail in your account.
+All KMS operations performed by Camunda appear in CloudTrail within your Amazon account.
 :::
 
 ### Recommended audit practices

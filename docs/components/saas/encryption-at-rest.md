@@ -16,7 +16,7 @@ keywords:
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-Camunda 8 SaaS cluster data is encrypted at rest to protect your data against unauthorized access.
+Encryption at rest protects stored data by encrypting it so that if the underlying storage or physical media is accessed without authorization, the contents are unreadable without the appropriate decryption keys.
 
 ## Overview
 
