@@ -44,6 +44,11 @@ Announcements and release notes for supported versions of the Camunda documentat
 </tr>
 </table>
 
+:::info Camunda 8.8
+
+- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md).
+  :::
+
 ## Release announcements
 
 Release announcements include:

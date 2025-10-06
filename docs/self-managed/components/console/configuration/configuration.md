@@ -13,36 +13,44 @@ Underscores in environment variables correspond to configuration file key levels
 
 ## Environment variables
 
-| Environment variable                            | Description                                                                                                                                                                                            | Example value                              |
-| :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------- |
-| `KEYCLOAK_BASE_URL`                             | Base URL for Keycloak.                                                                                                                                                                                 | `https://example.com/auth`                 |
-| `KEYCLOAK_INTERNAL_BASE_URL`                    | Internal base URL for Keycloak.                                                                                                                                                                        | `http://camunda-platform-keycloak:80/auth` |
-| `KEYCLOAK_REALM`                                | Realm for Keycloak.                                                                                                                                                                                    | `camunda-platform`                         |
-| `CAMUNDA_IDENTITY_AUDIENCE`                     | Audience for the Console client.                                                                                                                                                                       | `console`                                  |
-| `CAMUNDA_IDENTITY_CLIENT_ID`                    | Client ID for the Console client.                                                                                                                                                                      | `console`                                  |
-| `CAMUNDA_CONSOLE_CONTEXT_PATH`                  | Context path for Console.                                                                                                                                                                              | `console`                                  |
-| `CAMUNDA_CONSOLE_CUSTOMERID`                    | Unique identifier for the customer.                                                                                                                                                                    | `customer-id`                              |
-| `CAMUNDA_CONSOLE_INSTALLATIONID`                | Unique installation ID of the current customer installation.                                                                                                                                           | `installation-id`                          |
-| `CAMUNDA_CONSOLE_TELEMETRY`                     | Telemetry mode for Console Self-Managed: `disabled`, `online`, or `download`.                                                                                                                          | `online`                                   |
-| `CAMUNDA_CONSOLE_DISABLE_AUTH`                  | Disables authentication for Console. When enabled, users don’t need to log in and API requests can be sent without an authorization header. All `CAMUNDA_IDENTITY_*` variables are ignored.            | `true`                                     |
-| `CAMUNDA_LICENSE_KEY`                           | Camunda 8 license key, if required. For Helm installations, configure this in the `values.yaml` file. See [License key](/self-managed/installation-methods/helm/configure/license-key.md) for details. | N/A                                        |
-| `SERVER_SSL_ENABLED`                            | _(Optional)_ Whether to enable SSL support. Default: `false`.                                                                                                                                          | `true`                                     |
-| `SERVER_SSL_CERTIFICATE`                        | _(Optional)_ Path to the PEM-encoded SSL certificate file.                                                                                                                                             | `file:/full/path/to/certificate.pem`       |
-| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY`            | _(Optional)_ Path to the PEM-encoded private key file for the SSL certificate.                                                                                                                         | `file:/full/path/to/key.pem`               |
-| `SERVER_SSL_PASSPHRASE`                         | _(Optional)_ Passphrase for the key.                                                                                                                                                                   | `passphrase`                               |
-| `MANAGEMENT_SERVER_SSL_ENABLED`                 | _(Optional)_ Whether to enable SSL for management server routes. Default: `false`.                                                                                                                     | `true`                                     |
-| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | _(Optional)_ Path to the PEM-encoded certificate file for the management server.                                                                                                                       | `file:/full/path/to/certificate.pem`       |
-| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | _(Optional)_ Path to the PEM-encoded private key file for the management server certificate.                                                                                                           | `file:/full/path/to/key.pem`               |
-| `MANAGEMENT_SERVER_SSL_PASSPHRASE`              | _(Optional)_ Passphrase for the management server certificate key.                                                                                                                                     | `passphrase`                               |
-| `CAMUNDA_IDENTITY_JWT_ALGORITHMS`               | _(Optional)_ List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK set response.                                                     | `ES256`                                    |
-| `CAMUNDA_CONSOLE_REDIRECT_URL`                  | _(Optional)_ Overrides the redirect URL for the authentication flow. By default, the origin URL is used. Default: empty string.                                                                        | `https://example.com/callback`             |
-| `CAMUNDA_CONSOLE_REDIRECT_TRAILING_SLASH`       | _(Optional)_ Controls whether a trailing slash is added to the redirect URL for the authentication flow. Default: `true`.                                                                              | `false`                                    |
+Console environment variables can be set in Helm values via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
 
-Console environment variables could be set in Helm via the `console.env` key. For more details, check [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
+### Keycloak settings
 
-:::note
-Camunda 8 components without a valid license may display **Non-Production License** in the navigation bar and issue warnings in the logs. These warnings have no impact on Console startup or functionality. To obtain a license, visit the [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/).
-:::
+| Environment variable         | Description                     | Example value                              |
+| :--------------------------- | :------------------------------ | :----------------------------------------- |
+| `KEYCLOAK_BASE_URL`          | Base URL for Keycloak.          | `https://example.com/auth`                 |
+| `KEYCLOAK_INTERNAL_BASE_URL` | Internal base URL for Keycloak. | `http://camunda-platform-keycloak:80/auth` |
+| `KEYCLOAK_REALM`             | Realm for Keycloak.             | `camunda-platform`                         |
+
+### Console settings
+
+| Environment variable                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                   | Example value                  |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------- |
+| `CAMUNDA_IDENTITY_AUDIENCE`               | Audience for the Console client.                                                                                                                                                                                                                                                                                                                                                                                              | `console`                      |
+| `CAMUNDA_IDENTITY_CLIENT_ID`              | Client ID for the Console client.                                                                                                                                                                                                                                                                                                                                                                                             | `console`                      |
+| `CAMUNDA_CONSOLE_CONTEXT_PATH`            | Context path for Console.                                                                                                                                                                                                                                                                                                                                                                                                     | `console`                      |
+| `CAMUNDA_CONSOLE_CUSTOMERID`              | Unique identifier for the customer.                                                                                                                                                                                                                                                                                                                                                                                           | `customer-id`                  |
+| `CAMUNDA_CONSOLE_INSTALLATIONID`          | Unique installation ID of the current customer installation.                                                                                                                                                                                                                                                                                                                                                                  | `installation-id`              |
+| `CAMUNDA_CONSOLE_TELEMETRY`               | Telemetry mode for Console Self-Managed: `disabled`, `online`, or `download`.                                                                                                                                                                                                                                                                                                                                                 | `online`                       |
+| `CAMUNDA_CONSOLE_DISABLE_AUTH`            | Disables authentication for Console. When set to `true`, users can access Console without logging in and API requests do not require authorization. All Identity-related variables are ignored when authentication is disabled.                                                                                                                                                                                               | `true`                         |
+| `CAMUNDA_LICENSE_KEY`                     | Camunda 8 license key. For Helm installations, configure this in the `values.yaml` file. See [License key](/self-managed/deployment/helm/configure/license-key.md) for details.Without a license key, Console will display **Non‑Production License** in the navigation bar and log a warning; functionality is unaffected. See [Camunda Enterprise page](https://camunda.com/platform/camunda-platform-enterprise-contact/). | N/A                            |
+| `CAMUNDA_CONSOLE_REDIRECT_URL`            | _(Optional)_ Overrides the redirect URL for the authentication flow. By default, the origin URL is used. Default: empty string.                                                                                                                                                                                                                                                                                               | `https://example.com/callback` |
+| `CAMUNDA_CONSOLE_REDIRECT_TRAILING_SLASH` | _(Optional)_ Controls whether a trailing slash is added to the redirect URL for the authentication flow. Default: `true`.                                                                                                                                                                                                                                                                                                     | `false`                        |
+| `CAMUNDA_IDENTITY_JWT_ALGORITHMS`         | _(Optional)_ List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK set response.                                                                                                                                                                                                                                                                            | `ES256`                        |
+
+### SSL/TLS settings
+
+| Environment variable                            | Description                                                                                  | Example value                        |
+| :---------------------------------------------- | :------------------------------------------------------------------------------------------- | :----------------------------------- |
+| `SERVER_SSL_ENABLED`                            | _(Optional)_ Whether to enable SSL support. Default: `false`.                                | `true`                               |
+| `SERVER_SSL_CERTIFICATE`                        | _(Optional)_ Path to the PEM-encoded SSL certificate file.                                   | `file:/full/path/to/certificate.pem` |
+| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY`            | _(Optional)_ Path to the PEM-encoded private key file for the SSL certificate.               | `file:/full/path/to/key.pem`         |
+| `SERVER_SSL_PASSPHRASE`                         | _(Optional)_ Passphrase for the key.                                                         | `passphrase`                         |
+| `MANAGEMENT_SERVER_SSL_ENABLED`                 | _(Optional)_ Whether to enable SSL for management server routes. Default: `false`.           | `true`                               |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | _(Optional)_ Path to the PEM-encoded certificate file for the management server.             | `file:/full/path/to/certificate.pem` |
+| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | _(Optional)_ Path to the PEM-encoded private key file for the management server certificate. | `file:/full/path/to/key.pem`         |
+| `MANAGEMENT_SERVER_SSL_PASSPHRASE`              | _(Optional)_ Passphrase for the management server certificate key.                           | `passphrase`                         |
 
 ### Proxy
 
@@ -55,7 +63,7 @@ These settings are useful when the application needs to make outgoing network re
 | `no_proxy`           | A comma-separated list of domain names or IP addresses for which the proxy should be bypassed. | `localhost,127.0.0.1,.example.com`    | -             |
 
 :::note
-The proxy-related environment variables are lowercase because they follow a widely accepted convention used in many system environments and tools.
+These proxy variables (`http_proxy`, `https_proxy`, `no_proxy`) are lowercase by convention. Many systems and tools expect them in lowercase.
 :::
 
 ### Experimental Features
@@ -104,9 +112,7 @@ console:
 
 ### Override configuration parameters
 
-Configuration parameters formerly replaced the complete configuration. Even if you only changed the `customerId`, the complete configuration still had to be added.
-
-This is no longer the case with the override parameters. A subset of parameters can be set so individual parameters can be adjusted. If a parameter must be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so correlations can be made accordingly.
+You can override only specific configuration parameters as needed. The YAML structure mirrors the environment variable hierarchy. If a parameter must be changed for a specific cluster, the `name` and `namespace` fields must be set with the exact values so correlations can be made accordingly.
 
 #### Example
 
@@ -211,7 +217,7 @@ console:
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak
 
 By default, Console uses Keycloak to provide authentication.
-You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
+You can use a different OIDC provider by following the steps described in the [OIDC connection guide](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
 
 ## Monitoring
 

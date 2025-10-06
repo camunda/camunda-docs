@@ -3,16 +3,20 @@ id: whats-new-in-88
 title: What's new in Camunda 8.8
 sidebar_label: What's new in Camunda 8.8
 description: "Learn more about what's new and changed in Camunda 8.8."
-keywords: ["what's changed", "what's new"]
+keywords:
+  [
+    "what's changed",
+    "what's new",
+    "whats changed in 8.8",
+    "what's changed in 8.8",
+    "8.8 changes",
+  ]
+page_rank: 90
 ---
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
 Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
-
-:::warning
-This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.
-:::
 
 ## Introducing Camunda 8.8
 
@@ -319,3 +323,17 @@ The following guides provide detailed information on how you can upgrade to Camu
 | :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                               |
 | [APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)          | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</p>                      | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p> |
+
+## Migration from Camunda 7 to Camunda 8
+
+Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda 7 to Camunda 8.
+
+| What's new                                                                                                                            | Description                                                                                                                                                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)                                                        | Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.                                                                                                                    |
+| [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter) | Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.         |
+| [Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)                                                                | Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents. |
+
+:::info
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
+:::

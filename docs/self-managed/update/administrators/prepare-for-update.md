@@ -144,7 +144,7 @@ For more information, see the [component upgrade guide](/self-managed/components
 
 - [Supported environments](../../../reference/supported-environments.md#component-version-matrix)
 - [8.8 release notes](../../../reference/announcements-release-notes/880/880-release-notes.md)
-- [Helm chart 8.7 to 8.8 technical details](../../installation-methods/helm/upgrade/helm-870-880.md)
+- [Helm chart 8.7 to 8.8 technical details](../../deployment/helm/upgrade/helm-870-880.md)
 - [Component upgrade guide](../../components/components-upgrade/870-to-880.md)
 
 :::

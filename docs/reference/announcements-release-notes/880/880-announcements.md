@@ -517,9 +517,9 @@ The existing data schema in the secondary storage has been harmonized, to be use
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in Camunda 8.6 and is removed from the Helm chart in Camunda 8.8.
 
-Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
+Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-- If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/installation-methods/helm/install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
+- If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/deployment/helm/install/quick-install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 - New migration guides are also provided to support you when migrating from a previous Camunda version.
 
 :::caution
@@ -582,7 +582,7 @@ As a result, the following Docker images are deprecated as of Camunda 8.8:
 With the Camunda 8.8 release, a consistent secret pattern for Helm charts is introduced. The legacy secret configuration is deprecated and will be removed with 8.9, but remains functional during the transition period.
 
 :::info
-See the [secret management guide](/self-managed/installation-methods/helm/configure/secret-management.md) for migration instructions and examples.
+See the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md) for migration instructions and examples.
 :::
 
 </div>
@@ -631,7 +631,7 @@ With the Camunda 8.8 release, the default ID token claim that Web Modeler uses t
 With the Camunda 8.8 release, the Camunda Helm charts are updated to use the new Bitnami Docker repository.
 
 :::info
-See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 :::
 
 </div>
@@ -656,7 +656,7 @@ With the Camunda 8.8 release, alternative container images to the previously use
 - To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file.
 
 :::info
-Full setup instructions are available in the [installation guide](/self-managed/installation-methods/helm/install.md).
+Full setup instructions are available in the [installation guide](/self-managed/deployment/helm/install/quick-install.md).
 :::
 
 </div>
