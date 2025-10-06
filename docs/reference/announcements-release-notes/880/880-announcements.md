@@ -43,7 +43,7 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 <div className="release-announcement-content">
   
 #### PostgreSQL minimal supported versions
-Management Identity now also supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
+Web Modeler and Management Identity now also supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
 
 </div>
 </div>
