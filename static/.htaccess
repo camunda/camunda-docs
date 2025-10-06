@@ -156,7 +156,7 @@ RewriteRule ^/docs/8.6/self-managed/setup/guides/multi-namespace-deployment/?$ /
 RewriteRule ^/docs/8.5/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
 
 # Rename Self-Managed installation methods (8.8)
-RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/$1 [R=301,L]
 
 # Restructure Helm install (8.8)
 RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
@@ -217,7 +217,7 @@ RewriteRule ^docs/next/self-managed/setup/guides/using-existing-elasticsearch/?$
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-existing-opensearch/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/guides/?$ /docs/next/self-managed/installation-methods/helm/configure/guides/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/ingress-setup/?$ /docs/next/self-managed/installation-methods/helm/configure/ingress-setup/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/next/self-managed/installation-methods/helm/configure/multi-namespace-deployment/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/running-custom-connectors/?$ /docs/next/self-managed/installation-methods/helm/configure/running-custom-connectors/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/secret-management/?$ /docs/next/self-managed/installation-methods/helm/configure/secret-management/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/install/?$ /docs/next/self-managed/installation-methods/helm/install/ [R=301,L]
@@ -806,7 +806,7 @@ RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/access
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/air-gapped-installation/?$ /docs/self-managed/setup/guides/air-gapped-installation/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider/?$ /docs/self-managed/setup/guides/connect-to-an-oidc-provider/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/ingress-setup/?$ /docs/self-managed/setup/guides/ingress-setup/ [R=301,L]
-RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/?$ /docs/self-managed/setup/guides/multi-namespace-deployment/ [R=301,L]
+RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/running-custom-connectors/?$ /docs/self-managed/setup/guides/running-custom-connectors/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/using-existing-keycloak/?$ /docs/self-managed/installation-methods/helm/configure/using-external-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/platform-deployment/helm-kubernetes/guides/?$ /docs/self-managed/setup/guides/ [R=301,L]
