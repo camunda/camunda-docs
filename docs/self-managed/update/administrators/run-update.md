@@ -12,13 +12,13 @@ This guide describes how to perform a Camunda 8.8 Self-Managed upgrade. Ensure y
 
 ## Step 1: Confirm prerequisites
 
-First, confirm you have completed the following prerequisites:
+Confirm you have completed the following prerequisites:
 
-| Prerequisite     | Description                                                                                                                                                                          |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Test 8.8 cluster | Deploy new Camunda 8.8 cluster with your configuration to test target configuration                                                                                                  |
-| Test upgrade     | Confirm that the upgrade runs successfully in a non‑production environment that mirrors your production cluster.                                                                     |
-| Backups          | Create and verify backups; test restoring them to ensure data integrity. See the documentation [here](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
+| Prerequisite     | Description                                                                                                                                                                         |
+| :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Test 8.8 cluster | Deploy a new Camunda 8.8 cluster with your configuration, to test and validate your target configuration.                                                                           |
+| Test upgrade     | Confirm that the upgrade runs successfully in a non‑production environment that mirrors your production cluster.                                                                    |
+| Backups          | Create and verify backups. Test restoring backups to ensure data integrity. See [backup and restore](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
 
 ## Step 2: Perform upgrade
 
@@ -53,13 +53,19 @@ If you maintain custom deployment scripts, use the official Helm charts as a tec
 
 Camunda-provided Docker Compose files are only intended for development and testing purposes, and **are not recommended for production environments**. Docker Compose lacks the capabilities required for a production-ready system, such as automated migration job handling, high availability, failover support, scalable persistent storage management, and robust secret management with rotation.
 
-In 8.8 release default `docker-compose.yaml` file is now deploying Orchestration cluster and connectors inline with chart default configuration. In order to deploy Web Modeler use other Docker Compose configuration examples.
+With Camunda 8.8, the default `docker-compose.yaml` file now deploys Orchestration cluster and connectors inline with the chart default configuration. To deploy Web Modeler, you should use other Docker Compose configuration examples.
 
 Because of these limitations, Camunda does not supply automated migration scripts for Docker Compose setups. If you still need to update a development environment, you can follow the [Component upgrade guides](../../components/components-upgrade/870-to-880.md) to manually update each service.
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
-Manual upgrade involves updating each component’s container image to the 8.8 release, running required migration jobs (for example, the Identity migration application), and validating that the unified API is functioning. Because of the effort involved, consider migrating development environments to Kubernetes with Helm charts.
+A manual upgrade involves:
+
+- Updating each component’s container image to the 8.8 release
+- Running the required migration jobs (for example, the Identity migration application)
+- Validating that the unified API is functioning.
+
+Because of the effort involved in a manual upgrade, consider migrating development environments to Kubernetes with Helm charts.
 </TabItem>
 </Tabs>
 
