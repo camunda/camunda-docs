@@ -26,7 +26,7 @@ const Components = () => {
       title: "Orchestration cluster",
       icon: ClusterOrchestrationIcon,
       description:
-        "The core component that powers automation and process orchestration.",
+        "The core component (includes Zeebe, Tasklist, Operate, Identity).",
       link: "/self-managed/components/orchestration-cluster/overview",
     },
     {
