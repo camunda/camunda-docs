@@ -1334,7 +1334,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/enable-non-default-components",
+                "self-managed/deployment/helm/configure/enable-additional-components",
                 {
                   type: "category",
                   label: "Registry and images",
