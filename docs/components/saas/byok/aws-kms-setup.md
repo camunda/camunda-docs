@@ -175,8 +175,8 @@ You are responsible for monitoring key usage and access logs within your AWS acc
 ## Additional considerations
 
 - **Key rotation**: Amazon KMS manages the key lifecycle. You can enable [automatic rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) or rotate keys manually. Camunda does not control this process.
-- **Cost implications**: Using Amazon KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](./cost-and-troubleshooting.md) for details.
-- **Failure scenarios**: If the key is deleted or permissions revoked, cluster data becomes inaccessible. See [troubleshooting steps](./cost-and-troubleshooting.md) for recovery guidance.
+- **Cost implications**: Using Amazon KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/saas/byok/index.md#cost-implications) for details.
+- **Failure scenarios**: If the key is deleted or permissions revoked, cluster data becomes inaccessible. See [troubleshooting steps](/components/saas/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys) for recovery guidance.
 
 :::note Reference
 For more information, see the [Amazon KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html).

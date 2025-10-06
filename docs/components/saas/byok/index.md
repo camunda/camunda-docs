@@ -44,11 +44,6 @@ External encryption introduces a shared responsibility between Camunda and the c
 
 ### Customer responsibilities
 
-:::note Important configuration step
-Configuring your external encryption key in **Amazon KMS** is a critical part of the **Bring Your Own Key (BYOK)** setup.  
-For detailed guidance on cost implications and troubleshooting, see [external encryption key cost implications and troubleshooting](./cost-and-troubleshooting.md).
-:::
-
 - Create and manage the KMS key in your Amazon account
 - Ensure the key resides in the same **AWS region** as your Camunda 8 SaaS cluster
 - Configure key policies to allow Camunda access
@@ -65,3 +60,23 @@ Disabling, deleting, or revoking permissions for your KMS key will make your clu
 - Handle encryption and decryption operations for the customer
 - Integrate BYOK into the cluster creation and provisioning flow
 - Surface key usage errors in the Camunda Console
+
+## Cost implications
+
+Using external encryption keys with **Amazon KMS** incurs costs directly in your Amazon account. Camunda does not charge for the feature itself, but you are responsible for all Amazon KMS usage.
+
+| Cost type       | Description                                                              | Notes                                                      |
+| --------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| KMS key storage | Monthly charge for each KMS key                                          | Depends on Amazon region and key type                      |
+| API requests    | Charges for KMS API calls (Encrypt, Decrypt, GenerateDataKey, ReEncrypt) | Costs increase with frequent operations                    |
+| CloudTrail logs | Charges for storing and accessing CloudTrail events                      | Includes encryption/decryption activity by Camunda cluster |
+
+:::warning Cost responsibility
+You are responsible for monitoring Amazon KMS usage and associated costs.
+:::
+
+### Cost optimization tips
+
+- Use separate keys only when necessary to avoid extra storage fees.
+- Aggregate audit logging to reduce frequent API calls.
+- Review CloudTrail retention settings to balance compliance and storage cost.

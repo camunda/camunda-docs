@@ -1,13 +1,22 @@
 ---
-id: faq
-title: "FAQ"
-description: "Frequently asked questions about encryption at rest, encryption key types, and external encryption keys in Camunda 8 SaaS."
-keywords: ["encryption", "BYOK", "KMS", "encryption keys", "security", "FAQ"]
+id: faq-and-troubleshooting
+title: "FAQ & troubleshooting"
+description: "Frequently asked questions and troubleshooting guidance for encryption at rest, encryption key types, and external encryption keys in Camunda 8 SaaS."
+keywords:
+  [
+    "encryption",
+    "BYOK",
+    "KMS",
+    "encryption keys",
+    "security",
+    "FAQ",
+    "troubleshooting",
+  ]
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-This page answers common questions about encryption at rest, encryption key types, and external encryption keys for Camunda 8 SaaS clusters.
+This page answers common questions about encryption at rest, encryption key types, and external encryption keys for Camunda 8 SaaS clusters, and provides troubleshooting guidance for common issues.
 
 ## General questions
 
@@ -98,4 +107,20 @@ Yes. All connections to Camunda 8 SaaS use TLS encryption for data in transit.
 
 ### Are there cost implications for using external encryption keys?
 
-Yes. Using external encryption keys incurs charges directly in your Amazon account for KMS key storage, API calls, and CloudTrail logging. For more details, see [Cost implications and troubleshooting](/components/saas/byok/cost-and-troubleshooting.md).
+Yes. Using external encryption keys incurs charges directly in your Amazon account for KMS key storage, API calls, and CloudTrail logging. For more details, see [cost implications](/components/saas/byok/index.md#cost-implications).
+
+## Troubleshooting external encryption keys
+
+The following table summarizes common issues customers may encounter when using external encryption keys and recommended actions:
+
+| Issue                             | Possible cause                                                   | Resolution                                                                                                                                                                                                                          |
+| --------------------------------- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cluster cannot access KMS key     | Key policy does not grant the Camunda Cluster Amazon Role access | Update the KMS key policy to include the correct Amazon Role ARN from the Camunda Console. This issue typically appears as a cluster provisioning or startup error.                                                                 |
+| Encryption/decryption errors      | Key is disabled, deleted, or in the wrong region                 | Re-enable or restore the key, or create a new key in the same region as the Camunda cluster.                                                                                                                                        |
+| CloudTrail does not show activity | CloudTrail not enabled or log retention insufficient             | Enable CloudTrail in the Amazon region where the cluster resides and persist logs beyond the default 90 days. See [View CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html). |
+| Key rotation issues               | Cluster encryption update not supported                          | Create a new key and associate it with a new cluster if rotation is required. Verify encryption settings before using the new key.                                                                                                  |
+
+:::note Support
+If issues persist after checking key policies, region, and key status, contact [Amazon support](https://aws.amazon.com/contact-us/) for KMS-related troubleshooting.  
+For Camunda-specific issues with cluster provisioning, contact [Camunda support](https://camunda.com/services/support-guide/).
+:::
