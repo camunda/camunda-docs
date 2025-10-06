@@ -11,14 +11,14 @@ This integration enables seamless communication between your BPMN workflows and 
 
 The ServiceNow integration enables:
 
-- **Bi-Directional integration between ServiceNow and Camunda**  
-  Seamless integration between ServiceNow flows and Camunda processes to bring orchestration capabilities to ServiceNow.
+- **Bi-directional integration between ServiceNow and Camunda**  
+  Seamless communication between ServiceNow flows and Camunda processes to bring orchestration capabilities to ServiceNow.
 
-- **Enable end-to-end orchestration for ServiceNow**  
-  Orchestrate activities inside of ServiceNow and in any other systems end-to-end with BPMN (Business Process Modelling Notation).
+- **End-to-end orchestration for ServiceNow**  
+  Orchestrate activities inside ServiceNow and across other systems end-to-end using BPMN (Business Process Model and Notation).
 
-- **Manage Records within ServiceNow**  
-  Create, read, modify or delete any ServiceNow record from a BPMN orchestration.
+- **Manage records within ServiceNow**  
+  Create, read, modify, or delete any ServiceNow record from a BPMN orchestration.
 
 ## Audience
 
@@ -28,38 +28,36 @@ This documentation is intended for:
 - **Solution architects** designing process automation across Camunda and ServiceNow.
 - **Administrators** managing integration configuration and security.
 
-### About the integration
+## About the integration
 
 Camunda’s ServiceNow integration follows a **hybrid approach** that combines:
-- **Custom actions in the ServiceNow Camunda Spoke** for initiating or correlating Camunda processes from ServiceNow.  
-- **Camunda Connectors & Element Templates** for interacting with ServiceNow tables and flows from Camunda processes.
 
+- **Custom actions in the ServiceNow Camunda Spoke** for initiating or correlating Camunda processes from ServiceNow.
+- **Camunda connectors and element templates** for interacting with ServiceNow tables and flows from Camunda processes.
 
 ## Architecture
 
-![Camunda ServiceNow Integration Architecture](./img/sn-camunda-architecture.png)
+![Camunda ServiceNow integration architecture](./img/sn-camunda-architecture.png)
 
 This diagram shows how Camunda and ServiceNow interact with each other.
 
+## Integration features
 
-## Integration Features
-
-The Camunda ServiceNow integration provides **bi-directional orchestration** through two main components: the **Camunda Spoke** and **Camunda Connectors**.
+The Camunda ServiceNow integration provides **bi-directional orchestration** through two main components: the **Camunda Spoke** and **Camunda connectors**.
 
 ### Camunda Spoke in ServiceNow
 
-| Spoke actions        | Description |
-|----------------------|-------------|
-| **Start Process**    | Start a Camunda process from ServiceNow. |
-| **Correlate Message**| Correlate a running Camunda process instance from ServiceNow. |
-| **Send Signal**      | Broadcast BPMN signals to one or many Camunda process instances. |
-| **Cancel Process**   | Cancel a Camunda process instance from ServiceNow when needed. |
+| Spoke actions         | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
+| **Start process**     | Start a Camunda process from ServiceNow.                         |
+| **Correlate message** | Correlate a running Camunda process instance from ServiceNow.    |
+| **Send signal**       | Broadcast BPMN signals to one or many Camunda process instances. |
+| **Cancel process**    | Cancel a Camunda process instance from ServiceNow when needed.   |
 
+### ServiceNow connectors in Camunda
 
-### ServiceNow Connectors in Camunda
-
-| Connector                    | Description |
-|-------------------------------|-------------|
-| [**ServiceNow Outbound Connector**](outbound-connector.md) | Execute CRUD operations on any ServiceNow table. |
-| [**ServiceNow Flow Starter**](flow-starter.md)   | Start a ServiceNow flow from a Camunda process (requires ServiceNow Integration Hub Enterprise Pack). |
-|[ **ServiceNow Incident Handler**](incident-handler.md) | Create and manage incidents in ServiceNow directly from a Camunda process. |
+| Connector                                                  | Description                                                                                           |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [**ServiceNow Outbound Connector**](outbound-connector.md) | Execute CRUD operations on any ServiceNow table.                                                      |
+| [**ServiceNow Flow Starter**](flow-starter.md)             | Start a ServiceNow flow from a Camunda process (requires ServiceNow Integration Hub Enterprise Pack). |
+| [**ServiceNow Incident Handler**](incident-handler.md)     | Create and manage incidents in ServiceNow directly from a Camunda process.                            |
