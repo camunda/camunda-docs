@@ -5,13 +5,8 @@ sidebar_label: Release notes
 description: "Release notes for 8.8, including alphas"
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-keywords:
-  [
-    "product development lifecycle",
-    "software development lifecycle",
-    "CI/CD",
-    "AI",
-  ]
+keywords: ["8.8 release notes", "release notes for 8.8", "release notes"]
+page_rank: 90
 ---
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
@@ -328,6 +323,8 @@ The ServiceNow integration allows you to:
 - **Manage ServiceNow data**: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
 - **Trigger ServiceNow flows**: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
 - **Orchestrate ITSM processes**: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+
+<p><a href="../../../../components/camunda-integrations/servicenow/servicenow-integration/" class="link-arrow">ServiceNow integration</a></p>
 
 ## Intelligent document processing (IDP)
 

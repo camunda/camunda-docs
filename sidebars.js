@@ -1334,10 +1334,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/running-custom-connectors",
-                "self-managed/deployment/helm/configure/add-extra-manifests",
-                "self-managed/deployment/helm/configure/license-key",
-                "self-managed/deployment/helm/configure/web-modeler-console-connectors",
+                "self-managed/deployment/helm/configure/enable-additional-components",
                 {
                   type: "category",
                   label: "Registry and images",
@@ -1351,7 +1348,13 @@ module.exports = {
                   ],
                 },
                 {
-                  Database: [
+                  type: "category",
+                  label: "Database",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/database/index",
+                  },
+                  items: [
                     {
                       Elasticsearch: [
                         "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
@@ -1368,19 +1371,36 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/deployment/helm/configure/using-external-keycloak",
                 {
-                  Ingress: [
-                    "self-managed/deployment/helm/configure/ingress-setup",
-                    "self-managed/deployment/helm/configure/accessing-components-without-ingress",
+                  type: "category",
+                  label: "Ingress",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/ingress/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/configure/ingress/ingress-setup",
+                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
                   ],
                 },
+                {
+                  type: "category",
+                  label: "Authentication and authorization",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
+                  ],
+                },
+                "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/running-custom-connectors",
+                "self-managed/deployment/helm/configure/add-extra-manifests",
+                "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy",
                 "self-managed/deployment/helm/configure/multi-namespace-deployment",
-                "self-managed/deployment/helm/configure/secret-management",
-                "self-managed/deployment/helm/configure/authentication-and-authorization",
-                //license key
-                //image registry to include air gapped below and enterprise images
               ],
             },
             {
@@ -1400,11 +1420,16 @@ module.exports = {
               ],
             },
             {
-              "Operational tasks": [
+              type: "category",
+              label: "Operational tasks",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/helm/operational-tasks/index",
+              },
+              items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
               ],
-              //also to include backup and restore, and scaling
             },
             {
               type: "category",
