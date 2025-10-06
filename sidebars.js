@@ -375,17 +375,7 @@ module.exports = {
                 id: "components/early-access/alpha/alpha-features",
               },
               items: [
-                {
-                  type: "category",
-                  label: "BPMN Copilot",
-                  link: {
-                    type: "doc",
-                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                  },
-                  items: [
-                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                  ],
-                },
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
                 "components/early-access/alpha/feel-copilot/feel-copilot",
                 "components/early-access/alpha/ms-teams/ms-teams",
                 {
