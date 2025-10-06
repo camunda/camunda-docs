@@ -18,7 +18,7 @@ import OverviewImg from './img/hero-reference.png';
 
 See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="What's new in Camunda 8.8" href="./announcements-release-notes/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Release notes and announcements</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="What's new in Camunda 8.8" href="./announcements-release-notes/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Release announcements and release notes</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>

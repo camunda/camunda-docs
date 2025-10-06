@@ -411,7 +411,7 @@ You can now add new Zeebe partitions to a running cluster in Self-Managed.
 <p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
 
 :::caution
-This feature is not yet fully compatible with backup/restore.
+Backup and restore is not supported while the cluster partitions are being resized.
 :::
 
 ### Identity and Management Identity
