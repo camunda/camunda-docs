@@ -8,20 +8,22 @@ You can configure and automatically generate a custom element template in Web Mo
 
 ### Best practices
 
-When creating custom-built element templates, consider the best practices outlined in [Best practices for creating element templates and connectors](../../../connectors/custom-built-connectors/best-practices.md) to ensure they are effective, user-friendly, and maintainable.
+When creating custom-built element templates, consider the best practices outlined in [Best practices for creating element templates and connectors](best-practices.md) to ensure they are effective, user-friendly, and maintainable.
 
 ## Generate a BPMN element template
 
 1. Select the Web Modeler project where you want to create the template.
-2. Click **Create new**, select **Element template** to open the **Create new element template** screen.  
+2. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-element-template-details.png)
 
 3. Select the template starting point:
-   - **From Call activity**: Start from a Call activity template.
-   - **From Task**: Start from a Task template.  
+   - **Call activity**: Start from a Call activity template.
+   - **Task**: Start from a Task template.  
      You can choose from predefined Task templates, such as User task, Service task, Script task, and more.
-   - **From blank**: Start from a blank template.
+   - **Blank**: Start from a blank template.
      A blank template includes only the basic properties shared by all BPMN elements and allows you to customize the template from scratch.
+
+Continue with [**Step 4**](#configure-the-template-details) in the Configure the template details section below.
 
 ## Generate a connector template
 
@@ -29,13 +31,15 @@ You can start from a blank template or import an existing API definition such as
 
 To generate a connector template:
 
-1. Select the Web Modeler project where you want to create the template.
+1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
 2. Click **Create new**, select **Element template**, and then choose the **Connector** tab to open the **Create new connector template** screen.  
-   ![Create the new connector template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
+   ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
 
 3. Select the template starting point:
    - **From API definition**: Import an existing API definition file as a starting point. The **Import data source** section will appear below the template details.
    - **From blank**: Start from a blank template.
+
+Continue with [**Step 4**](#configure-the-template-details) in the Configure the template details section below.
 
 ## Configure the template details
 
@@ -53,8 +57,8 @@ To generate a connector template:
 #### Only for connector templates: Import an API definition
 
 5. If you selected **From API definition**, the **Import data source** section appears.
-   1. Select the format to upload (OpenAPI or Postman).
-   2. Upload the API definition:
+   1. Select the format to import (OpenAPI or Postman) and click **Import file**.
+   2. Import the API definition:
       - **Import file from URL:** Enter the API definition URL and click **Import icon**.
       - **Upload file:** Drag and drop a file into the upload area, or click the link to select a file.
 
@@ -65,4 +69,4 @@ To generate a connector template:
    For more information on working with and configuring connector templates, see [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
    :::
 
-6. Click **Create template** to generate and open the new template in the [element template editor](/components/connectors/manage-connector-templates.md).
+6. Click **Create template** to generate the new template and open it in the [element template editor](/components/connectors/manage-connector-templates.md).

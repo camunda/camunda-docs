@@ -14,7 +14,7 @@ Connector templates are a specific type of [element template](/components/concep
 
 ### Sentence case
 
-Use sentence case when naming element and connector templates
+Use sentence case when naming element and connector templates.
 
 For example:
 
@@ -24,7 +24,7 @@ For example:
 ### Choosing a name
 
 Choose a clear, easily understandable name. Include the brand name if the template connects to a service or tool; otherwise, describe its main feature.
-Name and description appear in the Modeler element template list and properties panel.
+The template's name and description appear in the Modeler element template list and properties panel.
 
 ### Description
 
@@ -34,7 +34,7 @@ Keep descriptions brief and clear. Explain what the template does and why it’s
 
 - **Prefer SVG format:** Use SVG files for icons, as they are scalable without losing quality. If an SVG icon isn't available, PNG or JPEG format is acceptable, but may not display well.
 - **Size:** You can upload an image file with a maximum size of **8 KB**. If you need to use a PNG or JPEG icon, ensure it is **512x512** pixels. Icons appear as **18x18** pixels in the element on the modeling canvas, and as **32x32** pixels in the properties panel.
-- **Check for official logo:** Look for an official logo from the service website.
+- **Check for official logo:** If the template connects to a service or tool, look for an official logo on the service's or tool's website.
 - **License compliance:** Ensure icons have the appropriate license (Public Domain CC0 or Creative Commons CC BY) for commercial use.
 
 ## Properties panel UI
@@ -67,8 +67,7 @@ Example:
 
 ### Placeholders
 
-- Placeholders appear as lighter text inside input fields.
-- Use placeholders to indicate expected format or example input.
+- Placeholders appear as lighter text inside input fields. Use them to indicate the expected format or example input.
 - Avoid placeholders that duplicate the label.
 - Ensure placeholders are understandable and helpful.
 
@@ -138,7 +137,7 @@ There are two mechanisms to define property behavior depending on whether a fiel
 - [**“Not empty” constraint**](/components/modeler/element-templates/template-properties.md#validating-user-input-constraints): Displays an error if the field is left empty.
 - [**Optional bindings**](/components/modeler/element-templates/template-properties.md#preventing-persisting-empty-values-optional): Does not persist empty properties in the BPMN XML.
 
-  Use **optional bindings** when a property is not required and you want to avoid storing empty values in the BPMN XML. In most cases, required fields should use the 'Not empty' constraint for validation.
+  Use **optional bindings** when a property is not required and you want to avoid storing empty values in the BPMN XML. In most cases, required fields should use the "Not empty" constraint for validation.
 
 #### Mandatory FEEL vs. optional FEEL
 
