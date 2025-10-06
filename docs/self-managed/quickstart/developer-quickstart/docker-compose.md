@@ -12,7 +12,7 @@ import {DockerCompose} from "@site/src/components/CamundaDistributions";
 Get started with Docker Compose configurations to run Camunda Self-Managed. The default lightweight configuration includes the Orchestration Cluster (Zeebe, Operate, and Tasklist consolidated), Connectors, and Elasticsearch. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL. Docker Compose also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
 :::note
-While the [Docker images](/self-managed/deployment/docker/) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend [Kubernetes](/self-managed/deployment/helm/install/) for production.
+While the [Docker images](/self-managed/deployment/docker/docker.md) themselves are supported for production usage, the Docker Compose files are designed to be used by developers to run an environment locally; they are not designed to be used in production. We recommend [Kubernetes](/self-managed/deployment/helm/install/index.md) for production.
 :::
 
 ## Prerequisites
