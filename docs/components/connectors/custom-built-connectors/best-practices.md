@@ -24,6 +24,7 @@ For example:
 ### Choosing a name
 
 Choose a clear, easily understandable name. Include the brand name if the template connects to a service or tool; otherwise, describe its main feature.
+Name and description appear in the Modeler element template list and properties panel.
 
 ### Description
 

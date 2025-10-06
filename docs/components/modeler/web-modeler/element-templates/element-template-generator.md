@@ -21,6 +21,7 @@ When creating custom-built element templates, consider the best practices outlin
    - **From Task**: Start from a Task template.  
      You can choose from predefined Task templates, such as User task, Service task, Script task, and more.
    - **From blank**: Start from a blank template.
+     A blank template includes only the basic properties shared by all BPMN elements and allows you to customize the template from scratch.
 
 ## Generate a connector template
 
@@ -36,7 +37,7 @@ To generate a connector template:
    - **From API definition**: Import an existing API definition file as a starting point. The **Import data source** section will appear below the template details.
    - **From blank**: Start from a blank template.
 
-### Configure the template details
+## Configure the template details
 
 4. In the **Configure template details** section, provide the following information:
    - **Name:** Enter a clear and descriptive name for the template. For example, include the brand name if the template connects to a service, or indicate its main feature.
