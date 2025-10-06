@@ -8,7 +8,7 @@ You can configure and automatically generate a custom element template in Web Mo
 
 ### Best practices
 
-When creating custom-built element templates, consider the best practices outlined in [Best practices for creating element templates and connectors](best-practices.md) to ensure they are effective, user-friendly, and maintainable.
+When creating custom-built element templates, consider the best practices outlined in [Best practices for custom-built element templates](best-practices.md) to ensure they are effective, user-friendly, and maintainable.
 
 ## Generate a BPMN element template
 
