@@ -89,7 +89,7 @@ No. Camunda never stores your encryption key. Access is granted through standard
 
 ### Where can I find setup instructions?
 
-See the [External Encryption Setup Guide](/components/saas/byok/aws-kms-setup.md) for configuration steps, including creating and associating Amazon KMS keys with your cluster.
+See the [external encryption setup guide](/components/saas/byok/aws-kms-setup.md) for configuration steps, including creating and associating Amazon KMS keys with your cluster.
 
 ## Other questions
 

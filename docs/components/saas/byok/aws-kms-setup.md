@@ -34,9 +34,9 @@ Before you begin, make sure you have:
 5. Under **Encryption at rest**, choose **External**.
 6. Click **Create cluster**.
 
-:::note
+<!-- :::note
 [Insert screenshot of cluster creation page with "External" encryption selected]
-:::
+::: -->
 
 After creation, the Console displays an **Amazon Role ARN** unique to your Camunda cluster. You will use this in the next step when configuring your KMS key.
 
@@ -65,6 +65,11 @@ You can create your KMS key in three ways:
 ### KMS key policy
 
 Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer-aws-account>` with the AWS account ID where the KMS key is created:
+
+### KMS key policy
+
+<details>
+<summary>View sample key policy JSON</summary>
 
 ```json
 {
@@ -107,6 +112,8 @@ Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer
 }
 ```
 
+</details>
+
 :::warning Key policy guidance
 
 - Ensure you do not restrict the Camunda cluster Amazon Role from required KMS actions; otherwise, encryption will fail.
@@ -117,9 +124,9 @@ Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer
 7. Click **Finish** to create the key.
 8. Copy the **KMS Key ARN**; you will need it in the Camunda Console.
 
-:::note
+<!-- :::note
 [Insert screenshot of Amazon KMS key details showing Key ARN]
-:::
+::: -->
 
 ## Step 3: Associate KMS key with your Camunda cluster
 
@@ -137,9 +144,9 @@ Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer
 Once a key is applied, it cannot be edited or replaced—even if the key was invalid or encryption failed. To change keys, you must create a new cluster.
 :::
 
-:::note
+<!-- :::note
 [Insert screenshot showing KMS Key ARN input in cluster details]
-:::
+::: -->
 
 ## Step 4: Verify encryption and logging
 
