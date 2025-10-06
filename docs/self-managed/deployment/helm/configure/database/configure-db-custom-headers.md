@@ -10,9 +10,18 @@ import TabItem from "@theme/TabItem";
 
 Custom HTTP headers can be added to a component's Elasticsearch and OpenSearch HTTP clients by creating a new Java plugin, and adding the plugin to your Camunda 8 Self-Managed installation. Using custom HTTP headers may be helpful for adding authentication, tracking, or debugging to your database requests.
 
-## Create the Java plugin
+## Prerequisites
 
-### Add the dependency
+- A deployed Camunda 8 Self-Managed Helm chart installation
+- Access to modify container configurations
+- Basic knowledge of Java development
+- Maven or Gradle build environment
+
+## Configuration
+
+### Create the Java plugin
+
+#### Add the dependency
 
 Add the following dependency to a new Java project:
 
@@ -45,10 +54,9 @@ implementation "io.camunda:camunda-search-client-plugin:${version.camunda-search
 </TabItem>
 </Tabs>
 
-### Write your custom header
+#### Write your custom header
 
-Once the dependency is added to your project, write your plugin by implementing the `DatabaseCustomHeaderSupplier` interface (provided by the
-`camunda-search-plugins` package).
+Once the dependency is added to your project, write your plugin by implementing the `DatabaseCustomHeaderSupplier` interface (provided by the `camunda-search-plugins` package).
 
 The following example implements the `DatabaseCustomHeaderSupplier` interface, and uses it to return a custom authentication token and UUID:
 
@@ -71,33 +79,33 @@ public class MyCustomHeaderPlugin implements DatabaseCustomHeaderSupplier {
 }
 ```
 
-### Build your project
+#### Build your project
 
 Build your project with all dependencies included, and copy the resulting JAR file somewhere it can be easily accessed. This JAR file will be required by your Camunda installation.
 
 :::note
-When building the project, the `camunda-search-client-plugin` dependency must have a scope of provided, otherwise there will be a clash between `camunda-search-client-plugin`
-classes which are loaded from different class loaders.
+When building the project, the `camunda-search-client-plugin` dependency must have a scope of provided, otherwise there will be a clash between `camunda-search-client-plugin` classes which are loaded from different class loaders.
 
 JVM treats `ClassA` loaded by `ClassLoaderA` as completely different from `ClassA` loaded by `ClassLoaderB`.
 
 Therefore, without a scope of provided it would result in `does not implement` or `ClassCastException` errors.
 :::
 
-## Add the plugin to your self-managed installation
+### Add the plugin to your self-managed installation
 
 To use your new plugin, it must be added to your Camunda 8 Self-Managed installation.
 
-### Mount the plugin
+#### Mount the plugin
 
-For each container, mount your plugin's JAR file inside the container's file system. For more information, see the
-[Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
+For each container, mount your plugin's JAR file inside the container's file system. For more information, see the [Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
 
-### Configure components
+#### Configure components
 
 Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](../application-configs.md).
 
-The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
+### Example usage
+
+The following examples add the new `my-plugin` JAR to the `application.yaml` for the Orchestration Cluster and Optimize:
 
 <Tabs groupId="db" defaultValue="elasticsearch" values={
 [
@@ -220,8 +228,7 @@ The following configuration uses the default name `camundaExporter`. To use a cu
 
 ### Exception: Unknown type of interceptor plugin or wrong class specified
 
-This exception means that the incorrect class was specified in the `CLASSNAME` property. There are several causes that
-might lead to this exception:
+This exception means that the incorrect class was specified in the `CLASSNAME` property. There are several causes that might lead to this exception:
 
 1. The class with such name or package does not exist
 2. The class does not implement the required SDK interface
@@ -235,10 +242,9 @@ To solve this, make sure:
 
 ### Exception: Failed to load interceptor plugin due to exception
 
-Usually related to incorrect JAR loading. Please make sure that the path to your plugin JAR file is correct, and
-the application has access to read it. Also check that the JAR is correct and contains the required dependencies. To check the
-content of the JAR file, you can use the following command: `jar xf <file-name>.jar`.
+Usually related to incorrect JAR loading. Please make sure that the path to your plugin JAR file is correct, and the application has access to read it. Also check that the JAR is correct and contains the required dependencies. To check the content of the JAR file, you can use the following command: `jar xf <file-name>.jar`.
 
-## Appendix
+## References
 
-Explore [plugin examples](https://github.com/camunda/camunda-search-client-plugins-example) in our official repository.
+- [Configure components using Helm charts](../application-configs.md)
+- [Plugin examples](https://github.com/camunda/camunda-search-client-plugins-example)
