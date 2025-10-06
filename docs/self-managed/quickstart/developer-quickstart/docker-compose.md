@@ -97,7 +97,7 @@ By default, the Orchestration Cluster uses [basic authentication](/self-managed/
 | :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Elasticsearch | Both          | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster (as secondary storage) and Optimize (full config only).                                                                                  |
 | Keycloak      | Full only     | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight config uses the embedded Orchestration Cluster Identity instead. Access with username `admin` and password `admin`. |
-| PostgreSQL    | Full only     | `localhost:5432`                                             | Database for Management Identity and Web Modeler metadata. Not needed in the lightweight config.                                                                           |
+| PostgreSQL    | Full only     | `localhost:5432`                                             | Database for Management Identity.                                                                                                                                          |
 
 ### Authentication
 
@@ -109,7 +109,13 @@ By default, the Orchestration Cluster uses [basic authentication](/self-managed/
 #### Full configuration
 
 - **Web UI**: Log in to all components (Operate, Tasklist, Console, Optimize, Web Modeler) with `demo` / `demo`
-- **APIs**: REST and gRPC APIs require OAuth authentication (use client ID `orchestration` and secret `secret` from the `.env` file)
+- **APIs**: REST and gRPC APIs require OAuth authentication with the following settings:
+  - **Client ID**: `orchestration` (from `ORCHESTRATION_CLIENT_ID` in the `.env` file)
+  - **Client Secret**: `secret` (from `ORCHESTRATION_CLIENT_SECRET` in the `.env` file)
+  - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+  - **Audience**: `orchestration-api`
+
+  For detailed information on using these credentials, see the [REST API authentication guide](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 ### Stop Camunda 8
 
