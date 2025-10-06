@@ -78,13 +78,13 @@ Log in to these services using the first user `demo`/`demo` credentials.
 <details>
   <summary>Operate and Tasklist Login</summary>
   <div>
-    <img alt="operate and tasklist login" src={require('./assets/operate-tasklist-login.png').default}/>
+    <img alt="operate and tasklist login" src={require('../assets/operate-tasklist-login.png').default}/>
   </div>
 </details>
 <details>
   <summary>Operate and Tasklist Dashboard</summary>
   <div>
-    <img alt="operate and tasklist dashboard" src={require('./assets/operate-tasklist-dashboard.png').default}/>
+    <img alt="operate and tasklist dashboard" src={require('../assets/operate-tasklist-dashboard.png').default}/>
   </div>
 </details>
 

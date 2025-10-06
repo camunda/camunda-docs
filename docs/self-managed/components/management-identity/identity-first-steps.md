@@ -22,7 +22,7 @@ Once Management Identity has successfully started, you can open the **Log in** p
 If you are running the default configuration, you can access the Management Identity interface via the following URLs:
 
 - [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md): `http://localhost:8084/`
-- [Helm](/self-managed/deployment/helm/install/quick-install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deployment/helm/configure/accessing-components-without-ingress.md)
+- [Helm](/self-managed/deployment/helm/install/quick-install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress.md)
 
 ## Default user
 
