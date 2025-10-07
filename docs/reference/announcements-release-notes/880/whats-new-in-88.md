@@ -138,6 +138,19 @@ The Orchestration Cluster [Identity](/components/identity/identity-introduction.
 With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
 :::
 
+### Tenant interceptors
+
+Tenant interceptors are **not supported in Camunda 8.8**.  
+If you are using tenant interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [tenant management](/components/identity/tenant.md).
+
+Administrators must:
+
+- Migrate tenants into the cluster using either the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
+- Assign tenants by:
+  - Direct assignment to [users](/components/identity/tenant.md#assign-users-to-a-tenant)
+  - Direct assignment to [clients](/components/identity/tenant.md#assign-clients-to-a-tenant)
+  - Using [mapping rules](/components/identity/tenant.md#assign-mapping-rules-to-a-tenant)
+
 ### Identity and Management Identity
 
 In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-introduction.md) and [Management Identity](/self-managed/components/management-identity/overview.md) are two separate components used for Identity management, each with distinct areas of responsibility.
