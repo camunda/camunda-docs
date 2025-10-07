@@ -1603,9 +1603,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/concepts/exporters",
-        "self-managed/concepts/elasticsearch-privileges",
-        "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [

@@ -714,3 +714,9 @@ The Camunda SaaS Starter plan is no longer available.
 
 </div>
 </div>
+
+### Removed: Tenant-providing interceptors
+
+With the **8.8 release**, Camunda announces the **removal of tenant-providing interceptors**.
+
+It is superseded by built-in [tenant management](/components/identity/tenant.md) going forward.
