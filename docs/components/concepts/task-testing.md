@@ -6,7 +6,13 @@ description: "Test implementation of a single BPMN task."
 
 You can run a single BPMN task directly from the modeler to test your implementation, without the overhead of executing an entire process. Get immediate feedback on your task logic, variable mappings, and configuration, right where you're modeling.
 
-Task testing runs your task within the actual process diagram where it's modeled, preserving:
+Task testing runs a single task, on the engine, exactly as it would later run during process execution:
+
+* You define the process context (process variables) the task is executed within
+* Inputs are mapped in accordance with defined input mappings
+* Actual task behaviors is executed by the engine
+* Outputs are mapped in accordance with defined output mappings
+* The results (updated process variables) are displayed to you so you can inspect them
 
 - Input/output variable mappings as configured
 - Process context and variable scope
