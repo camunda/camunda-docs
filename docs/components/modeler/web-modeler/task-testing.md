@@ -1,78 +1,92 @@
 ---
 id: task-testing
-title: Task Testing
-description: "Test implementation of a single BPMN task in Web Modeler."
+title: Task testing
+description: Test and debug a single BPMN task directly in Web Modeler using live data from your connected Camunda 8 cluster.
 ---
 
-[Test a single task](../../concepts/task-testing.md) in Web Modeler.
+You can [test a single task](../../concepts/task-testing.md) directly within **Web Modeler** to validate its configuration and logic without executing the entire process.  
+Task testing helps you debug mappings, inputs, and outputs quickly while staying in your implementation context.
 
-## Task Testing and Play
+## Task testing vs. Play
 
-Task Testing and Play have several significant differences, summarized in the table below. Task Testing is best for when you're implementing a diagram and want to quickly check whether a task is configured correctly. Play is best for when you want to run more formal end-to-end tests with mock data, to check test coverage, and to save test scenarios for reuse.
+While both **task testing** and **Play** let you validate your BPMN models, they serve different purposes:
 
-|                            | Task Testing                        | Play                                        |
-| -------------------------- | ----------------------------------- | ------------------------------------------- |
-| **Test scope**             | Single task                         | Element, process segment, or entire diagram |
-| **Best for**               | Quick implementation verification   | Formal end-to-end testing                   |
-| **Data type**              | Live data only                      | Live or mocked data                         |
-| **Saves test scenarios**   | No                                  | Yes                                         |
-| **Separate mode required** | No, lets you stay in Implement mode | Yes, requires switching to Play mode        |
+| Feature / Capability     | **Task testing** (Implement mode) | **Play** (Play mode)              |
+| ------------------------ | --------------------------------- | --------------------------------- |
+| **Test scope**           | Single task                       | Process segment or full diagram   |
+| **Best for**             | Quick implementation checks       | End-to-end test validation        |
+| **Data type**            | Live data only                    | Live or mocked data               |
+| **Saves test scenarios** | No                                | Yes                               |
+| **Mode required**        | Runs directly in _Implement_ mode | Requires switching to _Play_ mode |
 
-## Setting up Task Testing
+Use **Task testing** during implementation for quick feedback.  
+Use **Play** when performing structured testing with mock data or reusable scenarios.
 
-To run Task Testing, you'll need:
+## Prerequisites
 
-- An active Camunda 8.8+ cluster connection
-- Process deployment permissions on the target environment
+Before running task testing, ensure you have:
 
-## Testing a task
+- A connection to an **active Camunda 8.8 or later** orchestration cluster
+- Permissions to **deploy and run** processes in the target environment
 
-To use Task Testing:
+## Run a task test
 
-1. Select and configure the task you want to test.
+To test a task in Web Modeler:
+
+1. Select the BPMN task you want to test.
 2. Open the **Test** tab in the bottom panel.
-3. Enter the [process variables](../../concepts/variables.md) in the left pane in JSON format.
+3. In the left pane, define the **process variables** in JSON format to simulate the process context.
 
-**Tips for configuring process variables:**
+### Tips for defining process variables
 
-- Use the Variables tab to see available variables from your process.
-- Ensure that the task configuration includes any required input variable mappings.
-- Ensure that variable types match what your task expects.
-- Test with realistic data that represents actual use cases.
+- Use the **Variables** tab to review available variables in your process.
+- Confirm that **input mappings** for your task are configured correctly.
+- Match **variable names and types** to those expected by the task.
+- Provide **realistic sample data** to reflect actual execution conditions.
 
-4. Click **Test task**.
+4. Click **Test task** to execute the task.
 
-## Test results
+The process will deploy automatically before running the test.  
+The task executes on the connected cluster using your defined input data.
 
-After running a task, you'll see one of the following outcomes:
+## Viewing results
 
-### Successful execution
+After the test completes, results appear in the output panel:
 
-When the task completes successfully, the results panel displays the process variables the task executed with.
+### ✅ Successful execution
 
-### Task incident
+If the task runs successfully, the output panel displays the resulting process variables and any updates.
 
-If an incident occurs during the execution, you will see its details as well as the process variables.
+### ⚠️ Incident during execution
 
-### Error
+If the task encounters an incident, details are shown along with the relevant variable context to help diagnose the issue.
 
-If the task execution fails due to an error, you will see the response message.
+### ❌ Execution error
 
-## Troubleshooting common issues
+If the task fails due to an error (for example, a network or configuration issue), the error message and response details are displayed.
 
-### Task fails with incident
+## Troubleshooting
 
-- Check that variable mappings match expected input types.
-- Verify that required variables are provided.
-- Review the task configuration (connectors, scripts, etc.).
+### Task fails with an incident
+
+- Confirm variable names and data types match the task’s input mappings.
+- Verify that all required variables are provided.
+- Review connector, script, or implementation settings for errors.
 
 ### Deployment fails
 
-- Ensure the cluster connection is active.
-- Verify your deployment permissions.
-- Check for BPMN validation errors.
+- Check that the cluster connection is active and valid.
+- Verify you have deployment permissions.
+- Fix any BPMN validation or syntax errors before retrying.
 
-### Variables don't appear
+### Variables don’t appear in results
 
-- Confirm that variable mappings are configured on the task.
-- Check that the input variables match the expected names and types.
+- Ensure input/output variable mappings are configured correctly.
+- Confirm the variable names and types align with your task logic.
+
+## Related documentation
+
+- [Task testing overview](../../concepts/task-testing.md)
+- [Test a task in Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md)
+- [Working with variables](../../concepts/variables.md)
+- [Using Play mode](../../components/modeler/web-modeler/play-mode.md)

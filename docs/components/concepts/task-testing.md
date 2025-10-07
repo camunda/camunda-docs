@@ -1,37 +1,76 @@
 ---
 id: task-testing
-title: "Task Testing"
-description: "Test implementation of a single BPMN task."
+title: Task testing
+description: Run and debug a single BPMN task directly in the modeler to verify your implementation without executing the entire process.
 ---
 
-You can run a single BPMN task directly from the modeler to test your implementation, without the overhead of executing an entire process. Get immediate feedback on your task logic, variable mappings, and configuration, right where you're modeling.
+Task testing lets you execute a single BPMN task directly from the modeler to verify your implementation without running the full process.  
+This feature provides immediate feedback on your task logic, variable mappings, and configuration — all within your modeling environment.
 
-Task testing runs a single task, on the engine, exactly as it would later run during process execution:
+Task testing runs the task on the connected Camunda 8 engine, exactly as it would run during normal process execution.  
+This means the behavior, variable mappings, and configuration are realistic and production-accurate.
 
-* You define the process context (process variables) the task is executed within
-* Inputs are mapped in accordance with defined input mappings
-* Actual task behaviors is executed by the engine
-* Outputs are mapped in accordance with defined output mappings
-* The results (updated process variables) are displayed to you so you can inspect them
+## How task testing works
 
-- Input/output variable mappings as configured
-- Process context and variable scope
-- Exact task configuration and implementation details
-- Connection to the preceding and following tasks in the flow
+When you test a task, the following occurs:
 
-**Important:** Task testing executes tasks with live data. Any configured actions (emails, API calls, database changes, payments) will actually run. Use caution in production environments.
+1. The modeler deploys the process to the connected **Camunda 8.8+ orchestration cluster**.
+2. You define the process context by providing **input variables**.
+3. The engine executes the selected task:
+   - Input mappings are applied as configured.
+   - The actual task logic (connector, script, or external task) is executed by the engine.
+   - Output mappings are applied as configured.
+4. The modeler displays the **resulting process variables** and any incidents or errors for review.
 
-## Prerequesites
+:::warning
+Task testing executes tasks with live data on the connected cluster.  
+Any configured actions (emails, API calls, database updates, payments, etc.) will run as defined.  
+Always use a **test or staging environment** for validation — not production.
+:::
 
-To test a task, you need a connection to an active Camunda 8.8 or above orchestration cluster. The entire process will be deployed automatically prior to running the test. The connection requirements for [Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md) and [Web Modeler](../../components/modeler/web-modeler/task-testing.md) are slightly different.
+## Prerequisites
 
-Once you've run a test, you can view the deployed instance in Operate for further information about task execution.
+- A connection to an **active Camunda 8.8 or later** orchestration cluster.
+- Appropriate credentials and permissions to deploy and run processes.
+- A task eligible for execution (see below).
 
-## Supported elements
+Once a test has run, you can view the resulting process instance in [**Operate**](../../components/operate/operate-introduction.md) for additional insights into execution details or incidents.  
+Test instances are deployed as standard process instances and can be viewed, managed, or deleted as usual.
 
-Task testing supports running a single BPMN task. It doesn't support subprocesses, call activities or events.
+### Modeler requirements
 
-## Related
+- **Web Modeler:** Uses the configured cluster connection for execution and variable handling.
+- **Desktop Modeler:** Requires a manually configured connection to a running cluster.  
+  See the respective guides below for configuration steps.
 
 - [Test a task in Web Modeler](../../components/modeler/web-modeler/task-testing.md)
 - [Test a task in Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md)
+
+## Supported elements
+
+Task testing supports **single BPMN task elements**.  
+The following elements are currently supported:
+
+- Service tasks (including connectors)
+- Script tasks
+- User tasks (for validation of mappings and configuration, not full UI completion)
+
+The following elements are **not supported**:
+
+- Subprocesses and call activities
+- Events (start, end, boundary)
+- Multiple tasks or process segments
+
+## Variable persistence
+
+When a task test completes:
+
+- Input variables are stored locally in your modeling session for reuse in subsequent test runs.
+- Output variables are visible in the results panel but are **not persisted** to the cluster beyond the test instance.
+- You can rerun tests with the same input set or modify them to test new values.
+
+## Best practices
+
+- Use a **staging cluster** or **sandbox environment** for testing live integrations.
+- Mock external API calls and disable production credentials when possible.
+- Review results in Operate to confirm behavior and variable mappings.

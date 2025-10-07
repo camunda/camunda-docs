@@ -120,7 +120,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing"
+        "components/concepts/task-testing",
       ],
     },
     {
