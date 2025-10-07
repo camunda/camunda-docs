@@ -768,7 +768,9 @@ elasticsearch:
 
 ### Adding more orchestration clusters
 
-To configure multiple Camunda orchestration clusters in multiple namespaces, we recommend you to follow our guide for [multi-namespace deployments](/self-managed/deployment/helm/configure/multi-namespace-deployment.md). This is the most recommended approach to allow you to set up various environments using the Camunda Orchestration Cluster.
+Camunda 8 supports running multiple orchestration clusters in separate namespaces. This setup allows you to isolate environments such as development, staging, and production, while sharing infrastructure resources.
+
+To add another orchestration cluster, install the Helm chart again in a different namespace with unique release names and configuration values.
 
 ### Running benchmarks
 

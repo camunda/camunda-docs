@@ -1400,7 +1400,6 @@ module.exports = {
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy",
-                "self-managed/deployment/helm/configure/multi-namespace-deployment",
               ],
             },
             {
