@@ -290,11 +290,11 @@ When both `camunda.security.authentication.oidc.username-claim` and `camunda.sec
 
 #### Controlling the principal identification order
 
-In most cases we expect the default detection logic to be sufficient, however if you have a use-case for changing the order, the configuration property `camunda.security.authentication.oidc.prefer-username-claim` can be set to `true`. In this case the logic will be:
+In most cases, the default detection logic is sufficient. However, if you have a use-case for changing the order, the configuration property `camunda.security.authentication.oidc.prefer-username-claim` can be set to `true`. In this case, the logic will be:
 
-1. If the username claim is present, the request is treated as a user request with the corresponding username.
-1. If the username claim is not present, the request is treated as a client request with the corresponding ID matching the client id claim.
-1. If neither the client id claim nor the username claim are set, then the request is rejected.
+1. If the username claim is **present**, the request is treated as a **user request** with the corresponding username.
+2. If the username claim is **not present**, the request is treated as a **client request** with the corresponding ID matching the client id claim.
+3. If **neither the client id claim nor the username claim are set**, the request is **rejected**.
 
 We recommend to set client id claim and username claim as follows:
 
