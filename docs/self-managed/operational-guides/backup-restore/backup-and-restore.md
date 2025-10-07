@@ -148,7 +148,7 @@ Since the services are bound to your local machine, you **cannot reuse the same 
 export CAMUNDA_RELEASE_NAME="camunda"
 # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 & \
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 8092:8092 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
 ```
 

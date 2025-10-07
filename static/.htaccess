@@ -158,6 +158,12 @@ RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/da
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
 
+# Remove Helm chart multi-namespace deployment
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/multi-namespace-deployment/?$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+
 # Rename Self-Managed installation methods (8.8)
 RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
 
