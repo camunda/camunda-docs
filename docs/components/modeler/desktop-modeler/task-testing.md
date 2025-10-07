@@ -30,8 +30,9 @@ Click the **Test Task** button to execute the selected activity.
 
 Your BPMN diagram will be saved, deployed and a process instance will start.
 
-> [!Note]
-> If you're working in a [process application](./process-applications.md), all its resources will be deploy.
+:::note
+If you're working in a [process application](./process-applications.md), all its resources will be deploy.
+:::
 
 After a process instance starts, a link to view it in Operate is provided.
 
