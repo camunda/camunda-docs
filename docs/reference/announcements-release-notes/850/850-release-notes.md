@@ -40,7 +40,7 @@ Note that the actual values shown in this screenshot don't correspond to any act
 
 <!-- https://github.com/camunda/product-hub/issues/2162 -->
 
-You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
+You can now use Role-Based Access Control (RBAC) with your own OIDC Identity provider (such as Entra ID) and Web Modeler without relying on Keycloak. [This extends RBAC and role mapping support](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md#component-specific-configuration) that is available for other components to Web Modeler.
 
 ### Introductory UI header for processes page
 
@@ -53,6 +53,10 @@ The process overview page was redesigned for clarity and ease-of-use.
 <!-- https://github.com/camunda/product-hub/issues/2148 -->
 
 Use the supported [Spring Zeebe SDK](/apis-tools/camunda-spring-boot-starter/getting-started.md) in your Spring or Spring Boot projects to interact with the Zeebe API and build process applications. The Spring Zeebe SDK works with Zeebe gRPC and the new Zeebe REST API.
+
+:::warning
+The Spring Zeebe SDK was released with some differences from the Spring-Zeebe Client it was forked from. Specifically relevant is a change in the configuration defaults, where [job streaming is disabled by default](/apis-tools/camunda-spring-boot-starter/configuration.md#enable-job-streaming) for the Spring Zeebe SDK but was enabled by default in Spring-Zeebe client versions up to `8.5.3`.
+:::
 
 ### Modeler-only role in Camunda 8 SaaS <span class="badge badge--long" title="This feature affects Modeler">Modeler</span> <span class="badge badge--long" title="This feature affects SaaS">SaaS</span>
 

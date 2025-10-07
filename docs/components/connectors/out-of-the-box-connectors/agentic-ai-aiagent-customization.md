@@ -13,7 +13,9 @@ For example, you can:
 - Add support for additional AI models
 - Inject additional logic into the agent execution flow
 
-## Prerequisites
+## Extending the AI Agent connector
+
+### Prerequisites
 
 This guide assumes you are starting from a fresh Spring Boot project and intend to run a customized AI Agent connector in a self-managed or hybrid environment.
 
@@ -26,7 +28,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 
        <properties>
            <!-- use the desired connectors version -->
-           <version.connectors>SNAPSHOT</version.connectors>
+           <version.connectors>8.8.0</version.connectors>
        </properties>
 
        <dependencies>
@@ -67,10 +69,15 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
              enabled: false
    ```
 
-5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting the `CONNECTOR_AI_AGENT_TYPE` environment variable to a custom value (such as `my-ai-agent`) when starting your application.
-   This allows you to use your custom connector in combination with a [template configured](../use-connectors-in-hybrid-mode.md) for the `my-ai-agent` job worker type.
+5. If the default AI Agent connector is already connected to your engine (for example, if you are connecting to SaaS), you can override the registered AI Agent connector job worker type by setting one of the following type environment variables to a custom value (such as `my-ai-agent`) when starting your application.
+   This allows you to use your custom connector in combination with an [element template configured](../use-connectors-in-hybrid-mode.md) for the `my-ai-agent` job worker type.
 
-## Customize individual components
+| Variable                             | Description                                                                                            |
+| :----------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | Overrides the type of the [AI Agent Process](./agentic-ai-aiagent-process.md) job worker.              |
+| `CONNECTOR_AI_AGENT_TYPE`            | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) outbound connector job worker. |
+
+### Customize individual components
 
 :::tip
 Instead of the example below, you can also use other Spring mechanisms to customize the AI Agent connector, such as using Aspect Oriented Programming (AOP) to intercept and modify method calls.
@@ -109,7 +116,7 @@ public class MyCustomAgentInitializer implements AgentInitializer {
 }
 ```
 
-## Custom conversation storage
+### Custom conversation storage
 
 The AI Agent connector includes a set of default storage backends for conversation history, but you can also implement your own to meet specific needs. Similar to the agent initialization example above, you can register a bean that implements the `ConversationStore` interface to provide your own storage implementation.
 

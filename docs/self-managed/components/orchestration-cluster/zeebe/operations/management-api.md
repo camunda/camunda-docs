@@ -79,7 +79,7 @@ When all partitions soft pause exporting, a successful response is received. If 
 
 The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.
 
-The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md) operations.
+The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) operations.
 
 - **Enabled**: Records are exported to the exporter. The log is compacted only after the records are exported.
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.
@@ -128,7 +128,7 @@ After disabling the exporter, no records will be exported to this exporter. Othe
 To delete an exporter permanently from the system, first remove the configuration of the exporter from the application. Then send the following request to the gateway's management API:
 
 ```
-POST actuator/exporters/{exporterId}/delete
+DELETE actuator/exporters/{exporterId}
 ```
 
 If the configuration is deleted, the exporter remains in the system but enters a blocked state. This prevents log compaction and thus increases the disk usage.

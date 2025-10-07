@@ -26,7 +26,7 @@ When secondary storage is disabled, you lose access to these advanced features (
 
 ## Configuration
 
-Using [Helm charts](../installation-methods/helm/install.md), you can set this flag in your `values.yaml` file:
+Using [Helm charts](/self-managed/deployment/helm/install/quick-install.md), you can set this flag in your `values.yaml` file:
 
 ```yaml
 global:
@@ -108,8 +108,9 @@ These limitations mean you are using only a subset of Camunda’s capabilities. 
 
 ## When to use this mode
 
-Consider `noSecondaryStorage` mode **only** in specific situations, such as:
+Use `noSecondaryStorage` mode **only** in specific situations, such as:
 
+- **Local development with Camunda 8 Run**: Run Zeebe locally without secondary storage components by setting the `camunda.database.type=none` environment variable.
 - **Specialized technical requirements** that prevent the use of secondary storage.
 - **Temporary migration scenarios** where minimal orchestration functionality is needed during a transition period.
 - **Resource-constrained environments** where deploying the full platform is not feasible.

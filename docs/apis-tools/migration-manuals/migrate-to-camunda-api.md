@@ -16,10 +16,9 @@ This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/api
 
 - Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This is the single Orchestration Cluster REST API.
 - Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
-- In addition, several Zeebe gRPC endpoints will begin to be deprecated.
 
 :::info
-To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/11/camunda-8-7-releasing-february-2025/).
+To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
 :::
 
 :::note
@@ -1069,7 +1068,7 @@ Response structure changes as outlined in [general changes][].
 
 [setting variables]: /apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx
 [general changes]: #general-endpoint-changes
-[multi-tenancy]: /self-managed/concepts/multi-tenancy.md
+[multi-tenancy]: /components/concepts/multi-tenancy.md
 
 ### Process definition
 

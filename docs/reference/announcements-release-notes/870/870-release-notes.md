@@ -73,13 +73,13 @@ We have extended Camunda's [document handling](/components/document-handling/get
 
 ### Dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/installation-methods/helm/cloud-providers/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/installation-methods/helm/operational-tasks/dual-region-ops.md).
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 
 ### Dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/installation-methods/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
 <!--- https://github.com/camunda/product-hub/issues/2585 --->
 
@@ -93,7 +93,7 @@ Automation leaders can visualize all automation projects through a single, hiera
 
 The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
 
-For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/installation-methods/helm/configure/add-extra-manifests.md).
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/deployment/helm/configure/add-extra-manifests.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2464 --->
 
@@ -150,7 +150,7 @@ Create and append tasks with resources available in the current project and proc
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.7.10 (04.08.2025)](https://github.com/camunda/camunda/releases/tag/8.7.10)</li><li>[Camunda 8.7.9 (28.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.9)</li><li>[Camunda 8.7.8 (16.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.8)</li><li>[Camunda 8.7.7 (01.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.7)</li><li>[Camunda 8.7.6 (20.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.6)</li><li>[Camunda 8.7.5 (05.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.5)</li><li>[Camunda 8.7.4 (06.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.4)</li><li>[Camunda 8.7.3 (02.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.3)</li><li>[Camunda 8.7.2 (13.05.2025)](https://github.com/camunda/camunda/releases/tag/8.7.2)</li><li>[Camunda 8.7.1 (09.04.2025)](https://github.com/camunda/camunda/releases/tag/8.7.1)</li><li>[Camunda 8.7.0 (08.04.2025)](https://github.com/camunda/camunda/releases/tag/8.7.0)</li><li>[Connectors 8.7.7 (04.08.2025)](https://github.com/camunda/connectors/releases/tag/8.7.7)</li><li>[Connectors 8.7.6 (15.07.2025)](https://github.com/camunda/connectors/releases/tag/8.7.6)</li><li>[Connectors 8.7.5 (02.07.2025)](https://github.com/camunda/connectors/releases/tag/8.7.5)</li><li>[Connectors 8.7.4 (20.06.2025)](https://github.com/camunda/connectors/releases/tag/8.7.4)</li><li>[Connectors 8.7.3 (06.06.2025)](https://github.com/camunda/connectors/releases/tag/8.7.3)</li><li>[Connectors 8.7.2 (09.05.2025)](https://github.com/camunda/connectors/releases/tag/8.7.2)</li><li>[Connectors 8.7.1 (06.05.2025)](https://github.com/camunda/connectors/releases/tag/8.7.1)</li><li>[Connectors 8.7.0 (02.04.2025)](https://github.com/camunda/connectors/releases/tag/8.7.0)</li></ul>
+<ul><li>[Camunda 8.7.15 (03.10.2025)](https://github.com/camunda/camunda/releases/tag/8.7.15)</li><li>[Camunda 8.7.14 (01.10.2025)](https://github.com/camunda/camunda/releases/tag/8.7.14)</li><li>[Camunda 8.7.13 (15.09.2025)](https://github.com/camunda/camunda/releases/tag/8.7.13)</li><li>[Camunda 8.7.12 (02.09.2025)](https://github.com/camunda/camunda/releases/tag/8.7.12)</li><li>[Camunda 8.7.11 (25.08.2025)](https://github.com/camunda/camunda/releases/tag/8.7.11)</li><li>[Camunda 8.7.10 (04.08.2025)](https://github.com/camunda/camunda/releases/tag/8.7.10)</li><li>[Camunda 8.7.9 (28.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.9)</li><li>[Camunda 8.7.8 (16.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.8)</li><li>[Camunda 8.7.7 (01.07.2025)](https://github.com/camunda/camunda/releases/tag/8.7.7)</li><li>[Camunda 8.7.6 (20.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.6)</li><li>[Camunda 8.7.5 (05.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.5)</li><li>[Camunda 8.7.4 (06.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.4)</li><li>[Camunda 8.7.3 (02.06.2025)](https://github.com/camunda/camunda/releases/tag/8.7.3)</li><li>[Camunda 8.7.2 (13.05.2025)](https://github.com/camunda/camunda/releases/tag/8.7.2)</li><li>[Camunda 8.7.1 (09.04.2025)](https://github.com/camunda/camunda/releases/tag/8.7.1)</li><li>[Camunda 8.7.0 (08.04.2025)](https://github.com/camunda/camunda/releases/tag/8.7.0)</li><li>[Connectors 8.7.9 (02.10.2025)](https://github.com/camunda/connectors/releases/tag/8.7.9)</li><li>[Connectors 8.7.8 (01.09.2025)](https://github.com/camunda/connectors/releases/tag/8.7.8)</li><li>[Connectors 8.7.7 (04.08.2025)](https://github.com/camunda/connectors/releases/tag/8.7.7)</li><li>[Connectors 8.7.6 (15.07.2025)](https://github.com/camunda/connectors/releases/tag/8.7.6)</li><li>[Connectors 8.7.5 (02.07.2025)](https://github.com/camunda/connectors/releases/tag/8.7.5)</li><li>[Connectors 8.7.4 (20.06.2025)](https://github.com/camunda/connectors/releases/tag/8.7.4)</li><li>[Connectors 8.7.3 (06.06.2025)](https://github.com/camunda/connectors/releases/tag/8.7.3)</li><li>[Connectors 8.7.2 (09.05.2025)](https://github.com/camunda/connectors/releases/tag/8.7.2)</li><li>[Connectors 8.7.1 (06.05.2025)](https://github.com/camunda/connectors/releases/tag/8.7.1)</li><li>[Connectors 8.7.0 (02.04.2025)](https://github.com/camunda/connectors/releases/tag/8.7.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -596,7 +596,7 @@ The deployment experience is further simplified for Enterprise customers running
 - You no longer need to enter a client ID and secret in the deploy modal. Instead, simply choose a cluster (or stage for process applications) and deploy.
 
 :::note
-The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
+The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md?authPlatform=microsoftEntraId#configuration).
 You still need to enter a client ID and secret in this case.
 Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
 :::

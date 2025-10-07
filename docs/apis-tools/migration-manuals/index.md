@@ -5,10 +5,6 @@ description: "Plan and execute an update from Camunda 8.7 to 8.8. Includes archi
 
 Learn about important API & tools changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
 
-:::warning
-This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.
-:::
-
 ## About this guide
 
 This guide focuses on the API and SDK transitions required in an upgrade from Camunda 8.7 to Camunda 8.8.
