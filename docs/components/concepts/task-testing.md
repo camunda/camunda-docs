@@ -43,8 +43,8 @@ Test instances are deployed as standard process instances and can be viewed, man
 - **Desktop Modeler:** Requires a manually configured connection to a running cluster.  
   See the respective guides below for configuration steps.
 
-- [Test a task in Web Modeler](../../components/modeler/web-modeler/task-testing.md)
-- [Test a task in Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md)
+- [Test a task in Web Modeler](/components/modeler/web-modeler/task-testing.md)
+- [Test a task in Desktop Modeler](/components/modeler/desktop-modeler/task-testing.md)
 
 ## Supported elements
 
