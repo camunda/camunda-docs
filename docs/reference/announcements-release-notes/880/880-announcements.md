@@ -281,8 +281,8 @@ The Assignees list is removed from the response.
 
 With the Camunda 8.8 release, the deprecation of the [start public process via form](/components/tasklist/userguide/starting-processes.md#start-public-processes-via-form) feature is announced.
 
-- This SaaS feature is deprecated and does not work with [Tasklist running in v2 mode](/components/tasklist/api-versions.md). In consequence it will be removed in 8.10.
-- To still use this feature with 8.8, ensure to run [Tasklist in v1 mode](/components/tasklist/api-versions.md).
+- This SaaS feature is deprecated and does not work with [Tasklist running in V2 mode](/components/tasklist/api-versions.md). This feature will be removed in the 8.10 release.
+- To continue using this feature with Camunda 8.8, you must run [Tasklist in V1 mode](/components/tasklist/api-versions.md).
 
 </div>
 </div>
