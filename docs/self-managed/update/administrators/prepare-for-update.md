@@ -54,7 +54,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Unified components configuration</td>
-    <td>Introduced a new unified configuration with a shared YAML schema across Orchestration cluster components.</td>
+    <td><p>Introduced a new unified configuration with a shared YAML schema across Orchestration cluster components.</p><p>To learn more, see [Camunda 8.8 property changes](../../components/orchestration-cluster/core-settings/configuration/configuration-mapping.md).</p></td>
     <td><span className="label-highlight red">Breaking changes</span></td>    
 </tr>
 <tr>
@@ -64,7 +64,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Identity, authentication, and authorization</td>
-    <td colspan="2">Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster. See [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</td>    
+    <td colspan="2"><p>Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster.</p><p>To learn more, see [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</p></td>    
 </tr>
 </table>
 

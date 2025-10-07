@@ -401,18 +401,13 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-You can now add new Zeebe partitions to a running cluster in Self-Managed.
+You can now add new Zeebe partitions to a running cluster to increase capacity without downtime:
 
-- Scaling can be performed concurrently when the cluster is running, with zero downtime.
-- New process instances also start on new partitions, distributing cluster load evenly across partitions.
-- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
-- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+- New process instances will be started on new partitions immediately.
+- Existing process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 <p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
-
-:::caution
-This feature is not yet fully compatible with backup/restore.
-:::
 
 ### Identity and Management Identity
 
@@ -431,15 +426,6 @@ Enhanced migration now supports taken sequence flows leading to joining gateways
 
 - Define migration plans mapping active elements and taken sequence flows
 - Configure plans via Operate UI or API
-
-### Orchestration Cluster scaling
-
-<!-- https://github.com/camunda/product-hub/issues/2226 -->
-
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
-
-- New partitions start processing tasks immediately
-- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 ### Process instance migration
 
