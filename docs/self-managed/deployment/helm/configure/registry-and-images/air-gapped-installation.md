@@ -34,8 +34,6 @@ The following images must be available in your air-gapped environment:
 **Camunda images:**
 
 - [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
-- [camunda/operate](https://hub.docker.com/r/camunda/operate)
-- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
@@ -166,11 +164,8 @@ camunda-platform
     |_ identity
     |_ identityKeycloak
         |_ postgresql
-    |_ zeebe
-    |_ zeebeGateway
+    |_ orchestration
     |_ optimize
-    |_ operate
-    |_ tasklist
     |_ connectors
     |_ webModeler
     |_ postgresql
@@ -179,7 +174,7 @@ camunda-platform
 - Keycloak depends on Camunda Identity, and PostgreSQL depends on Keycloak.
 - PostgreSQL is also a dependency for Web Modeler.
   - This dependency is optional: you can install PostgreSQL with Helm or use an existing [external database](/self-managed/deployment/helm/install/quick-install.md#optional-configure-external-database).
-- Elasticsearch is a dependency for Zeebe, Operate, Tasklist, and Optimize.
+- Elasticsearch is a dependency for the Orchestration Cluster and Optimize.
 - Connectors can run stand-alone, but if you use inbound capabilities, Operate becomes a dependency.
 
 You can configure Keycloak and PostgreSQL values at the same hierarchy level:
@@ -230,14 +225,11 @@ You can override the image registry and tag in a custom `values.yaml` file:
 global:
   image:
     registry: example.jfrog.io
-zeebe:
+orchestration:
   image:
     repository: camunda/zeebe
     # e.g. work with the latest versions in development
     tag: latest
-zeebeGateway:
-  image:
-    repository: camunda/zeebe
 elasticsearch:
   image:
     registry: example.jfrog.io
@@ -260,14 +252,6 @@ identityKeycloak:
       repository: bitnamilegacy/postgresql
 
       ...
-operate:
-  image:
-    repository: camunda/operate
-    ...
-tasklist:
-  image:
-    repository: camunda/tasklist
-    ...
 optimize:
   image:
     repository: camunda/optimize

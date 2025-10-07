@@ -61,7 +61,7 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 
 ### Kubernetes
 
-A [multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace-deployment.md) is recommended. For details on individual components, see the [components section](#components).
+A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md) and the [components](#components) section.
 
 The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
@@ -85,7 +85,7 @@ The Orchestration Cluster exposes two services:
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace-deployment.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
 ### High availability (HA)
 

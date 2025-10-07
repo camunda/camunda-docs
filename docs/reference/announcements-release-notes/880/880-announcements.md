@@ -517,7 +517,7 @@ The existing data schema in the secondary storage has been harmonized, to be use
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in Camunda 8.6 and is removed from the Helm chart in Camunda 8.8.
 
-Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
+Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 - If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/deployment/helm/install/quick-install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 - New migration guides are also provided to support you when migrating from a previous Camunda version.

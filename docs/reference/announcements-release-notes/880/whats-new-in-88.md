@@ -3,16 +3,20 @@ id: whats-new-in-88
 title: What's new in Camunda 8.8
 sidebar_label: What's new in Camunda 8.8
 description: "Learn more about what's new and changed in Camunda 8.8."
-keywords: ["what's changed", "what's new"]
+keywords:
+  [
+    "what's changed",
+    "what's new",
+    "whats changed in 8.8",
+    "what's changed in 8.8",
+    "8.8 changes",
+  ]
+page_rank: 90
 ---
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
 Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
-
-:::warning
-This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.
-:::
 
 ## Introducing Camunda 8.8
 
@@ -118,9 +122,13 @@ In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flo
 
 ### Unified component configuration
 
-Camunda 8.8 introduces a unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
+Camunda 8.8 introduces unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
 
 In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
+
+:::note
+Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
+:::
 
 ## Identity, authentication, and authorization {#identity}
 

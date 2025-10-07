@@ -24,6 +24,10 @@ To use the MCP Client connector, it must be enabled in the connector runtime. An
 
 STDIO servers can use any programming language or execution runtime available on the machine running the connector runtime. The example below starts MCP servers using both Node.js and Docker, and therefore requires a Node.js and Docker environment to be available.
 
+:::warning
+Configuring STDIO servers results in the connector runtime starting and managing the lifecycle of the configured processes. When configuring third-party MCP servers, ensure that the configured commands are trusted and secure.
+:::
+
 ```yaml
 camunda:
   connector:
@@ -32,7 +36,7 @@ camunda:
         client:
           enabled: true # <-- disabled by default
           clients:
-            # STDIO server started Node.js process
+            # STDIO server started as Node.js process (requires Node.js runtime)
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
               stdio:
                 command: npx
@@ -43,7 +47,7 @@ camunda:
                 env:
                   MY_ENV_VAR: "my-value" # <-- optional environment variables
 
-            # STDIO server started as docker container
+            # STDIO server started as docker container (requires Docker being available)
             time:
               stdio:
                 command: docker

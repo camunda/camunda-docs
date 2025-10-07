@@ -8,7 +8,7 @@ description: "To enable a smoother integration with your existing systems, conne
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To enable a smoother integration with your existing systems, Camunda supports connecting to an OpenID Connect (OIDC) authentication provider. To connect to a Keycloak authentication provider, see our guide on [using an external Keycloak](/self-managed/deployment/helm/configure/using-external-keycloak.md).
+To enable a smoother integration with your existing systems, Camunda supports connecting to an OpenID Connect (OIDC) authentication provider. To connect to a Keycloak authentication provider, see our guide on [using an external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak.md).
 
 In this guide, we step through the configuration required to connect Camunda to your authentication provider.
 
