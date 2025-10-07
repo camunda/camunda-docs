@@ -39,7 +39,7 @@ To upgrade with Helm, see the [Helm chart upgrade guide for 8.7 to 8.8](/self-ma
 The guide covers update options, secret handling, migration job monitoring, and other upgrade tasks.
 
 :::info
-**Important:** Upgrade sequentially to the latest 8.7 patch before moving to 8.8. Confirm your Helm chart and Helm CLI versions are compatible with 8.8, and review your values file for deprecated keys.
+**Important:** Upgrade to the latest 8.7 patch before moving to 8.8. Confirm your Helm chart and Helm CLI versions are compatible with 8.8, and review your values file for deprecated keys.
 :::
 
 :::note
@@ -59,13 +59,8 @@ Because of these limitations, Camunda does not supply automated migration script
 
 For production deployments, we recommend either using Kubernetes with the official Camunda Helm chart or creating a custom deployment process with Infrastructure as Code tools such as Terraform, Ansible, or AWS CloudFormation.
 
-A manual upgrade involves:
+Manual upgrades involve multiple steps. In addition to updating container images, running migration jobs, you must also follow the component‑specific tasks listed in the component upgrade guide. Because of this complexity, it’s generally easier to migrate development environments to Kubernetes using the Helm charts, especially if you expect to upgrade frequently.
 
-- Updating each component’s container image to the 8.8 release
-- Running the required migration jobs (for example, the Identity migration application)
-- Validating that the unified API is functioning.
-
-Because of the effort involved in a manual upgrade, consider migrating development environments to Kubernetes with Helm charts.
 </TabItem>
 </Tabs>
 
