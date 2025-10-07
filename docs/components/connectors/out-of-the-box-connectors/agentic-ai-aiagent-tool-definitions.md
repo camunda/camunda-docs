@@ -80,8 +80,7 @@ schema resolution will collect all `fromAi` definitions within an activity and c
 the activity.
 
 :::important
-The first argument passed to the `fromAi` function must be a reference type (for example, not a static string), referencing a
-value within the variable defined as **Input element** in the multi-instance configuration. In the examples provided, `toolCall` is typically used as the input element. Example value: `toolCall.myParameter`.
+The first argument passed to the `fromAi` function must be a reference to a field within the `toolCall` context which will automatically be populated by the AI Agent connector. Example: `toolCall.myParameter`.
 :::
 
 By using the `fromAi` tool call as a wrapper function around the actual value, the connector can both **describe the parameter** for the LLM by generating a JSON Schema from the function calls and at the same time **utilize the LLM-generated value** as it can do with any other process variable.
@@ -123,7 +122,7 @@ fromAi(toolCall.shouldCalculate, "Defines if the calculation should be executed.
 ```
 
 For more complex type definitions, the fourth parameter of the function allows you to specify a JSON Schema from a
-FEEL context. Note that support for the JSON Schema features depends on your AI integration. For a list of examples, refer to the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
+FEEL context. Note that support for complex JSON Schema features may be limited by the selected provider/model. For a list of examples, refer to the [JSON Schema documentation](https://json-schema.org/learn/miscellaneous-examples).
 
 ```feel
 fromAi(
@@ -134,11 +133,35 @@ fromAi(
 )
 ```
 
+To mark a parameter as optional, you can use the `options` parameter:
+
+```feel
+fromAi(
+  toolCall.optionalParameter,
+  "An optional parameter",
+  "string",
+  null,
+  { required: false }
+)
+```
+
+Or using named parameters:
+
+```feel
+fromAi(
+  value: toolCall.optionalParameter,
+  description: "An optional parameter",
+  options: { required: false }
+)
+```
+
 You can combine multiple parameters within the same FEEL expression, for example:
 
 ```feel
 fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
+
+For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
 
 ## Tool Call Responses
 

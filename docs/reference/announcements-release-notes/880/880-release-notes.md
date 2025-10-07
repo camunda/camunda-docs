@@ -314,15 +314,28 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ## Integrations
 
+### Microsoft Teams
+
+The new Microsoft Teams integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
+
+The Microsoft Teams integration allows users to:
+
+- Start processes from a channel, chat, or the app’s Home tab.
+- Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+:::note
+The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
 ### ServiceNow
 
 Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.
 
 The ServiceNow integration allows you to:
 
-- **Manage ServiceNow data**: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
-- **Trigger ServiceNow flows**: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
-- **Orchestrate ITSM processes**: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+- Manage ServiceNow data: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
+- Trigger ServiceNow flows: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+- Orchestrate ITSM processes: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
 
 <p><a href="../../../../components/camunda-integrations/servicenow/servicenow-integration/" class="link-arrow">ServiceNow integration</a></p>
 
