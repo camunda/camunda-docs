@@ -280,10 +280,20 @@ As an example, assume that your client's access token payload looks like this:
 
 If you have set `camunda.security.authentication.oidc.client-id-claim` to `client-identifier`, then the Orchestration Cluster will use `123` as your client's ID when it applies memberships in groups, roles, and tenants, as well as authorizations.
 
-When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, a token is matched as follows:
+#### How principal identification works
+
+When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, and a token containing both claims is presented to the platform, we use the following logic to identify a single principal for the request:
 
 1. If the client id claim is present, the request is treated as a client request with the corresponding ID.
 1. If the client id is not present, the request is treated as a user request with the corresponding username matching the username-claim.
+1. If neither the client id claim nor the username claim are set, then the request is rejected.
+
+#### Controlling the principal identification order
+
+In most cases we expect the default detection logic to be sufficient, however if you have a use-case for changing the order, the configuration property `camunda.security.authentication.oidc.prefer-username-claim` can be set to `true`. In this case the logic will be:
+
+1. If the username claim is present, the request is treated as a user request with the corresponding username.
+1. If the username claim is not present, the request is treated as a client request with the corresponding ID matching the client id claim.
 1. If neither the client id claim nor the username claim are set, then the request is rejected.
 
 We recommend to set client id claim and username claim as follows:
