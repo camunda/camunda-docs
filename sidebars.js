@@ -1400,7 +1400,6 @@ module.exports = {
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy",
-                "self-managed/deployment/helm/configure/multi-namespace-deployment",
               ],
             },
             {
@@ -1643,6 +1642,7 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
