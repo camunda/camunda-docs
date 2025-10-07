@@ -117,8 +117,8 @@ Processes with active multi-instance elements can currently not be migrated. We 
 Process instances with active joining parallel gateways cannot currently be migrated. The migrator will skip these instances during migration.
 
 - This limitation occurs when some execution paths have completed and reached the joining parallel gateway, but other paths are still waiting at activities before the gateway.
-- Recommendation: Allow all parallel execution paths to complete and tokens to move past the joining gateway before initiating the migration.
-- See https://github.com/camunda/camunda-bpm-platform/issues/5461 for the follow-up work to resolve this limitation.
+- Recommendation: Ensure no token waits in a joining parallel gateway.
+- See https://github.com/camunda/camunda-bpm-platform/issues/5461
 
 #### Timer events
 
