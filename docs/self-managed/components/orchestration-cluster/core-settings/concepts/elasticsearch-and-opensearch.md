@@ -52,6 +52,14 @@ Shard and replica settings are applied on first startup or during version update
 
 ## Application configuration example
 
+<Tabs groupId="clients" defaultValue="elasticsearch" queryString values={
+[
+{label: 'Elasticsearch', value: 'elasticsearch' },
+{label: 'OpenSearch', value: 'opensearch' }
+]}>
+
+<TabItem value='elasticsearch'>
+
 ```yaml
 camunda:
   data:
@@ -61,13 +69,26 @@ camunda:
         url: https://localhost:9200
         security:
           self-signed: true
+```
 
+</TabItem>
+
+<TabItem value='opensearch'>
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
       opensearch:
         cluster-name: opensearch
         url: https://localhost:9200
         security:
           self-signed: true
 ```
+
+</TabItem>
+
+</Tabs>
 
 ## Database selection (optional)
 
