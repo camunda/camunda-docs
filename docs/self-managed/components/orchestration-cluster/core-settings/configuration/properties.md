@@ -702,7 +702,7 @@ script-src-attr 'none'.
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
+| `camunda.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
 
 ### `spring.profiles`
 
@@ -842,12 +842,6 @@ script-src-attr 'none'.
 </TabItem>
 <TabItem value="helm" label="Helm values">
 
-### `global`
-
-| Property                             | Description                                                                            | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------- | ------------- |
-| `global.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
-
 ### `orchestration.security.authentication`
 
 | Property                                                              | Description                                                                                                                                                                                                                                                                                                              | Default value |
@@ -928,10 +922,9 @@ script-src-attr 'none'.
 
 ### `orchestration.security.initialization`
 
-| Property                                             | Description                                                                          | Default value |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initialization.users`        | List of users to initialize (each with username, password, name, email).             |               |
-| `orchestration.security.initialization.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
+| Property                                      | Description                                                              | Default value |
+| --------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `orchestration.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
 
 ### `orchestration.security.multiTenancy`
 
