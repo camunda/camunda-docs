@@ -13,8 +13,9 @@ Please refer to [supported environments](/reference/supported-environments.md#ca
 :::
 
 :::note
-As of **8.8**, Camunda uses the **Camunda Exporter** after all **≤8.7** records have been exported and consumed.  
-The Elasticsearch and OpenSearch exporters remain available for existing setups and custom use cases until the migration is complete.
+As of **8.8**, Camunda uses the [**Camunda Exporter**](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from **≤8.7** are only consumed during migration.
+
+The Elasticsearch and OpenSearch exporters remain fully usable after migration for existing setups, Optimize, and other custom use cases—their functionality is **not limited to the migration period**.
 :::
 
 The Zeebe Elasticsearch exporter acts as a bridge between

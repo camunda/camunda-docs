@@ -140,19 +140,20 @@ Durations support ISO-8601 (`P30D`) or simplified suffix formats (`30d`, `12h`).
 Use simplified suffix formats unless strict ISO-8601 compliance is required.
 :::
 
-:::note
-Replica count changes (`number-of-replicas` and per-index overrides):
+#### Replica count changes (`number-of-replicas` and per-index overrides`)
 
-- Applied to existing indices on the next application restart (their settings are updated in place).
-- Also written to the index templates so that newly created indices inherit the new replica configuration.
+- For **newer versions (8.8+)**, changes are applied to existing indices on the next application restart—their settings are updated in place.
+- Also written to the index templates so that **newly created indices** inherit the updated replica configuration.
 
-Shard count changes (`number-of-shards` and per-index overrides):
+#### Shard count changes (`number-of-shards` and per-index overrides`)
 
-- Update only the index templates, affecting indices created _after_ the change.
-- Existing indices keep their original shard layout.
+- Only applied to **index templates**, affecting indices created _after_ the change.
+- Existing indices retain their original shard layout.
 
-Template priority changes adjust which template wins when multiple patterns match; the effect is only for indices created _after_ the change.
-:::
+#### Template priority changes
+
+- Adjust which template is applied when multiple patterns match.
+- The effect is **only for indices created _after_ the change**.
 
 :::note
 Some Elasticsearch and OpenSearch deployments may ship predefined wildcard (`*` pattern) index templates with their own priorities. Assign a **strictly higher** priority to the Camunda index templates to ensure Camunda's mappings and settings take precedence when multiple templates match the same index name. If the priority is not higher, provider wildcard templates may override shard/replica defaults, analyzers, or field mappings, leading to unexpected index behavior.

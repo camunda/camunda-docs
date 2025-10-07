@@ -31,7 +31,9 @@ See the [secondary storage documentation](/self-managed/components/orchestration
 ## Zeebe Elasticsearch or OpenSearch exporter
 
 :::note
-**Version 8.8:** The importer is required only for brownfield deployments (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Operate indices. The importer can then be safely disabled for subsequent restarts or deployments.
+**Version 8.8+:** The Importer is required only for **migration scenarios** (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Operate indices. The Importer can then be safely disabled for subsequent restarts or deployments.
+
+New 8.8+ installations do **not** need to enable or configure the Importer. Its only purpose is to temporarily support migrations from 8.7 data.
 :::
 
 For Elasticsearch, Operate imports data from indices created and filled in by the [Zeebe Elasticsearch exporter](../zeebe/exporters/elasticsearch-exporter.md).
