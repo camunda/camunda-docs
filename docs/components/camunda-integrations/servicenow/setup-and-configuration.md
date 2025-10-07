@@ -17,7 +17,7 @@ The setup and configuration process connects your ServiceNow instance with Camun
 
 ### Camunda
 
-1. Configure a [**Camunda API credential**](../guides/setup-client-connection-credentials/) for ServiceNow connectivity.
+1. Configure a [**Camunda API credential**](../../../components/react-components/create-api-credentials.md) for ServiceNow connectivity.
 2. Add the out-of-the-box **ServiceNow connector templates** to your Camunda processes, just like any other connector template.
 
 ### ServiceNow
