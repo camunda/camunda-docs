@@ -860,15 +860,16 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.authentication.oidc`
 
-| Property                                                   | Description                                                      | Default value                        |
-| ---------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
-| `orchestration.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
-| `orchestration.security.authentication.oidc.clientId`      | The client ID for OIDC authentication.                           |                                      |
-| `orchestration.security.authentication.oidc.clientSecret`  | The client secret for OIDC authentication.                       |                                      |
-| `orchestration.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              |                                      |
-| `orchestration.security.authentication.oidc.issuerUri`     | The issuer URI for OIDC authentication.                          |                                      |
-| `orchestration.security.authentication.oidc.redirectUri`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
-| `orchestration.security.authentication.oidc.userNameClaim` | The claim to use for the username in OIDC authentication.        | `sub`                                |
+| Property                                                                  | Description                                                                                                                                                                                  | Default value                                |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `orchestration.security.authentication.oidc.audience`                     | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                             |                                              |
+| `orchestration.security.authentication.oidc.backwardsCompatibleAudiences` | Defines audiences, which need to be set for backwards compatibility to allow access to the Orchestration Cluster. This is only important to set if you're upgrading from an earlier version. | `["operate-api","tasklist-api","zeebe-api"]` |
+| `orchestration.security.authentication.oidc.clientId`                     | The client ID for OIDC authentication.                                                                                                                                                       |                                              |
+| `orchestration.security.authentication.oidc.clientSecret`                 | The client secret for OIDC authentication.                                                                                                                                                   |                                              |
+| `orchestration.security.authentication.oidc.groupsClaim`                  | The claim to use for groups in OIDC authentication.                                                                                                                                          |                                              |
+| `orchestration.security.authentication.oidc.issuerUri`                    | The issuer URI for OIDC authentication.                                                                                                                                                      |                                              |
+| `orchestration.security.authentication.oidc.redirectUri`                  | The redirect URI for OIDC authentication.                                                                                                                                                    | `http://localhost:8080/sso-callback`         |
+| `orchestration.security.authentication.oidc.userNameClaim`                | The claim to use for the username in OIDC authentication.                                                                                                                                    | `sub`                                        |
 
 ### `orchestration.security.authorizations`
 
