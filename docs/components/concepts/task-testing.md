@@ -23,7 +23,7 @@ Task testing runs a single task, on the engine, exactly as it would later run du
 
 ## Prerequesites
 
-To test a task, you need a connection to an active Camunda 8.8 or above orchestration cluster. The entire process will be deployed automatically prior to running the test. The connection requirements for Desktop Modeler and Web Modeler are slightly different; see the relevant pages for details.
+To test a task, you need a connection to an active Camunda 8.8 or above orchestration cluster. The entire process will be deployed automatically prior to running the test. The connection requirements for [Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md) and [Web Modeler](../../components/modeler/web-modeler/task-testing.md) are slightly different.
 
 Once you've run a test, you can view the deployed instance in Operate for further information about task execution.
 
