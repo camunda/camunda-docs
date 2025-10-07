@@ -553,6 +553,15 @@ desired={<Six viewBox="140 40 680 500" />}
 | **Zeebe configuration** | Zeebe brokers in the surviving region are still configured to point to the Elasticsearch instance of the lost region. Zeebe cannot continue exporting data. | Elasticsearch exporter to the failed region has been disabled in the Zeebe cluster. Zeebe can export data to Elasticsearch again. |
 | **User interaction**    | Regular interaction with Camunda 8 is not restored.                                                                                                         | Regular interaction with Camunda 8 is restored, marking the conclusion of the temporary recovery.                                 |
 
+:::info
+
+If you have upgraded from a previously migrated 8.7 system, you may still have the legacy `elasticsearchregion0` and `elasticsearchregion1` exporters configured.
+
+- If **both exporters are disabled**, you can safely ignore them.
+- If they are **enabled** (for example, because you’re using **Optimize**), apply the **same logic** to these exporters as described for the new ones in this guide.
+
+:::
+
 #### Procedure
 
 1. Port-forward the service of the Zeebe Gateway for the [management REST API](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#managementserver)
@@ -1410,6 +1419,15 @@ desired={<Twelve viewBox="140 40 680 500" />}
 | **Details**   | **Current state**                                   | **Desired state**                                                                                                                                                                                                                            |
 | ------------- | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Camunda 8** | Reachable to end-users, but not exporting any data. | Start a new exporter to the recreated region.<br /> Ensure that both Elasticsearch instances are populated for data redundancy. <br /> Separate the initialization step (asynchronous) and confirm completion before resuming the exporters. |
+
+:::info
+
+If you have upgraded from a previously migrated 8.7 system, you may still have the legacy `elasticsearchregion0` and `elasticsearchregion1` exporters configured.
+
+- If **both exporters are disabled**, you can safely ignore them.
+- If the old exporter is **enabled** in the survived region (for example, because you’re using **Optimize**), apply the **same logic** to the old exporter to be initialized from the survived old exporter.
+
+:::
 
 #### How to get there
 
