@@ -329,15 +329,28 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ## Integrations
 
+### Microsoft Teams
+
+The new Microsoft Teams integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
+
+The Microsoft Teams integration allows users to:
+
+- Start processes from a channel, chat, or the app’s Home tab.
+- Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+:::note
+The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
 ### ServiceNow
 
 Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.
 
 The ServiceNow integration allows you to:
 
-- **Manage ServiceNow data**: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
-- **Trigger ServiceNow flows**: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
-- **Orchestrate ITSM processes**: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+- Manage ServiceNow data: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
+- Trigger ServiceNow flows: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+- Orchestrate ITSM processes: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
 
 <p><a href="../../../../components/camunda-integrations/servicenow/servicenow-integration/" class="link-arrow">ServiceNow integration</a></p>
 
@@ -426,18 +439,13 @@ Ad-hoc sub-process elements can be activated by job workers:
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-You can now add new Zeebe partitions to a running cluster in Self-Managed.
+You can now add new Zeebe partitions to a running cluster to increase capacity without downtime:
 
-- Scaling can be performed concurrently when the cluster is running, with zero downtime.
-- New process instances also start on new partitions, distributing cluster load evenly across partitions.
-- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
-- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+- New process instances will be started on new partitions immediately.
+- Existing process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 <p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
-
-:::caution
-Backup and restore is not supported while the cluster partitions are being resized.
-:::
 
 ### Identity and Management Identity
 
@@ -456,15 +464,6 @@ Enhanced migration now supports taken sequence flows leading to joining gateways
 
 - Define migration plans mapping active elements and taken sequence flows
 - Configure plans via Operate UI or API
-
-### Orchestration Cluster scaling
-
-<!-- https://github.com/camunda/product-hub/issues/2226 -->
-
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
-
-- New partitions start processing tasks immediately
-- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 ### Process instance migration
 
