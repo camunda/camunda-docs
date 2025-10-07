@@ -66,7 +66,7 @@ When to use it:
 
 :::tip
 If you start the process application in your test case, you
-should [disable the job workers](../spring-zeebe-sdk/configuration.md#disable-a-job-worker) to avoid interferences with
+should [disable the job workers](../camunda-spring-boot-starter/configuration.md#disable-a-job-worker) to avoid interferences with
 the mocks, for example, by setting the following configuration:
 
 ```java
@@ -145,6 +145,30 @@ void shouldUseCustomHandler() {
 
     // when: create a process instance
     // then: verify that the process instance has the expected variables
+}
+```
+
+### Inspect mock invocations
+
+You can inspect the invocations of a mock job worker to verify how many jobs were handled and to get the details of each
+job.
+
+```java
+@Test
+void shouldInspectMockInvocations() {
+    // given: mock job worker for the job type "send-email"
+    final JobWorkerMock mockJobWorker =
+            processTestContext.mockJobWorker("send-email").thenComplete();
+
+    // when: create a process instance that triggers the job worker
+
+    // then: verify the number of invocations
+    assertThat(mockJobWorker.getInvocations()).isEqualTo(1);
+    // and: inspect the details of each invocation
+    assertThat(mockJobWorker.getActivatedJobs())
+        .hasSize(1)
+        .flatExtracting(job -> job.getVariablesAsMap().entrySet())
+        .contains(entry("receiver", "Zee"), entry("subject", "Greetings"));
 }
 ```
 
@@ -267,10 +291,11 @@ void shouldThrowBpmnErrorFromJob() {
 
 ## Complete user tasks
 
-You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and completes it.
-If no user task exists, the command fails.
+You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and
+completes it. If no user task exists, the command fails.
 
-You can identify the user task by name or using a [UserTaskSelector](assertions.md#user-task-assertions).
+You can identify the user task by its BPMN element ID or using
+a [UserTaskSelector](assertions.md#with-user-task-selector).
 
 When to use it:
 
@@ -282,16 +307,16 @@ void shouldCompleteUserTask() {
     // given: a process instance is waiting at a user task
 
     // when: complete the user task
-    // 1) With name "Approve Request"
+    // 1) With element ID "task_approveRequest"
     final Map<String, Object> variables = Map.of(
         "approved", true,
         "comment", "Request approved by manager",
         "approvedAmount", 5000.00
     );
-    processTestContext.completeUserTask("Approve Request", variables);
+    processTestContext.completeUserTask("task_approveRequest", variables);
 
-    // 2) With selector by element id "task_approveRequest"
-    processTestContext.completeUserTask(byElementId("task_approveRequest"), variables);
+    // 2) With selector by task name "Approve Request"
+    processTestContext.completeUserTask(byTaskName("Approve Request"), variables);
 
     // then: verify that the process instance is completed
 }

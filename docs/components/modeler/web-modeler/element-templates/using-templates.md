@@ -6,7 +6,7 @@ description: "Learn how to apply, remove, update, and replace templates."
 
 ## Applying templates
 
-If a template matches a selected diagram element, the blue template catalog button, **Select**, is shown in the properties panel on the right side of the screen.
+If an [element template](/components/modeler/element-templates/about-templates.md) matches a selected diagram element, the blue template catalog button, **Select**, is shown in the properties panel on the right side of the screen.
 
 ![Template Chooser](./img/chooser.png)
 
@@ -78,6 +78,6 @@ If a diagram element supports being used as a template, a _Save as_ link will be
 
 The template can be further customized by [editing it](/components/connectors/manage-connector-templates.md).
 
-To use the template, you first need to [publish it to the project or organization](/components/connectors/manage-connector-templates.md#publish-a-connector-template).
+To use the template, you first need to [publish it to the project or organization](/components/modeler/web-modeler/element-templates/manage-element-templates.md#publish-an-element-template).
 
 Learn more about [saving elements as templates](./save-as-element-templates.md).

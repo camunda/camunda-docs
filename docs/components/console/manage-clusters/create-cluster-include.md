@@ -7,9 +7,10 @@ To deploy and run your process, you must create a [cluster](/components/concepts
 1. Name your cluster.
 1. Select a [cluster type](/components/concepts/clusters.md#cluster-type) and [cluster size](/components/concepts/clusters.md#cluster-size).
 1. Assign a cluster tag to indicate what type of cluster it is.
-1. Select your [region](/reference/regions.md).
-1. Select your [encryption at rest protection level](/components/concepts/encryption-at-rest.md) (enterprise only).
+1. Select your [region](/components/saas/regions.md).
+1. Select your [encryption at rest protection level](/components/saas/encryption-at-rest.md) (enterprise only).
 1. Select a channel and release. For the purpose of this guide, we recommend using the **Stable** channel and the latest generation.
+1. If you are using a generation of version 8.8 or higher, select if you want to enable [authorization-based access control](/components/concepts/access-control/authorizations.md).
 1. Click **Create cluster**.
 1. Your cluster will take a few moments to create. Check the status on the **Clusters** page or by clicking into the cluster itself and looking at the **Applications** section.
 
@@ -45,7 +46,13 @@ To learn more about the differences between **development clusters** and **produ
 
 You can decide if you want to have automated updates to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
-Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`. Assigning a tag can make it easier for team members to clearly distinguish between different stages of the software development lifecycle. Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
+### Tags
+
+Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`.
+
+- Assigning a tag makes it easier for team members to clearly distinguish between different stages of the software development lifecycle.
+- Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
+- [Authorization-based access control](/components/concepts/access-control/authorizations.md) is disabled by default for `dev` and `test` clusters, and enabled for `stage` and `prod` clusters. You can change this setting during and after cluster creation.
 
 :::info
 Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.

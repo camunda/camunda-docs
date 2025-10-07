@@ -1,20 +1,20 @@
 ---
 id: manage-groups
 title: "Groups"
-description: "Groups are a way to apply a set of roles and permissions to users. Use Identity to create a group."
+description: "Groups are a way to apply a set of roles and permissions to users for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)."
 ---
 
-Use groups and roles to manage and organize user access in Camunda 8.
+Use groups to manage and organize user access to Camunda 8 management and modeling components (Web Modeler, Console, and Optimize).
 
 ## About groups
 
-Organize your users into groups as an efficient and scalable way of controlling access in Camunda 8.
+Organize your users into groups as an efficient and scalable way of controlling access to Camunda 8 management and modeling components.
 
 - Instead of assigning roles to individual users, [map a set of roles to a group](#assign-roles-to-a-group).
 - All group members automatically inherit the role permissions of a group.
 
 :::note
-You do not create or manage users in Identity itself. Users are managed in Keycloak or your connected IdP.
+You do not create or manage users in Management Identity itself. Users are managed in Keycloak or your connected IdP.
 :::
 
 ## Manage groups

@@ -30,11 +30,15 @@ For SaaS clusters, Swagger UI is accessible through your cluster's dedicated end
 
 1. In the Camunda Console, go to your cluster
 2. In **Cluster Details**, find your **Region ID** and **Cluster ID**
-3. Use this URL format: `https://${REGION_ID}.zeebe.camunda.io/${CLUSTER_ID}/swagger-ui/index.html`
+3. Use this URL format: `https://${REGION_ID}.operate.camunda.io/${CLUSTER_ID}/swagger-ui/index.html`
+
+:::note
+Swagger UI is protected with CSRF. If you are logged into the Camunda Console, you can access Swagger UI directly. If not, you may need to log in first.
+:::
 
 **Example:**  
 If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swagger UI URL would be:
-`https://bru-2.zeebe.camunda.io/abc123-def456-ghi789/swagger-ui/index.html`
+`https://bru-2.operate.camunda.io/abc123-def456-ghi789/swagger-ui/index.html`
 
 ### Self-Managed
 
@@ -44,7 +48,7 @@ For Self-Managed deployments, Swagger UI is available at your configured Zeebe G
 `http://localhost:8080/swagger-ui/index.html`
 
 **Custom configuration:**
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/installation-methods/helm/configure/ingress-setup.md), then append `/swagger-ui/index.html`.
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger-ui/index.html`.
 
 **Example with custom domain:**
 `https://your-zeebe-gateway.company.com/swagger-ui/index.html`
@@ -94,7 +98,7 @@ For detailed authentication setup instructions, see the [Authentication guide](.
 ### Understanding the interface
 
 - **Endpoints are grouped by resource type** - Find process-related operations under "Process Instances", task operations under "User Tasks", etc.
-- **Required parameters are marked** - Look for the red asterisk (*) next to required fields
+- **Required parameters are marked** - Look for the red asterisk (\*) next to required fields
 - **Example values are provided** - Use the "Example Value" links to populate request bodies quickly
 - **Response schemas are documented** - Expand the response sections to understand the data structure
 
@@ -149,7 +153,7 @@ camunda:
 
 After exploring the API with Swagger UI:
 
-- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Spring SDK](/apis-tools/spring-zeebe-sdk/getting-started.md)
+- **Build production integrations** using the [Java client](/apis-tools/java-client/getting-started.md) or [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
 - **Review the complete API reference** in the [Overview](./orchestration-cluster-api-rest-overview.md)
 - **Set up proper authentication** following the [Authentication guide](./orchestration-cluster-api-rest-authentication.md)
 - **Learn advanced querying** with [Data Fetching and Search](./orchestration-cluster-api-rest-data-fetching.md)

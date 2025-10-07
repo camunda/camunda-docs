@@ -129,7 +129,7 @@ zbc.createWorker({
 });
 ```
 
-You can also use integrations in certain programming frameworks, like the [Camunda Spring Boot SDK](../../../apis-tools/spring-zeebe-sdk/getting-started.md) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
+You can also use integrations in certain programming frameworks, like the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) in the Java world, which starts the job worker and implements the subscription automatically in the background for your glue code.
 
 **A subscription for your glue code is opened automatically by the Spring integration:**
 

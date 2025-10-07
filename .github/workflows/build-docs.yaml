@@ -9,7 +9,7 @@ jobs:
       temporary_link_path: .github/workflows/validate-links
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - name: Install Dependencies

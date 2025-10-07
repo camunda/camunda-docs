@@ -19,7 +19,7 @@ You can create and manage [element templates](/components/concepts/element-templ
 
 ## Create an element template
 
-To create a new element template, follow the steps described in [Generate an element template](/components/connectors/custom-built-connectors/connector-template-generator.md#generate-a-connector-template).
+To create a new element template, follow the steps described in [Generate an element template](./element-template-generator.md).
 
 You will be taken to the **Element template editor** screen.
 In this screen, you can define the element template by writing the template JSON.

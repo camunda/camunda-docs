@@ -32,7 +32,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Get started with Self-Managed" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Introduction to Camunda 8" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -44,7 +44,7 @@ Orchestrate and automate complex business processes for people, systems, and dev
 
 :::info Camunda 8.8
 
-- See [what's new in Camunda 8.8](/components/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
 
 :::
 

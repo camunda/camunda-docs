@@ -11,7 +11,7 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda application(s) cannot access Elasticsearch with cluster-level privileges, it is possible to run the backup of Operate and Tasklist indices (steps 2 and 4 from the backup procedure below) as a standalone application separate from the main application (see [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application)).
+If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application. For details, see the [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application).
 :::
 
 import Tabs from '@theme/Tabs';
@@ -23,9 +23,23 @@ Use the backup feature to back up and restore your Camunda 8 Self-Managed compon
 
 ## About this guide
 
-This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. You should automate the procedures in this guide, choosing tools that fulfil the requirements of your organization.
+This guide covers how to back up and restore your Camunda 8 Self-Managed components and cluster. Automate backup and restore procedures with tools that meet your organization’s requirements.
 
-- Regularly [back up](./backup.md) the state of your Zeebe, Web Applications (Operate, Tasklist), and Optimize components without any downtime. You can also back up and restore Web Modeler data.
+:::info
+
+With Camunda 8.8, the architecture was updated. For clarity, the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) now consists of:
+
+- Zeebe
+- Web Applications (Operate and Tasklist)
+- Identity
+
+Depending on context, we may refer to a specific subcomponent of the Orchestration Cluster where appropriate.
+
+:::
+
+This guide includes procedures to:
+
+- Regularly [back up](./backup.md) the state of the Orchestration Cluster and Optimize without any downtime. You can also back up and restore Web Modeler data.
 
 - [Restore](./restore.md) a cluster from a backup if any failures occur that cause data loss.
 
@@ -39,11 +53,11 @@ This guide covers how to back up and restore your Camunda 8 Self-Managed compone
 
 ## Why you should use backup and restore
 
-The Camunda 8 components Zeebe, Web Applications (Operate, Tasklist), and Optimize store data in various formats and across multiple indices in Elasticsearch / OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup **requires coordination** between the components.
+The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch or OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup requires coordination between the components.
 
-For example, using Elasticsearch / OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, **backups must be** initiated through each component individually, using **their built-in backup functionality**.
+For example, using Elasticsearch or OpenSearch’s native snapshot capabilities directly does not produce a coherent backup. This is because Operate, Tasklist, and Optimize each manage their data across multiple indices, which cannot be reliably captured together without involvement from the components that understand their structure. For this reason, backups must be initiated through each component individually, using their built-in backup functionality.
 
-The same principle applies to Zeebe. **Backups must be** scheduled through Zeebe to ensure a **consistent snapshot** of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
+The same principle applies to Zeebe. Backups must be scheduled through Zeebe to ensure a consistent snapshot of all partition data. Simply taking a disk-level snapshot of each Zeebe broker is not enough, as the brokers operate independently and data may not be aligned across them at the time of the snapshot. Since disk-level backups are not synchronized, this can lead to inconsistencies and invalid recovery points.
 
 A complete backup of a Camunda 8 cluster includes:
 
@@ -51,7 +65,7 @@ A complete backup of a Camunda 8 cluster includes:
 - Backup of indices from Elasticsearch/OpenSearch containing exported Zeebe records.
 - A Zeebe broker partition backup (triggered through its API).
 
-Because the data across these systems is interdependent, **all components must be backed up** as part of the **same backup window**. Backups taken independently at different times may not align and could result in an unreliable restore point.
+Because the data across these systems is interdependent, all components must be backed up as part of the same backup window. Backups taken independently at different times may not align and could result in an unreliable restore point.
 
 :::warning
 To ensure a consistent backup, you must follow the process outlined in this guide. Deviating from it can result in undetected data loss, as there is no reliable method to verify cross-component data integrity after backup.
@@ -70,7 +84,7 @@ The following prerequisites are required before you can create and restore backu
 
 | Prerequisite                                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | :------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p>                                                                        |
+| Set up a snapshot repository in the secondary datastore. | <p>Depending on the choice of secondary datastore, you must configure the following on the datastore itself:</p><p><ul><li>[Elasticsearch snapshot repository](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/manage-snapshot-repositories)</li><li>[OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)</li></ul></p><p><small>Note: For Elasticsearch configuration with the Camunda Helm chart on AWS EKS using IRSA, see [configuration example](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#backup-related).</small></p>                                                                                  |
 | Configure component backup storage.                      | <p>Configure the backup storage for the components. This is also important for restoring a backup.</p><p><ul><li>[Operate](../../../self-managed/components/orchestration-cluster/operate/operate-configuration.md#backups)</li><li>[Optimize Elasticsearch](../../../self-managed/components/optimize/configuration/system-configuration.md#elasticsearch-backup-settings) / [Optimize OpenSearch](../../components/optimize/configuration/system-configuration.md#opensearch-backup-settings)</li><li>[Tasklist](../../../self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#backups)</li><li>[Zeebe](../../../self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerdatabackup)</li></ul></p> |
 
 :::note
@@ -88,7 +102,7 @@ To learn more about how to configure these settings, refer to the prerequisites 
 
 ## Considerations
 
-The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Operate, and backup `x` of Tasklist. The backup ID must be an integer and greater than the previous backups.
+The backup of each component and the backup of a Camunda 8 cluster is identified by an ID. This means a backup `x` of Camunda 8 consists of backup `x` of Zeebe, backup `x` of Optimize, backup `x` of Web Applications (Operate, Tasklist). The backup ID must be an integer and greater than the previous backups.
 
 :::note
 We recommend using the unix timestamp as the backup ID.
@@ -107,7 +121,7 @@ As of Camunda 8.8, configuring Operate and Tasklist with different repository na
 :::
 
 :::warning breaking changes
-As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` and `/actuator/backupRuntime`. The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
+As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/actuator/backupHistory` (Web Applications) and `/actuator/backupRuntime` (Zeebe). The previous `/actuator/backups` endpoint is still active only if the applications are deployed standalone (each application is running in its own process).
 :::
 
 ### Management API
@@ -133,8 +147,8 @@ Since the services are bound to your local machine, you **cannot reuse the same 
 ```bash
 export CAMUNDA_RELEASE_NAME="camunda"
 # kubectl port-forward services/$SERVICE_NAME $LOCAL_PORT:$REMOTE_PORT
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-core 9600:9600 & \
-kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 9620:8092 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-zeebe-gateway 9600:9600 & \
+kubectl port-forward services/$CAMUNDA_RELEASE_NAME-optimize 8092:8092 & \
 kubectl port-forward services/$CAMUNDA_RELEASE_NAME-elasticsearch 9200:9200 &
 ```
 
@@ -154,7 +168,7 @@ export CAMUNDA_RELEASE_NAME="camunda"
 # temporary overwrite of curl, can be removed with `unalias curl` again
 alias curl="kubectl run curl --rm -i -n $CAMUNDA_NAMESPACE --restart=Never --image=alpine/curl -- -sS"
 
-curl $CAMUNDA_RELEASE_NAME-core:9600/actuator/health
+curl $CAMUNDA_RELEASE_NAME-zeebe-gateway:9600/actuator/health
 curl $CAMUNDA_RELEASE_NAME-optimize:8092/actuator/health
 curl $CAMUNDA_RELEASE_NAME-elasticsearch:9200/_cluster/health
 ```
@@ -191,19 +205,19 @@ Setting the `contextPath` in the Helm chart for Optimize will not overwrite the 
 <summary>Example</summary>
 <summary>
 
-If you are defining the `contextPath` for Operate in the Camunda Helm chart:
+If you are defining the `contextPath` for the Orchestration Cluster in the Camunda Helm chart:
 
 ```bash
 orchestration:
-   contextPath: /core
+   contextPath: /example
 ```
 
-A call to the management API of Operate would look like the following example:
+A call to the management API of the Orchestration Cluster would look like the following example:
 
 ```bash
 ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
 
-curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/core/health
+curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/example/actuator/health
 ```
 
 Without the `contextPath` it would just be:
@@ -211,7 +225,7 @@ Without the `contextPath` it would just be:
 ```bash
 ORCHESTRATION_CLUSTER_MANAGEMENT_API=http://localhost:9600
 
-curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/health
+curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 ```
 
 </summary>

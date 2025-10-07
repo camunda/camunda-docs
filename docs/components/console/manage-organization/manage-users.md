@@ -29,7 +29,7 @@ The following roles are additionally available, providing dedicated rights for s
 
 Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **[Operate](../../operate/operate-introduction.md)** and **[Tasklist](../../tasklist/introduction-to-tasklist.md)**.
 
-Users with full access to Console can update clusters and toggle [auto-updates](/reference/auto-updates.md).
+Users with full access to Console can update clusters and toggle [auto-updates](/components/saas/auto-updates.md).
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 

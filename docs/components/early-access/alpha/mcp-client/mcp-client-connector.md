@@ -24,6 +24,10 @@ To use the MCP Client connector, it must be enabled in the connector runtime. An
 
 STDIO servers can use any programming language or execution runtime available on the machine running the connector runtime. The example below starts MCP servers using both Node.js and Docker, and therefore requires a Node.js and Docker environment to be available.
 
+:::warning
+Configuring STDIO servers results in the connector runtime starting and managing the lifecycle of the configured processes. When configuring third-party MCP servers, ensure that the configured commands are trusted and secure.
+:::
+
 ```yaml
 camunda:
   connector:
@@ -32,7 +36,7 @@ camunda:
         client:
           enabled: true # <-- disabled by default
           clients:
-            # STDIO server started Node.js process
+            # STDIO server started as Node.js process (requires Node.js runtime)
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
               stdio:
                 command: npx
@@ -43,7 +47,7 @@ camunda:
                 env:
                   MY_ENV_VAR: "my-value" # <-- optional environment variables
 
-            # STDIO server started as docker container
+            # STDIO server started as docker container (requires Docker being available)
             time:
               stdio:
                 command: docker
@@ -93,7 +97,7 @@ this for your specific use case varies on the connector runtime you are using.
        <!-- .... -->
 
        <properties>
-           <version.connectors>8.8.0-alpha6</version.connectors>
+           <version.connectors>8.8.0</version.connectors>
        </properties>
 
        <dependencies>
@@ -117,7 +121,7 @@ this for your specific use case varies on the connector runtime you are using.
    </project>
    ```
 
-3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/spring-zeebe-sdk/getting-started.md#configuring-the-camunda-8-connection).
+3. Configure the SDK to connect to your cluster, according to [the Camunda SDK documentation](../../../../apis-tools/camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection).
 4. In your application configuration file (e.g., `application.yml`), add the MCP client configuration as shown above.
 5. If you only want to run the MCP Client connector (for example, because you're connecting the runtime to SaaS), disable the other Agentic AI connectors provided by the `connector-agentic-ai` dependency:
 
@@ -136,8 +140,8 @@ this for your specific use case varies on the connector runtime you are using.
 
 ## Modeling
 
-1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not configure any tools within the ad-hoc sub-process yet.
-2. Install the [MCP Client element template](https://github.com/camunda/connectors/blob/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
-3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template you installed in step 2.
+1. Configure an AI agent ad-hoc sub-process as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+2. In a Self-Managed environment, install the [MCP Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
+3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template.
 4. In the **MCP Client** section of the properties panel, configure the **Client ID** to match the value of the MCP client you used in the runtime configuration (example: `filesystem`).
 5. Execute your process. You should see tool discovery calls being routed to the MCP Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.

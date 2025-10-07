@@ -300,9 +300,9 @@ This is especially relevant if you were using GCS through the S3 compatibility m
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE, FILESYSTEM]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). Use FILESYSTEM to store backups directly via the filesystem to a particular folder. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
@@ -354,6 +354,7 @@ More compression algorithms are available; check [commons-compress](https://comm
 | basePath                    | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
 | maxConcurrentConnections    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                                |
 | connectionAquisitionTimeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                                     |
+| supportLegacyMd5            | Enables the AWS provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage as your backup store that is not up to date with latest AWS SDK guidelines. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5`.                                                                                                                                                                                                          | false         |
 
 #### YAML snippet
 
@@ -371,6 +372,7 @@ backup:
     basePath: null
     maxConcurrentConnections:
     connectionAcquisitionTimeout:
+    supportLegacyMd5: false
 ```
 
 ### zeebe.broker.data.backup.gcs
@@ -449,6 +451,34 @@ backup:
     sasToken:
       type: null
       value: null
+```
+
+### zeebe.broker.data.backup.filesystem
+
+To store your backups in the local filesystem, choose the `FILESYSTEM` backup store and specify where to store the backups locally.
+
+:::caution
+Since the durability of the backups are largely dependent on the target file system and underlying storage, it is recommended to use known durable solutions in production, such as S3, GCS, or Azure. To ensure that this can be used properly in production, you must use a POSIX-compliant file system, and at a minimum replicated disks (e.g. RAID configured disks).
+:::
+
+:::note Backup encryption
+Zeebe does not support backup encryption natively, but it _can_ use filesystem based encryption. This then is a feature of the filesystem and not Zeebe itself.
+:::
+
+| Field    | Description                                                                                                                                                                                                                                                                                 | Example Value      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
+
+#### YAML snippet
+
+```yaml
+zeebe:
+  broker:
+    data:
+      backup:
+        store: FILESYSTEM
+        filesystem:
+          basePath:
 ```
 
 ### zeebe.broker.cluster
@@ -930,7 +960,7 @@ For an embedded gateway setup, any gateway property can be passed along to the `
 
 Multi-tenancy in Zeebe can be configured with the following configuration properties.
 Multi-tenancy is disabled by default.
-Read more [in the multi-tenancy documentation](../../../../concepts/multi-tenancy.md).
+Read more [in the multi-tenancy documentation](/components/concepts/multi-tenancy.md).
 
 :::note
 For now, multi-tenancy is only supported in combination with Identity.
@@ -958,9 +988,9 @@ broker:
 
 #### zeebe.broker.gateway.security.authentication
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                  | Example value |
-| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/components/management-identity/what-is-identity.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Example value |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| mode  | Controls which authentication mode is active; supported modes are `none` and `identity`. If `identity` is set, authentication will be done using [camunda-identity](/self-managed/components/management-identity/overview.md), which needs to be configured in the corresponding subsection. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_SECURITY_AUTHENTICATION_MODE`. | none          |
 
 ##### YAML snippet
 

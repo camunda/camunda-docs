@@ -5,7 +5,7 @@ description: "Start building and integrating AI agents into your end-to-end proc
 keywords: ["agentic ai", "AI agents"]
 ---
 
-import ExampleImg from './img/ao-example-integration.png';
+import ExampleImg from '../connectors/img/ai-agent-process.png';
 import AgentImg from './img/ao-ai-agent.png';
 
 Start building and integrating AI agents into your end-to-end processes.
@@ -22,24 +22,43 @@ Start building and integrating AI agents into your end-to-end processes.
 
 Use the following Camunda 8 features to integrate AI agents into your processes:
 
-| Type                | Feature                                                                                                                             | Description                                                                                                                                                                                                                |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **BPMN subprocess** | [Ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)                                           | A special kind of embedded subprocess with an ad-hoc marker that allows a small part of your process decision-making to be handed over to a human or agent.                                                                |
-| **Connector**       | [AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)                                        | Enables AI agents to integrate with an LLM to provide interaction and reasoning capabilities. Use with an ad-hoc sub-process in a feedback loop to provide automated user interaction and tool selection.                  |
-| **Connector**       | [MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md) _(early access)_                                    | Allows connecting an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.                                                                                      |
-| **Connector**       | [Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md) | Can be used independently with other AI connectors for direct LLM interaction. Useful if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions. |
-| **Connector**       | [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)                               | Allows embedding, storing, and retrieving LLM embeddings. Use this for building AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.                                 |
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[Ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)</td>
+    <td>A special kind of embedded BPMN subprocess with an ad-hoc marker that allows a small part of your process decision-making to be handed over to a human or agent.</td>
+</tr>
+<tr>
+    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+</tr>
+<tr>
+    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
+</tr>
+<tr>
+    <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+</tr>
+<tr>
+    <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
+    <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
+</tr>
+</table>
 
 ## Integrate an AI agent into your process
 
-A common model for AI agent integration uses an ad-hoc sub-process and AI agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md).
+A common model for AI agent integration uses an ad-hoc sub-process and AI agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md).
 
 In this model, an AI agent is defined using an AI agent connector, with the tools available to the agent defined in an ad-hoc sub-process. The AI agent is able to understand the context and process goal, and uses the available tools to complete the goal.
 
-<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-800"/></p>
+<p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-700"/></p>
 
 :::tip
-Learn more about this model in the [example AI Agent connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more about this model in the [example AI Agent Process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
 :::
 
 :::info further resources

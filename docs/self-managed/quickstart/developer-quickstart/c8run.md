@@ -13,7 +13,7 @@ import {C8Run} from "@site/src/components/CamundaDistributions";
 Camunda 8 Run is not supported for production use.
 :::
 
-Camunda 8 Run allows you to install and start a simplified, single-application Camunda configuration in a local development environment. This page guides you through using Camunda 8 Run on a local or virtual machine.
+Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -44,13 +44,13 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 - On Mac and Linux:
   - Run the helper script: `./start.sh`
-  - Or use the command: `./c8run start`
+  - Or use the CLI command: `./c8run start`
 - On Windows:
-  - Use the command: `.\c8run.exe start`
+  - Use the CLI command: `.\c8run.exe start`
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 Run using Docker:
+To start Camunda 8 in Docker Compose using C8Run you can use the following option. It is equivalent of running `docker compose up -d` :
 
 - On Mac and Linux: `./start.sh --docker`
 - On Windows: `.\c8run.exe start --docker`
@@ -63,25 +63,27 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 
 ### Configuration options
 
-The following command-line arguments are available:
+The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
+For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
-| Argument                   | Description                                                                                                                                                                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                        |
-| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                              |
-| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                              |
-| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                              |
-| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                              |
-| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                 |
-| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                      |
-| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. Additional options are not supported and will be ignored. See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
-| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                     |
-| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                       |
+| Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                        |
+| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                              |
+| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                              |
+| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                              |
+| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                                                                                                                                                                                                                              |
+| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provide an easy shortcut to run Camunda in Docker Compose. However, additional C8Run options are not supported and will be ignored. For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
+| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                     |
+| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                       |
 
 ## Work with Camunda 8 Run
 
 ### Access Camunda components
 
+Camunda 8 Run uses basic authentication with demo/demo for all web interfaces. OIDC/Keycloak is not included in this distribution.
 You can log in to all web interfaces using with the default credentials:
 
 - **Username:** `demo`
@@ -96,7 +98,7 @@ These web interfaces are available at:
 The following components do not have a web interface, but their endpoints are useful for additional configuration:
 
 - **Orchestration Cluster REST API:** http://localhost:8080/v2/
-- **Inbound Connectors API:** http://localhost:8085/
+- **Inbound Connectors API:** http://localhost:8086/
 - **Zeebe API (gRPC):** http://localhost:26500/
 - **Metrics (Prometheus):** http://localhost:9600/actuator/prometheus
 - **Swagger UI (API Explorer):** http://localhost:8080/swagger-ui/index.html
@@ -104,7 +106,7 @@ The following components do not have a web interface, but their endpoints are us
 :::note
 
 - The URLs for the Docker Compose application can be found in the [Docker Compose](#docker-compose) documentation.
-- The Connectors URL displays a login page, but it cannot be logged into.
+- The Connectors API does not provide a web interface. If you access its URL in a browser, you may see a login page, but it cannot be used to sign in. Use the API endpoints directly instead.
   :::
 
 ### Deploy diagrams from Desktop Modeler
@@ -130,9 +132,15 @@ To add a custom connector:
 
 Once configured, your connectors are available for use in Modeler.
 
+### Configure Connector secrets
+
+Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
+
+When starting C8Run with the `--docker` option, add the connector secrets to the `connector-secrets.txt` file in the docker-compose folder.
+
 ### Use Camunda APIs
 
-All APIs are **unprotected by default** in Camunda 8 Run and can be accessed without credentials or tokens.
+All APIs **do not require authentication by default** in Camunda 8 Run and can be accessed without credentials or tokens.
 
 Available APIs include:
 
@@ -141,29 +149,54 @@ Available APIs include:
 
 ### Enable authentication and authorization
 
-To enforce API authentication and work with authorizations, you must enable these features. The following minimal `application.yaml` shows the required configuration:
+By default, Camunda 8 Run configures authentication for web interfaces (demo/demo) but all API endpoints are open and do not require authentication. To secure APIs, enable authorization in application.yaml.
+
+You can either:
+
+- Update the existing `configuration/application.yaml`, or
+- Create a new `application.yaml` in the `/c8run` folder and pass it at startup using the [`--config` flag](#configuration-options):
 
 ```yaml
-camunda.security:
-  authentication.unprotected-api: false
-  authorizations.enabled: true
-  initialization.default-roles.admin.users:
-    - "username"
+camunda:
+  security:
+    authentication:
+      # Require authentication for API requests
+      unprotected-api: false
+    authorizations:
+      # Enable authorization checks
+      enabled: true
 ```
 
-Place the above `application.yaml` into your root `/c8run` folder, provide it to Camunda 8 Run at startup using the `--config` [flag](#configuration-options):
+Start C8Run with the configuration:
 
-```
+```bash
 ./start.sh --config application.yaml
 ```
 
-You are then required to provide basic authentication credentials on API requests, as in the following:
+Once enabled, API requests must include valid credentials. For example:
 
 ```shell
 curl --request GET 'http://localhost:8080/v2/topology'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'
+```
+
+To add additional users (e.g., an admin user), extend the configuration:
+
+```yaml
+camunda:
+  security:
+    initialization:
+      users:
+        - username: user
+          password: user
+          name: user
+          email: user@example.com
+      defaultRoles:
+        admin:
+          users:
+            - user
 ```
 
 ## Shut down Camunda 8 Run
@@ -177,6 +210,7 @@ To shut down the Camunda 8 Run Docker distribution, use `./shutdown.sh --docker`
 ### Enable TLS
 
 TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
+Although C8Run supports TLS, this is intended only for testing.
 
 ### Access metrics
 
@@ -184,21 +218,38 @@ Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://l
 
 ### Start external Elasticsearch
 
-To start Elasticsearch outside of Camunda 8 Run, use the `--disable-elasticsearch` flag at startup. This prevents Camunda 8 Run from starting its own Elasticsearch instance.
+By default, Camunda 8 Run starts with an embedded Elasticsearch.
+To use an external instance, run Camunda 8 Run without its built-in Elasticsearch and connect it to your own instance.
 
-The following command starts an external Elasticsearch instance using `docker run`:
+1. Start a single-node Elasticsearch container with security disabled:
 
-```bash
-docker run \
-    -m 1GB \
-    -d \
-    --name elasticsearch \
-    -p 9200:9200 \
-    -p 9300:9300 \
-    -e "discovery.type=single-node" \
-    -e "xpack.security.enabled=false" \
-    elasticsearch:8.15.2
-```
+   ```bash
+   docker run \
+       -m 1GB \
+       -d \
+       --name elasticsearch \
+       -p 9200:9200 \
+       -p 9300:9300 \
+       -e "discovery.type=single-node" \
+       -e "xpack.security.enabled=false" \
+       elasticsearch:8.15.2
+   ```
+
+1. Configure Camunda 8 Run by creating an `application.yaml` file that points to your external Elasticsearch:
+
+   ```yaml
+   camunda:
+     data:
+       secondary-storage:
+         elasticsearch:
+           url: "http://127.0.0.1:9200/"
+   ```
+
+1. Start Camunda 8 Run with the `--disable-elasticsearch` flag to prevent it from starting its own instance, and provide your config:
+
+   ```bash
+   ./start.sh --disable-elasticsearch --config application.yaml
+   ```
 
 ### Environment variables
 

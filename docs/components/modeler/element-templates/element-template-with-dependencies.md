@@ -6,6 +6,8 @@ description: "Learn what you need to consider when handling template dependencie
 
 When creating element templates, you may want to link to a resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a specific [job worker](/components/concepts/job-workers.md) to execute an action. These are all examples of dependencies.
 
+![Element template dependencies](./img/element-template-dependencies.png)
+
 Element templates can depend on:
 
 - [Camunda forms](/components/modeler/forms/camunda-forms-reference.md): used in user tasks.
@@ -18,13 +20,12 @@ Element templates can depend on:
 To make a template available for use, complete two key steps:
 
 1. **Provision dependencies at runtime**: Make dependencies available in the clusters that need them.
+
    - For job workers, ensure the runtime is started and connected to the cluster (see [hosting custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)).
    - Secrets must be configured beforehand.
    - Other dependency types (e.g., Camunda forms, RPA scripts, DMN decisions) need to be deployed to the cluster.
 
 2. **Make the template available at design time**: Ensure Web Modeler or Desktop Modeler can access the template for use in your projects.
-
-![Element template dependencies](./img/element-template-dependencies.png)
 
 ## Next steps
 

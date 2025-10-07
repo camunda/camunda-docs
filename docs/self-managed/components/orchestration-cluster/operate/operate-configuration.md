@@ -29,7 +29,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 Review the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md).
 
 :::note
-As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](../../../installation-methods/index.md). A migration from previous versions or Elasticsearch environments is currently not supported.
+As of the 8.4 release, Operate is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](../../../deployment/index.md). A migration from previous versions or Elasticsearch environments is currently not supported.
 :::
 
 ### Settings to connect
@@ -120,6 +120,15 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
       "logger.org.elasticsearch.deprecation": "OFF"
     }
   }'
+```
+
+This setting will prevent Elasticsearch from generating excessive deprecation warning logs, such as:
+
+```
+"Deprecated field [from] used, this field is unused and will be removed entirely"
+"Deprecated field [to] used, this field is unused and will be removed entirely"
+"Deprecated field [include_lower] used, this field is unused and will be removed entirely"
+"Deprecated field [include_upper] used, this field is unused and will be removed entirely"
 ```
 
 ### Settings for OpenSearch
