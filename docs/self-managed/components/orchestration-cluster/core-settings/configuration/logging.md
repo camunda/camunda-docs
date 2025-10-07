@@ -76,7 +76,7 @@ The default `log4j2.xml` (Zeebe, Operate, Tasklist, Identity) representation:
 
 :::note
 This is a simplified example. The actual `log4j2.xml` may include additional appenders, different file paths, or slightly different patterns.  
-See the full [logging documentation](../orchestration-cluster/core-settings/configuration/logging.md#default-logging-configuration) for the official default file and additional settings.
+See the full [logging documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#default-logging-configuration) for the official default file and additional settings.
 :::
 
 ## Environment variables
