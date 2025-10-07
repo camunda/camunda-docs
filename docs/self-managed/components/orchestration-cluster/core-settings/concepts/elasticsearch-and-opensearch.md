@@ -50,15 +50,9 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 Shard and replica settings are applied on first startup or during version updates. After indices are created, they can be adjusted in the cluster template and applied to new indices.
 :::
 
-## Application configuration example
+## Application configuration examples
 
-<Tabs groupId="clients" defaultValue="elasticsearch" queryString values={
-[
-{label: 'Elasticsearch', value: 'elasticsearch' },
-{label: 'OpenSearch', value: 'opensearch' }
-]}>
-
-<TabItem value='elasticsearch'>
+### Elasticsearch
 
 ```yaml
 camunda:
@@ -71,9 +65,7 @@ camunda:
           self-signed: true
 ```
 
-</TabItem>
-
-<TabItem value='opensearch'>
+### OpenSearch
 
 ```yaml
 camunda:
@@ -85,10 +77,6 @@ camunda:
         security:
           self-signed: true
 ```
-
-</TabItem>
-
-</Tabs>
 
 ## Database selection (optional)
 
