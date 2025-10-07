@@ -1,10 +1,10 @@
 ---
-id: testing
-title: Testing
+id: task-testing
+title: Task Testing
 description: "Test implementation of a single BPMN task in Web Modeler."
 ---
 
-[Test a single task](../../concepts/testing.md) in Web Modeler.
+[Test a single task](../../concepts/task-testing.md) in Web Modeler.
 
 ## Task Testing and Play
 

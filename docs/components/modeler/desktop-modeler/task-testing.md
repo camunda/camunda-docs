@@ -1,10 +1,10 @@
 ---
-id: testing
-title: Testing
+id: task-testing
+title: Task Testing
 description: "Test implementation of a single BPMN task in Desktop Modeler."
 ---
 
-[Test a single task](../../concepts/testing.md) in Desktop Modeler.
+[Test a single task](../../concepts/task-testing.md) in Desktop Modeler.
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ When configuring a connection, make sure to **Remember credentials** or task tes
 
 Select a task that you want to test, then go to the **Task Testing** tab in the bottom panel.
 
-![Testing tab](./img/testing/testing-tab.png)
+![Testing tab](./img/task-testing/testing-tab.png)
 
 ### Process variables
 
@@ -45,13 +45,13 @@ After running a task, you'll see one of the following outcomes:
 
 When the task completes successfully, the results panel displays the process variables the task executed with.
 
-![Testing success](./img/testing/testing-success.png)
+![Testing success](./img/task-testing/testing-success.png)
 
 ### Task incident
 
 If an incident occurs during the execution, you will see its details as well as the process variables.
 
-![Testing incident](./img/testing/testing-incident.png)
+![Testing incident](./img/task-testing/testing-incident.png)
 
 ### Error
 

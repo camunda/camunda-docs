@@ -1,6 +1,6 @@
 ---
-id: testing
-title: "Testing"
+id: task-testing
+title: "Task Testing"
 description: "Test implementation of a single BPMN task."
 ---
 
@@ -27,5 +27,5 @@ Task testing supports running a single BPMN task. It doesn't support subprocesse
 
 ## Related
 
-- [Test a task in Web Modeler](../../components/modeler/web-modeler/testing.md)
-- [Test a task in Desktop Modeler](../../components/modeler/desktop-modeler/testing.md)
+- [Test a task in Web Modeler](../../components/modeler/web-modeler/task-testing.md)
+- [Test a task in Desktop Modeler](../../components/modeler/desktop-modeler/task-testing.md)
