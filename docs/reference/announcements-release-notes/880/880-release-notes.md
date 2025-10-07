@@ -60,10 +60,6 @@ Use the following new features to build and integrate AI agents into your proces
 </tr>
 </table>
 
-:::note
-You can also use the new [fromAi()](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function
-:::
-
 ## APIs & tools
 
 <div class="release"><span class="badge badge--medium" title="This feature affects APIs & tools">APIs & tools</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
