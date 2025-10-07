@@ -433,15 +433,36 @@ module.exports = {
                 id: "components/modeler/web-modeler/process-applications/process-applications",
               },
               items: [
-                "components/modeler/web-modeler/process-applications/process-application-pipeline",
-                "components/modeler/web-modeler/process-applications/create-a-process-application",
-                "components/modeler/web-modeler/process-applications/deploy-process-application",
-                "components/modeler/web-modeler/process-applications/process-application-versioning",
+                {
+                  type: "doc",
+                  label: "Lifecycle",
+                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                },
+                {
+                  type: "doc",
+                  label: "Creation",
+                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Deployment",
+                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Versioning",
+                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                },
               ],
             },
             {
-              Collaboration: [
-                "components/modeler/web-modeler/collaboration/collaboration",
+              type: "category",
+              label: "Collaboration",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/collaboration/collaboration",
+              },
+              items: [
                 "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                 "components/modeler/web-modeler/collaboration/design-your-process",
                 "components/modeler/web-modeler/collaboration/implement-your-process",
