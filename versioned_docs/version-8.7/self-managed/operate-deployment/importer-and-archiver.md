@@ -130,5 +130,5 @@ or [OpenSearch Auto-interval date histogram](https://docs.opensearch.org/latest/
 for more information on possible values and their effects.
 
 :::note
-This feature is only officially supported from version >= 8.7.15.
+This feature is officially supported from version >= 8.7.15.
 :::
