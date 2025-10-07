@@ -128,3 +128,7 @@ therefore it would be archived into a historical index with a suffix of `yyyy-mm
 Refer to [Elasticsearch calendar intervals](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-datehistogram-aggregation#calendar_intervals)
 or [OpenSearch Auto-interval date histogram](https://docs.opensearch.org/latest/aggregations/bucket/auto-interval-date-histogram/)
 for more information on possible values and their effects.
+
+:::note
+This feature is only officially supported from version >= 8.7.15.
+:::
