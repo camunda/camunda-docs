@@ -470,9 +470,14 @@ module.exports = {
               ],
             },
             {
-              "Element templates": [
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+              },
+              items: [
                 "components/modeler/web-modeler/element-templates/element-template-generator",
-                "components/modeler/web-modeler/element-templates/manage-element-templates",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
               ],
