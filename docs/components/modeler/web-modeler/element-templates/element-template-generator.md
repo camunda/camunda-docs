@@ -32,7 +32,7 @@ You can start from a blank template or import an existing API definition such as
 To generate a connector template:
 
 1. Select the Web Modeler project where you want to create the template. Camunda recommends storing element templates in root project folders, not process applications, to simplify template management and avoid unnecessary versioning overhead.
-2. Click **Create new**, select **Element template**, and then choose the **Connector** tab to open the **Create new connector template** screen.  
+2. Click **Create new**, select **Element template**, and then choose the **Connector** tab.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
 
 3. Select the template starting point:
