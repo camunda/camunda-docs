@@ -197,11 +197,11 @@ You can deploy and execute processes using either Desktop Modeler or Web Modeler
 To deploy from Desktop Modeler to the lightweight configuration:
 
 1. Open Desktop Modeler and click the deployment icon (rocket symbol).
-2. Select **Camunda 8 Self-Managed**.
-3. Configure the connection:
+1. Select **Camunda 8 Self-Managed**.
+1. Configure the connection:
    - **Cluster endpoint**: `http://localhost:26500`
    - **Authentication**: Select **None** (no authentication required by default)
-4. Click **Deploy**.
+1. Click **Deploy**.
 
 For more details, see the [Desktop Modeler deployment guide](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md).
 
@@ -210,15 +210,15 @@ For more details, see the [Desktop Modeler deployment guide](/self-managed/compo
 To deploy from Desktop Modeler to the full configuration:
 
 1. Open Desktop Modeler and click the deployment icon.
-2. Select **Camunda 8 Self-Managed**.
-3. Configure the connection:
+1. Select **Camunda 8 Self-Managed**.
+1. Configure the connection:
    - **Cluster endpoint**: `http://localhost:26500`
    - **Authentication**: Select **OAuth**
    - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID**: `orchestration` (from `.env` file: `ORCHESTRATION_CLIENT_ID`)
    - **Client Secret**: `secret` (from `.env` file: `ORCHESTRATION_CLIENT_SECRET`)
    - **Audience**: `orchestration-api`
-4. Click **Deploy**.
+1. Click **Deploy**.
 
 :::tip
 The full configuration uses Keycloak for OIDC authentication. The client credentials (`orchestration` / `secret`) are pre-configured in the `.env` file and Identity configuration.
@@ -252,10 +252,10 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 When using the full configuration, Web Modeler connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Web Modeler interface.
 
 1. Log in to Web Modeler at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
-2. [Create a new project](../../../components/modeler/web-modeler/launch-web-modeler.md) or open an existing BPMN diagram.
-3. Use the visual modeler to [design your BPMN process](../../../components/modeler/bpmn/bpmn.md).
-4. Click **Deploy** to deploy the diagram to the pre-configured Orchestration Cluster.
-5. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8088/operate).
+1. [Create a new project](../../../components/modeler/web-modeler/launch-web-modeler.md) or open an existing BPMN diagram.
+1. Use the visual modeler to [design your BPMN process](../../../components/modeler/bpmn/bpmn.md).
+1. Click **Deploy** to deploy the diagram to the pre-configured Orchestration Cluster.
+1. After deployment, you can [create process instances](../../../components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8088/operate).
 
 Web Modeler uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is automatically used for deployment.
 
