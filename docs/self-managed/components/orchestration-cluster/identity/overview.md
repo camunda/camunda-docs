@@ -79,7 +79,7 @@ This endpoint is only available if **no user is assigned to the `admin` role**.
 To configure initial users programmatically, include the relevant definitions in your `application.yaml` or environment variables.
 
 <Tabs>
-<TabItem value="application-yaml" label="application.yaml" default>
+<TabItem value="application-properties" label="Application properties" default>
 
 ```yaml
 camunda:
@@ -107,7 +107,7 @@ CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=<The email address of the first us
 ```
 
 </TabItem>
-<TabItem value="helm" label="Helm variables">
+<TabItem value="helm" label="Helm values">
 
 ```yaml
 orchestration:
@@ -135,7 +135,7 @@ The orchestration cluster provides a number of [built-in roles](/components/conc
 To assign users, clients, groups, or [mapping rules](/components/concepts/access-control/mapping-rules.md) to roles, add the appropriate properties to your `application.yaml` or set them as environment variables.
 
 <Tabs>
-<TabItem value="application-yaml" label="application.yaml" default>
+<TabItem value="application-properties" label="Application properties" default>
 
 ```yaml
 camunda:
@@ -171,7 +171,7 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_<role>_MAPPINGS_0=<mapping id>
 ```
 
 </TabItem>
-<TabItem value="helm" label="Helm variables">
+<TabItem value="helm" label="Helm values">
 
 ```yaml
 orchestration:
@@ -193,7 +193,7 @@ Replace `<role>` with the ID of the role you want to configure.
 Here is an example how to configure a user `demo` to become a member of the admin role:
 
 <Tabs>
-<TabItem value="application-yaml" label="application.yaml" default>
+<TabItem value="application-properties" label="Application properties" default>
 ```yaml
 camunda:
   security:
@@ -221,7 +221,7 @@ You can assign a user to multiple roles by listing them in the respective sectio
 In Camunda 8 Run installations, basic authentication is enabled for the Orchestration Cluster web components, but the API is unprotected, and [authorizations](/components/identity/authorization.md) are disabled. API protection and authorizations can both be enabled by modifying your `application.yaml` or environment variables:
 
 <Tabs>
-<TabItem value="application-yaml" label="application.yaml" default>
+<TabItem value="application-properties" label="Application properties" default>
 
 ```yaml
 camunda:
@@ -241,7 +241,7 @@ CAMUNDA_SECURITY_AUTHORIZATIONS_ENABLED=true
 ```
 
 </TabItem>
-<TabItem value="helm" label="Helm variables">
+<TabItem value="helm" label="Helm values">
 
 ```yaml
 orchestration:
