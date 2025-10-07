@@ -273,6 +273,22 @@ The Assignees list is removed from the response.
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated: start public process via form in Tasklist
+
+With the Camunda 8.8 release, the deprecation of the [start public process via form](/components/tasklist/userguide/starting-processes.md#start-public-processes-via-form) feature is announced.
+
+- This SaaS feature is deprecated and does not work with [Tasklist running in v2 mode](/components/tasklist/api-versions.md). In consequence it will be removed in 8.10.
+- To still use this feature with 8.8, ensure to run [Tasklist in v1 mode](/components/tasklist/api-versions.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
