@@ -36,7 +36,7 @@ camunda:
         client:
           enabled: true # <-- disabled by default
           clients:
-            # STDIO server started Node.js process
+            # STDIO server started as Node.js process (requires Node.js runtime)
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
               stdio:
                 command: npx
@@ -47,7 +47,7 @@ camunda:
                 env:
                   MY_ENV_VAR: "my-value" # <-- optional environment variables
 
-            # STDIO server started as docker container
+            # STDIO server started as docker container (requires Docker being available)
             time:
               stdio:
                 command: docker
