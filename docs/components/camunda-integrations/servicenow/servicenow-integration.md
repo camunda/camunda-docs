@@ -56,8 +56,8 @@ The Camunda ServiceNow integration provides **bi-directional orchestration** thr
 
 ### ServiceNow connectors in Camunda
 
-| Connector                                                  | Description                                                                                           |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| [**ServiceNow Outbound Connector**](outbound-connector.md) | Execute CRUD operations on any ServiceNow table.                                                      |
-| [**ServiceNow Flow Starter**](flow-starter.md)             | Start a ServiceNow flow from a Camunda process (requires ServiceNow Integration Hub Enterprise Pack). |
-| [**ServiceNow Incident Handler**](incident-handler.md)     | Create and manage incidents in ServiceNow directly from a Camunda process.                            |
+| Connector                                                                              | Description                                                                                           |
+| -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| [**ServiceNow Outbound Connector**](/components/connectors/use-connectors/outbound.md) | Execute CRUD operations on any ServiceNow table.                                                      |
+| [**ServiceNow Flow Starter**](flow-starter.md)                                         | Start a ServiceNow flow from a Camunda process (requires ServiceNow Integration Hub Enterprise Pack). |
+| [**ServiceNow Incident Handler**](incident-handler.md)                                 | Create and manage incidents in ServiceNow directly from a Camunda process.                            |
