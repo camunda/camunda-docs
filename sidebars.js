@@ -450,6 +450,7 @@ module.exports = {
             },
             {
               "Element templates": [
+                "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/manage-element-templates",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
@@ -818,7 +819,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom connectors",
+          label: "Custom element and connector templates",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
@@ -827,13 +828,12 @@ module.exports = {
             "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Connector templates",
+              label: "Element and connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
               },
               items: [
-                "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
@@ -1334,10 +1334,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
-                "self-managed/deployment/helm/configure/running-custom-connectors",
-                "self-managed/deployment/helm/configure/add-extra-manifests",
-                "self-managed/deployment/helm/configure/license-key",
-                "self-managed/deployment/helm/configure/web-modeler-console-connectors",
+                "self-managed/deployment/helm/configure/enable-additional-components",
                 {
                   type: "category",
                   label: "Registry and images",
@@ -1351,7 +1348,13 @@ module.exports = {
                   ],
                 },
                 {
-                  Database: [
+                  type: "category",
+                  label: "Database",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/database/index",
+                  },
+                  items: [
                     {
                       Elasticsearch: [
                         "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
@@ -1368,19 +1371,35 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/deployment/helm/configure/using-external-keycloak",
                 {
-                  Ingress: [
-                    "self-managed/deployment/helm/configure/ingress-setup",
-                    "self-managed/deployment/helm/configure/accessing-components-without-ingress",
+                  type: "category",
+                  label: "Ingress",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/ingress/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/configure/ingress/ingress-setup",
+                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress",
                   ],
                 },
-                "self-managed/deployment/helm/configure/configure-multi-tenancy",
-                "self-managed/deployment/helm/configure/multi-namespace-deployment",
+                {
+                  type: "category",
+                  label: "Authentication and authorization",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
+                  ],
+                },
                 "self-managed/deployment/helm/configure/secret-management",
-                "self-managed/deployment/helm/configure/authentication-and-authorization",
-                //license key
-                //image registry to include air gapped below and enterprise images
+                "self-managed/deployment/helm/configure/running-custom-connectors",
+                "self-managed/deployment/helm/configure/add-extra-manifests",
+                "self-managed/deployment/helm/configure/license-key",
+                "self-managed/deployment/helm/configure/configure-multi-tenancy",
               ],
             },
             {
@@ -1400,11 +1419,16 @@ module.exports = {
               ],
             },
             {
-              "Operational tasks": [
+              type: "category",
+              label: "Operational tasks",
+              link: {
+                type: "doc",
+                id: "self-managed/deployment/helm/operational-tasks/index",
+              },
+              items: [
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
               ],
-              //also to include backup and restore, and scaling
             },
             {
               type: "category",
@@ -1579,9 +1603,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/concepts/exporters",
-        "self-managed/concepts/elasticsearch-privileges",
-        "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [
@@ -1618,6 +1639,7 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",

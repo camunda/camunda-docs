@@ -5,13 +5,8 @@ sidebar_label: Release notes
 description: "Release notes for 8.8, including alphas"
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-keywords:
-  [
-    "product development lifecycle",
-    "software development lifecycle",
-    "CI/CD",
-    "AI",
-  ]
+keywords: ["8.8 release notes", "release notes for 8.8", "release notes"]
+page_rank: 90
 ---
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
@@ -32,23 +27,38 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Connectors
+Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-[Camunda Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) is enhanced with the following new connectors:
+<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
-- [AI Agent connector](#ai-agent-connector): Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities.
-- [MCP connector](#mcp-client-connector): Enable Camunda processes and AI agents to auto-discover and invoke external tools.
-- [Vector DB connector](#vector-database-connector): Enable embedding, storing, and retrieving Large Language Model (LLM) embeddings.
+Use the following new features to build and integrate AI agents into your processes:
 
-### Dynamic activation of ad-hoc sub-processes using job workers
-
-<!-- https://github.com/camunda/product-hub/issues/2631 -->
-
-Ad-hoc sub-process elements can be activated by job workers:
-
-- Define a task in the process model.
-- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
-- Once any flows in the ad-hoc sub-process complete, a new job is created, giving job workers control over what to do next.
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+</tr>
+<tr>
+    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
+</tr>
+<tr>
+    <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+</tr>
+<tr>
+    <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
+    <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
+</tr>
+<tr>
+    <td>[fromAi() FEEl function](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)</td>
+    <td>Use in combination with the AI Agent connector. See [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).</td>
+</tr>
+</table>
 
 ## APIs & tools
 
@@ -319,7 +329,18 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ## Integrations
 
-### SAP
+### Microsoft Teams
+
+The new Microsoft Teams integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
+
+The Microsoft Teams integration allows users to:
+
+- Start processes from a channel, chat, or the app’s Home tab.
+- Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+:::note
+The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
 
 ### ServiceNow
 
@@ -327,9 +348,11 @@ Extend the power of your process automation by integrating Camunda with ServiceN
 
 The ServiceNow integration allows you to:
 
-- **Manage ServiceNow data**: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
-- **Trigger ServiceNow flows**: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
-- **Orchestrate ITSM processes**: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+- Manage ServiceNow data: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
+- Trigger ServiceNow flows: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+- Orchestrate ITSM processes: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+
+<p><a href="../../../../components/camunda-integrations/servicenow/servicenow-integration/" class="link-arrow">ServiceNow integration</a></p>
 
 ## Intelligent document processing (IDP)
 
@@ -345,6 +368,35 @@ You can use form-based structured document extraction to capture data from struc
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
 <p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+
+## Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--medium" title="This feature affects DCamunda 7 migration">Camunda 7 migration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Data migration tool
+
+Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.
+
+- Copy running process instances (state-preserving).
+- Copy process variables and their values.
+- Handle problematic instances gracefully with retry options.
+- Write custom code to intercept variable migration.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+
+### Migration Analyzer & Diagram Converter
+
+The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+
+It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+
+### Code conversion
+
+Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
 
 ## Optimize
 
@@ -373,22 +425,27 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 
 <p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
+### Dynamic activation of ad-hoc sub-processes using job workers
+
+<!-- https://github.com/camunda/product-hub/issues/2631 -->
+
+Ad-hoc sub-process elements can be activated by job workers:
+
+- Define a task in the process model.
+- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
+- Once any flows in the ad-hoc sub-process complete, a new job is created, giving job workers control over what to do next.
+
 ### Dynamic partition scaling
 
 <!-- https://github.com/camunda/product-hub/issues/2226 -->
 
-You can now add new Zeebe partitions to a running cluster in Self-Managed.
+You can now add new Zeebe partitions to a running cluster to increase capacity without downtime:
 
-- Scaling can be performed concurrently when the cluster is running, with zero downtime.
-- New process instances also start on new partitions, distributing cluster load evenly across partitions.
-- Process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
-- New partitions do not take part in correlating messages/signals, except for message/signal start events.
+- New process instances will be started on new partitions immediately.
+- Existing process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 <p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
-
-:::caution
-This feature is not yet fully compatible with backup/restore.
-:::
 
 ### Identity and Management Identity
 
@@ -407,15 +464,6 @@ Enhanced migration now supports taken sequence flows leading to joining gateways
 
 - Define migration plans mapping active elements and taken sequence flows
 - Configure plans via Operate UI or API
-
-### Orchestration Cluster scaling
-
-<!-- https://github.com/camunda/product-hub/issues/2226 -->
-
-Add Zeebe partitions to a running cluster in SaaS to increase capacity without downtime:
-
-- New partitions start processing tasks immediately
-- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
 
 ### Process instance migration
 

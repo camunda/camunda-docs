@@ -38,6 +38,14 @@ For Elasticsearch, Tasklist imports data from Elasticsearch indices created and 
 
 Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 
+:::note
+**Version 8.8:** The importer is required only for brownfield deployments (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
+:::
+
+For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
+
+Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
+
 ### Settings to connect and import
 
 See also [settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance).

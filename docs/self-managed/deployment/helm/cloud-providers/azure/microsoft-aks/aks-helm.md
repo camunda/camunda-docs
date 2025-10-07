@@ -157,7 +157,7 @@ Start by creating a `values.yml` file to store the configuration for your enviro
 <Tabs groupId="values">
   <TabItem value="with-domain" label="With domain" default>
 
-The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
+The following makes use of the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup) by deploying a single Ingress for all HTTP components and a separate Ingress for the gRPC endpoint.
 
 :::info Cert-manager annotation for domain installation
 The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manager](https://cert-manager.io/docs/usage/ingress/) and automatically results in the creation of the required certificate request, easing the setup.
@@ -392,10 +392,8 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 <summary>
 
 ```shell
-Operate:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-operate"  8081:80 --namespace "$CAMUNDA_NAMESPACE"
-Tasklist:
-> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-tasklist" 8082:80 --namespace "$CAMUNDA_NAMESPACE"
+Orchestration:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 Optimize:
 > kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
 Connectors:
