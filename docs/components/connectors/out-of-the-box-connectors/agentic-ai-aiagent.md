@@ -11,7 +11,7 @@ import AgentTaskFeedbackImg from '../img/ai-agent-task-feedback-loop.png';
 import AgentTaskFeedbackApprovalImg from '../img/ai-agent-task-user-feedback-loop.png';
 import AgentTaskFeedbackAdvancedImg from '../img/ai-agent-task-feedback-loop-advanced.png';
 
-Use the **AI Agent** outbound connector to integrate Large Language Models (LLMs) with AI agents.
+Use the **AI Agent** connector to integrate Large Language Models (LLMs) with AI agents to build solutions using [agentic orchestration](../../agentic-orchestration/agentic-orchestration.md).
 
 ## About this connector
 
