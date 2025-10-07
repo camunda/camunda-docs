@@ -27,23 +27,38 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 <div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Connectors
+Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-[Camunda Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) is enhanced with the following new connectors:
+<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
 
-- [AI Agent connector](#ai-agent-connector): Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities.
-- [MCP connector](#mcp-client-connector): Enable Camunda processes and AI agents to auto-discover and invoke external tools.
-- [Vector DB connector](#vector-database-connector): Enable embedding, storing, and retrieving Large Language Model (LLM) embeddings.
+Use the following new features to build and integrate AI agents into your processes:
 
-### Dynamic activation of ad-hoc sub-processes using job workers
-
-<!-- https://github.com/camunda/product-hub/issues/2631 -->
-
-Ad-hoc sub-process elements can be activated by job workers:
-
-- Define a task in the process model.
-- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
-- Once any flows in the ad-hoc sub-process complete, a new job is created, giving job workers control over what to do next.
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+</tr>
+<tr>
+    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
+</tr>
+<tr>
+    <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+</tr>
+<tr>
+    <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
+    <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
+</tr>
+<tr>
+    <td>[fromAi() FEEl function](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)</td>
+    <td>Use in combination with the AI Agent connector. See [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).</td>
+</tr>
+</table>
 
 ## APIs & tools
 
@@ -409,6 +424,16 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 - The unified configuration for Orchestration Cluster components allows you to define cluster and component behavior.
 
 <p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+
+### Dynamic activation of ad-hoc sub-processes using job workers
+
+<!-- https://github.com/camunda/product-hub/issues/2631 -->
+
+Ad-hoc sub-process elements can be activated by job workers:
+
+- Define a task in the process model.
+- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
+- Once any flows in the ad-hoc sub-process complete, a new job is created, giving job workers control over what to do next.
 
 ### Dynamic partition scaling
 
