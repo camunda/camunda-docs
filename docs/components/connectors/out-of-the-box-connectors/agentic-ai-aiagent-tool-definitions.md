@@ -133,11 +133,35 @@ fromAi(
 )
 ```
 
+To mark a parameter as optional, you can use the `options` parameter:
+
+```feel
+fromAi(
+  toolCall.optionalParameter,
+  "An optional parameter",
+  "string",
+  null,
+  { required: false }
+)
+```
+
+Or using named parameters:
+
+```feel
+fromAi(
+  value: toolCall.optionalParameter,
+  description: "An optional parameter",
+  options: { required: false }
+)
+```
+
 You can combine multiple parameters within the same FEEL expression, for example:
 
 ```feel
 fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
+
+For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
 
 ## Tool Call Responses
 
