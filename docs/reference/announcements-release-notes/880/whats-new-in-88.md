@@ -16,13 +16,11 @@ page_rank: 90
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
-Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
+Important changes in Camunda 8.8 you should consider when upgrading from Camunda 8.7.
 
-## Introducing Camunda 8.8
+## Why upgrade to Camunda 8.8?
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
-
-### Why upgrade to Camunda 8.8?
 
 Upgrading to Camunda 8.8 delivers significant benefits:
 
@@ -42,7 +40,7 @@ Upgrading to Camunda 8.8 delivers significant benefits:
 To learn more about the benefits of upgrading to Camunda 8.8, see the blog posts [streamlined deployment with Camunda 8.8](https://camunda.com/blog/2025/03/streamlined-deployment-with-camunda-8-8/) and [introducing enhanced Identity Management in Camunda 8.8](https://camunda.com/blog/2025/03/introducing-enhanced-identity-management-in-camunda-88/).
 :::
 
-### Summary of important changes
+## Summary of important changes
 
 Important changes introduced in Camunda 8.8 are summarized as follows:
 
