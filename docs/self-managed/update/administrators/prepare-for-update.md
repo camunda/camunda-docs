@@ -58,6 +58,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight red">Breaking changes</span></td>    
 </tr>
 <tr>
+    <td>Elasticsearch/OpenSearch: shared-only</td>
+    <td>Dedicated Elasticsearch or OpenSearch clusters per application are no longer supported. All Orchestration components must use a single, shared cluster.</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
+<tr>
     <td>Optimize</td>
     <td>Performs a startup data migration that requires downtime during startup data migration. You must plan a maintenance window.</td>
     <td><span className="label-highlight">Low</span></td>
@@ -65,6 +70,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 <tr>
     <td>Identity, authentication, and authorization</td>
     <td colspan="2"><p>Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster.</p><p>To learn more, see [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</p></td>    
+</tr>
+<tr>
+    <td>Zeebe Gateway</td>
+    <td>Tenant-providing interceptors are not supported and should be replaced with built-in [tenant management](/components/identity/tenant.md).</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>
 

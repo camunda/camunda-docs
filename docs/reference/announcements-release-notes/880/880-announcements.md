@@ -42,6 +42,20 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 </div>
 <div className="release-announcement-content">
   
+#### PostgreSQL, Oracle and Microsoft SQL Server supported versions
+Management Identity now supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
+
+Web Modeler now supports PostgreSQL version 18.x, Amazon Aurora PostgreSQL version 17.x, Oracle versions 19c and 23ai and Microsoft SQL Server versions 2019 and 2022.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Zeebe, Operate, Tasklist, and Identity must run on same minor and patch levels
 From version `8.8.0` onwards, the Zeebe, Operate, Tasklist, and Identity [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility.
 
@@ -64,7 +78,7 @@ See the [component version matrix](/reference/supported-environments.md#componen
   
 #### Removed: Tasklist GraphQL API
 
-With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed from the product.
+With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed.
 
 </div>
 </div>
@@ -179,25 +193,6 @@ With the Camunda 8.8 release, the deprecation process for job-based user tasks b
 </div>
 <div className="release-announcement-content">
   
-#### Deprecated: Zeebe gRPC API endpoints
-
-With the Camunda 8.8 release, the deprecation of several [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) endpoints is announced.
-
-These endpoints are scheduled for removal in the Camunda 8.9 release.
-
-- Key gRPC endpoints necessary for high-throughput and low-latency applications will remain available in the product to ensure peak performance for specific use cases.
-- The final list of retained gRPC endpoints will be confirmed with the Camunda 8.8 release.
-- Selected endpoints will remain active, with others scheduled for removal in the Camunda 8.10 release.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-  
 #### Deprecated: Zeebe Client job worker metrics
 
 With the Camunda 8.8 release, the deprecation of Zeebe client job worker metrics is announced.
@@ -267,6 +262,22 @@ The Assignees list is removed from the response.
 
 - These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 - The Operate and Tasklist usage metrics endpoints are scheduled for removal in the 8.10 release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated: start public process via form in Tasklist
+
+With the Camunda 8.8 release, the deprecation of the [start public process via form](/components/tasklist/userguide/starting-processes.md#start-public-processes-via-form) feature is announced.
+
+- This SaaS feature is deprecated and does not work with [Tasklist running in V2 mode](/components/tasklist/api-versions.md). This feature will be removed in the 8.10 release.
+- To continue using this feature with Camunda 8.8, you must run [Tasklist in V1 mode](/components/tasklist/api-versions.md).
 
 </div>
 </div>
@@ -662,6 +673,23 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 </div>
 
+### Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Tenant-providing interceptors
+
+With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
+
+It is superseded by built-in [tenant management](/components/identity/tenant.md).
+
+</div>
+</div>
+
 ### Marketplace
 
 <div className="release-announcement-row">
@@ -681,6 +709,37 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 </div>
 
 ### Modeler
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` in Web Modeler Self-Managed
+
+With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
+
+For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Cluster configuration in Web Modeler Self-Managed
+
+The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
+For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
+
+For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
