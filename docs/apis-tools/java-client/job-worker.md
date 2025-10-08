@@ -78,8 +78,8 @@ The 8.6.0 Java client cannot maintain the long-lived polling connections require
 - Receiving additional job activation requests from a Java client running on the same JVM while the long-polling connection is still open.
 - Receiving additional job activation requests from a Java client running on a different JVM while the long-polling connection is still open.
 
-Additionally, the long-polling connection may still receive jobs after the Java client has been closed.
-As the Java client will not process these jobs, they will time out, leading to some jobs not being processed and becoming available again after their timeout has elapsed.
+Additionally, the long-polling connection might still receive jobs after the Java client is closed.
+As the Java client does not process these jobs they will time out. This means some jobs are not processed and will become available again after their timeout has elapsed.
 
 If you encounter this issue, consider switching to the Zeebe gRPC protocol for job activation, or use job
 activation via the REST API with long polling disabled.
