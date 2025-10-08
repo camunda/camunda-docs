@@ -9,6 +9,7 @@ Data retention policies automatically delete old data from Elasticsearch or Open
 
 :::caution Manual policy management required
 In Camunda 8.7, retention policy configuration updates often require **manual intervention** in Elasticsearch/OpenSearch. Zeebe automatically applies configuration updates, but Operate and Tasklist do not. See [Known limitations](#known-limitations) for details.
+:::
 
 :::info Dated indices only
 Retention policies apply **only to dated indices** (indices with date suffixes like `operate-list-view-2024.01.15`). Main operational indices without date suffixes are never deleted by retention policies.
