@@ -9,7 +9,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.jpg";
 
-Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing** to ensure high availability and disaster recovery.
+Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing [(\*)](#active-active)** to ensure high availability and disaster recovery.
 
 :::important
 **Both regions must be fully operational at all times.** The only distinction is traffic routing: one region serves user traffic (primary), the other processes data but doesn't serve user traffic (secondary).
@@ -25,12 +25,12 @@ Before implementing a dual-region setup, ensure you understand the topic, the [l
 
 The dual-region setup is a hybrid active-active/active-passive architecture:
 
-| **Component** | **Mode**       | **Both Regions Running** | **User Traffic**          | **RPO** |
-| ------------- | -------------- | ------------------------ | ------------------------- | ------- |
-| Zeebe         | Active-active  | ✅ Required              | Both regions process data | 0       |
-| Elasticsearch | Active-active  | ✅ Required              | Data replicated to both   | 0       |
-| Operate       | Active-passive | ✅ Required              | One region serves users   | 0       |
-| Tasklist      | Active-passive | ✅ Required              | One region serves users   | 0       |
+| **Component** | **Mode**                              | **Both Regions Running** | **User Traffic**          | **RPO** |
+| ------------- | ------------------------------------- | ------------------------ | ------------------------- | ------- |
+| Zeebe         | Active-active                         | ✅ Required              | Both regions process data | 0       |
+| Elasticsearch | Active-active                         | ✅ Required              | Data replicated to both   | 0       |
+| Operate       | Active-passive [(\*)](#active-active) | ✅ Required              | One region serves users   | 0       |
+| Tasklist      | Active-passive [(\*)](#active-active) | ✅ Required              | One region serves users   | 0       |
 
 :::important
 
@@ -51,7 +51,7 @@ Both regions are operationally active with all components running, but only the 
 
 ### User traffic management
 
-You must route user traffic exclusively to the primary region. Methods include:
+You must route user traffic exclusively to the primary region [(\*)](#active-active). Methods include:
 
 - DNS configuration
 - Load balancer settings
@@ -77,6 +77,14 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 :::
 
+:::info <a id="active-active">(\*)</a> Active-Active
+
+With the introduction of Camunda 8.8, the new **v2 REST API** and **Tasklist V2** remove previous region-specific limitations. By using the v2 REST API for batch operations and enabling [Tasklist V2 mode](/components/tasklist/api-versions.md), you can take full advantage of the new user task implementation and avoid regional data loss, as data is now replicated through the Camunda Exporter rather than being confined to the region where the operation originated.
+
+These improvements also make a user-facing **active-active** setup feasible. Starting with version `8.9`, this will become the default for dual-region deployments. This serves as an early notice that **active-active** functionality is already supported.
+
+:::
+
 ## Dual-region architecture
 
 <img src={DualRegion} alt="Camunda dual-region architecture" style={{border: 'none'}} />
@@ -96,7 +104,7 @@ Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.o
 
 ### User traffic
 
-The system operates with active-passive user traffic routing. You must designate one region as primary and ensure all user traffic is directed there. The secondary region remains fully operational but does not serve user requests.
+The system operates with active-passive user traffic routing. You must designate one region as primary and ensure all user traffic is directed there. The secondary region remains fully operational but does not serve user requests [(\*)](#active-active).
 
 Traffic management responsibilities:
 
@@ -121,12 +129,12 @@ The currently supported Camunda 8 Self-Managed components are:
 
 #### Component requirements
 
-| Component     | Mode                          | Requirement                             | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                                         |
-| ------------- | ----------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| Zeebe         | Active-active                 | All brokers in both regions must run    | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                                   |
-| Elasticsearch | Active-active                 | Both clusters must run                  | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                                              |
-| Operate       | Active-passive (user traffic) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations</li></ul>                                                                                                                                                                     | Data loss possible if secondary region stops importing (data may be lost after Zeebe retention period) |
-| Tasklist      | Active-passive (user traffic) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments</li></ul>                                                                                                                                                                                 | Data loss possible if secondary region stops importing (data may be lost after Zeebe retention period) |
+| Component     | Mode                                                 | Requirement                             | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                      |
+| ------------- | ---------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| Zeebe         | Active-active                                        | All brokers in both regions must run    | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                |
+| Elasticsearch | Active-active                                        | Both clusters must run                  | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                           |
+| Operate       | Active-passive (user traffic) [(\*)](#active-active) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations if not submitted via V2 API</li></ul>                                                                                                                                         | Data loss possible if using V1 API as changes are isolated to the initiated region. |
+| Tasklist      | Active-passive (user traffic) [(\*)](#active-active) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments if not utilizing Tasklist V2 API</li></ul>                                                                                                                                                | Data loss possible if using V1 API as changes are isolated to the initiated region. |
 
 ## Requirements and limitations
 
@@ -200,9 +208,14 @@ Before implementing dual-region, ensure your organization has:
 
 ### Upgrade considerations
 
-When upgrading a dual-region setup, it is crucial to follow a staged approach. Perform the upgrade in one region first before proceeding to the other.
+Follow the upgrade recommendations provided in the [Camunda Helm chart](/self-managed/deployment/helm/upgrade/index.md) and the [component-specific upgrade guides](/self-managed/components/components-upgrade/introduction.md).
 
-Simultaneously upgrading both regions can result in a loss of quorum for partitions, as two Zeebe brokers might be upgraded at the same time. To prevent this issue, it is recommended to upgrade one region at a time, ensuring that only one Zeebe broker is updated during each upgrade phase.
+The general procedure outlined in the [upgrade overview](/self-managed/update/administrators/overview.md) also applies. Before starting, always create a [Camunda-supported backup](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+
+For dual-region setups, use a **staged upgrade approach**: upgrade one region at a time.
+Upgrading both regions simultaneously can cause a **loss of quorum** in Zeebe partitions if brokers in both regions are upgraded at once. To prevent this, complete the upgrade in one region before proceeding with the other, ensuring that only one Zeebe broker is updated during each phase.
+
+However, for certain **minor version upgrades**, simultaneous upgrades of both regions may be required to complete migration steps successfully. Always consult the release notes and migration instructions for your specific version before proceeding.
 
 ## Region loss
 
@@ -230,7 +243,7 @@ If the primary region is lost:
 
 - **Service disruption**: User traffic is unavailable
 - **Zeebe halt**: Processing stops due to quorum loss
-- **Data loss**: Region-specific data such as batch operations and task assignments is lost
+- **Data loss**: Region-specific data such as batch operations and task assignments is lost [(\*)](#active-active)
 
 #### Recovery steps for primary region loss
 

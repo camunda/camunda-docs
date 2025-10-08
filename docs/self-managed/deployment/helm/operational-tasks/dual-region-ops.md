@@ -687,7 +687,7 @@ This step is equivalent to applying for the region to be recreated:
 
 Important, the standalone schema manager will need to be disabled as otherwise it will block a successful restore of the Elasticsearch backup later on. In case you forget it, you have to manually remove all created indices in Elasticsearch in the restored region to be able to successfully restore the backup.
 
-There's no Helm Chart option for it and the `orchestration.env` is an array, meaning we can't overwrite it via an overlay but need to manually add it temporarily.
+There's no Helm chart option for it and the `orchestration.env` is an array, meaning we can't overwrite it via an overlay but need to manually add it temporarily.
 
 Edit the `camunda-values.yml` in `aws/dual-region/kubernetes` to include as part of the `orchestration.env` the following:
 
@@ -1015,7 +1015,7 @@ Follow the installation steps **surviving region**:
 
 #### Verification
 
-1. If the environment is exposed via e.g. an ingress a quick way to confirm is that `Operate` and `Tasklist` are not reachable through said ingress anymore.
+1. If the environment is exposed via e.g. an Ingress a quick way to confirm is that `Operate` and `Tasklist` are not reachable through said Ingress anymore.
 2. Another option is to check the logs of any `camunda-zeebe-X` pod to mention that only a subset of profiles are active.
 
    ```bash
@@ -1386,7 +1386,7 @@ Follow the installation instruction for the two regions, you will need to apply 
 
 #### Verification
 
-1. If the environment is exposed via e.g. an ingress a quick way to confirm is that `Operate` and `Tasklist` are reachable through said ingress again.
+1. If the environment is exposed via e.g. an Ingress a quick way to confirm is that `Operate` and `Tasklist` are reachable through said Ingress again.
 2. Another option is to check the logs of any `camunda-zeebe-X` pod to mention that certain profiles are active.
 
    The same command can be applied for the `CLUSTER_RECREATED` and `CAMUNDA_NAMESPACE_RECREATED`:
