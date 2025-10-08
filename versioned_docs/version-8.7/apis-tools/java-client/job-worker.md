@@ -23,6 +23,10 @@ The 8.6.0 Java client cannot maintain the long-lived polling connections require
 
 If you encounter this issue, consider switching to the Zeebe gRPC protocol for job activation, or use job
 activation via the Camunda 8 REST API with long polling disabled.
+
+Additionally, the long-polling connection might still receive jobs after the Java client is closed.
+As the Java client does not process these jobs they will time out.
+This means some jobs are not processed and will become available again after their timeout has elapsed.
 :::
 
 On `open`, the job worker waits `pollInterval` milliseconds and then polls for `maxJobsActive` jobs. It then continues with the following schedule:
