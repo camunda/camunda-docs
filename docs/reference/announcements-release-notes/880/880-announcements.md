@@ -179,25 +179,6 @@ With the Camunda 8.8 release, the deprecation process for job-based user tasks b
 </div>
 <div className="release-announcement-content">
   
-#### Deprecated: Zeebe gRPC API endpoints
-
-With the Camunda 8.8 release, the deprecation of several [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) endpoints is announced.
-
-These endpoints are scheduled for removal in the Camunda 8.9 release.
-
-- Key gRPC endpoints necessary for high-throughput and low-latency applications will remain available in the product to ensure peak performance for specific use cases.
-- The final list of retained gRPC endpoints will be confirmed with the Camunda 8.8 release.
-- Selected endpoints will remain active, with others scheduled for removal in the Camunda 8.10 release.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-  
 #### Deprecated: Zeebe Client job worker metrics
 
 With the Camunda 8.8 release, the deprecation of Zeebe client job worker metrics is announced.
