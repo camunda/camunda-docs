@@ -370,7 +370,7 @@ RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/camunda-api-res
 # Remove Zeebe REST API
 RewriteRule ^docs/apis-tools/zeebe-api-rest/specifications/?$ /docs/apis-tools/camunda-api-rest/specifications/ [R=301,L]
 RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
-RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/ [R=301,L]
+RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
 RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
