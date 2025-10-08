@@ -149,15 +149,15 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
-RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-gateway/?$ /docs/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/ [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/security/?$ /docs/self-managed/components/orchestration-cluster/zeebe/security/ [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/operations/?$ /docs/self-managed/components/orchestration-cluster/zeebe/operations/ [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/update-guide/?$ /docs/self-managed/components/components-upgrade/ [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/exporters/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/ [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/configuration/?$ /docs/self-managed/components/orchestration-cluster/zeebe/configuration/ [R=301,L]
-RewriteRule ^docs/self-managed/tasklist-deployment/?$ /docs/self-managed/components/orchestration-cluster/tasklist/ [R=301,L]
-RewriteRule ^docs/apis-tools/java-client-examples/?$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-gateway/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/security/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/security/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/operations/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/operations/$1 [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/update-guide/(.*)$ /docs/self-managed/components/components-upgrade/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/exporters/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/$1 [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/configuration/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/configuration/$1 [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/(.*)$ /docs/self-managed/components/orchestration-cluster/tasklist/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/java-client-examples/(.*)$ /docs/apis-tools/java-client/getting-started/$1 [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/$1 [R=301,L]
 
 # Remove Helm chart multi-namespace deployment
 RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace-deployment/?$ /docs/self-managed/deployment/helm/install/production/ [R=301,L]
