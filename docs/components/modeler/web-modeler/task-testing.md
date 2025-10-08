@@ -57,13 +57,19 @@ After the test completes, results appear in the output panel:
 
 If the task runs successfully, the output panel displays the resulting process variables and any updates.
 
+![Task testing success](./img/task-testing/task-testing-success.png)
+
 ### ⚠️ Incident during execution
 
 If the task encounters an incident, details are shown along with the relevant variable context to help diagnose the issue.
 
+![Task testing incident](./img/task-testing/task-testing-incident.png)
+
 ### ❌ Execution error
 
 If the task fails due to an error (for example, a network or configuration issue), the error message and response details are displayed.
+
+![Task testing error](./img/task-testing/task-testing-error.png)
 
 ## Troubleshooting
 
