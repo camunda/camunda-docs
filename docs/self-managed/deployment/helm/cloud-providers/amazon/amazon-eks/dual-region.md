@@ -438,24 +438,30 @@ Key changes of the dual-region setup:
 - `global.multiregion.regions: 2`
   - Indicates the use for two regions
 - `global.identity.auth.enabled: false`
-  - Identity is currently not supported. Review the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
-- `global.elasticsearch.disableExporter: true`
-  - Disables the automatic Elasticsearch configuration of the Helm chart. We will manually supply the values via environment variables.
+  - Management Identity is currently not supported. Review the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `identity.enabled: false`
-  - Identity is currently not supported.
+  - Management Identity is currently not supported.
 - `optimize.enabled: false`
-  - Optimize is currently not supported, and has a dependency on Identity.
-- `zeebe.env`
+  - Optimize is currently not supported, and has a dependency on Management Identity.
+- `orchestration.exporters.zeebe.enabled: false`
+  - Disables the automatic Elasticsearch Exporter configuration of the Helm chart. The old exporter used with Optimize and previous setups.
+- `orchestration.exporters.camunda.enabled: false`
+  - Disables the automatic Camunda Exporter configuration of the Helm chart. We will manually supply the values via environment variables.
+- `orchestration.env`
   - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
-  - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
+  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
     - The Elasticsearch endpoint for region 0.
-  - `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
     - The Elasticsearch endpoint for region 1.
+  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
+    - `io.camunda.exporter.CamundaExporter` explicitly create the new Camunda Exporter
+  - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
+    - `io.camunda.exporter.CamundaExporter` explicitly create the new Camunda Exporter
 - A cluster of eight Zeebe brokers (four in each of the regions) is recommended for the dual-region setup
-  - `zeebe.clusterSize: 8`
-  - `zeebe.partitionCount: 8`
-  - `zeebe.replicationFactor: 4`
+  - `orchestration.clusterSize: 8`
+  - `orchestration.partitionCount: 8`
+  - `orchestration.replicationFactor: 4`
 - `elasticsearch.initScripts`
   - Configures the S3 bucket access via a predefined Kubernetes secret.
 
@@ -476,8 +482,8 @@ You must change the following environment variables for Zeebe. The default value
 The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart:
 
 - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
-- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL`
-- `ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL`
+- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
+- `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
 1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/scripts/generate_zeebe_helm_values.sh) in the repository folder `aws/dual-region/scripts/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It will use the exported environment variables of the [environment prerequisites](#environment-prerequisites) for namespaces and regions.
 
@@ -506,14 +512,14 @@ Use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCO
 - name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL in the base Camunda Helm chart values file for Zeebe:
+Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
 
-- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION0_ARGS_URL
+- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL
   value: http://camunda-elasticsearch-master-hl.camunda-london.svc.cluster.local:9200
 
-Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL in the base Camunda Helm chart values file for Zeebe.
+Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe.
 
-- name: ZEEBE_BROKER_EXPORTERS_ELASTICSEARCHREGION1_ARGS_URL
+- name: ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL
   value: http://camunda-elasticsearch-master-hl.camunda-paris.svc.cluster.local:9200
 ```
 
@@ -553,7 +559,8 @@ kubectl --context "$CLUSTER_0" -n $CAMUNDA_NAMESPACE_0 port-forward services/$CA
 2. Open another terminal and use e.g. `cURL` to print the Zeebe cluster topology:
 
 ```
-curl -L -X GET 'http://localhost:8080/v2/topology' \
+# authentication may vary depending on your setup, the following is just an example call.
+curl -u demo:demo -L -X GET 'http://localhost:8080/v2/topology' \
   -H 'Accept: application/json'
 ```
 
@@ -592,7 +599,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 1,
@@ -620,7 +627,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 2,
@@ -648,7 +655,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 3,
@@ -676,7 +683,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 4,
@@ -704,7 +711,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 5,
@@ -732,7 +739,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 6,
@@ -760,7 +767,7 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     },
     {
       "nodeId": 7,
@@ -788,13 +795,14 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
           "health": "healthy"
         }
       ],
-      "version": "8.6.0"
+      "version": "8.8.0"
     }
   ],
   "clusterSize": 8,
   "partitionsCount": 8,
   "replicationFactor": 4,
-  "gatewayVersion": "8.6.0"
+  "gatewayVersion": "8.8.0",
+  "lastCompletedChangeId": "-1"
 }
 ```
 

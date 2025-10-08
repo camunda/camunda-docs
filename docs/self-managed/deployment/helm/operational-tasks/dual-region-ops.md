@@ -86,7 +86,7 @@ For the failback procedure, the recreated region must not include any active Cam
 
 :::info
 
-In the following examples, we’ll use direct API calls, as authentication methods may vary depending on your Identity configuration.
+In the following examples, we’ll use direct API calls, as authentication methods may vary depending on your embedded Identity configuration.
 
 The **Management API** (default port `9600`) is **not secured by default**.
 
@@ -678,7 +678,7 @@ Additionally, the Helm command will disable Operate and Tasklist. These componen
 
 This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS Dual-region Camunda clusters.
 
-Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
+Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
 This step is equivalent to applying for the region to be recreated:
 
@@ -700,8 +700,6 @@ orchestration:
 ```
 
 From the terminal context of `aws/dual-region/kubernetes` execute:
-
-<!-- TODO: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA=false -->
 
 ```bash
 helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
@@ -955,7 +953,7 @@ We want to reduce the deployed application to just the Zeebe Cluster and Elastic
 
 This procedure requires your Helm values file, `camunda-values.yml,` in `aws/dual-region/kubernetes,` used to deploy EKS Dual-region Camunda clusters.
 
-Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
+Ensure that the values for `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL` and `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL` correctly point to their respective regions. The placeholder in `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` should contain the Zeebe endpoints for both regions, the result of the `aws/dual-region/scripts/generate_zeebe_helm_values.sh`.
 
 This step is equivalent to applying for the region to be recreated:
 
