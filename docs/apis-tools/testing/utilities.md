@@ -94,14 +94,35 @@ void shouldCompleteJob() {
         "timestamp", "2024-01-01T10:00:00Z"
     );
     processTestContext.mockJobWorker("send-email").thenComplete(variables);
-    
-    // 3) With example data specified in the Camunda Modeler
-    processTestContext.mockJobWorker("send-email").thenCompleteWithExampleData();
 
     // when: create a process instance
     // then: verify that the process instance completed all tasks
 }
 ```
+
+### Complete with example data
+
+The mock completes jobs with [example data](/components/modeler/data-handling.md#defining-example-data) that is defined
+at the related BPMN element. If the BPMN element has no example data, the mock completes the job without variables.
+
+```java
+@Test
+void shouldCompleteJobWithExampleData() {
+    // given: mock job worker for the job type "fetch-weather-data"
+    processTestContext.mockJobWorker("fetch-weather-data").thenCompleteWithExampleData();
+
+    // when: create a process instance
+    // then: verify that the process instance completed all tasks
+}
+```
+
+:::tip
+
+Add example data during modeling to provide context and make writing FEEL expressions easier. By using the same example
+data for mocks, you keep the data in the BPMN process itself and avoid repeating them in the process tests. This can
+simplify your tests and reducing the maintenance effort.
+
+:::
 
 ### Throw BPMN error
 
@@ -237,6 +258,9 @@ void shouldMockDmnDecision() {
 You can complete an active job to simulate the behavior of a job worker without invoking the actual worker.
 The command waits for the first job with the given job type and completes it. If no job exists, the command fails.
 
+You can pass variables or complete the job with
+the [example data](/components/modeler/data-handling.md#defining-example-data) from the related BPMN element.
+
 When to use it:
 
 - Test the process with full control over the job completion
@@ -258,8 +282,8 @@ void shouldCompleteJob() {
     );
     processTestContext.completeJob("send-notification", variables);
 
-    // 3) With example data specified in the Camunda Modeler
-    processTestContext.completeJobWithExampleData();
+    // 3) With example data from the BPMN element
+    processTestContext.completeJobWithExampleData("send-notification");
 
     // then: verify that the process instance completed the task
 }
@@ -300,8 +324,9 @@ void shouldThrowBpmnErrorFromJob() {
 You can complete a user task to simulate the user behavior in Tasklist. The command waits for the first user task and
 completes it. If no user task exists, the command fails.
 
-You can identify the user task by its BPMN element ID or using
-a [UserTaskSelector](assertions.md#with-user-task-selector).
+Identify the user task by its BPMN element ID or using a [UserTaskSelector](assertions.md#with-user-task-selector). You
+can pass variables or complete the user task with
+the [example data](/components/modeler/data-handling.md#defining-example-data) from the related BPMN element.
 
 When to use it:
 
@@ -324,8 +349,8 @@ void shouldCompleteUserTask() {
     // 2) With selector by task name "Approve Request"
     processTestContext.completeUserTask(byTaskName("Approve Request"), variables);
 
-    // 3) With example data specified in the Camunda Modeler
-    processTestContext.completeUserTaskWithExampleData("task_approveRequest");
+    // 3) With example data from the BPMN element
+    processTestContext.completeUserTaskWithExampleData(byElementId("task_approveRequest"));
 
     // then: verify that the process instance is completed
 }
