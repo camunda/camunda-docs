@@ -4,8 +4,8 @@ title: Blueprints
 description: "Ready-to-use example processes demonstrating common Camunda–ServiceNow integration patterns."
 ---
 
-This blueprint provides **pre-configured Camunda processes** to help you quickly implement common integration scenarios with ServiceNow.  
-It demonstrates best practices, reusable patterns, and realistic business use cases, allowing you to get started without building processes from scratch.
+![Camunda ServiceNow integration blueprint](./img/sn-blueprint-template.png)
+This blueprint is a **pre-configured Camunda process** to help you quickly implement common integration scenarios with ServiceNow. It demonstrates best practices, reusable patterns, and realistic business use cases, allowing you to get started without building processes from scratch.
 
 The blueprint is available for download from the [Camunda Marketplace](https://marketplace.camunda.com/) and can be imported directly into Camunda Modeler.
 

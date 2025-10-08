@@ -38,8 +38,7 @@ Camunda’s ServiceNow integration follows a **hybrid approach** that combines:
 ## Architecture
 
 ![Camunda ServiceNow integration architecture](./img/sn-camunda-architecture.png)
-
-This diagram shows how Camunda and ServiceNow interact with each other.
+_This diagram shows how Camunda and ServiceNow interact with each other._
 
 ## Integration features
 
@@ -48,7 +47,7 @@ The Camunda ServiceNow integration provides **bi-directional orchestration** thr
 ### Camunda Spoke in ServiceNow
 
 | Spoke actions         | Description                                                      |
-| --------------------- | ---------------------------------------------------------------- |
+| :-------------------- | :--------------------------------------------------------------- |
 | **Start process**     | Start a Camunda process from ServiceNow.                         |
 | **Correlate message** | Correlate a running Camunda process instance from ServiceNow.    |
 | **Send signal**       | Broadcast BPMN signals to one or many Camunda process instances. |
@@ -57,7 +56,7 @@ The Camunda ServiceNow integration provides **bi-directional orchestration** thr
 ### ServiceNow connectors in Camunda
 
 | Connector                                                             | Description                                                                                           |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| :-------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
 | [**ServiceNow Outbound Connector**](connectors/outbound-connector.md) | Execute CRUD operations on any ServiceNow table.                                                      |
 | [**ServiceNow Flow Starter**](connectors/flow-starter.md)             | Start a ServiceNow flow from a Camunda process (requires ServiceNow Integration Hub Enterprise Pack). |
 | [**ServiceNow Incident Handler**](connectors/incident-handler.md)     | Create and manage incidents in ServiceNow directly from a Camunda process.                            |

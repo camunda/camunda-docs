@@ -15,7 +15,7 @@ This connector also allows Camunda orchestrations to **be interrupted** for appr
 The ServiceNow Flow Starter connector requires the **ServiceNow Integration Hub Enterprise Pack** and the **Flow Trigger – REST plugin** to be installed in your ServiceNow instance. See [prerequisites](../prerequisites.md).
 :::
 
-## Supported operation
+## Supported operations
 
 | Operation        | Description                                                                  | Example use case                                                               |
 | :--------------- | :--------------------------------------------------------------------------- | :----------------------------------------------------------------------------- |
