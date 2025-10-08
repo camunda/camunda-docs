@@ -377,7 +377,7 @@ RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/apis-too
 RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
 
 # Move V2 REST endpoints in 8.8
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topology/?$ docs/apis-tools/camunda-api-rest/specifications/get-topology/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topology/?$ /docs/apis-tools/camunda-api-rest/specifications/get-topology/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/?$ docs/apis-tools/camunda-api-rest/specifications/get-license/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-a-job/?$ ^docs/apis-tools/camunda-api-rest/specifications/update-job/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-incidents-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-incidents/ [R=301,L]
@@ -679,7 +679,6 @@ RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camund
 
 # Move mapping rules docs to new location in 8.8
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/self-managed/components/management-identity/orchestration-identity/mapping-rules/managing-mapping-rules/ [R=301,L]
-
 #---------------------------------------------------------------------------------
 #   8.6: content moves introduced prior to the release of version 8.6.
 #---------------------------------------------------------------------------------
