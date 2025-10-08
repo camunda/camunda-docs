@@ -233,14 +233,6 @@ The SQL connector now supports Oracle Database connections.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/sql" class="link-arrow">SQL connector</a></p>
 
-### Unlock element template fields
-
-[Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams.
-
-- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
-- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
-- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
-
 ## Console
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
@@ -571,6 +563,15 @@ As well as bearer token and client credentials authentication, you can now confi
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
+### Element template editor onboarding
+
+<!-- https://github.com/camunda/product-hub/issues/3021 -->
+
+Web Modeler now provides a low-coder friendly UX for creating building blocks.
+Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+
 ### Element template support for all tasks
 
 <!-- https://github.com/camunda/product-hub/issues/2606 -->
@@ -582,6 +583,18 @@ You can now save any configured task as a reusable element template directly fro
 - Publish templates to your project or organization for reuse
 
 <p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+
+### Unlock element template fields
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+Element template management is now more flexible for developers and DevOps teams.
+
+- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
+- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
+- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
 
 ### FEEL Copilot
 
@@ -609,17 +622,21 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
+<p><a href="../../../../components/modeler/web-modeler/play-your-process/#scenarios" class="link-arrow">Scenarios</a></p>
+
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/2558 -->
 
 Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
 
+<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/database/#using-alternative-database-vendors" class="link-arrow">Set up Oracle or MS SQL</a></p>
+
 ### Username claim configuration
 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
 
 ### Version description
 
@@ -825,7 +842,7 @@ You can now save, export, and share test scenarios:
 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
 
 ## 8.8.0-alpha7
 
