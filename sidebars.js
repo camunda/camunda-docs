@@ -1361,7 +1361,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
-                    "self-managed/deployment/helm/configure/database/using-existing-opensearch",
+                    "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     {

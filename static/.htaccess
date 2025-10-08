@@ -214,7 +214,7 @@ RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ 
 RewriteRule ^docs/next/self-managed/setup/guides/configure-db-custom-headers/?$ /docs/next/self-managed/installation-methods/helm/configure/database/configure-db-custom-headers/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/configure-elasticsearch-prefix-indices/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-elasticsearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-existing-opensearch/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-external-opensearch/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/guides/?$ /docs/next/self-managed/installation-methods/helm/configure/guides/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/ingress-setup/?$ /docs/next/self-managed/installation-methods/helm/configure/ingress-setup/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/next/self-managed/installation-methods/helm/configure/multi-namespace-deployment/ [R=301,L]
