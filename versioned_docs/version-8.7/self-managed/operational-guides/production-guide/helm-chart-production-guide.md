@@ -128,71 +128,72 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
 :::
 
 ```yaml
-identity:
-  auth:
-    issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
-    jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
-    publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
-    type: MICROSOFT
-    identity:
-      clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
-      existingSecret:
-        name: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000" #same as client ID
-      redirectUrl: https://management-host.com/identity
-      initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
-    operate:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-operate
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://orchestration-host.com/operate
-    optimize:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-optimize
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://orchestration-host.com/optimize
-    tasklist:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-tasklist
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://orchestration-host.com/tasklist
-    zeebe:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-zeebe
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-    connectors:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-connectors
-      existingSecretKey: certificate-secret-data
-      audience: "00000000-0000-0000-0000-000000000000"
-      clientApiAudience: "00000000-0000-0000-0000-000000000000"
-      tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
-    console:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
-      audience: "00000000-0000-0000-0000-000000000000"
-      existingSecret:
-        name: oidc-certificate-console
-      existingSecretKey: certificate-secret-data
-      redirectUrl: https://management-host.com
-    webModeler:
-      clientId: "00000000-0000-0000-0000-000000000000"
-      audience: "00000000-0000-0000-0000-000000000000"
-      clientApiAudience: "00000000-0000-0000-0000-000000000000"
-      publicApiAudience: "00000000-0000-0000-0000-000000000000"
-      redirectUrl: https://modeler.management-host.com
+global:
+  identity:
+    auth:
+      issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      issuerBackendUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      tokenUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/oauth2/v2.0/token
+      jwksUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/discovery/v2.0/keys
+      publicIssuerUrl: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
+      type: MICROSOFT
+      identity:
+        clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
+        existingSecret:
+          name: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000" #same as client ID
+        redirectUrl: https://management-host.com/identity
+        initialClaimValue: "00000000-0000-0000-0000-000000000000" #object ID of your user
+      operate:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-operate
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/operate
+      optimize:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-optimize
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/optimize
+      tasklist:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-tasklist
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://orchestration-host.com/tasklist
+      zeebe:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-zeebe
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+      connectors:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-connectors
+        existingSecretKey: certificate-secret-data
+        audience: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        tokenScope: "00000000-0000-0000-0000-000000000000/.default" # same as appplication ID
+      console:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
+        audience: "00000000-0000-0000-0000-000000000000"
+        existingSecret:
+          name: oidc-certificate-console
+        existingSecretKey: certificate-secret-data
+        redirectUrl: https://management-host.com
+      webModeler:
+        clientId: "00000000-0000-0000-0000-000000000000"
+        audience: "00000000-0000-0000-0000-000000000000"
+        clientApiAudience: "00000000-0000-0000-0000-000000000000"
+        publicApiAudience: "00000000-0000-0000-0000-000000000000"
+        redirectUrl: https://modeler.management-host.com
 ```
 
 For more information, see how to [connect to an OpenID Connect provider](/self-managed/identity/configuration/connect-to-an-oidc-provider.md#configuration).
