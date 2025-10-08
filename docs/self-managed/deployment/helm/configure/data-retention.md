@@ -50,19 +50,19 @@ The legacy Zeebe exporter is automatically enabled when:
 
 **History archiving and retention parameters:**
 
-| Key                                                      | Type    | Default                                  | Description                                                                                                                                                                |
-| -------------------------------------------------------- | ------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived.                                                             |
-| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (e.g., `1d` creates daily indices). **Must use units: h (hours), d (days), w (weeks), M (months), or y (years). Minimum value: 1h.** |
-| `orchestration.history.rolloverBatchSize`                | integer | `100`                                    | Maximum number of process instances per archiving batch                                                                                                                    |
-| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                                                                                        |
-| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                                                                                 |
-| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                                                                                 |
-| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)                                                                           |
-| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                                                                              |
-| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                                                                             |
-| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                                                                            |
-| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                                                                               |
+| Key                                                      | Type    | Default                                  | Description                                                                                                    |
+| -------------------------------------------------------- | ------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived. |
+| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (e.g., `1d` creates daily indices).                                      |
+| `orchestration.history.rolloverBatchSize`                | integer | `100`                                    | Maximum number of process instances per archiving batch                                                        |
+| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                            |
+| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                     |
+| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                     |
+| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)               |
+| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                  |
+| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                 |
+| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                |
+| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                   |
 
 #### Example usage
 
@@ -95,26 +95,23 @@ orchestration:
   # Zeebe records retention
   retention:
     enabled: true
-    minimumAge: 30d # Default: 30d. Use 7d, 90d, etc. for different periods
-    policyName: zeebe-record-retention-policy # Optional: customize policy name
+    minimumAge: 30d
+    policyName: zeebe-record-retention-policy
 
   # Historical data archiving and retention
   history:
-    # Archiving settings
-    waitPeriodBeforeArchiving: 1h # Grace period before archiving (default: 1h)
-    rolloverInterval: 1d # Time range for dated indices (default: 1d)
-    rolloverBatchSize: 100 # Max process instances per batch (default: 100)
-    elsRolloverDateFormat: date # Date format for indices (default: date)
-    delayBetweenRuns: 2000 # Milliseconds between archiver runs (default: 2000)
-    maxDelayBetweenRuns: 60000 # Max delay on failures (default: 60000)
-
-    # Retention settings
+    waitPeriodBeforeArchiving: 1h
+    rolloverInterval: 1d
+    rolloverBatchSize: 100
+    elsRolloverDateFormat: date
+    delayBetweenRuns: 2000
+    maxDelayBetweenRuns: 60000
     retention:
       enabled: true
-      minimumAge: 30d # Default: 30d. Use 90d, 365d, etc. for different periods
-      policyName: camunda-history-retention-policy # Optional: customize policy name
-      usageMetricsMinimumAge: 730d # Usage metrics retention (default: 730d = 2 years)
-      usageMetricsPolicyName: camunda-usage-metrics-retention-policy # Optional
+      minimumAge: 30d
+      policyName: camunda-history-retention-policy
+      usageMetricsMinimumAge: 730d
+      usageMetricsPolicyName: camunda-usage-metrics-retention-policy
 ```
 
 ### Troubleshooting
@@ -412,8 +409,3 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 :::info
 For Camunda 8.7 and earlier, if you change retention configuration after initial deployment, you must manually update the policies in Elasticsearch/OpenSearch for Operate and Tasklist. Zeebe automatically applies configuration updates. See [Manually creating or updating policies](#manually-creating-or-updating-policies-87-and-earlier).
 :::
-
-For earlier versions, refer to the component-specific documentation:
-
-- [Operate data retention](/self-managed/components/orchestration-cluster/operate/data-retention.md) - Includes version-specific warnings for 8.6 and 8.7
-- [Tasklist data retention](/self-managed/components/orchestration-cluster/tasklist/data-retention.md)
