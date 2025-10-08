@@ -1411,7 +1411,17 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
-                "self-managed/deployment/helm/upgrade/upgrade-hc-870-880",
+                {
+                  type: "category",
+                  label: "Upgrade 8.7 to 8.8",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/upgrade/upgrade-hc-870-880",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region",
+                  ],
+                },
                 "self-managed/deployment/helm/upgrade/upgrade-hc-860-870",
                 "self-managed/deployment/helm/upgrade/upgrade-hc-850-860",
                 "self-managed/deployment/helm/upgrade/upgrade-hc-840-850",
