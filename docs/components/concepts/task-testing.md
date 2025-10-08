@@ -48,12 +48,7 @@ Test instances are deployed as standard process instances and can be viewed, man
 
 ## Supported elements
 
-Task testing supports **single BPMN task elements**.  
-The following elements are currently supported:
-
-- Service tasks (including connectors)
-- Script tasks
-- User tasks (for validation of mappings and configuration, not full UI completion)
+Task testing supports **single BPMN task elements**.
 
 The following elements are **not supported**:
 
