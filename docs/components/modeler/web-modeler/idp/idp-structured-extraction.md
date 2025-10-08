@@ -62,8 +62,6 @@ After the extraction process of the sample document is complete, you can configu
 
    ![Extracted fields and tables - select table](img/extracted-fields-and-tables-configure-tables.png)
 
-1. Click **Confirm selection** to save your selection.
-
 ### Extracted Fields
 
 - **Field name:** Enter a descriptive name for the field, used to identify the field in your template. You can change the name as required.
