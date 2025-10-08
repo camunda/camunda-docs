@@ -195,7 +195,7 @@ RewriteRule ^docs/self-managed/operate-deployment/?$ /docs/self-managed/componen
 RewriteRule ^docs/self-managed/orchestration-cluster/?$ /docs/self-managed/components/orchestration-cluster/ [R=301,L]
 RewriteRule ^docs/self-managed/orchestration-cluster/sm-orchestration-cluster/?$ /docs/self-managed/components/orchestration-cluster/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/?$ /docs/self-managed/components/orchestration-cluster/tasklist/ [R=301,L]
-RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/components/orchestration-cluster/zeebe/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/?$ /docs/self-managed/components/orchestration-cluster/zeebe/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/console-deployment/installation/?$ /docs/self-managed/components/console/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
