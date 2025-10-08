@@ -230,96 +230,21 @@ Expected output showing the policy is attached:
 
 #### Manually creating or updating policies (8.7 and earlier)
 
-For Camunda 8.8+, policies are created automatically by the retention tooling. This section applies to Camunda 8.7 and earlier versions, or if you need to manually update an existing policy.
+For Camunda 8.8+, policies are created automatically by the retention tooling. If you need to manually create or update policies, use the policy names configured in your `values.yaml` with the commands in the [Camunda 8.7 manual policy management guide](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management).
 
-<details>
-<summary>Elasticsearch - Create and apply ILM policy</summary>
+**Camunda 8.8 default policy names** (customizable via Helm values):
 
-Create the policy:
+- `zeebe-record-retention-policy` - For Zeebe record indices (configured via `orchestration.retention.policyName`)
+- `camunda-history-retention-policy` - For historical Operate, Tasklist, and Camunda indices (configured via `orchestration.history.retention.policyName`)
+- `camunda-usage-metrics-retention-policy` - For usage metrics indices (configured via `orchestration.history.retention.usageMetricsPolicyName`)
 
-```bash
-curl -X PUT "${DATABASE_URL}/_ilm/policy/zeebe-record-retention-policy" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "policy": {
-      "phases": {
-        "delete": {
-          "min_age": "30d",
-          "actions": {
-            "delete": {}
-          }
-        }
-      }
-    }
-  }'
-```
+**Camunda 8.7 default policy names** (only Zeebe is customizable):
 
-Apply to existing indices:
+- `zeebe-record-retention-policy` - For Zeebe records (customizable via `zeebe.retention.policyName`)
+- `operate_delete_archived_indices` - For Operate indices (hardcoded)
+- `tasklist_delete_archived_indices` - For Tasklist indices (hardcoded)
 
-```bash
-curl -X PUT "${DATABASE_URL}/zeebe-record-*/_settings" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "index.lifecycle.name": "zeebe-record-retention-policy"
-  }'
-```
-
-For history retention, replace `zeebe-record-retention-policy` with `camunda-history-retention-policy` and adjust the minimum age as needed.
-
-</details>
-
-<details>
-<summary>OpenSearch - Create and apply ISM policy</summary>
-
-Create the policy:
-
-```bash
-curl -X PUT "${DATABASE_URL}/_plugins/_ism/policies/zeebe-record-retention-policy" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "policy": {
-      "description": "Zeebe record retention policy",
-      "default_state": "active",
-      "states": [
-        {
-          "name": "active",
-          "actions": [],
-          "transitions": [
-            {
-              "state_name": "delete",
-              "conditions": {
-                "min_index_age": "30d"
-              }
-            }
-          ]
-        },
-        {
-          "name": "delete",
-          "actions": [
-            {
-              "delete": {}
-            }
-          ],
-          "transitions": []
-        }
-      ]
-    }
-  }'
-```
-
-Apply to existing indices:
-
-```bash
-curl -X POST "${DATABASE_URL}/_plugins/_ism/add/zeebe-record-*" \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "policy_id": "zeebe-record-retention-policy"
-  }'
-```
-
-For history retention, replace `zeebe-record-retention-policy` with `camunda-history-retention-policy` and adjust the minimum age as needed.
-
-</details>
+The curl commands for creating and applying policies are the same across versions—only the policy names differ. See the [8.7 guide's manual policy section](/versioned_docs/version-8.7/self-managed/setup/guides/data-retention.md#manual-policy-management) for complete ILM and ISM policy creation commands.
 
 #### Known limitations
 
@@ -359,8 +284,10 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 
 - [Configure Helm chart components](./application-configs.md) - How to use `orchestration.configuration` for advanced settings
 - [Upgrade from 8.7 to 8.8](/self-managed/deployment/helm/upgrade/helm-870-880.md) - Version upgrade guidance
-- [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Component-level retention details
-- [Zeebe Camunda Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration
+- [Zeebe Elasticsearch Exporter retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) - Legacy Zeebe exporter retention settings
+- [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
+  - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
+  - [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
 - [Operate data retention](/self-managed/components/orchestration-cluster/operate/data-retention.md) - Operate-specific retention behavior
 - [Tasklist data retention](/self-managed/components/orchestration-cluster/tasklist/data-retention.md) - Tasklist-specific retention behavior
 
