@@ -684,21 +684,6 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
-</div>
-<div className="release-announcement-content">
-  
-#### Play job-based user tasks
-
-With the Camunda 8.8 release, User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
-
-You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -707,7 +692,7 @@ You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/u
 
 With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
 
-Refer to the [update guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration) for more information on how to migrate.
+For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
 
 </div>
 </div>
@@ -723,7 +708,22 @@ Refer to the [update guide](/self-managed/components/components-upgrade/870-to-8
 The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
 For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
 
-Refer to the [update guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options) for more information on how to modify your existing configuration.
+For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Play job-based user tasks
+
+With the Camunda 8.8 release, User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
+
+You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 
 </div>
 </div>
