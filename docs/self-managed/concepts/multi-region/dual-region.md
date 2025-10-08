@@ -7,7 +7,7 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 <!-- Image source: https://docs.google.com/presentation/d/1mbEIc0KuumQCYeg1YMpvdVR8AEUcbTWqlesX-IxVIjY/edit?usp=sharing -->
 
-import DualRegion from "./img/dual-region.svg";
+import DualRegion from "./img/dual-region.jpg";
 
 Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). This setup combines **active-active data replication** with **active-passive user traffic routing** to ensure high availability and disaster recovery.
 
@@ -79,7 +79,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 ## Dual-region architecture
 
-<DualRegion />
+<img src={DualRegion} alt="Camunda dual-region architecture" style={{border: 'none'}} />
 
 The dual-region architecture consists of two regions in a Kubernetes-based installation. Each region has a Kubernetes cluster with all Camunda 8 components fully operational.
 
