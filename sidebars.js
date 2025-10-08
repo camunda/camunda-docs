@@ -1361,6 +1361,7 @@ module.exports = {
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/enable-additional-components",
+                "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
                   label: "Registry and images",
