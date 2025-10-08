@@ -29,6 +29,6 @@ Before setting up the ServiceNow integration, ensure you have the following prer
   - A technical user or administrator account with permissions to access target tables and Flow Designer.
   - This account will be used in the ServiceNow connectors in Camunda to authenticate and interact with the ServiceNow instance.
 
-- **Optional plugins** (required only for starting ServiceNow flows from Camunda)
+- **Optional plugins** (required only for starting ServiceNow flows from Camunda using the ServiceNow Flow Starter connector)
   - ServiceNow Integration Hub Enterprise Pack.
   - ServiceNow Integration Hub Flow Trigger – REST.

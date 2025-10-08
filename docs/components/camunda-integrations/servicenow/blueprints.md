@@ -1,5 +1,5 @@
 ---
-id: servicenow-blueprints
+id: blueprints
 title: Blueprints
 description: "Ready-to-use example processes demonstrating common Camunda–ServiceNow integration patterns."
 ---
@@ -14,7 +14,7 @@ The blueprint is available for download from the [Camunda Marketplace](https://m
 The blueprint supports the following integration patterns:
 
 | Type              | Name                                   | Description                                                                                                                                                  | Example                                                                                  | Camunda Connectors            | ServiceNow Spoke                  |
-| ----------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------- | --------------------------------- |
+| :---------------- | :------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- | :---------------------------- | :-------------------------------- |
 | **Manage**        | Manage ServiceNow data entries         | Execute CRUD (Create, Read, Update, Delete) operations on any ServiceNow table.                                                                              | Create or modify a change request in ServiceNow.                                         | ServiceNow Outbound Connector | Not needed                        |
 |                   | Create ServiceNow Incident             | Define business errors within the BPMN model that create a ServiceNow incident.                                                                              | Create or modify a change request in ServiceNow.                                         | ServiceNow Incident Handler   | Not needed                        |
 | **Orchestration** | Start Camunda Process                  | Start a Camunda orchestration process from a ServiceNow Flow.                                                                                                | Trigger an end-to-end orchestration for employee onboarding.                             | Not needed                    | Camunda Spoke → Start Process     |

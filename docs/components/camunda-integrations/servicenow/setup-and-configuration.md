@@ -4,23 +4,30 @@ title: Setup & configuration
 description: "Install the Camunda Spoke in ServiceNow, configure connectors in Camunda, and set up secure credentials to enable bi-directional communication between both systems."
 ---
 
-The setup and configuration process connects your ServiceNow instance with Camunda so that workflows can securely exchange data and trigger actions in both directions. This involves installing and configuring the Camunda Spoke on your ServiceNow instance, setting up the ServiceNow connectors in Camunda, and establishing secure credentials for communication. Once configured, you can interact with ServiceNow tables and flows directly from BPMN processes and start or control Camunda processes from ServiceNow—enabling true end-to-end orchestration.
+The setup and configuration process connects your ServiceNow instance with Camunda so that workflows can securely exchange data and trigger actions in both directions.
 
-> 💡 **Before you begin**  
-> Ensure the following prerequisites are in place:
->
-> - ✅ **Administrator access** to both Camunda and ServiceNow instances.
-> - ✅ Your ServiceNow instance meets all [prerequisites](./prerequisites.md), including required plugins and user permissions.
-> - ✅ Network connectivity between Camunda and ServiceNow is allowed by your organization's security settings.
+This involves installing and configuring the Camunda Spoke on your ServiceNow instance, setting up the ServiceNow connectors in Camunda, and establishing secure credentials for communication.
+
+Once configured, you can interact with ServiceNow tables and flows directly from Camunda processes and start or control Camunda processes from ServiceNow—enabling true end-to-end orchestration.
+
+:::tip
+
+**Before you begin**  
+Ensure the following prerequisites are in place:
+
+- ✅ Administrator access to both Camunda and ServiceNow instances.
+- ✅ Your ServiceNow instance meets all [prerequisites](./prerequisites.md), including required plugins and user permissions.
+- ✅ Network connectivity between Camunda and ServiceNow is allowed by your organization's security settings.
+  :::
 
 ## Configuration instructions
 
-### Camunda
+### **Camunda**
 
 1. Configure a [**Camunda API credential**](../../../components/react-components/create-api-credentials.md) for ServiceNow connectivity.
-2. Add the out-of-the-box **ServiceNow connector templates** to your Camunda processes, just like any other connector template.
+2. Add the out-of-the-box **ServiceNow connector templates** to your Camunda processes and configure them, just like any other Camunda connector.
 
-### ServiceNow
+### **ServiceNow**
 
 1. **Install the Camunda Spoke**
    - Log in to your ServiceNow instance as an administrator.
