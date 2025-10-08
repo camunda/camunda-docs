@@ -5,7 +5,7 @@ title: Configure data retention
 description: "Learn how to configure data retention policies in Camunda 8.8 Helm charts to automatically manage and delete old data."
 ---
 
-Data retention policies automatically delete old data from Elasticsearch or OpenSearch after a specified time period using Index Lifecycle Management (ILM) for Elasticsearch or Index State Management (ISM) for OpenSearch.
+Data retention policies automatically delete old data from Elasticsearch or OpenSearch after a specified time period. This prevents unlimited data growth, reduces storage costs, and maintains system performance by using Index Lifecycle Management (ILM) for Elasticsearch or Index State Management (ISM) for OpenSearch.
 
 :::tip Best practice
 **Configure data retention during initial installation.** Adding retention configuration after deployment may require manual policy creation in Elasticsearch/OpenSearch. See [Differences from previous versions](#differences-from-previous-versions) for version-specific behavior.
@@ -24,7 +24,7 @@ Configure retention policies in your `values.yaml` file under the `orchestration
 **Retention policy types:**
 
 1. **Zeebe records** (`orchestration.retention`) - Retention for Zeebe record indices
-2. **Historical data** (`orchestration.history.retention`) - Retention for archived Operate, Tasklist, and Camunda indices
+1. **Historical data** (`orchestration.history.retention`) - Retention for archived Operate, Tasklist, and Camunda indices
 
 :::caution Zeebe records retention requirements
 The `orchestration.retention` configuration requires the **legacy Zeebe Elasticsearch/OpenSearch exporter** to be enabled.
@@ -127,9 +127,9 @@ Created automatically by the Zeebe Elasticsearch/OpenSearch exporter during init
 Created automatically by Camunda's retention tooling when `orchestration.history.retention.enabled: true`. The archiver will:
 
 1. Create the ILM/ISM policy with the configured `minimumAge` setting when retention is first enabled
-2. Wait for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes
-3. Archive completed instances to dated indices (e.g., `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`)
-4. Attach the policy directly to each archived index as it is created
+1. Wait for `waitPeriodBeforeArchiving` (default: 1 hour) after a process instance completes
+1. Archive completed instances to dated indices (e.g., `operate-process-8.3.0_2024-01-15`, `tasklist-task-8.8.0_2024-01-15`)
+1. Attach the policy directly to each archived index as it is created
 
 The policy applies directly to archived Operate, Tasklist, and Camunda indices (not via index templates). If `minimumAge` is set very low (e.g., `0s`), Elasticsearch may immediately delete newly created archived indices because the policy takes effect at creation time.
 
@@ -137,22 +137,28 @@ The policy applies directly to archived Operate, Tasklist, and Camunda indices (
 The `camunda-history-retention-policy` is created by Camunda's retention tooling as part of the archiving workflow. If you query for this policy before any archiving occurs, you may receive a 404 response. The policy is created when the first archived index is created.
 :::
 
-First, set your Elasticsearch/OpenSearch endpoint:
+**Set your database URL:**
 
 ```bash
-export ES_ENDPOINT="your-elasticsearch-host:9200"
+export DATABASE_URL="https://your-database-host:9200"
 ```
 
-**Check if policy exists:**
+Replace `your-database-host` with your Elasticsearch or OpenSearch hostname.
+
+**Check if policies exist:**
+
+For **Elasticsearch**:
 
 ```bash
-# Elasticsearch
-curl -X GET "${ES_ENDPOINT}/_ilm/policy/zeebe-record-retention-policy?pretty"
-curl -X GET "${ES_ENDPOINT}/_ilm/policy/camunda-history-retention-policy?pretty"
+curl -X GET "${DATABASE_URL}/_ilm/policy/zeebe-record-retention-policy?pretty"
+curl -X GET "${DATABASE_URL}/_ilm/policy/camunda-history-retention-policy?pretty"
+```
 
-# OpenSearch
-curl -X GET "${ES_ENDPOINT}/_plugins/_ism/policies/zeebe-record-retention-policy?pretty"
-curl -X GET "${ES_ENDPOINT}/_plugins/_ism/policies/camunda-history-retention-policy?pretty"
+For **OpenSearch**:
+
+```bash
+curl -X GET "${DATABASE_URL}/_plugins/_ism/policies/zeebe-record-retention-policy?pretty"
+curl -X GET "${DATABASE_URL}/_plugins/_ism/policies/camunda-history-retention-policy?pretty"
 ```
 
 Expected response for a policy with 30-day retention:
@@ -178,14 +184,9 @@ Expected response for a policy with 30-day retention:
 
 **Check if archived indices exist:**
 
-To verify the archiver is working and creating archived indices:
-
 ```bash
-# Check for archived Operate indices (process instances, variables, incidents, etc.)
-curl -X GET "${ES_ENDPOINT}/_cat/indices/operate-*_20*?v"
-
-# Check for archived Tasklist indices (tasks, task variables)
-curl -X GET "${ES_ENDPOINT}/_cat/indices/tasklist-*_20*?v"
+curl -X GET "${DATABASE_URL}/_cat/indices/operate-*_20*?v"
+curl -X GET "${DATABASE_URL}/_cat/indices/tasklist-*_20*?v"
 ```
 
 Archived indices follow the pattern: `{component}-{type}-{schema-version}_{date}`  
@@ -207,14 +208,16 @@ If no archived indices exist:
 
 **Check if retention policy is applied to an archived index:**
 
-Once archived indices exist, verify the retention policy is attached:
+For **Elasticsearch**:
 
 ```bash
-# Elasticsearch - Check lifecycle settings on a specific archived index
-curl -X GET "${ES_ENDPOINT}/operate-process-8.3.0_2024-01-15/_settings?pretty" | grep -A 3 lifecycle
+curl -X GET "${DATABASE_URL}/operate-process-8.3.0_2024-01-15/_settings?pretty" | grep -A 3 lifecycle
+```
 
-# OpenSearch - Check ISM policy on a specific archived index
-curl -X GET "${ES_ENDPOINT}/_plugins/_ism/explain/operate-process-8.3.0_2024-01-15?pretty"
+For **OpenSearch**:
+
+```bash
+curl -X GET "${DATABASE_URL}/_plugins/_ism/explain/operate-process-8.3.0_2024-01-15?pretty"
 ```
 
 Expected output showing the policy is attached:
@@ -232,16 +235,10 @@ For Camunda 8.8+, policies are created automatically by the retention tooling. T
 <details>
 <summary>Elasticsearch - Create and apply ILM policy</summary>
 
-Set your Elasticsearch endpoint:
-
-```bash
-export ES_ENDPOINT="your-elasticsearch-host:9200"
-```
-
 Create the policy:
 
 ```bash
-curl -X PUT "${ES_ENDPOINT}/_ilm/policy/zeebe-record-retention-policy" \
+curl -X PUT "${DATABASE_URL}/_ilm/policy/zeebe-record-retention-policy" \
   -H 'Content-Type: application/json' \
   -d '{
     "policy": {
@@ -260,7 +257,7 @@ curl -X PUT "${ES_ENDPOINT}/_ilm/policy/zeebe-record-retention-policy" \
 Apply to existing indices:
 
 ```bash
-curl -X PUT "${ES_ENDPOINT}/zeebe-record-*/_settings" \
+curl -X PUT "${DATABASE_URL}/zeebe-record-*/_settings" \
   -H 'Content-Type: application/json' \
   -d '{
     "index.lifecycle.name": "zeebe-record-retention-policy"
@@ -274,16 +271,10 @@ For history retention, replace `zeebe-record-retention-policy` with `camunda-his
 <details>
 <summary>OpenSearch - Create and apply ISM policy</summary>
 
-Set your OpenSearch endpoint:
-
-```bash
-export ES_ENDPOINT="your-opensearch-host:9200"
-```
-
 Create the policy:
 
 ```bash
-curl -X PUT "${ES_ENDPOINT}/_plugins/_ism/policies/zeebe-record-retention-policy" \
+curl -X PUT "${DATABASE_URL}/_plugins/_ism/policies/zeebe-record-retention-policy" \
   -H 'Content-Type: application/json' \
   -d '{
     "policy": {
@@ -319,7 +310,7 @@ curl -X PUT "${ES_ENDPOINT}/_plugins/_ism/policies/zeebe-record-retention-policy
 Apply to existing indices:
 
 ```bash
-curl -X POST "${ES_ENDPOINT}/_plugins/_ism/add/zeebe-record-*" \
+curl -X POST "${DATABASE_URL}/_plugins/_ism/add/zeebe-record-*" \
   -H 'Content-Type: application/json' \
   -d '{
     "policy_id": "zeebe-record-retention-policy"
@@ -339,8 +330,8 @@ When using OpenSearch, updating an existing ISM policy's `minimumAge` may not ta
 **To update an OpenSearch policy:**
 
 1. Get the current policy with its version information
-2. Update the policy using the `seq_no` and `primary_term` from the current version
-3. Verify the updated policy reflects the new `minimumAge`
+1. Update the policy using the `seq_no` and `primary_term` from the current version
+1. Verify the updated policy reflects the new `minimumAge`
 
 See the [OpenSearch ISM API documentation](https://opensearch.org/docs/latest/im-plugin/ism/api/) for details on policy version parameters.
 
@@ -357,15 +348,6 @@ When applying retention policies to a large number of existing indices, the oper
 **Policy timing considerations:**
 
 The `camunda-history-retention-policy` is created by Camunda's retention tooling as part of the archiving workflow. If you query for this policy immediately after deployment and before any archiving occurs, you may receive a 404 response. The policy is created when the first archived index is created by the archiver.
-
-**To verify history retention setup:**
-
-1. Deploy with `orchestration.history.retention.enabled: true`
-2. Complete at least one process instance
-3. Wait for `waitPeriodBeforeArchiving` + archiver run delay (~1 hour total by default)
-4. Check for archived indices (see [Check if archived indices exist](#check-if-archived-indices-exist))
-5. Verify the policy exists (see [Verifying retention policies](#verifying-retention-policies))
-6. Verify the policy is attached to archived indices (see [Check if retention policy is applied](#check-if-retention-policy-is-applied-to-an-archived-index))
 
 :::note Index naming
 Operate and Tasklist indices use schema-specific versioning in their names (e.g., `operate-process-8.3.0_`, `tasklist-task-8.8.0_`). The version numbers represent schema versions, which may differ from the Camunda platform version. When archived, these indices receive a date suffix (e.g., `operate-process-8.3.0_2024-01-15`).
