@@ -135,6 +135,12 @@ Manually execute and test individual tasks or segments (connectors, RPA bots, ID
 
 <div class="release"><span class="badge badge--medium" title="This feature affects connectors">Connectors</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
+### Ad-hoc tools schema resolver connector
+
+This connector implements the tool resolution part of the AI Agent connector, but can also be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver/" class="link-arrow">Ad-hoc tools schema resolver connector</a></p>
+
 ### AI Agent connector
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
@@ -265,10 +271,19 @@ The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (K
 
 ### Regions
 
-A new Singapore (ap-southeast-1) region is available for SaaS clusters on Amazon Web Services. Use this region to:
+New regions are available for SaaS clusters on Amazon Web Services:
 
-- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
-- Keep cluster data within Singapore to support your local data residency and compliance needs.
+| Type                     | Region                              |
+| :----------------------- | :---------------------------------- |
+| AWS region               | Singapore (ap-southeast-1)          |
+| Secondary backups region | Ireland, Europe (eu-west-1)         |
+| Secondary backups region | Jakarta, Indonesia (ap-southeast-3) |
+| Secondary backups region | Oregon, North America (us-west-2)   |
+
+Use these regions to:
+
+- Improve overall processing speed and reduce latency if you operate in countries within that region.
+- Keep cluster data within that country/region to support your local data residency and compliance needs.
 
 <p><a href="../../../../components/saas/regions" class="link-arrow">Regions</a></p>
 

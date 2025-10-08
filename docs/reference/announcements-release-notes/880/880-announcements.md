@@ -64,7 +64,7 @@ See the [component version matrix](/reference/supported-environments.md#componen
   
 #### Removed: Tasklist GraphQL API
 
-With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed from the product.
+With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed.
 
 </div>
 </div>
@@ -662,6 +662,23 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 </div>
 
+### Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Tenant-providing interceptors
+
+With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
+
+It is superseded by built-in [tenant management](/components/identity/tenant.md).
+
+</div>
+</div>
+
 ### Marketplace
 
 <div className="release-announcement-row">
@@ -714,9 +731,3 @@ The Camunda SaaS Starter plan is no longer available.
 
 </div>
 </div>
-
-### Removed: Tenant-providing interceptors
-
-With the **8.8 release**, Camunda announces the **removal of tenant-providing interceptors**.
-
-It is superseded by built-in [tenant management](/components/identity/tenant.md) going forward.
