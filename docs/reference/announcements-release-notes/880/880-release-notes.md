@@ -135,6 +135,12 @@ Manually execute and test individual tasks or segments (connectors, RPA bots, ID
 
 <div class="release"><span class="badge badge--medium" title="This feature affects connectors">Connectors</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
+### Ad-hoc tools schema resolver connector
+
+This connector implements the tool resolution part of the AI Agent connector, but can also be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver/" class="link-arrow">Ad-hoc tools schema resolver connector</a></p>
+
 ### AI Agent connector
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
