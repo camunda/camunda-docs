@@ -42,6 +42,20 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 </div>
 <div className="release-announcement-content">
   
+#### PostgreSQL, Oracle and Microsoft SQL Server supported versions
+Management Identity now supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
+
+Web Modeler now supports PostgreSQL version 18.x, Amazon Aurora PostgreSQL version 17.x, Oracle versions 19c and 23ai and Microsoft SQL Server versions 2019 and 2022.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Zeebe, Operate, Tasklist, and Identity must run on same minor and patch levels
 From version `8.8.0` onwards, the Zeebe, Operate, Tasklist, and Identity [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility.
 
