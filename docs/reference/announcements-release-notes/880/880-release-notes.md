@@ -271,10 +271,19 @@ The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (K
 
 ### Regions
 
-A new Singapore (ap-southeast-1) region is available for SaaS clusters on Amazon Web Services. Use this region to:
+New regions are available for SaaS clusters on Amazon Web Services:
 
-- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
-- Keep cluster data within Singapore to support your local data residency and compliance needs.
+| Type                     | Region                              |
+| :----------------------- | :---------------------------------- |
+| AWS region               | Singapore (ap-southeast-1)          |
+| Secondary backups region | Ireland, Europe (eu-west-1)         |
+| Secondary backups region | Jakarta, Indonesia (ap-southeast-3) |
+| Secondary backups region | Oregon, North America (us-west-2)   |
+
+Use these regions to:
+
+- Improve overall processing speed and reduce latency if you operate in countries within that region.
+- Keep cluster data within that country/region to support your local data residency and compliance needs.
 
 <p><a href="../../../../components/saas/regions" class="link-arrow">Regions</a></p>
 
