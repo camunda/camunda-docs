@@ -128,6 +128,7 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
 :::
 
 ```yaml
+global:
   identity:
     auth:
       issuer: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0
@@ -139,7 +140,7 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
       identity:
         clientId: "00000000-0000-0000-0000-000000000000" #This is the application ID
         existingSecret:
-          name: oidc-certificate-identity  #secret from the certificate that was created in the Active Directory
+          name: oidc-certificate-identity #secret from the certificate that was created in the Active Directory
         existingSecretKey: certificate-secret-data
         audience: "00000000-0000-0000-0000-000000000000" #same as client ID
         redirectUrl: https://management-host.com/identity
@@ -187,9 +188,6 @@ You must create a Kubernetes secret for all client secrets that exist in each ap
           name: oidc-certificate-console
         existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         audience: "00000000-0000-0000-0000-000000000000"
