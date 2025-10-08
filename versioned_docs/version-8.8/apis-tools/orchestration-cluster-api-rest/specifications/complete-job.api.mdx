@@ -1,0 +1,592 @@
+---
+id: complete-job
+title: "Complete job"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Complete job"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Complete job"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/{jobKey}/completion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Complete a job with the given payload, which allows completing the associated service task.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to complete.",
+      schema: {
+        type: "string",
+        format: "string<JobKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              additionalProperties: true,
+              description: "The variables to complete the job with.",
+              type: "object",
+              nullable: true,
+            },
+            result: {
+              description:
+                "The result of the completed job as determined by the worker.\n",
+              discriminator: {
+                propertyName: "type",
+                mapping: {
+                  userTask: {
+                    type: "object",
+                    nullable: true,
+                    properties: {
+                      denied: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n",
+                        nullable: true,
+                      },
+                      deniedReason: {
+                        type: "string",
+                        description:
+                          "The reason provided by the user task listener for denying the work.",
+                        nullable: true,
+                      },
+                      corrections: {
+                        type: "object",
+                        description:
+                          "JSON object with attributes that were corrected by the worker.\n\nThe following attributes can be corrected, additional attributes will be ignored:\n\n* `assignee` - clear by providing an empty String\n* `dueDate` - clear by providing an empty String\n* `followUpDate` - clear by providing an empty String\n* `candidateGroups` - clear by providing an empty list\n* `candidateUsers` - clear by providing an empty list\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n",
+                        nullable: true,
+                        properties: {
+                          assignee: {
+                            type: "string",
+                            description: "Assignee of the task.",
+                            nullable: true,
+                          },
+                          dueDate: {
+                            type: "string",
+                            format: "date-time",
+                            description: "The due date of the task.",
+                            nullable: true,
+                          },
+                          followUpDate: {
+                            type: "string",
+                            format: "date-time",
+                            description: "The follow-up date of the task.",
+                            nullable: true,
+                          },
+                          candidateUsers: {
+                            type: "array",
+                            description:
+                              "The list of candidate users of the task.",
+                            items: { type: "string" },
+                            nullable: true,
+                          },
+                          candidateGroups: {
+                            type: "array",
+                            description:
+                              "The list of candidate groups of the task.",
+                            items: { type: "string" },
+                            nullable: true,
+                          },
+                          priority: {
+                            type: "integer",
+                            format: "int32",
+                            description: "The priority of the task.",
+                            minimum: 0,
+                            maximum: 100,
+                            nullable: true,
+                          },
+                        },
+                        title: "JobResultCorrections",
+                      },
+                    },
+                    title: "JobResultUserTask",
+                  },
+                  adHocSubProcess: {
+                    type: "object",
+                    nullable: true,
+                    properties: {
+                      activateElements: {
+                        type: "array",
+                        description:
+                          "Indicates which elements need to be activated in the ad-hoc subprocess.",
+                        items: {
+                          type: "object",
+                          properties: {
+                            elementId: {
+                              description: "The ID of the element to activate.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                            variables: {
+                              description:
+                                "JSON document that will create the variables on the scope of the activated element.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                              additionalProperties: true,
+                              type: "object",
+                              nullable: true,
+                            },
+                          },
+                          title: "JobResultActivateElement",
+                        },
+                      },
+                      isCompletionConditionFulfilled: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.",
+                        default: false,
+                        nullable: false,
+                      },
+                      isCancelRemainingInstances: {
+                        type: "boolean",
+                        description:
+                          "Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.",
+                        default: false,
+                        nullable: false,
+                      },
+                    },
+                    title: "JobResultAdHocSubProcess",
+                  },
+                },
+              },
+              required: ["type"],
+              properties: {
+                type: {
+                  type: "string",
+                  description:
+                    "Used to distinguish between different types of job results.",
+                  enum: ["userTask", "adHocSubProcess"],
+                  default: "userTask",
+                },
+              },
+              oneOf: [
+                {
+                  type: "object",
+                  nullable: true,
+                  properties: {
+                    denied: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.\n",
+                      nullable: true,
+                    },
+                    deniedReason: {
+                      type: "string",
+                      description:
+                        "The reason provided by the user task listener for denying the work.",
+                      nullable: true,
+                    },
+                    corrections: {
+                      type: "object",
+                      description:
+                        "JSON object with attributes that were corrected by the worker.\n\nThe following attributes can be corrected, additional attributes will be ignored:\n\n* `assignee` - clear by providing an empty String\n* `dueDate` - clear by providing an empty String\n* `followUpDate` - clear by providing an empty String\n* `candidateGroups` - clear by providing an empty list\n* `candidateUsers` - clear by providing an empty list\n* `priority` - minimum 0, maximum 100, default 50\n\nProviding any of those attributes with a `null` value or omitting it preserves\nthe persisted attribute's value.\n",
+                      nullable: true,
+                      properties: {
+                        assignee: {
+                          type: "string",
+                          description: "Assignee of the task.",
+                          nullable: true,
+                        },
+                        dueDate: {
+                          type: "string",
+                          format: "date-time",
+                          description: "The due date of the task.",
+                          nullable: true,
+                        },
+                        followUpDate: {
+                          type: "string",
+                          format: "date-time",
+                          description: "The follow-up date of the task.",
+                          nullable: true,
+                        },
+                        candidateUsers: {
+                          type: "array",
+                          description:
+                            "The list of candidate users of the task.",
+                          items: { type: "string" },
+                          nullable: true,
+                        },
+                        candidateGroups: {
+                          type: "array",
+                          description:
+                            "The list of candidate groups of the task.",
+                          items: { type: "string" },
+                          nullable: true,
+                        },
+                        priority: {
+                          type: "integer",
+                          format: "int32",
+                          description: "The priority of the task.",
+                          minimum: 0,
+                          maximum: 100,
+                          nullable: true,
+                        },
+                      },
+                      title: "JobResultCorrections",
+                    },
+                  },
+                  title: "JobResultUserTask",
+                },
+                {
+                  type: "object",
+                  nullable: true,
+                  properties: {
+                    activateElements: {
+                      type: "array",
+                      description:
+                        "Indicates which elements need to be activated in the ad-hoc subprocess.",
+                      items: {
+                        type: "object",
+                        properties: {
+                          elementId: {
+                            description: "The ID of the element to activate.",
+                            allOf: [
+                              {
+                                description:
+                                  "The model-defined id of an element.",
+                                format: "ElementId",
+                                type: "string",
+                                example: "Activity_106kosb",
+                                title: "ElementId",
+                              },
+                            ],
+                          },
+                          variables: {
+                            description:
+                              "JSON document that will create the variables on the scope of the activated element.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                            additionalProperties: true,
+                            type: "object",
+                            nullable: true,
+                          },
+                        },
+                        title: "JobResultActivateElement",
+                      },
+                    },
+                    isCompletionConditionFulfilled: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the completion condition of the ad-hoc subprocess is fulfilled.",
+                      default: false,
+                      nullable: false,
+                    },
+                    isCancelRemainingInstances: {
+                      type: "boolean",
+                      description:
+                        "Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.",
+                      default: false,
+                      nullable: false,
+                    },
+                  },
+                  title: "JobResultAdHocSubProcess",
+                },
+              ],
+              title: "JobResult",
+            },
+          },
+          title: "JobCompletionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was completed successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the given key was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

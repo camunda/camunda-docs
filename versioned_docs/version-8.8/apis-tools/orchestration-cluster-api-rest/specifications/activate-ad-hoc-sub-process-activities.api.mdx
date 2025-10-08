@@ -1,0 +1,416 @@
+---
+id: activate-ad-hoc-sub-process-activities
+title: "Activate activities within an ad-hoc sub-process"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Activate activities within an ad-hoc sub-process"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Activate activities within an ad-hoc sub-process"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={
+    "/element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation"
+  }
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Activates selected activities within an ad-hoc sub-process identified by element ID.
+The provided element IDs must exist within the ad-hoc sub-process instance identified by the
+provided adHocSubProcessInstanceKey.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "adHocSubProcessInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the ad-hoc sub-process instance that contains the activities.",
+      schema: {
+        type: "string",
+        format: "string<ElementInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            elements: {
+              description: "Activities to activate.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  elementId: {
+                    description:
+                      "The ID of the element that should be activated.",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                  },
+                  variables: {
+                    description:
+                      "Variables to be set when activating the element.",
+                    type: "object",
+                    additionalProperties: true,
+                  },
+                },
+                required: ["elementId"],
+                title: "AdHocSubProcessActivateActivityReference",
+              },
+            },
+            cancelRemainingInstances: {
+              description:
+                "Whether to cancel remaining instances of the ad-hoc sub-process.",
+              type: "boolean",
+              default: false,
+            },
+          },
+          required: ["elements"],
+          title: "AdHocSubProcessActivateActivitiesInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The ad-hoc sub-process instance is modified." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The ad-hoc sub-process instance is not found or the provided key does not identify an\nad-hoc sub-process.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

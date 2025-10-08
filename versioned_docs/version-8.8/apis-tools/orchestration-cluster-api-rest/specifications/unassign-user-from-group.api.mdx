@@ -1,0 +1,322 @@
+---
+id: unassign-user-from-group
+title: "Unassign a user from a group"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Unassign a user from a group"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign a user from a group"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/groups/{groupId}/users/{username}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Unassigns a user from a group.
+The user is removed as a group member, with associated authorizations, roles, and tenant assignments no longer applied.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "groupId",
+      in: "path",
+      required: true,
+      description: "The group ID.",
+      schema: { type: "string" },
+    },
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The user username.",
+      schema: {
+        example: "swillis",
+        format: "Username",
+        description: "The unique name of a user.",
+        type: "string",
+        title: "Username",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The user was unassigned successfully from the group.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The group or user with the given ID was not found, or the user is not assigned to this group.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
