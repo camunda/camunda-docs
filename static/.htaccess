@@ -365,37 +365,37 @@ RewriteRule ^docs/8.6/self-managed/setup/guides/prefix-elasticsearch-opensearch-
 RewriteRule ^docs/8.5/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.5/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
-RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
 
 # Remove Zeebe REST API
-RewriteRule ^docs/apis-tools/zeebe-api-rest/specifications/?$ /docs/apis-tools/camunda-api-rest/specifications/ [R=301,L]
-RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/zeebe-api-rest/specifications/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
 RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-rest-authentication/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
-RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/zeebe-api-rest/zeebe-api-tutorial/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
-RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
 
 # Move V2 REST endpoints in 8.8
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topology/?$ /docs/apis-tools/camunda-api-rest/specifications/get-topology/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/?$ docs/apis-tools/camunda-api-rest/specifications/get-license/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-a-job/?$ ^docs/apis-tools/camunda-api-rest/specifications/update-job/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topology/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/get-topology/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-status-of-camunda-license/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/get-license/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-a-job/?$ ^docs/apis-tools/orchestration-cluster-api-rest/specifications/update-job/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-incidents-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-incidents/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-incident-by-key-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/get-incident/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-user-task/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/pin-internal-clock-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/pin-clock/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/reset-internal-clock-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/reset-clock/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-process-instances-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-process-instances/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-flow-node-instances/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-decision-definitions/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-decision-requirements/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-instances-alpha/?$ docs/apis-tools/camunda-api-rest/specifications/search-decision-instances/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/publish-a-message/?$ docs/apis-tools/camunda-api-rest/specifications/publish-message/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/correlate-a-message/?$ docs/apis-tools/camunda-api-rest/specifications/correlate-message/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ docs/apis-tools/camunda-api-rest/specifications/search-users/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/apis-tools/camunda-api-rest/specifications/create-deployment/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/apis-tools/camunda-api-rest/specifications/create-element-instance-variables/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-incident-by-key-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/get-incident/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-user-tasks-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-user-task/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/pin-internal-clock-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/pin-clock/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/reset-internal-clock-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/reset-clock/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-process-instances-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-flow-node-instances-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-flow-node-instances/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-definitions-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-definition-xml/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-requirements-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-requirements/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/query-decision-instances-alpha/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/publish-a-message/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/publish-message/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/correlate-a-message/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/correlate-message/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/search-users/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/update-element-instance-variables/?$ docs/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables/ [R=301,L]
 
 # Remove Camunda exporter from 8.7 docs
 RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/?$ /docs/self-managed/components/orchestration-cluster/zeebe/exporters/install-zeebe-exporters/ [R=301,L]
@@ -497,7 +497,7 @@ RewriteRule ^docs/8.6/self-managed/components/management-identity/install-identi
 RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/8.6/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
 # Remove V2 REST user search API from 8.7 and 8.8 docs
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api/ [R=301,L]
 RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
 
 # Move SAP integrations page to a new folder
