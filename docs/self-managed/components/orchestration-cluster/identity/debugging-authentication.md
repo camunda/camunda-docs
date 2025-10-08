@@ -90,7 +90,7 @@ If you do not have access to the API, you can also check the same data in the fo
 
 To review the effective configuration of your Orchestration Cluster, you can call the [Spring Boot Actuator endpoint](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints) at `<server>:<port>/actuator/configprops`.
 
-For example, with a Camunda 8 Run installation, this endpoint is available at `http://localhost:9600/actuator/configprops`. Note that the actuator port differs from the Orchestration Cluster API port and may not always be accessible, depending on your deployment setup.
+For example, with a Camunda 8 Run installation, this endpoint is available at `http://localhost:9600/actuator/configprops`. In other setups, replace `http://localhost:9600` by the URL to your Orchestration Cluster's actuator port and endpoint. Note that the actuator port differs from the Orchestration Cluster API port and may not always be accessible, depending on your deployment setup.
 
 Here is an excerpt from an example installation:
 
