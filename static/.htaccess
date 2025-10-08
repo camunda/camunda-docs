@@ -163,6 +163,7 @@ RewriteRule ^docs/self-managed/optimize-deployment/migration-update/?$ /docs/sel
 components/optimize/migration-update/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/?$ /docs/self-managed/components/orchestration-cluster/operate/$1 [R=301,L]
 RewriteRule ^docs/self-managed/modeler/?$ /docs/self-managed/components/modeler/$1 [R=301,L]
+RewriteRule ^docs/self-managed/setup/deploy/amazon/?$ /docs/self-managed/deployment/helm/cloud-providers/amazon/$1 [R=301,L]
 
 # Remove Helm chart multi-namespace deployment
 RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace-deployment/?$ /docs/self-managed/deployment/helm/install/production/ [R=301,L]
