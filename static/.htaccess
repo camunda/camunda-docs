@@ -149,6 +149,22 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/self-managed/components/ [R=301,L]
+
+RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/components/modeler/dmn/desktop-modeler-dmn/ [R=301,L]
+RewriteRule ^docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/?$ /docs/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/guides/oauth-entra/?$ /docs/guides/ [R=301,L]
+RewriteRule ^docs/guides/setup-client-connection-credentials/?$ /docs/components/console/manage-clusters/setup-client-connection-credentials/ [R=301,L]
+
+RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/multi-tenancy/?$ /docs/self-managed/installation-methods/helm/configure/configure-multi-tenancy/ [R=301,L]
+RewriteRule ^docs/self-managed/connectors-deployment/connectors-configuration/?$ /docs/self-managed/components/connectors/overview/ [R=301,L]
+
+RewriteRule ^docs/self-managed/console-deployment/configuration/ssl/?$ /docs/self-managed/components/console/configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/console-deployment/overview/?$ /docs/self-managed/components/console/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/console-deployment/telemetry/?$ /docs/self-managed/components/console/configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/console-deployment/usage-metrics/?$ /docs/reference/data-collection/usage-metrics/ [R=301,L]
+
 RewriteRule ^docs/self-managed/identity/access-management/access-management-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/access-management/manage-permissions/?$ /docs/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
