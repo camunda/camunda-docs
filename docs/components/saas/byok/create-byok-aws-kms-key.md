@@ -31,6 +31,7 @@ Use this script to create a single KMS key. The key will be created in eu-west-1
 - `TENANT_ROLE_ARN` (provided by Camunda)
 - `YOUR_ACCOUNT_ID`
 - `ALIAS_NAME` (optional)
+
 3.  Make the script executable and run it.
 4.  Copy the outputted key ARN and provide it to Camunda.
 
