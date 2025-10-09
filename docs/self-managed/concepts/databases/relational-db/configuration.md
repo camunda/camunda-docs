@@ -18,17 +18,17 @@ zeebe:
   broker:
     exporters:
       rdbms:
-        className: RdbmsExporter
-        args:
-        # see Configuration section for configuration options
+        className: io.camunda.exporter.rdbms.RdbmsExporter
 
 # set the RDBMS as primary database for Camunda REST API
 camunda:
-  database:
-    type: rdbms
-    url: jdbc:postgresql:camunda # example for a local PostgreSQL database with schema "camunda"
-    username: camunda
-    password: camunda
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql:camunda # example for a local PostgreSQL database with schema "camunda"
+        username: camunda
+        password: camunda
 ```
 
 The RDBMS [Exporter](./../../exporters.md) configuration can be enabled in addition to
@@ -44,13 +44,13 @@ If the target database schema is not empty, it sometimes can be useful to define
 can be done by setting the following property in the configuration:
 
 ```yaml
-camunda.database.index-prefix: c8_
+camunda.data.secondary-storage.rdbms.prefix: c8_
 ```
 
 To disable the automatic schema management, set the following property in the configuration:
 
 ```yaml
-camunda.database.auto-ddl: false
+camunda.data.secondary-storage.rdbms.auto-ddl: false
 ```
 
 Native SQL scripts for all supported databases can be found in the Camunda distribution (TODO:LINK). These scripts can
@@ -102,30 +102,51 @@ data.
 
 ## Configuration
 
+### Database driver
+
+The Camunda docker images ship the required database drivers for all the supported databases, except for Oracle. If Oracle is the preferred database, the driver must be added during the deployment by mounting it into the container. The Docker image provides a `/driver-lib` mount point for this purpose.
+
+Please note that the driver must to be placed directly in the **directory that is mounted, not in a subdirectory**.
+
+```yaml
+services:
+  camunda:
+    image: camunda/camunda:<tag>
+    ports:
+      - "8080:8080"
+      - "26500:26500"
+      - "9600:9600"
+    environment:
+      # environment configuration
+    volumes:
+      - <local-path>/driver-lib:/driver-lib
+```
+
 ### Database configuration
 
 Camunda RDBMS database configuration reference:
 
-| Property name                       | Description                                                                                                                                                                    | Default setting |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| camunda.database.url                | The JDBC connection url of the database                                                                                                                                        | _empty_         |
-| camunda.database.user               | The username for the database connection                                                                                                                                       | _empty_         |
-| camunda.database.password           | The password for the database connection                                                                                                                                       | _empty_         |
-| camunda.database.auto-ddl           | If the Liquibase schemamanagement should be used or not. If not, the DBA has to install the schema from available [scripts](#db-schema-management)                             | true            |
-| camunda.database.index-prefix       | A custom prefix for all camunda related database objects.                                                                                                                      | '' (empty)      |
-| camunda.database.database-vendor-id | Camunda uses vendor auto-detection vendor specific functions. With this property this auto-detection can be overridden. Possible values: _h2_, _mariadb_, _oracle_, _postgres_ | _empty_         |
+| Property name                            | Description                                                                                                                                                                                      | Default setting |
+|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------------- |
+| camunda.data.secondary-storage.rdbms.url | The JDBC connection url of the database                                                                                                                                                          | _empty_         |
+| camunda.data.secondary-storage.rdbms.user              | The username for the database connection                                                                                                                                                         | _empty_         |
+| camunda.data.secondary-storage.rdbms.password          | The password for the database connection                                                                                                                                                         | _empty_         |
+| camunda.data.secondary-storage.rdbms.auto-ddl          | If the Liquibase schemamanagement should be used or not. If not, the DBA has to install the schema from available [scripts](#db-schema-management)                                               | true            |
+| camunda.data.secondary-storage.rdbms.prefix            | A custom prefix for all camunda related database objects.                                                                                                                                        | '' (empty)      |
+| camunda.data.secondary-storage.rdbms.database-vendor-id      | Camunda uses vendor auto-detection vendor specific functions. With this property this auto-detection can be overridden. Possible values: _h2_, _mariadb_, _oracle_, _postgres_, _mysql_, _mssql_ | _empty_         |
 
 ### Exporter Configuration
 
-The RDBMS Exporter can be configured in the `args` section of the exporter configuration:
+The RDBMS Exporter can be enabled in the Zeebe broker configuration: 
 
 ```yaml
 # enable the exporter
 zeebe.broker.exporters:
   rdbms:
-    args:
-      propertyName: propertyValue
+    className: io.camunda.exporter.rdbms.RdbmsExporter
 ```
+
+Additional configuration for the exporter can be done in the `rdbms` section of the secondary-storage configuration:
 
 The following configuration options are available:
 
