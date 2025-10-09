@@ -632,15 +632,39 @@ h3 .badge:nth-of-type(1) {
 .badge--change {
   background-color: #0075ff;
   color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 .badge--deprecated {
   background-color: #ffd600;
   color: #000000;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .badge--breaking-change {
   background-color: #ff1f00;
   color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 .release .badge--long,
 .release .badge--medium {
@@ -1498,13 +1522,12 @@ ul ul .table-of-contents__link--active {
 
 /* Highlighted labels */
 .label-highlight {
-  font-size: 12px;
+  font-size: 80%;
   font-weight: 600;
-  text-transform: uppercase;
   background-color: #f0f0f0;
   color: #000;
   padding: 0.2rem 0.4rem;
-  border-radius: 0.2rem;
+  border-radius: var(--ifm-badge-border-radius);
 }
 
 .label-highlight.yellow {

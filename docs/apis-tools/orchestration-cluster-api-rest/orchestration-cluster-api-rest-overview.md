@@ -110,7 +110,7 @@ In the Camunda Console, go to your cluster, and in the **Cluster Details**, find
 
 #### Self-Managed
 
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
 
 ### Versioning
 

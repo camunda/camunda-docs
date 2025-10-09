@@ -19,7 +19,7 @@ You can create and manage [element templates](/components/concepts/element-templ
 
 ## Create an element template
 
-To create a new element template, follow the steps described in [Generate an element template](/components/connectors/custom-built-connectors/connector-template-generator.md#generate-a-connector-template).
+To create a new element template, follow the steps described in [Generate an element template](./element-template-generator.md).
 
 You will be taken to the **Element template editor** screen.
 In this screen, you can define the element template by writing the template JSON.
@@ -34,7 +34,6 @@ The components of the editor interface are as follows:
 
   :::info
   Starting with 8.8, the following properties are not managed by Web Modeler anymore, and you can freely edit them:
-
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
   - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
@@ -71,7 +70,7 @@ You cannot publish a new version if:
 Web Modeler also shows a warning if the template ID has changed since the last published version.
 You can still publish the new version in this case.
 
-As a [user with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization members to use it in their diagrams.
+As a [user with elevated access](/components/modeler/web-modeler/collaboration/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
 
 <img src={PublishToOrganizationFromEditorImg} width="482px" alt="Publish to organization from the editor page" style={{ verticalAlign: "top" }} />
@@ -83,10 +82,10 @@ After publishing, an element template version can be applied across all models w
 
 On the Web Modeler home page, you can find an overview of all shared resources within your organization.
 
-[Users with elevated access](/components/modeler/web-modeler/collaboration.md#elevated-access) can:
+[Users with elevated access](/components/modeler/web-modeler/collaboration/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's versions list (if they are in [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they are in [super-user mode](/components/modeler/web-modeler/collaboration/collaboration.md#super-user-mode) or are a [project admin or editor](/components/modeler/web-modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
 - Unpublish an element template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
@@ -94,7 +93,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 Organization members without special organization permissions can:
 
 - View all the resources published within the organization.
-- Open the resource's versions list (if they are a [project admin or editor](/components/modeler/web-modeler/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they are a [project admin or editor](/components/modeler/web-modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
 
 ![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
 

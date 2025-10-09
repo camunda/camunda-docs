@@ -2,6 +2,8 @@
 id: process-applications
 title: Process applications
 description: A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
+keywords: ["process application"]
+page_rank: 90
 ---
 
 import ProcessApplicationImg from './assets/process-applications/diagram-process-application-get-started.png'
@@ -32,5 +34,5 @@ Our [Modeler](../modeler/about-modeler.md) applications support you as you devel
 
 Read more about how to use process applications in Web and Desktop Modeler:
 
-- [Process applications in Web Modeler](/components/modeler/web-modeler/process-applications.md)
+- [Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)
 - [Process applications in Desktop Modeler](/components/modeler/desktop-modeler/process-applications.md)
