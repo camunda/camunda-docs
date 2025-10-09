@@ -632,15 +632,39 @@ h3 .badge:nth-of-type(1) {
 .badge--change {
   background-color: #0075ff;
   color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 .badge--deprecated {
   background-color: #ffd600;
   color: #000000;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .badge--breaking-change {
   background-color: #ff1f00;
   color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
 }
 .release .badge--long,
 .release .badge--medium {

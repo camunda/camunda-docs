@@ -112,6 +112,14 @@ To migrate a subprocess that is started from a call activity, the migrator must 
 
 Processes with active multi-instance elements can currently not be migrated. We recommend to finish the execution of any multi-instance elements prior to migration.
 
+#### Parallel gateways
+
+Process instances with active joining parallel gateways cannot currently be migrated. The migrator will skip these instances during migration.
+
+- This limitation occurs when some execution paths have completed and reached the joining parallel gateway, but other paths are still waiting at activities before the gateway.
+- Recommendation: Ensure no token waits in a joining parallel gateway.
+- See https://github.com/camunda/camunda-bpm-platform/issues/5461
+
 #### Timer events
 
 - Timer start events: prior to migration, you must ensure that your process has at least one [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events). Processes that only have a timer start event cannot be migrated.

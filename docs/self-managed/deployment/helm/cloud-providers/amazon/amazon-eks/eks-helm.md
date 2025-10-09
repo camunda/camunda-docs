@@ -33,7 +33,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 :::caution Optimize compatibility with OpenSearch
 
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md).
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
 :::
 
