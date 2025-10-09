@@ -151,6 +151,21 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/self-managed/components/ [R=301,L]
 
+RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
+
+RewriteRule ^docs/components/concepts/access-control/user-groups/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
+RewriteRule ^docs/components/concepts/access-control/user-task-access-restrictions/?$ /docs/components/tasklist/user-task-access-restrictions/ [R=301,L]
+RewriteRule ^docs/components/concepts/resource-authorizations/?$ /docs/components/management-identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/components/connectors/custom-built-connectors/connector-template-generator/?$ /docs/components/connectors/custom-built-connectors/connector-template-generator/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/about-templates/?$ /docs/next/components/modeler/element-templates/about-templates/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/additional-resources/?$ /docs/next/components/modeler/element-templates/about-templates/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/defining-templates/?$ /docs/next/components/modeler/element-templates/about-templates/ [R=301,L]
+RewriteRule ^docs/guides/setup-client-connection-credentials/?$ /docs/components/console/manage-clusters/setup-client-connection-credentials/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/access-management/resource-authorizations/?$ /docs/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/management-identity/configuration/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/configuration/getting-started/?$ /docs/self-managed/components/optimize/configuration/getting-started/ [R=301,L]
+
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/operate-tasklist-backup/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
@@ -174,7 +189,7 @@ RewriteRule ^docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/?$ /doc
 RewriteRule ^docs/guides/oauth-entra/?$ /docs/guides/ [R=301,L]
 RewriteRule ^docs/guides/setup-client-connection-credentials/?$ /docs/components/console/manage-clusters/setup-client-connection-credentials/ [R=301,L]
 
-RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/concepts/multi-tenancy/?$ /docs/self-managed/installation-methods/helm/configure/configure-multi-tenancy/ [R=301,L]
 RewriteRule ^docs/self-managed/connectors-deployment/connectors-configuration/?$ /docs/self-managed/components/connectors/overview/ [R=301,L]
 
@@ -235,7 +250,7 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topolog
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
 
 RewriteRule ^docs/components/best-practices/architecture/deciding-about-your-stack-c7/?$ /docs/components/best-practices/architecture/deciding-about-your-stack/ [R=301,L]
-RewriteRule ^ddocs/components/best-practices/architecture/extending-human-task-management-c7/?$ /docs/components/best-practices/architecture/understanding-human-tasks-management/ [R=301,L]
+RewriteRule ^ddocs/components/best-practices/architecture/extending-human-task-management-c7/?$ /docs/components/best-practices/best-practices-overview/ [R=301,L]
 RewriteRule ^docs/components/best-practices/architecture/sizing-your-environment-c7/?$ /docs/components/best-practices/best-practices-overview/ [R=301,L]
 RewriteRule ^docs/components/best-practices/development/invoking-services-from-the-process-c7/?$ /docs/components/best-practices/best-practices-overview/ [R=301,L]
 RewriteRule ^docs/components/best-practices/development/routing-events-to-processes-c7/?$ /docs/components/best-practices/best-practices-overview/ [R=301,L]
@@ -443,7 +458,7 @@ RewriteRule ^docs/self-managed/setup/deploy/azure/microsoft-aks/(.*)$ /docs/self
 # Move document handling content
 RewriteRule ^docs/components/concepts/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/guides/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
-RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/use-cases/(.*)$ /docs/components/document-handling/use-cases/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/display-and-download-document/(.*)$ /docs/components/document-handling/display-and-download-document/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/send-document-to-external-system-via-connector/(.*)$ /docs/components/document-handling/send-document-to-external-system-via-connector/ [R=301,L]
@@ -451,7 +466,7 @@ RewriteRule ^docs/components/document-handling/use-cases/upload-document-to-bpmn
 
 RewriteRule ^docs/components/concepts/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
 RewriteRule ^docs/guides/document-handling/(.*)$ /docs/components/document-handling/getting-started/ [R=301,L]
-RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/document-handling/configuration/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/concepts/document-handling/document-storage-configuration/(.*)$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/use-cases/(.*)$ /docs/components/document-handling/use-cases/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/display-and-download-document/(.*)$ /docs/components/document-handling/display-and-download-document/ [R=301,L]
 RewriteRule ^docs/components/document-handling/use-cases/send-document-to-external-system-via-connector/(.*)$ /docs/components/document-handling/send-document-to-external-system-via-connector/ [R=301,L]
