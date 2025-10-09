@@ -755,13 +755,13 @@ module.exports = {
                   items: [
                     {
                       type: "category",
-                      label: "AI Agent Process",
+                      label: "AI Agent Subprocess",
                       link: {
                         type: "doc",
-                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
                       },
                       items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example",
                       ],
                     },
                     {
