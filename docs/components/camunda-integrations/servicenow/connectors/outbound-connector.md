@@ -8,12 +8,12 @@ The **ServiceNow Outbound Connector** allows Camunda processes to interact direc
 
 ## Supported operations
 
-| Operation  | Description                                                       | Example use case                                                   |
-| :--------- | :---------------------------------------------------------------- | :----------------------------------------------------------------- |
-| **Create** | Inserts a new record into a ServiceNow table.                     | Creating a new incident or service request from a Camunda process. |
-| **Read**   | Retrieves records from a ServiceNow table using query parameters. | Looking up user details or checking incident status.               |
-| **Update** | Modifies fields of an existing record.                            | Updating ticket status or assignment group.                        |
-| **Delete** | Removes a record from a table by its `sys_id`.                    | Deleting temporary or test records after processing.               |
+| Operation  | Description                                                                          | Example use case                                                   |
+| :--------- | :----------------------------------------------------------------------------------- | :----------------------------------------------------------------- |
+| **Create** | Inserts a new record into a ServiceNow table.                                        | Creating a new incident or service request from a Camunda process. |
+| **Read**   | Retrieves records from a ServiceNow table using query parameters or by its `sys_id`. | Looking up user details or checking incident status.               |
+| **Update** | Modifies fields of an existing record identified by its `sys_id`.                    | Updating ticket status or assignment group.                        |
+| **Delete** | Removes a record from a table by its `sys_id`.                                       | Deleting temporary or test records after processing.               |
 
 ## Configuration
 
@@ -36,7 +36,15 @@ Authentication - Store your ServiceNow credentials securely as [Camunda secrets]
 :::
 
 ![ServiceNow Outbound Connector example](../img/outbound-connector.png)
-_Configuration of the ServiceNow Outbound Connector in Camunda Modeler._
+_Example configuration of the Create operation of the ServiceNow Outbound Connector in Camunda Modeler._
+
+---
+
+When selecting any operation other than Create, the `sys_id` field becomes available in the connector's properties.
+This allows you to specify which ServiceNow record the connector should read, update, or delete.
+
+![Sys ID field example](../img/outbound-sys-id.png)
+_Example configuration of the Update operation of the Connector that shows the `sys_id` field._
 
 ## Example: Create requested item
 
