@@ -1683,12 +1683,18 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
                   ],
                 },
-                // {
-                //   Concepts: [],
-                // },
-                // {
-                //   Migration: [],
-                // },
+                {
+                  Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                  ],
+                },
+                {
+                  Migration: [
+                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
+                  ],
+                },
               ],
             },
             {
@@ -1766,19 +1772,10 @@ module.exports = {
               ],
               Operate: [
                 "self-managed/components/orchestration-cluster/operate/operate-configuration",
-                "self-managed/components/orchestration-cluster/operate/data-retention",
-                "self-managed/components/orchestration-cluster/operate/schema-and-migration",
-                "self-managed/components/orchestration-cluster/operate/importer-and-archiver",
-                "self-managed/components/orchestration-cluster/operate/operate-authentication",
-                "self-managed/components/orchestration-cluster/operate/usage-metrics",
               ],
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/data-retention",
-                "self-managed/components/orchestration-cluster/tasklist/importer-and-archiver",
-                "self-managed/components/orchestration-cluster/tasklist/tasklist-authentication",
-                "self-managed/components/orchestration-cluster/tasklist/usage-metrics",
                 "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
