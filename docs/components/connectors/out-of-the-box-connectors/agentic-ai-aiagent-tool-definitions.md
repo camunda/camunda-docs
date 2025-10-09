@@ -25,12 +25,12 @@ groupId="ai-agent-implementation"
 defaultValue="process"
 queryString
 values={[
-{ label: "AI Agent Process", value: "process" },
+{ label: "AI Agent Subprocess", value: "process" },
 { label: "AI Agent Task", value: "task" },
 ]}>
 
 <TabItem value='process'>
-When using the **AI Agent Process** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
+When using the **AI Agent Subprocess** implementation, the connector relies on data provided by the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#special-ad-hoc-sub-process-variables) implementation to resolve the tools.
 </TabItem>
 
 <TabItem value='task'>
@@ -166,7 +166,7 @@ For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/
 ## Tool Call Responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
-set its output to a predefined variable name. For the **AI Agent Process** implementation, this variable is predefined as
+set its output to a predefined variable name. For the **AI Agent Subprocess** implementation, this variable is predefined as
 `toolCallResult`. For the **AI Agent Task** implementation, the variable depends on the configuration of the [multi-instance execution](#tools-loop),
 but is also typically named `toolCallResult`.
 

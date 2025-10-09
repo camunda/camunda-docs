@@ -1,7 +1,7 @@
 ---
-id: agentic-ai-aiagent-process
-sidebar_label: AI Agent Process
-title: AI Agent Process connector
+id: agentic-ai-aiagent-subprocess
+sidebar_label: AI Agent Subprocess
+title: AI Agent Subprocess connector
 description: AI agent connector implementation based on ad-hoc sub-processes.
 ---
 
@@ -18,7 +18,7 @@ import ConfigurationOutputMappingProcess from './agentic-ai/aiagent/configuratio
 import ConfigurationErrorHandling from './agentic-ai/aiagent/configuration/\_error-handling.md';
 import ConfigurationRetries from './agentic-ai/aiagent/configuration/\_retries.md';
 import ConfigurationExecutionListeners from './agentic-ai/aiagent/configuration/\_execution-listeners.md';
-import AgentProcessImg from '../img/ai-agent-process.png';
+import AgentProcessImg from '../img/ai-agent-subprocess.png';
 
 Implement an AI agent using an ad-hoc sub-process with an applied AI Agent connector template.
 
@@ -28,16 +28,16 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 :::info
 
-- For more information and usage examples, see [AI Agent Process](./agentic-ai-aiagent.md#ai-agent-process).
-- The [example integration](agentic-ai-aiagent-process-example.md) outlines how to model an agentic AI process using the AI Agent Process implementation.
+- For more information and usage examples, see [AI Agent Subprocess](./agentic-ai-aiagent.md#ai-agent-subprocess).
+- The [example integration](agentic-ai-aiagent-subprocess-example.md) outlines how to model an agentic AI process using the AI Agent Subprocess implementation.
 
 :::
 
-<img src={AgentProcessImg} alt="AI Agent Process" class="img-700"/>
+<img src={AgentProcessImg} alt="AI Agent Subprocess" class="img-700"/>
 
 ## Event handling
 
-With an **AI Agent Process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event.
+With an **AI Agent Subprocess**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event.
 
 - To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow.
 - The content of this variable is added to the LLM API request as a user message following any tool call results.
