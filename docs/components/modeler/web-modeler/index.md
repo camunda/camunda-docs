@@ -2,7 +2,7 @@
 id: index
 title: Web Modeler
 sidebar_label: About
-description: "Camunda Web Modeler is a collaborative, browser-based application for modeling BPMN, DMN, Camunda Forms an element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes."
+description: "Camunda Web Modeler is a collaborative, browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
