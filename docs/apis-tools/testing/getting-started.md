@@ -150,6 +150,50 @@ If you have no process application yet, you can add a minimal one inside the tes
 static class TestProcessApplication {}
 ```
 
+:::info
+
+CPT doesn't support Spring Boot process applications with `@PostConstruct` methods or a `CommandLineRunner`
+implementation. These methods are executed when the test class is initialized, but not before each test method.
+
+We recommend to use a minimal configuration for the test instead of the Spring Boot process application and invoke the
+`@PostConstruct` or `run()` methods manually before each test method.
+
+```java
+@SpringBootTest(classes = {TestProcessApplication.class})
+@CamundaSpringProcessTest
+public class ProcessTest {
+
+  @Autowired private CamundaClient client;
+
+  @BeforeEach
+  void invokeProcessApplication() throws Exception {
+    final Application springBootApplication = new Application();
+    springBootApplication.setCamundaClient(client);
+    // call the @PostConstruct methods
+    springBootApplication.afterStarted();
+    // call the CommandLineRunner method
+    springBootApplication.run();
+  }
+
+}
+```
+
+Minimal test configuration:
+
+```java
+// must be in a different package than the Spring Boot application
+package org.example.test;
+
+@SpringBootApplication(
+  // list all required packages for the process test, such as job workers
+  scanBasePackages = {"org.example.services", "org.example.workers"}
+)
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+public class TestProcessApplication {}
+```
+
+:::
+
 </TabItem>
 
 <TabItem value='java-client'>
