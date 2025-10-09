@@ -58,6 +58,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight red">Breaking changes</span></td>    
 </tr>
 <tr>
+    <td>Elasticsearch/OpenSearch: shared-only</td>
+    <td>Dedicated Elasticsearch or OpenSearch clusters per application are no longer supported. All Orchestration components must use a single, shared cluster.</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
+<tr>
     <td>Optimize</td>
     <td>Performs a startup data migration that requires downtime during startup data migration. You must plan a maintenance window.</td>
     <td><span className="label-highlight">Low</span></td>

@@ -1,6 +1,7 @@
 ---
 id: using-existing-postgres
 title: "Use external PostgreSQL"
+sidebar_label: External PostgreSQL
 description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
 ---
 

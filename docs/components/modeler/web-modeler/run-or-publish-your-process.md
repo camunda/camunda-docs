@@ -46,7 +46,7 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 - Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
-  Consider using a [process application](process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
+  Consider using a [process application](process-applications/process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
   :::
 - Implement and run your [job workers](../../concepts/job-workers.md) if you use tasks such as service or send tasks.
 - Ensure there are no missing secrets or misconfigured clients required for the process to run.
@@ -75,7 +75,7 @@ Running a process means that you execute the process as a process instance on Ca
 
 ### Test run using Play mode
 
-Before you publish or run a process, you can test it manually using the Play mode. With the Play mode, you can build and test your process iteratively in small steps. To enter the Play mode, click the Play tab in the top left corner of the modeling screen. Refer to the [Play mode documentation](./play-your-process.md) for details of how the Play environment works.
+Before you publish or run a process, you can test it manually using the Play mode. With the Play mode, you can build and test your process iteratively in small steps. To enter the Play mode, click the Play tab in the top left corner of the modeling screen. Refer to the [Play mode documentation](collaboration/play-your-process.md) for details of how the Play environment works.
 
 ### Run manually from Modeler
 
@@ -240,7 +240,7 @@ As soon as a matching event is received, a process instance will be started. To 
 ### Best practices for publishing a process
 
 - Use the [problems panel](./fix-problems-in-your-diagram.md) to make sure that the process free of errors before publishing it.
-- Ensure the process works by testing it interactively using the [Play mode](./play-your-process.md).
+- Ensure the process works by testing it interactively using the [Play mode](collaboration/play-your-process.md).
 - Use meaningful names and descriptions for the process and its elements.
 - Document the process with clear instructions and details on how it should be used.
 - Make sure that the process is accessible to the appropriate users only.

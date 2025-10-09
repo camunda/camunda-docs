@@ -40,7 +40,7 @@ Camunda offers two Modeler tools to design and implement your diagrams:
 - [Desktop Modeler](/components/modeler/desktop-modeler/index.md): Design, view, and edit models using this desktop application. Install and use Desktop Modeler locally, all while integrating your local development environment.
 
 :::note
-New to modeling a process? Visit our [getting started guide](/components/modeler/web-modeler/design-your-process.md).
+New to modeling a process? Visit our [getting started guide](/components/modeler/web-modeler/collaboration/design-your-process.md).
 :::
 
 ## Process execution

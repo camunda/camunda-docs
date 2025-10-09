@@ -261,7 +261,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-q
    <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
 
 :::tip
-In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/modeler/web-modeler/play-your-process.md).
+In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/modeler/web-modeler/collaboration/play-your-process.md).
 :::
 
 </TabItem>

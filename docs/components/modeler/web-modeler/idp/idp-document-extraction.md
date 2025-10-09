@@ -5,6 +5,7 @@ description: "Document extraction projects form the basis for using intelligent 
 ---
 
 import IdpExtractionProjectModalImg from './img/idp-create-extraction-project-modal.png';
+import IdpCreateExtractionProvidersImg from './img/idp-create-extraction-providers.png';
 
 Extract data from a single type of structured or unstructured document.
 
@@ -21,12 +22,26 @@ Document extraction templates form the basis for using IDP in your end-to-end pr
 To create a new document extraction template:
 
 1. In your [IDP application](idp-applications.md), click **Create extraction project** to open the Create new project modal.
-   <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="600px" style={{marginTop: '0'}} />
+   <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="700px" style={{marginTop: '0'}} />
 1. Select the **Extraction method** depending on whether your documents contain structured or unstructured data.
    - **Unstructured data extraction**: Extract data from unstructured documents.
    - **Structured form extraction**: Extract data from structured documents.
 1. **Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
 1. **Description**: Enter a description to provide more detailed information about the document type.
+1. **Provider**: Select the cloud provider you want to use for document extraction. The available providers depend on the connector secrets configured for your cluster.
+
+   <img src={IdpCreateExtractionProvidersImg} alt="Provider selection dropdown" width="700px" style={{marginTop: '0'}} />
+
+   The four supported providers are:
+   - **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction)
+   - **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only)
+   - **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction)
+   - **OpenAI compatible**: Any provider that implements the OpenAI `/chat/completions` API (unstructured extraction only)
+
+   :::note
+   If the connector secrets for a specific provider are missing from your cluster configuration, that provider will be unavailable for selection. To enable additional providers, configure the required connector secrets as described in the [IDP configuration guide](idp-configuration.md).
+   :::
+
 1. Click **Create** to create and open the new document extraction template.
 1. Configure and publish the template:
    - [Extract unstructured data](idp-unstructured-extraction.md): Configure and publish an unstructured data extraction template.
