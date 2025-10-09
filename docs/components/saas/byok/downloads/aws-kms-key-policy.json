@@ -31,11 +31,7 @@
       "Principal": {
         "AWS": "<TENANT-ROLE-ARN>"
       },
-      "Action": [
-        "kms:CreateGrant",
-        "kms:ListGrants",
-        "kms:RevokeGrant"
-      ],
+      "Action": ["kms:CreateGrant", "kms:ListGrants", "kms:RevokeGrant"],
       "Resource": "*"
     }
   ]
