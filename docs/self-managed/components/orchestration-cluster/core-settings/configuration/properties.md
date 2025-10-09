@@ -17,7 +17,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.api.long-polling`
 
@@ -29,7 +29,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
 
   </TabItem>
-    <TabItem value="env" label="Environment variable">
+    <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_LONGPOLLING`
 
@@ -46,7 +46,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - gRPC
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.api.grpc`
 
@@ -78,7 +78,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.grpc.interceptors[].class-name` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p>                                                                                                                | Null          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_GRPC`
 
@@ -115,7 +115,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - REST
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.api.rest.filters`
 
@@ -143,7 +143,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.rest.executor.queue-capacity`            | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_REST_FILTERS`
 
@@ -176,7 +176,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Cluster
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.cluster`
 
@@ -208,7 +208,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.cluster.raft.election-timeout`          | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_CLUSTER`
 
@@ -245,7 +245,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.data`
 
@@ -256,7 +256,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.export.skip-records`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
 
 </TabItem>
-  <TabItem value="env" label="Environment variable">
+  <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA`
 
@@ -272,7 +272,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - backup
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.data.backup`
 
@@ -329,7 +329,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.backup.filesystem.base-path` | <p>Set the base path to store all related backup files in.</p> | Null          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_BACKUP`
 
@@ -391,7 +391,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - secondary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.data.secondary-storage`
 
@@ -429,7 +429,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.secondary-storage.opensearch.index-prefix`              | <p>Prefix to apply to the indexes.</p>                             | `''`                    |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE`
 
@@ -472,7 +472,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - primary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.data.primary-storage`
 
@@ -512,7 +512,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.primary-storage.rocksdb.sst-partitioning-enabled`         | <p>Configures if the RocksDB SST files should be partitioned based on some virtual column families.</p><p>By default, RocksDB will not partition the SST files, which could influence the compacting of certain key ranges.</p><p>Enabling this option gives RocksDB some good hints how to improve compaction and reduce the write amplification.</p><p>Benchmarks have shown impressive results, allowing sustained performance on larger states.</p><p>This setting will increase the general file count of runtime and snapshots.</p>                                            | `true`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_PRIMARYSTORAGE`
 
@@ -559,7 +559,7 @@ The following configurations apply to all components within the Orchestration Cl
 Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.license`
 
@@ -568,7 +568,7 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | `camunda.license.key` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
 
 </TabItem>
-  <TabItem value="env" label="Environment variable">
+  <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_LICENSE`
 
@@ -582,7 +582,7 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 ## Security
 
 <Tabs>
-<TabItem value="conf" label="Configuration property" default>
+<TabItem value="conf" label="Configuration properties" default>
 
 ### `camunda.security`
 
@@ -715,7 +715,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 | `spring.profiles.active` | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_SECURITY`
 
@@ -826,6 +826,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`    | The email address of the first user. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`     | The name of the first user.          |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD` | The password of the first user.      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME` | The username of the first user.      |               |
 
 ### `CAMUNDA_SECURITY_MULTITENANCY`
 
@@ -838,7 +839,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `SPRING_PROFILES`
 
@@ -848,12 +849,6 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 </TabItem>
 <TabItem value="helm" label="Helm values">
-
-### `global`
-
-| Property                             | Description                                                                            | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------- | ------------- |
-| `global.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `orchestration.security.authentication`
 
@@ -865,15 +860,16 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.authentication.oidc`
 
-| Property                                                   | Description                                                      | Default value                        |
-| ---------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------ |
-| `orchestration.security.authentication.oidc.clientId`      | The client ID for OIDC authentication.                           |                                      |
-| `orchestration.security.authentication.oidc.clientSecret`  | The client secret for OIDC authentication.                       |                                      |
-| `orchestration.security.authentication.oidc.issuerUri`     | The issuer URI for OIDC authentication.                          |                                      |
-| `orchestration.security.authentication.oidc.redirectUri`   | The redirect URI for OIDC authentication.                        | `http://localhost:8080/sso-callback` |
-| `orchestration.security.authentication.oidc.userNameClaim` | The claim to use for the username in OIDC authentication.        | `sub`                                |
-| `orchestration.security.authentication.oidc.groupsClaim`   | The claim to use for groups in OIDC authentication.              |                                      |
-| `orchestration.security.authentication.oidc.audiences`     | Comma-separated list of audiences to validate in the OIDC token. |                                      |
+| Property                                                                  | Description                                                                                                                                                                                  | Default value                                |
+| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| `orchestration.security.authentication.oidc.audience`                     | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                             |                                              |
+| `orchestration.security.authentication.oidc.backwardsCompatibleAudiences` | Defines audiences, which need to be set for backwards compatibility to allow access to the Orchestration Cluster. This is only important to set if you're upgrading from an earlier version. | `["operate-api","tasklist-api","zeebe-api"]` |
+| `orchestration.security.authentication.oidc.clientId`                     | The client ID for OIDC authentication.                                                                                                                                                       |                                              |
+| `orchestration.security.authentication.oidc.clientSecret`                 | The client secret for OIDC authentication.                                                                                                                                                   |                                              |
+| `orchestration.security.authentication.oidc.groupsClaim`                  | The claim to use for groups in OIDC authentication.                                                                                                                                          |                                              |
+| `orchestration.security.authentication.oidc.issuerUri`                    | The issuer URI for OIDC authentication.                                                                                                                                                      |                                              |
+| `orchestration.security.authentication.oidc.redirectUri`                  | The redirect URI for OIDC authentication.                                                                                                                                                    | `http://localhost:8080/sso-callback`         |
+| `orchestration.security.authentication.oidc.userNameClaim`                | The claim to use for the username in OIDC authentication.                                                                                                                                    | `sub`                                        |
 
 ### `orchestration.security.authorizations`
 
@@ -936,10 +932,9 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.initialization`
 
-| Property                                         | Description                                                                          | Default value |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initiation.users`        | List of users to initialize (each with username, password, name, email).             |               |
-| `orchestration.security.initiation.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
+| Property                                      | Description                                                              | Default value |
+| --------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `orchestration.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
 
 ### `orchestration.security.multiTenancy`
 
@@ -954,7 +949,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 ## System
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Configuration properties">
 
 ### `camunda.system`
 
@@ -979,7 +974,7 @@ Disabling CSRF protection is not recommended for production environments as it l
 | `camunda.system.upgrade.enable-version-check` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_SYSTEM`
 
