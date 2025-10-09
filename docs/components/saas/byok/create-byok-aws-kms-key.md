@@ -21,7 +21,7 @@ Use this script to create a single KMS key. The key will be created in eu-west-1
 
 **Instructions:**
 
-1.  Download the script: [create-byok-kms-key-single-region.sh](https://docs.camunda.io/docs/next/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
+1.  Download the script: [create-byok-kms-key-single-region.sh](/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
 2.  Modify the following values at the top of the script:
     - `AWS_ACCESS_KEY_ID`
     - `AWS_SECRET_ACCESS_KEY`
@@ -46,7 +46,7 @@ Use this script to create a multi-region primary key and a replica key in a seco
 
 **Instructions:**
 
-1.  Download the script: [create-byok-kms-key-multi-region.sh](https://docs.camunda.io/docs/next/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
+1.  Download the script: [create-byok-kms-key-multi-region.sh](/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
 2.  Modify the following values at the top of the script:
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
@@ -62,8 +62,8 @@ Use this script to create a multi-region primary key and a replica key in a seco
 > before creating the second key.
 
 **Script Reference:** 
-For creating AWS KMS single-region key Download and run [create-byok-kms-key-single-region.sh](https://docs.camunda.io/docs/next/components/saas/byok/downloads/create-byok-kms-key-single-region.sh)
-For creating AWS KMS multi-region keys Download and run [create-byok-kms-key-multi-region.sh](https://docs.camunda.io/docs/next/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh)
+For creating AWS KMS single-region key Download and run [create-byok-kms-key-single-region.sh](/components/saas/byok/downloads/create-byok-kms-key-single-region.sh)
+For creating AWS KMS multi-region keys Download and run [create-byok-kms-key-multi-region.sh](/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh)
 
 ---
 
@@ -100,7 +100,7 @@ Follow these steps to create a single KMS key in your desired AWS region.
 
 6.  **Edit Key Policy**
    - On the review screen, find the **Key policy** section and click **Switch to policy view**.
-   - Add to or replace with the [key policy](https://docs.camunda.io/docs/next/components/saas/byok/downloads/aws-kms-key-policy.json) we provide to you
+   - Add to or replace with the [key policy](/components/saas/byok/downloads/aws-kms-key-policy.json) we provide to you
    - Replace `<YOUR_AWS_ACCOUNT_ID>` with your AWS Account ID.
    - Replace `<TENANT_ROLE_ARN>` with the tenant IAM role ARN provided by Camunda.
 
