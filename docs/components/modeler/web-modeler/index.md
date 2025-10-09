@@ -37,7 +37,7 @@ Access Web Modeler through the [Camunda 8 Console](../../console/introduction-to
 
 <DocCardList items={[{type:"link", href:"/docs/next/components/modeler/web-modeler/model-your-first-diagram/", label: "Model your first diagram", docId:"components/modeler/web-modeler/model-your-first-diagram"},
 {
-type:"link", href:"/docs/next/components/modeler/web-modeler/collaboration/collaboration/", label: "Collaborate with your team", docId:"components/modeler/web-modeler/collaboration/collaboration",
+type:"link", href:"/docs/next/components/modeler/web-modeler/collaboration/", label: "Collaborate with your team", docId:"components/modeler/web-modeler/collaboration/collaboration",
 },
 {
 type:"link", href:"/docs/next/components/modeler/web-modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/modeler/web-modeler/run-or-publish-your-process"
