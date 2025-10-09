@@ -266,7 +266,7 @@ RewriteRule ^docs/self-managed/zeebe-deployment/exporters/(.*)$ /docs/self-manag
 RewriteRule ^docs/self-managed/zeebe-deployment/configuration/(.*)$ /docs/self-managed/components/orchestration-cluster/zeebe/configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/(.*)$ /docs/self-managed/components/orchestration-cluster/tasklist/$1 [R=301,L]
 RewriteRule ^docs/apis-tools/java-client-examples/(.*)$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/$1 [R=301,L]
+
 RewriteRule ^docs/self-managed/optimize-deployment/configuration/(.*)$ /docs/self-managed/components/optimize/configuration/$1 [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/migration-update/(.*)$ /docs/self-managed/components/optimize/migration-update/$1 [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/(.*)$ /docs/self-managed/components/orchestration-cluster/operate/$1 [R=301,L]
