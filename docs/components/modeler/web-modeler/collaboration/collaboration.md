@@ -4,7 +4,7 @@ title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 
-import SuperUserModeImg from './img/super-user-mode.png';
+import SuperUserModeImg from '../img/super-user-mode.png';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -16,7 +16,7 @@ Files and folders are stored in projects.
 The user access on files and folders is defined at the project level.
 
 When you access Web Modeler via the Camunda 8 dashboard, you can note the **Home** page with all the projects you can access:
-![home page](img/collaboration/web-modeler-home.png)
+![home page](img/web-modeler-home.png)
 
 ### Access rights and permissions
 
@@ -69,7 +69,7 @@ If the role is not pre-existing, it can be created with the following permission
 - Web Modeler Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
-Refer to the documentation pages about [assigning roles](../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
+Refer to the documentation pages about [assigning roles](../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
 </TabItem>
 
 </Tabs>
@@ -83,20 +83,20 @@ Users without email addresses will not receive any kind of notification about pr
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
 1. Click **Add user**.
-   ![invite user](img/collaboration/web-modeler-collaborator-invite-modal-opened.png)
+   ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
 
 2. Choose a role for your new collaborator.
-   ![invite choose role](img/collaboration/web-modeler-collaborator-invite-choose-role.png)
+   ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
 
 3. Begin typing the name or email of the individual and Web Modeler will suggest Camunda 8 organization members that you can invite to the project.
-   ![invite suggestions](img/collaboration/web-modeler-collaborator-invite-suggestions.png)
+   ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.
-   ![invite type message](img/collaboration/web-modeler-collaborator-invite-type-message.png)
+   ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
 
 5. Click **Send** and your new collaborator will receive an email with the invitation.
-   ![invite sent](img/collaboration/web-modeler-collaborator-invite-sent.png)
-   ![invite email](img/collaboration/web-modeler-collaborator-invite-email.png)
+   ![invite sent](img/web-modeler-collaborator-invite-sent.png)
+   ![invite email](img/web-modeler-collaborator-invite-email.png)
 
 :::info Self-Managed license restrictions
 For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
@@ -115,19 +115,19 @@ Diagrams can also be shared with others in read-only mode via a sharing link.
 This link can also be protected with an additional password.
 
 1. Navigate to a diagram and click on the share icon button.
-   ![share button](img/collaboration/web-modeler-share-icon-button.png)
+   ![share button](img/web-modeler-share-icon-button.png)
 
 2. Click **Create link**.
-   ![share create link](img/collaboration/web-modeler-share-modal.png)
+   ![share create link](img/web-modeler-share-modal.png)
 
 3. Click **Copy** to copy the link to your clipboard.
-   ![share copy link](img/collaboration/web-modeler-share-modal-create.png)
+   ![share copy link](img/web-modeler-share-modal-create.png)
 
 4. Click **Add** and type a new password to protect your link.
-   ![share copy link](img/collaboration/web-modeler-share-modal-password-protect.png)
+   ![share copy link](img/web-modeler-share-modal-password-protect.png)
 
 5. Click **Email** to share the new link with multiple recipients.
-   ![share copy link](img/collaboration/web-modeler-share-modal-email.png)
+   ![share copy link](img/web-modeler-share-modal-email.png)
 
 Similar to the sharing link, a diagram can be embedded into HTML pages via an iframe tag. The iframe tag can be copied from the sharing dialog via the **Embed** button.
 
@@ -137,20 +137,20 @@ For wiki systems like [Confluence](https://www.atlassian.com/software/confluence
 
 When selecting an element of the BPMN diagram, a discussion can be attached to this element. If no element is selected, the discussion will be attached directly to the diagram.
 Switch between the **Properties Panel** and **Comments** using the two tabs present at the top of the right side panel.
-![comment](img/collaboration/web-modeler-comment-type-here.png)
+![comment](img/web-modeler-comment-type-here.png)
 
 New comments can be added to the discussion by any collaborator with Admin, Editor, or Commenter access rights.
 
 Afterwards, the comment can be edited or deleted via the context menu icon.
-![comment context menu](img/collaboration/web-modeler-comment-with-context-menu.png)
+![comment context menu](img/web-modeler-comment-with-context-menu.png)
 
 Elements with discussions attached will always have a visible blue overlay, so you can easily identify discussion points.
-![comment context menu](img/collaboration/web-modeler-comment-overlay-on-diagram.png)
+![comment context menu](img/web-modeler-comment-overlay-on-diagram.png)
 
 ### Mention others in comments
 
 By typing the **@** character, you are able to filter the collaborators on the project and select one of them.
-![comment suggestion](img/collaboration/web-modeler-comment-mention-suggestions.png)
+![comment suggestion](img/web-modeler-comment-mention-suggestions.png)
 
 When submitting the comment, this user will receive an email as a notification about the new comment.
 
@@ -158,14 +158,14 @@ When submitting the comment, this user will receive an email as a notification a
 Users without email addresses will not receive any kind of notification about being mentioned in a comment.
 :::
 
-![comment suggestion email](img/collaboration/web-modeler-comment-mention-email.png)
+![comment suggestion email](img/web-modeler-comment-mention-email.png)
 
 ## Interact with your collaborators
 
 ### Model a diagram together
 
 When others are opening the same diagram as you, the updates on the diagram are sent in real time. You can also note who is in the diagram with you.
-![real time collaboration](img/real-time-collaboration.png)
+![real time collaboration](../img/real-time-collaboration.png)
 
 ### Undo/redo management limitations
 
@@ -176,10 +176,10 @@ When collaborating with others on a diagram, you can only undo or redo your own 
 Whether you are in a presentation or if others are in the same diagram as you are, use the attention grabber pointer to draw attention to a specific part of the diagram. To do this, take the following steps:
 
 1. Switch on the attention grabber pointer from the canvas tools.
-   ![attention grabber](img/attention-grabber.png)
+   ![attention grabber](../img/attention-grabber.png)
 
 2. Drop the pointer by clicking anywhere on the canvas.
-   ![attention grabber](img/attention-grabber-pointer-pulse.png)
+   ![attention grabber](../img/attention-grabber-pointer-pulse.png)
 
 The pointer will pulsate to draw attention and will match your avatar color.
 It can also be seen in real-time by others that are looking at the same diagram as you.

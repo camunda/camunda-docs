@@ -122,9 +122,13 @@ value of `1w` would archive based on weekly intervals so a process instance whic
 therefore it would be archived into a historical index with a suffix of `yyyy-mm-07`
 
 | Configuration parameter                    | Description                            | Default value |
-|--------------------------------------------|----------------------------------------|---------------|
+| ------------------------------------------ | -------------------------------------- | ------------- |
 | camunda.tasklist.archiver.rolloverInterval | Interval for size of archived indices. | 1d            |
 
 Refer to [Elasticsearch calendar intervals](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-datehistogram-aggregation#calendar_intervals)
 or [OpenSearch Auto-interval date histogram](https://docs.opensearch.org/latest/aggregations/bucket/auto-interval-date-histogram/)
 for more information on possible values and their effects.
+
+:::note
+This feature is officially supported from version >= 8.7.15.
+:::

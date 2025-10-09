@@ -58,6 +58,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight red">Breaking changes</span></td>    
 </tr>
 <tr>
+    <td>Elasticsearch/OpenSearch: shared-only</td>
+    <td>Dedicated Elasticsearch or OpenSearch clusters per application are no longer supported. All Orchestration components must use a single, shared cluster.</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
+<tr>
     <td>Optimize</td>
     <td>Performs a startup data migration that requires downtime during startup data migration. You must plan a maintenance window.</td>
     <td><span className="label-highlight">Low</span></td>
@@ -107,7 +112,7 @@ The following table provides a high-level overview of the impact of these change
 </tr>
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
-    <td>This is no longer supported.<ul><li><p>You must transition to using Basic authentication and recreate users in Orchestration Cluster Identity.</p></li><li><p>See the documentation for [Tasklist authentication](../../components/orchestration-cluster/tasklist/tasklist-authentication.md) and [Operate authentication](../../components/orchestration-cluster/operate/operate-authentication.md).</p></li></ul></td>
+    <td>This is no longer supported.<ul><li><p>You must transition to using Basic authentication and recreate users in Orchestration Cluster Identity.</p></li><li><p>See the documentation for [Tasklist authentication](../../../../versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) and [Operate authentication](../../../../versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).</p></li></ul></td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 <tr>

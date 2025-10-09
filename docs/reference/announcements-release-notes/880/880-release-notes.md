@@ -135,11 +135,17 @@ Manually execute and test individual tasks or segments (connectors, RPA bots, ID
 
 <div class="release"><span class="badge badge--medium" title="This feature affects connectors">Connectors</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
+### Ad-hoc tools schema resolver connector
+
+This connector implements the tool resolution part of the AI Agent connector, but can also be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver/" class="link-arrow">Ad-hoc tools schema resolver connector</a></p>
+
 ### AI Agent connector
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
 
-Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities. Designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md), providing automated user interaction and tool selection.
+Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities. Designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md), providing automated user interaction and tool selection.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/" class="link-arrow">AI Agent connector</a></p>
 
@@ -265,10 +271,19 @@ The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (K
 
 ### Regions
 
-A new Singapore (ap-southeast-1) region is available for SaaS clusters on Amazon Web Services. Use this region to:
+New regions are available for SaaS clusters on Amazon Web Services:
 
-- Improve overall processing speed and reduce latency if you operate in Singapore and Southeast Asian (SEA) countries.
-- Keep cluster data within Singapore to support your local data residency and compliance needs.
+| Type                     | Region                              |
+| :----------------------- | :---------------------------------- |
+| AWS region               | Singapore (ap-southeast-1)          |
+| Secondary backups region | Ireland, Europe (eu-west-1)         |
+| Secondary backups region | Jakarta, Indonesia (ap-southeast-3) |
+| Secondary backups region | Oregon, North America (us-west-2)   |
+
+Use these regions to:
+
+- Improve overall processing speed and reduce latency if you operate in countries within that region.
+- Keep cluster data within that country/region to support your local data residency and compliance needs.
 
 <p><a href="../../../../components/saas/regions" class="link-arrow">Regions</a></p>
 
@@ -549,10 +564,10 @@ In addition to GitHub and GitLab, Web Modeler now supports integration with Azur
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
@@ -1326,7 +1341,7 @@ To learn more about versioning your diagrams, see [versions](components/modeler/
 As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 

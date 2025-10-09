@@ -21,9 +21,9 @@ When using [Git sync](/components/modeler/web-modeler/git-sync.md) to keep your 
 
 ## Process applications
 
-| Desktop Modeler                                                                            | Web Modeler                                                                                                       |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications.md). |
+| Desktop Modeler                                                                            | Web Modeler                                                                                                                            |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications/process-applications.md). |
 
 Using a single folder structure to represent process applications makes it easier to work across both tools.
 
