@@ -3,26 +3,30 @@ id: whats-new-in-88
 title: What's new in Camunda 8.8
 sidebar_label: What's new in Camunda 8.8
 description: "Learn more about what's new and changed in Camunda 8.8."
-keywords: ["what's changed", "what's new"]
+keywords:
+  [
+    "what's changed",
+    "what's new",
+    "whats changed in 8.8",
+    "what's changed in 8.8",
+    "8.8 changes",
+  ]
+page_rank: 90
 ---
 
 import OrchestrationClusterImg from '../../img/orchestration-cluster.png';
 
-Learn about important changes in Camunda 8.8 to consider when planning your upgrade from Camunda 8.7.
+Important changes in Camunda 8.8 you should consider when upgrading from Camunda 8.7.
 
-:::warning
-This documentation is a work in progress and may contain incomplete, placeholder, or evolving content. While the core concepts introduced in Camunda 8.8 are stable, specific details are actively being refined.
-:::
-
-## Introducing Camunda 8.8
+## Why upgrade to Camunda 8.8?
 
 Camunda 8.8 introduces important architectural changes and enhancements to simplify deployment, improve maintainability, and empower both operations teams and developers.
-
-### Why upgrade to Camunda 8.8?
 
 Upgrading to Camunda 8.8 delivers significant benefits:
 
 <div className="list-tick">
+
+- **Agentic orchestration**: [Build and orchestrate AI agents](#agentic-orchestration) within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
 - **Unified platform**: Camunda 8.8 combines core components into a single [Orchestration Cluster](#orchestration-cluster), reducing system complexity, centralizing operations, and simplifying both deployment and maintenance.
 
@@ -36,7 +40,7 @@ Upgrading to Camunda 8.8 delivers significant benefits:
 To learn more about the benefits of upgrading to Camunda 8.8, see the blog posts [streamlined deployment with Camunda 8.8](https://camunda.com/blog/2025/03/streamlined-deployment-with-camunda-8-8/) and [introducing enhanced Identity Management in Camunda 8.8](https://camunda.com/blog/2025/03/introducing-enhanced-identity-management-in-camunda-88/).
 :::
 
-### Summary of important changes
+## Summary of important changes
 
 Important changes introduced in Camunda 8.8 are summarized as follows:
 
@@ -47,7 +51,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 </tr>
 <tr>
     <td>[Agentic orchestration](#agentic-orchestration)</td>
-    <td>Improved agentic orchestration features and connectors.</td>
+    <td>Improved features and new connectors for building and orchestrating AI agents within your BPMN-based workflows.</td>
 </tr>
 <tr>
     <td>[Orchestration Cluster](#orchestration-cluster)</td>
@@ -64,24 +68,47 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 </tr>
 </table>
 
-:::note simple deployment
-The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
-:::
-
 :::info
 
 - See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
-- Ready to upgrade? See our [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
+- Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.7 to 8.8.
 
 :::
 
 ## Agentic orchestration
 
-Orchestrate trusted agents at scale using AI process agents, AI task agents, and advanced multi-agent orchestration.
+Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md): Build agents to operate autonomously within your end-to-end process and integrate with a variety of LLM providers such as Azure OpenAI or AWS Bedrock.
+<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
 
-- [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md): Support for multi-agent communication protocols (MCP). Agents and processes can auto-discover and invoke enterprise systems with full context. This unlocks more advanced coordination patterns while maintaining the governance and transparency enterprises require.
+Use the following new features to build and integrate AI agents into your processes:
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+</tr>
+<tr>
+    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
+</tr>
+<tr>
+    <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+</tr>
+<tr>
+    <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
+    <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
+</tr>
+</table>
+
+:::info
+To learn more about agentic orchestration, see the blog post [Enterprise-Grade Agentic Automation Is Here](https://camunda.com/blog/2025/10/enterprise-grade-agentic-automation-is-here/).
+:::
 
 ## Orchestration Cluster {#orchestration-cluster}
 
@@ -90,6 +117,10 @@ The primary architectural change is the consolidation of the core Zeebe, Operate
 The Orchestration Cluster (previously automation cluster) is now the core component of Camunda 8.
 
 <img src={OrchestrationClusterImg} alt="Diagram showing the Orchestration Cluster" class="img-noborder" style={{marginBottom: '0'}}/>
+
+:::note simple deployment
+The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
+:::
 
 ### Zeebe, Operate, Tasklist, and Identity
 
@@ -102,13 +133,17 @@ In Camunda 8.8, Zeebe, Operate, Tasklist, and Identity are integrated into the O
 
 In Camunda 8.7 and earlier, each component (Zeebe, Operate, Tasklist, and Identity) was deployed independently.
 
+<p><a href="../../../../self-managed/components/orchestration-cluster/overview/" class="link-arrow">Orchestration Cluster</a></p>
+
 ### Unified Orchestration Cluster REST API {#orchestration-cluster-api}
 
-Camunda 8.8 introduces a single unified [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) you can use to interact programmatically with the Orchestration Cluster.
+Camunda 8.8 introduces a single unified Orchestration Cluster REST API you can use to interact programmatically with the Orchestration Cluster.
 
 - This replaces component APIs (Operate API, Tasklist API, Zeebe API, and much of Identity API) with a single set of endpoints.
 - This unified API supports both organizational (SaaS) and Self-Managed deployments.
 - This is now the default and recommended integration point for developers, operators, and automation solutions.
+
+<p><a href="../../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/" class="link-arrow">Orchestration Cluster REST API</a></p>
 
 ### Unified Exporter
 
@@ -116,19 +151,47 @@ Camunda 8.8 introduces a new unified exporter architecture to improve cluster ma
 
 In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flows between components (such as Elasticsearch import/export).
 
+<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/" class="link-arrow">Camunda Exporter</a></p>
+
 ### Unified component configuration
 
-Camunda 8.8 introduces a unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
+Camunda 8.8 introduces unified configuration for Orchestration Cluster components where you can define all essential cluster and component behavior through a single, centralized configuration system.
 
 In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
 
+<p><a href="../../../../self-managed/components/orchestration-cluster/core-settings/overview/" class="link-arrow">Core settings and features</a></p>
+
+:::note
+
+Only the first partial set of unified configuration properties is introduced in Camunda 8.8.
+
+- All remaining unified property changes will be completed by Camunda 8.9.
+- This remaining work will result in future breaking changes. For example, the secondary database properties will be unified into a secondary-storage properties section.
+
+:::
+
 ## Identity, authentication, and authorization {#identity}
 
-The Orchestration Cluster [Identity](/components/identity/identity-introduction.md) component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
+The Orchestration Cluster Identity component UI handles authentication and authorization for the Orchestration Cluster components and its resources.
+
+<p><a href="../../../../components/identity/identity-introduction/" class="link-arrow">Introduction to Identity</a></p>
 
 :::note
 With this 8.8 change, the source of truth for Identity and Access Management for the Orchestration Cluster (including Zeebe, Operate, Tasklist, and its APIs) is now the Orchestration Cluster itself. This removes the reliance on the separate [Management Identity](/self-managed/components/management-identity/overview.md) (formerly "Identity") component.
 :::
+
+### Tenant interceptors
+
+Tenant interceptors are **not supported in Camunda 8.8**.  
+If you are using tenant interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [tenant management](/components/identity/tenant.md).
+
+Administrators must:
+
+- Migrate tenants into the cluster using either the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
+- Assign tenants by:
+  - Direct assignment to [users](/components/identity/tenant.md#assign-users-to-a-tenant)
+  - Direct assignment to [clients](/components/identity/tenant.md#assign-clients-to-a-tenant)
+  - Using [mapping rules](/components/identity/tenant.md#assign-mapping-rules-to-a-tenant)
 
 ### Identity and Management Identity
 
@@ -190,7 +253,7 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
     </tbody>
 </table>
 
-### Who is affected by 8.8 Identity changes?
+### Are you affected by 8.8 Identity changes?
 
 The 8.8 changes to Identity could affect different user roles in your Organization. For example:
 
@@ -295,15 +358,40 @@ In a Basic Authentication setup, the Orchestration Cluster provides full functio
 
 Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are summarized as follows:
 
-| What's new/changed                                                                                                                   | Description                                                                                                                                                                                                                                                                                                 |
-| :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Orchestration Cluster REST API](#orchestration-cluster)                                                                             | The unified Orchestration Cluster REST API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.                                                                                                                            |
-| [Camunda Java Client](apis-tools/java-client/getting-started.md)                                                                     | The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client. |
-| [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)                                            | The Camunda Spring Boot Starter replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.                                                                       |
-| [Camunda Process Test](/apis-tools/testing/getting-started.md)                                                                       | Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.                                                                        |
-| [Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)                                                 | Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.                                                                                                                                         |
-| [Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis) | The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster REST API, which provides a more unified and consistent interface for managing tasks and workflows.                                   |
-| [Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)      | With the 8.8 release, the gRPC API continues but is being disabled by default starting with 8.10.                                                                                                                                                                                                           |
+<table className="table-callout">
+<tr>
+    <td width="30%">**What's new/changed**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[Orchestration Cluster REST API](#orchestration-cluster)</td>
+    <td>The unified Orchestration Cluster REST API replaces the deprecated V1 component APIs, providing a unified interface for managing and interacting with the Orchestration Cluster.</td>
+</tr>
+<tr>
+    <td>[Camunda Java Client](apis-tools/java-client/getting-started.md)</td>
+    <td>The Camunda Java Client is now the official Java library for connecting to Camunda 8 clusters, automating processes, and implementing job workers. It is designed for Java developers who want to interact programmatically with Camunda 8 via REST or gRPC, and is the successor to the Zeebe Java client.</td>
+</tr>
+<tr>
+    <td>[Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)</td>
+    <td>The Camunda Spring Boot Starter replaces the Spring Zeebe SDK. The SDK relies on the Camunda Java client, designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.</td>
+</tr>
+<tr>
+    <td>[Camunda Process Test](/apis-tools/testing/getting-started.md)</td>
+    <td>Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.</td>
+</tr>
+<tr>
+    <td>[Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</td>
+    <td>Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.</td>
+</tr>
+<tr>
+    <td>[Tasklist GraphQL API](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)</td>
+    <td>The previously deprecated Tasklist GraphQL API is removed in Camunda 8.8. This change is part of the broader architectural evolution towards the Orchestration Cluster REST API, which provides a more unified and consistent interface for managing tasks and workflows.</td>
+</tr>
+<tr>
+    <td>[Zeebe gRPC API endpoints](/reference/announcements-release-notes/880/880-announcements.md#deprecated-zeebe-grpc-api-endpoints)</td>
+    <td>With the 8.8 release, the gRPC API continues but will be disabled by default starting with the 8.10 release.</td>
+</tr>
+</table>
 
 :::info
 To learn more about upgrading and migrating to 8.8, see the [API & tools upgrade guide](/apis-tools/migration-manuals/index.md).
@@ -315,7 +403,47 @@ Camunda 8.8 lays the foundation for future releases. Upgrading ensures compatibi
 
 The following guides provide detailed information on how you can upgrade to Camunda 8.8.
 
-| Guide                                                                         | Description                                                                                                             | Who is this guide for?                                                                                                                                                              |
-| :---------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Self-Managed upgrade guide](/self-managed/update/administrators/overview.md) | Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment. | Operations and platform administrators of Self-Managed installations.                                                                                                               |
-| [APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)          | <p>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</p>                      | <p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p> |
+<table className="table-callout">
+<tr>
+    <td width="25%">**Guide**</td>
+    <td>**Description**</td>
+    <td>**Who is this guide for?**</td>
+</tr>
+<tr>
+    <td>[Self-Managed upgrade guide](/self-managed/update/administrators/overview.md)</td>
+    <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
+    <td>Operations and platform administrators of Self-Managed installations.</td>
+</tr>
+<tr>
+    <td>[APIs & tools upgrade guide](/apis-tools/migration-manuals/index.md)</td>
+    <td>Plan and execute an upgrade from Camunda 8.7 to 8.8, focusing on API and tools transitions.</td>
+    <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
+</tr>
+</table>
+
+## Migration from Camunda 7 to Camunda 8
+
+Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda 7 to Camunda 8.
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**What's new**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)</td>
+    <td>Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.</td>
+</tr>
+<tr>
+    <td>[Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)</td>
+    <td>Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.</td>
+</tr>
+<tr>
+    <td>[Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)</td>
+    <td>Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.</td>
+</tr>
+</table>
+
+:::tip
+Start your migration today with the [Camunda 7 to Camunda 8 migration guide](/guides/migrating-from-camunda-7/index.md).
+:::
