@@ -6,6 +6,7 @@ description: "Structured data extraction allows you to extract data from structu
 
 import IdpPublishProjectModalImg from './img/idp-publish-structured.png';
 import IdpVersionsImg from './img/idp-versions.png';
+import IdpMenuImg from './img/idp-edit-template-button.png';
 
 Use this extraction method to extract data from [structured documents](idp-key-concepts.md#structured-documents).
 
@@ -37,19 +38,26 @@ Complete the following steps to configure and publish a structured data extracti
 
 ## Step 1: Create template and upload sample document {#upload}
 
-In the IDP application, click **Create document template**, select **Structured form extraction**, and enter a name, description, and select the provider. After publishing, the template’s name and description appear in the element selector when used in a process diagram. A clear name and concise description help others find and understand its use.
+In the IDP application, click **Create document template**, select **Structured form extraction**, and enter a name, description, and select the provider.
+
+:::note
+After publishing, the template name and description is shown in the element selector when used in a process diagram. Use a clear name and concise description to help other users find and understand when to use the template.
+:::
+
 ![Create form extraction template](img/idp-create-extraction-project.png)
 
-Note: You can edit the description and provider later from the menu button, but changes to the template apply only after republishing
-![Edit template button](img/idp-edit-template-button.png)
+You can edit the description and provider later via the menu button, but changes to the template are only applied after republishing.
 
-After creating the template, you’ll be taken to the new template screen where you can upload a sample document that represents the type of document you want to extract data from.
+<img src={IdpMenuImg} alt="Unstructured data extraction screen" class="img-600" />
+
+After creating the template, the new template screen opens. You can upload a sample document that represents the type of document you want to extract data from.
 
 ![Upload a sample document](img/idp-structured-instructions-upload.png)
 
 To upload your sample document:
 
 1. Drag your sample document into the box or click **Drag and drop a PDF file here or click to upload a file** to browse and upload your sample document.
+
 2. Once you have finished uploading your sample document, the extraction process starts automatically.
    - The extraction process retrieves the fields and tables from the document.
    - The extracted fields and tables are displayed in the **Fields** and **Tables** tabs.
@@ -85,9 +93,9 @@ Once you are satisfied with your template configuration, you can test it to vali
 
 ## Step 3: Test data extraction (optional) {#test}
 
-Testing is optional but recommended. It helps you evaluate the performance of your configured extraction template before publishing it.
+Testing is optional but recommended, as you can evaluate the performance of the extraction template before publishing.
 
-By testing, you can see how accurately the template extracts data from other documents of the same type, ensuring better results before using it in your processes.
+testing allows you to see how accurately the template extracts data from other documents of the same type. This ensures better results when using the template in your processes.
 
 ![Upload document for testing](img/idp-upload-test-template-empty.png)
 
