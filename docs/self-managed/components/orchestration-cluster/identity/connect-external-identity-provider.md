@@ -284,23 +284,23 @@ If you have set `camunda.security.authentication.oidc.client-id-claim` to `clien
 
 When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, and a token containing both claims is presented to the platform, we use the following logic to identify a single principal for the request:
 
-1. If the client id claim is present, the request is treated as a client request with the corresponding ID.
-1. If the client id is not present, the request is treated as a user request with the corresponding username matching the username-claim.
-1. If neither the client id claim nor the username claim are set, then the request is rejected.
+1. If the client id claim is **present**, the request is treated as a **client request** with the corresponding ID.
+1. If the client id is **not present**, the request is treated as a **user request** with the corresponding username matching the username-claim.
+1. If **neither the client id claim nor the username claim are set**, then the request is **rejected**.
 
 #### Controlling the principal identification order
 
 In most cases, the default detection logic is sufficient. However, if you have a use-case for changing the order, the configuration property `camunda.security.authentication.oidc.prefer-username-claim` can be set to `true`. In this case, the logic will be:
 
 1. If the username claim is **present**, the request is treated as a **user request** with the corresponding username.
-2. If the username claim is **not present**, the request is treated as a **client request** with the corresponding ID matching the client id claim.
+2. If the username claim is **not present**, the request is treated as a **client request** with the corresponding id matching the client id claim.
 3. If **neither the client id claim nor the username claim are set**, the request is **rejected**.
 
 We recommend to set client id claim and username claim as follows:
 
-- The client id claim should not be the same as the username claim.
-- The client id claim should be a claim that is not present in user access tokens. For this reason, it should not be set to a default claim (such as `sub`).
-- For ease of use, the client id claim's value should be the client id from the Identity Provider. This way, you can use the same value across both your Identity Provider and the Orchestration Cluster as the identifier of your client.
+- The client id claim **should not** be the same as the username claim.
+- The client id claim **should** be a claim that is not present in user access tokens. For this reason, it should not be set to a default claim (such as `sub`).
+- For ease of use, the client id claim's value **should** be the client id from the Identity Provider. This way, you can use the same value across both your Identity Provider and the Orchestration Cluster as the identifier of your client.
 
 ### Step 2: Prepare your IdP
 
