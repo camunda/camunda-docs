@@ -197,7 +197,7 @@ Examples:
 - `tasklist-task-8.8.0_2024-01-15`
 
 :::note Index versioning
-The version number in index names (e.g., `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [Operate schema and migration documentation](/self-managed/components/orchestration-cluster/operate/schema-and-migration.md).
+The version number in index names (e.g., `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [Operate schema and migration documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration.md).
 :::
 
 If no archived indices exist:
