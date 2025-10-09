@@ -25,12 +25,12 @@ Use this script to create a single KMS key. The key will be created in eu-west-1
 1.  Download the script: [create-byok-kms-key-single-region.sh](/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
 2.  Modify the following values at the top of the script:
 
-    - `AWS_ACCESS_KEY_ID`
-    - `AWS_SECRET_ACCESS_KEY`
-    - `AWS_SESSION_TOKEN` (if using temporary credentials)
-    - `TENANT_ROLE_ARN` (provided by Camunda)
-    - `YOUR_ACCOUNT_ID`
-    - `ALIAS_NAME` (optional)
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_SESSION_TOKEN` (if using temporary credentials)
+- `TENANT_ROLE_ARN` (provided by Camunda)
+- `YOUR_ACCOUNT_ID`
+- `ALIAS_NAME` (optional)
     
 3.  Make the script executable and run it.
 4.  Copy the outputted key ARN and provide it to Camunda.
@@ -53,12 +53,12 @@ Use this script to create a multi-region primary key and a replica key in a seco
 1.  Download the script: [create-byok-kms-key-multi-region.sh](/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
 2.  Modify the following values at the top of the script:
 
-   - `AWS_ACCESS_KEY_ID`
-   - `AWS_SECRET_ACCESS_KEY`
-   - `AWS_SESSION_TOKEN` (if using temporary credentials)
-   - `TENANT_ROLE_ARN` (provided by Camunda)
-   - `YOUR_ACCOUNT_ID`
-   - `ALIAS_NAME` (optional)
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_SESSION_TOKEN` (if using temporary credentials)
+- `TENANT_ROLE_ARN` (provided by Camunda)
+- `YOUR_ACCOUNT_ID`
+- `ALIAS_NAME` (optional)
 
 3.  Make the script executable and run it.
 4.  Copy the two outputted key ARNs and provide them to Camunda.
@@ -83,44 +83,44 @@ Follow these steps to create a single KMS key in your desired AWS region.
 
 1.  **Sign in to AWS Console**
 
-   - Sign in to your AWS account.
-   - Navigate to the KMS service.
-   - Ensure you are in the correct AWS region for your cluster.
+- Sign in to your AWS account.
+- Navigate to the KMS service.
+- Ensure you are in the correct AWS region for your cluster.
 
 2.  **Create a Customer Managed Key**
 
-   - Click **Create key**.
-   - Key type: **Symmetric**.
-   - Key usage: **Encrypt and decrypt**.
-   - Click **Next**.
+- Click **Create key**.
+- Key type: **Symmetric**.
+- Key usage: **Encrypt and decrypt**.
+- Click **Next**.
 
 3.  **Add Labels**
 
-   - Enter a descriptive alias (e.g., `camunda-saas-byok`).
-   - Add a description (e.g., `KMS key for Camunda SaaS BYOK integration`).
-   - Click **Next**.
+- Enter a descriptive alias (e.g., `camunda-saas-byok`).
+- Add a description (e.g., `KMS key for Camunda SaaS BYOK integration`).
+- Click **Next**.
 
 4.  **Define Key Administrators**
 
-   - Select the IAM users and/or roles that will administer this key. At least one administrator is required.
-   - Click **Next**.
+- Select the IAM users and/or roles that will administer this key. At least one administrator is required.
+- Click **Next**.
 
 5.  **Define Key Usage Permissions**
 
-   - Skip this step by clicking **Next**. Permissions will be configured in the next step.
+- Skip this step by clicking **Next**. Permissions will be configured in the next step.
 
 6.  **Edit Key Policy**
 
-   - On the review screen, find the **Key policy** section and click **Switch to policy view**.
-   - Add to or replace with the [key policy](/components/saas/byok/downloads/aws-kms-key-policy.json) we provide to you
-   - Replace `<YOUR_AWS_ACCOUNT_ID>` with your AWS Account ID.
-   - Replace `<TENANT_ROLE_ARN>` with the tenant IAM role ARN provided by Camunda.
+- On the review screen, find the **Key policy** section and click **Switch to policy view**.
+- Add to or replace with the [key policy](/components/saas/byok/downloads/aws-kms-key-policy.json) we provide to you
+- Replace `<YOUR_AWS_ACCOUNT_ID>` with your AWS Account ID.
+- Replace `<TENANT_ROLE_ARN>` with the tenant IAM role ARN provided by Camunda.
 
 7.  **Finalize Key Creation**
 
-   - Click **Finish**.
-   - From the key details page, copy the **ARN**.
-   - Provide this ARN to Camunda.
+- Click **Finish**.
+- From the key details page, copy the **ARN**.
+- Provide this ARN to Camunda.
 
 ### Option 2: Dual-Region Backup
 
@@ -130,22 +130,22 @@ For a dual-region setup, you can either create a multi-region key and replicate 
 
 1.  **Create the Primary Multi-Region Key**
 
-   - Follow steps 1-7 from **Manual Key Creation > Option 1: Single-Region Backup**, with one change:
-   - In step 2 (**Create a Customer Managed Key**), under **Advanced options**, select **Multi-Region key**.
-   - Ensure this primary key is created in the region `eu-west-1`.
+- Follow steps 1-7 from **Manual Key Creation > Option 1: Single-Region Backup**, with one change:
+- In step 2 (**Create a Customer Managed Key**), under **Advanced options**, select **Multi-Region key**.
+- Ensure this primary key is created in the region `eu-west-1`.
 
 2.  **Create the Replica Key**
 
-   - After the primary multi-region key is created, select it from your list of keys.
-   - Go to the **Regional replicas** tab.
-   - Click **Create replica key**.
-   - Select region `eu-west-2` The alias and policy will be replicated from the primary key.
-   - Click **Create replica key**.
+- After the primary multi-region key is created, select it from your list of keys.
+- Go to the **Regional replicas** tab.
+- Click **Create replica key**.
+- Select region `eu-west-2` The alias and policy will be replicated from the primary key.
+- Click **Create replica key**.
 
 3.  **Provide ARNs to Camunda**
 
-   - Copy the ARNs for both the primary and replica keys.
-   - Provide both ARNs to Camunda.
+- Copy the ARNs for both the primary and replica keys.
+- Provide both ARNs to Camunda.
 
 #### Method B: Create Two Single-Region Keys
 
