@@ -382,7 +382,7 @@ Supported providers are:
 - **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction).
 - **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only).
 - **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
-- **OpenAI compatible**: Any provider that implements the OpenAI `/chat/completions` API (unstructured extraction only).
+- **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
 
 <p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
 
