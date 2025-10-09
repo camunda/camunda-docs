@@ -377,7 +377,6 @@ module.exports = {
               items: [
                 "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
                 "components/early-access/alpha/feel-copilot/feel-copilot",
-                "components/early-access/alpha/ms-teams/ms-teams",
                 {
                   type: "category",
                   label: "MCP Client",
@@ -390,6 +389,7 @@ module.exports = {
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
                   ],
                 },
+                "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
           ],

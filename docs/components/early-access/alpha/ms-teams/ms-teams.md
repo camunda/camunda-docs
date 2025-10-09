@@ -9,179 +9,162 @@ import TeamsAppImg from './img/ms-teams-screenshot.png';
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
-MS Teams App Integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms—so they can stay in their primary collaboration tool without context switching.
+The Camunda for Microsoft Teams application allows you to view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
 
-<img src={TeamsAppImg} alt="Microsoft Teams Camunda App" width="500px" />
+## About Camunda for Microsoft Teams
 
-Users can start processes from a channel, chat, or the app’s Home tab, fill out start forms in Teams, and submit to kick off workflows, with optional links to Operate for monitoring.
+Integrating Camunda functionality within Microsoft teams means you can stay in Microsoft Teams as your primary collaboration tool without context switching.
 
-The integration surfaces task notifications and incidents inside Teams via tabs and bot prompts, enabling quick action and deeper investigation in Operate when needed.
+<img src={TeamsAppImg} alt="Microsoft Teams Camunda App" width="700px" />
 
-### Availability
-Note: The Camunda Microsoft Teams application is available as a preview feature starting with Camunda 8.8. At this stage, the integration is limited to SaaS customers only.
+- Start processes from a channel, chat, or the app **Home** tab, and fill out and submit start forms in Teams to kick off workflows. Optional links to Operate allow monitoring.
 
-### Prerequisites
-- Camunda 8 SaaS account
-- Microsoft Teams with admin permissions to add applications
-- Access to a Camunda organization and cluster
-- Forms built using [Form-js](https://docs.camunda.io/docs/apis-tools/frontend-development/forms/introduction-to-forms/#form-js), the library used by Web Modeler to create and run forms.
+- Task notifications and incidents are presented in Microsoft Teams via tabs and bot prompts, for quick action and deeper investigation in Operate if required.
+
+:::caution SaaS preview
+
+- The Camunda Microsoft Teams application is available as a preview feature starting with Camunda 8.8.
+- Currently, the integration is limited to SaaS customers only.
+
+:::
+
 ### Key features
 
-- **Task management** — View, claim, and complete user tasks directly in Teams.  
-- **Start processes** — Start predefined processes from Teams.  
-- **Notifications** — Receive alerts for new user tasks.
-- **Incident monitoring** — View incidents and take action when issues occur.  
+| Feature             | Description                                             |
+| :------------------ | :------------------------------------------------------ |
+| Task management     | View, claim, and complete user tasks directly in Teams. |
+| Start processes     | Start predefined processes from Teams.                  |
+| Notifications       | Receive alerts for new user tasks.                      |
+| Incident monitoring | View incidents and take action when issues occur.       |
 
+## Prerequisites
 
-## Getting started
+The following prerequisites are required for Camunda for Microsoft Teams:
+
+| Prerequisite                     | Description                                                                                                                                                                              |
+| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 SaaS account           | You must have a valid working Camunda 8 SaaS account.                                                                                                                                    |
+| Microsoft Teams                  | Microsoft Teams with admin permissions to add applications. Microsoft Teams administrators can manage app permissions and availability across the organization.                          |
+| Camunda organization and cluster | Access to a Camunda organization and cluster.                                                                                                                                            |
+| Forms                            | Forms built using [Form-js](https://docs.camunda.io/docs/apis-tools/frontend-development/forms/introduction-to-forms/#form-js), the library used by Web Modeler to create and run forms. |
+
+## Get started
 
 ### Install the app
 
-You can install the Camunda app from the Microsoft Teams app store or via your organization’s internal Teams catalog.
+You can install the Camunda for Microsoft Teams app from the Microsoft Teams app store or via your organization’s internal Teams catalog.
 
-1. Open **Microsoft Teams**.  
-2. Go to **Apps** and search for **Camunda**.  
-3. Select **Add** to install the app.  
+1. Open **Microsoft Teams**.
+2. Open **Apps** and search for **Camunda**.
+3. Select **Add** to install the app.
 
 <img width="1508" height="937" alt="image" src="https://github.com/user-attachments/assets/5a67962a-e22f-440d-8475-06605816cf8a" />
 
-> *If your organization manages Teams apps centrally, contact your Teams administrator for access.*
+:::note
+If your organization manages Teams apps centrally, contact your Teams administrator for access.
+:::
 
 ### Sign in and authorize
 
-After installation, open the Camunda app in Teams. You’ll be prompted to sign in with your **Camunda account credentials**.  
+After installation, open the Camunda for Microsoft Teams app in Microsoft Teams. When prompted, sign in using your **Camunda account credentials**.
 
-If requested, grant the necessary permissions to allow Teams to access your Camunda workspace.
+If requested, grant the necessary permissions to allow Microsoft Teams to access your Camunda workspace.
 
 <img width="1396" height="896" alt="image" src="https://github.com/user-attachments/assets/51d88a68-9599-4b90-a436-dfac93db337c" />
 
-## Using the app
+## Using Camunda for Microsoft Teams
 
-### Complete onboarding
+### Select your organization and cluster
 
 Once signed in, select the context you want to work in to see the relevant tasks, processes, and incidents.
-	1.	Choose your organization.
-	2.	Select your cluster.
 
-The organization and cluster drop-downs are always visible in the app header, so you can switch contexts quickly at any time. 
+1. Choose your organization.
+1. Select your cluster.
 
 <img width="834" height="564" alt="image" src="https://github.com/user-attachments/assets/cf8e697c-f1e2-4989-8e50-00e95ff7c572" />
 
-### Tasks
+:::tip
+The organization and cluster drop-downs are always visible in the app header, so you can switch contexts quickly at any time.
+:::
+
+### View, claim, and complete tasks
 
 The **Tasks** tab lists all user tasks assigned to you or available to claim.
 
-From here, you can:
-
-- View task details and variables.  
-- Claim or unclaim a task.  
-- Complete a task directly from Teams.  
-
-Tasks update automatically as you complete work in Camunda or Teams.
-
 <img width="1555" height="967" alt="image" src="https://github.com/user-attachments/assets/72403d36-0588-4c98-8327-2dff499aa2ef" />
 
-### Processes
+You can:
 
-Start Camunda processes directly from Teams without leaving the app.  
-Available processes are configured in your Camunda environment.
+- View task details and variables.
+- Claim or unclaim a task.
+- Complete a task directly from Teams.
 
-To start a process:
+:::note
+Tasks update automatically as you complete work in Camunda or Teams.
+:::
 
-1. Open the **Processes** tab.  
-2. Select a process definition.  
-3. Fill in any required fields.  
-4. Click **Start process**.
+### Start a process
+
+You can start Camunda processes directly from Microsoft Teams without leaving the application. The available processes are configured in your Camunda environment.
 
 <img width="1425" height="885" alt="image" src="https://github.com/user-attachments/assets/f689ae70-9135-4f57-be3b-cb19ae732e0a" />
 
-### Incidents
+To start a process:
 
-Monitor process incidents from within Teams.  
-The **Incidents** tab lists all current incidents for your selected context.  
+1. Select the **Processes** tab.
+2. Select a process definition.
+3. Complete any required fields.
+4. Click **Start process**.
 
-From here, you can:
+### Monitor incidents
 
-- View incident details.  
-- See affected process instances.  
-- Open the related process in Operate for further action.
+You can monitor process incidents from within Microsoft Teams. The **Incidents** tab lists all current incidents for your selected context.
 
 <img width="1427" height="891" alt="image" src="https://github.com/user-attachments/assets/27282a45-3e4b-42a1-8d78-77d88acb1d1b" />
 
+You can:
+
+- View incident details.
+- See affected process instances.
+- Open the related process in [Operate](/components/operate/operate-introduction.md) for further action.
+
 ### Notifications
 
-Stay informed through Teams notifications for **new user tasks assigned to you**.  
-
-Notifications appear as messages in your Teams activity feed or directly in chat.  
-Click a notification to open the related task in the app.
+Stay informed with Microsoft Teams notifications for new user tasks assigned to you.
 
 <img width="1029" height="588" alt="image" src="https://github.com/user-attachments/assets/0a0a9f6c-88a3-4695-b973-5dcfafc089ec" />
 
-**Enable notifications in a channel:**
+- Notifications appear as messages in your Teams activity feed or directly in chat.
+- Click a notification to open the related task in the app.
 
-1. In any Teams channel, type the command: `@Camunda Setup notifications`
-2. Follow the on-screen wizard to configure which notifications the channel should receive.
-3. Once complete, the selected channel will receive alerts for new tasks automatically.
+#### Enable channel notifications
+
+1. In any Teams channel, enter the command: `@Camunda Setup notifications`.
+2. Follow the on-screen instructions to configure the notifications the channel should receive.
+3. Once complete, the selected channel will automatically receive alerts for new tasks.
 
 <img width="1495" height="930" alt="image" src="https://github.com/user-attachments/assets/42bb7903-4bc4-4e68-8923-89e5907f8474" />
 
 ## Troubleshooting
 
-### App not appearing in Teams store
-- Verify your organization allows third-party app installations.  
-- Check with your Teams administrator for app approval policies.  
+### The app is not shown in the Microsoft Teams store
+
+- Verify your organization allows third-party app installations.
+- Check with your Teams administrator for app approval policies.
 
 ### Unable to connect to Camunda organization
-- Ensure you have proper permissions in your Camunda organization.  
-- Verify your SaaS account is active and accessible.  
-- If no tasks or incidents are visible, double-check your organization, cluster, and tenant settings.
 
-### Tasks not displaying
-- Check that you're connected to the correct Camunda cluster.  
+- Ensure you have the required permissions in your Camunda organization.
+- Verify your Camunda SaaS account is active and accessible.
+- If no tasks or incidents are visible, double-check your Camunda organization, cluster, and tenant settings.
+
+### Tasks not displayed
+
+- Verify that you are connected to the correct Camunda cluster.
 - If notifications are not appearing, make sure Teams notifications are enabled or re-run `@Camunda Setup notifications` in the channel.
-- It could be due to an expired Camunda session or missing permissions. Sign out and sign in again.
+- This could be due to an expired Camunda session or missing permissions. Sign out and sign in again.
 
-## Getting help
-- Contact Camunda support through your SaaS account.  
-- Provide feedback through the Camunda roadmap portal.  
+## Get help
 
----
-
-## Permissions and access
-
-To use the app, you need:  
-- A valid Camunda account  
-- Access to at least one organization, cluster, and tenant  
-
-Microsoft Teams administrators can manage app permissions and availability across the organization.
-
-<!--
-
-### Chat
-
-- A
-- B
-- C
-
-### Tasks
-
-- A
-- B
-- C
-
-### Processes
-
-- A
-- B
-- C
-
-### Incidents
-
-- A
-- B
-- C
-
-### Limitations
-
-- Currently only available for Camunda SaaS clusters running Camunda on 8.7 or higher.
--->
+- Contact Camunda support through your SaaS account.
+- Provide feedback through the Camunda roadmap portal.
