@@ -288,8 +288,8 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 - [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
   - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
   - [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
-- [Operate data retention](/self-managed/components/orchestration-cluster/operate/data-retention.md) - Operate-specific retention behavior
-- [Tasklist data retention](/self-managed/components/orchestration-cluster/tasklist/data-retention.md) - Tasklist-specific retention behavior
+- [Operate data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Operate-specific retention behavior
+- [Tasklist data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Tasklist-specific retention behavior
 
 **External documentation:**
 

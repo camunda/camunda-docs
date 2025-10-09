@@ -18,6 +18,8 @@ Inbound connectors are modeled as **catch events** in [BPMN](/components/modeler
 - **Message start events** – Start a new process instance with a `messageId` to prevent duplicate process instance creation.
 - **Intermediate catch events** – Receive messages in an already running process instance.
 - **Boundary events** – Receive messages in an already running process instance, attached to a task.
+- **Boundary events** – Receive messages in an already running process instance, attached to a task.
+- **Receive tasks** - Receive messages in an already running process instance.
 
 :::info
 If **idempotency** is a concern for the process creation and reprocessing of messages should never lead to a duplicate process instance creation, use the **message start event** element for an inbound connector as it relies on publishing a message.
@@ -37,6 +39,7 @@ When you **deploy** such a BPMN diagram with an inbound connector, the connector
 {label: 'Message start event', value: 'message-start' },
 {label: 'Intermediate catch event', value: 'intermediate' },
 {label: 'Boundary event', value: 'boundary' },
+{label: 'Receive task', value: 'receive' }
 ]}>
 
 <TabItem value='start'>
@@ -94,6 +97,18 @@ You can still start instances of that process manually via Modeler, which is som
 4. Fill in all required properties.
 5. Complete your BPMN diagram.
 6. Deploy it to your Camunda 8 instance.
+
+</TabItem>
+
+<TabItem value='receive'>
+
+### Modeling the connector receive task
+
+1. Start building your BPMN diagram with an **Receive Task** building block.
+2. Change its template to an inbound connector of your choice (e.g., HTTP webhook, or a message queue subscription).
+3. Fill in all required properties.
+4. Complete your BPMN diagram.
+5. Deploy it to your Camunda 8 instance.
 
 </TabItem>
 
