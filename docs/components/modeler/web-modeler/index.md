@@ -10,6 +10,8 @@ description: "Camunda Web Modeler is a collaborative, browser-based application 
 Web Modeler is a browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates.
 It enables teams to collaboratively develop executable processes as the foundation for scalable IT and business collaboration.
 
+![Web Modeler Screenshot](./img/context-pad/overview.png)
+
 ## Features
 
 - Design [BPMN](../bpmn/bpmn.md), [DMN](../dmn/dmn.md), and [Forms](../forms/camunda-forms-reference.md) collaboratively
