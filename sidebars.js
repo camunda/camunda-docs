@@ -421,27 +421,54 @@ module.exports = {
               label: "Process applications",
               link: {
                 type: "doc",
-                id: "components/modeler/web-modeler/process-applications",
+                id: "components/modeler/web-modeler/process-applications/process-applications",
               },
               items: [
-                "components/modeler/web-modeler/process-application-pipeline",
-                "components/modeler/web-modeler/create-a-process-application",
-                "components/modeler/web-modeler/deploy-process-application",
-                "components/modeler/web-modeler/process-application-versioning",
+                {
+                  type: "doc",
+                  label: "Lifecycle",
+                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                },
+                {
+                  type: "doc",
+                  label: "Creation",
+                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Deployment",
+                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                },
+                {
+                  type: "doc",
+                  label: "Versioning",
+                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                },
               ],
             },
             {
-              Collaboration: [
-                "components/modeler/web-modeler/collaboration",
-                "components/modeler/web-modeler/collaborate-with-modes",
-                "components/modeler/web-modeler/design-your-process",
-                "components/modeler/web-modeler/implement-your-process",
-                "components/modeler/web-modeler/play-your-process",
+              type: "category",
+              label: "Collaboration",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/collaboration/collaboration",
+              },
+              items: [
+                "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                "components/modeler/web-modeler/collaboration/design-your-process",
+                "components/modeler/web-modeler/collaboration/implement-your-process",
+                "components/modeler/web-modeler/collaboration/play-your-process",
               ],
             },
             {
-              "Element templates": [
-                "components/modeler/web-modeler/element-templates/manage-element-templates",
+              type: "category",
+              label: "Element templates",
+              link: {
+                type: "doc",
+                id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+              },
+              items: [
+                "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
               ],
@@ -719,13 +746,13 @@ module.exports = {
                   items: [
                     {
                       type: "category",
-                      label: "AI Agent Process",
+                      label: "AI Agent Subprocess",
                       link: {
                         type: "doc",
-                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
                       },
                       items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example",
                       ],
                     },
                     {
@@ -809,7 +836,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom connectors",
+          label: "Custom element and connector templates",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
@@ -818,13 +845,12 @@ module.exports = {
             "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Connector templates",
+              label: "Element and connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
               },
               items: [
-                "components/connectors/custom-built-connectors/connector-template-generator",
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
               ],
@@ -1326,6 +1352,7 @@ module.exports = {
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/enable-additional-components",
+                "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
                   label: "Registry and images",
@@ -1352,7 +1379,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
                       ],
                     },
-                    "self-managed/deployment/helm/configure/database/using-existing-opensearch",
+                    "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     {
@@ -1391,7 +1418,6 @@ module.exports = {
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/configure-multi-tenancy",
-                "self-managed/deployment/helm/configure/multi-namespace-deployment",
               ],
             },
             {
@@ -1402,7 +1428,17 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
-                "self-managed/deployment/helm/upgrade/upgrade-hc-870-880",
+                {
+                  type: "category",
+                  label: "Upgrade 8.7 to 8.8",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/upgrade/upgrade-hc-870-880",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region",
+                  ],
+                },
                 "self-managed/deployment/helm/upgrade/upgrade-hc-860-870",
                 "self-managed/deployment/helm/upgrade/upgrade-hc-850-860",
                 "self-managed/deployment/helm/upgrade/upgrade-hc-840-850",
@@ -1595,9 +1631,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/concepts/exporters",
-        "self-managed/concepts/elasticsearch-privileges",
-        "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges",
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [
@@ -1634,6 +1667,7 @@ module.exports = {
                 {
                   Configuration: [
                     "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
@@ -1743,6 +1777,8 @@ module.exports = {
               Identity: [
                 "self-managed/components/orchestration-cluster/identity/overview",
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/debugging-authentication",
+                "self-managed/components/orchestration-cluster/identity/special-oidc-cases",
                 "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
             },

@@ -16,6 +16,7 @@ import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsImg from './img/idp-versions.png';
 import IdpExtractionModelImg from './img/idp-extraction-model.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
+import IdpModelSelectionImg from './img/idp-model-selection.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -86,6 +87,17 @@ You can edit and delete extraction fields at any time. Click the three vertical 
 
 Once you have added your extraction fields, select an LLM model and test the data extraction.
 
+#### Model selection
+
+The **Extraction model** field is both a dropdown and an input field, giving you flexibility in model selection:
+
+<img src={IdpModelSelectionImg} alt="Model selection dropdown and input" width="380px" style={{marginTop: '0'}} />
+
+- **Dropdown selection**: Choose from a list of pre-configured models available in the dropdown.
+- **Custom model input**: If you want to use a model ID that is not part of the dropdown, you can type it directly into the field. This is useful for custom models or specific model versions that may not be listed in the default options.
+
+#### Extract and test
+
 <img src={IdpExtractionModelImg} alt="Extraction model" width="700px" style={{marginTop: '0'}} />
 
 1. **Extraction model**: Select the LLM model you want to use.
@@ -139,13 +151,11 @@ To validate the data extraction:
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-
    - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" style={{marginTop: '0'}} />
-
    - **Version name**: Enter a version for the published document extraction template.
    - **Version description**: Enter a description for the published document extraction template version.
    - **Extraction model**: Select the extraction model you want to use for the published document extraction template.

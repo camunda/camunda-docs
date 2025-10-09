@@ -1,6 +1,6 @@
 ### Event handling {#configuration-event-handling}
 
-Configures how the AI Agent process should behave when handling results from an [event subprocess](../../../../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
+Configures how the AI Agent sub-process should behave when handling results from an [event subprocess](../../../../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
 The **Event handling behavior** field can be set to one of options:
 
