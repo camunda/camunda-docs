@@ -104,7 +104,7 @@ After deployment, access the Camunda 8 components at:
 - **Core Orchestration Applications and REST API:** `https://camunda.example.com/orchestration/[identity|operate|optimize|tasklist|v2]`
 - **Web Modeler WebSocket:** Web Modeler exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used internally by the application and not for direct user access.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
-- **Zeebe GRPC Gateway:** `grpc://zeebe.camunda.example.com`
+- **Zeebe gRPC Gateway:** `grpc://zeebe.camunda.example.com`
 
 :::note
 This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable additional components](/self-managed/deployment/helm/configure/enable-additional-components.md).
