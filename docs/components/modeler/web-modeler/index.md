@@ -20,7 +20,7 @@ It enables teams to collaboratively develop executable processes as the foundati
 - Implement and deploy [process applications](./process-applications/process-applications.md) for Camunda 8
 - [Synchronize process applications with Git](./git-sync.md) for version control integration
 - [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) capabilities
-- [Play](collaboration/play-your-process.md) for process testing and validation
+- [Play](./collaboration/play-your-process.md) for process testing and validation
 - [Process landscape visualization](./process-landscape-visualization.md)
 - [Camunda Marketplace](./camunda-marketplace.md) integration
 - [Advanced modeling features](./advanced-modeling/camunda-docs-ai.md) including AI-powered assistance
