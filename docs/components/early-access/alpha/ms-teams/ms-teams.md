@@ -13,7 +13,7 @@ The Camunda for Microsoft Teams application allows you to view, claim, and compl
 
 ## About Camunda for Microsoft Teams
 
-Integrating Camunda functionality within Microsoft teams means you can stay in Microsoft Teams as your primary collaboration tool without context switching.
+Integrating Camunda functionality within Microsoft Teams means you can stay in Microsoft Teams as your primary collaboration tool without context switching.
 
 <img src={TeamsAppImg} alt="Microsoft Teams Camunda App" width="700px" />
 
