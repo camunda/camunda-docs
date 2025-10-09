@@ -149,6 +149,14 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-authentication/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/correlate-a-message/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/deploy-resources/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-cluster-topology/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/get-decision-definition-xml-alpha/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
+
 RewriteRule ^docs/components/best-practices/architecture/deciding-about-your-stack-c7/(.*)$ /docs/components/best-practices/architecture/deciding-about-your-stack/ [R=301,L]
 RewriteRule ^ddocs/components/best-practices/architecture/extending-human-task-management-c7/(.*)$ /docs/components/best-practices/architecture/extending-human-task-management/ [R=301,L]
 RewriteRule ^docs/components/best-practices/architecture/sizing-your-environment-c7/(.*)$ /docs/components/best-practices/architecture/sizing-your-environment/ [R=301,L]
