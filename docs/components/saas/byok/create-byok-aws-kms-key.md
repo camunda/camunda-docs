@@ -15,6 +15,7 @@ We provide automated scripts to create the necessary AWS KMS key(s) with the cor
 Use this script to create a single KMS key. The key will be created in eu-west-1 (Ireland) region.
 
 **What the script does:**
+
 - Creates a KMS key with the required policy for Camunda access.
 - Sets up an alias for easier key management.
 - Outputs the key ARN for you to provide to Camunda.
