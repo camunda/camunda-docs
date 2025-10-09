@@ -43,7 +43,7 @@ If [authorizations](/components/identity/authorization.md) are enabled on the cl
 
 ## Get started with Play
 
-![play process definition view](img/play-definition.png)
+![play process definition view](../img/play-definition.png)
 
 The first view in Play is the process definition view. It shows deployment problems, active process instances, and start events.
 
@@ -57,11 +57,11 @@ Play presents this example data in a readable JSON format, as illustrated below.
 Play will only consider the first executable process ID in the BPMN file.
 :::
 
-![play example data](img/play-example-data.png)
+![play example data](../img/play-example-data.png)
 
 ## Play a process
 
-![play process instance view](img/play-instance.png)
+![play process instance view](../img/play-instance.png)
 
 Click the action icons next to a task or event to play the process.
 
@@ -75,7 +75,7 @@ Actions in Play can be initiated through Operate, Tasklist, or external APIs. Fo
 
 In SaaS, view your process instance in Operate by selecting the **Process Instance Key** in the header.
 
-![play process instance view](img/play-view-process-instance.png)
+![play process instance view](../img/play-view-process-instance.png)
 
 You have a few options to mock an external system:
 
@@ -102,7 +102,7 @@ You can also return to the definition view by clicking **View all** on the top b
 
 After completing part of your process, you can **rewind** to a previous element to test a different scenario. Play will start a new instance and replay your actions up to, but not including, the selected previous task.
 
-![rewind process](img/play-rewind.png)
+![rewind process](../img/play-rewind.png)
 
 Play's rewind operation currently does not support the following elements:
 
@@ -125,9 +125,9 @@ For example, you can validate your process by creating and rerunning scenarios f
 Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
 :::
 
-Scenarios are stored in [test scenario files](advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+Scenarios are stored in [test scenario files](../advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
 
-Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files/#link-a-process-processid) of the BPMN diagram.
+Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files.md#link-a-process-processid) of the BPMN diagram.
 
 If multiple test scenario files are linked to the same process ID, Play will use:
 
@@ -140,9 +140,9 @@ To save a scenario:
 
 1. Execute a path in your process.
 1. Click **Save scenario** in the process instance header.
-1. A new [test scenario file](advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
+1. A new [test scenario file](../advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
 
-![Save a scenario](img/play-save-scenario.png)
+![Save a scenario](../img/play-save-scenario.png)
 
 :::tip
 To view your saved scenarios in Play, click **View all** beneath the Scenarios column in the process instance header.
@@ -155,10 +155,10 @@ Scenario coverage is calculated as the percentage of flow nodes in your process 
 - On the process definition page, covered paths are highlighted in blue. Click on individual scenarios to view their specific coverage.
 - Once a process instance is completed, the process instance header shows how much your process scenario coverage would increase if the path was saved as a scenario.
 
-![Scenario coverage](img/play-coverage.png)
+![Scenario coverage](../img/play-coverage.png)
 
 :::warning
-Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](advanced-modeling/test-scenario-files.md).
+Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](../advanced-modeling/test-scenario-files.md).
 :::
 
 ### Run scenario
@@ -168,7 +168,7 @@ You can run scenarios on the process definition page by clicking either the **Ru
 - Scenario execution results are marked with either a **Completed** or **Failed** status.
 - You must manually update a failed scenario by clicking **manually complete and update the scenario**, especially if diagram changes are made that require further user input (such as when a new flow node is added to a previously saved scenario path).
 
-![Run a scenario on the process definition page](img/play-scenario-runs.png)
+![Run a scenario on the process definition page](../img/play-scenario-runs.png)
 
 ### Limitations {#scenarios-limitations}
 
@@ -194,7 +194,7 @@ There are three ways to modify your process instance:
 Unlike in [Operate](/components/operate/userguide/process-instance-modification.md), these changes are applied immediately. If you need to change variables while modifying a process, use the **Variables** panel to set them separately. Alternatively, for advanced use cases you can modify the process instance from Operate.
 :::
 
-![modify process instance](img/play-modifications.png)
+![modify process instance](../img/play-modifications.png)
 
 ### Limitations {#modifications-limitations}
 

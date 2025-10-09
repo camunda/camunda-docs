@@ -114,7 +114,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-application-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/modeler/web-modeler/process-applications/process-application-versioning.md), and [readable for everyone](/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -126,7 +126,7 @@ Create and append tasks with resources available in the current project and proc
 
 ### Unified deployment experience from Web Modeler <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-[Authenticate deployments](/components/modeler/web-modeler/process-application-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
+[Authenticate deployments](/components/modeler/web-modeler/process-applications/process-application-versioning.md) with your existing user tokens, rather than entering shared secrets. This further simplifies the deployment process beyond our 8.6 release.
 
 <!--- https://github.com/camunda/product-hub/issues/2073 --->
 
@@ -252,7 +252,7 @@ Web Modeler now supports stronger governance and change control. This ensures sa
 - Reviews cannot be performed by the user who created the process application version, and the reviewer is logged in the version history of a process application.
 - Admins can enable production deployments for reviewed process applications as an alternative to using their own deployment pipeline.
 
-To learn more about this feature, see [process governance](/components/modeler/web-modeler/process-application-pipeline.md).
+To learn more about this feature, see [process governance](/components/modeler/web-modeler/process-applications/process-application-pipeline.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2583 -->
 
@@ -391,7 +391,7 @@ For example, you can validate your process by creating and rerunning scenarios f
 - As you save completed instances as scenarios, Play calculates the percent of elements covered by the scenario suite.
 - This is the first step towards bringing automated testing into Web Modeler, and enabling business and IT to collaborate on automated tests.
 
-To learn more about this feature, see [Play scenarios](/components/modeler/web-modeler/play-your-process.md#scenarios).
+To learn more about this feature, see [Play scenarios](/components/modeler/web-modeler/collaboration/play-your-process.md#scenarios).
 
 <!-- https://github.com/camunda/product-hub/issues/2073 -->
 
@@ -633,7 +633,7 @@ You can now configure and automatically generate a custom connector template in 
 - You can start from a blank template or import an existing API definition such as an OpenAPI specification, Swagger specification, or a Postman collection.
 - For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-To learn more about generating connector templates, see [generate a connector template](/components/connectors/custom-built-connectors/connector-template-generator.md).
+To learn more about generating connector templates, see [generate a connector template](/components/modeler/web-modeler/element-templates/element-template-generator.md).
 
 ### Monorepo Git sync <span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 

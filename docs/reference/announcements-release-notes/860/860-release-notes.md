@@ -504,7 +504,7 @@ You can now effortlessly integrate machine learning functionalities into your wo
 
 <!-- https://github.com/camunda/product-hub/issues/1983 -->
 
-The [process application](/components/modeler/web-modeler/process-applications.md) is a special type of folder in Web Modeler that enables bulk actions like deploying all assets together. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
+The [process application](/components/modeler/web-modeler/process-applications/process-applications.md) is a special type of folder in Web Modeler that enables bulk actions like deploying all assets together. This reduces the risk of having a broken deployment at runtime, and makes it more convenient to deploy related files.
 
 ## 8.6.0-alpha1
 
@@ -522,7 +522,7 @@ Developing and releasing Camunda processes in compliance with your organization'
 
 <!-- https://github.com/camunda/product-hub/issues/1983 -->
 
-The [process application](/components/modeler/web-modeler/process-applications.md) is a special type of folder in Web Modeler that enables bulk actions like deploying all assets together. This reduces the risk of having a broken deployment at runtime and makes it more convenient to deploy related files.
+The [process application](/components/modeler/web-modeler/process-applications/process-applications.md) is a special type of folder in Web Modeler that enables bulk actions like deploying all assets together. This reduces the risk of having a broken deployment at runtime and makes it more convenient to deploy related files.
 
 ### Instance modification as batch <span class="badge badge--long" title="This feature affects Operate">Operate</span>
 
