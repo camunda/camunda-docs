@@ -38,8 +38,10 @@ Complete the following steps to configure and publish a structured data extracti
 ## Step 1: Create template and upload sample document {#upload}
 
 In the IDP application, click **Create document template**, select **Structured form extraction**, and enter a name, description, and select the provider. After publishing, the template’s name and description appear in the element selector when used in a process diagram. A clear name and concise description help others find and understand its use.
+![Create form extraction template](img/idp-create-extraction-project.png)
 
 Note: You can edit the description and provider later from the menu button, but changes to the template apply only after republishing
+![Edit template button](img/idp-edit-template-button.png)
 
 After creating the template, you’ll be taken to the new template screen where you can upload a sample document that represents the type of document you want to extract data from.
 
@@ -139,6 +141,7 @@ Publish the document extraction template to make it available for [integration i
    - **Version description**: Enter a description for the published document extraction template version.
 
 1. Click **Publish** to make the document extraction template available for [integration into your processes](idp-integrate.md)<!--  and [document automation](idp-document-automation.md) projects -->.
+   ![IDP template element](img/idp-project-in-bpmn.png)
 
 ## Versions {#versions}
 
