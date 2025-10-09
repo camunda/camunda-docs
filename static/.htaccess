@@ -152,8 +152,6 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 RewriteRule ^docs/apis-tools/java-client/?$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/?$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
 
-apis-tools/camunda-api-rest/specifications/upload-document-alpha/
-
 RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
 
 RewriteRule ^docs/components/concepts/access-control/user-groups/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
