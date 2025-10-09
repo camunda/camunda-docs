@@ -18,7 +18,7 @@ Structured extraction allows you to:
 - Upload a sample document.
 - Automatically discover fields and tables.
 - Configure the fields and tables you want included in your template.
-- Receive confidence scores to each extracted value.
+- Receive confidence scores for each extracted value.
 - Build reusable templates.
 - Integrate extracted data into BPMN processes via variables.
 
@@ -30,20 +30,24 @@ Structured extraction uses [Optical Character Recognition (OCR)](idp-reference.m
 
 Complete the following steps to configure and publish a structured data extraction template:
 
-1. [Upload sample document and run extraction](#upload): Upload a sample document and run an extraction of document fields and tables.
-1. [Configure template](#configure): Select the fields and tables you want to include in your template.
-1. [Test data extraction](#test): (Optional) Upload documents to test your selection before publishing it as a template.
-1. [Publish](#publish): Publish the project to make it available for use in your BPMN diagrams, processes, and [document automation](idp-document-automation.md) projects.
+1. [Create template and upload sample document](#create): Create a new extraction template, add a name and description, select a provider, and upload a sample document.
+2. [Configure template](#configure): Review the extracted results, select which fields and tables to include, and adjust field names if necessary.
+3. [Test data extraction](#test): (Optional) Test the configuration of your template against other documents to evaluate how well it performs.
+4. [Publish](#publish): Publish the template to make it available for use in your BPMN diagrams, processes, and [document automation](idp-document-automation.md) projects.
 
-## Step 1: Upload a sample document and run extraction {#upload}
+## Step 1: Create template and upload sample document {#upload}
 
-Start by uploading a sample PDF document that represent the default document template you want to extract data from. You will use this document throughout the data extraction process.
+In the IDP application, click **Create document template**, select **Structured form extraction**, and enter a name, description, and select the provider. After publishing, the template’s name and description appear in the element selector when used in a process diagram. A clear name and concise description help others find and understand its use.
 
-![upload a sample document](img/idp-structured-instructions-upload.png)
+Note: You can edit the description and provider later from the menu button, but changes to the template apply only after republishing
+
+After creating the template, you’ll be taken to the new template screen where you can upload a sample document that represents the type of document you want to extract data from.
+
+![Upload a sample document](img/idp-structured-instructions-upload.png)
 
 To upload your sample document:
 
-1. Drag your sample document in the box or click **Drag and drop a PDF file here or click to upload a file** to browse and upload your sample document.
+1. Drag your sample document into the box or click **Drag and drop a PDF file here or click to upload a file** to browse and upload your sample document.
 2. Once you have finished uploading your sample document, the extraction process starts automatically.
    - The extraction process retrieves the fields and tables from the document.
    - The extracted fields and tables are displayed in the **Fields** and **Tables** tabs.
@@ -52,13 +56,13 @@ To upload your sample document:
 
 ## Step 2: Configure template {#configure}
 
-After the extraction process of the sample document is complete, you can configure the template to include only the fields and tables you want to include in your template.
+After the extraction process of the sample document is complete, you can configure the template to include only the fields and tables you want to be part of your template.
 
 1. Select the fields you want to include in your template by clicking the checkbox next to each field.
 
    ![Extracted fields and tables - select fields](img/extracted-fields-and-tables-configure.png)
 
-1. Select the tables you want to include in your template by clicking the checkbox next to each table.
+2. Select the tables you want to include in your template by clicking the checkbox next to each table.
 
    ![Extracted fields and tables - select table](img/extracted-fields-and-tables-configure-tables.png)
 
@@ -75,9 +79,13 @@ After the extraction process of the sample document is complete, you can configu
 - **Min confidence score:** The minimum confidence score of a field in the table.
 - **Average confidence score:** The average confidence score of all fields in the table.
 
+Once you are satisfied with your template configuration, you can test it to validate how well it performs on other documents, or you can publish it directly from this tab.
+
 ## Step 3: Test data extraction (optional) {#test}
 
-After you have configured your template, you can test the data extraction by uploading documents that match the template you have created.
+Testing is optional but recommended. It helps you evaluate the performance of your configured extraction template before publishing it.
+
+By testing, you can see how accurately the template extracts data from other documents of the same type, ensuring better results before using it in your processes.
 
 ![Upload document for testing](img/idp-upload-test-template-empty.png)
 
@@ -112,8 +120,8 @@ The detailed results section provides a comprehensive view of each tested docume
 
 You can test multiple documents by:
 
-- Clicking **Rerun tests** to test additional documents.
 - Clicking **Upload documents** to add more test files.
+- Clicking **Rerun tests** to test additional documents.
 
 ![Extracted test templates](img/idp-extracted-test-template.png)\*\*\*\*
 
