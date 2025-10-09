@@ -152,6 +152,8 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 RewriteRule ^docs/apis-tools/java-client/?$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
 RewriteRule ^docs/apis-tools/java-client/?$ /docs/apis-tools/java-client/getting-started/ [R=301,L]
 
+apis-tools/camunda-api-rest/specifications/upload-document-alpha/
+
 RewriteRule ^docs/self-managed/concepts/document-handling/configuration/overview/?$ /docs/self-managed/concepts/document-handling/configuration/ [R=301,L]
 
 RewriteRule ^docs/components/concepts/access-control/user-groups/?$ /docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
@@ -793,7 +795,7 @@ RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /d
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/create-document-link-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/create-document-link/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/delete-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/delete-document/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/download-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/get-document/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/create-document/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document/ [R=301,L]
 
 # Rename Web Modeler milestones to versions
 RewriteRule ^docs/components/modeler/web-modeler/milestones/?$ /docs/components/modeler/web-modeler/versions/ [R=301,L]
