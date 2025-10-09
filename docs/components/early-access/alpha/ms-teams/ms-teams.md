@@ -24,8 +24,7 @@ Note: The Camunda Microsoft Teams application is available as a preview feature 
 - Camunda 8 SaaS account
 - Microsoft Teams with admin permissions to add applications
 - Access to a Camunda organization and cluster
-- Forms built using Form-js
-
+- Forms built using [Form-js](https://docs.camunda.io/docs/apis-tools/frontend-development/forms/introduction-to-forms/#form-js), the library used by Web Modeler to create and run forms.
 ### Key features
 
 - **Task management** — View, claim, and complete user tasks directly in Teams.  
@@ -120,9 +119,7 @@ Click a notification to open the related task in the app.
 
 **Enable notifications in a channel:**
 
-1. In any Teams channel, type the command:
-
-@Camunda Setup notifications
+1. In any Teams channel, type the command: `@Camunda Setup notifications`
 2. Follow the on-screen wizard to configure which notifications the channel should receive.
 3. Once complete, the selected channel will receive alerts for new tasks automatically.
 
