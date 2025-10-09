@@ -41,12 +41,12 @@ Integrating Camunda functionality within Microsoft teams means you can stay in M
 
 The following prerequisites are required for Camunda for Microsoft Teams:
 
-| Prerequisite                     | Description                                                                                                                                                                              |
-| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 SaaS account           | You must have a valid working Camunda 8 SaaS account.                                                                                                                                    |
-| Microsoft Teams                  | Microsoft Teams with admin permissions to add applications. Microsoft Teams administrators can manage app permissions and availability across the organization.                          |
-| Camunda organization and cluster | Access to a Camunda organization and cluster.                                                                                                                                            |
-| Forms                            | Forms built using [Form-js](https://docs.camunda.io/docs/apis-tools/frontend-development/forms/introduction-to-forms/#form-js), the library used by Web Modeler to create and run forms. |
+| Prerequisite                     | Description                                                                                                                                                          |
+| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 SaaS account           | You must have a valid working Camunda 8 SaaS account.                                                                                                                |
+| Microsoft Teams                  | Microsoft Teams with admin permissions to add applications. Microsoft Teams administrators can manage app permissions and availability across the organization.      |
+| Camunda organization and cluster | Access to a Camunda organization and cluster.                                                                                                                        |
+| Forms                            | Forms built using [Form-js](/apis-tools/frontend-development/03-forms/01-introduction-to-forms.md#form-js), the library used by Web Modeler to create and run forms. |
 
 ## Get started
 
