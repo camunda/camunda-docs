@@ -60,7 +60,7 @@ The following elements are **not supported**:
 
 When a task test completes:
 
-- Input variables are stored locally in your modeling session for reuse in subsequent test runs.
+- Input variables are stored locally between your modeling session for reuse in subsequent test runs.
 - Output variables are visible in the results panel but are **not persisted** to the cluster beyond the test instance.
 - You can rerun tests with the same input set or modify them to test new values.
 
