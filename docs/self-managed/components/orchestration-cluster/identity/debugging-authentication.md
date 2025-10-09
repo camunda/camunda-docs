@@ -7,37 +7,38 @@ description: Learn how to troubleshoot unexpected authentication and authorizati
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes techniques you can use to debug problems in the authentication and authorization flow of the Orchestration Cluster. These techniques help answer questions such as:
+This guide explains how to debug issues in the **authentication and authorization flow** of the Orchestration Cluster.  
+These techniques help identify where and why access may be denied or restricted.
 
-- Why can I not log into the web applications?
-- Why does my search request return an empty result?
+Common questions you can answer with these steps:
 
-Conceptually, the authentication and authorization flow in the Orchestration Cluster consists of three steps:
+- Why can’t I log into the web applications?
+- Why does my search request return empty results?
+
+The flow consists of three key steps:
 
 1. **Request authentication**
-
-   - Input: HTTP request
-   - Output: Spring `Authentication` object that carries the user's identity
-   - Layer: Spring Security
+   - **Input:** HTTP request
+   - **Output:** Spring `Authentication` object with user identity
+   - **Layer:** Spring Security
 
 2. **Establish Orchestration Cluster user context**
-
-   - Input: Spring `Authentication`
-   - Output: `CamundaAuthentication` object that carries the user's groups, roles, tenant memberships, etc.
-   - Layer: Orchestration Cluster authentication
+   - **Input:** Spring `Authentication`
+   - **Output:** `CamundaAuthentication` object with roles, groups, and tenant memberships
+   - **Layer:** Orchestration Cluster authentication
 
 3. **Apply authorizations**
-   - Input: `CamundaAuthentication`
-   - Output: Application data, based on applying authorizations according to the user’s memberships
-   - Layer: Orchestration Cluster search layer and workflow engine
+   - **Input:** `CamundaAuthentication`
+   - **Output:** Application data, filtered by authorizations
+   - **Layer:** Orchestration Cluster search and workflow engine
 
-Each of these steps may either reject the request or not grant access to the desired data. For example:
+Typical failure points:
 
-- If you use basic authentication and provide an incorrect username/password, the request will fail in step 1.
-- If your user cannot see data because they are not a member of the correct role, the cause lies in step 2.
-- If your user has the right memberships but authorizations are not yet configured, the cause lies in step 3.
+- Step 1: Invalid credentials (for example, failed basic authentication).
+- Step 2: Missing role or group memberships.
+- Step 3: Authorizations not yet configured or missing.
 
-You can use the following resources to identify where a request may fail:
+To isolate the issue, use:
 
 - [Reviewing logs](#reviewing-logs)
 - [Reviewing data](#reviewing-data)
@@ -45,7 +46,7 @@ You can use the following resources to identify where a request may fail:
 
 ## Reviewing logs
 
-To obtain debug logs for request authentication and authorization, set logging levels as follows:
+Enable detailed logging to trace authentication decisions:
 
 <Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
 <TabItem value="yaml">
@@ -59,6 +60,7 @@ logging.level:
 ```
 
 </TabItem>
+
 <TabItem value="env">
 
 ```
@@ -68,9 +70,10 @@ LOGGING_LEVEL_IO_CAMUNDA_SECURITY=DEBUG
 ```
 
 </TabItem>
+
 </Tabs>
 
-With these settings, you can trace how requests are handled and how the Spring Security filter chains determine whether a request is authenticated.
+With these settings, you can trace request handling and how Spring Security filter chains determine authentication outcomes.
 
 ## Reviewing data
 
@@ -78,19 +81,25 @@ To review the assignment of users and clients to roles, groups, or tenants—as 
 
 If you do not have access to the API, you can also check the same data in the following Elasticsearch/OpenSearch indexes:
 
-- camunda-authorization
-- camunda-group
-- camunda-mapping-rule
-- camunda-role
-- camunda-tenant
-- camunda-user
-- camunda-web-session
+- `camunda-authorization`
+- `camunda-group`
+- `camunda-mapping-rule`
+- `camunda-role`
+- `camunda-tenant`
+- `camunda-user`
+- `camunda-web-session`
 
 ## Reviewing configuration
 
-To review the effective configuration of your Orchestration Cluster, you can call the [Spring Boot Actuator endpoint](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints) at `<server>:<port>/actuator/configprops`.
+To review the effective configuration of your Orchestration Cluster, you can call the [Spring Boot Actuator endpoint](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints) at:
 
-For example, with a Camunda 8 Run installation, this endpoint is available at `http://localhost:9600/actuator/configprops`. In other setups, replace `http://localhost:9600` by the URL to your Orchestration Cluster's actuator port and endpoint. Note that the actuator port differs from the Orchestration Cluster API port and may not always be accessible, depending on your deployment setup.
+```
+<server>:<port>/actuator/configprops
+```
+
+For example, with a Camunda 8 Run installation, this endpoint is available at `http://localhost:9600/actuator/configprops`.
+
+In other setups, replace `http://localhost:9600` with the URL to your Orchestration Cluster's actuator port and endpoint. Note that the actuator port differs from the Orchestration Cluster API port and may not always be accessible, depending on your deployment setup.
 
 Here is an excerpt from an example installation:
 
@@ -121,8 +130,8 @@ Here is an excerpt from an example installation:
         }
       }
       ...
-    },
-  ...
+    }
+  }
 }
 ```
 
