@@ -4,7 +4,7 @@ title: "Backups"
 description: "Learn more about backups with the Orchestration Cluster."
 ---
 
-When running an orchestration cluster with secondary storage, you must configure a snapshot repository in your chosen database:
+When running an orchestration cluster with [secondary storage](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage), you must configure a snapshot repository in your chosen database:
 
 - [Elasticsearch snapshot repository](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshot-restore.html)
 - [OpenSearch snapshot repository](https://docs.opensearch.org/docs/latest/tuning-your-cluster/availability-and-recovery/snapshots/snapshot-restore/)
@@ -20,7 +20,3 @@ Learn more about the backup procedure and why it must be triggered in the [backu
 | Configuration key                     | Description                      | Default value |
 | ------------------------------------- | -------------------------------- | ------------- |
 | `camunda.data.backup.repository-name` | ES / OS snapshot repository name | -             |
-
-:::warning Breaking change
-Configuring Operate and Tasklist with different repository names will potentially create multiple backups in different repositories. Always use the same `repository-name` for both components.
-:::

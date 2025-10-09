@@ -12,7 +12,7 @@ The Orchestration Cluster stores and reads data from either **Elasticsearch** or
 CAMUNDA_DATABASE=opensearch
 ```
 
-As of version 8.4, the cluster supports [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Using Amazon OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
+We now support [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/). To see which versions are supported, refer to [supported environments](/reference/supported-environments.md). Using Amazon OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
 
 ## Connection settings
 
@@ -42,7 +42,7 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 | `camunda.data.{ES/OS}.security.self-signed`      | Certificate is self-signed                   | false                                          |
 | `camunda.data.{ES/OS}.security.verify-hostname`  | Validate hostname for SSL                    | false                                          |
 | awsEnabled                                       | Use AWS credentials (OpenSearch only)        | false                                          |
-| `camunda.data.{ES/OS}.index-prefix`              | Prefix for index names                       | operate / tasklist                             |
+| `camunda.data.{ES/OS}.index-prefix: ''`          | Prefix for index names                       | operate / tasklist                             |
 | `camunda.data.{ES/OS}.number-of-shards`          | Number of shards for all indices             | 1                                              |
 | `camunda.data.{ES/OS}.number-of-replicas`        | Number of replicas for all indices           | 0                                              |
 
@@ -77,14 +77,6 @@ camunda:
         security:
           self-signed: true
 ```
-
-## Database selection (optional)
-
-Some components may require explicit configuration of which database to use:
-
-| Name           | Description                                              | Default value |
-| -------------- | -------------------------------------------------------- | ------------- |
-| `camunda.data` | Database to connect to (`elasticsearch` or `opensearch`) | elasticsearch |
 
 ## Disable Elasticsearch deprecation logging
 
