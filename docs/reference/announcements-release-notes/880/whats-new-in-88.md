@@ -68,10 +68,6 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 </tr>
 </table>
 
-:::note simple deployment
-The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
-:::
-
 :::info
 
 - See [release announcements](/reference/announcements-release-notes/880/880-announcements.md) and [release notes](/reference/announcements-release-notes/880/880-release-notes.md) for more detail on what's included in Camunda 8.8.
@@ -110,6 +106,10 @@ Use the following new features to build and integrate AI agents into your proces
 </tr>
 </table>
 
+:::info
+To learn more about agentic orchestration, see the blog post [Enterprise-Grade Agentic Automation Is Here](https://camunda.com/blog/2025/10/enterprise-grade-agentic-automation-is-here/).
+:::
+
 ## Orchestration Cluster {#orchestration-cluster}
 
 The primary architectural change is the consolidation of the core Zeebe, Operate, Tasklist, and Identity components into the Orchestration Cluster (a single unified deployable package). This impacts how Camunda 8 is deployed, managed, and scaled.
@@ -117,6 +117,10 @@ The primary architectural change is the consolidation of the core Zeebe, Operate
 The Orchestration Cluster (previously automation cluster) is now the core component of Camunda 8.
 
 <img src={OrchestrationClusterImg} alt="Diagram showing the Orchestration Cluster" class="img-noborder" style={{marginBottom: '0'}}/>
+
+:::note simple deployment
+The simplest Camunda 8.8 Self-Managed deployment runs as a single Java application or docker container.
+:::
 
 ### Zeebe, Operate, Tasklist, and Identity
 
