@@ -790,9 +790,9 @@ RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-source-code/(.*)$ /d
 RewriteRule ^docs/guides/migrating-from-camunda-7/adjusting-bpmn-models/(.*)$ /docs/guides/migrating-from-camunda-7/index/ [R=301,L]
 
 # Moved API endpoints in 8.7
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/create-document-link-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/create-document-link/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/delete-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/delete-document/ [R=301,L]
-RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/download-document-alpha/?$ /docs/apis-tools/camunda-api-rest/specifications/get-document/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/create-document-link-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/delete-document-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/delete-document/ [R=301,L]
+RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/download-document-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/get-document/ [R=301,L]
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/create-document/ [R=301,L]
 
 # Rename Web Modeler milestones to versions
