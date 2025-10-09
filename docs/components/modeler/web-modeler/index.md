@@ -5,35 +5,48 @@ sidebar_label: About
 description: "Camunda Web Modeler is a collaborative, browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates for Camunda 8. It enables teams to collaboratively design, implement, and deploy processes."
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Web Modeler is a browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates.
-It enables teams to collaboratively develop executable processes as the foundation for scalable IT and business collaboration.
+Web Modeler is a browser-based application for modeling BPMN, DMN, Camunda Forms, and element templates.  
+It enables teams to collaboratively design executable processes as the foundation for scalable IT and business automation.
 
 ![Web Modeler Screenshot](./img/context-pad/overview.png)
 
-## Features
+## Key features
 
-- Design [BPMN](../bpmn/bpmn.md), [DMN](../dmn/dmn.md), and [Forms](../forms/camunda-forms-reference.md) collaboratively
-- Manage [element templates](./element-templates/using-templates.md) for reusable components
-- [Collaborate](./collaboration/collaboration.md) with team members
-- Implement and deploy [process applications](./process-applications/process-applications.md) for Camunda 8
-- [Synchronize process applications with Git](./git-sync.md) for version control integration
-- [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) capabilities
-- [Play](./collaboration/play-your-process.md) for process testing and validation
-- [Process landscape visualization](./process-landscape-visualization.md)
-- [Camunda Marketplace](./camunda-marketplace.md) integration
-- [Advanced modeling features](./advanced-modeling/camunda-docs-ai.md) including AI-powered assistance
+| Feature                                                                          | Description                                                                                     |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                                 | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
+| [Element templates](./element-templates/using-templates.md)                      | Reuse preconfigured components to standardize modeling across teams and projects.               |
+| [Real-time collaboration](./collaboration/collaboration.md)                      | Work with team members simultaneously to speed up design and review cycles.                     |
+| [Camunda Marketplace](./camunda-marketplace.md)                                  | Extend Web Modeler with prebuilt templates, connectors, and components.                         |
+| [Git synchronization](./git-sync.md)                                             | Connect to Git repositories for version control, branching, and change history.                 |
+| [Play mode](./collaboration/play-your-process.md)                                | Test and validate processes in a sandbox environment before deployment.                         |
+| [Intelligent Document Processing (IDP)](./intelligent-document-processing.md)    | Extract and process data from documents to accelerate process automation.                       |
+| [Process application deployment](./process-applications/process-applications.md) | Implement and deploy process applications to Camunda 8 without leaving the Modeler.             |
+| [Process landscape visualization](./process-landscape-visualization.md)          | View dependencies and interactions between processes at a glance.                               |
+| [AI-powered assistance](./advanced-modeling/camunda-docs-ai.md)                  | Get intelligent modeling suggestions and automation support.                                    |
 
 ## Access Web Modeler
 
-Access Web Modeler through [Camunda 8 Console](../../console/introduction-to-console.md) or [launch it directly](./launch-web-modeler.md).
-No installation required.
+Access Web Modeler through the [Camunda 8 Console](../../console/introduction-to-console.md) or [launch it directly](./launch-web-modeler.md). No installation is required.
 
 ## Get started
 
-Learn how to [model your first diagram](./model-your-first-diagram.md), [collaborate with your team](./collaboration/collaboration.md), and [run or publish your processes](./run-or-publish-your-process.md) to Camunda 8.
+<DocCardList items={[{type:"link", href:"/docs/next/components/modeler/web-modeler/model-your-first-diagram/", label: "Model your first diagram", docId:"components/modeler/web-modeler/model-your-first-diagram"},
+{
+type:"link", href:"/docs/next/components/modeler/web-modeler/collaboration/collaboration/", label: "Collaborate with your team", docId:"components/modeler/web-modeler/collaboration/collaboration",
+},
+{
+type:"link", href:"/docs/next/components/modeler/web-modeler/run-or-publish-your-process/", label: "Run or publish your processes", docId:"components/modeler/web-modeler/run-or-publish-your-process"
+},
+{
+type:"link", href:"/docs/next/guides/orchestrate-human-tasks/", label: "Orchestrate human tasks", docId:"guides/orchestrate-human-tasks"
+}
+]}/>
 
-## Resources
+## Additional resources
 
-- [Self-Managed configuration & troubleshooting guides](../../../self-managed/components/modeler/web-modeler/overview.md)
+- [Self-Managed configuration & troubleshooting](../../../self-managed/components/modeler/web-modeler/overview.md)
