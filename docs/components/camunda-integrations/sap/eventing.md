@@ -12,11 +12,11 @@ It consits of three connectors
 - **SAP Eventing Outbound Connector**  
   send CloudEvents to AEM
 - **SAP Eventing Message Start Event Connector**  
-  translate an incoming CloudEvent to a [BMPN message start event](https://docs.camunda.io/docs/next/components/modeler/bpmn/message-events/#message-start-events)
+  translate an incoming CloudEvent to a [BMPN message start event](../../../components/modeler/bpmn/message-events/#message-start-events)
 - **SAP Eventing Intermediate Event Connector**  
-  translate an incoming CloudEvent from AEM to a [BPMN Intermediate Catch Event](https://docs.camunda.io/docs/next/components/modeler/bpmn/message-events/#intermediate-message-catch-events)
+  translate an incoming CloudEvent from AEM to a [BPMN Intermediate Catch Event](../../../components/modeler/bpmn/message-events/#intermediate-message-catch-events)
 
-The integration uses `HTTP` as the Transport Protocol - the incoming connectors act as Webhooks, relaying the CloudEvent payload into the Process Instance.  
+The integration uses `HTTP` as the Transport Protocol - the incoming connectors act as Webhooks, relaying the CloudEvent payload into the Process instance.  
 The outbound connector makes a `HTTP` `POST` request to an Advanced Event Mesh [topic](https://docs.solace.com/Messaging/Guaranteed-Msg/Topic-Endpoints.htm) or [queue](https://docs.solace.com/Messaging/Guaranteed-Msg/Queues.htm) endpoint.
 
 :::info
@@ -53,15 +53,15 @@ The path of the Camunda incoming Webhook URL needs to be configured in the `Queu
 
 ![AEM Queue Binding](./img/eventing-aem-queue-binding.png)
 
-The remaining configuration options of the `SAP Eventing Message Start Connector` correspond with those of the [regular Incoming Webhook Connector](https://docs.camunda.io/docs/next/components/connectors/protocol/http-webhook/) - with the exception of the default "Webhook response": replying with `OK` as the body in addition to the status code `200` explicitly acknowledges the receipt of the message from AEM in Camunda.
+The remaining configuration options of the `SAP Eventing Message Start Connector` correspond with those of the [regular Incoming Webhook Connector](../../../components/connectors/protocol/http-webhook/) - with the exception of the default "Webhook response": replying with `OK` as the body in addition to the status code `200` explicitly acknowledges the receipt of the message from AEM in Camunda.
 
 ![remaining Incoming Webhook config](./img/eventing-incoming-other-config.png)
 
-If a CloudEvent from AEM arrives in Camunda, all its `header` properties and the `body` payload is relayed as is to the process instance - either at Process Instance creation or while correlating the CloudEvent as BPMN message, depending on whether the `Start Eventing Message Start Event` connector is used or the `SAP Eventing Intermediate Event` connector.
+If a CloudEvent from AEM arrives in Camunda, all its `header` properties and the `body` payload is relayed as is to the process instance - either at Process instance creation or while correlating the CloudEvent as BPMN message, depending on whether the `Start Eventing Message Start Event` connector is used or the `SAP Eventing Intermediate Event` connector.
 
 ### SAP Eventing Intermediate Event Connector: correlate CloudEvents as BPMN message
 
-The `SAP Eventing Intermediate Event Connector` allows to "inject" a CloudEvent from AEM into a running Camunda BPMN Process Instance. This is achieved by utilizing the principle of BPMN [message correlation](https://docs.camunda.io/docs/next/components/connectors/protocol/http-webhook/#correlation) - any property of the CloudEvent can be used as the `correlation key` to map all event information to a Process Instance.
+The `SAP Eventing Intermediate Event Connector` allows to "inject" a CloudEvent from AEM into a running Camunda BPMN Process instance. This is achieved by utilizing the principle of BPMN [message correlation](../../../components/connectors/protocol/http-webhook/#correlation) - any property of the CloudEvent can be used as the `correlation key` to map all event information to a Process instance.
 
 #### Correlation via CloudEvent body
 
@@ -69,7 +69,7 @@ The configuration options of the `SAP Eventing Message Start Event Connector` an
 
 ![intermediate message correlation](./img/eventing-intermediate-correlation.png)
 
-In the above example, the process variable `ENCOMGridID` is expected to be present in the Process Instance. It's value is matched against the CloudEvent's payload, represented by `request.body`, and the entry `FlynnLocationID` 's value - if they match, the CloudEvent is considered to be the published BPMN message that is correlated to the corresponding Process Instance.
+In the above example, the process variable `ENCOMGridID` is expected to be present in the Process instance. It's value is matched against the CloudEvent's payload, represented by `request.body`, and the entry `FlynnLocationID` 's value - if they match, the CloudEvent is considered to be the published BPMN message that is correlated to the corresponding Process instance.
 
 #### Correlation via CloudEvent meta data
 
@@ -137,7 +137,7 @@ On the right handside of the UI, you'll see the FQDN of your AEM instance/broker
 
 #### Topic/Queue
 
-Choose the respective publishing target and provide the path to either. Note that neither must start with a "/" - a safety check is provided in the Element Template.
+Choose the respective publishing target and provide the path to either. Note that neither must start with a "/" - a safety check is provided in the Element template.
 
 #### Authorization
 
@@ -149,10 +149,10 @@ Even though the mapping of CloudEvent metadata (such as `ce-id` or `ce-subject`)
 
 The data in the CloudEvent maps to a standard JSON body.
 
-Both field allow for using [FEEL](https://docs.camunda.io/docs/next/components/modeler/feel/what-is-feel/) in them.
+Both field allow for using [FEEL](../../../components/modeler/feel/what-is-feel/) in them.
 
 ![Eventing Outbound CloudEvent](./img/eventing-outbound-cloudevent.png)
 
 #### Other configuration options
 
-All other configuration options are the same as for the [REST connector](https://docs.camunda.io/docs/next/components/connectors/protocol/rest/) - such as [Connection timeout](https://docs.camunda.io/docs/next/components/connectors/protocol/rest/#network-communication-timeouts) or [Output mapping](https://docs.camunda.io/docs/next/components/connectors/protocol/rest/#output-mapping).
+All other configuration options are the same as for the [REST connector](../../../components/connectors/protocol/rest/) - such as [Connection timeout](../../../components/connectors/protocol/rest/#network-communication-timeouts) or [Output mapping](../../../components/connectors/protocol/rest/#output-mapping).
