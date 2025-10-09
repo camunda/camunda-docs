@@ -601,9 +601,9 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 
 ### `camunda.security.csrf`
 
-| Property                        | Description                          | Default value |
-| ------------------------------- | ------------------------------------ | ------------- |
-| `camunda.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+| Property                        | Description                                                                                                                                                                                   | Default value |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
 ### `camunda.security.http-headers`
 
@@ -647,10 +647,6 @@ worker-src 'self' blob:;
 child-src;
 script-src-attr 'none'.
 ```
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 ### `camunda.security.authentication.oidc`
 
@@ -751,9 +747,9 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `CAMUNDA_SECURITY_CSRF`
 
-| Property                        | Description                          | Default value |
-| ------------------------------- | ------------------------------------ | ------------- |
-| `CAMUNDA_SECURITY_CSRF_ENABLED` | Enables or disables CSRF protection. | `true`        |
+| Property                        | Description                                                                                                                                                                                   | Default value |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_CSRF_ENABLED` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
 ### `CAMUNDA_SECURITY_HTTP_HEADERS`
 
@@ -797,10 +793,6 @@ worker-src 'self' blob:;
 child-src;
 script-src-attr 'none'.
 ```
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
@@ -883,9 +875,9 @@ Disabling CSRF protection is not recommended for production environments as it l
 
 ### `orchestration.security.csrf`
 
-| Property                              | Description                          | Default value |
-| ------------------------------------- | ------------------------------------ | ------------- |
-| `orchestration.security.csrf.enabled` | Enables or disables CSRF protection. | `true`        |
+| Property                              | Description                                                                                                                                                                                   | Default value |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `orchestration.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
 ### `orchestration.security.httpHeaders`
 
@@ -929,10 +921,6 @@ worker-src 'self' blob:;
 child-src;
 script-src-attr 'none'.
 ```
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 ### `orchestration.security.initialization`
 
