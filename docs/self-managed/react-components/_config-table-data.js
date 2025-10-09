@@ -764,7 +764,13 @@ export const configs = [
   },
   {
     name: "camunda.data.primary-storage.rocksdb.wal-disabled",
-    legacy: ["zeebe.broker.experimental.rocksdb.walDisabled"],
+    legacy: ["zeebe.broker.experimental.rocksdb.disableWal"],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.primary-storage.rocksdb.column-family-options",
+    legacy: ["zeebe.broker.experimental.rocksdb.columnFamilyOptions"],
     types: ["Direct mapping"],
     area: ["Data"],
   },

@@ -34,5 +34,5 @@ Our [Modeler](../modeler/about-modeler.md) applications support you as you devel
 
 Read more about how to use process applications in Web and Desktop Modeler:
 
-- [Process applications in Web Modeler](/components/modeler/web-modeler/process-applications.md)
+- [Process applications in Web Modeler](/components/modeler/web-modeler/process-applications/process-applications.md)
 - [Process applications in Desktop Modeler](/components/modeler/desktop-modeler/process-applications.md)

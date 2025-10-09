@@ -12,7 +12,7 @@ They are stored in JSON format and can be created, edited, and managed directly 
 
 ## Create a test scenario file
 
-You can create a new test scenario file by [saving a scenario in Play](../play-your-process.md#save-scenario).
+You can create a new test scenario file by [saving a scenario in Play](../collaboration/play-your-process.md#save-scenario).
 
 You can also manage scenarios and update failing scenarios from Play.
 

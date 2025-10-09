@@ -4,9 +4,9 @@ title: Create a process application
 description: Create a process application and select a development cluster to deploy to.
 ---
 
-import EmptyProjectImg from './img/process-applications/empty-project.png'
-import ReassignMainProcessImg from './img/process-applications/reassign-main-process.png'
-import FileListImg from './img/process-applications/file-list.png'
+import EmptyProjectImg from './img/empty-project.png'
+import ReassignMainProcessImg from './img/reassign-main-process.png'
+import FileListImg from './img/file-list.png'
 
 Create a process application in your project to work on and deploy a set of related files.
 
