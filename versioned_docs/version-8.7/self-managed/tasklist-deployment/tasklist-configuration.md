@@ -161,17 +161,17 @@ From 8.7.11 you can opt-in to applying the configured priority update on restart
 
 ### Dynamic schema settings updates (8.7.11+)
 
-Configure Operate to update certain schema-related settings each time it starts by enabling:
+Configure Tasklist to update certain schema-related settings each time it starts by enabling:
 
-| Name                                               | Description                                         | Default value |
-| -------------------------------------------------- | --------------------------------------------------- | ------------- |
-| camunda.operate.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+| Name                                                | Description                                         | Default value |
+| --------------------------------------------------- | --------------------------------------------------- | ------------- |
+| camunda.tasklist.elasticsearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
 
 For OpenSearch:
 
-| Name                                            | Description                                         | Default value |
-| ----------------------------------------------- | --------------------------------------------------- | ------------- |
-| camunda.operate.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
+| Name                                             | Description                                         | Default value |
+| ------------------------------------------------ | --------------------------------------------------- | ------------- |
+| camunda.tasklist.opensearch.updateSchemaSettings | Enables dynamic updates for schema-related settings | false         |
 
 Behavior when enabled:
 
