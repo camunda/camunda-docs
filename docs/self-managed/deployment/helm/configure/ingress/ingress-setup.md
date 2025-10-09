@@ -58,10 +58,6 @@ global:
   identity:
     auth:
       publicIssuerUrl: "https://camunda.example.com/auth/realms/camunda-platform"
-      operate:
-        redirectUrl: "https://camunda.example.com/operate"
-      tasklist:
-        redirectUrl: "https://camunda.example.com/tasklist"
       optimize:
         redirectUrl: "https://camunda.example.com/optimize"
       webModeler:
@@ -73,14 +69,16 @@ identity:
   contextPath: "/identity"
   fullURL: "https://camunda.example.com/identity"
 
-operate:
-  contextPath: "/operate"
-
 optimize:
   contextPath: "/optimize"
 
-tasklist:
-  contextPath: "/tasklist"
+orchestration:
+  contextPath: "/orchestration"
+  ingress:
+    grpc:
+      enabled: true
+      className: nginx
+      host: "zeebe.camunda.example.com"
 
 webModeler:
   # The context path is used for the web application that will be accessed by users in the browser.
@@ -92,14 +90,6 @@ console:
 
 connectors:
   contextPath: "/connectors"
-
-zeebeGateway:
-  contextPath: "/zeebe"
-  ingress:
-    grpc:
-      enabled: true
-      className: nginx
-      host: "zeebe.camunda.example.com"
 ```
 
 Incorporate these custom values into the values file you use to deploy Camunda (see [Install Camunda with Helm](/self-managed/deployment/helm/install/quick-install.md)):
@@ -110,10 +100,11 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -f v
 
 After deployment, access the Camunda 8 components at:
 
-- **Applications:** `https://camunda.example.com/[identity|operate|optimize|tasklist|modeler|console|zeebe]`
+- **Management Applications:** `https://camunda.example.com/[identity|modeler|console]`
+- **Core Orchestration Applications and REST API:** `https://camunda.example.com/orchestration/[identity|operate|optimize|tasklist|v2]`
 - **Web Modeler WebSocket:** Web Modeler exposes a WebSocket endpoint on `https://camunda.example.com/modeler-ws`. This is only used internally by the application and not for direct user access.
 - **Keycloak authentication:** `https://camunda.example.com/auth`
-- **Zeebe Gateway:** `grpc://zeebe.camunda.example.com`
+- **Zeebe GRPC Gateway:** `grpc://zeebe.camunda.example.com`
 
 :::note
 This configuration shows only the Ingress-related values for `webModeler`and `Console`. For full setup, see [Enable additional components](/self-managed/deployment/helm/configure/enable-additional-components.md).
