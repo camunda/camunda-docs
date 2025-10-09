@@ -5,6 +5,14 @@ sidebar_label: "User task access restrictions"
 description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
 ---
 
+:::caution Tasklist V1 only
+User task access restrictions are only supported with the Tasklist V1 API and are currently not supported in V2. From Camunda 8.8, Tasklist runs on V2 by default.
+
+For Tasklist V2, use [authorization-based access control](components/concepts/access-control/authorizations.md) to manage user permissions and control access to tasks.
+
+For more information about the differences between V1 and V2, see [Tasklist API versions](components/tasklist/api-versions.md).
+:::
+
 [User task access restrictions](components/tasklist/user-task-access-restrictions.md) are used in Tasklist to control task access for a user or a group.
 
 They are enabled by default and can be disabled using the `userAccessRestrictionsEnabled` [Tasklist environment variable](/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication.md?authentication=identity#configure-identity).
