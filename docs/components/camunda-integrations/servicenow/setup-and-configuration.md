@@ -1,80 +1,95 @@
 ---
 id: setup-and-configuration
 title: Setup & configuration
-description: "Install the Camunda Spoke in ServiceNow, configure connectors in Camunda, and set up secure credentials to enable bi-directional communication between both systems."
+description: "Connect Camunda and ServiceNow by installing the Camunda Spoke, configuring connectors, and establishing secure credentials for bi-directional orchestration."
 ---
 
-The setup and configuration process connects your ServiceNow instance with Camunda so that workflows can securely exchange data and trigger actions in both directions.
+Connect your ServiceNow instance with Camunda to enable end-to-end orchestration and secure data exchange.
 
-This involves installing and configuring the Camunda Spoke on your ServiceNow instance, setting up the ServiceNow connectors in Camunda, and establishing secure credentials for communication.
-
-Once configured, you can interact with ServiceNow tables and flows directly from Camunda processes and start or control Camunda processes from ServiceNow—enabling true end-to-end orchestration.
+Install and configure the Camunda Spoke in ServiceNow, set up ServiceNow connectors in Camunda, and configure secure credentials. After setup, you can interact with ServiceNow tables and flows from Camunda and start or control Camunda processes from ServiceNow.
 
 :::tip
-
 **Before you begin**  
 Ensure the following prerequisites are in place:
 
-- ✅ Administrator access to both Camunda and ServiceNow instances.
-- ✅ Your ServiceNow instance meets all [prerequisites](./prerequisites.md), including required plugins and user permissions.
-- ✅ Network connectivity between Camunda and ServiceNow is allowed by your organization's security settings.
+- Administrator access to both Camunda and ServiceNow.
+- ServiceNow instance meets all [prerequisites](./prerequisites.md), including required plugins and user permissions.
+- Network connectivity between Camunda and ServiceNow is allowed by your organization's security settings.
   :::
 
-## Configuration instructions
+## Configure Camunda
 
-### **Camunda**
+1. Create a [Camunda API credential](../../../components/react-components/create-api-credentials.md) for ServiceNow connectivity.
+2. Add and configure the ServiceNow connector templates in your Camunda processes like any other connector.
 
-1. Configure a [**Camunda API credential**](../../../components/react-components/create-api-credentials.md) for ServiceNow connectivity.
-2. Add the out-of-the-box **ServiceNow connector templates** to your Camunda processes and configure them, just like any other Camunda connector.
+## Configure ServiceNow
 
-### **ServiceNow**
+### Install the Camunda Spoke
 
-1. **Install the Camunda Spoke**
-   - Log in to your ServiceNow instance as an administrator.
-   - Navigate to **All → Application Manager**.
-   - Search for the **Camunda Spoke** application and click **Install**.
+1. Log in to ServiceNow as an administrator.
+2. Navigate to **All → Application Manager**.
+3. Search for **Camunda Spoke** and click **Install**.
 
-2. **Verify installation**
-   - **Spoke**: In the Application Navigator, filter for "Camunda Spoke" to confirm the application menu appears.
-   - **Connection alias**: Go to **Connections & Credentials → Connection & Credential Aliases** and verify that the **Camunda alias** exists and is associated with the Camunda Spoke application.
+### Verify installation
 
-3. **Create an OAuth profile**
-   - Navigate to **System OAuth → Application Registry** and click **New**.
-   - Select **Connect to a third-party OAuth Provider**.
-   - Fill in the form:
-     - **Name**: `Camunda OAuth`
-     - **Client ID**: Paste the `Client ID` created in Camunda
-     - **Client Secret**: Paste the `Client Secret` created in Camunda
-     - **OAuth API Script**: `OAuthCamundaUtil`
-     - **Default Grant Type**: `Client Credentials`
-     - **Token URL**: `https://login.cloud.camunda.io/oauth/token`
-     - **Refresh Token Lifespan**: Default `8,640,000`
-   - Click **Submit**.
+- **Spoke**: Confirm the "Camunda Spoke" menu appears in the Application Navigator.
+- **Connection alias**: Go to **Connections & Credentials → Connection & Credential Aliases** and ensure the **Camunda alias** exists and is linked to the Camunda Spoke.
 
-4. **Create a credential record**
-   - Navigate to **Connections & Credentials → Credentials** and click **New**.
-   - Select **OAuth 2.0 Credentials**.
-   - Fill in the form:
-     - **Name**: `Camunda Connection`
-     - **OAuth Entity Profile**: Choose `Camunda OAuth default_profile`
-   - Click **Submit**.
+### Create an OAuth profile
 
-5. **Create a connection record and link to alias**
-   - Navigate to **Connections & Credentials → Connection & Credential Aliases** and open the **Camunda alias** (_ensure you are editing a record in the Camunda Spoke application_).
-   - In the **Connections** tab, click **New**.
-   - Fill in the form:
-     - **Name**: `Camunda API Connection`
-     - **Credential**: Choose `Camunda Connection` (created previously)
-     - **Domain**: `Global`
-     - **Connection alias ID**: `x_camun_camunda.Camunda` (pre-populated)
-     - **URL Builder**: `Enabled`
-     - **Host**: `regionId.zeebe.camunda.io` (Camunda cluster Region ID, e.g., `lhr-1.zeebe.camunda.io`)
-     - **Protocol**: `https`
-     - **Base path**: `/Camunda-ClusterId` (e.g., `/6b6b3969-a65c-4bdd-905e-c29102eebded`)
-   - Click **Submit**.
+1. Navigate to **System OAuth → Application Registry** and click **New**.
+2. Select **Connect to a third-party OAuth Provider**.
+3. Fill in the form:
 
-6. **Optional: Configure Flow Starter**
-   - To start a ServiceNow flow from Camunda asynchronously, you will need:
-     - **ServiceNow Integration Hub Enterprise Pack**
-     - **ServiceNow Integration Hub Flow Trigger – REST** plugin
-   - See [Requesting and activating Integration Hub](https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html) for details.
+| Field                  | Value                                        |
+| :--------------------- | :------------------------------------------- |
+| Name                   | `Camunda OAuth`                              |
+| Client ID              | Paste Client ID from Camunda                 |
+| Client Secret          | Paste Client Secret from Camunda             |
+| OAuth API Script       | `OAuthCamundaUtil`                           |
+| Default Grant Type     | `Client Credentials`                         |
+| Token URL              | `https://login.cloud.camunda.io/oauth/token` |
+| Refresh Token Lifespan | Default `8,640,000`                          |
+
+4. Click **Submit**.
+
+### Create a credential record
+
+1. Navigate to **Connections & Credentials → Credentials** and click **New**.
+2. Select **OAuth 2.0 Credentials**.
+3. Fill in the form:
+
+| Field                | Value                           |
+| :------------------- | :------------------------------ |
+| Name                 | `Camunda Connection`            |
+| OAuth Entity Profile | `Camunda OAuth default_profile` |
+
+4. Click **Submit**.
+
+### Create a connection record and link to alias
+
+1. Navigate to **Connections & Credentials → Connection & Credential Aliases** and open the **Camunda alias**.
+2. In the **Connections** tab, click **New**.
+3. Fill in the form:
+
+| Field               | Value                                                              |
+| :------------------ | :----------------------------------------------------------------- |
+| Name                | `Camunda API Connection`                                           |
+| Credential          | `Camunda Connection`                                               |
+| Domain              | `Global`                                                           |
+| Connection alias ID | `x_camun_camunda.Camunda`                                          |
+| URL Builder         | Enabled                                                            |
+| Host                | Camunda cluster Region ID (e.g., `lhr-1.zeebe.camunda.io`)         |
+| Protocol            | `https`                                                            |
+| Base path           | Camunda Cluster ID (e.g., `/6b6b3969-a65c-4bdd-905e-c29102eebded`) |
+
+4. Click **Submit**.
+
+### Optional: Configure Flow Starter
+
+To start ServiceNow flows from Camunda asynchronously, ensure the following:
+
+- ServiceNow Integration Hub Enterprise Pack
+- ServiceNow Integration Hub Flow Trigger – REST plugin
+
+See [Requesting and activating Integration Hub](https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html) for details.

@@ -4,28 +4,28 @@ title: Best practices
 description: "Recommended approaches for building secure, reliable, and maintainable Camunda–ServiceNow integrations."
 ---
 
-This page outlines best practices for building **secure, reliable, and maintainable** integrations between Camunda and ServiceNow.  
-Following these recommendations helps you avoid common pitfalls and ensure your orchestrations scale effectively across teams and use cases.
+Use these practices to build secure, reliable, and maintainable Camunda–ServiceNow integrations.
 
-### Credential management
+### Manage credentials securely
 
-- Use [**Camunda secrets**](../../../components/console/manage-clusters/manage-secrets.md) to store and manage ServiceNow credentials.
-- Never hardcode usernames or passwords directly into connector configurations or BPMN models.
-- Reference secrets using the `{{secrets.<name>}}` syntax in connector fields.
-- Apply this practice consistently across all ServiceNow connectors to maintain a unified security model.
+- Store and manage ServiceNow credentials using [Camunda secrets](../../../components/console/manage-clusters/manage-secrets.md).
+- Never hardcode usernames or passwords in connector configurations or BPMN models.
+- Reference secrets with the `{{secrets.<name>}}` syntax in connector fields.
+- Apply this consistently across all ServiceNow connectors to maintain a unified security model.
 
-### Reusing variables
+### Reuse variables effectively
 
-When creating or modifying records in ServiceNow (for example, incidents, change requests, or catalog items), the response includes a **unique `sys_id`**.
+- Map ServiceNow `sys_id` values to **top-scope process variables** in your BPMN process.
+- Use these variables for:
 
-Map this value to a **top-scope process variable** in your BPMN process. This allows you to reuse the variable later for:
+| Action      | Purpose                                        |
+| ----------- | ---------------------------------------------- |
+| Lookup      | Retrieve existing records reliably             |
+| Update      | Modify records without additional queries      |
+| Delete      | Remove records when needed                     |
+| Correlation | Tie records to notifications or process events |
 
-- Record lookups
-- Updates
-- Deletions
-- Correlation with ServiceNow notifications
-
-**Example**
+**Example:**
 
 ```feel
 = incidentResponse.body.sys_id

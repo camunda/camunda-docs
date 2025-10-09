@@ -1,47 +1,47 @@
 ---
 id: troubleshooting
 title: Troubleshooting
-description: "Common issues and troubleshooting tips for the Camunda ServiceNow integration."
+description: "Resolve common issues with the Camunda–ServiceNow integration and ensure workflows run reliably."
 ---
 
-This page lists common issues you may encounter while setting up or using the Camunda ServiceNow integration, along with recommended solutions.
+Resolve common issues encountered while setting up or using the Camunda–ServiceNow integration and follow recommended actions to fix them.
 
 ## ServiceNow
 
-| Issue                         | Possible cause                                                             | Recommended action                                                                                                                                                                              |
-| ----------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Camunda Spoke not visible** | The spoke was not installed correctly or the user lacks permissions.       | Confirm that the Camunda Spoke is installed from the [ServiceNow Store](https://store.servicenow.com/store/app/aac1b64fc3803290ef46d0af050131d0) and that you're logged in as an administrator. |
-| **Flow doesn’t trigger**      | Trigger conditions are not configured or Integration Hub is not activated. | Review flow trigger settings and ensure the required Integration Hub plugins are active.                                                                                                        |
-| **Authentication failures**   | OAuth profile misconfigured or invalid Camunda credentials.                | Verify Client ID, Client Secret, and Token URL. Check the OAuth profile settings in ServiceNow.                                                                                                 |
-| **Missing required plugins**  | IntegrationHub packs (e.g., Enterprise Pack) not installed.                | Install the required plugins listed in [Prerequisites](./prerequisites.md).                                                                                                                     |
+| Issue                     | Possible cause                                                | Recommended action                                                                                                                                                                          |
+| ------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda Spoke not visible | Spoke not installed correctly or insufficient permissions.    | Confirm the Camunda Spoke is installed from the [ServiceNow Store](https://store.servicenow.com/store/app/aac1b64fc3803290ef46d0af050131d0) and that you are logged in as an administrator. |
+| Flow doesn’t trigger      | Trigger conditions misconfigured or Integration Hub inactive. | Review flow trigger settings and ensure the required Integration Hub plugins are active.                                                                                                    |
+| Authentication failures   | OAuth profile misconfigured or invalid Camunda credentials.   | Verify the Client ID, Client Secret, and Token URL. Check the OAuth profile settings in ServiceNow.                                                                                         |
+| Missing required plugins  | IntegrationHub packs (e.g., Enterprise Pack) not installed.   | Install the required plugins listed in [Prerequisites](./prerequisites.md).                                                                                                                 |
 
 ## Camunda
 
-| Issue                                   | Possible cause                                                         | Recommended action                                                                                           |
-| --------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| **Connector task fails**                | Incorrect credentials or network connectivity issues.                  | Confirm that Camunda API credentials are valid and that the ServiceNow instance is reachable.                |
-| **Variables not mapped correctly**      | Response fields from ServiceNow are not stored or referenced properly. | Map the entire response object and specific fields explicitly in your BPMN model.                            |
-| **Process not started from ServiceNow** | Correlation keys or message names do not match.                        | Verify that message names and correlation variables are correctly configured in both ServiceNow and Camunda. |
-| **Timeouts or unexpected errors**       | Large payloads or network latency.                                     | Check logs, increase timeout thresholds, and test the ServiceNow API call separately.                        |
+| Issue                               | Possible cause                                                         | Recommended action                                                                                           |
+| ----------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| Connector task fails                | Invalid credentials or network connectivity issues.                    | Confirm Camunda API credentials are valid and that the ServiceNow instance is reachable.                     |
+| Variables not mapped correctly      | Response fields from ServiceNow are not stored or referenced properly. | Map the entire response object and specific fields explicitly in your BPMN model.                            |
+| Process not started from ServiceNow | Correlation keys or message names do not match.                        | Verify that message names and correlation variables are configured correctly in both ServiceNow and Camunda. |
+| Timeouts or unexpected errors       | Large payloads or network latency.                                     | Check logs, increase timeout thresholds, and test the ServiceNow API call separately.                        |
 
 ## General tips
 
-- **Enable verbose flow logs in ServiceNow**  
+- Enable verbose flow logs in ServiceNow  
   Navigate to **Flow Designer → Your flow name → Flow Reporting Settings** and enable full verbose logging to debug flow execution.
 
-- **Check Camunda Operate for connector errors**  
+- Check Camunda Operate for connector errors  
   Inspect failed connector tasks in [Camunda Operate](/components/operate/operate-introduction.md) for detailed error messages and variable mappings.
 
-- **Validate network connectivity**  
-  Ensure that outbound calls from Camunda to ServiceNow (and vice versa) are not blocked by firewalls, VPNs, or proxies.
+- Validate network connectivity  
+  Ensure outbound calls between Camunda and ServiceNow are not blocked by firewalls, VPNs, or proxies.
 
-- **Check version compatibility**  
-  Make sure your Camunda and ServiceNow versions meet the [prerequisites](./prerequisites.md).
+- Check version compatibility  
+  Verify that Camunda and ServiceNow versions meet the [prerequisites](./prerequisites.md).
 
 ## Frequently asked questions
 
 **Do I need IntegrationHub Enterprise Pack for all connectors?**  
-No. It’s only required for starting ServiceNow flows from Camunda using the Flow Starter connector.
+No. It is only required to start ServiceNow flows from Camunda using the Flow Starter connector.
 
 **Why do I get 401 Unauthorized errors from ServiceNow?**  
-This usually indicates a misconfigured OAuth profile. Double-check the Client ID, Client Secret, and Token URL.
+This usually indicates a misconfigured OAuth profile. Verify the Client ID, Client Secret, and Token URL.
