@@ -151,6 +151,24 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/self-managed/components/ [R=301,L]
 
+RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/backup-restore/operate-tasklist-backup/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
+RewriteRule ^docs/self-managed/optimize-deployment/configuration/getting-started/?$ /docs/self-managed/components/optimize/configuration/getting-started/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/deploy/amazon/aws-marketplace/?$ /docs/self-managed/setup/deploy/amazon/amazon-eks/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/deploy/gcp/google-gke/?$ /docs/self-managed/installation-methods/helm/cloud-providers/gcp/google-gke/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/deploy/openshift/redhat-openshift-dual-region/?$ /docs/self-managed/installation-methods/helm/operational-tasks/dual-region-operational-procedure/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/deploy/openshift/redhat-openshift/?$ /docs/self-managed/installation-methods/helm/cloud-providers/openshift/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/?$ /docs/self-managed/installation-methods/helm/configure/guides/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/installing-payment-app-example/?$ /docs/self-managed/installation-methods/manual/install/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-indices/?$ /docs/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/using-existing-postgres/?$ /docs/self-managed/installation-methods/helm/configure/database/postgresql/using-external-postgresql/ [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/configuration/logging/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/zeebe-deployment/zeebe-installation/?$ /docs/self-managed/components/orchestration-cluster/zeebe/overview/ [R=301,L]
+
+RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/self-managed/components/ [R=301,L]
+
 RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/components/modeler/dmn/desktop-modeler-dmn/ [R=301,L]
 RewriteRule ^docs/guides/devops-lifecycle/integrate-web-modeler-in-ci-cd/?$ /docs/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/ [R=301,L]
 RewriteRule ^docs/guides/oauth-entra/?$ /docs/guides/ [R=301,L]
