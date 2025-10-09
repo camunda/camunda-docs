@@ -1,7 +1,7 @@
 ---
 id: task-testing
 title: Task testing
-description: Run and debug a single BPMN task directly in the modeler to verify your implementation without executing the entire process.
+description: Run a single BPMN task directly in the modeler to verify your implementation without executing the entire process.
 ---
 
 Task testing lets you execute a single BPMN task directly from the modeler to verify your implementation without running the full process.
