@@ -40,6 +40,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 ### Prerequisites
 
 - **A Camunda 8 Orchestration Cluster**
+
   - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/deployment/helm/install/quick-install.md) or [manual installation](/self-managed/deployment/manual/install.md).
 
@@ -110,7 +111,7 @@ In the Camunda Console, go to your cluster, and in the **Cluster Details**, find
 
 #### Self-Managed
 
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
+Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is: `http://localhost:8080/v2/`
 
 ### Versioning
 

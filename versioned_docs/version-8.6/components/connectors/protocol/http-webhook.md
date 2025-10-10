@@ -78,7 +78,6 @@ The **HTTP Webhook Connector** is an inbound Connector that allows you to start 
   - Set the **API Key locator** property that will be evaluated against the incoming request to extract the API key. [See the example](#how-to-configure-api-key-authorization).
 
 - **[JWT authorization](https://jwt.io/)** - The token should be in the _Authorization_ header of the request in the format of Bearer `{JWT_TOKEN}`.
-
   - Set JWK URL which is used as a well-known public URL to fetch the [JWKs](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-key-sets).
   - Set JWT role property expression which will be evaluated against the content of the JWT to extract the list of roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).
   - Set the required roles which will be used to validate if the JWT contains all required roles. See more details on extracting roles from JWT data [here](#how-to-extract-roles-from-jwt-data).

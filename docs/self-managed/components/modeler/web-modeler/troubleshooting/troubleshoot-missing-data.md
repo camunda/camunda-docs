@@ -28,4 +28,4 @@ The missing/orphaned projects and all contained files remain in the Web Modeler 
 
 ## Resolution
 
-To restore project access for the affected users, Web Modeler admins can use the [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode) to reassign collaborators to orphaned projects.
+To restore project access for the affected users, Web Modeler admins can use the [super-user mode](../../../../../components/modeler/web-modeler/collaboration/collaboration.md#super-user-mode) to reassign collaborators to orphaned projects.

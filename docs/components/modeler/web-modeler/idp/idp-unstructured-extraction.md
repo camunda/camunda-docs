@@ -16,6 +16,7 @@ import IdpValidationResultsSummaryImg from './img/idp-summary.png';
 import IdpVersionsImg from './img/idp-versions.png';
 import IdpExtractionModelImg from './img/idp-extraction-model.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
+import IdpModelSelectionImg from './img/idp-model-selection.png';
 
 Use this extraction method to extract data from [unstructured documents](idp-key-concepts.md#unstructured-documents).
 
@@ -85,6 +86,17 @@ You can edit and delete extraction fields at any time. Click the three vertical 
 ### Extract data and save as test case {#extract-data}
 
 Once you have added your extraction fields, select an LLM model and test the data extraction.
+
+#### Model selection
+
+The **Extraction model** field is both a dropdown and an input field, giving you flexibility in model selection:
+
+<img src={IdpModelSelectionImg} alt="Model selection dropdown and input" width="380px" style={{marginTop: '0'}} />
+
+- **Dropdown selection**: Choose from a list of pre-configured models available in the dropdown.
+- **Custom model input**: If you want to use a model ID that is not part of the dropdown, you can type it directly into the field. This is useful for custom models or specific model versions that may not be listed in the default options.
+
+#### Extract and test
 
 <img src={IdpExtractionModelImg} alt="Extraction model" width="700px" style={{marginTop: '0'}} />
 

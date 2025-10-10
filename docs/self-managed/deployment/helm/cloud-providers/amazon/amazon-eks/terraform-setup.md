@@ -280,6 +280,7 @@ The module is locally sourced in your clone. Any changes you make to the module 
    If you want to grant access to other users, you can configure this by using the `access_entries` input.
 
    Amazon EKS access management is divided into two distinct layers:
+
    - The **first layer** involves **AWS IAM permissions**, which allow basic Amazon EKS functionalities such as interacting with the Amazon EKS UI and generating EKS access through the AWS CLI. The module handles this part for you by creating the necessary IAM roles and policies.
 
    - The **second layer** controls **cluster access** within Kubernetes, defining the user's permissions inside the cluster (for example, policy association). This can be configured directly through the module's `access_entries` input.
@@ -306,6 +307,7 @@ The module is locally sourced in your clone. Any changes you make to the module 
    ```
 
    In this configuration:
+
    - Replace `principal_arn` with the ARN of the IAM user or role.
    - Use `policy_associations` to define policies for fine-grained access control.
 
@@ -410,7 +412,7 @@ If you choose not to use this module, you'll need to either provide a managed El
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
 The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
 
@@ -668,6 +670,7 @@ This section applies if you have previously created a private cluster and want t
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
+
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
@@ -999,6 +1002,7 @@ Export `REMOTE_HOST`, `REMOTE_PORT`, and `LOCAL_PORT` with the component-specifi
    [socat](http://www.dest-unreach.org/socat/) (_SOcket CAT_) is a command-line tool that relays data between two network endpoints.
 
    In this command:
+
    - `tcp-listen:$REMOTE_PORT,fork,reuseaddr` listens on the specified port in the pod and can handle multiple connections.
    - `tcp-connect:$REMOTE_HOST:$REMOTE_PORT` forwards all incoming traffic to the internal component endpoint.
 
