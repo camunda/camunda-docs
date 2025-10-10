@@ -287,8 +287,7 @@ The ECK deployment creates an Elasticsearch cluster with:
 Elasticsearch serves as the primary database for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities:
 
 - **[Zeebe records](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)** - Process execution data exported from Zeebe workflow engine using the Elasticsearch exporter
-- **[Operate data persistence](/self-managed/components/orchestration-cluster/operate/data-retention.md)** - Process instance states, variables, flow nodes, incidents, and operational data stored in dedicated Elasticsearch indices
-- **[Tasklist data persistence](/self-managed/components/orchestration-cluster/tasklist/data-retention.md)** - User task data, process diagrams, and task execution history maintained in Elasticsearch with configurable retention policies
+- **[orchestration data persistence](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)** - Process instance states, variables, flow nodes, incidents, and operational data stored in dedicated Elasticsearch indices
 - **[Optimize analytics processing](/components/best-practices/architecture/sizing-your-environment.md#disk-space)** - Historical audit data and process analytics stored for extended periods (typically 6-18 months) to enable business intelligence and process optimization
 
 ### Installation
@@ -421,6 +420,10 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 **Use case**: Local development and testing without external domain.
+
+:::note Local hostname configuration
+In certain setups, Keycloak is configured to use its service name as the hostname, which may result in redirections. For local deployments, you need to add the Keycloak service name to your local hosts file (`/etc/hosts` on Linux and macOS) by adding the entry `127.0.0.1 keycloak-service` and use this hostname to access Keycloak.
+:::
 
 </TabItem>
   <TabItem value="domain-nginx" label="nginx-ingress">
@@ -723,8 +726,9 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Backup and disaster recovery
 
-- **PostgreSQL**: Configure automated backups using CloudNativePG's backup capabilities
-- **Elasticsearch**: Set up snapshot repositories for data backup
+- **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/documentation/1.16/backup_recovery/)
+- **Elasticsearch**: Set up snapshot repositories for data backup, [ECK snapshot documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/cloud-on-k8s)
+- **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control
 
 ### Monitoring and observability
@@ -759,7 +763,7 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Next steps
 
-- [Configure ingress and TLS](/self-managed/deployment/helm/configure/ingress-setup.md)
+- [Configure ingress and TLS](/self-managed/deployment/helm/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deployment/helm/configure/application-configs.md)
 - [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
 - [Production deployment guide](/self-managed/deployment/helm/install/production/index.md)
