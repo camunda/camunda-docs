@@ -81,6 +81,12 @@ function Feature({ imageUrl, url, title, description }) {
   );
 }
 
+const search_agentic_url = "/docs/components/agentic-orchestration/";
+const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
+const release = "/docs/reference/announcements-release-notes/overview/";
+const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
+const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
+
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -96,6 +102,19 @@ function Home() {
           <div className="homeSearch">
             <AlgoliaSearchBox />
           </div>
+          <p
+            className="popular"
+            style={{ marginTop: "0.5rem", color: "#ffffff" }}
+          >
+            <strong style={{ paddingRight: "20px" }}>Popular:</strong>{" "}
+            <Link to={useBaseUrl(search_agentic_url)}>
+              Agentic orchestration
+            </Link>
+            <Link to={useBaseUrl(search_idp_url)}>IDP</Link>
+            <Link to={useBaseUrl(release)}>Release notes</Link>
+            <Link to={useBaseUrl(search_migrate_url)}>Camunda 7 migration</Link>
+            <Link to={useBaseUrl(search_feel_url)}>What is FEEL</Link>
+          </p>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
