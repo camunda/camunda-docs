@@ -102,10 +102,7 @@ function Home() {
           <div className="homeSearch">
             <AlgoliaSearchBox />
           </div>
-          <p
-            className="popular"
-            style={{ marginTop: "0.5rem", color: "#ffffff" }}
-          >
+          <p className="popular" style={{ color: "#ffffff" }}>
             <strong style={{ paddingRight: "20px" }}>Popular:</strong>{" "}
             <Link to={useBaseUrl(search_agentic_url)}>
               Agentic orchestration
