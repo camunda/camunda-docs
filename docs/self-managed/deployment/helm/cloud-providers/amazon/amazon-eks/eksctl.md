@@ -15,9 +15,9 @@ This guide provides a user-friendly approach for setting up and managing Amazon 
 ## Prerequisites
 
 - An [AWS account](https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html) is required to create resources within AWS.
-- [kubectl (1.30+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
-- [AWS CLI (2.17+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
-- [eksctl (0.193+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
+- [kubectl (1.33+)](https://kubernetes.io/docs/tasks/tools/#kubectl), a CLI tool to interact with the cluster.
+- [AWS CLI (2.23+)](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), a CLI tool for creating AWS resources.
+- [eksctl (0.215+)](https://eksctl.io/getting-started/), a CLI tool for creating and managing Amazon EKS clusters.
 - This guide uses GNU/Bash for all the shell commands listed.
 
 ### Considerations
@@ -45,7 +45,7 @@ This guide results in the following:
 
 - An Amazon EKS Kubernetes cluster running the latest Kubernetes version with four nodes ready for Camunda 8 installation.
 - Installed and configured [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), which is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- A [managed Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
+- A [managed Aurora PostgreSQL 17.x](https://aws.amazon.com/rds/aurora/) instance that will be used by the Camunda 8 components.
 - A [managed OpenSearch domain](https://aws.amazon.com/opensearch-service/) created and configured for use with the Camunda platform..
 - [IAM Roles for Service Accounts](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) (IRSA) configured and [Pod Identities](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
   - This simplifies the setup by not relying on explicit credentials, but instead allows creating a mapping between IAM roles and Kubernetes service accounts based on a trust relationship. A [blog post](https://aws.amazon.com/blogs/containers/diving-into-iam-roles-for-service-accounts/) by AWS visualizes this on a technical level.
@@ -112,7 +112,7 @@ export CIDR=10.192.0.0/16
 
 # Optional
 # Default node type for the Kubernetes cluster
-export NODE_TYPE=m6i.xlarge
+export NODE_TYPE=m7i.xlarge
 # Initial node count to create the cluster with
 export NODE_COUNT=4
 ```
@@ -147,7 +147,7 @@ apiVersion: eksctl.io/v1alpha5
 metadata:
   name: ${CLUSTER_NAME:-camunda-cluster} # e.g. camunda-cluster
   region: ${REGION:-eu-central-1} # e.g. eu-central-1
-  version: "1.32"
+  version: "1.33"
 availabilityZones:
   - ${REGION:-eu-central-1}c # e.g. eu-central-1c, the minimal is two distinct Availability Zones (AZs) within the region
   - ${REGION:-eu-central-1}b
@@ -184,7 +184,7 @@ kind: ClusterConfig
 kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
-  - amiFamily: AmazonLinux2
+  - amiFamily: AmazonLinux2023
     desiredCapacity: ${NODE_COUNT:-4} # number of default nodes spawned if no cluster autoscaler is used
     disableIMDSv1: true
     iam:
@@ -232,6 +232,8 @@ vpc:
     gateway: HighlyAvailable
 secretsEncryption:
   keyARN: ${KMS_ARN}
+autoModeConfig:
+  enabled: false
 EOF
 ```
 
@@ -621,7 +623,7 @@ export AURORA_USERNAME=secret_user
 # Postgres DB password of the admin user
 export AURORA_PASSWORD=camundarocks123
 # The PostgreSQL version
-export POSTGRESQL_VERSION=15.10
+export POSTGRESQL_VERSION=17.5
 
 # For each database, we need to generate a username, password and database name
 export DB_KEYCLOAK_NAME="keycloak_db"
@@ -655,17 +657,18 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
 
    ```shell
    export GROUP_ID_AURORA=$(aws ec2 create-security-group \
-     --group-name aurora-postgres-sg \
-     --description "Security Group to allow the Amazon EKS cluster $CLUSTER_NAME to connect to Aurora PostgreSQL $RDS_NAME" \
-     --vpc-id $VPC_ID \
-     --output text)
+      --group-name aurora-postgres-sg \
+      --description "Security Group to allow the Amazon EKS cluster $CLUSTER_NAME to connect to Aurora PostgreSQL $RDS_NAME" \
+      --vpc-id $VPC_ID \
+      --query 'GroupId' \
+      --output text)
 
    echo "GROUP_ID_AURORA=$GROUP_ID_AURORA"
    ```
 
    The variable `GROUP_ID_AURORA` contains the output (the value should look like this: `sg-1234567890`).
 
-3. Create a security ingress rule to allow access to PostgreSQL:
+3. Create a security Ingress rule to allow access to PostgreSQL:
 
    ```shell
    aws ec2 authorize-security-group-ingress \
@@ -673,7 +676,6 @@ export DB_WEBMODELER_PASSWORD="CHANGE-ME-PLEASE"
      --protocol tcp \
      --port 5432 \
      --cidr $CIDR
-     # The CIDR range should match the value in the `cluster.yaml`
    ```
 
 4. Retrieve subnets of the VPC to create a database subnet group:
@@ -838,10 +840,8 @@ Creating an OpenSearch domain can be accomplished through various methods, such 
 
 The resulting OpenSearch domain is intended for use with the Camunda platform, the following components utilize OpenSearch:
 
-- Operate
+- Orchestration Cluster (Zeebe, Operate, Tasklist)
 - Optimize
-- Tasklist
-- Zeebe
 
 :::info Optional service
 
@@ -896,6 +896,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
      --group-name opensearch-sg \
      --description "Security Group to allow internal connections From EKS $CLUSTER_NAME to OpenSearch $OPENSEARCH_NAME" \
      --vpc-id $VPC_ID \
+     --query 'GroupId' \
      --output text)
 
    echo "GROUP_ID_OPENSEARCH=$GROUP_ID_OPENSEARCH"
@@ -903,14 +904,14 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
 
    The variable `GROUP_ID_OPENSEARCH` contains the output (the value should look like this: `sg-1234567890`).
 
-3. Create a security ingress rule to allow access to OpenSearch over HTTPS (port 443) from within the VPC:
+3. Create a security Ingress rule to allow access to OpenSearch over HTTPS (port 443) from within the VPC:
 
    ```shell
    aws ec2 authorize-security-group-ingress \
      --group-id $GROUP_ID_OPENSEARCH \
      --protocol tcp \
      --port 443 \
-     --cidr $CIDR  # Replace with the CIDR range of your EKS cluster, e.g., <EKS_CIDR_BLOCK>
+     --cidr $CIDR
    ```
 
    Ensure that the CIDR range is appropriate for your environment. OpenSearch uses `443` as the https transport port.

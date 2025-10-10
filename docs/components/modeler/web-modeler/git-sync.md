@@ -281,7 +281,7 @@ If you delete, move, or rename files in Web Modeler, the original will remain in
 <h3>Create a new access token</h3>
 
 Web Modeler requires a **user** HTTP access token to sync changes with your Bitbucket Data Center repository.
-Repository or project access tokens and are not supported.
+Repository or project access tokens are not supported.
 
 Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html#HTTPaccesstokens-CreateHTTPaccesstokens) to generate a new user access token for your repository with the **Repository write** permission.
 
