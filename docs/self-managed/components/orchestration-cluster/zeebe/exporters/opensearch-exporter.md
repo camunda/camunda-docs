@@ -12,6 +12,13 @@ import TabItem from "@theme/TabItem";
 Please refer to [Supported Environments](../../../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
+:::note
+As of **8.8**, Camunda uses the [**Camunda Exporter**](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from **≤8.7** are only consumed during migration.
+
+The Elasticsearch and OpenSearch exporters remain fully usable after migration for existing setups, Optimize, and other custom use cases—their functionality is **not limited to the migration period**.
+
+:::
+
 The Zeebe OpenSearch Exporter acts as a bridge between
 [Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
 exporting records written to Zeebe streams as documents into several indices.

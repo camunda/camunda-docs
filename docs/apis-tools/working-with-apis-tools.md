@@ -3,6 +3,7 @@ id: working-with-apis-tools
 title: "APIs & tools"
 sidebar_label: "APIs & tools"
 description: "Learn more about the integration concepts involved in using the Camunda Zeebe client libraries, APIs, and SDKs to interact programmatically with Camunda 8."
+page_rank: 90
 ---
 
 import "./react-components/\_apitools-card.css";

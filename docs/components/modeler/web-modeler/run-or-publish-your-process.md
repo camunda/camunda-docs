@@ -145,6 +145,7 @@ You have the following options to publish a process:
 - [Deploy a process](#deploy-a-process)
   - [Before deploying a process](#before-deploying-a-process)
 - [Run a process](#run-a-process)
+  - [Before running a process](#before-running-a-process)
   - [Test run using Play mode](#test-run-using-play-mode)
   - [Run manually from Modeler](#run-manually-from-modeler)
   - [Schedule via timer](#schedule-via-timer)
