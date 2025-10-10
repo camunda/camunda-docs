@@ -8,11 +8,9 @@ Before setting up the SAP integration, ensure that the following requirements ar
 
 ## Camunda setup
 
-Minimum versions vary by component:
-
 - **OData and RFC Connectors:** 8.6+
 - **BTP Plugin:** 8.6+
-- **Advanced Event Mesh Integration:** 8.8+
+- **Advanced Event Mesh Integration:** 8.6+
 
 Works with both **SaaS** and **Self-Managed** deployments:
 
