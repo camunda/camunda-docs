@@ -644,7 +644,7 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 <!-- https://github.com/camunda/product-hub/issues/2507 -->
 
-In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
 
 <p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
 
