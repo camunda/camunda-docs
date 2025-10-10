@@ -141,7 +141,7 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
 
-1. **Core Pod:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
    - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also use in the other components such as Operate, Tasklist.
 
      In the example below, a TLS certificate is generated for the Zeebe Gateway service with an [annotation](https://docs.openshift.com/container-platform/latest/security/certificates/service-serving-certificate.html). The generated certificate will be in the form of a secret.
@@ -171,10 +171,7 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/core-route.yml
    ``` -->
 
-   The actual configuration properties can be reviewed:
-   - [in the Operate configuration documentation](/self-managed/components/orchestration-cluster/operate/operate-configuration.md#zeebe-broker-connection),
-   - [in the Tasklist configuration documentation](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#zeebe-broker-connection),
-   - [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
+   The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
 2. **Connectors:** update your `values.yml` file with the following:
 
@@ -224,6 +221,24 @@ To make this work, you will need to configure the deployment to reference `local
 ```yaml reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
 ```
+
+:::info Keycloak issuer and localhost hostname alignment
+
+When running without a domain, Console validates the issuer claim of the JWT against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+
+Add (or adjust) an /etc/hosts entry while you are developing locally:
+
+```text
+127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+```
+
+After adding this entry, you can reach Keycloak at:
+`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+
+Why port `18080`? We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+
+This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
+:::
 
   </TabItem>
 </Tabs>
@@ -322,15 +337,203 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Verify connectivity to Camunda 8
 
-Please follow our [guide to verify connectivity to Camunda 8](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md#verify-connectivity-to-camunda-8).
+First, we need an OAuth client to be able to connect to the Camunda 8 cluster.
 
-The username of the first user is `demo`, the password is the one generated previously and stored in the environment variable `FIRST_USER_PASSWORD`.
+### Generate an M2M token using Identity
 
-:::caution Domain name for gRPC Zeebe
+Generate an M2M token by following the steps outlined in the [Identity getting started guide](/self-managed/components/management-identity/overview.md), along with the [incorporating applications documentation](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
 
-In this setup, the domain used for gRPC communication with Zeebe is slightly different from the one in the guide. Instead of using `zeebe.$DOMAIN_NAME`, you need to use `zeebe-$DOMAIN_NAME`.
+Below is a summary of the necessary instructions:
 
+<Tabs groupId="domain">
+  <TabItem value="with" label="With domain" default>
+
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
+
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
+
+</TabItem>
+  
+<TabItem value="without" label="Without domain">
+
+Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
+
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+```
+
+:::tip Localhost development with kubefwd
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable via their in-cluster DNS names on your workstation.
+
+Example (requires sudo to bind privileged ports and modify /etc/hosts):
+
+```shell
+sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
+```
+
+After this runs, you can reach services directly, for example:
+
+- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
+- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
+
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with Ctrl+C when finished. Be aware kubefwd modifies your /etc/hosts temporarily; it restores the file when it exits.
 :::
+
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
+5. Retrieve the `client-id` and `client-secret` values from the application details
+
+```shell
+export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
+export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
+```
+
+<details>
+<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
+<summary>
+
+```shell
+Orchestration:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+Optimize:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-optimize" 8083:80 --namespace "$CAMUNDA_NAMESPACE"
+Connectors:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-connectors" 8086:8080 --namespace "$CAMUNDA_NAMESPACE"
+WebModeler:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-web-modeler-webapp" 8070:80 --namespace "$CAMUNDA_NAMESPACE"
+Console:
+> kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
+```
+
+</summary>
+</details>
+
+</TabItem>
+</Tabs>
+
+### Use the token
+
+<Tabs groupId="c8-connectivity">
+  <TabItem value="rest-api" label="REST API" default>
+
+For a detailed guide on generating and using a token, please conduct the relevant documentation on [authenticating with the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+
+<Tabs groupId="domain">
+  <TabItem value="with" label="With domain" default>
+
+Export the following environment variables:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+```
+
+  </TabItem>
+  <TabItem value="without" label="Without domain">
+
+This requires to port-forward the Zeebe Gateway to be able to connect to the cluster.
+
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
+```
+
+Export the following environment variables:
+
+```shell reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+```
+
+  </TabItem>
+
+</Tabs>
+
+Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+```
+
+...and results in the following output:
+
+<details>
+  <summary>Example output</summary>
+  <summary>
+
+```json reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+```
+
+  </summary>
+</details>
+
+  </TabItem>
+  <TabItem value="modeler" label="Desktop Modeler">
+
+Follow our existing [Modeler guide on deploying a diagram](/self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md). Below are the helper values required to be filled in Modeler:
+
+<Tabs groupId="domain" defaultValue="with" queryString values={
+[
+{label: 'With domain', value: 'with' },
+{label: 'Without domain', value: 'without' },
+]}>
+
+<TabItem value="with">
+
+The following values are required for the OAuth authentication:
+
+- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+
+<TabItem value="without">
+
+This requires port-forwarding the Zeebe Gateway to be able to connect to the cluster:
+
+```shell
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 26500:26500 --namespace "$CAMUNDA_NAMESPACE"
+```
+
+The following values are required for OAuth authentication:
+
+- **Cluster endpoint:** `http://localhost:26500`
+- **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
+- **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
+- **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
+- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
 
 ## Pitfalls to avoid
 

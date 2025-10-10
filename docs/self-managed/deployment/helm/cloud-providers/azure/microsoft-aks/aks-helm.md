@@ -21,6 +21,26 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the related repository. This contains an up-to-date list of versions we also use for testing.
 
+## Architecture
+
+In addition to the infrastructure diagram provided in the [Terraform setup guide](./terraform-setup.md), this section installs Camunda 8 following the architecture described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md).
+
+The architecture includes the following core components:
+
+- **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, and Identity)
+- **Web Modeler and Console**: Management and design tools (Web Modeler, Console, and Management Identity)
+- **Keycloak as OIDC provider**: Example OIDC provider (can be replaced with any compatible IdP)
+
+To demonstrate how to deploy with a custom domain, the following stack is also included:
+
+- **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
+- **external-dns**: Manages DNS record in Route53 for domain ownership confirmation
+- **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
+
+:::info Single namespace deployment
+This guide uses a single Kubernetes namespace for simplicity, since the deployment is done with a single Helm chart. This differs from the [reference architecture](/self-managed/reference-architecture/reference-architecture.md#components), which recommends separating Orchestration Cluster and Web Modeler or Console into different namespaces in production to improve isolation and enable independent scaling.
+:::
+
 ### Considerations
 
 While this guide is primarily tailored for UNIX systems, it can also be run under Windows by utilizing the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
@@ -191,6 +211,24 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/helm-values/values-no-domain.yml
 ```
 
+:::info Keycloak issuer and localhost hostname alignment
+
+When running without a domain, Console validates the issuer claim of the JWT against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+
+Add (or adjust) an /etc/hosts entry while you are developing locally:
+
+```text
+127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+```
+
+After adding this entry, you can reach Keycloak at:
+`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+
+Why port `18080`? We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+
+This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
+:::
+
 #### Reference the credentials in secrets
 
 Before installing the Helm chart, create Kubernetes secrets to store the Keycloak database authentication credentials.
@@ -347,10 +385,17 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Use `demo` as both the username and password.
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -365,14 +410,39 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8080:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-1. Open Identity in your browser at `http://localhost:8080`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Use `demo` as both the username and password.
+:::tip Localhost development with kubefwd
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable via their in-cluster DNS names on your workstation.
+
+Example (requires sudo to bind privileged ports and modify /etc/hosts):
+
+```shell
+sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
+```
+
+After this runs, you can reach services directly, for example:
+
+- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
+- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
+
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with Ctrl+C when finished. Be aware kubefwd modifies your /etc/hosts temporarily; it restores the file when it exits.
+:::
+
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test".
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -471,7 +541,7 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
