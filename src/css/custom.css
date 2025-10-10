@@ -1090,7 +1090,7 @@ span.callout + p::after {
 
 p.popular > a {
   padding-right: 20px;
-  color: #eee;
+  color: #ccc;
 }
 
 [data-theme="dark"] p.popular > a {
