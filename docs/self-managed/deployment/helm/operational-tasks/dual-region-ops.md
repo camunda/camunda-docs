@@ -176,8 +176,8 @@ The Failover phase outlines steps for removing lost brokers, redistributing load
 #### Remove lost brokers from Zeebe cluster in the surviving region
 
 <StateContainer
-current={<img src={Four} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
-desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
+current={<img src={Four} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -551,8 +551,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Configure Zeebe to disable the Elastic exporter to the lost region
 
 <StateContainer
-current={<img src={Five} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
-desired={<img src={Six} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
+current={<img src={Five} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Six} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -656,8 +656,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Deploy Camunda 8 in the newly created region
 
 <StateContainer
-current={<img src={Six} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
-desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.3)'}} />}
+current={<img src={Six} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -955,8 +955,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 #### Deactivate Operate and Tasklist in the active region
 
 <StateContainer
-current={<img src={Eight} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Nine} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Eight} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Nine} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 | **Details**   | **Current State**                                                                                                                                    | **Desired State**                                                                                           |
@@ -1073,8 +1073,8 @@ Follow the installation steps for the **surviving region**:
 #### Pause Camunda exporters to Elasticsearch
 
 <StateContainer
-current={<img src={Nine} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Ten} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2'}} />}
+current={<img src={Nine} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Ten} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1'}} />}
 />
 
 | **Details**   | **Current state**                                                                                                                                                                                                                                                                                                                                                      | **Desired state**                                                                                                                                                                                                   |
@@ -1108,8 +1108,8 @@ There is no API available to confirm the status of the Camunda exporters. A resp
 #### Create and restore Elasticsearch backup
 
 <StateContainer
-current={<img src={Ten} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Eleven} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Ten} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Eleven} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -1346,8 +1346,8 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 #### Initialize new Camunda exporter to the recreated region
 
 <StateContainer
-current={<img src={Eleven} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Twelve} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Eleven} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Twelve} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -1426,8 +1426,8 @@ curl -XGET 'http://localhost:9600/actuator/cluster' | jq .lastChange
 #### Reactivate Camunda exporter
 
 <StateContainer
-current={<img src={Twelve} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Thirteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Twelve} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Thirteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -1458,8 +1458,8 @@ There is currently no API available to confirm the reactivation of the exporters
 #### Add new brokers to the Zeebe cluster
 
 <StateContainer
-current={<img src={Thirteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Thirteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
@@ -1803,8 +1803,8 @@ curl -L -X GET 'http://localhost:8080/v2/topology' \
 #### Start Operate and Tasklist
 
 <StateContainer
-current={<img src={Fourteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
-desired={<img src={Fifteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.2)'}} />}
+current={<img src={Fourteen} alt="Current state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
+desired={<img src={Fifteen} alt="Desired state diagram" style={{border: 'none', transform: 'scale(1.1)'}} />}
 />
 
 <div>
