@@ -71,25 +71,6 @@ If the task fails due to an error (for example, a network or configuration issue
 
 ![Task testing error](./img/task-testing/task-testing-error.png)
 
-## Troubleshooting
-
-### Task fails with an incident
-
-- Confirm variable names and data types match the task’s input mappings.
-- Verify that all required variables are provided.
-- Review connector, script, or implementation settings for errors.
-
-### Deployment fails
-
-- Check that the cluster connection is active and valid.
-- Verify you have deployment permissions.
-- Fix any BPMN validation or syntax errors before retrying.
-
-### Variables don’t appear in results
-
-- Ensure input/output variable mappings are configured correctly.
-- Confirm the variable names and types align with your task logic.
-
 ## Related documentation
 
 - [Task testing overview](../../concepts/task-testing.md)

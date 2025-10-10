@@ -8,7 +8,7 @@ Task testing lets you execute a single BPMN task directly from the modeler to ve
 
 This feature provides immediate feedback on your task logic, variable mappings, and configuration — all within your modeling environment.
 
-Task testing runs the task on the connected Camunda 8 engine, exactly as it would run during normal process execution. This means the behavior, variable mappings, and configuration are realistic and production-accurate.
+Task testing runs the task on the connected Camunda 8 engine, exactly as it would run during normal process execution.
 
 ## How task testing works
 
@@ -25,21 +25,15 @@ When you test a task, the following occurs:
 :::warning
 Task testing executes tasks with live data on the connected cluster. Any configured actions (emails, API calls, database updates, payments, etc.) will run as defined.
 
-Always use a **test or staging environment** for validation — not production.
+We **do not recommend** using a production environment.
 :::
 
 ## Prerequisites
 
 - A connection to an **active Camunda 8.8 or later** orchestration cluster.
 - Appropriate credentials and permissions to deploy and run processes.
-- A task eligible for execution (see below).
 
 Once a test has run, you can view the resulting process instance in [**Operate**](../../components/operate/operate-introduction.md) for additional insights into execution details or incidents. Test instances are deployed as standard process instances and can be viewed, managed, or deleted as usual.
-
-### Modeler requirements
-
-- **Web Modeler:** Uses the configured cluster connection for execution and variable handling.
-- **Desktop Modeler:** Requires a manually configured connection to a running cluster.  
 
 See the respective guides below for configuration steps:
 
