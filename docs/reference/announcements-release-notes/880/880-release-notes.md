@@ -564,6 +564,21 @@ BPMN Copilot and FEEL Copilot in the Web Modeler are now available for Camunda S
 
 You can connect these features to your own AI provider and model, even fine-tuning the model yourself to improve its performance and relevance to your organization.
 
+### CI/CD building blocks guide
+
+<!-- https://github.com/camunda/product-hub/issues/2858 -->
+
+Element templates documentation is improved to support scalable reuse of building blocks, focusing on CI/CD practices for managing templates across teams and environments.
+
+Key updates include:
+
+- Guidance on integrating element templates and dependencies into CI/CD pipelines
+- Restructuring the documentation to improve discoverability and usability
+- Tool-agnostic content covering Web Modeler, dependency management, and local development setups
+- Moving relevant information from Connectors to the element templates section
+
+<p><a href="../../../../components/modeler/element-templates/about-templates" class="link-arrow">Element templates in Modeler</a></p>
+
 ### Cluster basic authentication
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
@@ -590,9 +605,9 @@ Whether you create an element template from scratch or from a task, you can quic
 
 You can now save any configured task as a reusable element template directly from the Web Modeler properties panel:
 
-- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates
-- Edit templates to adjust input/output bindings, validation rules, categories, and more
-- Publish templates to your project or organization for reuse
+- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates.
+- Edit templates to adjust input/output bindings, validation rules, categories, and more.
+- Publish templates to your project or organization for reuse.
 
 <p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
 
