@@ -22,7 +22,7 @@ Frequently asked questions and troubleshooting guidance for encryption at rest, 
 
 Encryption at rest protects data on storage media (disks or backups) from unauthorized access.
 
-:::note Applies to
+:::note
 Applies to both Orchestration clusters and Web Modeler in Camunda 8 SaaS.
 :::
 
