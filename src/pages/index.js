@@ -82,6 +82,7 @@ function Feature({ imageUrl, url, title, description }) {
 }
 
 const search_agentic_url = "/docs/components/agentic-orchestration/";
+const search_agent_url = "/docs/components/agentic-orchestration/ai-agents/";
 const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
 const release = "/docs/reference/announcements-release-notes/overview/";
 const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
@@ -107,6 +108,7 @@ function Home() {
             <Link to={useBaseUrl(search_agentic_url)}>
               Agentic orchestration
             </Link>
+            <Link to={useBaseUrl(search_agent_url)}>AI agent</Link>
             <Link to={useBaseUrl(search_idp_url)}>IDP</Link>
             <Link to={useBaseUrl(release)}>Release notes</Link>
             <Link to={useBaseUrl(search_migrate_url)}>Camunda 7 migration</Link>
