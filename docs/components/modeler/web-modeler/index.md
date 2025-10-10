@@ -16,18 +16,18 @@ It enables teams to collaboratively design executable processes as the foundatio
 
 ## Key features
 
-| Feature                                                                          | Description                                                                                     |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                                 | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
-| [Element templates](./element-templates/using-templates.md)                      | Reuse preconfigured components to standardize modeling across teams and projects.               |
-| [Real-time collaboration](./collaboration/collaboration.md)                      | Work with team members simultaneously to speed up design and review cycles.                     |
-| [Camunda Marketplace](./camunda-marketplace.md)                                  | Extend Web Modeler with prebuilt templates, connectors, and components.                         |
-| [Git synchronization](./git-sync.md)                                             | Connect to Git repositories for version control, branching, and change history.                 |
-| [Play mode](./collaboration/play-your-process.md)                                | Test and validate processes in a sandbox environment before deployment.                         |
-| [Intelligent Document Processing (IDP)](./intelligent-document-processing.md)    | Extract and process data from documents to accelerate process automation.                       |
-| [Process application deployment](./process-applications/process-applications.md) | Implement and deploy process applications to Camunda 8 without leaving the Modeler.             |
-| [Process landscape visualization](./process-landscape-visualization.md)          | View dependencies and interactions between processes at a glance.                               |
-| [AI-powered assistance](./advanced-modeling/camunda-docs-ai.md)                  | Get intelligent modeling suggestions and automation support.                                    |
+| Feature                                                                       | Description                                                                                     |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                              | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
+| [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and projects.                        |
+| [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
+| [Play mode](./collaboration/play-your-process.md)                             | Test and validate processes during development.                                                 |
+| [Camunda Marketplace](./camunda-marketplace.md)                               | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
+| [Process applications](./process-applications/process-applications.md)        | Work on and deploy sets of files in a single bundle.                                            |
+| [Git synchronization](./git-sync.md)                                          | Connect process applications to Git repositories for version control.                           |
+| [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
+| [Intelligent Document Processing (IDP)](./intelligent-document-processing.md) | Extract and process data from documents to accelerate process automation.                       |
+| [AI-powered assistance](./advanced-modeling/camunda-docs-ai.md)               | Get intelligent modeling suggestions and automation support.                                    |
 
 ## Access Web Modeler
 
