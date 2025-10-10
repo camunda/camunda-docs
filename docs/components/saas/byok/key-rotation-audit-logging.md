@@ -4,61 +4,62 @@ title: "Key rotation and audit logging"
 description: "Camunda cannot rotate customer-managed keys. Any key rotation must be performed manually within your Amazon account."
 ---
 
-This page describes how key rotation and audit logging work when using **Amazon Bring Your Own Key (BYOK)** with Camunda 8.8.
+Learn more about key rotation and audit logging when using Amazon BYOK with Camunda 8.8.
 
 :::note Disclaimer
-This page includes references to **Amazon Web Services (AWS)** operations and behaviors, which are subject to change by the vendor. Camunda does not control or guarantee the accuracy of AWS features, APIs, or logging mechanisms. If AWS modifies these services, this documentation may become outdated.
+References to Amazon Web Services (AWS) operations may change over time. Camunda does not control AWS features, APIs, or logs. This documentation may become outdated if AWS updates their services.
 :::
 
 ## Key rotation
 
-With BYOK, you manage your own encryption keys in **Amazon KMS**. Camunda **cannot rotate the customer's KMS key**. The customer owns the key, and only the customer can rotate it in Amazon KMS.
+With BYOK, you manage your own encryption keys in Amazon KMS. Camunda cannot rotate customer keys. Only you can rotate keys in KMS.
 
-### Manual key rotation in Amazon KMS
+### Manual key rotation
 
-Key rotation in Amazon KMS does **not change the Key ID**. When you enable automatic or manual rotation, Amazon generates new key material for the same key. Camunda SaaS clusters continue to use the same Key ID and do not need to be reconfigured.
+- Rotating a key in KMS does not change the Key ID.
+- New key material is generated for future encryption; previously encrypted data remains accessible.
+- Camunda clusters continue using the same Key ID and do not need reconfiguration.
+- Camunda does not re-encrypt existing data; you are responsible for key management.
 
-Using KMS key rotation creates new key material for future encryptions while preserving access to previously encrypted data. Camunda does **not** automatically re-encrypt existing data. The customer is solely responsible for managing their key material.
-
-If you prefer to create a new KMS key instead of rotating an existing one, contact **Camunda Support** to update your cluster configuration. Customers cannot update encryption settings directly in Camunda SaaS.
+To use a new KMS key instead of rotating, contact Camunda Support to update cluster settings.
 
 :::warning Key rotation caution
 
-- Do not delete or disable an old key until your cluster is confirmed to be using a replacement key.
-- Incorrect key management may cause data access issues.
-- Ensure backup storage and persistent volumes remain accessible after any key changes.
-- For more details, see [Amazon KMS key rotation documentation](https://docs.aws.amazon.com/kms/latest/userguide/list-rotations.html) and [Amazon S3 server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html).
+- Do not delete or disable an old key until the cluster uses a replacement.
+- Improper key management may block data access.
+- Ensure backup storage and persistent volumes remain accessible.
+- See [KMS key rotation](https://docs.aws.amazon.com/kms/latest/userguide/list-rotations.html) and [S3 server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html).
   :::
 
-### Recommended best practices
+### Best practices
 
 | Practice                      | Description                                                           |
 | ----------------------------- | --------------------------------------------------------------------- |
 | Separate keys per environment | Use different keys for production, staging, and development clusters. |
 | Regular auditing              | Periodically review KMS key policies and access logs.                 |
-| Monitor rotation              | Use Amazon CloudWatch or EventBridge to track key rotation events.    |
+| Monitor rotation              | Use CloudWatch or EventBridge to track key rotation events.           |
 
 ## Audit logging
 
-**Amazon KMS** integrates with **Amazon CloudTrail** to provide detailed logs of all key usage. As a BYOK customer, you are responsible for monitoring and persisting these logs in your Amazon account.
+Amazon KMS integrates with CloudTrail to log all key usage. You are responsible for monitoring and persisting these logs.
 
 ### What is logged
 
-- **Encrypt**, **Decrypt**, **GenerateDataKey**, and **CreateGrant** operations
-- Any **failed attempts** due to denied access
+- Encrypt, Decrypt, GenerateDataKey, CreateGrant operations
+- Failed attempts due to denied access
 
 :::note Log visibility
-All KMS operations performed by Camunda appear in CloudTrail within your Amazon account.
+All KMS operations performed by Camunda appear in CloudTrail in your Amazon account.
 :::
 
-### Recommended audit practices
+### Audit best practices
 
-1. Enable CloudTrail in the Amazon region where your cluster resides to persist audit logs.
-2. Set up CloudWatch or EventBridge alerts for critical events, such as key deletion, disabled keys, or access denied errors.
-3. Review logs regularly to verify compliance with your internal security policies.
-4. Use Amazon tools such as [CloudTrail Lake](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html) or [Access Analyzer for KMS](https://docs.aws.amazon.com/kms/latest/userguide/viewing-grants.html) to simplify auditing.
-5. Export CloudTrail logs to a centralized SIEM if required by your organization.
+1. Enable CloudTrail in the cluster region and persist logs.
+2. Set up CloudWatch or EventBridge alerts for key deletion, disabled keys, or access denied events.
+3. Review logs regularly for compliance.
+4. Use tools like [CloudTrail Lake](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html) or [Access Analyzer for KMS](https://docs.aws.amazon.com/kms/latest/userguide/viewing-grants.html) to simplify auditing.
+5. Export logs to a centralized SIEM if required.
 
 :::warning Audit responsibility
-You are responsible for monitoring and persisting your KMS key activity and logs according to your compliance requirements. Camunda does not have access to CloudTrail logs in your Amazon account.
+You are responsible for monitoring and persisting KMS activity and logs. Camunda does not have access to CloudTrail logs in your account.
 :::

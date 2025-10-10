@@ -1,65 +1,54 @@
 ---
 id: overview
-title: "Overview"
-description: "Learn more about Camunda integrations, including Camunda's Amazon BYOK (Bring Your Own Key) integration."
+title: Encryption
+description: Learn how to configure Amazon BYOK (Bring Your Own Key) for Camunda 8 SaaS clusters.
 ---
 
-Camunda 8 SaaS encrypts all cluster data at rest to protect customer workloads. By default, encryption is managed using cloud provider–supplied keys. While this satisfies many organizations, some—especially in regulated industries—require full control over their encryption keys.
+Camunda 8 SaaS encrypts all cluster data at rest. By default, encryption uses cloud provider–managed keys. For stricter compliance or control, you can configure **Bring Your Own Key (BYOK)** with **Amazon KMS**, available for clusters hosted in AWS regions.
 
-This documentation focuses specifically on the **Bring Your Own Key (BYOK)** approach with **Amazon Key Management Service (KMS)**. This feature is currently **available only for clusters provisioned in AWS regions**. Support for additional cloud providers may be added in the future.
+## Encryption overview
 
-With BYOK, you can configure Camunda 8 SaaS to use a **customer-managed key** stored in your own Amazon account. This ensures you retain ownership, control, and visibility throughout the key lifecycle, including creation, rotation, and audit logging.
+With BYOK, Camunda 8 SaaS uses your customer-managed key stored in your AWS account.  
+You control the key’s lifecycle—creation, access, rotation, and logging—while Camunda handles encryption and decryption operations.
 
-## Problem statement
+| Category          | Details                                          |
+| ----------------- | ------------------------------------------------ |
+| Availability      | AWS-hosted clusters only                         |
+| Encrypted storage | Document, backup, Zeebe, and Elasticsearch disks |
+| Setup             | Configure the key during cluster creation        |
+| Rotation          | Managed in AWS KMS (not through Camunda)         |
+| Logging           | Key usage visible in AWS CloudTrail              |
 
-By default, Camunda 8 SaaS uses either **Camunda-managed keys** (where Camunda manages the key material and lifecycle on your behalf) or **Amazon-managed keys** (where Amazon manages the key material in your account). These options may not meet the strict requirements of certain industries. For example, financial services, healthcare, and government organizations often need:
+<details>
+<summary>Encryption details for beginners</summary>
 
-- Exclusive ownership of encryption keys
-- Centralized audit logs within their own Amazon accounts
-- Custom key lifecycle policies, such as mandatory rotation or automated revocation
+**Encryption at rest** protects stored data from unauthorized access.  
+Camunda 8 SaaS supports three encryption models:
 
-Without BYOK, customers in these environments may need to accept a higher risk profile or consider alternative solutions.
+| Type                    | Managed by | Description                                                |
+| ----------------------- | ---------- | ---------------------------------------------------------- |
+| Camunda-managed         | Camunda    | Default encryption, handled automatically                  |
+| Amazon-managed          | AWS        | Encryption in your account, but AWS controls key lifecycle |
+| Customer-managed (BYOK) | You        | You create, own, and manage the key in your AWS account    |
 
-## Feature overview
+Industries such as finance, healthcare, and government often require this level of control for compliance reasons.  
+With BYOK, you maintain visibility through **CloudTrail** and **CloudWatch**, apply your own rotation policies, and centralize audit logs in your AWS account.
 
-External encryption enables Camunda 8 SaaS customers to configure their own **Amazon KMS** encryption keys for cluster data at rest.  
-This option is **available only for clusters hosted in AWS regions**.
+</details>
 
-**Supported storage types** (encrypted with customer-managed keys):
+## Responsibilities
 
-- Document handling storage
-- Backup storage
-- Zeebe persistent disks
-- Elasticsearch persistent disks
+| Owner    | Responsibility                                           |
+| -------- | -------------------------------------------------------- |
+| Customer | Create and manage the KMS key in AWS                     |
+| Customer | Ensure the key and cluster are in the same AWS region    |
+| Customer | Configure key policies granting Camunda access           |
+| Camunda  | Encrypt and decrypt customer data using the provided key |
+| Camunda  | Surface any key-related errors in the Console            |
 
-**Supported operations** (for AWS-region clusters):
-
-- **Provisioning** — configure a customer-managed key when creating a cluster
-- **Audit logging** — view encryption and decryption activity in **Amazon CloudTrail**
-- **Rotation** — rotation must be handled on the Amazon KMS side; Camunda SaaS cannot initiate key rotation
-
-## Shared responsibility model
-
-External encryption introduces a shared responsibility between Camunda and the customer.
-
-### Customer responsibilities
-
-- Create and manage the KMS key in your Amazon account
-- Ensure the key resides in the same **AWS region** as your Camunda 8 SaaS cluster
-- Configure key policies to allow Camunda access
-- Monitor key usage and access logs via **Amazon CloudTrail** and **Amazon CloudWatch**
-- Rotate keys as required by your internal security policies
-
-:::warning Key deletion or permissions changes
-Disabling, deleting, or revoking permissions for your KMS key will make your cluster and its data inaccessible. This is the customer's responsibility to manage and restore.
+:::warning Key management
+If your KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible.
 :::
-
-### Camunda responsibilities
-
-- Use the customer-provided key to encrypt all customer-specific data at rest
-- Handle encryption and decryption operations for the customer
-- Integrate BYOK into the cluster creation and provisioning flow
-- Surface key usage errors in the Camunda Console
 
 ## Cost implications
 
