@@ -1,7 +1,7 @@
 ---
 id: bpmn-copilot
 title: BPMN Copilot
-sidebar_label: Get started
+sidebar_label: BPMN Copilot
 description: "Chat with the AI BPMN Copilot for help generating new BPMN process diagrams in Web Modeler based on a process description."
 ---
 
