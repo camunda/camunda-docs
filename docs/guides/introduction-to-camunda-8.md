@@ -4,6 +4,7 @@ title: Get started with Camunda
 sidebar_label: Get started with Camunda
 slug: /guides/
 description: "Learn about Camunda 8, a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices."
+page_rank: 90
 ---
 
 import DocCardList from '@theme/DocCardList';
