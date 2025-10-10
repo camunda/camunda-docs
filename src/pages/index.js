@@ -30,7 +30,7 @@ const features = [
       "Set up and host Camunda 8 yourself instead of using Camunda 8 SaaS.",
   },
   {
-    title: "APIs and tools",
+    title: "APIs & tools",
     imageUrl: "img/home-apis.png",
     url: "/docs/apis-tools/working-with-apis-tools/",
     description:
@@ -44,7 +44,7 @@ const features = [
       "Level up your BPMN and DMN skills, including insights from consulting and the community.",
   },
   {
-    title: "General reference",
+    title: "Reference",
     imageUrl: "img/home-reference.png",
     url: "/docs/reference/",
     description:
@@ -166,8 +166,17 @@ function Home() {
                   "button button--outline button--secondary button--lg button--hero get-started-use-case",
                   styles.getStarted
                 )}
+                to={useBaseUrl("docs/components/agentic-orchestration/")}
+              >
+                Agentic Orchestration
+              </Link>
+              <Link
+                className={clsx(
+                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
+                  styles.getStarted
+                )}
                 to={useBaseUrl(
-                  "docs/apis-tools/spring-zeebe-sdk/getting-started/"
+                  "docs/apis-tools/camunda-spring-boot-starter/getting-started/"
                 )}
               >
                 Camunda Spring Boot Starter
@@ -182,15 +191,6 @@ function Home() {
                 )}
               >
                 Release notes
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/apis-tools/node-js-sdk/")}
-              >
-                Node.js SDK
               </Link>
             </div>
           </div>
