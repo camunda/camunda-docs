@@ -1393,6 +1393,8 @@ module.exports = {
                     id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
                   },
                   items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
                   ],
