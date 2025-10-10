@@ -120,6 +120,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/task-testing",
       ],
     },
     {
@@ -479,6 +480,7 @@ module.exports = {
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
             "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing",
           ],
         },
         {
@@ -512,6 +514,7 @@ module.exports = {
               ],
             },
             "components/modeler/desktop-modeler/settings/settings",
+            "components/modeler/desktop-modeler/task-testing",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
