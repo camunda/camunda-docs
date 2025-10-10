@@ -373,6 +373,19 @@ The ServiceNow integration allows you to:
 
 <div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
 
+### Bring your own model (BYOM)
+
+When using an OpenAI Compatible provider, you can use your own model for document extraction. Any model provider that implements the `/chat/completions` API endpoint is supported.
+
+Supported providers are:
+
+- **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction).
+- **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only).
+- **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
+- **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
+
 ### Structured data form extraction
 
 <!-- https://github.com/camunda/product-hub/issues/2694 -->
@@ -551,14 +564,11 @@ An offline installer package for the [RPA](/components/rpa/overview.md) worker a
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Git sync Azure DevOps and Bitbucket integration
+### Bring your own model (BYOM)
 
-<!-- https://github.com/camunda/product-hub/issues/2580 -->
-<!-- https://github.com/camunda/product-hub/issues/2507 -->
+BPMN Copilot and FEEL Copilot in the Web Modeler are now available for Camunda Self-Managed customers in a safe, secure way.
 
-In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
-
-<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+You can connect these features to your own AI provider and model, even fine-tuning the model yourself to improve its performance and relevance to your organization.
 
 ### Cluster basic authentication
 
@@ -570,6 +580,15 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 - Web Modeler sends a username and password with every request to the cluster.
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
+
+### Git sync Azure DevOps and Bitbucket integration
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
+
+<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Element template support for all tasks
 

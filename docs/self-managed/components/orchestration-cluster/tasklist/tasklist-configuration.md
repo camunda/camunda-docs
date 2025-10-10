@@ -26,174 +26,22 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Elasticsearch or OpenSearch
 
-Tasklist stores and reads data from Elasticsearch or OpenSearch.
+See the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
-As of the 8.4 release, Tasklist is now compatible with [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/) 2.5.x. Note that using Amazon OpenSearch requires [setting up a new Camunda installation](/self-managed/setup/overview.md). A migration from previous versions or Elasticsearch environments is currently not supported.
-
-### Settings to connect
-
-Tasklist supports [basic authentication](https://www.elastic.co/guide/en/elasticsearch/reference/7.12/setting-up-authentication.html) for Elasticsearch. Set the appropriate username/password combination in the configuration to use it.
-
-#### Settings to connect to a secured Elasticsearch or OpenSearch instance
-
-To connect to a secured (https) Elasticsearch instance you need normally only set the URL protocol
-part to `https` instead of `http`. A secured Elasticsearch instance needs also `username` and `password`.
-The other SSL settings should only be used in case of connection problems, for example disable
-host verification.
+## Zeebe Elasticsearch or OpenSearch importer
 
 :::note
-You may need to import the certificate into JVM runtime.
-:::
-
-| Name                                               | Description                                | Default value         |
-| :------------------------------------------------- | :----------------------------------------- | :-------------------- |
-| camunda.tasklist.elasticsearch.indexPrefix         | Prefix for index names.                    | tasklist              |
-| camunda.tasklist.elasticsearch.clusterName         | Clustername of Elasticsearch.              | elasticsearch         |
-| camunda.tasklist.elasticsearch.url                 | URL of Elasticsearch REST API.             | http://localhost:9200 |
-| camunda.tasklist.elasticsearch.username            | Username to access Elasticsearch REST API. | -                     |
-| camunda.tasklist.elasticsearch.password            | Password to access Elasticsearch REST API. | -                     |
-| camunda.tasklist.elasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch. | -                     |
-| camunda.tasklist.elasticsearch.ssl.selfSigned      | Certificate was self-signed.               | false                 |
-| camunda.tasklist.elasticsearch.ssl.verifyHostname  | Should the hostname be validated.          | false                 |
-
-For OpenSearch we also have similar configurations:
-
-| Name                                            | Description                                                                                                                                                                                                                                                                        | Default value         |
-| :---------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------- |
-| camunda.tasklist.opensearch.indexPrefix         | Prefix for index names.                                                                                                                                                                                                                                                            | tasklist              |
-| camunda.tasklist.opensearch.clusterName         | Cluster name of OpenSearch.                                                                                                                                                                                                                                                        | opensearch            |
-| camunda.tasklist.opensearch.url                 | URL of OpenSearch REST API.                                                                                                                                                                                                                                                        | http://localhost:9200 |
-| camunda.tasklist.opensearch.username            | Username to access OpenSearch REST API.                                                                                                                                                                                                                                            | -                     |
-| camunda.tasklist.opensearch.password            | Password to access OpenSearch REST API.                                                                                                                                                                                                                                            | -                     |
-| camunda.tasklist.opensearch.awsEnabled          | <p>Use basic authentication or AWS credentials to log in.</p><p><ul><li><p>Set to `false` to use basic authentication for OpenSearch, adhering to the global AWS OpenSearch configuration settings.</p></li><li><p>Set to `true` to log in with AWS credentials.</p></li></ul></p> | false                 |
-| camunda.tasklist.opensearch.ssl.certificatePath | Path to certificate used by OpenSearch                                                                                                                                                                                                                                             | -                     |
-| camunda.tasklist.opensearch.ssl.selfSigned      | Certificate was self-signed.                                                                                                                                                                                                                                                       | false                 |
-| camunda.tasklist.opensearch.ssl.verifyHostname  | Should the hostname be validated.                                                                                                                                                                                                                                                  | false                 |
-
-By default, Tasklist always tries to connect to Elasticsearch. To define the database to use, the configuration below is mandatory (if this configuration is missed, Elasticsearch is used as the selected database):
-
-| Name                      | Description                                                                                    | Default value |
-| :------------------------ | :--------------------------------------------------------------------------------------------- | :------------ |
-| camunda.tasklist.database | Database that Tasklist is going to connect - valid values are `elasticsearch` or `opensearch`. | elasticsearch |
-
-### Settings for shards and replicas
-
-Tasklist creates the template with index settings named `tasklist-<version>_template` that Elasticsearch uses for all Tasklist indices. These settings can be changed.
-
-The following configuration parameters define the settings:
-
-| Name                                            | Description                                                    | Default value |
-| :---------------------------------------------- | :------------------------------------------------------------- | :------------ |
-| camunda.tasklist.elasticsearch.numberOfShards   | How many shards Elasticsearch uses for all Tasklist indices.   | 1             |
-| camunda.tasklist.elasticsearch.numberOfReplicas | How many replicas Elasticsearch uses for all Tasklist indices. | 0             |
-
-These values are applied only on first startup of Tasklist or during version update. After the Tasklist
-ELS schema is created, settings may be adjusted directly in the ELS template:
-
-- Changes to `camunda.tasklist.elasticsearch.numberOfShards` will not be applied to existing indices and index templates.
-- Changes to `camunda.tasklist.elasticsearch.numberOfReplicas` will be applied to existing indices and index templates.
-
-:::warning
-
-Due to a known [bug](https://github.com/camunda/camunda/issues/31238), changes to `camunda.tasklist.elasticsearch.numberOfReplicas` are currently not applied to index templates.
+Version 8.8: The importer is required only for migration scenarios (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
 
 :::
 
-### Settings for index templates priority
+For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
 
-Camunda 8 creates index templates that Elasticsearch/OpenSearch uses for the historical indices. The priority of these templates can be changed.
-
-This is useful when the Elasticsearch/OpenSearch provider has some predefined wildcard (with `*` index pattern) index templates with given priority, setting a higher priority for Tasklist index templates ensures that the correct index mappings and settings are applied on the indices created from these templates.
-
-The following configuration parameter defines the setting:
-
-| Name                                    | Description                                           | Default value   |
-| --------------------------------------- | ----------------------------------------------------- | --------------- |
-| camunda.database.index.templatePriority | Priority for all index templates created by Camunda 8 | - (no priority) |
+Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
 
 :::note
-The priority should be different (strictly higher) than that set by the wildcard templates.
-:::
+Version 8.8: The importer is required only for migration scenarios (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
 
-### Snippet from application.yml
-
-```yaml
-camunda.tasklist:
-  elasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # Url
-    url: https://localhost:9200
-    ssl:
-      selfSigned: true
-```
-
-#### Disable Elasticsearch deprecation logging
-
-When using an Elasticsearch version ≥8.16.0 it is recommended to turn off deprecation logging for the Elasticsearch cluster.
-
-```shell
-curl -X PUT "http://localhost:9200/_cluster/settings" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "persistent": {
-      "logger.org.elasticsearch.deprecation": "OFF"
-    }
-  }'
-```
-
-This setting will prevent Elasticsearch from generating excessive deprecation warning logs, such as:
-
-```
-"Deprecated field [from] used, this field is unused and will be removed entirely"
-"Deprecated field [to] used, this field is unused and will be removed entirely"
-"Deprecated field [include_lower] used, this field is unused and will be removed entirely"
-"Deprecated field [include_upper] used, this field is unused and will be removed entirely"
-```
-
-## Zeebe Broker connection
-
-Tasklist needs a connection to the Zeebe Broker to start the import.
-
-### Settings to connect
-
-| Name                                   | Description                                                                                                         | Default value         |
-| :------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------- |
-| camunda.tasklist.zeebe.gatewayAddress  | Gateway address that points to Zeebe as hostname and port.                                                          | localhost:26500       |
-| camunda.tasklist.zeebe.secure          | Connection should be secure via Transport Layer Security (TLS).                                                     | false                 |
-| camunda.tasklist.zeebe.certificatePath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | -                     |
-| camunda.tasklist.zeebe.restAddress     | Path to Zeebe REST address. This is necessary to consume the Zeebe API from Tasklist.                               | http://localhost:8083 |
-
-Additionally, visit [Zeebe Secure Client Communication](/self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication.md) for more details.
-
-### Snippet from application.yml
-
-```yaml
-camunda.tasklist:
-  zeebe:
-    # Gateway host and port
-    gatewayAddress: localhost:26500
-```
-
-### Intra-cluster secure connection
-
-You can enable intra-cluster TLS secured connections between Tasklist and Zeebe by applying the following configuration properties.
-
-| Name                                                | Description                                                                                                         | Example value                     |
-| :-------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :-------------------------------- |
-| zeebe.gateway.cluster.initialContactPoints          | Zeebe Gateway initial contact points.                                                                               | [gateway-0:26502,gateway-1:26502] |
-| zeebe.gateway.cluster.security.enabled              | Connection should be secure via Transport Layer Security (TLS).                                                     | true                              |
-| zeebe.gateway.cluster.security.certificateChainPath | Path to certificate used by Zeebe. This is necessary when the certificate isn't registered in the operating system. | /path/to/cert.pem                 |
-| zeebe.gateway.cluster.security.privateKeyPath       | Path to certificate's key used by Zeebe.                                                                            | /path/to/private.key              |
-| zeebe.gateway.cluster.advertisedHost                | Advertised hostname in the cluster.                                                                                 | tasklist                          |
-| zeebe.gateway.cluster.memberId                      | Member ID for the cluster.                                                                                          | tasklist                          |
-
-For extended configuration and guidelines, refer to [secure cluster communication](../zeebe/security/secure-cluster-communication.md) and [gateway configuration](../zeebe/configuration/gateway.md).
-
-## Zeebe Elasticsearch or OpenSearch exporter
-
-:::note
-Refer to [supported environments](../../../../reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch or OpenSearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
 For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
@@ -227,6 +75,21 @@ camunda.tasklist:
     # Index prefix, configured in Zeebe Elasticsearch exporter
     prefix: zeebe-record
 ```
+
+## Intra-cluster secure connection
+
+You can enable intra-cluster TLS-secured connections between Tasklist and Zeebe by applying the following configuration properties:
+
+| Name                                                  | Description                                                                                                  | Example value                       |
+| :---------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------- |
+| `zeebe.gateway.cluster.initialContactPoints`          | Zeebe Gateway initial contact points.                                                                        | `[gateway-0:26502,gateway-1:26502]` |
+| `zeebe.gateway.cluster.security.enabled`              | Enables secure connections via Transport Layer Security (TLS).                                               | `true`                              |
+| `zeebe.gateway.cluster.security.certificateChainPath` | Path to the certificate used by Zeebe. Required if the certificate isn't registered in the operating system. | `/path/to/cert.pem`                 |
+| `zeebe.gateway.cluster.security.privateKeyPath`       | Path to the certificate's private key used by Zeebe.                                                         | `/path/to/private.key`              |
+| `zeebe.gateway.cluster.advertisedHost`                | Advertised hostname in the cluster.                                                                          | `tasklist`                          |
+| `zeebe.gateway.cluster.memberId`                      | Member ID for the cluster.                                                                                   | `tasklist`                          |
+
+For extended configuration and guidelines, refer to [Secure cluster communication](../zeebe/security/secure-cluster-communication.md) and [Gateway configuration](../zeebe/configuration/gateway.md).
 
 ## Monitoring and health probes
 
