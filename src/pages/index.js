@@ -178,21 +178,19 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/apis-tools/camunda-spring-boot-starter/getting-started/"
+                  "docs/reference/announcements-release-notes/overview/"
                 )}
               >
-                Camunda Spring Boot Starter
+                Release notes
               </Link>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/overview/"
-                )}
+                to={useBaseUrl("docs/apis-tools/node-js-sdk/")}
               >
-                Release notes
+                Node.js SDK
               </Link>
             </div>
           </div>
