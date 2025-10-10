@@ -5,7 +5,7 @@ title: AI Agent connector
 description: AI agent connector implementing a feedback loop for user interactions and tool calls with an LLM.
 ---
 
-import AgentProcessImg from '../img/ai-agent-process.png';
+import AgentSubprocessImg from '../img/ai-agent-subprocess.png';
 import AgentTaskImg from '../img/ai-agent-task-simple.png';
 import AgentTaskFeedbackImg from '../img/ai-agent-task-feedback-loop.png';
 import AgentTaskFeedbackApprovalImg from '../img/ai-agent-task-user-feedback-loop.png';
@@ -31,8 +31,8 @@ Core features include:
 
 New to agentic orchestration?
 
-- The [Build your first AI Agent](../../../guides/getting-started-agentic-orchestration.md) guide provides a quick introduction to agentic orchestration and how to use the AI Agent Process connector using a blueprint.
-- See the [example AI Agent connector integration](agentic-ai-aiagent-process-example.md) for a worked example of a simple Agent AI feedback loop model.
+- The [Build your first AI Agent](../../../guides/getting-started-agentic-orchestration.md) guide provides a quick introduction to agentic orchestration and how to use the AI Agent Subprocess connector using a blueprint.
+- See the [example AI Agent connector integration](agentic-ai-aiagent-subprocess-example.md) for a worked example of a simple Agent AI feedback loop model.
 - See [additional resources](#additional-resources) for examples of how you can use the AI Agent connector.
 
 :::
@@ -49,19 +49,19 @@ The following prerequisites are required to use this connector:
 
 The AI agent is provided as 2 different variants, each with different capabilities and suited for different use cases.
 
-- [AI Agent Process](#ai-agent-process)
+- [AI Agent Subprocess](#ai-agent-subprocess)
 - [AI Agent Task](#ai-agent-task)
 
 :::tip
 
-- You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the [**AI Agent Process**](#ai-agent-process) implementation due to the simplified configuration and support for event sub-processes.
+- You can choose the implementation type that best fits your use case, but the **recommended approach** for most use cases is to use the [**AI Agent Subprocess**](#ai-agent-subprocess) implementation due to the simplified configuration and support for event sub-processes.
 - Both variants are available with a dedicated element template that you can apply to the respective BPMN element.
 
 :::
 
-### AI Agent Process
+### AI Agent Subprocess
 
-The [AI Agent Process](./agentic-ai-aiagent-process.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
+The [AI Agent Subprocess](./agentic-ai-aiagent-subprocess.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
 to handle tool resolution and a feedback loop. This is the recommended implementation type for most use cases, and offers:
 
 - Simplified configuration as the tool feedback loop is handled internally
@@ -69,27 +69,27 @@ to handle tool resolution and a feedback loop. This is the recommended implement
 
 #### Restrictions
 
-- Because of BPMN semantics, the ad-hoc sub-process must contain at least one activity. This means you cannot create an AI Agent process without any tools.
+- Because of BPMN semantics, the ad-hoc sub-process must contain at least one activity. This means you cannot create an AI Agent sub-process without any tools.
 - As the tool calling feedback loop is implicitly handled within the AI Agent execution, you have less control over the tool calls.
 
 #### Example
 
-A basic AI agent process might look similar to the following example.
+A basic AI Agent sub-process might look similar to the following example.
 
-<img src={AgentProcessImg} alt="AI Agent Process" class="img-700"/>
+<img src={AgentSubprocessImg} alt="AI Agent Subprocess" class="img-700"/>
 
 - The connector is configured so the AI Agent resolves available tools and activates them as needed to complete it's goal.
 - Handling of event sub-processes within the ad-hoc sub-process is supported (See [Event Handling](#event-handling)). The AI Agent Task implementation does not support this.
 
 This pattern can also be combined with a user feedback loop for verification or follow-up interactions. For example, instead of the showcased user task, this could also be another LLM acting as a judge, or any other task that validates the agent's response.
 
-![AI Agent Process with user feedback loop](../img/ai-agent-process-user-feedback-loop.png)
+![AI Agent Subprocess with user feedback loop](../img/ai-agent-subprocess-user-feedback-loop.png)
 
 ### AI Agent Task
 
 The [AI Agent Task](./agentic-ai-aiagent-task.md) implementation is the original variant that relies on a BPMN [service task](../../../components/modeler/bpmn/service-tasks/service-tasks.md) in combination with a multi-instance ad-hoc sub-process.
 
-Unlike the AI Agent Process implementation, you must model the feedback loop explicitly in the BPMN diagram, leading to a more complex configuration.
+Unlike the AI Agent Subprocess implementation, you must model the feedback loop explicitly in the BPMN diagram, leading to a more complex configuration.
 
 This implementation is best suited for:
 
@@ -128,7 +128,7 @@ This connector is typically used in a feedback loop, with the connector implemen
 For example, the following diagram shows a tool calling loop modeled with the [AI Agent Task](#ai-agent-task) implementation type.
 
 - The process loops back to the AI Agent connector task from the ad-hoc sub-process until the agent decides no further tool calls are needed.
-- With the [AI Agent Process](#ai-agent-process) implementation type, the tool calling loop is handled internally and so is not explicitly modeled in the BPMN diagram.
+- With the [AI Agent Subprocess](#ai-agent-subprocess) implementation type, the tool calling loop is handled internally and so is not explicitly modeled in the BPMN diagram.
 
 ![AI Agent feedback loop](../img/ai-agent-loop-overview.png)
 
@@ -140,10 +140,10 @@ For example, the following diagram shows a tool calling loop modeled with the [A
 
 Typical feedback loop use cases for this connector include the following:
 
-| Use case             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tool calling         | <p>In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools and their input parameters, and pass these tool definitions to the LLM.</p><p><ul><li><p>The LLM generates a response, that might include tool calls (a request to call a tool paired with the input parameters).</p></li><li><p>If tool calls are requested, the tools can be executed by activating the respective activities within the ad-hoc sub-process.<ul><li>With the [AI Agent Process](#ai-agent-process) implementation, activating the activities will be implicitely handled by the agent implementation.</li><li>With the [AI Agent Task](#ai-agent-task) implementation, it is necessary to model the process to pass these tool calls to the ad-hoc sub-process and to return the tool call results to the AI Agent task.</li></ul></p></li></ul></p> |
-| Response interaction | After returning a response (and without calling any tools), model the process to act upon the response. For example, present the response to a user who can then ask follow-up questions back to the AI Agent connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Use case             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tool calling         | <p>In combination with an ad-hoc sub-process, the AI Agent connector will resolve available tools and their input parameters, and pass these tool definitions to the LLM.</p><p><ul><li><p>The LLM generates a response, that might include tool calls (a request to call a tool paired with the input parameters).</p></li><li><p>If tool calls are requested, the tools can be executed by activating the respective activities within the ad-hoc sub-process.<ul><li>With the [AI Agent Subprocess](#ai-agent-subprocess) implementation, activating the activities will be implicitely handled by the agent implementation.</li><li>With the [AI Agent Task](#ai-agent-task) implementation, it is necessary to model the process to pass these tool calls to the ad-hoc sub-process and to return the tool call results to the AI Agent task.</li></ul></p></li></ul></p> |
+| Response interaction | After returning a response (and without calling any tools), model the process to act upon the response. For example, present the response to a user who can then ask follow-up questions back to the AI Agent connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 As the agent preserves the context of the conversation, follow-up questions/tasks and handling of tool call results can
 relate to the previous interaction with the LLM, allowing the LLM to provide more relevant responses.
@@ -154,7 +154,7 @@ An important concept to understand is the use of the **Agent context** process v
 
 Depending on which implementation type is used, the Agent context must be configured differently in the model:
 
-- [**AI Agent Process**](#ai-agent-process): The agent context is kept within the subprocess scope. This means you only need to configure the agent context when the agent should pick up an existing conversation, for example to model a user feedback loop as in the [quickstart example](../../../guides/getting-started-agentic-orchestration.md). In this case, you must align the configured agent context variable with the used result variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
+- [**AI Agent Subprocess**](#ai-agent-subprocess): The agent context is kept within the subprocess scope. This means you only need to configure the agent context when the agent should pick up an existing conversation, for example to model a user feedback loop as in the [quickstart example](../../../guides/getting-started-agentic-orchestration.md). In this case, you must align the configured agent context variable with the used result variable/expression so that the context update is correctly passed to the next execution of the AI Agent connector task.
 
 - [**AI Agent Task**](#ai-agent-task): You must align the agent context input variable and the response variable/expression so the context update is correctly passed to the next execution of the AI Agent connector task.
 

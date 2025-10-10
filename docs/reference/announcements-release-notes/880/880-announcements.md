@@ -10,9 +10,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release.
 
-| Minor release date | Scheduled end of maintenance | Changelog(s) | Release blog | Upgrade guides                                                                                 |
-| ------------------ | ---------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027                | -            | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Release blog | Upgrade guides                                                                                 |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027                | [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -253,8 +253,8 @@ To learn more, see [migrate to Camunda Process Test](../../../apis-tools/migrati
 
 With the Camunda 8.8 release, the deprecation of usage metrics endpoints in Operate and Tasklist is announced.
 
-- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/operate/usage-metrics.md)
-- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).
 
 :::warning Breaking change
 The Assignees list is removed from the response.
@@ -749,7 +749,10 @@ For more information on how to modify your existing configuration, see the [upgr
   
 #### Play job-based user tasks
 
-With the Camunda 8.8 release, User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
+With the Camunda 8.8 release, user tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
+
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).
 
 You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 

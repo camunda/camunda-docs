@@ -315,48 +315,31 @@ module.exports = {
                 // },
               ],
             },
-            "components/camunda-integrations/servicenow/servicenow-integration",
-            // NOTE: The above should be removed once items are added to the complete section below.
-            // {
-            //   type: "category",
-            //   label: "ServiceNow",
-            //   link: {
-            //     type: "doc",
-            //     id: "components/camunda-integrations/servicenow/servicenow-integration",
-            //   },
-            //   items: [
-            //     "components/camunda-integrations/servicenow/prerequisites",
-            // {
-            //   "Setup & configuration": [
-            //     "components/camunda-integrations/servicenow/setup/connector",
-            //     "components/camunda-integrations/servicenow/example-workflows",
-            //   ],
-            // },
-            // {
-            //     "Integration features": [
-            // "components/camunda-integrations/servicenow/features/manage-snow-records",
-            // "components/camunda-integrations/servicenow/features/start-process-servicenow",
-            //   ],
-            // },
-            // "components/camunda-integrations/servicenow/best-practices",
-            // {
-            //   "Troubleshooting & FAQs": [
-            //     "components/camunda-integrations/servicenow/troubleshooting/troubleshooting",
-            //     "components/camunda-integrations/servicenow/troubleshooting/pitfalls",
-            //     "components/camunda-integrations/servicenow/troubleshooting/limitations",
-            //     "components/camunda-integrations/servicenow/troubleshooting/faq",
-            //   ],
-            // },
-            // {
-            //   "Examples & blueprints": [
-            //     "components/camunda-integrations/servicenow/examples/example-blueprints",
-            //     "components/camunda-integrations/servicenow/examples/sample-use-cases",
-            //   ],
-            // },
-            // "components/camunda-integrations/servicenow/resources",
-            // "components/camunda-integrations/servicenow/glossary",
-            //   ],
-            // },
+            {
+              type: "category",
+              label: "ServiceNow",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/servicenow/servicenow-integration",
+              },
+              items: [
+                "components/camunda-integrations/servicenow/prerequisites",
+                "components/camunda-integrations/servicenow/setup-and-configuration",
+                {
+                  type: "category",
+                  label: "Connectors",
+                  items: [
+                    "components/camunda-integrations/servicenow/connectors/outbound-connector",
+                    "components/camunda-integrations/servicenow/connectors/incident-handler",
+                    "components/camunda-integrations/servicenow/connectors/flow-starter",
+                  ],
+                },
+                "components/camunda-integrations/servicenow/blueprints",
+                "components/camunda-integrations/servicenow/best-practices",
+                "components/camunda-integrations/servicenow/troubleshooting",
+                "components/camunda-integrations/servicenow/glossary",
+              ],
+            },
           ],
         },
         {
@@ -755,13 +738,13 @@ module.exports = {
                   items: [
                     {
                       type: "category",
-                      label: "AI Agent Process",
+                      label: "AI Agent Subprocess",
                       link: {
                         type: "doc",
-                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process",
+                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
                       },
                       items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example",
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example",
                       ],
                     },
                     {
@@ -1683,12 +1666,18 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
                   ],
                 },
-                // {
-                //   Concepts: [],
-                // },
-                // {
-                //   Migration: [],
-                // },
+                {
+                  Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                  ],
+                },
+                {
+                  Migration: [
+                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
+                  ],
+                },
               ],
             },
             {
@@ -1766,19 +1755,10 @@ module.exports = {
               ],
               Operate: [
                 "self-managed/components/orchestration-cluster/operate/operate-configuration",
-                "self-managed/components/orchestration-cluster/operate/data-retention",
-                "self-managed/components/orchestration-cluster/operate/schema-and-migration",
-                "self-managed/components/orchestration-cluster/operate/importer-and-archiver",
-                "self-managed/components/orchestration-cluster/operate/operate-authentication",
-                "self-managed/components/orchestration-cluster/operate/usage-metrics",
               ],
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/data-retention",
-                "self-managed/components/orchestration-cluster/tasklist/importer-and-archiver",
-                "self-managed/components/orchestration-cluster/tasklist/tasklist-authentication",
-                "self-managed/components/orchestration-cluster/tasklist/usage-metrics",
                 "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
