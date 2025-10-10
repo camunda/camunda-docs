@@ -97,6 +97,8 @@ Replace `<tenant-role-arn>` with the Amazon Role ARN from Step 1, and `<customer
 }
 ```
 
+</details>
+
 :::warning Key policy guidance
 
 - Don’t restrict the Camunda cluster Role from required KMS actions.
