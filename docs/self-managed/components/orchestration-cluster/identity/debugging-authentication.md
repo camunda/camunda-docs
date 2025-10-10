@@ -18,13 +18,11 @@ Common questions you can answer with these steps:
 The flow consists of three key steps:
 
 1. **Request authentication**
-
    - **Input:** HTTP request
    - **Output:** Spring `Authentication` object with user identity
    - **Layer:** Spring Security
 
 2. **Establish Orchestration Cluster user context**
-
    - **Input:** Spring `Authentication`
    - **Output:** `CamundaAuthentication` object with roles, groups, and tenant memberships
    - **Layer:** Orchestration Cluster authentication

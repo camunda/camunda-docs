@@ -44,7 +44,6 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
 ## Configure the template details
 
 4. In the **Configure template details** section, provide the following information:
-
    - **Name:** Enter a clear and descriptive name for the template. For example, include the brand name if the template connects to a service, or indicate its main feature.
    - **Description:** Describe the template’s main features and benefits.
    - **Icon:** Use a default BPMN symbol or upload a custom icon. Supported formats: SVG, PNG, JPEG. Maximum file size: 8 KB. Minimum dimensions: 512 × 512 pixels.
@@ -58,10 +57,8 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
 #### Only for connector templates: Import an API definition
 
 5. If you selected **From API definition**, the **Import data source** section appears.
-
    1. Select the format to import (OpenAPI or Postman) and click **Import file**.
    2. Import the API definition:
-
       - **Import file from URL:** Enter the API definition URL and click **Import icon**.
       - **Upload file:** Drag and drop a file into the upload area, or click the link to select a file.
 

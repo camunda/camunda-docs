@@ -65,7 +65,6 @@ Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **GitHub API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
@@ -122,7 +121,6 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
 2. In the modal, select the **GitLab** tile at the top.
 
 3. In the **Configure GitLab** modal, provide the following information:
-
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
@@ -177,7 +175,6 @@ When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server insta
 2. Select the **Azure** tile, located at the top of the modal.
 
 3. Provide the following information in the **Configure Azure** modal:
-
    - **Application (client) ID:** Can be found on the applications registration page.
    - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
    - **Private Key:** The private key used to generate the certificate in PEM format.
@@ -249,7 +246,6 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
-
    - **Access token:** The repository, project, or workspace access token you generated.
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
@@ -302,7 +298,6 @@ Refer to the [Bitbucket documentation](https://developer.atlassian.com/server/bi
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
-
    - **Access token:** The user access token you generated.
    - **Bitbucket API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.

@@ -33,7 +33,6 @@ To create a new document extraction template:
    <img src={IdpCreateExtractionProvidersImg} alt="Provider selection dropdown" width="700px" style={{marginTop: '0'}} />
 
    The four supported providers are:
-
    - **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction)
    - **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only)
    - **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction)
