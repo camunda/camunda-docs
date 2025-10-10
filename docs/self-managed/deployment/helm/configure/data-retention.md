@@ -197,7 +197,7 @@ Examples:
 - `tasklist-task-8.8.0_2024-01-15`
 
 :::note Index versioning
-The version number in index names (e.g., `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [Operate schema and migration documentation](/self-managed/components/orchestration-cluster/operate/schema-and-migration.md).
+The version number in index names (e.g., `8.3.0`) represents the **schema version**, not necessarily the Camunda platform version. Schema versions evolve independently as index structures change. For details, see [Operate schema and migration documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration.md).
 :::
 
 If no archived indices exist:
@@ -288,8 +288,8 @@ Operate and Tasklist indices use schema-specific versioning in their names (e.g.
 - [Zeebe Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) - Camunda exporter configuration (controls `orchestration.history.*` settings)
   - [History archiving settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=history#options) - Archiving and rollover configuration
   - [Retention settings](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md?configuration=retention#options) - Historical data retention policies
-- [Operate data retention](/self-managed/components/orchestration-cluster/operate/data-retention.md) - Operate-specific retention behavior
-- [Tasklist data retention](/self-managed/components/orchestration-cluster/tasklist/data-retention.md) - Tasklist-specific retention behavior
+- [Operate data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Operate-specific retention behavior
+- [Tasklist data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md) - Tasklist-specific retention behavior
 
 **External documentation:**
 
