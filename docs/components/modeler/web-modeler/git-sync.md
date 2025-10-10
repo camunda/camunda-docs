@@ -281,7 +281,7 @@ If you delete, move, or rename files in Web Modeler, the original will remain in
 <h3>Create a new access token</h3>
 
 Web Modeler requires a **user** HTTP access token to sync changes with your Bitbucket Data Center repository.
-Repository or project access tokens and are not supported.
+Repository or project access tokens are not supported.
 
 Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html#HTTPaccesstokens-CreateHTTPaccesstokens) to generate a new user access token for your repository with the **Repository write** permission.
 
@@ -321,7 +321,7 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications/process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
@@ -359,7 +359,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](./create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](process-applications/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.
