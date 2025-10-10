@@ -1336,9 +1336,6 @@ module.exports = {
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
-                "self-managed/deployment/helm/configure/running-custom-connectors",
-                "self-managed/deployment/helm/configure/add-extra-manifests",
-                "self-managed/deployment/helm/configure/license-key",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
