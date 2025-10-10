@@ -150,7 +150,7 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 ### Architecture
 
-Our setup provisions three separate PostgreSQL clusters for different Camunda components, all targeting PostgreSQL 15 — the common denominator across current Camunda requirements as specified in our [supported environments guide](/reference/supported-environments.md):
+Our setup provisions three separate PostgreSQL clusters for different Camunda components, all targeting PostgreSQL 17 — the common denominator across current Camunda requirements as specified in our [supported environments guide](/reference/supported-environments.md):
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-keycloak**: Database for Keycloak identity service
