@@ -1088,6 +1088,15 @@ span.callout + p::after {
   background-image: url("/static/img/hero-bg.png");
 }
 
+p.popular > a {
+  padding-right: 20px;
+  color: #ccc;
+}
+
+[data-theme="dark"] p.popular > a {
+  color: var(--ifm-link-color);
+}
+
 /* Remove badges from sidebar */
 a.table-of-contents__link.toc-highlight > span.badge {
   display: none;

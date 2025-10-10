@@ -3,6 +3,8 @@ id: overview
 title: Reference
 sidebar_label: Reference
 slug: /reference/
+description: "Release notes and release announcements, published security notices, licensing, supported environments, and source code access information."
+page_rank: 90
 ---
 
 import "./react-components/\_release-table.css";
@@ -23,7 +25,7 @@ See what's new in our latest release, read release notes and release announcemen
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." title="Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={OverviewImg} alt="See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information." title="See what's new in our latest release, read release notes and release announcements, and access published security notices, licensing, supported environments, and source code access information." class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
