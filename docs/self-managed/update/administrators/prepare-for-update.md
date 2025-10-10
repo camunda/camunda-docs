@@ -12,8 +12,7 @@ Check your current setup and make sure you are ready to upgrade.
 
 | Area                         | Description and actions                                                                                                                                   |
 | :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade to the latest 8.7.x patch before upgrading to 8.8.                               |
-| Component version alignment  | Orchestration components such as Zeebe, Operate, Tasklist, and Identity must run the same minor version. Update to the latest 8.7 patch version.          |
+| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade all Camunda applications to it latest 8.7.x patch before upgrading to 8.8.       |
 | Configuration customizations | Identify non-default parameters and values in configuration files, ingress rules, external Elasticsearch/OpenSearch configurations, and custom exporters. |
 
 ## Step 2: Assess Camunda 8.8 changes and impact
@@ -144,7 +143,7 @@ You should run a load test that simulates real production traffic, as component 
 
 Once you have confirmed you are ready to upgrade and taken any actions required, proceed to the upgrade.
 
-<p><a href="../run-admin-upgrade/" class="link-arrow">Perform an upgrade</a></p>
+<p><a href="../run-admin-upgrade" class="link-arrow">Perform an upgrade</a></p>
 
 :::tip
 For more information, see the [component upgrade guide](/self-managed/components/components-upgrade/introduction.md) and version-specific documentation.

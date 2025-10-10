@@ -233,14 +233,6 @@ The SQL connector now supports Oracle Database connections.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/sql" class="link-arrow">SQL connector</a></p>
 
-### Unlock element template fields
-
-[Element template management](/components/connectors/manage-connector-templates.md) is now more flexible for developers and DevOps teams.
-
-- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
-- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
-- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
-
 ## Console
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
@@ -346,12 +338,14 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ### Microsoft Teams
 
-The new Microsoft Teams integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
+The new Camunda for Microsoft Teams app allows you to view, claim, and complete Camunda tasks directly in Microsoft Teams.
 
-The Microsoft Teams integration allows users to:
+The app integration allows you to:
 
-- Start processes from a channel, chat, or the app’s Home tab.
+- Start processes from a channel, chat, or the app **Home** tab.
 - Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+<p><a href="../../../../components/early-access/alpha/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
 
 :::note
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
@@ -381,6 +375,19 @@ The ServiceNow integration allows you to:
 ## Intelligent document processing (IDP)
 
 <div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+### Bring your own model (BYOM)
+
+When using an OpenAI Compatible provider, you can use your own model for document extraction. Any model provider that implements the `/chat/completions` API endpoint is supported.
+
+Supported providers are:
+
+- **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction).
+- **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only).
+- **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
+- **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
 
 ### Structured data form extraction
 
@@ -560,14 +567,26 @@ An offline installer package for the [RPA](/components/rpa/overview.md) worker a
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Git sync Azure DevOps and Bitbucket integration
+### Bring your own model (BYOM)
 
-<!-- https://github.com/camunda/product-hub/issues/2580 -->
-<!-- https://github.com/camunda/product-hub/issues/2507 -->
+BPMN Copilot and FEEL Copilot in the Web Modeler are now available for Camunda Self-Managed customers in a safe, secure way.
 
-In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
+You can connect these features to your own AI provider and model, even fine-tuning the model yourself to improve its performance and relevance to your organization.
 
-<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+### CI/CD building blocks guide
+
+<!-- https://github.com/camunda/product-hub/issues/2858 -->
+
+Element templates documentation is improved to support scalable reuse of building blocks, focusing on CI/CD practices for managing templates across teams and environments.
+
+Key updates include:
+
+- Guidance on integrating element templates and dependencies into CI/CD pipelines
+- Restructuring the documentation to improve discoverability and usability
+- Tool-agnostic content covering Web Modeler, dependency management, and local development setups
+- Moving relevant information from Connectors to the element templates section
+
+<p><a href="../../../../components/modeler/element-templates/about-templates" class="link-arrow">Element templates in Modeler</a></p>
 
 ### Cluster basic authentication
 
@@ -580,17 +599,38 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
+### Element template editor onboarding
+
+<!-- https://github.com/camunda/product-hub/issues/3021 -->
+
+Web Modeler now provides a low-coder friendly UX for creating building blocks.
+Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+
 ### Element template support for all tasks
 
 <!-- https://github.com/camunda/product-hub/issues/2606 -->
 
 You can now save any configured task as a reusable element template directly from the Web Modeler properties panel:
 
-- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates
-- Edit templates to adjust input/output bindings, validation rules, categories, and more
-- Publish templates to your project or organization for reuse
+- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates.
+- Edit templates to adjust input/output bindings, validation rules, categories, and more.
+- Publish templates to your project or organization for reuse.
 
 <p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+
+### Unlock element template fields
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+Element template management is now more flexible for developers and DevOps teams.
+
+- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
+- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
+- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
 
 ### FEEL Copilot
 
@@ -608,6 +648,15 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 
 <!-- https://github.com/camunda/camunda-docs/issues/5611 -->
 
+### Git sync Azure DevOps and Bitbucket integration
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
+
+<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+
 ### Low-code process testing
 
 <!-- https://github.com/camunda/product-hub/issues/2610 -->
@@ -618,17 +667,21 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
+<p><a href="../../../../components/modeler/web-modeler/collaboration/play-your-process/" class="link-arrow">Scenarios</a></p>
+
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/2558 -->
 
 Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
 
+<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/database/#using-alternative-database-vendors" class="link-arrow">Set up Oracle or MS SQL</a></p>
+
 ### Username claim configuration
 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
 
 ### Version description
 
@@ -834,7 +887,7 @@ You can now save, export, and share test scenarios:
 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
 
 ## 8.8.0-alpha7
 

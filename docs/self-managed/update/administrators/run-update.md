@@ -16,9 +16,9 @@ Confirm you have completed the following prerequisites:
 
 | Prerequisite     | Description                                                                                                                                                                         |
 | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Backups          | Create and verify backups. Test restoring backups to ensure data integrity. See [backup and restore](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
 | Test 8.8 cluster | Deploy a new Camunda 8.8 cluster with your configuration, to test and validate your target configuration.                                                                           |
 | Test upgrade     | Confirm that the upgrade runs successfully in a non‑production environment that mirrors your production cluster.                                                                    |
-| Backups          | Create and verify backups. Test restoring backups to ensure data integrity. See [backup and restore](../../../self-managed/operational-guides/backup-restore/backup-and-restore.md) |
 
 ## Step 2: Perform upgrade
 
