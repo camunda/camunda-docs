@@ -42,7 +42,10 @@ You can install the SAP Eventing connectors directly from the [Camunda Marketpla
 
 ## Configuration
 
-## SAP Eventing Message Start Event Connector:
+- [SAP Eventing Message Start Event Connector](#sap-eventing-message-start-event-connector)
+- [SAP Eventing Intermediate Event Connector](#sap-eventing-intermediate-event-connector)
+
+## SAP Eventing Message Start Event Connector
 
 Inbound CloudEvents → BPMN Message
 
@@ -76,7 +79,7 @@ The path component of the Camunda Webhook URL must be used as the **POST Request
 
 ### Other Configuration Options
 
-The remaining configuration options of the **SAP Eventing Message Start Event Connector** match those of the [HTTP Webhook Connector](../../../components/connectors/protocol/http-webhook/), with one key difference:
+The remaining configuration options of the **SAP Eventing Message Start Event Connector** match those of the [HTTP Webhook Connector](/components/connectors/protocol/http-webhook.md), except for one key difference:
 
 > The default **Webhook response** explicitly returns a `200` status code and an `"OK"` message body, confirming that the CloudEvent was successfully received and acknowledged by Camunda.
 
@@ -84,7 +87,7 @@ The remaining configuration options of the **SAP Eventing Message Start Event Co
 
 ### Event Flow
 
-When a CloudEvent is received from AEM, all **header** properties and the **body** payload are relayed as-is to the target process instance—either:
+When a CloudEvent is received from AEM, all **header** properties and the **body** payload are relayed as-is to the target process instance, either:
 
 - At process creation, when using the **SAP Eventing Message Start Event Connector**, or
 - During event correlation, when using the **SAP Eventing Intermediate Event Connector**.
@@ -97,7 +100,8 @@ This ensures that message attributes and payload data from AEM are preserved end
 
 The **SAP Eventing Intermediate Event Connector** injects a CloudEvent from **SAP Advanced Event Mesh (AEM)** into an _active_ Camunda BPMN process instance.
 
-It does this by leveraging the BPMN principle of [**message correlation**](../../../components/connectors/protocol/http-webhook/#correlation).  
+It does this by leveraging the BPMN principle of [**message correlation**](/components/connectors/protocol/http-webhook.md#correlation).
+
 Any CloudEvent property can be used as a **correlation key** to map incoming event data to the correct process instance.
 
 ### Correlation via CloudEvent Body
@@ -106,18 +110,17 @@ The configuration options of the **SAP Eventing Message Start Event Connector** 
 
 ![Intermediate Message Correlation](./img/eventing-intermediate-correlation.png)
 
-In the example above, the process variable `ENCOMGridID` is expected to exist within the process instance.  
-Its value is compared against the CloudEvent payload (`request.body.FlynnLocationID`).  
-If both values match, the CloudEvent is considered to be the published BPMN message that is correlated to the corresponding process instance.
+- In the example above, the process variable `ENCOMGridID` is expected to exist within the process instance.
+- Its value is compared against the CloudEvent payload (`request.body.FlynnLocationID`).
+- If both values match, the CloudEvent is considered to be the published BPMN message that is correlated to the corresponding process instance.
 
 ### Correlation via CloudEvent Metadata
 
 Since **HTTP** is used as the transport protocol, the [CloudEvents specification](https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/bindings/http-protocol-binding.md) requires all CloudEvent metadata to be passed as **HTTP headers**.
 
-In addition, AEM prepends all user properties with the prefix `Solace-User-Property-` to persist them in its event engine.  
-For example, a CloudEvent with the property `"ce-id"` is represented in AEM as the HTTP header named `Solace-User-Property-ce-id`
+In addition, AEM prepends all user properties with the prefix `Solace-User-Property-` to persist them in its event engine. For example, a CloudEvent with the property `"ce-id"` is represented in AEM as the HTTP header named `Solace-User-Property-ce-id`
 
-Therefore, to perform BPMN message correlation based on CloudEvent metadata, reference the corresponding **HTTP header name** including the `Solace-User-Property-` prefix.
+This means that to perform BPMN message correlation based on CloudEvent metadata, reference the corresponding **HTTP header name** including the `Solace-User-Property-` prefix.
 
 #### Example: CloudEvent HTTP Message
 
@@ -163,7 +166,7 @@ In this example, to correlate the CloudEvent `ce-id` property to a process insta
 ![Mapping to CloudEvent meta data](./img/eventing-correlation-ce-headers.png)
 
 :::tip
-Explicitly note the "backticks" notation of the header value `` request.headers.`solace-user-property-ce-id` `` in order to escape the dashes in the header field name!
+Note the "backticks" notation of the header value `` request.headers.`solace-user-property-ce-id` `` to escape the dashes in the header field name.
 :::
 
 ### SAP Eventing Outbound Connector
@@ -174,18 +177,20 @@ The **SAP Eventing Outbound Connector** allows you to send CloudEvents to **SAP 
 
 ### Endpoint
 
-The **Endpoint** field specifies the URL of your AEM Event Broker.  
+The **Endpoint** field specifies the URL of your AEM Event Broker.
+
 You can find this URL in the Advanced Event Mesh's web interface by navigating to:
 
 > **Cluster Manager → Your Cluster → (Service Details) → Connect → Connect with Java → Solace REST Messaging API**
 
-On the right-hand side of the interface, you’ll see the **FQDN** (Fully Qualified Domain Name) of your AEM broker instance.
+On the right-hand side of the interface is the **FQDN** (Fully Qualified Domain Name) of your AEM broker instance.
 
 ![FQDN of the AEM REST messaging API](./img/eventing-aem-rest-fqdn.png)
 
 ### Topic / Queue
 
-Specify the target **topic** or **queue** path where the CloudEvent will be published.  
+Specify the target **topic** or **queue** path where the CloudEvent will be published.
+
 Neither value should begin with a `/` — the connector includes a validation check to prevent this.
 
 ### Authorization
