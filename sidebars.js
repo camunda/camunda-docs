@@ -288,6 +288,7 @@ module.exports = {
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
                     "components/camunda-integrations/sap/btp-plugin",
+                    "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
                 },
@@ -1393,6 +1394,8 @@ module.exports = {
                     id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
                   },
                   items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
                   ],

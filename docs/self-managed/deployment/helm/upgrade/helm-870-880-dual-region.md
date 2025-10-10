@@ -78,7 +78,7 @@ Basic authentication now applies to the entire Orchestration Cluster. If you pre
 
 1. Manually migrate users to the new [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
 2. Configure initial users to avoid falling back to `demo:demo` credentials.
-3. Review the [Authentication](#authentication) section of this guide.
+3. Review the [Authentication](./helm-870-880.md#authentication) section of this guide.
 
 **API security defaults:** gRPC and REST APIs are secured by default in 8.8. To restore previous behavior:
 
@@ -103,7 +103,7 @@ Since every setup can differ, here are some edge cases to consider when upgradin
   When each region has its own secondary storage, enable the migration in both regions, as the storages are isolated and each requires the migration independently.
 
 - **Identity migration (if using Identity):**  
-  Enable [Identity migration](#identity-migration-optional). Review the [migration of secrets](#migrate-secrets-to-new-format).
+  Enable [Identity migration](./helm-870-880.md#identity-migration). Review the [Extract plaintext values and reference them as kubernetes-secrets](../configure/secret-management.md#extract-plaintext-values-and-reference-them-as-kubernetes-secrets).
 
 - **Helm-managed single region exporters:**  
   When using one external secondary storage instead of two and using the Helm chart managed exporter, consider enabling the following to ensure automatic creation:
