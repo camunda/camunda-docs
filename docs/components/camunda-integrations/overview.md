@@ -36,8 +36,8 @@ With this integration, you can:
 - **Execute core SAP functions**  
   Call BAPIs and Remote Function Modules (RFCs) in SAP S/4HANA or ECC directly from Camunda.
 
-- **Extend Event Driven Architecture**  
-  React on CloudEvents from Advanced Event Mesh (AEM) or send CloudEvents to AEM
+- **Extend event driven architecture**  
+  Receive CloudEvents from SAP Advanced Event Mesh (AEM) and publish CloudEvents to AEM.
 
 - **Connect to SAP BTP**  
   Integrate with services and applications on the SAP Business Technology Platform to build comprehensive, cross-platform workflows.
