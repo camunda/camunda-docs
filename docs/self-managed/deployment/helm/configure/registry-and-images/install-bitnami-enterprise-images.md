@@ -5,11 +5,11 @@ title: Install Bitnami enterprise images
 description: Configure the Camunda Helm chart to use vendor-supported Bitnami Premium, enterprise images, understand CVE reporting, and set expectations on vulnerabilities.
 ---
 
-This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. We will refer to this solution as Enterprise images to indicate that it is design for Camunda Enterprise customers and help to clarify what we offer. It covers configuration steps, security considerations, CVE reporting, and best practices.
+This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. These images are referred to as Enterprise images, indicating that they are intended for Camunda Enterprise customers. The guide also covers configuration steps, security considerations, CVE reporting, and best practices.
 
 ## Overview
 
-By default, the Camunda Helm chart deploys Bitnami open-source images. For production environments requiring enhanced security and vendor support, Camunda enables access to Bitnami Premium images via a vendor-proxied registry for licensed enterprise customers.
+By default, the Camunda Helm chart deploys Bitnami open-source images. For production environments that require enhanced security and vendor support, Camunda enables access to Bitnami Premium images through a vendor-proxied registry for licensed enterprise customers.
 
 :::info Important update since Camunda 8.8
 Previously, some users deployed Bitnami subcharts in production. Starting with Camunda 8.8, Bitnami subcharts are primarily intended for development and testing purposes unless your teams have specific expertise with Bitnami charts in production.
@@ -28,7 +28,7 @@ If you use Bitnami-based subcharts in production, Camunda strongly recommends us
 
 ## Understanding Bitnami image offerings
 
-Following [Bitnami chart security policy changes](https://github.com/bitnami/charts/issues/30850), Camunda transitioned from open-source Bitnami images to Bitnami Premium images licensed by Bitnami (Broadcom). These images require an additional values file for configuration, detailed below. While Bitnami offers another repository of Bitnami Secure images, we continue to offer mirror of Bitnami Premium in our sub-charts.
+Following [Bitnami chart security policy changes](https://github.com/bitnami/charts/issues/30850), Camunda transitioned from open-source Bitnami images to Bitnami Premium images licensed by Broadcom. These images require an additional values file for configuration, detailed below.While Bitnami also provides a repository of Secure images, Camunda continues to mirror the Premium versions in its subcharts.
 
 ### Available image types
 
@@ -43,7 +43,7 @@ Following [Bitnami chart security policy changes](https://github.com/bitnami/cha
 - **Support:** Vendor-maintained with SLAs and security patches
 - **Exclusions:** PhotonOS-based Premium images are not distributed or supported by Camunda
 
-For more information, see [Bitnami ](https://bitnami.com/) and [Bitnami Documentation](https://docs.bitnami.com/).
+For more information, see [Bitnami](https://bitnami.com/) and [Bitnami Documentation](https://docs.bitnami.com/).
 
 ## Benefits of Bitnami Premium images
 
