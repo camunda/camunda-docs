@@ -438,15 +438,15 @@ Key changes of the dual-region setup:
 - `global.multiregion.regions: 2`
   - Indicates the use for two regions
 - `global.identity.auth.enabled: false`
-  - Management Identity is currently not supported. Review the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
 - `identity.enabled: false`
   - Management Identity is currently not supported.
 - `optimize.enabled: false`
-  - Optimize is currently not supported, and has a dependency on Management Identity.
+  - Optimize is not currently supported and depends on Management Identity.
 - `orchestration.exporters.zeebe.enabled: false`
-  - Disables the automatic Elasticsearch Exporter configuration of the Helm chart. The old exporter used with Optimize and previous setups.
+  - Disables the automatic Elasticsearch Exporter configuration in the Helm chart. This exporter was previously used with Optimize and earlier setups.
 - `orchestration.exporters.camunda.enabled: false`
-  - Disables the automatic Camunda Exporter configuration of the Helm chart. We will manually supply the values via environment variables.
+  - Disables the automatic Camunda Exporter configuration in the Helm chart. Values are supplied manually through environment variables.
 - `orchestration.env`
   - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
@@ -455,9 +455,9 @@ Key changes of the dual-region setup:
   - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
     - The Elasticsearch endpoint for region 1.
   - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_CLASSNAME`
-    - `io.camunda.exporter.CamundaExporter` explicitly create the new Camunda Exporter
+    - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
   - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_CLASSNAME`
-    - `io.camunda.exporter.CamundaExporter` explicitly create the new Camunda Exporter
+    - `io.camunda.exporter.CamundaExporter` explicitly creates the new Camunda Exporter.
 - A cluster of eight Zeebe brokers (four in each of the regions) is recommended for the dual-region setup
   - `orchestration.clusterSize: 8`
   - `orchestration.partitionCount: 8`
