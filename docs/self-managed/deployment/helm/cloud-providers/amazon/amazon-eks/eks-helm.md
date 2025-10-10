@@ -219,13 +219,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 
 :::danger Exposure of the Zeebe Gateway
-
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
 :::
 
@@ -272,13 +266,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 
 :::danger Exposure of the Zeebe Gateway
-
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
 :::
 
@@ -344,7 +332,7 @@ identityKeycloak:
   # extraEnvVars:
   #   ...
 
-postgresql:
+webModelerPostgresql:
   enabled: true
 
 webModeler:
@@ -354,8 +342,7 @@ webModeler:
   #     externalDatabase:
   #         url: jdbc:aws-wrapper:postgresql://${DB_HOST}:5432/${DB_WEBMODELER_NAME}
   #         user: ${DB_WEBMODELER_USERNAME}
-  #         existingSecret: webmodeler-postgres-secret
-  #         existingSecretPasswordKey: password
+  #         ...
 
 identity:
   # Remove this part
@@ -366,8 +353,7 @@ identity:
   #     port: 5432
   #     username: ${DB_IDENTITY_USERNAME}
   #     database: ${DB_IDENTITY_NAME}
-  #     existingSecret: identity-postgres-secret
-  #     existingSecretPasswordKey: password
+  #     ...
 ```
 
 </details>
@@ -447,7 +433,7 @@ A custom Keycloak container image containing necessary configurations is accessi
 
 The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
 
-Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnamilegacy/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
+Maintenance of these images is based on the upstream Bitnami and official keycloak images, ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
 ##### Keycloak image configuration
 

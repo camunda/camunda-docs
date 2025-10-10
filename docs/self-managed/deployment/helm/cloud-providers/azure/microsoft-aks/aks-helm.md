@@ -169,12 +169,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 :::danger Exposure of the Zeebe Gateway
 
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+For secure operation, do not publicly expose the Zeebe Gateway. Keep it reachable only within your Azure Virtual Network (for example, by deploying it without a public Ingress) and access it from internal services or over a private network extension such as an Azure VPN or ExpressRoute connection. This reduces external attack surface while preserving controlled operational access.
 
 :::
 
@@ -263,7 +258,7 @@ identityKeycloak:
   # extraEnvVars:
   #   ...
 
-postgresql:
+webModelerPostgresql:
   enabled: true
 
 webModeler:
@@ -273,8 +268,7 @@ webModeler:
   #     externalDatabase:
   #         url: jdbc:postgresql://$\{DB_HOST}:5432/$\{DB_WEBMODELER_NAME}
   #         user: $\{DB_WEBMODELER_USERNAME}
-  #         existingSecret: webmodeler-postgres-secret
-  #         existingSecretPasswordKey: password
+  #         ...
 
 identity:
   # Remove this part
@@ -285,8 +279,7 @@ identity:
   #     port: 5432
   #     username: $\{DB_IDENTITY_USERNAME}
   #     database: $\{DB_IDENTITY_NAME}
-  #     existingSecret: identity-postgres-secret
-  #     existingSecretPasswordKey: password
+  #     ...
 ```
 
 </details>
