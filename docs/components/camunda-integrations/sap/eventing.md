@@ -2,20 +2,22 @@
 id: eventing
 title: SAP Eventing with SAP Advanced Event Mesh (AEM)
 description: "React on CloudEvents to/from Advanced Event Mesh in a BPMN process"
+sidebar_label: SAP Eventing
 ---
 
-Camunda's **SAP Eventing integration** enables you to receive [CloudEvents](https://cloudevents.io/) from SAP Advanced Event Mesh (AEM) and send CloudEvents to AEM.
+Receive [CloudEvents](https://cloudevents.io/) from SAP Advanced Event Mesh (AEM) and send CloudEvents to AEM.
 
-It consists of three connectors that allow bidirectional communication between Camunda and AEM.
+## About SAP Eventing
+
+This consists of three connectors that allow bidirectional communication between Camunda and AEM.
 
 <!-- add links of Element Template from marketplace! -->
 
-- **SAP Eventing Outbound Connector**  
-  Send CloudEvents from Camunda to an AEM topic or queue endpoint.
-- **SAP Eventing Message Start Event Connector**  
-  Translate an incoming CloudEvent from AEM into a [BPMN Message Start Event](../../../components/modeler/bpmn/message-events/#message-start-events) triggering a new process instance.
-- **SAP Eventing Intermediate Event Connector**  
-  Translate an incoming CloudEvent from AEM into a [BPMN Intermediate Catch Event](../../../components/modeler/bpmn/message-events/#intermediate-message-catch-events) allowing an active process to continue based on the event.
+| Connector                                  | Description                                                                                                                                                                                                                              |
+| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SAP Eventing Outbound Connector            | Send CloudEvents from Camunda to an AEM topic or queue endpoint.                                                                                                                                                                         |
+| SAP Eventing Message Start Event Connector | Translate an incoming CloudEvent from AEM into a [BPMN Message Start Event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) triggering a new process instance.                                           |
+| SAP Eventing Intermediate Event Connector  | Translate an incoming CloudEvent from AEM into a [BPMN Intermediate Catch Event](/components/modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events) allowing an active process to continue based on the event. |
 
 The integration uses `HTTP` as the transport protocol.
 
@@ -24,7 +26,7 @@ The integration uses `HTTP` as the transport protocol.
 
 :::info
 SAP Advanced Event Mesh uses [Solace Event Broker](https://solace.com/products/event-broker/) as its core event broker.
-Therefore, the terms **AEM** and **Solace Event Broker** can be used interchangeably when referring to core eventing functionality.
+This means the terms **AEM** and **Solace Event Broker** can be used interchangeably when referring to core eventing functionality.
 :::
 
 ## Prerequisites
@@ -52,29 +54,25 @@ Applying the **SAP Eventing Message Start Event Connector** generates a unique *
 The Webhook URL is generated **only after the initial deployment** of the process.
 :::
 
-This Webhook URL must be registered as a target in **SAP Advanced Event Mesh (AEM)**.  
+This Webhook URL must be registered as a target in **SAP Advanced Event Mesh (AEM)**.
+
 The host portion of the URL (`https://<region>.connectors.camunda.io`) is used when configuring the **REST consumer** in AEM.
 
 ![AEM REST consumer](./img/eventing-aem-rest-consumer.png)
 
----
-
 ### Authentication
 
-In the same REST consumer configuration, set up authentication from AEM to the Camunda Webhook endpoint.  
+In the same REST consumer configuration, set up authentication from AEM to the Camunda Webhook endpoint.
+
 The credentials configured in the **Authorization** section of the Camunda connector must correspond to the **Authentication Scheme** used in AEM.
 
 ![Camunda and AEM credentials](./img/eventing-authorization.png)
-
----
 
 ### Queue Binding
 
 The path component of the Camunda Webhook URL must be used as the **POST Request Target** in the **Queue Binding** of the REST consumer.
 
 ![AEM Queue Binding](./img/eventing-aem-queue-binding.png)
-
----
 
 ### Other Configuration Options
 
@@ -83,8 +81,6 @@ The remaining configuration options of the **SAP Eventing Message Start Event Co
 > The default **Webhook response** explicitly returns a `200` status code and an `"OK"` message body, confirming that the CloudEvent was successfully received and acknowledged by Camunda.
 
 ![Remaining Incoming Webhook config](./img/eventing-incoming-other-config.png)
-
----
 
 ### Event Flow
 
@@ -95,8 +91,6 @@ When a CloudEvent is received from AEM, all **header** properties and the **body
 
 This ensures that message attributes and payload data from AEM are preserved end-to-end within the Camunda process.
 
----
-
 ## SAP Eventing Intermediate Event Connector
 
 ### Correlate CloudEvents as BPMN Messages
@@ -105,8 +99,6 @@ The **SAP Eventing Intermediate Event Connector** injects a CloudEvent from **SA
 
 It does this by leveraging the BPMN principle of [**message correlation**](../../../components/connectors/protocol/http-webhook/#correlation).  
 Any CloudEvent property can be used as a **correlation key** to map incoming event data to the correct process instance.
-
----
 
 ### Correlation via CloudEvent Body
 
@@ -117,8 +109,6 @@ The configuration options of the **SAP Eventing Message Start Event Connector** 
 In the example above, the process variable `ENCOMGridID` is expected to exist within the process instance.  
 Its value is compared against the CloudEvent payload (`request.body.FlynnLocationID`).  
 If both values match, the CloudEvent is considered to be the published BPMN message that is correlated to the corresponding process instance.
-
----
 
 ### Correlation via CloudEvent Metadata
 
@@ -176,15 +166,11 @@ In this example, to correlate the CloudEvent `ce-id` property to a process insta
 Explicitly note the "backticks" notation of the header value `` request.headers.`solace-user-property-ce-id` `` in order to escape the dashes in the header field name!
 :::
 
----
-
 ### SAP Eventing Outbound Connector
 
 The **SAP Eventing Outbound Connector** allows you to send CloudEvents to **SAP Advanced Event Mesh (AEM)** using its **REST messaging** capability. It uses the REST messaging capability of AEM to publish the CloudEvent via a `HTTP POST` request.
 
 ![SAP eventing outbound connector configuration](./img/eventing-outbound-connector.png)
-
----
 
 ### Endpoint
 
@@ -197,14 +183,10 @@ On the right-hand side of the interface, you’ll see the **FQDN** (Fully Qualif
 
 ![FQDN of the AEM REST messaging API](./img/eventing-aem-rest-fqdn.png)
 
----
-
 ### Topic / Queue
 
 Specify the target **topic** or **queue** path where the CloudEvent will be published.  
 Neither value should begin with a `/` — the connector includes a validation check to prevent this.
-
----
 
 ### Authorization
 
@@ -216,23 +198,19 @@ Select one of the following authorization methods:
 - `OAuth 2.0`
 - `Bearer Token`
 
----
-
 ### CloudEvent
 
 While CloudEvent metadata (for example, `ce-id` or `ce-subject`) is automatically handled by the AEM broker—including the required `Solace-User-Property-` prefix, you only need to configure the **standard CloudEvent attributes** in this connector.
 
-The CloudEvent data is serialized into a **JSON body**, and both the **metadata** and **data** fields support [FEEL expressions](../../../components/modeler/feel/what-is-feel/) for dynamic values.
+The CloudEvent data is serialized into a **JSON body**, and both the **metadata** and **data** fields support [FEEL expressions](/components/modeler/feel/what-is-feel.md) for dynamic values.
 
 ![Eventing Outbound CloudEvent](./img/eventing-outbound-cloudevent.png)
 
----
-
 ### Other Configuration Options
 
-All remaining options are identical to those of the [REST Connector](../../../components/connectors/protocol/rest/), including:
+All remaining options are identical to those of the [REST Connector](/components/connectors/protocol/rest.md), including:
 
-- [Connection timeout](../../../components/connectors/protocol/rest/#network-communication-timeouts)
-- [Output mapping](../../../components/connectors/protocol/rest/#output-mapping)
+- [Connection timeout](/components/connectors/protocol/rest.md#network-communication-timeouts)
+- [Output mapping](/components/connectors/protocol/rest.md#output-mapping)
 
 These settings control network behavior and define how response data is mapped to process variables.
