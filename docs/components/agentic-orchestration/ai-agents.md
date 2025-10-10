@@ -5,7 +5,7 @@ description: "Start building and integrating AI agents into your end-to-end proc
 keywords: ["agentic ai", "AI agents"]
 ---
 
-import ExampleImg from '../connectors/img/ai-agent-process.png';
+import ExampleImg from '../connectors/img/ai-agent-subprocess.png';
 import AgentImg from './img/ao-ai-agent.png';
 
 Start building and integrating AI agents into your end-to-end processes.
@@ -51,14 +51,14 @@ Use the following Camunda 8 features to integrate AI agents into your processes:
 
 ## Integrate an AI agent into your process
 
-A common model for AI agent integration uses an ad-hoc sub-process and AI agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md).
+A common model for AI agent integration uses an ad-hoc sub-process and AI agent connector in a [tools feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md).
 
 In this model, an AI agent is defined using an AI agent connector, with the tools available to the agent defined in an ad-hoc sub-process. The AI agent is able to understand the context and process goal, and uses the available tools to complete the goal.
 
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-700"/></p>
 
 :::tip
-Learn more about this model in the [example AI Agent Process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more about this model in the [example AI Agent Subprocess connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
 :::
 
 :::info further resources

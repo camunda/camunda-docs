@@ -257,7 +257,7 @@ Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret c
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
 - Using an [existing Elasticsearch instance](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
-- Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md)
+- Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
   - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 

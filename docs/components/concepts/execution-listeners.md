@@ -106,7 +106,6 @@ If this happens, all listeners of the same event type (`start` or `end`) that we
 Execution listeners have the following limitations:
 
 - **Unsupported elements**: The following elements do not support `start` or `end` listeners due to their processing nature:
-
   - Start events (start ELs): Use `start` listeners of process instances or subprocesses to cover the missing `start` listeners for specific start events.
   - Boundary events (start ELs): Place the start logic in the `start` ELs of the main activity to which the boundary event is attached.
   - Gateways (end ELs): Use `start` ELs on the element following the gateway to execute the required logic. This allows handling of any post-execution tasks in a dedicated element.

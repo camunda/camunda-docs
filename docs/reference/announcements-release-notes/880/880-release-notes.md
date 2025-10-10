@@ -145,7 +145,7 @@ This connector implements the tool resolution part of the AI Agent connector, bu
 
 <!-- https://github.com/camunda/product-hub/issues/2779 -->
 
-Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities. Designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example.md), providing automated user interaction and tool selection.
+Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities. Designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md), providing automated user interaction and tool selection.
 
 <p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/" class="link-arrow">AI Agent connector</a></p>
 
@@ -338,12 +338,14 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ### Microsoft Teams
 
-The new Microsoft Teams integration lets users view, claim, and complete Camunda tasks directly in Microsoft Teams, including inline task forms.
+The new Camunda for Microsoft Teams app allows you to view, claim, and complete Camunda tasks directly in Microsoft Teams.
 
-The Microsoft Teams integration allows users to:
+The app integration allows you to:
 
-- Start processes from a channel, chat, or the app’s Home tab.
+- Start processes from a channel, chat, or the app **Home** tab.
 - Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+<p><a href="../../../../components/early-access/alpha/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
 
 :::note
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
@@ -364,6 +366,19 @@ The ServiceNow integration allows you to:
 ## Intelligent document processing (IDP)
 
 <div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+### Bring your own model (BYOM)
+
+When using an OpenAI Compatible provider, you can use your own model for document extraction. Any model provider that implements the `/chat/completions` API endpoint is supported.
+
+Supported providers are:
+
+- **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction).
+- **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only).
+- **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
+- **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
 
 ### Structured data form extraction
 
@@ -543,23 +558,20 @@ An offline installer package for the [RPA](/components/rpa/overview.md) worker a
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-### Git sync Azure DevOps and Bitbucket integration
+### Bring your own model (BYOM)
 
-<!-- https://github.com/camunda/product-hub/issues/2580 -->
-<!-- https://github.com/camunda/product-hub/issues/2507 -->
+BPMN Copilot and FEEL Copilot in the Web Modeler are now available for Camunda Self-Managed customers in a safe, secure way.
 
-In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
-
-<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+You can connect these features to your own AI provider and model, even fine-tuning the model yourself to improve its performance and relevance to your organization.
 
 ### Cluster basic authentication
 
 <!-- https://github.com/camunda/web-modeler/issues/13707 -->
 
-As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 <p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
@@ -611,6 +623,15 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 <p><a href="../../../../components/modeler/feel/feel-playground/" class="link-arrow">FEEL Playground</a></p>
 
 <!-- https://github.com/camunda/camunda-docs/issues/5611 -->
+
+### Git sync Azure DevOps and Bitbucket integration
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket Cloud.
+
+<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Low-code process testing
 
@@ -1358,7 +1379,7 @@ To learn more about versioning your diagrams, see [versions](components/modeler/
 As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 

@@ -109,9 +109,9 @@ How you configure these secrets depends if you are running Camunda 8 SaaS or a S
   - If you run it with Java, export the secrets as environment variables before starting the distribution.
   - If you use Camunda 8 Run with Docker, navigate to the `docker-compose-8.x` folder in the new `c8run` directory and add the secrets in the `connector-secrets.txt` file.
 
-## Step 3: Configure the AI Agent connector (optional)
+## Step 3: Configure the AI Agent Subprocess connector (optional)
 
-In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` ad-hoc sub-process. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
+In the blueprint BPMN diagram, the [AI Agent Subprocess](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) connector template is applied to the `AI Agent` ad-hoc sub-process. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
@@ -129,7 +129,7 @@ Once you have started your process, you can then monitor the execution in [Opera
 
 ### SaaS
 
-In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/play-your-process.md) feature.
+In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/collaboration/play-your-process.md) feature.
 
 1. Select the **Play** tab.
 1. Select the cluster you want to deploy and play the process on.
