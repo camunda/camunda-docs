@@ -13,10 +13,10 @@ This guide explains how to deploy Camunda 8 infrastructure components using **ve
 ## Overview
 
 :::info New in Camunda 8.8
-Starting with Camunda 8.8, we continue to strengthen our commitment to robust, production-ready deployments based on solid foundations. Bitnami sub-charts are disabled by default due to [changes in Bitnami's container image distribution](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/).
+Starting with Camunda 8.8, we continue to strengthen our commitment to robust, production-ready deployments based on solid foundations.
 :::
 
-As outlined in our strategy, Camunda reinforces building deployments on solid foundations—primarily managed PostgreSQL and Elasticsearch services, along with external OIDC providers. However, we understand that managed infrastructure components aren't always available in your organization's service catalog.
+As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/), Camunda reinforces building deployments on solid foundations—primarily managed PostgreSQL and Elasticsearch services, along with external OIDC providers. However, we understand that managed infrastructure components aren't always available in your organization's service catalog.
 
 This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami sub-charts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
 
@@ -29,7 +29,7 @@ If you prefer to continue using Bitnami sub-charts, you can enable them by using
 Using official vendor-supported methods provides several advantages over traditional sub-charts:
 
 - **Vendor maintenance**: Each deployment method is maintained by the respective project team (Elastic, CloudNativePG community, Keycloak team) with dedicated engineering resources
-- **Production-grade features**: Built-in backup, monitoring, and scaling capabilities designed for enterprise environments
+- **Production-grade features**: Built-in management, monitoring, and scaling capabilities designed for enterprise environments
 - **Enterprise support**: Official support channels, dedicated vendor support teams, and comprehensive documentation
 - **Security-focused**: Regular updates and CVE patches from upstream maintainers with specialized security teams
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
@@ -58,18 +58,12 @@ This deployment approach separates infrastructure management from application de
 ## Infrastructure components
 
 This approach uses three vendor-supported infrastructure components, each maintained by their respective project teams:
-
-### Component overview
-
 | Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/)           |
 | **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
 | **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
-### Enterprise features
-
-Each component provides enterprise-grade features including automated backups, monitoring, scaling capabilities, and official vendor support channels.
 
 ## Quick start
 
@@ -82,11 +76,13 @@ All configuration files, deployment scripts, and automation tools referenced in 
 <details>
 <summary><strong>Quick deployment commands</strong></summary>
 
-```bash
-# Get all deployment resources
-git clone https://github.com/camunda/camunda-deployment-references.git
-cd camunda-deployment-references/generic/kubernetes/operator-based
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/main/camunda-deployment-references/generic/kubernetes/operator-based/get-your-copy.sh
+```
 
+Then execute:
+
+```bash
 # Set up environment (required for all deployments)
 source ./0-set-environment.sh
 
@@ -130,15 +126,13 @@ Each infrastructure component should be deployed individually in the following o
 | Order | Component                                      | Dependencies | Purpose                                                              |
 | ----- | ---------------------------------------------- | ------------ | -------------------------------------------------------------------- |
 | 1     | **[PostgreSQL](#postgresql-deployment)**       | None         | Database clusters for Keycloak, Management Identity, and Web Modeler |
-| 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Data storage for orchestration cluster components                    |
+| 2     | **[Elasticsearch](#elasticsearch-deployment)** | None         | Secondary storage for orchestration cluster components                    |
 | 3     | **[Keycloak](#keycloak-deployment)**           | PostgreSQL   | Authentication and identity management                               |
 | 4     | **[Camunda Platform](#camunda-deployment)**    | All above    | Deploy using Helm with vendor-supported infrastructure               |
 
 :::tip Automation with GitOps
 While this guide demonstrates manual deployment using command-line tools, these same configurations can be automated using GitOps solutions like ArgoCD, Flux, or other Kubernetes deployment pipelines. All configuration files referenced in this guide are designed to work seamlessly with declarative deployment approaches.
 :::
-
----
 
 ## PostgreSQL deployment
 
@@ -170,7 +164,7 @@ The PostgreSQL deployment follows these steps, automated via the `postgresql/dep
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/deploy.sh
 ```
 
-### Operator Custom Resources
+#### Operator Custom Resources
 
 <Tabs groupId="postgres-cr">
   <TabItem value="clusters" label="PostgreSQL Clusters" default>
@@ -284,7 +278,7 @@ The ECK deployment creates an Elasticsearch cluster with:
 
 **Elasticsearch as the database for Camunda components:**
 
-Elasticsearch serves as the primary database for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities:
+Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities:
 
 - **[Zeebe records](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)** - Process execution data exported from Zeebe workflow engine using the Elasticsearch exporter
 - **[orchestration data persistence](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)** - Process instance states, variables, flow nodes, incidents, and operational data stored in dedicated Elasticsearch indices
@@ -300,7 +294,7 @@ The Elasticsearch deployment follows these steps, automated via the `elasticsear
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
-### Operator Custom Resources
+#### Operator Custom Resources
 
 <Tabs groupId="elasticsearch-cr">
   <TabItem value="cluster" label="Elasticsearch Cluster" default>
@@ -380,12 +374,9 @@ The Keycloak deployment provides:
 
 - **Database integration**: Connects to CloudNativePG-managed PostgreSQL cluster
 - **Authentication path**: Configured to serve under `/auth` path prefix
-- **Flexible domain support**: Options for local development, [nginx-ingress](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
+- **Flexible domain support**: Options for local development, [ingress-nginx](https://kubernetes.github.io/ingress-nginx/), or [OpenShift routes](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes)
 - **Resource optimization**: Sized appropriately for typical Camunda authentication loads
 - **Custom Ingress management**: Uses dedicated Ingress manifests integrated within the operator configuration for subpath management constraints
-
-**Use cases in Camunda 8:**
-Keycloak serves as the OIDC authentication provider for Management Identity, handling user authentication, authorization, and client credentials management for system integrations.
 
 ### Ingress management
 
@@ -406,7 +397,7 @@ The Keycloak deployment follows these steps, automated via the `keycloak/deploy.
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/deploy.sh
 ```
 
-### Operator Custom Resources
+#### Operator Custom Resources
 
 <Tabs groupId="keycloak-cr">
   <TabItem value="no-domain" label="Local deployment" default>
@@ -557,17 +548,18 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 | Keycloak (Local)         | `camunda-keycloak-no-domain-values.yml` | Local development OIDC configuration       | Camunda deployment |
 | Keycloak (Production)    | `camunda-keycloak-domain-values.yml`    | Production OIDC configuration              | Camunda deployment |
 
+
+### Generate authentication secrets
+
+Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
+
 ### Pre-deployment checklist
 
 Before deploying Camunda Platform:
 
 - [ ] All infrastructure components deployed (PostgreSQL, Elasticsearch, Keycloak)
 - [ ] Configuration files saved locally from previous sections
-- [ ] Authentication secrets generated (see next section)
-
-### Generate authentication secrets
-
-Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
+- [ ] Authentication secrets generated (previous section)
 
 ### Helm deployment
 
@@ -704,7 +696,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 **Solutions:**
 
-- Verify Keycloak is accessible: `kubectl port-forward svc/keycloak-service 8080:8080 -n $CAMUNDA_NAMESPACE`
+- Verify Keycloak is accessible: `kubectl port-forward svc/keycloak-service 18080:8080 -n $CAMUNDA_NAMESPACE`
 
   :::note
   This uses `keycloak-service` (the service name created by the Keycloak Operator) and port `8080` (Keycloak's internal port). This differs from Helm chart deployments which use `camunda-keycloak` service name and port `80`.
