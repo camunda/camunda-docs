@@ -49,7 +49,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Data and exporters</td>
-    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices and additional disk space while data is moved to unified indices.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
+    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>May require prefix migration depending on the configuration - utility tool provided</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>Requires data migration for some indices - migration applications are provided</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
