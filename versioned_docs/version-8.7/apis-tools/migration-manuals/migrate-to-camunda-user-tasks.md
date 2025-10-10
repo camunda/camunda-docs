@@ -347,13 +347,13 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+href:"../../tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/",
+href:"../../camunda-api-rest/camunda-api-rest-overview/",
 label: "Camunda 8 API (REST)",
 docId:"apis-tools/camunda-api-rest/camunda-api-rest-overview"
 }
