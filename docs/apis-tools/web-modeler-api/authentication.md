@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 :::note
-Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/modeler/web-modeler/collaboration.md#super-user-mode).
+Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/modeler/web-modeler/collaboration/collaboration.md#super-user-mode).
 
 While there's no project-level access control enforced in the API, access is still dependent on the [CRUD operations assigned](#generate-a-token).
 :::

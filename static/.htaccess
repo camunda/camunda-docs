@@ -149,6 +149,28 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Orchestration cluster revamp
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/operate-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/schema-and-migration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/operate/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/data-retention/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/tasklist-authentication/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/usage-metrics/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics/ [R=301,L]
+
+# Remove Helm chart multi-namespace deployment
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/multi-namespace-deployment/?$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+RewriteRule ^docs/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+RewriteRule ^docs/8.6/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+RewriteRule ^docs/8.5/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
+
+# Rename Self-Managed installation methods (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
+
+# Restructure Helm install (8.8)
+RewriteRule ^docs/next/self-managed/installation-methods/helm/install/(.*)$ /docs/next/self-managed/deployment/helm/install/quick-install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/operational-guides/production-guide/helm-chart-production-guide/(.*)$ /docs/next/self-managed/deployment/helm/install/production/ [R=301,L]
+
 # Orchestration cluster restructure
 RewriteRule ^docs/next/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
 
@@ -201,7 +223,7 @@ RewriteRule ^docs/next/self-managed/setup/guides/connect-to-an-oidc-provider/?$ 
 RewriteRule ^docs/next/self-managed/setup/guides/configure-db-custom-headers/?$ /docs/next/self-managed/installation-methods/helm/configure/database/configure-db-custom-headers/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/configure-elasticsearch-prefix-indices/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/using-existing-elasticsearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/elasticsearch/using-external-elasticsearch/ [R=301,L]
-RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-existing-opensearch/ [R=301,L]
+RewriteRule ^docs/next/self-managed/setup/guides/using-existing-opensearch/?$ /docs/next/self-managed/installation-methods/helm/configure/database/using-external-opensearch/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/guides/?$ /docs/next/self-managed/installation-methods/helm/configure/guides/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/ingress-setup/?$ /docs/next/self-managed/installation-methods/helm/configure/ingress-setup/ [R=301,L]
 RewriteRule ^docs/next/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/next/self-managed/installation-methods/helm/configure/multi-namespace-deployment/ [R=301,L]
@@ -495,7 +517,13 @@ RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/
 RewriteRule ^docs/next/components/camunda-integrations/sap/?$ /docs/next/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
 # Restructure Agentic AI docs
-RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/ [R=301,L]
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+
+RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process/?$ /docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess/ [R=301,L]
+RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess/ [R=301,L]
 
 # Restructure Backup and restore guide
 RewriteRule ^docs/next/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/next/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]

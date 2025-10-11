@@ -1,23 +1,19 @@
 ---
 id: 880-release-notes
-title: "Release notes"
+title: "8.8 Release notes"
+sidebar_label: Release notes
 description: "Release notes for 8.8, including alphas"
-keywords:
-  [
-    "product development lifecycle",
-    "software development lifecycle",
-    "CI/CD",
-    "AI",
-  ]
+toc_min_heading_level: 2
+toc_max_heading_level: 2
+keywords: ["8.8 release notes", "release notes for 8.8", "release notes"]
+page_rank: 90
 ---
 
-These release notes identify the new features included in 8.8, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
+These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
-## 8.8 minor
-
-| Scheduled release date | Scheduled end of maintenance | Changelog(s) | Release blog | Update guide |
-| ---------------------- | ---------------------------- | ------------ | ------------ | ------------ |
-| 14 October 2025        | 13 April 2027                | -            | -            | -            |
+| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                                 |
+| ------------------ | ---------------------------- | --------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027                | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -26,6 +22,684 @@ These release notes identify the new features included in 8.8, including [alpha 
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
 
 :::
+
+## Agentic orchestration
+
+<div class="release"><span class="badge badge--medium" title="This feature affects agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects ai agents">AI agents</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+
+<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Camunda Agentic orchestration</a></p>
+
+Use the following new features to build and integrate AI agents into your processes:
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**Feature**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[AI agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)</td>
+    <td>Enables AI agents to integrate with an LLM to provide interaction/reasoning capabilities. This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.</td>
+</tr>
+<tr>
+    <td>[MCP Client connector](/components/early-access/alpha/mcp-client/mcp-client.md)</td>
+    <td>Connect an AI agent connector to tools exposed by [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) servers.</td>
+</tr>
+<tr>
+    <td>[Ad-hoc tools schema resolver connector](/components/connectors/out-of-the-box-connectors/agentic-ai-ahsp-tools-schema-resolver.md)</td>
+    <td>Can be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.</td>
+</tr>
+<tr>
+    <td>[Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)</td>
+    <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
+</tr>
+<tr>
+    <td>[fromAi() FEEl function](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)</td>
+    <td>Use in combination with the AI Agent connector. See [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).</td>
+</tr>
+</table>
+
+## APIs & tools
+
+<div class="release"><span class="badge badge--medium" title="This feature affects APIs & tools">APIs & tools</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### APIs
+
+Use the Orchestration Cluster REST API to interact programmatically with the Orchestration Cluster.
+
+- This replaces component APIs (Operate API, Tasklist API, Zeebe API, and much of Identity API) with a single set of endpoints.
+- This unified API supports both organizational (SaaS) and Self-Managed deployments.
+- This is now the default and recommended integration point for developers, operators, and automation solutions.
+- You can also use a Swagger UI to interact with this API.
+
+<p><a href="../../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/" class="link-arrow">Orchestration Cluster API</a></p>
+
+### Camunda Java client
+
+<!-- https://github.com/camunda/product-hub/issues/2248 -->
+
+The new Camunda Java Client replaces the Zeebe Java Client as the official Java library for building process applications that integrate with Camunda 8. This client provides everything you need to programmatically interact with the Orchestration Cluster, whether you are orchestrating microservices, managing human tasks, or visualizing process data.
+
+<p><a href="../../../../apis-tools/java-client/getting-started/" class="link-arrow">Get started with the Camunda Java client</a></p>
+
+### Camunda Process Test H2 data layer support
+
+<!-- https://github.com/camunda/product-hub/issues/2687 -->
+
+Camunda Process Test supports using the [H2 Database Engine](https://www.h2database.com/html/main.html) as the default embedded data layer.
+
+- H2 is now automatically provisioned when integrating the Camunda Process Test libraries, eliminating manual database configuration and reducing memory footprint.
+- H2 support streamlines the developer experience for your Spring Boot and plain Java projects. Process testing is now faster to set up, simpler to maintain, and easier to integrate with your continuous integration workflows.
+
+<p><a href="../../../../apis-tools/testing/getting-started" class="link-arrow">Camunda Process Test</a></p>
+
+### Camunda Spring Boot Starter
+
+<!-- https://github.com/camunda/product-hub/issues/2249 -->
+
+The Camunda Spring Boot Starter replaces the Spring Zeebe SDK to simplify interaction between a Spring Boot application and Camunda 8, allowing you to:
+
+- Easily integrate process entity management and queries within your workflows.
+- Seamlessly configure endpoints and authentication via Spring Boot auto-configuration, minimizing boilerplate code.
+- Rely on an official, standardized approach to guarantee consistency and reduce maintenance costs when upgrading.
+- Based on Spring Boot 3.5 ([version compatibility matrix](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility)).
+
+<p><a href="../../../../apis-tools/camunda-spring-boot-starter/getting-started/" class="link-arrow">Get started with the Camunda Spring Boot Starter</a></p>
+
+### Process instance tags
+
+Introduce optional, immutable **process instance tags** set at creation for lightweight routing, correlation, and future prioritization without inspecting large variable payloads. See [process instance creation](/components/concepts/process-instance-creation.md#tags) and [job workers](/components/concepts/job-workers.md#tags).
+
+<p><a href="../../../../components/concepts/process-instance-creation/" class="link-arrow">Process instance creation</a></p>
+
+### Public API
+
+Find out what’s included in Camunda 8's public API, the policies around versioning, and what to expect when upgrading.
+
+- The public API is the official contract between Camunda and its users under SemVer.
+- No breaking changes will be made to the public API in minor or patch releases.
+- You can safely build on these interfaces with the expectation of stability and backward compatibility.
+
+<p><a href="../../../../reference/public-api/" class="link-arrow">Public API</a></p>
+
+### Run process segment
+
+<!-- https://github.com/camunda/product-hub/issues/2453 -->
+
+Manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
+
+<p><a href="../../../../components/concepts/process-instance-creation/#run-process-segment" class="link-arrow">Run process segment</a></p>
+
+## Connectors
+
+<div class="release"><span class="badge badge--medium" title="This feature affects connectors">Connectors</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Ad-hoc tools schema resolver connector
+
+This connector implements the tool resolution part of the AI Agent connector, but can also be used independently with other AI connectors for direct LLM interaction. Use this connector if you don’t want to use the AI agent connector but still want to resolve tools for an ad-hoc sub-process or debug tool definitions.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver/" class="link-arrow">Ad-hoc tools schema resolver connector</a></p>
+
+### AI Agent connector
+
+<!-- https://github.com/camunda/product-hub/issues/2779 -->
+
+Enable AI agents to integrate with an LLM to provide interaction/reasoning capabilities. Designed for use with an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) in a [feedback loop](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md), providing automated user interaction and tool selection.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/" class="link-arrow">AI Agent connector</a></p>
+
+### Azure Blob Storage connector
+
+<!-- https://github.com/camunda/product-hub/issues/2713 -->
+
+Store and retrieve documents within Camunda workflows using Azure Blob Storage. Enables seamless document management directly within processes, improves efficiency, and reduces the need for custom integrations.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/azure-blob-storage/" class="link-arrow">Azure Blob Storage connector</a></p>
+
+### CSV connector (SaaS)
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Read, filter, transform, and write CSV data within processes. Reduces technical debt, accelerates development, and broadens integration capabilities with native support for this universal data format.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/csv/" class="link-arrow">CSV connector</a></p>
+
+### Google Cloud storage connector
+
+<!-- https://github.com/camunda/product-hub/issues/2712 -->
+
+Store and retrieve documents directly within Camunda workflows, streamlining document management without custom development.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/google-cloud-storage/" class="link-arrow">Google Cloud storage connector</a></p>
+
+### Hubspot Connector
+
+<!-- https://github.com/camunda/product-hub/issues/2398 -->
+
+Connect your BPMN service with [HubSpot](https://hubspot.com/) and manage your HubsSpot contacts, companies, and deals.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/hubspot/" class="link-arrow">HubSpot connector</a></p>
+
+### MCP Client connector
+
+<!-- https://github.com/camunda/product-hub/issues/2900 -->
+
+Enable Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
+
+<p><a href="../../../../components/early-access/alpha/mcp-client/" class="link-arrow">MCP client connector</a></p>
+
+### Vector database connector
+
+<!-- https://github.com/camunda/product-hub/issues/2744 -->
+<!-- https://github.com/camunda/product-hub/issues/2779 -->
+
+Enable embedding, storing, and retrieving Large Language Model (LLM) embeddings. Use to build AI-based solutions for your organizations, such as context document search, long-term LLM memory, and agentic AI interaction in combination with the AI Agent connector (RAG).
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/embeddings-vector-db" class="link-arrow">Vector database connector</a></p>
+
+### Email connector `Message-ID`
+
+<!-- https://github.com/camunda/connectors/pull/4657 -->
+
+The Email connector now exposes the `Message-ID` provided by the client in the connector response payload. This allows for improved traceability, easier correlation between sent messages and logs, and better integration with downstream systems that rely on `Message-ID`.
+
+:::note
+This change is backwards-compatible and does not require any action. You can now optionally use the `messageId` field for enhanced tracking when parsing connector responses.
+:::
+
+### Intrinsic functions
+
+<!-- https://github.com/camunda/camunda-docs/pull/5934 -->
+
+A new `getJson` intrinsic function accepts a document and an optional FEEL expression. It extracts and returns content from a JSON document as an object.
+
+- The optional FEEL expression parameter specifies the part that will be extracted from the JSON document content.
+- If not provided, the whole document is returned as a JSON object.
+
+<p><a href="../../../../components/connectors/use-connectors/intrinsic-functions" class="link-arrow">Intrinsic functions</a></p>
+
+### Job header binding
+
+<!-- https://github.com/camunda/connectors/issues/5131 -->
+
+Use the `@Header` annotation to bind a header value (for example, a FEEL expression) to a model class.
+
+### SQL connector Oracle database connection
+
+<!-- https://github.com/camunda/connectors/issues/5074 -->
+
+The SQL connector now supports Oracle Database connections.
+
+<p><a href="../../../../components/connectors/out-of-the-box-connectors/sql" class="link-arrow">SQL connector</a></p>
+
+## Console
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Connector manage and run supports multiple runtimes
+
+<!-- https://github.com/camunda/product-hub/issues/2750 -->
+<!-- https://github.com/camunda/product-hub/issues/1933 -->
+
+Connector manage and run in Console now supports management of multiple connector runtime instances.
+
+<p><a href="../../../../components/console/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
+
+### Docker distribution
+
+<!-- https://github.com/camunda/product-hub/issues/2242 -->
+
+Console is now available as a Self-Managed Docker distribution. Deploy Camunda Console using a Docker image, run Console outside Kubernetes using Docker Compose or other container services, and use Console with Camunda 8 clusters deployed via Docker.
+
+<p><a href="../../../../self-managed/quickstart/developer-quickstart/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
+
+### Encryption (BYOK)
+
+The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (KMS) allows you to configure Camunda 8 SaaS to use a customer-managed key stored in your own Amazon account. This ensures you retain ownership, control, and visibility throughout the key lifecycle, including creation, rotation, and audit logging.
+
+- Camunda 8 SaaS encrypts all cluster data at rest to protect customer workloads. By default, encryption is managed using cloud provider–supplied keys. While this satisfies many organizations, some (especially in regulated industries) require full control over their encryption keys.
+- This feature is currently available only for customers provisioning their Camunda 8 SaaS clusters in AWS regions. Support for additional cloud providers may be added in the future.
+
+### Regions
+
+New regions are available for SaaS clusters on Amazon Web Services:
+
+| Type                     | Region                              |
+| :----------------------- | :---------------------------------- |
+| AWS region               | Singapore (ap-southeast-1)          |
+| Secondary backups region | Ireland, Europe (eu-west-1)         |
+| Secondary backups region | Jakarta, Indonesia (ap-southeast-3) |
+| Secondary backups region | Oregon, North America (us-west-2)   |
+
+Use these regions to:
+
+- Improve overall processing speed and reduce latency if you operate in countries within that region.
+- Keep cluster data within that country/region to support your local data residency and compliance needs.
+
+<p><a href="../../../../components/saas/regions" class="link-arrow">Regions</a></p>
+
+### Usage metrics for licence model and tenant
+
+<!-- https://github.com/camunda/product-hub/issues/1979 -->
+
+Usage metrics now support per-tenant reporting and align with Camunda’s updated licensing model based on the number of tenants.
+
+## Desktop Modeler
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Settings
+
+<!-- https://github.com/camunda/product-hub/issues/2491 -->
+
+The new **Settings** window in Desktop Modeler allows you to configure the application and customize your modeling experience. You can select your default execution platform version, as well as other options that were previously only available as flags.
+
+<p><a href="../../../../components/modeler/desktop-modeler/settings/" class="link-arrow">Desktop Modeler settings</a></p>
+
+## Helm chart deployment
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Alternative container images
+
+<!-- https://github.com/camunda/product-hub/issues/2826 -->
+
+Camunda provides alternative container images to the previous Bitnami images, offering better security and faster patch delivery. From 8.8, these are the default supported images.
+
+- These images are hosted on `registry.camunda.cloud`.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file.
+
+<p><a href="../../../../self-managed/deployment/helm/install" class="link-arrow">Install Camunda with Helm</a></p>
+
+### Configurable volumes
+
+<!-- https://github.com/camunda/product-hub/issues/2597 -->
+
+The Helm chart now supports configurable volumes. You can define `PersistentVolumeClaims` or continue using `EmptyDir` through `values.yaml`.
+
+### ExtraVolumeClaimTemplates
+
+You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
+
+:::info important
+Kubernetes does not allow you to change the `volumeClaimTemplates` of an existing StatefulSet. If you add, remove, or modify `extraVolumeClaimTemplates` after initial deployment, you must delete and recreate the StatefulSet (which will also delete the pods) for the changes to take effect. This may require additional planning and data migration steps to avoid data loss.
+:::
+
+### Common labels for Camunda resources
+
+A new `commonLabels` value is now available and integrates with `camundaPlatform.labels`. This allows you to define mutable labels that are automatically applied to all Camunda resources. By setting `commonLabels`, you can ensure consistent labeling across deployments, making it easier to manage, organize, and identify resources within your Camunda environment.
+
+### Configure Web Modeler replicas
+
+The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
+
+## Integrations
+
+### Microsoft Teams
+
+The new Camunda for Microsoft Teams app allows you to view, claim, and complete Camunda tasks directly in Microsoft Teams.
+
+The app integration allows you to:
+
+- Start processes from a channel, chat, or the app **Home** tab.
+- Fill out start forms in Microsoft Teams and submit them to kick off workflows, with optional links to Operate for monitoring.
+
+<p><a href="../../../../components/early-access/alpha/ms-teams/" class="link-arrow">Camunda for Microsoft Teams app</a></p>
+
+:::note
+The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
+:::
+
+### SAP Advanced Event Mesh (AEM) connectivity
+
+Connect Camunda directly to SAP Advanced Event Mesh (AEM) for event-driven process automation.
+
+- New AEM connectors allow you to receive CloudEvents from SAP systems as BPMN messages and publish CloudEvents from Camunda to AEM.
+- This enables seamless integration with SAP’s event-driven architecture, allowing your Camunda processes to react in real time to business events across SAP BTP, S/4HANA, or ECC.
+
+<p><a href="../../../../components/camunda-integrations/sap/eventing" class="link-arrow">SAP Eventing with SAP Advanced Event Mesh</a></p>
+
+### ServiceNow
+
+Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.
+
+The ServiceNow integration allows you to:
+
+- Manage ServiceNow data: Create, read, update, and delete records in any ServiceNow table directly from Camunda workflows.
+- Trigger ServiceNow flows: Start automations built in ServiceNow's Flow Designer as part of an end-to-end process.
+- Orchestrate ITSM processes: Integrate Camunda tasks with ServiceNow approvals, incidents, and service requests to create unified workflows.
+
+<p><a href="../../../../components/camunda-integrations/servicenow/servicenow-integration/" class="link-arrow">ServiceNow integration</a></p>
+
+## Intelligent document processing (IDP)
+
+<div class="release"><span class="badge badge--medium" title="This feature affects IDP">IDP</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+### Bring your own model (BYOM)
+
+When using an OpenAI Compatible provider, you can use your own model for document extraction. Any model provider that implements the `/chat/completions` API endpoint is supported.
+
+Supported providers are:
+
+- **AWS**: Amazon Web Services with Bedrock and Textract (supports both structured and unstructured extraction).
+- **Azure**: Microsoft Azure with AI Document Intelligence and AI Foundry (unstructured extraction only).
+- **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
+- **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
+
+### Structured data form extraction
+
+<!-- https://github.com/camunda/product-hub/issues/2694 -->
+
+You can use form-based structured document extraction to capture data from structured documents.
+
+- For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
+- Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
+
+<p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+
+## Migration from Camunda 7 to Camunda 8
+
+<div class="release"><span class="badge badge--medium" title="This feature affects DCamunda 7 migration">Camunda 7 migration</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Data migration tool
+
+Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.
+
+- Copy running process instances (state-preserving).
+- Copy process variables and their values.
+- Handle problematic instances gracefully with retry options.
+- Write custom code to intercept variable migration.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+
+### Migration Analyzer & Diagram Converter
+
+The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+
+It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+
+### Code conversion
+
+Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
+
+<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
+
+## Optimize
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Amazon OpenSearch support
+
+<!-- https://github.com/camunda/product-hub/issues/2473 -->
+
+Camunda 8 Self-Managed now fully supports the use of Amazon OpenSearch with Optimize.
+
+## Orchestration Cluster
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Identity">Identity</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Architecture
+
+The primary architectural change in 8.8 is the consolidation of the core Zeebe, Operate, Tasklist, and Identity components into the Orchestration Cluster application as a single deployable artifact, distributed as a JAR file or Docker container.
+
+This impacts how Camunda 8 is deployed, managed, and scaled.
+
+- The Orchestration Cluster (previously automation cluster) is now the core component of Camunda 8.
+- Use the Orchestration Cluster REST API to interact programmatically with the Orchestration Cluster.
+- The new unified exporter architecture improves cluster management and data migration, bringing importer and archiving logic of web components (Tasklist and Operate) closer to the distributed platform (Zeebe). The index schema is also harmonized.
+- The unified configuration for Orchestration Cluster components allows you to define cluster and component behavior.
+
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+
+### Dynamic activation of ad-hoc sub-processes using job workers
+
+<!-- https://github.com/camunda/product-hub/issues/2631 -->
+
+Ad-hoc sub-process elements can be activated by job workers:
+
+- Define a task in the process model.
+- When the engine reaches the ad-hoc sub-process, a job is created. Completing this job with a job result lets you define which elements in the ad-hoc sub-process to activate.
+- Once any flows in the ad-hoc sub-process complete, a new job is created, giving job workers control over what to do next.
+
+### Dynamic partition scaling
+
+<!-- https://github.com/camunda/product-hub/issues/2226 -->
+
+You can now add new Zeebe partitions to a running cluster to increase capacity without downtime:
+
+- New process instances will be started on new partitions immediately.
+- Existing process instances do not migrate between partitions, so it can take time for the cluster to reach equilibrium.
+- Existing messages remain on original partitions, potentially causing slight imbalances for message-heavy workloads (future updates will address this)
+
+<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling" class="link-arrow">Cluster scaling</a></p>
+
+### Identity and Management Identity
+
+In Camunda 8.8, Orchestration Cluster Identity and Management Identity are two separate components used for Identity management, each with distinct areas of responsibility.
+
+- **Identity**: Access and permission management for all Orchestration Cluster components: Zeebe, Operate, Tasklist, and the Orchestration Cluster REST and gRPC API.
+- **Management Identity**: Continues to manage access for platform components such as Web Modeler, Console, and Optimize.
+
+<p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
+
+### Migrate taken sequence flows flowing to the joining gateway
+
+<!-- https://github.com/camunda/product-hub/issues/2913 -->
+
+Enhanced migration now supports taken sequence flows leading to joining gateways:
+
+- Define migration plans mapping active elements and taken sequence flows
+- Configure plans via Operate UI or API
+
+### Process instance migration
+
+<!-- https://github.com/camunda/product-hub/issues/1314 -->
+
+Enhanced process instance migration allows you to solve problems with process definitions and use the latest process improvements. You can now migrate compensation boundary event subscriptions, escalation boundary events, and escalation event subprocesses.
+
+<p><a href="../../../../components/concepts/process-instance-migration/" class="link-arrow">Process instance migration</a></p>
+
+### React to expired messages with a custom exporter
+
+You can now use a custom exporter to react to expired messages.
+
+- The original message is retrieved from primary storage upon expiration, and the expiry event enhanced with the original message.
+- Existing functionality remains unchanged, so there is no disruption for current customers or custom exporters.
+
+With these updates, developers can subscribe to the expired messages through a custom exporter, examine the event content, and optionally re-publish or handle the message differently.
+
+### Run Orchestration Cluster without secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/2897 -->
+
+You can now run Orchestration Cluster in "Zeebe-only" mode without secondary storage:
+
+- Ideal for setups not using Query APIs, Operate, or Tasklist
+- Enable by setting `camunda.database.type=none`
+- Starts only the required Zeebe components
+
+### User task listeners
+
+<!-- https://github.com/camunda/product-hub/issues/2126 -->
+
+Task lifecycle management is enhanced with user task listeners, allowing users to react to specific user task lifecycle events.
+
+- Process designers can now model task listeners for different events, such as `assigning` and `completing`.
+- Developers can use the same job infrastructure to activate and complete task listener jobs.
+- Operations engineers can easily check details of active and completed task listeners within instances, and efficiently resolve task listener incidents.
+
+This enhancement streamlines operations and ensures smoother incident handling, improving time to unblock process execution.
+
+<p><a href="../../../../components/concepts/user-task-listeners/" class="link-arrow">User task listeners</a></p>
+
+### Zeebe-managed resilient batch operations
+
+All batch operations, such as canceling or resolving incidents in bulk, are now handled by Zeebe instead of Operate.
+
+- This change ensures region failovers in the multi-region setup no longer risk losing critical batch commands.
+- Users will initiate and manage batch operations through the Orchestration Cluster REST API and the Operate UI, but the underlying processing occurs within Zeebe.
+- By moving batch operations to the core engine, multi-region deployments gain reliability and resilience.
+
+<!-- https://github.com/camunda/product-hub/issues/2420 -->
+
+## Robotic Process Automation (RPA)
+
+<div class="release"><span class="badge badge--medium" title="This feature affects RPA">RPA</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Multi-file script support
+
+<!-- https://github.com/camunda/product-hub/issues/2710 -->
+
+RPA supports multi-file script support to allow you to organize scripts modularly, reuse common automation components, and integrate existing Robot Framework scripts. The execution engine fully supports multi-file scripts and linked resources, improving scalability, maintainability, and flexibility for enterprise automation projects.
+
+### RPA worker offline installer
+
+<!-- https://github.com/camunda/product-hub/issues/2786 -->
+
+An offline installer package for the [RPA](/components/rpa/overview.md) worker allows installation without internet connectivity. The offline installer removes reliance on external repositories or downloads, ensuring consistent, secure, and hassle-free deployment into air-gapped or restricted environments.
+
+## Web Modeler
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+### Bring your own model (BYOM)
+
+BPMN Copilot and FEEL Copilot in the Web Modeler are now available for Camunda Self-Managed customers in a safe, secure way.
+
+You can connect these features to your own AI provider and model, even fine-tuning the model yourself to improve its performance and relevance to your organization.
+
+### CI/CD building blocks guide
+
+<!-- https://github.com/camunda/product-hub/issues/2858 -->
+
+Element templates documentation is improved to support scalable reuse of building blocks, focusing on CI/CD practices for managing templates across teams and environments.
+
+Key updates include:
+
+- Guidance on integrating element templates and dependencies into CI/CD pipelines
+- Restructuring the documentation to improve discoverability and usability
+- Tool-agnostic content covering Web Modeler, dependency management, and local development setups
+- Moving relevant information from Connectors to the element templates section
+
+<p><a href="../../../../components/modeler/element-templates/about-templates" class="link-arrow">Element templates in Modeler</a></p>
+
+### Cluster basic authentication
+
+<!-- https://github.com/camunda/web-modeler/issues/13707 -->
+
+In addition to bearer token authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
+
+- Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
+- Web Modeler sends a username and password with every request to the cluster.
+
+<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
+
+### Element template editor onboarding
+
+<!-- https://github.com/camunda/product-hub/issues/3021 -->
+
+Web Modeler now provides a low-coder friendly UX for creating building blocks.
+Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+
+### Element template support for all tasks
+
+<!-- https://github.com/camunda/product-hub/issues/2606 -->
+
+You can now save any configured task as a reusable element template directly from the Web Modeler properties panel:
+
+- Save configured tasks (service, user, send, receive, business rule, script tasks, or call activities) as templates.
+- Edit templates to adjust input/output bindings, validation rules, categories, and more.
+- Publish templates to your project or organization for reuse.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+
+### Unlock element template fields
+
+<!-- https://github.com/camunda/product-hub/issues/2860 -->
+
+Element template management is now more flexible for developers and DevOps teams.
+
+- You can assign custom semantic IDs and use an intuitive versioning scheme, ensuring templates are portable and retain stable references across different environments.
+- Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
+- Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
+
+<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
+
+### FEEL Copilot
+
+<!-- https://github.com/camunda/web-modeler/issues/14223 -->
+
+Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler.
+
+<p><a href="../../../../components/early-access/alpha/feel-copilot/" class="link-arrow">FEEL Copilot</a></p>
+
+### FEEL Playground
+
+Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
+
+<p><a href="../../../../components/modeler/feel/feel-playground/" class="link-arrow">FEEL Playground</a></p>
+
+<!-- https://github.com/camunda/camunda-docs/issues/5611 -->
+
+### Git sync Azure DevOps and Bitbucket integration
+
+<!-- https://github.com/camunda/product-hub/issues/2580 -->
+<!-- https://github.com/camunda/product-hub/issues/2507 -->
+
+In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
+
+<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+
+### Low-code process testing
+
+<!-- https://github.com/camunda/product-hub/issues/2610 -->
+
+You can now save and rerun versioned test scenarios in Web Modeler:
+
+- Supports user tasks, connectors, and basic branching logic
+- Ideal for process developers and CoEs
+- Enables behavior-driven development with Camunda Process Test
+
+<p><a href="../../../../components/modeler/web-modeler/collaboration/play-your-process/" class="link-arrow">Scenarios</a></p>
+
+### RDBMS support for Oracle and MS SQL in Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/2558 -->
+
+Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
+
+<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/database/#using-alternative-database-vendors" class="link-arrow">Set up Oracle or MS SQL</a></p>
+
+### Username claim configuration
+
+<!-- https://github.com/camunda/web-modeler/issues/9292 -->
+
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
+
+### Version description
+
+<!-- https://github.com/camunda/web-modeler/issues/12057 -->
+
+Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
+
+<p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
+
+### Technical Changelogs for all 8.8.x releases
+
+<details className="changelog-dropdown">
+  <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
+
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+<!-- RELEASE_LINKS_PLACEHOLDER -->
+
+</details>
 
 ## 8.8.0-alpha8
 
@@ -213,7 +887,7 @@ You can now save, export, and share test scenarios:
 
 <!-- https://github.com/camunda/web-modeler/issues/9292 -->
 
-Configure the claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable for Tasklist, Optimize, and Operate authentication.
+Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNAMECLAIM` environment variable to account for differences between identity providers and ensure user-friendly names.
 
 ## 8.8.0-alpha7
 
@@ -275,7 +949,7 @@ To learn more, see [Google Cloud storage connector](/components/connectors/out-o
 
 <!-- https://github.com/camunda/product-hub/issues/2712 -->
 
-#### MCP Client connector (early access) <span class="badge badge--medium" title="This feature is in early access">early access</span>
+#### MCP Client connector <span class="badge badge--medium" title="This feature is in early access">early access</span>
 
 Use the new MCP Client connector to allow Camunda processes and AI agents to auto-discover and invoke external tools, eliminating hardwired connectors and enabling dynamic, metadata-driven tool integration.
 
@@ -449,7 +1123,7 @@ This feature is not yet fully compatible with backup/restore.
 Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
 
 - From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
-- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/installation-methods/helm/install.md) for details.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/deployment/helm/install/quick-install.md) for details.
 
 #### Configurable volumes
 
@@ -613,7 +1287,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/installation-methods/helm/install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -729,7 +1403,7 @@ To learn more about versioning your diagrams, see [versions](components/modeler/
 As well as bearer token and client credentials authentication, you can now configure Web Modeler in Self-Managed to use basic authentication for cluster access.
 
 - To use basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
-- Web Modeler sends a username and password with every request to one of the cluster components (Zeebe, Operate, Tasklist).
+- Web Modeler sends a username and password with every request to the cluster.
 
 To learn more about basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
 

@@ -117,17 +117,24 @@ A successful response looks like:
 
 <TabItem value='self-managed'>
 
-1. **Configure the Orchestration Cluster for OIDC-based authentication**
+1. **Configure the Orchestration Cluster for OIDC-based authentication**  
    - Follow [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
-   - Note the **client ID** or configured **audiences** of the Orchestration Cluster for audience validation (**CLIENT_ID_OC**).
+   - Note the **client ID** or configured **audiences** of the Orchestration Cluster for audience validation (`CLIENT_ID_OC`).
 
-2. **Register a client in your identity provider (IdP)**
-   - Create a new application/client.
-   - Configure required scopes (e.g., `openid`).
+2. **Register or configure a client in your identity provider (IdP)**
+   - Create a new application/client in your IdP (or use an existing one).
+   - Configure required scopes (for example, `openid`).
    - Create a new client secret.
    - Capture the **client ID**, **client secret**, and **authorization URI**.
 
-3. **Request an access token using the credentials**
+   :::note
+   If you're using **Camunda Identity**, follow these steps instead:
+   1. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+   2. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Tasklist API** (or any other API you want to access).
+   3. Capture the `Client ID` and `Client Secret` from the application in Identity.
+   :::
+
+3. **Request an access token using the client credentials**
 
 ```shell
 curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
@@ -137,22 +144,37 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 --data-urlencode "audience=${CLIENT_ID_OC}" \
 --data-urlencode "scope=${CLIENT_ID_OC}" \
 --data-urlencode 'grant_type=client_credentials'
+``
+  
+A successful authentication response looks like the following:
+
 ```
+{
+  "access_token": "<TOKEN>",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+  
+**Note for Microsoft Entra ID:**
+Use `scope=${CLIENT_ID_OC}/.default` instead of `scope=${CLIENT_ID_OC}`. The Authorization URI is typically in the format:  
+`https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
-**Note for Microsoft Entra ID:**  
-Use `scope=${CLIENT_ID_OC}/.default` instead of `scope=${CLIENT_ID_OC}`. The Authorization URI is typically in the format: `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
-
-4. Capture the `access_token` as your token.
+4. **Capture the access token**
+   - Store the value of the `access_token` property to use as your token in API requests.
 
 :::note Audience validation
 If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster configuration, or add your audience in the Orchestration Cluster configuration. Often this is the client ID you used when configuring the Orchestration Cluster.
 :::
 
 :::note Authorizations
-If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. You should use your `client id` when configuring authorizations.
+If authorizations are enabled, your application will only be able to retrieve the topology, with other requests requiring you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. Use your `client id` when configuring authorizations.
 :::
 
 </TabItem>
+  
 </Tabs>
 
 #### Use a token

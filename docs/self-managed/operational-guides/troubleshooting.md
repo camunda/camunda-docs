@@ -24,7 +24,7 @@ The security warning does not indicate a security vulnerability. This warning ca
 
 In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
 
-For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/installation-methods/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
+For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
 
 ### Suppress the warning
 
@@ -81,16 +81,20 @@ global:
 
 ## Zeebe Backup with S3
 
-In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+In general, some S3 compatible implementations are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+As soon as issues appear related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-They will disable to automated creation of checksums.
+This will disable automated creation of checksums. If you are still encountering issues with MD5 checksums required by your provider, enable legacy support for the AWS S3 client by setting:
+
+```
+ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
+```
 
 **Backups to IBM COS fail with 403 Access Denied**
 
@@ -158,11 +162,11 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/installation-methods/helm/install.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/installation-methods/helm/configure/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -271,7 +275,7 @@ Find more information on [how to register your application on Identity](https://
 
 The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
 
-For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/installation-methods/helm/cloud-providers/amazon/amazon-eks/irsa.md#irsa-check-script).
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa.md#irsa-check-script).
 
 ### Interpretation of the results
 

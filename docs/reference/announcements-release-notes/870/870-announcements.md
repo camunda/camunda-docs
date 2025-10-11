@@ -64,7 +64,7 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
-- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/installation-methods/helm/configure/connect-to-an-oidc-provider.md).
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
   It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID and generic providers as well.
 
 ### Breaking changes in Camunda Process Test
@@ -112,7 +112,7 @@ The Spring Zeebe SDK will not be developed further and will only receive bug fix
 
 ##### Separated Ingress deprecation
 
-The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/installation-methods/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
+The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 ##### ExtraVolumeClaimTemplates
 
@@ -136,7 +136,7 @@ The configuration for the external database used by the Web Modeler REST API has
 ##### Bitnami Docker repository migration
 
 The Camunda Helm charts have been updated to use the new Bitnami Docker repository.
-See [Bitnami Docker repository migration](/self-managed/installation-methods/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/deployment/helm/upgrade/index.md#bitnami-docker-repository-migration) for migration details.
 
 #### Adjustments
 

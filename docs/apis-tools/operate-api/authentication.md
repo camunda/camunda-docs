@@ -153,6 +153,8 @@ Make sure your token includes the correct audience from the Orchestration Cluste
 If authorizations are enabled, your application can only retrieve the topology. Other requests require you to configure [authorizations](/components/concepts/access-control/authorizations.md) for the client. Use your `client ID` when setting up authorizations.
 :::
 
+For more information, see the deprecated [authentication configuration for Operate](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).
+
 </TabItem>
 
 </Tabs>

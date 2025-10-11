@@ -52,7 +52,7 @@ configuration](#component-specific-configuration) to ensure the components are c
      - **Optimize**
      - **Management Identity**
      - **Web Modeler API**
-   - Web applications requiring confidential access/a confidential client:
+   - Web applications requiring public access/a public client:
      - **Console**
      - **Web Modeler UI**
 4. Make a note of the following values for each application you create:
@@ -125,7 +125,7 @@ global:
         audience: <Audience from Step 3>
 ```
 
-You can also [store the client secrets in a Kubernetes secret](/self-managed/installation-methods/helm/install.md#create-identity-secrets) and reference this in the Helm values.
+You can also [store the client secrets in a Kubernetes secret](/self-managed/deployment/helm/install/quick-install.md#create-identity-secrets) and reference this in the Helm values.
 
 </TabItem>
 </Tabs>

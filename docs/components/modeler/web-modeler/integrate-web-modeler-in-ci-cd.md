@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-applications/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -253,7 +253,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/collaboration/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 

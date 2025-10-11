@@ -74,7 +74,7 @@ This guide assumes you are starting from a fresh Spring Boot project and intend 
 
 | Variable                             | Description                                                                                            |
 | :----------------------------------- | :----------------------------------------------------------------------------------------------------- |
-| `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | Overrides the type of the [AI Agent Process](./agentic-ai-aiagent-process.md) job worker.              |
+| `CONNECTOR_AI_AGENT_JOB_WORKER_TYPE` | Overrides the type of the [AI Agent Subprocess](./agentic-ai-aiagent-subprocess.md) job worker.        |
 | `CONNECTOR_AI_AGENT_TYPE`            | Overrides the type of the [AI Agent Task](./agentic-ai-aiagent-task.md) outbound connector job worker. |
 
 ### Customize individual components
