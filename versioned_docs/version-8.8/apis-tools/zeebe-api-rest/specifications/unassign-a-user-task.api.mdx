@@ -1,0 +1,149 @@
+---
+id: unassign-a-user-task
+title: "Unassign a user task"
+description: "Removes the assignee of a task with the given key."
+sidebar_label: "Unassign a user task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV01z2zYQ/SuYPSVTmpRTN014cx2ldWunHltup3F1AMGliBgEGHxI5nD43zsAqA9Lbt3J5JiDhiK5eG8X+x657MHShYH8Dm4NamKpuYd5AiUapnlruZKQwzU2aomG2BoJNYYvJCJRFaEhnqy4rcO9BV+iJPfYpZBASzVt0KL26D1I2iDk4AzqGTX3v2EHCXCP3lJbQwIaPzuusYTcaof7Kcxq9MCe1TO5dbKeybAaGwp5D7ZrPQmXFheoIYFK6YbaeOn1CQzD3BOZVkmDxq94NTnxh0OyDQNZUUOcHOsuiXGMoTGVE6JLYUjgZDJ5FuJghwijUipLCtzBTsml0khKtJQLQ6hG0mq15CWWhMsAsE6eFKrs0r8lJMCUtCitz4G2reCM+hyyVqtCYPPdJ+MT6nd26XGmp+QqRo68RBWfkFlCDYmBRWS/u35/Rt6e/PDj/EVtbWvyLFutVqmu2BGW3CqdKr3IdMX8z8e9TMmsRo2koZ2vk5Yl95xU+Kpa1JajIaZFxivOiFWhwDFt4lsZ6xubGtPywtos3rZ803pjNZeL3c47zWFfTafk9vqc8BKl5VXH5eKQOqypqBMegxbK2bwQVN77jltuxZOk+yzGNQ3VG9U+JhgSMJZaZ55V7vevDrC9vn6Zza5IhCBMlUgqpYmtuVkT+SIaLnnjGshPJpMEGvoQz15PJoPH9B3/H5VIgg+toDJIa78cLkmz1W0ojEtjqWRfqzNK8wXf501h2PYCRhG/ixUNwxCc+by5D53p/e6tWSkny9Hhb78Ah5u1aVdayUXoFBLmtEZpRffN7N/M/s3sX8vsQwIN2lqVkEOJAi2GEcTWkEPmbXrkbWqyfmcAGbL1MOOHCNTL9azitIAc+miiIc+yvlbGDnnfKm2HbHkMCSyp5rQQUZf+djTbWkRCMSrC5aea6W/4gSgOUR8RCyQ/U4srGkcKz/MY783kzeRJKB+63qsIdD29mZHTq3MSS4ra23kerCG9sZ+EjMHPgYZZyiBzmtvuxi+Je1Eg1ahPnd/6jR5GroDsz2MQJOOf92uV/PrnLDSay0qF5WPDHyfhtx+1iRlP0uNDYV2dB38w1TROhoekXGyf0RGNCWesLyUBwRlKEwQ8zqkx5Cyutx25iBHkj8hLjgNrFMr6CbngtnZFylSTMdo4WdLNsRCqyBrKZTZSmezjdPrT9Ojs98vL2w/ns7+OLs7Pph9upkfH6XFqH2zYhlYZ21C5k9ftOCwSun357Jffb98SXza6j02z+GCzVlAuvYRCrf3oqTvYegoSyB+P9RtbzZPRGnfQ9wU1eKvFMPjLnx3qDvK7+dZJwXolN/5/CXlFhdn/DNit7MX1+MHwkvzXx8GTtYwXqeyCk4XzZ5DAPXZ73yjDfEigRlqiDvnFiFPGsLU7a//1XexNsnkwvZteTGdTGIZ/AFgoofk=
+sidebar_class_name: "delete api-method"
+info_path: versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Unassign a user task"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/user-tasks/{userTaskKey}/assignee"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Removes the assignee of a task with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task was unassigned successfully." },
+    "400": {
+      description:
+        "The user task with the given key cannot be unassigned. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": { description: "The user task with the given key was not found." },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

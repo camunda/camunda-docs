@@ -1,0 +1,124 @@
+---
+id: variable-search-response
+title: VariableSearchResponse
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+VariableSearchResponse - represents a variable in a search response. It contains information about the variable's ID, name, value, truncation status, and a preview of the value. The `value` field may be `null` if the value has been truncated due to exceeding a length limit (8191 characters). The `previewValue` field provides a shorter preview of the value for display purposes.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+  "id": string,
+  "name": string,
+  "value": string,
+  "isValueTruncated": boolean,
+  "previewValue": string,
+  "draft": {
+    "value": string,
+    "isValueTruncated": boolean,
+    "previewValue": string
+  }
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "id": "<id>-<var_name>",
+  "name": "<var_name>",
+  "value": "\"stringVariableValue\"",
+  "isValueTruncated": false,
+  "previewValue": "\"stringVariableValue\"",
+  "draft": {
+    "value": "\"draftValueOfVariable\"",
+    "isValueTruncated": false,
+    "previewValue": "\"draftValueOfVariable\""
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>id</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> id of the variable
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>name</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> variable name
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>value</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> represents the value of the variable. If `isValueTruncated` is `true` and `alwaysReturnFullValue` in the search request is not set to `true`, the value will be `null`.
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>previewValue</b></code>](#)<Bullet />`string` <Badge class="secondary" text="non-null"/>
+
+> preview of the variable value. It is limited to a length of 8191 characters.
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>isValueTruncated</b></code>](#)<Bullet />`boolean` <Badge class="secondary" text="non-null"/>
+
+> indicates, whether `previewValue` contains truncated value or full value
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableSearchResponse.<b>draft</b></code>](#)<Bullet />`object` <Badge class="secondary" text="non-null"/>
+
+> represents draft value for variable
+
+### Returned by
+
+[`Search task variables`](../../controllers/tasklist-api-rest-task-controller.md#search-task-variables) <Badge class="secondary" text="POST"/> <Bullet />
+
+### Member of
+
+[`TaskSearchResponse`](../responses/task-search-response.mdx) <Badge class="secondary" text="object"/>

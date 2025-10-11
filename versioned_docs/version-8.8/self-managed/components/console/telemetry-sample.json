@@ -1,0 +1,3762 @@
+{
+  "installation": {
+    "cid": "urbanisierung-in-da-house",
+    "iid": "lenovo-diypunk"
+  },
+  "dataPoints": [
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        },
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        },
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        },
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "zeebe-gateway",
+          "type": "component"
+        },
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "zeebe-broker",
+          "type": "component"
+        },
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "console",
+          "type": "component"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        },
+        {
+          "id": "identity",
+          "type": "component"
+        }
+      ],
+      "key": "component-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "installation",
+          "type": "global"
+        }
+      ],
+      "key": "automation-cluster-count",
+      "type": 1,
+      "transferredValue": "1",
+      "value": 1,
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "process-instances",
+      "type": 1,
+      "transferredValue": "0",
+      "value": 0,
+      "tsFrom": 1712225131653,
+      "tsTo": 1712228731653
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "decision-instances",
+      "type": 1,
+      "transferredValue": "0",
+      "value": 0,
+      "tsFrom": 1712225131653,
+      "tsTo": 1712228731653
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "task-users",
+      "type": 1,
+      "transferredValue": "0",
+      "value": 0,
+      "tsFrom": 1712225131653,
+      "tsTo": 1712228731653
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.22912768E8",
+      "value": "1.22912768E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "5.36870912E8",
+      "value": "5.36870912E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "5828608.0",
+      "value": "5828608.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.073741824E9",
+      "value": "1.073741824E9",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "1.22916864E8",
+      "value": "1.22916864E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.030532251908396948",
+      "value": "0.030532251908396948",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS_MESSAGE_SUBSCRIPTION"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "VARIABLE_DOCUMENT"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION_REQUIREMENTS"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "VARIABLE"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "INCIDENT"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION_EVALUATION"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_queue_size",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "JOB"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_max_data_size_bytes",
+      "type": 0,
+      "transferredValue": "5.36870912E8",
+      "value": "5.36870912E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.7297408E7",
+      "value": "1.7297408E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "3463064.0",
+      "value": "3463064.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "4.6926336E7",
+      "value": "4.6926336E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "8.897916E7",
+      "value": "8.897916E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "1427968.0",
+      "value": "1427968.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "2.9360128E7",
+      "value": "2.9360128E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.1550704E7",
+      "value": "1.1550704E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "7610368.0",
+      "value": "7610368.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_usage_after_gc_percent",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "pool": "long-lived"
+      },
+      "transferredValue": "0.08740711212158203",
+      "value": "0.08740711212158203",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_archiver_query_seconds_max",
+      "type": 0,
+      "transferredValue": "0.00215654",
+      "value": "0.00215654",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION"
+      },
+      "transferredValue": "0.001228848",
+      "value": "0.001228848",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS_MESSAGE_SUBSCRIPTION"
+      },
+      "transferredValue": "0.001132317",
+      "value": "0.001132317",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "VARIABLE_DOCUMENT"
+      },
+      "transferredValue": "0.001508634",
+      "value": "0.001508634",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION_REQUIREMENTS"
+      },
+      "transferredValue": "0.006173284",
+      "value": "0.006173284",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "VARIABLE"
+      },
+      "transferredValue": "0.001468678",
+      "value": "0.001468678",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS"
+      },
+      "transferredValue": "0.001468728",
+      "value": "0.001468728",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "INCIDENT"
+      },
+      "transferredValue": "0.001221294",
+      "value": "0.001221294",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "0.001141895",
+      "value": "0.001141895",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "DECISION_EVALUATION"
+      },
+      "transferredValue": "0.006291656",
+      "value": "0.006291656",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_query_seconds_max",
+      "type": 0,
+      "tags": {
+        "partition": "1",
+        "type": "JOB"
+      },
+      "transferredValue": "0.00620293",
+      "value": "0.00620293",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "20.0",
+      "value": "20.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_model_dmn_count",
+      "type": 0,
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_count",
+      "type": 0,
+      "transferredValue": "2.0",
+      "value": "2.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_memory_allocated_bytes_total",
+      "type": 0,
+      "transferredValue": "4.94927872E8",
+      "value": "4.94927872E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "process_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.030534351145038167",
+      "value": "0.030534351145038167",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_overhead_percent",
+      "type": 0,
+      "transferredValue": "2.0E-5",
+      "value": "2.0E-5",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_memory_promoted_bytes_total",
+      "type": 0,
+      "transferredValue": "3643392.0",
+      "value": "3643392.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_model_bpmn_count",
+      "type": 0,
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "operate_import_position_update_seconds_max",
+      "type": 0,
+      "transferredValue": "7.614E-6",
+      "value": "7.614E-6",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.9136512E7",
+      "value": "1.9136512E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "4194304.0",
+      "value": "4194304.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "6.291456E7",
+      "value": "6.291456E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "8.978432E7",
+      "value": "8.978432E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "2555904.0",
+      "value": "2555904.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "6.7108864E7",
+      "value": "6.7108864E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.1927552E7",
+      "value": "1.1927552E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "7667712.0",
+      "value": "7667712.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "4317464.0",
+      "value": "4317464.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "4317463.0",
+      "value": "4317463.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "operate",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_live_data_size_bytes",
+      "type": 0,
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_overhead_percent",
+      "type": 0,
+      "transferredValue": "6.666666666666667E-6",
+      "value": "6.666666666666667E-6",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "tasklist_import_position_update_seconds_max",
+      "type": 0,
+      "transferredValue": "6.572E-6",
+      "value": "6.572E-6",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_count",
+      "type": 0,
+      "transferredValue": "1.0",
+      "value": "1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "4301080.0",
+      "value": "4301080.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_usage_after_gc_percent",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "pool": "long-lived"
+      },
+      "transferredValue": "0.12174694462164729",
+      "value": "0.12174694462164729",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_count_buffers",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "18.0",
+      "value": "18.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "application_ready_time_seconds",
+      "type": 0,
+      "tags": {
+        "main_application_class": "io.camunda.tasklist.Application"
+      },
+      "transferredValue": "143.297",
+      "value": "143.297",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Tenured Gen"
+      },
+      "transferredValue": "3.57957632E8",
+      "value": "3.57957632E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.22912768E8",
+      "value": "1.22912768E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Eden Space"
+      },
+      "transferredValue": "1.43130624E8",
+      "value": "1.43130624E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "5828608.0",
+      "value": "5828608.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Survivor Space"
+      },
+      "transferredValue": "1.7891328E7",
+      "value": "1.7891328E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.073741824E9",
+      "value": "1.073741824E9",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "1.22916864E8",
+      "value": "1.22916864E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_memory_promoted_bytes_total",
+      "type": 0,
+      "transferredValue": "1233936.0",
+      "value": "1233936.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Tenured Gen"
+      },
+      "transferredValue": "4.3580248E7",
+      "value": "4.3580248E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.883904E7",
+      "value": "1.883904E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Eden Space"
+      },
+      "transferredValue": "2.5839552E7",
+      "value": "2.5839552E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "1.03317232E8",
+      "value": "1.03317232E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "1469696.0",
+      "value": "1469696.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Survivor Space"
+      },
+      "transferredValue": "641096.0",
+      "value": "641096.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.3468E7",
+      "value": "1.3468E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "5825664.0",
+      "value": "5825664.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_total_capacity_bytes",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "4301079.0",
+      "value": "4301079.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "process_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.02987012987012987",
+      "value": "0.02987012987012987",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_max_data_size_bytes",
+      "type": 0,
+      "transferredValue": "3.57957632E8",
+      "value": "3.57957632E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.030635714285714287",
+      "value": "0.030635714285714287",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "tasklist_archiver_query_seconds_max",
+      "type": 0,
+      "transferredValue": "0.002591257",
+      "value": "0.002591257",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_live_data_size_bytes",
+      "type": 0,
+      "transferredValue": "4.3580248E7",
+      "value": "4.3580248E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Tenured Gen"
+      },
+      "transferredValue": "7.2634368E7",
+      "value": "7.2634368E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "2.0578304E7",
+      "value": "2.0578304E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Eden Space"
+      },
+      "transferredValue": "2.9229056E7",
+      "value": "2.9229056E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "1.03940096E8",
+      "value": "1.03940096E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "2555904.0",
+      "value": "2555904.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "Survivor Space"
+      },
+      "transferredValue": "3604480.0",
+      "value": "3604480.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.376256E7",
+      "value": "1.376256E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "5898240.0",
+      "value": "5898240.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "disk_free_bytes",
+      "type": 0,
+      "tags": {
+        "path": "/usr/local/tasklist/."
+      },
+      "transferredValue": "5.16118396928E11",
+      "value": "5.16118396928E11",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "tasklist_import_query_seconds_max",
+      "type": 0,
+      "transferredValue": "0.001899377",
+      "value": "0.001899377",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "tasklist",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_gc_memory_allocated_bytes_total",
+      "type": 0,
+      "transferredValue": "2.39386E8",
+      "value": "2.39386E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.021139807692307694",
+      "value": "0.021139807692307694",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "process_cpu_usage",
+      "type": 0,
+      "transferredValue": "0.021153846153846155",
+      "value": "0.021153846153846155",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "6.51202E-4",
+      "value": "6.51202E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "9.68318E-4",
+      "value": "9.68318E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "0.001420859",
+      "value": "0.001420859",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "7.42274E-4",
+      "value": "7.42274E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "VARIABLE"
+      },
+      "transferredValue": "7.58965E-4",
+      "value": "7.58965E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "0.00133099",
+      "value": "0.00133099",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "9.01362E-4",
+      "value": "9.01362E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "PROCESS_INSTANCE"
+      },
+      "transferredValue": "9.73058E-4",
+      "value": "9.73058E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "PROCESS"
+      },
+      "transferredValue": "0.001878378",
+      "value": "0.001878378",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "2",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "9.0527E-4",
+      "value": "9.0527E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "3",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "5.0599E-4",
+      "value": "5.0599E-4",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "optimize_import_newPageFetchTime_seconds_max",
+      "type": 0,
+      "tags": {
+        "PARTITION_ID": "1",
+        "RECORD_TYPE": "INCIDENT"
+      },
+      "transferredValue": "0.001196607",
+      "value": "0.001196607",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "disk_free_bytes",
+      "type": 0,
+      "tags": {
+        "path": "/optimize/."
+      },
+      "transferredValue": "5.16118396928E11",
+      "value": "5.16118396928E11",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "disk_total_bytes",
+      "type": 0,
+      "tags": {
+        "path": "/optimize/."
+      },
+      "transferredValue": "9.82141468672E11",
+      "value": "9.82141468672E11",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "process_uptime_seconds",
+      "type": 0,
+      "transferredValue": "1825.233",
+      "value": "1825.233",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_info",
+      "type": 0,
+      "tags": {
+        "runtime": "OpenJDK Runtime Environment",
+        "vendor": "Alpine",
+        "version": "17.0.10+7-alpine-r0"
+      },
+      "transferredValue": "1.0",
+      "value": "1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "system_cpu_count",
+      "type": 0,
+      "transferredValue": "2.0",
+      "value": "2.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "application_ready_time_seconds",
+      "type": 0,
+      "tags": {
+        "main_application_class": "org.camunda.optimize.Main"
+      },
+      "transferredValue": "10.28",
+      "value": "10.28",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped - 'non-volatile memory'"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "mapped"
+      },
+      "transferredValue": "0.0",
+      "value": "0.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_buffer_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "id": "direct"
+      },
+      "transferredValue": "98304.0",
+      "value": "98304.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "1.22912768E8",
+      "value": "1.22912768E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "1.073741824E9",
+      "value": "1.073741824E9",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "2.68435456E8",
+      "value": "2.68435456E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "5828608.0",
+      "value": "5828608.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "-1.0",
+      "value": "-1.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "2.18103808E8",
+      "value": "2.18103808E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_max_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "1.22916864E8",
+      "value": "1.22916864E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "2.3658496E7",
+      "value": "2.3658496E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "8388608.0",
+      "value": "8388608.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "3.97410304E8",
+      "value": "3.97410304E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "9.4175232E7",
+      "value": "9.4175232E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "2555904.0",
+      "value": "2555904.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "6.67942912E8",
+      "value": "6.67942912E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.2582912E7",
+      "value": "1.2582912E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_committed_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "5308416.0",
+      "value": "5308416.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "http_server_requests_seconds",
+      "type": 0,
+      "tags": {
+        "exception": "None",
+        "method": "GET",
+        "outcome": "SUCCESS",
+        "status": "200",
+        "uri": "/optimize/api/readyz"
+      },
+      "transferredValue": "undefined",
+      "value": "undefined",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "http_server_requests_seconds_max",
+      "type": 0,
+      "tags": {
+        "exception": "None",
+        "method": "GET",
+        "outcome": "SUCCESS",
+        "status": "200",
+        "uri": "/optimize/api/readyz"
+      },
+      "transferredValue": "0.002338862",
+      "value": "0.002338862",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'profiled nmethods'"
+      },
+      "transferredValue": "2.1061504E7",
+      "value": "2.1061504E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Survivor Space"
+      },
+      "transferredValue": "8388608.0",
+      "value": "8388608.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Old Gen"
+      },
+      "transferredValue": "8.380416E7",
+      "value": "8.380416E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Metaspace"
+      },
+      "transferredValue": "9.35114E7",
+      "value": "9.35114E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-nmethods'"
+      },
+      "transferredValue": "1412480.0",
+      "value": "1412480.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "id": "G1 Eden Space"
+      },
+      "transferredValue": "3.50224384E8",
+      "value": "3.50224384E8",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "Compressed Class Space"
+      },
+      "transferredValue": "1.225728E7",
+      "value": "1.225728E7",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_used_bytes",
+      "type": 0,
+      "tags": {
+        "area": "nonheap",
+        "id": "CodeHeap 'non-profiled nmethods'"
+      },
+      "transferredValue": "5248896.0",
+      "value": "5248896.0",
+      "tsFrom": 1712228731639
+    },
+    {
+      "entities": [
+        {
+          "id": "a22efefbb00546c04512fc7d4b455e77",
+          "type": "cluster"
+        },
+        {
+          "id": "optimize",
+          "type": "component"
+        }
+      ],
+      "key": "jvm_memory_usage_after_gc_percent",
+      "type": 0,
+      "tags": {
+        "area": "heap",
+        "pool": "long-lived"
+      },
+      "transferredValue": "0.0780487060546875",
+      "value": "0.0780487060546875",
+      "tsFrom": 1712228731639
+    }
+  ]
+}

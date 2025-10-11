@@ -1,0 +1,316 @@
+---
+id: get-decision-requirements-xml
+title: "Get decision requirements XML"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get decision requirements XML"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWW1v2zYQ/isEP7WYYjltunXGMMBN3S5tkgaJ03Rz/eFEni02FKmSlF9m6L8PpKTYsZW+AMOwAv5gWC8nPs8d7x5RxxV1MLW0N6IvkQkrtCIGPxfCYIbKWTqOqM7RgBNanXDao1N0jeXlhuGHs1MaUY6WGZF7Y9qjH9VHNRodvzu/OrkaDs6P/+wN3g/Oh9f90/HY37tEVxhlCW9DJmDJh7PTzkdFI5qDgQwdGs90RRVkSHuUt/B4i0saUeHhc3ApjWg9KKc9Zwrc5jhMkYC1YqqQk1tcEj0hLsV2ThGZp4KlBFjFD0ihxOcCieConJgINGSiDXGpWHvVoRG1LMUMaG9F3TL31K0zQk1pRCfaZODurvzWFtu3uPx9J7h/ISZIBmoqFBKDVheGYfDg0RuYAZFaTYlFI0CKv5F7uhXEY1qWYx8Wm2tl0XpWT7pd/7cbmg9np1+MCBGW2IIxtHZSSLkkJswpcu8108qhcsFtXLh4kUl//FAwyrIsI3r0EJXc6JngyAkHBx5XaUdmIMU2FuS5FCxkbJwbnUjMfvpk/Tib2PcB+uSisiQcHQhJdPIJmfNRqwwT5EQoMrp8dUx+PXr2y/hR6lxue3E8n887ZsIOkAunTUebaWwmzP+83eMOGaZokGSwJAkS4Fx4TJDeoRyNE2iJzZGJiWDE6RDrmjbxAaoqoA5VRctXxN3D60B+IbsKI3YyqE+uL0+a1F0KNd2FDs9MoJB+DEh04XqJBHVLI4oLyHKJW9fLiDrhZCuZbXRbZBmYu4rbBl4DvABOfD2gdR7AOnDFhttUKIdTNJv+CuWePtnB9Gn0x3B4QaohCNMc1wVbE7iHfdTtRjQTSmRF1pzBojr7udstPYLPl2/wVxFc5BJUSMxtp4UimTZYZ99992vXm3xZklEGizc6sUPdZ07MwKEdEwbKF0SCJAdjkftICWUdKPZNs+FzwSvmTkJoI6Zim/B9hvHsSfxJJzaGio8fs1ynAq1r62UVqqbOD9vr3NTuSmC3tipwAoVLPauqqgkzGEiCtJ5IisDDq2FFb25uDvprY/yK3ux1Y68be934wXTj6W4ZvtImEZyjClVzJyH1IgGk1POdJcm+3Pflvi/3/3+5H7UvE9o/R+bCpYHAVMxQhc+hOVQqMNGF4h1yto6fJWA2viuECk82H0Yk0XxZVdVeNfaqsVeNH0g1nrU1EfqK+Mk0vjzQGG2IZqwwBrlv68gA7xsZDbd6FbGXgL0E7CXgB5OAMqIZulTXHevQQnapH6pZNxxsrhvi1QO95DI0LSNq0cya7nNhJO3RVVXqZS+OV6m2ruytcm1cGc98XszACEhkVT3+diUJTapLzUCGy20p5G/4FncTk3eGpWhd1YQnx7KwDg25HFwNyWtwOIdlx8+Gh78P87z7vNuK4E2/YfT+xQmpPA8Am+LWQHiVaoWojL8XJLSmLbLCCLe88kNUIXyBYND4zs5GrtXYAcmfJ8GIRvXBq6ZY39wMPf0ErGBfG8LbhNwSaqKDYZ1j7R70L078bKOxlefdzmH9sgAWJqPeqjiGrFAc6n491jVSZVIj9FPh0iLpMJ3FrDK/+xfWFmhpuVNWFydBX5jOskKFl5KaVotgIA3mc8Iqtr6opGCoLLZQO63ukPeVM+Sw0/0eionUSZyBUHENYePj/tn1+cv+wenJ8eD8anBw2Ol23MKF8ObaugzUBo/X6B5Y1LfsLa3WL+R/cZupToqwWZFLEMpHPERgVevHiLbqB41o7+HdKC8h46iWgRFdrRKweG1kWfrLnws0S9objdeqEWSGC+uPOe1NQNrtjavNADyqIflj8t9sZ7XGqb4Iahn0Txb+jEb0Fpdf2Ksrx2XTwA1eV9Z9xjB3G+Pc7R95fbhT9teDIS3LfwCXCABs
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision requirements XML"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/decision-requirements/{decisionRequirementsKey}/xml"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Returns decision requirements as XML.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "decisionRequirementsKey",
+      in: "path",
+      required: true,
+      description:
+        "The assigned key of the decision requirements, which acts as a unique identifier for this decision.",
+      schema: {
+        type: "string",
+        format: "string<DecisionRequirementsKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The XML of the decision requirements is successfully returned.",
+      content: { "text/xml": { schema: { type: "string" } } },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The decision requirements with the given key was not found. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

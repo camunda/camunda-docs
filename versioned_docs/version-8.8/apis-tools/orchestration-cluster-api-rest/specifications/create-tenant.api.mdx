@@ -1,0 +1,354 @@
+---
+id: create-tenant
+title: "Create tenant"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Create tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Creates a new tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            tenantId: {
+              type: "string",
+              description:
+                "The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].",
+              minLength: 1,
+              maxLength: 256,
+              pattern: "^[A-Za-z0-9_@.+-]+$",
+            },
+            name: { type: "string", description: "The name of the tenant." },
+            description: {
+              type: "string",
+              description: "The description of the tenant.",
+            },
+          },
+          required: ["tenantId", "name"],
+          title: "TenantCreateRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "201": {
+      description: "The tenant was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
+                type: "string",
+                title: "TenantId",
+              },
+              name: {
+                type: "string",
+                description: "The name of the tenant.",
+                example: "Customer Service Department",
+              },
+              description: {
+                type: "string",
+                description: "The description of the tenant.",
+                example: "Customer Service department business processes",
+              },
+            },
+            title: "TenantCreateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": { description: "Tenant with this id already exists." },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

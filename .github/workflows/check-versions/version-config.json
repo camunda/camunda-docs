@@ -1,12 +1,12 @@
 [
   {
-    "version": "8.8 (next)",
+    "version": "8.9 (next)",
     "source": "docs/",
-    "suggestions": ["versioned_docs/version-8.7/"]
+    "suggestions": ["versioned_docs/version-8.8/"]
   },
   {
-    "version": "8.7 (current)",
-    "source": "versioned_docs/version-8.7/",
+    "version": "8.8 (current)",
+    "source": "versioned_docs/version-8.8/",
     "suggestions": ["docs/"]
   }
 ]

@@ -1,0 +1,4 @@
+label: "Task applications"
+link: null
+customProps:
+  description: Task applications are the interface between humans and Camunda processes to orchestrate human work.

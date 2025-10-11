@@ -1,0 +1,92 @@
+---
+id: variable-input
+title: VariableInput
+hide_table_of_contents: false
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+export const Bullet = () => (
+  <>
+    <span
+      style={{
+        fontWeight: "normal",
+        fontSize: ".5em",
+        color: "var(--ifm-color-secondary-darkest)",
+      }}
+    >
+      &nbsp;●&nbsp;
+    </span>
+  </>
+);
+
+export const SpecifiedBy = (props) => (
+  <>
+    Specification
+    <a
+      className="link"
+      style={{ fontSize: "1.5em", paddingLeft: "4px" }}
+      target="_blank"
+      href={props.url}
+      title={"Specified by " + props.url}
+    >
+      ⎘
+    </a>
+  </>
+);
+
+export const Badge = (props) => (
+  <>
+    <span class={"badge badge--" + props.class}>{props.text}</span>
+  </>
+);
+
+Change or add a variable with name and value.
+
+<Tabs groupId="schema" defaultValue="schema" values={
+[
+{label:'Schema',value: 'schema'},
+{label:'Example value',value: 'example'}
+]
+}>
+<TabItem value='schema'>
+
+```graphql
+{
+    "name": string,
+    "value": string
+}
+```
+
+</TabItem>
+
+<TabItem value='example'>
+
+```json
+{
+  "name": "string",
+  "value": "\"string\""
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Fields
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableInput.<b>name</b></code>](#)<Bullet /> `string`
+
+> Name of the variable.
+
+#### [<code style={{ fontWeight: 'normal' }}>VariableInput.<b>value</b></code>](#)<Bullet /> `string`
+
+> The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.
+
+### Member of
+
+[`TaskCompleteRequest`](./task-complete-request.mdx) <Badge class="secondary" text="input"/>
+
+### Consumed by
+
+[`Complete task`](../../controllers/tasklist-api-rest-task-controller.md#complete-task) <Badge class="secondary" text="PATCH"/>

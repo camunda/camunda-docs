@@ -1,0 +1,318 @@
+---
+id: suspend-batch-operation
+title: "Suspend Batch operation"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Suspend Batch operation"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWd9z27gR/ld20IdLppIoO86dozfZcVpfU8djK9e5cfywBFciYhLgAaBkVuX/frMAJetX29z0KR15xiORXO63C+z3AcIuhceZE6MHcYFe5mAqsuiV0eKxJ9YX15kYCVe7inQW7D6tzXoiIyetqsLVSHzRX/TDw+Wnm/vr+8nVzeWvo6tfrm4mn8cfHx/52X304gDB1lorPYN0G3nwRU9y5UA5yIwmQNdomVujTe2Kpgc+J6ismVlyDiRqSAm8RflEGdSOHbLFjlNwHn3tgHRWGaU9vEqCRX9t4ZJlupXa36hpXw++cIoVWizJk+WRWgqNJYmR2DMXPaF4DCr0uegJS7/VylImRt7WtDtQk5zgiRp4ZWwXJkFBM5QNXL9/DWZ6KI0YjpM5lShGSzE1tkQvRuJiNxb4F9S1ykRP+KbiaJ23Ss/25uu+cZ7K/ox0CCELMU2NBR7YHXDRE/SMZVWwv9PTtyc/vXt3fvLmx/OzN6cnjKR8eLQXjGjbxzge5PyFyRqOXRrtSXv+ilVVKBmsk6+O41q27eYATrFwFO64ymhHjt86HZ7xx/6w7s59hbUj6OBhgQ6kJU6WM3oJgyHPhsPDPitr5iqjDDL0yLWpjYc5FmrHyVYulTVpQeWfu5w2Jm4bYAy30RIy8qgKMOlXkh7QQTRMKQOl4eHuwyW8O3v70+Or3PvKjZJksVgM7FT2KVPe2IGxs8ROJf+z3esBTHKyBCU2zBPMMsWYWHBCFVmvyIGrSKqpkuDNil0hGK6cWHFdDcWwmBDrlzmZ+HS5V2nr6qyt2iu8MXy+uwaVkfZq2qxouwUd3pliXbAPTE3tR2mB+mmrDjfvt+sa3A9mF93VZYm2WRFtF/gF4AIzuIu1wwBRSDYQlPY0I7uZr9L+zekeJpfRXyeT25UWSZNRoJpnuesC2MI+Gw57olRalXW5usLnePXjcNgyAtfLN+SrgZ6rAnVkxE7SSkNpLHXVt51+l/qqXhp4KPH5Z5O6iRlLr+boyT2yDjMhUoIKraOMR0pp51HLb5oNrgWWzb2CMFbN1G7A2xEm89Pkq0ldgjEe9tm+lILouPU+DlXbRp6/2afhB2NTlWWkA2vWgtGRHYvCLHY140j3I92PdP8O6H5gq3BjPExNrbNI991dA+8T9NrkyPoj64+s/75Y//bQZn6sgSfTMj3IWv71JWVtLWWwyFUR4CW59Q/JbhcQKXKUgKMEHCXgu5KAA/t8niBHdq4k8eY+sF/7ooFa4xxVgWlBTCjlAp9yrCrSYHTRAJ8kmXKtCg4WgXYcswsnKd3RgoMU5VPFZ1Q1PzdQWZqT9tGU7JzsD1waZVV7dudMbSU5mFpTQko8LPScY+08ZT3AuVEZ3wvT52jOoFNURW3JDeCyUKS9A7TsSpqyJM1nFd5AAK2xKBqw5G0DPjduI36cerKAIVwznUJFVplsAL+aOhyuFYS2q5rAwO5UaiO3kmSOWrkSeChGsFKszEg3kFjWOsOBMuE64YSN5mCTfxKllHiSuVYSi740WlLlXbKS5/6LEid/ylFnhdKz/hb2UZWPqnxU5e9MldueKMnnhpsKlXGhovnEfCS+6Uw+iY0IF7sPUUrjuXxtCzESy8jzdpQky9w4346WlbG+TeZcFHO0ivU91BA/jnqwqvPCSCzyGNR+/fADPvxfDcgnK3NyvvvBeFmwWlu4u7qfwF/Q0wKbAU8Fw2/DnA/PhwcR2PQbvI9vr7tFJABsKtsKgiXqIEQ0/qMg4QTfkayt8s09u4hDeEFoyY5rnr91oXXYASl0SoKR6HVfPqyY+vM/Jhx+ik7J/+aCbUJhKT01wbArsMMZjG+vebbJupj5cHDSrRQow2R0TZzLuEDBlZ4pTdQRJFbSSuVnyud1OpCmTLr1bP2pnKvJiXaPU7fXQVx4La51WJH0DBbK54CwwjwHGaNlRhVKknZ0ILSP8Qn8EpOBk8Hwj4SYFiZNSlQ66SBccjn+++eb9+P+x+vLq5v7q/7JYDjwzz4MLzOyRL0RR9eyg90O4U7OGx2d/88uYFeZnp59UhWoNE97mIZlJ2APYted6InRoT7hhoY99jodehDLZYqOPtuibfn2bzXZRoweHl9kK+hcphx/X/XF/sM8vLrrWmiv4X/oNx5MvLuJugmqWtR8JXriiZqDvdH2se2JnDAjG5KIdpcx1P6Evb342WsItr3VG2PJu8R/Y7u15WPFWi80t5/uJyxAXfOxNBm/a3HBjVpcxNhNFSdttIz3lqJAPatxxrbRJ//9Dj2u4W0=
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Suspend Batch operation"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/batch-operations/{batchOperationKey}/suspension"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Suspends a running batch operation.
+This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "batchOperationKey",
+      in: "path",
+      required: true,
+      description: "The key (or operate legacy ID) of the batch operation.\n",
+      schema: {
+        format: "BatchOperationKey | uuid",
+        type: "string",
+        description: "System-generated key for an batch operation.",
+        example: "2251799813684321",
+        title: "BatchOperationKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{ content: { "application/json": {} }, required: false }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The batch operation pause request was created.",
+      content: {},
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found. The batch operation was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

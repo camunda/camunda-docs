@@ -1,0 +1,330 @@
+---
+id: broadcast-signal
+title: "Broadcast signal"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Broadcast signal"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Broadcast signal"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/signals/broadcast"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Broadcasts a signal.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            signalName: {
+              description: "The name of the signal to broadcast.",
+              type: "string",
+            },
+            variables: {
+              additionalProperties: true,
+              description: "The signal variables as a JSON object.",
+              type: "object",
+            },
+            tenantId: {
+              description: "The ID of the tenant that owns the signal.",
+              allOf: [
+                {
+                  example: "customer-service",
+                  description: "The unique identifier of the tenant.",
+                  format: "TenantId",
+                  type: "string",
+                  title: "TenantId",
+                },
+              ],
+            },
+          },
+          required: ["signalName"],
+          title: "SignalBroadcastRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The signal was broadcast.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["tenantId", "signalKey"],
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the signal that was broadcast.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              signalKey: {
+                allOf: [
+                  {
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    description: "System-generated key for an signal.",
+                    format: "SignalKey",
+                    example: "22517998136987467",
+                    type: "string",
+                    title: "SignalKey",
+                  },
+                ],
+                description: "The unique ID of the signal that was broadcast.",
+              },
+            },
+            title: "SignalBroadcastResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The signal is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
