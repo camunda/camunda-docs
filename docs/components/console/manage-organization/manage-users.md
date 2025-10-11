@@ -16,24 +16,22 @@ To change the owner of the organization, utilize the user administration. The cu
 
 In addition to the owner, the **Admin** role is available as a second role with comprehensive rights.
 
-The admin role has the same rights as the owner, but an admin cannot manage other admins.
+The admin role has full access to the platform, process resources, and clusters, but cannot manage other admins.
 
 The following roles are additionally available, providing dedicated rights for specific elements in Camunda 8:
 
-- **Operations Engineer**: Full access to Console, except deletion privileges. Full access to Operate and Web Modeler, except deployment and process instance creation privileges
-- **Analyst**: Full access to Optimize and Web Modeler, except deployment and process instance creation privileges. Read-only access to Clusters
-- **Task User**: Full access to Tasklist and Web Modeler, except deployment and process instance creation privileges. Read-only access to Clusters
-- **Developer**: Full access to Console, except deletion privileges. Full access to Operate, Tasklist, and Web Modeler
-- **Visitor**: Read-only access to Console, Operate, and Tasklist. Full access to Web Modeler, except deployment and process instance creation privileges
-- **Modeler**: Full access to Web Modeler, except deployment and process instance creation privileges. Read-only access to Console and clusters, except access to cluster components
+- **Modeler**: Access to Web Modeler for creating and collaborating on projects, except permissions to deploy and run processes. Read-only access to Console.
+- **Analyst**: Includes Modeler permissions and has full access to Optimize to build process dashboards and reports.
 
-Users can be assigned multiple roles. For example, a user can have the role of **Operations Engineer** and **Task User**, which gives them access to **[Operate](../../operate/operate-introduction.md)** and **[Tasklist](../../tasklist/introduction-to-tasklist.md)**.
+Starting with version 8.8, user access to clusters is managed independently. To control what a user can access, define their authorizations in the cluster’s Identity. Learn more [here](/components/identity/authorization.md).
 
-Users with full access to Console can update clusters and toggle [auto-updates](/components/saas/auto-updates.md).
+If cluster authorizations are disabled, the user will have full access to the cluster and its components.
+
+Users can be assigned multiple roles. For example, a user can have both **Modeler** and **Analyst** roles, giving them access to Web Modeler and Optimize.
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
-People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, however, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
+People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
 
 ## Resource-based authorizations
 
