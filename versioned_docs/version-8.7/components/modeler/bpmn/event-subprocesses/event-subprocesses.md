@@ -13,6 +13,8 @@ An event subprocess must have exactly **one** start event of one of the followin
 - [Timer](../timer-events/timer-events.md)
 - [Message](../message-events/message-events.md)
 - [Error](../error-events/error-events.md)
+- [Signal](../signal-events/signal-events.md)
+- [Escalation](../escalation-events/escalation-events.md)
 
 An event subprocess behaves like a boundary event, but is inside the scope instead of attached to the scope. Like a boundary event, the event subprocess can be interrupting or non-interrupting (indicated in BPMN by a solid or dashed border of the start event). The start event of the event subprocess can be triggered when its containing scope is activated.
 
