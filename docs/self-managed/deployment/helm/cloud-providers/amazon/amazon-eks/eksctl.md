@@ -936,7 +936,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
 
    ```shell
    aws opensearch create-domain --domain-name $OPENSEARCH_NAME \
-     --engine-version OpenSearch_2.15 \
+     --engine-version OpenSearch_2.19 \
      --cluster-config  "InstanceType=m7i.large.search,InstanceCount=3,ZoneAwarenessEnabled=true,ZoneAwarenessConfig={AvailabilityZoneCount=3}" \
      --node-to-node-encryption-options Enabled=true \
      --ebs-options "EBSEnabled=true,VolumeType=gp3,VolumeSize=50,Iops=3000,Throughput=125" \
@@ -946,7 +946,7 @@ For more information, see the [Amazon OpenSearch Service fine-grained access con
    ```
 
    - **Domain Name**: `$OPENSEARCH_NAME` is the name of the OpenSearch domain being created.
-   - **Engine Version**: Uses OpenSearch version `2.15`.
+   - **Engine Version**: Uses OpenSearch version `2.19`.
    - **Cluster Configuration**:
      - `InstanceType=m7i.large.search` specifies the instance type for the domain.
      - `InstanceCount=3` creates a cluster with 3 instances.

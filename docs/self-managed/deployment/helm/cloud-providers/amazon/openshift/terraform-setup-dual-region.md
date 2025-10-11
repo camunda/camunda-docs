@@ -429,9 +429,14 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift
 
 Alongside the `config.tf` file, review the file called `peering.tf` used to reference the peering configuration:
 
+<details>
+<summary>Show peering.tf reference</summary>
+
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/openshift/rosa-hcp-dual-region/terraform/peering/peering.tf
 ```
+
+</details>
 
 One cluster will be referenced as the **owner**, and the other as the **accepter**.
 This designation is used solely for networking purposes and does not imply any dependency between the two clusters.
