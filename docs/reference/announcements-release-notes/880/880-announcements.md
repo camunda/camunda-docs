@@ -212,6 +212,21 @@ To learn more, see [Zeebe client job worker](/apis-tools/java-client/job-worker.
 </div>
 <div className="release-announcement-content">
   
+#### Deprecated: Zeebe gRPC DeployProcess endpoint
+
+The `DeployProcess` endpoint was deprecated with 8.0, replaced with `DeployResource` RPC.
+
+This endpoint is scheduled for removal in the Camunda 8.10 release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Deprecated: File type `connector_template` in Web Modeler API
 
 With the Camunda 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated.
