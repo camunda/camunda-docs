@@ -150,11 +150,11 @@ A successful authentication response looks like the following:
 
 ```
 {
-  "access_token": "<TOKEN>",
-  "expires_in": 300,
-  "refresh_expires_in": 0,
-  "token_type": "Bearer",
-  "not-before-policy": 0
+"access_token": "<TOKEN>",
+"expires_in": 300,
+"refresh_expires_in": 0,
+"token_type": "Bearer",
+"not-before-policy": 0
 }
 ```
 
