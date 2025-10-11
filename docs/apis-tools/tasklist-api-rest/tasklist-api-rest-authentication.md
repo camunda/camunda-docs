@@ -22,7 +22,7 @@ The Tasklist REST API supports three authentication methods depending on your en
 | -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
 | [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
 | [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Helm](../../self-managed/installation-methods/helm/install.md)                        | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| [Helm](/self-managed/deployment/helm/install/index.md)                                 | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
 | SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 ## Authenticate API calls
@@ -117,7 +117,7 @@ A successful response looks like:
 
 <TabItem value='self-managed'>
 
-1. **Configure the Orchestration Cluster for OIDC-based authentication**  
+1. **Configure the Orchestration Cluster for OIDC-based authentication**
    - Follow [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
    - Note the **client ID** or configured **audiences** of the Orchestration Cluster for audience validation (`CLIENT_ID_OC`).
 
@@ -132,7 +132,7 @@ A successful response looks like:
    1. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
    2. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Tasklist API** (or any other API you want to access).
    3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-   :::
+      :::
 
 3. **Request an access token using the client credentials**
 
@@ -144,8 +144,8 @@ curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platf
 --data-urlencode "audience=${CLIENT_ID_OC}" \
 --data-urlencode "scope=${CLIENT_ID_OC}" \
 --data-urlencode 'grant_type=client_credentials'
-``
-  
+```
+
 A successful authentication response looks like the following:
 
 ```
@@ -157,7 +157,7 @@ A successful authentication response looks like the following:
   "not-before-policy": 0
 }
 ```
-  
+
 **Note for Microsoft Entra ID:**
 Use `scope=${CLIENT_ID_OC}/.default` instead of `scope=${CLIENT_ID_OC}`. The Authorization URI is typically in the format:  
 `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
