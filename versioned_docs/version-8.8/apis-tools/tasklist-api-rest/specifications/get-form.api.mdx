@@ -1,0 +1,147 @@
+---
+id: get-form
+title: "Get a form"
+description: "Get the form details by `formId` and `processDefinitionKey` required query param. The `version` query param is optional and is used only for deployed forms (if empty, it retrieves the highest version)."
+sidebar_label: "Get a form"
+hide_title: true
+hide_table_of_contents: true
+api: eJzdV1FvGzcM/iuEXppgFzvtgqHwW7YkndeuLWJnAxYEiHyifWpk6SLxnBrG/feB0p3ti53W6+OeDJ8okvr08SO1EiRnQQxuxZXzc3GXCYUh97ok7awYiHdIQAXC1Pk5KCSpTYDJEu75w1Ddg7QK7kvvcgzhAqfaat75Hpf34PGx0h4VPFbol1BKL+c9GBcI9wv0QTt7v70EOoCLcaWJbnWAKqACZ82SEwCFpXFLVDGbAEd6CjgvaZmBJvBIXuMCQ8y30LMCA0ET6LgnMuFK9JL9D5UYiBlSPHImYnQk9IzDSlg5RzEQ6YAiE5pxKCUV4jk4fJThBbjpGiIO0x5bDMhXmImQFziXYrAStCzZcyCv7UzUdbYOtg/ANnSEaCf2NU7Ro80RyMXwjQtQax8/mkyD2bfj89kbww4A8Jc0+sU766Y0lSbsy0lbwhl6kcVLkJQ+/XIm6vqO94fS2YCBd7w5PeWfbm6fLIQqj2h4pMpbVBw4d5bQEtvLsjQ6j2Tofwm8abWbhpt8wZyYIJ6pQzqF1GoXvn3oVFY/VghaoSU91ehbnHA+QaUaSOBJU6EtOLu+wp6os/2M+G7cDit2GQFHHvmSFfAdLKRBS5zVPVdCbyck1/dUo1HHMSXSZPCws0fTbmHUL5Nvn4eITXNjcXPLyn00eZmaMX1WElsZA9rGhHIZYnLSdu8ig6dCG0xqUnoMaCnJSYfFr8LaPV8cFegh5Gil1y4y/DlrM0FopaXhgcxJ1iwtMgSXa0moIk+6cOpwgQYJt71OnDMo7Y7boVXMdwzwVGDMeOdYjJJKDsF5sI7AWfgHcYKs2jpswIyFy21A4VRWhrLvIdtjgWkJFFvNdVPFoq556ez0bLeOzy2g985zyLaQOX+7aUlrVA5pSEwDRzB1lf2WIJTeTQzOf/qvwhBIUhUOIOg5EycuARVyh2y/j8efITmD3Kl1HSUsWvnrwZXzgF/lvDSYwdnpKej1JUt49atUcI2PFQZ6lbay0VnX6KMjuGI41iYMX3CQusc2kX9+w5ybYwhydoAKnENaSCcsvVtoFWNOvMYpbBl3jxfNXZ5X3rNqM81tIGnzA2JeJrI09nBzM7yIPcg491CVcIS9WS9S1bgZNCcJx11uRh+RlPG0VLhmWIiDAhViIPqL1/3YzfqrRLpaZCKgX7QTROWNGIhV4k096PdXhQtUD1al88TGC+m1nJhEG15L3I+1JAbCuFya+HmfOvACi3iL2/nnIaToqXE4/8zd29O3p3s9sekLXjac3/gpiMq9fpLxXk+xYwfMK69pGcHJnXvQKAa3d5mYoPToTx64td3ebZuO2GXCp92wvn1Z6jQedTP5LdqdTCTPjLKigvtuKuk4WvJEIhdSG0aepW2EZnryp7RyhgpyUwUeAZn2zRw0Ph+9/zAcjU9Gl6PR8NPHdiBqEqq7+a/Ta2CKoERJjkaitb5qa+qPv8eRedpOXdzeMHAsw4PRgeD6cjRmNHcxby00F5RHqZYn5E6qkMDf0jIeA7wstTJL0CwUc+74kypoy5NBI5Ncl8bZWdAKeeT2QDI8BK6UJP+NVso8MivRm48ZBv3+09NTL5fzyirZy92cYTE6R5b2wXqk/NB8yZ5tVi4P693axf993w4x/cZR6HcGALF4nYgeaC7tVhR+rMjYF55Dttpo/f/qSdNQjvAr9UsjtWVgIsSrRq1uGa2k5EFkYtA8a+6yRnduxWrFJXPjTV3z5zTuc6UqHbhUNoP6i5AeXTe4HMOB75K9icc6eukttJCm4i2CXyqHp/bj75RvpLh5IW2yutvI+o+jt/9FuTeTVgxtB5w2w+aa67s6EwVKhT4mlRbP8xxL2tq28xzi06yb37tLFqp/Ab96n4Y=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a form"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/forms/{formId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get the form details by `formId` and `processDefinitionKey` required query param. The `version` query param is optional and is used only for deployed forms (if empty, it retrieves the highest version).
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "formId",
+      in: "path",
+      description: "The ID of the form.",
+      required: true,
+      schema: { type: "string" },
+    },
+    {
+      name: "processDefinitionKey",
+      in: "query",
+      description: "Reference to the process definition.",
+      required: true,
+      schema: { type: "string" },
+    },
+    {
+      name: "version",
+      in: "query",
+      description: "The version of the form. Valid only for deployed forms.",
+      required: false,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "On success returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              id: {
+                type: "string",
+                description:
+                  "The unique identifier of the embedded form within one process.",
+              },
+              processDefinitionKey: {
+                type: "string",
+                description:
+                  "Reference to process definition (renamed equivalent of `Form.processDefinitionId` field).",
+              },
+              title: { type: "string", description: "The title of the form." },
+              schema: { type: "string", description: "The form content." },
+              version: {
+                type: "integer",
+                description:
+                  "The version field is null in the case of an embedded form, while it represents the deployed form's version in other scenarios.",
+                format: "int64",
+              },
+              tenantId: {
+                type: "string",
+                description: "The tenant ID associated with the form.",
+              },
+              isDeleted: {
+                type: "boolean",
+                description:
+                  "Indicates whether the deployed form is deleted or not on Zeebe. This field is false by default, in the case of an embedded form.",
+              },
+            },
+            title: "FormResponse",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the form with the `formId` and `processDefinitionKey` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
