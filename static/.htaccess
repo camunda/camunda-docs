@@ -149,11 +149,12 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Fix various redirects prior to the 8.8 release cutting
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-authentication/?$ /docs/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration/ [R=301,L]
-RewriteRule ^docs/docs/self-managed/tasklist-deployment/importer-and-archiver/?$ /docs/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/tasklist-deployment/importer-and-archiver/?$ /docs/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/data-retention/?$ /docs/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/operate-authentication/?$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
-RewriteRule ^docs/docs/self-managed/operate-deployment/importer-and-archiver/?$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/importer-and-archiver/?$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
 RewriteRule ^docs/guides/create-decision-tables-using-dmn/?$ /docs/components/modeler/dmn/decision-table/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/save-and-deploy/?$ /docs/components/modeler/web-modeler/process-applications/deploy-process-application/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/process-application-versioning/?$ /docs/components/modeler/web-modeler/process-applications/process-application-versioning/ [R=301,L]
