@@ -146,6 +146,13 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 ##################################################################################
 
 #---------------------------------------------------------------------------------
+#   8.9: content moves introduced prior to the release of version 8.9.
+#---------------------------------------------------------------------------------
+
+RewriteRule ^docs/next/components/features-integrations/features-integrations/?$ /docs/next/components/features-integrations/ [R=301,L]
+RewriteRule ^docs/next/components/features-integrations/features-integrations/?$ /docs/next/components/features-integrations/ [R=301,L]
+
+#---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
