@@ -57,7 +57,6 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
 #### Only for connector templates: Import an API definition
 
 5. If you selected **From API definition**, the **Import data source** section appears.
-
    1. Select the format to import (OpenAPI or Postman) and click **Import file**.
    2. Import the API definition:
 
