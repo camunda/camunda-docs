@@ -53,6 +53,8 @@ Before proceeding with this guide, ensure you have:
 
 This deployment approach separates infrastructure management from application deployment:
 
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764643761312188&cot=14 -->
+
 ![Vendor-supported infrastructure architecture](assets/vendor-components-arch.jpg)
 
 ## Infrastructure components

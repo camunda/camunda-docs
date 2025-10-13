@@ -107,7 +107,6 @@ Since every setup can differ, here are some edge cases to consider when upgradin
 
 - **Helm-managed single region exporters:**  
   When using one external secondary storage instead of two and using the Helm chart managed exporter, consider enabling the following to ensure automatic creation:
-
   - Set `orchestration.exporters.zeebe.enabled: true` and `orchestration.exporters.camunda.enabled: true`.
   - Keep it disabled in case you're defining the exporter yourself.
 
