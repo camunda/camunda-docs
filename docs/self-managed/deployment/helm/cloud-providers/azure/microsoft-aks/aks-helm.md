@@ -191,7 +191,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 For secure operation, do not publicly expose the Zeebe Gateway Service. Keep it reachable only within your Azure Virtual Network (for example, by deploying it without a public Ingress) and access it from internal services or over a private network extension such as an Azure VPN or ExpressRoute connection. This reduces external attack surface while preserving controlled operational access.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
 
 :::
 
@@ -215,9 +215,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 :::info Keycloak issuer and localhost hostname alignment
 
-When running without a domain, Console validates the issuer claim of the JWT against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
 
-Add (or adjust) an /etc/hosts entry while you are developing locally:
+Add (or update) the following entry in your `/etc/hosts` file while developing locally:
 
 ```text
 127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
@@ -226,7 +226,8 @@ Add (or adjust) an /etc/hosts entry while you are developing locally:
 After adding this entry, you can reach Keycloak at:
 `http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
 
-Why port `18080`? We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+**Why port `18080`?**
+We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
 
 This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
 :::
@@ -417,9 +418,9 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --name
 ```
 
 :::tip Localhost development with kubefwd
-For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable via their in-cluster DNS names on your workstation.
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
 
-Example (requires sudo to bind privileged ports and modify /etc/hosts):
+Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
 
 ```shell
 sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
@@ -431,7 +432,7 @@ After this runs, you can reach services directly, for example:
 - Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
 - Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
 
-You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with Ctrl+C when finished. Be aware kubefwd modifies your /etc/hosts temporarily; it restores the file when it exits.
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
 :::
 
 1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
