@@ -246,7 +246,6 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
-
    - **Access token:** The repository, project, or workspace access token you generated.
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
