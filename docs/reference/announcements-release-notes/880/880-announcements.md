@@ -696,6 +696,8 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm: Alternative infrastructure methods
 
+Prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts in production; Bitnami remains for evaluation/PoC. [Guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure)
+
 </div>
 </div>
 
@@ -706,7 +708,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
 <div className="release-announcement-content">
   
 #### Reference Architecture: EC2
-
+New EC2 manual / VM blueprint: HA multi-AZ cluster, managed OpenSearch, optional Aurora PostgreSQL, dual LB pattern, VPN/bastion option, modular Terraform. [Guide](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md)
 </div>
 </div>
 
@@ -717,7 +719,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
 <div className="release-announcement-content">
   
 #### Reference Architecture: Azure AKS
-
+New AKS architecture: zonal AKS baseline, managed/operator data services, unified ingress & identity patterns, private networking, modular Terraform + Helm workflow. [Guide](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
 </div>
 </div>
 
