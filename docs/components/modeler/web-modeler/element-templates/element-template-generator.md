@@ -44,7 +44,6 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
 ## Configure the template details
 
 4. In the **Configure template details** section, provide the following information:
-
    - **Name:** Enter a clear and descriptive name for the template. For example, include the brand name if the template connects to a service, or indicate its main feature.
    - **Description:** Describe the template’s main features and benefits.
    - **Icon:** Use a default BPMN symbol or upload a custom icon. Supported formats: SVG, PNG, JPEG. Maximum file size: 8 KB. Minimum dimensions: 512 × 512 pixels.
