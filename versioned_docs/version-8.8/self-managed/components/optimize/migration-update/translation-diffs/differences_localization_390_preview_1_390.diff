@@ -1,0 +1,267 @@
+diff --git a/backend/src/main/resources/localization/en.json b/backend/src/main/resources/localization/en.json
+index a42815a76..50aed4cec 100644
+--- a/backend/src/main/resources/localization/en.json
++++ b/backend/src/main/resources/localization/en.json
+@@ -88,10 +88,10 @@
+   "home": {
+     "createBtn": {
+       "default": "Create New",
+-      "collection": "New Collection",
+-      "dashboard": "New Dashboard",
++      "collection": "Collection",
++      "dashboard": "Dashboard",
+       "report": {
+-        "default": "New Report",
++        "default": "Report",
+         "process": "Process Report",
+         "combined": "Combined Process Report",
+         "decision": "Decision Report"
+@@ -145,6 +145,7 @@
+       "decision": "Decision Table",
+       "process": "Process",
+       "notCreated": "There are no sources added yet",
++      "contactManager": "Please contact the collection manager to add new sources",
+       "add": "Add Source",
+       "definitionName": "Definition Name",
+       "deleteWarning": "The '{name}' Data Source will be removed from the Collection.",
+@@ -159,25 +160,35 @@
+       "unauthorizedTenant": "(Unauthorized Tenant)"
+     },
+     "empty": "There are no items created yet",
++    "contactEditor": "Please contact an Optimize editor to create new items",
++    "contactManager": "Please contact the collection manager to create new items",
+     "welcome": "Welcome"
+   },
+   "processes": {
+-    "title": "Processes",
++    "label": "process",
++    "label-plural": "processes",
++    "list": "Processes List",
+     "empty": "There are no processes imported yet",
+     "owner": "Owner",
+-    "timeGoal": "Goal: Time",
+-    "displayData": "Goals display data from instances",
+-    "endedThisMonth": "ended in the last 30 days",
++    "processOwner": "Process Owner",
++    "timeKpi": "KPI: Time",
++    "qualityKpi": "KPI: Quality",
++    "kpiInfo": "KPI values are based on certain reports.",
+     "setGoal": "Set Goal",
+     "editGoal": "Edit Goal",
+     "goals": "Goals",
+     "goalRemoved": "Goals removed from '{processName}' process",
+-    "addOwner": "Add Owner",
+-    "editOwner": "Edit Owner",
+-    "addProcessOwner": "Add Process Owner",
+     "ownerInfo": "The process owner is responsible for business metrics for the process. You can use the process owner to sort and filter processes.",
+     "ownerRemoveWarning": "The '{owner}' Owner will be removed from the process",
+-    "noData": "No Data",
++    "processOverview": "Processes Overview",
++    "configureProcess": "Configure Process",
++    "emailDigest": "Email Digest",
++    "digestInfo": "The process digest sends periodic emails with the existing KPI status to the Process Owner. By default, the digest will be sent every Monday at 9:00 AM (To change the default send time, please contact your administrator).",
++    "digestConfigured": "Your process digest has been successfully configured. An email has been sent to {name}.",
++    "configureKpis": "Learn more about KPIs",
++    "analysing": "Analysing <b>{count}</b> {label}.",
++    "processesListed": "{total} {label} listed",
++    "processesListedOf": "{count} of {total} {label} listed",
+     "timeGoals": {
+       "label": "Time goals",
+       "configure": "Configure duration goals",
+@@ -321,10 +332,15 @@
+     "noSources": "No Data Sources",
+     "templates": {
+       "blank": "Blank report",
++      "p75Duration": "KPI: 75th Percentile Duration",
++      "percentSLAMet": "KPI: % SLA Met",
+       "heatmap": "Heatmap: Flownode count",
+-      "number": "Number: Process instance duration",
+       "table": "Data Table: User task count",
+-      "chart": "Bar Chart: Process Instance count"
++      "chart": "Bar Chart: Process Instance count",
++      "percentNoIncidents": "KPI: Incident-Free Rate",
++      "percentSuccess": "KPI: Success Rate (edit filter to only show successful end events)",
++      "percentAutomated": "KPI: Automation Rate (edit filter to exclude user tasks)",
++      "number": "Number: Process instance duration"
+     },
+     "instanceCount": {
+       "appliedFilters": "Applied filters",
+@@ -445,8 +461,11 @@
+         "variableName": "Variable Name",
+         "type": "Type",
+         "newName": "New Name",
+-        "renameInfo": "You may provide a UI-only alias to override each over your variable names.",
+-        "renameWarning": "Warning! Changes will update across all reports using this process definition. This can affect other users."
++        "renameInfo": "You may provide a UI-only alias that is displayed instead of the variable name defined in the Modeler. ",
++        "important": "Important!",
++        "followGuidelines": "Follow these guidelines to avoid unexpected behavior.",
++        "globalChanges": "Changes will update all reports using this process definition",
++        "useSameVariable": "Use the same alias for variables that appear in multiple process definitions"
+       }
+     },
+     "noDefinitionMessage": {
+@@ -498,13 +517,14 @@
+         "multipleVariable": "Var",
+         "inputVariable": "InputVar",
+         "outputVariable": "OutputVar",
+-        "objectVariable": "Object Variable"
++        "objectVariable": "Object Variable",
++        "numberOfOpenIncidents": "Open Incidents Count"
+       },
+       "pageError": "Only the first 10,000 instances can be displayed"
+     },
+     "progressBar": {
+       "invalid": "Invalid Configuration",
+-      "goal": "Goal"
++      "goal": "Target"
+     },
+     "combined": {
+       "multiSelect": {
+@@ -565,12 +585,14 @@
+         "yAxis": "Y Axis Label"
+       },
+       "goal": {
+-        "legend": "Goal",
++        "legend": "Set Target",
+         "goalValue": "Goal value",
+         "baseline": "Baseline",
+         "target": "Target",
+         "invalidInput": "Enter a positive number",
+-        "lessThanTargetError": "Target must be greater than baseline"
++        "lessThanTargetError": "Target must be greater than baseline",
++        "setKpi": "Display as a process KPI",
++        "kpiDescription": "The status of this metric will be displayed directly on the process in the process page."
+       },
+       "pointMarkers": {
+         "legend": "Line points",
+@@ -581,7 +603,7 @@
+         "enableStackedBars": "Stacked bars"
+       },
+       "limitPrecision": {
+-        "legend": "Limit Precision",
++        "legend": "Custom Precision",
+         "numberOf": {
+           "digits": "No. of digits",
+           "units": "No. of units"
+@@ -639,9 +661,13 @@
+       "portfolioPerformance_subTitle": "View a summary of up to 10 processes",
+       "operationsMonitoring": "Operations monitoring",
+       "operationsMonitoring_subTitle": "Monitor active processes and incidents",
+-      "completedInstances": "Total Completed Process Instances",
+-      "runningInstances": "Running Process Instances",
+-      "aggregateDuration": "Aggregated Process Duration (To Do: View alternate duration aggregations)",
++      "30DayThroughput": "Throughput (30-day rolling)",
++      "p75Duration": "75th Percentile Duration",
++      "p99Duration": "99th Percentile Duration",
++      "percentSLAMet": "% SLA Met",
++      "percentNoIncidents": "Incident-Free Rate",
++      "percentSuccess": "Success Rate (edit filter to only show successful end events)",
++      "percentAutomated": "Automation Rate (edit filter to exclude user tasks)",
+       "flownodeDuration": "Which process steps take too much time? (To Do: Add Target values for these process steps)",
+       "controlChart": "Is my process within control?",
+       "flownodeFrequency": "How often is each process step run?",
+@@ -682,12 +708,12 @@
+     },
+     "addButton": {
+       "addReport": "Add a Report",
+-      "selectReport": "Select Report",
+-      "addExternal": "Add External Source",
++      "optimizeReport": "Optimize Report",
+       "addReportLabel": "Add Report",
+       "selectReportPlaceholder": "Select a Report",
+       "noReports": "No reports have been created",
+-      "externalUrl": "External URL"
++      "externalUrl": "External URL",
++      "newReport": "New Report from a template"
+     },
+     "noAuthorization": "Missing authorization",
+     "noReportAccess": "No access to report",
+@@ -712,8 +738,8 @@
+       },
+       "types": {
+         "state": "Instance State",
+-        "instanceStartDate": "Start Date",
+-        "instanceEndDate": "End Date",
++        "instanceStartDate": "Instance Start Date",
++        "instanceEndDate": "Instance End Date",
+         "variable": "Variable",
+         "runningInstancesOnly": "Running",
+         "completedInstancesOnly": "Completed",
+@@ -765,6 +791,7 @@
+     "apply": "Apply Changes",
+     "create": "Create Alert",
+     "notCreated": "There are no Alerts created yet",
++    "contactManager": "Please contact the collection manager to create new Alerts",
+     "inactiveStatus": "Alert inactive",
+     "activateInfo": "To active add email or target system",
+     "existingAlerts": "Existing alerts",
+@@ -884,11 +911,15 @@
+     "dataSource": "Data Source",
+     "selected": "Selected",
+     "documentation": "documentation",
++    "here": "here",
+     "open": "Open",
+     "for": "for",
+     "download": "Download",
+     "view": "View",
+     "viewDocumentation": "View documentation",
++    "viewMore": "View More",
++    "viewLess": "View Less",
++    "configure": "Configure",
+     "process": {
+       "label": "Process",
+       "label-plural": "Processes"
+@@ -1054,19 +1085,20 @@
+         }
+       },
+       "types": {
+-        "instanceState": "Process Instance State",
++        "instanceState": "Instance State",
+         "date": "Instance Date",
+         "assignee": "Assignee",
+         "candidateGroup": "Candidate Group",
+         "instanceStartDate": "Start Date",
+         "instanceEndDate": "End Date",
+-        "duration": "Duration",
+         "instance": "Process instance",
+-        "instanceDuration": "Process Instance Duration",
++        "duration": "Duration",
++        "instanceDuration": "Instance Duration",
++        "processInstanceDuration": "Process Instance Duration",
+         "flowNodeDuration": "Flow Node Duration",
+         "variable": "Variable",
+         "multipleVariable": "Variable",
+-        "flowNode": "Flow Node",
++        "flowNode": "Flow Node Execution",
+         "evaluationDateTime": "Evaluation Date Time",
+         "inputVariable": "Input Variable",
+         "outputVariable": "Output Variable",
+@@ -1084,6 +1116,7 @@
+       "list": {
+         "appliedTo": "Applied to",
+         "invalidDefinition": "Data Source is missing version or tenant selection.",
++        "totalInstanceWarning": "Filter applies to the total instance count",
+         "operators": {
+           "isBetween": "is between",
+           "between": "between",
+@@ -1216,6 +1249,10 @@
+         "view": "Filter Flow Nodes",
+         "decision": "Filter Decision Evaluations"
+       },
++      "dropdownInfo": {
++        "instance": "Return Instances filtered by...",
++        "view": "Return Flow Node Data filtered by..."
++      },
+       "allVisible": {
+         "instance": "All instances visible",
+         "view": "All Flow Node data visible",
+@@ -1235,7 +1272,8 @@
+       "limitReached": "Process definition limit reached. Only ten processes allowed.",
+       "select": {
+         "process": "Select Process",
+-        "decision": "Select Decision"
++        "decision": "Select Decision",
++        "multiProcess": "Select one or more processes"
+       },
+       "version": {
+         "label": "Version",

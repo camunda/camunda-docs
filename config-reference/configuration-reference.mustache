@@ -8,15 +8,17 @@ import TabItem from "@theme/TabItem";
 import Property from "@site/src/components/Property";
 
 
-Properties for the Camunda Spring SDK.
+Properties for the {{componentName}}.
 
 ## Properties
 
 <Tabs groupId="property-format" defaultValue="property" queryString values={
-
 [
 {label: 'Configuration property', value: 'property' },
 {label: 'Environment variable', value: 'env' },
+{{#useHelm}}
+{label: 'Helm chart value', value: 'helm' },
+{{/useHelm}}
 ]
 }>
 </Tabs>
@@ -42,7 +44,7 @@ Properties for the Camunda Spring SDK.
 {{#properties}}
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="{{name}}" env="{{env}}"{{#helm}} helm="{{helm}}"{{/helm}}/><a href="#{{anchor}}" id="{{anchor}}" class="hash-link"/>
 </td>
 
 <td>
@@ -100,9 +102,12 @@ Deprecated {{&group.description}}
   {{#deprecation.replacement}}<a href="#{{deprecation.replacementAnchor}}"><Property defaultValue="property" groupId="property-format" property="{{deprecation.replacement}}" env="{{deprecation.replacementEnv}}"/></a>{{/deprecation.replacement}}
 </td>
 <td>
-
+{{#deprecation.reason}}
 {{deprecation.reason}}
-
+{{/deprecation.reason}}
+{{^deprecation.reason}}
+N/A
+{{/deprecation.reason}}
 </td>
 </tr>
 {{/properties}}

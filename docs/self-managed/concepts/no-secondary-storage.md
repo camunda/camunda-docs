@@ -4,6 +4,9 @@ title: "No secondary storage"
 description: "Run Zeebe clusters with only the engine and primary storage components, without secondary storage dependencies."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 The `noSecondaryStorage` mode allows you to run Zeebe clusters with only the engine and primary storage components, disabling all components that depend on secondary storage.
 
 ## No secondary storage mode
@@ -26,7 +29,7 @@ When secondary storage is disabled, you lose access to these advanced features (
 
 ## Configuration
 
-Using [Helm charts](../installation-methods/helm/install.md), you can set this flag in your `values.yaml` file:
+Using [Helm charts](/self-managed/deployment/helm/install/quick-install.md), you can set this flag in your `values.yaml` file:
 
 ```yaml
 global:
@@ -41,6 +44,64 @@ In addition to using Helm charts, you can enable `noSecondaryStorage` mode throu
 
 - **Docker Compose**: Modify your `docker-compose` file to exclude secondary storage services.
 - **Manual deployment**: Start Zeebe without Elasticsearch/OpenSearch or any services that rely on them.
+
+As you are running in headless mode, you will need to configure your brokers with the following:
+
+<Tabs groupId="brokerConfig" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<TabItem value="yaml">
+
+```yaml
+spring:
+  profiles:
+    active: broker,standalone
+
+camunda:
+  data:
+    secondary-storage:
+      type: none
+```
+
+</TabItem>
+
+<TabItem value="env">
+
+```
+SPRING_PROFILES_ACTIVE=broker,standalone
+CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
+```
+
+</TabItem>
+
+</Tabs>
+
+Similarly, if you're running gateways and brokers separately, you will need to also configure your gateways:
+
+<Tabs groupId="gatewayConfig" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' }, {label: 'Environment variables', value: 'env' }]}>
+<TabItem value="yaml">
+
+```yaml
+spring:
+  profiles:
+    active: gateway,standalone
+
+camunda:
+  data:
+    secondary-storage:
+      type: none
+```
+
+</TabItem>
+
+<TabItem value="env">
+
+```
+SPRING_PROFILES_ACTIVE=gateway,standalone
+CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Components and features disabled in `noSecondaryStorage` mode
 
@@ -108,8 +169,9 @@ These limitations mean you are using only a subset of Camunda’s capabilities. 
 
 ## When to use this mode
 
-Consider `noSecondaryStorage` mode **only** in specific situations, such as:
+Use `noSecondaryStorage` mode **only** in specific situations, such as:
 
+- **Local development with Camunda 8 Run**: Run Zeebe locally without secondary storage components by setting the `camunda.database.type=none` environment variable.
 - **Specialized technical requirements** that prevent the use of secondary storage.
 - **Temporary migration scenarios** where minimal orchestration functionality is needed during a transition period.
 - **Resource-constrained environments** where deploying the full platform is not feasible.

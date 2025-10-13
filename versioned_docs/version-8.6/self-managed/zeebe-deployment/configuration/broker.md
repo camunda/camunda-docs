@@ -348,6 +348,7 @@ More compression algorithms are available; check [commons-compress](https://comm
 | basePath                    | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
 | maxConcurrentConnections    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                                |
 | connectionAquisitionTimeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                                     |
+| supportLegacyMd5            | Enables the AWS provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage as your backup store that is not up to date with latest AWS SDK guidelines. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5`.                                                                                                                                                                                                          | false         |
 
 #### YAML snippet
 
@@ -363,6 +364,7 @@ backup:
     forcePathStyleAccess: false
     compression: none
     basePath: null
+    supportLegacyMd5: false
 ```
 
 #### Known issues
