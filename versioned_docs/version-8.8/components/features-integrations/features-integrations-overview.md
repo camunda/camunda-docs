@@ -1,5 +1,5 @@
 ---
-id: features-home
+id: features-integrations-overview
 title: Features and integrations
 sidebar_label: Features and integrations
 description: "Features and integrations."
