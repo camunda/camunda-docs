@@ -146,11 +146,18 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 ##################################################################################
 
 #---------------------------------------------------------------------------------
+#   8.9: content moves introduced prior to the release of version 8.9.
+#---------------------------------------------------------------------------------
+
+
+#---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
 # Add Identity overview redirect
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/overview/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
+
+RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
 
 # Fix various redirects prior to the 8.8 release cutting
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-authentication/?$ /docs/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration/ [R=301,L]
