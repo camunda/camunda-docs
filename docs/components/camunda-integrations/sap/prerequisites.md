@@ -27,7 +27,6 @@ You’ll need an **SAP BTP subaccount** with the following services enabled:
 - [**SAP Cloud Connector**](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/cloud-connector) - configured to bridge on-premises systems with BTP
 
 - **Additional services (depending on your use case):**
-
   - [**SAP Advanced Event Mesh (AEM)**](https://discovery-center.cloud.sap/serviceCatalog/advanced-event-mesh?region=all) - enables event-driven integration between Camunda and SAP
 
 - **Required for the BTP Plugin:**
