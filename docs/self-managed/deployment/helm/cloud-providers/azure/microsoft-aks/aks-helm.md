@@ -191,7 +191,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 For secure operation, do not publicly expose the Zeebe Gateway Service. Keep it reachable only within your Azure Virtual Network (for example, by deploying it without a public Ingress) and access it from internal services or over a private network extension such as an Azure VPN or ExpressRoute connection. This reduces external attack surface while preserving controlled operational access.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components (for example: Operate, Tasklist, Console, Connectors, Identity) to initiate connections to the Zeebe Gateway Service. Deny all other ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
 
 :::
 
