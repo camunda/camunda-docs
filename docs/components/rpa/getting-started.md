@@ -28,7 +28,6 @@ To get started with RPA, you first need to write an RPA script. [Camunda Modeler
 Once you have written your script, you can test it on a local RPA worker.
 
 1. **Start the RPA worker**:
-
    1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
    2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
    3. Start the worker by running the executable.
