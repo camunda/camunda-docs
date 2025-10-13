@@ -65,7 +65,6 @@ Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
-
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
    - **GitHub API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
