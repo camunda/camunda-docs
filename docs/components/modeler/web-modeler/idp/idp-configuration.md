@@ -190,7 +190,6 @@ To use [Docker](/self-managed/deployment/docker/docker.md) to deploy and run Cam
 
 1. Download the latest Camunda Docker Compose release artifact from the [camunda-distributions](https://github.com/camunda/camunda-distributions/releases) GitHub repository, and extract the file contents to your desired directory.
 1. In the extracted directory:
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:
