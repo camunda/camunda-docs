@@ -745,15 +745,15 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Additional resources
 
-- [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/)
-- [Elastic Cloud on Kubernetes Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation)
-- [Camunda 8 Helm Chart Parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)
-- [Kubernetes Operator Pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
+- [CloudNativePG documentation](https://cloudnative-pg.io/documentation/)
+- [Elastic Cloud on Kubernetes guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+- [Keycloak Operator documentation](https://www.keycloak.org/operator/installation)
+- [Camunda 8 Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)
+- [Kubernetes Operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/)
 
 ## Next steps
 
-- [Configure ingress and TLS](/self-managed/deployment/helm/configure/ingress/index.md)
+- [Configure Ingress and TLS](/self-managed/deployment/helm/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deployment/helm/configure/application-configs.md)
 - [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
 - [Production deployment guide](/self-managed/deployment/helm/install/production/index.md)
