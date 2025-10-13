@@ -203,7 +203,6 @@ Users need specific permissions to access **Orchestration Cluster** web componen
 Within components, users need additional permissions for specific resources, for example:
 
 - **Process related**: Resource type `processDefinition`
-
   - `READ_PROCESS_DEFINITION` to view process models
   - `CREATE_PROCESS_INSTANCE` to start new processes
   - `UPDATE_PROCESS_INSTANCE` to update running instances
