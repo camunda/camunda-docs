@@ -501,6 +501,20 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 
 <p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
+### Reference Architecture: General updates
+
+The 8.8 release cycle also refreshed multiple Self-Managed reference architecture guides and infrastructure baselines:
+
+- **Managed search (EKS single-region & EC2)**: OpenSearch upgraded 2.15 → 2.19 (aligns with the latest [supported environments](/reference/supported-environments.md)).
+- **Database layer (EKS & EC2)**: Aurora PostgreSQL baseline raised 15 → 17 (see updated versions in [supported environments](/reference/supported-environments.md)).
+- **Identity / global architecture**: Keycloak now standardized on the Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
+- **Private access (OpenShift ROSA, EKS, EC2)**: Optional VPN pattern documented (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
+- **OpenShift (single & dual region)**: Validation and guidance updated for OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
+- **EKS networking**: Alternative NAT gateway strategies added (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
+- **High availability**: Dual region materials refreshed (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
+- **Core diagrams**: Generic reference architecture visuals updated for unified Orchestration Cluster (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
+- **Terraform module upgrade**: AWS EKS Terraform module v5 → v6 (review changes in [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+
 ### Dynamic activation of ad-hoc sub-processes using job workers
 
 <!-- https://github.com/camunda/product-hub/issues/2631 -->
