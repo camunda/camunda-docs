@@ -1,0 +1,137 @@
+---
+id: sequence-flows-by-key
+title: "Get sequence flows of process instance by key"
+description: "Get sequence flows of process instance by key"
+sidebar_label: "Get sequence flows of process instance by key"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlVktv2zgQ/ivEnHa7jOW06aLQLQWcwtvFJohd7CHwgaZGNhuJVEjKWUPgfy+GlJzYVrG7x6K+yHzMNzPfvNiBFxsH+QPcWSPRubl2XmiJsOJgGrTCK6PnBeTg8KlFLfGmMs/u4/4z7oFDI6yo0aMljA60qBFyeIxnSkMOjfBb4FCgk1Y1BAY5fMY9MyVrkkqmBp0cLD61ymIBubctcnByi7WAvAO/bwhaaY8btMChNLYWPm39fgUhrEjcNUY7dCTxdjqlz7HqRStJJ3CQRnvUnq68yd7Q50yZsFZETzzW7tW+81bpDQT6cbga0zPXO1GpgpFD6PyxPtE0lZKR2qyxZl1h/dtXR3IjRpj1V5QE0FgKiFfJO+eFb92/MvPuLQQONTonNjjiAoWpZ3/sMG2cO87BK1/R1sxaY2Fg4t05EzfGrlVRoP5vnP9Q7l6du3ufAo4UemdaK5Fp41lpWl38HFnwfqweru/m7JXDDKPAT8BH4OBQtlb5fWyRaxQW7QW1yPxhFXgH0phHhXG1Ou2Un9CzofGykjrvWONk6z1LPbdGvzXUrTcYyaHum0O2u8x6mYtBxmXdI+5DNqBfRHQga+1u6OetrSCHLrEf8izrtsb5kHeNsT4Ah52wSqyrRD6dpciXoq2I6spIUcXtU8eWW2R0QBODXPJbZJQjSfuEWCYdx3Afph+mo0h09TsoL5nzgrP1vhnFSZdHkeJ8GSK5oHvJ6SF6L0OjUWk29sPw9m52f72cXSxmi8X89q9hMPZygR9lxAGlNzEaROt0CYbbN0My//H3Miae0qWJ4n0C3sbZjeyuXVdKkivnDhsm4jBkQnq1QyZ0waSpmwqpfZ0mGf1jA2xpLKuNVt5Q6kdJb01LmbA1xlM5pNoWMsYwJRI55fIse35+nkhRt7oQE2lqIqFSErWLPPa8/dnv8BPhwkh3kFYmrjOLJVpK46wHchmhUiInZy8n08k0ZZXztdCvFP3fGjti8RAwj//4rKmE0qQlmtz19fcAu8vUqY4rEDjkCfKkCFe8r6UH6Lq1cPjFViHQ9lOLNjaOl9KLhVooR/8LyEtROTwz8tBm4Zf7/on1K/v+M2zUpyG/9T4WftXSCnh87aU3X1gFDlsUBdpoVTq5lhIb/0qGRj9V06FZfZotgYNoiawDoScZHwFHTei6dGNpHlGHcLDI05psCuEb9aq9Dg==
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get sequence flows of process instance by key"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/process-instances/{key}/sequence-flows"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get sequence flows of process instance by key
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "key",
+      in: "path",
+      description: "Key of process instance",
+      required: true,
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "*/*": { schema: { type: "array", items: { type: "string" } } },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
