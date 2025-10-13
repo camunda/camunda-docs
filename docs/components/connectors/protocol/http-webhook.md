@@ -69,7 +69,6 @@ The **HTTP Webhook connector** is an inbound connector that allows you to start 
   - Provide the values in plain text, not base64-encoded.
 
 - **API Key** - The API key can be provided anywhere in the request, for example, in the `Authorization` header or in the request body.
-
   - Set the **API Key** property to the expected value of the API key.
   - Set the **API Key locator** property that will be evaluated against the incoming request to extract the API key. [See the example](#how-to-configure-api-key-authorization).
 
