@@ -21,7 +21,6 @@ The **HTTP Webhook connector** is an inbound connector that allows you to start 
 1. In the **Webhook Configuration** section, configure the **Webhook ID**. By default, **Webhook ID** is pre-filled with a random value. This value will be part of the Webhook URL. You will find more details about HTTP Webhook URLs [below](#activate-the-http-webhook-connector-by-deploying-your-diagram).
 2. Configure [**HMAC authentication**](https://en.wikipedia.org/wiki/HMAC) if required in the **Authentication** section:
    If you require HMAC authentication for your webhook, you can set up the HMAC shared secret key, HMAC header, HMAC hash algorithm, and an array of HMAC scopes.
-
    - **HMAC secret key**: Set the HMAC shared secret key that will be used to calculate the message hash. The value of this key should be provided by the webhook provider to ensure secure communication.
    - **HMAC header**: Set the HMAC header whose value contains an encrypted hash message. The exact value of this header should be provided by the external caller when invoking your webhook.
    - **HMAC hash algorithm**: Select the HMAC hash algorithm to be used in the HMAC signature calculation. The exact value of this algorithm should also be provided by the external caller when invoking your webhook.
