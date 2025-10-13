@@ -68,7 +68,6 @@ Once you are happy with your script and have tested it locally, you can start au
 The last step is to configure the RPA worker to pick up the jobs from Camunda.
 
 1. **Create credentials for the worker**:
-
    1. Create the necessary worker credentials in Console. You can follow the same steps as for the Modeler credentials. Give your new client the scopes `Zeebe` and `Secrets`.
    2. Add the generated credentials to your `application.properties` in the same directory as your RPA worker executable.
 
