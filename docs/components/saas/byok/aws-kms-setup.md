@@ -139,10 +139,6 @@ Once a key is applied, it cannot be edited or replaced—even if the key was inv
   1. Navigate to **Customer managed keys**.
   2. Select your key and view **Key policy** and **Key usage** tabs.
   3. Review **Recent activity** to confirm operations (Encrypt, Decrypt, GenerateDataKey).
-- To confirm storage encryption:
-  - **Amazon EBS**: check **Encryption** column in volumes list
-  - **Amazon S3**: confirm bucket encryption references your KMS key
-  - **Elasticsearch**: verify encryption in domain settings
 
 ### Monitor KMS usage
 
