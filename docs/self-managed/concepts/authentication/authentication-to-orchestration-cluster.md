@@ -8,7 +8,7 @@ description: "Learn about authentication methods for the Orchestration Cluster o
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Orchestration Cluster components and their resources is managed by [Identity](/self-managed/components/orchestration-cluster/identity/initial-setup.md).
+Authentication to the Orchestration Cluster components and their resources is managed by [Identity](/components/identity/identity-introduction.md).
 
 ## About Orchestration Cluster authentication
 
