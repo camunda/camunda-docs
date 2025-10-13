@@ -351,6 +351,15 @@ The app integration allows you to:
 The Microsoft Teams integration is released as an [early access](/components/early-access/overview.md) alpha feature to allow you to test and participate in development by sharing feedback before general availability, and is subject to alpha feature limitations.
 :::
 
+### SAP Advanced Event Mesh (AEM) connectivity
+
+Connect Camunda directly to SAP Advanced Event Mesh (AEM) for event-driven process automation.
+
+- New AEM connectors allow you to receive CloudEvents from SAP systems as BPMN messages and publish CloudEvents from Camunda to AEM.
+- This enables seamless integration with SAP’s event-driven architecture, allowing your Camunda processes to react in real time to business events across SAP BTP, S/4HANA, or ECC.
+
+<p><a href="../../../../components/camunda-integrations/sap/eventing" class="link-arrow">SAP Eventing with SAP Advanced Event Mesh</a></p>
+
 ### ServiceNow
 
 Extend the power of your process automation by integrating Camunda with ServiceNow. This integration enables seamless communication between your BPMN workflows and ServiceNow IT Service Management (ITSM), helping you automate routine tasks and accelerate service delivery.

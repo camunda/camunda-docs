@@ -120,6 +120,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/task-testing",
       ],
     },
     {
@@ -288,6 +289,7 @@ module.exports = {
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
                     "components/camunda-integrations/sap/btp-plugin",
+                    "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
                 },
@@ -389,7 +391,13 @@ module.exports = {
       },
       items: [
         {
-          "Web Modeler": [
+          type: "category",
+          label: "Web Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/index",
+          },
+          items: [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
@@ -478,6 +486,7 @@ module.exports = {
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
             "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing",
           ],
         },
         {
@@ -511,6 +520,7 @@ module.exports = {
               ],
             },
             "components/modeler/desktop-modeler/settings/settings",
+            "components/modeler/desktop-modeler/task-testing",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
@@ -1394,6 +1404,8 @@ module.exports = {
                     id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
                   },
                   items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
                   ],
@@ -1661,6 +1673,9 @@ module.exports = {
                 },
                 {
                   Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/monitoring",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
