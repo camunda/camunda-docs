@@ -38,6 +38,41 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm: Alternative infrastructure methods
+
+Prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts in production; Bitnami remains for evaluation/PoC. [Guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure)
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference Architecture: EC2
+New EC2 manual / VM blueprint: HA multi-AZ cluster, managed OpenSearch, optional Aurora PostgreSQL, dual LB pattern, VPN/bastion option, modular Terraform. [Guide](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md)
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference Architecture: Azure AKS
+New AKS architecture: zonal AKS baseline, managed/operator data services, unified ingress & identity patterns, private networking, modular Terraform + Helm workflow. [Guide](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">

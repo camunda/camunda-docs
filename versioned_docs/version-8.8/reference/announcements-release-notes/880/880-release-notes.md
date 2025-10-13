@@ -334,6 +334,51 @@ A new `commonLabels` value is now available and integrates with `camundaPlatform
 
 The number of replicas for the Web Modeler REST API and web app deployments can be set with new configuration properties: `webModeler.restapi.replicas` and `webModeler.webapp.replicas`, respectively.
 
+### Alternative infrastructure methods (Helm)
+
+Production guidance now recommends running PostgreSQL, Elasticsearch / OpenSearch, and Keycloak via **vendor-supported operators** instead of the Bitnami subcharts once you leave evaluation environments.
+
+Why it matters:
+
+- Operators (CloudNativePG, Elastic/ECK or OpenSearch Operator, Keycloak Operator) automate upgrades, failover, backups, credentials, and certificate rotation.
+- Decouples critical data services from the Camunda Helm release cycle and values file structure, reducing blast radius and enabling independent scaling / maintenance windows.
+- Improves security posture (faster CVE patch uptake) and observability through native CR status conditions.
+- Allows progressive migration: keep Bitnami for local dev & PoC, layer operators in staging, then switch production.
+
+Key elements delivered in 8.8 docs:
+
+- A consolidated vendor-supported infrastructure guide showing topology, value layering, and service hand-off points.
+- Replacement examples for each subchart (connection secrets, services, and TLS considerations).
+- Keycloak Operator access clarification (no embedded Service route by default; use Ingress or on-demand port-forward during initial admin tasks).
+- Consistent table formatting updates (e.g. Message Send connector) while aligning infra references across 8.7 / 8.8 versioned docs.
+
+### Reference architecture: Amazon EC2 (manual / VM)
+
+New production reference architecture for running the Camunda 8 Orchestration Cluster directly on Amazon EC2 with Terraform-provisioned networking & IAM plus managed cloud services.
+
+Highlights:
+
+- Three-node zebee/core layout across three AZs (balanced partition placement, quorum resilience).
+- Managed OpenSearch (baseline 2.19) and optional Aurora PostgreSQL 17 minimize ops overhead for data layers.
+- Dual load balancer pattern (ALB for HTTP/webapps & REST; NLB for gRPC) enabling protocol-appropriate routing and future mTLS expansion.
+- Optional VPN / bastion design for private subnet administration; security groups scoped least-privilege.
+- Modular Terraform stacks (network, security, compute, search, database) producing outputs consumed by automation or configuration management.
+- Upgrade path guidance (charted Helm deployment can still be used inside VM or K8s migration strategy documented separately).
+
+### Reference architecture: Azure AKS
+
+New Kubernetes reference architecture for Microsoft Azure leveraging AKS plus Terraform for infrastructure and Helm for platform lifecycle.
+
+Highlights:
+
+- Multi-AZ (zonal) AKS cluster baseline with node pool separation (system vs workloads) when available in region.
+- Choice of managed vs operator-managed PostgreSQL & search (Azure Database for PostgreSQL / Elastic, or in-cluster operators) with trade-off notes.
+- Identity & ingress patterns aligned to unified Orchestration Cluster (shared vs split fronts, TLS termination options, private endpoints / internal load balancers).
+- Azure-native networking & security (Private DNS, NSGs, managed identities) mapped to Camunda component requirements.
+- Terraform + Helm separation enables idempotent infra changes and predictable app rollouts, easing blue/green or canary strategies.
+
+See the reference architecture guides for full topology diagrams, sizing guidance, and migration considerations.
+
 ## Integrations
 
 ### Microsoft Teams
