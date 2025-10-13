@@ -1,0 +1,4 @@
+label: "Customize & extend"
+link: null
+customProps:
+  description: Customize the form renderer and extend the editor with custom components.
