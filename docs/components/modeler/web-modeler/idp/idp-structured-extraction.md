@@ -145,7 +145,6 @@ Publish the document extraction template to make it available for [integration i
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
    <img src={IdpPublishProjectModalImg} width="500px" alt="Validate extraction screen" style={{marginTop: '0'}} />
-
    - **Version name**: Enter a version for the published document extraction template.
    - **Version description**: Enter a description for the published document extraction template version.
 
