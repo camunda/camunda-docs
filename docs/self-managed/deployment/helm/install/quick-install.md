@@ -86,7 +86,6 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    You should see a JSON response with the cluster topology information.
 
    Available services:
-
    - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
    - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
    - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
