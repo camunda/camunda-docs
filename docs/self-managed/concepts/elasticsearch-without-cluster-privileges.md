@@ -356,7 +356,6 @@ Use the standalone schema manager if you need to:
 #### Procedure
 
 1. Prepare a schema manager configuration that includes the new settings.
-
    - For Operate and Tasklist version 8.7.11+, set `updateSchemaSettings: true`.
 
    Example configuration:
