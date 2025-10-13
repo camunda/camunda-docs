@@ -119,7 +119,7 @@ camunda.security.initialization.users[0].email: <email>
 <TabItem value="helm-values">
 
 ```yaml
-camunda:
+orchestration:
   security:
     initialization:
       users:
@@ -210,7 +210,7 @@ camunda.security.initialization.default-roles.<role>.mappingrules[0]: <mapping i
 <TabItem value="helm-values">
 
 ```yaml
-camunda:
+orchestration:
   security:
     initialization:
       defaultRoles:
@@ -258,7 +258,7 @@ camunda.security.initialization.default-roles.admin.users[0]: demo
 <TabItem value="helm-values">
 
 ```yaml
-camunda:
+orchestration:
   security:
     initialization:
       defaultRoles:
@@ -306,10 +306,10 @@ camunda.security.authorizations.enabled: true
 <TabItem value="helm-values">
 
 ```yaml
-camunda:
+orchestration:
   security:
     authentication:
-      unprotected-api: false
+      unprotectedApi: false
     authorizations:
       enabled: true
 ```
