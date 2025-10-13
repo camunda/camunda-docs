@@ -1,0 +1,177 @@
+---
+id: delete-document
+title: "Delete document"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Delete document"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV91v2zYQ/1cOfGoxxXK7bOv05jpu56JLg9hdMbh+oKizxVYiFZJyYhj634cjJX8HTbGnDX0IHInH+/3uU3cb5vjSsmTGrrSoS1SOzSOmKzTcSa3GGUtYhgU63J5HLEMrjKxIgCXss/qsZrPhh+vJeDIdXQ//TibT2w/Xb+dzOrnyl4FD1t6HhdEluBxhyMtaZRxegShq69D06MK1dggu5w5cLi1IC6I2BpUr1mDrqtLGYQYLbXYardMGLegFuHWFCQw+TSJ4O7yJQKqLEktt1vBMaXVRGZ3Vgng/j6DQghcn7z8rFrGKG16iQ0Oe2TDFSyQ/tHjjjEVMkukVdzmLmMG7WhrMWOJMjcf+meYI4yvPLscdaachOLbHImZFjiVnyebobud0GGfBJ7WSdzUWa5AZKicXEu2eb0nVQpuSu727ni45hiXMOiPVkp6lK/BQqGmiraneozs772o06wNDF7ywT7XUK9vZe3hI2XDogUOqTTMnXFtpZdHS+cv+5amjpvs677ltsTKwtRBo7aIuinWPNRG7/PZ16XJPcilXqMgiUqi0g4WuVUZshVaOaiHZMF5VhRS+WuLK6LTA8qcvlrRuHg3rAG6CJGTouCxAp19QOPC8STDFDKSC2e2bIfx++ctv82e5c5VN4vj+/r5nFuICM+m06WmzjM1C0B/JPe/BNEeDUPI1pAg8yyRh8gIqQ1XtKGFshUIupKCYkJ0tbV89PV8AbQwCLSqI7eVdhI4jtZd6tZEnbWIAH2/HXdqupVqeQvs7C14XpIOnunZJWnD1lUUMH3hZ+Yzdf99sE/mUzDG6rcuSm3WXncfAO4DXPINbvKvROgKwjrt6z2wmlcMlmn17pXI/vzzBpKT6Yzq9gaAChM7QNy7f2FoCB9iX/X7ESqlkWZfdE38IT7/2+w0hUL48wV4F+FAVXPnEPDZaKiipJoO2Q/Nb07t8WcOs5A/vdGqneiCcXHGHdg6CKyqIFKHixmJGnpLKOq7Ek6JBuUDd8yQhtJFLeUz4kGG8ehl/0amNeeBDOptdKrC2tq6Cq5qGzn7p98+UoQIKpqHyQGO0AS38xyaD+1wWHp6aR8fNBNeEEvnRAn60gB8t4D/TApqIlehyvRto/ZznctLWffptvNkNeQ1NJWhW3RRYm4IlbBMKuknieJNr65pkQyNpE68o+ituJE+LUCN0HAq/S2g/cvrX5xKFDmj+6iz/YESO1oVJHIZhRobb0WQKb7nDex4GGoI/hHnVf9U/i0CiT9A+uBlDsNwD7LewDoJ60VmIIPy9IH7KsyhqI916QiqCC18jN2gGNYVpm1Ettkei59QLsaj9501Xku8+TYl+yq0U31JBMj6DpFpoL9hm0nkLBjdjijYaGyzv9160nwQufDDaObpbcUZqKRViWwkhk7p2vpQur9Oe0GUsgvj2V1pbo2XNSfHcjH0XEbosa+U/PWoZ5lZ+Zq1iESukQGXxDLX34QT+CsbAi17/eyimhU7jkksVtxA2Hg7+/Hh9Nbh4Px6Oriejixe9fs89OO/eSltXcrXHo10Qs0fWy83uQ/t/3DTbfHT44OKq4FJRsL3zN213mm33TssiluwtofOobTEzttmk3OJHUzQNvQ77GjWtTFrqR49sbPvO/TfL21krvuL6YJNc8aImKUa13jXK7yT57LbdQJ/DU9bqs7zal1yt90l1fPf828ybiOXIMzSeZhAYCIGV27v66PRHdm6/OVej96PpiDXNPwP5CZQ=
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete document"}
+></Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/documents/{documentId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Delete a document from the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "documentId",
+      in: "path",
+      required: true,
+      description: "The ID of the document to delete.",
+      schema: {
+        description: "Document Id that uniquely identifies a document.",
+        format: "DocumentId",
+        type: "string",
+        title: "DocumentId",
+      },
+    },
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description: "The ID of the document store to delete the document from.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The document was deleted successfully." },
+    "404": {
+      description: "The document with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

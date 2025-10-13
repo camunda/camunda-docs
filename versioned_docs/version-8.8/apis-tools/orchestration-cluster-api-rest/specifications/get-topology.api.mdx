@@ -1,0 +1,269 @@
+---
+id: get-topology
+title: "Get cluster topology"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get cluster topology"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get cluster topology"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/topology"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Obtains the current topology of the cluster the gateway is part of.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "Obtains the current topology of the cluster the gateway is part of.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a topology request.",
+            type: "object",
+            required: [
+              "brokers",
+              "clusterSize",
+              "partitionsCount",
+              "replicationFactor",
+              "gatewayVersion",
+              "lastCompletedChangeId",
+            ],
+            properties: {
+              brokers: {
+                description: "A list of brokers that are part of this cluster.",
+                type: "array",
+                items: {
+                  description: "Provides information on a broker node.",
+                  type: "object",
+                  required: ["nodeId", "host", "port", "partitions", "version"],
+                  properties: {
+                    nodeId: {
+                      description:
+                        "The unique (within a cluster) node ID for the broker.",
+                      type: "integer",
+                      format: "int32",
+                      example: 0,
+                    },
+                    host: {
+                      description: "The hostname for reaching the broker.",
+                      type: "string",
+                      example:
+                        "zeebe-0.zeebe-broker-service.b7fd7aa3-b973-4128-8789-74cd2318992c-zeebe.svc.cluster.local",
+                    },
+                    port: {
+                      description: "The port for reaching the broker.",
+                      type: "integer",
+                      format: "int32",
+                      example: 26501,
+                    },
+                    partitions: {
+                      description:
+                        "A list of partitions managed or replicated on this broker.",
+                      type: "array",
+                      items: {
+                        description:
+                          "Provides information on a partition within a broker node.",
+                        type: "object",
+                        required: ["partitionId", "role", "health"],
+                        properties: {
+                          partitionId: {
+                            description: "The unique ID of this partition.",
+                            type: "integer",
+                            format: "int32",
+                            example: 1,
+                          },
+                          role: {
+                            description:
+                              "Describes the Raft role of the broker for a given partition.",
+                            type: "string",
+                            example: "leader",
+                            enum: ["leader", "follower", "inactive"],
+                          },
+                          health: {
+                            description:
+                              "Describes the current health of the partition.",
+                            type: "string",
+                            example: "healthy",
+                            enum: ["healthy", "unhealthy", "dead"],
+                          },
+                        },
+                        title: "Partition",
+                      },
+                    },
+                    version: {
+                      description: "The broker version.",
+                      type: "string",
+                      example: "8.8.0",
+                    },
+                  },
+                  title: "BrokerInfo",
+                },
+              },
+              clusterSize: {
+                description: "The number of brokers in the cluster.",
+                type: "integer",
+                format: "int32",
+                example: 3,
+              },
+              partitionsCount: {
+                description:
+                  "The number of partitions are spread across the cluster.",
+                type: "integer",
+                format: "int32",
+                example: 3,
+              },
+              replicationFactor: {
+                description:
+                  "The configured replication factor for this cluster.",
+                type: "integer",
+                format: "int32",
+                example: 3,
+              },
+              gatewayVersion: {
+                description: "The version of the Zeebe Gateway.",
+                type: "string",
+                example: "8.8.0",
+              },
+              lastCompletedChangeId: {
+                description: "ID of the last completed change",
+                type: "string",
+                example: "-1",
+              },
+            },
+            title: "TopologyResponse",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

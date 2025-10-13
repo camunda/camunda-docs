@@ -146,7 +146,7 @@ If an immediate cluster upgrade to a fixed version is not possible, the followin
 
 ## Anomaly detection scripts
 
-The [c8-sm-checks](https://github.com/camunda/c8-sm-checks) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
+The [c8-sm-checks](https://github.com/camunda/c8-sm-checks/tree/v1.2.1) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
 
 These scripts perform health checks on various aspects of the Kubernetes installation and Zeebe components, providing insights into potential issues that may affect the performance or stability.
 
@@ -156,7 +156,7 @@ Each script in the `c8-sm-checks` project can be executed independently, allowin
 
 To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
 
-For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
+For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks/tree/v1.2.1).
 Additionally, you can use the `-h` option with each script to display help information directly from the command line.
 
 Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:

@@ -120,6 +120,7 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
+        "components/concepts/task-testing",
       ],
     },
     {
@@ -288,6 +289,7 @@ module.exports = {
                     "components/camunda-integrations/sap/odata-connector",
                     "components/camunda-integrations/sap/rfc-connector",
                     "components/camunda-integrations/sap/btp-plugin",
+                    "components/camunda-integrations/sap/eventing",
                     "components/camunda-integrations/sap/csap-cli",
                   ],
                 },
@@ -315,48 +317,31 @@ module.exports = {
                 // },
               ],
             },
-            "components/camunda-integrations/servicenow/servicenow-integration",
-            // NOTE: The above should be removed once items are added to the complete section below.
-            // {
-            //   type: "category",
-            //   label: "ServiceNow",
-            //   link: {
-            //     type: "doc",
-            //     id: "components/camunda-integrations/servicenow/servicenow-integration",
-            //   },
-            //   items: [
-            //     "components/camunda-integrations/servicenow/prerequisites",
-            // {
-            //   "Setup & configuration": [
-            //     "components/camunda-integrations/servicenow/setup/connector",
-            //     "components/camunda-integrations/servicenow/example-workflows",
-            //   ],
-            // },
-            // {
-            //     "Integration features": [
-            // "components/camunda-integrations/servicenow/features/manage-snow-records",
-            // "components/camunda-integrations/servicenow/features/start-process-servicenow",
-            //   ],
-            // },
-            // "components/camunda-integrations/servicenow/best-practices",
-            // {
-            //   "Troubleshooting & FAQs": [
-            //     "components/camunda-integrations/servicenow/troubleshooting/troubleshooting",
-            //     "components/camunda-integrations/servicenow/troubleshooting/pitfalls",
-            //     "components/camunda-integrations/servicenow/troubleshooting/limitations",
-            //     "components/camunda-integrations/servicenow/troubleshooting/faq",
-            //   ],
-            // },
-            // {
-            //   "Examples & blueprints": [
-            //     "components/camunda-integrations/servicenow/examples/example-blueprints",
-            //     "components/camunda-integrations/servicenow/examples/sample-use-cases",
-            //   ],
-            // },
-            // "components/camunda-integrations/servicenow/resources",
-            // "components/camunda-integrations/servicenow/glossary",
-            //   ],
-            // },
+            {
+              type: "category",
+              label: "ServiceNow",
+              link: {
+                type: "doc",
+                id: "components/camunda-integrations/servicenow/servicenow-integration",
+              },
+              items: [
+                "components/camunda-integrations/servicenow/prerequisites",
+                "components/camunda-integrations/servicenow/setup-and-configuration",
+                {
+                  type: "category",
+                  label: "Connectors",
+                  items: [
+                    "components/camunda-integrations/servicenow/connectors/outbound-connector",
+                    "components/camunda-integrations/servicenow/connectors/incident-handler",
+                    "components/camunda-integrations/servicenow/connectors/flow-starter",
+                  ],
+                },
+                "components/camunda-integrations/servicenow/blueprints",
+                "components/camunda-integrations/servicenow/best-practices",
+                "components/camunda-integrations/servicenow/troubleshooting",
+                "components/camunda-integrations/servicenow/glossary",
+              ],
+            },
           ],
         },
         {
@@ -375,17 +360,7 @@ module.exports = {
                 id: "components/early-access/alpha/alpha-features",
               },
               items: [
-                {
-                  type: "category",
-                  label: "BPMN Copilot",
-                  link: {
-                    type: "doc",
-                    id: "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                  },
-                  items: [
-                    "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
-                  ],
-                },
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
                 "components/early-access/alpha/feel-copilot/feel-copilot",
                 {
                   type: "category",
@@ -399,6 +374,7 @@ module.exports = {
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
                   ],
                 },
+                "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
           ],
@@ -415,7 +391,13 @@ module.exports = {
       },
       items: [
         {
-          "Web Modeler": [
+          type: "category",
+          label: "Web Modeler",
+          link: {
+            type: "doc",
+            id: "components/modeler/web-modeler/index",
+          },
+          items: [
             "components/modeler/web-modeler/launch-web-modeler",
             "components/modeler/web-modeler/model-your-first-diagram",
             "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
@@ -480,6 +462,7 @@ module.exports = {
                 "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                "components/modeler/web-modeler/element-templates/best-practices",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -504,6 +487,7 @@ module.exports = {
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
             "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing",
           ],
         },
         {
@@ -537,6 +521,7 @@ module.exports = {
               ],
             },
             "components/modeler/desktop-modeler/settings/settings",
+            "components/modeler/desktop-modeler/task-testing",
             "components/modeler/desktop-modeler/troubleshooting",
           ],
         },
@@ -819,6 +804,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/hubspot",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
             {
               Microsoft: [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
@@ -1360,6 +1346,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1418,6 +1405,8 @@ module.exports = {
                     id: "self-managed/deployment/helm/configure/authentication-and-authorization/index",
                   },
                   items: [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
                   ],
@@ -1685,6 +1674,9 @@ module.exports = {
                 },
                 {
                   Concepts: [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/monitoring",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
