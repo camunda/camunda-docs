@@ -39,7 +39,6 @@ For more information on Camunda 7 plugins, see the [Camunda 7 documentation](htt
 1. **Download the latest release** from the [releases page](https://github.com/camunda/camunda-7-to-8-data-migrator/releases).
 
 2. **Deploy the plugin** to your Camunda 7 installation by copying the generated JAR file into the Camunda 7 plugins directory. For example the paths are:
-
    - For Tomcat: `./camunda-bpm-ee-tomcat-<camunda-7-version>-ee/server/apache-tomcat-<tomcat-version>/webapps/camunda/WEB-INF/lib/`.
    - For Run: `./camunda-bpm-run-ee-<camunda-7-version>-ee/configuration/userlib/`.
 
