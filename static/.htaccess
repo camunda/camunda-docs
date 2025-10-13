@@ -313,7 +313,7 @@ RewriteRule ^docs/self-managed/operational-guides/production-guide/helm-chart-pr
 
 # Orchestration cluster restructure
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
-RewriteRule ^docs/next/self-managed/orchestration-identity/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
+RewriteRule ^docs/self-managed/orchestration-identity/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 
 # Self-Managed Restructure
 # Setup
