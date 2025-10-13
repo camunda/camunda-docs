@@ -206,7 +206,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 If you find that its features aren't suitable for your needs, or if you prefer to use a Kubernetes-native Ingress controller, such as the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), [you have that option](https://www.redhat.com/en/blog/a-guide-to-using-routes-ingress-and-gateway-apis-in-kubernetes-without-vendor-lock-in).
 
-For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/deployment/helm/configure/ingress-setup.md).
+For guidance on installing an Ingress controller, you can refer to the [Ingress Setup documentation](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 :::note Difference between ingress-nginx and NGINX Ingress
 

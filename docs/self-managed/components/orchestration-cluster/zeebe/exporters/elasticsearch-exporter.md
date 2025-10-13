@@ -12,6 +12,12 @@ import TabItem from "@theme/TabItem";
 Please refer to [supported environments](/reference/supported-environments.md#camunda-8-self-managed) to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup.
 :::
 
+:::note
+As of **8.8**, Camunda uses the [**Camunda Exporter**](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from **≤8.7** are only consumed during migration.
+
+The Elasticsearch and OpenSearch exporters remain fully usable after migration for existing setups, Optimize, and other custom use cases—their functionality is **not limited to the migration period**.
+:::
+
 The Zeebe Elasticsearch exporter acts as a bridge between
 [Zeebe](https://zeebe.io/) and [Elasticsearch](https://www.elastic.co/products/elasticsearch) by
 exporting records written to Zeebe streams as documents into several indices.
@@ -254,6 +260,7 @@ signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
+
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
@@ -285,6 +292,7 @@ signed using trusted root certificate authorities.
     ```
 
     Then, specify the following properties when running the application:
+
     - `javax.net.ssl.trustStore`: must be set to the path of your custom trust store.
     - `javax.net.ssl.trustStorePassword`: set to your trust store password.
 

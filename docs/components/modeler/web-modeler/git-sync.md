@@ -68,7 +68,7 @@ Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server
 
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
-   - **GitHub API Base URL:** (optional - _**SaaS only**_) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
+   - **GitHub API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your GitHub installation's REST API. Only necessary for GitHub Enterprise instances, refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose your correct Enterprise Server version. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
@@ -284,16 +284,18 @@ If you delete, move, or rename files in Web Modeler, the original will remain in
 
 <h3>Create a new access token</h3>
 
-Web Modeler requires an access token to sync changes with your Bitbucket Data Center repository.
-You can use one of the following token types:
+Web Modeler requires a **user** HTTP access token to sync changes with your Bitbucket Data Center repository.
+Repository or project access tokens are not supported.
 
-- **Repository access token** (recommended)
-- Project access token
-- User access token
-
-Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html) to generate a new repository access token for your repository with the **Repository write** permission.
+Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html#HTTPaccesstokens-CreateHTTPaccesstokens) to generate a new user access token for your repository with the **Repository write** permission.
 
 <h3>Configure Bitbucket Data Center in Web Modeler</h3>
+
+:::note
+When using Web Modeler Self-Managed with a self-hosted Bitbucket Data Center instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL` is set to the API URL of your self-hosted Bitbucket Data Center instance.
+It usually looks like `http(s)://HOSTNAME/rest/api/latest`.
+Refer to the [Bitbucket documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris) for more information.
+:::
 
 1. In Web Modeler, navigate to the process application you want to connect to Bitbucket Data Center, and click **Connect repository**.
 
@@ -301,8 +303,8 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
 
-   - **Access token:** The repository, project, or workspace access token you generated.
-   - **Bitbucket API Base URL:** (optional - _**SaaS only**_) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
+   - **Access token:** The user access token you generated.
+   - **Bitbucket API Base URL:** (optional - _**SaaS only**_, configured globally for SM) The base URL of your Bitbucket installation's REST API (e.g., `https://bitbucket.example.com/rest/api/latest`, see [documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris)). Only necessary for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path containing your process application files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
@@ -324,7 +326,7 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
 
 1. In your connected process application, click **Sync with _GitProvider_** button.
-2. Enter a [version number](./process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](process-applications/process-applications.md#versioning) to create a new milestone for your process application. The new milestone will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
@@ -362,7 +364,7 @@ Git sync supports parallel feature development by allowing multiple process appl
 
 To use Git sync for parallel feature development:
 
-1. Create a new [process application](./create-a-process-application.md) in Modeler for each active feature branch you want to develop.
+1. Create a new [process application](process-applications/create-a-process-application.md) in Modeler for each active feature branch you want to develop.
 2. Configure Git sync for each instance by connecting it to the corresponding feature branch in your repository.
 3. Work on your feature in Modeler, using **Sync with _GitProvider_** to pull and push changes as needed.
 4. Once the feature is complete and merged into the main branch, you can delete the process application associated with the feature branch.

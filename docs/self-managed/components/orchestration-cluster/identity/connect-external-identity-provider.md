@@ -124,7 +124,7 @@ orchestration.security.authentication.oidc.scope: ["openid"]
 
 :::info
 If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods)),
-you need to make the cluster accept the token passed by Web Modeler.
+both applications must use the same IdP. You also need to make the cluster accept the token passed by Web Modeler.
 To do so, include the Web Modeler UI's token audience in the configured list of audiences.
 :::
 

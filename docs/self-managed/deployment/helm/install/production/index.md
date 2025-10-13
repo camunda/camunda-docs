@@ -113,7 +113,7 @@ orchestration:
         secretName: camunda-platform-zeebe-grpc
 ```
 
-More information can be found in the [Ingress setup](/self-managed/deployment/helm/configure/ingress-setup.md) guide.
+More information can be found in the [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) guide.
 
 ### Identity provider integration
 
@@ -257,7 +257,7 @@ Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret c
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
 - Using an [existing Elasticsearch instance](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
-- Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md)
+- Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
   - Using Amazon OpenSearch service [through IRSA](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/modeler/web-modeler/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
@@ -769,7 +769,9 @@ elasticsearch:
 
 ### Adding more orchestration clusters
 
-To configure multiple Camunda orchestration clusters in multiple namespaces, we recommend you to follow our guide for [multi-namespace deployments](/self-managed/deployment/helm/configure/multi-namespace-deployment.md). This is the most recommended approach to allow you to set up various environments using the Camunda Orchestration Cluster.
+Camunda 8 supports running multiple orchestration clusters in separate namespaces. This setup allows you to isolate environments such as development, staging, and production, while sharing infrastructure resources.
+
+To add another orchestration cluster, install the Helm chart again in a different namespace with unique release names and configuration values.
 
 ### Running benchmarks
 

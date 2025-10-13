@@ -61,7 +61,7 @@ This allows:
 The following properties for the ad-hoc sub-process must be configured. You can use the following suggested values as a starting point and change as required or if dealing with multiple agents within the same process.
 
 - **Input collection**: Set this to the list of tool calls your AI Agent connector returns, for example `agent.toolCalls`.
-- **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](#tool-definitions). Suggested value: `toolCall`. This must be aligned with the `fromAi` function calls in the tool definition.
+- **Input element**: Contains the individual tool call, including LLM-generated input parameters based on the [tool definition](#tool-definitions). Must aways be set to `toolCall`.
 - **Output collection**: Collects the results of all the requested tool calls. Suggested value: `toolCallResults`. Make sure you pass this value as [Tool Call Results](agentic-ai-aiagent.md#tools) in the AI Agent configuration.
 - **Output element**: Collects the individual tool call result as returned by an individual tool (see [Tool Call Responses](#tool-call-responses)). When changing this `toolCallResult` to a different value, make sure you also change your tools to write to the updated variable name.
   ```feel
