@@ -250,7 +250,7 @@ If you are using tenant interceptors in Camunda 8.7, you must migrate to the new
 
 Administrators must:
 
-- Migrate tenants into the cluster using either the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
+- Migrate tenants into the cluster using either the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the [Orchestration Identity UI](/components/identity/tenant.md#create-a-tenant).
 - Assign tenants by:
   - Direct assignment to [users](/components/identity/tenant.md#assign-users-to-a-tenant)
   - Direct assignment to [clients](/components/identity/tenant.md#assign-clients-to-a-tenant)
