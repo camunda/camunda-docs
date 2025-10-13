@@ -414,7 +414,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 ```
 
 <details>
-<summary>To access the other services and their UIs, port-forward those Components as well:
+<summary>To access the other services and their UIs, port-forward those Components as well:</summary>
 
 ```shell
 Orchestration:
@@ -429,7 +429,6 @@ Console:
 > kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-</summary>
 </details>
 
 </TabItem>
