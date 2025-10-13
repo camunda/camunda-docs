@@ -25,7 +25,6 @@ The **HTTP Webhook connector** is an inbound connector that allows you to start 
    - **HMAC header**: Set the HMAC header whose value contains an encrypted hash message. The exact value of this header should be provided by the external caller when invoking your webhook.
    - **HMAC hash algorithm**: Select the HMAC hash algorithm to be used in the HMAC signature calculation. The exact value of this algorithm should also be provided by the external caller when invoking your webhook.
    - **HMAC Scopes** (optional): Here, you can define an array of HMAC scopes to specify which parts of the webhook request are included in the HMAC signature calculation. The available HMAC scopes are:
-
      - `BODY` (default value): Includes the body of the webhook request in the HMAC signature calculation.
      - `URL`: Includes the URL of the webhook request in the HMAC signature calculation.
      - `PARAMETERS`: Includes the query parameters of the URL in the HMAC signature calculation.
