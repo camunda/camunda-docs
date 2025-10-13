@@ -570,7 +570,7 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-domain-values.yml \
   -f camunda-values-identity-secrets.yml \
-  -n $CAMUNDA_NAMESPACE
+  -n "$CAMUNDA_NAMESPACE"
 ```
 
 </TabItem>
@@ -586,7 +586,7 @@ helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
   -f camunda-values-identity-secrets.yml \
-  -n $CAMUNDA_NAMESPACE
+  -n "$CAMUNDA_NAMESPACE"
 ```
 
 </TabItem>
