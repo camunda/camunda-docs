@@ -254,7 +254,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
    ```
 
 1. Verify your AWS quotas, and if quotas are insufficient, consult the following:
-
    - [Provisioned AWS Infrastructure](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-aws-prereqs.html#rosa-aws-policy-provisioned_rosa-sts-aws-prereqs)
    - [Required AWS Service Quotas](https://docs.openshift.com/rosa/rosa_planning/rosa-sts-required-aws-service-quotas.html#rosa-sts-required-aws-service-quotas)
 
