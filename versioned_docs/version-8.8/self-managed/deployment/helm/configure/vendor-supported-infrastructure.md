@@ -8,7 +8,7 @@ description: "Deploy Camunda 8 infrastructure components using vendor-supported 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to deploy Camunda 8 infrastructure components using **vendor-supported deployment methods** as an alternative to the Bitnami sub-charts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
+This guide explains how to deploy Camunda 8 infrastructure components using **vendor-supported deployment methods** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Overview
 
@@ -18,15 +18,15 @@ Starting with Camunda 8.8, we continue to strengthen our commitment to robust, p
 
 As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/), Camunda reinforces building deployments on solid foundations—primarily managed PostgreSQL and Elasticsearch services, along with external OIDC providers. However, we understand that managed infrastructure components aren't always available in your organization's service catalog.
 
-This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami sub-charts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
+This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami subcharts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
 
 :::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami sub-charts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
 ## Why use vendor-supported deployment methods?
 
-Using official vendor-supported methods provides several advantages over traditional sub-charts:
+Using official vendor-supported methods provides several advantages over traditional subcharts:
 
 - **Vendor maintenance**: Each deployment method is maintained by the respective project team (Elastic, CloudNativePG community, Keycloak team) with dedicated engineering resources
 - **Production-grade features**: Built-in management, monitoring, and scaling capabilities designed for enterprise environments
@@ -35,7 +35,7 @@ Using official vendor-supported methods provides several advantages over traditi
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami sub-charts, ensuring long-term maintainability
+- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
 
 ## Prerequisites
 
@@ -52,6 +52,8 @@ Before proceeding with this guide, ensure you have:
 ## Architecture overview
 
 This deployment approach separates infrastructure management from application deployment:
+
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764643761312188&cot=14 -->
 
 ![Vendor-supported infrastructure architecture](assets/vendor-components-arch.jpg)
 
@@ -143,7 +145,7 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 ### Architecture
 
-Our setup provisions three separate PostgreSQL clusters for different Camunda components, all targeting PostgreSQL 17 — the common denominator across current Camunda requirements as specified in our [supported environments guide](/reference/supported-environments.md):
+Our setup provisions three separate PostgreSQL clusters for different Camunda components. Use the latest PostgreSQL version listed in our [supported environments matrix](/reference/supported-environments.md) that is compatible across the required components:
 
 - **pg-identity**: Database for Camunda Identity component
 - **pg-keycloak**: Database for Keycloak identity service
@@ -162,6 +164,13 @@ The PostgreSQL deployment follows these steps, automated via the `postgresql/dep
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/deploy.sh
 ```
+
+**Deployment steps performed by the script:**
+
+- Install CloudNativePG operator to `cnpg-system` namespace
+- Generate PostgreSQL authentication secrets using `./set-secrets.sh`
+- Deploy three PostgreSQL clusters from `postgresql-clusters.yml`
+- Wait for readiness validation of all clusters
 
 #### Operator Custom Resources
 
@@ -185,9 +194,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </TabItem>
 </Tabs>
 
-### Installation
-
-**To execute**:
+#### Execution
 
 <Tabs groupId="postgres-deployment">
   <TabItem value="standard" label="Kubernetes" default>
@@ -213,13 +220,6 @@ The `deploy-openshift.sh` script applies necessary Security Context Constraints 
 
   </TabItem>
 </Tabs>
-
-**Deployment steps performed by the script:**
-
-- Install CloudNativePG operator to `cnpg-system` namespace
-- Generate PostgreSQL authentication secrets using `./set-secrets.sh`
-- Deploy three PostgreSQL clusters from `postgresql-clusters.yml`
-- Wait for readiness validation of all clusters
 
 ### Camunda Helm configuration
 
@@ -262,7 +262,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 [Elastic Cloud on Kubernetes (ECK)](https://www.elastic.co/docs/deploy-manage/deploy/cloud-on-k8s) is the official Kubernetes deployment method for Elasticsearch, maintained by Elastic. ECK provides the vendor-recommended approach for deploying Elasticsearch in Kubernetes environments, automatically handling cluster deployment, scaling, upgrades, and security configuration.
 
-For Camunda 8.8, we target Elasticsearch 8.16+ as documented in our [supported environments guide](../../../../reference/supported-environments.md).
+Use the latest Elasticsearch version listed in our [supported environments matrix](../../../../reference/supported-environments.md) and verify compatibility there before deploying.
 
 **Official documentation**: [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 
@@ -270,18 +270,20 @@ For Camunda 8.8, we target Elasticsearch 8.16+ as documented in our [supported e
 
 The ECK deployment creates an Elasticsearch cluster with:
 
-- **Master-only nodes**: Three dedicated master nodes for cluster coordination
+- **Three multi-role nodes**: Each node is master-eligible and also serves data, ingest, and coordinating roles (no separate master-only tier)
 - **Security configuration**: TLS disabled for internal communication (can be enabled for production)
 - **Anti-affinity rules**: Ensures nodes are distributed across different Kubernetes nodes
 - **Resource optimization**: Configured for Camunda's specific requirements
 
-**Elasticsearch as the database for Camunda components:**
+:::note Baseline
+This topology is an opinionated minimal baseline. Adjust node count/roles (e.g., add dedicated ingest, coordinating, or hot/warm tiers), JVM heap, storage class/size, security (TLS & auth), and other settings to match your workload characteristics, retention, and compliance requirements.
+:::
 
-Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities:
+**Elasticsearch as the secondary storage for Camunda 8:**
 
-- **[Zeebe records](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)** - Process execution data exported from Zeebe workflow engine using the Elasticsearch exporter
-- **[orchestration data persistence](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)** - Process instance states, variables, flow nodes, incidents, and operational data stored in dedicated Elasticsearch indices
-- **[Optimize analytics processing](/components/best-practices/architecture/sizing-your-environment.md#disk-space)** - Historical audit data and process analytics stored for extended periods (typically 6-18 months) to enable business intelligence and process optimization
+Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities.
+
+[Learn more about the secondary storage](/self-managed/concepts/no-secondary-storage.md#understanding-primary-vs-secondary-storage) and how it supports advanced features like web applications, search APIs, process monitoring, task management, and analytics.
 
 ### Installation
 
@@ -292,6 +294,13 @@ The Elasticsearch deployment follows these steps, automated via the `elasticsear
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
+
+**Deployment steps performed by the script:**
+
+- Install ECK Custom Resource Definition
+- Deploy ECK operator to `elastic-system` namespace
+- Create Elasticsearch cluster from `elasticsearch-cluster.yml`
+- Wait for cluster health validation
 
 #### Operator Custom Resources
 
@@ -306,32 +315,16 @@ This configuration creates a production-ready Elasticsearch cluster with securit
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
-**Use cases:**
-
-- Zeebe records storage and indexing
-- Operate data persistence and search
-- Tasklist data persistence and search
-- Optimize data storage and analytics
-
 </TabItem>
 </Tabs>
 
-### Installation
-
-**To execute**:
+#### Execution
 
 1. **Navigate to Elasticsearch directory**: `cd ../elasticsearch/`
 2. **Review deployment script**: `cat deploy.sh` to understand the deployment steps
 3. **Review cluster configuration**: `cat elasticsearch-cluster.yml` to verify Elasticsearch cluster settings
 4. **Adapt configuration if needed**: Modify `elasticsearch-cluster.yml` for your specific requirements (node count, resources, security settings, etc.)
 5. **Execute deployment**: `./deploy.sh`
-
-**Deployment steps performed by the script:**
-
-- Install ECK Custom Resource Definition
-- Deploy ECK operator to `elastic-system` namespace
-- Create Elasticsearch cluster from `elasticsearch-cluster.yml`
-- Wait for cluster health validation
 
 ### Camunda Helm configuration
 
@@ -363,7 +356,9 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 The [Keycloak Operator](https://www.keycloak.org/operator/installation) provides the official vendor-supported way to deploy and manage Keycloak instances on Kubernetes. Maintained by the Keycloak team, it provides the recommended approach for automated deployment, configuration, and lifecycle management.
 
-We target Keycloak 26+ as specified in our [supported environments documentation](/reference/supported-environments.md).
+Use the latest Keycloak version listed in our [supported environments matrix](/reference/supported-environments.md).
+
+We use the Camunda-maintained quay-optimized Keycloak image [camunda/keycloak:quay-optimized-version](https://github.com/camunda/keycloak) as it bundles the Camunda Identity login theme, the `/auth` base path, the AWS JDBC wrapper, and pre-baked configuration.
 
 **Official documentation**: [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation)
 
@@ -395,6 +390,13 @@ The Keycloak deployment follows these steps, automated via the `keycloak/deploy.
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/deploy.sh
 ```
+
+**Deployment steps performed by the script:**
+
+- Install Keycloak Custom Resource Definitions
+- Deploy Keycloak operator to the target namespace
+- Create Keycloak instance from the selected configuration file
+- Wait for Keycloak readiness validation
 
 #### Operator Custom Resources
 
@@ -444,9 +446,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 </TabItem>
 </Tabs>
 
-### Installation
-
-**To execute**:
+#### Execution
 
 1. **Navigate to Keycloak directory**: `cd ../keycloak/`
 2. **Review deployment script**: `cat deploy.sh` to understand the deployment steps
@@ -456,13 +456,6 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
    - `keycloak-instance-domain-nginx.yml` for nginx-ingress
    - `keycloak-instance-domain-openshift.yml` for OpenShift Routes
 5. **Execute deployment**: `./deploy.sh`
-
-**Deployment steps performed by the script:**
-
-- Install Keycloak Custom Resource Definitions
-- Deploy Keycloak operator to the target namespace
-- Create Keycloak instance from the selected configuration file
-- Wait for Keycloak readiness validation
 
 ### Camunda Helm configuration
 
@@ -547,10 +540,6 @@ Before deploying Camunda Platform, ensure you have saved all required configurat
 | Keycloak (Local)         | `camunda-keycloak-no-domain-values.yml` | Local development OIDC configuration       | Camunda deployment |
 | Keycloak (Production)    | `camunda-keycloak-domain-values.yml`    | Production OIDC configuration              | Camunda deployment |
 
-### Generate authentication secrets
-
-Create the required secrets for Camunda Platform authentication. For detailed guidance on secret generation and complete installation instructions, see our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md) and [secret management documentation](/self-managed/deployment/helm/configure/secret-management.md).
-
 ### Pre-deployment checklist
 
 Before deploying Camunda Platform:
@@ -568,25 +557,23 @@ Deploy Camunda Platform using the infrastructure configuration files you saved f
 export HELM_CHART_VERSION=13.0.0  # Replace with your desired version
 ```
 
+For end-to-end configuration patterns (OIDC-enabled "Full Cluster" including Optimize, Web Modeler, Console, and Identity), see the Full Cluster section of our [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md#full-cluster).
+
 <Tabs groupId="camunda-deployment">
   <TabItem value="with-domain" label="With external domain" default>
 
 Deploy Camunda Platform with external domain configuration:
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-domain-values.yml \
   -f camunda-values-identity-secrets.yml \
-  -n $CAMUNDA_NAMESPACE
+  -n "$CAMUNDA_NAMESPACE"
 ```
-
-:::tip Value files order
-The order of `-f` flags matters in Helm. Later files override values from earlier files, so place your most specific configurations last.
-:::
 
 </TabItem>
   <TabItem value="no-domain" label="Local development">
@@ -594,22 +581,26 @@ The order of `-f` flags matters in Helm. Later files override values from earlie
 Deploy Camunda Platform for local development:
 
 ```bash
-helm install camunda camunda/camunda-platform \
+helm install "$CAMUNDA_RELEASE_NAME" camunda/camunda-platform \
   --version $HELM_CHART_VERSION \
   -f camunda-elastic-values.yml \
   -f camunda-identity-values.yml \
   -f camunda-webmodeler-values.yml \
   -f camunda-keycloak-no-domain-values.yml \
   -f camunda-values-identity-secrets.yml \
-  -n $CAMUNDA_NAMESPACE
+  -n "$CAMUNDA_NAMESPACE"
 ```
-
-:::note Component flexibility
-Remove value files for components you don't need. For example, omit `camunda-webmodeler-values.yml` if you don't plan to use Web Modeler.
-:::
 
 </TabItem>
 </Tabs>
+
+:::tip Helm value files
+Order & precedence: The order of `-f` flags matters—later files override earlier ones, so place the most specific/override files (e.g. secrets, domain-specific settings) last.
+
+File origin: Every `-f` file corresponds to a configuration you saved in previous sections (Elasticsearch integration, PostgreSQL clusters, Keycloak, Identity secrets). Make sure they're present locally and reflect any custom adjustments before running the command.
+
+Component flexibility: Drop files for components you don't deploy (for example, remove `camunda-webmodeler-values.yml` if you're not using Web Modeler) to reduce footprint.
+:::
 
 ## Verification and troubleshooting
 
@@ -716,8 +707,8 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Backup and disaster recovery
 
+- **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/backup.md)).
 - **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/documentation/1.16/backup_recovery/)
-- **Elasticsearch**: Set up snapshot repositories for data backup, [ECK snapshot documentation](https://www.elastic.co/docs/deploy-manage/tools/snapshot-and-restore/cloud-on-k8s)
 - **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control
 
@@ -733,7 +724,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - **Storage**: Plan for data growth and I/O requirements
 - **Network**: Consider bandwidth requirements between components
 
-## Migration from sub-charts
+## Migration from subcharts
 
 If you're migrating from existing Bitnami sub-chart deployments:
 
