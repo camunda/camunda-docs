@@ -236,8 +236,7 @@ Installing all components in a cluster requires downloading all related Docker i
 2. **Install the Helm chart:**
 
    ```bash
-   helm upgrade --install camunda camunda/camunda-platform \
-     --repo https://helm.camunda.io \
+   helm install camunda camunda-platform \
      --version 13.0.0 \
      --namespace camunda \
      -f camunda-values.yaml
