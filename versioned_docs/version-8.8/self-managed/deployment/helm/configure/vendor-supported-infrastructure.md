@@ -8,7 +8,7 @@ description: "Deploy Camunda 8 infrastructure components using vendor-supported 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This guide explains how to deploy Camunda 8 infrastructure components using **vendor-supported deployment methods** as an alternative to the Bitnami subcharts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
+This guide explains how to deploy Camunda 8 infrastructure components using **vendor-supported deployment methods** as an alternative to the Bitnami sub-charts. This approach provides production-grade, officially maintained deployment solutions for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Overview
 
@@ -18,15 +18,15 @@ Starting with Camunda 8.8, we continue to strengthen our commitment to robust, p
 
 As outlined in [our strategy](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/), Camunda reinforces building deployments on solid foundations—primarily managed PostgreSQL and Elasticsearch services, along with external OIDC providers. However, we understand that managed infrastructure components aren't always available in your organization's service catalog.
 
-This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami subcharts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
+This guide demonstrates how to integrate these infrastructure components using official deployment methods that don't depend on Bitnami sub-charts. Instead, we use vendor-supported deployment approaches—the recommended way to deploy and manage these services in production environments.
 
 :::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+If you prefer to continue using Bitnami sub-charts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
 :::
 
 ## Why use vendor-supported deployment methods?
 
-Using official vendor-supported methods provides several advantages over traditional subcharts:
+Using official vendor-supported methods provides several advantages over traditional sub-charts:
 
 - **Vendor maintenance**: Each deployment method is maintained by the respective project team (Elastic, CloudNativePG community, Keycloak team) with dedicated engineering resources
 - **Production-grade features**: Built-in management, monitoring, and scaling capabilities designed for enterprise environments
@@ -35,7 +35,7 @@ Using official vendor-supported methods provides several advantages over traditi
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
+- **Future-proof architecture**: Doesn't depend on deprecated Bitnami sub-charts, ensuring long-term maintainability
 
 ## Prerequisites
 
@@ -733,7 +733,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - **Storage**: Plan for data growth and I/O requirements
 - **Network**: Consider bandwidth requirements between components
 
-## Migration from subcharts
+## Migration from sub-charts
 
 If you're migrating from existing Bitnami sub-chart deployments:
 

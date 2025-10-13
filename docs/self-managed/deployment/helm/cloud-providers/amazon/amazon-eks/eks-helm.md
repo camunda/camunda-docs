@@ -304,8 +304,8 @@ Some components are not enabled by default in this deployment. For more informat
 
 If you do not wish to use a managed OpenSearch service, you can opt to use the internal Elasticsearch deployment. This configuration disables OpenSearch and enables the internal Kubernetes Elasticsearch deployment:
 
-:::tip Alternative: Vendor-supported Elasticsearch deployment  
-Instead of using Bitnami subcharts for internal Elasticsearch, consider using [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#elasticsearch-deployment) for production-grade Elasticsearch clusters with automated scaling, upgrades, and security configuration.
+:::tip Alternative: Vendor-supported Elasticsearch deployment
+Instead of using Bitnami subcharts for internal Elasticsearch, consider deploying [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md#elasticsearch-deployment) for a production-grade setup with automated scaling, upgrades, and built-in security.
 :::
 
 <details>

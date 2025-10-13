@@ -38,10 +38,12 @@ The following tables show the **top-level configuration sections** in `values.ya
 | `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
 
 :::info
-Bitnami subcharts are best used in development and testing environments, unless your operational teams have expertise with Bitnami chart production deployments.
-For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach allows you to use your preferred deployment method, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda — giving you greater operational control and flexibility.
+Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production.
 
-**Alternative deployment approach**: For vendor-supported infrastructure deployment methods, see [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md). This guide demonstrates how to deploy PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami sub-charts.
+For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment methods, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—providing greater operational control and flexibility.
+
+**Alternative deployment approach:**  
+See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 :::
 
 #### Bitnami subcharts guidance
