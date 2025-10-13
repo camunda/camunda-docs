@@ -75,19 +75,7 @@ public class SecureClient {
 
 Alternatively, use the `ZEEBE_CA_CERTIFICATE_PATH` environment variable to override the code configuration.
 
-To disable TLS in a Java client, use the `.usePlaintext()` option:
-
-```java
-public class InsecureClient {
-    public static void main(final String[] args) {
-        final CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build();
-
-        // ...
-    }
-}
-```
-
-Alternatively, use the `ZEEBE_INSECURE_CONNECTION` environment variable to override the code configuration. To enable an insecure connection, set it to **true**. To use a secure connection, set it to any non-empty value other than **true**. Setting the environment variable to an empty string is equivalent to unsetting it.
+To disable TLS in a Java client, use the `ZEEBE_INSECURE_CONNECTION` environment variable. To enable an insecure connection, set it to **true**. To use a secure connection, set it to any non-empty value other than **true**. Setting the environment variable to an empty string is equivalent to unsetting it.
 
 ## Self signed certificates
 
