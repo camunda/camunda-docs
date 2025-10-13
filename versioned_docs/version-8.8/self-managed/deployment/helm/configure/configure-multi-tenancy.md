@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 Multi-tenancy lets you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8 cluster. This ensures separation while reducing infrastructure overhead by running multiple tenants on a shared installation.
 
-This page explains how to configure multi-tenancy in both Management Identity and [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md). It also shows the defaults, how to enable or enforce tenant checks, and how to resolve common issues.
+This page explains how to configure multi-tenancy in both [Management Identity](/self-managed/components/management-identity/overview.md) and [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/initial-setup.md). It also shows the defaults, how to enable or enforce tenant checks, and how to resolve common issues.
 
 ## Prerequisites
 

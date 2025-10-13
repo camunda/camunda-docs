@@ -180,7 +180,7 @@ RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/defining-
 RewriteRule ^docs/guides/setup-client-connection-credentials/?$ /docs/components/console/introduction-to-console/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/access-management/resource-authorizations/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/application-user-group-role-management/identity-application-user-group-role-management-overview/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/configuration/getting-started/?$ /docs/self-managed/components/optimize/overview/ [R=301,L]
 
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
@@ -212,7 +212,7 @@ RewriteRule ^docs/self-managed/console-deployment/overview/?$ /docs/self-managed
 RewriteRule ^docs/self-managed/console-deployment/telemetry/?$ /docs/self-managed/components/console/configuration/ [R=301,L]
 RewriteRule ^docs/self-managed/console-deployment/usage-metrics/?$ /docs/reference/data-collection/usage-metrics/ [R=301,L]
 
-RewriteRule ^docs/self-managed/identity/access-management/access-management-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/access-management/access-management-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/access-management/manage-permissions/?$ /docs/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/access-management/resource-authorizations/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
@@ -226,7 +226,7 @@ RewriteRule ^docs/self-managed/identity/configuration/alternative-db/?$ /docs/se
 RewriteRule ^docs/self-managed/identity/configuration/configure-external-identity-provider/?$ /docs/self-managed/components/management-identity/configuration/configure-external-identity-provider/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/configuration/connect-to-an-existing-keycloak/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/configuration/connect-to-an-oidc-provider/?$ /docs/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
-RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/identity/configuration/identity-configuration-overview/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 
 RewriteRule ^docs/self-managed/identity/miscellaneous/application-monitoring/?$ /docs/self-managed/components/management-identity/miscellaneous/application-monitoring/ [R=301,L]
 RewriteRule ^docs/self-managed/identity/miscellaneous/configuration-variables/?$ /docs/self-managed/components/management-identity/miscellaneous/configuration-variables/ [R=301,L]
@@ -313,6 +313,7 @@ RewriteRule ^docs/self-managed/operational-guides/production-guide/helm-chart-pr
 
 # Orchestration cluster restructure
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/configuration/?$ /docs/self-managed/components/orchestration-cluster/core-settings/configuration/properties/ [R=301,L]
+RewriteRule ^docs/next/self-managed/orchestration-identity/orchestration-identity/?$ /docs/next/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 
 # Self-Managed Restructure
 # Setup
@@ -350,7 +351,7 @@ RewriteRule ^docs/self-managed/console-deployment/installation/?$ /docs/self-man
 RewriteRule ^docs/self-managed/modeler/web-modeler/installation/?$ /docs/self-managed/components/modeler/web-modeler/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/operate-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/operate/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/optimize-deployment/install-and-start/?$ /docs/self-managed/components/optimize/overview/ [R=301,L]
-RewriteRule ^docs/self-managed/orchestration-identity/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/identity/overview/ [R=301,L]
+RewriteRule ^docs/self-managed/orchestration-identity/orchestration-identity/?$ /docs/self-managed/components/orchestration-cluster/identity/initial-setup/ [R=301,L]
 RewriteRule ^docs/self-managed/tasklist-deployment/install-and-start/?$ /docs/self-managed/components/orchestration-cluster/tasklist/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/update/index/?$ /docs/self-managed/components/components-update/introduction/ [R=301,L]
 

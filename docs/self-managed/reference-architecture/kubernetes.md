@@ -131,7 +131,7 @@ As shown in the [architecture diagram](#orchestration-cluster), the Orchestratio
 - [Zeebe](/components/zeebe/zeebe-overview.md) — workflow engine and broker
 - [Operate](/components/operate/operate-introduction.md) — visibility and troubleshooting UI
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md) — UI for human tasks
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) — authentication and access control
+- [Identity](/components/identity/identity-introduction.md) — authentication and access control
 
 Also included in this namespace are components that are tightly integrated with the cluster:
 
