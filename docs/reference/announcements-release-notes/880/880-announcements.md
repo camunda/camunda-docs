@@ -569,7 +569,7 @@ With the Camunda 8.8 release, the new unified configuration is introduced.
 
 - In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
 
-This means some configuration properties have changed or are replaced with new properties.
+This means some configuration properties have changed or are replaced with new properties. See [Camunda 8.8 property changes](../../../../self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping) for more information.
 
 :::note
 Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
