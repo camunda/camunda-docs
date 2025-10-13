@@ -18,7 +18,6 @@ Ensure you have the following prerequisites before setting up the Camunda–Serv
 - ServiceNow version: Yokohama or newer.
 
 - Required plugins:
-
   - Integration Hub Starter Pack
   - Integration Hub Action Step – REST
 
