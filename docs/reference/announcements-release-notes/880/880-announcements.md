@@ -696,11 +696,41 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 <div className="release-announcement-content">
 
-#### Removed: Tenant-providing interceptors
+#### Tenant-providing interceptors
 
 With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
 
 It is superseded by built-in [tenant management](/components/identity/tenant.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### User storage in Elasticsearch/OpenSearch for Operate or Tasklist
+
+With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
+
+You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### LDAP authentication for Operate or Tasklist
+
+With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
+
+You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>
