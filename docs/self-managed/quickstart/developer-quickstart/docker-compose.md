@@ -122,7 +122,6 @@ To start specific configurations:
 
 - **Web UI**: Log in to all components (Operate, Tasklist, Console, Optimize, Web Modeler) with `demo` / `demo`.
 - **APIs**: REST and gRPC APIs require OAuth authentication with the following settings:
-
   - **Client ID**: `orchestration` (from `ORCHESTRATION_CLIENT_ID` in the `.env` file)
   - **Client Secret**: `secret` (from `ORCHESTRATION_CLIENT_SECRET` in the `.env` file)
   - **OAuth URL**: `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
