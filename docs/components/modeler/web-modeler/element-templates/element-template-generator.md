@@ -59,7 +59,6 @@ Continue with [**Step 4**](#configure-the-template-details) in the Configure the
 5. If you selected **From API definition**, the **Import data source** section appears.
    1. Select the format to import (OpenAPI or Postman) and click **Import file**.
    2. Import the API definition:
-
       - **Import file from URL:** Enter the API definition URL and click **Import icon**.
       - **Upload file:** Drag and drop a file into the upload area, or click the link to select a file.
 
