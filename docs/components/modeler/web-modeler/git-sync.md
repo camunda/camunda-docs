@@ -175,7 +175,6 @@ When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server insta
 2. Select the **Azure** tile, located at the top of the modal.
 
 3. Provide the following information in the **Configure Azure** modal:
-
    - **Application (client) ID:** Can be found on the applications registration page.
    - **Directory (tenant) ID:** Your Microsoft Entra tenant unique identifier. Can also be found on the applications registration page.
    - **Private Key:** The private key used to generate the certificate in PEM format.
