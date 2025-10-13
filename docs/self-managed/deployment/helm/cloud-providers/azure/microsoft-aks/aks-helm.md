@@ -453,8 +453,7 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 ```
 
 <details>
-<summary>To access the other services and their UIs, port-forward those components as well:</summary>
-<summary>
+<summary>To access the other services and their UIs, port-forward those components as well:
 
 ```shell
 Orchestration:
