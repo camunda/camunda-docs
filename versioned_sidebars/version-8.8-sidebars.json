@@ -427,7 +427,8 @@
               "items": [
                 "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
-                "components/modeler/web-modeler/element-templates/save-as-element-templates"
+                "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                "components/modeler/web-modeler/element-templates/best-practices"
               ]
             },
             "components/modeler/web-modeler/camunda-marketplace",
