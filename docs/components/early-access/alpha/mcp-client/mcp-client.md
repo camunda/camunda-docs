@@ -181,7 +181,6 @@ Here is an example setup with a filesystem MCP server (see [examples](#examples)
      ```
 5. Create a default flow to a user task for the confirmation. Set up a form for the user task to enable a decision on
    whether the tool call should be executed.
-
    - A checkbox could be added to the form to allow the user to confirm or deny the tool call.
    - A text view could present the tool call with a template such as the following:
 
