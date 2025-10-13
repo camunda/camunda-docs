@@ -492,7 +492,6 @@ This section applies if you have previously created a private cluster and want t
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
-
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 
