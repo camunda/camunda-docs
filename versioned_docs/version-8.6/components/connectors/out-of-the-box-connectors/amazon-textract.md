@@ -105,10 +105,6 @@ The connector response mirrors the [AWS Textract API](https://docs.aws.amazon.co
 - [Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)
 - [Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)
 
-:::note
-From version 8.7.0, the Amazon Textract connector can read input directly from the Camunda document store. See [document handling](/components/document-handling/getting-started.md) for details and limitations.
-:::
-
 ## Use the Textract connector response in your process
 
 You can map fields from the Textract response to process variables using **Result Variable** or **Result Expression**.
