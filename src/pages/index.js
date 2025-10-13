@@ -178,19 +178,30 @@ function Home() {
                   styles.getStarted
                 )}
                 to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/overview/"
+                  "docs/reference/announcements-release-notes/880/whats-new-in-88/"
                 )}
               >
-                Release notes
+                What's new in 8.8
               </Link>
               <Link
                 className={clsx(
                   "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
                   styles.getStarted
                 )}
-                to={useBaseUrl("docs/apis-tools/node-js-sdk/")}
+                to={useBaseUrl(
+                  "docs/reference/announcements-release-notes/880/880-release-notes/"
+                )}
               >
-                Node.js SDK
+                8.8 release notes
+              </Link>
+              <Link
+                className={clsx(
+                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
+                  styles.getStarted
+                )}
+                to={useBaseUrl("docs/apis-tools/java-client/getting-started/")}
+              >
+                Java client
               </Link>
             </div>
           </div>
