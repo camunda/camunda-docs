@@ -158,7 +158,6 @@ To use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) t
 1. [Install Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run). For example, download the latest release of Camunda 8 Run for your operating system and architecture and open the .tgz file to extract the Camunda 8 Run script into a new directory.
 
 1. Navigate to the `docker-compose-8.x` folder in the new c8run directory.
-
    1. Open the `connector-secrets.txt` file, and add your AWS connector secrets.
 
       For example:
