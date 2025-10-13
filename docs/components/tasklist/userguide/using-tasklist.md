@@ -68,7 +68,7 @@ To group tasks and quickly find relevant assignments, use [task filters](./using
 
 ## Sorting
 
-Click the Sorting icon to sort the tasks. You can arrange them by the date of creation, due date, follow-up date, or priority.
+Click the **Sorting** icon to sort the tasks. You can arrange them by the date of creation, due date, follow-up date, or priority.
 
 The follow-up date defines the latest time you should start working on a task. The due date provides a deadline for when the task should be finished.
 
