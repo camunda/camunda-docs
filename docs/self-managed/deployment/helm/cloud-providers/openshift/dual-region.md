@@ -311,7 +311,6 @@ Installing Submariner in OpenShift **requires** [Advanced Cluster Management](#a
    ```
 
    If everything is set up correctly, you should observe in the output of each cluster context the following statuses:
-
    - Gateway's status: `All connections (1) are established`
    - Connection's status: `connected   10.406614ms (RTT)`
 
