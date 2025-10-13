@@ -151,7 +151,6 @@ To validate the data extraction:
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-
    - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
