@@ -176,7 +176,7 @@ module.exports = {
       label: "Features and integrations",
       link: {
         type: "doc",
-        id: "components/features-integrations/features-integrations",
+        id: "components/features-integrations/features-home",
       },
       items: [
         {
