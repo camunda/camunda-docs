@@ -72,6 +72,20 @@ With the 8.7 release, no special configuration is required to update Helm from 8
 
 The structure of the Helm charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
 
+### Internal Keycloak
+
+:::warning
+
+In the Camunda 8.7 Helm chart, Keycloak has been upgraded to version `26.3.3`, which introduces changes to environment variable prefixes.  
+Some variables previously using the `KEYCLOAK_` prefix now use `KC_`.
+
+For details, see the [Keycloak release notes](https://github.com/camunda/keycloak/releases/tag/2025-09-16-001).
+
+Update the prefix for any affected environment variables in your configuration.
+No action is required if you don’t use custom variables passed to the Keycloak deployment (for example, via the values file or post-rendering).
+
+:::
+
 </TabItem>
 
 <TabItem value='8.6'>

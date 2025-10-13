@@ -97,26 +97,26 @@ export const usingCamundaCards = [
 
 export const featuresPageCards = [
   {
-    link: "../../agentic-orchestration/",
+    link: "../agentic-orchestration/",
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
       "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
-    link: "../../modeler/web-modeler/idp/",
+    link: "../modeler/web-modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
     description: "integrate automated document processing into your processes.",
   },
   {
-    link: "../../rpa/overview/",
+    link: "../rpa/overview/",
     title: "Robotic process automation (RPA)",
     image: IconRpaImg,
     description: "Use RPA to automate manual, repetitive tasks.",
   },
   {
-    link: "../../document-handling/getting-started/",
+    link: "../document-handling/getting-started/",
     title: "Document handling",
     image: IconDocsImg,
     description: "Store, track, and manage documents.",

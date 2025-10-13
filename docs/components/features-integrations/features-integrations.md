@@ -21,10 +21,10 @@ Learn more about selected key features.
 
 Learn more about Camunda integrations.
 
-<p><a href="../../camunda-integrations/overview/" class="link-arrow">Camunda integrations</a></p>
+<p><a href="../camunda-integrations/overview/" class="link-arrow">Camunda integrations</a></p>
 
 ## Early access
 
 Introducing early access - a space to explore new features and components currently in development by Camunda
 
-<p><a href="../../early-access/overview/" class="link-arrow">Early access</a></p>
+<p><a href="../early-access/overview/" class="link-arrow">Early access</a></p>

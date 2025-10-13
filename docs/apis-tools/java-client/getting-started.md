@@ -91,7 +91,6 @@ public static void main(String[] args) {
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            .usePlaintext()
             .build()) {
 
         // Test the connection
@@ -104,9 +103,8 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Creates a no-authentication provider** – Configures the client to skip authentication.
-2. **Builds an unencrypted client** – Uses plaintext communication for local development.
-3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
-4. **Tests the connection** – Verifies connectivity by requesting cluster topology information.
+2. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
+3. **Tests the connection** – Verifies connectivity by requesting cluster topology information.
 
 **Environment variables option**  
 You can also set connection details via environment variables to create the client more simply:
@@ -117,7 +115,7 @@ export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default
 ```
 
 ```java
-CamundaClient client = CamundaClient.newClientBuilder().usePlaintext().build();
+CamundaClient client = CamundaClient.newClientBuilder().build();
 ```
 
 The client will automatically read the environment variables and configure the appropriate authentication method.
@@ -148,9 +146,6 @@ public static void main(String[] args) {
     try (CamundaClient client = CamundaClient.newClientBuilder()
             .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
             .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            // uncomment to use an unencrypted transport (plain http)
-            // we advise to use encrypted connections to not leak credentials
-            // .usePlaintext()
             .credentialsProvider(credentialsProvider)
             .build()) {
 
