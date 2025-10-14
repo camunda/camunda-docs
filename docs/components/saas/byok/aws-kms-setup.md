@@ -4,6 +4,11 @@ title: "Encryption at rest using external encryption keys"
 description: "Learn how to configure encryption at rest for a Camunda 8 SaaS Orchestration cluster using external Amazon KMS encryption keys."
 ---
 
+:::warning Disclaimer
+This documentation describes functionality that is not yet generally available.  
+The **Bring Your Own Key (BYOK)** feature is scheduled for release with a future 8.8 update. Details may change before the official feature release.
+:::
+
 Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration cluster using Amazon KMS.
 
 ## Prerequisites

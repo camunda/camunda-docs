@@ -1,7 +1,7 @@
 ---
 id: encryption-at-rest
 title: "Encryption at rest"
-description: "Camunda 8 SaaS cluster data at rest is protected using provider-managed or Camunda-managed encryption keys. AWS enterprise customers can bring their own KMS key (BYOK) for full control."
+description: "Camunda 8 SaaS cluster data at rest is protected using Google Cloud Platform (GCP) encryption with a provider-managed encryption key."
 keywords:
   [
     "encryption",
@@ -10,69 +10,63 @@ keywords:
     "provider key",
     "software key",
     "hardware key",
-    "BYOK",
   ]
 ---
 
-Encryption at rest protects stored data by making it unreadable without the appropriate decryption keys.
+<span class="badge badge--cloud">Camunda 8 SaaS only</span>
+
+Camunda 8 SaaS cluster data is encrypted at rest to provide security and protection for your data.
 
 ## Overview
 
-By default, Camunda 8 SaaS uses a provider-managed encryption key with [Google Cloud Platform (GCP) encryption](https://cloud.google.com/docs/security/encryption/default-encryption). Enterprise customers can choose:
+By default, Camunda 8 SaaS cluster data at rest is protected with a provider-managed encryption key using [Google Cloud Platform (GCP) encryption](https://cloud.google.com/docs/security/encryption/default-encryption). The encryption key is owned and managed by GCP.
 
-- Camunda-managed software or hardware keys (Google KMS)
-- Bring Your Own Key (BYOK) on AWS for full control
+Enterprise customers requiring a higher level of protection can select a dedicated Camunda-managed software or hardware (HSM) encryption key when creating a new cluster. The encryption key is managed by Camunda using Google Cloud Key Management Service (KMS).
 
-Key points:
-
-- Encryption type is selected only when [creating a cluster](/components/console/manage-clusters/create-cluster.md)
-- Each cluster can have its own key
-- The key applies to all workloads and persists across updates
-- View encryption details in **Cluster Details** on the **Console Overview** tab
+- You can only select the encryption type when [creating a cluster](/components/console/manage-clusters/create-cluster.md). You cannot change the encryption type after cluster creation.
+- You can configure encryption keys on a per-cluster basis so that each cluster has a dedicated encryption key. Encryption keys can be configured for all cluster versions.
+- You can view cluster encryption key details in **Cluster Details** on the **Console Overview** tab.
 
 :::note
-Backups use default provider GCP encryption.
+Backups use the default provider GCP encryption.
 :::
 
-## Encryption types
+### Encryption types
 
-| Type               | Managed by | Notes                                                                                               |
-| ------------------ | ---------- | --------------------------------------------------------------------------------------------------- |
-| Provider (default) | Google     | FIPS 140-2 validated encryption module (certificate 4407)                                           |
-| Software key       | Camunda    | Google KMS software protection; operations in software; FIPS 140-2 Level 1; zero downtime rotation  |
-| Hardware key       | Camunda    | Google KMS hardware (HSM) protection; FIPS 140-2 Level 3; operations in HSM; zero downtime rotation |
-| BYOK               | Customer   | AWS KMS key; full control over lifecycle, rotation, and revocation; enterprise only                 |
+The following table summarizes the available types of cluster encryption at rest.
 
-## Provider encryption key
+| Encryption type                   | Managed by | Protection level                                                                                                                                                                                                                                                                                                                                                                                   |
+| :-------------------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Provider encryption key (default) | Google     | Google uses a [FIPS 140-2](https://cloud.google.com/security/compliance/fips-140-2-validated) validated encryption module (certificate 4407) in our production environment.                                                                                                                                                                                                                        |
+| Software encryption key           | Camunda    | <p><ul><li><p>Google KMS [software](https://cloud.google.com/docs/security/key-management-deep-dive#software_backend_software_protection_level) protection level.</p></li><li>Cryptographic operations are performed in software.</li><li>Compliant with [FIPS 140-2 Level 1](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).</li></ul></p>                |
+| Hardware encryption key           | Camunda    | <p><ul><li><p>Google KMS [hardware](https://cloud.google.com/docs/security/key-management-deep-dive#backend_hardware_protection_level) protection level.</p></li><li>Cryptographic operations are performed in a hardware security module (HSM).</li><li>Compliant with [FIPS 140-2 Level 3](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).</li></ul></p> |
 
-Default option, managed by Google. Uses FIPS 140-2 validated module.
+## Provider encryption key (default)
+
+By default, Camunda 8 SaaS cluster data at rest is protected using GCP encryption.
+
+- Provider encryption keys are owned and managed by GCP.
+- Google uses a [FIPS 140-2](https://cloud.google.com/security/compliance/fips-140-2-validated) validated encryption module.
 
 :::info
-Learn more about [Google default encryption](https://cloud.google.com/docs/security/encryption/default-encryption)
+Learn more about [Google default encryption at rest](https://cloud.google.com/docs/security/encryption/default-encryption) and default provider encryption settings.
 :::
 
-## Camunda-managed keys
+## Camunda-managed software encryption key
 
-### Software key
+Camunda-managed software encryption keys use the Google KMS [software](https://cloud.google.com/docs/security/key-management-deep-dive#software_backend_software_protection_level) protection level to provide a higher level of protection than default provider encryption.
 
-- Managed by Camunda using Google KMS
-- FIPS 140-2 Level 1
-- Operations in software
-- Zero downtime rotation
+- Requires an enterprise plan.
+- Software encryption keys are managed by Camunda.
+- Software encryption keys are compliant with [FIPS 140-2 Level 1](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).
+- Cryptographic operations are performed in software.
+- Rotated with zero downtime for security and compliance.
 
-### Hardware key
+## Camunda-managed hardware encryption key
 
-- Managed by Camunda using Google KMS
-- FIPS 140-2 Level 3
-- Operations in HSM
-- Zero downtime rotation
+Camunda-managed hardware encryption keys use the Google KMS [hardware](https://cloud.google.com/docs/security/key-management-deep-dive#backend_hardware_protection_level) protection level to provide a higher level of protection than both default provider encryption and Camunda-managed software encryption keys.
 
-## Bring Your Own Key (BYOK)
-
-Enterprise customers on AWS can use their own AWS KMS key.
-
-- You manage the key lifecycle, including rotation and revocation
-- Camunda never stores the key; access via standard AWS KMS integrations
-- Zero downtime rotation supported
-
-See [BYOK setup guide](/components/saas/byok/index.md) for configuration.
+- Requires an enterprise plan.
+- Hardware encryption keys are managed by Camunda.
+- Hardware encryption keys are compliant with [FIPS 140-2 Level 3](https://cloud.google.com/docs/security/key-management-deep-dive#fips_140-2_validation).
+- Rotated with zero downtime for security and compliance.
