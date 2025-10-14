@@ -348,7 +348,7 @@ Why it matters:
 
 Key elements delivered in 8.8 docs:
 
-- A consolidated vendor-supported infrastructure guide showing topology, value layering, and service hand-off points.
+- A consolidated vendor-supported infrastructure guide showing topology, and service hand-off points.
 - Replacement examples for each subchart (connection secrets, services, and TLS considerations).
 - Keycloak Operator access clarification (no embedded Service route by default; use Ingress or on-demand port-forward during initial admin tasks).
 
@@ -371,8 +371,8 @@ New Kubernetes reference architecture for Microsoft Azure leveraging AKS plus Te
 Highlights:
 
 - Multi-AZ (zonal) AKS cluster baseline with node pool separation (system vs workloads) when available in Region.
-- Choice of managed vs embedded solutions for PostgreSQL and ElasticSearch (Azure Database for PostgreSQL, Elasticsearch using chart embedded deployment).
-- Identity & ingress patterns aligned to unified Orchestration Cluster (shared vs split fronts, TLS termination options, private endpoints / internal load balancers).
+- Choice of managed vs embedded solutions for PostgreSQL and Elasticsearch (Azure Database for PostgreSQL, Elasticsearch using chart embedded deployment).
+- Identity & Ingress patterns aligned to unified Orchestration Cluster (shared vs split fronts, TLS termination options, private endpoints / internal load balancers).
 - Azure-native networking & security (Private DNS, NSGs, managed identities) mapped to Camunda component requirements.
 - Terraform + Helm separation enables idempotent infra changes and predictable app rollouts.
 
