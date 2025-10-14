@@ -350,7 +350,6 @@ As per default authorizations are enabled, your application will only be able to
             .grpcAddress(URI.create(clusterGrpcLocal))
             .restAddress(URI.create(clusterRestLocal))
             .credentialsProvider(credentialsProvider)
-            .usePlaintext()
             .build()) {
       // Send a topology request to verify authentication
       Topology t = client.newTopologyRequest().send().join();
