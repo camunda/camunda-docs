@@ -551,6 +551,7 @@ module.exports = {
             "/docs/8.5/**",
             "/docs/8.6/**",
             "/docs/8.7/**",
+            ({ frontMatter }) => frontMatter.draft === true,
           ],
         },
       },
