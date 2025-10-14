@@ -32,7 +32,7 @@ With README support in Web Modeler, you can:
 - In every project, process application, and folder (each can have its own README)
   ![process application with readme](img/process-application-with-readme.png)
   > Git-connected process applications sync README content just like any other file
-- In the [process landscape view](../process-landscape-visualization.md) as context for a node or the entire app
+- In the [process landscape view](../../process-landscape-visualization.md) as context for a node or the entire app
   ![process landscape with readme](img/process-landscape-with-readme.png)
 
 :::note
@@ -68,5 +68,5 @@ To see the final result of a README file, select the **Preview** tab:
 
 ## Related resources
 
-- [Process applications](../process-applications/process-applications.md)
-- [Process landscape visualization](../process-landscape-visualization.md)
+- [Process applications](../../process-applications/process-applications.md)
+- [Process landscape visualization](../../process-landscape-visualization.md)

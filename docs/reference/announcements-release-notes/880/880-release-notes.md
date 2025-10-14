@@ -1061,7 +1061,7 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 - This helps customers who use Jira for their development processes.
 - Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
-To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+To learn more, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md?platform=bitbucket).
 
 ### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
@@ -1235,7 +1235,7 @@ To learn more about this connector, see [vector database connector](/components/
 
 ### Azure DevOps integration for Git sync <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/git-sync.md) that allows for direct syncing with Azure repositories.
+Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/process-applications/git-sync.md) that allows for direct syncing with Azure repositories.
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
@@ -1394,7 +1394,7 @@ To learn more about these settings, see [Desktop Modeler settings](/components/m
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
+To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/modeling/versions.md).
 
 ### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 

@@ -18,7 +18,7 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling
-tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with
+tools. [Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with
 Web Modeler.
 :::
 
