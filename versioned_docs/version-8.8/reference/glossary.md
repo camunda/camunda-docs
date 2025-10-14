@@ -10,7 +10,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 <div class="alphabet-rows">
   <div class="alphabet-navigation">
-    <div class="letter-link">A</div>
+    <div class="letter-link"><a href="#b">A</a></div>
     <div class="letter-link"><a href="#b">B</a></div>
     <div class="letter-link"><a href="#c">C</a></div>
     <div class="letter-link"><a href="#d">D</a></div>
@@ -40,6 +40,22 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#z">Z</a></div>
   </div>
 </div>
+
+## A
+
+### Agentic orchestration
+
+Agentic orchestration is the blended deterministic and dynamic coordination and governance of AI agents (LLM-powered), humans, and systems in a process workflow to achieve a business goal.
+
+It involves directing when AI Agents act, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
+
+See [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+
+### AI Agent
+
+An AI Agent generally refers to the logical concept of an Agent. “I have built an invoice processing agent” generally refers to a full solution or maybe a part of a solution.
+
+### AI Agent Sub-process
 
 ## B
 
