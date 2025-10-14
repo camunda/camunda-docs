@@ -696,7 +696,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
   
 #### Helm: Alternative infrastructure methods
 
-Prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts in production; Bitnami remains for evaluation/PoC. [Guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure)
+For production: prefer managed/external services first, then vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts; Bitnami remains for evaluation/PoC. [Guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure)
 
 </div>
 </div>

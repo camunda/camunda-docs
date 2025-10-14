@@ -336,21 +336,21 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ### Alternative infrastructure methods (Helm)
 
-Production guidance now recommends running PostgreSQL, Elasticsearch / OpenSearch, and Keycloak via **vendor-supported operators** instead of the Bitnami subcharts once you leave evaluation environments.
+Production guidance now recommends running PostgreSQL, Elasticsearch / OpenSearch, and Keycloak via **managed/external services first**, then **vendor-supported operators** as an alternative, instead of the Bitnami subcharts once you leave evaluation environments.
 
 Why it matters:
 
-- Operators (CloudNativePG, Elastic/ECK or OpenSearch Operator, Keycloak Operator) automate upgrades, failover, backups, credentials, and certificate rotation.
+- Managed services (AWS RDS/Aurora, Amazon OpenSearch, Azure Database for PostgreSQL, etc.) offer the simplest operational model with automatic maintenance, scaling, and backups.
+- Vendor-supported operators solutions (CloudNativePG, Elastic/ECK, Keycloak Operator) automate upgrades, failover, backups, credentials, and certificate rotation when managed services aren't available or suitable.
 - Decouples critical data services from the Camunda Helm release cycle and values file structure, reducing blast radius and enabling independent scaling / maintenance windows.
-- Improves security posture (faster CVE patch uptake) and observability through native CR status conditions.
-- Allows progressive migration: keep Bitnami for local dev & PoC, layer operators in staging, then switch production.
+- Improves security posture (faster CVE patch uptake) and observability through native monitoring and status conditions.
+- Allows progressive migration: keep Bitnami for local dev & PoC, evaluate managed services or vendor-supported operators for staging, then switch production.
 
 Key elements delivered in 8.8 docs:
 
 - A consolidated vendor-supported infrastructure guide showing topology, value layering, and service hand-off points.
 - Replacement examples for each subchart (connection secrets, services, and TLS considerations).
 - Keycloak Operator access clarification (no embedded Service route by default; use Ingress or on-demand port-forward during initial admin tasks).
-- Consistent table formatting updates (e.g. Message Send connector) while aligning infra references across 8.7 / 8.8 versioned docs.
 
 ### Reference architecture: Amazon EC2 (manual / VM)
 
