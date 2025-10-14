@@ -282,7 +282,7 @@ If you have set `camunda.security.authentication.oidc.client-id-claim` to `clien
 
 #### How principal identification works
 
-When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, and a token containing both claims is presented to the platform, we use the following logic to identify a single principal for the request:
+When both `camunda.security.authentication.oidc.username-claim` and `camunda.security.authentication.oidc.client-id-claim` are configured, and a token containing both claims is presented to the platform, the Orchestration Cluster uses the following logic to identify a single principal for the request:
 
 1. If the client id claim is present, the request is treated as a client request with the corresponding ID.
 1. If the client id is not present, the request is treated as a user request with the corresponding username matching the username-claim.
@@ -296,10 +296,12 @@ In most cases we expect the default detection logic to be sufficient, however if
 1. If the username claim is not present, the request is treated as a client request with the corresponding ID matching the client id claim.
 1. If neither the client id claim nor the username claim are set, then the request is rejected.
 
+#### Recommendations for client ID and username claim configuration
+
 We recommend to set client id claim and username claim as follows:
 
 - The client id claim should not be the same as the username claim.
-- The client id claim should be a claim that is not present in user access tokens. For this reason, it should not be set to a default claim (such as `sub`).
+- The claim that is checked first (based on the ordering defined in [How principal identification works](#how-principal-identification-works) and [Controlling the principal identification order](#controlling-the-principal-identification-order)) should not be present in tokens for the opposite principal type. As an example, using the default logic in [How principal identification works](#how-principal-identification-works), if the client ID claim is `client_id`, then tokens issued for users should not contain a `client_id` claim.
 - For ease of use, the client id claim's value should be the client id from the Identity Provider. This way, you can use the same value across both your Identity Provider and the Orchestration Cluster as the identifier of your client.
 
 ### Step 2: Prepare your IdP
