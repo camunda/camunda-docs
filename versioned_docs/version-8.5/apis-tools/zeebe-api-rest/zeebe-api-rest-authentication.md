@@ -120,7 +120,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
      ${ZEEBE_REST_ADDRESS}/v1/topology
 ```
 
-A successful response includes [information about the cluster](/apis-tools/zeebe-api-rest/specifications/get-cluster-topology.api.mdx). For example:
+A successful response includes information about the cluster. For example:
 
 ```json
 {

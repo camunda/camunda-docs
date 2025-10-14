@@ -8,10 +8,6 @@ description: "Interact with Zeebe clusters. Run user task state operations for Z
 
 The Zeebe REST API is a REST API designed to interact with the Zeebe workflow engine.
 
-:::note
-Ensure you [authenticate](./zeebe-api-rest-authentication.md) before accessing the Zeebe REST API.
-:::
-
 ## Context paths
 
 ### SaaS
@@ -25,9 +21,3 @@ Example path: `https://${REGION}.zeebe.camunda.io:443/${CLUSTER_ID}/v1/`
 The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/setup/guides/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v1/`
-
-## API Explorer
-
-See [the interactive Zeebe REST API Explorer][zeebe-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
-
-[zeebe-api-explorer]: ./specifications/zeebe-rest-api.info.mdx

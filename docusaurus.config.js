@@ -405,10 +405,6 @@ module.exports = {
               label: "Blog",
               href: "https://camunda.com/blog/tag/camunda-platform-8/",
             },
-            {
-              label: "Release policy",
-              to: "docs/reference/announcements-release-notes/release-policy",
-            },
           ],
         },
         {

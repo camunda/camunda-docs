@@ -29,10 +29,6 @@ Find your region and cluster id under **Connection information** in your client 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
 :::
 
-## API Explorer
-
-See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
-
 ### Swagger UI
 
 A detailed API description is also available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
@@ -46,5 +42,3 @@ Find your region and cluster id under **Connection information** in your client 
 ## API in Postman
 
 Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-f0db0193-0557-4acd-8e94-ecdaeffbaa5d?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
-
-[tasklist-api-explorer]: ./specifications/tasklist-rest-api.info.mdx
