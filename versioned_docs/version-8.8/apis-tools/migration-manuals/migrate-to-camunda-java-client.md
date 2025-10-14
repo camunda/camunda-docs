@@ -46,10 +46,6 @@ Gradle:
 implementation 'io.camunda:camunda-client-java:${camunda.version}'
 ```
 
-:::info
-The Camunda Java Client artifact still contains the deprecated Zeebe classes (for example, ZeebeClient) as deprecated types to ease migration, but all new features are available only for Camunda classes. Zeebe classes are planned for removal after 8.10.
-:::
-
 ## Update imports
 
 Update all imports statement in your Java files to use the new Camunda Java Client package structure.
@@ -70,7 +66,7 @@ import io.camunda.client.*;
 
 - All old Java client property names are refactored to more general ones. For example, `zeebe.client.tenantId` to `camunda.client.tenantId`.
 - Environment variables are also updated accordingly. For example, `ZEEBE_CLIENT_TENANT_ID` to `CAMUNDA_CLIENT_TENANT_ID`.
-- Both `restAddress` and `grpcAddress` now **require explicit URI schemes** (for example, `http://` or `https://`).
+- The former deprecated `gatewayAddress` property and `usePlainText` have been **removed and superseded by `restAddress` and `grpcAddress` which require explicit URI schemes** (for example, `http://` or `https://`).
 
 ## Update client initialization
 
