@@ -719,7 +719,9 @@ New EC2 manual / VM blueprint: HA multi-AZ cluster, managed OpenSearch, optional
 <div className="release-announcement-content">
   
 #### Reference Architecture: Azure AKS
-New AKS architecture: zonal AKS baseline, managed/operator data services, unified ingress & identity patterns, private networking, modular Terraform + Helm workflow. [Guide](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+
+New AKS architecture: zonal AKS baseline, managed/operator data services, unified Ingress & Identity patterns, private networking, modular Terraform + Helm workflow. [Guide](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+
 </div>
 </div>
 
