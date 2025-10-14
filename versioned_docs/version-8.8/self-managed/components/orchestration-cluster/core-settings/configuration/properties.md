@@ -17,7 +17,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.long-polling`
 
@@ -46,7 +46,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - gRPC
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.grpc`
 
@@ -115,7 +115,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - REST
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.rest.filters`
 
@@ -176,7 +176,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Cluster
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.cluster`
 
@@ -245,7 +245,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data`
 
@@ -272,7 +272,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - backup
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.backup`
 
@@ -391,7 +391,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - secondary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.secondary-storage`
 
@@ -472,7 +472,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - primary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.primary-storage`
 
@@ -559,7 +559,7 @@ The following configurations apply to all components within the Orchestration Cl
 Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.license`
 
@@ -582,7 +582,7 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 ## Security
 
 <Tabs>
-<TabItem value="conf" label="Configuration property" default>
+<TabItem value="conf" label="Application properties" default>
 
 ### `camunda.security`
 
@@ -841,12 +841,6 @@ script-src-attr 'none'.
 </TabItem>
 <TabItem value="helm" label="Helm values">
 
-### `global`
-
-| Property                             | Description                                                                            | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------- | ------------- |
-| `global.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
-
 ### `orchestration.security.authentication`
 
 | Property                                                              | Description                                                                                                                                                                                                                                                                                                              | Default value |
@@ -953,7 +947,7 @@ import SecondaryStorage from './partials/\_secondary-storage.md'
 ## System
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.system`
 
