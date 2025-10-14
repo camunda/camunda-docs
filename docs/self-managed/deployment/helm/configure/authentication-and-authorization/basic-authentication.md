@@ -8,64 +8,30 @@ description: Learn how to configure and manage basic authentication for Camunda 
 By default, Camunda 8 Self-Managed uses basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
 
 :::note
-Because basic authentication is enabled by default, components that depend on Management Identity are disabled by default, which are:
+Because basic authentication is enabled by default, components that depend on Management Identity (implementing only OIDC/OAuth authentication) are disabled by default, which are:
 
 - Management Identity
 - Console
 - Web Modeler
 - Keycloak
 - Optimize
-  :::
+
+Nevertheless, you can choose to enable them, which requires adding OIDC-specific properties, see TODO (guides here).
+:::
 
 ### Default users
 
 Two users are created by default:
 
-| Username    | Password    | Description             |
-| ----------- | ----------- | ----------------------- |
-| `demo`      | `demo`      | Default demo user       |
-| `connector` | `connector` | Default Connectors user |
+| Username    | Password    | Role         | Description                                                                  |
+| ----------- | ----------- | ------------ | ---------------------------------------------------------------------------- |
+| `demo`      | `demo`      | `admin`      | Your initial administrative user                                             |
+| `connector` | `connector` | `connectors` | Used by the Connectors component to connect to the Orchestration Cluster API |
 
-### Add users
-
-To add a user, for example user `foo`, update your configuration:
-
-```yaml
-orchestration:
-  security:
-    initialization:
-      users:
-        - username: demo
-          password: demo
-          name: Demo User
-          email: demo@demo.com
-        - username: connector
-          password: connector
-          name: Connector User
-          email: connector@demo.com
-        - username: foo
-          password: foo
-          name: Foo User
-          email: foo@foo.com
-```
-
-### Assign roles
-
-To assign default roles to a user, add them to `defaultRoles`. For example, to assign the `admin` role to `foo`:
-
-```yaml
-orchestration:
-  security:
-    initialization:
-      defaultRoles:
-        admin:
-          users:
-            - demo
-            - foo
-```
+See the [documentation on Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration) for how to configure the initial users and their roles.
 
 :::note Helm arrays
-In Helm, arrays must be overwritten in full. The default array must be configured in your custom `values.yaml`. For example, when adding the user `foo` or assigning roles to `foo`, include the default array values.
+In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.
 :::
 
 ## Next steps

@@ -8,13 +8,27 @@ Camunda 8 Self-Managed supports multiple authentication methods for securing acc
 
 ## Overview
 
-By default, Camunda uses basic authentication with predefined demo users. For production or multi-user environments, you can configure Keycloak-based authentication, either through an internal Keycloak instance deployed with Camunda or an external OpenID Connect (OIDC) provider.
+By default, Camunda uses basic authentication with predefined demo users. Alternatively, you can configure OpenID Connect (OIDC) authentication, either through an internal Keycloak instance deployed with Camunda or an external OIDC provider.
 
 ### Authentication options
 
-| Method                                                   | Description                                                                                         | Recommended for                             |
-| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| [Basic authentication](./basic-authentication.md)        | Default authentication with preconfigured demo users. No external identity provider (IdP) required. | Local development and testing               |
-| [Internal Keycloak](./internal-keycloak.md)              | Deploys a managed Keycloak instance within the Helm release, preconfigured by Management Identity.  | Small teams or self-contained environments  |
-| [External Keycloak](./using-external-keycloak.md)        | Connects Camunda to a separately deployed Keycloak instance for centralized identity management.    | Enterprise or production setups             |
-| [Other OIDC providers](./connect-to-an-oidc-provider.md) | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure |
+TODO: adjust "recommended for" to user journeys
+
+| Method                                                | Description                                                                                         | Recommended for                             |
+| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| [Basic authentication](./basic-authentication.md)     | Default authentication with preconfigured demo users. No external identity provider (IdP) required. | Local development and testing               |
+| [Internal Keycloak](./internal-keycloak.md)           | Deploys a Keycloak pod with the Helm release, preconfigured by Management Identity.                 | Small teams or self-contained environments  |
+| [External Keycloak](./using-external-keycloak.md)     | Connects Camunda to a separately deployed Keycloak instance for centralized identity management.    | Enterprise or production setups             |
+| [External OIDC provider](./external-oidc-provider.md) | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure |
+
+## References
+
+TODO: does this make sense here?
+
+- [Helm chart OpenID Connect provider setup](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)
+- [Connect Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Using external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak.md)
+- Management Identity:
+  - [Connect Management Identity to an identity provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
+  - [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md)
+  - [Configure an external IdP provider](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md)
