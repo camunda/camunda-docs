@@ -178,7 +178,7 @@ webModelerPostgresql:
       userPasswordKey: "webmodeler-postgresql-user-password"
 ```
 
-You can replace the value of `webModeler.restapi.mail.fromAddress` with a value that fits your scenario. This is the email address that web modeler declares in the emails it sends. For more details on how you can configure the Web Modeler email connection, see [the corresponding documentation](../enable-additional-components.md#web-modeler).
+You can replace the value of `webModeler.restapi.mail.fromAddress` with a value that fits your scenario. This is the email address that Web Modeler declares in the emails it sends. For more details on how you can configure the Web Modeler email connection, see [the corresponding documentation](../enable-additional-components.md#web-modeler).
 
 #### Configure Console
 
