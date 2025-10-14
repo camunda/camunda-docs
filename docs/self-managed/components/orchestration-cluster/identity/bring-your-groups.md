@@ -2,7 +2,6 @@
 id: bring-your-groups
 title: Bring your own groups
 description: TBD
-draft: true
 unlisted: true
 ---
 
