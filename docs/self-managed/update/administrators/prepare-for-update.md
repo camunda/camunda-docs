@@ -43,7 +43,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Data and exporters</td>
-    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>May require prefix migration depending on the configuration - see prefix migration in the <a href="../../../components/components-upgrade/870-to-880">update</a> section</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>Requires data migration to be performed - see data migration in the <a href="../../../components/components-upgrade/870-to-880">update</a> section</p></li></ul></p></td>
+    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>May require prefix migration depending on the configuration. See <a href="../../../components/components-upgrade/870-to-880#prefix-migration">prefix migration</a> in the components update section.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>Requires a data migration. See <a href="../../../components/components-upgrade/870-to-880#data-migration">data migration</a> in the components update section.</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
