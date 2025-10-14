@@ -831,7 +831,7 @@ script-src-attr 'none'.
 
 | Property                              | Description                                                                            | Default value |
 | ------------------------------------- | -------------------------------------------------------------------------------------- | ------------- |
-| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
+| `CAMUNDA_PERSISTENT_SESSIONS_ENABLED` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `false`       |
 
 ### `SPRING_PROFILES`
 
