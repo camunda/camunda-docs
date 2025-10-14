@@ -365,7 +365,7 @@ As per default authorizations are enabled, your application will only be able to
 ```xml
 <dependency>
     <groupId>io.camunda</groupId>
-    <artifactId>spring-boot-starter-camunda-sdk</artifactId>
+    <artifactId>camunda-spring-boot-starter</artifactId>
     <version>${version.camundastarter}</version>
 </dependency>
 ```
