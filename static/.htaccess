@@ -141,13 +141,24 @@ RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/
 RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
 
+## Microsoft Teams app redirect for app store documentation link.
+
+RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
 
 #---------------------------------------------------------------------------------
+#   8.9: content moves introduced prior to the release of version 8.9.
+#---------------------------------------------------------------------------------
+
+
+#---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
+
+RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
 
 # Fix various redirects prior to the 8.8 release cutting
 RewriteRule ^docs/self-managed/tasklist-deployment/tasklist-authentication/?$ /docs/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration/ [R=301,L]

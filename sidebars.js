@@ -462,6 +462,7 @@ module.exports = {
                 "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                "components/modeler/web-modeler/element-templates/best-practices",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -1345,6 +1346,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {

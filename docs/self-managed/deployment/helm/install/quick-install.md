@@ -236,8 +236,7 @@ Installing all components in a cluster requires downloading all related Docker i
 2. **Install the Helm chart:**
 
    ```bash
-   helm upgrade --install camunda camunda/camunda-platform \
-     --repo https://helm.camunda.io \
+   helm install camunda camunda-platform \
      --version 13.0.0 \
      --namespace camunda \
      -f camunda-values.yaml
@@ -427,6 +426,7 @@ This command lists all available chart versions and their corresponding applicat
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation.md).
 - **Image sources**: By default, the Helm chart uses Bitnami open-source images for infrastructure dependencies (PostgreSQL, Elasticsearch, Keycloak). For production environments, Camunda recommends using Bitnami Premium images for enhanced security and vendor support. For detailed information about image types, CVE handling policies, and installation procedures, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+- **Infrastructure deployment alternatives**: For production deployments, consider using [vendor-supported infrastructure deployment methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) with official operators for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Next steps
 
