@@ -141,7 +141,7 @@ RewriteRule ^optimize/3.11.0/apis-tools/optimize-api/(.*)$ /docs/8.3/apis-tools/
 RewriteRule ^optimize/3.11.0/components/(.*)$ /docs/8.3/components/optimize/$1 [R=301,L]
 RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301,L]
 
-## Microsoft for Teams app redirect for app store documentation link.
+## Microsoft Teams app redirect for app store documentation link.
 
 RewriteRule ^docs/docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
 
