@@ -688,6 +688,67 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Alternative infrastructure methods
+
+For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: EC2
+
+New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: Azure AKS
+
+New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
+See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: General updates
+
+- Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
+- Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
+- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
+- Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
+- OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
+- EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
+- High availability: Refreshed dual region deployment material (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
+- Core diagrams: Updated generic reference architecture visuals for 8.8 Orchestration Cluster changes (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
+- Terraform module upgrade: AWS EKS module v5 → v6 (review [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+
+</div>
+</div>
+
 ### Identity
 
 <div className="release-announcement-row">
