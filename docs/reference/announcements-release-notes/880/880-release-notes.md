@@ -336,45 +336,45 @@ The number of replicas for the Web Modeler REST API and web app deployments can 
 
 ### Alternative infrastructure methods (Helm)
 
-Production guidance now recommends running PostgreSQL, Elasticsearch / OpenSearch, and Keycloak via **managed/external services first**, then **vendor-supported operators** as an alternative, instead of the Bitnami subcharts once you leave evaluation environments.
+Production guidance now recommends running PostgreSQL, Elasticsearch / OpenSearch, and Keycloak using **managed or external services first**. If these are not available, use **vendor-supported operators** instead of Bitnami subcharts when moving beyond evaluation environments.
 
 Why it matters:
 
-- Managed services (AWS RDS/Aurora, Amazon OpenSearch, Azure Database for PostgreSQL, etc.) offer the simplest operational model with automatic maintenance, scaling, and backups.
-- Vendor-supported operators solutions (CloudNativePG, Elastic/ECK, Keycloak Operator) automate upgrades, failover, backups, credentials, and certificate rotation when managed services aren't available or suitable.
-- Decouples critical data services from the Camunda Helm release cycle and values file structure, reducing blast radius and enabling independent scaling / maintenance windows.
-- Improves security posture (faster CVE patch uptake) and observability through native monitoring and status conditions.
-- Allows progressive migration: keep Bitnami for local dev & PoC, evaluate managed services or vendor-supported operators for staging, then switch production.
+- Managed services such as AWS RDS / Aurora, Amazon OpenSearch, and Azure Database for PostgreSQL provide automatic maintenance, scaling, and backups.
+- Vendor-supported operators (CloudNativePG, Elastic / ECK, Keycloak Operator) automate upgrades, failover, backups, credentials, and certificate rotation when managed services aren’t available or suitable.
+- Decouples critical data services from the Camunda Helm release cycle and values file structure, reducing blast radius and enabling independent scaling and maintenance.
+- Enables faster CVE patch adoption and native observability through built-in monitoring and status conditions.
+- Continue using Bitnami subcharts for local development and proofs of concept, evaluate managed services or vendor-supported operators for staging, and use managed or vendor-supported options for production.
 
-Key elements delivered in 8.8 docs:
+Key updates in 8.8 documentation:
 
-- A consolidated vendor-supported infrastructure guide showing topology, and service hand-off points.
-- Replacement examples for each subchart (connection secrets, services, and TLS considerations).
-- Keycloak Operator access clarification (no embedded Service route by default; use Ingress or on-demand port-forward during initial admin tasks).
+- A consolidated vendor-supported infrastructure guide with architecture topology and service hand-off points.
+- Replacement examples for each subchart, including connection secrets, services, and TLS configuration.
+- Clarified Keycloak Operator behavior: no embedded Service route by default; use Ingress or on-demand port-forwarding for initial administration.
 
 ### Reference architecture: Amazon EC2 (manual / VM)
 
-New production reference architecture for running the Camunda 8 Orchestration Cluster directly on Amazon EC2, utilizing a Terraform script to provision networking, AWS IAM, and managed Cloud services.
+New production reference architecture for running the Camunda 8 Orchestration Cluster directly on Amazon EC2 using Terraform to provision networking, IAM, and managed AWS services.
 
 Highlights:
 
-- Three-node Orchestration cluster across three AZs (balanced partition placement, quorum resilience).
-- Managed OpenSearch (baseline 2.19) and optional Aurora PostgreSQL 17 minimize ops overhead for data layers.
-- Dual load balancer pattern (ALB for HTTP/webapps & REST; NLB for gRPC) enabling protocol-appropriate routing and future mTLS expansion.
-- Optional VPN / Bastion design for private subnet administration; security groups scoped least-privilege.
-- Modular Terraform stacks (network, security, compute, search, database) producing outputs consumed by automation or configuration management.
+- Three-node Orchestration Cluster across three Availability Zones for balanced partition placement and quorum resilience.
+- Managed OpenSearch (baseline 2.19) and optional Aurora PostgreSQL 17 to reduce operational overhead.
+- Dual load balancer pattern (ALB for HTTP / web apps and REST, NLB for gRPC) supporting protocol-appropriate routing and future mTLS expansion.
+- Optional VPN / bastion design for secure private subnet administration; security groups follow least-privilege principles.
+- Modular Terraform stacks for network, security, compute, search, and database, with reusable outputs for automation or configuration management.
 
 ### Reference architecture: Azure AKS
 
-New Kubernetes reference architecture for Microsoft Azure leveraging AKS plus Terraform for infrastructure and Helm for platform lifecycle.
+New Kubernetes reference architecture for Microsoft Azure that combines AKS with Terraform for infrastructure and Helm for platform lifecycle management.
 
 Highlights:
 
-- Multi-AZ (zonal) AKS cluster baseline with node pool separation (system vs workloads) when available in Region.
-- Choice of managed vs embedded solutions for PostgreSQL and Elasticsearch (Azure Database for PostgreSQL, Elasticsearch using chart embedded deployment).
-- Identity & Ingress patterns aligned to unified Orchestration Cluster (shared vs split fronts, TLS termination options, private endpoints / internal load balancers).
-- Azure-native networking & security (Private DNS, NSGs, managed identities) mapped to Camunda component requirements.
-- Terraform + Helm separation enables idempotent infra changes and predictable app rollouts.
+- Multi-AZ (zonal) AKS baseline with separate node pools for system and workload components when supported in the region.
+- Flexible data layer options: managed or embedded PostgreSQL and Elasticsearch (Azure Database for PostgreSQL, or embedded Elasticsearch via chart deployment).
+- Unified Identity and Ingress patterns for the Orchestration Cluster, including shared or split fronts, TLS termination choices, and private endpoints or internal load balancers.
+- Azure-native networking and security: Private DNS, NSGs, and managed identities mapped to Camunda component requirements.
+- Terraform + Helm separation enables idempotent infrastructure updates and predictable application rollouts.
 
 See the reference architecture guides for full topology diagrams, sizing guidance, and migration considerations.
 
@@ -500,20 +500,19 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 
 <p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
-### Reference Architecture: General updates
+### Reference architecture: General updates
 
-The 8.8 release cycle also refreshed multiple Self-Managed reference architecture guides and infrastructure baselines:
+The 8.8 release cycle includes updates across multiple Self-Managed reference architecture guides and infrastructure baselines.
 
-- **Managed search (EKS single-region & EC2)**: OpenSearch upgraded 2.15 → 2.19 (aligns with the latest [supported environments](/reference/supported-environments.md)).
-- **Database layer (EKS & EC2)**: Aurora PostgreSQL baseline raised 15 → 17 (see updated versions in [supported environments](/reference/supported-environments.md)).
-- **Identity / global architecture**: Keycloak now standardized on the Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
-- **Private access (OpenShift ROSA, EKS, EC2)**: Optional VPN pattern documented (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
-- **OpenShift (single & dual region)**: Validation and guidance updated for OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
-- **EKS networking**: Alternative NAT gateway strategies added (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
-- **High availability**: Dual region operational guides are refreshed
-  (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
-- **Core diagrams**: Generic reference architecture visuals updated for unified Orchestration Cluster (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
-- **Terraform module upgrade**: AWS EKS Terraform module v5 → v6 (review changes in [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+- **Managed search (EKS single-region and EC2)**: Upgraded OpenSearch from 2.15 to 2.19 to align with the latest [supported environments](/reference/supported-environments.md).
+- **Database layer (EKS and EC2)**: Raised the Aurora PostgreSQL baseline from version 15 to 17. See the updated versions in [supported environments](/reference/supported-environments.md).
+- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
+- **Private access (OpenShift ROSA, EKS, EC2)**: Documented an optional VPN pattern. See [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture).
+- **OpenShift (single and dual region)**: Updated validation and guidance for OpenShift 4.19. See [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
+- **EKS networking**: Added alternative NAT gateway strategies. See [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
+- **High availability**: Refreshed dual-region operational guides. See [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
+- **Core diagrams**: Updated generic reference architecture visuals for the unified Orchestration Cluster. See [reference architectures](/self-managed/reference-architecture/reference-architecture.md).
+- **Terraform module upgrade**: Upgraded the AWS EKS Terraform module from v5 to v6. Review changes in [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading.
 
 ### Dynamic activation of ad-hoc sub-processes using job workers
 

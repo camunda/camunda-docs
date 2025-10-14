@@ -694,9 +694,22 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 <div className="release-announcement-content">
   
-#### Helm: Alternative infrastructure methods
+#### Helm chart: Alternative infrastructure methods
 
-For production: prefer managed/external services first, then vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts; Bitnami remains for evaluation/PoC. [Guide](/self-managed/deployment/helm/configure/vendor-supported-infrastructure)
+For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: EC2
+
+New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
 
 </div>
 </div>
@@ -707,20 +720,10 @@ For production: prefer managed/external services first, then vendor-supported op
 </div>
 <div className="release-announcement-content">
   
-#### Reference Architecture: EC2
-New EC2 manual / VM blueprint: HA multi-AZ cluster, managed OpenSearch, optional Aurora PostgreSQL, dual LB pattern, VPN/bastion option, modular Terraform. [Guide](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md)
-</div>
-</div>
+#### Reference architecture: Azure AKS
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-  
-#### Reference Architecture: Azure AKS
-
-New AKS architecture: zonal AKS baseline, managed/operator data services, unified Ingress & Identity patterns, private networking, modular Terraform + Helm workflow. [Guide](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
+New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
+See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md).
 
 </div>
 </div>
@@ -731,7 +734,7 @@ New AKS architecture: zonal AKS baseline, managed/operator data services, unifie
 </div>
 <div className="release-announcement-content">
   
-#### Reference Architecture: General updates
+#### Reference architecture: General updates
 
 - Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
 - Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
