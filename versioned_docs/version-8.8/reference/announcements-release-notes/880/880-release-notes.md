@@ -354,16 +354,15 @@ Key elements delivered in 8.8 docs:
 
 ### Reference architecture: Amazon EC2 (manual / VM)
 
-New production reference architecture for running the Camunda 8 Orchestration Cluster directly on Amazon EC2 with Terraform-provisioned networking & IAM plus managed cloud services.
+New production reference architecture for running the Camunda 8 Orchestration Cluster directly on Amazon EC2, utilizing a Terraform script to provision networking, AWS IAM, and managed Cloud services.
 
 Highlights:
 
-- Three-node zebee/core layout across three AZs (balanced partition placement, quorum resilience).
+- Three-node Orchestration cluster across three AZs (balanced partition placement, quorum resilience).
 - Managed OpenSearch (baseline 2.19) and optional Aurora PostgreSQL 17 minimize ops overhead for data layers.
 - Dual load balancer pattern (ALB for HTTP/webapps & REST; NLB for gRPC) enabling protocol-appropriate routing and future mTLS expansion.
-- Optional VPN / bastion design for private subnet administration; security groups scoped least-privilege.
+- Optional VPN / Bastion design for private subnet administration; security groups scoped least-privilege.
 - Modular Terraform stacks (network, security, compute, search, database) producing outputs consumed by automation or configuration management.
-- Upgrade path guidance (charted Helm deployment can still be used inside VM or K8s migration strategy documented separately).
 
 ### Reference architecture: Azure AKS
 
@@ -371,11 +370,11 @@ New Kubernetes reference architecture for Microsoft Azure leveraging AKS plus Te
 
 Highlights:
 
-- Multi-AZ (zonal) AKS cluster baseline with node pool separation (system vs workloads) when available in region.
-- Choice of managed vs operator-managed PostgreSQL & search (Azure Database for PostgreSQL / Elastic, or in-cluster operators) with trade-off notes.
+- Multi-AZ (zonal) AKS cluster baseline with node pool separation (system vs workloads) when available in Region.
+- Choice of managed vs embedded solutions for PostgreSQL and ElasticSearch (Azure Database for PostgreSQL, Elasticsearch using chart embedded deployment).
 - Identity & ingress patterns aligned to unified Orchestration Cluster (shared vs split fronts, TLS termination options, private endpoints / internal load balancers).
 - Azure-native networking & security (Private DNS, NSGs, managed identities) mapped to Camunda component requirements.
-- Terraform + Helm separation enables idempotent infra changes and predictable app rollouts, easing blue/green or canary strategies.
+- Terraform + Helm separation enables idempotent infra changes and predictable app rollouts.
 
 See the reference architecture guides for full topology diagrams, sizing guidance, and migration considerations.
 
@@ -511,7 +510,8 @@ The 8.8 release cycle also refreshed multiple Self-Managed reference architectur
 - **Private access (OpenShift ROSA, EKS, EC2)**: Optional VPN pattern documented (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
 - **OpenShift (single & dual region)**: Validation and guidance updated for OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
 - **EKS networking**: Alternative NAT gateway strategies added (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
-- **High availability**: Dual region materials refreshed (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
+- **High availability**: Dual region operational guides are refreshed
+  (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
 - **Core diagrams**: Generic reference architecture visuals updated for unified Orchestration Cluster (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
 - **Terraform module upgrade**: AWS EKS Terraform module v5 → v6 (review changes in [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
 
