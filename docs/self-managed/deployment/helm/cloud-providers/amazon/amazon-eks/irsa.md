@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 ## IRSA configuration validation of a Camunda 8 helm deployment
 
+:::caution Camunda 8.8 compatibility
+This guide and the referenced helper scripts (including `c8-sm-checks` IRSA validation) are not yet fully validated against Camunda 8.8. You may encounter transient errors, missing flags, or deprecated value references when executing them with 8.8-based deployments. A refreshed, 8.8-tested version of this page and the scripts will be published soon.
+
+Proceed with caution in production environments until the update is available.
+:::
+
 The [c8-sm-checks](self-managed/operational-guides/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
 
 ### IRSA check script
@@ -62,10 +68,10 @@ Options:
 **Example Command:**
 
 ```bash
-./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "zeebe,operate"
+./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "zeebe,optimize"
 ```
 
-In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and **`zeebe`** and **`operate`** components for OpenSearch access in the `camunda-primary` namespace.
+In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and **`zeebe`** and **`optimize`** components for OpenSearch access in the `camunda-primary` namespace.
 
 #### Script output overview
 

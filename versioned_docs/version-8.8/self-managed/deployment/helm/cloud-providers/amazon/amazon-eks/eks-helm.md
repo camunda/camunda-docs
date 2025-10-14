@@ -218,14 +218,10 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-domain.yml
 ```
 
-:::danger Exposure of the Zeebe Gateway
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
 
 :::
 
@@ -246,6 +242,25 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/helm-values/values-no-domain.yml
 ```
+
+:::info Keycloak issuer and localhost hostname alignment
+
+When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+
+Add (or update) the following entry in your `/etc/hosts` file while developing locally:
+
+```text
+127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+```
+
+After adding this entry, you can reach Keycloak at:
+`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+
+**Why port `18080`?**
+We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+
+This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
+:::
 
 #### Reference the credentials in secrets
 
@@ -271,14 +286,10 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-domain.yml
 ```
 
-:::danger Exposure of the Zeebe Gateway
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Publicly exposing the Zeebe Gateway without proper authorization can pose significant security risks. To avoid this, consider disabling the Ingress for the Zeebe Gateway by setting the following values to `false` in your configuration file:
-
-- `zeebeGateway.ingress.grpc.enabled`
-- `zeebeGateway.ingress.rest.enabled`
-
-By default, authorization is enabled to ensure secure access to Zeebe. Typically, only internal components need direct access to Zeebe, making it unnecessary to expose the gateway externally.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
 
 :::
 
@@ -289,6 +300,25 @@ By default, authorization is enabled to ensure secure access to Zeebe. Typically
 ```hcl reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/helm-values/values-no-domain.yml
 ```
+
+:::info Keycloak issuer and localhost hostname alignment
+
+When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means that during port-forwarding you may need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+
+Add (or update) the following entry in your `/etc/hosts` file while developing locally:
+
+```text
+127.0.0.1  $CAMUNDA_RELEASE_NAME-keycloak
+```
+
+After adding this entry, you can reach Keycloak at:
+`http://$CAMUNDA_RELEASE_NAME-keycloak:18080/auth`
+
+**Why port `18080`?**
+We forward container port `8080` (originally `80`) to a non‑privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using 8080.
+
+This constraint does not apply when a proper domain and Ingress are configured (the public FQDN is then used as the issuer and no hosts file changes are needed).
+:::
 
   </TabItem>
 
@@ -352,7 +382,7 @@ identityKeycloak:
   # extraEnvVars:
   #   ...
 
-postgresql:
+webModelerPostgresql:
   enabled: true
 
 webModeler:
@@ -362,8 +392,7 @@ webModeler:
   #     externalDatabase:
   #         url: jdbc:aws-wrapper:postgresql://${DB_HOST}:5432/${DB_WEBMODELER_NAME}
   #         user: ${DB_WEBMODELER_USERNAME}
-  #         existingSecret: webmodeler-postgres-secret
-  #         existingSecretPasswordKey: password
+  #         ...
 
 identity:
   # Remove this part
@@ -374,8 +403,7 @@ identity:
   #     port: 5432
   #     username: ${DB_IDENTITY_USERNAME}
   #     database: ${DB_IDENTITY_NAME}
-  #     existingSecret: identity-postgres-secret
-  #     existingSecretPasswordKey: password
+  #     ...
 ```
 
 </details>
@@ -455,7 +483,7 @@ A custom Keycloak container image containing necessary configurations is accessi
 
 The sources of the [Camunda Keycloak images](https://hub.docker.com/r/camunda/keycloak) can be found on [GitHub](https://github.com/camunda/keycloak). In this repository, the [aws-advanced-jdbc-wrapper](https://github.com/awslabs/aws-advanced-jdbc-wrapper) is assembled in the `Dockerfile`.
 
-Maintenance of these images is based on the upstream [Bitnami Keycloak images](https://hub.docker.com/r/bitnamilegacy/keycloak), ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
+Maintenance of these images is based on the upstream Bitnami and official keycloak images, ensuring they are always up-to-date with the latest Keycloak releases. The lifecycle details for Keycloak can be found on [endoflife.date](https://endoflife.date/keycloak).
 
 ##### Keycloak image configuration
 
@@ -513,10 +541,17 @@ Below is a summary of the necessary instructions:
 <Tabs groupId="domain">
   <TabItem value="with" label="With domain" default>
 
-1. Open Identity in your browser at `https://${DOMAIN_NAME}/identity`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Use `demo` as both the username and password.
+1. Open Identity in your browser at `https://${DOMAIN_NAME}/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -531,14 +566,39 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
 
 ```shell
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8084:80 --namespace "$CAMUNDA_NAMESPACE"
-kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-1. Open Identity in your browser at `http://localhost:8084`. You will be redirected to Keycloak and prompted to log in with a username and password.
-2. Use `demo` as both the username and password.
+:::tip Localhost development with kubefwd
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
+
+Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
+
+```shell
+sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
+```
+
+After this runs, you can reach services directly, for example:
+
+- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
+- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
+
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
+:::
+
+1. Open Identity in your browser at `http://localhost:8085/managementidentity`. You will be redirected to Keycloak and prompted to log in with a username and password.
+2. Log in with the initial user `admin` (defined in `identity.firstUser` of the values file). Retrieve the generated password (created earlier when running the secret creation script) from the Kubernetes secret and use it to authenticate:
+
+```shell
+kubectl get secret identity-secret-for-components \
+  --namespace "$CAMUNDA_NAMESPACE" \
+  -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
+```
+
 3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
-4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Core API** with "read" and "write" permission.
+4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
 ```shell
@@ -548,7 +608,6 @@ export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identit
 
 <details>
 <summary>To access the other services and their UIs, port-forward those Components as well:</summary>
-<summary>
 
 ```shell
 Orchestration:
@@ -563,7 +622,6 @@ Console:
 > kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-console" 8087:80 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
-</summary>
 </details>
 
 </TabItem>
@@ -638,7 +696,7 @@ Follow our existing [Modeler guide on deploying a diagram](/self-managed/compone
 
 The following values are required for the OAuth authentication:
 
-- **Cluster endpoint:** `https://zeebe.$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
+- **Cluster endpoint:** `https://zeebe-$DOMAIN_NAME`, replacing `$DOMAIN_NAME` with your domain
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
