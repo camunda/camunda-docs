@@ -1,7 +1,7 @@
 ---
 id: agentic-ai-aiagent-subprocess
-sidebar_label: AI Agent Subprocess
-title: AI Agent Subprocess connector
+sidebar_label: AI Agent Sub-process
+title: AI Agent Sub-process connector
 description: AI agent connector implementation based on ad-hoc sub-processes.
 ---
 
@@ -28,16 +28,16 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 :::info
 
-- For more information and usage examples, see [AI Agent Subprocess](./agentic-ai-aiagent.md#ai-agent-subprocess).
-- The [example integration](agentic-ai-aiagent-subprocess-example.md) outlines how to model an agentic AI process using the AI Agent Subprocess implementation.
+- For more information and usage examples, see [AI Agent Sub-process](./agentic-ai-aiagent.md#ai-agent-sub-process).
+- The [example integration](agentic-ai-aiagent-subprocess-example.md) outlines how to model an agentic AI process using the AI Agent Sub-process implementation.
 
 :::
 
-<img src={AgentProcessImg} alt="AI Agent Subprocess" class="img-700"/>
+<img src={AgentProcessImg} alt="AI Agent Sub-process" class="img-700"/>
 
 ## Event handling
 
-With an **AI Agent Subprocess**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event.
+With an **AI Agent Sub-process**, an event handled as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md) will directly trigger an execution of the underlying job worker which can either interrupt ongoing tool calls or wait for all tool calls to complete before handling the event.
 
 - To provide additional data to the LLM from a handled event, create a `toolCallResult` variable from the event handling flow.
 - The content of this variable is added to the LLM API request as a user message following any tool call results.

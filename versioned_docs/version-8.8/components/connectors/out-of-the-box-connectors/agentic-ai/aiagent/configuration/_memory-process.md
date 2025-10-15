@@ -4,7 +4,7 @@ import ConfigurationMemoryStorageBackends from './\_memory-storage-backends.md';
 
 Configure the agent's short-term/conversational memory.
 
-For the AI Agent Subprocess implementation, configuration of the agent context field is only necessary when re-entering the agent as part of a feedback loop outside the agent execution.
+For the AI Agent Sub-process implementation, configuration of the agent context field is only necessary when re-entering the agent as part of a feedback loop outside the agent execution.
 
 | Field         | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | :------------ | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
