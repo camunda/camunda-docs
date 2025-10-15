@@ -254,13 +254,6 @@ Console is now available as a Self-Managed Docker distribution. Deploy Camunda C
 
 <p><a href="../../../../self-managed/quickstart/developer-quickstart/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
 
-### Encryption (BYOK)
-
-The new Bring Your Own Key (BYOK) approach with Amazon Key Management Service (KMS) allows you to configure Camunda 8 SaaS to use a customer-managed key stored in your own Amazon account. This ensures you retain ownership, control, and visibility throughout the key lifecycle, including creation, rotation, and audit logging.
-
-- Camunda 8 SaaS encrypts all cluster data at rest to protect customer workloads. By default, encryption is managed using cloud provider–supplied keys. While this satisfies many organizations, some (especially in regulated industries) require full control over their encryption keys.
-- This feature is currently available only for customers provisioning their Camunda 8 SaaS clusters in AWS regions. Support for additional cloud providers may be added in the future.
-
 ### Regions
 
 New regions are available for SaaS clusters on Amazon Web Services:
@@ -755,6 +748,7 @@ Use the version **Description** field to track changes alongside the version tag
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
+<ul><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>

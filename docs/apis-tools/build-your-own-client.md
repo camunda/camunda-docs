@@ -118,7 +118,8 @@ Response contents:
   ],
   "clusterSize": 1,
   "partitionsCount": 2,
-  "replicationFactor": 1
+  "replicationFactor": 1,
+  "clusterId": "clusterId"
 }
 
 Response trailers received:
