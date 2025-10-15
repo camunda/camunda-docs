@@ -575,6 +575,7 @@
             "components/connectors/protocol/http-webhook",
             "components/connectors/out-of-the-box-connectors/hugging-face",
             "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
             {
               "Microsoft": [
                 "components/connectors/out-of-the-box-connectors/azure-open-ai",
@@ -1898,7 +1899,7 @@
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
-            "self-managed/setup/guides/multi-namespace-deployment",
+            "self-managed/setup/guides/data-retention",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management"
           ]
@@ -2064,7 +2065,8 @@
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges"
+        "self-managed/concepts/opensearch-privileges",
+        "self-managed/concepts/secondary-storage-management"
       ]
     },
     {
