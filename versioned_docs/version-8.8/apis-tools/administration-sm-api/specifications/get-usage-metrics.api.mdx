@@ -1,0 +1,156 @@
+---
+id: get-usage-metrics
+title: "Get usage metrics for clusters"
+description: "Returns usage metrics for a specific cluster for a given time range. The usage metrics are aggregated over the time range and include number of started process instances, executed decision instances, and assigned task users."
+sidebar_label: "Get usage metrics for clusters"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV01v2zgQ/SvEnFqAsb1fQKFbUGyKLDa7RZNgFzB8GJNjm41EKiSVNBD034uhJFuxZW93kWAPvSSWPHx8fDPzhq7BleQxGmcvNWSwpngbcE1XFL1RASR4CqWzgQJkNfw4m/E/TUF5U/IqyODPO5CgnI1kI3+LZZkblTCnnwOH1BDUhgrkT6XnHaNpAY3mv/GpJMggRG/sGuQe/s2GhNFko1kZ8sKtRNyQUHkVIvkJNJIxFYVwaUNEq1rkQ4yKDyaK9mRi5bwIEX0kLbr1wvQAE5B7RKOLmA+42qpYkgcJK+cLjJCBdtUyp1H2bTAzP+SAIpSkzMoowdATaBoW/b4ynjRk827nhex3dsvPpCJIQK0Nb4L5xwHVFeaBJEQTc45+72xwOV1fnevC2PPSTIb53SnWMG9lAhfCv5WRvpCqWMce4TsXMmK4uw3kv1lADMGsLWnBK0XFS/9X4SR0jLomjVSEwz5ttkqi9/g0um86i4gbjOlsQWzwgcSSyA4O7Y7lasjjdfJ2s03VPgOjYcRYxrpkmPDXYXnh/PvW7qBpmOjPs58Oa+vC+aXRmixn5pcxp74m/0D+LBhNgrx3Pp36ecwnipW34XSddObbvV6bB7IimoKER7umiTgsc/QkcL32tEZ2CvdAPtn4bpVAq4WxKq/0sF6PerQ85TsyoR3pq4jrwClOEot+1C0kBFKVN/EJsnkNS0JPHrL5ollIKNFjQTE19Xy0q625r04MKpBgOPa+Is+9YrHgxKcy29Vd9BXJwbTc67hGjm2dJEpKhohF2W88lDaI2z8u/x7EGCsKk+cmkHJWhyPsEvJJgofm89yejlAmq1+FMNnTev4z3YWEguLGdbchNgGMG8hgityaZ1iaaSrts2J7Rwqpr9rKqHwOGdTtlk02ndYbF2KT1aXzsQEJD+gNLvPWWvm7tk9XWOVMLHcK8/R6zE/5Cz5qL9n5x0vR7t5ehJzfg3s3ezcbReLQIyg7uXY4mxjLUZw2eBQpidn31DXHtYfuO2tb3h14guLnLkB2Hy76pP32101yLGNXLi3v3DOZpgmxvcgmEm+uKV+dXaHFNem3B8zPVTITpoyHi91KdIYshjDsHZznFuKHyWwy626+qJLsbe75NCGbTh8fHycKi8pqnChXsLK5UWQDcWxXsL93b+TeYu1U2K42Lj1PPa3Ik1U07YDCNOlRuhALtAPYDxRHHLyzorAvR727vn8X/t9WXaQvcVrmaNLATPLXXbPPYdvsnJln7b6QXdfOoa6XGOjW503Dr1svSuPBBG5xvZ3zR+V+86nzqrfiG6fIKPs7euqHyQPmFQdAct7/SuRlZsoJrv1oeRm6LzFPTpBtx8qO6mJn4+mCIGFDqNNtoe6WsMOUwwMe/Cx+Nmo+/HrDd8WKq2/ri3s+mND7K7d9GmDXdRtx4+7INjxlWhKRn6FZNE3zFavQk7I=
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get usage metrics for clusters"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/admin-api/usage-metrics"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns usage metrics for a specific cluster for a given time range. The usage metrics are aggregated over the time range and include number of started process instances, executed decision instances, and assigned task users.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      description: "The unique identifier of the cluster",
+      in: "query",
+      name: "id",
+      required: true,
+      schema: { type: "string" },
+    },
+    {
+      description:
+        "The start timestamp of the time range as UNIX timestamp in milliseconds",
+      in: "query",
+      name: "start",
+      required: true,
+      schema: { format: "double", type: "number" },
+    },
+    {
+      description:
+        "The end timestamp of the time range as UNIX timestamp in milliseconds",
+      in: "query",
+      name: "end",
+      required: true,
+      schema: { format: "double", type: "number" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Ok",
+      content: {
+        "application/json": {
+          schema: {
+            properties: {
+              id: {
+                type: "string",
+                description: "The identifier of the cluster.",
+              },
+              processInstances: {
+                description: "The usage metrics for started process instances.",
+                properties: {
+                  total: {
+                    type: "number",
+                    format: "double",
+                    description:
+                      "The number of usage metrics for a specific type.",
+                  },
+                },
+                required: ["total"],
+                type: "object",
+                additionalProperties: false,
+                title: "ConsoleSMAdminApi.UsageMetricsInstances",
+              },
+              decisionInstances: {
+                description:
+                  "The usage metrics for executed decision instances.",
+                properties: {
+                  total: {
+                    type: "number",
+                    format: "double",
+                    description:
+                      "The number of usage metrics for a specific type.",
+                  },
+                },
+                required: ["total"],
+                type: "object",
+                additionalProperties: false,
+                title: "ConsoleSMAdminApi.UsageMetricsInstances",
+              },
+              taskUsers: {
+                description: "The usage metrics for assigned task users.",
+                properties: {
+                  total: {
+                    type: "number",
+                    format: "double",
+                    description:
+                      "The number of usage metrics for a specific type.",
+                  },
+                  assignees: {
+                    items: { type: "string" },
+                    type: "array",
+                    description: "The users that tasks have been assigned to.",
+                  },
+                },
+                required: ["total", "assignees"],
+                type: "object",
+                additionalProperties: false,
+                title: "ConsoleSMAdminApi.UsageMetricsTaskUsers",
+              },
+            },
+            required: [
+              "id",
+              "processInstances",
+              "decisionInstances",
+              "taskUsers",
+            ],
+            type: "object",
+            additionalProperties: false,
+            title: "ConsoleSMAdminApi.UsageMetricsForCluster",
+          },
+        },
+      },
+    },
+    "403": { description: "Forbidden" },
+    "500": { description: "Server-side error" },
+  }}
+></StatusCodes>

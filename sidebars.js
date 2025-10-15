@@ -462,6 +462,7 @@ module.exports = {
                 "components/modeler/web-modeler/element-templates/element-template-generator",
                 "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
                 "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                "components/modeler/web-modeler/element-templates/best-practices",
               ],
             },
             "components/modeler/web-modeler/camunda-marketplace",
@@ -996,7 +997,20 @@ module.exports = {
       items: [
         "components/concepts/clusters",
         "components/saas/regions",
-        "components/saas/encryption-at-rest",
+        {
+          type: "category",
+          label: "Encryption",
+          link: {
+            type: "doc",
+            id: "components/saas/byok/overview",
+          },
+          items: [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/faq-and-troubleshooting",
+          ],
+        },
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -1345,6 +1359,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -1775,7 +1790,6 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
                 "self-managed/components/orchestration-cluster/identity/debugging-authentication",
                 "self-managed/components/orchestration-cluster/identity/special-oidc-cases",
-                "self-managed/components/orchestration-cluster/identity/bring-your-groups",
               ],
             },
           ],
