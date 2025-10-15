@@ -56,7 +56,7 @@ You can also run this setup using a single AWS EC2 instance. However, in the eve
 
 - An AWS account to provision resources.
   - At a high level, permissions are needed for **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/ec2/example/policy.json).
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/stable/8.8/aws/ec2/example/policy.json).
 - Terraform (v1.7 or later)
 - A Unix-based operating system with `ssh` and `sftp`
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install), though these configurations have not been tested.
@@ -82,7 +82,7 @@ Start by downloading a copy of the reference architecture from the GitHub reposi
 The reference architecture repository allows you to reuse and extend the provided Terraform examples. This flexible implementation avoids the constraints of relying on third-party-maintained Terraform modules:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/compute/ec2-single-region/procedure/get-your-copy.sh
 ```
 
 With the reference architecture in place, you can proceed with the remaining steps in this documentation. Make sure you're in the correct directory before continuing with the instructions.
@@ -138,25 +138,25 @@ Next, follow these steps to create an S3 bucket with versioning enabled:
 2. Run the following command to create an S3 bucket for storing your Terraform state. Be sure to choose a unique bucket name, and ensure that the `AWS_REGION` environment variable is already set:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-creation.sh
    ```
 
 3. Enable versioning on the S3 bucket to track changes and protect the state file from accidental deletions or overwrites:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-versioning.sh
    ```
 
 4. Secure the bucket by blocking public access:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-private.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-private.sh
    ```
 
 5. Verify versioning is enabled on the bucket:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-verify.sh
    ```
 
 The S3 bucket is now ready to securely store your Terraform state files, with versioning enabled for added protection.
@@ -172,7 +172,7 @@ Make sure you are in the `terraform` subfolder: `camunda-deployment-references/a
 :::
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh
 ```
 
 Terraform will now use the S3 bucket to manage the state file, ensuring remote and persistent storage.
@@ -184,7 +184,7 @@ The `ec2.tf` file handles the creation of compute instances and, optionally, a b
 The file defines all resources related to the EC2 setup and can be customized as needed in your copied reference architecture. Note that the embedded code snippet below is limited to 30 lines. For the complete file, see the link provided at the bottom of the snippet:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/ec2.tf#L1-L30
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/compute/ec2-single-region/terraform/cluster/ec2.tf#L1-L30
 ```
 
 ### Security setup
@@ -204,7 +204,7 @@ In addition to traffic management, this file also includes:
 The embedded snippet below shows which resources are created and how they can be customized in your copied reference. The preview is limited to 30 lines. For the complete file, refer to the link at the bottom of the snippet:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/security.tf#L1-L30
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/compute/ec2-single-region/terraform/cluster/security.tf#L1-L30
 ```
 
 ### Load balancer setup
@@ -219,7 +219,7 @@ The configuration includes two types of load balancers:
 The embedded snippet below shows the resources defined in this file and how they can be customized in your copied reference. The preview is limited to 30 lines. For the complete file, refer to the link at the bottom of the snippet:
 
 ```hcl reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/lb.tf#L1-L30
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/compute/ec2-single-region/terraform/cluster/lb.tf#L1-L30
 ```
 
 ### OpenSearch module setup
@@ -253,10 +253,10 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    :::
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/compute/ec2-single-region/terraform/cluster/opensearch.tf#L1-L30
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/compute/ec2-single-region/terraform/cluster/opensearch.tf#L1-L30
    ```
 
-2. Customize the cluster setup using various input options. For a complete list of available parameters, refer to the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/opensearch/README.md).
+2. Customize the cluster setup using various input options. For a complete list of available parameters, refer to the [OpenSearch module documentation](https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/modules/opensearch/README.md).
 
 :::tip
 The instance type `m7i.large.search` used in the example is only a suggestion. You can change it based on your workload and requirements.
@@ -282,7 +282,7 @@ We strongly recommend managing sensitive information using a secure secrets mana
 2. Perform a final initialization to apply any changes made throughout this guide:
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/aws/common/procedure/s3-bucket/s3-bucket-tf-init.sh#L7
    ```
 
 3. Plan the configuration files:

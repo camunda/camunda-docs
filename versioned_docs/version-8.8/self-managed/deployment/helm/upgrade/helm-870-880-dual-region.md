@@ -93,7 +93,7 @@ orchestration:
 
 #### Reference configuration example
 
-See the [example `values.yaml`](https://github.com/camunda/c8-multi-region/blob/main/aws/dual-region/kubernetes/camunda-values-migration.yml) showing 8.7 → 8.8 changes with migration enabled.
+See the [example `values.yaml`](https://github.com/camunda/c8-multi-region/blob/stable/8.8/aws/dual-region/kubernetes/camunda-values-migration.yml) showing 8.7 → 8.8 changes with migration enabled.
 
 #### Multi-region specific considerations
 
