@@ -155,7 +155,7 @@ camunda:
       allow-non-self-assignment: true
 ```
 
-## Tasklist API mode configuration
+## Tasklist UI mode configuration
 
 Starting with Camunda 8.8, Tasklist can operate in two modes: V1 (legacy) and V2 (recommended). The V2 mode uses the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and is enabled by default.
 
