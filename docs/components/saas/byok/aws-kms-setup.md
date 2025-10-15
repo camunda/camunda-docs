@@ -72,7 +72,7 @@ Use this script to create a single KMS key in the same region as the cluster.
 
 #### Dual-region backup
 
-Use this script to create a multi-region primary key in `eu-west-1` (Ireland) and a replica key in `eu-west-2` (London).
+Use this script to create a multi-region primary key in the cluster's region and a replica key in backup region.
 
 **What the script does:**
 
