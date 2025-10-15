@@ -225,6 +225,7 @@ Before using it, clone the `c8-sm-checks` repository to your local environment b
 ```bash
 git clone https://github.com/camunda/c8-sm-checks.git
 cd c8-sm-checks
+git checkout v1.2.2
 ```
 
 ### Kubernetes connectivity scripts
