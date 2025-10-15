@@ -78,7 +78,7 @@ The Java client cannot keep the long-lived polling connections required for job 
 
 When the cases above occurs, the open long-polling request will be interrupted.
 You may observe workers intermittently stop receiving jobs and cause reduced throughput due to wasted I/O and connection churn.
-If you encounter this issue, consider using job activation via the Camunda 8 REST API with long polling disabled, or switching to the Zeebe gRPC protocol for job activation.
+If you encounter this issue, consider using job activation via the Orchestration Cluster REST API with long polling disabled, or switching to the Zeebe gRPC protocol for job activation.
 
 Additionally, the long-polling connection might still receive jobs after the Java client is closed.
 As the Java client does not process these jobs they will time out.
