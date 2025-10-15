@@ -49,7 +49,7 @@ We provide automated scripts to create the necessary KMS key(s) with the correct
 
 #### Single-region backup
 
-Use this script to create a single KMS key in `eu-west-1` (Ireland).
+Use this script to create a single KMS key in the same region as the cluster.
 
 **What the script does:**
 
