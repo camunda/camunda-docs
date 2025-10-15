@@ -45,7 +45,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ### Agentic orchestration
 
-Agentic orchestration is the coordination and governance of AI agents (LLM-powered), humans, and systems in a blended deterministic and dynamic process workflow to achieve a business goal.
+In Camunda, agentic orchestration refers to the governed coordination of AI agents, humans, and systems in a blended deterministic and dynamic BPMN process workflow to achieve a business goal.
 
 For example, this includes directing when AI agents act, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
 
