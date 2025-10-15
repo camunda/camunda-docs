@@ -76,7 +76,7 @@ With OIDC, authentication is delegated to an [external Identity Provider (IdP)](
 This is the **recommended method for production environments**.
 
 - [Users](/components/identity/user.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
-- [User groups](/components/identity/group.md) can be managed in Identity or [configured to use groups from your IdP](/self-managed/components/orchestration-cluster/identity/bring-your-own-groups.md).
+- [User groups](/components/identity/group.md) can be managed in Identity or configured to use groups from your IdP.
 - [Clients](/components/identity/client.md) are managed in your external IdP and [mapped through rules](/components/concepts/access-control/mapping-rules.md) in Identity.
 
 Using OIDC provides several security benefits:
