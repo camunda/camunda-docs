@@ -163,7 +163,6 @@ RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/ [R=301,L]
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/identity/mapping-rules/ [R=301,L]
 RewriteRule ^docs/components/identity/mapping-rules/manage-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/components/identity/mapping-rules/manage-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
 
 RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
 
