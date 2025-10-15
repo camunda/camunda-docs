@@ -21,6 +21,11 @@ TODO: adjust "recommended for" to user journeys
 | [External Keycloak](./using-external-keycloak.md)     | Connects Camunda to a separately deployed Keycloak instance for centralized identity management.    | Enterprise or production setups             |
 | [External OIDC provider](./external-oidc-provider.md) | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure |
 
+### Limitations of OIDC setups
+
+Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
+front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the OIDC provider or the other components.
+
 ## References
 
 TODO: does this make sense here?

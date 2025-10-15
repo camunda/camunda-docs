@@ -281,7 +281,7 @@ In the internal Keycloak scenario, the Camunda Helm Chart does most of the heavy
 - Run `kubectl get pods` and `kubectl get configmap` and the corresponding `kubectl describe` commands to review each component and its effective configuration
 - Log into Keycloak (using user `admin` and the configured admin user password from the secret you created) to review OIDC provider setup
 
-### Connect to the cluster
+## Connect to the cluster
 
 Running this configuration, you can use the following port-forwarding instructions to access the APIs and UIs from localhost:
 
