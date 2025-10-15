@@ -27,6 +27,14 @@ All Tasklist data present in Elasticsearch (from both **main** and **dated** ind
 
 The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
 
+## Rollover Interval
+
+Process instances are archived into historical indices based on some rollover interval, by default this value is `1d` therefore a process instance which completed
+at yyyy-mm-dd would be archived into an index which that date as a suffix, meaning there would be one historical index per day. By increasing this interval, the number
+of historical indices will reduce which will reduce shard consumption.
+
+This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter
+
 ## Data cleanup
 
 In case of intensive Zeebe usage, the amount of data can grow significantly overtime. Therefore, you should consider the data cleanup strategy.
@@ -50,6 +58,18 @@ This ILM Policy works on Elasticsearch 7 as well, and can function as a replacem
 
 :::note
 Only indices containing dates in their suffix may be deleted.
+:::
+
+:::warning Limitation: ILM configuration updates are not applied automatically
+
+If you update the value of `ilmMinAgeForDeleteArchivedIndices` in the `application.yml` after deployment, the change will **not** be applied to the existing ILM policy used by Tasklist. This is a known issue.
+
+To change the ILM settings after installation, you must manually update the corresponding ILM policy in Elasticsearch. Be aware that if Camunda 8 is installed without ILM configured initially, applying ILM later may lead to issues unless handled carefully and manually.
+
+Zeebe does correctly apply ILM updates via configuration, but Tasklist does not.
+
+For reliable ILM behavior, Camunda recommends configuring `ilmMinAgeForDeleteArchivedIndices` during initial installation and verifying the applied policy in Elasticsearch.
+
 :::
 
 ### OpenSearch

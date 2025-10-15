@@ -2,6 +2,8 @@
 id: process-applications
 title: Process applications
 description: A process application is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
+keywords: ["process application"]
+page_rank: 90
 ---
 
 import ProcessApplicationImg from './assets/process-applications/diagram-process-application-get-started.png'
