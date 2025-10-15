@@ -10,17 +10,7 @@ import TabItem from "@theme/TabItem";
 All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.  
 This page describes the available authentication methods for accessing the Operate REST API and when to use each method.
 
-The Operate REST API supports three authentication methods based on your environment and configuration:
-
-- **No authentication**
-- **Basic authentication**
-- **OIDC-based authentication**
-
-## When to use each method
-
-- **No authentication**: Only for local development with Camunda 8 Run or Docker Compose. Never use in production.
-- **Basic authentication**: For username/password protection in development or testing environments.
-- **OIDC-based authentication**: Required for SaaS and recommended for Self-Managed production clusters.
+The Operate REST API supports three authentication methods based on your environment and configuration: none, basic, and OIDC-based.
 
 ## Authentication support matrix
 

@@ -286,9 +286,8 @@ Several identity providers, such as Keycloak, support client X.509 authenticatio
 **Prerequisites**
 
 - Properly configured KeyStore and TrustStore
-- Both the Spring Camunda application and identity provider share the same CA trust certificates
-- Certificates for both Spring Camunda and the identity provider are signed by a trusted CA
-- The Spring Camunda application certificate has a proper Distinguished Name (DN), e.g., `CN=My Camunda Client, OU=Camunda Users, O=Best Company, C=DE`
+- Both your application and identity provider share the same CA trust certificates
+- Certificates for the identity provider are signed by a trusted CA
 - The application DN is registered in the identity provider client authorization details
 
 ```java
