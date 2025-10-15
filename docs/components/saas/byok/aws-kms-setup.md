@@ -88,7 +88,7 @@ Use this script to create a multi-region primary key in `eu-west-1` (Ireland) an
 4. Copy the two outputted key ARNs and provide them to Camunda.
 
 :::note Alternative
-For dual-region setups, you can also run the single-region script twice—once in `eu-west-1` and once in `eu-west-2`. Make sure to modify the `REGION` variable before creating the second key.
+For dual-region setups, you can also run the single-region script twice—once in  cluster's region and once in backup region. Make sure to modify the `REGION` variable before creating the second key.
 :::
 
 ### Option B: Manual key creation in AWS Console
