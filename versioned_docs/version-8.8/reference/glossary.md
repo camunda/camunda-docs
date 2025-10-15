@@ -45,15 +45,15 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ### Agentic orchestration
 
-In Camunda, agentic orchestration refers to the governed coordination of AI agents, humans, and systems in a blended deterministic and dynamic BPMN process workflow to achieve a business goal.
+The governed coordination of AI agents, humans, and systems in a blended deterministic and dynamic BPMN process workflow to achieve a business goal.
 
-For example, this includes directing when AI agents act, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
+For example, this involves directing when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
 
 ### AI agent
 
-In Camunda, an AI agent refers to the whole or part of an autonomous (LLM-powered) solution built in BPMN that interprets goals and context, plans steps, calls tools/APIs, and returns results.
+The whole or part of an autonomous (LLM-powered) solution built in BPMN that interprets goals and context, plans steps, calls tools/APIs, and returns results.
 
 For example, you can build an invoice processing AI agent in Camunda using an ad‑hoc sub‑process and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
 
