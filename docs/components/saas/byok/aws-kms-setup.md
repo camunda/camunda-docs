@@ -64,6 +64,7 @@ Use this script to create a single KMS key in the same region as the cluster.
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
    - `AWS_SESSION_TOKEN` (if using temporary credentials)
+   - `REGION` (replace with the region in which the cluster is created)
    - `TENANT_ROLE_ARN` (from the Camunda Console)
    - `YOUR_ACCOUNT_ID`
    - `ALIAS_NAME` (optional)
@@ -88,7 +89,7 @@ Use this script to create a multi-region primary key in the cluster's region and
 4. Copy the two outputted key ARNs and provide them to Camunda.
 
 :::note Alternative
-For dual-region setups, you can also run the single-region script twice—once in  cluster's region and once in backup region. Make sure to modify the `REGION` variable before creating the second key.
+For dual-region setups, you can also run the single-region script twice—once in the cluster's region and once in backup region. Make sure to modify the `REGION` variable before creating the second key.
 :::
 
 ### Option B: Manual key creation in AWS Console
@@ -121,13 +122,13 @@ You can either create a multi-region key and replica or create two single-region
 
 1. Follow the single-region steps, selecting **Multi-Region key** under **Advanced options**.
 2. After creating the primary key in cluster's region, go to **Regional replicas** and click **Create replica key**.
-3. Select `eu-west-2` for the replica and confirm.
+3. Select the region for the replica and confirm. The region should be the same as the backup region.
 4. Copy both key ARNs and provide them to Camunda.
 
 ##### Method B: Two single-region keys
 
-1. Create a key in `eu-west-1` using the single-region steps.
-2. Repeat the process in `eu-west-2` using a different alias (e.g., `camunda-saas-byok-replica`).
+1. Create a key in the cluster's region using the single-region steps.
+2. Repeat the process in the backup region using a different alias (e.g., `camunda-saas-byok-replica`).
 3. Provide both key ARNs to Camunda.
 
 ### Sample key policy

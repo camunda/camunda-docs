@@ -10,9 +10,8 @@ YOUR_ACCOUNT_ID="<your-account-id>"
 # Pre-configured alias name - change if needed
 ALIAS_NAME="alias/camunda-byok-multi-region-key"
 
-# Pre-configured primary nd secondary regions - DO NOT CHANGE THESE VALUES
-PRIMARY_REGION="eu-west-1"
-SECONDARY_REGION="eu-west-2"
+PRIMARY_REGION="<the-cluster-region>"
+SECONDARY_REGION="<backup-region>"
 
 # Create KMS key policy file
 cat > kms-policy.json << EOF
