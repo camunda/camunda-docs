@@ -81,9 +81,6 @@ function Feature({ imageUrl, url, title, description }) {
   );
 }
 
-const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
-const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
-
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -99,11 +96,6 @@ function Home() {
           <div className="homeSearch">
             <AlgoliaSearchBox />
           </div>
-          <p className="popular" style={{ color: "#ccc" }}>
-            <strong style={{ paddingRight: "20px" }}>Popular:</strong>{" "}
-            <Link to={useBaseUrl(search_migrate_url)}>Camunda 7 migration</Link>
-            <Link to={useBaseUrl(search_feel_url)}>What is FEEL</Link>
-          </p>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
