@@ -120,7 +120,7 @@ You can either create a multi-region key and replica or create two single-region
 ##### Method A: Multi-region key (recommended)
 
 1. Follow the single-region steps, selecting **Multi-Region key** under **Advanced options**.
-2. After creating the primary key in `eu-west-1`, go to **Regional replicas** and click **Create replica key**.
+2. After creating the primary key in cluster's region, go to **Regional replicas** and click **Create replica key**.
 3. Select `eu-west-2` for the replica and confirm.
 4. Copy both key ARNs and provide them to Camunda.
 
