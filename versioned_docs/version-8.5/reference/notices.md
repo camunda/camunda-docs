@@ -52,7 +52,7 @@ Camunda has provided the following releases which contain the fix:
 
 #### Publication date
 
-September 9, 2025
+October 7th, 2025
 
 #### Products affected
 
@@ -66,13 +66,13 @@ Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-20
 
 You are using:
 
-- Optimize 8.7.0 - 8.7.8 or 8.6.0 - 8.6.15
+- Optimize 8.7.0 - 8.7.10 or 8.6.0 - 8.6.17
 
 #### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Optimize 8.7.9, 8.6.16
+- Optimize 8.7.11, 8.6.18
 
 ### Notice 27
 

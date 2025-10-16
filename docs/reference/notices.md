@@ -90,6 +90,32 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
+October 7th, 2025
+
+### Products affected
+
+- Camunda Optimize
+
+### Impact
+
+Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-2025-5115), which allows a remote attacker to repeatedly send malformed HTTP/2 frames that exhaust a Jetty server’s CPU and memory, causing a denial-of-service.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Optimize 8.7.0 - 8.7.10 or 8.6.0 - 8.6.17
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Optimize 8.7.11, 8.6.18
+
+## Notice 28
+
+### Publication date
+
 October 3, 2025
 
 ### Products affected
@@ -115,32 +141,6 @@ server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA2
 ```
 
 There is no known mitigation other than disabling the use of DHE and ECDHE cipher suites.
-
-## Notice 28
-
-### Publication date
-
-September 9, 2025
-
-### Products affected
-
-- Camunda Optimize
-
-### Impact
-
-Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-2025-5115), which allows a remote attacker to repeatedly send malformed HTTP/2 frames that exhaust a Jetty server’s CPU and memory, causing a denial-of-service.
-
-### How to determine if the installation is affected
-
-You are using:
-
-- Optimize 8.7.0 - 8.7.8 or 8.6.0 - 8.6.15
-
-### Solution
-
-Camunda has provided the following releases which contain the fix:
-
-- Optimize 8.7.9, 8.6.16
 
 ## Notice 27
 
