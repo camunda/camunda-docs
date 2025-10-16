@@ -15,6 +15,35 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 31
+
+### Publication date
+
+October 16th, 2025
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The embedded Undertow web server was affected by [CVE-2025-9784](https://nvd.nist.gov/vuln/detail/CVE-2025-9784),
+a flaw where malformed client requests can trigger server-side stream resets without incrementing abuse counters.
+This issue, referred to as the "MadeYouReset" attack, allows malicious clients to induce excessive server workload by
+repeatedly causing server-side stream aborts and could be exploited to cause a denial of service (DoS).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler 8.8.0 or 8.7.0 - 8.7.10 or 8.6.0 - 8.6.19
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler 8.8.1, 8.7.11, 8.6.20
+
 ## Notice 30
 
 ### Publication date
