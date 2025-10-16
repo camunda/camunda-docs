@@ -12,7 +12,7 @@ Camunda publishes security notices after fixes are available.
 
 ### Publication date
 
-October 16th, 2025
+October 16, 2025
 
 ### Products affected
 
