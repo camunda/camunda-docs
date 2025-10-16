@@ -12,7 +12,7 @@ ALIAS_NAME="alias/camunda-byok-multi-region-key"
 # Pre-configured values - DO NOT CHANGE THESE VALUES
 TENANT_ROLE_ARN="<TENANT-ROLE-ARN>"
 PRIMARY_REGION="<PRIMARY-REGION>"
-SECONDARY_REGION="<SECONDARY-REGION>
+SECONDARY_REGION="<SECONDARY-REGION>"
 
 # Create KMS key policy file
 cat > kms-policy.json << EOF
