@@ -5,7 +5,7 @@ title: Helm chart internal Keycloak setup
 description: Learn how to configure and enable the internal Keycloak instance for Camunda 8 Self-Managed deployments using Helm chart.
 ---
 
-The Camunda Helm chart can deploy an internal Keycloak instance that acts as the identity management service for authentication and authorization. The Management Identity component configures the internal Keycloak automatically automatically on startup with a realm and several entities to simplify setup and reduce the learning curve.
+The Camunda Helm chart can deploy an internal Keycloak instance that acts as the identity management service for authentication and authorization. The Management Identity component configures the internal Keycloak automatically on startup with a realm and several entities to simplify setup and reduce the learning curve.
 
 Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart. In this case, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against the internal Keycloak.
 
@@ -276,10 +276,10 @@ console:
   enabled: true
 ```
 
-In the internal Keycloak scenario, the Camunda Helm Chart does most of the heavy lifting of setting up Keycloak, creating OIDC/OAuth clients and wiring the components together. Accordingly, your values file largely only consists of enabling all components and configuring the client secrets. If you are curious how each components is configured and which OIDC clients are used, we recommend to:
+In the internal Keycloak scenario, the Camunda Helm Chart does most of the heavy lifting of setting up Keycloak, creating OIDC/OAuth clients and wiring the components together. Accordingly, your values file largely only consists of enabling all components and configuring the client secrets. If you are curious how each component is configured and which OIDC clients are used, we recommend to:
 
 - Run `kubectl get pods` and `kubectl get configmap` and the corresponding `kubectl describe` commands to review each component and its effective configuration
-- Log into Keycloak (using user `admin` and the configured admin user password from the secret you created) to review OIDC provider setup
+- Log into Keycloak (using user `admin` and the configured admin user password from the secret you created) to review the OIDC provider setup
 
 ## Connect to the cluster
 
@@ -310,7 +310,7 @@ kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 kubectl port-forward svc/camunda-console 8087:80
 ```
 
-Once port forwarding is in place, you can then access the corresponding component via `http://localhost:<port>`, for example `http://localhost:18080` for Keycloak and `http://localhost:8080` for the Orchestration Cluster UI. Use the credentials `demo/demo` to log in.
+Once port forwarding is in place, you can then access the corresponding component via `http://localhost:<port>`, for example `http://localhost:18080` for Keycloak and `http://localhost:8080` for the Orchestration Cluster UI. Use the username `demo` and the password you have set in the secret key `identity-firstuser-password` to log in.
 
 ## External identity provider
 

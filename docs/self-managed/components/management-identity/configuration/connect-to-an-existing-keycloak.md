@@ -27,19 +27,18 @@ As of the 8.5.3 release, Management Identity uses the Keycloak frontend URL inst
 To avoid connectivity issues, ensure your Keycloak frontend URL is accessible by adjusting your network, firewall, or security settings as needed. This adjustment is crucial to maintain the integration with Keycloak and ensure compatibility.
 :::
 
-To connect Management Identity to an existing Keycloak instance, take the following steps for your Camunda installation:
+To connect Management Identity to an existing Keycloak instance, take the following steps for your Camunda installation.
 
-<Tabs groupId="install" defaultValue="non-helm" queryString values={
-[
-{label: 'Non-Helm installations', value: 'non-helm' },
-{label: 'Helm installations', value: 'helm' },
-]}>
+### Prepare an existing Keycloak realm
 
-<TabItem value='non-helm'>
+Management Identity can either create a Keycloak realm called `camunda-platform` with all settings from scratch, or it can use an already existing Keycloak realm. If you would like to use an existing Keycloak realm, prepare following the steps below. Otherwise you can skip this section.
 
 1. Log in to your Keycloak Admin Console.
 2. Select the realm you would like to connect Management Identity to. In our example, this is **camunda-platform**.
    ![keycloak-admin-realm-select](../img/keycloak-admin-realm-select.png)
+   :::warning
+   Management Identity only supports Keycloak realms where realm name and realm ID are the same value. That is not the case for realms created through the Keycloak UI (where the ID becomes a generated value). You can specifyf both name and ID when you use [Keycloak's JSON import feature](https://www.keycloak.org/server/importExport).
+   :::
 3. Select **Clients** in the navigation menu, and click the **Create** button to create a new client.
 4. Enter a client ID and click **Next**.
    :::note What client ID should I use?
@@ -59,59 +58,28 @@ To connect Management Identity to an existing Keycloak instance, take the follow
    Management Identity is designed to allow users to manage the various entities related to Camunda. To achieve this, it requires specific access to the realm.
    :::
 10. Navigate to the **Credentials** tab and copy the client secret.
-11. Set the `IDENTITY_CLIENT_SECRET` [environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) with the value from **Step 9**.
-12. Set the `KEYCLOAK_REALM` [environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) to the realm you selected in **Step 2**.
-    :::tip
-    If you are using a specific realm, you need to set additional variables to use the intended realm.
-    See the [environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) page for details of Keycloak-specific variables to consider.
-    :::
-13. Start Management Identity.
 
-</TabItem>
-<TabItem value="helm">
+### Configure and start the application
 
-1. Log in to your Keycloak Admin Console.
-2. Verify the name of the realm you would like to connect Management Identity to. In our example, this is **camunda-platform**.
-   ![keycloak-admin-realm-select](../img/keycloak-admin-realm-select.png)
-3. Set the `KEYCLOAK_REALM` [environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) to the realm you selected in **Step 2**.
-4. Start Management Identity.
+Configure the Management Identity application through environment variables as follows:
 
-</TabItem>
-</Tabs>
+1. Set `IDENTITY_CLIENT_ID` [environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) to the ID of the client you have created (or `camunda-identity` if you are letting Management Identity create everything).
+1. Set `KEYCLOAK_REALM` [environment variable](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) to the realm you want to use (or `camunda-platform` if you are letting Management Identity create everything).
+1. Set `KEYCLOAK_SETUP_USER` to the name of an administrative Keycloak user.
+1. Set `KEYCLOAK_SETUP_PASSWORD` to the administrative Keycloak user's password.
+   :::tip
+   If you are using a specific realm, you need to set additional variables to use the intended realm.
+   See the [environment variables](/self-managed/components/management-identity/miscellaneous/configuration-variables.md) page for details of Keycloak-specific variables to consider.
+   :::
+1. Start Management Identity.
 
 :::note What does Management Identity create when starting?
 Management Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/components/management-identity/miscellaneous/starting-configuration.md).
 :::
 
-## Adjustments to Helm Values file
-
-The only change required to use the existing Keycloak is configuring the following values in the Camunda 8 Self-Managed Helm chart:
-
-```yaml
-# File: existing-keycloak-values.yaml
-global:
-  identity:
-    keycloak:
-      url:
-        # This will produce the following URL "https://keycloak.stage.svc.cluster.local:8443".
-        # Also the host could be outside the Kubernetes cluster like "keycloak.stage.example.com".
-        protocol: "https"
-        host: "keycloak.stage.svc.cluster.local"
-        port: "8443"
-      auth:
-        adminUser: "admin"
-        existingSecret: "stage-keycloak"
-        existingSecretKey: "admin-password"
-
-identityKeycloak:
-  enabled: false
-```
-
-Then, use the custom values file to [deploy Camunda 8](/self-managed/deployment/helm/install/quick-install.md) as usual.
-
-```sh
-helm install camunda camunda/camunda-platform -f existing-keycloak-values.yaml
-```
+:::tip Helm Chart setup
+If you would like to run a full Camunda cluster with an existing Keycloak instance, have a look at [our Helm Chart setup guide for this scenario](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md#create-a-secret).
+:::
 
 ## Considerations
 

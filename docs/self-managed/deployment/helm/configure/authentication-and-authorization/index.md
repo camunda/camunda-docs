@@ -37,3 +37,5 @@ TODO: does this make sense here?
   - [Connect Management Identity to an identity provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
   - [Connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md)
   - [Configure an external IdP provider](/self-managed/components/management-identity/configuration/configure-external-identity-provider.md)
+
+TODO: Decide what to do with the guides in the Management Identity config section (do we want to keep the non-Helm part?) and OC Identity config section

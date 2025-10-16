@@ -73,7 +73,7 @@ For **each** of the components above, follow these steps:
 | Web Modeler UI        | `<WEB_MODELER_URL>/login-callback`           | `http://localhost:8070/login-callback`              |
 | Console               | `<CONSOLE_URL>/`                             | `http://localhost:8087/`                            |
 
-Replace the components' `*_URL` placeholders with the base URLs that they will be accessible from your users' browsers. If you want to expose the services on localhost (as described in the rest of this guide), you can directly use the URIs for local deployment on the right side.
+Replace the components' `*_URL` placeholders with the base URLs (in the form `<protocol>://<host/ip>:<port>/<context-path>`) that they will be accessible from your users' browsers. If you want to expose the services on localhost (as described in the rest of this guide), you can directly use the URIs for local deployment on the right side.
 
 ### Create secrets
 
