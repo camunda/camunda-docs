@@ -51,7 +51,7 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
  https://docs.camunda.io/docs/ms-teams/
 
 # Console
-#   updated at 2025-10-16T06:22:55.804Z
+#   updated at 2025-10-16T06:59:36.267Z
 
 https://docs.camunda.io
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
@@ -81,7 +81,7 @@ https://docs.camunda.io/docs/next/components/console/manage-clusters/cluster-cap
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-alerts/
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-api-clients/
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-allowlists/
+https://docs.camunda.io/docs/next/components/early-access/overview/
 https://docs.camunda.io/docs/next/components/identity/identity-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
-https://docs.camunda.io/docs/reference/early-access/
