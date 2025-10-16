@@ -12,8 +12,7 @@ Check your current setup and make sure you are ready to upgrade.
 
 | Area                         | Description and actions                                                                                                                                   |
 | :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade to the latest 8.7.x patch before upgrading to 8.8.                               |
-| Component version alignment  | Orchestration components such as Zeebe, Operate, Tasklist, and Identity must run the same minor version. Update to the latest 8.7 patch version.          |
+| Camunda version              | Direct upgrades are only supported from 8.7.x to 8.8.x. You must upgrade all Camunda applications to it latest 8.7.x patch before upgrading to 8.8.       |
 | Configuration customizations | Identify non-default parameters and values in configuration files, ingress rules, external Elasticsearch/OpenSearch configurations, and custom exporters. |
 
 ## Step 2: Assess Camunda 8.8 changes and impact
@@ -43,13 +42,8 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
-    <td>Tasklist UI mode configuration</td>
-    <td><p>Tasklist V1 UI mode remains available as a configuration option during the migration period.</p><p><ul><li><p>To use Tasklist V1 UI, set <code>CAMUNDA_TASKLIST_V2_MODE_ENABLED=false</code> environment variable.</p></li><li><p>V1 mode provides continued access to legacy interface and features during transition.</p></li><li><p>Review <a href="../../../../components/tasklist/api-versions">Tasklist API versions</a> to understand differences between V1 and V2 modes.</p></li><li><p>Plan migration to V2 mode for full feature compatibility.</p></li></ul></p></td>
-    <td><span className="label-highlight">Low</span></td>
-</tr>
-<tr>
     <td>Data and exporters</td>
-    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>Requires temporary rebalancing of indices and additional disk space while data is moved to unified indices.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>If Tasklist data is present, an additional data migration is required - process application migration utilities are offered for this.</p></li></ul></p></td>
+    <td><p>Introduced unified exporter architecture and unified data schema.</p><p><ul><li>May require prefix migration depending on the configuration. See <a href="../../../components/components-upgrade/870-to-880#prefix-migration">prefix migration</a> in the components update section.</li><li><p>Dedicated data retention configurations per application (Zeebe, Tasklist, Operate) are no longer supported.</p></li><li><p>Requires a data migration. See <a href="../../../components/components-upgrade/870-to-880#data-migration">data migration</a> in the components update section.</p></li></ul></p></td>
     <td><span className="label-highlight yellow">Medium</span></td>
 </tr>
 <tr>
@@ -63,6 +57,17 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 <tr>
+    <td>Zeebe Gateway</td>
+    <td>Tenant-providing interceptors are not supported and should be replaced with built-in [tenant management](/components/identity/tenant.md).</td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
+<tr>
+    <td>Tasklist UI mode</td>
+    <td><p>Tasklist UI supports two modes: V1 (that uses the deprecated Tasklist API) and V2 (that uses the Orchestration Cluster API).
+    </p><p><ul><li><p>Tasklist UI in V1 API mode is available as a configuration option, which allows you to access legacy features during the transition.</p></li><li><p>We recommend planning your migration to the V2 API to take advantage of all the latest features.</p></li><li><p>To learn more about the differences between the V1 and V2 modes, see the <a href="../../../../components/tasklist/api-versions">Tasklist API versions documentation</a>.</p></li></ul></p></td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
     <td>Optimize</td>
     <td>Performs a startup data migration that requires downtime during startup data migration. You must plan a maintenance window.</td>
     <td><span className="label-highlight">Low</span></td>
@@ -70,11 +75,6 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 <tr>
     <td>Identity, authentication, and authorization</td>
     <td colspan="2"><p>Orchestration Cluster provides Identity and Access Management (IAM) inside a cluster.</p><p>To learn more, see [Identity, authentication, and authorization](#identity-authentication-and-authorization) below.</p></td>    
-</tr>
-<tr>
-    <td>Zeebe Gateway</td>
-    <td>Tenant-providing interceptors are not supported and should be replaced with built-in [tenant management](/components/identity/tenant.md).</td>
-    <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>
 
@@ -112,12 +112,12 @@ The following table provides a high-level overview of the impact of these change
 </tr>
 <tr>
     <td>User storage in Elasticsearch/OpenSearch for Operate or Tasklist</td>
-    <td>This is no longer supported.<ul><li><p>You must transition to using Basic authentication and recreate users in Orchestration Cluster Identity.</p></li><li><p>See the documentation for [Tasklist authentication](../../../../versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) and [Operate authentication](../../../../versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).</p></li></ul></td>
+    <td>This is no longer supported.<ul><li><p>You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.</p></li><li><p>See the documentation for [Tasklist authentication](/versioned_docs/version-8.7/self-managed/tasklist-deployment/tasklist-authentication.md) and [Operate authentication](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).</p></li></ul></td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 <tr>
     <td>LDAP authentication for Operate or Tasklist</td>
-    <td><p>This is no longer supported.</p><p>You must transition to use OIDC or Basic Authentication.</p></td>
+    <td><p>This is no longer supported.</p><p>You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).</p></td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>
@@ -144,7 +144,7 @@ You should run a load test that simulates real production traffic, as component 
 
 Once you have confirmed you are ready to upgrade and taken any actions required, proceed to the upgrade.
 
-<p><a href="../run-admin-upgrade/" class="link-arrow">Perform an upgrade</a></p>
+<p><a href="../run-admin-upgrade" class="link-arrow">Perform an upgrade</a></p>
 
 :::tip
 For more information, see the [component upgrade guide](/self-managed/components/components-upgrade/introduction.md) and version-specific documentation.

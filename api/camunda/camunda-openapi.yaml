@@ -9787,6 +9787,11 @@ components:
           description: ID of the last completed change
           type: string
           example: "-1"
+        clusterId:
+          description: The unique ID of the cluster.
+          type: string
+          nullable: true
+          example: "cluster-12345"
     LicenseResponse:
       description: The response of a license request.
       type: object
