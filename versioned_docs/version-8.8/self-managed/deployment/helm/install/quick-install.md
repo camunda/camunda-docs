@@ -221,6 +221,12 @@ orchestration:
 
 console:
   enabled: true
+
+elasticsearch:
+  master:
+    replicaCount: 1
+    persistence:
+      size: 10Gi
 ```
 
 ### Install and verify the deployment
