@@ -64,12 +64,10 @@ https://docs.camunda.io/docs/components/console/manage-plan/available-plans/
 https://docs.camunda.io/docs/components/console/manage-plan/cancel-professional-subscription/
 https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
 https://docs.camunda.io/docs/components/saas/backups/
-https://docs.camunda.io/docs/components/saas/byok/
-https://docs.camunda.io/docs/components/saas/byok/aws-kms-setup/
-https://docs.camunda.io/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh
-https://docs.camunda.io/docs/components/saas/byok/downloads/create-byok-kms-key-single-region.sh
-https://docs.camunda.io/docs/components/saas/byok/faq-and-troubleshooting/
-https://docs.camunda.io/docs/components/saas/byok/key-rotation-audit-logging/
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
+https://docs.camunda.io/docs/components/console/manage-clusters/manage-api-clients
 https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/next/apis-tools/administration-api/administration-api-reference/
