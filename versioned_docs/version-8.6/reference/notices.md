@@ -29,13 +29,15 @@ repeatedly causing server-side stream aborts and could be exploited to cause a d
 
 You are using:
 
-- Web Modeler 8.8.0 or 8.7.0 - 8.7.10 or 8.6.0 - 8.6.19
+- Web Modeler Self-Managed 8.8.0, ≤ 8.7.10, or ≤ 8.6.19
 
 ### Solution
 
 Camunda has provided the following releases which contain the fix:
 
-- Web Modeler 8.8.1, 8.7.11, 8.6.20
+- Web Modeler Self-Managed 8.8.1, 8.7.11, 8.6.20
+
+The fix was deployed to Web Modeler SaaS on October 14, 2025, 14:26 CET.
 
 ## Notice 30
 
