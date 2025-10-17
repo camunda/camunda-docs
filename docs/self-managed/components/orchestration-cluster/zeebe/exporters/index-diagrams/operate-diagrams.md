@@ -9,7 +9,6 @@ The following index diagrams show Camunda Exporter indices for Operate.
 
 - [operate-decision-requirements](#operate-decision-requirements)
 - [operate-decision](#operate-decision)
-- [operate-import-position](#operate-import-position)
 - [operate-metric](#operate-metric)
 - [operate-migration-steps-repository](#operate-migration-steps-repository)
 - [operate-process](#operate-process)
@@ -34,10 +33,6 @@ The following index diagrams show Camunda Exporter indices for Operate.
 ## operate-decision
 
 ![diagram](./operate-diagrams-2.png)
-
-## operate-import-position
-
-![diagram](./operate-diagrams-3.png)
 
 ## operate-metric
 
