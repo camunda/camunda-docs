@@ -49,9 +49,9 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 
 ### No event handling support
 
-Unlike the AI Agent Subprocess implementation, the AI Agent Task implementation does not support event handling as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
+Unlike the AI Agent Sub-process implementation, the AI Agent Task implementation does not support event handling as part of an [event subprocess](../../../components/modeler/bpmn/event-subprocesses/event-subprocesses.md).
 
-If you want to handle events while the AI agent is working on a task, use the [AI Agent Subprocess](./agentic-ai-aiagent-subprocess.md) implementation instead.
+If you want to handle events while the AI agent is working on a task, use the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation instead.
 
 ### Process definition not found errors when running the AI Agent for the first time
 
