@@ -655,7 +655,7 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 
 In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
 
-<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+<p><a href="../../../../components/modeler/web-modeler/process-applications/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Low-code process testing
 
@@ -667,7 +667,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
-<p><a href="../../../../components/modeler/web-modeler/collaboration/play-your-process/" class="link-arrow">Scenarios</a></p>
+<p><a href="../../../../components/modeler/web-modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
 
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
@@ -689,7 +689,7 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-<p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
+<p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
 
 ### Technical Changelogs for all 8.8.x releases
 
