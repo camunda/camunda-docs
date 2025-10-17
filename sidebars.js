@@ -997,7 +997,20 @@ module.exports = {
       items: [
         "components/concepts/clusters",
         "components/saas/regions",
-        "components/saas/encryption-at-rest",
+        {
+          type: "category",
+          label: "Encryption",
+          link: {
+            type: "doc",
+            id: "components/saas/byok/overview",
+          },
+          items: [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/faq-and-troubleshooting",
+          ],
+        },
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
