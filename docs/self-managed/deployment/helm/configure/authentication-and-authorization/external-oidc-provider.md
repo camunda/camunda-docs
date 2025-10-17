@@ -7,4 +7,8 @@ description: "Learn how to set up the Helm Chart so that it connects to an exter
 
 Instead of using internal Keycloak, you can configure Camunda to connect to an external IdP, such as an external Keycloak, Microsoft Entra ID, or Okta.
 
-See [Helm chart OpenID Connect provider setup](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md) for details.
+The Helm chart offers these options:
+
+- [External Keycloak](./external-keycloak.md): An externally running Keycloak instance with a realm that you would like Camunda's Management Identity component to populate for you.
+- [Microsoft Entra](./microsoft-entra.md)
+- [Generic OIDC provider](./generic-oidc-provider.md): Any OIDC provider that is not Microsoft Entra. Also use this guide if you'd like to set up Keycloak without Management Identity setup support.

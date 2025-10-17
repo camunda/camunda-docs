@@ -15,8 +15,8 @@ If you prefer to run Keycloak externally and disable the internal one, see the [
 
 This guide shows you how to:
 
-- Configure the Helm Chart to deploy an internal Keycloak instance
-- Configure the Helm Chart with a custom secret for accounts used across all components
+- Configure the Helm chart to deploy an internal Keycloak instance
+- Configure the Helm chart with a custom secret for accounts used across all components
 - Choose which application components you want to enable in the release
 - Access all components from your local machine
 
@@ -276,7 +276,7 @@ console:
   enabled: true
 ```
 
-In the internal Keycloak scenario, the Camunda Helm Chart does most of the heavy lifting of setting up Keycloak, creating OIDC/OAuth clients and wiring the components together. Accordingly, your values file largely only consists of enabling all components and configuring the client secrets. If you are curious how each component is configured and which OIDC clients are used, we recommend to:
+In the internal Keycloak scenario, the Camunda Helm chart does most of the heavy lifting of setting up Keycloak, creating OIDC/OAuth clients and wiring the components together. Accordingly, your values file largely only consists of enabling all components and configuring the client secrets. If you are curious how each component is configured and which OIDC clients are used, we recommend to:
 
 - Run `kubectl get pods` and `kubectl get configmap` and the corresponding `kubectl describe` commands to review each component and its effective configuration
 - Log into Keycloak (using user `admin` and the configured admin user password from the secret you created) to review the OIDC provider setup
@@ -316,4 +316,4 @@ Once port forwarding is in place, you can then access the corresponding componen
 
 Instead of using an internal Keycloak instance, you can configure Camunda to connect to an external IdP, such as an external Keycloak, Microsoft Entra ID, or Okta.
 
-See [Helm chart OpenID Connect provider setup](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md) for details.
+See the [guide on connecting to an external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) for details.

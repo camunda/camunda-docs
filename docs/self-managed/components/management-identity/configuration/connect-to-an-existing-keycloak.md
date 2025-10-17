@@ -77,8 +77,8 @@ Configure the Management Identity application through environment variables as f
 Management Identity creates a base set of configurations required to function successfully. To understand more about what is created and why, see [the starting configuration](/self-managed/components/management-identity/miscellaneous/starting-configuration.md).
 :::
 
-:::tip Helm Chart setup
-If you would like to run a full Camunda cluster with an existing Keycloak instance, have a look at [our Helm Chart setup guide for this scenario](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md#create-a-secret).
+:::tip Helm chart setup
+If you would like to run a full Camunda cluster with an existing Keycloak instance, have a look at [our Helm chart setup guide for this scenario](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md#create-a-secret).
 :::
 
 ## Considerations

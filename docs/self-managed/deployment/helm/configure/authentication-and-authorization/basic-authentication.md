@@ -15,9 +15,7 @@ Because basic authentication is enabled by default, components that depend on Ma
 - Web Modeler
 - Keycloak
 - Optimize
-
-Nevertheless, you can choose to enable them, which requires adding OIDC-specific properties, see TODO (guides here).
-:::
+  :::
 
 ### Default users
 
@@ -37,4 +35,4 @@ In Helm, arrays must be overwritten in full. If you change these configuration s
 ## Next steps
 
 - To enable centralized authentication, see [Internal Keycloak](./internal-keycloak.md).
-- To integrate with an external identity provider, see [External Keycloak](./using-external-keycloak.md) or [OIDC setup](./connect-to-an-oidc-provider.md).
+- To integrate with an external identity provider, see [External OIDC provider](./external-oidc-provider.md).

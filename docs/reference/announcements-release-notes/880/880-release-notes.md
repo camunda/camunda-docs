@@ -499,7 +499,7 @@ The 8.8 release cycle includes updates across multiple Self-Managed reference ar
 
 - **Managed search (EKS single-region and EC2)**: Upgraded OpenSearch from 2.15 to 2.19 to align with the latest [supported environments](/reference/supported-environments.md).
 - **Database layer (EKS and EC2)**: Raised the Aurora PostgreSQL baseline from version 15 to 17. See the updated versions in [supported environments](/reference/supported-environments.md).
-- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
+- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
 - **Private access (OpenShift ROSA, EKS, EC2)**: Documented an optional VPN pattern. See [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture).
 - **OpenShift (single and dual region)**: Updated validation and guidance for OpenShift 4.19. See [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 - **EKS networking**: Added alternative NAT gateway strategies. See [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).

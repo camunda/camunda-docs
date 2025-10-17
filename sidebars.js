@@ -1433,8 +1433,6 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
                       ],
                     },
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
                   ],
                 },
                 "self-managed/deployment/helm/configure/secret-management",

@@ -2,10 +2,10 @@
 id: microsoft-entra
 sidebar_label: Microsoft Entra
 title: Helm chart setup with an external Microsoft Entra tenant
-description: "Learn how to set up the Helm Chart so that it connects to a Microsoft Entra tenant"
+description: "Learn how to set up the Helm chart so that it connects to a Microsoft Entra tenant"
 ---
 
-This guide shows you how you can set up the Helm Chart against a Microsoft Entra tenant, configuring all components with dedicated OIDC/OAuth clients.
+This guide shows you how you can set up the Helm chart against a Microsoft Entra tenant, configuring all components with dedicated OIDC/OAuth clients.
 
 ## Prerequisites
 
@@ -19,11 +19,24 @@ To use this guide, make sure you are have the following:
 
 To use Microsoft Entra, you need to perform the following steps:
 
+1. [Ensure Entra prerequisites](#ensure-entra-prerequisites)
 1. [Create applications in Entra](#create-applications-in-entra)
 1. [Create secrets](#create-secrets)
 1. [Configure components using OIDC](#configure-components-using-oidc)
 
 Jump to the [full configuration example](#full-configuration-example) to see it all at once.
+
+### Ensure Entra prerequisites
+
+For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`, and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must ensure that either there is an [admin consent flow configured](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent) process.
+
+The applications you configured in this guide should support the following `grant_type` values:
+
+- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
+- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
+- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
+
+This is by default the case, however may be restricted by custom policies in your organization.
 
 ### Create applications in Entra
 
@@ -97,7 +110,7 @@ Note how here we are changing the naming from _application secret_ to _client se
 The secret key `webmodeler-api-client-secret` is not used throughout the rest of this guide. The Web Modeler API client is for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md) programmatically.
 :::
 
-Next, create a secret with the remaining credentials for the Camunda Helm Chart:
+Next, create a secret with the remaining credentials for the Camunda Helm chart:
 
 ```
 kubectl create secret generic camunda-credentials \
@@ -229,6 +242,10 @@ identityPostgresql:
 Replace `<IDENTITY_URL>` with the base URL of Management Identity as it will be reachable from your users' browser. In our local deployment, this is `http://localhost:8084.
 
 The value `global.identity.auth.identity.initialClaimName` determines which claim of an access token carries the identifier of your initial administrative user. On the same level, the value `initialClaimValue` determines the value of that claim that when matched grants administrative access to Management Identity.
+
+:::danger
+Once set, your initial claim name and value cannot be updated using environment or Helm values, and must be changed directly in the Identity PostgreSQL database.
+:::
 
 :::tip
 If you are _not_ enabling Optimize, add the following environment variable so that Management Identity starts successfully:

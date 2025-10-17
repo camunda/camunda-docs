@@ -2,7 +2,7 @@
 id: external-keycloak
 sidebar_label: External Keycloak
 title: Helm chart setup with an external Keycloak instance
-description: "Learn how to set up the Helm Chart so that it connects to an external Keycloak instance"
+description: "Learn how to set up the Helm chart so that it connects to an external Keycloak instance"
 ---
 
 The Camunda Helm chart can connect to an external Keycloak instance that acts as the identity management service for authentication and authorization. With initial configuration for administrative access, the Management Identity component configures the Keycloak realm and several entities automatically on startup to simplify setup and reduce the learning curve.
@@ -17,7 +17,7 @@ Make sure you are running a version of Keycloak that is supported by your Camund
 
 ## Configuring Keycloak
 
-Before you start setting up the Camunda Helm Chart, prepare your Keycloak instance. For the Keycloak realm, you have two options:
+Before you start setting up the Camunda Helm chart, prepare your Keycloak instance. For the Keycloak realm, you have two options:
 
 - [You use an existing realm](#option-1-prepare-an-existing-realm)
 - [You let Camunda's Management Identity create a realm for you](#option-2-let-management-identity-create-a-realm)
@@ -42,9 +42,9 @@ As a result, take note of the following properties:
 - The ID of the client that Management Identity generates for Keycloak setup: `camunda-identity` (called `<identity_client_id>` in the following)
 - The name and password of an administrative Keycloak user (called `<keycloak_admin_username>` and `<keycloak_admin_password>` in the following)
 
-## Configuring the Helm Chart
+## Configuring the Helm chart
 
-Next, you can continue with preparing your Kubernetes cluster and installing the Camunda Helm Chart.
+Next, you can continue with preparing your Kubernetes cluster and installing the Camunda Helm chart.
 
 You need to perform the following steps:
 
