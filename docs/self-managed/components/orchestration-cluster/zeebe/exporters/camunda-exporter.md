@@ -115,6 +115,7 @@ All index templates created by this exporter apply the created ILM Policy.
 | policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
 | usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
 | usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
+| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                | `PT1H`                                   |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
@@ -136,6 +137,7 @@ indices. The history can be configured as follows:
 | waitPeriodBeforeArchiving | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                             | `1h`    |
 | delayBetweenRuns          | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `2000`  |
 | maxDelayBetweenRuns       | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `60000` |
+| processInstanceEnabled    | If `true`, enables the archiving of the completed process instances and their related objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `true`  |
 | retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 
 </TabItem>
@@ -187,12 +189,14 @@ exporters:
         waitPeriodBeforeArchiving: "1h"
         delayBetweenRuns: 2000
         maxDelayBetweenRuns: 60000
+        processInstanceEnabled: true
         retention:
           enabled: false
           minimumAge: 30d
           policyName: camunda-retention-policy
           usageMetricsMinimumAge: 730d
           usageMetricsPolicyName: camunda-usage-metrics-retention-policy
+          applyPolicyJobInterval: PT1H
 
         batchOperation:
           exportItemsOnCreation: true

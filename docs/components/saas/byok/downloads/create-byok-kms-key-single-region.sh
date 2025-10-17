@@ -4,14 +4,14 @@ AWS_SECRET_ACCESS_KEY="your-secret-key"
 AWS_SESSION_TOKEN="your-session-token"  # if using temporary credentials
 
 # Configuration - Update these values
-TENANT_ROLE_ARN="<your-camunda-tenant-iam-role-arn>"
 YOUR_ACCOUNT_ID="<your-account-id>"
 
 # Pre-configured alias name - change if needed
 ALIAS_NAME="alias/camunda-byok-key"
 
-# Pre-configured region - DO NOT CHANGE THIS VALUE
-REGION="<the-cluster-region>"
+# Pre-configured values - DO NOT CHANGE THESE VALUES
+TENANT_ROLE_ARN="<TENANT-ROLE-ARN>"
+REGION="<PRIMARY-REGION>"
 
 # Create KMS key policy file
 cat > kms-policy.json << EOF

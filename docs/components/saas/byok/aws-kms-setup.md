@@ -64,8 +64,6 @@ Use this script to create a single KMS key in the same region as the cluster.
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
    - `AWS_SESSION_TOKEN` (if using temporary credentials)
-   - `REGION` (replace with the region in which the cluster is created)
-   - `TENANT_ROLE_ARN` (from the Camunda Console)
    - `YOUR_ACCOUNT_ID`
    - `ALIAS_NAME` (optional)
 3. Make the script executable and run it.
@@ -84,7 +82,7 @@ Use this script to create a multi-region primary key in the cluster's region and
 **Instructions:**
 
 1. Download [create-byok-kms-key-multi-region.sh](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
-2. Modify the same variables as above. Instead of `REGION` (only present in the single region script), modify the variables `PRIMARY_REGION` (replace with the region in which the cluster is created) and `SECONDARY_REGION` (backup region).
+2. Modify the same variables as above.
 3. Make the script executable and run it.
 4. Copy the two outputted key ARNs and provide them to Camunda.
 
