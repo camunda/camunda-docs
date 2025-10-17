@@ -561,6 +561,21 @@ Additional upgrade considerations are necessary for deployments that use custom 
 </div>
 <div className="release-announcement-content">
   
+#### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8
+
+<p>In case you are running the **[Zeebe Java Client &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/java-client/index.md) or the [Spring Zeebe SDK &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc)** and opted into **preferring REST over GRPC (setting `preferRestOverGrpc=true` explicitly on client setup)** you are affected by [#39675](https://github.com/camunda/camunda/issues/39675).</p>
+<p>**Impact:** When updating your Orchestration Cluster to 8.8 without updating your clients prio to at least 8.7.16, workers will fail to activate jobs.</p>
+<p>**Required action:** You need to update your clients to at least 8.7.16, which contains the fix for [#39675](https://github.com/camunda/camunda/issues/39675), before upgrading your Cluster.</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Orchestration Cluster: Unified component configuration
 
 With the Camunda 8.8 release, the new unified configuration is introduced.
