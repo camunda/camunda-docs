@@ -125,7 +125,7 @@ Examples:
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 | -                                      | **source:** `"Peter"`<br/>**target:** `sender`                                                               | `sender: "Peter"`                           |
-| `customer:{"name": "John"}`            | **source:** (not provided)<br/>**target:** `customer`                                                               | `customer: null`                           |
+| `customer:{"name": "John"}`            | **source:** (not provided)<br/>**target:** `customer`                                                        | `customer: null`                            |
 
 ### Output mappings
 
