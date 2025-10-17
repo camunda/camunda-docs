@@ -148,7 +148,7 @@ camunda:
 
 **Request timeout offset:** The offset being added to the timeout on asynchronous requests sent to Camunda to cover the network latency.
 
-### Multi tenancy
+### Multi-tenancy
 
 To connect the client to a specific tenant, you can configure:
 
