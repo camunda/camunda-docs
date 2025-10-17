@@ -79,17 +79,17 @@ Make sure that you create your own validation logic that matches your use case.
 
 To implement task life cycle operations with the Zeebe task API, call the respective endpoints:
 
-- [`POST /user-tasks/:taskKey/assignment`](/apis-tools/zeebe-api-rest/specifications/assign-a-user-task.api.mdx) or [`DELETE /user-tasks/:taskKey/assignee`](/apis-tools/zeebe-api-rest/specifications/unassign-a-user-task.api.mdx) to change task assignment.
-- [`PATCH /user-tasks/:taskKey`](/apis-tools/zeebe-api-rest/specifications/update-a-user-task.api.mdx) to update a task.
-- [`POST /user-tasks/:taskKey/completion`](/apis-tools/zeebe-api-rest/specifications/complete-a-user-task.api.mdx) to complete a task.
+- `POST /user-tasks/:taskKey/assignment` or `DELETE /user-tasks/:taskKey/assignee` to change task assignment.
+- `PATCH /user-tasks/:taskKey` to update a task.
+- `POST /user-tasks/:taskKey/completion` to complete a task.
 
 All these endpoints (except `DELETE`) allow you to send a custom `action` attribute via the payload. The `action` attribute carries any arbitrary string and can be used to track any life cycle event, including those mentioned above.
 
-#### [`POST /user-tasks/:taskKey/assignment`](/apis-tools/zeebe-api-rest/specifications/assign-a-user-task.api.mdx)
+#### `POST /user-tasks/:taskKey/assignment`
 
 Use the `assignment` endpoint to change the task assignment. Use the `action` attribute to indicate the cause of the change, including `claim`, `reassign`, or `assign`.
 
-#### [`PATCH /user-tasks/:taskKey`](/apis-tools/zeebe-api-rest/specifications/update-a-user-task.api.mdx)
+#### `PATCH /user-tasks/:taskKey`
 
 Use the `update` endpoint to change candidate users, groups, the due date, or the follow-up date by defining the `changeset`. You can also send it with an empty `changeset` and just pass an `action`. Use it to send `start`, `pause`, and `resume` actions. Additionally, you can send anything of interest or relevant for the audit log such as `escalate`, `requestFurtherInformation`, `uploadDocument`, or `openExternalApp`.
 
@@ -104,7 +104,7 @@ An example request payload could look like this:
 }
 ```
 
-#### [`POST /user-tasks/:taskKey/completion`](/apis-tools/zeebe-api-rest/specifications/complete-a-user-task.api.mdx)
+#### `POST /user-tasks/:taskKey/completion`
 
 Use the `completion` endpoint to complete a task. Pass along with it the outcome of the task via the `action` attribute, such as `approve` or `reject`.
 

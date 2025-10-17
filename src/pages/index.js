@@ -81,13 +81,6 @@ function Feature({ imageUrl, url, title, description }) {
   );
 }
 
-const search_agentic_url = "/docs/components/agentic-orchestration/";
-const search_agent_url = "/docs/guides/getting-started-agentic-orchestration/";
-const search_idp_url = "/docs/components/modeler/web-modeler/idp/";
-const release = "/docs/reference/announcements-release-notes/overview/";
-const search_migrate_url = "/docs/guides/migrating-from-camunda-7/";
-const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
-
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
@@ -103,17 +96,6 @@ function Home() {
           <div className="homeSearch">
             <AlgoliaSearchBox />
           </div>
-          <p className="popular" style={{ color: "#ccc" }}>
-            <strong style={{ paddingRight: "20px" }}>Popular:</strong>{" "}
-            <Link to={useBaseUrl(search_agentic_url)}>
-              Agentic orchestration
-            </Link>
-            <Link to={useBaseUrl(search_agent_url)}>Build an AI agent</Link>
-            <Link to={useBaseUrl(search_idp_url)}>IDP</Link>
-            <Link to={useBaseUrl(release)}>Release notes</Link>
-            <Link to={useBaseUrl(search_migrate_url)}>Camunda 7 migration</Link>
-            <Link to={useBaseUrl(search_feel_url)}>What is FEEL</Link>
-          </p>
           <div className={clsx("row", styles.buttonsWrapper)}>
             <div className={clsx("", styles.buttons)}>
               <Link
@@ -156,56 +138,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className={clsx("hero hero--secondary", styles.heroBanner)}>
-          <div className="container">
-            <h2 className="hero__title">What's new</h2>
-            <p className="hero__subtitle">
-              Check out some of our latest features
-            </p>
-            <div className={styles.buttons}>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/components/agentic-orchestration/")}
-              >
-                Agentic Orchestration
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/whats-new-in-88/"
-                )}
-              >
-                What's new in 8.8
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl(
-                  "docs/reference/announcements-release-notes/880/880-release-notes/"
-                )}
-              >
-                8.8 release notes
-              </Link>
-              <Link
-                className={clsx(
-                  "button button--outline button--secondary button--lg button--hero get-started-use-case get-started-use-case-2",
-                  styles.getStarted
-                )}
-                to={useBaseUrl("docs/apis-tools/java-client/getting-started/")}
-              >
-                Java client
-              </Link>
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );

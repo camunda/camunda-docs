@@ -365,13 +365,13 @@ Refer to the dedicated sections and API explorers to learn details about the API
 <DocCardList items={[
 {
 type:"link",
-href:"/docs/8.5/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
+href:"/docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/",
 label: "Tasklist API (REST)",
 docId:"apis-tools/tasklist-api-rest/tasklist-api-rest-overview"
 },
 {
 type:"link",
-href:"/docs/8.5/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
+href:"/docs/apis-tools/zeebe-api-rest/zeebe-api-rest-overview/",
 label: "Zeebe API (REST)",
 docId:"apis-tools/zeebe-api-rest/zeebe-api-rest-overview"
 }

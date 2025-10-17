@@ -6,10 +6,6 @@ function preGenerateDocs(config) {
   hackChangesetDescription(config.specPath);
 }
 
-function postGenerateDocs(config) {
-  removeDuplicateVersionBadge(`${config.outputDir}/zeebe-rest-api.info.mdx`);
-}
-
 module.exports = {
   preGenerateDocs,
   postGenerateDocs,

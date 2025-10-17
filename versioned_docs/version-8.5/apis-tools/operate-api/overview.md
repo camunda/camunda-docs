@@ -24,10 +24,6 @@ Find your region and cluster id under **Connection information** in your client 
 For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Operate component.
 :::
 
-## API Explorer
-
-See [the interactive Operate API Explorer][operate-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Operate API.
-
 ### Swagger UI
 
 A Swagger UI is also available within a running instance of Operate, at `https://${base-url}/swagger-ui/index.html`.
@@ -368,5 +364,3 @@ Delete the data for process instance (and all dependant data) with key `22517998
   "deleted": 1
 }
 ```
-
-[operate-api-explorer]: ./specifications/operate-public-api.info.mdx
