@@ -49,6 +49,8 @@ The property object keys are divided into required and optional keys:
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
 - `id : String`: An identifier that can be used to reference the property in conditional properties.
+- [`editable: Boolean`](#preventing-edits-editable): Setting this key's value determines whether properties are read-only or editable in the properties panel.
+- [`entriesVisible: Boolean`](#displaying-all-entries-entriesVisible): Setting this key's value determines whether all entries of a dropdown property are visible without opening the dropdown.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -1120,3 +1122,97 @@ You should generally avoid using this configuration, as it removes the abstracti
 ```
 
 ![Display default entries](./img/entries-visible.png)
+
+## Ad-hoc sub-processes: `zeebe:adHoc`
+
+Specifies that the element should be treated as an **ad-hoc sub-process** when deployed to Zeebe.
+
+When this property is set to `true`, the sub-process is marked as ad-hoc, allowing the contained activities to be executed independently of a predefined sequence flow.
+
+### Example
+
+```json
+{
+  "appliesTo": ["bpmn:SubProcess"],
+  "properties": [
+    {
+      "binding": {
+        "type": "zeebe:adHoc"
+      },
+      "value": true
+    }
+  ]
+}
+```
+
+:::info
+Only applicable to elements of type bpmn:SubProcess.
+
+When set to true, the sub-process does not follow a fixed control flow; its contained activities can be triggered manually or based on conditions.
+
+When omitted or set to false, the sub-process behaves as a standard (non-ad-hoc) sub-process.
+:::
+
+## Binding for linked resources: `zeebe:linkedResource`
+
+Defines a link between an element and an external resource.
+
+Use this binding to configure properties that connect to reusable or external assets such as subprocesses, decision tables, or forms.
+
+### Example
+
+```json
+{
+  "binding": {
+    "type": "zeebe:linkedResource",
+    "resourceType": "bpmn:Process",
+    "bindingType": "latest",
+    "resourceId": "OrderApprovalProcess",
+    "versionTag": "v2"
+  }
+}
+```
+
+| Property       | Description                                                               |
+| -------------- | ------------------------------------------------------------------------- |
+| `resourceId`   | The ID of the external resource to link to.                               |
+| `resourceType` | Type of the linked resource.                                              |
+| `bindingType`  | Determines how the resource version is resolved (`latest`, `versionTag`). |
+| `versionTag`   | Specifies a version tag if `bindingType` is `versionTag`.                 |
+
+:::info
+Typically used to link BPMN elements to external processes, decisions, or forms.
+
+The bindingType controls versioning behavior when multiple versions exist.
+:::
+
+## Task retries: `zeebe:taskDefinition:retries`
+
+:::note
+**Deprecated.** Use `zeebe:taskDefinition` with the `retries` property instead.
+:::
+
+This binding was previously used to define the retry behavior for service tasks after a failure.
+
+### Example
+
+```json
+{
+  "binding": {
+    "type": "zeebe:taskDefinition:retries"
+  },
+  "value": "3"
+}
+```
+
+It should be replaced with:
+
+```json
+{
+  "binding": {
+    "type": "zeebe:taskDefinition",
+    "property": "retries"
+  },
+  "value": "3"
+}
+```
