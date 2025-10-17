@@ -91,6 +91,15 @@ const search_feel_url = "/docs/components/modeler/feel/what-is-feel/";
 function Home() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
+
+  const openKapa = () => {
+    if (typeof window !== "undefined" && window.Kapa?.open) {
+      window.Kapa.open({});
+    } else {
+      console.warn("Kapa widget is not loaded yet.");
+    }
+  };
+
   return (
     <Layout
       title={`${siteConfig.title}`}
@@ -141,6 +150,13 @@ function Home() {
                 Sign up
               </Link>
             </div>
+            <button
+              type="button"
+              className="button button--secondary button--lg"
+              onClick={openKapa}
+            >
+              Open AI assistant
+            </button>
           </div>
         </div>
       </header>
