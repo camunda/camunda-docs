@@ -1695,11 +1695,6 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                   ],
                 },
-                {
-                  Migration: [
-                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
-                  ],
-                },
               ],
             },
             {

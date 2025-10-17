@@ -196,16 +196,10 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | Disk \[GB\]         | 32      | 192   |
 | gateway                            | embedded in broker  |         |       |
 | **Operate**                        |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
 |                                    | vCPU \[cores\]      | 0.3     | 1     |
 |                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | **Tasklist**                       |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
 |                                    | vCPU \[cores\]      | 0.3     | 1     |
 |                                    | Mem \[GB\] limit    | 0.2     | 2     |

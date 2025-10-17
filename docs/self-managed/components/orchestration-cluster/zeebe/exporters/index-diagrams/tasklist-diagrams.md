@@ -8,7 +8,6 @@ description: "The Camunda index diagrams to which the Camunda Exporter will expo
 The following index diagrams show Camunda Exporter indices for Tasklist.
 
 - [tasklist-form](#tasklist-form)
-- [tasklist-import-position](#tasklist-import-position)
 - [tasklist-metric](#tasklist-metric)
 - [tasklist-process](#tasklist-process)
 - [tasklist-user](#tasklist-user)
@@ -19,10 +18,6 @@ The following index diagrams show Camunda Exporter indices for Tasklist.
 ## tasklist-form
 
 ![diagram](./tasklist-diagrams-1.png)
-
-## tasklist-import-position
-
-![diagram](./tasklist-diagrams-2.png)
 
 ## tasklist-metric
 
