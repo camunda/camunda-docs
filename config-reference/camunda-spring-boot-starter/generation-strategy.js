@@ -59,10 +59,17 @@ const downloadReference = async (version) => {
       `${baseDir}/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
       `${baseDir}/${version}/spring-configuration-metadata.json`
     );
-    fs.copyFileSync(
-      `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`,
-      `${baseDir}/${version}/additional-properties.json`
-    );
+    if (
+      fs.existsSync(
+        `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`
+      )
+    ) {
+      fs.copyFileSync(
+        `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`,
+        `${baseDir}/${version}/additional-properties.json`
+      );
+    }
+
     fs.rmSync(`${baseDir}/${version}/target`, {
       recursive: true,
       force: true,
