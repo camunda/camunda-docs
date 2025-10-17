@@ -59,7 +59,7 @@ Follow these principles when designing your agentic orchestration solution:
 <table className="table-callout">
 <tr>
     <td><span className="callout">1</span></td>
-    <td>**Process Flow Within Tools**: Full BPMN control inside ad-hoc subprocesses for ultimate flexibility.</td>
+    <td>**Process Flow Within Tools**: Full BPMN control inside ad-hoc sub-processes for ultimate flexibility.</td>
 </tr>
 <tr>
     <td><span className="callout">2</span></td>

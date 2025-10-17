@@ -58,7 +58,7 @@ In this model, an AI agent is defined using an AI agent connector, with the tool
 <p><img src={ExampleImg} title="Example AI agent integration diagram" alt="Get started" className="img-700"/></p>
 
 :::tip
-Learn more about this model in the [example AI Agent Subprocess connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more about this model in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
 :::
 
 :::info further resources

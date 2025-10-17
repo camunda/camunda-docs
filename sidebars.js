@@ -740,7 +740,7 @@ module.exports = {
                   items: [
                     {
                       type: "category",
-                      label: "AI Agent Subprocess",
+                      label: "AI Agent Sub-process",
                       link: {
                         type: "doc",
                         id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess",
