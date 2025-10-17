@@ -890,6 +890,15 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+To disable the deployment of annotations, you can set:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      enabled: false
+```
+
 ## Reacting on events
 
 The Camunda Spring Boot Starter is integrated with the Spring events and offers its own.
