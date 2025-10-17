@@ -25,6 +25,6 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 :::info
 
 - [REST connector](/components/connectors/protocol/rest.md)
-- [Host custom connectors](/components/connectors/custom-built-connectors/host-custom-connectors/)
+- [Host custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)
 
 :::
