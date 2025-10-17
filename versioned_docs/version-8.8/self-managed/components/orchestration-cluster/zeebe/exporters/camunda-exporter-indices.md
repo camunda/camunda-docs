@@ -5,16 +5,20 @@ sidebar_label: "Camunda Exporter Indices"
 description: "The indices to which the Camunda Exporter will export system state information to."
 ---
 
+import OperateIndices from './index-diagrams/operate-diagrams.md';
+import TasklistIndices from './index-diagrams/tasklist-diagrams.md';
+import CamundaIdentityIndices from './index-diagrams/camunda-diagrams.md';
+
 Index diagrams for all the Camunda Exporter indices.
 
 ## Operate indices
 
-- [Operate index diagrams](./index-diagrams/operate-diagrams.md)
+<OperateIndices />
 
 ## Tasklist indices
 
-- [Tasklist index diagrams](./index-diagrams/tasklist-diagrams.md)
+<TasklistIndices />
 
 ## Camunda Identity indices
 
-- [Camunda Identity index diagrams](./index-diagrams/camunda-diagrams.md)
+<CamundaIdentityIndices />
