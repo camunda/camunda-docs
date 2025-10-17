@@ -49,3 +49,36 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 # Microsoft Teams app
 
  https://docs.camunda.io/docs/ms-teams/
+
+# Console
+#   updated at 2025-10-17T08:35:10.319Z
+
+https://docs.camunda.io
+https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
+https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
+https://docs.camunda.io/docs/components/
+https://docs.camunda.io/docs/components/concepts/clusters/#auto-pause
+https://docs.camunda.io/docs/components/concepts/resource-authorizations/
+https://docs.camunda.io/docs/components/console/manage-clusters/create-cluster/
+https://docs.camunda.io/docs/components/console/manage-plan/available-plans/
+https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
+https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
+https://docs.camunda.io/docs/components/saas/backups/
+https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/next/apis-tools/administration-api/administration-api-reference/
+https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger/
+https://docs.camunda.io/docs/next/components/concepts/access-control/authorizations/
+https://docs.camunda.io/docs/next/components/connectors/use-connectors/#using-secrets
+https://docs.camunda.io/docs/next/components/console/introduction-to-console/
+https://docs.camunda.io/docs/next/components/console/manage-clusters/cluster-capacity/
+https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-alerts/
+https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-api-clients/
+https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-allowlists/
+https://docs.camunda.io/docs/next/components/early-access/overview/
+https://docs.camunda.io/docs/next/components/identity/identity-introduction/
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
+https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
+https://docs.camunda.io/docs/next/components/tasklist/api-versions/
+https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
