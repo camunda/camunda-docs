@@ -1089,6 +1089,7 @@
       "items": [
         "components/concepts/clusters",
         "components/saas/regions",
+        "components/saas/data-locations",
         "components/saas/encryption-at-rest",
         "components/saas/backups",
         "components/saas/auto-updates",
