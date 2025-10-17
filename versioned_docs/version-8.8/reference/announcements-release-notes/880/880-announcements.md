@@ -563,8 +563,8 @@ Additional upgrade considerations are necessary for deployments that use custom 
   
 #### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8
 
-<p>In case you are running the **[Zeebe Java Client &lt;=8.7.15](../../../../version-8.7/apis-tools/java-client/index.md) or the [Spring Zeebe SDK &lt;=8.7.15](../../../../version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc)** and opted into **preferring REST over GRPC (setting `preferRestOverGrpc=true` explicitly on client setup)** you are affected by [#39675](https://github.com/camunda/camunda/issues/39675).</p>
-<p>**Impact:** When updating your Orchestration Cluster to 8.8 without updating your clients prio to at least 8.7.16, workers will fail to activate jobs with a log message such as:</p>
+<p>In case you are running the **[Zeebe Java Client &lt;=8.7.15](../../../../version-8.7/apis-tools/java-client/index.md) or the [Spring Zeebe SDK &lt;=8.7.15](../../../../version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc)** and opted into **preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup)** you are affected by [#39675](https://github.com/camunda/camunda/issues/39675).</p>
+<p>**Impact:** When updating your Orchestration Cluster to 8.8 without updating your clients prior to at least 8.7.16, workers will fail to activate jobs with a log message such as:</p>
 <p>
 ```bash
 io.camunda.zeebe.client.api.command.MalformedResponseException:
