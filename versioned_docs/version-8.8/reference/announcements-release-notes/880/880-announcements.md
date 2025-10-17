@@ -561,11 +561,19 @@ Additional upgrade considerations are necessary for deployments that use custom 
 </div>
 <div className="release-announcement-content">
   
-#### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8
+#### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled
 
-<p>In case you are running the **[Zeebe Java Client &lt;=8.7.15](../../../../version-8.7/apis-tools/java-client/index.md) or the [Spring Zeebe SDK &lt;=8.7.15](../../../../version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc)** and opted into **preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup)** you are affected by [#39675](https://github.com/camunda/camunda/issues/39675).</p>
-<p>**Impact:** When updating your Orchestration Cluster to 8.8 without updating your clients prior to at least 8.7.16, workers will fail to activate jobs with a log message such as:</p>
-<p>
+The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
+
+- Either the [Zeebe Java Client &lt;=8.7.15](../../../../version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
+
+In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
+
+**Impact**
+
+When updating your Orchestration Cluster to 8.8 without updating your clients prior to at least 8.7.16, workers will fail to activate jobs with a log message such as the following:
+
 ```bash
 io.camunda.zeebe.client.api.command.MalformedResponseException:
  Expected to receive a response body, but got a problem: class ProblemDetail {
@@ -576,8 +584,10 @@ io.camunda.zeebe.client.api.command.MalformedResponseException:
     instance: null
 }
 ```
-</p>
-<p>**Required action:** You need to update your clients to at least 8.7.16,  which contains the fix for [#39675](https://github.com/camunda/camunda/issues/39675), or alternatively opt out of making use of `preferRestOverGrpc=true` before upgrading your Cluster.</p>
+
+**Required action**
+
+You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
 
 </div>
 </div>
