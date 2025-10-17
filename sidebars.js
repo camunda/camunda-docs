@@ -407,6 +407,7 @@ module.exports = {
                 "components/modeler/web-modeler/modeling/versions",
                 "components/modeler/web-modeler/modeling/file-download",
                 "components/modeler/web-modeler/modeling/import-diagram",
+                "components/modeler/web-modeler/modeling/camunda-marketplace",
                 {
                   type: "category",
                   label: "Process applications",
@@ -496,7 +497,6 @@ module.exports = {
               ],
             },
             "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/process-landscape-visualization",
             {
               type: "doc",

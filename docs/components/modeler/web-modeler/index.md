@@ -22,7 +22,7 @@ It enables teams to collaboratively design executable processes as the foundatio
 | [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and projects.                        |
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Play mode](validation/play-your-process.md)                                  | Test and validate processes during development.                                                 |
-| [Camunda Marketplace](./camunda-marketplace.md)                               | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
+| [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend Web Modeler with prebuilt blueprints and connectors.                                     |
 | [Process applications](./process-applications/process-applications.md)        | Work with sets of files and deploy them in a single bundle.                                     |
 | [Git synchronization](process-applications/git-sync.md)                       | Connect process applications to Git repositories for version control.                           |
 | [Process landscape visualization](./process-landscape-visualization.md)       | View dependencies and interactions between processes at a glance.                               |
