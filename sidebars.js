@@ -498,7 +498,11 @@ module.exports = {
             "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/camunda-marketplace",
             "components/modeler/web-modeler/process-landscape-visualization",
-            "components/modeler/web-modeler/web-modeler-settings",
+            {
+              type: "doc",
+              id: "components/modeler/web-modeler/web-modeler-settings",
+              label: "Settings",
+            },
             "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
           ],
         },
