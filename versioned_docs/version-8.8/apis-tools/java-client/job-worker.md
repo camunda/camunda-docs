@@ -71,15 +71,18 @@ When you model a service task in your BPMN process and assign it a job type (e.g
 The Java client provides a job worker that handles polling for available jobs. This allows you to focus on writing code to handle the activated jobs.
 
 :::caution REST API limitation
-The 8.6.0 Java client cannot maintain the long-lived polling connections required for job polling via the Orchestration Cluster REST API. For example, this applies when:
+The Java client cannot keep the long-lived polling connections required for job polling via the Orchestration Cluster REST API in the following cases:
 
-- Performing long-polling job activation when activating jobs larger than the maximum message size.
-- Receiving additional job activation requests from the same Java client while the long-polling connection is still open.
-- Receiving additional job activation requests from a Java client running on the same JVM while the long-polling connection is still open.
-- Receiving additional job activation requests from a Java client running on a different JVM while the long-polling connection is still open.
+- Performing long-polling job activation when activating jobs larger than the [maximum message size](../../self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md#zeebegatewaynetwork).
+- Issuing any additional job activation requests while a long-polling connection is open - whether from the same client instance, another client in the same JVM, or a client in a different JVM.
 
-If you encounter this issue, consider switching to the Zeebe gRPC protocol for job activation, or use job
-activation via the REST API with long polling disabled.
+When the cases above occurs, the open long-polling request will be interrupted.
+You may observe workers intermittently stop receiving jobs and cause reduced throughput due to wasted I/O and connection churn.
+If you encounter this issue, consider using job activation via the Orchestration Cluster REST API with long polling disabled, or switching to the Zeebe gRPC protocol for job activation.
+
+Additionally, the long-polling connection might still receive jobs after the Java client is closed.
+As the Java client does not process these jobs they will time out.
+This means some jobs are not processed and will become available again after their timeout has elapsed.
 :::
 
 On `open`, the job worker waits `pollInterval` milliseconds and then polls for `maxJobsActive` jobs. It then continues with the following schedule:
