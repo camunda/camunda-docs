@@ -2,7 +2,7 @@
 id: using-existing-postgres
 title: "Use external PostgreSQL"
 sidebar_label: External PostgreSQL
-description: "Learn how to use an Amazon OpenSearch Service instance in Camunda 8 Self-Managed deployment."
+description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
 The [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md) can optionally install an internal PostgreSQL using [Bitnami subcharts](../../configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
@@ -25,7 +25,7 @@ password: `examplePassword`
 ```SQL
 CREATE DATABASE "web-modeler";
 CREATE DATABASE "keycloak";
-CREATE DATABASE "identity";
+CREATE DATABASE "management-identity";
 ```
 
 - **Kubernetes secrests:** Store the database password in a Kubernetes secret so it is not referenced in plain text within your values.yaml (This secret exists outside the Helm chart and will not be overwritten by subsequent helm upgrade commands). For example:
@@ -36,7 +36,7 @@ kubectl create secret generic camunda-psql-db --from-literal=password=examplePas
 
 ## Configuration
 
-Three Camunda 8 Self-Managed components require PostgreSQL: Identity, Keycloak, and Web Modeler.
+Three Camunda 8 Self-Managed components require PostgreSQL: Management Identity, Keycloak, and Web Modeler.
 Each of these components must be configured to connect to the external PostgreSQL instance.
 
 ### Parameters
@@ -87,7 +87,7 @@ identity:
     secret:
       existingSecret: "camunda-psql-db"
       existingSecretKey: "password"
-    database: "identity"
+    database: "management-identity"
 
 identityKeycloak:
   externalDatabase:
@@ -95,6 +95,7 @@ identityKeycloak:
     user: "postgres"
     existingSecret: "camunda-psql-db"
     existingSecretKey: "password"
+    database: "keycloak"
   auth:
     adminUser: postgres
     existingSecret: "camunda-psql-db"
