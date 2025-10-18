@@ -318,7 +318,12 @@ Next, configure a client in your IdP:
 ### Step 3: Configure your worker application
 
 Depending on your application type (for example, standalone Java application, Spring Boot application), the configuration steps may vary.
+Refer to the documentation of your chosen Camunda Client for details on how to configure authentication using client credentials.
 
+- Orchestration Cluster REST and gRPC API clients: See [REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-based-authentication-using-client-credentials).
+- Java Client: See [Java client authentication](/apis-tools/java-client/getting-started.md?authentication=oidc-self-managed#step-2-connect-to-your-camunda-8-cluster).
+- Spring Boot Starter: See [Spring Boot Starter authentication](/apis-tools/camunda-spring-boot-starter/getting-started.md?authentication=oidc#step-3-configure-the-camunda-8-connection).
+- Connectors: See [Connector authentication](/self-managed/components/connectors/connectors-configuration.md).
 - **Audience Validation**: If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster above, or add your audience in the Orchestration Cluster configuration.
 
 :::note

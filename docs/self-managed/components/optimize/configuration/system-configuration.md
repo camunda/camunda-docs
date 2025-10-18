@@ -106,11 +106,11 @@ These values relate to Optimize data import.
 | import.elasticsearchJobExecutorThreadCount |                                                                       | 1             | Number of threads being used to process the import jobs per data type that are writing data to Elasticsearch.                                                                                                                  |
 | import.elasticsearchJobExecutorQueueSize   |                                                                       | 5             | Adjust the queue size of the import jobs per data type that store data to Elasticsearch. A too large value might cause memory problems.                                                                                        |
 
-### Public API
+### External API
 
-This section focuses on common properties related to the Public REST API of Optimize. It is
-mandatory to configure one of the values below if the Public REST API is to be used. If neither is
-configured an error will be thrown and all requests to the Public API will get rejected. If both are configured then
+This section focuses on common properties related to the External REST API of Optimize. It is
+mandatory to configure one of the values below if the External REST API is to be used. If neither is
+configured an error will be thrown and all requests to the External API will get rejected. If both are configured then
 the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
 
 | YAML path       | Environment Variable                                  | Default value | Description                                                                                                                                    |

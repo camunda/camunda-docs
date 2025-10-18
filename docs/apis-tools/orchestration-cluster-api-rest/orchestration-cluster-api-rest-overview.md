@@ -17,7 +17,7 @@ The Orchestration Cluster REST API lets you interact programmatically with proce
 
 ## Key features
 
-This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/identity/authorization.md).
+This API is designed to make it easy to [find resources](./orchestration-cluster-api-rest-data-fetching.md#advanced-search-filters) with a consistent experience, while ensuring all endpoints are secure with [authentication](./orchestration-cluster-api-rest-authentication.md) and fine-grained [resource authorization](/components/concepts/access-control/authorizations.md).
 
 **Key capabilities include**
 
@@ -42,6 +42,7 @@ This section helps you get up and running in minutes. To begin using the Orchest
 - **A Camunda 8 Orchestration Cluster**
   - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
   - For production or advanced development, use [Helm/Kubernetes](/self-managed/deployment/helm/install/quick-install.md) or [manual installation](/self-managed/deployment/manual/install.md).
+  - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://camunda.com/try-camunda-cloud/) to get a managed cluster with the API enabled.
 
 - **A client to send API requests**
   - Quick testing: Use the [Swagger](../orchestration-cluster-api-rest-swagger) interface
@@ -57,12 +58,11 @@ Authentication for the Orchestration Cluster REST API depends on your environmen
 
 - No authentication – For local development only
 - Basic authentication – Username/password for simple setups
-- OIDC access tokens – OAuth2/OIDC for production environments
+- OIDC-based authentication – Use OAuth2/OIDC tokens for production environments
 
 **Quick reference**
 
 - See the [authentication support matrix](./orchestration-cluster-api-rest-authentication.md#authentication-support-matrix) for details on supported methods by deployment type
-- For production security, OIDC with X.509 client certificates is supported in self-managed environments. See [OIDC with X.509](./orchestration-cluster-api-rest-authentication.md#oidc-with-x509-client-certificates)
 - If you're using the Java or Spring clients, token management is handled automatically. See [client authentication configuration](../camunda-spring-boot-starter/getting-started.md#configuring-the-camunda-8-connection)
 
 For detailed authentication setup, follow the step-by-step guide in [Authentication](./orchestration-cluster-api-rest-authentication.md) based on your deployment type.
@@ -74,8 +74,11 @@ Once you're set up, verify your connection works by making your first API call:
 **Using curl:**
 
 ```bash
-curl ${BASE_URL}/topology
+curl http://localhost:8080/v2/topology
 ```
+
+> Replace `http://localhost:8080/v2` with your actual `${BASE_URL}` if not running in a C8 Run or Docker-Compose.
+> See [Base URLs](#base-urls) below for details on SaaS and custom setups.
 
 **Using Postman**  
 Try the [get cluster topology](https://www.postman.com/camundateam/camunda-8-postman/request/en495q6/get-cluster-typology) request or browse the full collection.
@@ -126,7 +129,7 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 
 ### Request size limits
 
-The default maximum request size for deployment-related requests (such as `POST /v2/deployments`) is 4MB.
+The default maximum request size for all requests (e.g. to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
 
 ### Naming conventions
 
