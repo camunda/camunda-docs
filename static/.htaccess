@@ -158,6 +158,12 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Add mapping rules
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/assign-mapping-rules-to-tenants/?$ /docs/components/identity/mapping-rules/ [R=301,L]
+RewriteRule ^docs/components/identity/mapping-rules/manage-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
+
 RewriteRule ^docs/next/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
 
 # Fix various redirects prior to the 8.8 release cutting
