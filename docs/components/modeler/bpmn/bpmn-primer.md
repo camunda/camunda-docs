@@ -115,7 +115,7 @@ The following is an introduction to BPMN 2.0, its elements, and their execution 
 
 ## Modeling BPMN diagrams
 
-The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md). Learn more by [modeling your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md).
+The best tool for modeling BPMN diagrams for Zeebe is [Modeler](../about-modeler.md). Learn more by [modeling your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md).
 
 - [Download page](https://camunda.com/download/modeler/)
 - [Source code repository](https://github.com/camunda/camunda-modeler)

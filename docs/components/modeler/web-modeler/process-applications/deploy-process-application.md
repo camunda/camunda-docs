@@ -12,14 +12,14 @@ Validate your process application in development before deploying it to testing,
 
 ## Validate your process application
 
-Use [Play mode](../collaboration/play-your-process.md) to validate your process application in development.
+Use [Play mode](../validation/play-your-process.md) to validate your process application in development.
 
 1. Open the [main process](create-a-process-application.md#main-process).
 1. Select the **Play** tab to play the process application using your selected development cluster.
 1. Perform validation as required, for example, debug your process logic and test the process application.
 
 :::info
-To learn more about using Play for validation, see [Play mode for rapid validation](../collaboration/play-your-process.md)
+To learn more about using Play for validation, see [Play mode for rapid validation](../validation/play-your-process.md)
 :::
 
 ## Deploy your process application

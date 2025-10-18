@@ -255,7 +255,7 @@ The Camunda 8 REST API provides an [endpoint for synchronous message correlation
 Web Modeler now supports DMN models and Forms inside [Marketplace blueprints](https://marketplace.camunda.com/en-US/listing?pl=3082&cat=107793&locale=en-US).
 
 - These blueprints can now showcase even more ways to implement common business processes, and illustrate best practices for process modeling and implementation.
-- To learn more about browsing Marketplace blueprints, see [browse marketplace blueprints](/components/modeler/web-modeler/camunda-marketplace.md#browse-marketplace-blueprints).
+- To learn more about browsing Marketplace blueprints, see [browse marketplace blueprints](/components/modeler/web-modeler/modeling/camunda-marketplace.md#browse-marketplace-blueprints).
 
 ### Share connectors within the project and organization in Self-Managed <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 

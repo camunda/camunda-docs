@@ -4,14 +4,14 @@ title: Publish processes via a form
 description: "Share executable processes publicly with anyone from Web Modeler on Camunda 8 SaaS."
 ---
 
-import CreateFormImg from '../img/create-form.png';
-import PublicationSectionImg from '../img/publication-section.png';
-import LinkStartFormImg from '../img/link-start-form.png';
-import PreviewStartFormImg from '../img/start-form-configured.png';
-import SelectStartEventImg from '../img/select-start-event.png';
-import ImplementModeImg from '../img/implement-mode-active.png';
-import PublicLinkImg from '../img/public-link.png';
-import PublicFormImg from '../img/public-form.png';
+import CreateFormImg from '../../img/create-form.png';
+import PublicationSectionImg from '../../img/publication-section.png';
+import LinkStartFormImg from '../../img/link-start-form.png';
+import PreviewStartFormImg from '../../img/start-form-configured.png';
+import SelectStartEventImg from '../../img/select-start-event.png';
+import ImplementModeImg from '../../img/implement-mode-active.png';
+import PublicLinkImg from '../../img/public-link.png';
+import PublicFormImg from '../../img/public-form.png';
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>
 
@@ -35,7 +35,7 @@ To create a form for public access, follow these steps:
 
 3. Name your form.
 4. Design your form using the **component palette**.
-5. [Link form to start event](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button).
+5. [Link form to start event](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#using-the-link-button).
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/components/modeler/forms/utilizing-forms.md).
 
@@ -66,7 +66,7 @@ To unpublish a process and disable the public access again, follow these steps:
 1. Select the start event with the linked form.
 2. Open to the **Publication** section in the **properties panel**.
 3. Deactivate the toggle to disable public access.
-4. [Deploy](../run-or-publish-your-process.md#deploy-a-process) the changes.
+4. [Deploy](../../run-or-publish-your-process.md#deploy-a-process) the changes.
 
 ## Update a public form
 
@@ -77,7 +77,7 @@ To update a public form, follow these steps:
 3. Remove the form by clicking the corresponding action.
 4. Click the **link icon** again.
 5. Select the same form again, and click **Link** to confirm.
-6. [Deploy](../run-or-publish-your-process.md#deploy-a-process) the process again.
+6. [Deploy](../../run-or-publish-your-process.md#deploy-a-process) the process again.
 
 ## FAQ
 

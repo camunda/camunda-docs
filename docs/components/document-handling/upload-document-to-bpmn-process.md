@@ -17,7 +17,7 @@ Although this example focuses on [Web Modeler](/components/modeler/web-modeler/l
 
 ![Form with Filepicker](./img/form-with-file-picker.png)
 
-A designed form can be [linked](/components/modeler/web-modeler/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
+A designed form can be [linked](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md) to a [user task](#upload-a-document-from-a-user-task-in-tasklist) or used to [start a process](#upload-a-document-to-start-a-process).
 Documents uploaded with the form can then be [referenced](#get-reference-to-an-uploaded-document) later in the process.
 
 The Filepicker always returns an array with metadata for a single or multiple files, for example:
@@ -48,7 +48,7 @@ You can configure a form with the Filepicker for a start event of a BPMN process
 :::note
 
 Only logged-in users can upload files.
-[Publicly accessible processes](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
+[Publicly accessible processes](/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes.md) with a start form do not support file upload using the Filepicker.
 
 :::
 

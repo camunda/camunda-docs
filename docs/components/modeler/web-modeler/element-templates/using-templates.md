@@ -15,7 +15,7 @@ selected element.
 
 ![Popup Menu](./img/modal.png)
 
-You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md).
+You can also click the **blue shop icon** in the upper right of the popup to open the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md).
 
 ![Marketplace Menu](./img/marketplace.png)
 

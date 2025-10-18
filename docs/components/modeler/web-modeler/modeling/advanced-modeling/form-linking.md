@@ -15,7 +15,7 @@ import IssueLinkedFormSolution04 from './img/linked_issue04.png';
 You can use one of the following approaches to link a form to a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) or a [none start event](/components/modeler/bpmn/none-events/none-events.md#none-start-events).
 
 :::tip
-By linking a Camunda Form to a start event, process instances can be started with the form's input [via a public form](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md) (SaaS only) or directly [in Tasklist](/components/tasklist/userguide/starting-processes.md).
+By linking a Camunda Form to a start event, process instances can be started with the form's input [via a public form](/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes.md) (SaaS only) or directly [in Tasklist](/components/tasklist/userguide/starting-processes.md).
 :::
 
 ## Using the link button

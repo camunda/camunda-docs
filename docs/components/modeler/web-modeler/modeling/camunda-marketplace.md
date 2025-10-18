@@ -25,12 +25,12 @@ To navigate to the Camunda Marketplace, take the following steps:
 - From the canvas, select an element and click the **Change element** icon.
 - From the properties panel on the right side of the screen, navigate to the **Template** section and click **Select**.
 - From the side palette, click the **Create element** icon.
-  ![change element](./img/change-element.png)
+  ![change element](../img/change-element.png)
 
 4. Click the **blue shop icon** next to Change element to open the Camunda Marketplace modal.
-   ![marketplace icon](./img/marketplace-icon.png)
+   ![marketplace icon](../img/marketplace-icon.png)
 5. Browse [available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md), tick the boxes on the left side of the modal to implement filters, and search for a specific connector by typing in the **Search for a connector** search bar.
-   ![camunda marketplace](./img/connector-marketplace.png)
+   ![camunda marketplace](../img/connector-marketplace.png)
 
 :::note
 Want to learn more about a connector before applying it to your diagram? Every connector in the Camunda Marketplace offers additional documentation by clicking the **Documentation** link inside the connector's box. This will open a new tab in your browser of the [Camunda Marketplace](https://marketplace.camunda.com/) and additional details for the connector you selected.
@@ -60,9 +60,9 @@ This means a developer created a template and reused one of the Camunda connecto
 1. Log in to your Camunda account and navigate to Web Modeler by clicking the Camunda components icon in the top left corner of your console, and then select Modeler.
 2. Select an existing project or create a new one within the projects tab.
 3. If you initiate a project with a pre-defined blueprint, navigate to the Marketplace modal by clicking on **Browse blueprints**. If you wish to incorporate it into an existing project, open the **Create new** dropdown and select **Browse blueprints**.
-   ![Browse-blueprints-ctas](./img/browse-blueprints-ctas.png)
+   ![Browse-blueprints-ctas](../img/browse-blueprints-ctas.png)
 4. Within the modal, you'll discover a variety of blueprints submitted by Camunda, partners, or community members to the **Camunda Marketplace**. These can include BPMN, DMN, and/or Form files. Utilize the sidebar to filter blueprints by use case, or leverage the sub-navigation to search and filter by industry, creator, or supported Camunda version.
-   ![Marketplace-modal-blueprints](./img/marketplace-modal-blueprints.png)
+   ![Marketplace-modal-blueprints](../img/marketplace-modal-blueprints.png)
 5. Once you've found the desired blueprint, click **Use blueprint** to open it in Web Modeler and start your work. The blueprint will be automatically saved within the project you initiated.
 6. If you can't find the right blueprint, you can suggest ideas in our [Idea Portal](https://marketplace.camunda.com/en-US/pages/connectorsIdeaPortal) or contribute your own process to the [Camunda Marketplace](https://marketplace.camunda.com/en-US/pages/submissionMenu).
 

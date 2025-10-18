@@ -17,7 +17,7 @@ Using both tools together allows you to combine the best of both worlds:
 
 This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
 
-When using [Git sync](/components/modeler/web-modeler/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
+When using [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
 
 ## Process applications
 

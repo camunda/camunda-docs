@@ -9,7 +9,7 @@ import GHIcon from "@site/src/mdx/GitHubInlineIcon";
 
 Forms play a key role in giving work instructions, collecting information and making decisions within human task orchestration. Forms are lightweight user interfaces, tailored for focused data input in specific steps of a process, rendering the orchestration of human tasks more efficient than simply routing users to the applications that are orchestrated.
 
-Forms are commonly used in [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms), but also as [start forms](/components/tasklist/userguide/starting-processes.md) to start a new process instance, or even as [public forms](/components/modeler/web-modeler/advanced-modeling/publish-public-processes.md), e.g. to capture user input at scale or to allow your customers to trigger a self-service process.
+Forms are commonly used in [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms), but also as [start forms](/components/tasklist/userguide/starting-processes.md) to start a new process instance, or even as [public forms](/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes.md), e.g. to capture user input at scale or to allow your customers to trigger a self-service process.
 
 ## Camunda Forms
 

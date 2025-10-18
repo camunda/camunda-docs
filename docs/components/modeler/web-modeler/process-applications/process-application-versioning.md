@@ -23,7 +23,7 @@ To create a process application version:
    ![Create a version modal](../img/versions/web-modeler-version-create-process-application-version.png)
 3. Select the **Create** button.
 
-When you open the versions page (use the **Show versions** button in the **Versions** dropdown menu), you can now use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/modeler/web-modeler/versions.md#compare-versions).
+When you open the versions page (use the **Show versions** button in the **Versions** dropdown menu), you can now use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/modeler/web-modeler/modeling/versions.md#compare-versions).
 
 ![Versions list with file navigation header buttons highlighted](../img/versions/web-modeler-version-view-process-application-version.png)
 
@@ -31,7 +31,7 @@ When you open the versions page (use the **Show versions** button in the **Versi
 
 You can perform the following actions on a process application version:
 
-1. Restore as latest, useful for reverting changes, making further edits, [git syncing](/components/modeler/web-modeler/git-sync.md), downloading, or using Play.
+1. Restore as latest, useful for reverting changes, making further edits, [git syncing](git-sync.md), downloading, or using Play.
 2. Edit
 3. Deploy, especially after the version has been [reviewed](./process-application-pipeline.md#review).
 4. Download

@@ -15,6 +15,6 @@ Camunda Docs AI provides a smart AI-powered chatbot that helps you find answers 
 
 Click the **Camunda Docs AI** widget in the bottom right corner of a BPMN/DMN canvas to open the chatbot:
 
-![camunda docs ai trigger](./img/camunda-docs-ai-trigger.png)
+![camunda docs ai trigger](img/camunda-docs-ai-trigger.png)
 
 Here, you can ask questions like _How do I design a process?_, _What is BPMN?_, and more.

@@ -72,7 +72,7 @@ With Camunda 8.4, we improved the way you can link forms to BPMN diagrams in Web
 - No need to manually re-link forms or use a JSON configuration.
 - Forms will be automatically deployed with the diagram.
 
-See the [form linking reference](/components/modeler/web-modeler/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
+See the [form linking reference](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked) for more details.
 :::
 
 ## Deploy your diagram and start an instance
@@ -85,7 +85,7 @@ You can now monitor your instances in [Operate](/components/operate/operate-intr
 
 :::info
 Linked Camunda Forms will automatically be deployed along with the diagram.
-As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/advanced-modeling/form-linking.md#camunda-form-linked)), make sure you don't accidentally deploy a diagram.
+As linked forms are resolved to their latest version (unless you change the [binding type](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#camunda-form-linked)), make sure you don't accidentally deploy a diagram.
 
 When deploying to a Camunda 8 cluster with a version lower than 8.4, forms linked to user tasks or none start events will be automatically embedded into the user task to guarantee backwards compatibility.
 Read more about the different ways to reference Camunda Forms in the [user task forms reference](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms).

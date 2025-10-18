@@ -12,7 +12,7 @@ They are stored in JSON format and can be created, edited, and managed directly 
 
 ## Create a test scenario file
 
-You can create a new test scenario file by [saving a scenario in Play](../collaboration/play-your-process.md#save-scenario).
+You can create a new test scenario file by [saving a scenario in Play](play-your-process.md#save-scenario).
 
 You can also manage scenarios and update failing scenarios from Play.
 
@@ -80,7 +80,7 @@ Add a `processId` field with the process ID of the BPMN process you want to test
 
 You can find the BPMN process ID in the properties panel, or in the first `<bpmn:process id=` field of the XML.
 
-![process ID in properties panel](img/process-id-properties-panel.png)
+![process ID in properties panel](../modeling/advanced-modeling/img/process-id-properties-panel.png)
 
 The `processId` should be shorter than 255 characters and not contain whitespace.
 

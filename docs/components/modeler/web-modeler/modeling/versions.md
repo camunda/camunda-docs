@@ -20,7 +20,7 @@ You can use the versions list to view, compare, and manage your diagram versions
 
 To view the versions list, select **Versions > Show versions**.
 
-![Versions list showing the show versions button](img/versions/web-modeler-version-action-show-versions.png)
+![Versions list showing the show versions button](../img/versions/web-modeler-version-action-show-versions.png)
 
 ## Create a version
 
@@ -28,11 +28,11 @@ You can create a new version either from your diagram or the versions list.
 
 - From your diagram, select **Versions > Create version**.
 
-  ![versions create via the breadcrumb menu](img/versions/web-modeler-version-create-via-versions-menu.png)
+  ![versions create via the breadcrumb menu](../img/versions/web-modeler-version-create-via-versions-menu.png)
 
 - From the versions list, hover over the draft in the **Versions** panel and select **Create a new version**.
 
-  ![versions create via icon](img/versions/web-modeler-version-create-via-icon-highlight.png)
+  ![versions create via icon](../img/versions/web-modeler-version-create-via-icon-highlight.png)
 
 :::note
 
@@ -58,7 +58,7 @@ Turn off the sidebar **Show changes** toggle to view individual versions without
 
 To view BPMN diagram changes visually, select the **Visual view** tab.
 
-![versions diffing in visual view](img/versions/web-modeler-version-visual-diffing.png)
+![versions diffing in visual view](../img/versions/web-modeler-version-visual-diffing.png)
 
 - Differences between the versions are highlighted visually on the diagram. For example, if an element was added, this change is highlighted in green with a plus symbol. Hover over a change to view more details.
 - Only differences that affect the execution of the BPMN process are highlighted.
@@ -74,7 +74,7 @@ You can only use the **Code view** to compare changes in a DMN diagram. The **Vi
 
 To view BPMN and DMN diagram changes as code in an XML diff layout, select the **Code view** tab.
 
-![versions diffing in code view](img/versions/web-modeler-version-code-diffing.png)
+![versions diffing in code view](../img/versions/web-modeler-version-code-diffing.png)
 
 - The XML for the previous version is shown on the left, with the currently selected version shown on the right.
 - Differences between the versions are highlighted in the XML. For example, if an element was added, this change is highlighted in green.
@@ -87,11 +87,11 @@ You can restore a version to revert to a previous snapshot of your diagram.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Restore as latest**.
 
-![versions restore](img/versions/web-modeler-version-restore-highlight.png)
+![versions restore](../img/versions/web-modeler-version-restore-highlight.png)
 
 The diagram reverts to the restored version. A new version is created with "(restored)" appended to the name.
 
-![version restored](img/versions/web-modeler-version-restore-complete-highlight.png)
+![version restored](../img/versions/web-modeler-version-restore-complete-highlight.png)
 
 ## Copy a diagram version
 
