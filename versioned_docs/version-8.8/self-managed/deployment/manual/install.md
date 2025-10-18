@@ -201,7 +201,7 @@ Connectors require authentication to use their full capabilities. By default, th
 
 If you don’t configure a user at startup, create one manually in the Identity UI after deployment.
 
-For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/identity/overview.md).
+For more details, see [Identity configuration overview](/self-managed/components/orchestration-cluster/identity/initial-setup.md).
 
 <Tabs>
   <TabItem value="env" label="Environment variables">

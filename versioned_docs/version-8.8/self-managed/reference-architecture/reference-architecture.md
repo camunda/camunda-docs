@@ -48,7 +48,7 @@ The following components are bundled into a single artifact:
 - [Zeebe](/components/zeebe/zeebe-overview.md): Highly scalable, cloud-native workflow engine that tracks the state of active process instances and drives business processes from start to finish.
 - [Operate](/components/operate/operate-introduction.md): Monitoring tool for visualizing and troubleshooting process instances running in Zeebe.
 - [Tasklist](/components/tasklist/introduction-to-tasklist.md): User interface for interacting with user tasks, including assigning and completing them.
-- [Identity](/self-managed/components/orchestration-cluster/identity/overview.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
+- [Identity](/components/identity/identity-introduction.md): Integrated authentication and authorization service for managing access to all Orchestration Cluster components and APIs.
 
 Tightly integrated with the Orchestration Cluster:
 

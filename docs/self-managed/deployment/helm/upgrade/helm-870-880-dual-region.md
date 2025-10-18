@@ -16,15 +16,15 @@ Multi-region deployments, as outlined in our [reference](/self-managed/deploymen
 
 The following table outlines configuration changes specific to multi-region deployments:
 
-| Configuration area        | Change required                                       | Description                                                                                                                                                                   |
-| ------------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Exporter keys**         | Replace `global.elasticsearch.disableExporter: false` | Use `orchestration.exporters.camunda.enabled: false` and `orchestration.exporters.zeebe.enabled: false` instead                                                               |
-| **New Camunda Exporter**  | Define for both regions                               | Configure the new [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)                                                |
-| **Legacy Exporter**       | Retain during migration                               | Keep the old [Elasticsearch / OpenSearch Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) definitions                      |
-| **Environment variables** | Update gateway prefixes                               | Change `ZEEBE_GATEWAY_*` to `ZEEBE_BROKER_GATEWAY_*` (embedded gateway architecture)                                                                                          |
-| **Message compression**   | Add to orchestration config                           | Required for migration jobs to communicate with the Zeebe cluster                                                                                                             |
-| **Basic auth users**      | Migrate manually                                      | Users defined in `camunda.operate` or `camunda.tasklist` require manual migration to [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md) |
-| **API security**          | Review defaults                                       | gRPC and REST APIs are secured by default in 8.8                                                                                                                              |
+| Configuration area        | Change required                                       | Description                                                                                                                                                                        |
+| ------------------------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Exporter keys**         | Replace `global.elasticsearch.disableExporter: false` | Use `orchestration.exporters.camunda.enabled: false` and `orchestration.exporters.zeebe.enabled: false` instead                                                                    |
+| **New Camunda Exporter**  | Define for both regions                               | Configure the new [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)                                                     |
+| **Legacy Exporter**       | Retain during migration                               | Keep the old [Elasticsearch / OpenSearch Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) definitions                           |
+| **Environment variables** | Update gateway prefixes                               | Change `ZEEBE_GATEWAY_*` to `ZEEBE_BROKER_GATEWAY_*` (embedded gateway architecture)                                                                                               |
+| **Message compression**   | Add to orchestration config                           | Required for migration jobs to communicate with the Zeebe cluster                                                                                                                  |
+| **Basic auth users**      | Migrate manually                                      | Users defined in `camunda.operate` or `camunda.tasklist` require manual migration to [embedded Identity](/self-managed/components/orchestration-cluster/identity/initial-setup.md) |
+| **API security**          | Review defaults                                       | gRPC and REST APIs are secured by default in 8.8                                                                                                                                   |
 
 #### Configure exporters for both regions
 
@@ -76,7 +76,7 @@ If your multi-region setup uses cluster message compression (standard practice),
 
 Basic authentication now applies to the entire Orchestration Cluster. If you previously defined users in `camunda.operate.userId` or `camunda.tasklist.userId`:
 
-1. Manually migrate users to the new [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md).
+1. Manually migrate users to the new [embedded Identity](/self-managed/components/orchestration-cluster/identity/initial-setup.md).
 2. Configure initial users to avoid falling back to `demo:demo` credentials.
 3. Review the [Authentication](./helm-870-880.md#authentication) section of this guide.
 

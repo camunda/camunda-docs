@@ -200,7 +200,7 @@ orchestration.security.initialization.defaultRoles.admin.users: [ <YOUR_USERNAME
 1. If the username is shown, continue configuring your own groups, mapping rules, or setting up [authorizations](../../../../components/concepts/access-control/authorizations.md) for other users.
 
 :::tip
-For more details on assigning users to the default roles, see the [corresponding documentation](overview.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration).
+For more details on assigning users to the default roles, see the [corresponding documentation](initial-setup.md#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration).
 :::
 
 ### (Optional) Step 8: Configure bring your own groups
