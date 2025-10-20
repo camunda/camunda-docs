@@ -32,7 +32,7 @@ cat > kms-policy.json << EOF
       "Sid": "Allow Camunda tenant IAM Role basic key access",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "$TENANT_ROLE_ARN"
+        "AWS": "<TENANT-ROLE-ARN>"
       },
       "Action": [
         "kms:Encrypt",
@@ -47,7 +47,7 @@ cat > kms-policy.json << EOF
       "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "$TENANT_ROLE_ARN"
+        "AWS": "<TENANT-ROLE-ARN>"
       },
       "Action": [
         "kms:CreateGrant",
