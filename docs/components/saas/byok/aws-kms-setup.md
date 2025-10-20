@@ -33,7 +33,6 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 3. Select an Amazon region for your cluster.
 4. Choose **Single region** or **Dual region backup**.
    - Dual region requires one key per region. Keys can be separate.
-   - Full support for dual-region encryption is under discussion; confirm with your Camunda contact.
 5. Under **Encryption at rest**, choose **External**.
 6. Click **Create cluster**.
 
@@ -59,13 +58,11 @@ Use this script to create a single KMS key in the same region as the cluster.
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-single-region.sh](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
+1. Download [create-byok-kms-key-single-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/docs/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
 2. Modify the following values at the top of the script:
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
    - `AWS_SESSION_TOKEN` (if using temporary credentials)
-   - `REGION` (replace with the region in which the cluster is created)
-   - `TENANT_ROLE_ARN` (from the Camunda Console)
    - `YOUR_ACCOUNT_ID`
    - `ALIAS_NAME` (optional)
 3. Make the script executable and run it.
@@ -83,8 +80,8 @@ Use this script to create a multi-region primary key in the cluster's region and
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-multi-region.sh](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
-2. Modify the same variables as above. Instead of `REGION` (only present in the single region script), modify the variables `PRIMARY_REGION` (replace with the region in which the cluster is created) and `SECONDARY_REGION` (backup region).
+1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
+2. Modify the same variables as above.
 3. Make the script executable and run it.
 4. Copy the two outputted key ARNs and provide them to Camunda.
 

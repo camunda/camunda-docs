@@ -15,6 +15,37 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 31
+
+### Publication date
+
+October 16, 2025
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The embedded Undertow web server was affected by [CVE-2025-9784](https://nvd.nist.gov/vuln/detail/CVE-2025-9784),
+a flaw where malformed client requests can trigger server-side stream resets without incrementing abuse counters.
+This issue, referred to as the "MadeYouReset" attack, allows malicious clients to induce excessive server workload by
+repeatedly causing server-side stream aborts and could be exploited to cause a denial of service (DoS).
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed 8.8.0, ≤ 8.7.10, or ≤ 8.6.19
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.8.1, 8.7.11, 8.6.20
+
+The fix was deployed to Web Modeler SaaS on October 14, 2025, 14:26 CET.
+
 ## Notice 30
 
 ### Publication date
@@ -141,7 +172,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -167,7 +198,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -202,7 +233,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -240,7 +271,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
@@ -278,7 +309,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
@@ -313,7 +344,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 18th, 2025
+June 18, 2025
 
 ### Products affected
 
@@ -338,7 +369,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 17th, 2025
+June 17, 2025
 
 ### Products affected
 
@@ -363,7 +394,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-May 21st, 2025
+May 21, 2025
 
 ### Products affected
 
@@ -392,7 +423,7 @@ The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -423,7 +454,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -456,7 +487,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 14th, 2025
+March 14, 2025
 
 ### Products affected
 
@@ -480,7 +511,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -504,7 +535,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -535,7 +566,7 @@ The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Publication date
 
-July 18th, 2024
+July 18, 2024
 
 ### Products affected
 
@@ -561,7 +592,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-October 3rd, 2023
+October 3, 2023
 
 ### Products affected
 
@@ -621,7 +652,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-November 10th, 2022
+November 10, 2022
 
 ### Products affected:
 
@@ -651,7 +682,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-April 11th, 2022
+April 11, 2022
 
 ### Products affected:
 
@@ -678,7 +709,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -704,7 +735,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -729,7 +760,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -755,7 +786,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -783,7 +814,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -809,7 +840,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -837,7 +868,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 
@@ -865,7 +896,7 @@ Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLoo
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 
