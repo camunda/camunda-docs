@@ -81,7 +81,7 @@ Use this script to create a multi-region primary key in the cluster's region and
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-multi-region.sh](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
+1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/docs/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
 2. Modify the same variables as above.
 3. Make the script executable and run it.
 4. Copy the two outputted key ARNs and provide them to Camunda.
