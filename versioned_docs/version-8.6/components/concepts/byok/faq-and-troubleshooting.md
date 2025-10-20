@@ -55,7 +55,7 @@ Yes. All clusters use provider-managed encryption by default.
 - Revoking access immediately blocks cluster access; a new key or restored access is required.
 - Camunda does not store your key.
 
-Setup instructions: [external encryption setup guide](/components/saas/byok/aws-kms-setup.md)
+Setup instructions: [external encryption setup guide](/components/concepts/byok/aws-kms-setup.md)
 
 ## Other questions
 
