@@ -855,11 +855,11 @@ If the input `type` is `String` or `Text`, then [`feel`](#adding-feel-editor-sup
 
 ### Ad-hoc sub-processes: `zeebe:adHoc`
 
-| **Binding `type`**         | `zeebe:adHoc`                                                                                           |
-| -------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **Valid property `type`s** | `Hidden`                                                                                                |
-| **Binding parameters**     | `property`: The name of the property.<br/>Supported properties: `outputCollection` and `outputElement`. |
-| **Mapping result**         | `<zeebe:adHoc [property]="[userInput]" />`                                                              |
+| **Binding `type`**         | `zeebe:adHoc`                                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Valid property `type`s** | `Hidden`                                                                                                                             |
+| **Binding parameters**     | `property`: The name of the property.<br/>Supported properties: `outputCollection`, `outputElement`, and `activeElementsCollection`. |
+| **Mapping result**         | `<zeebe:adHoc [property]="[userInput]" />`                                                                                           |
 
 The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. When configured, contained activities can be executed independently without following a predefined sequence flow.
 
@@ -881,6 +881,39 @@ The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. 
       "type": "Hidden",
       "binding": { "type": "zeebe:adHoc", "property": "outputElement" },
       "value": "={ id: results._meta.id, name: results._meta.name, content: results }"
+    }
+  ]
+}
+```
+
+### Example with `activeElementsCollection`
+
+```json
+{
+  ...,
+  "appliesTo": [ "bpmn:AdHocSubProcess" ],
+  "elementType": { "value": "bpmn:AdHocSubProcess" },
+  "properties": [
+    {
+      "type": "Hidden",
+      "binding": {
+        "type": "property",
+        "name": "cancelRemainingInstances"
+      },
+      "value": "false"
+    },
+    {
+      "type": "String",
+      "feel": "required",
+      "binding": {
+        "type": "property",
+        "name": "completionCondition"
+      }
+    },
+    {
+      "type": "Hidden",
+      "binding": { "type": "zeebe:adHoc", "property": "activeElementsCollection" },
+      "value": "=anActiveElementsCollection"
     }
   ]
 }
