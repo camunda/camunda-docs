@@ -6,7 +6,7 @@ description: "Authentication requirements for accessing the Operate REST API."
 
 All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) or use Basic Auth if your environment allows.
 
-See [Identity and access management](/components/concepts/access-control-overview.md) for a full overview of authentication vs. authorization.
+See [Identity and access management](/components/concepts/access-control/access-control-overview.md) for a full overview of authentication vs. authorization.
 
 ## Using Basic Auth
 
@@ -38,6 +38,6 @@ A successful response returns matching process instances.
 
 ## Learn more
 
-- [Identity and access management](../concepts/access-control-overview.md)
-- [OIDC setup (Self-Managed)](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Identity and access management](/components/concepts/access-control/access-control-overview.md)
+- [OIDC setup (Self-Managed)](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [API client setup (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)

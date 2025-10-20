@@ -17,12 +17,12 @@ The Zeebe REST API supports three authentication methods depending on your envir
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
-| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
-| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Helm](/self-managed/deployment/helm/install/index.md)                                 | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
-| SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
+| Distribution                                                                      | Default Authentication | No Auth Support         | Basic Auth Support | OIDC-based Auth Support |
+| --------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
+| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Helm](/self-managed/deployment/helm/install/index.md)                            | Basic Auth             | ✅ (when Auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 ## Authenticate API calls
 
@@ -39,7 +39,7 @@ curl http://localhost:8080/v1/topology
 Basic Authentication uses username and password credentials. To set it up:
 
 **For Camunda 8 Run:**
-Enable Basic Auth by configuring authentication in your `application.yaml`. For detailed steps, see the [Camunda 8 Run documentation on enabling authentication](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
+Enable Basic Auth by configuring authentication in your `application.yaml`. For detailed steps, see the [Camunda 8 Run documentation on enabling authentication](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization).
 
 **For Helm:**
 Basic Auth is enabled by default for the Tasklist REST API.
@@ -109,7 +109,7 @@ To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/)
 <TabItem value='self-managed'>
 
 1. **Configure Orchestration Cluster for OIDC-based Authentication.**
-   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+   - Make sure you have configured your Orchestration Cluster with your Identity Provider following the steps in [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
    - Note the **client ID** or configured values of **audiences** of the Orchestration Cluster for audience validation (usually the same as the client ID you used when configuring the Orchestration Cluster) as **CLIENT_ID_OC**.
 2. **Register a client in your Identity Provider (IdP).**
    - Create a new application/client in your IdP.

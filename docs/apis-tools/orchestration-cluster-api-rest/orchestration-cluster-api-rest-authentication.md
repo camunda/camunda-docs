@@ -13,12 +13,12 @@ The Orchestration Cluster REST API supports three authentication methods dependi
 
 ## Authentication support matrix
 
-| Distribution                                                                           | Default Authentication | No auth support         | Basic auth support | OIDC-based auth support |
-| -------------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
-| [Camunda 8 Run](../../self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Docker Compose](../../self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
-| [Helm](/self-managed/deployment/helm/install/quick-install.md)                         | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
-| SaaS                                                                                   | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
+| Distribution                                                                      | Default Authentication | No auth support         | Basic auth support | OIDC-based auth support |
+| --------------------------------------------------------------------------------- | ---------------------- | ----------------------- | ------------------ | ----------------------- |
+| [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None                   | ✅ (default)            | ✅ (when enabled)  | ✅ (when configured)    |
+| [Helm](/self-managed/deployment/helm/install/quick-install.md)                    | Basic Auth             | ✅ (when auth disabled) | ✅ (default)       | ✅ (when configured)    |
+| SaaS                                                                              | OIDC-based Auth        | ❌                      | ❌                 | ✅ (required)           |
 
 ## Authenticate API calls
 
@@ -35,7 +35,7 @@ curl http://localhost:8080/v2/topology
 Basic Authentication uses username and password credentials.
 
 **For Camunda 8 Run:**  
-Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](../../self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
+Enable Basic Auth by configuring authentication in your `application.yaml`. See [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md#enable-authentication-and-authorization) for details.
 
 **For Helm:**  
 Basic Auth is enabled by default for the Orchestration Cluster API.
@@ -88,7 +88,7 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 **Prerequisites for OIDC-based authentication**
 
-- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
+- Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
 - You must have a registered client in your IdP with a **client ID**, **client secret**, and authorization endpoint.
 - Note the configured **audience** and **scope** for token requests (variables `OC_AUDIENCE` and `SCOPE`). Depends on IdP configuration.
 

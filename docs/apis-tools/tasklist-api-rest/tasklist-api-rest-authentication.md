@@ -39,6 +39,6 @@ A successful response returns matching task objects.
 
 ## Learn more
 
-- [Identity and access management](../concepts/access-control-overview.md)
-- [OIDC setup (Self-Managed)](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Identity and access management](/components/concepts/access-control/access-control-overview.md)
+- [OIDC setup (Self-Managed)](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [API client setup (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
