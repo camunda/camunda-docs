@@ -231,4 +231,12 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
 
 ## Deprecating a template: `deprecated`
 
-Indicates whether the element template is deprecated. Can be `boolean` or `object` with `message` (optional message to describe migration path) and `documentationRef` (optional link to migration documentation).
+Indicates whether the element template is deprecated.
+
+```json
+{
+  ...,
+  "deprecated": true,
+  ...
+}
+```
