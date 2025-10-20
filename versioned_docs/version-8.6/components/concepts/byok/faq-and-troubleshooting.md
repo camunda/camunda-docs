@@ -33,7 +33,7 @@ Applies to both Orchestration clusters and Web Modeler in Camunda 8 SaaS.
 - Camunda-managed hardware key: Uses Google KMS HSM (FIPS 140-2 Level 3).
 - External key: Customer-supplied KMS key (AWS only currently).
 
-Full comparison: [encryption at rest](/components/saas/encryption-at-rest.md)
+Full comparison: [encryption at rest](/components/concepts/encryption-at-rest.md)
 
 ### When can I choose the encryption type?
 
@@ -62,7 +62,7 @@ Setup instructions: [external encryption setup guide](/components/saas/byok/aws-
 - Performance: Minimal impact; handled by cloud KMS.
 - Per-cluster keys: Supported.
 - Encryption in transit: TLS enforced.
-- Cost: Charges apply in your AWS account. See [cost implications](/components/saas/byok/index.md#cost-implications).
+- Cost: Charges apply in your AWS account. See [cost implications](/components/concepts/byok/index.md#cost-implications).
 
 ## Troubleshooting external encryption keys
 

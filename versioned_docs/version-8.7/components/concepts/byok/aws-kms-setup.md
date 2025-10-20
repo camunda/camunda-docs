@@ -33,7 +33,6 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 3. Select an Amazon region for your cluster.
 4. Choose **Single region** or **Dual region backup**.
    - Dual region requires one key per region. Keys can be separate.
-   - Full support for dual-region encryption is under discussion; confirm with your Camunda contact.
 5. Under **Encryption at rest**, choose **External**.
 6. Click **Create cluster**.
 
@@ -225,7 +224,7 @@ You are responsible for monitoring key usage and access logs within your AWS acc
 ## Additional considerations
 
 - **Key rotation**: Enable [automatic rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) or rotate manually in AWS KMS.
-- **Cost**: Using Amazon KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/saas/byok/index.md#cost-implications).
+- **Cost**: Using Amazon KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/concepts/byok/index.md#cost-implications).
 - **Failure scenarios**: Deleting keys or revoking permissions makes cluster data inaccessible. See [troubleshooting steps](/components/saas/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys).
 
 :::note Reference
