@@ -10,11 +10,14 @@ export const MarkerStronglyConsistentExtension = () => {
       <span
         className={"badge badge--consistent"}
         title={
-          "This endpoint accesses strongly consistent data storage. Responses are guaranteed to reflect all writes that occurred before the request."
+          "This endpoint accesses strongly consistent data storage. Responses are guaranteed to reflect all writes that occurred before the request. Click to learn more."
         }
       >
         Strongly Consistent
-      </span>
+      </span>{" "}
+      <a href="../../orchestration-cluster-api-rest-data-fetching/#data-consistency">
+        Learn about consistency.
+      </a>
     </p>
   );
 };
