@@ -172,7 +172,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -198,7 +198,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -233,7 +233,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -271,7 +271,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
@@ -309,7 +309,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
@@ -344,7 +344,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 18th, 2025
+June 18, 2025
 
 ### Products affected
 
@@ -369,7 +369,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 17th, 2025
+June 17, 2025
 
 ### Products affected
 
@@ -394,7 +394,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-May 21st, 2025
+May 21, 2025
 
 ### Products affected
 
@@ -423,7 +423,7 @@ The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -454,7 +454,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -487,7 +487,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 14th, 2025
+March 14, 2025
 
 ### Products affected
 
@@ -511,7 +511,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -535,7 +535,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -566,7 +566,7 @@ The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Publication date
 
-July 18th, 2024
+July 18, 2024
 
 ### Products affected
 
@@ -592,7 +592,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-October 3rd, 2023
+October 3, 2023
 
 ### Products affected
 
@@ -652,7 +652,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-November 10th, 2022
+November 10, 2022
 
 ### Products affected:
 
@@ -682,7 +682,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-April 11th, 2022
+April 11, 2022
 
 ### Products affected:
 
@@ -709,7 +709,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -735,7 +735,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -760,7 +760,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -786,7 +786,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -814,7 +814,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -840,7 +840,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -868,7 +868,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 
@@ -896,7 +896,7 @@ Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLoo
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 

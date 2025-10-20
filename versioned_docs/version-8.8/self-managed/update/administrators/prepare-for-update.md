@@ -35,6 +35,17 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
+    <td>Tasklist UI mode</td>
+    <td><p>Tasklist UI supports two modes: V1 (that uses the deprecated Tasklist API) and V2 (that uses the Orchestration Cluster API).
+    </p><p><ul><li><p>Tasklist UI in V1 API mode is available as a configuration option, which allows you to access legacy features during the transition.</p></li><li><p>We recommend planning your migration to the V2 API to take advantage of all the latest features.</p></li><li><p>To learn more about the differences between the V1 and V2 modes, see the <a href="../../../../components/tasklist/api-versions">Tasklist API versions documentation</a>.</p></li></ul></p></td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
+    <td>Optimize</td>
+    <td>Performs a startup data migration that requires downtime during startup data migration. You must plan a maintenance window.</td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
     <td>Orchestration Cluster API</td>
     <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p>
     <ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li>
@@ -61,6 +72,20 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td>Tenant-providing interceptors are not supported and should be replaced with built-in [tenant management](/components/identity/tenant.md).</td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
+<tr>
+    <td>Zeebe Java Client/Spring SDK &lt;=8.7.15 with REST API enabled</td>
+    <td><p>See [Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8](../../../reference/announcements-release-notes/880/880-announcements.md#orchestration-cluster-zeebe-java-client-8715-with-rest-api-enabled)</p></td>
+    <td><span className="label-highlight red">Breaking changes</span></td>
+</tr>
+</table>
+
+### Identity, authentication, and authorization
+
+Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for Orchestration Cluster components and resources.
+
+The following table provides a high-level overview of the impact of these changes:
+
+<table className="table-callout">
 <tr>
     <td>Tasklist UI mode</td>
     <td><p>Tasklist UI supports two modes: V1 (that uses the deprecated Tasklist API) and V2 (that uses the Orchestration Cluster API). 
