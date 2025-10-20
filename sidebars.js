@@ -1693,11 +1693,6 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
                   ],
                 },
-                {
-                  Migration: [
-                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
-                  ],
-                },
               ],
             },
             {
@@ -1755,19 +1750,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
-                    {
-                      type: "category",
-                      label: "Camunda Exporter indices",
-                      link: {
-                        type: "doc",
-                        id: "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
-                      },
-                      items: [
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-identity",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-operate",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-tasklist",
-                      ],
-                    },
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter",
                   ],

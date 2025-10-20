@@ -23,7 +23,7 @@ cat > kms-policy.json << EOF
       "Sid": "Enable IAM user permissions",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::<CUSTOMER-AWS-ACCOUNT-ID>:root"
+        "AWS": "arn:aws:iam::$YOUR_ACCOUNT_ID:root"
       },
       "Action": "kms:*",
       "Resource": "*"
@@ -32,7 +32,7 @@ cat > kms-policy.json << EOF
       "Sid": "Allow Camunda tenant IAM Role basic key access",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "<TENANT-ROLE-ARN>"
+        "AWS": "$TENANT_ROLE_ARN"
       },
       "Action": [
         "kms:Encrypt",
@@ -47,7 +47,7 @@ cat > kms-policy.json << EOF
       "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "<TENANT-ROLE-ARN>"
+        "AWS": "$TENANT_ROLE_ARN"
       },
       "Action": [
         "kms:CreateGrant",
@@ -102,6 +102,7 @@ fi
 # Create replica key in secondary region
 echo "Creating replica key in $SECONDARY_REGION..."
 SECONDARY_KEY_ID=$(aws kms replicate-key \
+  --region $PRIMARY_REGION \
   --key-id $PRIMARY_KEY_ID \
   --replica-region $SECONDARY_REGION \
   --description "Camunda 8 BYOK Multi-Region Key" \
