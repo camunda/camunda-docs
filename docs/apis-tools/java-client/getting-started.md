@@ -201,8 +201,8 @@ private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. 
 // Audience is the API that will receive the token, e.g., the Orchestration Cluster
 private static final String AUDIENCE = "[Orchestration Cluster audience]";
 
-// Scope is the permission requested from the IdP
-private static final String SCOPE = "openid profile [optional additional scopes]";
+// Scope is the permission requested from the IdP (or leave empty)
+private static final String SCOPE = "[optional additional scopes]";
 
 private static final String CLIENT_ID = "[Client ID registered in your IdP]";
 private static final String CLIENT_SECRET = "[Client Secret]";
@@ -239,7 +239,7 @@ https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
 ```
 
 :::note Audience validation
-If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camunda.security.authentication.oidc), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
 
 Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
 :::

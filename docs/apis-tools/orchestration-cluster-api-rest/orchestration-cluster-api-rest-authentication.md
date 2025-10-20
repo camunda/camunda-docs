@@ -52,7 +52,7 @@ Basic Authentication checks the password with every request, limiting the number
 See [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
 :::
 
-### OIDC-based Authentication using client credentials
+## Using a token (OIDC/JWT)
 
 OIDC-based Authentication is recommended for production and required for SaaS. You must obtain an Access Token and pass it as an OAuth 2.0 Bearer Token in the `Authorization` header of each request.
 
@@ -90,7 +90,7 @@ curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
 
 - Your Orchestration Cluster must already be configured with your Identity Provider. See [Set up OIDC-based Authentication](../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md).
 - You must have a registered client in your IdP with a **client ID**, **client secret**, and authorization endpoint.
-- Note the **client ID** or configured **audiences** for audience validation (usually the same as the client ID used when configuring the Orchestration Cluster), referred to as **CLIENT_ID_OC**.
+- Note the configured **audience** and **scope** for token requests (variables `OC_AUDIENCE` and `SCOPE`). Depends on IdP configuration.
 
 **Request an access token using client credentials**
 
@@ -101,12 +101,12 @@ curl --location --request POST 'http://<IDP_HOST>/auth/realms/<REALM>/protocol/o
 --header 'Content-Type: application/x-www-form-urlencoded' \
 --data-urlencode "client_id=${CLIENT_ID}" \
 --data-urlencode "client_secret=${CLIENT_SECRET}" \
---data-urlencode "audience=${CLIENT_ID_OC}" \
---data-urlencode "scope=${CLIENT_ID_OC}" \
+--data-urlencode "audience=${OC_AUDIENCE}" \
+--data-urlencode "scope=${SCOPE}" \
 --data-urlencode 'grant_type=client_credentials'
 ```
 
-> **Microsoft Entra ID**: Use `scope=${CLIENT_ID_OC}/.default` instead of `scope=${CLIENT_ID_OC}`. The Authorization URI is typically `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
+> **Microsoft Entra ID**: Use `scope=${SCOPE}/.default` instead of `scope=${SCOPE}`. The Authorization URI is typically `https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token`.
 
 **Use the access token in API requests**
 
