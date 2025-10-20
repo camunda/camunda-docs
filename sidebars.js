@@ -1606,7 +1606,6 @@ module.exports = {
             },
           ],
         },
-        "self-managed/operational-guides/data-purge",
         {
           type: "category",
           label: "Document handling",
@@ -1641,7 +1640,6 @@ module.exports = {
         {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
-        "self-managed/concepts/exporters",
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [
@@ -1693,11 +1691,6 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
-                  ],
-                },
-                {
-                  Migration: [
-                    "self-managed/components/orchestration-cluster/core-settings/migration/importer",
                   ],
                 },
               ],
