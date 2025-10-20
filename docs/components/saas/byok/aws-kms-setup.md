@@ -33,7 +33,6 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 3. Select an Amazon region for your cluster.
 4. Choose **Single region** or **Dual region backup**.
    - Dual region requires one key per region. Keys can be separate.
-   - Full support for dual-region encryption is under discussion; confirm with your Camunda contact.
 5. Under **Encryption at rest**, choose **External**.
 6. Click **Create cluster**.
 
