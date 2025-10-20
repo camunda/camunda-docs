@@ -147,12 +147,15 @@ Camunda 8.8 introduces a single unified Orchestration Cluster REST API you can u
 
 ### Unified Exporter
 
-Camunda 8.8 introduces a new unified Camunda Exporter which directly populates data records that are consumable by read APIs on the secondary storage.
-This significantly reduces the latency until eventually consistent data becomes available on Get and Search APIs, you can learn more about the change in the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/) written by our engineering team.
+Camunda 8.8 introduces a new unified Camunda Exporter that directly populates data records that are consumable by read APIs on the secondary storage. This significantly reduces latency until eventually consistent data becomes available on Get and Search APIs.
 
 In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flows between components (such as Elasticsearch import/export).
 
 <p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/" class="link-arrow">Camunda Exporter</a></p>
+
+:::info
+Learn more about the unified Camunda Exporter in the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
+:::
 
 ### Unified component configuration
 
