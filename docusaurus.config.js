@@ -548,7 +548,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.5/**",
             "/docs/8.6/**",
             "/docs/8.7/**",
           ],
