@@ -120,7 +120,7 @@ export default function LiveBenchBusinessFilter() {
   const CONTEXT_COL = "context_window_tokens"; // tokens
   const COST_1M_BLEND_COL = "price_1m_blended_3_to_1_usd"; // $ / 1M (blended 3:1) ← preferred
   const COST_1K_FALLBACK_COL = "usd_per_1k_output"; // fallback if needed
-  const SPEED_COL = "median_output_tokens_per_second"; // tokens / sec
+  const SPEED_COL = "speed_score_0_to_10_int"; // tokens / sec
   const LICENSE_COL = "license_type"; // open / proprietary (optional)
 
   // Map from metric base -> CSV column (eval__ prefix in file)
@@ -178,7 +178,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $15 / 1M (premium-ok).",
         ],
         metricBases: ["ifbench", "gpqa"],
-        defaults: { minContext: 128_000, maxCost1M: 15, minSpeed: 50 },
+        defaults: { minContext: 128_000, maxCost1M: 15, minSpeed: 5 },
       },
       {
         id: "healthcare",
@@ -190,7 +190,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $20 / 1M (premium-ok).",
         ],
         metricBases: ["scicode", "hle", "mmlu_pro"],
-        defaults: { minContext: 256_000, maxCost1M: 20, minSpeed: 40 },
+        defaults: { minContext: 256_000, maxCost1M: 20, minSpeed: 4 },
       },
       {
         id: "customer",
@@ -202,7 +202,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $2 / 1M (low-cost).",
         ],
         metricBases: ["gpqa", "aime", "ifbench"],
-        defaults: { minContext: 64_000, maxCost1M: 2, minSpeed: 100 },
+        defaults: { minContext: 64_000, maxCost1M: 2, minSpeed: 8 },
       },
       {
         id: "developer",
@@ -214,7 +214,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $8 / 1M (mid-range).",
         ],
         metricBases: ["livecodebench", "scicode", "ifbench"],
-        defaults: { minContext: 128_000, maxCost1M: 8, minSpeed: 80 },
+        defaults: { minContext: 128_000, maxCost1M: 8, minSpeed: 7 },
       },
       {
         id: "legal",
@@ -226,7 +226,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $12 / 1M (premium-leaning).",
         ],
         metricBases: ["ifbench", "mmlu_pro", "gpqa"],
-        defaults: { minContext: 256_000, maxCost1M: 12, minSpeed: 40 },
+        defaults: { minContext: 256_000, maxCost1M: 12, minSpeed: 4 },
       },
       {
         id: "scientific",
@@ -238,7 +238,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $25 / 1M (premium-ok).",
         ],
         metricBases: ["math_500", "aime", "scicode"],
-        defaults: { minContext: 512_000, maxCost1M: 25, minSpeed: 40 },
+        defaults: { minContext: 512_000, maxCost1M: 25, minSpeed: 4 },
       },
       {
         id: "backoffice",
@@ -250,7 +250,7 @@ export default function LiveBenchBusinessFilter() {
           "Default budget: ≤ $3 / 1M (low-cost).",
         ],
         metricBases: ["terminalbench_hard", "ifbench", "math_500"],
-        defaults: { minContext: 64_000, maxCost1M: 3, minSpeed: 120 },
+        defaults: { minContext: 64_000, maxCost1M: 3, minSpeed: 9 },
       },
     ],
     []
@@ -307,7 +307,7 @@ export default function LiveBenchBusinessFilter() {
 
   const CONTEXT_MAX = 1_000_000;
   const COST_CAP = 100; // slider max = 100; when at max, treat as "no cost filter"
-  const SPEED_MAX = 400;
+  const SPEED_MAX = 10;
 
   const contextMinObserved = useMemo(() => {
     let min = Number.POSITIVE_INFINITY;
@@ -326,6 +326,24 @@ export default function LiveBenchBusinessFilter() {
     });
     return Number.isFinite(min) ? min : 0;
   }, [rows]);
+
+  function SpeedIcons({ value }) {
+    const vRaw = Number.isFinite(value) ? value : Number(value);
+    const v = Math.max(0, Math.min(10, Math.round(vRaw || 0)));
+
+    if (!Number.isFinite(vRaw)) {
+      return React.createElement("span", null, "—");
+    }
+
+    return React.createElement(
+      "span",
+      {
+        title: `${v}/10`,
+        style: { whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums" },
+      },
+      "⚡".repeat(v) || "—"
+    );
+  }
 
   const [minContext, setMinContext] = useState(0);
   const [maxCost1M, setMaxCost1M] = useState(COST_CAP); // default to "no filter" in no-profile mode
@@ -552,7 +570,7 @@ export default function LiveBenchBusinessFilter() {
         />
         <Slider
           id="spd"
-          label="Min speed (tokens / second)"
+          label="Min speed (0–10)"
           value={minSpeed}
           onChange={setMinSpeed}
           min={0}
@@ -637,7 +655,7 @@ export default function LiveBenchBusinessFilter() {
                 <th style={{ whiteSpace: "nowrap" }}>⭐ Avg</th>
                 <th>Context (tokens)</th>
                 <th>Cost ($/1M blended)</th>
-                <th>Speed (tok/s)</th>
+                <th>Speed (0–10)</th>
                 {metricKeysInUse.map(({ base }) => (
                   <th key={base}>{prettyMetric(base)}</th>
                 ))}
@@ -659,7 +677,6 @@ export default function LiveBenchBusinessFilter() {
                   const per1k = toNumber(row[COST_1K_FALLBACK_COL]);
                   cost1m = Number.isFinite(per1k) ? per1k * 1000 : NaN;
                 }
-                const spd = toNumber(row[SPEED_COL]);
 
                 return (
                   <tr key={modelName + ":" + i}>
@@ -675,7 +692,9 @@ export default function LiveBenchBusinessFilter() {
                     </td>
                     <td>{Number.isFinite(ctx) ? ctx : "—"}</td>
                     <td>{Number.isFinite(cost1m) ? cost1m : "—"}</td>
-                    <td>{Number.isFinite(spd) ? spd : "—"}</td>
+                    <td>
+                      <SpeedIcons value={row[SPEED_COL]} />
+                    </td>
                     {metricKeysInUse.map(({ base, key }) => {
                       const v = normalize01(row[key]);
                       return (
