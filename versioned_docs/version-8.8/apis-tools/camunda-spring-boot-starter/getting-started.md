@@ -106,7 +106,7 @@ camunda:
 Camunda is configured with URLs (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
 :::
 
-If you set up a Self-Managed cluster with authentication method `oidc`, Keycloak is used as the default Identity provider. As long as the port config (from Docker Compose or port-forward with Helm charts) is the default, you must configure the accompanying Spring profile and client credentials:
+If you set up a [Self-Managed cluster with OIDC](https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/), you must configure the accompanying client credentials:
 
 ```yaml
 camunda:
