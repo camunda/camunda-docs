@@ -106,7 +106,7 @@ camunda:
 Camunda is configured with URLs (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
 :::
 
-If you set up a [Self-Managed cluster with OIDC](https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/), you must configure the accompanying client credentials:
+If you set up a [Self-Managed cluster with OIDC](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md), you must configure the accompanying client credentials:
 
 ```yaml
 camunda:
