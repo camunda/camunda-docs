@@ -106,7 +106,7 @@ camunda:
 Camunda is configured with URLs (`http://localhost:26500` instead of `localhost:26500` + plaintext connection flag).
 :::
 
-If you set up a Self-Managed cluster with Identity, Keycloak is used as the default Identity provider. As long as the port config (from Docker Compose or port-forward with Helm charts) is the default, you must configure the accompanying Spring profile and client credentials:
+If you set up a [Self-Managed cluster with OIDC](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md), you must configure the accompanying client credentials:
 
 ```yaml
 camunda:
@@ -127,7 +127,7 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-      token-url: https://my-keycloak/auth/realms/camunda-platform/protocol/openid-connect/token
+      token-url: https://my-oidc-provider/auth/realms/camunda-platform/protocol/openid-connect/token
     grpc-address: https://my-grpc-address
     rest-address: https://my-rest-address
 ```
@@ -141,28 +141,6 @@ You can inject the Camunda client and work with it to create new workflow instan
 private CamundaClient client;
 ```
 
-## Deploy process models
-
-Use the `@Deployment` annotation:
-
-```java
-@SpringBootApplication
-@Deployment(resources = "classpath:demoProcess.bpmn")
-public class MySpringBootApplication {
-```
-
-This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
-
-```java
-@Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
-```
-
-Or, define wildcard patterns:
-
-```java
-@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
-```
-
 ## Implement the job worker
 
 To implement a job worker, you need to declare a method like this on a bean:
@@ -174,7 +152,19 @@ public void handleJobFoo() {
 }
 ```
 
-See [the configuration documentation](/apis-tools/camunda-spring-boot-starter/configuration.md) for a more in-depth discussion on parameters and configuration options for job workers.
+To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.
+
+## Deploy process models
+
+To deploy process models on application start-up, use the `@Deployment` annotation:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath:demoProcess.bpmn")
+public class MySpringBootApplication {
+```
+
+To learn about all options about the usage of the `@Deployment` annotation, check out the [configuration](./configuration.md#deploying-resources-on-start-up) page.
 
 ## Writing test cases
 
