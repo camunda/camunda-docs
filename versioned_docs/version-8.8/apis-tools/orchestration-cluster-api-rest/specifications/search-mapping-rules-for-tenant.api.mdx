@@ -1,0 +1,343 @@
+---
+id: search-mapping-rules-for-tenant
+title: "Search mapping rules for tenant"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Search mapping rules for tenant"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search mapping rules for tenant"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/tenants/{tenantId}/mapping-rules/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Retrieves a filtered and sorted list of MappingRules for a specified tenant.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "tenantId",
+      in: "path",
+      required: true,
+      schema: {
+        example: "customer-service",
+        description: "The unique identifier of the tenant.",
+        format: "TenantId",
+        type: "string",
+        title: "TenantId",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              default: 0,
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          required: ["after"],
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          required: ["before"],
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                  type: "object",
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          type: "object",
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["mappingRuleId", "claimName", "claimValue", "name"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                required: ["field"],
+                title: "MappingRuleSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The mapping rule search filters.",
+              allOf: [
+                {
+                  description: "Mapping rule search filter.",
+                  type: "object",
+                  properties: {
+                    claimName: {
+                      type: "string",
+                      description: "The claim name to match against a token.",
+                    },
+                    claimValue: {
+                      type: "string",
+                      description: "The value of the claim to match.",
+                    },
+                    name: {
+                      type: "string",
+                      description: "The name of the mapping rule.",
+                    },
+                    mappingRuleId: {
+                      type: "string",
+                      description: "The ID of the mapping rule.",
+                    },
+                  },
+                  title: "MappingRuleFilter",
+                },
+              ],
+            },
+          },
+          title: "MappingRuleSearchQueryRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search result of MappingRules for the tenant.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    allOf: [
+                      {
+                        description:
+                          "Pagination information about the search results.",
+                        type: "object",
+                        required: ["totalItems"],
+                        properties: {
+                          totalItems: {
+                            description: "Total items matching the criteria.",
+                            type: "integer",
+                            format: "int64",
+                            example: 1,
+                          },
+                          hasMoreTotalItems: {
+                            description:
+                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
+                            type: "boolean",
+                            example: false,
+                          },
+                          startCursor: {
+                            description:
+                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The start cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "StartCursor",
+                              },
+                            ],
+                          },
+                          endCursor: {
+                            description:
+                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                            allOf: [
+                              {
+                                description:
+                                  "The end cursor in a search query result set.",
+                                format: "base64",
+                                type: "string",
+                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                title: "EndCursor",
+                              },
+                            ],
+                          },
+                        },
+                        example: { totalItems: 1, hasMoreTotalItems: false },
+                        title: "SearchQueryPageResponse",
+                      },
+                    ],
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching mapping rules.",
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    claimName: {
+                      type: "string",
+                      description: "The name of the claim to map.",
+                    },
+                    claimValue: {
+                      type: "string",
+                      description: "The value of the claim to map.",
+                    },
+                    name: {
+                      type: "string",
+                      description: "The name of the mapping rule.",
+                    },
+                    mappingRuleId: {
+                      type: "string",
+                      description: "The ID of the mapping rule.",
+                    },
+                  },
+                  title: "MappingRuleResult",
+                },
+              },
+            },
+            title: "MappingRuleSearchQueryResult",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

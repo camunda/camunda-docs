@@ -32,8 +32,10 @@
     "api:generate:camunda": "npm run api:generate camunda",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
     "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
+    "config-reference:download:camunda-spring-boot-starter:8.8": "npm run config-reference:download:camunda-spring-boot-starter 8.8",
     "config-reference:generate": "node ./config-reference/generate-config-reference.js generate",
     "config-reference:generate:camunda-spring-boot-starter": "npm run config-reference:generate camunda-spring-boot-starter",
+    "config-reference:generate:camunda-spring-boot-starter:8.8": "npm run config-reference:generate:camunda-spring-boot-starter 8.8",
     "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
@@ -47,7 +49,7 @@
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "clsx": "^2.1.1",
     "docusaurus-plugin-openapi-docs": "^4.4.0",
-    "docusaurus-theme-openapi-docs": "^4.4.0",
+    "docusaurus-theme-openapi-docs": "https://github.com/jwulf/docusaurus-openapi-docs/releases/download/oneOf-display-format-package/docusaurus-theme-openapi-docs-4.5.1.tgz",
     "mixpanel-browser": "^2.64.0",
     "mustache": "^4.2.0",
     "pushfeedback-react": "^0.1.63",

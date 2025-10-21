@@ -73,7 +73,20 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/byok/overview"
+          },
+          "items": [
+            "components/concepts/encryption-at-rest",
+            "components/concepts/byok/aws-external-encryption-setup",
+            "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/faq-and-troubleshooting"
+          ]
+        },
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -1652,7 +1665,6 @@
             "self-managed/setup/guides/air-gapped-installation",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
-            "self-managed/setup/guides/multi-namespace-deployment",
             "self-managed/setup/guides/installing-payment-app-example",
             "self-managed/setup/guides/secret-management"
           ]
@@ -1741,7 +1753,8 @@
         "self-managed/concepts/multi-tenancy",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
-        "self-managed/concepts/opensearch-privileges"
+        "self-managed/concepts/opensearch-privileges",
+        "self-managed/concepts/secondary-storage-management"
       ]
     },
     {

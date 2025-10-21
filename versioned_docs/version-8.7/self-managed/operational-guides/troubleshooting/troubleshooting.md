@@ -66,16 +66,20 @@ global:
 
 ## Zeebe Backup with S3
 
-In general, some S3 compatible implementation are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [this documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+In general, some S3 compatible implementations are not able to properly handle the checksum feature of the S3 client being introduced with version 2.30.0. For more details, you can refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-As soon as issues appear that would be related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
+As soon as issues appear related to the checksum, it can be disabled by setting these environment variables on your Zeebe brokers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 AWS_RESPONSE_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-They will disable to automated creation of checksums.
+They will disable to automated creation of checksums. Furthermore, if you are still encountering issues in terms of MD5 checksums required by your provider you can enable legacy support for the AWS S3 client by setting:
+
+```
+ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
+```
 
 **Backups to IBM COS fail with 403 Access Denied**
 
@@ -104,7 +108,11 @@ To resolve this issue, set the following environment variable on your Zeebe brok
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
 ```
 
-This disables the additional checksum calculation in the S3 client and should resolve the issue.
+This will disable automated creation of checksums. If you are still encountering issues with MD5 checksums required by your provider, enable legacy support for the AWS S3 client by setting:
+
+```
+ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5=true
+```
 
 ## Zeebe backup with Azure Blob Storage
 
@@ -174,7 +182,7 @@ If an immediate cluster upgrade to a fixed version is not possible, the followin
 
 ## Anomaly detection scripts
 
-The [c8-sm-checks](https://github.com/camunda/c8-sm-checks) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
+The [c8-sm-checks](https://github.com/camunda/c8-sm-checks/tree/stable/8.7) project introduces a set of scripts to aid detection of Camunda deployment anomalies.
 
 These scripts perform health checks on various aspects of the Kubernetes installation and Zeebe components, providing insights into potential issues that may affect the performance or stability.
 
@@ -184,7 +192,7 @@ Each script in the `c8-sm-checks` project can be executed independently, allowin
 
 To utilize these scripts effectively, ensure you have the necessary permissions and access to your Kubernetes cluster. Additionally, make sure you have the required dependencies installed on your system, such as `kubectl`, `helm`, `curl`, and `grpcurl`.
 
-For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks).
+For detailed documentation and usage instructions for each script, refer to the [c8-sm-checks GitHub repository](https://github.com/camunda/c8-sm-checks/tree/stable/8.7).
 Additionally, you can use the `-h` option with each script to display help information directly from the command line.
 
 Before using it, clone the `c8-sm-checks` repository to your local environment by running the following command:
