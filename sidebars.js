@@ -1266,11 +1266,7 @@ module.exports = {
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
-        {
-          type: "link",
-          label: "For Administrators",
-          href: "/self-managed/deployment/helm/install/quick-install",
-        },
+        "self-managed/quickstart/admin-quickstart",
       ],
     },
     {
