@@ -668,7 +668,7 @@ curl -I http://camunda.local/operate
 
 You should receive an HTTP response (likely a redirect to a login page).
 
-For more details on Ingress configuration, see the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress-setup.md).
+For more details on Ingress configuration, see the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
 
 </TabItem>
 
