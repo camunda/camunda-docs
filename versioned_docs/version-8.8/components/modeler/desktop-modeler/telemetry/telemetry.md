@@ -196,11 +196,11 @@ Example event:
 
 ## Task testing events
 
-`Task Testing` events are sent when using [task testing](../task-testing.md) feature:
+Task testing events are sent when using the [task testing](../task-testing.md) feature:
 
 - Task execution is started. This event includes `elementType` and `elementTemplate` if applied.
 - Task testing deployment. [Deployment event](#deployment-and-start-instance-events) is triggered when the process is deployed during task testing.
-- Task execution finished. This event includes `elementType`, `elementTemplate`, `success` boolean value and `incidentType` if task testing resulted in an [incident](../../../concepts/incidents.md).
+- Task execution finished. This event includes `elementType`, `elementTemplate`, `success` boolean value, and `incidentType` if task testing resulted in an [incident](../../../concepts/incidents.md).
 
 Example task testing finished event:
 
