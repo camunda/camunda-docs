@@ -154,6 +154,10 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/850/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/announcements-release-notes/850/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
