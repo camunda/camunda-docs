@@ -74,7 +74,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Zeebe Java Client/Spring SDK &lt;=8.7.15 with REST API enabled</td>
-    <td><p>See [Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8](../../../reference/announcements-release-notes/880/880-announcements.md#orchestration-cluster-zeebe-java-client-8715-with-rest-api-enabled-is-incompatible-with-88)</p></td>
+    <td><p>See [Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with 8.8](../../../reference/announcements-release-notes/880/880-announcements.md#orchestration-cluster-zeebe-java-client-8715-with-rest-api-enabled)</p></td>
     <td><span className="label-highlight red">Breaking changes</span></td>
 </tr>
 </table>

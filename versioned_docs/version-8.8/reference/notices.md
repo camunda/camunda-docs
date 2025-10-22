@@ -15,6 +15,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 32
+
+### Publication date
+
+October 21th, 2025
+
+### Products affected
+
+- Camunda Identity
+
+### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Identity 8.7.0 - 8.7.4 or 8.7.6 - 8.7.7
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Identity 8.7.8
+
 ## Notice 31
 
 ### Publication date

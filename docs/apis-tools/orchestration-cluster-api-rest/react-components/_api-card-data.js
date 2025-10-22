@@ -6,7 +6,7 @@ import OpenApiImg from "./img/openapi-icon.png";
 // API exploration cards for orchestration cluster overview page
 export const apiExplorationCards = [
   {
-    link: "https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-rest-api/",
+    link: "../specifications/orchestration-cluster-api/",
     title: "Interactive REST API Explorer",
     image: InteractiveApiExplorerImg,
     description:
