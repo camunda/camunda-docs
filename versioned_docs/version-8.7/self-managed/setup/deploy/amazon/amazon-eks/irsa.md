@@ -207,7 +207,7 @@ Replace `<instance-id>` with your actual EC2 instance ID. You'll need to run thi
 
 More details can be found in the [AWS documentation on modifying IMDS for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-existing-instances.html#modify-PUT-response-hop-limit).
 
-Overall, this will disable the role assumption of the node for the Kubernetes pod. Depending on the resulting error within Operate, Zeebe, and Web-Modeler, you'll get a clearer error, which is helpful to debug the error more easily.
+Overall, this will disable the role assumption of the node for the Kubernetes pod.
 
 ## Backup-related
 
