@@ -9,7 +9,7 @@ Any task can be transformed into a connector task. This guide details the basic 
 Find the available connectors in Camunda 8 SaaS and how to use them in detail in
 the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 documentation. Additionally, learn how you can visit
-the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add connectors from your BPMN
+the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md) to add connectors from your BPMN
 diagram.
 
 :::info
@@ -18,7 +18,7 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling
-tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with
+tools. [Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with
 Web Modeler.
 :::
 

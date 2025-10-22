@@ -99,7 +99,7 @@ Organization members without special organization permissions can:
 
 ### Versioning element templates
 
-You can version your element templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
+You can version your element templates [similar to diagrams](/components/modeler/web-modeler/modeling/versions.md).
 
 If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 
