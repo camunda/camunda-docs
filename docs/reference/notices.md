@@ -19,17 +19,17 @@ To learn more about security at Camunda, including our security policy, security
 
 ### Publication date
 
-October 22nd, 2025
+October 22, 2025
 
 ### Products affected
 
-- Orchestration Cluster
+- Camunda Orchestration Cluster
 
 ### Impact
 
 A bug in signal broadcast command processing allowed unauthorized users to trigger signal start events or signal intermediate catch events in certain process definitions without the required create or update permissions.
 
-This **did not** allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
+This did not allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
 
 ### How to determine if the installation is affected
 
@@ -47,7 +47,7 @@ Camunda has provided the following release which contains the fix:
 
 ### Publication date
 
-October 21th, 2025
+October 21, 2025
 
 ### Products affected
 
@@ -83,6 +83,7 @@ October 16, 2025
 
 The embedded Undertow web server was affected by [CVE-2025-9784](https://nvd.nist.gov/vuln/detail/CVE-2025-9784),
 a flaw where malformed client requests can trigger server-side stream resets without incrementing abuse counters.
+
 This issue, referred to as the "MadeYouReset" attack, allows malicious clients to induce excessive server workload by
 repeatedly causing server-side stream aborts and could be exploited to cause a denial of service (DoS).
 
