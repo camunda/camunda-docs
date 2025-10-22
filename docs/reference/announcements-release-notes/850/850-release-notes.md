@@ -144,7 +144,7 @@ The first step to offer an intuitive and consistent experience via a single, [un
 
 <!-- https://github.com/camunda/product-hub/issues/2010 -->
 
-Introducing AI-driven [refactoring suggestions](/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions.md) in our modeling canvas, designed to refine your BPMN models based on task descriptions. Enter a description, like `Send a message`, and immediately receive a practical suggestion, such as implementing it through a Slack connector. This feature aims to streamline your workflow, offering intuitive, actionable advice for transforming descriptions into efficient BPMN tasks.
+Introducing AI-driven [refactoring suggestions](/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions.md) in our modeling canvas, designed to refine your BPMN models based on task descriptions. Enter a description, like `Send a message`, and immediately receive a practical suggestion, such as implementing it through a Slack connector. This feature aims to streamline your workflow, offering intuitive, actionable advice for transforming descriptions into efficient BPMN tasks.
 
 ### Frontend developer documentation <span class="badge badge--long" title="This feature affects Tasklist">Tasklist</span>
 
