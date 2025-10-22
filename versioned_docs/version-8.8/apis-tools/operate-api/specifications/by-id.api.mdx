@@ -1,0 +1,195 @@
+---
+id: by-id
+title: "Get decision instance by id"
+description: "Get decision instance by id"
+sidebar_label: "Get decision instance by id"
+hide_title: true
+hide_table_of_contents: true
+api: eJzlV9tu20YQ/RVintqUNuXELQK+qREdsBFsw5KTAIYQrJYja2Nyl9ldyhEI/nsxy4tulOL2qUWeRO5cdubMRYclWPZoIHyAEXJhhJKxNJZJjjDzQeWomaXDBEKYr+MEfMiZZhla1GRWgmQZQgiCREJCCDmzS/AhQcO1yMkaQogTTy28pLnDE+0lPmj8VgiNCYRWF+iD4UvMGIQl2HVOno3VQj5CVc1I2eRKGjQkfz0Y0M/uRZOCczQGfOBKWpSWVFiep4K7TIKvhvTKw3vU/CtySwlqytuK+haR9MTiwxOut86FtPiIGnxYKJ0xWx/9cUmaxjKLhz58QFlkhPzVMB5HI/Ah+jgc3w+n7vn++sP1zadr9zS5jd7FV3E0glnlA65YWrhcRr2Od1SumEgL3a+Va0VQjXAhpCDlDy/OqTFte+Xlhm0HxP2otuJNTD9QvHbdd0LhI2oj6oqfDO/N622rqVM9XrJR9C6exDfXX6bDP8cR+DCOp9HdcPwl+nx7F01ItFe5TUWphhpNkdpTtcMklnlhzZYO05qtacosZuZfN648hhjd2yepfLDCpnS0vyNciE6ji/qmsP+NsH3QRYpH2seJZILfX9QXJxCo061VUDJpey884QCqisSXfbssliuWisSjFYnGHt9puVbzFLPf/uluo9VUmBfORobGsMd+qLt93ie0vcO0DUqktdIdEm8OkbhSei6SBOUuBq+CV///dC8P072rC45UeqMKzdGTynoLVcjk5+iC3/vmYXgbe1sJe+gMfgI8iEUgL7Swa8e55sg06jPHQR5mlV8CV+pJoHub7XOv92gPmZc3X3uOs2Vol4ro3SM6KIi9hRCsLoLW5qy1MUEpkgooGL1q+V+hUwihrMGtwiAol8rYKixzpS0pr5gWbJ7W2JKsLuyCuX9ASBVnqTvej3u6RI8EtPqJPdoletQC9e3njocovefu7eDtoNcTqR7xsmmMjZ+ltXmvn1q515OjqG2hJqRXJ90WZ/OXmAuiTO2/GtzcRnfDaXQ26aiDY9KNXeXvFLzz0oToAqL3Wgla7au2V//6NHV9JeRCOfOmv24cu0fvtpinglMqhwkrjzk+7TFuxQo9JhOPqyxPkbZTQwO7pqInr3W7UNrLlBRWUWc7S6tVQZ2wVMrWhIpGl3FXw7qRKCkTBsHz8/M5Z1khE3bOVUYgpIKjNA7HBrdxc+LvGSeKm85aKPceaFygRskxaByZwPGHliDCxfngfFB3lbEZk1sXnR6hHcy68lj8boM8ZUKSTxdg2YzXA6wuYMM2NwMGPoQioU+velAeoCznzOC9TquKjr8VqN3Qb+bKTWEiDD0nEC5YavAgpm5Fwi93zQfXr97xj7LeFNrmlWvoaBdA8ylEvK0iartElqB2QdWCIeeY2y2Tg68xGptuDb2PpuADKwinDsu91nbee8Mpy1pjqp5QVlUXnaV3CrCq/gYA8BqK
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/operate-api/specifications/operate-public-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get decision instance by id"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/v1/decision-instances/{id}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Get decision instance by id
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "id",
+      in: "path",
+      description: "Id of decision instance",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Success",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              id: { type: "string" },
+              key: { type: "integer", format: "int64" },
+              state: {
+                type: "string",
+                enum: ["FAILED", "EVALUATED", "UNKNOWN", "UNSPECIFIED"],
+              },
+              evaluationDate: { type: "string" },
+              evaluationFailure: { type: "string" },
+              processDefinitionKey: { type: "integer", format: "int64" },
+              processInstanceKey: { type: "integer", format: "int64" },
+              decisionId: { type: "string" },
+              decisionDefinitionId: { type: "string" },
+              decisionName: { type: "string" },
+              decisionVersion: { type: "integer", format: "int32" },
+              decisionType: {
+                type: "string",
+                enum: [
+                  "DECISION_TABLE",
+                  "LITERAL_EXPRESSION",
+                  "UNSPECIFIED",
+                  "UNKNOWN",
+                ],
+              },
+              result: { type: "string" },
+              evaluatedInputs: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: { type: "string" },
+                    name: { type: "string" },
+                    value: { type: "string" },
+                  },
+                  title: "DecisionInstanceInput",
+                },
+              },
+              evaluatedOutputs: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    id: { type: "string" },
+                    name: { type: "string" },
+                    value: { type: "string" },
+                    ruleId: { type: "string" },
+                    ruleIndex: { type: "integer", format: "int32" },
+                  },
+                  title: "DecisionInstanceOutput",
+                },
+              },
+              tenantId: { type: "string" },
+            },
+            title: "DecisionInstance",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "Invalid request",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden",
+      content: {
+        "*/*": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Requested resource not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "API application error",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: { type: "integer", format: "int32" },
+              message: { type: "string" },
+              instance: { type: "string" },
+              type: { type: "string" },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -93,7 +93,6 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    You should see a JSON response with the cluster topology information.
 
    Available services:
-
    - **Operate:** [http://localhost:8088/operate](http://localhost:8088/operate) - Monitor process instances
    - **Tasklist:** [http://localhost:8088/tasklist](http://localhost:8088/tasklist) - Complete user tasks
    - **Identity:** [http://localhost:8088/identity](http://localhost:8088/identity) - User and permission management
@@ -229,6 +228,12 @@ orchestration:
 
 console:
   enabled: true
+
+elasticsearch:
+  master:
+    replicaCount: 1
+    persistence:
+      size: 10Gi
 ```
 
 ### Install and verify the deployment
@@ -244,8 +249,7 @@ Installing all components in a cluster requires downloading all related Docker i
 2. **Install the Helm chart:**
 
    ```bash
-   helm upgrade --install camunda camunda/camunda-platform \
-     --repo https://helm.camunda.io \
+   helm install camunda camunda-platform \
      --version 13.0.0 \
      --namespace camunda \
      -f camunda-values.yaml
@@ -368,6 +372,24 @@ Once port-forwarding is active, access the UIs in your browser:
 - **PostgreSQL (Web Modeler):** `localhost:5433`
 - **Elasticsearch:** `localhost:9200`
 
+:::tip
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
+
+Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
+
+```shell
+sudo kubefwd services -n "$CAMUNDA_NAMESPACE"
+```
+
+After this runs, you can reach services directly, for example:
+
+- Identity: `http://$CAMUNDA_RELEASE_NAME-identity/managementidentity`
+- Keycloak: `http://$CAMUNDA_RELEASE_NAME-keycloak`
+- Zeebe Gateway gRPC: `$CAMUNDA_RELEASE_NAME-zeebe-gateway:26500`
+
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
+:::
+
 ## Troubleshoot installation issues
 
 Verify that each pod is running and ready. If a pod is pending, it cannot be scheduled onto a node. This usually happens when the cluster does not have enough resources. To check messages from the scheduler, run:
@@ -417,6 +439,7 @@ This command lists all available chart versions and their corresponding applicat
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
 - **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation.md).
 - **Image sources**: By default, the Helm chart uses Bitnami open-source images for infrastructure dependencies (PostgreSQL, Elasticsearch, Keycloak). For production environments, Camunda recommends using Bitnami Premium images for enhanced security and vendor support. For detailed information about image types, CVE handling policies, and installation procedures, see [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md).
+- **Infrastructure deployment alternatives**: For production deployments, consider using [vendor-supported infrastructure deployment methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) with official operators for PostgreSQL, Elasticsearch, and Keycloak.
 
 ## Next steps
 
@@ -430,7 +453,7 @@ This command lists all available chart versions and their corresponding applicat
 - Enable OIDC guide
 - Explanation of management/orchestration cluster -->
 
-- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of the default Elasticsearch.
+- [Helm chart Amazon OpenSearch service usage](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) — configure Camunda to use Amazon OpenSearch Service instead of the default Elasticsearch.
 - [Getting started with document handling](/self-managed/concepts/document-handling/overview.md) — configure document storage and management in Camunda 8.
 - [Production installation](/self-managed/deployment/helm/install/production/index.md) — configure and install the helm chart for production environments.
 - [Helm Configuration](/self-managed/deployment/helm/configure/index.md) - customize your installation by modifying the Helm chart configuration.

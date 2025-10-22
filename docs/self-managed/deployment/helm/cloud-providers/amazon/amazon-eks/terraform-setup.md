@@ -110,7 +110,7 @@ After completing this guide, you will have:
 
 - An Amazon EKS Kubernetes cluster running with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), installed and configured. This is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-- (Optional) A managed [Aurora PostgreSQL 15.x](https://aws.amazon.com/rds/postgresql/) instance for Camunda.
+- (Optional) A managed [Aurora PostgreSQL](https://aws.amazon.com/rds/postgresql/) instance for Camunda.
 - (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with the Camunda platform.
 - (Optional) [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) configured so Kubernetes workloads can assume IAM roles without stored credentials.
 
@@ -410,7 +410,7 @@ If you choose not to use this module, you'll need to either provide a managed El
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-existing-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda platform. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
 
 The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
 

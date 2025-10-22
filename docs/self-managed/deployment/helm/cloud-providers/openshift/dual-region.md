@@ -378,9 +378,14 @@ chmod +x setup-namespaces-secrets.sh
 
 Before deploying, some values in the value files need to be updated. To assist with generating these values, save the following Bash script as `generate-zeebe-helm-values.sh`:
 
+<details>
+<summary>Show `generate-zeebe-helm-values.sh` script reference</summary>
+
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/dual-region/procedure/generate-zeebe-helm-values.sh
 ```
+
+</details>
 
 Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. You will be prompted to specify the number of Zeebe brokers (total number of Zeebe brokers in both Kubernetes clusters), for a dual-region setup we recommend `8`, resulting in four brokers per region:
 

@@ -10,7 +10,7 @@ echo "1/4 Creating version $NEW_DOCS_VERSION of main docs..."
 npm run docusaurus docs:version $NEW_DOCS_VERSION
 
 # commit the big stuff first, so that we can split into two PRs -- a big one, and a reviewable one.
-git add versioned_docs versioned_sidebars optimize_versioned_docs optimize_versioned_sidebars
+git add versioned_docs versioned_sidebars
 git commit -m "release: the big commit"
 
 # now start committing the small stuff

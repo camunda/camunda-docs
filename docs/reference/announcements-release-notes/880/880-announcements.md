@@ -10,9 +10,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release.
 
-| Minor release date | Scheduled end of maintenance | Changelog(s) | Release blog | Upgrade guides                                                                                 |
-| ------------------ | ---------------------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027                | -            | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Release blog | Upgrade guides                                                                                 |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027                | [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -42,6 +42,20 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 </div>
 <div className="release-announcement-content">
   
+#### PostgreSQL, Oracle and Microsoft SQL Server supported versions
+Management Identity now supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
+
+Web Modeler now supports PostgreSQL version 18.x, Amazon Aurora PostgreSQL version 17.x, Oracle versions 19c and 23ai and Microsoft SQL Server versions 2019 and 2022.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
 #### Zeebe, Operate, Tasklist, and Identity must run on same minor and patch levels
 From version `8.8.0` onwards, the Zeebe, Operate, Tasklist, and Identity [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility.
 
@@ -58,13 +72,50 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled
+
+The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
+
+- Either the [Zeebe Java Client &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
+
+In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
+
+**Impact**
+
+When updating your Orchestration Cluster to 8.8 without updating your clients prior to at least 8.7.16, workers will fail to activate jobs with a log message such as the following:
+
+```bash
+io.camunda.zeebe.client.api.command.MalformedResponseException:
+ Expected to receive a response body, but got a problem: class ProblemDetail {
+    type: about:blank
+    title: Unexpected server response
+    status: 500
+    detail: {"jobs":[{"type":"check-generation-usage-job","processDefinitionId":"c[...]
+    instance: null
+}
+```
+
+**Required action**
+
+You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
   
 #### Removed: Tasklist GraphQL API
 
-With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed from the product.
+With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed.
 
 </div>
 </div>
@@ -179,15 +230,15 @@ With the Camunda 8.8 release, the deprecation process for job-based user tasks b
 </div>
 <div className="release-announcement-content">
   
-#### Deprecated: Zeebe gRPC API endpoints
+#### Deprecated: Zeebe Client job worker metrics
 
-With the Camunda 8.8 release, the deprecation of several [Zeebe gRPC](/apis-tools/zeebe-api/grpc.md) endpoints is announced.
+With the Camunda 8.8 release, the deprecation of Zeebe client job worker metrics is announced.
 
-These endpoints are scheduled for removal in the Camunda 8.9 release.
+These metrics are scheduled for removal in the Camunda 8.10 release.
 
-- Key gRPC endpoints necessary for high-throughput and low-latency applications will remain available in the product to ensure peak performance for specific use cases.
-- The final list of retained gRPC endpoints will be confirmed with the Camunda 8.8 release.
-- Selected endpoints will remain active, with others scheduled for removal in the Camunda 8.10 release.
+:::info
+To learn more, see [Zeebe client job worker](/apis-tools/java-client/job-worker.md) and [Zeebe client job worker concept](/components/concepts/job-workers.md).
+:::
 
 </div>
 </div>
@@ -198,15 +249,11 @@ These endpoints are scheduled for removal in the Camunda 8.9 release.
 </div>
 <div className="release-announcement-content">
   
-#### Deprecated: Zeebe Client job worker metrics
+#### Deprecated: Zeebe gRPC DeployProcess endpoint
 
-With the Camunda 8.8 release, the deprecation of Zeebe client job worker metrics is announced.
+The `DeployProcess` endpoint was deprecated with 8.0, replaced with `DeployResource` RPC.
 
-These metrics are scheduled for removal in the Camunda 8.10 release.
-
-:::info
-To learn more, see [Zeebe client job worker](/apis-tools/java-client/job-worker.md) and [Zeebe client job worker concept](/components/concepts/job-workers.md).
-:::
+This endpoint is scheduled for removal in the Camunda 8.10 release.
 
 </div>
 </div>
@@ -258,8 +305,8 @@ To learn more, see [migrate to Camunda Process Test](../../../apis-tools/migrati
 
 With the Camunda 8.8 release, the deprecation of usage metrics endpoints in Operate and Tasklist is announced.
 
-- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/operate/usage-metrics.md)
-- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/tasklist/usage-metrics.md).
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).
 
 :::warning Breaking change
 The Assignees list is removed from the response.
@@ -267,6 +314,22 @@ The Assignees list is removed from the response.
 
 - These endpoints are superseded by [usage metrics endpoint](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics.api.mdx).
 - The Operate and Tasklist usage metrics endpoints are scheduled for removal in the 8.10 release.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated: start public process via form in Tasklist
+
+With the Camunda 8.8 release, the deprecation of the [start public process via form](/components/tasklist/userguide/starting-processes.md#start-public-processes-via-form) feature is announced.
+
+- This SaaS feature is deprecated and does not work with [Tasklist running in V2 mode](/components/tasklist/api-versions.md). This feature will be removed in the 8.10 release.
+- To continue using this feature with Camunda 8.8, you must run [Tasklist in V1 mode](/components/tasklist/api-versions.md).
 
 </div>
 </div>
@@ -517,7 +580,7 @@ The existing data schema in the secondary storage has been harmonized, to be use
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in Camunda 8.6 and is removed from the Helm chart in Camunda 8.8.
 
-Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress-setup.md) for more information on configuring a combined Ingress setup.
+Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
 - If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/deployment/helm/install/quick-install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 - New migration guides are also provided to support you when migrating from a previous Camunda version.
@@ -543,7 +606,7 @@ With the Camunda 8.8 release, the new unified configuration is introduced.
 
 - In Camunda 8.7 and earlier, managing and configuring core components (Zeebe, Operate, Tasklist, Identity) was done separately.
 
-This means some configuration properties have changed or are replaced with new properties.
+This means some configuration properties have changed or are replaced with new properties. See [Camunda 8.8 property changes](../../../../self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping) for more information.
 
 :::note
 Only a partial set of unified configuration properties are introduced in Camunda 8.8, with remaining properties planned for delivery with Camunda 8.9.
@@ -662,6 +725,114 @@ Full setup instructions are available in the [installation guide](/self-managed/
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Alternative infrastructure methods
+
+For production environments, use managed or external services first. If not available, prefer vendor-supported operators (PostgreSQL, Elasticsearch/OpenSearch, Keycloak) over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use. See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: EC2
+
+New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: Azure AKS
+
+New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
+See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Reference architecture: General updates
+
+- Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
+- Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
+- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
+- Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
+- OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
+- EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
+- High availability: Refreshed dual region deployment material (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
+- Core diagrams: Updated generic reference architecture visuals for 8.8 Orchestration Cluster changes (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
+- Terraform module upgrade: AWS EKS module v5 → v6 (review [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+
+</div>
+</div>
+
+### Identity
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tenant-providing interceptors
+
+With the 8.8 release, Camunda announces the removal of tenant-providing interceptors.
+
+It is superseded by built-in [tenant management](/components/identity/tenant.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### User storage in Elasticsearch/OpenSearch for Operate or Tasklist
+
+With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
+
+You must transition to using [Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### LDAP authentication for Operate or Tasklist
+
+With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
+
+You must transition to use [OIDC or Basic Authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+
+</div>
+</div>
+
 ### Marketplace
 
 <div className="release-announcement-row">
@@ -684,13 +855,47 @@ For future use, refer to the [new AWS Marketplace listing](https://aws.amazon.co
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Removed</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removed: Cluster authentication `OAUTH` and `CLIENT_CREDENTIALS` in Web Modeler Self-Managed
+
+With the Camunda 8.8 release, the deprecated authentication methods `OAUTH` and `CLIENT_CREDENTIALS` for configured [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are no longer supported.
+
+For more information on how to migrate, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#cluster-configuration).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Cluster configuration in Web Modeler Self-Managed
+
+The available configuration options for [clusters in Web Modeler Self-Managed](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) now depend on the version of the cluster.
+For version 8.8 and above, [new configuration options](/self-managed/components/modeler/web-modeler/configuration/configuration.md#additional-configuration-for-cluster-versions--88) are required.
+
+For more information on how to modify your existing configuration, see the [upgrade guide](/self-managed/components/components-upgrade/870-to-880.md#changed-configuration-options).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
   
 #### Play job-based user tasks
 
-With the Camunda 8.8 release, User tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
+With the Camunda 8.8 release, user tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
+
+- [Deprecated Operate endpoints](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md)
+- [Deprecated Tasklist endpoint](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).
 
 You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#camunda-user-tasks).
 

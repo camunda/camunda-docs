@@ -1,18 +1,27 @@
 ---
 id: configure-db-custom-headers
 sidebar_label: Configure custom HTTP headers
-title: Helm chart custom headers configuration
-description: "Learn how to configure DB client custom HTTP headers"
+title: Configure custom HTTP headers for database clients
+description: Learn how to add custom HTTP headers to database clients in Camunda 8 Self-Managed.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Custom HTTP headers can be added to a component's Elasticsearch and OpenSearch HTTP clients by creating a new Java plugin, and adding the plugin to your Camunda 8 Self-Managed installation. Using custom HTTP headers may be helpful for adding authentication, tracking, or debugging to your database requests.
+You can add custom HTTP headers to the Elasticsearch or OpenSearch clients used by Camunda components by creating a Java plugin and adding it to your Camunda 8 Self-Managed installation. Custom headers can help with adding authentication, tracking, or debugging to your database requests.
 
-## Create the Java plugin
+## Prerequisites
 
-### Add the dependency
+- A deployed Camunda 8 Self-Managed Helm chart installation
+- Access to modify container configurations
+- Basic knowledge of Java development
+- Maven or Gradle build environment
+
+## Configuration
+
+### Create the Java plugin
+
+#### Add the dependency
 
 Add the following dependency to a new Java project:
 
@@ -45,12 +54,11 @@ implementation "io.camunda:camunda-search-client-plugin:${version.camunda-search
 </TabItem>
 </Tabs>
 
-### Write your custom header
+#### Write your custom header
 
-Once the dependency is added to your project, write your plugin by implementing the `DatabaseCustomHeaderSupplier` interface (provided by the
-`camunda-search-plugins` package).
+After adding the dependency, create your plugin by implementing the `DatabaseCustomHeaderSupplier` interface provided by the `camunda-search-client-plugin` package.
 
-The following example implements the `DatabaseCustomHeaderSupplier` interface, and uses it to return a custom authentication token and UUID:
+The following example implements the `DatabaseCustomHeaderSupplier` interface, and returns a custom authentication token and UUID:
 
 ```java
 package com.myplugin;
@@ -71,33 +79,27 @@ public class MyCustomHeaderPlugin implements DatabaseCustomHeaderSupplier {
 }
 ```
 
-### Build your project
+#### Build your project
 
-Build your project with all dependencies included, and copy the resulting JAR file somewhere it can be easily accessed. This JAR file will be required by your Camunda installation.
+Build your project with all dependencies included, and copy the resulting JAR file to a location accessible by your Camunda installation. This JAR file will be required later during configuration.
 
 :::note
-When building the project, the `camunda-search-client-plugin` dependency must have a scope of provided, otherwise there will be a clash between `camunda-search-client-plugin`
-classes which are loaded from different class loaders.
+When building the project, the `camunda-search-client-plugin` dependency must have a scope of `provided`, otherwise there will be a class loader conflict between `camunda-search-client-plugin` classes loaded from different class paths.
 
-JVM treats `ClassA` loaded by `ClassLoaderA` as completely different from `ClassA` loaded by `ClassLoaderB`.
-
-Therefore, without a scope of provided it would result in `does not implement` or `ClassCastException` errors.
+The JVM treats `ClassA` loaded by `ClassLoaderA` as completely different from `ClassA` loaded by `ClassLoaderB`. Without a `provided` scope, this causes `does not implement` or `ClassCastException` errors.
 :::
 
-## Add the plugin to your self-managed installation
+### Add the plugin to your self-managed installation
 
-To use your new plugin, it must be added to your Camunda 8 Self-Managed installation.
+To use your new plugin, add it to your Camunda 8 Self-Managed installation.
 
-### Mount the plugin
+- **Mount the plugin**: For each container, mount your plugin JAR file inside the container's file system. For more information, see the [Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
 
-For each container, mount your plugin's JAR file inside the container's file system. For more information, see the
-[Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
+- **Configure components**: Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](../application-configs.md).
 
-### Configure components
+### Example usage
 
-Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](../application-configs.md).
-
-The following examples add the new `my-plugin` JAR to the `application.yaml` for Zeebe, Operate, and Tasklist:
+The following examples add the new `my-plugin` JAR to the `application.yaml` for the Orchestration Cluster and Optimize:
 
 <Tabs groupId="db" defaultValue="elasticsearch" values={
 [
@@ -109,7 +111,7 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 
 <TabItem value='elasticsearch'>
 
-#### Configure Zeebe Exporter
+#### Zeebe Exporter
 
 ```yaml
 - ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -117,32 +119,10 @@ The following examples add the new `my-plugin` JAR to the `application.yaml` for
 - ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
-#### Configure Operate Importer
-
-```yaml
-- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_ELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-#### Configure Tasklist Importer
-
-```yaml
-- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_ZEEBEELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_ELASTICSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-#### Configure Optimize Importer
+#### Optimize Importer
 
 :::note
-Due to technical limitations, Optimize currently allows registering up to 5 plugins.
+Due to technical limitations, Optimize currently allows registering up to five plugins.
 :::
 
 ```yaml
@@ -155,7 +135,7 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 
 <TabItem value='opensearch'>
 
-#### Configure Zeebe Exporter
+#### Zeebe Exporter
 
 ```yaml
 - ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_ID=my-plugin
@@ -163,32 +143,10 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 - ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
 ```
 
-#### Configure Operate Importer
-
-```yaml
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_OPERATE_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-#### Configure Tasklist Importer
-
-```yaml
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_ZEEBEOPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_ID=my-plugin
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_CLASSNAME=com.myplugin.MyCustomHeaderPlugin
-- CAMUNDA_TASKLIST_OPENSEARCH_INTERCEPTORPLUGINS_0_JARPATH=/usr/local/plugin/plg.jar
-```
-
-#### Configure Optimize Importer
+#### Optimize Importer
 
 :::note
-Due to technical limitations, Optimize currently allows registering up to 5 plugins.
+Due to technical limitations, Optimize currently allows registering up to five plugins.
 :::
 
 ```yaml
@@ -201,7 +159,7 @@ Due to technical limitations, Optimize currently allows registering up to 5 plug
 
 <TabItem value='camundaExporter'>
 
-#### Configure Zeebe Exporter
+#### Zeebe Exporter
 
 :::note
 The following configuration uses the default name `camundaExporter`. To use a custom name, update `CAMUNDAEXPORTER` in the provided environment variables to match the name defined in your exporter [configuration](../../../../components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
@@ -220,25 +178,32 @@ The following configuration uses the default name `camundaExporter`. To use a cu
 
 ### Exception: Unknown type of interceptor plugin or wrong class specified
 
-This exception means that the incorrect class was specified in the `CLASSNAME` property. There are several causes that
-might lead to this exception:
+This exception means that the incorrect class was specified in the `CLASSNAME` property. Possible causes include:
 
-1. The class with such name or package does not exist
-2. The class does not implement the required SDK interface
-3. The class is inner, `static`, or `final`
+- The class name or package does not exist.
+- The class does not implement the required SDK interface.
+- The class is defined as `inner`, `static`, or `final`.
 
-To solve this, make sure:
+To fix this:
 
-1. You use the latest Search Plugins SDK
-2. Your classes implement correct SDK interfaces
-3. The plugin class is `public` and not `final`
+- Use the latest Search Plugins SDK.
+- Ensure your class implements the correct SDK interface.
+- Verify that the plugin class is `public` and not `final`.
 
 ### Exception: Failed to load interceptor plugin due to exception
 
-Usually related to incorrect JAR loading. Please make sure that the path to your plugin JAR file is correct, and
-the application has access to read it. Also check that the JAR is correct and contains the required dependencies. To check the
-content of the JAR file, you can use the following command: `jar xf <file-name>.jar`.
+This error usually indicates an issue with JAR loading.
 
-## Appendix
+- Make sure that the path to your plugin JAR file is correct and that the application has permission to read it.
+- Also confirm that the JAR is valid and contains all required dependencies.
 
-Explore [plugin examples](https://github.com/camunda/camunda-search-client-plugins-example) in our official repository.
+To check the contents of your JAR file, run the following command:
+
+```bash
+jar xf <file-name>.jar
+```
+
+## References
+
+- [Configure components using Helm charts](../application-configs.md)
+- [Plugin examples](https://github.com/camunda/camunda-search-client-plugins-example)
