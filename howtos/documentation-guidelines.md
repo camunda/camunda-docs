@@ -36,7 +36,7 @@ Different versions are sourced from different paths:
 | Instance | Version(s)         | Source path                                       |
 | -------- | ------------------ | ------------------------------------------------- |
 | `docs`   | Next               | [/docs/](../docs/)                                |
-| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_docs/version-\*/](../versioned_docs/) |
+| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_docs/version-\*/](../versioned_docs/) |
 
 When edits are intended to apply to both the current version _and beyond_, they should be made in both the most recent versioned folder and the "Next" version folder.
 
@@ -51,7 +51,7 @@ There is a separate source spec for each version of each API Explorer. Each API'
 | Instance | Version(s)         | Sidebars path                                                          |
 | -------- | ------------------ | ---------------------------------------------------------------------- |
 | `docs`   | Next               | [/docs/sidebars.js](../sidebars.js)                                    |
-| `docs`   | 8.7, 8.6, 8.5, ... | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
+| `docs`   | 8.8, 8.7, 8.6, ... | [/versioned_sidebars/version-\*-sidebars.json](../versioned_sidebars/) |
 
 ### Sidebar file type
 

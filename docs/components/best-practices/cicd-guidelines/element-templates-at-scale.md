@@ -7,7 +7,7 @@ description: "Learn how to provision element templates at runtime and make them 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
-- Makes templates available at design time to multiple Web Modeler [shared projects](/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration.md) within an organization.
+- Makes templates available at design time to multiple Web Modeler [shared projects](/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
