@@ -1253,18 +1253,6 @@ module.exports = {
             "reference/announcements-release-notes/860/860-release-notes",
           ],
         },
-        {
-          type: "category",
-          label: "8.5",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/850/850-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes",
-          ],
-        },
         "reference/announcements-release-notes/release-policy",
       ],
     },
