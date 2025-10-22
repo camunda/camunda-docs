@@ -10,7 +10,7 @@ Available in Modeler's [**Design** mode](/components/modeler/web-modeler/collabo
 
 Token simulation is a BPMN learning tool, not a fully featured BPMN engine.
 
-If you are developing your process and want to validate how _exactly_ it would execute on Camunda, [give Play a try](collaboration/play-your-process.md).
+If you are developing your process and want to validate how _exactly_ it would execute on Camunda, [give Play a try](play-your-process.md).
 
 :::
 

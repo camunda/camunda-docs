@@ -125,9 +125,9 @@ For example, you can validate your process by creating and rerunning scenarios f
 Although scenarios are quick to develop and use for non-developers, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline.
 :::
 
-Scenarios are stored in [test scenario files](../advanced-modeling/test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+Scenarios are stored in [test scenario files](test-scenario-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
 
-Play will use the test scenario file [linked to the first executable process ID](../advanced-modeling/test-scenario-files.md#link-a-process-processid) of the BPMN diagram.
+Play will use the test scenario file [linked to the first executable process ID](test-scenario-files.md#link-a-process-processid) of the BPMN diagram.
 
 If multiple test scenario files are linked to the same process ID, Play will use:
 
@@ -140,7 +140,7 @@ To save a scenario:
 
 1. Execute a path in your process.
 1. Click **Save scenario** in the process instance header.
-1. A new [test scenario file](../advanced-modeling/test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
+1. A new [test scenario file](test-scenario-files.md) will be saved in the same Web Modeler folder as the process.
 
 ![Save a scenario](../img/play-save-scenario.png)
 
@@ -158,7 +158,7 @@ Scenario coverage is calculated as the percentage of flow nodes in your process 
 ![Scenario coverage](../img/play-coverage.png)
 
 :::warning
-Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](../advanced-modeling/test-scenario-files.md).
+Scenario coverage will not display as expected if you edit or remove the "metadata" field in the [test scenario file](test-scenario-files.md).
 :::
 
 ### Run scenario

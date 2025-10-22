@@ -4,7 +4,7 @@ title: Task testing
 description: Test and debug a single BPMN task directly in Web Modeler using live data from your connected Camunda 8 cluster.
 ---
 
-You can [test a single task](../../concepts/task-testing.md) directly within **Web Modeler** to validate its configuration and logic without executing the entire process.  
+You can [test a single task](../../../concepts/task-testing.md) directly within **Web Modeler** to validate its configuration and logic without executing the entire process.  
 Task testing helps you debug mappings, inputs, and outputs quickly while staying in your implementation context.
 
 ## Task testing vs. Play
@@ -57,23 +57,23 @@ After the test completes, results appear in the output panel:
 
 If the task runs successfully, the output panel displays the resulting process variables and any updates.
 
-![Task testing success](./img/task-testing/task-testing-success.png)
+![Task testing success](../img/task-testing/task-testing-success.png)
 
 ### ⚠️ Incident during execution
 
 If the task encounters an incident, details are shown along with the relevant variable context to help diagnose the issue.
 
-![Task testing incident](./img/task-testing/task-testing-incident.png)
+![Task testing incident](../img/task-testing/task-testing-incident.png)
 
 ### ❌ Execution error
 
 If the task fails due to an error (for example, a network or configuration issue), the error message and response details are displayed.
 
-![Task testing error](./img/task-testing/task-testing-error.png)
+![Task testing error](../img/task-testing/task-testing-error.png)
 
 ## Related documentation
 
-- [Task testing overview](../../concepts/task-testing.md)
-- [Test a task in Desktop Modeler](../desktop-modeler/task-testing.md)
-- [Working with variables](../../concepts/variables.md)
-- [Using Play mode](./collaboration/play-your-process.md)
+- [Task testing overview](../../../concepts/task-testing.md)
+- [Test a task in Desktop Modeler](../../desktop-modeler/task-testing.md)
+- [Working with variables](../../../concepts/variables.md)
+- [Using Play mode](play-your-process.md)
