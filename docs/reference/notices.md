@@ -27,7 +27,7 @@ October 22nd, 2025
 
 ### Impact
 
-There was a bug in the signal broadcast command processing which allowed users to trigger either signal start events, or signal intermediate catch events, in certain process definitions without being authorized to create or update the process definitions.
+A bug in signal broadcast command processing allowed unauthorized users to trigger signal start events or signal intermediate catch events in certain process definitions without the required create or update permissions.
 
 This **did not** allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
 
