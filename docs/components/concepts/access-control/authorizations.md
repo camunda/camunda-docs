@@ -177,14 +177,14 @@ Camunda provides predefined roles to simplify access management:
 | `admin`            | Full control over all **Orchestration Cluster** resources and components.           | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all web components.                                                                                                                                                      |
 | `readonly-admin`   | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                                                                                                                                          |
 | `connectors`       | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`), `CREATE`, `READ`, and `DELETE` on **Document**                                                                     |
-| `apps-integration` | Technical role for executing app integration calls.                                 | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_INSTANCE`, `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `READ_USER_TASK`, `UPDATE_USER_TASK` on **Process Definition** (`*`) `CREATE` on **Document** |
+| `app-integrations` | Technical role for executing app integration calls.                                 | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_INSTANCE`, `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `READ_USER_TASK`, `UPDATE_USER_TASK` on **Process Definition** (`*`) `CREATE` on **Document** |
 | `rpa`              | Role for RPA workers.                                                               | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                                                                                                                                                 |
 
 ### Role assignment in SaaS
 
 - **admin**: Automatically assigned to Organization Owner and Admin
 - **connectors**: Automatically assigned to Connectors Runtime in Cluster deployment
-- **apps-integration**: Automatically assigned to App integration clients in Cluster deployment
+- **app-integrations**: Automatically assigned to App integration clients in Cluster deployment
 - **readonly-admin**: Automatically assigned to Camunda Support Agents for support cases
 
 ## Common use cases
