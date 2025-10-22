@@ -15,6 +15,34 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 33
+
+### Publication date
+
+October 22nd, 2025
+
+### Products affected
+
+- Orchestration Cluster
+
+### Impact
+
+There was a bug in the signal broadcast command processing which allowed users to trigger either signal start events, or signal intermediate catch events, in certain process definitions without being authorized to create or update the process definitions.
+
+This **did not** allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Orchestration Cluster 8.8.0
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Orchestration Cluster 8.8.1
+
 ## Notice 32
 
 ### Publication date
