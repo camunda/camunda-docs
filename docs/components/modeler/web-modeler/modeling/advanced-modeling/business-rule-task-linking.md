@@ -34,6 +34,6 @@ You can also enter the Decision ID directly in the **Called decision** section i
 :::info
 Deploying a diagram does not automatically deploy linked diagrams. Ensure you deploy linked diagrams separately.
 
-You might also consider using a [process application](../process-applications/process-applications.md) that allows you to deploy all related
+You might also consider using a [process application](../../process-applications/process-applications.md) that allows you to deploy all related
 diagrams together in a single bundle.
 :::

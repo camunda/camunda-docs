@@ -4,8 +4,8 @@ title: Use a shared project for organization-wide collaboration
 description: "Step-by-step guide on setting up a shared project resource available to all organization members, enabling seamless collaboration, governance, and reusability."
 ---
 
-import AddUserImg from './img/invite-collaborators.png';
-import BulkAddUserImg from './img/invite-all-organization-members.png';
+import AddUserImg from '../img/invite-collaborators.png';
+import BulkAddUserImg from '../img/invite-all-organization-members.png';
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
@@ -30,7 +30,7 @@ To create a shared project as a space for your organization's resources:
 
 1. Open [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and select **Create new project** (if you do not have any existing projects) or **New project** (if you already have existing projects).
 2. Name your project accordingly.
-   ![web modeler empty home](../../../components/modeler/web-modeler/img/web-modeler-new-user-home.png)
+   ![web modeler empty home](../img/web-modeler-new-user-home.png)
 3. On the right side of the page under **Collaborators**, select **Add user**.
 4. To add collaborators to your organization and project, enter the email address of the collaborator you would like to invite and select `Enter` or `Tab` between each entry. You may enter up to 20 email addresses. To add **all** existing organization members to your project, use the **All users in the organization** option to send a bulk invitation to all colleagues.
    <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
@@ -45,12 +45,12 @@ If you previously invited collaborators to your organization _and_ project in th
 
 ## Share resources within a project
 
-You can publish a specific [version](/components/modeler/web-modeler/versions.md) of a file or process application within the shared project.
+You can publish a specific [version](/components/modeler/web-modeler/modeling/versions.md) of a file or process application within the shared project.
 
 1. From the BPMN diagram, select the **Versions** dropdown in the top right corner.
 2. Select the three vertical dots on the right side of the version labeled **Browse version actions**.
 3. Select **Copy to...**, choose the shared project you want to store the shared resource in, and select **Copy here** to make it available for all project members.
-   ![share asset version](./img/share-asset-version.png)
+   ![share asset version](../img/share-asset-version.png)
 
 Users can also reuse published resources by copying them into their own projects:
 
@@ -76,12 +76,12 @@ You can open the process landscape view by clicking **View landscape** from any 
    :::note
    For process applications, version tags represent a unified "versioned" snapshot of all process application files rather than separate versions for each file as with simple BPMN files.
    :::
-   ![selected node information](../../../components/modeler/web-modeler/img/process-landscape-node-information.png)
+   ![selected node information](../img/process-landscape-node-information.png)
 
 2. **Search**: Press `Ctrl+F` or `⌘+F` to search. Enter the name or identifier of a BPMN file to quickly find, highlight, and jump to the corresponding node.
-   ![landscape search](../../../components/modeler/web-modeler/img/process-landscape-search.png)
+   ![landscape search](../img/process-landscape-search.png)
 3. **Highlight paths:** Click on a node or connection to highlight the entire chain of related connections.
-   ![landscape selected node connections](../../../components/modeler/web-modeler/img/process-landscape-connection.png)
+   ![landscape selected node connections](../img/process-landscape-connection.png)
 
 ### README documentation
 
@@ -95,7 +95,7 @@ To access the associated README file for a process within the shared project:
 
 Organization owners and administrators can connect their Web Modeler process applications to GitHub and GitLab, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced:
 
-![process org landscape architecture](./img/process-org-landscape-architecture.png)
+![process org landscape architecture](../img/process-org-landscape-architecture.png)
 
 To keep your process landscape up to date with all changes in production, take the following steps:
 
@@ -108,4 +108,4 @@ Alternatively, you can trigger a quick automation like a GitHub Action to keep y
 
 Once the basic integration is configured by an organization owner or organization administrator, project administrators and editors can use the built-in button to pull changes from GitHub, integrate contributions from Desktop Modeler users, and merge their own work.
 
-Learn more in Camunda's [Git sync documentation](/components/modeler/web-modeler/git-sync.md).
+Learn more in Camunda's [Git sync documentation](/components/modeler/web-modeler/process-applications/git-sync.md).

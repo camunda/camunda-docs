@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 Connectors are available [out-of-the-box (OOTB)](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and come with [connector templates](/components/connectors/manage-connector-templates.md) that customize how a BPMN element is shown
 and how it can be configured by process developers. Connector templates are a specific type of [element template](/components/modeler/element-templates/about-templates.md), which can also be used when creating custom connectors via the [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
 
-Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) provides connectors by Camunda partners and community contributors.
+Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md) provides connectors by Camunda partners and community contributors.
 
 Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 

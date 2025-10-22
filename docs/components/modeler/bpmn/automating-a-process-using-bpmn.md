@@ -64,7 +64,7 @@ Take the following steps:
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
 :::note
-You can also import a BPMN diagram with Web Modeler. See how to do that [here](/components/modeler/web-modeler/import-diagram.md).
+You can also import a BPMN diagram with Web Modeler. See how to do that [here](/components/modeler/web-modeler/modeling/import-diagram.md).
 :::
 
 ## Execute your process diagram
