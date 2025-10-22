@@ -199,6 +199,8 @@ eks_managed_node_group_defaults {
 
 In the [reference architecture with terraform](terraform-setup.md), this setting is configured like that by default.
 
+:::
+
 **For existing worker node instances**, you can modify the hop limit using the AWS CLI:
 
 ```bash
