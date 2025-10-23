@@ -15,6 +15,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 32
+
+### Publication date
+
+October 21th, 2025
+
+### Products affected
+
+- Camunda Management Identity
+
+### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity 8.7.0 - 8.7.4 or 8.7.6 - 8.7.7
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Management Identity 8.7.8
+
 ## Notice 31
 
 ### Publication date
@@ -58,7 +84,7 @@ October 7th, 2025
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
-- Camunda Identity
+- Camunda Management Identity
 
 ### Impact
 
@@ -74,7 +100,7 @@ You are using:
 - Zeebe 8.7.0 - 8.7.12 or 8.5.0 - 8.5.24
 - Operate 8.7.0 - 8.7.12 or 8.5.0 - 8.5.20
 - Optimize 8.7.0 - 8.7.9 or 8.6.0 - 8.6.16
-- Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
+- Management Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
 
 ### Solution
 
@@ -84,7 +110,7 @@ Camunda has provided the following releases which contain the fix:
 - Zeebe 8.7.13, 8.5.25
 - Operate 8.7.13, 8.5.21
 - Optimize 8.7.10, 8.6.17
-- Identity 8.7.7, 8.6.20, 8.5.22
+- Management Identity 8.7.7, 8.6.20, 8.5.22
 
 ## Notice 29
 
@@ -240,7 +266,7 @@ August 27, 2025
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
-- Camunda Identity
+- Camunda Management Identity
 - Camunda Optimize
 
 ### Impact
@@ -254,7 +280,7 @@ You are using:
 - Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
 - Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.22
 - Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
-- Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
+- Management Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
 ### Solution
@@ -264,7 +290,7 @@ Camunda has provided the following releases which contain the fix:
 - Tasklist 8.7.11, 8.6.25, 8.5.21
 - Zeebe 8.7.11, 8.6.25, 8.5.23
 - Operate 8.7.11, 8.6.25, 8.5.19
-- Identity 8.7.6, 8.6.19, 8.5.20
+- Management Identity 8.7.6, 8.6.19, 8.5.20
 - Optimize 8.7.8, 8.6.15
 
 ## Notice 23
@@ -278,7 +304,7 @@ July 31, 2025
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
-- Camunda Identity
+- Camunda Management Identity
 - Camunda Optimize
 
 ### Impact
@@ -292,7 +318,7 @@ You are using:
 - Tasklist 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.18
 - Zeebe 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22
 - Operate 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.16
-- Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
+- Management Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
 - Optimize 8.7.0 - 8.7.6 or 8.6.0 - 8.6.12
 
 ### Solution
@@ -302,7 +328,7 @@ Camunda has provided the following releases which contain the fix:
 - Tasklist 8.7.9, 8.6.23, 8.5.19
 - Zeebe 8.7.9, 8.6.23
 - Operate 8.7.9, 8.6.23, 8.5.17
-- Identity 8.7.5, 8.6.18, 8.5.19
+- Management Identity 8.7.5, 8.6.18, 8.5.19
 - Optimize 8.7.7, 8.6.13
 
 ## Notice 22
@@ -570,23 +596,23 @@ July 18, 2024
 
 ### Products affected
 
-Camunda Identity
+Camunda Management Identity
 
 ### Impact
 
-The version of `Apache Tomcat` used by Camunda Identity was affected by the following vulnerability:
+The version of `Apache Tomcat` used by Camunda Management Identity was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2024-34750
 
 ### How to determine if the installation is affected
 
-You are using Camunda Identity version 8.5.3 or previous.
+You are using Camunda Management Identity version 8.5.3 or previous.
 
 ### Solution
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- [Camunda Management Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
 
 ## Notice 12
 

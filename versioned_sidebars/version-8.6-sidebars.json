@@ -73,7 +73,20 @@
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
         "components/concepts/data-retention",
-        "components/concepts/encryption-at-rest",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/byok/overview"
+          },
+          "items": [
+            "components/concepts/encryption-at-rest",
+            "components/concepts/byok/aws-external-encryption-setup",
+            "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/faq-and-troubleshooting"
+          ]
+        },
         "components/concepts/outbound-connectors-job-workers",
         "components/concepts/backups",
         "components/concepts/resource-deletion",
@@ -1533,18 +1546,6 @@
           "items": [
             "reference/announcements-release-notes/860/860-announcements",
             "reference/announcements-release-notes/860/860-release-notes"
-          ]
-        },
-        {
-          "type": "category",
-          "label": "8.5",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/850/850-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes"
           ]
         },
         "reference/announcements-release-notes/release-policy"
