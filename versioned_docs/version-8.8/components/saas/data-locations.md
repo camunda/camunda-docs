@@ -24,9 +24,9 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Backups (concept)](https://docs.camunda.io/docs/components/concepts/backups/)
-- [Console backups](https://docs.camunda.io/docs/components/console/manage-clusters/create-backups/)
-- [Regions](https://docs.camunda.io/docs/reference/regions/)
+- [Backups (concept)](/components/saas/backups.md)
+- [Console backups](/components/console/manage-clusters/cluster-backups.md)
+- [Regions](/saas/regions.md)
 
 :::
 
@@ -51,8 +51,8 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Manage secrets](https://docs.camunda.io/docs/components/console/manage-clusters/manage-secrets/)
-- [Secret provider (self‑managed)](https://docs.camunda.io/docs/self-managed/connectors-deployment/connectors-configuration/)
+- [Manage secrets](/components/console/manage-clusters/manage-secrets.md)
+- [Secrets (self‑managed)](/self-managed/components/connectors/connectors-configuration.md)
 
 :::
 
@@ -64,7 +64,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Regions (hosting note)](https://docs.camunda.io/docs/reference/regions/)
+- [Regions (hosting note)](/reference/regions.md)
 
 :::
 
@@ -82,7 +82,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Regions (hosting note)](https://docs.camunda.io/docs/reference/regions/)
+- [Regions (hosting note)](/reference/regions.md)
 
 :::
 
@@ -94,6 +94,6 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Alerts](https://docs.camunda.io/docs/components/console/manage-clusters/manage-alerts/)
+- [Alerts](/components/console/manage-clusters/manage-alerts.md)
 
 :::
