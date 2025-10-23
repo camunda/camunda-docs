@@ -29,6 +29,12 @@ Get started with Camunda agentic orchestration.
 
 :::info Further resources
 
+- [Build your first AI Agent](../../guides/getting-started-agentic-orchestration.md): Get started with building and running your first AI agent.
+- [Design and architecture](design-architecture.md): Plan and design your agentic orchestration solutions using recommended architecture guidelines.
+- [AI agents](ai-agents.md): Learn how to build and integrate AI agents into your end-to-end processes.
+- [Choosing the right LLM](choosing-right-model-agentic.md): How to choose the right LLM or foundation model for orchestrating agentic AI workflows.
+- [LLM recommendations](model-recommendations-agentic.md): Prompting recommendations when using models for agentic processes.
+
 - Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
 - Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
 
