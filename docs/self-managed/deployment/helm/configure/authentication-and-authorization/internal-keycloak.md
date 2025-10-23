@@ -55,7 +55,7 @@ This secret includes the following keys:
 - `identity-connectors-client-token`: The client secret of the Keycloak OIDC client `connectors `used by Connectors.
 - `identity-optimize-client-token`: The client secret of the Keycloak OIDC client `optimize` used by Optimize.
 - `identity-orchestration-client-token`: The client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
-- `literal=webmodeler-postgresql-admin-password`: The password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
+- `webmodeler-postgresql-admin-password`: The password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
 - `webmodeler-postgresql-user-password` The password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
 
 ### Enable internal Keycloak
