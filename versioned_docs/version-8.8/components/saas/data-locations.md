@@ -26,7 +26,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 - [Backups (concept)](/components/saas/backups.md)
 - [Console backups](/components/console/manage-clusters/cluster-backups.md)
-- [Regions](/saas/regions.md)
+- [Regions](regions.md)
 
 :::
 
@@ -64,7 +64,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Regions (hosting note)](/reference/regions.md)
+- [Regions](regions.md)
 
 :::
 
@@ -82,7 +82,7 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 :::info
 
-- [Regions (hosting note)](/reference/regions.md)
+- [Regions](regions.md)
 
 :::
 
