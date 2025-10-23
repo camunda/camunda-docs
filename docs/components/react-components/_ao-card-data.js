@@ -1,6 +1,7 @@
 import IconAoImg from "../assets/icon-play.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
+import IconAoLlmImg from "../assets/icon-llm.png";
 
 export const introCards = [
   {
@@ -21,5 +22,19 @@ export const introCards = [
     image: IconAoAgentImg,
     description:
       "Learn how to build and integrate AI agents into your end-to-end processes.",
+  },
+  {
+    link: "./choosing-right-model-agentic/",
+    title: "Choosing the right LLM",
+    image: IconAoLlmImg,
+    description:
+      "Learn how to choose the right Large Language Model (LLM) for AI agents.",
+  },
+  {
+    link: "./model-recommendations-agentic/",
+    title: "LLM recommendations",
+    image: IconAoLlmImg,
+    description:
+      "Recommendations and best practices for working with models and prompts.",
   },
 ];
