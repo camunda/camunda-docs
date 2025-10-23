@@ -89,7 +89,7 @@ camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
 camunda.security.authentication.oidc.issuer-uri: <YOUR_ISSUERURI>
 camunda.security.authentication.oidc.redirect-uri: <YOUR_REDIRECTURI>
 camunda.security.authentication.oidc.username-claim: <YOUR_USERNAMECLAIM>
-camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 camunda.security.authentication.oidc.scope: ["openid"]
 ```
 
@@ -101,19 +101,25 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET=<YOUR_CLIENTSECRET>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI=<YOUR_ISSUERURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI=<YOUR_REDIRECTURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM=<YOUR_USERNAMECLAIM>
-CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES=<YOUR_CLIENTID>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES_0=<YOUR_CLIENTID>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 ```
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-orchestration.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
-orchestration.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-orchestration.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.scope: ["openid"]
+orchestration:
+  security:
+    authentication:
+      oidc:
+        clientId: <YOUR_CLIENTID>
+        secret: 
+          existingSecret: <NAME_OF_K8S_SECRET>
+          existingSecretKey: <KEY_INSIDE_K8S_SECRET>
+        issuer: <YOUR_ISSUERURI>
+        redirectUrl: <YOUR_REDIRECTURL>
+        usernameClaim: <YOUR_USERNAMECLAIM>
+        audience: <YOUR_CLIENTID>
+        scope: ["openid"]
 ```
 </TabItem>
 </Tabs>
@@ -134,24 +140,26 @@ The following examples use HELM values notation. You can also apply these using 
 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
+Application.yaml:
 ```yaml
 orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
 orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
 orchestration.security.authentication.oidc.usernameClaim: "oid"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
+Application.yaml:
 ```yaml
 orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 orchestration.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
 orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
 orchestration.security.authentication.oidc.usernameClaim: "preferred_username"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 orchestration.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
 </TabItem>
@@ -190,7 +198,12 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=<YOUR_USERNAME>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.initialization.defaultRoles.admin.users: [ <YOUR_USERNAME> ]
+orchestration:
+  security:
+    initialization:
+      defaultRoles:
+        admin:
+          users: [ <YOUR_USERNAME> ]
 ```
 </TabItem>
 </Tabs>
@@ -227,7 +240,11 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
+orchestration:
+  security:
+    authentication:
+      oidc:
+        groupsClaim: <YOUR_GROUPSCLAIM>
 ```
 </TabItem>
 </Tabs>
