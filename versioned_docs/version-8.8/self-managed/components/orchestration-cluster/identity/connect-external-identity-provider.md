@@ -330,6 +330,7 @@ Next, configure a client in your IdP:
    - Configure the necessary scopes (for example, `openid`).
    - Create a new client secret.
    - Ensure that the client's access tokens include the client id claim as configured in the previous step.
+   - Set the audience to the value of your orchestration cluster audience, if it is configured as in [Step 4](#step-4-configure-the-oidc-connection-details).
 2. Note the **client ID**, **client secret**, and **authorization URI** as these are required during Camunda configuration.
 
 ### Step 3: Configure your worker application
@@ -360,19 +361,19 @@ As per default authorizations are enabled, your application will only be able to
    private static final String clientId = "<YOUR_CLIENT_ID>";
    private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
    private static final String authorizationServer = "<YOUR_AUTHORIZATION_SERVER>";
-   private static final String audience = "<YOUR_CLIENT_ID>";
    private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
    private static final String clusterGrpcLocal = "grpc://localhost:26500";
    private static final String clusterRestLocal = "http://localhost:8080";
+   private static final String scope = "openid";
 
   // Build a new OAuthCredentialsProvider
   final OAuthCredentialsProvider credentialsProvider =
         new OAuthCredentialsProviderBuilder()
           .authorizationServerUrl(authorizationServer)
-          .audience(audience)
+          .audience(ocAudience). // for Microsoft EntraID typically use: ocAudience + "/.default"
           .clientId(clientId)
           .clientSecret(clientSecret)
-          .scope(ocAudience) // for Microsoft EntraID typically use: ocAudience + "/.default"
+          .scope(scope)
           .build();
   // Build a new Camunda Client with the CredentialsProvider
    try (CamundaClient client = CamundaClient.newClientBuilder()
@@ -409,8 +410,8 @@ camunda:
       client-id: <YOUR_CLIENT_ID>
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
-      audience: <YOUR_CLIENT_ID>
-      scope: <YOUR_CLIENT_ID_FROM_OC>
+      audience: <YOUR_CLIENT_ID_FROM_OC>
+      scope: ["openid"]
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -448,8 +449,8 @@ camunda:
       client-id: <YOUR_CLIENT_ID>
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
-      audience: <YOUR_CLIENT_ID>
-      scope: <YOUR_CLIENT_ID_FROM_OC>
+      audience: <YOUR_CLIENT_ID_FROM_OC>
+      scope: ["openid"]
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -478,7 +479,6 @@ Note: You can run the Connector Runtime simply using Helm or Docker Image.
 private static final String clientId = "<YOUR_CLIENT_ID>";
 private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
 private static final String authorizationServer = "https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
 private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>" + "/.default";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
@@ -491,8 +491,7 @@ private static final String clusterRestLocal = "http://localhost:8080";
 private static final String clientId = "<YOUR_CLIENT_ID>";
 private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
 private static final String authorizationServer = "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>/protocol/openid-connect/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
-private static final String ocAudience = "<YOUR_CLIENT_ID>";
+private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
 ```
