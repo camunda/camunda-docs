@@ -12,10 +12,9 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 
 <img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
-:::note
+:::info
 
-- Console and Web Modeler cluster components are currently hosted in GCP (EU). [Contact us](/reference/contact.md) if you have additional questions.
-- Single-tenant clusters run on a dedicated GCP or AWS infrastructure.
+See [Data Locations](data-locations.md) for more information about where your Camunda 8 SaaS data is located and how data is handled.
 
 :::
 

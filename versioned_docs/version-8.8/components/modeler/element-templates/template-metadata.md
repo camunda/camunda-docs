@@ -202,7 +202,7 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
 
 ```json
 {
-   ...,
+  ...,
   "groups": [
     {
       "id": "definition",
@@ -226,5 +226,17 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
   "properties": [
     ...
   ]
+}
+```
+
+## Deprecating a template: `deprecated`
+
+Indicates whether the element template is deprecated.
+
+```json
+{
+  ...,
+  "deprecated": true,
+  ...
 }
 ```

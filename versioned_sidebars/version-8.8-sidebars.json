@@ -187,7 +187,9 @@
           },
           "items": [
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/ai-agents"
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic"
           ]
         },
         {
@@ -1090,7 +1092,6 @@
         "components/concepts/clusters",
         "components/saas/regions",
         "components/saas/data-locations",
-        "components/saas/encryption-at-rest",
         {
           "type": "category",
           "label": "Encryption",
