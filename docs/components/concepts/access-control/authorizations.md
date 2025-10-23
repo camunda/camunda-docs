@@ -175,17 +175,17 @@ Camunda provides predefined roles to simplify access management:
 | Role ID            | Purpose                                                                             | Typical authorizations                                                                                                                                                                                                                                                  |
 | ------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `admin`            | Full control over all **Orchestration Cluster** resources and components.           | All permissions for all resources: `READ`, `CREATE`, `UPDATE`, `DELETE`, including `ACCESS` to all web components.                                                                                                                                                      |
-| `readonly-admin`   | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                                                                                                                                          |
-| `connectors`       | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`), `CREATE`, `READ`, and `DELETE` on **Document**                                                                     |
 | `app-integrations` | Technical role for executing app integration calls.                                 | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `CREATE_PROCESS_INSTANCE`, `READ_PROCESS_INSTANCE`, `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `READ_USER_TASK`, `UPDATE_USER_TASK` on **Process Definition** (`*`) `CREATE` on **Document** |
+| `connectors`       | Technical role for executing connector calls.                                       | `READ_PROCESS_DEFINITION` on **Process Definition** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`), `CREATE` on **Message** (`*`), `CREATE`, `READ`, and `DELETE` on **Document**                                                                     |
+| `readonly-admin`   | Audit-focused users who need read-only access across the **Orchestration Cluster**. | `READ` for all resources, including `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, etc.                                                                                                                                                          |
 | `rpa`              | Role for RPA workers.                                                               | `READ` on **Resource** (`*`), `UPDATE_PROCESS_INSTANCE` on **Process Definition** (`*`)                                                                                                                                                                                 |
 
 ### Role assignment in SaaS
 
-- **admin**: Automatically assigned to Organization Owner and Admin
-- **connectors**: Automatically assigned to Connectors Runtime in Cluster deployment
-- **app-integrations**: Automatically assigned to App integration clients in Cluster deployment
-- **readonly-admin**: Automatically assigned to Camunda Support Agents for support cases
+- **admin**: Automatically assigned to organization owner and admin.
+- **connectors**: Automatically assigned to Connector Runtime in cluster deployment.
+- **app-integrations**: Automatically assigned to app integration clients in cluster deployment.
+- **readonly-admin**: Automatically assigned to Camunda Support agents for support cases.
 
 ## Common use cases
 
@@ -205,7 +205,6 @@ Users need specific permissions to access **Orchestration Cluster** web componen
 Within components, users need additional permissions for specific resources, for example:
 
 - **Process related**: Resource type `processDefinition`
-
   - `READ_PROCESS_DEFINITION` to view process models
   - `CREATE_PROCESS_INSTANCE` to start new processes
   - `UPDATE_PROCESS_INSTANCE` to update running instances
