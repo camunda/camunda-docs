@@ -1091,6 +1091,20 @@
         "components/saas/regions",
         "components/saas/data-locations",
         "components/saas/encryption-at-rest",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/byok/overview"
+          },
+          "items": [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/faq-and-troubleshooting"
+          ]
+        },
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -2723,18 +2737,6 @@
             "reference/announcements-release-notes/860/860-release-notes"
           ]
         },
-        {
-          "type": "category",
-          "label": "8.5",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/850/850-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes"
-          ]
-        },
         "reference/announcements-release-notes/release-policy"
       ]
     },
@@ -3225,19 +3227,7 @@
                   },
                   "items": [
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
-                    {
-                      "type": "category",
-                      "label": "Camunda Exporter indices",
-                      "link": {
-                        "type": "doc",
-                        "id": "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices"
-                      },
-                      "items": [
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-identity",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-operate",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-tasklist"
-                      ]
-                    },
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter"
                   ]
