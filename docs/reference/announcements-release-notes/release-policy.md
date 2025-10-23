@@ -99,7 +99,7 @@ An **Update available** notification is shown in Console, recommending that you 
 
 #### Generation names
 
-As of Camunda 8.5.0, the generation naming scheme in Camunda 8 SaaS changed to no longer include the patch version.
+The generation naming scheme in Camunda 8 SaaS no longer includes the patch version.
 
 - The naming scheme used for the Camunda 8.5 generations is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 
