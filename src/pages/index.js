@@ -150,13 +150,6 @@ function Home() {
                 Sign up
               </Link>
             </div>
-            <button
-              type="button"
-              className="button button--secondary button--lg"
-              onClick={openKapa}
-            >
-              Open AI assistant
-            </button>
           </div>
         </div>
       </header>
