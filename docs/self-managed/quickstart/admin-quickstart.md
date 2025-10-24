@@ -7,7 +7,7 @@ description: "Get started with Camunda 8 Self-Managed as an administrator using 
 
 This quickstart guide helps administrators set up a local Kubernetes cluster and deploy Camunda 8 Self-Managed for testing and development purposes.
 
-Follow the [kind installation guide](/self-managed/deployment/helm/cloud-providers/kind) to:
+Follow the [kind installation guide](/self-managed/deployment/helm/cloud-providers/kind.md) to:
 
 - Install kind (Kubernetes in Docker)
 - Set up a local Kubernetes cluster
