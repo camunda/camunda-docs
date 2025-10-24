@@ -42,7 +42,7 @@ Camunda exclusively provides access to Bitnami Premium **images** for licensed e
 
 Each Camunda Helm chart version specifies its chart dependencies in the `Chart.yaml` file. For example, see the [Camunda 8.9 Chart.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.9/Chart.yaml) file which lists all dependent charts.
 
-**Keycloak Helm chart fork:** Camunda uses a forked Keycloak Helm chart based on Bitnami's chart. The Keycloak image has been upgraded to the latest public release, and environment variable names have been adjusted for compatibility with both enterprise and open-source deployments. The fork ensures ease of distribution and backward compatibility. See the implementation in the Camunda Helm repository: [Keycloak Helm chart](https://github.com/camunda/camunda-platform-helm/tree/main/charts/keycloak-24).
+**Keycloak Helm chart fork:** Camunda uses a forked Keycloak Helm chart based on Bitnami's chart. The Keycloak image has been upgraded to the latest public release, and environment variable names have been adjusted for compatibility with both enterprise and open-source deployments. The fork ensures ease of distribution and backward compatibility.
 :::
 
 ### Available image types
