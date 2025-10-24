@@ -74,6 +74,8 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
+For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
+
 ## Connectivity
 
 The connection to Camunda API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
