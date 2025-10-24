@@ -35,6 +35,17 @@ If you use Bitnami-based subcharts in production, Camunda strongly recommends us
 
 Following [Bitnami chart security policy changes](https://github.com/bitnami/charts/issues/30850), Camunda transitioned from open-source Bitnami images to Bitnami Premium images licensed by Broadcom. These images require an additional values file for configuration, detailed below.While Bitnami also provides a repository of Secure images, Camunda continues to mirror the Premium versions in its subcharts.
 
+**You do not need to use any charts other than those specified in the `Chart.yaml` dependencies.** The Camunda Helm chart handles all chart dependencies automatically.
+
+:::info Camunda provides Premium images only
+Camunda exclusively provides access to Bitnami Premium **images** for licensed enterprise customers. However, the Helm **charts** themselves remain the open-source Bitnami charts.
+
+Each Camunda Helm chart version specifies its chart dependencies in the `Chart.yaml` file. For example, see the [Camunda 8.8 Chart.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.8/Chart.yaml) file which lists all dependent charts.
+
+**Keycloak Helm chart fork:** Camunda uses a forked Keycloak Helm chart based on Bitnami's chart. The Keycloak image has been upgraded to the latest public release, and environment variable names have been adjusted for compatibility with both enterprise and open-source deployments. The fork ensures ease of distribution and backward compatibility. See the implementation in the Camunda Helm repository: [Keycloak Helm chart](https://github.com/camunda/camunda-platform-helm/tree/main/charts/keycloak-24).
+
+:::
+
 ### Available image types
 
 | Image Type      | Registry Path                                                            | Base OS | Support Level       | Intended Use            |
@@ -116,14 +127,6 @@ helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
 ```
 
 This deploys Camunda with vendor-supported Premium images, recommended for secure, stable production environments.
-
-:::note Keycloak Helm chart fork
-Camunda uses a forked Keycloak Helm chart based on Bitnami’s chart. The Keycloak image has been upgraded to the latest public release, and environment variable names have been adjusted for compatibility with both enterprise and open-source deployments.
-
-The fork ensures ease of distribution and backward compatibility.
-
-See the implementation in the Camunda Helm repository: [Keycloak Helm chart](https://github.com/camunda/camunda-platform-helm/tree/main/charts/keycloak-24).
-:::
 
 ## Understanding CVEs in Bitnami images
 
