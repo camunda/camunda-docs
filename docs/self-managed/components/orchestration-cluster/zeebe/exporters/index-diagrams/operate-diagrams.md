@@ -21,6 +21,7 @@ The following index diagrams show Camunda Exporter indices for Operate.
 - [operate-job](#operate-job)
 - [operate-list-view](#operate-list-view)
 - [operate-message](#operate-message)
+- [operate-metadata](#operate-metadata)
 - [operate-operation](#operate-operation)
 - [operate-post-importer-queue](#operate-post-importer-queue)
 - [operate-sequence-flow](#operate-sequence-flow)
@@ -98,3 +99,5 @@ The following index diagrams show Camunda Exporter indices for Operate.
 ## operate-variable
 
 ![diagram](./operate-diagrams-20.png)
+
+## operate-metadata
