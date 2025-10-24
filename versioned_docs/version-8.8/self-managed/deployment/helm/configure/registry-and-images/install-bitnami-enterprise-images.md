@@ -33,7 +33,7 @@ If you use Bitnami-based subcharts in production, Camunda strongly recommends us
 
 ## Understanding Bitnami image offerings
 
-Following [Bitnami chart security policy changes](https://github.com/bitnami/charts/issues/30850), Camunda transitioned from open-source Bitnami images to Bitnami Premium images licensed by Broadcom. These images require an additional values file for configuration, detailed below.While Bitnami also provides a repository of Secure images, Camunda continues to mirror the Premium versions in its subcharts.
+Following [Bitnami chart security policy changes](https://github.com/bitnami/charts/issues/30850), Camunda transitioned from open-source Bitnami images to Bitnami Premium images licensed by Broadcom. These images require an additional values file for configuration, detailed below. While Bitnami also provides a repository of Secure images, Camunda continues to mirror the Premium versions in its subcharts.
 
 **You do not need to use any charts other than those specified in the `Chart.yaml` dependencies.** The Camunda Helm chart handles all chart dependencies automatically.
 
