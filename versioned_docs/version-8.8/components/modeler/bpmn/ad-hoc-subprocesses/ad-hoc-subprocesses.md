@@ -34,7 +34,7 @@ Alternatively, use the [ad-hoc sub-process API](/apis-tools/orchestration-cluste
 
 An ad-hoc sub-process can define an expression `activeElementsCollection` that should return a
 [list](../../feel/language-guide/feel-data-types.md#list) of strings. Each string in the list should match to an ID of
-an inner element of the ad-hoc sub-process. Usually, the expression accesses a process instance variable that was
+an inner element of the ad-hoc sub-process. Usually, the expression accesses a process variable that was
 created before and holds the list of element IDs.
 
 ![A process with an ad-hoc sub-process that shows how a variable is used to active the inner elements.](assets/ad-hoc-subprocess-activation.png)

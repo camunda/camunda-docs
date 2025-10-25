@@ -29,7 +29,7 @@ Clients send commands to Zeebe to:
   - Complete jobs
   - Fail jobs
 - Handle operational issues
-  - Update process instance variables
+  - Update process variables
   - Resolve incidents
 
 Client applications can be scaled up and down separately from Zeebe. The Zeebe brokers do not execute any business logic.

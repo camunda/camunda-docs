@@ -64,7 +64,7 @@ Similar to regular job workers, a listener can read variables of the process ins
 
 Start listeners are invoked after applying the variable input mappings, and before subscribing to events, evaluating the element's expressions, and executing the element's behavior.
 
-- A start listener can read the process instance variables and local variables created by the variable input
+- A start listener can read the process variables and local variables created by the variable input
   mappings.
 - If a start listener completes the job with variables, those variables are set as
   [local variables](/components/concepts/variables.md#local-variables) for the element. Subsequent listeners can access these variables.
@@ -80,7 +80,7 @@ You can use variables for the following use cases:
 
 End listeners are invoked after applying the variable output mappings and before leaving the element.
 
-- An end listener can read the process instance variables, the local variables of the element, and the resulting
+- An end listener can read the process variables, the local variables of the element, and the resulting
   variables of the output mappings.
 - If an end listener completes the job with variables, those variables are propagated to the element's parent scope, like
   variables from the output mappings. Subsequent listeners can access these variables.

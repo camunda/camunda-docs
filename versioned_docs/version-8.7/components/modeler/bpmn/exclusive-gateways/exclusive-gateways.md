@@ -1,10 +1,10 @@
 ---
 id: exclusive-gateways
 title: "Exclusive gateway"
-description: "Learn more about exclusive gateways (or XOR-gateways) and their conditions, which allow you to make a decision based on data such as process instance variables."
+description: "Learn more about exclusive gateways (or XOR-gateways) and their conditions, which allow you to make a decision based on data such as process variables."
 ---
 
-An exclusive gateway (or XOR-gateway) allows you to make a decision based on data (i.e. on process instance variables).
+An exclusive gateway (or XOR-gateway) allows you to make a decision based on data (i.e. on process variables).
 
 ![process](assets/exclusive-gateway.png)
 
@@ -18,7 +18,7 @@ An exclusive gateway can also be used to join multiple incoming flows together a
 
 ## Conditions
 
-A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
+A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md) that can access the process variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
 Multiple boolean values or comparisons can be combined as disjunction (`or`) or conjunction (`and`).
 

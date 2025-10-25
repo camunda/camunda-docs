@@ -344,7 +344,7 @@ Two authentication methods are supported:
 
 The **Document source** can be either **Plain text** or a **Camunda document**.
 
-**Plain text** can be useful when you deal with small size data that can fit into a text field or a process instance variable. Input will be handled as a regular UTF-8 text.
+**Plain text** can be useful when you deal with small size data that can fit into a text field or a process variable. Input will be handled as a regular UTF-8 text.
 
 :::note
 A FEEL [string conversion function](/components/modeler/feel/builtin-functions/feel-built-in-functions-conversion.md#stringfrom) might be useful if you have JSON input.

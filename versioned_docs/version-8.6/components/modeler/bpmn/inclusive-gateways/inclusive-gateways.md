@@ -4,7 +4,7 @@ title: "Inclusive gateway"
 description: "An inclusive gateway (or OR-gateway) allows you to make multiple decisions based on data."
 ---
 
-The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data, or process instance variables. Inclusive gateways can be diverging (a sequence flow is split into multiple paths) or converging (split paths are merged before continuing).
+The inclusive gateway (or OR-gateway) allows for making multiple decisions based on data, or process variables. Inclusive gateways can be diverging (a sequence flow is split into multiple paths) or converging (split paths are merged before continuing).
 
 ![A process model to prepare lunch at lunchtime can use an inclusive gateway to decide which steps to take to prepare the different lunch components, e.g. cook pasta,stir-fry steak, prepare salad, or any combination of these.](assets/inclusive-gateway.png)
 
@@ -39,7 +39,7 @@ For example: Once all selected courses are complete, the table can be cleared.
 
 ## Conditions
 
-A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md) that can access the process instance variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
+A `conditionExpression` defines when a flow is taken. It is a [boolean expression](/components/modeler/feel/language-guide/feel-boolean-expressions.md) that can access the process variables and compare them with literals or other variables. The condition is fulfilled when the expression returns `true`.
 
 Multiple boolean values or comparisons can be combined as disjunction (`and`) or conjunction (`or`).
 

@@ -119,7 +119,7 @@ For string literals containing escaped characters (e.g., a newline character `\n
 
 Examples:
 
-| Process instance variables             | Input mappings                                                                                               | New variables                               |
+| Process variables                      | Input mappings                                                                                               | New variables                               |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
 | `orderId: "order-123"`                 | **source:** `=orderId`<br/> **target:** `reference`                                                          | `reference: "order-123"`                    |
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
@@ -146,7 +146,7 @@ In the case of a subprocess, the behavior is different. There are no results var
 
 Examples:
 
-| Results variables                                    | Output mappings                                                                                                                      | Process instance variables                         |
+| Results variables                                    | Output mappings                                                                                                                      | Process variables                                  |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |

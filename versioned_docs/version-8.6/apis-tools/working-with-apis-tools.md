@@ -25,7 +25,7 @@ Clients allow applications to do the following:
 - Start and cancel process instances.
 - Activate jobs, work on those jobs, and subsequently complete or fail jobs.
 - Publish messages.
-- Update process instance variables and resolve [incidents](/components/concepts/incidents.md).
+- Update process variables and resolve [incidents](/components/concepts/incidents.md).
 
 The official clients mentioned below interact with [Zeebe](/components/zeebe/zeebe-overview.md), the workflow engine integrated into Camunda 8. All clients require [setting up client credentials](/guides/setup-client-connection-credentials.md) to authenticate. Clients connect to Camunda 8 via a mix of REST and [gRPC](https://grpc.io), a high-performance, open source, and universal RPC protocol.
 
