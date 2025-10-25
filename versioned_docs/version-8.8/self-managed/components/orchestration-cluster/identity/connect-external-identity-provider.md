@@ -89,7 +89,7 @@ camunda.security.authentication.oidc.client-secret: <YOUR_CLIENTSECRET>
 camunda.security.authentication.oidc.issuer-uri: <YOUR_ISSUERURI>
 camunda.security.authentication.oidc.redirect-uri: <YOUR_REDIRECTURI>
 camunda.security.authentication.oidc.username-claim: <YOUR_USERNAMECLAIM>
-camunda.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+camunda.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 camunda.security.authentication.oidc.scope: ["openid"]
 ```
 
@@ -101,19 +101,25 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET=<YOUR_CLIENTSECRET>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI=<YOUR_ISSUERURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI=<YOUR_REDIRECTURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM=<YOUR_USERNAMECLAIM>
-CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES=<YOUR_CLIENTID>
+CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES_0=<YOUR_CLIENTID>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 ```
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
-orchestration.security.authentication.oidc.issuerUri: <YOUR_ISSUERURI>
-orchestration.security.authentication.oidc.redirectUri: <YOUR_REDIRECTURI>
-orchestration.security.authentication.oidc.usernameClaim: <YOUR_USERNAMECLAIM>
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
-orchestration.security.authentication.oidc.scope: ["openid"]
+orchestration:
+  security:
+    authentication:
+      oidc:
+        clientId: <YOUR_CLIENTID>
+        secret: 
+          existingSecret: <NAME_OF_K8S_SECRET>
+          existingSecretKey: <KEY_INSIDE_K8S_SECRET>
+        issuer: <YOUR_ISSUERURI>
+        redirectUrl: <YOUR_REDIRECTURL>
+        usernameClaim: <YOUR_USERNAMECLAIM>
+        audience: <YOUR_CLIENTID>
+        scope: ["openid"]
 ```
 </TabItem>
 </Tabs>
@@ -134,24 +140,26 @@ The following examples use HELM values notation. You can also apply these using 
 
 <Tabs groupId="idpExamples" defaultValue="entraid">
 <TabItem value="entraid" label="Microsoft EntraID">
+Application.yaml:
 ```yaml
 orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 orchestration.security.authentication.oidc.issuerUri: "https://login.microsoftonline.com/<YOUR_TENANT_ID>/v2.0"
 orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
 orchestration.security.authentication.oidc.usernameClaim: "oid"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 orchestration.security.authentication.oidc.scope: ["openid", "profile", "<client-id>/.default"]
 ```
 </TabItem>
 <TabItem value="keycloak" label="Keycloak">
+Application.yaml
 ```yaml
 orchestration.security.authentication.oidc.clientId: <YOUR_CLIENTID>
 orchestration.security.authentication.oidc.clientSecret: <YOUR_CLIENTSECRET>
 orchestration.security.authentication.oidc.issuerUri: "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>"
 orchestration.security.authentication.oidc.redirectUri: "http://localhost:8080/sso-callback"
 orchestration.security.authentication.oidc.usernameClaim: "preferred_username"
-orchestration.security.authentication.oidc.audiences: <YOUR_CLIENTID>
+orchestration.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
 orchestration.security.authentication.oidc.scope: ["openid", "profile", "email"]
 ```
 </TabItem>
@@ -190,7 +198,12 @@ CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES_ADMIN_USERS_0=<YOUR_USERNAME>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.initialization.defaultRoles.admin.users: [ <YOUR_USERNAME> ]
+orchestration:
+  security:
+    initialization:
+      defaultRoles:
+        admin:
+          users: [ <YOUR_USERNAME> ]
 ```
 </TabItem>
 </Tabs>
@@ -227,7 +240,11 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM=<YOUR_GROUPSCLAIM>
 </TabItem>
 <TabItem value="helm">
 ```yaml
-orchestration.security.authentication.oidc.groupsClaim: <YOUR_GROUPSCLAIM>
+orchestration:
+  security:
+    authentication:
+      oidc:
+        groupsClaim: <YOUR_GROUPSCLAIM>
 ```
 </TabItem>
 </Tabs>
@@ -313,6 +330,7 @@ Next, configure a client in your IdP:
    - Configure the necessary scopes (for example, `openid`).
    - Create a new client secret.
    - Ensure that the client's access tokens include the client id claim as configured in the previous step.
+   - Set the audience to the value of your orchestration cluster audience, if it is configured as in [Step 4](#step-4-configure-the-oidc-connection-details).
 2. Note the **client ID**, **client secret**, and **authorization URI** as these are required during Camunda configuration.
 
 ### Step 3: Configure your worker application
@@ -343,19 +361,19 @@ As per default authorizations are enabled, your application will only be able to
    private static final String clientId = "<YOUR_CLIENT_ID>";
    private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
    private static final String authorizationServer = "<YOUR_AUTHORIZATION_SERVER>";
-   private static final String audience = "<YOUR_CLIENT_ID>";
    private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
    private static final String clusterGrpcLocal = "grpc://localhost:26500";
    private static final String clusterRestLocal = "http://localhost:8080";
+   private static final String scope = "openid";
 
   // Build a new OAuthCredentialsProvider
   final OAuthCredentialsProvider credentialsProvider =
         new OAuthCredentialsProviderBuilder()
           .authorizationServerUrl(authorizationServer)
-          .audience(audience)
+          .audience(ocAudience). // for Microsoft EntraID typically use: ocAudience + "/.default"
           .clientId(clientId)
           .clientSecret(clientSecret)
-          .scope(ocAudience) // for Microsoft EntraID typically use: ocAudience + "/.default"
+          .scope(scope)
           .build();
   // Build a new Camunda Client with the CredentialsProvider
    try (CamundaClient client = CamundaClient.newClientBuilder()
@@ -392,8 +410,8 @@ camunda:
       client-id: <YOUR_CLIENT_ID>
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
-      audience: <YOUR_CLIENT_ID>
-      scope: <YOUR_CLIENT_ID_FROM_OC>
+      audience: <YOUR_CLIENT_ID_FROM_OC>
+      scope: ["openid"]
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -431,8 +449,8 @@ camunda:
       client-id: <YOUR_CLIENT_ID>
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
-      audience: <YOUR_CLIENT_ID>
-      scope: <YOUR_CLIENT_ID_FROM_OC>
+      audience: <YOUR_CLIENT_ID_FROM_OC>
+      scope: ["openid"]
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -461,7 +479,6 @@ Note: You can run the Connector Runtime simply using Helm or Docker Image.
 private static final String clientId = "<YOUR_CLIENT_ID>";
 private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
 private static final String authorizationServer = "https://login.microsoftonline.com/<YOUR_TENANT_ID>/oauth2/v2.0/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
 private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>" + "/.default";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
@@ -474,8 +491,7 @@ private static final String clusterRestLocal = "http://localhost:8080";
 private static final String clientId = "<YOUR_CLIENT_ID>";
 private static final String clientSecret = "<YOUR_CLIENT_SECRET>";
 private static final String authorizationServer = "https://<KEYCLOAK_HOST>/realms/<REALM_NAME>/protocol/openid-connect/token";
-private static final String audience = "<YOUR_CLIENT_ID>";
-private static final String ocAudience = "<YOUR_CLIENT_ID>";
+private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
 ```
