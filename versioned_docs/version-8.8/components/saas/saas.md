@@ -88,6 +88,10 @@ Camunda 8 SaaS offers a number of monitoring options to help you keep track of y
 
 In Camunda 8 SaaS, [data retention](/components/saas/data-retention.md) strategies are implemented. This is necessary as the amount of data can grow significantly overtime. These settings are a balance between performance and usability.
 
+### Data locations
+
+See [data locations](data-locations.md) to learn more about where your Camunda 8 SaaS data is located and how data is handled.
+
 ### Access controls
 
 Camunda 8 SaaS supports the following access controls.
