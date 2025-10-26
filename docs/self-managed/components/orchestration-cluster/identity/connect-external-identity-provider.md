@@ -364,7 +364,7 @@ As per default authorizations are enabled, your application will only be able to
    private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
    private static final String clusterGrpcLocal = "grpc://localhost:26500";
    private static final String clusterRestLocal = "http://localhost:8080";
-   private static final String scope = "openid";
+   private static final String scope = "openid"; // <YOUR_CLIENT_ID> for Microsoft EntraID
 
   // Build a new OAuthCredentialsProvider
   final OAuthCredentialsProvider credentialsProvider =
@@ -411,7 +411,7 @@ camunda:
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
       audience: <YOUR_CLIENT_ID_FROM_OC>
-      scope: ["openid"]
+      scope: ["openid"] # <YOUR_CLIENT_ID> for Microsoft EntraID
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -450,7 +450,7 @@ camunda:
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
       audience: <YOUR_CLIENT_ID_FROM_OC>
-      scope: ["openid"]
+      scope: ["openid"] # <YOUR_CLIENT_ID> for Microsoft EntraID
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -482,6 +482,7 @@ private static final String authorizationServer = "https://login.microsoftonline
 private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>" + "/.default";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
+private static final String scope = "<YOUR_CLIENT_ID>";
 ```
 
 </TabItem>
@@ -494,6 +495,7 @@ private static final String authorizationServer = "https://<KEYCLOAK_HOST>/realm
 private static final String ocAudience = "<YOUR_CLIENT_ID>";
 private static final String clusterGrpcLocal = "grpc://localhost:26500";
 private static final String clusterRestLocal = "http://localhost:8080";
+private static final String scope = "openid";
 ```
 
 </TabItem>
