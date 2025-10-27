@@ -15,6 +15,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 32
+
+### Publication date
+
+October 21th, 2025
+
+### Products affected
+
+- Camunda Management Identity
+
+### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity 8.7.0 - 8.7.4 or 8.7.6 - 8.7.7
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Management Identity 8.7.8
+
 ## Notice 31
 
 ### Publication date
@@ -58,7 +84,7 @@ October 7th, 2025
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
-- Camunda Identity
+- Camunda Management Identity
 
 ### Impact
 
@@ -74,7 +100,7 @@ You are using:
 - Zeebe 8.7.0 - 8.7.12 or 8.5.0 - 8.5.24
 - Operate 8.7.0 - 8.7.12 or 8.5.0 - 8.5.20
 - Optimize 8.7.0 - 8.7.9 or 8.6.0 - 8.6.16
-- Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
+- Management Identity 8.7.0 - 8.7.6 or 8.6.0 - 8.6.19 or 8.5.0 - 8.5.21
 
 ### Solution
 
@@ -84,7 +110,7 @@ Camunda has provided the following releases which contain the fix:
 - Zeebe 8.7.13, 8.5.25
 - Operate 8.7.13, 8.5.21
 - Optimize 8.7.10, 8.6.17
-- Identity 8.7.7, 8.6.20, 8.5.22
+- Management Identity 8.7.7, 8.6.20, 8.5.22
 
 ## Notice 29
 
@@ -172,7 +198,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -198,7 +224,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
@@ -233,14 +259,14 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-August 27th, 2025
+August 27, 2025
 
 ### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
-- Camunda Identity
+- Camunda Management Identity
 - Camunda Optimize
 
 ### Impact
@@ -254,7 +280,7 @@ You are using:
 - Tasklist 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.20
 - Zeebe 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.22
 - Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
-- Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
+- Management Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
 ### Solution
@@ -264,21 +290,21 @@ Camunda has provided the following releases which contain the fix:
 - Tasklist 8.7.11, 8.6.25, 8.5.21
 - Zeebe 8.7.11, 8.6.25, 8.5.23
 - Operate 8.7.11, 8.6.25, 8.5.19
-- Identity 8.7.6, 8.6.19, 8.5.20
+- Management Identity 8.7.6, 8.6.19, 8.5.20
 - Optimize 8.7.8, 8.6.15
 
 ## Notice 23
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
-- Camunda Identity
+- Camunda Management Identity
 - Camunda Optimize
 
 ### Impact
@@ -292,7 +318,7 @@ You are using:
 - Tasklist 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.18
 - Zeebe 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22
 - Operate 8.7.0 - 8.7.8 or 8.6.0 - 8.6.22 or 8.5.0 - 8.5.16
-- Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
+- Management Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
 - Optimize 8.7.0 - 8.7.6 or 8.6.0 - 8.6.12
 
 ### Solution
@@ -302,14 +328,14 @@ Camunda has provided the following releases which contain the fix:
 - Tasklist 8.7.9, 8.6.23, 8.5.19
 - Zeebe 8.7.9, 8.6.23
 - Operate 8.7.9, 8.6.23, 8.5.17
-- Identity 8.7.5, 8.6.18, 8.5.19
+- Management Identity 8.7.5, 8.6.18, 8.5.19
 - Optimize 8.7.7, 8.6.13
 
 ## Notice 22
 
 ### Publication date
 
-July 31st, 2025
+July 31, 2025
 
 ### Products affected
 
@@ -344,7 +370,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 18th, 2025
+June 18, 2025
 
 ### Products affected
 
@@ -369,7 +395,7 @@ Camunda has provided the following releases which contain the fix:
 
 ### Publication date
 
-June 17th, 2025
+June 17, 2025
 
 ### Products affected
 
@@ -394,7 +420,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-May 21st, 2025
+May 21, 2025
 
 ### Products affected
 
@@ -423,7 +449,7 @@ The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -454,7 +480,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-April 8th, 2025
+April 8, 2025
 
 ### Products affected
 
@@ -487,7 +513,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 14th, 2025
+March 14, 2025
 
 ### Products affected
 
@@ -511,7 +537,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -535,7 +561,7 @@ Camunda has provided the following release which contains a fix:
 
 ### Publication date
 
-March 11th, 2025
+March 11, 2025
 
 ### Products affected
 
@@ -566,33 +592,33 @@ The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
 ### Publication date
 
-July 18th, 2024
+July 18, 2024
 
 ### Products affected
 
-Camunda Identity
+Camunda Management Identity
 
 ### Impact
 
-The version of `Apache Tomcat` used by Camunda Identity was affected by the following vulnerability:
+The version of `Apache Tomcat` used by Camunda Management Identity was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2024-34750
 
 ### How to determine if the installation is affected
 
-You are using Camunda Identity version 8.5.3 or previous.
+You are using Camunda Management Identity version 8.5.3 or previous.
 
 ### Solution
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- [Camunda Management Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
 
 ## Notice 12
 
 ### Publication date
 
-October 3rd, 2023
+October 3, 2023
 
 ### Products affected
 
@@ -652,7 +678,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-November 10th, 2022
+November 10, 2022
 
 ### Products affected:
 
@@ -682,7 +708,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-April 11th, 2022
+April 11, 2022
 
 ### Products affected:
 
@@ -709,7 +735,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -735,7 +761,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
 ### Products affected:
 
@@ -760,7 +786,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -786,7 +812,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
 ### Products affected:
 
@@ -814,7 +840,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -840,7 +866,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
 ### Products affected:
 
@@ -868,7 +894,7 @@ Camunda has provided the following releases which contain a fix
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 
@@ -896,7 +922,7 @@ Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLoo
 
 ### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
 ### Products affected:
 
