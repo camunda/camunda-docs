@@ -35,5 +35,5 @@ Disabling variable import means variable-based reports and filters will no longe
 :::
 
 :::note
-When re-enabled, partial or full variable import may happen depending on your cluster [retention](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) configuration.
+When re-enabled, partial or full variable import may happen depending on your cluster [retention](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) configuration.
 :::
