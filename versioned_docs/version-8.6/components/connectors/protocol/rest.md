@@ -61,7 +61,7 @@ To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the follo
 The HTTPS protocol handler also uses the `http.nonProxyHosts` property to specify non-proxy hosts.
 :::
 
-| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (nonProxyHost site) |
+| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (`nonProxyHost` site) |
 | ---------------- | ------------------------- | ------------------------- | ---------------------------------------------- | ------------------------------------------- | --------------------------------- |
 | ❌               | N/A                       | N/A                       | No proxy                                       | No proxy                                    | No proxy                          |
 | ✅               | ❌                        | ✅                        | Proxy                                          | Proxy                                       | Proxy                             |

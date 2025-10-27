@@ -83,7 +83,7 @@ As an alternative to using JVM properties, the proxy settings can also be set wi
 The HTTPS properties also use the `http.nonProxyHosts` or `CONNECTOR_HTTP_NON_PROXY_HOSTS` property to specify non-proxy hosts.
 :::
 
-| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (nonProxyHost site) |
+| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (`nonProxyHost` site) |
 | ---------------- | ------------------------- | ------------------------- | ---------------------------------------------- | ------------------------------------------- | --------------------------------- |
 | ❌               | N/A                       | N/A                       | No proxy                                       | No proxy                                    | No proxy                          |
 | ✅               | ❌                        | ✅                        | Proxy                                          | Proxy                                       | Proxy                             |
