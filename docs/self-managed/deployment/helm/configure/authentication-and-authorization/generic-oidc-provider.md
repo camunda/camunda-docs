@@ -1,7 +1,7 @@
 ---
 id: generic-oidc-provider
 sidebar_label: Generic OIDC provider
-title: Helm chart setup with any third-party OIDC provider
+title: Set up the Helm chart with any third-party OIDC provider
 description: "Learn how to set up the Helm Chart so that it connects to a third-party OIDC provider"
 ---
 

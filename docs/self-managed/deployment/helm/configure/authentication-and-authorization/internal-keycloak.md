@@ -1,37 +1,37 @@
 ---
 id: internal-keycloak
 sidebar_label: Internal Keycloak
-title: Helm chart internal Keycloak setup
-description: Learn how to configure and enable the internal Keycloak instance for Camunda 8 Self-Managed deployments using Helm chart.
+title: Set up the Helm chart with the internal Keycloak instance
+description: Learn how to configure and enable the internal Keycloak instance for Camunda 8 Self-Managed deployments using the Helm chart.
 ---
 
 The Camunda Helm chart can deploy an internal Keycloak instance that acts as the identity management service for authentication and authorization. The Management Identity component configures the internal Keycloak automatically on startup with a realm and several entities to simplify setup and reduce the learning curve.
 
-Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart. In this case, Management Identity, Connectors, and the Orchestration Cluster itself must be configured to authenticate against the internal Keycloak.
+Enable internal Keycloak if you don’t have an external identity provider (IdP) and want to use additional Camunda components (Console, Web Modeler, Optimize, Management Identity) that are disabled by default in the Helm chart.
 
-If you prefer to run Keycloak externally and disable the internal one, see the [guide on using an external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
+If you prefer to run Keycloak externally and disable the internal one, see [Set up the Helm chart with an external Keycloak instance](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
 
 ## Configuration
 
 This guide shows you how to:
 
-- Configure the Helm chart to deploy an internal Keycloak instance
-- Configure the Helm chart with a custom secret for accounts used across all components
-- Choose which application components you want to enable in the release
-- Access all components from your local machine
+- Configure the Helm chart to deploy an internal Keycloak instance.
+- Configure the Helm chart with a custom secret for accounts used across all components.
+- Enable the application components you want to include in the release.
+- Access all components from your local environment.
 
-To use an internal Keycloak instance, you need to perform the following steps:
+To use an internal Keycloak instance, complete the following steps:
 
 1. [Create a secret](#create-a-secret)
 1. [Enable internal Keycloak](#enable-internal-keycloak)
 1. [Configure Management Identity](#configure-management-identity)
 1. [Configure components using OIDC](#configure-components-using-oidc)
 
-Jump to the [full configuration example](#full-configuration-example) to see it all at once.
+See the [full configuration example](#full-configuration-example) for the complete setup.
 
 ### Create a secret
 
-Create a secret that contains all required keys. For example, the following command creates a `camunda-credentials` secret:
+Create a secret that contains all required credentials. For example, the following command creates a `camunda-credentials` secret:
 
 ```bash
 kubectl create secret generic camunda-credentials \
@@ -48,15 +48,15 @@ kubectl create secret generic camunda-credentials \
 
 This secret includes the following keys:
 
-- `identity-keycloak-postgresql-admin-password`: The password for the administrative account of the PostgreSQL instance used by Management Identity (username `postgres`).
-- `identity-keycloak-postgresql-user-password`: The password non-privileged user account of the PostgreSQL instance used by Management Identity (username `bn_keycloak`).
-- `identity-keycloak-admin-password`: The password for the adminstrative account for the internal Keycloak instance (username `admin`).
-- `identity-firstuser-password`: The password for the initial user account for the internal Keycloak instance (default username `demo`). This is the account you will use to log into the Camunda web applications once everything is set up.
-- `identity-connectors-client-token`: The client secret of the Keycloak OIDC client `connectors `used by Connectors.
-- `identity-optimize-client-token`: The client secret of the Keycloak OIDC client `optimize` used by Optimize.
-- `identity-orchestration-client-token`: The client secret of the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
-- `webmodeler-postgresql-admin-password`: The password for the administrative account of the PostgreSQL instance used by Web Modeler (username `postgres`).
-- `webmodeler-postgresql-user-password` The password non-privileged user account of the PostgreSQL instance used by Web Modeler (username `web-modeler`).
+- `identity-keycloak-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Management Identity (`postgres`).
+- `identity-keycloak-postgresql-user-password`: Password for the non-privileged PostgreSQL account used by Management Identity (`bn_keycloak`).
+- `identity-keycloak-admin-password`: Password for the adminstrative account for the internal Keycloak instance (`admin`).
+- `identity-firstuser-password`: Password for the initial user account in Keycloak (default username `demo`), used to log in to the Camunda web apps.
+- `identity-connectors-client-token`: Client secret for the Keycloak OIDC client `connectors `used by Connectors.
+- `identity-optimize-client-token`: Client secret for the Keycloak OIDC client `optimize` used by Optimize.
+- `identity-orchestration-client-token`: Client secret for the Keycloak OIDC client `orchestration` used by the Orchestration Cluster.
+- `webmodeler-postgresql-admin-password`: Password for the administrative account of the PostgreSQL instance used by Web Modeler (`postgres`).
+- `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
 
 ### Enable internal Keycloak
 
@@ -78,7 +78,7 @@ identityKeycloak:
 
 ### Configure Management Identity and global defaults
 
-Management Identity configures the internal Keycloak instance during startup. For example, it creates the Camunda realm and other required Keycloak entities. If you cannot see the Camunda realm in Keycloak, then this step was not successful.
+Management Identity configures the internal Keycloak instance during startup. For example, it creates the Camunda realm and other required Keycloak entities. If the Camunda realm doesn’t appear in Keycloak after deployment, the setup process did not complete successfully.
 
 Management Identity configuration:
 
@@ -99,11 +99,11 @@ identity:
       existingSecretKey: "identity-firstuser-password"
 ```
 
-`identity.firstUser` defines the first user created in internal Keycloak. By default it creates this user with name `demo`. Set the value `identity.firstUser.username` if you would like to choose a different name.
+`identity.firstUser` defines the first user created in Keycloak. By default, this user is named `demo`. You can override this by setting `identity.firstUser.username`.
 
 ### Configure components using OIDC
 
-Once Management Identity is configured, you can move on to configuring the OAuth and OIDC connections for the other components. You can skip those components that you do not need. Keep in mind that Orchestration Cluster and Connectors are enabled by default, so you will have to disable them explicitly in that case.
+Once Management Identity is configured, you can set up OAuth and OIDC for the remaining components. You can skip components you don’t plan to run. By default, the Orchestration Cluster and Connectors are enabled and must be explicitly disabled if not required.
 
 #### Configure Orchestration Cluster
 
@@ -154,7 +154,7 @@ optimize:
   enabled: true
 ```
 
-Make sure to add the part under `global.identity.auth` to the existing section that you created when configuring Management Identity.
+Add the section under `global.identity.auth` to the existing section you created when configuring Management Identity.
 
 #### Configure Web Modeler
 
@@ -178,7 +178,9 @@ webModelerPostgresql:
       userPasswordKey: "webmodeler-postgresql-user-password"
 ```
 
-You can replace the value of `webModeler.restapi.mail.fromAddress` with a value that fits your scenario. This is the email address that Web Modeler declares in the emails it sends. For more details on how you can configure the Web Modeler email connection, see [the corresponding documentation](../enable-additional-components.md#web-modeler).
+You can update `webModeler.restapi.mail.fromAddress` with an address suitable for your environment.
+This address appears as the sender in emails sent by Web Modeler.
+For more details on configuring email delivery, see the [Web Modeler section in Enable additional Camunda components](../enable-additional-components.md#web-modeler).
 
 #### Configure Console
 
@@ -197,11 +199,11 @@ console:
   enabled: true
 ```
 
-Make sure to add the part under `global.identity.auth` to the existing section that you created when configuring Management Identity.
+Add the section under `global.identity.auth` to the existing section you created when configuring Management Identity.
 
 ### Full configuration example
 
-Full configuration file to enable internal Keycloak:
+The following example shows a complete configuration for connecting to internal Keycloak:
 
 ```yaml
 global:
@@ -276,14 +278,16 @@ console:
   enabled: true
 ```
 
-In the internal Keycloak scenario, the Camunda Helm chart does most of the heavy lifting of setting up Keycloak, creating OIDC/OAuth clients and wiring the components together. Accordingly, your values file largely only consists of enabling all components and configuring the client secrets. If you are curious how each component is configured and which OIDC clients are used, we recommend to:
+In this setup, the Camunda Helm chart handles most of the Keycloak configuration automatically, including creating OIDC or OAuth clients and linking components. Your values file primarily enables components and defines client secrets.
 
-- Run `kubectl get pods` and `kubectl get configmap` and the corresponding `kubectl describe` commands to review each component and its effective configuration
-- Log into Keycloak (using user `admin` and the configured admin user password from the secret you created) to review the OIDC provider setup
+To review how each component is configured and which OIDC clients are used:
+
+- Run `kubectl get pods` and `kubectl get configmap`, then use `kubectl describe` to inspect component configurations.
+- Log into Keycloak (using your administrative user) to review the OIDC client setup
 
 ## Connect to the cluster
 
-Running this configuration, you can use the following port-forwarding instructions to access the APIs and UIs from localhost:
+After applying this configuration, use the following `kubectl port-forward` commands to access the APIs and UIs from your localhost:
 
 ```bash
 # Keycloak (required for all UIs)
@@ -310,10 +314,16 @@ kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 kubectl port-forward svc/camunda-console 8087:80
 ```
 
-Once port forwarding is in place, you can then access the corresponding component via `http://localhost:<port>`, for example `http://localhost:18080` for Keycloak and `http://localhost:8080` for the Orchestration Cluster UI. Use the username `demo` and the password you have set in the secret key `identity-firstuser-password` to log in.
+Once port forwarding is active, access each component through `http://localhost:<port>`.
+For example:
+
+- Keycloak: `http://localhost:18080`
+- Orchestration Cluster: `http://localhost:8080`
+
+Log in with username `demo` and the password you defined under `identity-firstuser-password`.
 
 ## External identity provider
 
 Instead of using an internal Keycloak instance, you can configure Camunda to connect to an external IdP, such as an external Keycloak, Microsoft Entra ID, or Okta.
 
-See the [guide on connecting to an external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) for details.
+See [Set up the Helm chart with an external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) for details.

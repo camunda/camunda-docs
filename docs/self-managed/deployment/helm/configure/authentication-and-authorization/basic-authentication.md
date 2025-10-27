@@ -8,7 +8,7 @@ description: Learn how to configure and manage basic authentication for Camunda 
 By default, Camunda 8 Self-Managed uses basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.
 
 :::note
-Because basic authentication is enabled by default, components that depend on Management Identity (implementing only OIDC/OAuth authentication) are disabled by default, which are:
+Because basic authentication is enabled by default, components that depend on Management Identity (which implements OIDC/OAuth authentication) are disabled by default. These components include:
 
 - Management Identity
 - Console
@@ -21,12 +21,13 @@ Because basic authentication is enabled by default, components that depend on Ma
 
 Two users are created by default:
 
-| Username    | Password    | Role         | Description                                                                  |
-| ----------- | ----------- | ------------ | ---------------------------------------------------------------------------- |
-| `demo`      | `demo`      | `admin`      | Your initial administrative user                                             |
-| `connector` | `connector` | `connectors` | Used by the Connectors component to connect to the Orchestration Cluster API |
+| Username    | Password    | Role         | Description                                                                         |
+| ----------- | ----------- | ------------ | ----------------------------------------------------------------------------------- |
+| `demo`      | `demo`      | `admin`      | Initial administrative user                                                         |
+| `connector` | `connector` | `connectors` | Used by the Connectors component to authenticate with the Orchestration Cluster API |
 
-See the [documentation on Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration) for how to configure the initial users and their roles.
+For details on configuring initial users and their roles, see  
+[Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration).
 
 :::note Helm arrays
 In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.
