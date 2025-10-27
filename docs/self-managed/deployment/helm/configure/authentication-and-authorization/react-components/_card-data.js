@@ -8,21 +8,21 @@ import IconGear from "../../../../../../components/assets/icon-orchcluster.png";
 // Backup and Restore overview cards data
 export const overviewCards = [
   {
-    link: "/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md",
+    link: "./external-keycloak",
     title: "External Keycloak",
     image: IconGear,
     description:
       "Use an externally hosted Keycloak instance where the Camunda Management Identity component can automatically populate the realm.",
   },
   {
-    link: "/self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra.md",
+    link: "./microsoft-entra",
     title: "Microsoft Entra",
     image: IconGear,
     description:
       "Connect Camunda to Microsoft Entra ID for authentication and authorization.",
   },
   {
-    link: "/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider.md",
+    link: "./generic-oidc-provider",
     title: "Generic OIDC Provider",
     image: IconGear,
     description:
