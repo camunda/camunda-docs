@@ -61,12 +61,12 @@ To specify the proxy as an HTTPS (HTTP over SSL) protocol handler, set the follo
 The HTTPS protocol handler also uses the `http.nonProxyHosts` property to specify non-proxy hosts.
 :::
 
-| Proxy config set | nonProxyHost config set | valid login provided      | domain1.com (proxied site, no auth required) | domain2.com (proxied site, auth required) | domain3.com (nonProxyHost site) |
-| ---------------- | ----------------------- | ------------------------- | -------------------------------------------- | ----------------------------------------- | ------------------------------- |
-| ❌               | N/A                     | N/A                       | no proxy                                     | no proxy                                  | no proxy                        |
-| ✅               | ❌                      | ✅                        | proxy                                        | proxy                                     | proxy                           |
-| ✅               | ✅                      | ❌ (incorrect or missing) | proxy                                        | Auth error                                | no proxy                        |
-| ✅               | ✅                      | ✅                        | proxy                                        | proxy                                     | no proxy                        |
+| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (nonProxyHost site) |
+| ---------------- | ------------------------- | ------------------------- | ---------------------------------------------- | ------------------------------------------- | --------------------------------- |
+| ❌               | N/A                       | N/A                       | No proxy                                       | No proxy                                    | No proxy                          |
+| ✅               | ❌                        | ✅                        | Proxy                                          | Proxy                                       | Proxy                             |
+| ✅               | ✅                        | ❌ (Incorrect or missing) | Proxy                                          | Auth error                                  | No proxy                          |
+| ✅               | ✅                        | ✅                        | Proxy                                          | Proxy                                       | No proxy                          |
 
 ### Authentication
 
