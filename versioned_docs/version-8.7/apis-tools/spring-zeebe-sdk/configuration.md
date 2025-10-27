@@ -51,6 +51,8 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/resources/modes/self-managed.yaml
 ```
 
+For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.zeebe.scope` in addition to the defaults provided by the mode.
+
 ## Job worker configuration options
 
 ### Job type
