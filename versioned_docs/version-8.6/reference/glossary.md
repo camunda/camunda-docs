@@ -375,7 +375,7 @@ See [process instance](#process-instance).
 
 ### Workflow instance variable
 
-See [process variable](#process-instance-variable).
+See [process variable](#process-variable).
 
 ## Z
 

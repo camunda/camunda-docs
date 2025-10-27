@@ -313,13 +313,6 @@ A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
-### Process variable
-
-A process variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
-
-- [Variables](/components/concepts/variables.md)
-- [Data flow](/components/modeler/bpmn/data-flow.md)
-
 ### Process model
 
 The BPMN representation of a [process](/components/concepts/processes.md), created in a BPMN file (for example, in Modeler).
@@ -327,6 +320,13 @@ The BPMN representation of a [process](/components/concepts/processes.md), creat
 Identified by its **process ID** (`bpmn:process id` attribute).
 
 A single BPMN file can contain multiple process models.
+
+### Process variable
+
+A process variable represents the execution state (i.e data) of a process instance. These variables capture business process parameters which are the input and output of various stages of the process instance and which also influence process flow execution.
+
+- [Variables](/components/concepts/variables.md)
+- [Data flow](/components/modeler/bpmn/data-flow.md)
 
 ### Protocol connector
 
@@ -444,7 +444,7 @@ See [process instance](#process-instance).
 
 ### Workflow instance variable
 
-See [process variable](#process-instance-variable).
+See [process variable](#process-variable).
 
 ## Z
 
