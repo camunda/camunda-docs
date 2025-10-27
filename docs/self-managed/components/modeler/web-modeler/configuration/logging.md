@@ -26,6 +26,23 @@ By default, Web Modeler's `restapi` component logs in JSON. For a more readable 
 SPRING_PROFILES_INCLUDE=default-logging
 ```
 
+### Changing log level at runtime
+
+You can adjust log levels dynamically using Spring Boot Actuator endpoints:
+
+```bash
+curl 'http://localhost:8091/actuator/loggers/io.camunda' \
+  -i -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"configuredLevel":"DEBUG"}'
+```
+
+Replace `io.camunda` with the logger you want to adjust.
+
+:::note
+The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Web Modeler `restapi` component.
+:::
+
 ## Logging configuration for the `webapp` component
 
 By default, the `webapp` component logs to the Docker container's standard output.
