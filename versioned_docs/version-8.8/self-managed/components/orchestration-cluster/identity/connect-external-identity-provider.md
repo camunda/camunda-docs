@@ -90,7 +90,7 @@ camunda.security.authentication.oidc.issuer-uri: <YOUR_ISSUERURI>
 camunda.security.authentication.oidc.redirect-uri: <YOUR_REDIRECTURI>
 camunda.security.authentication.oidc.username-claim: <YOUR_USERNAMECLAIM>
 camunda.security.authentication.oidc.audiences: [<YOUR_CLIENTID>]
-camunda.security.authentication.oidc.scope: ["openid"]
+camunda.security.authentication.oidc.scope: ["openid"] # for Microsoft EntraId: "[<YOUR_CLIENTID + "/.default">]"
 ```
 
 </TabItem>
@@ -102,6 +102,7 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI=<YOUR_ISSUERURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI=<YOUR_REDIRECTURI>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM=<YOUR_USERNAMECLAIM>
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES_0=<YOUR_CLIENTID>
+# for Microsoft EntraId: "[<YOUR_CLIENTID + "/.default">]"
 CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE=["openid"]
 ```
 </TabItem>
@@ -119,7 +120,7 @@ orchestration:
         redirectUrl: <YOUR_REDIRECTURL>
         usernameClaim: <YOUR_USERNAMECLAIM>
         audience: <YOUR_CLIENTID>
-        scope: ["openid"]
+        scope: ["openid"] # for Microsoft EntraId: "[<YOUR_CLIENTID + "/.default">]"
 ```
 </TabItem>
 </Tabs>
@@ -364,13 +365,13 @@ As per default authorizations are enabled, your application will only be able to
    private static final String ocAudience = "<YOUR_CLIENT_ID_FROM_OC>";
    private static final String clusterGrpcLocal = "grpc://localhost:26500";
    private static final String clusterRestLocal = "http://localhost:8080";
-   private static final String scope = "openid"; // <YOUR_CLIENT_ID> for Microsoft EntraID
+   private static final String scope = "openid"; // <YOUR_CLIENT_ID + "/.default"> for Microsoft EntraID
 
   // Build a new OAuthCredentialsProvider
   final OAuthCredentialsProvider credentialsProvider =
         new OAuthCredentialsProviderBuilder()
           .authorizationServerUrl(authorizationServer)
-          .audience(ocAudience). // for Microsoft EntraID typically use: ocAudience + "/.default"
+          .audience(ocAudience). // for Microsoft EntraID typically use: ocAudience
           .clientId(clientId)
           .clientSecret(clientSecret)
           .scope(scope)
@@ -411,7 +412,7 @@ camunda:
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
       audience: <YOUR_CLIENT_ID_FROM_OC>
-      scope: ["openid"] # <YOUR_CLIENT_ID> for Microsoft EntraID
+      scope: ["openid"] # <YOUR_CLIENT_ID + "/.default"> for Microsoft EntraID
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
@@ -450,7 +451,7 @@ camunda:
       client-secret: <YOUR_CLIENT_SECRET>
       token-url: <YOUR_AUTHORIZATION_SERVER>
       audience: <YOUR_CLIENT_ID_FROM_OC>
-      scope: ["openid"] # <YOUR_CLIENT_ID> for Microsoft EntraID
+      scope: ["openid"] # <YOUR_CLIENT_ID + "/.default"> for Microsoft EntraID
     grpc-address: grpc://localhost:26500
     rest-address: http://localhost:8080
 ```
