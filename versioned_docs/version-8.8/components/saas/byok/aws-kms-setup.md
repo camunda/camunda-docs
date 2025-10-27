@@ -56,7 +56,7 @@ Use this script to create a single KMS key in the same region as the cluster.
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-single-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/docs/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
+1. Download [create-byok-kms-key-single-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.8/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
 2. Modify the following values at the top of the script:
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
@@ -78,7 +78,7 @@ Use this script to create a multi-region primary key in the cluster's region and
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/docs/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
+1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.8/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
 2. Modify the same variables as above.
 3. Make the script executable and run it.
 4. Copy the two outputted key ARNs and provide them to Camunda.
@@ -106,7 +106,7 @@ For dual-region setups, you can also run the single-region script twice—once i
 5. **Define key usage permissions**
    - Skip this step; permissions are configured in the next step.
 6. **Edit key policy**
-   - Switch to policy view and replace the existing policy with the [provided key policy](https://github.com/camunda/camunda-docs/tree/main/docs/components/saas/byok/downloads/aws-kms-key-policy.json).
+   - Switch to policy view and replace the existing policy with the [provided key policy](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.8/components/saas/byok/downloads/aws-kms-key-policy.json).
    - Replace `<YOUR_AWS_ACCOUNT_ID>` and `<TENANT_ROLE_ARN>` with your values.
 7. **Finish and copy the ARN**
    - Click **Finish** and copy the key ARN to use in the Camunda Console.
