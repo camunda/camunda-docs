@@ -96,7 +96,7 @@ For API documentation, link to the centralized authentication overview instead o
 :::warning
 The Operate, Tasklist, and Zeebe REST APIs are **deprecated**. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
-Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
+Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
 :::
 
 ## How to obtain tokens
