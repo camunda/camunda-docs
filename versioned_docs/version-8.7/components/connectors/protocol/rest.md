@@ -83,12 +83,34 @@ As an alternative to using JVM properties, the proxy settings can also be set wi
 The HTTPS properties also use the `http.nonProxyHosts` or `CONNECTOR_HTTP_NON_PROXY_HOSTS` property to specify non-proxy hosts.
 :::
 
-| Proxy config set | `nonProxyHost` config set | Valid login provided      | `domain1.com` (proxied site, no auth required) | `domain2.com` (proxied site, auth required) | `domain3.com` (`nonProxyHost` site) |
-| ---------------- | ------------------------- | ------------------------- | ---------------------------------------------- | ------------------------------------------- | --------------------------------- |
-| ❌               | N/A                       | N/A                       | No proxy                                       | No proxy                                    | No proxy                          |
-| ✅               | ❌                        | ✅                        | Proxy                                          | Proxy                                       | Proxy                             |
-| ✅               | ✅                        | ❌ (Incorrect or missing) | Proxy                                          | Auth error                                  | No proxy                          |
-| ✅               | ✅                        | ✅                        | Proxy                                          | Proxy                                       | No proxy                          |
+#### Learn how the proxy configuration works
+
+The process consists of two main steps: configuration and request handling.
+
+##### Set your configuration
+
+First, define how the proxy should behave.
+These are the available configuration options:
+
+1. Enable or disable proxying.
+1. Define which URLs should skip the proxy, listed as `nonProxyHosts`.
+1. Define which URLs require authentication.
+
+##### Handle incoming requests
+
+When a URL request arrives, the following process takes place:
+
+1. Check if the proxy is enabled.
+1. Check if the site is listed in `nonProxyHosts`.
+1. Check if the site requires authentication.
+
+For example, when a URL request arrives:
+
+1. Is the proxy enabled? Yes, proceed with proxying.
+1. Is the URL site in `nonProxyHosts`? No, proceed with proxying.
+1. Does the URL require authentication?
+   1. Yes. The request is proxied only if the authentication is valid. Otherwise, it returns an authentication error.
+   1. No. The request is proxied.
 
 ### Authentication
 
