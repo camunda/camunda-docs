@@ -11,10 +11,10 @@ Choose the right Large Language Model (LLM) to ensure your AI agent reliably exe
 
 This guide covers:
 
-- How to measure agent performance with standardized benchmarks
-- Key LiveBench metrics and what they mean
-- A decision framework for selecting models based on deployment and business needs
-- How to use LiveBench’s interactive tool to compare models
+- How to measure agent performance with standardized benchmarks.
+- Key LiveBench metrics and what they mean.
+- A decision framework for selecting models based on deployment and business needs.
+- How to use LiveBench’s interactive tool to compare models.
 
 ## Measuring agent performance
 
@@ -38,17 +38,19 @@ One such benchmark is **LiveBench**, which avoids common pitfalls such as test d
 
 LiveBench evaluates LLMs across multiple skill areas. Each metric represents a core capability:
 
-| Metric                             | What it measures                                        | When it matters                                  |
-| :--------------------------------- | :------------------------------------------------------ | :----------------------------------------------- |
-| **Reasoning**                      | Logical thinking and stepwise problem-solving           | Strategic planning, multi-step workflows         |
-| **Math**                           | Numerical accuracy and quantitative reasoning           | Finance, analytics, reporting                    |
-| **Coding**                         | Code generation and debugging                           | Dev tools, automation scripts                    |
-| **Data analysis**                  | Extracting insights from datasets, tables, or documents | Research, reporting, content analysis            |
-| **Instruction following**          | Compliance with formats, rules, and prompts             | Policy-driven workflows, SOP tasks               |
-| **Software engineering (agentic)** | Tool-assisted coding and autonomous dev work            | CI/CD, issue triage, automated PRs               |
-| **Language**                       | Context understanding, fluency, general knowledge       | Chatbots, documentation, natural language output |
+| Metric                             | What it measures                                         | When it matters                                   |
+| :--------------------------------- | :------------------------------------------------------- | :------------------------------------------------ |
+| **Reasoning**                      | Logical thinking and stepwise problem-solving.           | Strategic planning, multi-step workflows.         |
+| **Math**                           | Numerical accuracy and quantitative reasoning.           | Finance, analytics, reporting.                    |
+| **Coding**                         | Code generation and debugging.                           | Dev tools, automation scripts.                    |
+| **Data analysis**                  | Extracting insights from datasets, tables, or documents. | Research, reporting, content analysis.            |
+| **Instruction following**          | Compliance with formats, rules, and prompts.             | Policy-driven workflows, SOP tasks.               |
+| **Software engineering (agentic)** | Tool-assisted coding and autonomous dev work.            | CI/CD, issue triage, automated PRs.               |
+| **Language**                       | Context understanding, fluency, general knowledge.       | Chatbots, documentation, natural language output. |
 
-Different models excel in different areas. For instance, a model might rank highly in reasoning but score average on coding tasks. Matching model strengths to your workflow requirements ensures better outcomes.
+Different models excel in different areas.
+For instance, a model might rank highly in reasoning but score average on coding tasks.
+Matching model strengths to your workflow requirements ensures better outcomes.
 
 ## Model selection framework
 
@@ -85,13 +87,13 @@ import LiveBenchModelFilter from '../react-components/livebench-model-filter'
 - **On-premises + cost-sensitive:** Likely shows open-source models ranked by accuracy.
 - **High accuracy + less cost concern:** Surfaces top proprietary models.
 
-## Key takeaway
+## Key takeaways
 
 Model choice should align with:
 
-1. **Performance metrics** (tool usage, action completion, instruction adherence)
-2. **LiveBench scores** for skills relevant to your workflow
-3. **Practical constraints** like hosting, privacy, cost, and accuracy needs
+1. **Performance metrics** (tool usage, action completion, instruction adherence).
+2. **LiveBench scores** for skills relevant to your workflow.
+3. **Practical constraints** like hosting, privacy, cost, and accuracy needs.
 
 A clear framework and benchmarked data helps you choose an LLM or foundation model to power your Camunda agent.
 
