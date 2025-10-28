@@ -96,11 +96,13 @@ You can choose a [region in **GCP** or **AWS**](regions.md). Each [Orchestration
 
 ## REST API connector (traffic routing)
 
-You can use the Camunda‑hosted REST API connector in the EU, or host your own connector runtime (hybrid mode) to keep traffic in your chosen location.
+For security reasons, REST API calls made by the REST API connector are all routed through a dedicated HTTPS proxy hosted by Camunda in the EU. Depending on the cloud provider of your Camunda Orchestration Cluster, the REST API connector will use either an AWS or a GCP-hosted HTTPS proxy.
 
-| Host location                                                                   | Handled data                                                                                                                                                                               | Personal data processing                                                                                                    |
-| :------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| <ul><li>Belgium, EU (GCP clusters)</li><li>Germany, EU (AWS clusters)</li></ul> | All data uploaded to Camunda in Orchestration Clusters and is processed by the REST API Connector. The use of the REST API Connector is optional, and depends on the customers’ workflows. | Dependent on the data you sent to Camunda in the Orchestration Clusters. Camunda does not process personal data by default. |
+As a customer, you can either use the Camunda‑hosted REST API connector, or host your own connector runtime (hybrid mode) to keep traffic in your chosen location.
+
+| Host location                                                                   | Handled data                                                                                                                                                                                                      | Personal data processing                                                                                                    |
+| :------------------------------------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Belgium, EU (GCP clusters)</li><li>Germany, EU (AWS clusters)</li></ul> | <p>All data uploaded to Camunda in Orchestration Clusters and processed specifically by the REST API Connector.</p><p>The use of the REST API Connector is optional, and depends on the customers’ workflows.</p> | Dependent on the data you sent to Camunda in the Orchestration Clusters. Camunda does not process personal data by default. |
 
 :::info Learn More
 
