@@ -5,34 +5,23 @@ sidebar_position: 2
 description: "Authenticate API requests to the Tasklist REST API."
 ---
 
-All Tasklist REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) or use Basic Auth if your environment allows.
-
-See [Identity and access management](/components/concepts/access-control/access-control-overview.md) for a full overview of authentication vs. authorization.
-
-## Using Basic Auth
-
-Basic authentication uses a username and password. Include credentials in each request:
-
-```shell
-curl --user username:password \
-   --request POST ${CAMUNDA_TASKLIST_BASE_URL}/v1/tasks/search \
-   --header 'Content-Type: application/json' \
-   --data-raw '{}'
-```
-
-:::note
-Basic Auth is typically used only for local development or Self-Managed Helm deployments. It is not recommended for production SaaS environments.
+:::warning
+The Tasklist REST API is **deprecated**. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
-## Using a token (OIDC/JWT)
+Tasklist uses the same authentication mechanism as the [Orchestration Cluster REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
-If your environment uses OIDC-based authentication, include the token in the `Authorization` header:
+If your environment uses **OIDC-based authentication**, obtain an access token following [Using a token (OIDC/JWT)](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 
-```shell
-curl --request POST ${CAMUNDA_TASKLIST_BASE_URL}/v1/tasks/search \
-   --header "Authorization: Bearer ${TOKEN}" \
-   --header 'Content-Type: application/json' \
-   --data-raw '{}'
+If **no authentication is configured** (for example, for local development), see [No authentication (local development)](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development).
+
+When making requests to Tasklist, replace the base URL used in examples with your Tasklist API URL.
+
+Example:
+
+```bash
+curl -X GET "$TASKLIST_BASE_URL/v1/tasks" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
 A successful response returns matching task objects.
