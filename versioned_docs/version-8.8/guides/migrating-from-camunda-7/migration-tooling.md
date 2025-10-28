@@ -7,10 +7,6 @@ description: "Understand the available migration tooling and its roadmap."
 
 Camunda currently invests in tooling to help support and ease your migration from Camunda 7 to Camunda 8.
 
-:::info
-The migration tooling is currently under development, with an initial release planned for **Camunda 8.8 (October 2025)**.
-:::
-
 ## Migration tools
 
 Camunda provides the following migration tools:

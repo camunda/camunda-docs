@@ -706,7 +706,7 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 
 In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
 
-<p><a href="../../../../components/modeler/web-modeler/git-sync" class="link-arrow">Git sync</a></p>
+<p><a href="../../../../components/modeler/web-modeler/process-applications/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Low-code process testing
 
@@ -718,7 +718,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
-<p><a href="../../../../components/modeler/web-modeler/collaboration/play-your-process/" class="link-arrow">Scenarios</a></p>
+<p><a href="../../../../components/modeler/web-modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
 
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
@@ -740,7 +740,7 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-<p><a href="../../../../components/modeler/web-modeler/versions" class="link-arrow">Web Modeler versioning</a></p>
+<p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
 
 ### Technical Changelogs for all 8.8.x releases
 
@@ -748,7 +748,7 @@ Use the version **Description** field to track changes alongside the version tag
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<ul><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -1113,7 +1113,7 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 - This helps customers who use Jira for their development processes.
 - Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
-To learn more, see [Git sync](/components/modeler/web-modeler/git-sync.md?platform=bitbucket).
+To learn more, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md?platform=bitbucket).
 
 ### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
@@ -1287,7 +1287,7 @@ To learn more about this connector, see [vector database connector](/components/
 
 ### Azure DevOps integration for Git sync <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/git-sync.md) that allows for direct syncing with Azure repositories.
+Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/process-applications/git-sync.md) that allows for direct syncing with Azure repositories.
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
@@ -1446,7 +1446,7 @@ To learn more about these settings, see [Desktop Modeler settings](/components/m
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/versions.md).
+To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/modeling/versions.md).
 
 ### Web Modeler cluster basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 

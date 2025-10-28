@@ -129,7 +129,7 @@ Once you have started your process, you can then monitor the execution in [Opera
 
 ### SaaS
 
-In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/collaboration/play-your-process.md) feature.
+In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/validation/play-your-process.md) feature.
 
 1. Select the **Play** tab.
 1. Select the cluster you want to deploy and play the process on.

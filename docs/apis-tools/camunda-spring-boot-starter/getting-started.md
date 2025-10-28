@@ -133,7 +133,8 @@ camunda:
 
 </TabItem>
 <TabItem value="oidc">
-To activate OIDC-based authentication:
+
+If you set up a [Self-Managed cluster with OIDC](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md), you must configure the accompanying client credentials:
 
 ```yaml
 camunda:
@@ -180,9 +181,9 @@ camunda:
     auth:
       client-id: <your client id>
       client-secret: <your client secret>
-    cloud:
-      cluster-id: <your cluster id>
-      region: <your cluster region id>
+      token-url: https://my-oidc-provider/auth/realms/camunda-platform/protocol/openid-connect/token
+    grpc-address: https://my-grpc-address
+    rest-address: https://my-rest-address
 ```
 
 :::note
@@ -202,31 +203,7 @@ You can inject the Camunda client and work with it to create new workflow instan
 private CamundaClient client;
 ```
 
-### Deploy process models
-
-Use the `@Deployment` annotation:
-
-```java
-@SpringBootApplication
-@Deployment(resources = "classpath:demoProcess.bpmn")
-public class MySpringBootApplication {
-    // ...
-}
-```
-
-This annotation uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) and can deploy multiple files at once:
-
-```java
-@Deployment(resources = {"classpath:demoProcess.bpmn", "classpath:demoProcess2.bpmn"})
-```
-
-Or, define wildcard patterns:
-
-```java
-@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
-```
-
-### Implement a job worker
+## Implement the job worker
 
 Declare a method like this on a bean:
 
@@ -237,25 +214,19 @@ public void handleJobFoo() {
 }
 ```
 
-See the [configuration documentation](/apis-tools/camunda-spring-boot-starter/configuration.md) for a detailed discussion of parameters and configuration options for job workers.
+To learn about all options you have with job workers, check out the [configuration](./configuration.md#job-worker-configuration-options) page.
 
-### Write test cases
+## Deploy process models
 
-Refer to [Camunda Process Test](../testing/getting-started.md) to write test cases when using the Camunda Spring Boot Starter.
+To deploy process models on application start-up, use the `@Deployment` annotation:
 
-## Key features and capabilities
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath:demoProcess.bpmn")
+public class MySpringBootApplication {
+```
 
-- **Full Orchestration Cluster 8 API support:** Access all Orchestration Cluster API capabilities, including process deployment, management, job handling, and querying process data.
-- **Multiple authentication methods:** Supports no authentication (development), basic authentication, and OIDC access tokens for production environments.
-- **Automatic token management:** Handles authentication token acquisition and renewal automatically—no manual token management required.
-- **Protocol flexibility:** Choose between REST and gRPC protocols based on your requirements and infrastructure.
-
-## Next steps and resources
-
-**Learn the fundamentals**
-
-- [Process testing](../testing/getting-started.md) – Test your processes with Camunda Process Test.
-- [Getting started tutorial](../../guides/getting-started-example.md) – Complete walkthrough with Modeler, Operate, and Spring SDK.
+To learn about all options about the usage of the `@Deployment` annotation, check out the [configuration](./configuration.md#deploying-resources-on-start-up) page.
 
 **Need help?**
 

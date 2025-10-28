@@ -1,6 +1,6 @@
 ---
 id: google-cloud-storage
-title: Google cloud storage connector
+title: Google Cloud storage connector
 sidebar_label: Google Cloud Storage
 description: Interact with Google Cloud Storage from your BPMN process.
 ---
