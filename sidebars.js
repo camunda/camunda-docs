@@ -461,7 +461,6 @@ module.exports = {
                 },
                 {
                   "AI features": [
-                    "components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions",
                     "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
                   ],
                 },
