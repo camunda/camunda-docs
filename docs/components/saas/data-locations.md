@@ -8,9 +8,10 @@ Learn more about where your Camunda 8 SaaS data is located and how data is handl
 
 ## About Camunda 8 SaaS data locations
 
-You can choose GCP or AWS [regions](regions.md) for your cluster, with paired secondary regions for disaster‑recovery backups.
+- Console and the Web Modeler are hosted in the EU
+- Camunda Orchestration Clusters can be created either on AWS or GCP, in the [region](regions.md) of your choice.
 
-Console and Web Modeler are hosted in the EU on GCP. Single‑tenant clusters run on dedicated infrastructure on the selected cloud provider.
+For more details, see the sections below.
 
 :::caution Processing personal data
 Unless specifically mentioned, Camunda does not process personal data on behalf of its customers. It is the responsibility of you as the customer to decide whether to use Camunda for processing personal data.
@@ -18,13 +19,13 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 ## Alerts
 
-(Optional) Camunda 8 alerts can notify you when process instances stop with an error.
+(Optional) Camunda 8 Alerts can notify you when process instances stop with an error.
 
-| Host location          | Handled data                                          | Personal data processing |
-| :--------------------- | :---------------------------------------------------- | :----------------------- |
-| Belgium, Europe (GCP). | Route alerts containing administrative metadata only. | N/A                      |
+| Host location     | Handled data                                          | Personal data processing |
+| :---------------- | :---------------------------------------------------- | :----------------------- |
+| Belgium, EU (GCP) | Route alerts containing administrative metadata only. | N/A                      |
 
-:::info
+:::info Learn More
 
 - [Alerts](/components/console/manage-clusters/manage-alerts.md)
 
@@ -32,16 +33,18 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 ## Connector secrets (credentials)
 
-(Optional) This is only used if you create secrets for connectors. Connector secrets are configured and referenced via [Console](/components/console/manage-clusters/manage-secrets.md).
+(Optional) This is only used if you want to create secrets for connectors and you are using the Camunda-hosted connector version. Connector secrets are configured and referenced via [Console](/components/console/manage-clusters/manage-secrets.md).
 
-| Host location                                                                                                                                    | Handled data                                                                                        | Personal data processing                                                                                                |
-| :----------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| GCP Secret Manager, [replicated globally](https://cloud.google.com/secret-manager/docs/secret-manager-secrets-comparison) for high availability. | Stores credentials required by Connectors (API keys, tokens, passwords), not business process data. | Not intended for personal data processing. If credentials embed personal identifiers, you must handle this accordingly. |
+If you want to control the location where the secrets are stored, please consider hosting your own connector runtime.
 
-:::info
+| Host location                                                                                                                                                                                                                                                                       | Handled data                                                                                        | Personal data processing                                                                                                                                                                                                                                    |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p>GCP Secret Manager, [replicated globally](https://cloud.google.com/secret-manager/docs/secret-manager-secrets-comparison) for high availability.</p><p>Connector secrets for clusters created in an AWS region will be stored inside AWS Secret Manager (Germany, EU), only.</p> | Stores credentials required by connectors (API keys, tokens, passwords), not business process data. | <p>Not intended for personal data processing.</p><p>If you embed personal data in connector secrets, please note the global replication of data, review if your company has special data residency requirements, and use connector secrets accordingly.</p> |
+
+:::info Learn More
 
 - [Connector secrets](/components/console/manage-clusters/manage-secrets.md)
-- [Secrets (Self‑Managed)](/self-managed/components/connectors/connectors-configuration.md)
+- If you want to use your own secret management solution, see the [Secrets (Self‑Managed)](/self-managed/components/connectors/connectors-configuration.md) documentation
 
 :::
 
@@ -49,11 +52,11 @@ Unless specifically mentioned, Camunda does not process personal data on behalf 
 
 You can use the Camunda‑hosted [Console](/components/console/introduction-to-console.md) admin UI for cluster and organization management.
 
-| Host location          | Handled data                                                               | Personal data processing                                     |
-| :--------------------- | :------------------------------------------------------------------------- | :----------------------------------------------------------- |
-| Belgium, Europe (GCP). | Stores administrative metadata and settings, not operational payload data. | Generally minimal, not highly confidential operational data. |
+| Host location                                                        | Handled data                                       | Personal data processing                                                                                                                          |
+| :------------------------------------------------------------------- | :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Stores administrative metadata and settings, only. | Limited to Account/authentication data to access Camunda Platform SaaS, it does not include personal data in scope of Data Processing Agreements. |
 
-:::info
+:::info Learn More
 
 - [Regions](regions.md)
 
@@ -63,23 +66,31 @@ You can use the Camunda‑hosted [Console](/components/console/introduction-to-c
 
 [Identity](/components/identity/identity-introduction.md) is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
 
-| Host location   | Handled data                                                               | Personal data processing                                                            |
-| :-------------- | :------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
-| Europe (Auth0). | User accounts and authentication metadata. Separate from process payloads. | Account/auth data is processed by design, not “customer‑uploaded operational data”. |
+| Host location                       | Handled data                                                               | Personal data processing                                                                                                                                        |
+| :---------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Germany, EU (Auth0 as part of Okta) | User accounts and authentication metadata. Separate from process payloads. | Limited to account/authentication data by design to access the Camunda Platform SaaS, it does not include personal data in scope of Data Processing Agreements. |
+
+:::info Learn more
+
+- [Identity](/components/identity/identity-introduction.md)
+- [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
+
+:::
 
 ## Orchestration Clusters and backups
 
-You can choose a region in **GCP** or **AWS**. Each [Orchestration Cluster](/components/orchestration-cluster.md) uses a dedicated infrastructure.
+You can choose a [region in **GCP** or **AWS**](regions.md). Each [Orchestration Cluster](/components/orchestration-cluster.md) uses a dedicated infrastructure.
 
-| Host location                                                                                                                                                             | Handled data                                                                                                                   | Personal data processing                                                                                                                                                                              |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <p>Backups are per‑cluster.</p><p>Single‑region by default, with optional dual‑region replication at no extra cost (secondary region depends on your primary choice).</p> | Operational data across Zeebe, Operate, Tasklist, and Optimize is backed up consistently for disaster recovery (not archival). | <p>Dependent on your process usage and not by default.</p><p>Only applies if you use Camunda to process personal data.</p><p>Camunda supports [encryption at rest](byok/index.md) and in transit.</p> |
+| Host location                                                                                                                                                                                                                                                                                                        | Handled data                                                                                                                                                | Personal data processing                                                                                                    |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <p>Orchestration Clusters are created on AWS or GCP, in one of the offered [regions](regions.md).</p><p>Backups are single‑region by default, in the same region as the Orchestration Cluster.</p><p>Optionally, you can replicate backups in [a secondary region](regions.md), depending on the primary region.</p> | All data uploaded to Camunda in Orchestration Clusters during customers’ process orchestration (used in Zeebe, Operate, Tasklist, Optimize and Connectors). | Dependent on the data you sent to Camunda in the Orchestration Clusters. Camunda does not process personal data by default. |
 
-:::info
+:::info Learn More
 
+- [Orchestration Clusters](/components/orchestration-cluster.md)
+- [Regions](regions.md)
 - [Backups (concept)](/components/saas/backups.md)
 - [Console backups](/components/console/manage-clusters/cluster-backups.md)
-- [Regions](regions.md)
 
 :::
 
@@ -87,11 +98,11 @@ You can choose a region in **GCP** or **AWS**. Each [Orchestration Cluster](/com
 
 You can use the Camunda‑hosted REST API connector in the EU, or host your own connector runtime (hybrid mode) to keep traffic in your chosen location.
 
-| Host location                                                                           | Handled data                                                            | Personal data processing |
-| :-------------------------------------------------------------------------------------- | :---------------------------------------------------------------------- | :----------------------- |
-| <ul><li>Belgium, Europe (GCP clusters)</li><li>Germany, Europe (AWS clusters)</li></ul> | Routes REST calls for processes. The proxy does not store payload data. | N/A                      |
+| Host location                                                                   | Handled data                                                                                                                                                                               | Personal data processing                                                                                                    |
+| :------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <ul><li>Belgium, EU (GCP clusters)</li><li>Germany, EU (AWS clusters)</li></ul> | All data uploaded to Camunda in Orchestration Clusters and is processed by the REST API Connector. The use of the REST API Connector is optional, and depends on the customers’ workflows. | Dependent on the data you sent to Camunda in the Orchestration Clusters. Camunda does not process personal data by default. |
 
-:::info
+:::info Learn More
 
 - [REST connector](/components/connectors/protocol/rest.md)
 - [Host custom connectors](/components/connectors/custom-built-connectors/host-custom-connector.md)
@@ -102,12 +113,12 @@ You can use the Camunda‑hosted REST API connector in the EU, or host your own 
 
 You can use the Camunda‑hosted [Web Modeler](/components/modeler/web-modeler/index.md) in the EU, or [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda Self‑Managed if you want to control the hosting location.
 
-| Host location          | Handled data                                                            | Personal data processing                                                                         |
-| :--------------------- | :---------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
-| Belgium, Europe (GCP). | Stores process models (diagrams/designs), not operational payload data. | Typically not processed, only if you as a customer include personal data in your process models. |
+| Host location     | Handled data                                    | Personal data processing                   |
+| :---------------- | :---------------------------------------------- | :----------------------------------------- |
+| Belgium, EU (GCP) | Stores process models (diagrams/designs), only. | Not intended for personal data processing. |
 
-:::info
+:::info Learn More
 
-- [Regions](regions.md)
+- [Web Modeler](/components/modeler/web-modeler/index.md)
 
 :::
