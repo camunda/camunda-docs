@@ -155,8 +155,8 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #---------------------------------------------------------------------------------
 
 # Removal of refactoring suggestions
-RewriteRule ^docs/next/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/web-modeler/ [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/?$ /docs/components/modeler/web-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/web-modeler/index/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/?$ /docs/components/modeler/web-modeler/index/ [R=301,L]
 
 # Removal of 8.5 announcements/release notes
 RewriteRule ^docs/next/reference/announcements-release-notes/850/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
