@@ -4,8 +4,6 @@ sidebar_label: Connect to an identity provider
 description: Learn how to connect Camunda 8 components to an external Identity Provider (IdP) for authentication and user management.
 ---
 
-# Connect to an identity provider
-
 Integrate with an external identity provider (IdP) for single sign-on (SSO), centralized user management, and secure authentication.
 
 ## About IdP integration

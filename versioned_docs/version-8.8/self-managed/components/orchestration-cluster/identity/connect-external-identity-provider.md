@@ -43,7 +43,7 @@ Before configuring Camunda, you must first prepare your IdP:
 5. Note the **client ID**, **client secret**, and **issuer URI** as these are required during Camunda configuration.
 
 :::note
-For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), configure your IdP to include it in the token, and update the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#oidc-configuration).
+For most IdPs, the default claim for the username is `sub` (subject). If you want to use a different claim (for example, `preferred_username` or `email`), configure your IdP to include it in the token, and update the [Orchestration Cluster configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camunda.security.authentication.oidc).
 :::
 
 ### Step 2: Choose your deployment and configuration method
@@ -318,7 +318,12 @@ Next, configure a client in your IdP:
 ### Step 3: Configure your worker application
 
 Depending on your application type (for example, standalone Java application, Spring Boot application), the configuration steps may vary.
+Refer to the documentation of your chosen Camunda Client for details on how to configure authentication using client credentials.
 
+- Orchestration Cluster REST and gRPC API clients: See [REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#oidc-based-authentication-using-client-credentials).
+- Java Client: See [Java client authentication](/apis-tools/java-client/getting-started.md?authentication=oidc-self-managed#step-2-connect-to-your-camunda-8-cluster).
+- Spring Boot Starter: See [Spring Boot Starter authentication](/apis-tools/camunda-spring-boot-starter/getting-started.md?authentication=oidc#step-3-configure-the-camunda-8-connection).
+- Connectors: See [Connector authentication](/self-managed/components/connectors/connectors-configuration.md).
 - **Audience Validation**: If you have configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`), the Orchestration Cluster will validate the audience claim in the token against the configured audiences. Make sure your token has the correct audience from the Orchestration Cluster above, or add your audience in the Orchestration Cluster configuration.
 
 :::note
@@ -404,18 +409,18 @@ camunda:
 @SpringBootApplication
 public class App implements CommandLineRunner
 {
-    @Autowired
-    private CamundaClient client;
+	  @Autowired
+	  private CamundaClient client;
 
-    public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+	  public static void main(String[] args) {
+		  SpringApplication.run(App.class, args);
 
-    }
-    @Override
-    public void run(final String... args) {
-        Topology t = client.newTopologyRequest().send().join();
-        System.out.println(t.toString());
-    }
+	  }
+	  @Override
+		public void run(final String... args) {
+		  Topology t = client.newTopologyRequest().send().join();
+		    System.out.println(t.toString());
+	  }
 }
 ```
 
