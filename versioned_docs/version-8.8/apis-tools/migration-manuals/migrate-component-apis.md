@@ -25,8 +25,6 @@ Users now require wildcard (`*`) permissions for the resource type and permissio
 
 For guidance on assigning permissions in Identity, see the [Identity authorization guide](../../components/identity/authorization.md).
 
-<Tabs>
-<TabItem value="Operate" default>
 ### Mapping Operate permissions to new authorizations
 
 To maintain the same access level for the Operate V1 API, apply the following authorizations:
@@ -41,7 +39,7 @@ To maintain the same access level for the Operate V1 API, apply the following au
 
 - `PROCESS_DEFINITION:*:DELETE_PROCESS_INSTANCES`
 
-### Complete list of resource permissions
+### Operate V1 API permission matrix
 
 To enable more fine-grained access control, the matrix below details the required permissions for each Operate V1 API endpoint.
 Ensure the user has general access (resource ID `*`) for each listed resource and permission type.
@@ -70,9 +68,6 @@ Ensure the user has general access (resource ID `*`) for each listed resource an
 | [`POST /v1/incidents/search`](../operate-api/specifications/search-3.api.mdx)                                  | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
 | [`GET /v1/incidents/:key`](../operate-api/specifications/by-key-3.api.mdx)                                     | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
 
-</TabItem>
-
-<TabItem value="Tasklist">
 ### Mapping Tasklist permissions to new authorizations
 
 To maintain the same access level for the Tasklist V1 API, apply the following authorizations:
@@ -85,7 +80,7 @@ To maintain the same access level for the Tasklist V1 API, apply the following a
 
 - `PROCESS_DEFINITION:*:UPDATE_USER_TASK`
 
-### Complete list of resource permissions
+### Tasklist V1 API permission matrix
 
 To enable more fine-grained access control, the matrix below details the required permissions for each Tasklist V1 API endpoint.  
 Ensure the user has general access (resource ID `*`) for each listed resource and permission type.
@@ -101,7 +96,3 @@ Ensure the user has general access (resource ID `*`) for each listed resource an
 | [`POST /v1/tasks/:taskId/variables`](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)    | PROCESS_DEFINTION  | UPDATE_USER_TASK |
 | [`POST /v1/tasks/:taskId/variables/search`](../tasklist-api-rest/specifications/search-task-variables.api.mdx) | PROCESS_DEFINITION | READ_USER_TASK   |
 | [`GET /v1/variables/:variableId`](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)              | PROCESS_DEFINITION | READ_USER_TASK   |
-
-</TabItem>
-
-</Tabs>
