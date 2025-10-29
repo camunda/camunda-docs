@@ -446,7 +446,6 @@
                 "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
-                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
                     "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai"
                   ]
                 }
