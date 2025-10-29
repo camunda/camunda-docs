@@ -1,10 +1,10 @@
 ---
 id: aws-external-encryption-setup
 title: "Encryption at rest using external encryption keys"
-description: "Learn how to configure encryption at rest for a Camunda 8 SaaS Orchestration cluster using external Amazon KMS encryption keys."
+description: "Learn how to configure encryption at rest for Camunda 8 SaaS using external Amazon KMS encryption keys."
 ---
 
-Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration cluster using Amazon KMS.
+Learn how to configure encryption at rest for Camunda 8 SaaS using Amazon KMS.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 - Key management is fully customer-side in Amazon KMS. Camunda cannot rotate keys.
   :::
 
-## Step 1: Create a Camunda 8 SaaS Orchestration cluster
+## Step 1: Create a Camunda 8 cluster
 
 1. Sign in to the [Camunda Console](https://console.camunda.io/).
 2. Navigate to the **Cluster** section and click **Create New Cluster**.
