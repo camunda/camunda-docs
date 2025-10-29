@@ -39,7 +39,6 @@ curl 'http://localhost:8091/actuator/loggers/io.camunda' \
 
 Replace `io.camunda` with the logger you want to adjust.
 
-For
 :::note
 The base URL may differ depending on your environment configuration. The example above assumes execution from the same host running the Web Modeler `restapi` component. This URL is only callable via the [management port](https://docs.spring.io/spring-boot/reference/actuator/monitoring.html#actuator.monitoring.customizing-management-server-port), usually not publicly available.
 :::
