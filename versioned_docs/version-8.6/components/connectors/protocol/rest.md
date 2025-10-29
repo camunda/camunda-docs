@@ -76,19 +76,17 @@ These are the available configuration options:
 
 ##### Handle incoming requests
 
-When a URL request arrives, the following process takes place:
+When a URL request comes in, it’s handled according to your previously set configuration:
 
-1. Check if the proxy is enabled.
-1. Check if the site is listed in `nonProxyHosts`.
-1. Check if the site requires authentication.
-
-For example, when a URL request arrives:
-
-1. Is the proxy enabled? Yes, proceed with proxying.
-1. Is the URL site in `nonProxyHosts`? No, proceed with proxying.
-1. Does the URL require authentication?
-   1. Yes. The request is proxied only if the authentication is valid. Otherwise, it returns an authentication error.
-   1. No. The request is proxied.
+1. Check if the proxy is enabled:
+   1. Yes: Proceed with proxying.
+   1. No: Do not proxy; the request is handled directly.
+1. Check if the site is listed in `nonProxyHosts`:
+   1. Yes: Do not proxy; the request bypasses the proxy.
+   1. No: Proceed with proxying.
+1. Check if the site requires authentication:
+   1. Yes: The request is proxied only if authentication succeeds; otherwise, it returns an authentication error.
+   1. No: The request is proxied normally.
 
 ### Authentication
 
