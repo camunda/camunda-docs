@@ -33,8 +33,10 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     #fc5d0d,
     #ffc600,
     #ffc600,
-    #fc5d0d
+    #ffc600,
+    #ffc600
   );
+  --kapa-button-bg: white;
 }
 
 .markdown {
@@ -65,6 +67,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-toc-border-color: #323232;
   --ifm-tabs-padding-vertical: 10px;
   --ifm-tabs-padding-horizontal: 15px;
+  --kapa-button-bg: black;
 }
 
 .footer--dark {
@@ -112,6 +115,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
 .navbar__title {
   padding-left: 10px;
   font-size: 16px;
+  display: none;
 }
 
 a {
