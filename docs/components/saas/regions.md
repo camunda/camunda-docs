@@ -13,7 +13,7 @@ The following regions are available for customers on Trial, Starter, and Enterpr
 <img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
 :::info
-See [data Locations](data-locations.md) for more information about where your Camunda 8 SaaS data is located and how data is handled.
+See [Data locations](data-locations.md) for more information about where your Camunda 8 SaaS data is located and how data is handled.
 :::
 
 ## Google Cloud Platform (GCP) regions
