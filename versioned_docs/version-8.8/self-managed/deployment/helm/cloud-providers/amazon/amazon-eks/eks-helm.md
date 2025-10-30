@@ -20,7 +20,7 @@ Lastly you'll verify that the connection to your Self-Managed Camunda 8 environm
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) to interact with the cluster.
 - [jq](https://jqlang.github.io/jq/download/) to interact with some variables.
 - [GNU envsubst](https://www.gnu.org/software/gettext/manual/html_node/envsubst-Invocation.html) to generate manifests.
-- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
+- (optional) Domain name/[hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-working-with.html) in Route53. This allows you to expose Camunda 8 and connect via community-supported [zbctl](https://github.com/camunda-community-hub/zeebe-client-go/blob/stable/8.8/cmd/zbctl/zbctl.md) or [Camunda Modeler](https://camunda.com/download/modeler/).
 - A namespace to host the Camunda Platform.
 
 For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
@@ -559,15 +559,24 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
+6. Navigate to the Orchestration Cluster Identity at `https://${DOMAIN_NAME}/identity` in your browser and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with appropriate permissions for your use case.
+9. In the selected role, navigate to the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, "test") and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information on managing roles and clients, refer to the [roles documentation](/components/identity/role.md#manage-clients).
+
 </TabItem>
   
 <TabItem value="without" label="Without domain">
 
-Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
+Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 :::tip Localhost development with kubefwd
@@ -597,7 +606,7 @@ kubectl get secret identity-secret-for-components \
   -o jsonpath='{.data.identity-first-user-password}' | base64 -d; echo
 ```
 
-3. Select **Add application** and select **M2M** as the type. Assign a name like "test."
+3. Select **Add application** and select **M2M** as the type. Assign a name like "test".
 4. Select the newly created application. Then, select **Access to APIs > Assign permissions**, and select the **Orchestration API** with "read" and "write" permission.
 5. Retrieve the `client-id` and `client-secret` values from the application details
 
@@ -605,6 +614,14 @@ kubectl get secret identity-secret-for-components \
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
+
+6. Navigate to the Orchestration Cluster Identity at `http://localhost:8080/identity` in your browser and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with appropriate permissions for your use case.
+9. In the selected role, navigate to the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, "test") and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information on managing roles and clients, refer to the [roles documentation](/components/identity/role.md#manage-clients).
 
 <details>
 <summary>To access the other services and their UIs, port-forward those Components as well:</summary>
