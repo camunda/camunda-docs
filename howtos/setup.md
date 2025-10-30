@@ -25,6 +25,18 @@ export NODE_OPTIONS=--max-old-space-size=10248
 npm run start
 ```
 
+### Do a clean start
+
+You can clear Docusaurus' cache running the following command:
+
+```
+npm run docusaurus -- clear
+```
+
+:::tip
+This can be useful when renaming files.
+:::
+
 ## Build
 
 **You can now apply the `deploy` label to a pull request. This will trigger a GitHub action to preview your environment from GitHub upon a successful build.**
