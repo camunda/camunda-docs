@@ -297,5 +297,4 @@ The following advanced configuration options can be provided via environment var
 
 <!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
-- Explore the [Camunda 8 Run quickstart](/self-managed/setup/developers/c8run.md) for local testing with H2.
 - Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
