@@ -274,7 +274,7 @@ If Optimize is not enabled, add the following environment variable to ensure Man
 ```
 identity:
   env:
-    - name: CAMUNDA_IDENTITY_AUDIENCE # redundant with global.identity.auth.identity.audience; needed to get the audience value in the optimize config in the embedded application.yaml of Management Identity right when Optimize is disabled...
+    - name: CAMUNDA_IDENTITY_AUDIENCE
       value: "<mgmt-identity-app-id>"
 ```
 

@@ -12,7 +12,7 @@ This guide explains how to configure the Camunda Helm chart to use Bitnami Premi
 By default, the Camunda Helm chart deploys Bitnami open-source images. For production environments that require enhanced security and vendor support, Camunda enables access to Bitnami Premium images through a vendor-proxied registry for licensed enterprise customers.
 
 :::info Important update since Camunda 8.8
-Previously, some users deployed Bitnami subcharts in production. Starting with Camunda 8.8, Bitnami subcharts are primarily intended for development and testing purposes unless your teams have specific expertise with Bitnami charts in production.
+Starting Camunda 8.8, Bitnami subcharts are primarily intended for development and testing purposes unless your teams have specific expertise with Bitnami charts in production.
 
 **For existing users:** You may continue using Bitnami subcharts in your environments. If you have production deployments using these subcharts prior to 8.8, review the implications for your setup. See [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for details.
 
@@ -22,14 +22,10 @@ Previously, some users deployed Bitnami subcharts in production. Starting with C
 - Utilize managed services (e.g., AWS OpenSearch, Azure Database)
 - Manage infrastructure lifecycle separately from Camunda charts
 - Achieve greater operational control and flexibility
-  :::
-
-:::note Alternative: Vendor-supported Infrastructure
-For production environments, consider using vendor-supported deployment methods instead of Bitnami subcharts. This approach leverages official Kubernetes operators (CloudNativePG, ECK, Keycloak Operator) that provide enterprise-grade features and vendor support.  
-See [Deploy infrastructure with vendor-supported methods](/self-managed/deployment/helm/configure/vendor-supported-infrastructure.md) for detailed instructions.
-:::
 
 If you use Bitnami-based subcharts in production, Camunda strongly recommends using Bitnami Premium images licensed by Camunda and maintained by Bitnami (Broadcom). This guide explains how to configure and install Camunda with these images.
+
+:::
 
 ## Understanding Bitnami image offerings
 
@@ -40,7 +36,7 @@ Following [Bitnami chart security policy changes](https://github.com/bitnami/cha
 :::info Camunda provides Premium images only
 Camunda provides access to **Bitnami Premium images** exclusively for licensed enterprise customers. The Helm charts, however, remain based on the open-source Bitnami charts.
 
-Each Camunda Helm chart version lists its chart dependencies in the `Chart.yaml` file. For example, see the [Camunda 8.8 Chart.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.8/Chart.yaml) file for a complete list of dependent charts.
+Each Camunda Helm chart version lists its chart dependencies in the `Chart.yaml` file. For example, see the [Camunda 8.7 Chart.yaml](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/Chart.yaml) file for a complete list of dependent charts.
 
 **Keycloak Helm chart fork:** Camunda uses a fork of the Bitnami Keycloak Helm chart. The Keycloak image has been upgraded to the latest public release, and environment variable names have been adjusted for compatibility with both enterprise and open-source deployments. This fork ensures ease of distribution and backward compatibility.
 :::
@@ -121,8 +117,7 @@ This is necessary because `global.image.pullSecrets` does not apply to vendor ch
 
 ```shell
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values.yaml \
-  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-enterprise.yaml
+  --values https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.7/values-enterprise.yaml
 ```
 
 This deploys Camunda with vendor-supported Premium images, recommended for secure, stable production environments.
