@@ -92,9 +92,9 @@ The process consists of two main steps: configuration and request handling.
 First, define how the proxy should behave.
 These are the available configuration options:
 
-1. Enable or disable proxying.
-1. Define which URLs should skip the proxy, listed as `nonProxyHosts`.
-1. Define which URLs require authentication.
+- Enable or disable proxying.
+- Define which URLs should skip the proxy, listed as `nonProxyHosts`.
+- Define which URLs require authentication.
 
 ##### Handle incoming requests
 
