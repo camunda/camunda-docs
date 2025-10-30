@@ -4,157 +4,29 @@ title: Authentication
 description: "Authentication requirements for accessing the Operate REST API."
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-All Operate REST API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.
-
-## Generate a token
-
-<Tabs groupId="environment" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-<TabItem value='saas'>
-
-1. [Create client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) in the **Clusters > Cluster name > API** tab of [Camunda Console](https://console.camunda.io/).
-2. Add permissions to this client for **Operate**.
-3. Once you have created the client, capture the following values required to generate a token:
-   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   | Name                     | Environment variable name        | Default value                                |
-   | ------------------------ | -------------------------------- | -------------------------------------------- |
-   | Client ID                | `ZEEBE_CLIENT_ID`                | -                                            |
-   | Client Secret            | `ZEEBE_CLIENT_SECRET`            | -                                            |
-   | Authorization Server URL | `ZEEBE_AUTHORIZATION_SERVER_URL` | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 |                                  | `operate.camunda.io`                         |
-   | Operate REST Address     | `CAMUNDA_OPERATE_BASE_URL`       | -                                            |
-   <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   :::caution
-   When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
-   :::
-4. Execute an authentication request to the token issuer:
-   ```bash
-   curl --request POST ${ZEEBE_AUTHORIZATION_SERVER_URL} \
-       --header 'Content-Type: application/x-www-form-urlencoded' \
-       --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode 'audience=operate.camunda.io' \
-       --data-urlencode "client_id=${ZEEBE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${ZEEBE_CLIENT_SECRET}"
-   ```
-   A successful authentication response looks like the following:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-5. Capture the value of the `access_token` property and store it as your token.
-
-</TabItem>
-
-<TabItem value='self-managed'>
-
-1. [Add an M2M application in Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
-2. [Add permissions to this application](/self-managed/components/management-identity/application-user-group-role-management/applications.md) for **Operate API**.
-3. Capture the `Client ID` and `Client Secret` from the application in Identity.
-4. [Generate a token](/self-managed/components/management-identity/authentication.md) to access the Operate REST API. Provide the `client_id` and `client_secret` from the values you previously captured in Identity.
-   ```shell
-   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
-   --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=${CLIENT_ID}" \
-   --data-urlencode "client_secret=${CLIENT_SECRET}" \
-   --data-urlencode 'grant_type=client_credentials'
-   ```
-   A successful authentication response looks like the following:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-5. Capture the value of the `access_token` property and store it as your token.
-
-For more information, see the deprecated [authentication configuration for Operate](/versioned_docs/version-8.7/self-managed/operate-deployment/operate-authentication.md).
-
-</TabItem>
-
-</Tabs>
-
-## Use a token
-
-Include the previously captured token as an authorization header in each request: `Authorization: Bearer <TOKEN>`.
-
-For example, to send a request to the Operate REST API's ["Search process instances"](./specifications/search-1.api.mdx) endpoint:
-
-<Tabs groupId="environment" defaultValue="saas" queryString values={
-[
-{label: 'SaaS', value: 'saas' },
-{label: 'Self-Managed', value: 'self-managed' },
-]}>
-
-<TabItem value='saas'>
-
-:::tip
-The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can capture this URL when creating an API client. You can also construct it as `https://${REGION}.operate.camunda.io/${CLUSTER_ID}`.
+:::warning
+The Operate REST API is **deprecated**. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
-</TabItem>
+Operate uses the same authentication mechanism as the [Orchestration Cluster REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
-<TabItem value='self-managed'>
+If your environment uses **OIDC-based authentication**, obtain an access token following [Using a token (OIDC/JWT)](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt).
 
-:::tip
-The `${CAMUNDA_OPERATE_BASE_URL}` variable below represents the URL of the Operate REST API. You can configure this value in your Self-Managed installation. The default value is `http://localhost:8081`.
-:::
+If **no authentication is configured** (for example, for local development), see [No authentication (local development)](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#no-authentication-local-development).
 
-</TabItem>
+When making requests to Operate, replace the base URL used in examples with your Operate API URL.
 
-</Tabs>
+Example:
 
-```shell
-curl --request POST ${CAMUNDA_OPERATE_BASE_URL}/v1/process-instances/search \
-   --header "Authorization: Bearer ${TOKEN}" \
-   --header 'Content-Type: application/json' \
-   --data-raw '{}'
+```bash
+curl -X GET "$OPERATE_BASE_URL/v1/process-definitions" \
+  -H "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
-A successful response includes [matching process instances](./specifications/search-1.api.mdx). For example:
+A successful response returns matching process instances.
 
-```json
-{
-  "items": [],
-  "sortValues": [123456],
-  "total": 0
-}
-```
+## Learn more
 
-## Token expiration
-
-Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.
-
-## Authentication via cookie (Self-Managed only)
-
-You can also access the Operate API in a Self-Managed cluster by sending cookie headers in each request. You can obtain a cookie using the /api/login API endpoint. For example:
-
-**Example:**
-
-1. Log in as user 'demo' and store the cookie in the file `cookie.txt`.
-
-```shell
-curl --request POST 'http://localhost:8080/api/login?username=demo&password=demo' \
-   --cookie-jar cookie.txt
-```
-
-2. Send the cookie as a header in each API request. In this case, request all process definitions.
-
-```shell
-curl --request POST 'http://localhost:8080/v1/process-definitions/search' \
-   --cookie cookie.txt \
-   --header 'Content-Type: application/json' -d '{}'
-```
+- [Identity and access management](/components/concepts/access-control/access-control-overview.md)
+- [OIDC setup (Self-Managed)](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [API client setup (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
