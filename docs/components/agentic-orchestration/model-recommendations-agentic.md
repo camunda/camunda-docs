@@ -42,7 +42,7 @@ When defining tools for the agent to use be very specific about what each tool d
 - The more context you give the AI about the tool’s purpose, the more accurately it will use that tool.
 - Write clear, instructive descriptions for each tool call.
 
-You can do so via [`fromAi` expressions](/docs/next/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions/#ai-generated-parameters-via-fromai) in Camunda.
+You can do so via [`fromAi` expressions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) in Camunda.
 For example, `fromAi(toolCall.emailBody, "Body of the email to be sent")`.
 
 ### Mind the context window
