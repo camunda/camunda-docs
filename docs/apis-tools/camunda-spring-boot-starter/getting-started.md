@@ -38,7 +38,7 @@ With the Camunda Spring Boot Starter, you can build:
 | ----------------------------------- | ---- | --------------- | --------------------------- |
 | 8.8.x                               | ≥ 17 | 8.8.x           | 3.5.x                       |
 
-## Getting started in three steps
+## Get started
 
 ### Step 1: Add the dependency
 

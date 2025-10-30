@@ -44,7 +44,7 @@ Use the Camunda Java Client to build:
 - **Integration services** that connect Camunda processes with existing systems or third-party services
 - **Data processing applications** that leverage process data for visualization, analytics, or business intelligence
 
-## Getting started in three steps
+## Get started
 
 ### Step 1: Add the dependency
 
@@ -198,7 +198,7 @@ private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC)
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
 
-// Audience is the API that will receive the token, e.g., the Orchestration Cluster
+// Audience is the API that will receive the token, such as the Orchestration Cluster for example
 private static final String AUDIENCE = "[Orchestration Cluster audience]";
 
 // Scope is the permission requested from the IdP (or leave empty)

@@ -9,7 +9,7 @@ The Administration API for Self-Managed is a REST API that provides endpoints to
 
 ## Authentication
 
-Clients can access the Administration Self-Managed REST API only by including a JWT access token in the authorization header:
+To access the Administration Self-Managed REST API, clients must include a JWT access token in the authorization header:
 
 ```
 Authorization: Bearer <TOKEN>

@@ -129,7 +129,7 @@ Adding new endpoints or attributes to existing responses is **not** considered a
 
 ### Request size limits
 
-The default maximum request size for all requests (e.g. to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
+The default maximum request size for all requests (for example, to `POST /v2/deployments`) is 4MB. It can be configured in the Zeebe Gateway configuration using the `maxMessageSize` property. For more information, see the [Zeebe Gateway configuration reference](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md#gateway-configuration).
 
 ### Naming conventions
 
