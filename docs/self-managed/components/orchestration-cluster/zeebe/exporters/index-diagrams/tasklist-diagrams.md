@@ -15,31 +15,31 @@ The following index diagrams show Camunda Exporter indices for Tasklist.
 - [tasklist-task-variable](#tasklist-task-variable)
 - [tasklist-task](#tasklist-task)
 
-## tasklist-form
+### tasklist-form
 
 ![diagram](./tasklist-diagrams-1.png)
 
-## tasklist-metric
+### tasklist-metric
 
 ![diagram](./tasklist-diagrams-3.png)
 
-## tasklist-process
+### tasklist-process
 
 ![diagram](./tasklist-diagrams-4.png)
 
-## tasklist-user
+### tasklist-user
 
 ![diagram](./tasklist-diagrams-5.png)
 
-## tasklist-draft-task-variable
+### tasklist-draft-task-variable
 
 ![diagram](./tasklist-diagrams-6.png)
 
-## tasklist-task-variable
+### tasklist-task-variable
 
 ![diagram](./tasklist-diagrams-7.png)
 
-## tasklist-task
+### tasklist-task
 
 ![diagram](./tasklist-diagrams-8.png)
 ![diagram](./tasklist-diagrams-9.png)

@@ -27,76 +27,76 @@ The following index diagrams show Camunda Exporter indices for Operate.
 - [operate-sequence-flow](#operate-sequence-flow)
 - [operate-variable](#operate-variable)
 
-## operate-decision-requirements
+### operate-decision-requirements
 
 ![diagram](./operate-diagrams-1.png)
 
-## operate-decision
+### operate-decision
 
 ![diagram](./operate-diagrams-2.png)
 
-## operate-metric
+### operate-metric
 
 ![diagram](./operate-diagrams-4.png)
 
-## operate-migration-steps-repository
+### operate-migration-steps-repository
 
 ![diagram](./operate-diagrams-5.png)
 
-## operate-process
+### operate-process
 
 ![diagram](./operate-diagrams-6.png)
 
-## operate-user
+### operate-user
 
 ![diagram](./operate-diagrams-7.png)
 
-## operate-batch-operation
+### operate-batch-operation
 
 ![diagram](./operate-diagrams-8.png)
 
-## operate-decision-instance
+### operate-decision-instance
 
 ![diagram](./operate-diagrams-9.png)
 
-## operate-event
+### operate-event
 
 ![diagram](./operate-diagrams-10.png)
 
-## operate-flownode-instance
+### operate-flownode-instance
 
 ![diagram](./operate-diagrams-11.png)
 
-## operate-incident
+### operate-incident
 
 ![diagram](./operate-diagrams-12.png)
 
-## operate-job
+### operate-job
 
 ![diagram](./operate-diagrams-13.png)
 
-## operate-list-view
+### operate-list-view
 
 ![diagram](./operate-diagrams-14.png)
 ![diagram](./operate-diagrams-15.png)
 
-## operate-message
+### operate-message
 
 ![diagram](./operate-diagrams-16.png)
 
-## operate-operation
+### operate-operation
 
 ![diagram](./operate-diagrams-17.png)
 
-## operate-post-importer-queue
+### operate-post-importer-queue
 
 ![diagram](./operate-diagrams-18.png)
 
-## operate-sequence-flow
+### operate-sequence-flow
 
 ![diagram](./operate-diagrams-19.png)
 
-## operate-variable
+### operate-variable
 
 ![diagram](./operate-diagrams-20.png)
 
