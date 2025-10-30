@@ -37,7 +37,7 @@ Camunda currently supports the following secondary storage options:
 | **H2**                                        | 8.9-alpha1+                 | Lightweight in-memory or file-based option, useful for development. |
 | **PostgreSQL, MariaDB, Oracle, MySQL, MSSQL** | Planned / under development | To be supported as part of broader RDBMS rollout.                   |
 
-For detailed configuration of each database type, see the [database configuration guide](/self-managed/concepts/databases/relational-db/configuration.md).
+<!-- For detailed configuration of each database type, see the [database configuration guide](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
 ## How data flows between layers
 
@@ -91,6 +91,7 @@ data:
 
 ## Next steps
 
-- Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md).
+<!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
+
 - Explore the [Camunda 8 Run quickstart](/self-managed/setup/developers/c8run.md) for local testing with H2.
 - Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).

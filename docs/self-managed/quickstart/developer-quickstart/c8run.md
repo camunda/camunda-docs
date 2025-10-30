@@ -263,7 +263,7 @@ Camunda 8 uses two layers of storage:
 - **Primary storage** is handled by the Zeebe broker to store workflow execution data.
 - **Secondary storage** is used by applications like Operate, Tasklist, and Identity to read and present that data.
 
-For more details on how these layers interact, see [Secondary storage architecture](/self-managed/concepts/databases/secondary-storage.md).  
+For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage.md).  
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
 
 ### Switching between Elasticsearch and H2
@@ -295,6 +295,7 @@ The following advanced configuration options can be provided via environment var
 
 ## Next steps
 
-- Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md).
+<!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
+
 - Explore the [Camunda 8 Run quickstart](/self-managed/setup/developers/c8run.md) for local testing with H2.
 - Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
