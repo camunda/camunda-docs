@@ -80,6 +80,255 @@ instance, in addition to the adjustments described [above](#running-web-modeler-
 
 ## Using alternative database vendors
 
+### H2
+
+The H2 driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="h2-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:h2:mem:[DB_NAME]" # Or any other connection mode (See https://www.h2database.com/html/features.html)
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default H2 driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:h2:mem:[DB_NAME]" # Or any other connection mode (See https://www.h2database.com/html/features.html)
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default H2 driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:h2:mem:[DB_NAME] # Or any other connection mode (See https://www.h2database.com/html/features.html)
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default H2 driver
+```
+</TabItem>
+</Tabs>
+
+#### Custom schema
+
+By default, H2 uses the `PUBLIC` schema. To use a different schema you can add an initialization command to the JDBC URL like the following:
+
+```yml
+jdbc:h2:mem:[DB_NAME];INIT=CREATE SCHEMA IF NOT EXISTS [CUSTOM_SCHEMA]\;SET SCHEMA [CUSTOM_SCHEMA]
+```
+
+### MariaDB
+
+The MariaDB driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="mariadb-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MariaDB driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MariaDB driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:mariadb://[DB_HOST]:[DB_PORT]/[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MariaDB driver
+```
+</TabItem>
+</Tabs>
+
+#### Case sensitivity
+
+MariaDB usually uses case-insensitive collations by default. To enable case sensitivity, set the database collation to a case-sensitive one like `utf8mb4_bin`.
+
+Not doing so may lead to unexpected behavior.
+The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+
+### MSSQL
+
+The MSSQL driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MSSQL driver
+```
+</TabItem>
+</Tabs>
+
+#### Case sensitivity
+
+MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive one like `Latin1_General_CS_AS`.
+
+Not doing so may lead to unexpected behavior.
+The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+
+#### Custom schema
+
+MSSQL supports custom schemas, but this is not configurable in Web Modeler.
+If you want to use a custom schema in MSSQL, you must set the default schema for the database user accordingly.
+
+### MySQL
+
+As the MySQL driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
+
+1. Download the appropriate (platform independent) MySQL driver: https://dev.mysql.com/downloads/connector/j/.
+2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
+
+<Tabs groupId="mysql-config" defaultValue="envVars" queryString values={
+[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'values.yaml', value: 'valuesYaml' },
+{label: 'application.yaml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+```sh
+SPRING_DATASOURCE_URL="jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]"
+SPRING_DATASOURCE_USERNAME="[DB_USER]"
+SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
+SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MySQL driver
+```
+</TabItem>
+<TabItem value="valuesYaml">
+```yaml
+webModeler:
+  restapi:
+    externalDatabase:
+      enabled: true
+      url: "jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]"
+      user: "[DB_USER]"
+      password: "[DB_PASSWORD]"
+    env:
+      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MySQL driver
+        value: "[YOUR_CUSTOM_DRIVER]"
+    extraVolumeMounts:
+      - name: mysql-driver
+        mountPath: /driver-lib
+    extraVolumes:
+      - name: mysql-driver
+        emptyDir: {}
+    initContainers:
+      - name: fetch-jdbc-drivers
+        image: alpine:3.22.1
+        imagePullPolicy: "Always"
+        command:
+          [
+            "sh",
+            "-c",
+            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.5.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1 && sh /docker-entrypoint.sh",
+          ]
+        volumeMounts:
+          - name: mysql-driver
+            mountPath: /driver-lib
+        securityContext:
+          runAsUser: 1001
+```
+</TabItem>
+<TabItem value="applicationYaml">
+```yaml
+spring:
+  datasource:
+    url: jdbc:mysql://[DB_HOST]:[DB_PORT]/[DB_NAME]
+    username: [DB_USER]
+    password: [DB_PASSWORD]
+    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MySQL driver
+```
+</TabItem>
+</Tabs>
+
+#### Case sensitivity
+
+MySQL usually uses case-insensitive collations by default. To enable case sensitivity, set the database collation to a case-sensitive one like `utf8mb4_0900_as_cs`.
+
+Not doing so may lead to unexpected behavior.
+The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+
 ### Oracle
 
 As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
@@ -150,58 +399,3 @@ spring:
 ```
 </TabItem>
 </Tabs>
-
-### MSSQL
-
-The MSSQL driver is provided by default, so no additional steps are necessary to provide the driver.
-
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
-
-<Tabs groupId="mssql-config" defaultValue="envVars" queryString values={
-[
-{label: 'Environment variables', value: 'envVars' },
-{label: 'values.yaml', value: 'valuesYaml' },
-{label: 'application.yaml', value: 'applicationYaml' },
-]}>
-
-<TabItem value="envVars">
-```sh
-SPRING_DATASOURCE_URL="jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
-SPRING_DATASOURCE_USERNAME="[DB_USER]"
-SPRING_DATASOURCE_PASSWORD="[DB_PASSWORD]"
-SPRING_DATASOURCE_DRIVER_CLASS_NAME="[YOUR_CUSTOM_DRIVER]" # Optional; omit to use default MSSQL driver
-```
-</TabItem>
-<TabItem value="valuesYaml">
-```yaml
-webModeler:
-  restapi:
-    externalDatabase:
-      enabled: true
-      url: "jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]"
-      user: "[DB_USER]"
-      password: "[DB_PASSWORD]"
-    env:
-      - name: SPRING_DATASOURCE_DRIVER_CLASS_NAME # Optional; omit to use default MSSQL driver
-        value: "[YOUR_CUSTOM_DRIVER]"
-```
-</TabItem>
-<TabItem value="applicationYaml">
-```yaml
-spring:
-  datasource:
-    url: jdbc:sqlserver://[DB_HOST]:[DB_PORT];databaseName=[DB_NAME]
-    username: [DB_USER]
-    password: [DB_PASSWORD]
-    driver-class-name: [YOUR_CUSTOM_DRIVER] # Optional; omit to use default MSSQL driver
-```
-</TabItem>
-</Tabs>
-
-#### Case sensitivity
-
-MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive one. We recommend using `Latin1_General_CS_AS`.
-
-Not doing so may lead to unexpected behavior.
-The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
-This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
