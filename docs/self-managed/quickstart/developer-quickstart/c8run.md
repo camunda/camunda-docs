@@ -19,7 +19,7 @@ Camunda 8 Run includes the following:
 
 - Orchestration Cluster
 - Connectors
-- Elasticsearch
+- Elasticsearch (default secondary storage)
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
@@ -50,7 +50,7 @@ If no version of Java is found, follow your chosen installation's instructions f
 
 If startup is successful, a browser window for Operate will open automatically. Alternatively, you can access Operate at [http://localhost:8080/operate](http://localhost:8080/operate).
 
-To start Camunda 8 in Docker Compose using C8Run you can use the following option. It is equivalent of running `docker compose up -d` :
+To start Camunda 8 in Docker Compose using Camunda 8 Run you can use the following option. It is equivalent of running `docker compose up -d` :
 
 - On Mac and Linux: `./start.sh --docker`
 - On Windows: `.\c8run.exe start --docker`
@@ -66,18 +66,18 @@ If Camunda 8 Run fails to start, run the [shutdown script](#shut-down-camunda-8-
 The following options provide a convenient way to override settings for quick tests and interactions in Camunda 8 Run.  
 For more advanced or permanent configuration, modify the default `configuration/application.yaml` or supply a custom file using the `--config` flag (e.g., [to enable authentication and authorization](#enable-authentication-and-authorization)).
 
-| Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                        |
-| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                              |
-| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                              |
-| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                              |
-| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                                                                                                                                                                                                                              |
-| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                 |
-| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                      |
-| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provide an easy shortcut to run Camunda in Docker Compose. However, additional C8Run options are not supported and will be ignored. For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
-| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                     |
-| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                       |
+| Argument                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--config <path>`          | Applies the specified Zeebe [`application.yaml`](/self-managed/components/orchestration-cluster/zeebe/configuration/configuration.md).                                                                                                                                                                                                                                                                                                |
+| `--username <arg>`         | Configures the first user’s username as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `--password <arg>`         | Configures the first user’s password as `<arg>`.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `--keystore <arg>`         | Configures the TLS certificate for HTTPS. If not specified, HTTP is used. For more information, see [enabling TLS](#enable-tls).                                                                                                                                                                                                                                                                                                      |
+| `--keystorePassword <arg>` | Provides the password for the JKS keystore file.                                                                                                                                                                                                                                                                                                                                                                                      |
+| `--port <arg>`             | Sets the Camunda core port (default: `8080`).                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--log-level <arg>`        | Sets the log level for the Camunda core.                                                                                                                                                                                                                                                                                                                                                                                              |
+| `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provide an easy shortcut to run Camunda in Docker Compose. However, additional Camunda 8 Run options are not supported and will be ignored. For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
+| `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                             |
+| `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                               |
 
 ## Work with Camunda 8 Run
 
@@ -136,7 +136,7 @@ Once configured, your connectors are available for use in Modeler.
 
 Connector Secrets can be provided as environment variables by adding them to the `.env` file in the root folder.
 
-When starting C8Run with the `--docker` option, add the connector secrets to the `connector-secrets.txt` file in the docker-compose folder.
+When starting Camunda 8 Run with the `--docker` option, add the connector secrets to the `connector-secrets.txt` file in the docker-compose folder.
 
 ### Use Camunda APIs
 
@@ -167,7 +167,7 @@ camunda:
       enabled: true
 ```
 
-Start C8Run with the configuration:
+Start Camunda 8 Run with the configuration:
 
 ```bash
 ./start.sh --config application.yaml
@@ -210,7 +210,7 @@ To shut down the Camunda 8 Run Docker distribution, use `./shutdown.sh --docker`
 ### Enable TLS
 
 TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
-Although C8Run supports TLS, this is intended only for testing.
+Although Camunda 8 Run supports TLS, this is intended only for testing.
 
 ### Access metrics
 
@@ -235,23 +235,94 @@ To use an external instance, run Camunda 8 Run without its built-in Elasticsearc
        elasticsearch:8.15.2
    ```
 
-1. Configure Camunda 8 Run by creating an `application.yaml` file that points to your external Elasticsearch:
+````
 
-   ```yaml
-   camunda:
-     data:
-       secondary-storage:
-         elasticsearch:
-           url: "http://127.0.0.1:9200/"
-   ```
+2. Configure Camunda 8 Run by creating an `application.yaml` file that points to your external Elasticsearch:
 
-1. Start Camunda 8 Run with the `--disable-elasticsearch` flag to prevent it from starting its own instance, and provide your config:
+```yaml
+camunda:
+data:
+  secondary-storage:
+    elasticsearch:
+      url: "http://127.0.0.1:9200/"
+````
 
-   ```bash
-   ./start.sh --disable-elasticsearch --config application.yaml
-   ```
+3. Start Camunda 8 Run with the `--disable-elasticsearch` flag to prevent it from starting its own instance, and provide your config:
 
-### Environment variables
+```bash
+./start.sh --disable-elasticsearch --config application.yaml
+```
+
+### Configure secondary storage (Elasticsearch or H2)
+
+In version **8.9-alpha1**, Camunda 8 Run starts with **Elasticsearch** as its default secondary storage.
+
+To test Camunda 8 Run using an **H2 database**, you can configure H2 as an alternative secondary storage. This is useful for development and local testing because it requires minimal setup and runs entirely in memory.
+
+Default (Elasticsearch) configuration:
+
+```yaml
+data:
+  secondary-storage:
+    type: elasticsearch
+```
+
+Optional (H2) configuration:
+
+```yaml
+data:
+  secondary-storage:
+    type: rdbms
+    rdbms:
+      url: jdbc:h2:mem:camunda
+      username: sa
+      password:
+      flushInterval: PT0.5S
+      queueSize: 1000
+```
+
+H2 runs in memory by default. Data will be lost when you stop Camunda 8 Run.
+
+To persist data, you can switch to a file-based H2 configuration such as:
+
+```yaml
+url: jdbc:h2:file:./camunda-data/h2db
+```
+
+:::warning
+Operate and Tasklist are only supported with H2 once both applications have migrated to v2 APIs (expected in **8.9-alpha3**).  
+In alpha1, use H2 for testing Camunda 8 Run only.
+:::
+
+### Primary vs. secondary storage
+
+Camunda 8 uses two layers of storage:
+
+- **Primary storage** is handled by the Zeebe broker to store workflow execution data.
+- **Secondary storage** is used by applications like Operate, Tasklist, and Identity to read and present that data.
+
+For more details on how these layers interact, see [Secondary storage architecture](/self-managed/concepts/databases/secondary-storage.md).
+
+Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
+
+### Switching between Elasticsearch and H2
+
+To switch between storage types:
+
+- **Use Elasticsearch (default)** – Remove or comment out the `data.secondary-storage` section in `application.yaml`.
+- **Use H2** – Add the H2 configuration section to `application.yaml` and restart Camunda 8 Run.
+- **Switch back to Elasticsearch** – Restore the default configuration or delete the H2 section.
+
+Choose H2 for quick local development with minimal setup. Use Elasticsearch for closer alignment with production or when using Operate and Tasklist.
+
+### Known limitations (8.9-alpha1)
+
+- Operate and Tasklist are **not yet supported** when using H2.
+- H2 is intended for **testing only** in this alpha release.
+- Data stored in H2 is ephemeral unless configured as file-based.
+- Performance and memory use may vary depending on local environment.
+
+## Environment variables
 
 The following advanced configuration options can be provided via environment variables:
 
