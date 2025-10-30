@@ -1,5 +1,5 @@
 ---
-id: choosing-right-model-agentic
+id: choose-right-model-agentic
 title: Choose the right LLM
 sidebar_label: Choose the right LLM
 description: How to select the right LLM or foundation model for orchestrating agentic AI workflows.
