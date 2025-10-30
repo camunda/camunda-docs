@@ -35,7 +35,7 @@ Camunda 8 Alerts are optional. This information only applies if you use Alerts.
 
 This only applies if you want to create [connector secrets](/components/console/manage-clusters/manage-secrets.md) and are using the Camunda-hosted connector version. Connector secrets are configured and referenced via Console.
 
-- If you want to control the location where the secrets are stored, you can also [host your own connector runtime](/components/connectors/custom-built-connectors/host-custom-connectors/).
+- If you want to control the location where the secrets are stored, you can also [host your own connector runtime](/components/connectors/custom-built-connectors/host-custom-connector.md).
 - If you want to use your own secret management solution, see [Secrets (Self‑Managed)](/self-managed/components/connectors/connectors-configuration.md).
 
 | Host location                                                                                                                                                                                                                                                                       | Data handled                                                                                        | Personal data processing                                                                                                                                                                                                                                         |
