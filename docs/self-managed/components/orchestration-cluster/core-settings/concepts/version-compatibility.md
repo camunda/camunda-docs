@@ -40,11 +40,11 @@ The broker validates the previous persisted version against the new binary versi
 
 ### Why incompatible paths are blocked
 
-Skipping minors, downgrading, or involving pre-release versions can lead to state shape differences the broker cannot safely reconcile. Blocking prevents partial or irreversibly invalid state migrations.
+Skipping minors, downgrading, or involving pre-release versions can lead to an incompatible state that the broker cannot safely reconcile. Blocking prevents partial or irreversibly invalid state migrations.
 
 ## Secondary storage (Elasticsearch/OpenSearch) schema manager
 
-Secondary storage holds exported data. Beginning with Camunda 8.8, schema upgrades are designed to be backward compatible—older application nodes can still write to a newer schema version.
+Secondary storage holds exported data. Beginning with Camunda 8.8, schema upgrades are designed to be backward compatible, so that older application nodes can still write to a newer schema version.
 
 ### When are version checks available?
 
