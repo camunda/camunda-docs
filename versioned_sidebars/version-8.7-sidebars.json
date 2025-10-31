@@ -1796,6 +1796,7 @@
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/data-locations",
     "reference/saas-ip-addresses",
     {
       "type": "category",
