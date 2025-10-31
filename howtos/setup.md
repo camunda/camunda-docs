@@ -25,16 +25,16 @@ export NODE_OPTIONS=--max-old-space-size=10248
 npm run start
 ```
 
-### Do a clean start
+### Clear Docusaurus cache
 
-You can clear Docusaurus' cache running the following command:
+You can clear Docusaurus cache running the following command:
 
 ```
 npm run docusaurus -- clear
 ```
 
 :::tip
-This can be useful when renaming files.
+When renaming a file or changing its `id`, the continuous development server started with `npm run start` may fail due to cached content. Clearing the cache and then restarting the server will resolve this issue.
 :::
 
 ## Build
