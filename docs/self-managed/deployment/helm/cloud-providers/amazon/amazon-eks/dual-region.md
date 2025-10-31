@@ -550,6 +550,12 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
 
 ### Verify Camunda 8
 
+:::info Authentication changes in 8.8+
+
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+
+:::
+
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 
 ```shell

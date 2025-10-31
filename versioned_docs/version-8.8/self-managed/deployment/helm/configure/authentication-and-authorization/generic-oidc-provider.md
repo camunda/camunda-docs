@@ -1,16 +1,14 @@
 ---
-id: connect-to-an-oidc-provider
-sidebar_label: Setup OpenID Connect provider
-title: Helm chart OpenID Connect provider setup
-description: "To enable a smoother integration with your existing systems, connect to an OpenID Connect provider"
+id: generic-oidc-provider
+sidebar_label: Generic OIDC provider
+title: Set up the Helm chart with any third-party OIDC provider
+description: "Learn how to set up the Helm Chart so that it connects to a third-party OIDC provider"
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-To enable a smoother integration with your existing systems, Camunda supports connecting to an OpenID Connect (OIDC) authentication provider. To connect to a Keycloak authentication provider, see our guide on [using an external Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak.md).
-
-In this guide, we step through the configuration required to connect Camunda to your authentication provider.
+In this guide, we step through the configuration required to connect Camunda to a generic OIDC provider. See also our specific guides for [Keycloak](external-keycloak.md) and [Microsoft Entra](./microsoft-entra.md)
 
 ## Prerequisites
 
@@ -28,9 +26,6 @@ configuration](#component-specific-configuration) to ensure the components are c
 :::
 
 ## Configuration
-
-<Tabs groupId="authPlatform" defaultValue="generic" queryString values={[{label: 'Generic', value: 'generic' },{label: 'Microsoft Entra ID', value: 'microsoftEntraId' }]} >
-<TabItem value="generic">
 
 <h3>Steps</h3>
 
@@ -123,141 +118,6 @@ Once set, you cannot update your initial claim name and value using environment 
 <h3>Additional considerations</h3>
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
-
-</TabItem>
-<TabItem value="microsoftEntraId">
-
-<h3>Steps</h3>
-
-:::note
-Ensure you register a new application for each component.
-:::
-
-1. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each** component you would like to connect. Web Modeler requires two applications: one for the UI, and one for the API.
-2. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
-3. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
-   - **Web**: Operate, Tasklist, Optimize, Identity, Web Modeler API
-   - **Single-page application**: Console, Web Modeler UI
-4. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
-   :::note
-   Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
-   :::
-5. [Create a new client secret](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app?tabs=client-secret#add-credentials), and note the new secret's value for later use. The secret ID is not needed, only the secret value is required.
-6. Set the following environment variables or Helm values for the component you are configuring an app for:
-
-:::note
-You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
-:::
-
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
-<TabItem value="env">
-
-```
-    CAMUNDA_IDENTITY_TYPE=MICROSOFT
-    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
-    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
-    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
-    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
-    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
-    SPRING_PROFILES_ACTIVE=oidc
-```
-
-</TabItem>
-<TabItem value="helm">
-
-```yaml
-global:
-  identity:
-    auth:
-      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
-      type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        audience: <Audience from Step 2>
-        # This is the object ID of the first user. A role mapping in Identity will automatically be generated for this user.
-        initialClaimValue: <Initial claim value>
-        redirectUrl: <See the Helm value in the table below>
-      operate:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      tasklist:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      optimize:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      zeebe:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        tokenScope: "<Client ID from Step 2>/.default"
-      webModeler:
-        clientId: <Client ID of Web Modeler's UI from Step 2>
-        clientApiAudience: <Client ID of Web Modeler's UI from Step 2>
-        publicApiAudience: <Client ID of Web Modeler's API from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-      console:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-        wellKnown: <Found in the "Endpoints" section of the app registrations page>
-      connectors:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-```
-
-</TabItem>
-</Tabs>
-
-:::danger
-Once set, your initial claim name and value cannot be updated using environment or Helm values, and must be changed directly in the database.
-:::
-
-<h3>Additional considerations</h3>
-
-Due to technical limitations regarding [third party content](https://openid.net/specs/openid-connect-frontchannel-1_0.html#ThirdPartyContent),
-front channel single sign out is not supported. This means that when a user logs out of one component, they will not be logged out of the other components.
-
-For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, `profile`,
-and `<CLIENT_UUID>/.default`. To ensure your users are able to successfully authenticate with Entra ID, you must
-ensure that either there is
-an [admin consent flow configured](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow)
-or grant consent on behalf of your users using
-the [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent)
-process.
-
-The client should be configured to support `grant_type`:
-
-- To **create** an M2M token, the `client_credentials` grant type is required. The response contains an access token.
-- To **renew** a token using a refresh token, the `refresh_token` grant type is required.
-- To **create** a token via authorization flow, the `authorization_code` grant type is required. The response contains both access and refresh tokens.
-
-To successfully authenticate with Entra ID, you should use the `v2.0` API. This means that
-the `CAMUNDA_IDENTITY_ISSUER_BACKEND_URL` value should end with `/v2.0`.
-
-Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#configure-the-app-manifest-in-the-microsoft-entra-admin-center) to configure the app manifest, and set the [requestedAccessTokenVersion](https://learn.microsoft.com/en-us/entra/identity-platform/reference-microsoft-graph-app-manifest#api-attribute) under `Api:` to `2`:
-
-```json
-    "requestedAccessTokenVersion": 2,
-```
-
-</TabItem>
-</Tabs>
 
 ### Component-specific configuration
 
