@@ -201,6 +201,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactor
 
 ## Web Modeler folder restructure - moved to validation/
 RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/modeler/web-modeler/validation/task-testing/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/modeler/web-modeler/validation/test-scenario-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/modeler/web-modeler/validation/token-simulation/ [R=301,L]
