@@ -508,7 +508,7 @@ The following values are required for the OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 
@@ -526,7 +526,7 @@ The following values are required for OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 </Tabs>

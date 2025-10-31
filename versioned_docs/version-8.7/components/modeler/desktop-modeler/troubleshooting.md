@@ -50,9 +50,9 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 
 To produce logging output, you can also run Desktop Modeler from the command line.
 
-## I cannot connect to an orchestration cluster {#i-cannot-connect-to-zeebe}
+## I cannot connect to Zeebe {#i-cannot-connect-to-zeebe}
 
-You try to connect (i.e., to deploy) to a remote orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (i.e., to deploy) to a remote cluster, and Desktop Modeler tells you it "Cannot connect to cluster."
 
 :::tip
 If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused](../../concepts/clusters.md#auto-pause).
@@ -60,11 +60,11 @@ If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
-## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
+## I cannot connect to local Zeebe {#i-cannot-connect-to-local-zeebe}
 
-You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
+You try to connect (i.e., to deploy) to a local cluster, and Desktop Modeler tells you it "Cannot connect to cluster."
 
-Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
+Ensure your local cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/setup/deploy/local/c8run.md), a lightweight all-in-one distribution.
 
 ## Resolve a general Zeebe connection issue
 
