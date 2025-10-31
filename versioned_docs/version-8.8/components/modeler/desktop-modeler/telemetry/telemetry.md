@@ -193,3 +193,22 @@ Example event:
   "triggerType": "keyboard"
 }
 ```
+
+## Task testing events
+
+Task testing events are sent when using the [task testing](../task-testing.md) feature:
+
+- Task execution is started. This event includes `elementType` and `elementTemplate` if applied.
+- Task testing deployment. [Deployment event](#deployment-and-start-instance-events) is triggered when the process is deployed during task testing.
+- Task execution finished. This event includes `elementType`, `elementTemplate`, `success` boolean value, and `incidentType` if task testing resulted in an [incident](../../../concepts/incidents.md).
+
+Example task testing finished event:
+
+```json
+{
+  "elementType": "bpmn:ServiceTask",
+  "elementTemplate": "io.camunda.connectors.HttpJson.v2",
+  "success": false,
+  "incidentType": "JOB_NO_RETRIES"
+}
+```

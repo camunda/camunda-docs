@@ -367,15 +367,24 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
+6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+9. In the selected role view, open the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+
 </TabItem>
   
 <TabItem value="without" label="Without domain">
 
-Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
+Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 :::tip Localhost development with kubefwd
@@ -413,6 +422,14 @@ kubectl get secret identity-secret-for-components \
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
+
+6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+9. In the selected role view, open the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
 <details>
 <summary>To access the other services and their UIs, port-forward those Components as well:</summary>
@@ -508,7 +525,7 @@ The following values are required for the OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 
@@ -526,7 +543,7 @@ The following values are required for OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 </Tabs>

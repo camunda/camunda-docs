@@ -3,8 +3,8 @@
 module.exports = {
   "Orchestration Cluster API": [
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview",
-    "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching",
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication",
+    "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching",
     "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger",
     {
       Specifications: require("./specifications/sidebar"),
