@@ -51,6 +51,30 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 | :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
 
+## Identity
+
+Identity is managed by Camunda for SaaS. Single Sign-on (SSO) is supported.
+
+| Host location                       | Data handled                                                               | Personal data processing                                                                                                                                                                      |
+| :---------------------------------- | :------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Germany, EU (Auth0 as part of Okta) | User accounts and authentication metadata. Separate from process payloads. | Limited to account/authentication data by design to access the Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+
+:::note
+Identity was made available as part of the Camunda 8.8 release.
+:::
+
+## Orchestration Clusters and backups
+
+You can choose a [region](regions.md) in **GCP** or **AWS**. Each Orchestration Cluster uses a dedicated infrastructure.
+
+| Host location                                                                                                                                                                                                                                                                                                                 | Data handled                                                                                                                                                | Personal data processing                                                                                                    |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| <p>Orchestration Clusters are created on AWS or GCP, in one of the available [regions](regions.md).</p><p>Backups are single‑region by default, in the same region as the Orchestration Cluster.</p><p>Optionally, you can replicate backups in a [secondary region](regions.md), depending on the chosen primary region.</p> | All data uploaded to Camunda in Orchestration Clusters during customers’ process orchestration (used in Zeebe, Operate, Tasklist, Optimize and Connectors). | Dependent on the data you sent to Camunda in the Orchestration Clusters. Camunda does not process personal data by default. |
+
+:::note
+Prior to Camunda 8.7, the Orchestration Cluster was referred to as the Automation Cluster.
+:::
+
 ## REST connector (traffic routing)
 
 For security reasons, REST API requests made by the [REST connector](/components/connectors/protocol/rest.md) are all routed through a dedicated HTTPS proxy hosted by Camunda in the EU. The REST connector uses either an AWS or a GCP-hosted HTTPS proxy, depending on your chosen Orchestration Cluster cloud provider.
