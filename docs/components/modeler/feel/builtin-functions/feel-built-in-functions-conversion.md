@@ -70,6 +70,70 @@ context([{"key":"a", "value":1}, {"key":"b", "value":2}])
 // {a:1, b:2}
 ```
 
+## from json(value)
+
+Parses a JSON string into a FEEL value. The function converts JSON primitives, objects, and arrays into their corresponding FEEL types.
+
+Returns `null` if the string is not a valid JSON value.
+
+**Function signature**
+
+```feel
+from json(value: string): Any
+```
+
+**Examples**
+
+```feel
+// JSON object to FEEL context
+from json("{\"a\": 1, \"b\": 2}")
+// {a: 1, b: 2}
+
+// JSON primitives to FEEL values
+from json("1")
+// 1
+
+from json("\"a\"")
+// "a"
+
+from json("true")
+// true
+
+from json("null")
+// null
+
+// JSON array to FEEL list
+from json("[1, 2, 3]")
+// [1, 2, 3]
+
+// JSON string with date/time format remains as string
+from json("\"2023-06-14\"")
+// "2023-06-14"
+
+from json("\"14:55:00\"")
+// "14:55:00"
+
+from json("\"2023-06-14T14:55:00\"")
+// "2023-06-14T14:55:00"
+
+from json("\"2023-06-14T14:55:00+02:00\"")
+// "2023-06-14T14:55:00+02:00"
+
+from json("\"2023-06-14T14:55:00+02:00[Europe/Berlin]\"")
+// "2023-06-14T14:55:00@Europe/Berlin"
+
+// JSON string with duration format remains as string
+from json("\"P1Y\"")
+// "P1Y"
+
+from json("\"PT2H\"")
+// "PT2H"
+
+// Invalid JSON returns null
+from json("invalid")
+// null
+```
+
 ## date(from)
 
 Returns a date from the given value.
