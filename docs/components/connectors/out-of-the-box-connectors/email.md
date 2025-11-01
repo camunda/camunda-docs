@@ -37,6 +37,60 @@ This method allows the user to connect to any SMTP, POP3 or IMAP server using an
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
 
+### No Authentication
+
+For SMTP servers that do not require authentication, you can select this option to connect without providing
+credentials.
+
+### OAuth2 Authentication
+
+For Google and Outlook OAuth2 authentication is supported. Others providers may work if they support standard OAuth2 flows.
+
+<Tabs groupId="oauth" defaultValue="google" queryString
+values={[{label: 'Google Setup', value: 'google' }, {label: 'Outlook Setup', value: 'outlook' }]}>
+
+<TabItem value='google'>
+To setup google OAuth2 authentication follow these steps:
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a new project or select an existing one.
+3. Navigate to "APIs & Services" > "Credentials" and add new OAuth Credentials, select "Web application" and the authorized redirect URL: ```http://localhost/oauth2/callback```
+4. Note your clientId and clientSecret.
+5. Open this link in your browser, replace `<YOUR_CLIENT_ID>` with your actual Client ID:
+```
+https://accounts.google.com/o/oauth2/v2/auth?
+client_id=<YOUR_CLIENT_ID>&
+redirect_uri=http://localhost/oauth/callback&
+response_type=code&
+scope=https://mail.google.com/&
+access_type=offline&
+prompt=consent
+```
+6. Login with your Google account.
+7. Now you get redirect to a URL like this:
+```http://localhost/oauth2/callback?code=**4/0AX42j92ZjKEdm8lfQFu3XfWg3ET**&scope=https://mail.google.com/```
+8. Write down the part between `code=` and `&scope=` in the URL, this is your **authorization code**.
+9. Now execute this curl command to get your refresh token, replace `<YOUR_CLIENT_ID>`, `<YOUR_CLIENT_SECRET>` and `<YOUR_AUTHORIZATION_CODE>` with your actual values:
+```
+curl --request POST \
+  --url https://oauth2.googleapis.com/token \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data 'code=<YOUR_AUTHORIZATION_CODE>&
+  client_id=<YOUR_CLIENT_ID>&
+  client_secret=<YOUR_CLIENT_SECRET>&
+  redirect_uri=http://localhost/oauth2/callback&
+  grant_type=authorization_code'
+```
+10. In the response you get your refresh token, write it down.
+11. In the Email connector configuration, select "OAuth2" as the authentication type and input the values you collected in the previous steps, as the token endpoint use `https://oauth2.googleapis.com/token`.
+
+</TabItem>
+
+<TabItem value='outlook'>
+outlook tbd
+</TabItem>
+
+</Tabs>
+
 ## POP3
 
 The Post Office Protocol version 3 (POP3) is an Internet standard protocol used by local email clients to retrieve
