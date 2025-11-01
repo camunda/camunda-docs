@@ -28,7 +28,7 @@ SPRING_PROFILES_INCLUDE=default-logging
 
 ### Changing log level at runtime
 
-You can adjust log levels dynamically using Spring Boot Actuator [loggers](https://docs.spring.io/spring-boot/api/rest/actuator/loggers.html) endpoints:
+You can adjust log levels dynamically using Spring Boot Actuator [`loggers`](https://docs.spring.io/spring-boot/api/rest/actuator/loggers.html) endpoints:
 
 ```bash
 curl 'http://localhost:8091/actuator/loggers/io.camunda' \
