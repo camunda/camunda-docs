@@ -25,6 +25,18 @@ export NODE_OPTIONS=--max-old-space-size=10248
 npm run start
 ```
 
+### Clear Docusaurus cache
+
+You can clear Docusaurus cache running the following command:
+
+```
+npm run docusaurus -- clear
+```
+
+:::tip
+When renaming a file or changing its `id`, the continuous development server started with `npm run start` may fail due to cached content. Clearing the cache and then restarting the server will resolve this issue.
+:::
+
 ## Build
 
 **You can now apply the `deploy` label to a pull request. This will trigger a GitHub action to preview your environment from GitHub upon a successful build.**
