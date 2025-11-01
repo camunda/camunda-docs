@@ -14,12 +14,12 @@ All Administration API requests require authentication. To authenticate, generat
 2. Add permissions to this client for [the needed scopes](#client-credentials-and-scopes).
 3. Once you have created the client, capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   | Name                     | Environment variable name        | Default value                                |
-   | ------------------------ | -------------------------------- | -------------------------------------------- |
-   | Client ID                | `CAMUNDA_CONSOLE_CLIENT_ID`      | -                                            |
-   | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
-   | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   | Name                     | Environment variable name         | Default value                                |
+   | ------------------------ | --------------------------------- | -------------------------------------------- |
+   | Client ID                | `CAMUNDA_OPTIMIZE_CLIENT_ID`      | -                                            |
+   | Client Secret            | `CAMUNDA_OPTIMIZE_CLIENT_SECRET`  | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL`               | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 | `CAMUNDA_OPTIMIZE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::caution
    When client credentials are created, the `Client Secret` is only shown once. Save this `Client Secret` somewhere safe.
@@ -29,9 +29,9 @@ All Administration API requests require authentication. To authenticate, generat
    curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
-       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
+       --data-urlencode "audience=${CAMUNDA_OPTIMIZE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_OPTIMIZE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_OPTIMIZE_CLIENT_SECRET}"
    ```
    A successful authentication response looks like the following:
    ```json

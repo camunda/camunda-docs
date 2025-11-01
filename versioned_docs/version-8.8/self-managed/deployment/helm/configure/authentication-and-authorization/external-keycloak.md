@@ -182,10 +182,6 @@ global:
       jwksUrl: <KEYCLOAK_URL>/realms/<realm>/protocol/openid-connect/certs
       identity:
         clientId: <identity_client_id>
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"

@@ -56,7 +56,6 @@ These secrets are used by Camunda applications and must be configured manually w
 | **Enterprise License Key**              | `global.license.secret`                             | Camunda Enterprise license key                          |
 | **Identity First User Password**        | `identity.firstUser.secret`                         | Default user password (`demo/demo`)                     |
 | **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`                 | OAuth admin client secret for administrative operations |
-| **OAuth Client Secret (Console)**       | `global.identity.auth.console.secret`               | OAuth client secret for Console                         |
 | **OAuth Client Secret (Connectors)**    | `connectors.security.authentication.oidc.secret`    | OAuth client secret for connectors                      |
 | **OAuth Client Secret (Orchestration)** | `orchestration.security.authentication.oidc.secret` | OAuth client secret for Orchestration Cluster           |
 | **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`              | OAuth client secret for Optimize                        |
@@ -121,7 +120,7 @@ For production environments, create a Kubernetes Secret and reference it from yo
 Create a secret using `kubectl` or a YAML manifest:
 
 ```sh
-kubectl create secret generic console-secret \
+kubectl create secret generic optimze-secret \
   --from-literal=client-secret=camundapassword \
   --namespace camunda
 ```
@@ -132,7 +131,7 @@ Or using YAML:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: console-secret
+  name: optimze-secret
   namespace: camunda
 type: Opaque
 stringData:
@@ -147,9 +146,9 @@ stringData:
 global:
   identity:
     auth:
-      console:
+      optimze:
         secret:
-          existingSecret: "console-secret"
+          existingSecret: "optimze-secret"
           existingSecretKey: "client-secret"
 ```
 
@@ -261,9 +260,9 @@ This scenario applies when your legacy configuration references a Kubernetes sec
 global:
   identity:
     auth:
-      console:
+      optimze:
         existingSecret:
-          name: console-secret
+          name: optimze-secret
         existingSecretKey: client-secret
 ```
 
@@ -273,9 +272,9 @@ global:
 global:
   identity:
     auth:
-      console:
+      optimze:
         secret:
-          existingSecret: console-secret
+          existingSecret: optimze-secret
           existingSecretKey: client-secret
 ```
 
@@ -289,7 +288,7 @@ This scenario applies when your legacy configuration provided a plaintext string
 global:
   identity:
     auth:
-      console:
+      optimze:
         existingSecret: "my-plaintext-secret"
 ```
 
@@ -299,7 +298,7 @@ global:
 global:
   identity:
     auth:
-      console:
+      optimze:
         secret:
           inlineSecret: "my-plaintext-secret"
 ```
@@ -494,9 +493,6 @@ RELEASE_NAMESPACE=camunda-dev
 # Only if "connectors.enabled: true".
 export IDENTITY_CONNECTORS_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
 
-# Only if "console.enabled: true".
-export IDENTITY_CONSOLE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
-
 # Only if "optimize.enabled: true".
 export IDENTITY_OPTIMIZE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 
@@ -533,9 +529,6 @@ type: Opaque
 stringData:
   # Only if "connectors.enabled: true".
   identity-connectors-client-token: "${IDENTITY_CONNECTORS_CLIENT_SECRET}"
-
-  # Only if "console.enabled: true".
-  identity-console-client-token: "${IDENTITY_CONSOLE_CLIENT_SECRET}"
 
   # Only if "optimize.enabled: true".
   identity-optimize-client-token: "${IDENTITY_OPTIMIZE_CLIENT_SECRET}"
@@ -576,10 +569,10 @@ If a component already uses its own existing secret, make sure to remove that se
 global:
   identity:
     auth:
-      console:
+      optimize:
         secret:
           existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
+          existingSecretKey: "identity-optimize-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"
