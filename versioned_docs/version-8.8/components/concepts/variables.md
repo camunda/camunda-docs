@@ -84,7 +84,7 @@ Input/output variable mappings can be used to create new variables or customize 
 
 Variable mappings are defined in the process as extension elements under `ioMapping`. Every variable mapping has a `source` and a `target` expression.
 
-The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the value. If the variable or the nested property doesn't exist, it uses `null` as the value.
+The `source` expression defines the **value** of the mapping. Usually, it [accesses a variable](/components/modeler/feel/language-guide/feel-variables.md#access-variable) of the process instance that holds the value. If the variable or the nested property doesn't exist, it uses `null` as the value. Same applies if you do not provide a `source`.
 
 The `target` expression defines **where** the value of the `source` expression is stored. It can reference a variable by its name or a nested property of a variable. If the variable or the nested property doesn't exist, it's created.
 
@@ -113,7 +113,7 @@ Input mappings can be used to create new variables. They can be defined on [serv
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
-You can use [expressions](./expressions.md) or static values for input mappings.
+You can use [expressions](./expressions.md) or static values for input mappings. You can leave the `source` empty to map the `target` variable to `null`.
 
 For string literals containing escaped characters (e.g., a newline character `\n`), the string is returned in its original form as expected (no double escaping is applied).
 
@@ -125,6 +125,7 @@ Examples:
 | `customer:{"name": "John"}`            | **source:** `=customer.name`<br/>**target:** `sender`                                                        | `sender: "John"`                            |
 | `customer: "John"`<br/>`iban: "DE456"` | **source:** `=customer`<br/> **target:** `sender.name`<br/>**source:** `=iban`<br/>**target:** `sender.iban` | `sender: {"name": "John", "iban": "DE456"}` |
 | -                                      | **source:** `"Peter"`<br/>**target:** `sender`                                                               | `sender: "Peter"`                           |
+| `customer:{"name": "John"}`            | **source:** (not provided)<br/>**target:** `customer`                                                        | `customer: null`                            |
 
 ### Output mappings
 
