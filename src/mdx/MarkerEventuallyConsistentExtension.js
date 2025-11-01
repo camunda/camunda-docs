@@ -7,14 +7,22 @@ export const MarkerEventuallyConsistentExtension = () => {
         marginBottom: "0",
       }}
     >
-      <span
-        className={"badge badge--eventually-consistent"}
-        title={
-          "This endpoint accesses eventually consistent data storage. There may be a delay between when data is written and when it is available for reading."
-        }
+      <a href="../../orchestration-cluster-api-rest-data-fetching/#data-consistency">
+        <span
+          className={"badge badge--eventually-consistent"}
+          title={
+            "This endpoint accesses eventually consistent data storage. There may be a delay between when data is written and when it is available for reading. Click to learn more about endpoint data consistency."
+          }
+        >
+          Eventually Consistent
+        </span>
+      </a>{" "}
+      <a
+        href="../../orchestration-cluster-api-rest-data-fetching/#data-consistency"
+        style={{ fontSize: "90%", marginLeft: "8px" }}
       >
-        Eventually Consistent
-      </span>
+        About endpoint data consistency
+      </a>
     </p>
   );
 };
