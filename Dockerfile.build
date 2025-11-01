@@ -3,7 +3,7 @@
 #  To run: `npm run build:docker`
 
 # Install dependencies
-FROM node:22 AS build-setup
+FROM node:24 AS build-setup
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
