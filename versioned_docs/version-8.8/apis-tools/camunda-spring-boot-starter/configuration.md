@@ -948,6 +948,19 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
 }
 ```
 
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
+
 ## Observing metrics
 
 The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
