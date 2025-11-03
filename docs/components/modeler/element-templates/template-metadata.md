@@ -236,7 +236,7 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
 Use `deprecated` to mark a [template as deprecated](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#deprecation).
 
 :::info
-By deprecating an element template you prevent its _future use_. Users will no longer see the template when choosing a template, changing an element's type, or creating a new element. Existing uses continue to work, with a deprecation hint shown in the modeler UI.
+By deprecating an element template, you prevent its _future use_. Users will no longer see the template when choosing a template, changing an element's type, or creating a new element. Existing uses continue to work, with a deprecation hint shown in the modeler UI.
 :::
 
 The `deprecated` property can be an object or a boolean. If an object, it has the following attributes:
