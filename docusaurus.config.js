@@ -2,6 +2,7 @@ const { unsupportedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
+const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
   // url: "https://camunda-cloud.github.io",
   url: docsSiteUrl,
   // baseUrl: "/camunda-cloud-documentation/",
-  baseUrl: process.env.DOCS_SITE_BASE_URL || "/",
+  baseUrl: docsSitebaseUrl,
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
   },
@@ -235,6 +236,15 @@ module.exports = {
             },
           },
         },
+      },
+    ],
+    [
+      // RSS feed for security notices
+      "./static/plugins/notices-feed",
+      {
+        url: docsSiteUrl,
+        contextPath: docsSitebaseUrl,
+        maxItems: 50,
       },
     ],
   ],
