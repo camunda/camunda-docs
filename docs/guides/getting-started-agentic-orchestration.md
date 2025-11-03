@@ -32,10 +32,10 @@ Once you have completed this guide, you will have an example running AI agent an
 
 The following prerequisites are required to build your first AI agent:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| :------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Running Camunda 8 environment    | <p>To run your agent, you must have a running Camunda 8 environment (version 8.8 or newer), either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                                                                                                                                                                                                                                                                 |
-| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For the purposes of this guide it is assumed you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> If you do not have access to an AWS account, you can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider)</p> |
+| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Running Camunda 8 environment    | <p>To run your agent, you must have a running Camunda 8 environment (version 8.8 or newer), either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                                                                                                                                                                                                                                                                  |
+| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For the purposes of this guide it is assumed you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> If you do not have access to an AWS account, you can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider).</p> |
 
 ### AWS Bedrock Configuration
 
@@ -62,12 +62,12 @@ To learn more about dynamic workflows, see [agentic orchestration design and arc
 
 ### What is an AI agent?
 
-An **AI agent** in Camunda is an automation that leverages ad-hoc sub-processes to perform tasks with non-deterministic behavior. AI agents can:
+An **AI agent** in Camunda refers to an automation mechanism that leverages ad-hoc sub-processes to perform tasks with non-deterministic behavior. AI agents can:
 
-- Make autonomous decisions about task execution
-- Adapt their behavior based on context and input
-- Handle complex scenarios that require dynamic responses
-- Integrate with other process components through standard interfaces
+- Make autonomous decisions about task execution.
+- Adapt their behavior based on context and input.
+- Handle complex scenarios that require dynamic responses.
+- Integrate with other process components through standard interfaces.
 
 AI agents represent the practical implementation of agentic process orchestration within the Camunda ecosystem, combining the flexibility of AI with the reliability of traditional process automation.
 
@@ -75,10 +75,10 @@ AI agents represent the practical implementation of agentic process orchestratio
 
 An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a key building block in Camunda agentic orchestration. Unlike standard BPMN subprocesses with predefined sequences, ad-hoc subprocesses allow:
 
-- **Dynamic task selection**: Tasks within the subprocess can be executed in any order, repeatedly, or skipped entirely based on runtime needs
-- **Non-deterministic execution**: The exact sequence and occurrence of tasks are determined at runtime by the AI agent
-- **Parallel execution**: Multiple tasks can run simultaneously when appropriate
-- **Flexible tool access**: The subprocess acts as a container of available actions (tools) that the AI agent can choose from
+- **Dynamic task selection**: Tasks within the subprocess can be executed in any order, repeatedly, or skipped entirely based on runtime needs.
+- **Non-deterministic execution**: The exact sequence and occurrence of tasks are determined at runtime by the AI agent.
+- **Parallel execution**: Multiple tasks can run simultaneously when appropriate.
+- **Flexible tool access**: The subprocess acts as a container of available actions, i.e., tools, that the AI agent can choose from.
 
 The AI Agent connector lets the LLM choose from the tools in that sub-process and dynamically orchestrates tool calling and request handling. This approach provides the AI agent freedom within constraints, ensuring it stays aligned with business goals while having the flexibility to adapt.
 
@@ -106,12 +106,12 @@ The example AI agent process is a chatbot that you (the user) can chat and inter
 
 The process showcases how an AI agent can:
 
-- **Make autonomous decisions** about which tasks to execute based on your input
-- **Adapt its behavior** dynamically using the context provided
-- **Handle complex scenarios** by selecting and combining different tools
-- **Integrate seamlessly** with other process components
+- **Make autonomous decisions** about which tasks to execute based on your input.
+- **Adapt its behavior** dynamically using the context provided.
+- **Handle complex scenarios** by selecting and combining different tools.
+- **Integrate seamlessly** with other process components.
 
-The example comes with a form linked to the start event where you can provide requests—from simple questions to more complex tasks involving document uploads.
+The example includes a form linked to the start event, allowing you to submit requests ranging from simple questions to more complex tasks, such as document uploads.
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
@@ -125,7 +125,7 @@ The example process is preconfigured to use AWS Bedrock as the model. For authen
 How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed (local) environment.
 
 - For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
-- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with docker, add the secrets in the `connector-secrets.txt` file.
+- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
 
 ## Step 3: Configure the AI Agent connector (optional)
 
@@ -135,13 +135,13 @@ In the blueprint BPMN diagram, the AI Agent connector template is applied to the
 
 ### Key configuration options
 
-- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers
-- **System prompt**: Customize the agent's behavior and personality
-- **Model parameters**: Adjust temperature, max tokens, and other LLM settings
-- **Connector secrets**: Update authentication credentials if changing providers
+- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers.
+- **System prompt**: Customize the agent's behavior and personality.
+- **Model parameters**: Adjust temperature, max tokens, and other LLM settings.
+- **Connector secrets**: Update authentication credentials if changing providers.
 
 :::tip
-When configuring connectors, use FEEL expressions (click the `fx` icon) to reference process variables and build dynamic prompts based on runtime data.
+When configuring connectors, use FEEL expressions, by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
 :::
 
 :::info
@@ -158,11 +158,11 @@ Once you have started your process, you can then monitor the execution in [Opera
 
 When you run the AI agent process:
 
-1. The AI agent receives your prompt and analyzes it
-2. It determines which tools from the ad-hoc subprocess to activate
-3. Tasks may execute in parallel or sequentially based on the agent's decisions
-4. Process variables are updated as each tool completes
-5. The agent may iterate through multiple tool calls to fulfill complex requests
+1. The AI agent receives your prompt and analyzes it.
+1. It determines which tools from the ad-hoc subprocess should be activated.
+1. Tasks can execute in parallel or sequentially, depending on the agent's decisions.
+1. Process variables are updated as each tool completes its execution.
+1. The agent may iterate through multiple tool calls to handle complex requests.
 
 You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
