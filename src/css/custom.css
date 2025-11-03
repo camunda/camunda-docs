@@ -84,7 +84,6 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --docsearch-hit-highlight-color: #bc4223 !important;
   --docsearch-highlight-color: #ad452a !important;
   --docsearch-primary-color: #ad452a !important;
-  --docsearch-icon-color: red !important;
   --docsearch-secondary-text-color: rgb(140, 140, 140) !important;
   --docsearch-icon-color: rgb(140, 140, 140) !important;
 }
