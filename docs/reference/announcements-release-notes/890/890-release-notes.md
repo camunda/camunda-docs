@@ -92,11 +92,10 @@ These new databases are available as secondary storage options. Zeebe’s primar
 
 <!-- https://github.com/camunda/product-hub/issues/2742 -->
 
-Camunda 8.9 introduces a standardized and robust approach to JDBC driver management for RDBMS integrations in manual installations.  
-The new `/driver-lib` directory distinguishes between Camunda-bundled\*\* and customer-supplied JDBC drivers.  
-Drivers that Camunda can legally distribute are included by default, while customers can easily provide and configure their own (for example, Oracle JDBC).  
-Clear configuration options offer full control, including explicit driver-class designation when required.
+Camunda 8.9 introduces a standardized approach to JDBC driver management for RDBMS integrations in manual installations. A new `/driver-lib` directory now separates Camunda-bundled drivers from customer-supplied ones, providing a clear and compliant structure for database connectivity.
+
+Drivers that Camunda can legally distribute are included by default, while customers can easily add and configure their own (for example, Oracle JDBC). Configuration options allow full control, including explicit driver-class designation when required.
 
 :::note
-This improvement simplifies compliance and configuration for RDBMS setups, ensuring consistent connectivity across PostgreSQL, Oracle, MariaDB, and H2.
+This change simplifies compliance and setup for RDBMS environments, ensuring consistent connectivity across PostgreSQL, Oracle, MariaDB, and H2.
 :::
