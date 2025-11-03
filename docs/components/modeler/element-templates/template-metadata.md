@@ -231,7 +231,7 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
 
 ## Deprecating a template: `deprecated`
 
-- `deprecated` is an optional key
+- `deprecated` is an optional key.
 
 Use `deprecated` to mark a [template as deprecated](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#deprecation).
 
