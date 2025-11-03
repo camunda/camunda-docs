@@ -72,7 +72,7 @@ The available configuration options depend on the version of the cluster:
 
 ### Database
 
-Web Modeler currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB and H2 as persistent data storage.
+Web Modeler currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB, and H2 as persistent data storage.
 
 :::info Oracle and MySQL driver
 The Oracle and MySQL drivers are not provided by default and must be downloaded and supplied for the application to load.
@@ -88,8 +88,6 @@ Refer to the [Oracle](database.md#oracle) and [MySQL](database.md#mysql) databas
 | `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-
-Using a custom database schema via `SPRING_DATASOURCE_HIKARI_SCHEMA` is supported for PostgreSQL only.
 
 ### SMTP / email
 
