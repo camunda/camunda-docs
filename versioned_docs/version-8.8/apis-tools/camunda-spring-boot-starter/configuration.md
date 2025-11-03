@@ -657,7 +657,7 @@ public void handleJobFoo() {
    // some work
   } catch(Exception e) {
    // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, (retries) -> Duration.ofSeconds(10), e);
+   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
    // this is a static function that returns an instance of JobError
   }
 }
@@ -668,7 +668,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to `PT0S`, function input are the retries that will be submitted
+- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
