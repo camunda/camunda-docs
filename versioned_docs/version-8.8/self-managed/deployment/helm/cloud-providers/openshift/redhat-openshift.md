@@ -160,16 +160,15 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    </details>
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Core Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
-   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+   To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
+   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
    Update your `values.yml` file with the following:
 
-   <!-- The following values file will need to be uncommented when the work on 8.8 is resumed; https://github.com/camunda/camunda-deployment-references/pull/134 -->
-   <!--```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/helm-values/core-route.yml
-   ``` -->
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/single-region/helm-values/orchestration-route.yml
+   ```
 
    The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
@@ -206,7 +205,7 @@ For guidance on installing an Ingress controller, you can refer to the [Ingress 
 
 Do not confuse the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) with the [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift) that is endorsed by Red Hat for usage with OpenShift. Despite very similar names, they are two different products.
 
-If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/main/examples/ingress-resources/grpc-services/README.md).
+If you should decide to use the Red Hat endorsed [NGINX Ingress Controller](https://www.redhat.com/en/blog/using-nginx-ingress-controller-red-hat-openshift), you would require additional adjustments done to the Camunda 8 Ingress objects and the NGINX Ingress Controller itself to make `gRPC` and `HTTP/2` connections work. In that case, please refer to the [example and the prerequisites](https://github.com/nginxinc/kubernetes-ingress/blob/stable/8.8/examples/ingress-resources/grpc-services/README.md).
 
 :::
 
