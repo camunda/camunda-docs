@@ -174,6 +174,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.8: {
+                specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
                 outputDir:
