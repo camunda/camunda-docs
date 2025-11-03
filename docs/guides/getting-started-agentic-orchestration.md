@@ -168,7 +168,7 @@ You can observe this dynamic behavior in real-time through Operate, where you'll
 
 ### SaaS
 
-In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/play-your-process.md) feature.
+In this example, you can quickly test the AI agent using the [Play](/components/modeler/web-modeler/validation/play-your-process.md) feature.
 
 1. Select the **Play** tab.
 1. Select the cluster you want to deploy and play the process on.
