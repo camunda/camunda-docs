@@ -1665,6 +1665,7 @@ module.exports = {
             "self-managed/concepts/opensearch-privileges",
           ],
         },
+        "self-managed/concepts/secondary-storage",
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },

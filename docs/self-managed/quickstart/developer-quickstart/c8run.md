@@ -276,9 +276,59 @@ To persist data, you can switch to a file-based H2 configuration such as:
 url: jdbc:h2:file:./camunda-data/h2db
 ```
 
-:::warning
-Operate and Tasklist are only supported with H2 once both applications have migrated to v2 APIs (expected in **8.9-alpha3**).  
-In alpha1, use H2 for testing Camunda 8 Run only.
+<details>
+<summary>Full example configuration</summary>
+
+```yaml
+camunda:
+  backup:
+    webapps:
+      enabled: false
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:mem:camunda
+        username: sa
+        password:
+        flushInterval: PT0.5S
+        queueSize: 1000
+  security:
+    initialization:
+      users:
+        - username: demo
+          password: demo
+          name: Demo
+          email: demo@example.com
+      defaultRoles:
+        admin:
+          users:
+            - demo
+    authentication:
+      method: BASIC
+      unprotected-api: true
+    authorizations:
+      enabled: false
+
+zeebe:
+  broker:
+    network:
+      host: localhost
+      advertisedHost: localhost
+  gateway:
+    cluster:
+      initialContactPoints: zeebe:26502
+      memberId: identity
+
+spring:
+  profiles:
+    active: "broker,consolidated-auth,identity,tasklist"
+```
+
+</details>
+
+:::note
+Operate and Tasklist are only supported with H2 once both applications have migrated to v2 APIs. Use H2 for testing Camunda 8 Run only.
 :::
 
 ### Primary vs. secondary storage
