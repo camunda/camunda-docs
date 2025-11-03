@@ -1014,6 +1014,7 @@ module.exports = {
       items: [
         "components/concepts/clusters",
         "components/saas/regions",
+        "components/saas/data-locations",
         {
           type: "category",
           label: "Encryption",

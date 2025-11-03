@@ -9,8 +9,6 @@ description: "Build applications for human-centered processes by querying user t
 To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
-## Introduction
-
 The Tasklist API is a REST API designed to build task applications for human-centered processes. The API allows you to query user tasks, assign users to these tasks, and complete these tasks.
 
 :::note
