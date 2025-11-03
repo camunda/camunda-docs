@@ -27,14 +27,14 @@ npm run start
 
 ### Clear Docusaurus cache
 
-You can clear Docusaurus cache running the following command:
+To clear the Docusaurus cache, run the following command:
 
 ```
 npm run docusaurus -- clear
 ```
 
 :::tip
-When renaming a file or changing its `id`, the continuous development server started with `npm run start` may fail due to cached content. Clearing the cache and then restarting the server will resolve this issue.
+When renaming a file or changing its `id`, the continuous development server started with `npm run start` can fail due to cached content. To resolve this issue, clear the cache and then restart the server.
 :::
 
 ## Build
