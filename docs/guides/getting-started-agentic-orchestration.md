@@ -124,7 +124,7 @@ The example process is preconfigured to use AWS Bedrock as the model. For authen
 
 How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed (local) environment.
 
-- For SaaS and Self Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
+- For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
 - For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with docker, add the secrets in the `connector-secrets.txt` file.
 
 ## Step 3: Configure the AI Agent connector (optional)
