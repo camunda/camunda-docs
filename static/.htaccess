@@ -950,6 +950,9 @@ RewriteRule ^optimize/self-managed/components/optimize/migration-update/instruct
 # Updated web-modeler troubleshooting
 RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 
+# Removed Web Modeler Task testing page
+RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ docs/components/concepts/task-testing/ [R=301,L]
+
 ##################################################################################
 #
 #  Hey friend! There's a good chance you've left the redirect party, come back!
