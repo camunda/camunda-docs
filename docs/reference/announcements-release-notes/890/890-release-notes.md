@@ -50,31 +50,33 @@ This feature enables organizations to use relational databases such as H2, Postg
 Key highlights:
 
 - **Flexible database choice:** Use relational databases instead of Elasticsearch or OpenSearch.
-- **Consistent APIs:** Continue using the same REST API and data format—no query or integration changes needed.
-- **Simplified operations:** Leverage existing database expertise without maintaining Elasticsearch or OpenSearch clusters.
-- **Primary execution unchanged:** Zeebe’s primary storage remains Raft + RocksDB; this update only extends the secondary storage layer.
+- **Separation of concerns:** Zeebe’s primary storage remains Raft + RocksDB; this update only extends the secondary storage layer.
+- **Consistent APIs:** Continue using the same REST API and data format as with Elasticsearch or OpenSearch—no query or integration changes needed.
+- **Simplified operations:** Leverage existing RDBMS expertise without maintaining Elasticsearch or OpenSearch clusters.
 
 :::note
-Currently limited to H2 in C8Run. Operate and external RDBMS configuration will follow in upcoming alpha releases.
+Currently limited to H2 in Camunda 8 Run. Operate and external RDBMS configuration will follow in upcoming alpha releases.
 :::
 
 ### MySQL and Microsoft SQL Server secondary storage <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span>
 
 <!-- https://github.com/camunda/product-hub/issues/3043 -->
 
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional database options for the orchestration cluster.  
-This enhancement provides greater flexibility for enterprises that depend on these databases due to policy, licensing, or ecosystem requirements, enabling smoother onboarding and infrastructure consistency.
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional database options for the Orchestration cluster.  
+This enhancement provides greater flexibility for enterprises that depend on these databases due to policy, licensing, or ecosystem requirements, enabling smoother onboarding and infrastructure alignment.
 
-Key highlights:
-
-- **New supported databases:** Adds MySQL and Microsoft SQL Server as additional secondary storage options.
-- **Broader enterprise compatibility:** Simplifies adoption for organizations operating in Microsoft- or MySQL-centric environments.
-- **Reduced operational friction:** Removes the need for parallel data systems, reducing maintenance overhead and alignment issues.
-- **Primary execution unchanged:** Zeebe’s primary storage remains Raft + RocksDB; this update only extends the secondary storage layer.
+Zeebe’s primary execution storage (Raft + RocksDB) remains unchanged.
 
 :::note
 This release introduces foundational support only. External configuration and Operate integration will follow in later alpha milestones.
 :::
+
+### Web Modeler: RDBMS support (H2, MariaDB, MySQL) <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span>
+
+<!-- https://github.com/camunda/product-hub/issues/3189 -->
+
+Web Modeler now supports H2, MariaDB, and MySQL as relational database systems, aligning with the configurations supported by the Orchestration cluster.  
+This enhancement ensures consistency across environments, simplifies setup for administrators, and improves integration for both SaaS and Self-Managed deployments.
 
 ### JDBC driver management for RDBMS integrations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span>
 

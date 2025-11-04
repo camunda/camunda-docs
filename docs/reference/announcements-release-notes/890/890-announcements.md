@@ -49,9 +49,9 @@ See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/
 
 #### MySQL and Microsoft SQL Server secondary storage support
 
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the orchestration cluster.
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage) for details.
+See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage-self-manageddata) for details.
 
 </div>
 </div>
@@ -70,7 +70,23 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.  
 Users can now easily add or replace drivers (for example, Oracle JDBC) while maintaining full compliance and version control.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations) for details.
+See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations-self-managedconfiguration) for details.
+
+</div>
+</div>
+
+### Modeler
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
+
+Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.  
+This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
 
 </div>
 </div>
