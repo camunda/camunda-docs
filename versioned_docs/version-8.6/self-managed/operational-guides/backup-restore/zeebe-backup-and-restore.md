@@ -180,7 +180,7 @@ curl --request GET 'http://localhost:9600/actuator/backups'
 The list of backups can be filtered by specifying a backup ID prefix:
 
 ```
-GET actuator/backupRuntime/{backupIdPrefix}
+GET actuator/backups/{backupIdPrefix}
 ```
 
 The backup ID prefix must end with `*`, for example `10*` will match all backups with IDs starting with `10`.
@@ -189,7 +189,7 @@ The backup ID prefix must end with `*`, for example `10*` will match all backups
   <summary>Example request</summary>
 
 ```shell
-curl --request GET 'http://localhost:9600/actuator/backupRuntime/10*'
+curl --request GET 'http://localhost:9600/actuator/backups/10*'
 ```
 
 </details>

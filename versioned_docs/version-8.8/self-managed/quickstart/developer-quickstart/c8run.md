@@ -201,9 +201,33 @@ camunda:
 
 ## Shut down Camunda 8 Run
 
-To shut down Camunda 8 Run and end all running processes, run `./shutdown.sh` (or `.\c8run.exe stop` on Windows) from the `c8run` directory.
+To shut down (non-Docker) Camunda 8 Run and end all running processes, run the following command from the `c8run` directory:
 
-To shut down the Camunda 8 Run Docker distribution, use `./shutdown.sh --docker` (or `.\c8run.exe stop --docker` on Windows).
+```bash
+./shutdown.sh
+
+# Windows:
+# .\c8run.exe stop
+```
+
+If you started Camunda 8 Run with Docker `./start.sh --docker`, run the following command instead:
+
+```bash
+# Stop containers but keep existing data
+docker compose -f docker-compose-8.8/docker-compose.yaml down
+# (older bundles use: docker/docker-compose.yml)
+
+# Stop containers and remove all data volumes
+docker compose -f docker-compose-8.8/docker-compose.yaml down -v
+```
+
+The `-v` option removes all Docker volumes, including persisted data such as users and process instances. Omit `-v` if you want to keep your existing data for the next startup.
+
+To confirm that Camunda 8 Run has stopped, check for active containers:
+
+```bash
+docker ps
+```
 
 ## Advanced options
 
