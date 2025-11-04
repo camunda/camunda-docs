@@ -8,6 +8,8 @@ description: "Step through an example to create a new project, add a collaborato
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Web Modeler API, such as creating a new project, adding a collaborator to a project, viewing the details of a project, and deleting a project.
 
+This tutorial focuses on using the Web Modeler API in a Camunda 8 SaaS environment, but the same principles apply to a Self-Managed environment.
+
 ## Prerequisites
 
 - Create your first client by navigating to **Console > Organization > Administration API > Create new credentials**. Ensure you determine the scoped access for client credentials. For example, in this tutorial we will create a project, add a collaborator, and delete a project. Ensure you check the box for the Web Modeler scope.

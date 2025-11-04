@@ -215,7 +215,7 @@ assertThat(processInstance).hasTerminatedElement("task_A", 2);
 
 ## Variable assertions
 
-You can verify the process instance variables using `CamundaAssert.assertThat(processInstance)`. Local variables of BPMN elements are ignored.
+You can verify the process variables using `CamundaAssert.assertThat(processInstance)`. Local variables of BPMN elements are ignored.
 
 ### hasVariableNames
 

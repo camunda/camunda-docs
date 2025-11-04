@@ -1796,6 +1796,7 @@
     "reference/licenses",
     "reference/notices",
     "reference/regions",
+    "reference/data-locations",
     "reference/saas-ip-addresses",
     {
       "type": "category",
@@ -1898,6 +1899,7 @@
             "self-managed/setup/guides/using-existing-keycloak",
             "self-managed/setup/guides/configure-db-custom-headers",
             "self-managed/setup/guides/air-gapped-installation",
+            "self-managed/setup/guides/install-bitnami-enterprise-images",
             "self-managed/setup/guides/running-custom-connectors",
             "self-managed/setup/guides/prefix-elasticsearch-indices",
             "self-managed/setup/guides/data-retention",
