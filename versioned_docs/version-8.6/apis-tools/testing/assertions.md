@@ -62,7 +62,7 @@ assertThat(processInstance).hasCompletedElements("A", "B");
 assertThat(processInstance).hasTerminatedElements("A", "B");
 ```
 
-### Process instance variables
+### Process variables
 
 Assert that the process instance has the given variables. Local variables of BPMN elements are ignored.
 

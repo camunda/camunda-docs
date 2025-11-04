@@ -160,16 +160,15 @@ Additionally, the Zeebe Gateway should be configured to use an encrypted connect
    </details>
    - The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
 
-   To configure a Zeebe cluster securely, it's essential to set up a secure communication configuration between pods:
-   - We enable gRPC Ingress for the Core Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
-   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Core pod and configure a secure TLS connection.
+   To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
+   - We enable gRPC Ingress for the Zeebe Pod, which sets up a secure proxy that we'll use to communicate with the Zeebe cluster. To avoid conflicts with other services, we use a specific domain (`zeebe-$DOMAIN_NAME`) for the gRPC proxy, different from the one used by other services (`$DOMAIN_NAME`). We also note that the port used for gRPC is `443`.
+   - We mount the **Service Certificate Secret** (`camunda-platform-internal-service-certificate`) to the Zeebe pod and configure a secure TLS connection.
 
    Update your `values.yml` file with the following:
 
-   <!-- The following values file will need to be uncommented when the work on 8.8 is resumed; https://github.com/camunda/camunda-deployment-references/pull/134 -->
-   <!--```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/core-route.yml
-   ``` -->
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+   ```
 
    The actual configuration properties can be reviewed [in the Zeebe Gateway configuration documentation](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
@@ -367,15 +366,24 @@ export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page o
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
 
+6. Open the Orchestration Cluster Identity in your browser at `https://${DOMAIN_NAME}/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+9. In the selected role view, open the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
+
 </TabItem>
   
 <TabItem value="without" label="Without domain">
 
-Identity and Keycloak must be port-forwarded to be able to connect to the cluster.
+Identity, Keycloak and the Orchestration cluster must be port-forwarded to be able to connect to the cluster.
 
 ```shell
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-identity" 8085:80 --namespace "$CAMUNDA_NAMESPACE"
 kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-keycloak" 18080:8080 --namespace "$CAMUNDA_NAMESPACE"
+kubectl port-forward "svc/$CAMUNDA_RELEASE_NAME-zeebe-gateway"  8080:8080 --namespace "$CAMUNDA_NAMESPACE"
 ```
 
 :::tip Localhost development with kubefwd
@@ -413,6 +421,14 @@ kubectl get secret identity-secret-for-components \
 export ZEEBE_CLIENT_ID='client-id' # retrieve the value from the identity page of your created m2m application
 export ZEEBE_CLIENT_SECRET='client-secret' # retrieve the value from the identity page of your created m2m application
 ```
+
+6. Open the Orchestration Cluster Identity in your browser at `http://localhost:8080/identity` and log in with the user `admin` (defined in `identity.firstUser` of the values file).
+7. In the Identity navigation menu, select **Roles**.
+8. Either select an existing role (for example, **Admin**) or [create a new role](/components/identity/role.md) with the appropriate permissions for your use case.
+9. In the selected role view, open the **Clients** tab and click **Assign client**.
+10. Enter the client ID of your application created in Management Identity (for example, `test`) and click **Assign client** to save.
+
+This operation links the OIDC client to the role's permissions in the Orchestration Cluster, granting the application access to the cluster resources. For more information about managing roles and clients, see [Roles](/components/identity/role.md#manage-clients).
 
 <details>
 <summary>To access the other services and their UIs, port-forward those Components as well:</summary>
@@ -508,7 +524,7 @@ The following values are required for the OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `https://$DOMAIN_NAME/auth/realms/camunda-platform/protocol/openid-connect/token`, replacing `$DOMAIN_NAME` with your domain
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 
@@ -526,7 +542,7 @@ The following values are required for OAuth authentication:
 - **Client ID:** Retrieve the client ID value from the identity page of your created M2M application
 - **Client Secret:** Retrieve the client secret value from the Identity page of your created M2M application
 - **OAuth Token URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
-- **Audience:** `zeebe-api`, the default for Camunda 8 Self-Managed
+- **Audience:** `orchestration-api`, the default for Camunda 8 Self-Managed
 
 </TabItem>
 </Tabs>
