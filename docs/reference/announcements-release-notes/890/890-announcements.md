@@ -21,34 +21,6 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 :::
 
-## Supported environment changes
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### RDBMS secondary storage supported versions
-
-Camunda 8.9 adds support for PostgreSQL 15–17, Amazon Aurora PostgreSQL 14–17, Oracle Database 19c and 23ai, MariaDB 10.11, 11.4, and 11.8, and H2 2.3 when used as secondary data stores.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### MySQL and Microsoft SQL Server supported versions
-
-Camunda 8.9 introduces MySQL 8.4 and Microsoft SQL Server 2019 and 2022 as supported secondary storage options for the orchestration cluster.
-
-</div>
-</div>
-
 ## Key changes
 
 ### Data
@@ -64,7 +36,7 @@ Camunda 8.9 introduces MySQL 8.4 and Microsoft SQL Server 2019 and 2022 as suppo
 Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.  
 This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb-self-manageddata) for supported versions and details.
+See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb-self-manageddata) for details.
 
 </div>
 </div>
@@ -77,9 +49,9 @@ See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/
 
 #### MySQL and Microsoft SQL Server secondary storage support
 
-Camunda 8.9 adds MySQL 8.4 and Microsoft SQL Server 2019/2022 as additional secondary storage options for the orchestration cluster.
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the orchestration cluster.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage) for supported versions and details.
+See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage) for details.
 
 </div>
 </div>

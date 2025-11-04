@@ -43,49 +43,37 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/2439 -->
 
-Camunda 8.9 now supports RDBMS as an alternative secondary data store to Elasticsearch or OpenSearch.
+Camunda 8.9 introduces RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch for storing and querying process data.
 
-This feature enables organizations to use H2, PostgreSQL, Oracle, or MariaDB as the secondary storage layer, reducing operational complexity for teams that do not need the scale or performance of ES/OS and prefer an RDBMS-based solution.
+This feature enables organizations to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB as the secondary storage layer, reducing operational complexity for teams that do not need the scale or performance of Elasticsearch or OpenSearch and prefer an RDBMS-based solution.
 
 Key highlights:
 
-- **Flexible database choice:** Use H2 (for development), PostgreSQL, Oracle, or MariaDB as secondary storage alternatives to ES/OS.
-- **Separation of concerns:** Zeebe (Raft + RocksDB) remains the primary execution storage; only the secondary storage layer changes.
-- **Consistent APIs:** Continue using the same REST API and data format as with ES/OS—no query or integration changes needed.
-- **Simplified operations:** Leverage existing database expertise without maintaining or scaling ES/OS clusters.
-
-Supported versions:
-
-- **PostgreSQL**: 15, 16, 17
-- **Amazon Aurora PostgreSQL (compatible)**: 14, 15, 16, 17
-- **Oracle Database**: 19c, 23ai
-- **MariaDB**: 10.11, 11.4, 11.8
-- **H2 (development only)**: 2.3
+- **Flexible database choice:** Use relational databases instead of Elasticsearch or OpenSearch.
+- **Consistent APIs:** Continue using the same REST API and data format—no query or integration changes needed.
+- **Simplified operations:** Leverage existing database expertise without maintaining Elasticsearch or OpenSearch clusters.
+- **Primary execution unchanged:** Zeebe’s primary storage remains Raft + RocksDB; this update only extends the secondary storage layer.
 
 :::note
-Web applications access data through the public Camunda REST API, ensuring that switching between ES/OS and RDBMS does not change behavior or data visibility.
+Currently limited to H2 in C8Run. Operate and external RDBMS configuration will follow in upcoming alpha releases.
 :::
 
 ### MySQL and Microsoft SQL Server secondary storage <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span>
 
 <!-- https://github.com/camunda/product-hub/issues/3043 -->
 
-Camunda 8.9 expands secondary storage support by introducing MySQL and Microsoft SQL Server as additional database options for the orchestration cluster.  
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional database options for the orchestration cluster.  
 This enhancement provides greater flexibility for enterprises that depend on these databases due to policy, licensing, or ecosystem requirements, enabling smoother onboarding and infrastructure consistency.
 
-What’s new:
+Key highlights:
 
-- **New supported databases:** MySQL and Microsoft SQL Server are now supported as secondary data stores alongside PostgreSQL, Oracle, MariaDB, and H2.
+- **New supported databases:** Adds MySQL and Microsoft SQL Server as additional secondary storage options.
 - **Broader enterprise compatibility:** Simplifies adoption for organizations operating in Microsoft- or MySQL-centric environments.
 - **Reduced operational friction:** Removes the need for parallel data systems, reducing maintenance overhead and alignment issues.
-
-Supported versions:
-
-- **MySQL:** 8.4
-- **Microsoft SQL Server:** 2019, 2022
+- **Primary execution unchanged:** Zeebe’s primary storage remains Raft + RocksDB; this update only extends the secondary storage layer.
 
 :::note
-These new databases are available as secondary storage options. Zeebe’s primary execution storage (Raft + RocksDB) remains unchanged.
+This release introduces foundational support only. External configuration and Operate integration will follow in later alpha milestones.
 :::
 
 ### JDBC driver management for RDBMS integrations <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Configuration">Configuration</span>
