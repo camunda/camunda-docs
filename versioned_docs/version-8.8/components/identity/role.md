@@ -55,7 +55,7 @@ To assign users to a role:
 2. Click on the role you want to assign users to.
 3. Select the **Users** tab.
 4. Click **Assign user**.
-5. Type the username of the user you want to assign to the role, and click **Assign user**.
+5. Type the username of the user you want to assign to the role, and click **Assign user**. The username field refers to the email address of the user.
 
 :::note
 For Self-Managed deployments with basic authentication, you must search for existing users.
