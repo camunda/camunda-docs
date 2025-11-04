@@ -91,7 +91,7 @@ Start the modeler without activating installed plug-ins. This is useful to debug
 
 ### BPMN-only mode
 
-To disable the DMN and Form editing capabilities of the App, configure your `flags.json` like this:
+To disable the DMN, Form, and RPA script editing capabilities of the App, configure your `flags.json` like this:
 
 ```js
 {
