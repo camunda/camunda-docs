@@ -37,6 +37,7 @@ The following features are only available in Tasklist API V1 and are not support
 - Public start forms
 - Advanced process filtering (currently limited to search by process definition ID)
 - Task context description
+- Searching user tasks with variable filters will not include tasks created before the upgrade to 8.8
 
 Ensure your application does not rely on these features before upgrading to the V2 API.
 :::
