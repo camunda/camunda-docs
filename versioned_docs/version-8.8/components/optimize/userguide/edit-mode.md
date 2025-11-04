@@ -55,7 +55,7 @@ In dashboard edit mode, click **Add a Filter** to reveal the **Filters** panel. 
 - Start date: Allows filtering by process instance start date
 - End date: Allows filtering by process instance end date
 - Instance state: Allows filtering by process instance state, such as running, completed, or canceled
-- Variable: Allows filtering by process instance variable value
+- Variable: Allows filtering by process variable value
 - Assignee: Allows filtering flow node data by their assignee
 - Candidate Group: Allows filtering flow node data by their candidate group
 

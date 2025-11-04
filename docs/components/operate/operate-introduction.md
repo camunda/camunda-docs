@@ -8,7 +8,7 @@ Operate is a tool for monitoring and troubleshooting process instances running i
 
 In addition to providing visibility into active and completed process instances, Operate can also:
 
-- Carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md) and updating process instance variables.
+- Carry out key operations such as resolving [incidents](./userguide/resolve-incidents-update-variables.md) and updating process variables.
 - Retry or cancel [many process instances at once](/components/operate/userguide/selections-operations.md).
 - [Delete finished instances](/components/operate/userguide/delete-finished-instances.md) and [resources](/components/operate/userguide/delete-resources.md).
 - [Modify](/components/operate/userguide/process-instance-modification.md) an active process instance to allow execution to continue.

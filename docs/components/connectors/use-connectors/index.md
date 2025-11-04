@@ -113,7 +113,7 @@ This field facilitates the mapping of a **Connector** response into multiple pro
 providing further flexibility of the variable utilization within the ongoing process.
 Additionally, the extracted values can be transformed with [FEEL expressions](/components/concepts/expressions.md).
 
-To ensure process isolation, note that connectors do not have access to process instance variables.
+To ensure process isolation, note that connectors do not have access to process variables.
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
