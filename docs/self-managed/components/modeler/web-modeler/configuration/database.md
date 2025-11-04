@@ -186,9 +186,9 @@ spring:
 
 MariaDB usually uses case-insensitive collations by default. To enable case sensitivity, set the database collation to a case-sensitive one like `utf8mb4_bin`.
 
-Not doing so may lead to unexpected behavior.
-The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
-This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+Otherwise, you may encounter unexpected behavior.
+The only restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount`, because the database treats these two names as the same identifier.
 
 ### MSSQL
 
@@ -239,20 +239,20 @@ spring:
 
 #### Case sensitivity
 
-MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive one like `Latin1_General_CS_AS`.
+MSSQL is case-insensitive by default. To enable case sensitivity, set the database collation to a case-sensitive such as `Latin1_General_CS_AS`.
 
-Not doing so may lead to unexpected behavior.
-The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
-This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+Otherwise, you may encounter unexpected behavior.
+The only restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount`, because the database treats these two names as the same identifier.
 
 #### Custom schema
 
 MSSQL supports custom schemas, but this is not configurable in Web Modeler.
-If you want to use a custom schema in MSSQL, you must set the default schema for the database user accordingly.
+To use a custom schema, set the database user’s default schema.
 
 ### MySQL
 
-As the MySQL driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
+As the MySQL driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and provide it for the application to load.
 
 1. Download the appropriate (platform independent) MySQL driver: https://dev.mysql.com/downloads/connector/j/.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
@@ -300,7 +300,7 @@ webModeler:
           [
             "sh",
             "-c",
-            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.5.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1 && sh /docker-entrypoint.sh",
+            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.5.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1",
           ]
         volumeMounts:
           - name: mysql-driver
@@ -325,13 +325,13 @@ spring:
 
 MySQL usually uses case-insensitive collations by default. To enable case sensitivity, set the database collation to a case-sensitive one like `utf8mb4_0900_as_cs`.
 
-Not doing so may lead to unexpected behavior.
-The only known restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
-This means that if you have a field named `amount`, you can't create another field named `Amount` as the database will treat them as the same.
+Otherwise, you may encounter unexpected behavior.
+The only restriction currently is that extraction fields in [IDP extraction](../../../../../components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields) will not be case-sensitive.
+This means that if you have a field named `amount`, you can't create another field named `Amount`, because the database treats these two names as the same identifier.
 
 ### Oracle
 
-As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and supply it for the application to load.
+As the Oracle driver is not provided by default in each of the Camunda 8 distributions, you must download the driver and provide it for the application to load.
 
 1. Download the appropriate Oracle driver: https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html.
 2. If you are using Docker or Kubernetes, ensure that the folder with the library is properly mounted as a volume at this location: `/driver-lib`. It will be automatically loaded by the application.
