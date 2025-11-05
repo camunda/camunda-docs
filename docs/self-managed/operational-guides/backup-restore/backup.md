@@ -24,7 +24,7 @@ Make sure you have:
   - Access permissions to snapshot repositories
 - Confirmed that all components are healthy.
 
-See [backup prerequisites](./index.md#prerequisites) for details.
+See [backup prerequisites](./backup-and-restore.md#prerequisites) for details.
 
 ## 1. Assign a backup ID
 
@@ -198,5 +198,5 @@ You can extend automation with verification and cleanup steps, ensuring backups 
 
 ## Next steps
 
-- [Restore a backup](./restore-backup.md)
+- [Restore a backup](./restore.md)
 - [Perform a cold backup](./cold-backup.md)
