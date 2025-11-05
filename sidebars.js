@@ -494,7 +494,6 @@ module.exports = {
                 "components/modeler/web-modeler/validation/play-your-process",
                 "components/modeler/web-modeler/validation/test-scenario-files",
                 "components/modeler/web-modeler/validation/token-simulation",
-                "components/modeler/web-modeler/validation/task-testing",
               ],
             },
             "components/modeler/web-modeler/run-or-publish-your-process",
