@@ -78,6 +78,100 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-warning-contrast-background: rgb(252, 243, 238);
 }
 
+/* Match Algolia colours to Camunda brand colours */
+:root {
+  --docsearch-muted-color: rgb(140, 140, 140) !important;
+  --docsearch-hit-highlight-color: #bc4223 !important;
+  --docsearch-highlight-color: #ad452a !important;
+  --docsearch-primary-color: #ad452a !important;
+  --docsearch-secondary-text-color: rgb(140, 140, 140) !important;
+  --docsearch-icon-color: rgb(140, 140, 140) !important;
+}
+.DocSearch-Button {
+  background-color: #ebebee !important;
+  border-radius: 20px !important;
+  height: 32px !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-title {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-path {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] mark {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-action,
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon,
+.DocSearch-Hit[aria-selected="true"] mark {
+  color: white !important;
+}
+.DocSearch-SearchBar {
+  padding: 20px !important;
+}
+.DocSearch-Form {
+  border: 2px solid #ad452a !important;
+}
+/* Search bar general */
+
+/* As we now show the breadcrumbs with full path,
+we make it less bold compared to the search keyword */
+.DocSearch-Hit-source {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: unset !important;
+}
+
+/* Landing page search bar */
+
+.homeSearch {
+  margin: auto;
+  max-width: 1000px;
+  padding: 15px 20px 20px 20px;
+}
+
+.homeSearch .DocSearch-Button {
+  height: 55px !important;
+  width: 100%;
+  border-radius: 8px !important;
+  background: white;
+  border: none !important;
+}
+.homeSearch .DocSearch-Button:hover {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+  color: var(--docsearch-muted-color);
+}
+
+.DocSearch-Button-Keys {
+  display: none !important;
+}
+
+.homeSearch .DocSearch-Button-Placeholder::after {
+  content: " Camunda 8 docs";
+}
+
+@media (max-width: 768px) {
+  .homeSearch .DocSearch-Button-Placeholder {
+    display: inline;
+  }
+}
+[data-theme="dark"] .homeSearch .DocSearch-Button {
+  background-color: transparent;
+  border: 2px solid rgb(40, 40, 40) !important;
+}
+
+[data-theme="dark"] .homeSearch .DocSearch-Button:hover {
+  background-color: transparent;
+  border: 2px solid var(--ifm-color-primary) !important;
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
+}
+
 .page-description {
   font-size: 18px;
   font-weight: 500;
@@ -478,63 +572,6 @@ body {
   border: 2px solid #333;
 }
 
-/* Search bar general */
-
-/* As we now show the breadcrumbs with full path,
-we make it less bold compared to the search keyword */
-.DocSearch-Hit-source {
-  color: var(--ifm-color-content-secondary) !important;
-  font-size: 0.8rem !important;
-  font-weight: unset !important;
-}
-
-/* Landing page search bar */
-
-.homeSearch {
-  margin: auto;
-  max-width: 1000px;
-  padding: 15px 20px 20px 20px;
-}
-
-.homeSearch .DocSearch-Button {
-  height: 55px;
-  width: 100%;
-  border-radius: 8px;
-  background: white;
-  border: none !important;
-}
-.homeSearch .DocSearch-Button:hover {
-  height: 55px;
-  width: 100%;
-  border-radius: 8px;
-  background: white;
-  color: var(--docsearch-muted-color);
-}
-
-.DocSearch-Button-Keys {
-  display: none !important;
-}
-
-.homeSearch .DocSearch-Button-Placeholder::after {
-  content: " Camunda 8 docs";
-}
-
-@media (max-width: 768px) {
-  .homeSearch .DocSearch-Button-Placeholder {
-    display: inline;
-  }
-}
-[data-theme="dark"] .homeSearch .DocSearch-Button {
-  background-color: transparent;
-  border: 2px solid rgb(40, 40, 40) !important;
-}
-
-[data-theme="dark"] .homeSearch .DocSearch-Button:hover {
-  background-color: transparent;
-  border: 2px solid var(--ifm-color-primary) !important;
-  box-shadow: 0px 8px 16px 4px #78a9ff33;
-}
-
 .table-of-contents__link .callout {
   display: none;
 }
@@ -629,6 +666,54 @@ h3 .badge:nth-of-type(1) {
   color: #ffffff;
   vertical-align: middle;
 }
+.badge--change {
+  background-color: #0075ff;
+  color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
+.badge--deprecated {
+  background-color: #ffd600;
+  color: #000000;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.badge--breaking-change {
+  background-color: #ff1f00;
+  color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
+.release .badge--long,
+.release .badge--medium {
+  margin-left: 0;
+  margin-bottom: 1.5rem;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.release + h3 {
+  margin-top: 1rem;
+}
 
 .badge--platform {
   background-color: #fc5d0d;
@@ -654,6 +739,35 @@ h3 .badge:nth-of-type(1) {
   color: #000000;
   margin-left: 4px;
   vertical-align: text-top;
+}
+
+.badge--consistent {
+  background-color: var(--ifm-color-success);
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+.badge--eventually-consistent {
+  background-color: #ff8b00;
+  color: #ffffff;
+  margin-left: 4px;
+  vertical-align: text-top;
+  margin-bottom: 0;
+  padding: 0.4rem 0.6rem;
+}
+
+[data-theme="dark"] .badge--eventually-consistent {
+  background-color: #9a4e00;
+  color: #e1d9cd;
+  border: 1px solid #9d7800;
+}
+[data-theme="dark"] .badge--consistent {
+  background-color: #005d5d;
+  color: #bae6ff;
+  border: 1px solid #009d9a;
 }
 
 /* HTTP Method badges */
@@ -1009,6 +1123,15 @@ span.callout + p::after {
 
 .hero--primary {
   background-image: url("/static/img/hero-bg.png");
+}
+
+p.popular > a {
+  padding-right: 20px;
+  color: #ccc;
+}
+
+[data-theme="dark"] p.popular > a {
+  color: var(--ifm-link-color);
 }
 
 /* Remove badges from sidebar */
@@ -1445,13 +1568,12 @@ ul ul .table-of-contents__link--active {
 
 /* Highlighted labels */
 .label-highlight {
-  font-size: 12px;
+  font-size: 80%;
   font-weight: 600;
-  text-transform: uppercase;
   background-color: #f0f0f0;
   color: #000;
   padding: 0.2rem 0.4rem;
-  border-radius: 0.2rem;
+  border-radius: var(--ifm-badge-border-radius);
 }
 
 .label-highlight.yellow {
@@ -1467,4 +1589,127 @@ ul ul .table-of-contents__link--active {
 .label-highlight.red {
   background-color: #da1e28;
   color: #fff;
+}
+
+h3.subheading {
+  margin-bottom: 40px;
+  margin-top: -10px;
+  font-weight: normal;
+}
+@media (max-width: 996px) {
+  .hero-topic {
+    display: none;
+  }
+  h3.subheading {
+    margin-bottom: 20px;
+  }
+}
+.button--hero--topic {
+  background-color: #0f62fe;
+  border-color: #0f62fe;
+  color: #fff !important;
+  transition: all 0.3s;
+}
+
+.button--hero--topic:hover {
+  background-color: #0050e6;
+  border-color: #0050e6;
+  color: #fff !important;
+}
+
+.button--hero--topic::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right-white.png") no-repeat center / 12px
+    12px;
+  margin-left: 8px; /* spacing between text and icon */
+}
+
+.button--hero--topic:hover::after,
+.button--hero--topic:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .button--hero--topic {
+  border-color: rgb(255, 255, 255);
+  transition: 0.3s;
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border: 1px solid white;
+}
+
+[data-theme="dark"] .button--hero--topic:hover {
+  background-color: #ffffff;
+  color: var(--ifm-color-black) !important;
+  border: 1px solid #171c29;
+}
+
+.link-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.link-arrow::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url("/static/img/arrow-right.png") no-repeat center / 12px 12px;
+  margin-left: 6px; /* spacing between text and icon */
+}
+
+.link-arrow:hover::after,
+.link-arrow:focus-visible::after {
+  transform: translateX(2px); /* move arrow */
+}
+
+[data-theme="dark"] .link-arrow::after {
+  background: url("/static/img/arrow-right-dark.png") no-repeat center / 12px
+    12px;
+}
+
+h2 + .release-announcement-row {
+  margin-top: 40px;
+}
+
+h3 + .release-announcement-row {
+  margin-top: 40px;
+}
+
+.release-announcement-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 20px;
+}
+
+.release-announcement-row .badge {
+  flex-shrink: 0;
+  margin-top: 0.125rem; /* Slight adjustment to align with text baseline */
+}
+
+.release-announcement-row {
+  flex: 0 0 auto;
+}
+
+.release-announcement-row h4 {
+  margin-top: 0px;
+}
+
+.release-announcement-row span {
+  white-space: nowrap;
+}
+
+.release-announcement-badge {
+  width: 100px;
+}
+
+.release-announcement-content {
+  flex: 4;
 }

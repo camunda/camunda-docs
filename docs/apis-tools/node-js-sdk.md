@@ -4,7 +4,7 @@ title: Node.js
 description: Get started with the official Camunda 8 JavaScript SDK for Node.js.
 ---
 
-As of 8.5.0, the official [Camunda 8 JavaScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
+The official [Camunda 8 JavaScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
 
 This SDK is written in TypeScript and has full type support for IDEs and editors that support IntelliSense. It can be used in JavaScript or TypeScript projects.
 
@@ -41,7 +41,7 @@ The best way to do the configuration is via the zero-configuration constructor i
 
 The environment variables you need to set are outlined below. Replace these with your secrets and URLs.
 
-To configure a client, and to capture these values when creating the client, review our documentation on [setting up client connection credentials](/components/console/manage-clusters/setup-client-connection-credentials.md).
+To configure a client, and to capture these values when creating the client, review our documentation on [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
 
 ### Self-Managed configuration
 

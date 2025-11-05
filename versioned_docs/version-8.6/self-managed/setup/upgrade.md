@@ -363,7 +363,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 
 ```yaml
 image:
-  repository: bitnami/elasticsearch
+  repository: bitnamilegacy/elasticsearch
   tag: 8.8.2
 ```
 
@@ -575,8 +575,6 @@ If not specified on installation, the Helm chart generates random secrets for al
 To extract the secrets, use the following code snippet, replacing `camunda` with your actual Helm release name:
 
 ```shell
-# Uncomment if Console is enabled.
-# export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
 export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
@@ -593,8 +591,6 @@ After exporting all secrets into environment variables, run the following upgrad
 
 ```shell
 helm upgrade camunda camunda/camunda-platform \
-  # Uncomment if Console is enabled.
-  # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \

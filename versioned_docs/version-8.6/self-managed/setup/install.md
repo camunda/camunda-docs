@@ -107,7 +107,6 @@ data:
   tasklist-secret: VmVyeUxvbmdTdHJpbmc=
   optimize-secret: VmVyeUxvbmdTdHJpbmc=
   connectors-secret: VmVyeUxvbmdTdHJpbmc=
-  console-secret: VmVyeUxvbmdTdHJpbmc=
   keycloak-secret: VmVyeUxvbmdTdHJpbmc=
   zeebe-secret: VmVyeUxvbmdTdHJpbmc=
 ```
@@ -131,9 +130,6 @@ global:
         existingSecret:
           name: identity-secret-for-components
       connectors:
-        existingSecret:
-          name: identity-secret-for-components
-      console:
         existingSecret:
           name: identity-secret-for-components
       zeebe:
@@ -439,6 +435,10 @@ kubectl logs -f <POD_NAME>
 ## Upgrading
 
 For upgrading the Camunda Helm chart from one release to another, perform a [Helm upgrade](/self-managed/setup/upgrade.md).
+
+## Production installation
+
+For production installation, see the [Camunda production installation guide with Kubernetes and Helm](/versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md), available starting with version 8.7.
 
 ## General notes
 

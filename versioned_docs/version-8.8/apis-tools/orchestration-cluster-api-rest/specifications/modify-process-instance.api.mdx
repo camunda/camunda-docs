@@ -1,0 +1,407 @@
+---
+id: modify-process-instance
+title: "Modify process instance"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Modify process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Modify process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/modification"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Modifies a running process instance.
+This request can contain multiple instructions to activate an element of the process or
+to terminate an active instance of an element.
+
+Use this to repair a process instance that is stuck on an element or took an unintended path.
+For example, because an external system is not available or doesn't respond as expected.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance that should be modified.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+            activateInstructions: {
+              description:
+                "Instructions describing which elements should be activated in which scopes and which variables should be created.",
+              type: "array",
+              items: {
+                description:
+                  "Instructions describing an element that should be activated.",
+                type: "object",
+                properties: {
+                  elementId: {
+                    description:
+                      "The ID of the element that should be activated.",
+                    allOf: [
+                      {
+                        description: "The model-defined id of an element.",
+                        format: "ElementId",
+                        type: "string",
+                        example: "Activity_106kosb",
+                        title: "ElementId",
+                      },
+                    ],
+                  },
+                  variableInstructions: {
+                    description:
+                      "Instructions describing which variables should be created.",
+                    type: "array",
+                    items: {
+                      type: "object",
+                      description:
+                        "Instructions describing which variables should be created.",
+                      properties: {
+                        variables: {
+                          description:
+                            "JSON document that will instantiate the variables for the root variable scope of the process instance.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
+                          additionalProperties: true,
+                          type: "object",
+                        },
+                        scopeId: {
+                          description:
+                            "The ID of the element in which scope the variables should be created.\nLeave empty to create the variables in the global scope of the process instance\n",
+                          type: "string",
+                          default: "",
+                        },
+                      },
+                      required: ["variables"],
+                      title: "ModifyProcessInstanceVariableInstruction",
+                    },
+                  },
+                  ancestorElementInstanceKey: {
+                    description:
+                      "The key of the ancestor scope the element instance should be created in.\nSet to -1 to create the new element instance within an existing element instance of the\nflow scope.\n",
+                    oneOf: [
+                      { type: "string", default: "-1" },
+                      {
+                        description:
+                          "System-generated key for a element instance.",
+                        format: "ElementInstanceKey",
+                        example: "2251799813686789",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ElementInstanceKey",
+                      },
+                    ],
+                  },
+                },
+                required: ["elementId"],
+                title: "ProcessInstanceModificationActivateInstruction",
+              },
+            },
+            terminateInstructions: {
+              description:
+                "Instructions describing which elements should be terminated.",
+              type: "array",
+              items: {
+                type: "object",
+                description:
+                  "Instructions describing which elements should be terminated.",
+                properties: {
+                  elementInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a element instance.",
+                        format: "ElementInstanceKey",
+                        example: "2251799813686789",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ElementInstanceKey",
+                      },
+                    ],
+                    description:
+                      "The ID of the element that should be terminated.",
+                  },
+                },
+                required: ["elementInstanceKey"],
+                title: "ProcessInstanceModificationTerminateInstruction",
+              },
+            },
+          },
+          title: "ProcessInstanceModificationInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is modified." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

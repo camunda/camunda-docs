@@ -7,10 +7,6 @@ description: "Understand the available migration tooling and its roadmap."
 
 Camunda currently invests in tooling to help support and ease your migration from Camunda 7 to Camunda 8.
 
-:::info
-The migration tooling is currently under development, with an initial release planned for **Camunda 8.8 (October 2025)**.
-:::
-
 ## Migration tools
 
 Camunda provides the following migration tools:
@@ -275,6 +271,6 @@ With this approach, the duration of history migration doesn't block big bang mig
 
 ### Customization of Data Migrator
 
-You might need to customize the data migration, especially if you used complex data formats in C7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
+You might need to customize the data migration, especially if you used complex data formats in Camunda 7 (for example, Java objects) that need to be converted to something Camunda 8 can handle (for example, JSON). As part of this step, you might also need to extract big payloads and binaries (like documents) into an external data store and reference it from the process (using, for example, upcoming document handling possibilities).
 
 <!-- TODO link to document handling docs -->

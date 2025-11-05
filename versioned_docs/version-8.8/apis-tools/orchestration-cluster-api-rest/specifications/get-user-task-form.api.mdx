@@ -1,0 +1,384 @@
+---
+id: get-user-task-form
+title: "Get user task form"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get user task form"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWW1v2zYQ/iuEPrVYYjuvTY1hgJsmXbosLRKnwZYaAy2dbTYSqZKUHc/Qf98dKdlyJLfr9imAPxi2xOO98bmHNG8RWD42Qfc+uDWgmeXmIRjsBCoFza1Q8iIKusEYLI32cfBc6STYCSIwoRYpSeD4Z/lZ3t+ffri6ubjpn12d/tE9+3R21b/tXQ4GNPYOLLMTYCOczNSIcZaVxlo0fqUsoAAnKWEYyChVQlo2E3HMlIznTIPNtGSxkA8QOT2mxfprwpECw6SyzGRpqrRlkAwhipbinyX6nXLNE7CgKeRFIPEB/c+K4H6DOcoICinldoK/NXzNhAZMgtUZPI27jzEtI2EPMG/hFBNOIOFBdxHYeUrajdVCjnGE/OB2+ebn25XZX2o5/RNgCOxMjoUEDN+oTIdANtiL93zKWazkmKECwWPxNwbJDfNqXwZ5PiDPTaqkAUOe7Hc69FX33q0IZtFkYQjGjLJ4mWyIKJpQSQvS0myeprEIHSraXwypWNSDVcMvEFrKtCYMWeEdQB1cWgJTkxd+lF28JXCUQCHrPI4/jNxKwSNP0pgshJmxKgG9i8FPRQi1zLlVkeJrBkxE6LsYCVyiQrM31aquRr/0bae2YlZYZ3Mpkg9yP3NTKASHXYx9Kgh5dfv1yDboiGCEK08qaM5yboOTy0DOvV87lWTRq7/25OPRhE8r8RSSLprVEm6ARwGB1sp0scg4eYqVJDwU6rOLwWXq8RNBGqt5UZMVjVjAMAZdjQZfHR8GRbqpMgmCG7J2MzcWkt0xSKItVE91QmnjdYtr6fIVv8rX/v7R3qvXr0/2Do5PDg+OjxrSvcmH/1Gwm4F3iZPIR6ro6uKV7+pJ58aIsfQp2GGziQgnjIfWkD3eUBceXEgBPj95vm7oGkwW41LnNLDfOdyMek+CM06aMhntsGFmkY+XFIOOqVC41ZkJO2ECEYU6DzdR07KIIm45KSBun2LyvsVLOGkYQ/JTnZ/WDfTYRy+J+LBc4C7jIE1J8oJDKj3J7q/PT9nrw6NXgxcTa1PTbbdns1lLj8JdiIRVuqX0uI2P9CG5l7QtgQaW8DlDPPAIxdAmj9mKEZlJIcT0h8wqVxaF24xg4Deq79CpG/3GDpNpUePFHru9viiXfo4T6qbdnBGnFe8GfKgy2x3GXD6s1Uj1/QotdWeeWjdZknA9L+ngqeGVgTc8Yte48YJxHGMst1kl7A1kcbDfuBP82u9/ZF4FMlkEK8AXDqzZRjTuBImQIsmS8ok/+qfjTicnC4SXfxGvZPCYYpIcMJ8GjdBKlIYCfevhF6GXeJmze3ThvRqavuqFVkyxhMyAhVxSQSDE8Exj8ISS08kFA5Xhf4UGnXlq+FBaIKM98X/d4fZ0v/0F/Wtz7x7prPJIUWpvfeY8lRx29prLXhfRxzx8ML7eGc/QNnrli5yFeCCjRx4bcmQCPHIHukVwd3e321sJQ+MRpUiJc2NLI1sa2dLIc6aRg3pV4rllKPCfn3RFtGSU4giB5zc1++afm231b6t/W/3Povob/o9cYUDuH8i2wLcFvi3wZ13gR02XA5gzWltN1QJa40KpMMy0pouFiYidebrMLH0r9n9fMVtG2DLClhGeKyPgYAJ2ooqmlGvo2AmpcnfmdANp2otKOydvF5fm1Cwouz6ZxnUIFr7GcyzNxUQZm3cX1DbK0SuUn3ItOFp3+KFhzwUlxmMV8ti9bsIODVBrqYz+g0ZTmFG/pKdxZpC+2PXZTZ+9w1WZ8bm7CiXz62ZOOiedRguuwfV97b2PF8xH7gxUWa00QfTUaMIL/6gR13sygHws7PyGVPgUvgGuQdPdTAVkhW1niZ6HTgjf+B/nJfTe3/XJ/SE3IvyeCpJxKBJypJxggabmCND5oNLGCDqtvWKXQFDS9KJFeMoTPFLy4n4fiuLwSCoZfizsJBu2QpW0Qy++/BbGYG0Gea2AMHdELDgHBd1uhPXj7sc5K22esNB7S+WDWxZIAw2uXfoR9qlou+y1Oj/i4jBWw3bChWwXJkz7tPf77dXb3u7lxenZ1c3ZLmps2Ufr0psixhMuK35Ql3fVCBg1NIoXq+33GfWMC6RZeLRtJGYhaRldWhcF/dwHK/rBCd31frLLBFaFZ5H7YLFAkMKtjvOcXiNp6zm+H6xIx3eXhKHfSHUjHpunvedqKl9cF13ql6yxI90YQPGSy7ljuzijJ/z5QJ22tY646xL6S1bnmJfohSGktjK31h4mJliy9bszLOH8H145NVE=
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user task form"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/user-tasks/{userTaskKey}/form"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Get the form of a user task.
+
+Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The user task key.",
+      schema: {
+        type: "string",
+        format: "string<UserTaskKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The form is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              tenantId: {
+                description: "The tenant ID of the form.",
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+              },
+              formId: {
+                description: "The user-provided identifier of the form.",
+                allOf: [
+                  {
+                    description: "The user-defined id for the form",
+                    type: "string",
+                    format: "FormId",
+                    example: "Form_1nx5hav",
+                    title: "FormId",
+                  },
+                ],
+              },
+              schema: { description: "The form content.", type: "object" },
+              version: {
+                description: "The version of the the deployed form.",
+                type: "integer",
+                format: "int64",
+              },
+              formKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a deployed form.",
+                    format: "FormKey",
+                    example: "2251799813684365",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "FormKey",
+                  },
+                ],
+                description:
+                  "The assigned key, which acts as a unique identifier for this form.",
+              },
+            },
+            title: "FormResult",
+          },
+        },
+      },
+    },
+    "204": {
+      description:
+        "The user task was found, but no form is associated with it.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

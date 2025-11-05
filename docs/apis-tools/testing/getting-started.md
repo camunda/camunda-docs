@@ -27,7 +27,9 @@ tests.
 
 ## Prerequisites
 
-- Java 8+ / 17+ (for Camunda Spring Boot SDK)
+- Java:
+  - For the Camunda Java client: 8+
+  - For the Camunda Spring Boot Starter: 17+
 - [JUnit 5](https://junit.org/junit5/)
 
 For the default [Testcontainers runtime](configuration.md#testcontainers-runtime):
@@ -36,21 +38,27 @@ For the default [Testcontainers runtime](configuration.md#testcontainers-runtime
 
 ## Install
 
-We have two variations of CPT: for the [Camunda Spring Boot SDK](/apis-tools/spring-zeebe-sdk/getting-started.md) and the [Camunda Java client](/apis-tools/java-client/getting-started.md). Choose the one depending on which library you use in your process application.
+CPT has two variants:
 
-Add the following dependency to your Maven project:
+- For the [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md)
+- For the [Camunda Java client](/apis-tools/java-client/getting-started.md)
+
+Choose the one depending on which library you use in your process application.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
 <TabItem value='spring-sdk'>
 
+Add the following dependency to your Maven project:
+
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-spring</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -59,10 +67,13 @@ Add the following dependency to your Maven project:
 
 <TabItem value='java-client'>
 
+Add the following dependency to your Maven project:
+
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-process-test-java</artifactId>
+  <version>${camunda.version}</version>
   <scope>test</scope>
 </dependency>
 ```
@@ -76,7 +87,7 @@ Add the following dependency to your Maven project:
 Create a new Java class with the following structure:
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot SDK', value: 'spring-sdk' },
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
 {label: 'Java client', value: 'java-client' }
 ]}>
 
@@ -102,8 +113,8 @@ public class MyProcessTest {
     @Autowired private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
-        // given: the processes are deployed
+    void shouldCreateProcessInstance() {
+        // given process definition is deployed
 
         // when
         final ProcessInstanceEvent processInstance =
@@ -115,7 +126,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
@@ -126,6 +137,18 @@ public class MyProcessTest {
 - (_optional_) Inject a preconfigured `CamundaClient` to interact with the Camunda runtime.
 - (_optional_) Inject a `CamundaProcessTestContext` to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
+
+The Spring test requires a Spring Boot process application in the same package. Usually, the process
+application [deploys the process resources](/apis-tools/camunda-spring-boot-starter/getting-started.md#deploy-process-models)
+using the annotation `@Deployment`.
+
+If you have no process application yet, you can add a minimal one inside the test class as follows:
+
+```java
+@SpringBootApplication
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+static class TestProcessApplication {}
+```
 
 </TabItem>
 
@@ -149,7 +172,7 @@ public class MyProcessTest {
     private CamundaProcessTestContext processTestContext;
 
     @Test
-    void shouldCompleteProcessInstance() {
+    void shouldCreateProcessInstance() {
         // given
         client
             .newDeployResourceCommand()
@@ -167,7 +190,7 @@ public class MyProcessTest {
                 .join();
 
         // then
-        CamundaAssert.assertThat(processInstance).isCompleted();
+        CamundaAssert.assertThat(processInstance).isActive();
     }
 }
 ```
@@ -177,6 +200,114 @@ public class MyProcessTest {
 - (_optional_) Get a preconfigured `CamundaClient` injected to interact with the Camunda runtime.
 - (_optional_) Get a `CamundaProcessTestContext` injected to interact with the test runtime.
 - (_optional_) Use `CamundaAssert` to verify the process instance state.
+
+</TabItem>
+
+</Tabs>
+
+### Deploy resources
+
+You can deploy additional BPMN processes and other resources by adding the annotation `@TestDeployment` on the test
+class or the method. An annotation on the test method takes precedence over an annotation on the test class. The
+resources are loaded from the root classpath of the test.
+
+```java
+@Test
+@TestDeployment(resources = "my-process.bpmn")
+void shouldCreateProcessInstance() {
+  // the given resources are deployed before running the test
+}
+```
+
+## Test lifecycle
+
+CPT performs the following actions during the JUnit 5 lifecycle when running a test class:
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+- `beforeAll` (test methods)
+  - Start the test runtime
+- `beforeEach` (test method)
+  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Publish the client created event for the Spring Boot process application to trigger the deployment and start job
+    workers
+  - Deploy resources defined via `@TestDeployment`
+- `afterEach` (test method)
+  - Collect the data for the coverage report
+  - Print the created process instances if the test failed
+  - Close the client connections
+  - Publish the client closed event for the Spring Boot process application to stop job workers
+  - Reset the Camunda runtime clock
+  - Delete all data in the Camunda runtime
+- `afterAll` (test methods)
+  - Generate the coverage report
+  - Stop the test runtime
+
+### Limitations
+
+CPT doesn't support Spring Boot process applications with `@PostConstruct` methods or a `CommandLineRunner`
+implementation. These methods are executed when the test class is initialized, but not before each test method.
+
+We recommend to use a minimal configuration for the test instead of the Spring Boot process application and invoke the
+`@PostConstruct` or `run()` methods manually before each test method.
+
+```java
+@SpringBootTest(classes = {TestProcessApplication.class})
+@CamundaSpringProcessTest
+public class ProcessTest {
+
+  @Autowired private CamundaClient client;
+
+  @BeforeEach
+  void invokeProcessApplication() throws Exception {
+    final Application springBootApplication = new Application();
+    springBootApplication.setCamundaClient(client);
+    // call the @PostConstruct methods
+    springBootApplication.afterStarted();
+    // call the CommandLineRunner method
+    springBootApplication.run();
+  }
+
+}
+```
+
+Minimal test configuration:
+
+```java
+// must be in a different package than the Spring Boot application
+package org.example.test;
+
+@SpringBootApplication(
+  // list all required packages for the process test, such as job workers
+  scanBasePackages = {"org.example.services", "org.example.workers"}
+)
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+public class TestProcessApplication {}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+- `beforeAll` (test methods)
+  - Start the test runtime
+- `beforeEach` (test method)
+  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Deploy resources defined via `@TestDeployment`
+- `afterEach` (test method)
+  - Collect the data for the coverage report
+  - Print the created process instances if the test failed
+  - Close the client connections
+  - Reset the Camunda runtime clock
+  - Delete all data in the Camunda runtime
+- `afterAll` (test methods)
+  - Generate the coverage report
+  - Stop the test runtime
 
 </TabItem>
 
@@ -194,3 +325,20 @@ You can dive deeper into the library and read more about:
 ## Examples
 
 Take a look at the example project on [GitHub](https://github.com/camunda/camunda/tree/main/testing/camunda-process-test-example). This demonstrates the usage of the library for a demo Spring Boot process application.
+
+## Process Test Coverage
+
+After a test run, CPT prints the coverage of your BPMN processes to the log and generates a detailed HTML and JSON
+report. You can use the report to identify untested paths in your processes and to increase your test coverage.
+
+A link to the HTML report is printed in the log:
+
+```
+Process coverage: io.camunda.InvoiceApprovalTest
+========================
+- Process_InvoiceApproval: 100%
+
+ Coverage report: file:///my/home/projects/my-process-application/target/coverage-report/report.html
+```
+
+![An example process test coverage HTML report](assets/process-coverage-report.png)

@@ -83,12 +83,32 @@ As an alternative to using JVM properties, the proxy settings can also be set wi
 The HTTPS properties also use the `http.nonProxyHosts` or `CONNECTOR_HTTP_NON_PROXY_HOSTS` property to specify non-proxy hosts.
 :::
 
-| Proxy config set | nonProxyHost config set | valid login provided      | domain1.com (proxied site, no auth required) | domain2.com (proxied site, auth required) | domain3.com (nonProxyHost site) |
-| ---------------- | ----------------------- | ------------------------- | -------------------------------------------- | ----------------------------------------- | ------------------------------- |
-| ❌               | N/A                     | N/A                       | no proxy                                     | no proxy                                  | no proxy                        |
-| ✅               | ❌                      | ✅                        | proxy                                        | proxy                                     | proxy                           |
-| ✅               | ✅                      | ❌ (incorrect or missing) | proxy                                        | Auth error                                | no proxy                        |
-| ✅               | ✅                      | ✅                        | proxy                                        | proxy                                     | no proxy                        |
+#### Learn how the proxy configuration works
+
+The process consists of two main steps: configuration and request handling.
+
+##### Set your configuration
+
+First, define how the proxy should behave.
+These are the available configuration options:
+
+- Enable or disable proxying.
+- Define which URLs should skip the proxy, listed as `nonProxyHosts`.
+- Define which URLs require authentication.
+
+##### Handle incoming requests
+
+When a URL request comes in, it’s handled according to your previously set configuration:
+
+1. Check if the proxy is enabled:
+   1. Yes: Proceed with proxying.
+   1. No: Do not proxy; the request is handled directly.
+1. Check if the site is listed in `nonProxyHosts`:
+   1. Yes: Do not proxy; the request bypasses the proxy.
+   1. No: Proceed with proxying.
+1. Check if the site requires authentication:
+   1. Yes: The request is proxied only if authentication succeeds; otherwise, it returns an authentication error.
+   1. No: The request is proxied normally.
 
 ### Authentication
 
@@ -219,10 +239,6 @@ If you set the `Content-Type` header to `multipart/form-data`, only body fields 
 
 When you are making a PUT, POST, or PATCH request, you might need to provide a body.
 You can provide a body for your request under the **Payload** section in the **Request body** field.
-
-:::note
-Secrets are currently not supported in the body of a **REST connector**.
-:::
 
 ```
 = {

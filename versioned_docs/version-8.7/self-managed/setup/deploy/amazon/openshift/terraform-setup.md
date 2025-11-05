@@ -218,7 +218,6 @@ To set up a ROSA cluster, certain prerequisites must be configured on your AWS a
 4. Enable ROSA on your AWS account via the [AWS Console](https://console.aws.amazon.com/rosa/).
 
 5. Enable HCP ROSA on [AWS Marketplace](https://docs.openshift.com/rosa/cloud_experts_tutorials/cloud-experts-rosa-hcp-activation-and-account-linking-tutorial.html):
-
    - Navigate to the ROSA console: [AWS ROSA Console](https://console.aws.amazon.com/rosa).
    - Choose **Get started**.
    - On the **Verify ROSA prerequisites** page, select **I agree to share my contact information with Red Hat**.
@@ -299,21 +298,21 @@ rosa verify openshift-client
 
    ⚠️ Since private subnets are not reachable from the internet, you'll need to establish a connection between your network and the cluster. This can be done using a [bastion host](https://docs.aws.amazon.com/mwaa/latest/userguide/tutorials-private-network-bastion.html) or a Client VPN.
 
-   The [next section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
+The [VPN module setup section](#vpn-module-setup) will guide you through setting up an [AWS VPN Endpoint](https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-getting-started.html), which allows secure access to the private cluster.
 
-   :::
+:::
 
-   ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
-   ```
+```hcl reference
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.7/aws/openshift/rosa-hcp-single-region/terraform/cluster/cluster.tf
+```
 
-   :::caution Camunda Terraform module
+:::caution Camunda Terraform module
 
-   This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
+This ROSA module is based on the [official Red Hat Terraform module for ROSA HCP](https://registry.terraform.io/modules/terraform-redhat/rosa-hcp/rhcs/latest). Please be aware of potential differences and choices in implementation between this module and the official one.
 
-   We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md) for more information.
+We invite you to consult the [Camunda ROSA module documentation](https://github.com/camunda/camunda-deployment-references/tree/stable/8.7/aws/modules/rosa-hcp/README.md) for more information.
 
-   :::
+:::
 
 4. After setting up the terraform files and ensuring your AWS authentication is configured, initialize your Terraform project, then, initialize Terraform to [configure the backend](#create-an-s3-bucket-for-terraform-state-management) and download necessary provider plugins:
 
@@ -493,7 +492,6 @@ This section applies if you have previously created a private cluster and want t
    ```
 
 3. Import the generated configuration file (`my-client.ovpn`) into an OpenVPN client:
-
    - _(preferred)_ [Official AWS VPN Client](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect-aws-client-vpn-connect.html)
    - [Other OpenVPN Clients](https://docs.aws.amazon.com/vpn/latest/clientvpn-user/connect.html)
 

@@ -14,7 +14,7 @@ import TabItem from "@theme/TabItem";
 
 [Web Modeler](/components/modeler/about-modeler.md) serves as a powerful tool for the development and deployment of processes and process applications. While Web Modeler simplifies one-click deployment for development, professional teams often rely on continuous integration and continuous deployment (CI/CD) pipelines for automated production deployments. The [Web Modeler API](/apis-tools/web-modeler-api/index.md) facilitates integration of Web Modeler into these pipelines, aligning with team practices and organizational process governance.
 
-- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
+- For low-risk processes, you can use Web Modeler [process application development pipeline](/components/modeler/web-modeler/process-applications/process-application-pipeline.md) to quickly develop and progress process application releases through the stages of a standard development lifecycle. [Version comparison](/components/modeler/web-modeler/modeling/versions.md#compare-versions) (Visual and XML diffing), built in [review](/components/modeler/web-modeler/process-applications/process-application-pipeline.md#review), and [Git Sync](/components/modeler/web-modeler/process-applications/git-sync.md) provide a powerful combination for collaboration between team members using both Web and Desktop Modeler.
 
 - For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can integrate Web Modeler into your CI/CD pipelines.
 
@@ -43,7 +43,7 @@ This blueprint provides a ready-to-use proof of concept for a CI/CD pipeline for
 
 While a pipeline for process application integration and deployment resembles general software CI/CD pipelines, key distinctions exist. Consider the following:
 
-- Web Modeler uses [versions](/components/modeler/web-modeler/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
+- Web Modeler uses [versions](/components/modeler/web-modeler/modeling/versions.md) to indicate specific process states, such as readiness for developer handover, review, or deployment.
 - A process application comprises main processes and diverse resources, such as subprocesses, forms, DMN decision models, connectors, job workers, and orchestrated services. Some applications bundle these resources, while others focus on a single process for deployment.
 - Process reviews differ from code reviews, occurring on visual diagrams rather than XML.
 
@@ -54,7 +54,7 @@ While a pipeline for process application integration and deployment resembles ge
 Before getting started, obtain API clients and tokens for integrating Web Modeler and accessing the process engine via API:
 
 - [Obtain an API token for Web Modeler](/apis-tools/web-modeler-api/authentication.md)
-- [Obtain an API client for Zeebe](/components/console/manage-clusters/setup-client-connection-credentials.md)
+- [Obtain an API client for Zeebe](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
 
 ### Disable manual deployments from Web Modeler
 
@@ -112,7 +112,7 @@ Pagination is enforced for all listed `search` endpoints. Ensure you obtain all 
 
 We work to replace this with a webhook or subscription approach. An alternate approach involves manually triggering synchronization or delegating synchronization triggers to other sources, such as the pipeline itself, creation of new branches, or pull/merge requests.
 
-Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/modeler/web-modeler/versions.md).
+Real-time synchronization isn't always what you need. Consider Web Modeler as a local repository, and update your remote repository only after files are committed and pushed. This aligns with the concept of [versions](/components/modeler/web-modeler/modeling/versions.md).
 
 #### Listening to version creation
 
@@ -253,7 +253,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/modeler/web-modeler/validation/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 

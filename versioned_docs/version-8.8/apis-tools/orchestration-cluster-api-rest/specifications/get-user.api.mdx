@@ -1,0 +1,289 @@
+---
+id: get-user
+title: "Get user"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get user"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtT4zgQ/isqn2ZqIQ4Ms8vmlskElimGoSAMtRVykGUlEdiSR5ITUi7/9+2W7Dy9sLN72KIqBwrr1V8/vm4pXQSWTkzQGQZ3hutgdBCojGtqhZIXcdAJJty6hYMg5oZpkeEKzD/IBzkc9r5d3V7cDvpXvT87/e/9q8Fd93I0wrVzbgklORwl0YIIa9y3pClvPUiQllEN35ZrxC4CXACp9R7YIBAlo3YK35r/yIXmoI/VOd9WZTDlS+FEjYmtxi04adiUpzToFAF/pmmWIIiZiyQRBlbHSqfUwtTdCrdBthQ/ck5q8XQp3C4yJ89qISc4FtYBLKWV5QiVN5mShhvU4rjdxn/NBhBhiMkZ48aM8yRZEM1triWPEYwpabm0eJpmWSKYi1H4aFBEsWZopZWKHjmz6GmNEbXCK7D08P/lkoOght8V2xTBTYlwHMwUSfN5t/SKgHJTqRtu8sTCNC6ctI+aBSMBubEkoezJkBlNRExoDijSVoEgDPiJQ5oYRJ1yGjtyF8H9/f1hd7WZN4ZrqV75t6GGQEYJT3/ZDfmmwl1y7XeSmFvnEEcFQg3xGyMeEyHJ8OasR34/+fjb6N3U2sx0wnA+n7f0mB3yWFilW0pPQhjiH+573yLgDM1JShck4oTGsA0waUJWJCMm40yMBSNWuThUahM01Of+ywz1q9uOWWNmrsUOKbvk7uaCCBeB8QIO7EK7M2OK0e4ENFK57UQJlU8wv0qE9fkVU3aV2UY3eZpSvai5tw28AvhEY3Lj2YQAxlKbr5kNZc/yiau3S3th6sNxYxr+MRhcEy+CMBVzAmcAH8pIpcAG9km7fRCkQoo0T+sRffajX9vtEhFslVuv2CsJf87ASZ76W0YDtVIFLPHSNs2vTK/5siBDUOGLisxAdZkVM0gPMyKMSqksUgyuCQN1v8T7AAyV7N9SA2+SHX4oLSZiW/9NhcPZcfgI+oXUq4cy12tIlWqfvefqMvJhNyvPlI5EDAq4JFpWFIgVmkqTRM1fLPT77N9n/z7730T2n7zwxJsL0ATxJmLG5erdOqe+EIxVLvdlYF8G9mXgjZeBj02/9MBnGFuN2cK1hkApxnINPx3IfCoSB48//2rdqleCz5h9RdhXhH1FeKsVARZTbqeqaqq5Fpidoih8A5iwqJ8CJbatuJ7VrbFcg+uDwqd1CdlYTJWxZafIlLYlKAL7Z1QLCoCOMrjs07+mdaIYTdx0E11wYb3z8k0DFDjRR7GX5AYqFrnp3w7IOQRiThct9DzCb8Kctk/bjQi49R9I715fEG+5A1gvZDUEVqRGCL/5Z0Fcg85wKMHCLm5RhHfhJ04119i0WeNVhe2QcBy5TTDjP85qtn25H6D6ETWCvSYC9zjiCDlWbmNFoGYLQHmMNlDDW95uHVUXA/AQj1d91B5N4RlJSV8CkTmv8sEzqS7qE3iJ5lGLqTRkfvvyvzAG0jEod3IGfIe1BM7ARncBQcq4Jy0lNeYpYV5bzBi4pbg0vEG1S79CvntjyFGr/TMqRomKwpQKGVYQJux1v95dfe4eXl70+le3/UOQ2LLP1rk3A46nVK7pgQ3qvKGzXazu2f/c5K6ibvmzDaEuCokudSYWVfYPXUMWG6+dZWcWKOlTeBgUBTCE3+mkLHEaiqRewPxolfGuRMTC4DeUljFNzHaDfN2idzdVK/09ealt3qh4NUnlwlWcJMcRfD7xRbDWui9HZd3+dMr55S5jPLNrB3ea2JiKywp53occKv8CHyN9qw==
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/{username}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Get a user by its username.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "username",
+      in: "path",
+      required: true,
+      description: "The username of the user.",
+      schema: {
+        example: "swillis",
+        format: "Username",
+        description: "The unique name of a user.",
+        type: "string",
+        title: "Username",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The user is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              username: {
+                example: "swillis",
+                format: "Username",
+                description: "The unique name of a user.",
+                type: "string",
+                title: "Username",
+              },
+              name: { description: "The name of the user.", type: "string" },
+              email: { description: "The email of the user.", type: "string" },
+            },
+            title: "UserResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The user with the given username was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

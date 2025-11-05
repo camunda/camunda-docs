@@ -1,0 +1,291 @@
+---
+id: cancel-process-instance
+title: "Cancel process instance"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Cancel process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Cancel process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/cancellation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Cancels a running process instance. As a cancelation includes more than just the removal of the process instance resource, the cancelation resource must be posted.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance to cancel.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          nullable: true,
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          title: "CancelProcessInstanceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The process instance is canceled." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

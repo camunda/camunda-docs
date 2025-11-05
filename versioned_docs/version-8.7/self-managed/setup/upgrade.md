@@ -72,6 +72,20 @@ With the 8.7 release, no special configuration is required to update Helm from 8
 
 The structure of the Helm charts in version 12.0.0+ is similar to that of version 11.0.0+, with no breaking changes introduced between versions 8.6 and 8.7.
 
+### Internal Keycloak
+
+:::warning
+
+In the Camunda 8.7 Helm chart, Keycloak has been upgraded to version `26.3.3`, which introduces changes to environment variable prefixes.  
+Some variables previously using the `KEYCLOAK_` prefix now use `KC_`.
+
+For details, see the [Keycloak release notes](https://github.com/camunda/keycloak/releases/tag/2025-09-16-001).
+
+Update the prefix for any affected environment variables in your configuration.
+No action is required if you don’t use custom variables passed to the Keycloak deployment (for example, via the values file or post-rendering).
+
+:::
+
 </TabItem>
 
 <TabItem value='8.6'>
@@ -376,7 +390,7 @@ If you have a custom `values.yaml`, change the image repository and tag:
 
 ```yaml
 image:
-  repository: bitnami/elasticsearch
+  repository: bitnamilegacy/elasticsearch
   tag: 8.8.2
 ```
 
@@ -588,8 +602,6 @@ If not specified on installation, the Helm chart generates random secrets for al
 To extract the secrets, use the following code snippet, replacing `camunda` with your actual Helm release name:
 
 ```shell
-# Uncomment if Console is enabled.
-# export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
 export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
@@ -607,8 +619,6 @@ After exporting all secrets into environment variables, run the following upgrad
 ```shell
 helm repo update
 helm upgrade camunda camunda/camunda-platform \
-  # Uncomment if Console is enabled.
-  # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \

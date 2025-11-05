@@ -74,20 +74,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.5: {
-                specPath: "api/operate/version-8.5/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.4: {
-                specPath: "api/operate/version-8.4/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.4/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -122,20 +108,6 @@ module.exports = {
                 specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.5: {
-                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.4: {
-                specPath: "api/tasklist/version-8.4/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.4/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -202,6 +174,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.8: {
+                specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
                 outputDir:
@@ -250,13 +229,6 @@ module.exports = {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.5: {
-                specPath: "api/zeebe/version-8.5/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/zeebe-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -385,15 +357,11 @@ module.exports = {
           title: "About",
           items: [
             {
-              label: "Camunda Help Center",
-              to: "docs/reference/camunda-help-center",
-            },
-            {
               label: "Try free",
               href: "https://signup.camunda.com/accounts?utm_source=docs.camunda.io&utm_medium=referral&utm_content=footer",
             },
             {
-              label: "Contact",
+              label: "Support and feedback",
               to: "docs/reference/contact",
             },
           ],
@@ -541,15 +509,12 @@ module.exports = {
           // 👋 When cutting a new version, remove the banner for maintained versions by adding an entry. Remove the entry to versions >18 months old.
           versions: {
             current: {
-              label: "8.8 (unreleased)",
+              label: "8.9 (unreleased)",
+            },
+            8.7: {
+              banner: "none",
             },
             8.6: {
-              banner: "none",
-            },
-            8.5: {
-              banner: "none",
-            },
-            8.4: {
               banner: "none",
             },
           },
@@ -566,9 +531,8 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.4/**",
-            "/docs/8.5/**",
             "/docs/8.6/**",
+            "/docs/8.7/**",
           ],
         },
       },

@@ -1,0 +1,3464 @@
+{
+  "Guides": [
+    {
+      "type": "category",
+      "label": "Get started",
+      "link": {
+        "type": "doc",
+        "id": "guides/introduction-to-camunda"
+      },
+      "items": [
+        "guides/getting-started-example",
+        "guides/getting-started-agentic-orchestration",
+        "guides/orchestrate-human-tasks",
+        "guides/orchestrate-apis"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Migrate from Camunda 7",
+      "link": {
+        "type": "doc",
+        "id": "guides/migrating-from-camunda-7/index"
+      },
+      "items": [
+        "guides/migrating-from-camunda-7/migration-journey",
+        "guides/migrating-from-camunda-7/conceptual-differences",
+        "guides/migrating-from-camunda-7/migration-tooling",
+        {
+          "type": "category",
+          "label": "Data Migrator",
+          "link": {
+            "type": "doc",
+            "id": "guides/migrating-from-camunda-7/data-migrator/index"
+          },
+          "items": [
+            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
+            "guides/migrating-from-camunda-7/data-migrator/install",
+            "guides/migrating-from-camunda-7/data-migrator/runtime",
+            "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/variables",
+            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
+            "guides/migrating-from-camunda-7/data-migrator/limitations",
+            {
+              "type": "category",
+              "label": "Configuration & reference",
+              "items": [
+                "guides/migrating-from-camunda-7/data-migrator/database",
+                "guides/migrating-from-camunda-7/data-migrator/config-examples",
+                "guides/migrating-from-camunda-7/data-migrator/config-properties"
+              ]
+            },
+            "guides/migrating-from-camunda-7/data-migrator/troubleshooting"
+          ]
+        },
+        "guides/migrating-from-camunda-7/code-conversion",
+        "guides/migrating-from-camunda-7/migration-readiness"
+      ]
+    }
+  ],
+  "Components": [
+    "components/components-overview",
+    {
+      "type": "category",
+      "label": "Introduction to Camunda 8",
+      "link": {
+        "type": "doc",
+        "id": "components/concepts/concepts-overview"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Processes",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/processes"
+          },
+          "items": [
+            "components/concepts/process-instance-creation",
+            "components/concepts/process-instance-modification",
+            "components/concepts/process-instance-migration",
+            "components/concepts/incidents"
+          ]
+        },
+        "components/concepts/process-applications",
+        "components/concepts/workflow-patterns",
+        {
+          "type": "category",
+          "label": "Identity and access management",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/access-control/access-control-overview"
+          },
+          "items": [
+            "components/concepts/access-control/authorizations",
+            "components/concepts/access-control/connect-to-identity-provider",
+            "components/concepts/access-control/mapping-rules",
+            "components/concepts/multi-tenancy"
+          ]
+        },
+        "components/concepts/job-workers",
+        "components/concepts/outbound-connectors-job-workers",
+        "components/concepts/element-templates",
+        {
+          "Listeners": [
+            "components/concepts/execution-listeners",
+            {
+              "type": "category",
+              "label": "User task listeners",
+              "link": {
+                "type": "doc",
+                "id": "components/concepts/user-task-listeners"
+              },
+              "items": ["components/concepts/listen-to-user-tasks"]
+            }
+          ]
+        },
+        "components/concepts/messages",
+        "components/concepts/signals",
+        "components/concepts/variables",
+        "components/concepts/expressions",
+        "components/concepts/resource-deletion",
+        "components/concepts/task-testing"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Best Practices",
+      "link": {
+        "type": "doc",
+        "id": "components/best-practices/best-practices-overview"
+      },
+      "items": [
+        {
+          "Project management": [
+            "components/best-practices/management/following-the-customer-success-path",
+            "components/best-practices/management/doing-a-proper-poc"
+          ],
+          "Architecture": [
+            "components/best-practices/architecture/deciding-about-your-stack",
+            "components/best-practices/architecture/sizing-your-environment",
+            "components/best-practices/architecture/understanding-human-tasks-management"
+          ],
+          "Development": [
+            "components/best-practices/development/connecting-the-workflow-engine-with-your-world",
+            "components/best-practices/development/service-integration-patterns",
+            "components/best-practices/development/writing-good-workers",
+            "components/best-practices/development/dealing-with-problems-and-exceptions",
+            "components/best-practices/development/handling-data-in-processes",
+            "components/best-practices/development/routing-events-to-processes",
+            "components/best-practices/development/testing-process-definitions",
+            "components/best-practices/development/local-development-with-element-templates"
+          ],
+          "Modeling": [
+            "components/best-practices/modeling/creating-readable-process-models",
+            "components/best-practices/modeling/naming-bpmn-elements",
+            "components/best-practices/modeling/naming-technically-relevant-ids",
+            "components/best-practices/modeling/modeling-beyond-the-happy-path",
+            "components/best-practices/modeling/modeling-with-situation-patterns",
+            "components/best-practices/modeling/building-flexibility-into-bpmn-models",
+            "components/best-practices/modeling/choosing-the-dmn-hit-policy",
+            "components/best-practices/modeling/choosing-the-resource-binding-type"
+          ],
+          "Operations": [
+            "components/best-practices/operations/versioning-process-definitions",
+            "components/best-practices/operations/reporting-about-processes"
+          ],
+          "CI/CD guidelines": [
+            "components/best-practices/cicd-guidelines/element-templates-at-scale"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Features and integrations",
+      "link": {
+        "type": "doc",
+        "id": "components/features-integrations/features-integrations"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Agentic orchestration",
+          "link": {
+            "type": "doc",
+            "id": "components/agentic-orchestration/agentic-orchestration"
+          },
+          "items": [
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Intelligent document processing (IDP)",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/idp"
+          },
+          "items": [
+            "components/modeler/web-modeler/idp/idp-configuration",
+            "components/modeler/web-modeler/idp/idp-applications",
+            {
+              "type": "category",
+              "label": "Document extraction",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/idp/idp-document-extraction"
+              },
+              "items": [
+                "components/modeler/web-modeler/idp/idp-unstructured-extraction",
+                "components/modeler/web-modeler/idp/idp-structured-extraction"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Integrate IDP into your processes",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/idp/idp-integrate"
+              },
+              "items": ["components/modeler/web-modeler/idp/idp-example"]
+            },
+            "components/modeler/web-modeler/idp/idp-key-concepts",
+            "components/modeler/web-modeler/idp/idp-reference"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Robotic Process Automation (RPA)",
+          "link": {
+            "type": "doc",
+            "id": "components/rpa/overview"
+          },
+          "items": [
+            "components/rpa/getting-started",
+            "components/rpa/production",
+            {
+              "type": "link",
+              "label": "RPA library specifications",
+              "href": "https://camunda.github.io/rpa-python-libraries/"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Document handling",
+          "link": {
+            "type": "doc",
+            "id": "components/document-handling/getting-started"
+          },
+          "items": [
+            "components/document-handling/use-cases",
+            "components/document-handling/upload-document-to-bpmn-process",
+            "components/document-handling/display-and-download-document",
+            "components/document-handling/send-document-to-external-system-via-connector"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Camunda integrations",
+          "link": {
+            "type": "doc",
+            "id": "components/camunda-integrations/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "SAP",
+              "link": {
+                "type": "doc",
+                "id": "components/camunda-integrations/sap/sap-integration"
+              },
+              "items": [
+                "components/camunda-integrations/sap/prerequisites",
+                {
+                  "Integration modules": [
+                    "components/camunda-integrations/sap/odata-connector",
+                    "components/camunda-integrations/sap/rfc-connector",
+                    "components/camunda-integrations/sap/btp-plugin",
+                    "components/camunda-integrations/sap/eventing",
+                    "components/camunda-integrations/sap/csap-cli"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "ServiceNow",
+              "link": {
+                "type": "doc",
+                "id": "components/camunda-integrations/servicenow/servicenow-integration"
+              },
+              "items": [
+                "components/camunda-integrations/servicenow/prerequisites",
+                "components/camunda-integrations/servicenow/setup-and-configuration",
+                {
+                  "type": "category",
+                  "label": "Connectors",
+                  "items": [
+                    "components/camunda-integrations/servicenow/connectors/outbound-connector",
+                    "components/camunda-integrations/servicenow/connectors/incident-handler",
+                    "components/camunda-integrations/servicenow/connectors/flow-starter"
+                  ]
+                },
+                "components/camunda-integrations/servicenow/blueprints",
+                "components/camunda-integrations/servicenow/best-practices",
+                "components/camunda-integrations/servicenow/troubleshooting",
+                "components/camunda-integrations/servicenow/glossary"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Early access",
+          "link": {
+            "type": "doc",
+            "id": "components/early-access/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Alpha features",
+              "link": {
+                "type": "doc",
+                "id": "components/early-access/alpha/alpha-features"
+              },
+              "items": [
+                "components/early-access/alpha/bpmn-copilot/bpmn-copilot",
+                "components/early-access/alpha/feel-copilot/feel-copilot",
+                {
+                  "type": "category",
+                  "label": "MCP Client",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/early-access/alpha/mcp-client/mcp-client"
+                  },
+                  "items": [
+                    "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-connector"
+                  ]
+                },
+                "components/early-access/alpha/ms-teams/ms-teams"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Modeler",
+      "link": {
+        "type": "doc",
+        "id": "components/modeler/about-modeler"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Web Modeler",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/web-modeler/index"
+          },
+          "items": [
+            "components/modeler/web-modeler/launch-web-modeler",
+            "components/modeler/web-modeler/model-your-first-diagram",
+            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
+            "components/modeler/web-modeler/context-pad",
+            "components/modeler/web-modeler/git-sync",
+            "components/modeler/web-modeler/import-diagram",
+            "components/modeler/web-modeler/fix-problems-in-your-diagram",
+            "components/modeler/web-modeler/run-or-publish-your-process",
+            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
+            {
+              "type": "category",
+              "label": "Process applications",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/process-applications/process-applications"
+              },
+              "items": [
+                {
+                  "type": "doc",
+                  "label": "Lifecycle",
+                  "id": "components/modeler/web-modeler/process-applications/process-application-pipeline"
+                },
+                {
+                  "type": "doc",
+                  "label": "Creation",
+                  "id": "components/modeler/web-modeler/process-applications/create-a-process-application"
+                },
+                {
+                  "type": "doc",
+                  "label": "Deployment",
+                  "id": "components/modeler/web-modeler/process-applications/deploy-process-application"
+                },
+                {
+                  "type": "doc",
+                  "label": "Versioning",
+                  "id": "components/modeler/web-modeler/process-applications/process-application-versioning"
+                }
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Collaboration",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/collaboration/collaboration"
+              },
+              "items": [
+                "components/modeler/web-modeler/collaboration/collaborate-with-modes",
+                "components/modeler/web-modeler/collaboration/design-your-process",
+                "components/modeler/web-modeler/collaboration/implement-your-process",
+                "components/modeler/web-modeler/collaboration/play-your-process"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Element templates",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/web-modeler/element-templates/manage-element-templates"
+              },
+              "items": [
+                "components/modeler/web-modeler/element-templates/element-template-generator",
+                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                "components/modeler/web-modeler/element-templates/best-practices"
+              ]
+            },
+            "components/modeler/web-modeler/camunda-marketplace",
+            "components/modeler/web-modeler/versions",
+            "components/modeler/web-modeler/token-simulation",
+            {
+              "Advanced modeling": [
+                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
+                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
+                "components/modeler/web-modeler/advanced-modeling/form-linking",
+                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
+                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
+                "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
+                {
+                  "AI features": [
+                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai"
+                  ]
+                }
+              ]
+            },
+            "components/modeler/web-modeler/file-download",
+            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/process-landscape-visualization",
+            "components/modeler/web-modeler/task-testing"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Desktop Modeler",
+          "link": {
+            "type": "doc",
+            "id": "components/modeler/desktop-modeler/index"
+          },
+          "items": [
+            "components/modeler/desktop-modeler/install-the-modeler",
+            "components/modeler/desktop-modeler/model-your-first-diagram",
+            "components/modeler/desktop-modeler/connect-to-camunda-8",
+            "components/modeler/desktop-modeler/start-instance",
+            "components/modeler/desktop-modeler/process-applications",
+            "components/modeler/desktop-modeler/use-connectors",
+            "components/modeler/desktop-modeler/variables",
+            {
+              "Element templates": [
+                "components/modeler/desktop-modeler/element-templates/configuring-templates",
+                "components/modeler/desktop-modeler/element-templates/using-templates"
+              ]
+            },
+            {
+              "Additional configuration": [
+                "components/modeler/desktop-modeler/flags/flags",
+                "components/modeler/desktop-modeler/plugins/plugins",
+                "components/modeler/desktop-modeler/custom-lint-rules/custom-lint-rules",
+                "components/modeler/desktop-modeler/search-paths/search-paths",
+                "components/modeler/desktop-modeler/telemetry/telemetry"
+              ]
+            },
+            "components/modeler/desktop-modeler/settings/settings",
+            "components/modeler/desktop-modeler/task-testing",
+            "components/modeler/desktop-modeler/troubleshooting"
+          ]
+        },
+        {
+          "Camunda Forms": [
+            "components/modeler/forms/camunda-forms-reference",
+            "components/modeler/forms/utilizing-forms",
+            {
+              "Form Element Library": [
+                "components/modeler/forms/form-element-library/forms-element-library",
+                "components/modeler/forms/form-element-library/forms-element-library-text",
+                "components/modeler/forms/form-element-library/forms-element-library-html",
+                "components/modeler/forms/form-element-library/forms-element-library-textfield",
+                "components/modeler/forms/form-element-library/forms-element-library-textarea",
+                "components/modeler/forms/form-element-library/forms-element-library-number",
+                "components/modeler/forms/form-element-library/forms-element-library-datetime",
+                "components/modeler/forms/form-element-library/forms-element-library-checkbox",
+                "components/modeler/forms/form-element-library/forms-element-library-radio",
+                "components/modeler/forms/form-element-library/forms-element-library-select",
+                "components/modeler/forms/form-element-library/forms-element-library-checkbox-group",
+                "components/modeler/forms/form-element-library/forms-element-library-taglist",
+                "components/modeler/forms/form-element-library/forms-element-library-group",
+                "components/modeler/forms/form-element-library/forms-element-library-dynamiclist",
+                "components/modeler/forms/form-element-library/forms-element-library-iframe",
+                "components/modeler/forms/form-element-library/forms-element-library-table",
+                "components/modeler/forms/form-element-library/forms-element-library-expression",
+                "components/modeler/forms/form-element-library/forms-element-library-filepicker",
+                "components/modeler/forms/form-element-library/forms-element-library-document-preview",
+                "components/modeler/forms/form-element-library/forms-element-library-image",
+                "components/modeler/forms/form-element-library/forms-element-library-spacer",
+                "components/modeler/forms/form-element-library/forms-element-library-separator",
+                "components/modeler/forms/form-element-library/forms-element-library-button"
+              ]
+            },
+            {
+              "Configuration": [
+                "components/modeler/forms/configuration/forms-config-data-binding",
+                "components/modeler/forms/configuration/forms-config-options",
+                "components/modeler/forms/configuration/forms-config-table-data-binding",
+                "components/modeler/forms/configuration/forms-config-templating-syntax"
+              ]
+            }
+          ]
+        },
+        {
+          "Element templates": [
+            "components/modeler/element-templates/about-templates",
+            {
+              "type": "category",
+              "label": "Defining templates",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/element-templates/defining-templates"
+              },
+              "items": [
+                "components/modeler/element-templates/template-metadata",
+                "components/modeler/element-templates/template-properties",
+                "components/modeler/element-templates/template-example"
+              ]
+            },
+            "components/modeler/element-templates/element-templates-with-dependencies",
+            "components/modeler/element-templates/additional-resources"
+          ]
+        },
+        "components/modeler/data-handling",
+        "components/modeler/using-web-and-desktop-modeler-together",
+        {
+          "Reference": [
+            {
+              "type": "category",
+              "label": "Modeling guidance",
+              "link": {
+                "type": "doc",
+                "id": "components/modeler/reference/modeling-guidance/index"
+              },
+              "items": [
+                "components/modeler/reference/modeling-guidance/rules/called-element",
+                "components/modeler/reference/modeling-guidance/rules/element-type",
+                "components/modeler/reference/modeling-guidance/rules/error-reference",
+                "components/modeler/reference/modeling-guidance/rules/escalation-reference",
+                "components/modeler/reference/modeling-guidance/rules/feel",
+                "components/modeler/reference/modeling-guidance/rules/message-reference",
+                "components/modeler/reference/modeling-guidance/rules/no-loop"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "BPMN, DMN, and FEEL",
+      "link": {
+        "type": "doc",
+        "id": "components/concepts/bpmn-dmn-feel"
+      },
+      "items": [
+        {
+          "BPMN": [
+            "components/modeler/bpmn/modeler-bpmn",
+            "components/modeler/bpmn/automating-a-process-using-bpmn",
+            "components/modeler/bpmn/bpmn-primer",
+            "components/modeler/bpmn/bpmn-coverage",
+            "components/modeler/bpmn/data-flow",
+            {
+              "Tasks": [
+                "components/modeler/bpmn/tasks",
+                "components/modeler/bpmn/service-tasks/service-tasks",
+                "components/modeler/bpmn/user-tasks/user-tasks",
+                "components/modeler/bpmn/receive-tasks/receive-tasks",
+                "components/modeler/bpmn/business-rule-tasks/business-rule-tasks",
+                "components/modeler/bpmn/script-tasks/script-tasks",
+                "components/modeler/bpmn/send-tasks/send-tasks",
+                "components/modeler/bpmn/manual-tasks/manual-tasks",
+                "components/modeler/bpmn/undefined-tasks/undefined-tasks"
+              ]
+            },
+            {
+              "Gateways": [
+                "components/modeler/bpmn/gateways",
+                "components/modeler/bpmn/exclusive-gateways/exclusive-gateways",
+                "components/modeler/bpmn/parallel-gateways/parallel-gateways",
+                "components/modeler/bpmn/event-based-gateways/event-based-gateways",
+                "components/modeler/bpmn/inclusive-gateways/inclusive-gateways"
+              ]
+            },
+            {
+              "Events": [
+                "components/modeler/bpmn/events",
+                "components/modeler/bpmn/none-events/none-events",
+                "components/modeler/bpmn/message-events/message-events",
+                "components/modeler/bpmn/signal-events/signal-events",
+                "components/modeler/bpmn/timer-events/timer-events",
+                "components/modeler/bpmn/error-events/error-events",
+                "components/modeler/bpmn/escalation-events/escalation-events",
+                "components/modeler/bpmn/terminate-events/terminate-events",
+                "components/modeler/bpmn/link-events/link-events",
+                "components/modeler/bpmn/compensation-events/compensation-events"
+              ]
+            },
+            {
+              "Subprocesses": [
+                "components/modeler/bpmn/subprocesses",
+                "components/modeler/bpmn/embedded-subprocesses/embedded-subprocesses",
+                "components/modeler/bpmn/call-activities/call-activities",
+                "components/modeler/bpmn/event-subprocesses/event-subprocesses",
+                "components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses"
+              ]
+            },
+            {
+              "Markers": [
+                "components/modeler/bpmn/markers",
+                "components/modeler/bpmn/multi-instance/multi-instance",
+                "components/modeler/bpmn/compensation-handler/compensation-handler"
+              ]
+            }
+          ]
+        },
+        {
+          "DMN": [
+            "components/modeler/dmn/desktop-modeler-dmn",
+            "components/modeler/dmn/decision-requirements-graph",
+            {
+              "Decision table": [
+                "components/modeler/dmn/decision-table",
+                "components/modeler/dmn/decision-table-input",
+                "components/modeler/dmn/decision-table-output",
+                "components/modeler/dmn/decision-table-rule",
+                "components/modeler/dmn/decision-table-hit-policy"
+              ]
+            },
+            "components/modeler/dmn/decision-literal-expression",
+            "components/modeler/dmn/dmn-data-types"
+          ]
+        },
+        {
+          "FEEL expressions": [
+            "components/modeler/feel/what-is-feel",
+            "components/modeler/feel/language-guide/feel-data-types",
+            "components/modeler/feel/language-guide/feel-unary-tests",
+            "components/modeler/feel/feel-playground",
+            {
+              "Expressions": [
+                "components/modeler/feel/language-guide/feel-expressions-introduction",
+                "components/modeler/feel/language-guide/feel-boolean-expressions",
+                "components/modeler/feel/language-guide/feel-context-expressions",
+                "components/modeler/feel/language-guide/feel-control-flow",
+                "components/modeler/feel/language-guide/feel-error-handling",
+                "components/modeler/feel/language-guide/feel-functions",
+                "components/modeler/feel/language-guide/feel-list-expressions",
+                "components/modeler/feel/language-guide/feel-numeric-expressions",
+                "components/modeler/feel/language-guide/feel-string-expressions",
+                "components/modeler/feel/language-guide/feel-temporal-expressions",
+                "components/modeler/feel/language-guide/feel-variables"
+              ]
+            },
+            {
+              "Built-in functions": [
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-introduction",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-boolean",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-context",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-conversion",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-list",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-numeric",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Orchestration Cluster",
+      "link": {
+        "type": "doc",
+        "id": "components/orchestration-cluster"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Zeebe",
+          "link": {
+            "type": "doc",
+            "id": "components/zeebe/zeebe-overview"
+          },
+          "items": [
+            "components/zeebe/technical-concepts/technical-concepts-overview",
+            "components/zeebe/technical-concepts/architecture",
+            "components/zeebe/technical-concepts/batch-operations",
+            "components/zeebe/technical-concepts/clustering",
+            "components/zeebe/technical-concepts/health",
+            "components/zeebe/technical-concepts/partitions",
+            "components/zeebe/technical-concepts/internal-processing",
+            "components/zeebe/technical-concepts/process-lifecycles",
+            "components/zeebe/technical-concepts/protocols"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Operate",
+          "link": {
+            "type": "doc",
+            "id": "components/operate/operate-introduction"
+          },
+          "items": [
+            "components/operate/userguide/access-control",
+            "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/resolve-incidents-update-variables",
+            "components/operate/userguide/selections-operations",
+            "components/operate/userguide/delete-finished-instances",
+            "components/operate/userguide/delete-resources",
+            {
+              "Process instance modification": [
+                "components/operate/userguide/process-instance-modification",
+                "components/operate/userguide/process-instance-batch-modification"
+              ]
+            },
+            "components/operate/userguide/process-instance-migration",
+            "components/operate/userguide/monitor-operation-status"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Tasklist",
+          "link": {
+            "type": "doc",
+            "id": "components/tasklist/introduction-to-tasklist"
+          },
+          "items": [
+            "components/tasklist/userguide/access-control",
+            "components/tasklist/userguide/using-tasklist",
+            "components/tasklist/api-versions",
+            "components/tasklist/userguide/managing-tasks",
+            "components/tasklist/userguide/using-filters",
+            "components/tasklist/userguide/defining-task-priorities",
+            "components/tasklist/userguide/starting-processes",
+            "components/tasklist/user-task-access-restrictions",
+            "components/tasklist/userguide/tasklist-localization"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Identity",
+          "link": {
+            "type": "doc",
+            "id": "components/identity/identity-introduction"
+          },
+          "items": [
+            "components/identity/access-control",
+            "components/identity/user",
+            "components/identity/group",
+            "components/identity/role",
+            "components/identity/authorization",
+            "components/identity/client",
+            "components/identity/mapping-rules",
+            "components/identity/tenant"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Connectors",
+      "link": {
+        "type": "doc",
+        "id": "components/connectors/introduction-to-connectors"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "How to use connectors",
+          "link": {
+            "type": "doc",
+            "id": "components/connectors/use-connectors/index"
+          },
+          "items": [
+            "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
+            "components/connectors/connector-types",
+            "components/connectors/use-connectors/inbound",
+            "components/connectors/use-connectors/outbound",
+            "components/connectors/use-connectors/intrinsic-functions",
+            "components/connectors/use-connectors-in-hybrid-mode"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Camunda connectors",
+          "link": {
+            "type": "doc",
+            "id": "components/connectors/out-of-the-box-connectors/available-connectors-overview"
+          },
+          "items": [
+            {
+              "Agentic AI": [
+                {
+                  "type": "category",
+                  "label": "AI Agent",
+                  "link": {
+                    "type": "doc",
+                    "id": "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent"
+                  },
+                  "items": [
+                    {
+                      "type": "category",
+                      "label": "AI Agent Sub-process",
+                      "link": {
+                        "type": "doc",
+                        "id": "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess"
+                      },
+                      "items": [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example"
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "AI Agent Task",
+                      "link": {
+                        "type": "doc",
+                        "id": "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task"
+                      },
+                      "items": [
+                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example"
+                      ]
+                    },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization"
+                  ]
+                },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver"
+              ]
+            },
+            {
+              "Amazon AWS": [
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-comprehend",
+                "components/connectors/out-of-the-box-connectors/amazon-dynamodb",
+                "components/connectors/out-of-the-box-connectors/amazon-eventbridge",
+                "components/connectors/out-of-the-box-connectors/aws-lambda",
+                "components/connectors/out-of-the-box-connectors/amazon-sagemaker",
+                "components/connectors/out-of-the-box-connectors/amazon-sns",
+                "components/connectors/out-of-the-box-connectors/amazon-sqs",
+                "components/connectors/out-of-the-box-connectors/amazon-s3",
+                "components/connectors/out-of-the-box-connectors/amazon-textract"
+              ]
+            },
+            "components/connectors/out-of-the-box-connectors/asana",
+            "components/connectors/out-of-the-box-connectors/automation-anywhere",
+            "components/connectors/out-of-the-box-connectors/blueprism",
+            "components/connectors/out-of-the-box-connectors/box",
+            "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/easy-post",
+            "components/connectors/out-of-the-box-connectors/email",
+            "components/connectors/out-of-the-box-connectors/github",
+            "components/connectors/out-of-the-box-connectors/gitlab",
+            {
+              "Google": [
+                "components/connectors/out-of-the-box-connectors/google-cloud-storage",
+                "components/connectors/out-of-the-box-connectors/googledrive",
+                "components/connectors/out-of-the-box-connectors/google-maps-platform",
+                "components/connectors/out-of-the-box-connectors/google-sheets",
+                "components/connectors/out-of-the-box-connectors/google-gemini"
+              ]
+            },
+            "components/connectors/protocol/graphql",
+            "components/connectors/protocol/http-webhook",
+            "components/connectors/out-of-the-box-connectors/hubspot",
+            "components/connectors/out-of-the-box-connectors/hugging-face",
+            "components/connectors/out-of-the-box-connectors/kafka",
+            "components/connectors/out-of-the-box-connectors/message-send",
+            {
+              "Microsoft": [
+                "components/connectors/out-of-the-box-connectors/azure-open-ai",
+                "components/connectors/out-of-the-box-connectors/azure-blob-storage",
+                "components/connectors/out-of-the-box-connectors/microsoft-teams",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail"
+              ]
+            },
+            "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/operate",
+            "components/connectors/protocol/polling",
+            "components/connectors/out-of-the-box-connectors/rabbitmq",
+            "components/connectors/protocol/rest",
+            "components/connectors/out-of-the-box-connectors/salesforce",
+            "components/connectors/out-of-the-box-connectors/sendgrid",
+            "components/connectors/out-of-the-box-connectors/slack",
+            "components/connectors/protocol/soap",
+            "components/connectors/out-of-the-box-connectors/sql",
+            "components/connectors/out-of-the-box-connectors/twilio",
+            "components/connectors/out-of-the-box-connectors/uipath",
+            "components/connectors/out-of-the-box-connectors/embeddings-vector-db",
+            "components/connectors/out-of-the-box-connectors/whatsapp"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Custom element and connector templates",
+          "link": {
+            "type": "doc",
+            "id": "components/connectors/custom-built-connectors/build-connector"
+          },
+          "items": [
+            "components/connectors/custom-built-connectors/host-custom-connectors",
+            {
+              "type": "category",
+              "label": "Element and connector templates",
+              "link": {
+                "type": "doc",
+                "id": "components/connectors/custom-built-connectors/connector-templates"
+              },
+              "items": [
+                "components/connectors/manage-connector-templates",
+                "components/connectors/custom-built-connectors/create-connector-from-rest"
+              ]
+            },
+            "components/connectors/custom-built-connectors/connector-sdk"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Optimize",
+      "link": {
+        "type": "doc",
+        "id": "components/optimize/what-is-optimize"
+      },
+      "items": [
+        "components/optimize/improve-processes-with-optimize",
+        "components/optimize/userguide/collections-dashboards-reports",
+        "components/optimize/userguide/user-permissions",
+        "components/optimize/userguide/data-sources",
+        {
+          "Dashboards": [
+            "components/optimize/userguide/creating-dashboards",
+            "components/optimize/userguide/edit-mode",
+            "components/optimize/userguide/view-mode"
+          ]
+        },
+        {
+          "Dashboards maintained by Camunda": [
+            "components/optimize/userguide/process-dashboards",
+            "components/optimize/userguide/instant-process-dashboards"
+          ]
+        },
+        "components/optimize/userguide/creating-reports",
+        "components/optimize/userguide/process-KPIs",
+        {
+          "Process analysis": [
+            "components/optimize/userguide/process-analysis/process-analysis-overview",
+            "components/optimize/userguide/process-analysis/task-analysis",
+            "components/optimize/userguide/process-analysis/branch-analysis",
+            "components/optimize/userguide/process-analysis/user-task-analytics",
+            {
+              "Report analysis": [
+                "components/optimize/userguide/process-analysis/report-analysis/overview",
+                {
+                  "Edit mode": [
+                    "components/optimize/userguide/process-analysis/report-analysis/edit-mode",
+                    "components/optimize/userguide/process-analysis/report-analysis/select-process-definitions",
+                    "components/optimize/userguide/process-analysis/report-analysis/define-reports",
+                    "components/optimize/userguide/process-analysis/report-analysis/measures",
+                    "components/optimize/userguide/process-analysis/report-analysis/compare-target-values",
+                    "components/optimize/userguide/process-analysis/report-analysis/process-instance-parts",
+                    "components/optimize/userguide/process-analysis/report-analysis/configure-reports"
+                  ]
+                },
+                "components/optimize/userguide/process-analysis/report-analysis/view-mode"
+              ]
+            },
+            {
+              "Filters": [
+                "components/optimize/userguide/process-analysis/filters",
+                "components/optimize/userguide/process-analysis/metadata-filters",
+                "components/optimize/userguide/process-analysis/instance-state-filters",
+                "components/optimize/userguide/process-analysis/flow-node-filters",
+                "components/optimize/userguide/process-analysis/process-instance-filters",
+                "components/optimize/userguide/process-analysis/variable-filters"
+              ]
+            }
+          ]
+        },
+        {
+          "Additional features": [
+            "components/optimize/userguide/additional-features/alerts",
+            "components/optimize/userguide/additional-features/export-import",
+            "components/optimize/userguide/additional-features/variable-labeling",
+            "components/optimize/userguide/additional-features/process-variants-comparison",
+            "components/optimize/userguide/additional-features/ml-dataset"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Console",
+      "link": {
+        "type": "doc",
+        "id": "components/console/introduction-to-console"
+      },
+      "items": [
+        {
+          "Manage your organization": [
+            "components/console/manage-organization/organization-settings",
+            "components/console/manage-organization/manage-users",
+            "components/console/manage-organization/manage-user-groups",
+            "components/console/manage-organization/external-sso",
+            "components/console/manage-organization/view-organization-activity",
+            "components/console/manage-organization/enable-alpha-features",
+            "components/console/manage-organization/usage-history",
+            "components/console/manage-organization/usage-alerts",
+            "components/console/manage-organization/advanced-search",
+            "components/console/manage-organization/switch-organization",
+            "components/console/manage-organization/delete-account"
+          ]
+        },
+        {
+          "Manage clusters": [
+            "components/console/manage-clusters/create-cluster",
+            "components/console/manage-clusters/manage-cluster",
+            "components/console/manage-clusters/cluster-connectors",
+            "components/console/manage-clusters/manage-api-clients",
+            "components/console/manage-clusters/manage-secrets",
+            "components/console/manage-clusters/manage-alerts",
+            "components/console/manage-clusters/manage-ip-allowlists",
+            "components/console/manage-clusters/create-backups",
+            "components/console/manage-clusters/settings",
+            "components/console/manage-clusters/cluster-capacity"
+          ]
+        },
+        {
+          "Manage your plan": [
+            "components/console/manage-plan/create-account",
+            "components/console/manage-plan/available-plans",
+            "components/console/manage-plan/upgrade-to-enterprise-plan",
+            "components/console/manage-plan/update-billing-reservations",
+            "components/console/manage-plan/update-creditcard",
+            "components/console/manage-plan/retrieve-invoices-or-update-billing-info",
+            "components/console/manage-plan/cancel-starter-subscription"
+          ]
+        },
+        {
+          "Troubleshooting": [
+            "components/console/console-troubleshooting/common-pitfalls"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Camunda 8 SaaS",
+      "link": {
+        "type": "doc",
+        "id": "components/saas/saas"
+      },
+      "items": [
+        "components/concepts/clusters",
+        "components/saas/regions",
+        "components/saas/data-locations",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/byok/overview"
+          },
+          "items": [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/faq-and-troubleshooting"
+          ]
+        },
+        "components/saas/backups",
+        "components/saas/auto-updates",
+        "components/saas/data-retention",
+        "components/saas/camunda-help-center",
+        "components/saas/status",
+        "components/saas/saas-ip-addresses"
+      ]
+    },
+    "reference/glossary"
+  ],
+  "APIs & Tools": [
+    "apis-tools/working-with-apis-tools",
+    {
+      "APIs": [
+        {
+          "Orchestration Cluster API": [
+            "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview",
+            "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching",
+            "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication",
+            "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger",
+            {
+              "Specifications": [
+                {
+                  "type": "doc",
+                  "id": "apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api"
+                },
+                {
+                  "type": "category",
+                  "label": "Ad-hoc sub-process",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities",
+                      "label": "Activate activities within an ad-hoc sub-process",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Authentication",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-authentication",
+                      "label": "Get current user",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Authorization",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-authorization",
+                      "label": "Create authorization",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-authorization",
+                      "label": "Update authorization",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-authorization",
+                      "label": "Get authorization",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-authorization",
+                      "label": "Delete authorization",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-authorizations",
+                      "label": "Search authorizations",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Batch operation",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation",
+                      "label": "Get batch operation",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operations",
+                      "label": "Search batch operations",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/cancel-batch-operation",
+                      "label": "Cancel Batch operation",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/suspend-batch-operation",
+                      "label": "Suspend Batch operation",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/resume-batch-operation",
+                      "label": "Resume Batch operation",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operation-items",
+                      "label": "Search batch operation items",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Clock",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/pin-clock",
+                      "label": "Pin internal clock (alpha)",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/reset-clock",
+                      "label": "Reset internal clock (alpha)",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Cluster",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
+                      "label": "Get cluster topology",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
+                      "label": "Get cluster status",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Decision definition",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions",
+                      "label": "Search decision definitions",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-definition",
+                      "label": "Get decision definition",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-definition-xml",
+                      "label": "Get decision definition XML",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-decision",
+                      "label": "Evaluate decision",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Decision instance",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances",
+                      "label": "Search decision instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance",
+                      "label": "Get decision instance",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Decision requirements",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-requirements",
+                      "label": "Search decision requirements",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-requirements",
+                      "label": "Get decision requirements",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-requirements-xml",
+                      "label": "Get decision requirements XML",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Document",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-document",
+                      "label": "Upload document",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-documents",
+                      "label": "Upload multiple documents",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-document",
+                      "label": "Download document",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-document",
+                      "label": "Delete document",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-document-link",
+                      "label": "Create document link",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Element instance",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instances",
+                      "label": "Search element instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-element-instance",
+                      "label": "Get element instance",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables",
+                      "label": "Update element instance variables",
+                      "className": "api-method put"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Group",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-group",
+                      "label": "Create group",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-group",
+                      "label": "Get group",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-group",
+                      "label": "Update group",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-group",
+                      "label": "Delete group",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-group",
+                      "label": "Search group users",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-group",
+                      "label": "Search group mapping rules",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-group",
+                      "label": "Search group roles",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-group",
+                      "label": "Search group clients",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-group",
+                      "label": "Assign a user to a group",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-group",
+                      "label": "Unassign a user from a group",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-client-to-group",
+                      "label": "Assign a client to a group",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-client-from-group",
+                      "label": "Unassign a client from a group",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-mapping-rule-to-group",
+                      "label": "Assign a mapping rule to a group",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-mapping-rule-from-group",
+                      "label": "Unassign a mapping rule from a group",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-groups",
+                      "label": "Search groups",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Incident",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incident",
+                      "label": "Resolve incident",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-incidents",
+                      "label": "Search incidents",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-incident",
+                      "label": "Get incident",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Job",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/activate-jobs",
+                      "label": "Activate jobs",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-jobs",
+                      "label": "Search jobs",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
+                      "label": "Fail job",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/throw-job-error",
+                      "label": "Throw error for job",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/complete-job",
+                      "label": "Complete job",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-job",
+                      "label": "Update job",
+                      "className": "api-method patch"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "License",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-license",
+                      "label": "Get license status",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Mapping rule",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-mapping-rule",
+                      "label": "Create mapping rule",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-mapping-rule",
+                      "label": "Update mapping rule",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-mapping-rule",
+                      "label": "Delete a mapping rule",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-mapping-rule",
+                      "label": "Get a mapping rule",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rule",
+                      "label": "Search mapping rules",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Message",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/publish-message",
+                      "label": "Publish message",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/correlate-message",
+                      "label": "Correlate message",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Message subscription",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-message-subscriptions",
+                      "label": "Search correlated message subscriptions",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-message-subscriptions",
+                      "label": "Search message subscriptions",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Process definition",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definitions",
+                      "label": "Search process definitions",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition",
+                      "label": "Get process definition",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
+                      "label": "Get process definition XML",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-start-process-form",
+                      "label": "Get process start form",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-statistics",
+                      "label": "Get process definition statistics",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Process instance",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance",
+                      "label": "Create process instance",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
+                      "label": "Get process instance",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
+                      "label": "Get process instance sequence flows",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
+                      "label": "Get process instance statistics",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
+                      "label": "Search process instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instance-incidents",
+                      "label": "Search for incidents associated with a process instance",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance",
+                      "label": "Cancel process instance",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instances-batch-operation",
+                      "label": "Create a batch operation to cancel process instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation",
+                      "label": "Create a batch operation to resolve incidents of process instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instances-batch-operation",
+                      "label": "Create a batch operation to migrate process instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instances-batch-operation",
+                      "label": "Create a batch operation to modify process instances",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance",
+                      "label": "Migrate process instance",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/modify-process-instance",
+                      "label": "Modify process instance",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-call-hierarchy",
+                      "label": "Get call hierarchy for process instance",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Resource",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-deployment",
+                      "label": "Deploy resources",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-resource",
+                      "label": "Delete resource",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-resource",
+                      "label": "Get resource",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content",
+                      "label": "Get resource content",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Role",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-role",
+                      "label": "Create role",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-role",
+                      "label": "Get role",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-role",
+                      "label": "Update role",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-role",
+                      "label": "Delete role",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-role",
+                      "label": "Search role users",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-role",
+                      "label": "Search role clients",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-user",
+                      "label": "Assign a role to a user",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
+                      "label": "Unassign a role from a user",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-client",
+                      "label": "Assign a role to a client",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-client",
+                      "label": "Unassign a role from a client",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-roles",
+                      "label": "Search roles",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-group",
+                      "label": "Assign a role to a group",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-group",
+                      "label": "Unassign a role from a group",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-groups-for-role",
+                      "label": "Search role groups",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-mapping-rule",
+                      "label": "Assign a role to a mapping rule",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-mapping-rule",
+                      "label": "Unassign a role from a mapping rule",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-role",
+                      "label": "Search role mapping rules",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Setup",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-admin-user",
+                      "label": "Create admin user",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Signal",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/broadcast-signal",
+                      "label": "Broadcast signal",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "System",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-usage-metrics",
+                      "label": "Get usage metrics",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Tenant",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-tenant",
+                      "label": "Create tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant",
+                      "label": "Get tenant",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-tenant",
+                      "label": "Update tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-tenant",
+                      "label": "Delete tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-tenant",
+                      "label": "Assign a user to a tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-tenant",
+                      "label": "Unassign a user from a tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-tenant",
+                      "label": "Search users for tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-tenant",
+                      "label": "Search clients for tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-group-ids-for-tenant",
+                      "label": "Search groups for tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-tenant",
+                      "label": "Search roles for tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-client-to-tenant",
+                      "label": "Assign a client to a tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-client-from-tenant",
+                      "label": "Unassign a client from a tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-mapping-rule-to-tenant",
+                      "label": "Assign a mapping rule to a tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-mapping-rule-from-tenant",
+                      "label": "Unassign a mapping rule from a tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
+                      "label": "Search mapping rules for tenant",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-group-to-tenant",
+                      "label": "Assign a group to a tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-group-from-tenant",
+                      "label": "Unassign a group from a tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-tenant",
+                      "label": "Assign a role to a tenant",
+                      "className": "api-method put"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-tenant",
+                      "label": "Unassign a role from a tenant",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-tenants",
+                      "label": "Search tenants",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "User",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/create-user",
+                      "label": "Create user",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-users",
+                      "label": "Search users",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-user",
+                      "label": "Get user",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/delete-user",
+                      "label": "Delete user",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-user",
+                      "label": "Update user",
+                      "className": "api-method put"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "User task",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task",
+                      "label": "Complete user task",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
+                      "label": "Assign user task",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task",
+                      "label": "Get user task",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/update-user-task",
+                      "label": "Update user task",
+                      "className": "api-method patch"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
+                      "label": "Get user task form",
+                      "className": "api-method get"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-task",
+                      "label": "Unassign user task",
+                      "className": "api-method delete"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks",
+                      "label": "Search user tasks",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-user-task-variables",
+                      "label": "Search user task variables",
+                      "className": "api-method post"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Variable",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/search-variables",
+                      "label": "Search variables",
+                      "className": "api-method post"
+                    },
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/orchestration-cluster-api-rest/specifications/get-variable",
+                      "label": "Get variable",
+                      "className": "api-method get"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Tutorials": [
+                "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-tutorial",
+                "apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-intermediate-tutorial"
+              ]
+            }
+          ]
+        },
+        {
+          "Administration API (SaaS)": [
+            {
+              "type": "autogenerated",
+              "dirName": "apis-tools/administration-api"
+            }
+          ]
+        },
+        {
+          "Administration API (Self-Managed)": [
+            "apis-tools/administration-sm-api/administration-sm-api-overview",
+            "apis-tools/administration-sm-api/administration-sm-api-authentication",
+            {
+              "Specifications": [
+                {
+                  "type": "doc",
+                  "id": "apis-tools/administration-sm-api/specifications/administration-api-self-managed"
+                },
+                {
+                  "type": "category",
+                  "label": "Usage Metrics",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/administration-sm-api/specifications/get-usage-metrics",
+                      "label": "Get usage metrics for clusters",
+                      "className": "api-method get"
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Clusters",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/administration-sm-api/specifications/get-clusters",
+                      "label": "Get current clusters",
+                      "className": "api-method get"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Optimize API": [
+            "apis-tools/optimize-api/overview",
+            "apis-tools/optimize-api/optimize-api-authentication",
+            "apis-tools/optimize-api/optimize-api-tutorial",
+            {
+              "Configuration": [
+                "apis-tools/optimize-api/configuration/enable-sharing",
+                "apis-tools/optimize-api/configuration/disable-sharing"
+              ]
+            },
+            {
+              "Dashboard": [
+                "apis-tools/optimize-api/dashboard/get-dashboard-ids",
+                "apis-tools/optimize-api/dashboard/delete-dashboard",
+                "apis-tools/optimize-api/dashboard/export-dashboard-definitions"
+              ]
+            },
+            {
+              "Report": [
+                "apis-tools/optimize-api/report/get-report-ids",
+                "apis-tools/optimize-api/report/delete-report",
+                "apis-tools/optimize-api/report/export-report-definitions",
+                "apis-tools/optimize-api/report/get-data-export"
+              ]
+            },
+            "apis-tools/optimize-api/external-variable-ingestion",
+            "apis-tools/optimize-api/health-readiness",
+            "apis-tools/optimize-api/import-entities",
+            "apis-tools/optimize-api/variable-labeling"
+          ]
+        },
+        {
+          "Web Modeler API": [
+            {
+              "type": "autogenerated",
+              "dirName": "apis-tools/web-modeler-api"
+            }
+          ]
+        },
+        {
+          "Zeebe API (gRPC)": [
+            {
+              "type": "autogenerated",
+              "dirName": "apis-tools/zeebe-api"
+            }
+          ]
+        },
+        {
+          "Deprecated": [
+            {
+              "Operate API": [
+                "apis-tools/operate-api/operate-api-overview",
+                "apis-tools/operate-api/operate-api-authentication",
+                "apis-tools/operate-api/operate-api-tutorial",
+                {
+                  "Specifications": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/operate-api/specifications/operate-public-api"
+                    },
+                    {
+                      "type": "category",
+                      "label": "ProcessDefinition",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-2",
+                          "label": "Search process definitions",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-2",
+                          "label": "Get process definition by key",
+                          "className": "api-method get"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/xml-by-key",
+                          "label": "Get process definition as XML by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "DecisionDefinition",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-7",
+                          "label": "Search decision definitions",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-6",
+                          "label": "Get decision definition by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "DecisionInstance",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-6",
+                          "label": "Search decision instances",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-id",
+                          "label": "Get decision instance by id",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "FlownodeInstance",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-4",
+                          "label": "Search flownode-instances",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-4",
+                          "label": "Get flow node instance by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Variable",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search",
+                          "label": "Search variables for process instances",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key",
+                          "label": "Get variable by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "ProcessInstance",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-1",
+                          "label": "Search process instances",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-1",
+                          "label": "Get process instance by key",
+                          "className": "api-method get"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/delete",
+                          "label": "Delete process instance and all dependant data by key",
+                          "className": "api-method delete"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/get-statistics",
+                          "label": "Get flow node statistic by process instance id",
+                          "className": "api-method get"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/sequence-flows-by-key",
+                          "label": "Get sequence flows of process instance by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "DecisionRequirements",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-5",
+                          "label": "Search decision requirements",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-5",
+                          "label": "Get decision requirements by key",
+                          "className": "api-method get"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/xml-by-key-1",
+                          "label": "Get decision requirements as XML by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Incident",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/search-3",
+                          "label": "Search incidents",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/operate-api/specifications/by-key-3",
+                          "label": "Get incident by key",
+                          "className": "api-method get"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Tasklist API": [
+                "apis-tools/tasklist-api-rest/tasklist-api-rest-overview",
+                "apis-tools/tasklist-api-rest/tasklist-api-rest-authentication",
+                {
+                  "Specifications": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/tasklist-api-rest/specifications/tasklist-rest-api"
+                    },
+                    {
+                      "type": "category",
+                      "label": "Form",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/get-form",
+                          "label": "Get a form",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Task",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/save-draft-task-variables",
+                          "label": "Save draft variables",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/search-task-variables",
+                          "label": "Search task variables",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/search-tasks",
+                          "label": "Search tasks",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/unassign-task",
+                          "label": "Unassign a task",
+                          "className": "api-method patch"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/complete-task",
+                          "label": "Complete a task",
+                          "className": "api-method patch"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/assign-task",
+                          "label": "Assign a task",
+                          "className": "api-method patch"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/get-task-by-id",
+                          "label": "Get a task",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "Variables",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/tasklist-api-rest/specifications/get-variable-by-id",
+                          "label": "Get a variable",
+                          "className": "api-method get"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Zeebe API (REST)": [
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
+                "apis-tools/zeebe-api-rest/zeebe-api-rest-authentication",
+                "apis-tools/zeebe-api-rest/zeebe-api-tutorial",
+                {
+                  "Specifications": [
+                    {
+                      "type": "doc",
+                      "id": "apis-tools/zeebe-api-rest/specifications/zeebe-rest-api"
+                    },
+                    {
+                      "type": "category",
+                      "label": "Cluster",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/get-cluster-topology",
+                          "label": "Get cluster topology",
+                          "className": "api-method get"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "User task",
+                      "items": [
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/complete-a-user-task",
+                          "label": "Complete a user task",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/assign-a-user-task",
+                          "label": "Assign a user task",
+                          "className": "api-method post"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/update-a-user-task",
+                          "label": "Update a user task",
+                          "className": "api-method patch"
+                        },
+                        {
+                          "type": "doc",
+                          "id": "apis-tools/zeebe-api-rest/specifications/unassign-a-user-task",
+                          "label": "Unassign a user task",
+                          "className": "api-method delete"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "API Clients": [
+        {
+          "Java client": [
+            "apis-tools/java-client/getting-started",
+            "apis-tools/java-client/job-worker",
+            "apis-tools/java-client/logging"
+          ]
+        },
+        {
+          "Camunda Spring Boot Starter": [
+            "apis-tools/camunda-spring-boot-starter/getting-started",
+            "apis-tools/camunda-spring-boot-starter/configuration",
+            "apis-tools/camunda-spring-boot-starter/properties-reference"
+          ]
+        },
+        "apis-tools/node-js-sdk",
+        {
+          "Community clients": [
+            "apis-tools/community-clients/index",
+            "apis-tools/build-your-own-client"
+          ]
+        }
+      ]
+    },
+    {
+      "Frontend development": [
+        {
+          "type": "autogenerated",
+          "dirName": "apis-tools/frontend-development"
+        }
+      ]
+    },
+    {
+      "Testing": [
+        {
+          "Camunda Process Test": [
+            "apis-tools/testing/getting-started",
+            "apis-tools/testing/configuration",
+            "apis-tools/testing/assertions",
+            "apis-tools/testing/utilities",
+            "apis-tools/testing/connectors"
+          ]
+        },
+        {
+          "Deprecated": ["apis-tools/testing/zeebe-process-test"]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Upgrade to Camunda 8.8",
+      "link": {
+        "type": "doc",
+        "id": "apis-tools/migration-manuals/index"
+      },
+      "items": [
+        "apis-tools/migration-manuals/migrate-to-camunda-api",
+        "apis-tools/migration-manuals/migrate-component-apis",
+        "apis-tools/migration-manuals/migrate-to-camunda-java-client",
+        "apis-tools/migration-manuals/migrate-to-camunda-user-tasks",
+        "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
+        "apis-tools/migration-manuals/migrate-to-camunda-process-test",
+        "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api"
+      ]
+    }
+  ],
+  "Reference": [
+    "reference/overview",
+    {
+      "type": "category",
+      "label": "Release announcements and release notes",
+      "link": {
+        "type": "doc",
+        "id": "reference/announcements-release-notes/overview"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "8.8",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/880/whats-new-in-88"
+          },
+          "items": [
+            "reference/announcements-release-notes/880/whats-new-in-88",
+            "reference/announcements-release-notes/880/880-announcements",
+            "reference/announcements-release-notes/880/880-release-notes"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "8.7",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/870/870-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/870/870-announcements",
+            "reference/announcements-release-notes/870/870-release-notes"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "8.6",
+          "link": {
+            "type": "doc",
+            "id": "reference/announcements-release-notes/860/860-announcements"
+          },
+          "items": [
+            "reference/announcements-release-notes/860/860-announcements",
+            "reference/announcements-release-notes/860/860-release-notes"
+          ]
+        },
+        "reference/announcements-release-notes/release-policy"
+      ]
+    },
+    "reference/notices",
+    "reference/licenses",
+    "reference/public-api",
+    "reference/supported-environments",
+    "reference/dependencies",
+    {
+      "type": "category",
+      "label": "Data collection",
+      "link": {
+        "type": "doc",
+        "id": "reference/data-collection/data-collection"
+      },
+      "items": ["reference/data-collection/usage-metrics"]
+    },
+    "reference/contact"
+  ],
+  "Self-Managed": [
+    "self-managed/about-self-managed",
+    {
+      "type": "category",
+      "label": "Quickstart",
+      "link": {
+        "type": "doc",
+        "id": "self-managed/quickstart/overview"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "For Developers",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/quickstart/developer-quickstart"
+          },
+          "items": [
+            "self-managed/quickstart/developer-quickstart/c8run",
+            "self-managed/quickstart/developer-quickstart/docker-compose"
+          ]
+        },
+        "self-managed/quickstart/administrator-quickstart"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Reference architecture",
+      "link": {
+        "type": "doc",
+        "id": "self-managed/reference-architecture/reference-architecture"
+      },
+      "items": [
+        "self-managed/reference-architecture/kubernetes",
+        "self-managed/reference-architecture/manual"
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Deploy and manage",
+      "link": {
+        "type": "doc",
+        "id": "self-managed/deployment/index"
+      },
+      "items": [
+        {
+          "type": "category",
+          "label": "Kubernetes with Helm",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/deployment/helm/index"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Install",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/deployment/helm/install/index"
+              },
+              "items": [
+                "self-managed/deployment/helm/install/quick-install",
+                "self-managed/deployment/helm/install/production/index"
+              ]
+            },
+            "self-managed/deployment/helm/chart-parameters",
+            {
+              "type": "category",
+              "label": "Configure",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/deployment/helm/configure/index"
+              },
+              "items": [
+                "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/vendor-supported-infrastructure",
+                "self-managed/deployment/helm/configure/enable-additional-components",
+                "self-managed/deployment/helm/configure/data-retention",
+                {
+                  "type": "category",
+                  "label": "Registry and images",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/configure/registry-and-images/index"
+                  },
+                  "items": [
+                    "self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation",
+                    "self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Database",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/configure/database/index"
+                  },
+                  "items": [
+                    {
+                      "Elasticsearch": [
+                        "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
+                        "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices"
+                      ]
+                    },
+                    "self-managed/deployment/helm/configure/database/using-external-opensearch",
+                    "self-managed/deployment/helm/configure/database/using-existing-postgres",
+                    "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    {
+                      "Troubleshooting": [
+                        "self-managed/deployment/helm/configure/database/all-shards-failed"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Ingress",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/configure/ingress/index"
+                  },
+                  "items": [
+                    "self-managed/deployment/helm/configure/ingress/ingress-setup",
+                    "self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Authentication and authorization",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/configure/authentication-and-authorization/index"
+                  },
+                  "items": [
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
+                    {
+                      "type": "category",
+                      "label": "External OIDC provider",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider"
+                      },
+                      "items": [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider"
+                      ]
+                    }
+                  ]
+                },
+                "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/running-custom-connectors",
+                "self-managed/deployment/helm/configure/add-extra-manifests",
+                "self-managed/deployment/helm/configure/license-key",
+                "self-managed/deployment/helm/configure/configure-multi-tenancy"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Upgrade",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/deployment/helm/upgrade/index"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Upgrade 8.7 to 8.8",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/upgrade/upgrade-hc-870-880"
+                  },
+                  "items": [
+                    "self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region"
+                  ]
+                },
+                "self-managed/deployment/helm/upgrade/upgrade-hc-860-870",
+                "self-managed/deployment/helm/upgrade/upgrade-hc-850-860",
+                "self-managed/deployment/helm/upgrade/upgrade-hc-840-850",
+                "self-managed/deployment/helm/upgrade/upgrade-hc-830-840",
+                "self-managed/deployment/helm/upgrade/upgrade-hc-820-830"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Operational tasks",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/deployment/helm/operational-tasks/index"
+              },
+              "items": [
+                "self-managed/deployment/helm/operational-tasks/diagnostics",
+                "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure"
+              ]
+            },
+            {
+              "type": "category",
+              "label": "Cloud providers",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/deployment/helm/cloud-providers/index"
+              },
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Amazon",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks"
+                  },
+                  "items": [
+                    {
+                      "type": "category",
+                      "label": "Amazon EKS",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks"
+                      },
+                      "items": [
+                        {
+                          "Quickstart": [
+                            "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-eksctl"
+                          ]
+                        },
+                        "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-terraform",
+                        "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm",
+                        "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region",
+                        {
+                          "Troubleshooting": [
+                            "self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "category",
+                      "label": "ROSA",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup"
+                      },
+                      "items": [
+                        "self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup",
+                        "self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region"
+                      ]
+                    }
+                  ]
+                },
+                "self-managed/deployment/helm/cloud-providers/gcp/google-gke",
+                {
+                  "type": "category",
+                  "label": "Microsoft",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks"
+                  },
+                  "items": [
+                    "self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/aks-terraform",
+                    "self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/aks-helm"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Red Hat OpenShift",
+                  "items": [
+                    {
+                      "type": "doc",
+                      "label": "Single Region",
+                      "id": "self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift"
+                    },
+                    {
+                      "type": "doc",
+                      "label": "Dual Region",
+                      "id": "self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift-dual-region"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "self-managed/deployment/docker/docker",
+        {
+          "type": "category",
+          "label": "Manual",
+          "items": [
+            "self-managed/deployment/manual/install",
+            "self-managed/deployment/manual/upgrade",
+            {
+              "type": "category",
+              "label": "Cloud providers",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Amazon",
+                  "items": [
+                    "self-managed/deployment/manual/cloud-providers/amazon/aws-ec2"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Concepts": [
+        {
+          "Authentication": [
+            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
+            "self-managed/concepts/authentication/authentication-to-management-components"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Back up and restore",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/operational-guides/backup-restore/backup-and-restore"
+          },
+          "items": [
+            "self-managed/operational-guides/backup-restore/backup",
+            "self-managed/operational-guides/backup-restore/restore",
+            {
+              "Backup Management API": [
+                "self-managed/operational-guides/backup-restore/optimize-backup",
+                "self-managed/operational-guides/backup-restore/webapps-backup",
+                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Document handling",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/concepts/document-handling/getting-started"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Configuration",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/concepts/document-handling/configuration/index"
+              },
+              "items": [
+                "self-managed/concepts/document-handling/configuration/camunda-8-run",
+                "self-managed/concepts/document-handling/configuration/docker",
+                "self-managed/concepts/document-handling/configuration/helm"
+              ]
+            }
+          ]
+        },
+        "self-managed/concepts/exporters",
+        "self-managed/operational-guides/configure-flow-control/configure-flow-control",
+        {
+          "Monitoring": [
+            "self-managed/operational-guides/monitoring/log-levels",
+            "self-managed/operational-guides/monitoring/metrics"
+          ]
+        },
+        {
+          "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
+        },
+        "self-managed/operational-guides/data-purge",
+        {
+          "Privileges": [
+            "self-managed/concepts/elasticsearch-privileges",
+            "self-managed/concepts/elasticsearch-without-cluster-privileges",
+            "self-managed/concepts/opensearch-privileges"
+          ]
+        },
+        {
+          "Troubleshooting": ["self-managed/operational-guides/troubleshooting"]
+        },
+        "self-managed/concepts/secondary-storage-management",
+        "self-managed/concepts/no-secondary-storage"
+      ]
+    },
+    {
+      "Components": [
+        {
+          "type": "category",
+          "label": "Orchestration Cluster",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/components/orchestration-cluster/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Core settings and features",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/components/orchestration-cluster/core-settings/overview"
+              },
+              "items": [
+                {
+                  "Configuration": [
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/properties",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/csrf-protection",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/logging"
+                  ]
+                },
+                {
+                  "Concepts": [
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/monitoring",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility"
+                  ]
+                },
+                {
+                  "Migration": [
+                    "self-managed/components/orchestration-cluster/core-settings/migration/importer"
+                  ]
+                }
+              ]
+            },
+            {
+              "Zeebe": [
+                "self-managed/components/orchestration-cluster/zeebe/overview",
+                {
+                  "Zeebe Gateway": [
+                    "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/overview",
+                    "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/interceptors",
+                    "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/filters",
+                    "self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming"
+                  ]
+                },
+                {
+                  "Configuration": [
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/configuration",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/environment-variables",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/fixed-partitioning",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/priority-election",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/broker-config",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-config"
+                  ]
+                },
+                {
+                  "Security": [
+                    "self-managed/components/orchestration-cluster/zeebe/security/security",
+                    "self-managed/components/orchestration-cluster/zeebe/security/client-authorization",
+                    "self-managed/components/orchestration-cluster/zeebe/security/secure-client-communication",
+                    "self-managed/components/orchestration-cluster/zeebe/security/secure-cluster-communication"
+                  ]
+                },
+                {
+                  "Operation": [
+                    "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/health",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/backpressure",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/disk-space",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/update-zeebe",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/rebalancing",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/management-api",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/backups",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Exporters",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/components/orchestration-cluster/zeebe/exporters/exporters"
+                  },
+                  "items": [
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter"
+                  ]
+                }
+              ],
+              "Operate": [
+                "self-managed/components/orchestration-cluster/operate/operate-configuration"
+              ],
+              "Tasklist": [
+                "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
+                "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
+                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions"
+              ]
+            },
+            {
+              "Identity": [
+                "self-managed/components/orchestration-cluster/identity/overview",
+                "self-managed/components/orchestration-cluster/identity/connect-external-identity-provider",
+                "self-managed/components/orchestration-cluster/identity/debugging-authentication",
+                "self-managed/components/orchestration-cluster/identity/special-oidc-cases"
+              ]
+            }
+          ]
+        },
+        {
+          "Console": [
+            "self-managed/components/console/overview",
+            {
+              "Configuration": [
+                "self-managed/components/console/configuration/configuration",
+                "self-managed/components/console/configuration/ssl"
+              ]
+            },
+            "self-managed/components/console/usage-metrics",
+            "self-managed/components/console/telemetry"
+          ]
+        },
+        {
+          "Modeler": [
+            {
+              "Web Modeler": [
+                "self-managed/components/modeler/web-modeler/overview",
+                {
+                  "Configuration": [
+                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                    "self-managed/components/modeler/web-modeler/configuration/database",
+                    "self-managed/components/modeler/web-modeler/configuration/identity",
+                    "self-managed/components/modeler/web-modeler/configuration/logging",
+                    "self-managed/components/modeler/web-modeler/configuration/ssl",
+                    "self-managed/components/modeler/web-modeler/configuration/copilot"
+                  ],
+                  "Troubleshooting": [
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration",
+                    "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems"
+                  ]
+                }
+              ]
+            },
+            {
+              "Desktop Modeler": [
+                "self-managed/components/modeler/desktop-modeler/deploy-to-self-managed"
+              ]
+            }
+          ]
+        },
+        {
+          "Connectors": [
+            "self-managed/components/connectors/overview",
+            "self-managed/components/connectors/connectors-configuration"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Management Identity",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/components/management-identity/overview"
+          },
+          "items": [
+            "self-managed/components/management-identity/get-started",
+            {
+              "type": "category",
+              "label": "Configuration",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/components/management-identity/configuration/identity-configuration-overview"
+              },
+              "items": [
+                "self-managed/components/management-identity/configuration/connect-to-an-oidc-provider",
+                "self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak",
+                "self-managed/components/management-identity/configuration/configure-external-identity-provider",
+                "self-managed/components/management-identity/configuration/alternative-db"
+              ]
+            },
+            "self-managed/components/management-identity/authentication",
+            {
+              "type": "category",
+              "label": "Management",
+              "items": [
+                {
+                  "type": "category",
+                  "label": "Users, groups, roles, and applications",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview"
+                  },
+                  "items": [
+                    "self-managed/components/management-identity/application-user-group-role-management/manage-groups",
+                    "self-managed/components/management-identity/application-user-group-role-management/manage-roles",
+                    "self-managed/components/management-identity/application-user-group-role-management/applications"
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Access and permissions",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/components/management-identity/access-management/access-management-overview"
+                  },
+                  "items": [
+                    "self-managed/components/management-identity/access-management/manage-permissions"
+                  ]
+                },
+                "self-managed/components/management-identity/mapping-rules",
+                "self-managed/components/management-identity/manage-tenants"
+              ]
+            },
+            {
+              "Reference": [
+                "self-managed/components/management-identity/miscellaneous/application-monitoring",
+                "self-managed/components/management-identity/miscellaneous/configuration-variables",
+                "self-managed/components/management-identity/miscellaneous/configure-logging",
+                "self-managed/components/management-identity/miscellaneous/making-identity-production-ready",
+                "self-managed/components/management-identity/miscellaneous/resource-management",
+                "self-managed/components/management-identity/miscellaneous/starting-configuration",
+                "self-managed/components/management-identity/miscellaneous/troubleshoot-identity"
+              ]
+            }
+          ]
+        },
+        {
+          "Optimize": [
+            "self-managed/components/optimize/overview",
+            {
+              "Configuration": [
+                {
+                  "System configuration": [
+                    "self-managed/components/optimize/configuration/system-configuration",
+                    "self-managed/components/optimize/configuration/system-configuration-platform-8"
+                  ]
+                },
+                "self-managed/components/optimize/configuration/logging",
+                "self-managed/components/optimize/configuration/security-instructions",
+                "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
+                "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/localization",
+                "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/variable-import",
+                "self-managed/components/optimize/configuration/multi-tenancy"
+              ]
+            },
+            {
+              "Migration & update": [
+                "self-managed/components/optimize/migration-update/camunda-8/instructions",
+                "self-managed/components/optimize/migration-update/camunda-8/8.7-to-8.8",
+                "self-managed/components/optimize/migration-update/camunda-8/8.6-to-8.7",
+                "self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6",
+                "self-managed/components/optimize/migration-update/camunda-8/3.12_8.4-to-3.13_8.5",
+                "self-managed/components/optimize/migration-update/camunda-8/3.11_8.3-to-3.12_8.4",
+                "self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10",
+                "self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9",
+                "self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1",
+                "self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Components upgrade",
+          "link": {
+            "type": "doc",
+            "id": "self-managed/components/components-upgrade/introduction"
+          },
+          "items": [
+            "self-managed/components/components-upgrade/870-to-880",
+            "self-managed/components/components-upgrade/860-to-870",
+            "self-managed/components/components-upgrade/850-to-860",
+            "self-managed/components/components-upgrade/840-to-850",
+            "self-managed/components/components-upgrade/830-to-840",
+            {
+              "Elasticsearch": [
+                "self-managed/components/components-upgrade/elasticsearch/7-to-8"
+              ]
+            },
+            {
+              "Keycloak": [
+                "self-managed/components/components-upgrade/keycloak/keycloak-update"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Upgrade to Camunda 8.8",
+      "link": {
+        "type": "doc",
+        "id": "self-managed/update/administrators/admin-upgrade-overview"
+      },
+      "items": [
+        "self-managed/update/administrators/prepare-for-admin-upgrade",
+        "self-managed/update/administrators/run-admin-upgrade"
+      ]
+    }
+  ]
+}

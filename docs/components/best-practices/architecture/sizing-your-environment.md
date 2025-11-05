@@ -159,10 +159,10 @@ The numbers in the table were measured using Camunda 8 (version 8.6), [the bench
 
 **\*\*** As Tasks are the primary resource driver, the number of process instances supported by a cluster is calculated based on the assumption of an average of 10 tasks per process. Customers can calculate a more accurate process instance estimate using their anticipated number of tasks per process.
 
-**\*\*\*** Total number of process instances within the retention period, regardless of if they are active or finished. This is limited by disk space, CPU, and memory for running and historical process instances available to ElasticSearch. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
+**\*\*\*** Max total number of historical process instances within the retention period. For active process instances this is limited mostly by the Zeebe resources and for historical instances by Elasticsearch resources. Calculated assuming a typical set of process variables for process instances. Note that it makes a difference if you add one or two strings (requiring ~ 1kb of space) to your process instances, or if you attach a full JSON document containing 1MB, as this data needs to be stored in various places, influencing memory and disk requirements. If this number increases, you can still retain the runtime throughput, but Tasklist, Operate, and/or Optimize may lag behind.
 The provisioned disk size is calculated as the sum of the disk size used by Zeebe and Elasticsearch.
 
-The max throughput numbers should be considered as peak loads, and the data retention configuration considered when defining the amount of data kept for completed instances in your cluster. See [Camunda 8 SaaS data retention](/components/concepts/data-retention.md) for the default retention times for Zeebe, Tasklist, Operate and Optimize.
+The max throughput numbers should be considered as peak loads, and the data retention configuration considered when defining the amount of data kept for completed instances in your cluster. See [Camunda 8 SaaS data retention](/components/saas/data-retention.md) for the default retention times for Zeebe, Tasklist, Operate and Optimize.
 
 - If process instances are completed and older than the configured retention time of an application, the data is removed.
 - If a process instance is older than the configured retention time but still active and incomplete, it is fully functioning in runtime and is _not_ removed.
@@ -196,16 +196,10 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | Disk \[GB\]         | 32      | 192   |
 | gateway                            | embedded in broker  |         |       |
 | **Operate**                        |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
 |                                    | vCPU \[cores\]      | 0.3     | 1     |
 |                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | **Tasklist**                       |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
 | #webapp                            | 2                   |         |       |
 |                                    | vCPU \[cores\]      | 0.3     | 1     |
 |                                    | Mem \[GB\] limit    | 0.2     | 2     |
