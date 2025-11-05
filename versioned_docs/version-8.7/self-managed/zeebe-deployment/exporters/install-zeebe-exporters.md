@@ -39,7 +39,8 @@ you can configure the exporter parameters.
 
 :::note
 
-During startup, the Zeebe pods will copy the exporters located in `/exporters/` to `/usr/local/zeebe/exporters/`. If the pods have a read-only root file system, a writable volume must be mounted to `/usr/local/zeebe/exporters/`, e.g.:
+During startup, the Zeebe pods will copy the exporters located in `/exporters/` to `/usr/local/zeebe/exporters/`. If the pods have a read-only root file system, a writable volume must be mounted to `/usr/local/zeebe/exporters/`. 
+For example:
 
 ```yaml
 extraVolumes:
