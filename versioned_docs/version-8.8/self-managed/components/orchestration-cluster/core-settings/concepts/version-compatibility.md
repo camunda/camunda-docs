@@ -50,7 +50,7 @@ Secondary storage holds exported data. Starting with Camunda 8.8, schema upgrade
 
 | Capability                                                                              | Introduced in patches   |
 | --------------------------------------------------------------------------------------- | ----------------------- |
-| Store schema version metadata (no enforcement)                                          | 8.6.30 / 8.7.17 / 8.8.3 |
+| Store schema version metadata (no enforcement)                                          | 8.6.31 / 8.7.18 / 8.8.3 |
 | Enforce compatibility rules (same matrix as broker, with tolerant skips for downgrades) | 8.8.3                   |
 
 If you upgrade from an earlier patch that does **not** store schema version metadata, the schema manager treats it as an indeterminate case (assumed fresh install) and proceeds.
