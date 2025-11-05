@@ -5,7 +5,7 @@ title: Configure RDBMS in Helm chart
 description: "Learn how to configure RDBMS secondary storage types"
 ---
 
-Camunda 8 Self-Managed supports connecting to external relational databases (RDBMS) as an alternative to Elasticsearch and Opensearch.
+Camunda 8 Self-Managed supports connecting to external relational databases (RDBMS) as an alternative to Elasticsearch and OpenSearch.
 
 ## Prerequisites
 
