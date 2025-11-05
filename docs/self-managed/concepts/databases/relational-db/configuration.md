@@ -104,7 +104,7 @@ data.
 
 ### Database driver
 
-The Camunda docker images ship the required database drivers for all the supported databases, except for Oracle. If Oracle is the preferred database, the driver must be added during the deployment by mounting it into the container. The Docker image provides a `/driver-lib` mount point for this purpose.
+The Camunda docker images ship the required database drivers for all the supported databases, except for Oracle and MySQL. If one of these is the preferred database, the driver must be added during the deployment by mounting it into the container. The Docker image provides a `/driver-lib` mount point for this purpose.
 
 Please note that the driver must to be placed directly in the **directory that is mounted, not in a subdirectory**.
 
