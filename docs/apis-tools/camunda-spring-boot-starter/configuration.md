@@ -909,6 +909,17 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the `tenantId` set to `camunda.client.tenant-id` is used.
+
 To disable the deployment of annotations, you can set:
 
 ```yaml
