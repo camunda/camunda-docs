@@ -113,8 +113,6 @@ orchestration:
       volumeMounts:
         - name: jdbcdrivers
           mountPath: /driver-lib
-      securityContext:
-        runAsUser: 1001
 ```
 
 ### Option 2: Creating a custom Docker image with the Oracle JDBC driver
