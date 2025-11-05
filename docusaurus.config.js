@@ -74,13 +74,6 @@ module.exports = {
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
-              8.5: {
-                specPath: "api/operate/version-8.5/operate-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/operate-api/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
             },
           },
         },
@@ -115,13 +108,6 @@ module.exports = {
                 specPath: "api/tasklist/version-8.6/tasklist-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/tasklist-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.5: {
-                specPath: "api/tasklist/version-8.5/tasklist-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/tasklist-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -188,6 +174,13 @@ module.exports = {
             label: "Unused but required field",
             baseUrl: "Unused but required field",
             versions: {
+              8.8: {
+                specPath: "api/camunda/version-8.8/camunda-openapi.yaml",
+                outputDir:
+                  "versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications",
+                label: "Unused but required field",
+                baseUrl: "Unused but required field",
+              },
               8.7: {
                 specPath: "api/camunda/version-8.7/camunda-openapi.yaml",
                 outputDir:
@@ -236,13 +229,6 @@ module.exports = {
                 specPath: "api/zeebe/version-8.6/zeebe-openapi.yaml",
                 outputDir:
                   "versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications",
-                label: "Unused but required field",
-                baseUrl: "Unused but required field",
-              },
-              8.5: {
-                specPath: "api/zeebe/version-8.5/zeebe-openapi.yaml",
-                outputDir:
-                  "versioned_docs/version-8.5/apis-tools/zeebe-api-rest/specifications",
                 label: "Unused but required field",
                 baseUrl: "Unused but required field",
               },
@@ -531,9 +517,6 @@ module.exports = {
             8.6: {
               banner: "none",
             },
-            8.5: {
-              banner: "none",
-            },
           },
           docItemComponent: "@theme/ApiItem",
         },
@@ -548,7 +531,6 @@ module.exports = {
             "/docs/**/assets/**",
             "/docs/**/tags/**",
             "/docs/next/**",
-            "/docs/8.5/**",
             "/docs/8.6/**",
             "/docs/8.7/**",
           ],

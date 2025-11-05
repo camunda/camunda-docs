@@ -49,7 +49,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Logging
 
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
 ## Clustering
 

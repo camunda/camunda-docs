@@ -302,7 +302,7 @@ You can also use FEEL expressions to modify the data you return.
 ### Response expression
 
 :::note
-Prior to 8.6, the HTTP Webhook connector supported a [response body expression](</versioned_docs/version-8.5/components/connectors/protocol/http-webhook.md#Response Body Expression>).
+Prior to 8.6, the HTTP Webhook connector supported a response body expression.
 As of 8.6, this was replaced with a more powerful construct that allows control over
 not only the response body, but also the headers and the HTTP status returned by
 the connector.

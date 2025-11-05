@@ -15,7 +15,7 @@ processes. It will start a lightweight in-memory Zeebe engine and provide you wi
 verify your process behaves as expected.
 
 :::note
-As of 8.5.0, Zeebe Process Test does not support the new REST API and related features (for example, Camunda user tasks).
+Zeebe Process Test does not support the new REST API and related features (for example, Camunda user tasks).
 :::
 
 ## Prerequisites
@@ -93,7 +93,6 @@ class DeploymentAssertTest {
 Switching between testcontainers and embedded requires just two steps:
 
 1. Switch to the relevant dependency.
-
    - Testcontainers: `zeebe-process-test-extension-testcontainer`
    - Embedded: `zeebe-process-test-extension`
 

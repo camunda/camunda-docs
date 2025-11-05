@@ -221,4 +221,4 @@ Within components, users need additional permissions for specific resources, for
 When implementing your own integrations (for example, using a Camunda client), you should consider the following:
 
 - **Job workers**: Resource type `processDefinition`
-  - `UPDATE_PROCESS_INSTANCE` to complete jobs for the specific process definitions
+  - `UPDATE_PROCESS_INSTANCE` to activate or complete jobs for the specific process definitions
