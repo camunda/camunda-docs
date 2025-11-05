@@ -9,10 +9,11 @@ Use message aggregation to collect multiple related messages into a single proce
 
 ## What message aggregation is
 
-Message aggregation is a message correlation pattern that allows you to **receive, store, and process multiple messages** belonging to the same business entity.  
+Message aggregation is a message correlation pattern that allows you to receive, store, and process multiple messages belonging to the same business entity.
+
 It’s commonly used when:
 
-- You receive multiple events about a single entity (e.g., shipments for the same order).
+- You receive multiple events about a single entity (for example, shipments for the same order).
 - You need to wait for _N_ messages before proceeding.
 - You want to combine or "map-reduce" data across messages before continuing.
 
@@ -25,16 +26,15 @@ This guide applies to Camunda 8 (Zeebe). The message aggregation pattern require
 ## How it works
 
 1. Each message is published with:
-   - a **message name** (e.g., `"ItemReceived"`)
-   - a **correlation key** (e.g., `"order-123"`)
-   - optionally, a **time-to-live (TTL)** greater than `0`
-
+   - A **message name** (for example, `"ItemReceived"`)
+   - A **correlation key** (for example, `"order-123"`)
+   - Optionally, a **time-to-live (TTL)** greater than `0`
 2. The first message starts a new process instance.
-3. All subsequent messages with the same correlation key are **correlated** to that instance.
+3. All subsequent messages with the same correlation key are correlated to that instance.
 4. The workflow collects the message data (for example, appending to a list).
 5. Once all expected messages are received, the process continues.
 
-If additional messages with the same correlation key arrive after the process instance has completed, a **new instance** is created automatically.
+If additional messages with the same correlation key arrive after the process instance has completed, a new instance is created automatically.
 
 ## Example use case
 
@@ -100,7 +100,7 @@ Once three messages are received (`count(messages) == 3`), the process continues
 
 ## Publishing messages
 
-Here’s a simple example in Java using the Zeebe client:
+Here’s an example in Java using the Zeebe client:
 
 ```java
 final ZeebeClient client = ZeebeClient.newClientBuilder().build();
