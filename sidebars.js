@@ -1613,6 +1613,7 @@ module.exports = {
           items: [
             "self-managed/operational-guides/backup-restore/backup",
             "self-managed/operational-guides/backup-restore/restore",
+            "self-managed/operational-guides/backup-restore/cold-backup",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",

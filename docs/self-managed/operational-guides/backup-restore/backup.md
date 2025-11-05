@@ -74,7 +74,7 @@ To check the state:
 curl http://localhost:9600/actuator/backupHistory/$BACKUP_ID
 ```
 
-For detailed behavior, see the [web applications backup management API](webapps-backup.md).
+For detailed behavior, see the [web applications backup management API](./webapps-backup.md).
 
 Operate and Tasklist must share the same:
 
@@ -100,7 +100,7 @@ Check backup state:
 curl http://localhost:8092/actuator/backups/$BACKUP_ID
 ```
 
-See the [Optimize backup management API](optimize-backup.md).
+See the [Optimize backup management API](./optimize-backup.md).
 
 ## 5. Back up Web Modeler (if deployed)
 

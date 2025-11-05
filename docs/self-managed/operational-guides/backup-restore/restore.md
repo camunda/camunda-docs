@@ -174,9 +174,9 @@ After verifying the system, perform these maintenance tasks:
 - Remove temporary snapshot files from restore directories.
 - Record the restore completion timestamp and backup ID.
 - Update monitoring alerts to reflect new indices and partitions.
-- Run a new [create a backup](./create-backup.md) once the system stabilizes.
+- Run a new [create a backup](./backup.md) once the system stabilizes.
 
 ## Next steps
 
-- [Create a backup](./create-backup.md)
+- [Create a backup](./backup.md)
 - [Perform a cold backup](./cold-backup.md)

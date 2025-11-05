@@ -112,6 +112,6 @@ Include both API checks and visual inspection as part of your automated validati
 
 ## Next steps
 
-- [Create a backup](./create-backup.md)
-- [Restore a backup](./restore-backup.md)
+- [Create a backup](./backup.md)
+- [Restore a backup](./restore.md)
 - [Perform a cold backup](./cold-backup.md) _(optional)_

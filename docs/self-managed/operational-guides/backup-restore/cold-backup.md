@@ -23,7 +23,7 @@ Use a cold backup if:
 - You need a guaranteed consistent restore point without using the Backup Management APIs.
 - You are operating in an environment where **management APIs are not exposed** or not configured.
 
-For hot (online) backups, see [Create a backup](./create-backup.md).
+For hot (online) backups, see [create a backup](./backup.md).
 
 ## Before you begin
 
@@ -166,5 +166,5 @@ Restart processes or services as appropriate to your environment.
 
 ## Next steps
 
-- [Create a backup](./create-backup.md)
-- [Restore a backup](./restore-backup.md)
+- [Create a backup](./backup.md)
+- [Restore a backup](./restore.md)
