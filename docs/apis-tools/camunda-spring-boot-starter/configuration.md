@@ -901,7 +901,7 @@ public class MyRandomBean {
 }
 ```
 
-By default, the tenant id being set to `camunda.client.tenant-id` will be used.
+By default, the `tenantId` set to `camunda.client.tenant-id` is used.
 
 To disable the deployment of annotations, you can set:
 
