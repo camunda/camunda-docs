@@ -284,7 +284,7 @@ assertThat(processInstance).hasTerminatedElement("task_A", 2);
 
 ## Variable assertions
 
-You can verify the process instance variables using `CamundaAssert.assertThat(processInstance)`.
+You can verify the process variables using `CamundaAssert.assertThat(processInstance)`.
 
 ### hasVariableNames
 

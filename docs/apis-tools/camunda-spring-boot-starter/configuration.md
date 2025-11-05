@@ -407,6 +407,8 @@ public void handleJobFoo(final JobClient jobClient) {
 
 #### `ActivatedJob` parameter
 
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
@@ -454,7 +456,7 @@ You can also use your own class into which the process variables are mapped to (
 
 ```java
 @JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables){
+public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
   // do whatever you need to do
   variables.getMyAttributeX();
   variables.setMyAttributeY(42);
@@ -489,8 +491,8 @@ On top, you can directly retrieve the document content as `InputStream` or `byte
 You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
-@JobWorker(type = "foo")
-public void handleFoo(@CustomHeaders Map<String, String> headers){
+@JobWorker
+public void handleFoo(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -498,6 +500,21 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
 :::note
 This will not have any effect on the variable fetching behavior.
 :::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void handleFoo(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey) {
+  // do whatever you need to do
+}
+```
 
 ### Completing jobs
 
@@ -913,7 +930,7 @@ To react on the creation of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientCreated(CamundaClientCreatedEvent event){
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
   // do what you need to do
 }
 ```
@@ -924,7 +941,7 @@ To react on the closing of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientClosing(CamundaClientClosingEvent event){
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
   // do what you need to do
 }
 ```
@@ -947,6 +964,19 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
   }
 }
 ```
+
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
 
 ## Observing metrics
 

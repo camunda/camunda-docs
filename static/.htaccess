@@ -180,6 +180,38 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-note
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
+# Restructure Web Modeler Docs (8.8)
+## Web Modeler folder restructure - moved to modeling/
+RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/modeler/web-modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/modeler/web-modeler/modeling/versions/ [R=301,L]
+
+## Web Modeler folder restructure - moved to modeling/advanced-modeling/
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/ [R=301,L]
+
+## Web Modeler folder restructure - moved to validation/
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/modeler/web-modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/modeler/web-modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/modeler/web-modeler/validation/token-simulation/ [R=301,L]
+
+## Web Modeler folder restructure - moved to process-applications/
+RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/modeler/web-modeler/process-applications/git-sync/ [R=301,L]
+
+## Web Modeler folder restructure - moved to collaboration/
+RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+
 # Add mapping rules
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/ [R=301,L]
