@@ -655,10 +655,14 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void handleJobFoo() {
   try {
    // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, (retries) -> Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+  } catch(DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch(StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
