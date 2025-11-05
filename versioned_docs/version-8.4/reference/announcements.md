@@ -77,6 +77,11 @@ The Helm charts are not yet prepared with the OpenSearch configurations as templ
 
 This release contains the following limitations:
 
+- In **Operate `8.4.21` and `8.4.22`**
+  - **Bug**
+    - **Description:** Decision instances with evaluation failures cannot be imported due to a missing field mapping.
+    - **Reference:** [the related issue](https://github.com/camunda/camunda/issues/39791)
+    - **Mitigation:** We advise customers to **stay on Operate `8.4.20`** and upgrade directly to **`8.5.latest`** to avoid the risk of running into this bug in unsupported patch versions.
 - In **Operate `8.4.0`**
   - **Bug**
     - **Description:** Instance migration always points to the latest process version
@@ -99,7 +104,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md#configuration) when configuring a custom OIDC provider.
+      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provi)
 
 ## Camunda 8.3
 
