@@ -672,10 +672,14 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void handleJobFoo() {
   try {
    // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+  } catch(DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch(StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
@@ -685,7 +689,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to `PT0S`
+- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to `PT0S`, function input are the retries that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
