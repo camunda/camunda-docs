@@ -1720,6 +1720,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility",
                   ],
                 },
               ],

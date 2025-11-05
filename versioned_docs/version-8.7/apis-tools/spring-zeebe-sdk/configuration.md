@@ -280,6 +280,49 @@ public void handleJobFoo() {
 }
 ```
 
+## Deploying resources on start-up
+
+To deploy process models on application start-up, use the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
+
+```java
+@Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
+```
+
+Or, define wildcard patterns:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+```
+
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the tenant id being set to `camunda.client.tenant-id` will be used.
+
+To disable the deployment of annotations, you can set:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      enabled: false
+```
+
 ## Additional configuration options
 
 For a full set of configuration options, see [CamundaClientConfigurationProperties.java](https://github.com/camunda/camunda/blob/stable/8.7/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/zeebe/spring/client/properties/CamundaClientProperties.java).
