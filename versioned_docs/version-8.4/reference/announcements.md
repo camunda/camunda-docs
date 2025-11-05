@@ -104,7 +104,7 @@ This release contains the following limitations:
     - **Reference:** https://github.com/camunda/issues/issues/569
     - **Mitigation:**
       1. Feature is planned to be delivered with an upcoming patch release. Please see [issue](https://github.com/camunda/issues/issues/569) for latest progress.
-      2. [Disable Connectors component](../self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provi)
+      2. [Disable Connectors component](/self-managed/platform-deployment/helm-kubernetes/guides/connect-to-an-oidc-provider.md)
 
 ## Camunda 8.3
 
