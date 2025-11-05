@@ -33,7 +33,7 @@ zeebe:
       value: "{{ .Release.Name }}-hazelcast"
 ```
 
-This example is downloading the exporters" JAR from a URL and adding the JAR to the `exporters` directory,
+This example is downloading the exporters' JAR from a URL and adding the JAR to the `exporters` directory,
 which will be scanned for JARs and added to the Zeebe Broker classpath. Then, with `environment variables`,
 you can configure the exporter parameters.
 
