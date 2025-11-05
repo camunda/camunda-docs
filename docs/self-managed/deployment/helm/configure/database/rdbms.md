@@ -86,23 +86,18 @@ Not yet tested
 
 :::
 
+:::note
+
+This example uses /driver-lib, which is a filepath that the Orchestration Cluster looks for for extra drivers. If you use a different name, you may need to override more settings like the command and entrypoint for a different directory to be added to the classpath.
+
+:::
+
 ```yaml
 orchestration:
-  command:
-    - /bin/sh
-    - -c
-    - |
-      java -cp "/extraDrivers/ojdbc.jar:/app/identity.jar" org.springframework.boot.loader.launch.JarLauncher
-  # Extra volumes are mounted for any TLS certs necessary for the database:
   extraVolumeMounts:
-    - name: "keystore-secret"
-      secret:
-        secretName: "keystore-secret"
     - name: jdbcdrivers
-      mountPath: /extraDrivers
+      mountPath: /driver-lib
   extraVolumes:
-    - name: "keystore-secret"
-      mountPath: "/usr/local/certificates"
     - name: jdbcdrivers
       emptyDir: {}
   initContainers:
@@ -113,11 +108,11 @@ orchestration:
         [
           "sh",
           "-c",
-          "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /extraDrivers/ojdbc.jar",
+          "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /driver-lib/ojdbc.jar",
         ]
       volumeMounts:
         - name: jdbcdrivers
-          mountPath: /extraDrivers
+          mountPath: /driver-lib
       securityContext:
         runAsUser: 1001
 ```
@@ -132,7 +127,7 @@ Not yet tested
 
 ```Dockerfile
 FROM camunda/camunda-platform:8.8.0
-ADD ojdbc8.jar /app/lib/ojdbc8.jar
+ADD ojdbc8.jar /driver-lib/ojdbc8.jar
 ```
 
 ```shell
@@ -152,7 +147,7 @@ Not yet tested
 orchestration:
   extraVolumeMounts:
     - name: jdbcdrivers
-      mountPath: /app/lib/
+      mountPath: /driver-lib
   extraVolumes:
     - name: jdbcdrivers
 ```
