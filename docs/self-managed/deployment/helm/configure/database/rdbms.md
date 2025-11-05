@@ -78,7 +78,7 @@ Some drivers, such as the Oracle JDBC driver, are not included in the Camunda im
 2. **Custom Docker Image**: Build a custom Docker image that includes the necessary JDBC drivers and use that image for your Camunda components.
 3. **Mounting from a Volume**: If you have the driver stored in a persistent volume or a secret, you can mount that volume into the pod.
 
-### Example 1: Using an Init Container to download the Oracle JDBC driver
+### Option 1: Using an Init Container to download the Oracle JDBC driver
 
 :::warning Important
 
@@ -117,7 +117,7 @@ orchestration:
         runAsUser: 1001
 ```
 
-### Example 2: Creating a custom Docker image with the Oracle JDBC driver
+### Option 2: Creating a custom Docker image with the Oracle JDBC driver
 
 :::warning Important
 
@@ -135,7 +135,7 @@ docker build -t internal-registry/orchestration:8.8.0 .
 docker push internal-registry/orchestration:8.8.0
 ```
 
-### Example 3: Mounting the JDBC driver from a volume
+### Option 3: Mounting the JDBC driver from a volume
 
 :::warning Important
 
