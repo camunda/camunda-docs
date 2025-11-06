@@ -20,7 +20,7 @@ It’s commonly used when:
 Instead of creating a new process instance for each message, messages with the same **correlation key** are routed to the same instance.
 
 :::note
-This guide applies to Camunda 8 (Zeebe). The message aggregation pattern requires understanding of [message correlation](/components/concepts/messages/#message-correlation) and BPMN message events.
+This guide applies to Camunda 8 (Zeebe). The message aggregation pattern requires understanding of [message correlation](/components/concepts/messages.md#message-correlation-overview) and BPMN message events.
 :::
 
 ## How it works
@@ -137,13 +137,4 @@ The first message starts the workflow; the next two correlate to the existing in
 
 ## Related resources
 
-- [Message correlation concept](/components/concepts/messages/#message-correlation)
-- [Forum example discussion](https://forum.camunda.io/t/message-aggregator-example-bpmn/36625)
 - [Messages](/components/concepts/messages.md)
-
-## Next steps
-
-- Learn more about [message correlation patterns](/components/concepts/messages/#message-correlation).
-- Explore how to handle race conditions using [event-based gateways](/components/modeler/bpmn/event-based-gateways/event-based-gateways.md).
-- Try combining aggregation with [message expiration](/components/concepts/messages/#message-time-to-live) for dynamic batching scenarios.
-- Experiment with the BPMN model in your environment to verify message routing and process completion logic.
