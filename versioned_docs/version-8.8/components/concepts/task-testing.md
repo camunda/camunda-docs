@@ -37,7 +37,6 @@ Once a test has run, you can view the resulting process instance in [**Operate**
 
 See the respective guides below for configuration steps:
 
-- [Test a task in Web Modeler](/components/modeler/web-modeler/task-testing.md)
 - [Test a task in Desktop Modeler](/components/modeler/desktop-modeler/task-testing.md)
 
 ## Supported elements

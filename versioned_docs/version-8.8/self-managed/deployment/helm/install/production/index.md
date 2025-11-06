@@ -169,9 +169,6 @@ identity:
       clientId: "00000000-0000-0000-0000-000000000000"
       wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
       audience: "00000000-0000-0000-0000-000000000000"
-      secret:
-        existingSecret: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
       redirectUrl: https://management-and-modeling-host.com
     webModeler:
       clientId: "00000000-0000-0000-0000-000000000000"
@@ -541,9 +538,6 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        secret:
-          existingSecret: oidc-certificate-console
-          existingSecretKey: certificate-secret-data
         redirectUrl: https://management-and-modeling-host.com
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
