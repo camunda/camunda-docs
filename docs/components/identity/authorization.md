@@ -12,7 +12,7 @@ Create and manage your Orchestration Cluster authorizations.
 
 An authorization grants an **owner** access to a **resource** and defines the specific **permissions** they have.
 
-- **Owner**: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md).
+- **Owner**: The entity that receives permissions, such as a [user](user.md), [group](group.md), [role](role.md), [client](client.md), or [mapping rule](mapping-rules.md). For [user](user.md) entity in SaaS deployments, the username field refers to the email address of the user. For [user](user.md) entity in Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 - **Resource**: The object that the permissions apply to, such as a process definition, decision definition, or system. See the full list of [available resources](/components/concepts/access-control/authorizations.md#available-resources).
 
 Each authorization specifies which permissions the owner has for the resource (for example, `READ`, `UPDATE`, `DELETE`).
