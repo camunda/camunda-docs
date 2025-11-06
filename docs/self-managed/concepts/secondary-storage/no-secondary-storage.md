@@ -4,12 +4,17 @@ title: "Run without secondary storage"
 description: "Run Zeebe clusters using only the engine and primary storage components, disabling all secondary-storage-dependent features."
 ---
 
-Use **no secondary storage mode** to run Zeebe clusters with only the process engine and primary storage components. This mode disables all components that depend on secondary storage, such as Operate, Tasklist, and Optimize.
+Use **no secondary storage mode** to run Zeebe clusters with only the process engine and its primary storage layer.  
+In this mode, Operate, Tasklist, Identity, and web-based APIs are automatically disabled.
 
-In this mode, only the Zeebe engine and its primary storage layer are active. This provides core process execution and orchestration capabilities but excludes the full Camunda platform experience, including web applications, APIs, and monitoring tools.
+For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.  
+For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
+
+This setup provides core process execution and orchestration capabilities through Zeebe, but it excludes the broader Camunda platform experience—such as analytics, search, and human-task management.
 
 :::note
-This mode is primarily intended for **lightweight development or specialized use cases**. Most production environments require secondary storage for analytics, search, and human-task management.
+No secondary storage mode is designed for lightweight development, testing, or specialized technical use cases.  
+Most production environments should enable secondary storage to support Operate, Tasklist, Optimize, and API functionality.
 :::
 
 ## Configuration
