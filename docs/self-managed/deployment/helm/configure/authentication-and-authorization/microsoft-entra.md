@@ -31,6 +31,17 @@ See the [full configuration example](#full-configuration-example) for the comple
 For authentication, the Camunda components use the following scopes:
 `email`, `openid`, `offline_access`, `profile`, and `<CLIENT_UUID>/.default`.
 
+:::tip Optional scopes
+The `offline_access` scope is optional.
+If your organization restricts this scope for security reasons, you can adjust the scopes with:
+
+```
+CAMUNDA_IDENTITY_AUTH_SCOPES="openid profile email"
+```
+
+This configuration allows login without the `offline_access` scope.
+:::
+
 To allow users to successfully authenticate with Entra ID, you must either configure an [admin consent workflow](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/configure-admin-consent-workflow) or grant consent on behalf of your users using [admin consent](https://learn.microsoft.com/en-gb/entra/identity/enterprise-apps/user-admin-consent-overview#admin-consent).
 
 The applications you configure in this guide must support the following `grant_type` values:
@@ -137,6 +148,8 @@ This secret includes the following keys:
 - `identity-postgresql-user-password`: Password for the non-privileged PostgreSQL account used by Management Identity (`bn_keycloak`).
 - `literal=webmodeler-postgresql-admin-password`: Password for the administrative PostgreSQL account used by Web Modeler (`postgres`).
 - `webmodeler-postgresql-user-password` Password for the non-privileged PostgreSQL account used by Web Modeler (`web-modeler`).
+
+For additional options on how to create and reference Kubernetes secrets (for example using YAML manifests or consolidated secrets), see [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
 ### Configure components using OIDC
 

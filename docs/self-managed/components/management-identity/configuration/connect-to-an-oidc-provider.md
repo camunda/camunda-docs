@@ -17,6 +17,10 @@ Connect Management Identity to an OpenID Connect (OIDC) authentication provider 
 - A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
 - To connect to a Keycloak authentication provider, see [connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity.
+
+This guide focuses on application-level Management Identity configuration (for example, environment variables and IdP application settings) and applies regardless of deployment method.
 :::
 
 ## Prerequisites
@@ -65,7 +69,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' }]} >
 <TabItem value="env">
 
 ```
@@ -82,52 +86,6 @@ You can connect to your OIDC provider through either environment variables or He
 ```
 
 </TabItem>
-<TabItem value="helm">
-
-```yaml
-global:
-  identity:
-    auth:
-      issuer: <URL_OF_ISSUER>
-      # this is used for container to container communication
-      issuerBackendUrl: <URL_OF_ISSUER>
-      tokenUrl: <TOKEN_URL_ENDPOINT>
-      jwksUrl: <JWKS_URL>
-      type: "GENERIC"
-      identity:
-        clientId: <Client ID from Step 3>
-        existingSecret: <Client secret from Step 3>
-        audience: <Audience from Step 3>
-        initialClaimName: <Initial claim name if not using the default "oid">
-        initialClaimValue: <Initial claim value>
-      operate:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      tasklist:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      optimize:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      zeebe:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-        existingSecret: <Client secret from Step 3>
-      webModeler:
-        clientId: <Client ID of Web Modeler's UI from Step 3>
-        clientApiAudience: <Audience of Web Modeler's UI from Step 3>
-        publicApiAudience: <Audience of Web Modeler's API from Step 3>
-      console:
-        clientId: <Client ID from Step 3>
-        audience: <Audience from Step 3>
-```
-
-You can also [store the client secrets in a Kubernetes secret](/self-managed/deployment/helm/install/quick-install.md#create-identity-secrets) and reference this in the Helm values.
-
-</TabItem>
 </Tabs>
 
 :::note
@@ -137,6 +95,17 @@ Once set, you cannot update your initial claim name and value using environment 
 <h3>Additional considerations</h3>
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
+
+:::tip Optional scopes
+The `offline_access` scope is optional.
+If your organization restricts this scope for security reasons, you can adjust the scopes with:
+
+```
+CAMUNDA_IDENTITY_AUTH_SCOPES="openid profile email"
+```
+
+This configuration allows login without the `offline_access` scope.
+:::
 
 </TabItem>
 <TabItem value="microsoftEntraId">
@@ -169,7 +138,7 @@ Ensure you register a new application for each component.
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Helm values', value: 'helm' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' }]} >
 <TabItem value="env">
 
 ```
@@ -183,62 +152,6 @@ You can connect to your OIDC provider through either environment variables or He
     IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
     IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
     SPRING_PROFILES_ACTIVE=oidc
-```
-
-</TabItem>
-<TabItem value="helm">
-
-```yaml
-global:
-  identity:
-    auth:
-      issuer: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      # this is used for container to container communication
-      issuerBackendUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/oauth2/v2.0/token
-      jwksUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/discovery/v2.0/keys
-      type: "MICROSOFT"
-      publicIssuerUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-      identity:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        audience: <Audience from Step 2>
-        # This is the object ID of the first user. A role mapping in Identity will automatically be generated for this user.
-        initialClaimValue: <Initial claim value>
-        redirectUrl: <See the Helm value in the table below>
-      operate:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      tasklist:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      optimize:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        redirectUrl: <See the Helm value in the table below>
-      zeebe:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
-        tokenScope: "<Client ID from Step 2>/.default"
-      webModeler:
-        clientId: <Client ID of Web Modeler's UI from Step 2>
-        clientApiAudience: <Client ID of Web Modeler's UI from Step 2>
-        publicApiAudience: <Client ID of Web Modeler's API from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-      console:
-        clientId: <Client ID from Step 2>
-        audience: <Client ID from Step 2>
-        redirectUrl: <See the Helm value in the table below>
-        wellKnown: <Found in the "Endpoints" section of the app registrations page>
-      connectors:
-        clientId: <Client ID from Step 2>
-        existingSecret: <Client secret from Step 5>
 ```
 
 </TabItem>

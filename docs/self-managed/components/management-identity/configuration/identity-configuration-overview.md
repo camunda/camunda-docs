@@ -7,6 +7,12 @@ description: "Learn more about how Management Identity plays together with Keycl
 
 Configure Management Identity for your Camunda 8 Self-Managed deployment.
 
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity:
+
+This section focuses on application-level Management Identity configuration (for example, environment variables and IdP application settings) and applies regardless of deployment method.
+:::
+
 ## Configure Management Identity IdP
 
 The default Camunda 8 Self-Managed deployment uses built-in Keycloak as an identity provider (IdP).
