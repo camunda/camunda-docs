@@ -11,12 +11,13 @@ Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.
 
 ## Static outbound IP addresses
 
-Camunda SaaS uses static IP addresses for some of its services. The addresses can be retrieved using the [Camunda Management API `/meta/ip-ranges` endpoint](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMeta).
-Although infrequent, we may change these IP addresses from time to time and any change will be published through the API at least 24 hours in advance. If you rely on these IP addresses for your network configuration, we strongly recommend to fetch the latest version at least once every 24 hours.
+Camunda SaaS uses static IP addresses for some of its services. These addresses can be retrieved using the [Camunda Management API `/meta/ip-ranges` endpoint](https://console.cloud.camunda.io/customer-api/openapi/docs/#/default/GetMeta).
+
+Although changes to these IP addresses are infrequent, they may occur from time to time. Any change will be published through the API at least 24 hours in advance. If you rely on these IP addresses for your network configuration, it is strongly recommended fetching the latest version at least once every 24 hours.
 
 :::note
 
-Under normal circumstances, changes to these IP addresses will be communicated in advance. However, in case of emergency, it may not be possible to prepublish these changes.
+Typically, any changes to these IP addresses are communicated in advance. However, in exceptional cases, it may not be possible to provide prior notice.
 
 :::
 
