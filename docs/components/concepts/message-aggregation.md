@@ -144,6 +144,6 @@ The first message starts the workflow; the next two correlate to the existing in
 ## Next steps
 
 - Learn more about [message correlation patterns](/components/concepts/messages/#message-correlation).
-- Explore how to handle race conditions using [event-based gateways](/components/modeler/bpmn/event-based-gateways.md).
+- Explore how to handle race conditions using [event-based gateways](/components/modeler/bpmn/event-based-gateways/event-based-gateways.md).
 - Try combining aggregation with [message expiration](/components/concepts/messages/#message-time-to-live) for dynamic batching scenarios.
 - Experiment with the BPMN model in your environment to verify message routing and process completion logic.
