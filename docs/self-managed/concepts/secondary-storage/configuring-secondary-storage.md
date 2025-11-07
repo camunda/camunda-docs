@@ -7,12 +7,11 @@ description: "Learn how to configure secondary storage in Camunda Self-Managed e
 
 Configure secondary storage to enable features such as Operate, Tasklist, Identity, and search-based REST APIs in Camunda Self-Managed environments.
 
-Camunda uses the `data.secondary-storage` configuration to define which database backend supports advanced web applications and APIs.  
-This section explains how to configure secondary storage through different deployment methods and how to disable it when running the Zeebe engine alone.
-
 ## Configuration options
 
-You can configure secondary storage using **Helm charts**, **Docker Compose**, or **manual configuration files**.
+You can configure secondary storage using Helm charts, Docker Compose, or manual configuration files.
+
+Camunda uses the `data.secondary-storage` configuration to define which database backend supports advanced web applications and APIs.
 
 ### Helm
 
@@ -101,19 +100,18 @@ data:
 ## Choosing a storage backend
 
 | Scenario                                  | Recommended backend              | Reason                                                        |
-| ----------------------------------------- | -------------------------------- | ------------------------------------------------------------- |
+| :---------------------------------------- | :------------------------------- | :------------------------------------------------------------ |
 | Local testing or Camunda 8 Run quickstart | H2                               | Fast, lightweight, and runs entirely in memory or file-based. |
 | Production workloads                      | Elasticsearch or supported RDBMS | Scalable and persistent; designed for concurrent queries.     |
 | Debugging and troubleshooting             | H2 or PostgreSQL                 | Easier to inspect and visualize data.                         |
 
 :::note
-Camunda 8 Run uses H2 for **testing and development only**.  
-Operate and Tasklist require full RDBMS or Elasticsearch support in later versions.
+Camunda 8 Run uses H2 for **testing and development only**. Operate and Tasklist require full RDBMS or Elasticsearch support in later versions.
 :::
 
-## Running without secondary storage
+## Run without secondary storage
 
-If you want to run the Zeebe engine without secondary storage or web applications, use **no secondary storage mode**.
+If you want to run the Zeebe engine without secondary storage or web applications, you can use **no secondary storage** mode.
 
 In this mode:
 
@@ -122,10 +120,3 @@ In this mode:
 - This configuration is best suited for local development or minimal-resource environments.
 
 See [Run without secondary storage](./no-secondary-storage.md) for configuration examples and limitations.
-
-## Next steps
-
-- [Run without secondary storage](./no-secondary-storage.md)  
-  Configure Zeebe to run without secondary storage and understand the components that are disabled in this mode.
-- [Manage secondary storage data](./managing-secondary-storage.md)  
-  Learn best practices for maintaining data integrity, configuring replicas, and performing backups.

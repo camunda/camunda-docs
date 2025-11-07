@@ -4,22 +4,27 @@ title: "Run without secondary storage"
 description: "Run Zeebe clusters using only the engine and primary storage components, disabling all secondary-storage-dependent features."
 ---
 
-Use **no secondary storage mode** to run Zeebe clusters with only the process engine and its primary storage layer.  
-In this mode, Operate, Tasklist, Identity, and web-based APIs are automatically disabled.
+Use **no secondary storage** mode to run Zeebe clusters with only the process engine and its primary storage layer.
 
-For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.  
-For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
-
-This setup provides core process execution and orchestration capabilities through Zeebe, but it excludes the broader Camunda platform experience—such as analytics, search, and human-task management.
-
-:::note
-No secondary storage mode is designed for lightweight development, testing, or specialized technical use cases.  
-Most production environments should enable secondary storage to support Operate, Tasklist, Optimize, and API functionality.
+:::warning
+Disabling secondary storage removes key Camunda 8 capabilities, including Operate, Tasklist, and search-based REST endpoints. This mode is suitable only for lightweight development, testing, or specialized technical use cases.
 :::
 
-## Configuration
+## About this mode
 
-You can enable no-secondary-storage mode in several ways depending on your deployment method.
+Typically, you should use secondary storage in nearly all production environments to enable monitoring, analytics, querying, and human-task management through Operate, Tasklist, and other applications.
+
+You should **only** disable/run without secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments.
+
+- In this mode, Operate, Tasklist, Identity, and web-based APIs are automatically disabled.
+- For Helm deployments, Optimize is also disabled by default when secondary storage is not configured.
+- For Docker or manual deployments, you must **explicitly disable Optimize** in your configuration, as it cannot function without secondary storage.
+
+This setup provides core process execution and orchestration capabilities through Zeebe, but excludes the full Camunda platform experience, such as analytics, search, and human-task management.
+
+## Enable **no secondary storage** mode
+
+You can enable this mode in several ways depending on your deployment method.
 
 ### Helm
 
@@ -83,22 +88,26 @@ environment:
 
 ## Components and features disabled
 
-When secondary storage is disabled, the following components and features are unavailable:
+If secondary storage is disabled, the following components and features are unavailable:
 
-| Category             | Component or feature                                                               | Behavior               |
-| -------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
-| **Web applications** | Operate, Tasklist, Identity UI, Optimize, Play (Modeler Play tab)                  | Disabled               |
-| **APIs & services**  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
-| **Data & storage**   | Elasticsearch/OpenSearch exporters, Schema Manager, secondary storage backups      | Disabled               |
+| Category         | Component or feature                                                               | Behavior               |
+| :--------------- | :--------------------------------------------------------------------------------- | :--------------------- |
+| Web applications | Operate, Tasklist, Identity UI, Optimize, Play (Modeler Play tab)                  | Disabled               |
+| APIs & services  | Orchestration Cluster REST API (search endpoints), batch operations, usage metrics | Return `403 Forbidden` |
+| Data & storage   | Elasticsearch/OpenSearch exporters, Schema Manager, secondary storage backups      | Disabled               |
 
-- **Outbound connectors** remain supported.  
-  However, inbound connectors and any features that require process definition lookup are unavailable.
+:::note
 
-- **Custom exporters** (for example, Kafka, Prometheus, or MongoDB) continue to work because they interact directly with the engine’s primary storage.
+- Outbound connectors remain supported. However, inbound connectors and any features that require process definition lookup are unavailable.
+- Custom exporters (for example, Kafka, Prometheus, or MongoDB) continue to work as they interact directly with the engine’s primary storage.
+
+:::
 
 ## Error handling and API responses
 
-When you attempt to access a disabled feature, the system returns a clear and descriptive error response:
+If you attempt to access a disabled feature, the system returns a descriptive error response.
+
+For example:
 
 ```json
 {
@@ -108,46 +117,36 @@ When you attempt to access a disabled feature, the system returns a clear and de
 }
 ```
 
-At startup, affected components log a warning and shut down gracefully.  
-SDKs and clients will also surface `403 Forbidden` errors when interacting with unsupported endpoints.
+- At startup, affected components log a warning and shut down gracefully.
+- SDKs and clients will also return a `403 Forbidden` error when interacting with unsupported endpoints.
 
 ## Limitations and considerations
 
-:::warning
-Using no-secondary-storage mode significantly reduces Camunda’s capabilities.
-:::
+Using this mode significantly reduces Camunda’s capabilities:
 
-- **No visual monitoring** – Operate and Tasklist are unavailable.
-- **No historical data or analytics** – Optimize, dashboards, and audit records cannot be accessed.
-- **Limited API access** – Most search and query endpoints return `403 Forbidden`.
-- **Reduced observability** – Built-in metrics and secondary storage exporters are disabled.
-- **No human task management** – Tasklist and identity-based task assignment are unavailable.
+| Limitation                      | Impact                                                         |
+| :------------------------------ | :------------------------------------------------------------- |
+| No visual monitoring            | Operate and Tasklist are unavailable.                          |
+| No historical data or analytics | Optimize, dashboards, and audit records cannot be accessed.    |
+| Limited API access              | Most search and query endpoints return `403 Forbidden`.        |
+| Reduced observability           | Built-in metrics and secondary storage exporters are disabled. |
+| No human task management        | Tasklist and identity-based task assignment are unavailable.   |
 
 :::note
-You can still deploy and execute BPMN and DMN processes using the Zeebe client or REST API endpoints that rely only on the engine.
+You can still deploy and execute BPMN and DMN processes using the Zeebe client or REST API endpoints that only rely on the engine.
 :::
 
 ## When to use this mode
 
-Use no-secondary-storage mode only in limited, specialized scenarios:
-
-- **Local development with Camunda 8 Run**  
-  Run Zeebe locally without secondary storage components for lightweight testing and iteration.
-
-- **Resource-constrained environments**  
-  Deploy only the Zeebe engine where secondary storage or web applications cannot be supported.
-
-- **Temporary migration or diagnostic scenarios**  
-  Use this configuration when minimal orchestration functionality is needed during transition or troubleshooting.
-
-- **Custom monitoring or exporter development**  
-  Suitable for environments where you implement custom exporters or external observability tools that replace secondary storage.
-
+:::caution
 Before using this mode in production, consult your Camunda support or field team to ensure it meets your requirements.
+:::
 
-## Next steps
+Use this mode only in limited, specialized scenarios, such as the following:
 
-- [Configure secondary storage](./configuring-secondary-storage.md)  
-  Learn how to enable and configure secondary storage for Operate, Tasklist, and REST APIs.
-- [Manage secondary storage data](./managing-secondary-storage.md)  
-  Explore best practices for managing data, backups, and performance monitoring.
+| Scenario                                    | Description                                                                                   |
+| :------------------------------------------ | :-------------------------------------------------------------------------------------------- |
+| Local development with Camunda 8 Run        | Run Zeebe locally without secondary storage components for lightweight testing and iteration. |
+| Resource-constrained environments           | Deploy only the Zeebe engine when secondary storage or web applications cannot be supported.  |
+| Temporary migration or diagnostic scenarios | Minimal orchestration functionality during transition or troubleshooting.                     |
+| Custom monitoring or exporter development   | Use custom exporters or external observability tools instead of secondary storage.            |
