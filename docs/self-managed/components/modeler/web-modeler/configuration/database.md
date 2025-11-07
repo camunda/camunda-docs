@@ -10,16 +10,16 @@ import TabItem from "@theme/TabItem";
 This page describes advanced database connection configuration for Web Modeler.  
 For a general setup guide, visit the [configuration overview](configuration.md#database).
 
-Web Modeler supports multiple database vendors. **PostgreSQL** is used by default.
+Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
 
-| Database   | Default driver included | Notes                             |
-| ---------- | ----------------------- | --------------------------------- |
-| PostgreSQL | ✅ Yes                  | Default database                  |
-| H2         | ✅ Yes                  | For development or testing only   |
-| MariaDB    | ✅ Yes                  | Case-sensitive collation optional |
-| MSSQL      | ✅ Yes                  | Case-sensitive collation optional |
-| MySQL      | ❌ No                   | Driver must be provided manually  |
-| Oracle     | ❌ No                   | Driver must be provided manually  |
+| Database   | Default driver included | Notes                                                                  |
+| ---------- | ----------------------- | ---------------------------------------------------------------------- |
+| PostgreSQL | ✅ Yes                  | Supported for production use.                                          |
+| H2         | ✅ Yes                  | For development, testing, or evaluation only.                          |
+| MariaDB    | ✅ Yes                  | Must use a case-sensitive collation.                                   |
+| MySQL      | ❌ No                   | Driver must be provided manually; must use a case-sensitive collation. |
+| MSSQL      | ✅ Yes                  | Must use a case-sensitive collation.                                   |
+| Oracle     | ❌ No                   | Driver must be provided manually.                                      |
 
 ## Configuring SSL for the database connection
 
@@ -235,6 +235,12 @@ spring:
 
 MariaDB uses case-insensitive collations by default.  
 To enable case sensitivity, set the database collation to a case-sensitive one such as `utf8mb4_bin`.
+
+:::note
+If a case-insensitive collation is used, you may encounter unexpected behavior.  
+For example, in [IDP extraction](/components/modeler/web-modeler/idp/idp-unstructured-extraction.md#extract-fields),  
+a field named `amount` and another named `Amount` would be treated as identical because the database does not distinguish between them.
+:::
 
 ### MSSQL
 
