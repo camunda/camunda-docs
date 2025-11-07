@@ -7,12 +7,10 @@ description: Learn how to connect Camunda 8 Orchestration Cluster Identity to an
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC).
+Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
 
 :::info Deploying with Helm?
 If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Identity.
-
-This page provides application-level settings, claims, and mapping rules that apply regardless of deployment method.
 :::
 
 ## About Authentication and authorization
@@ -54,7 +52,7 @@ For most IdPs, the default claim for the username is `sub` (subject). If you wan
 
 ### Step 2: Choose your deployment and configuration method
 
-You can configure OIDC using `application.yaml`, environment variables, or Helm values.
+You can configure OIDC using `application.yaml` or environment variables.
 
 Select the option that best fits your deployment approach.
 

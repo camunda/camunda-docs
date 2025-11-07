@@ -10,17 +10,17 @@ import TabItem from "@theme/TabItem";
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
 
-Connect Management Identity to an OpenID Connect (OIDC) authentication provider for integration with your existing system.
+Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables and IdP settings.
 
 :::note
 
 - A full list of supported and unsupported features when using an OIDC provider is available in the [OIDC features table](#supported-and-unsupported-oidc-features).
 - To connect to a Keycloak authentication provider, see [connect to an existing Keycloak instance](/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak.md).
 
+:::
+
 :::info Deploying with Helm?
 If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Management Identity.
-
-This guide focuses on application-level Management Identity configuration (for example, environment variables and IdP application settings) and applies regardless of deployment method.
 :::
 
 ## Prerequisites
@@ -69,7 +69,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Application.yaml', value: 'yaml'}]} >
 <TabItem value="env">
 
 ```
@@ -86,6 +86,28 @@ You can connect to your OIDC provider through either environment variables or He
 ```
 
 </TabItem>
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  identity:
+    type: "GENERIC"
+    baseUrl: <IDENTITY_URL>
+    authUrl: <AUTH_URL_ENDPOINT>
+    tokenUrl: <TOKEN_URL_ENDPOINT>
+    jwksUrl: <JWKS_URL>
+    clientId: <Client ID from Step 3>
+    clientSecret: <Client secret from Step 3>
+    audience: <Audience from Step 3>
+identity:
+  initialClaimName: <Initial claim name if not using the default "oid">
+  initialClaimValue: <Initial claim value>
+spring:
+  profiles:
+    active: oidc
+```
+
+</TabItem>
 </Tabs>
 
 :::note
@@ -98,6 +120,11 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 
 :::tip Optional scopes
 The `offline_access` scope is optional.
+
+If this scope is included, your OIDC provider issues a refresh token to Management Identity on user login. Management Identity uses the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
+
+If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+
 If your organization restricts this scope for security reasons, you can adjust the scopes with:
 
 ```
@@ -138,7 +165,7 @@ Ensure you register a new application for each component.
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' }]} >
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Application.yaml', value: 'yaml' }]} >
 <TabItem value="env">
 
 ```
@@ -152,6 +179,27 @@ You can connect to your OIDC provider through either environment variables or He
     IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
     IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
     SPRING_PROFILES_ACTIVE=oidc
+```
+
+</TabItem>
+<TabItem value="yaml">
+
+```yaml
+camunda:
+  identity:
+    type: "MICROSOFT"
+    baseUrl: <IDENTITY_URL>
+    authUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    tokenUrl: https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    clientId: <Client ID from Step 2>
+    clientSecret: <Client secret from Step 5>
+    audience: <Client ID from Step 2>
+identity:
+  initialClaimName: <Initial claim name if not using the default "oid">
+  initialClaimValue: <Initial claim value>
+spring:
+  profiles:
+    active: oidc
 ```
 
 </TabItem>
