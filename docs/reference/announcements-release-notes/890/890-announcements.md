@@ -10,14 +10,14 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.9 release.
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Release blog | Upgrade guides |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | ------------ | -------------- |
-| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -            | -              |
+| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------- |
+| 14 April 2026      | 13 October 2028              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | -              |
 
 :::info 8.9 resources
 
 - See [release notes](/reference/announcements-release-notes/890/890-release-notes.md) to learn more about new features and enhancements.
-- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/15) for an overview of known bugs by component and severity.
+- Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/21) for an overview of known bugs by component and severity.
 
 :::
 
@@ -33,10 +33,13 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 #### RDBMS secondary storage
 
-Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.  
+Camunda 8.9 introduces optional RDBMS secondary storage as an alternative to Elasticsearch or OpenSearch.
+
 This enables teams to use relational databases such as H2, PostgreSQL, Oracle, or MariaDB for storing and querying process data, reducing operational complexity for non-high-performance use cases.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb-self-manageddata) for details.
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#rdbms-secondary-storage-h2-postgresql-oracle-mariadb).
+:::
 
 </div>
 </div>
@@ -51,7 +54,9 @@ See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/
 
 Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage-self-manageddata) for details.
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
+:::
 
 </div>
 </div>
@@ -66,11 +71,14 @@ See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/
 
 #### Standardized JDBC driver management for RDBMS
 
-Camunda 8.9 adds a standardized JDBC driver management system for manual installations.  
-A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.  
-Users can now easily add or replace drivers (for example, Oracle JDBC) while maintaining full compliance and version control.
+Camunda 8.9 adds a standardized JDBC driver management system for manual installations.
 
-See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations-self-managedconfiguration) for details.
+- A new `/driver-lib` directory separates Camunda-bundled drivers from customer-supplied ones.
+- Customers can add and configure their own drivers (for example, Oracle JDBC), while maintaining full compliance and version control.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations).
+:::
 
 </div>
 </div>
@@ -85,8 +93,13 @@ See the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/
 
 #### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
-Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.  
+Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
+
 This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
+:::
 
 </div>
 </div>
