@@ -9,12 +9,6 @@ import TabItem from '@theme/TabItem';
 
 ## IRSA configuration validation of a Camunda 8 helm deployment
 
-:::caution Camunda 8.8 compatibility
-This guide and the referenced helper scripts (including `c8-sm-checks` IRSA validation) are not yet fully validated against Camunda 8.8. You may encounter transient errors, missing flags, or deprecated value references when executing them with 8.8-based deployments. A refreshed, 8.8-tested version of this page and the scripts will be published soon.
-
-Proceed with caution in production environments until the update is available.
-:::
-
 The [c8-sm-checks](self-managed/operational-guides/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
 
 ### IRSA check script
@@ -49,7 +43,7 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 #### Example usage
 
-You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks). Below is a quick reference for common usage options:
+You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]
@@ -58,7 +52,7 @@ Options:
   -n NAMESPACE                    Specify the namespace to use (required)
   -e EXCLUDE_COMPONENTS           Comma-separated list of Components to exclude from the check (reference of the component is the root key used in the chart)
   -p                              Comma-separated list of Components to check IRSA for PostgreSQL (overrides default list: identityKeycloak,identity,webModeler)
-  -l                              Comma-separated list of Components to check IRSA for OpenSearch (overrides default list: zeebe,operate,tasklist,optimize)
+  -l                              Comma-separated list of Components to check IRSA for OpenSearch (overrides default list: orchestration,optimize)
   -s                              Disable pod spawn for IRSA and connectivity verification.
                                   By default, the script spawns jobs in the specified namespace to perform
                                   IRSA checks and network connectivity tests. These jobs use the amazonlinux:latest
@@ -68,10 +62,10 @@ Options:
 **Example Command:**
 
 ```bash
-./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "zeebe,optimize"
+./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "orchestration"
 ```
 
-In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and **`zeebe`** and **`optimize`** components for OpenSearch access in the `camunda-primary` namespace.
+In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and only \*\*`orchestration` for OpenSearch access in the `camunda-primary` namespace.
 
 #### Script output overview
 
