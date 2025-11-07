@@ -27,6 +27,19 @@ Start a Camunda process from ServiceNow.
 **Variables:** (Optional) Define key-value pairs to pass as process variables in JSON format.  
  Example: `{ "invoiceId": "12345", "amount": 250 }`
 
+ Code Example: 
+```
+const returnObject = {
+    "request_item_number": fd_data.trigger.request_item.number.toString() || "",
+    "request_sys_id": fd_data.trigger.request_item.sys_id.toString() || ""
+};
+return JSON.stringify(returnObject);
+```
+
+:::tip
+
+When adding the JSON payload as code snippet, make sure to properly convert ServiceNow types into a JSON compatible format. In the example above, `sys_id` is a ServiceNow GUID, but needs to be a string for the JSON payload - thus the explicit conversion via `fd_data.trigger.request_item.sys_id.toString()`
+
 **Tenant ID:** (Optional) Provide the tenant identifier if your Camunda setup uses multi-tenancy. Leave blank for single-tenant setups.  
  Example: `hr-emea`
 
