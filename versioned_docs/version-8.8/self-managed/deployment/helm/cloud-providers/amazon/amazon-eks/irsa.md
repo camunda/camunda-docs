@@ -65,7 +65,7 @@ Options:
 ./checks/kube/aws-irsa.sh -n camunda-primary -p "identity,webModeler" -l "orchestration"
 ```
 
-In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and only \*\*`orchestration` for OpenSearch access in the `camunda-primary` namespace.
+In this example, the script will check **`identity`** and **`webModeler`** components (references of the component name in the helm chart) for Aurora PostgreSQL access and only **`orchestration`** for OpenSearch access in the `camunda-primary` namespace.
 
 #### Script output overview
 
