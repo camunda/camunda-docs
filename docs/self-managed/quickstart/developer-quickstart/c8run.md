@@ -245,7 +245,8 @@ Camunda 8 Run supports multiple secondary storage options.
 By default, it uses **Elasticsearch**, but you can switch to **H2** for lightweight local development.
 
 In version **8.9-alpha1**, Camunda 8 Run starts with **Elasticsearch** as its default secondary storage.  
-To test Camunda 8 Run using an **H2 database**, configure H2 as an alternative secondary storage. This is useful for development and local testing because it requires minimal setup and runs entirely in memory.
+To test Camunda 8 Run using an **H2 database**, configure H2 as an alternative secondary storage.  
+This setup is intended for **local testing only**, as it runs entirely in memory and resets when the application stops.
 
 **Default (Elasticsearch) configuration:**
 
@@ -255,22 +256,32 @@ data:
     type: elasticsearch
 ```
 
-**Optional (H2) configuration:**
+**Optional (H2) configuration (for local testing):**
+
+When using H2, you must also disable Operate and backup for webapps. Otherwise, Camunda 8 Run will not start correctly.
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
-    rdbms:
-      url: jdbc:h2:mem:camunda
-      username: sa
-      password:
-      flushInterval: PT0.5S
-      queueSize: 1000
+camunda:
+  backup:
+    webapps:
+      enabled: false
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:h2:mem:camunda
+        username: sa
+        password:
+        flushInterval: PT0.5S
+        queueSize: 1000
+
+spring:
+  profiles:
+    active: "broker,consolidated-auth,identity,tasklist"
 ```
 
-H2 runs in memory by default. Data will be lost when you stop Camunda 8 Run.
-To persist data, you can switch to a file-based H2 configuration such as:
+H2 runs in memory by default, so data will be lost when you stop Camunda 8 Run.
+To persist data, switch to a file-based configuration such as:
 
 ```yaml
 url: jdbc:h2:file:./camunda-data/h2db
@@ -328,7 +339,7 @@ spring:
 </details>
 
 :::note
-Operate and Tasklist are only supported with H2 once both applications have migrated to v2 APIs. Use H2 for testing Camunda 8 Run only.
+Operate and Tasklist are only supported with H2 once both applications have migrated to the v2 APIs. Use H2 for testing Camunda 8 Run only, and disable Operate and webapp backup.
 :::
 
 ### Primary vs. secondary storage

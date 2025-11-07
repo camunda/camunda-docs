@@ -99,14 +99,15 @@ data:
 
 ## Choosing a storage backend
 
-| Scenario                                  | Recommended backend              | Reason                                                        |
-| :---------------------------------------- | :------------------------------- | :------------------------------------------------------------ |
-| Local testing or Camunda 8 Run quickstart | H2                               | Fast, lightweight, and runs entirely in memory or file-based. |
-| Production workloads                      | Elasticsearch or supported RDBMS | Scalable and persistent; designed for concurrent queries.     |
-| Debugging and troubleshooting             | H2 or PostgreSQL                 | Easier to inspect and visualize data.                         |
+| Scenario                                  | Recommended backend                             | Reason                                                        |
+| :---------------------------------------- | :---------------------------------------------- | :------------------------------------------------------------ |
+| Local testing or Camunda 8 Run quickstart | H2                                              | Fast, lightweight, and runs entirely in memory or file-based. |
+| Production workloads                      | Elasticsearch or supported RDBMS                | Scalable and persistent; designed for concurrent queries.     |
+| Debugging and troubleshooting             | H2 or PostgreSQL (for debugging and inspection) | Easier to inspect and visualize data.                         |
 
 :::note
-Camunda 8 Run uses H2 for **testing and development only**. Operate and Tasklist require full RDBMS or Elasticsearch support in later versions.
+H2 is suitable for testing and local development only.  
+For production use, Operate and Tasklist require a persistent secondary storage backend such as an RDBMS or Elasticsearch.
 :::
 
 ## Run without secondary storage
