@@ -24,8 +24,8 @@ export const introCards = [
       "Learn how to build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "./choosing-right-model-agentic/",
-    title: "Choosing the right LLM",
+    link: "./choose-right-model-agentic/",
+    title: "Choose the right LLM",
     image: IconAoLlmImg,
     description:
       "Learn how to choose the right Large Language Model (LLM) for AI agents.",

@@ -38,7 +38,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 ## Desktop Modeler
 
 - Windows 10 / 11
-- macOS 13 / 14 / 15
+- macOS 13 / 14 / 15 / 26
 - Ubuntu LTS (latest)
 
 ## Clients
