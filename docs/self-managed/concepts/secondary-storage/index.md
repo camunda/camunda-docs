@@ -34,7 +34,7 @@ Camunda supports the following secondary storage backends, depending on the vers
 
 The following diagram shows how secondary storage fits into the Camunda data flow.
 
-<img src={DataFlowImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder img-transparent"/>
+<img src={DataFlowImg} alt="Camunda data flow showing secondary storage" class="img-noborder img-transparent"/>
 
 1. The Zeebe broker executes workflow instances and stores state in primary storage.
 1. The exporter, part of Zeebe, streams workflow and task data to secondary storage.
