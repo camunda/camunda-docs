@@ -8,7 +8,7 @@ A **job worker** is a service capable of performing a particular task in a proce
 
 A job has the following properties:
 
-- **Type**: Describes the work item and is defined in each task in the process. The type is referenced by workers to request the jobs they are able to perform.
+- **Type**: Describes the work item and is defined in each task in the process. The type is referenced by workers to request the jobs they are able to perform. Note that this is a case sensitive field (if the underlying Operating System permits it) so that type `**o**rderProcess` points to a different worker than `**O**derProcess`.
 - **Custom headers**: Additional static metadata that is defined in the process. Custom headers are used to configure reusable job workers (e.g. a `notify Slack` worker might read out the Slack channel from its header.)
 - **Key**: Unique key to identify a job. The key is used to hand in the results of a job execution, or to report failures during job execution.
 - **Variables**: The contextual/business data of the process instance required by the worker to do its work.
