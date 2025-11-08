@@ -80,12 +80,6 @@ Some drivers, such as the Oracle JDBC driver, are not included in the Camunda im
 
 ### Option 1: Using an Init Container to download the Oracle JDBC driver
 
-:::warning Important
-
-Not yet tested
-
-:::
-
 :::note
 
 This example uses /driver-lib, which is a filepath that the Orchestration Cluster looks for for extra drivers. If you use a different name, you may need to override more settings like the command and entrypoint for a different directory to be added to the classpath.
@@ -108,7 +102,7 @@ orchestration:
         [
           "sh",
           "-c",
-          "wget https://download.oracle.com/otn-pub/otn_software/jdbc/237/ojdbc17.jar -O /driver-lib/ojdbc.jar",
+          "wget https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc11/23.9.0.25.07/ojdbc11-23.9.0.25.07.jar -O /driver-lib/ojdbc.jar",
         ]
       volumeMounts:
         - name: jdbcdrivers
@@ -135,6 +129,15 @@ docker build -t internal-registry/orchestration:8.8.0 .
 docker push internal-registry/orchestration:8.8.0
 ```
 
+Then use the new image in your Helm values:
+
+```yaml
+orchestration:
+  image:
+    repository: internal-registry/orchestration
+    tag: 8.8.0
+```
+
 ### Option 3: Mounting the JDBC driver from a volume
 
 :::warning Important
@@ -155,7 +158,7 @@ orchestration:
 This will mount an empty volume into the container, but on first load you'll need to copy the driver into that folder.
 
 ```shell
-kubectl cp /path/to/ojdbc8.jar <pod-name>:/app/lib/ojdbc8.jar
+kubectl cp /path/to/ojdbc8.jar <pod-name>:/driver-lib/ojdbc8.jar
 ```
 
 ## References
