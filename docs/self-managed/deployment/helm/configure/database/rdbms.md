@@ -88,6 +88,11 @@ This example uses /driver-lib, which is a filepath that the Orchestration Cluste
 
 ```yaml
 orchestration:
+  exporters:
+    rdbms:
+      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+      username: myuser
+      inlineSecret: mypassword
   extraVolumeMounts:
     - name: jdbcdrivers
       mountPath: /driver-lib
@@ -133,6 +138,11 @@ Then use the new image in your Helm values:
 
 ```yaml
 orchestration:
+  exporters:
+    rdbms:
+      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+      username: myuser
+      inlineSecret: mypassword
   image:
     repository: internal-registry/orchestration
     tag: 8.8.0
@@ -148,6 +158,11 @@ Not yet tested
 
 ```yaml
 orchestration:
+  exporters:
+    rdbms:
+      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+      username: myuser
+      inlineSecret: mypassword
   extraVolumeMounts:
     - name: jdbcdrivers
       mountPath: /driver-lib
