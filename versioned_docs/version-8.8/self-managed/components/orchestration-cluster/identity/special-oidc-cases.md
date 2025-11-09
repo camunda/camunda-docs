@@ -55,3 +55,31 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=http://<Docker network domain nam
 </Tabs>
 
 The exact property values depend on your OIDC provider and environment.
+
+## Using the Bearer JWT client authentication method (_private key JWT_)
+
+In environments where extra security is required, the Orchestration Cluster backend can be configured to use the Bearer JWT client authentication method (_private key JWT_) instead of the standard _client id_ and _client secret_ (_client secret basic_) method.
+With this method the client secret will not be used as a credential, rather a client assertion JWT will be built and signed by the client's certificate.
+To learn more about the private key JWT authentication method, please refer to the [OAuth 2.0 Private Key JWT page](https://oauth.net/private-key-jwt/).
+
+The OIDC client credentials flow will work as expected, only the client credentials used to authenticate with the IdP will change.
+Refer to your IdP documentation for setting up private key JWT. For example, here is the [Keycloak documentation page](https://www.keycloak.org/securing-apps/authz-client#_client_authentication_with_signed_jwt).
+
+This is the minimal needed configuration of client credentials when using the _private key JWT_ method. Please note the absence of `clientSecret`.
+
+```yaml
+camunda:
+  security:
+    authentication:
+      oidc:
+        clientId: <YOUR_CLIENTID>
+        clientAuthenticationMethod: private_key_jwt
+        assertion:
+          keystore:
+            path: <YOUR_KEYSTORE_LOCATION>
+            password: <YOUR_KEYSTORE_LOCATION>
+            keyAlias: <YOUR_PRIVATE_KEY_ALIAS>
+            keyPassword: <YOUR_PRIVATE_KEY_PASSWORD>
+```
+
+A comprehensive list of possible configuration properties can be found at [the oidc configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
