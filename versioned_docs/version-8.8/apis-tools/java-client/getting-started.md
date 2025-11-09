@@ -77,7 +77,7 @@ Select the appropriate [authentication method](../orchestration-cluster-api-rest
 {label: 'No authentication', value: 'no-auth' },
 {label: 'Basic authentication', value: 'basic-auth' },
 {label: 'OIDC-based authentication (Self-Managed)', value: 'oidc-self-managed' },
-{label: 'OIDC-based authentication with client certificate', value: 'x509' },
+{label: 'OIDC-based mutual TLS authentication', value: 'mTLS' },
 ]}>
 
 <TabItem value="no-auth">
@@ -191,7 +191,7 @@ The client will automatically read the environment variables and configure the a
 
 <TabItem value="oidc-self-managed">
 
-**Use for:** Self-Managed production environments with OIDC-based authentication.
+**Use for:** Self-Managed production environments with OIDC-based authentication. Standard `client_secret_basic` authentication method.
 
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
@@ -277,11 +277,11 @@ The client will automatically read the environment variables and configure the a
   :::
 
 </TabItem>
-<TabItem value="x509">
+<TabItem value="mTLS">
 
-**Use for:** Production environments with X.509 certificate-based authentication.
+**Use for:** Production environments with X.509 certificate-based client authentication.
 
-Several identity providers, such as Keycloak, support client X.509 authentication as an alternative to the client credentials flow.
+Several identity providers, such as Keycloak, support client mTLS authentication as an alternative to `client_secret_basic`.
 
 **Prerequisites**
 
@@ -296,7 +296,6 @@ private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestratio
 private static final String OAUTH_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
 private static final String AUDIENCE = "[Audience - default: zeebe-api]";
 private static final String CLIENT_ID = "[Client ID]";
-private static final String CLIENT_SECRET = "[Client Secret]";
 private static final Path KEYSTORE_PATH = Paths.get("/path/to/keystore.p12");
 private static final String KEYSTORE_PASSWORD = "password";
 private static final String KEYSTORE_KEY_PASSWORD = "password";
@@ -309,7 +308,6 @@ public static void main(String[] args) {
             .authorizationServerUrl(OAUTH_URL)
             .audience(AUDIENCE)
             .clientId(CLIENT_ID)
-            .clientSecret(CLIENT_SECRET)
             .keystorePath(KEYSTORE_PATH)
             .keystorePassword(KEYSTORE_PASSWORD)
             .keystoreKeyPassword(KEYSTORE_KEY_PASSWORD)
@@ -332,7 +330,7 @@ public static void main(String[] args) {
 
 **What this code does**
 
-1. **Sets up X.509 certificate authentication** – Configures the client to authenticate using client certificates with OAuth.
+1. **Sets up mTLS certificate authentication** – Configures the client to authenticate using client certificates with OAuth.
 2. **Builds a secure client** – Establishes an encrypted connection using mutual TLS authentication.
 3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
 4. **Tests the connection** – Verifies certificate authentication by requesting cluster topology information.
@@ -360,7 +358,7 @@ CamundaClient client = CamundaClient.newClientBuilder().build();
 
 The client automatically reads environment variables and configures the appropriate authentication method.
 
-Refer to your identity provider documentation for configuring X.509 authentication. For example, see [Keycloak](https://www.keycloak.org/server/mutual-tls).
+Refer to your identity provider documentation for configuring mutual TLS authentication. For example, see [Keycloak](https://www.keycloak.org/server/mutual-tls).
 
 :::note
 
