@@ -18,7 +18,7 @@ For example, during the [OIDC authorization code flow](https://auth0.com/docs/ge
 - The browser is redirected to the OIDC provider for login.
 - Once the user grants consent, the Orchestration Cluster backend exchanges the authorization code for an ID/access token by calling the provider’s token endpoint.
 
-In most environments—such as production or centrally managed OIDC providers—both backend and browser can use the same URL. In that case, configure only the [OIDC issuer property](../core-settings/configuration/properties.md#oidc-configuration) `camunda.security.authentication.oidc.issuer-uri`.  
+In most environments—such as production or centrally managed OIDC providers—both backend and browser can use the same URL. In that case, configure only the [OIDC issuer property](../core-settings/configuration/properties.md#camundasecurityauthenticationoidc) `camunda.security.authentication.oidc.issuer-uri`.  
 The Orchestration Cluster will then request the provider’s well-known endpoint and resolve the required URIs (e.g., authorization and token endpoints).
 
 However, in some development environments (for example, Docker Compose), the backend and browser may need different URLs:

@@ -10521,6 +10521,8 @@ components:
     JobSearchQueryResult:
       description: Job search response.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
       properties:
@@ -10535,7 +10537,6 @@ components:
         - customHeaders
         - elementId
         - elementInstanceKey
-        - hasFailedWithRetriesLeft
         - jobKey
         - kind
         - listenerEventType
@@ -10785,7 +10786,6 @@ components:
           example: Request property [maxJobsToActivates] cannot be parsed
         instance:
           type: string
-          format: uri
           description: A URI path identifying the origin of the problem.
           example: /v2/jobs/activation
     SearchQueryRequest:

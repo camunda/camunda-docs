@@ -187,19 +187,11 @@ For more details on configuring email delivery, see the [Web Modeler section in 
 Console component configuration:
 
 ```yaml
-global:
-  identity:
-    auth:
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
-
 console:
   enabled: true
 ```
 
-Add the section under `global.identity.auth` to the existing section you created when configuring Management Identity.
+Since Console is a public client, it does not need to be defined under `global.identity.auth`.
 
 ### Full configuration example
 
@@ -210,10 +202,6 @@ global:
   identity:
     auth:
       enabled: true
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"

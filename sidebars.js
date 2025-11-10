@@ -189,7 +189,7 @@ module.exports = {
           items: [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
         },
@@ -494,7 +494,6 @@ module.exports = {
                 "components/modeler/web-modeler/validation/play-your-process",
                 "components/modeler/web-modeler/validation/test-scenario-files",
                 "components/modeler/web-modeler/validation/token-simulation",
-                "components/modeler/web-modeler/validation/task-testing",
               ],
             },
             "components/modeler/web-modeler/run-or-publish-your-process",
@@ -1606,6 +1605,28 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secondary storage",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/secondary-storage/index",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1668,8 +1689,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/secondary-storage-management",
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1708,6 +1727,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility",
                   ],
                 },
               ],

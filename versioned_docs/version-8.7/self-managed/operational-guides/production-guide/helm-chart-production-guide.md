@@ -184,9 +184,6 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
@@ -567,13 +564,7 @@ global:
         clientId: "00000000-0000-0000-0000-000000000000"
         wellKnown: https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration
         audience: "00000000-0000-0000-0000-000000000000"
-        existingSecret:
-          name: oidc-certificate-console
-        existingSecretKey: certificate-secret-data
         redirectUrl: https://management-host.com
-        existingSecret:
-          name: camunda-credentials
-        existingSecretKey: identity-console-client-password
       webModeler:
         clientId: "00000000-0000-0000-0000-000000000000"
         audience: "00000000-0000-0000-0000-000000000000"
@@ -593,7 +584,6 @@ identity:
     database: identity_db
     existingSecret: identity-db-secret
     existingSecretPasswordKey: database-password
-
 
 webModeler:
   enabled: true
@@ -691,7 +681,6 @@ console:
                   version: 8.7.x
                   readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
                   metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
-
 ```
 
 ### Example orchestration configuration
