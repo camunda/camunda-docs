@@ -1,18 +1,16 @@
 ---
 id: get-license
 title: "Get license status"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Obtains the status of the current Camunda license."
 sidebar_label: "Get license status"
 hide_title: true
 hide_table_of_contents: true
-api: eJy1Vt9v2zYQ/lcIPm2YY7tdu2UC9uC6aeaiS4LEXTG4fjhRZ4stRarkKY5h6H8fjpL8u2j7sIfAkXi877677+60kQTLIJOZfKcV2oBy3pOuRA+knZ1kMpFLpO6sJzMMyuuSD2UiP9qPdjYb3948TB6mVzfjf5OH6f3tzfV8zie3KYG2QVCOIhBQFYRbxCdVeY+WxBiKymYgTOO/L3vSYyidDRhkspHPh0P+OQTdd9s5OnR/xq1yltASe4OyNFpFfoNPgV1uZFA5FnCKNc1RdBGx961P4fFLhYHYN61LlIl06SdUFCl8qbTHjLP6CEZnu/S1t6d8oyd1GLuiQK80GM576TnzpBvyB1dPI/MVCn2Wr9BBxMs9sQATopmjHP1KxyDaeFPnDIKVPYlPUJQGZUK+wvowyhPgD9oY4ZEqbyN4B8peRctg/ZVK7MADeW2X+9gyAARZH2XlPHyKLbNVjnavKFzlqA0Q1tkLFf1oBeZPZraN7jQHNQdSao9hROdVkAG1cOcy3l4+w2/hfAEkE8kOLkgXnARbGQPpNuN1T5KmmIS23vet5mRd8+nLc30wskJbQm/BCPTeeeFU7IdMrHJtIl2FIWi7jDF3iv1ov94PpXepweKXb/XFSNw1liJDAm1EI34BQTSGKWZCWzG7fzMWf7x4+fv8p5yoDMlgsFqt+n6hLjDT5Hzf+eXALxT/sd3PfTHN0aMoYM1lhizTjAlG7LpDhBKVXmglyEVqbdhRgw2/4548bC1qlf3VYlVenwy7kXh/PxE6Q0t6se6yegAd7yygMuwDUldRkhqwnw90vv9+V/nTYI7RQ1UU4LetdQy8A3gFmbhvis0AzWzcQ2DVLNHv89WWfn1+gsm6/2s6vevGq3IZioXzgnIdugAOsF8Mhz1ZaKuLquie4Kl5+m04rBmB9fIdfC03lQEbhXlMWltROI+t+g7pt9R3s2hWwNNbl4apGynSj0AY5kKBtY5YYiX4gFmcPDYQWPVd1WAtlED5iSCc10t9HPBhhIPH54NPLg0DaOJhn/tDoO2t102q6mYGFEi5a/cxCxooZ1e7yRrQP6LnXb6RlTcykZumfetkMNjkLlCdbErnqR48cq0fwWseQlEafNy0eSdf4xSY+PqcLPjAQoEdz1uvcgzUfDaIsakCoRf3Vw9TcQ2EK1j3OcMMfwhzObwcnkVg0+/wPrqbiIZ5BNgfWB0ET56zEI3xj4LU9ZyTrSqvaf3ALpoUvkLw6EcV12WrnxY7IsWFE41kr/3nTdeAbz9MOfwUglbfcsE2US/aLlw0bHVznsHobsLVRh8a5sP+s3YBgIrF4DrKRHY77coutUVsdd8oqRveS015lfaVKwaqMd/+6hAqjAv8qFXuJnFm8DKubFw0dilWmnIB2z16KVQTbX/3kXQmtHY7in8aMuJZf/gjIabGpYMCtO26JgzGo7/f37weXbybjK9uHq4unvWHfXqimN7SBSrA7sVxjbRd+e1YPaK72W3W/+PruJUE4RMNSgM6frlE/pt2Isy26Zv32q6eyc0mhYDvvalrfv2lQr+WyWy+GwL8VPdkjpChjyPkM665ekphSXFamCpur+OvZ+6G7Wy6vprKuv4P7gZIgQ==
+api: eJydVtty2zgM/RUOn3ZnZcvNtrtZzeyDm6bddHrJpO72IZsHiIItthSpklAcj0f/vgNK8j3Ty0PGkQTi4AAHANeSYBFkdivfaIU2oLxLpKvRA2lnrwqZyQXS8C2RBQbldc0fZSbf5wTaBkElikBATRBuHp9U4z1aEhdQNbYAYToPY5lIj6F2NmCQ2VqeTSb887jbwdG++xNulbOEltgb1LXRKjJIPwd2uZZBlVjBMdasRDFExN43PoXHrw0GYt+0qlFm0uWfUVGk8LXRHgvO2z0YXWwT1J+e8YlE6nDhqgq90mA4s7Xn3JLuyO8dPY7MNyj0Sb5CBxEPJ2IOJkQzRyX6pY5B9PHmzhkEKxOJD1DVBmVGvsF2P8oj4E/aGOGRGm8j+ADKXkXPYPVIJbbggby2i11sGQCCbA+ycho+x57ZskS7UxSuctQGCOvsSEU/WoH5m5ltojvOQcuB1NpjmNJpFRRAPdypjPeHT/CbO18ByUyygxHpipNgG2Mg32S8TSRpikno633Ta062LX99dqoPplZoS+gtGIHeOy+civ1QiGWpTaSrMARtFzHmHcU+0g21d7nB6rdvdcVUXHeWokACbUQnfQFBdIY5FkJbcXvz8kL89fTZn3e/lER1yNJ0uVyO/VyNsNDk/Nj5Rerniv/Y7texmJXoUVSw4iJDUWjGBCO2vSFCjUrPtRLkIrE+7KjA8X/2REfuNxb1un60VI3XR8NsKj7eXAldoCU9Xw053YOOZ+bQGPYBuWsoyw3YL3sq332/rftxMIfooakq8JvGOgTeAjyHQtx0pWaAbjLuILBmFuh3+WpLv58dYbLq/5nNrofhqlyBYu68oFKHIYA97KeTSSIrbXXVVMMTPHRPf0wmLSOwXr6Dr+WWMmCjMA9Jaysq57FX3z79nvp2Et1W8PDa5WHmpor0PRCGO6HAWkcssRp8wCLOHRsIrPpZadRA5ZE+nNcLfRj/fsDp/Vn62eUhhS489rk7EfpWe9Flru0GwsMI79FSA8asRsrZoEPX0HEssntCG7SzvLzX8guuZPbooYRXTYP94fYukRVS6frtzu0DVHKk2yke0N+j75w33shMrrth0WZpui5doDZb185Tm96fRQCveeBFIfLnbqgMzWKcAhNfnxIhf7BQ4ZDG916VGKi7hIgL0wRCL24uP8zEKyBcwmrM9WT4fZjzyfnkJAKbfof36fWV6JhHgN3xOEDwnDsJ0Rn/KEjL1QioGq9p9YFddCl8juDRTxuuy0atPXZEisstGsmk/+floOHXn2Ycfg5Bq2+5YJsoR23nLhr2sjzNYHp9xdVGHzrmk/GTft2AisXgOspMDvvz0i60Rey7rFPSsCoWmsomHytXpaoz3/zqEBqMl4WDTry+ihOKF39j41qzC7HUVArY7Oxzobpox9sL2YnQ+k0s/u3IiCfjyY+EmBuXpxVoO3RNSC+mbz++ezEdvbm6uHz34XL0ZDwZ0wPF9NYuUAV2J45XSJvrRT/ED+iut3v85+7afdEJHyitDeh4D4oM133P324SdJf0fXsr1+scAn70pm359dcG/Upmt3fbNuenNpElQoF+ZwJNlcJ6Z+Ac38X3ps+ry5ls2/8Bck9bgg==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/license"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Obtains the status of the current Camunda license.
 
@@ -86,7 +81,7 @@ Obtains the status of the current Camunda license.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -122,6 +117,7 @@ Obtains the status of the current Camunda license.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

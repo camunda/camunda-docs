@@ -1,18 +1,16 @@
 ---
 id: get-usage-metrics
 title: "Get usage metrics"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Retrieve the usage metrics based on given criteria."
 sidebar_label: "Get usage metrics"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/system/usage-metrics"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Retrieve the usage metrics based on given criteria.
 
@@ -83,6 +78,10 @@ Retrieve the usage metrics based on given criteria.
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -249,6 +248,7 @@ Retrieve the usage metrics based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -297,6 +297,7 @@ Retrieve the usage metrics based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -344,6 +345,7 @@ Retrieve the usage metrics based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -355,7 +357,7 @@ Retrieve the usage metrics based on given criteria.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -391,6 +393,7 @@ Retrieve the usage metrics based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

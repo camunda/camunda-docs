@@ -1,0 +1,367 @@
+---
+id: resolve-process-instance-incidents
+title: "Resolve process instance incidents"
+description: "Creates a batch operation to resolve multiple incidents of a process instance."
+sidebar_label: "Resolve process instance incidents"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Resolve process instance incidents"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/incident-resolution"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates a batch operation to resolve multiple incidents of a process instance.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the process instance to resolve incidents for.",
+      schema: {
+        description: "System-generated key for a process instance.",
+        format: "ProcessInstanceKey",
+        "x-semantic-type": "ProcessInstanceKey",
+        example: "2251799813690746",
+        type: "string",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "ProcessInstanceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The batch operation request for incident resolution was created.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The created batch operation.",
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                allOf: [
+                  {
+                    "x-semantic-type": "BatchOperationKey",
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+                description: "Key of the batch operation.",
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: [
+                  "CANCEL_PROCESS_INSTANCE",
+                  "RESOLVE_INCIDENT",
+                  "MIGRATE_PROCESS_INSTANCE",
+                  "MODIFY_PROCESS_INSTANCE",
+                  "DELETE_PROCESS_INSTANCE",
+                  "ADD_VARIABLE",
+                  "UPDATE_VARIABLE",
+                  "DELETE_DECISION_DEFINITION",
+                  "DELETE_PROCESS_DEFINITION",
+                ],
+                title: "BatchOperationTypeEnum",
+              },
+            },
+            title: "BatchOperationCreatedResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

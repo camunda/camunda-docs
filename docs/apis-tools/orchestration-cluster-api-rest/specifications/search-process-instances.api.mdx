@@ -1,18 +1,16 @@
 ---
 id: search-process-instances
 title: "Search process instances"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Search for process instances based on given criteria."
 sidebar_label: "Search process instances"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Search for process instances based on given criteria.
 
 <Heading
@@ -57,100 +52,111 @@ Search for process instances based on given criteria.
         schema: {
           description: "Process instance search request.",
           type: "object",
+          additionalProperties: false,
           allOf: [
             {
               type: "object",
               properties: {
                 page: {
-                  description: "Pagination criteria.",
-                  allOf: [
+                  "x-polymorphic-schema": true,
+                  description:
+                    "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                  oneOf: [
                     {
-                      description:
-                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
-                      oneOf: [
-                        {
-                          type: "object",
-                          title: "Offset-based pagination",
-                          properties: {
-                            from: {
-                              description:
-                                "The index of items to start searching from.",
-                              type: "integer",
-                              format: "int32",
-                              default: 0,
-                              minimum: 0,
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                              minimum: 1,
-                            },
-                          },
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based forward pagination",
-                          required: ["after"],
-                          properties: {
-                            after: {
-                              description:
-                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The end cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "EndCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based backward pagination",
-                          required: ["before"],
-                          properties: {
-                            before: {
-                              description:
-                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The start cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "StartCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
                         },
-                      ],
-                      title: "SearchQueryPageRequest",
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based forward pagination",
+                      required: ["after"],
+                      properties: {
+                        after: {
+                          description:
+                            "The start cursor in a search query result set.",
+                          format: "base64",
+                          type: "string",
+                          "x-semantic-type": "StartCursor",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "StartCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based backward pagination",
+                      required: ["before"],
+                      properties: {
+                        before: {
+                          description:
+                            "The end cursor in a search query result set.",
+                          format: "base64",
+                          "x-semantic-type": "EndCursor",
+                          type: "string",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "EndCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
                     },
                   ],
-                  type: "object",
+                  title: "SearchQueryPageRequest",
                 },
               },
               title: "SearchQueryRequest",
@@ -196,7 +202,6 @@ Search for process instances based on given criteria.
               },
             },
             filter: {
-              description: "The process instance search filters.",
               allOf: [
                 {
                   description: "Process instance search filter.",
@@ -210,7 +215,6 @@ Search for process instances based on given criteria.
                           type: "object",
                           properties: {
                             startDate: {
-                              description: "The start date.",
                               allOf: [
                                 {
                                   description:
@@ -220,7 +224,6 @@ Search for process instances based on given criteria.
                                     {
                                       type: "string",
                                       format: "date-time",
-                                      title: "Exact match",
                                       description: "Matches the value exactly.",
                                     },
                                     {
@@ -284,9 +287,9 @@ Search for process instances based on given criteria.
                                   title: "DateTimeFilterProperty",
                                 },
                               ],
+                              description: "The start date.",
                             },
                             endDate: {
-                              description: "The end date.",
                               allOf: [
                                 {
                                   description:
@@ -296,7 +299,6 @@ Search for process instances based on given criteria.
                                     {
                                       type: "string",
                                       format: "date-time",
-                                      title: "Exact match",
                                       description: "Matches the value exactly.",
                                     },
                                     {
@@ -360,9 +362,9 @@ Search for process instances based on given criteria.
                                   title: "DateTimeFilterProperty",
                                 },
                               ],
+                              description: "The end date.",
                             },
                             state: {
-                              description: "The process instance state.",
                               allOf: [
                                 {
                                   description:
@@ -460,6 +462,7 @@ Search for process instances based on given criteria.
                                   title: "ProcessInstanceStateFilterProperty",
                                 },
                               ],
+                              description: "The process instance state.",
                             },
                             hasIncident: {
                               type: "boolean",
@@ -467,7 +470,6 @@ Search for process instances based on given criteria.
                                 "Whether this process instance has a related incident or not.",
                             },
                             tenantId: {
-                              description: "The tenant ID.",
                               allOf: [
                                 {
                                   description:
@@ -535,6 +537,7 @@ Search for process instances based on given criteria.
                                   title: "StringFilterProperty",
                                 },
                               ],
+                              description: "The tenant ID.",
                             },
                             variables: {
                               description: "The process instance variables.",
@@ -624,7 +627,6 @@ Search for process instances based on given criteria.
                               },
                             },
                             processInstanceKey: {
-                              description: "The key of this process instance.",
                               allOf: [
                                 {
                                   description:
@@ -640,6 +642,8 @@ Search for process instances based on given criteria.
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -647,6 +651,9 @@ Search for process instances based on given criteria.
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -668,6 +675,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -675,6 +684,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -690,6 +702,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -697,6 +711,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -717,6 +734,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -724,6 +743,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -738,6 +760,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -745,6 +769,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -757,9 +784,9 @@ Search for process instances based on given criteria.
                                   title: "ProcessInstanceKeyFilterProperty",
                                 },
                               ],
+                              description: "The key of this process instance.",
                             },
                             parentProcessInstanceKey: {
-                              description: "The parent process instance key.",
                               allOf: [
                                 {
                                   description:
@@ -775,6 +802,8 @@ Search for process instances based on given criteria.
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -782,6 +811,9 @@ Search for process instances based on given criteria.
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -803,6 +835,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -810,6 +844,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -825,6 +862,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -832,6 +871,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -852,6 +894,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -859,6 +903,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -873,6 +920,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -880,6 +929,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -892,9 +944,9 @@ Search for process instances based on given criteria.
                                   title: "ProcessInstanceKeyFilterProperty",
                                 },
                               ],
+                              description: "The parent process instance key.",
                             },
                             parentElementInstanceKey: {
-                              description: "The parent element instance key.",
                               allOf: [
                                 {
                                   description:
@@ -910,6 +962,8 @@ Search for process instances based on given criteria.
                                           description:
                                             "System-generated key for a element instance.",
                                           format: "ElementInstanceKey",
+                                          "x-semantic-type":
+                                            "ElementInstanceKey",
                                           example: "2251799813686789",
                                           type: "string",
                                           allOf: [
@@ -917,6 +971,9 @@ Search for process instances based on given criteria.
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -938,6 +995,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
+                                              "x-semantic-type":
+                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -945,6 +1004,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -960,6 +1022,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
+                                              "x-semantic-type":
+                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -967,6 +1031,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -987,6 +1054,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a element instance.",
                                             format: "ElementInstanceKey",
+                                            "x-semantic-type":
+                                              "ElementInstanceKey",
                                             example: "2251799813686789",
                                             type: "string",
                                             allOf: [
@@ -994,6 +1063,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -1008,6 +1080,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a element instance.",
                                             format: "ElementInstanceKey",
+                                            "x-semantic-type":
+                                              "ElementInstanceKey",
                                             example: "2251799813686789",
                                             type: "string",
                                             allOf: [
@@ -1015,6 +1089,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -1027,9 +1104,9 @@ Search for process instances based on given criteria.
                                   title: "ElementInstanceKeyFilterProperty",
                                 },
                               ],
+                              description: "The parent element instance key.",
                             },
                             batchOperationId: {
-                              description: "The batch operation ID.",
                               allOf: [
                                 {
                                   description:
@@ -1097,10 +1174,9 @@ Search for process instances based on given criteria.
                                   title: "StringFilterProperty",
                                 },
                               ],
+                              description: "The batch operation ID.",
                             },
                             errorMessage: {
-                              description:
-                                "The error message related to the process.",
                               allOf: [
                                 {
                                   description:
@@ -1168,6 +1244,8 @@ Search for process instances based on given criteria.
                                   title: "StringFilterProperty",
                                 },
                               ],
+                              description:
+                                "The error message related to the process.",
                             },
                             hasRetriesLeft: {
                               description:
@@ -1175,8 +1253,6 @@ Search for process instances based on given criteria.
                               type: "boolean",
                             },
                             elementInstanceState: {
-                              description:
-                                "The state of the element instances associated with the process instance.",
                               allOf: [
                                 {
                                   description:
@@ -1270,10 +1346,10 @@ Search for process instances based on given criteria.
                                   title: "ElementInstanceStateFilterProperty",
                                 },
                               ],
+                              description:
+                                "The state of the element instances associated with the process instance.",
                             },
                             elementId: {
-                              description:
-                                "The element ID associated with the process instance.",
                               allOf: [
                                 {
                                   description:
@@ -1341,6 +1417,8 @@ Search for process instances based on given criteria.
                                   title: "StringFilterProperty",
                                 },
                               ],
+                              description:
+                                "The element ID associated with the process instance.",
                             },
                             hasElementInstanceIncident: {
                               description:
@@ -1348,8 +1426,6 @@ Search for process instances based on given criteria.
                               type: "boolean",
                             },
                             incidentErrorHashCode: {
-                              description:
-                                "The incident error hash code, associated with this process.",
                               allOf: [
                                 {
                                   description:
@@ -1359,7 +1435,6 @@ Search for process instances based on given criteria.
                                     {
                                       type: "integer",
                                       format: "int32",
-                                      title: "Exact match",
                                       description: "Matches the value exactly.",
                                     },
                                     {
@@ -1424,6 +1499,8 @@ Search for process instances based on given criteria.
                                   title: "IntegerFilterProperty",
                                 },
                               ],
+                              description:
+                                "The incident error hash code, associated with this process.",
                             },
                             tags: {
                               description:
@@ -1436,7 +1513,11 @@ Search for process instances based on given criteria.
                                   "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                 example: "business_key:1234",
                                 format: "Tag",
+                                "x-semantic-type": "Tag",
                                 type: "string",
+                                minLength: 1,
+                                maxLength: 100,
+                                pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                 title: "Tag",
                               },
                               uniqueItems: true,
@@ -1449,7 +1530,6 @@ Search for process instances based on given criteria.
                       ],
                       properties: {
                         processDefinitionId: {
-                          description: "The process definition ID.",
                           allOf: [
                             {
                               description:
@@ -1517,9 +1597,9 @@ Search for process instances based on given criteria.
                               title: "StringFilterProperty",
                             },
                           ],
+                          description: "The process definition ID.",
                         },
                         processDefinitionName: {
-                          description: "The process definition name.",
                           allOf: [
                             {
                               description:
@@ -1587,9 +1667,9 @@ Search for process instances based on given criteria.
                               title: "StringFilterProperty",
                             },
                           ],
+                          description: "The process definition name.",
                         },
                         processDefinitionVersion: {
-                          description: "The process definition version.",
                           allOf: [
                             {
                               description:
@@ -1599,7 +1679,6 @@ Search for process instances based on given criteria.
                                 {
                                   type: "integer",
                                   format: "int32",
-                                  title: "Exact match",
                                   description: "Matches the value exactly.",
                                 },
                                 {
@@ -1664,9 +1743,9 @@ Search for process instances based on given criteria.
                               title: "IntegerFilterProperty",
                             },
                           ],
+                          description: "The process definition version.",
                         },
                         processDefinitionVersionTag: {
-                          description: "The process definition version tag.",
                           allOf: [
                             {
                               description:
@@ -1734,9 +1813,9 @@ Search for process instances based on given criteria.
                               title: "StringFilterProperty",
                             },
                           ],
+                          description: "The process definition version tag.",
                         },
                         processDefinitionKey: {
-                          description: "The process definition key.",
                           allOf: [
                             {
                               description:
@@ -1752,6 +1831,7 @@ Search for process instances based on given criteria.
                                       description:
                                         "System-generated key for a deployed process definition.",
                                       format: "ProcessDefinitionKey",
+                                      "x-semantic-type": "ProcessDefinitionKey",
                                       example: "2251799813686749",
                                       type: "string",
                                       allOf: [
@@ -1759,6 +1839,9 @@ Search for process instances based on given criteria.
                                           description:
                                             "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
+                                          pattern: "^-?[0-9]+$",
+                                          minLength: 1,
+                                          maxLength: 25,
                                           title: "LongKey",
                                         },
                                       ],
@@ -1780,6 +1863,8 @@ Search for process instances based on given criteria.
                                           description:
                                             "System-generated key for a deployed process definition.",
                                           format: "ProcessDefinitionKey",
+                                          "x-semantic-type":
+                                            "ProcessDefinitionKey",
                                           example: "2251799813686749",
                                           type: "string",
                                           allOf: [
@@ -1787,6 +1872,9 @@ Search for process instances based on given criteria.
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -1802,6 +1890,8 @@ Search for process instances based on given criteria.
                                           description:
                                             "System-generated key for a deployed process definition.",
                                           format: "ProcessDefinitionKey",
+                                          "x-semantic-type":
+                                            "ProcessDefinitionKey",
                                           example: "2251799813686749",
                                           type: "string",
                                           allOf: [
@@ -1809,6 +1899,9 @@ Search for process instances based on given criteria.
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -1829,6 +1922,8 @@ Search for process instances based on given criteria.
                                         description:
                                           "System-generated key for a deployed process definition.",
                                         format: "ProcessDefinitionKey",
+                                        "x-semantic-type":
+                                          "ProcessDefinitionKey",
                                         example: "2251799813686749",
                                         type: "string",
                                         allOf: [
@@ -1836,6 +1931,9 @@ Search for process instances based on given criteria.
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -1850,6 +1948,8 @@ Search for process instances based on given criteria.
                                         description:
                                           "System-generated key for a deployed process definition.",
                                         format: "ProcessDefinitionKey",
+                                        "x-semantic-type":
+                                          "ProcessDefinitionKey",
                                         example: "2251799813686749",
                                         type: "string",
                                         allOf: [
@@ -1857,6 +1957,9 @@ Search for process instances based on given criteria.
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -1869,6 +1972,7 @@ Search for process instances based on given criteria.
                               title: "ProcessDefinitionKeyFilterProperty",
                             },
                           ],
+                          description: "The process definition key.",
                         },
                       },
                       title: "ProcessInstanceFilterFields",
@@ -1890,7 +1994,6 @@ Search for process instances based on given criteria.
                                 type: "object",
                                 properties: {
                                   startDate: {
-                                    description: "The start date.",
                                     allOf: [
                                       {
                                         description:
@@ -1900,7 +2003,6 @@ Search for process instances based on given criteria.
                                           {
                                             type: "string",
                                             format: "date-time",
-                                            title: "Exact match",
                                             description:
                                               "Matches the value exactly.",
                                           },
@@ -1966,9 +2068,9 @@ Search for process instances based on given criteria.
                                         title: "DateTimeFilterProperty",
                                       },
                                     ],
+                                    description: "The start date.",
                                   },
                                   endDate: {
-                                    description: "The end date.",
                                     allOf: [
                                       {
                                         description:
@@ -1978,7 +2080,6 @@ Search for process instances based on given criteria.
                                           {
                                             type: "string",
                                             format: "date-time",
-                                            title: "Exact match",
                                             description:
                                               "Matches the value exactly.",
                                           },
@@ -2044,9 +2145,9 @@ Search for process instances based on given criteria.
                                         title: "DateTimeFilterProperty",
                                       },
                                     ],
+                                    description: "The end date.",
                                   },
                                   state: {
-                                    description: "The process instance state.",
                                     allOf: [
                                       {
                                         description:
@@ -2150,6 +2251,7 @@ Search for process instances based on given criteria.
                                           "ProcessInstanceStateFilterProperty",
                                       },
                                     ],
+                                    description: "The process instance state.",
                                   },
                                   hasIncident: {
                                     type: "boolean",
@@ -2157,7 +2259,6 @@ Search for process instances based on given criteria.
                                       "Whether this process instance has a related incident or not.",
                                   },
                                   tenantId: {
-                                    description: "The tenant ID.",
                                     allOf: [
                                       {
                                         description:
@@ -2227,6 +2328,7 @@ Search for process instances based on given criteria.
                                         title: "StringFilterProperty",
                                       },
                                     ],
+                                    description: "The tenant ID.",
                                   },
                                   variables: {
                                     description:
@@ -2322,148 +2424,171 @@ Search for process instances based on given criteria.
                                     },
                                   },
                                   processInstanceKey: {
+                                    allOf: [
+                                      {
+                                        description:
+                                          "ProcessInstanceKey property with full advanced search capabilities.",
+                                        type: "object",
+                                        oneOf: [
+                                          {
+                                            type: "string",
+                                            title: "Exact match",
+                                            description:
+                                              "Matches the value exactly.",
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "System-generated key for a process instance.",
+                                                format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
+                                                example: "2251799813690746",
+                                                type: "string",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                                    type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
+                                                    title: "LongKey",
+                                                  },
+                                                ],
+                                                title: "ProcessInstanceKey",
+                                              },
+                                            ],
+                                          },
+                                          {
+                                            title: "Advanced filter",
+                                            description:
+                                              "Advanced ProcessInstanceKey filter.",
+                                            type: "object",
+                                            properties: {
+                                              $eq: {
+                                                description:
+                                                  "Checks for equality with the provided value.",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "System-generated key for a process instance.",
+                                                    format:
+                                                      "ProcessInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ProcessInstanceKey",
+                                                    example: "2251799813690746",
+                                                    type: "string",
+                                                    allOf: [
+                                                      {
+                                                        description:
+                                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                                        type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
+                                                        title: "LongKey",
+                                                      },
+                                                    ],
+                                                    title: "ProcessInstanceKey",
+                                                  },
+                                                ],
+                                              },
+                                              $neq: {
+                                                description:
+                                                  "Checks for inequality with the provided value.",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "System-generated key for a process instance.",
+                                                    format:
+                                                      "ProcessInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ProcessInstanceKey",
+                                                    example: "2251799813690746",
+                                                    type: "string",
+                                                    allOf: [
+                                                      {
+                                                        description:
+                                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                                        type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
+                                                        title: "LongKey",
+                                                      },
+                                                    ],
+                                                    title: "ProcessInstanceKey",
+                                                  },
+                                                ],
+                                              },
+                                              $exists: {
+                                                description:
+                                                  "Checks if the current property exists.",
+                                                type: "boolean",
+                                              },
+                                              $in: {
+                                                description:
+                                                  "Checks if the property matches any of the provided values.",
+                                                type: "array",
+                                                items: {
+                                                  description:
+                                                    "System-generated key for a process instance.",
+                                                  format: "ProcessInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ProcessInstanceKey",
+                                                  example: "2251799813690746",
+                                                  type: "string",
+                                                  allOf: [
+                                                    {
+                                                      description:
+                                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                                      type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
+                                                      title: "LongKey",
+                                                    },
+                                                  ],
+                                                  title: "ProcessInstanceKey",
+                                                },
+                                              },
+                                              $notIn: {
+                                                description:
+                                                  "Checks if the property matches none of the provided values.",
+                                                type: "array",
+                                                items: {
+                                                  description:
+                                                    "System-generated key for a process instance.",
+                                                  format: "ProcessInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ProcessInstanceKey",
+                                                  example: "2251799813690746",
+                                                  type: "string",
+                                                  allOf: [
+                                                    {
+                                                      description:
+                                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                                      type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
+                                                      title: "LongKey",
+                                                    },
+                                                  ],
+                                                  title: "ProcessInstanceKey",
+                                                },
+                                              },
+                                            },
+                                          },
+                                        ],
+                                        title:
+                                          "ProcessInstanceKeyFilterProperty",
+                                      },
+                                    ],
                                     description:
                                       "The key of this process instance.",
-                                    allOf: [
-                                      {
-                                        description:
-                                          "ProcessInstanceKey property with full advanced search capabilities.",
-                                        type: "object",
-                                        oneOf: [
-                                          {
-                                            type: "string",
-                                            title: "Exact match",
-                                            description:
-                                              "Matches the value exactly.",
-                                            allOf: [
-                                              {
-                                                description:
-                                                  "System-generated key for a process instance.",
-                                                format: "ProcessInstanceKey",
-                                                example: "2251799813690746",
-                                                type: "string",
-                                                allOf: [
-                                                  {
-                                                    description:
-                                                      "Zeebe Engine resource key (Java long serialized as string)",
-                                                    type: "string",
-                                                    title: "LongKey",
-                                                  },
-                                                ],
-                                                title: "ProcessInstanceKey",
-                                              },
-                                            ],
-                                          },
-                                          {
-                                            title: "Advanced filter",
-                                            description:
-                                              "Advanced ProcessInstanceKey filter.",
-                                            type: "object",
-                                            properties: {
-                                              $eq: {
-                                                description:
-                                                  "Checks for equality with the provided value.",
-                                                allOf: [
-                                                  {
-                                                    description:
-                                                      "System-generated key for a process instance.",
-                                                    format:
-                                                      "ProcessInstanceKey",
-                                                    example: "2251799813690746",
-                                                    type: "string",
-                                                    allOf: [
-                                                      {
-                                                        description:
-                                                          "Zeebe Engine resource key (Java long serialized as string)",
-                                                        type: "string",
-                                                        title: "LongKey",
-                                                      },
-                                                    ],
-                                                    title: "ProcessInstanceKey",
-                                                  },
-                                                ],
-                                              },
-                                              $neq: {
-                                                description:
-                                                  "Checks for inequality with the provided value.",
-                                                allOf: [
-                                                  {
-                                                    description:
-                                                      "System-generated key for a process instance.",
-                                                    format:
-                                                      "ProcessInstanceKey",
-                                                    example: "2251799813690746",
-                                                    type: "string",
-                                                    allOf: [
-                                                      {
-                                                        description:
-                                                          "Zeebe Engine resource key (Java long serialized as string)",
-                                                        type: "string",
-                                                        title: "LongKey",
-                                                      },
-                                                    ],
-                                                    title: "ProcessInstanceKey",
-                                                  },
-                                                ],
-                                              },
-                                              $exists: {
-                                                description:
-                                                  "Checks if the current property exists.",
-                                                type: "boolean",
-                                              },
-                                              $in: {
-                                                description:
-                                                  "Checks if the property matches any of the provided values.",
-                                                type: "array",
-                                                items: {
-                                                  description:
-                                                    "System-generated key for a process instance.",
-                                                  format: "ProcessInstanceKey",
-                                                  example: "2251799813690746",
-                                                  type: "string",
-                                                  allOf: [
-                                                    {
-                                                      description:
-                                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                                      type: "string",
-                                                      title: "LongKey",
-                                                    },
-                                                  ],
-                                                  title: "ProcessInstanceKey",
-                                                },
-                                              },
-                                              $notIn: {
-                                                description:
-                                                  "Checks if the property matches none of the provided values.",
-                                                type: "array",
-                                                items: {
-                                                  description:
-                                                    "System-generated key for a process instance.",
-                                                  format: "ProcessInstanceKey",
-                                                  example: "2251799813690746",
-                                                  type: "string",
-                                                  allOf: [
-                                                    {
-                                                      description:
-                                                        "Zeebe Engine resource key (Java long serialized as string)",
-                                                      type: "string",
-                                                      title: "LongKey",
-                                                    },
-                                                  ],
-                                                  title: "ProcessInstanceKey",
-                                                },
-                                              },
-                                            },
-                                          },
-                                        ],
-                                        title:
-                                          "ProcessInstanceKeyFilterProperty",
-                                      },
-                                    ],
                                   },
                                   parentProcessInstanceKey: {
-                                    description:
-                                      "The parent process instance key.",
                                     allOf: [
                                       {
                                         description:
@@ -2480,6 +2605,8 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "System-generated key for a process instance.",
                                                 format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
                                                 example: "2251799813690746",
                                                 type: "string",
                                                 allOf: [
@@ -2487,6 +2614,9 @@ Search for process instances based on given criteria.
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2509,6 +2639,8 @@ Search for process instances based on given criteria.
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2516,6 +2648,9 @@ Search for process instances based on given criteria.
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2532,6 +2667,8 @@ Search for process instances based on given criteria.
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2539,6 +2676,9 @@ Search for process instances based on given criteria.
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2559,6 +2699,8 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2566,6 +2708,9 @@ Search for process instances based on given criteria.
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2580,6 +2725,8 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2587,6 +2734,9 @@ Search for process instances based on given criteria.
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2600,10 +2750,10 @@ Search for process instances based on given criteria.
                                           "ProcessInstanceKeyFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The parent process instance key.",
                                   },
                                   parentElementInstanceKey: {
-                                    description:
-                                      "The parent element instance key.",
                                     allOf: [
                                       {
                                         description:
@@ -2620,6 +2770,8 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "System-generated key for a element instance.",
                                                 format: "ElementInstanceKey",
+                                                "x-semantic-type":
+                                                  "ElementInstanceKey",
                                                 example: "2251799813686789",
                                                 type: "string",
                                                 allOf: [
@@ -2627,6 +2779,9 @@ Search for process instances based on given criteria.
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2649,6 +2804,8 @@ Search for process instances based on given criteria.
                                                       "System-generated key for a element instance.",
                                                     format:
                                                       "ElementInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ElementInstanceKey",
                                                     example: "2251799813686789",
                                                     type: "string",
                                                     allOf: [
@@ -2656,6 +2813,9 @@ Search for process instances based on given criteria.
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2672,6 +2832,8 @@ Search for process instances based on given criteria.
                                                       "System-generated key for a element instance.",
                                                     format:
                                                       "ElementInstanceKey",
+                                                    "x-semantic-type":
+                                                      "ElementInstanceKey",
                                                     example: "2251799813686789",
                                                     type: "string",
                                                     allOf: [
@@ -2679,6 +2841,9 @@ Search for process instances based on given criteria.
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
+                                                        pattern: "^-?[0-9]+$",
+                                                        minLength: 1,
+                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2699,6 +2864,8 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "System-generated key for a element instance.",
                                                   format: "ElementInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ElementInstanceKey",
                                                   example: "2251799813686789",
                                                   type: "string",
                                                   allOf: [
@@ -2706,6 +2873,9 @@ Search for process instances based on given criteria.
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2720,6 +2890,8 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "System-generated key for a element instance.",
                                                   format: "ElementInstanceKey",
+                                                  "x-semantic-type":
+                                                    "ElementInstanceKey",
                                                   example: "2251799813686789",
                                                   type: "string",
                                                   allOf: [
@@ -2727,6 +2899,9 @@ Search for process instances based on given criteria.
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
+                                                      pattern: "^-?[0-9]+$",
+                                                      minLength: 1,
+                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2740,9 +2915,10 @@ Search for process instances based on given criteria.
                                           "ElementInstanceKeyFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The parent element instance key.",
                                   },
                                   batchOperationId: {
-                                    description: "The batch operation ID.",
                                     allOf: [
                                       {
                                         description:
@@ -2812,10 +2988,9 @@ Search for process instances based on given criteria.
                                         title: "StringFilterProperty",
                                       },
                                     ],
+                                    description: "The batch operation ID.",
                                   },
                                   errorMessage: {
-                                    description:
-                                      "The error message related to the process.",
                                     allOf: [
                                       {
                                         description:
@@ -2885,6 +3060,8 @@ Search for process instances based on given criteria.
                                         title: "StringFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The error message related to the process.",
                                   },
                                   hasRetriesLeft: {
                                     description:
@@ -2892,8 +3069,6 @@ Search for process instances based on given criteria.
                                     type: "boolean",
                                   },
                                   elementInstanceState: {
-                                    description:
-                                      "The state of the element instances associated with the process instance.",
                                     allOf: [
                                       {
                                         description:
@@ -2995,10 +3170,10 @@ Search for process instances based on given criteria.
                                           "ElementInstanceStateFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The state of the element instances associated with the process instance.",
                                   },
                                   elementId: {
-                                    description:
-                                      "The element ID associated with the process instance.",
                                     allOf: [
                                       {
                                         description:
@@ -3068,6 +3243,8 @@ Search for process instances based on given criteria.
                                         title: "StringFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The element ID associated with the process instance.",
                                   },
                                   hasElementInstanceIncident: {
                                     description:
@@ -3075,8 +3252,6 @@ Search for process instances based on given criteria.
                                     type: "boolean",
                                   },
                                   incidentErrorHashCode: {
-                                    description:
-                                      "The incident error hash code, associated with this process.",
                                     allOf: [
                                       {
                                         description:
@@ -3086,7 +3261,6 @@ Search for process instances based on given criteria.
                                           {
                                             type: "integer",
                                             format: "int32",
-                                            title: "Exact match",
                                             description:
                                               "Matches the value exactly.",
                                           },
@@ -3152,6 +3326,8 @@ Search for process instances based on given criteria.
                                         title: "IntegerFilterProperty",
                                       },
                                     ],
+                                    description:
+                                      "The incident error hash code, associated with this process.",
                                   },
                                   tags: {
                                     description:
@@ -3164,7 +3340,12 @@ Search for process instances based on given criteria.
                                         "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                       example: "business_key:1234",
                                       format: "Tag",
+                                      "x-semantic-type": "Tag",
                                       type: "string",
+                                      minLength: 1,
+                                      maxLength: 100,
+                                      pattern:
+                                        "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                       title: "Tag",
                                     },
                                     uniqueItems: true,
@@ -3177,7 +3358,6 @@ Search for process instances based on given criteria.
                             ],
                             properties: {
                               processDefinitionId: {
-                                description: "The process definition ID.",
                                 allOf: [
                                   {
                                     description:
@@ -3246,9 +3426,9 @@ Search for process instances based on given criteria.
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description: "The process definition ID.",
                               },
                               processDefinitionName: {
-                                description: "The process definition name.",
                                 allOf: [
                                   {
                                     description:
@@ -3317,9 +3497,9 @@ Search for process instances based on given criteria.
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description: "The process definition name.",
                               },
                               processDefinitionVersion: {
-                                description: "The process definition version.",
                                 allOf: [
                                   {
                                     description:
@@ -3329,7 +3509,6 @@ Search for process instances based on given criteria.
                                       {
                                         type: "integer",
                                         format: "int32",
-                                        title: "Exact match",
                                         description:
                                           "Matches the value exactly.",
                                       },
@@ -3395,10 +3574,9 @@ Search for process instances based on given criteria.
                                     title: "IntegerFilterProperty",
                                   },
                                 ],
+                                description: "The process definition version.",
                               },
                               processDefinitionVersionTag: {
-                                description:
-                                  "The process definition version tag.",
                                 allOf: [
                                   {
                                     description:
@@ -3467,9 +3645,10 @@ Search for process instances based on given criteria.
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description:
+                                  "The process definition version tag.",
                               },
                               processDefinitionKey: {
-                                description: "The process definition key.",
                                 allOf: [
                                   {
                                     description:
@@ -3486,6 +3665,8 @@ Search for process instances based on given criteria.
                                             description:
                                               "System-generated key for a deployed process definition.",
                                             format: "ProcessDefinitionKey",
+                                            "x-semantic-type":
+                                              "ProcessDefinitionKey",
                                             example: "2251799813686749",
                                             type: "string",
                                             allOf: [
@@ -3493,6 +3674,9 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -3514,6 +3698,8 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "System-generated key for a deployed process definition.",
                                                 format: "ProcessDefinitionKey",
+                                                "x-semantic-type":
+                                                  "ProcessDefinitionKey",
                                                 example: "2251799813686749",
                                                 type: "string",
                                                 allOf: [
@@ -3521,6 +3707,9 @@ Search for process instances based on given criteria.
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -3536,6 +3725,8 @@ Search for process instances based on given criteria.
                                                 description:
                                                   "System-generated key for a deployed process definition.",
                                                 format: "ProcessDefinitionKey",
+                                                "x-semantic-type":
+                                                  "ProcessDefinitionKey",
                                                 example: "2251799813686749",
                                                 type: "string",
                                                 allOf: [
@@ -3543,6 +3734,9 @@ Search for process instances based on given criteria.
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -3563,6 +3757,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a deployed process definition.",
                                               format: "ProcessDefinitionKey",
+                                              "x-semantic-type":
+                                                "ProcessDefinitionKey",
                                               example: "2251799813686749",
                                               type: "string",
                                               allOf: [
@@ -3570,6 +3766,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -3584,6 +3783,8 @@ Search for process instances based on given criteria.
                                               description:
                                                 "System-generated key for a deployed process definition.",
                                               format: "ProcessDefinitionKey",
+                                              "x-semantic-type":
+                                                "ProcessDefinitionKey",
                                               example: "2251799813686749",
                                               type: "string",
                                               allOf: [
@@ -3591,6 +3792,9 @@ Search for process instances based on given criteria.
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -3603,6 +3807,7 @@ Search for process instances based on given criteria.
                                     title: "ProcessDefinitionKeyFilterProperty",
                                   },
                                 ],
+                                description: "The process definition key.",
                               },
                             },
                             title: "ProcessInstanceFilterFields",
@@ -3614,6 +3819,7 @@ Search for process instances based on given criteria.
                   title: "ProcessInstanceFilter",
                 },
               ],
+              description: "The process instance search filters.",
             },
           },
           title: "ProcessInstanceSearchQuery",
@@ -3642,58 +3848,49 @@ Search for process instances based on given criteria.
                   page: {
                     description:
                       "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        required: ["totalItems"],
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                            example: 1,
-                          },
-                          hasMoreTotalItems: {
-                            description:
-                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
-                            type: "boolean",
-                            example: false,
-                          },
-                          startCursor: {
-                            description:
-                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The start cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "StartCursor",
-                              },
-                            ],
-                          },
-                          endCursor: {
-                            description:
-                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The end cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "EndCursor",
-                              },
-                            ],
-                          },
-                        },
-                        example: { totalItems: 1, hasMoreTotalItems: false },
-                        title: "SearchQueryPageResponse",
+                    type: "object",
+                    required: ["totalItems"],
+                    "x-semantic-provider": ["startCursor", "endCursor"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
                       },
-                    ],
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether there are more items matching the criteria beyond the returned items.\nThis is useful for determining if additional requests are needed to retrieve all results.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The start cursor in a search query result set.",
+                        format: "base64",
+                        type: "string",
+                        "x-semantic-type": "StartCursor",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "StartCursor",
+                      },
+                      endCursor: {
+                        description:
+                          "The end cursor in a search query result set.",
+                        format: "base64",
+                        "x-semantic-type": "EndCursor",
+                        type: "string",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "EndCursor",
+                      },
+                    },
+                    example: { totalItems: 1, hasMoreTotalItems: false },
+                    title: "SearchQueryPageResponse",
                   },
                 },
                 title: "SearchQueryResponse",
@@ -3724,6 +3921,9 @@ Search for process instances based on given criteria.
                         "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
                       format: "ProcessDefinitionId",
                       type: "string",
+                      "x-semantic-type": "ProcessDefinitionId",
+                      minLength: 1,
+                      pattern: "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
                       example: "new-account-onboarding-workflow",
                       title: "ProcessDefinitionId",
                     },
@@ -3733,23 +3933,14 @@ Search for process instances based on given criteria.
                     },
                     processDefinitionVersion: {
                       type: "integer",
-                      description: "The process definition version.",
                       format: "int32",
                     },
                     processDefinitionVersionTag: {
                       type: "string",
                       description: "The process definition version tag.",
                     },
-                    startDate: {
-                      type: "string",
-                      description: "The start date.",
-                      format: "date-time",
-                    },
-                    endDate: {
-                      type: "string",
-                      description: "The end date.",
-                      format: "date-time",
-                    },
+                    startDate: { type: "string", format: "date-time" },
+                    endDate: { type: "string", format: "date-time" },
                     state: {
                       description: "Process instance states",
                       type: "string",
@@ -3766,6 +3957,10 @@ Search for process instances based on given criteria.
                       description: "The unique identifier of the tenant.",
                       format: "TenantId",
                       type: "string",
+                      "x-semantic-type": "TenantId",
+                      minLength: 1,
+                      maxLength: 256,
+                      pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                       title: "TenantId",
                     },
                     processInstanceKey: {
@@ -3774,6 +3969,7 @@ Search for process instances based on given criteria.
                           description:
                             "System-generated key for a process instance.",
                           format: "ProcessInstanceKey",
+                          "x-semantic-type": "ProcessInstanceKey",
                           example: "2251799813690746",
                           type: "string",
                           allOf: [
@@ -3781,6 +3977,9 @@ Search for process instances based on given criteria.
                               description:
                                 "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
+                              pattern: "^-?[0-9]+$",
+                              minLength: 1,
+                              maxLength: 25,
                               title: "LongKey",
                             },
                           ],
@@ -3795,6 +3994,7 @@ Search for process instances based on given criteria.
                           description:
                             "System-generated key for a deployed process definition.",
                           format: "ProcessDefinitionKey",
+                          "x-semantic-type": "ProcessDefinitionKey",
                           example: "2251799813686749",
                           type: "string",
                           allOf: [
@@ -3802,6 +4002,9 @@ Search for process instances based on given criteria.
                               description:
                                 "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
+                              pattern: "^-?[0-9]+$",
+                              minLength: 1,
+                              maxLength: 25,
                               title: "LongKey",
                             },
                           ],
@@ -3816,6 +4019,7 @@ Search for process instances based on given criteria.
                           description:
                             "System-generated key for a process instance.",
                           format: "ProcessInstanceKey",
+                          "x-semantic-type": "ProcessInstanceKey",
                           example: "2251799813690746",
                           type: "string",
                           allOf: [
@@ -3823,6 +4027,9 @@ Search for process instances based on given criteria.
                               description:
                                 "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
+                              pattern: "^-?[0-9]+$",
+                              minLength: 1,
+                              maxLength: 25,
                               title: "LongKey",
                             },
                           ],
@@ -3837,6 +4044,7 @@ Search for process instances based on given criteria.
                           description:
                             "System-generated key for a element instance.",
                           format: "ElementInstanceKey",
+                          "x-semantic-type": "ElementInstanceKey",
                           example: "2251799813686789",
                           type: "string",
                           allOf: [
@@ -3844,6 +4052,9 @@ Search for process instances based on given criteria.
                               description:
                                 "Zeebe Engine resource key (Java long serialized as string)",
                               type: "string",
+                              pattern: "^-?[0-9]+$",
+                              minLength: 1,
+                              maxLength: 25,
                               title: "LongKey",
                             },
                           ],
@@ -3863,7 +4074,11 @@ Search for process instances based on given criteria.
                           "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                         example: "business_key:1234",
                         format: "Tag",
+                        "x-semantic-type": "Tag",
                         type: "string",
+                        minLength: 1,
+                        maxLength: 100,
+                        pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                         title: "Tag",
                       },
                       uniqueItems: true,
@@ -3917,6 +4132,7 @@ Search for process instances based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -3965,6 +4181,7 @@ Search for process instances based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -4012,6 +4229,7 @@ Search for process instances based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -4023,7 +4241,7 @@ Search for process instances based on given criteria.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -4059,6 +4277,7 @@ Search for process instances based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

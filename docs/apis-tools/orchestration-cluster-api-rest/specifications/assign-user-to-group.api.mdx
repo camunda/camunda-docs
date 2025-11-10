@@ -1,18 +1,16 @@
 ---
 id: assign-user-to-group
 title: "Assign a user to a group"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Assigns a user to a group, making the user a member of the group."
 sidebar_label: "Assign a user to a group"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "put api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/groups/{groupId}/users/{username}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Assigns a user to a group, making the user a member of the group.
 Group members inherit the group authorizations, roles, and tenant assignments.
@@ -65,7 +60,11 @@ Group members inherit the group authorizations, roles, and tenant assignments.
         example: "swillis",
         format: "Username",
         description: "The unique name of a user.",
+        "x-semantic-type": "Username",
         type: "string",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "Username",
       },
     },
@@ -116,6 +115,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -163,6 +163,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -211,6 +212,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -259,6 +261,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -270,7 +273,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -306,6 +309,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -354,6 +358,7 @@ Group members inherit the group authorizations, roles, and tenant assignments.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

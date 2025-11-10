@@ -1,18 +1,16 @@
 ---
 id: get-tenant
 title: "Get tenant"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Retrieves a single tenant by tenant ID."
 sidebar_label: "Get tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWd9v2kgQ/ldG+9TqCCZtetfzG6W0R9VLo4Q0OlEexusBb2vvOrtrCEL+30/jH4EE0qTSPVwkHhC2dz3zzc73zcLsWnicOxFOxJg0ai+mHWFysuiV0aNYhGJOvhnqiJictCrnMRGKb/qbnkwGX04vRhfj4engn3D4dXg6vux/nk557Jy8VbQgBwhO6XlK4CtLEK3aq9H7ruiIHC1m5MkykrXQmJEIRT1lFIuOUOwvR5+IjrB0XShLsQi9LagjnEwoQxGuBd1glqf8qiycNxnZI0d2oSTtYB8nBIVW1wWBikl7NVNkwczAJy1KBjYzNkPP8zdY/CpnF85bped8r3zl83ZKWU4ZpcuNduQY2Ktej792ITSrsEQHtlmtGFwhJTk3K9J0xSCk0Z60ZwuY56mSVXKC747NrLfiv2e/tu0IrUygxQPKU9bdhGGi7yQ5t7nlvHtVI65TsN4J9sEQ+AU2u8nBoMkBXNQ5gJhytD7jUMrOJrv/o8Tdc/YL4W8NPHkVICqc0uQc5NZwxsmJsryP65xckXpRljx08hCRcmsWKqYYYvQIyoE2HhaYqvgnDMqtiVLKfnuMSX04q2dCTB5VCjVpAF0Td0QxKA2T8w8D+PPkzR/TF4n3uQuDYLlcdu1MHlGsvLFdY+eBnUn+8LyXXRgnZAkyXEFEgHGs2CemsKEjuJykmikJ3lRZbmADJ6f7TT/K5Xp0N5m3HCms2sltHy7PRy3FVkrPd11X78yQsxMKjEzhwyhF/eNO/refb3L7GLP64IosQ7tqmX3f8cbBO4zhnK4LcpWsnEdfbIUtlPY0J7sdr9L+9au9bP5rPD6D2gRIExPMjAWfKNcCuOP7pNfriExplRVZe4c39d3vvV4lJ+bLE+LVQDd5iroi5v2glYbMWGrYdzf8JvSWLyuYZHjzyURubPrSqwV6clOQqFkQEUGO1lEldaWdRy2flA3mAm8/O4QwVs3VfcB3EQaLV8F3E7kAazxsc1vmjbbe10vV6vx4v85tE26K8oerBQ5Y+IRR1aoGaakCialjIAlhXG2sa3F1dXXU30ymu5q/uwYVjEPdONSNQ914VnXj9a4MPxgbqTgmXanmtoQ0PxIwTc2SDj8TDnI/yP35yf3kwf99HMjMFPqg7IOyD8p+bsp+s++Pfl8DJ9OyPMhaY8FIWVhLMSwTlVLbR2ixNTt9LZFDCTiUgEMJeDYloOyIjHximhZ81ST3CZuqO44uWLcd1FJ0BLdL2/Z5YVMRinWt5DIMgnVinC/DdW6sL4MFp32BVmGU1uLg4VrxLZNTIzGtHu9jCA9wv7cN+YuVCTlfHxrAIC2cJwvnw4sxfERPS1x1ebHZ/V03b3tve3s98NQnWO+fjaCOvHKwXbtaF1yE9rqoJ/+qk6q370gWVvnVBZuol/AdoSXLzZUtKjW+K098H1WTRKe5+NBq8dPVmOFH6JR8zATPqaij9MxUExsK7Y+gfzbibJN1deS97nGzF6D0m0a/GGBW6BhhqOdKEzUSqJnU1vG58kkRdaXJAllPv/1WzhXcvd5RzdmoKh/SZFmhqz1Hz2GpfAIIrc+3IGu0rJlUSdKO9kD7XI/A1zoYOO72fgVilJooyFDpoHHhgkH/78vT9/2jz6PB8PRieHTc7XX9ja+WNzfOZ6i3cHwk33T77/Npvdlc/8NDsYYBnm58kKeoNC9vFe66qQWT5hDFiY4Ib89Tpp1G0BOxXkfo6NKmZcmPrwuyKxFOphv9VwUjVo6vYxHOMHX0k+henDeHby/hIYTNQ9SrqsykBd+JjvhBq+0zvXJatr3JCkM93JeScr/14s6BF+vvtjB+HI5FWf4LH+3z/w==
+api: eJztWW1v2zYQ/isHYh9a1LacrO1aYRjmpmnnouuCxF2AZdlwos4WW4pUSMqx5+m/DxSl+DVLsm/B/CGwJJ7u9XmOCm/BHE4siy/YiBQqxy47TBdk0AmthimL2YRcs9RhKVluROHXWMxOyRlBU7KAYIWaSAJXS0Iyb6+Gb3uswwo0mJMj4y0tmMKcWMyCyDBlHSa8vgJdxjrM0FUpDKUsdqakTaOjjKBU4qokECkpJ8aCDOgxuKw17y1anlGOLF4wmmFeSG+Pl9bpnEzXkpkKTlsB3VP3WJscnZdfBuDmhTdhnRFqwjps1rWUo3KCd5ulFeFcqI+kJi5j8UGH5Thr7w5fvPTJco6M9+ePJ9+nNMZSuh/+vhh0f8PuX/3u6z9/7D3rXj57+o03K5xcU15Vlz6DttDKkvXxH/b7/mc70qZC12jBNJVMwZack7XjUsq5j5Vr5Ug5rwGLQgpeAyP6Yr2axUqaN/QH3ZbQ8Axaf0A4ynvLbOnkC3GPq8J4zDkRPA7wWGzl9NYQ/Ate7bLUR02p4SyUGlIq0Ljch1J1lsj7/+FjI6YHZHll4d7JhqS0QpG1UBjtgUWWVdWmX6dkS+lYVfml57fhtTB6KlJKIUWHICwo7WCKUqT/AtTC6ERS/uwuwA7gJEhCSg6FhIBNQNvEnVAKQsHF6bsjeP38xXeXTzLnChtH0fX1dc+MeZdS4bTpaTOJzJj7Py/3tAejjAxBjnNICDBNhbeJEpaoB1sQF2PBwekaTI3b4IvT+13dSZmwul3MGyiWRmzVdgCfT4ctkudCTbZN1+/UCGMxw0SXLk4kqq9r9V99vqztXcgagC3zHM28JdCm4aWBN5jCKV2VZGv2WoeuXAmbCeVoQmY1XqHct4c70fzTaHQCQQVwnRKMtQGXCds6sGb7eb9f81HkZd7e4Szcvez3azp5vNwjXgU0KySqGpibQQsFuTbUoG89/Cb0Fi9zuMhx9kEndqQH3IkpOrKXwFF5QiQEBRpLNdWFsg4V/6/Q8BvyFj60EROx6f+6w9H0MPqiExthcM/rXGV9Q7W3IXMt7Q9209400UvkX23gO2DpMu9VIDlwQ7WTKK13JCNM60+NBTs/P+8OlsK03gLWU1K7sW8j+zaybyOPuY18u83Kd9okIk1J1SS66SjNJwRKqa9p/xGxZ/+e/Y+e/c9v/V/UxzXWpdoTfU/0PdEfOdFf7DokGCjwtTWeLWSMNqA5L42hFK4zIak9g2h9a74D9v1g3w/2/eAx94PKn6fSlJQrUcp5l2tlhQ2EDjMEmjlSVmgVBhBfac7iW9/psCnKksK7/jw9J5fpZhZSTzP8WSyLwrmojRbtcXLlBw9kpu2cozSSxWwRukYVR9Ei09ZV8aLQxlXR9LA2ZQQmMhDRL4fu0rJGao6yfrwLjX7BH363+fzF8IysC9MbOJKldWTg9PhsBO/R0TXOe76w3vy6mVf9V/2dFrzoPbQPToYQIq8NrPbJ1oRveDtNBOGHGqkHHZZ4aYSbn3kVIYVvCA0Zf+azAtvGdm3J3ye1EOs0F+9aMH84H3n3E7SC36XCy9S4FGqsa8EGn7sjGJwMfbXJ2BB5v3fQ7DvI3XLqwY4wL1WKcKwmQhE1dAtIaveMiXBZmfS4ziMexG9+hbWlP2PfouTJsG5VXOd5qer9TU3gWrgMEFqbr4AHbz0hpeCkLO1w7WNYgV9DMHDQ6z/ExUTqJMpRqKgxYaOjwc+fP70ddD8Oj44/nR13D3r9npu5Or2Fti5HteLHe3LNTGITT4vlRv6A6WRTYUczFxUShfLpq8NZNFy/aCZGlnVYfDM8uuw0hL1gi0WClj4bWVX+8VVJZs7ii8slv+uGkArrr1MWj1HazdnmqvdPTpsp6FO459RpZxTNQ1TzZVdjrNM0wJtIqsuqPTZd6Y8DzqlYaYfbE8C15vj+eMSq6h97bXl1
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Retrieves a single tenant by tenant ID.
 
 <Heading
@@ -52,11 +47,16 @@ Retrieves a single tenant by tenant ID.
       name: "tenantId",
       in: "path",
       required: true,
+      description: "The unique identifier of the tenant.",
       schema: {
         example: "customer-service",
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -87,6 +87,10 @@ Retrieves a single tenant by tenant ID.
                 description: "The unique identifier of the tenant.",
                 format: "TenantId",
                 type: "string",
+                "x-semantic-type": "TenantId",
+                minLength: 1,
+                maxLength: 256,
+                pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                 title: "TenantId",
               },
               description: {
@@ -137,6 +141,7 @@ Retrieves a single tenant by tenant ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -185,6 +190,7 @@ Retrieves a single tenant by tenant ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -232,6 +238,7 @@ Retrieves a single tenant by tenant ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -279,6 +286,7 @@ Retrieves a single tenant by tenant ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -290,7 +298,7 @@ Retrieves a single tenant by tenant ID.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -326,6 +334,7 @@ Retrieves a single tenant by tenant ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

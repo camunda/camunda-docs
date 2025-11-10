@@ -1,18 +1,16 @@
 ---
 id: get-role
 title: "Get role"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Get a role by its ID."
 sidebar_label: "Get role"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1v2zgQ/SsDnlqsYjltupvVzU3crotuGiROg4XrA0WNLbYUqZJUHMPQf1+MKNWO7bQp9rIFfDBsieR8vjeS34p5PncsmbAro5BNI2ZKtNxLo0cZS9gcfbMQsQydsLKkFZawT/qTnkzOPlxcj67Hw4uzf5Lhx+HF+GbwfjqltbfogYM1CiFdgvQORue9T5pFrOSWF+jRktcV07xAljDaOcpYxCRZL7nPWcQsfq2kxYwl3la4HcI4x+BgdN5jEXMix4KzZMX8siSTzlup56yup2TJlUY7dLT+ot+nr0esSQeuEgKdm1VKLcGir6zGjHwIoz1qT6d5WSopmkLFnx2ZWG2E8NA2VRAccity6CIB6bEgm220Jv2MwlN9LHXAyxBrKM92To+Wgrb3WB119Xz6SZk15x6sPuXwxh0wM/CtvR6r64h56RW2BbhCVynP6poWTvrHj7QAv1boPCguvji440pmwCufo/ZttUFYzOiSK0f1y5FnDZhW7Pb29miw3owPe7INi/rRfpbWpAqL337U1wFchp2QoedSQWgicNeWJcUMpIbJ1Zsz+PPk1R/TZ7n3pUvieLFY9OxMHGEmvbE9Y+exnQn60L7nPRjnaBEKvoQUgWeZJJ9cwRoe4EoUciYFeNPUvQ0bKNHAte9jK6zuNnlmbME9S1hl5U7PB3BzNQLZdGC2lHq+67o5M+PU7YTx1FQ+SRXXX1jE8J4XZQOJzftrpPwIcQNwVVFwu+ywtu147eA1z+AqoIkcOM99tZE2k9rjHO1mvlL7ly/2ovyv8fgSggkQJkOYGQs+l64L4IHvk34/YoXUsqiK7orfh6vf+/2GZoSXJ+SrAe9LxTXfJFiXtNRQGIst+h6m36be4WUJk4LfvzOpG5uB8PKOe3RTEFxr4wliJbcOM6qU1M5zLZ7UDcICDesdQBgr53I74IcRxncv4s8mdTEP8ZDNzaHRcus8lKqbGy93afjG2FRmGeqGNd9GiHRAuXGlzOK74/tA9wPdD3T/f9L95Dtvagvp88bfXN6hhtE5LHjg/MxU+sD4A+MPjP/VGP9q33+zgQZqpiV6oLXGghGishYzWORSNe7pD1sXW/sGEChyGAGHEXAYAb/MCKgjVqDPTSs+NYKRz8kUPfNdvArKRk2KD9q7TkaqrGIJWwUW10kcr3LjfJ2sSmN9Hd9Ry++4lTxVgRi0HNjeoVgZwVVzex86aIHUlS7dD1bk6HyQyuBMVc6jhavh9Rjeco8Lvmz0FHL/0M1p/7S/1wNtfYL1weUIQuaNg8251bmgAbTXRdj8s04aBc2hqKz0y2syEUr4GrlFS4LLBoxa340nuk6bTSxqf7zpePjudkzhp9xJ8SMTtKeBjdQz02xs4bM/g8HliLqN1oXM+73j9jnAhV+LauyMF5XOOAz1XGrEFv4BSd0Mn0ufV2lPmCIWYfu3b+lchW5HNGNUOxodwhRFpZvnjZ6Hl1UOnc9TECFa4ouSArXDPaG9DyvwMSQDx73+z4SYKpPGBZc6bl24+Gzw983F+eDo/ehseHE9PDru9Xv+3jflLY3zBdcbcZCMa/fov6v1Y/U/SMFtvz3e+7hUXGoqZpPcqmX9pBEyHYtY0iqa06il7oStVil3eGNVXdPtrxXaJUsm0zXTm9GQSUe/M5bMuHLbMvJmJs+uWsH5OWyJy3sjbW9yvWyGi6roikXsCy7XinY9rTuNsokmLA6EwNJvHNuRk4lz3wbh2+GY1fW/doQopQ==
+api: eJztWMty2zYU/ZU7WCVTWpQdp025U2wnVSZJPYpSL1wtQPBKRAICDADqMRr+e+cSZPR07HSXGS00Egngnvs8pM6aeT5zLLlnI6OQTSJmSrTcS6OHGUvYDH2zELEMnbCypBWWsLfogYM1CiFdgfQOhtc9FrGSW16gR0s210zzAlnCaN8wYxGTdLbkPmcRs/itkhYzlnhb4T7AOMdgPth1IseCs2TN/Kokk85bqWesridkyZVGO3S0ftHv09cD1qQDVwmBzk0rpVZg0VdWY0YYwmiP2tNpXpZKiiYN8RdHJtZbLuzapvyAQ25FDp0nID0WZLP11qRfUHjKj6X8ehl8DenZj+nBVND2HqujLp9PPymz5tzO6lMOb90BMwXf2uuxuo6Yl15hm4ARukp5Vte0cNk/f6AE+K1C50Fx8dXBnCuZAa98jtq32QZhMaNLrhzlL0eeNc20Znd3d2eDzWbcrcl+W9QP1rO0JlVY/PZYXQdwG3ZChp5LBaGIwF2blhQzkBruR2+u4M/Ll39MnuXely6J48Vi0bNTcYaZ9Mb2jJ3FdiroQ/ue92Cco0Uo+ApSBJ5lkjC5gk17gCtRyKkU4E2T99ZtoEB7/+pHeyusHhZ5amzBPUtYZeVBzQfweTQE2VRgupJ6dgjdnJlyqnbCeGoqn6SK668sYrjkRdm0xPb9Tac81nEDcFVRcLvqem0feAPwmmcwCt1EAM5zX22FzaT2OEO7Ha/U/sXF0S7/azy+hWAChMkQpsaCz6XrHNjBvuz3I1ZILYuq6K74Mlz93u83Y0b98oR4NeCyVFzz7QHrgpYaCmOx7b7d8NvQu35ZwX3Bl+9M6sZmILycc49uAoJrbTy1WMmtw4wyJbXzXIv/2xrE3Qf9YaycyX3/dx2O5xfxF5O6mAf3yOY2h7Sjdh0y19HIi8OpfGNsKrMMdTNE3xlFOqBQuVJm8UM2P03/afpP0/9LTP/lD97jFtLnDd5MzlHD8BoWPFDA1FT6RAAnAjgRwC9OAC+P/ZEbaKDaWpoWtNZYMEJU1mIGi1yqBp7+3XW+te8HJz448cGJD35lPqgjtjzDOWpfcaVWZ8JoJ10Y6KAf4dKjdtLoID19xRVLHjwTsTlXFYazpCEV6HPTKl6NjuVz8pNeNly8DoJLTUIU2nmnblVWsYStA2PUSRyvc+N8naxLY30dzy8aGCt5qsIQ0nJglm5ilBFcNbePdSItkOjT5fJvK3J0PuhzcKUq59HC6ObTGN5yjwu+amQegt+FedV/1T+KQFufYH1wO4QQeQOwzZEdBJHdUYiw+WdBGmHPoais9KtPZCKk8DVyi5Z0oK2WbbEbJLpOm00san+86Rr53d2Y3E+5k+IxE7Sn6Umpp6bZ2Pbm8QgGt0OqNloXIu/3zttnDhd+o/WxK15UOuNwo2dSI7ajFjqpe17MpM+rtCdMEYuw/fu3dK5Cd6DlMcod0ZQwRVHp5tmmZ+EtmUOH+QpE8JaGUUmB2uER196HFfgnBAPnvf7PuJgqk8YFlzpuIVx8Nfjw+eP14Oz98Orm46ebs/Nev+eXvklvaZwvuN7yg7Rle0R0Xm8e4Q/qz201PS59XCouNaWqcX3dzvR9o546FrGklVEnUTuY92y9TrnDz1bVNd3+VqFdseR+spnjZvAz6eh3xpIpV25fu97289moVbmfw56ifdTT9ibXqw1DMRa1ZNb6W0/qThjdYrqBEFhuEduhhr1Dc29vxqyu/wPQTkbD
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/roles/{roleId}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Get a role by its ID.
 
@@ -122,6 +117,7 @@ Get a role by its ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -169,6 +165,7 @@ Get a role by its ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -216,6 +213,7 @@ Get a role by its ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -227,7 +225,7 @@ Get a role by its ID.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -263,6 +261,7 @@ Get a role by its ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

@@ -1,18 +1,16 @@
 ---
 id: search-roles-for-tenant
 title: "Search roles for tenant"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Retrieves a filtered and sorted list of roles for a specified tenant."
 sidebar_label: "Search roles for tenant"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Retrieves a filtered and sorted list of roles for a specified tenant.
 
 <Heading
@@ -52,11 +47,16 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
       name: "tenantId",
       in: "path",
       required: true,
+      description: "The unique identifier of the tenant.",
       schema: {
         example: "customer-service",
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -70,154 +70,111 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
     content: {
       "application/json": {
         schema: {
-          description: "Role search request.",
-          allOf: [
-            {
-              type: "object",
-              properties: {
-                page: {
-                  description: "Pagination criteria.",
-                  allOf: [
-                    {
-                      description:
-                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
-                      oneOf: [
-                        {
-                          type: "object",
-                          title: "Offset-based pagination",
-                          properties: {
-                            from: {
-                              description:
-                                "The index of items to start searching from.",
-                              type: "integer",
-                              format: "int32",
-                              default: 0,
-                              minimum: 0,
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                              minimum: 1,
-                            },
-                          },
-                        },
-                        {
-                          type: "object",
-                          title: "Cursor-based forward pagination",
-                          required: ["after"],
-                          properties: {
-                            after: {
-                              description:
-                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The end cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "EndCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
-                        },
-                        {
-                          type: "object",
-                          title: "Cursor-based backward pagination",
-                          required: ["before"],
-                          properties: {
-                            before: {
-                              description:
-                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The start cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "StartCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
-                        },
-                      ],
-                      title: "SearchQueryPageRequest",
-                    },
-                  ],
-                  type: "object",
-                },
-              },
-              title: "SearchQueryRequest",
-            },
-          ],
           type: "object",
           properties: {
-            sort: {
-              description: "Sort field criteria.",
-              type: "array",
-              items: {
-                type: "object",
-                properties: {
-                  field: {
-                    description: "The field to sort by.",
-                    type: "string",
-                    enum: ["name", "roleId"],
-                  },
-                  order: {
-                    description:
-                      "The order in which to sort the related field.",
-                    type: "string",
-                    enum: ["ASC", "DESC"],
-                    default: "ASC",
-                    title: "SortOrderEnum",
+            page: {
+              "x-polymorphic-schema": true,
+              description:
+                "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+              oneOf: [
+                {
+                  type: "object",
+                  title: "Limit-based pagination",
+                  properties: {
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
+                      maximum: 10000,
+                    },
                   },
                 },
-                required: ["field"],
-                title: "RoleSearchQuerySortRequest",
-              },
-            },
-            filter: {
-              description: "The role search filters.",
-              allOf: [
                 {
-                  description: "Role filter request",
                   type: "object",
+                  title: "Offset-based pagination",
                   properties: {
-                    roleId: {
-                      description: "The role ID search filters.",
-                      type: "string",
+                    from: {
+                      description:
+                        "The index of items to start searching from.",
+                      type: "integer",
+                      format: "int32",
                     },
-                    name: {
-                      description: "The role name search filters.",
-                      type: "string",
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
                     },
                   },
-                  title: "RoleFilter",
+                },
+                {
+                  type: "object",
+                  title: "Cursor-based forward pagination",
+                  required: ["after"],
+                  properties: {
+                    after: {
+                      description:
+                        "The start cursor in a search query result set.",
+                      format: "base64",
+                      type: "string",
+                      "x-semantic-type": "StartCursor",
+                      pattern:
+                        "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                      minLength: 2,
+                      maxLength: 300,
+                      example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                      title: "StartCursor",
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
+                      maximum: 10000,
+                    },
+                  },
+                },
+                {
+                  type: "object",
+                  title: "Cursor-based backward pagination",
+                  required: ["before"],
+                  properties: {
+                    before: {
+                      description:
+                        "The end cursor in a search query result set.",
+                      format: "base64",
+                      "x-semantic-type": "EndCursor",
+                      type: "string",
+                      pattern:
+                        "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                      minLength: 2,
+                      maxLength: 300,
+                      example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                      title: "EndCursor",
+                    },
+                    limit: {
+                      description:
+                        "The maximum number of items to return in one request.",
+                      type: "integer",
+                      format: "int32",
+                      default: 100,
+                      minimum: 1,
+                      maximum: 10000,
+                    },
+                  },
                 },
               ],
+              title: "SearchQueryPageRequest",
             },
           },
-          title: "RoleSearchQueryRequest",
+          title: "SearchQueryRequest",
         },
       },
     },
@@ -233,93 +190,56 @@ Retrieves a filtered and sorted list of roles for a specified tenant.
       content: {
         "application/json": {
           schema: {
-            description: "Role search response.",
             type: "object",
-            allOf: [
-              {
-                type: "object",
-                required: ["page"],
-                properties: {
-                  page: {
-                    description:
-                      "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        required: ["totalItems"],
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                            example: 1,
-                          },
-                          hasMoreTotalItems: {
-                            description:
-                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
-                            type: "boolean",
-                            example: false,
-                          },
-                          startCursor: {
-                            description:
-                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The start cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "StartCursor",
-                              },
-                            ],
-                          },
-                          endCursor: {
-                            description:
-                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The end cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "EndCursor",
-                              },
-                            ],
-                          },
-                        },
-                        example: { totalItems: 1, hasMoreTotalItems: false },
-                        title: "SearchQueryPageResponse",
-                      },
-                    ],
-                  },
-                },
-                title: "SearchQueryResponse",
-              },
-            ],
+            required: ["page"],
             properties: {
-              items: {
-                description: "The matching roles.",
-                type: "array",
-                items: {
-                  description: "Role search response item.",
-                  type: "object",
-                  properties: {
-                    name: { type: "string", description: "The role name." },
-                    roleId: { type: "string", description: "The role id." },
-                    description: {
-                      type: "string",
-                      description: "The description of the role.",
-                    },
+              page: {
+                description: "Pagination information about the search results.",
+                type: "object",
+                required: ["totalItems"],
+                "x-semantic-provider": ["startCursor", "endCursor"],
+                properties: {
+                  totalItems: {
+                    description: "Total items matching the criteria.",
+                    type: "integer",
+                    format: "int64",
                   },
-                  title: "RoleResult",
+                  hasMoreTotalItems: {
+                    description:
+                      "Indicates whether there are more items matching the criteria beyond the returned items.\nThis is useful for determining if additional requests are needed to retrieve all results.\n",
+                    type: "boolean",
+                  },
+                  startCursor: {
+                    description:
+                      "The start cursor in a search query result set.",
+                    format: "base64",
+                    type: "string",
+                    "x-semantic-type": "StartCursor",
+                    pattern:
+                      "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                    minLength: 2,
+                    maxLength: 300,
+                    example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                    title: "StartCursor",
+                  },
+                  endCursor: {
+                    description: "The end cursor in a search query result set.",
+                    format: "base64",
+                    "x-semantic-type": "EndCursor",
+                    type: "string",
+                    pattern:
+                      "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                    minLength: 2,
+                    maxLength: 300,
+                    example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                    title: "EndCursor",
+                  },
                 },
+                example: { totalItems: 1, hasMoreTotalItems: false },
+                title: "SearchQueryPageResponse",
               },
             },
-            title: "RoleSearchQueryResult",
+            title: "SearchQueryResponse",
           },
         },
       },

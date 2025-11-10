@@ -1,18 +1,16 @@
 ---
 id: get-process-definition-statistics
 title: "Get process definition statistics"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Get statistics about elements in currently running process instances by process definition key and search filter."
 sidebar_label: "Get process definition statistics"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -36,9 +34,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Get statistics about elements in currently running process instances by process definition key and search filter.
 
 <Heading
@@ -57,10 +52,23 @@ Get statistics about elements in currently running process instances by process 
       description:
         "The assigned key of the process definition, which acts as a unique identifier for this process definition.",
       schema: {
+        description: "System-generated key for a deployed process definition.",
+        format: "ProcessDefinitionKey",
+        "x-semantic-type": "ProcessDefinitionKey",
+        example: "2251799813686749",
         type: "string",
-        format: "string<ProcessDefinitionKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "ProcessDefinitionKey",
       },
     },
   ]}
@@ -75,9 +83,9 @@ Get statistics about elements in currently running process instances by process 
         schema: {
           description: "Process definition element statistics request.",
           type: "object",
+          additionalProperties: false,
           properties: {
             filter: {
-              description: "The process definition statistics search filters.",
               allOf: [
                 {
                   description: "Process definition statistics search filter.",
@@ -87,7 +95,6 @@ Get statistics about elements in currently running process instances by process 
                       type: "object",
                       properties: {
                         startDate: {
-                          description: "The start date.",
                           allOf: [
                             {
                               description:
@@ -97,7 +104,6 @@ Get statistics about elements in currently running process instances by process 
                                 {
                                   type: "string",
                                   format: "date-time",
-                                  title: "Exact match",
                                   description: "Matches the value exactly.",
                                 },
                                 {
@@ -161,9 +167,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "DateTimeFilterProperty",
                             },
                           ],
+                          description: "The start date.",
                         },
                         endDate: {
-                          description: "The end date.",
                           allOf: [
                             {
                               description:
@@ -173,7 +179,6 @@ Get statistics about elements in currently running process instances by process 
                                 {
                                   type: "string",
                                   format: "date-time",
-                                  title: "Exact match",
                                   description: "Matches the value exactly.",
                                 },
                                 {
@@ -237,9 +242,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "DateTimeFilterProperty",
                             },
                           ],
+                          description: "The end date.",
                         },
                         state: {
-                          description: "The process instance state.",
                           allOf: [
                             {
                               description:
@@ -335,6 +340,7 @@ Get statistics about elements in currently running process instances by process 
                               title: "ProcessInstanceStateFilterProperty",
                             },
                           ],
+                          description: "The process instance state.",
                         },
                         hasIncident: {
                           type: "boolean",
@@ -342,7 +348,6 @@ Get statistics about elements in currently running process instances by process 
                             "Whether this process instance has a related incident or not.",
                         },
                         tenantId: {
-                          description: "The tenant ID.",
                           allOf: [
                             {
                               description:
@@ -410,6 +415,7 @@ Get statistics about elements in currently running process instances by process 
                               title: "StringFilterProperty",
                             },
                           ],
+                          description: "The tenant ID.",
                         },
                         variables: {
                           description: "The process instance variables.",
@@ -498,7 +504,6 @@ Get statistics about elements in currently running process instances by process 
                           },
                         },
                         processInstanceKey: {
-                          description: "The key of this process instance.",
                           allOf: [
                             {
                               description:
@@ -514,6 +519,7 @@ Get statistics about elements in currently running process instances by process 
                                       description:
                                         "System-generated key for a process instance.",
                                       format: "ProcessInstanceKey",
+                                      "x-semantic-type": "ProcessInstanceKey",
                                       example: "2251799813690746",
                                       type: "string",
                                       allOf: [
@@ -521,6 +527,9 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
+                                          pattern: "^-?[0-9]+$",
+                                          minLength: 1,
+                                          maxLength: 25,
                                           title: "LongKey",
                                         },
                                       ],
@@ -542,6 +551,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -549,6 +560,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -564,6 +578,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -571,6 +587,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -591,6 +610,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a process instance.",
                                         format: "ProcessInstanceKey",
+                                        "x-semantic-type": "ProcessInstanceKey",
                                         example: "2251799813690746",
                                         type: "string",
                                         allOf: [
@@ -598,6 +618,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -612,6 +635,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a process instance.",
                                         format: "ProcessInstanceKey",
+                                        "x-semantic-type": "ProcessInstanceKey",
                                         example: "2251799813690746",
                                         type: "string",
                                         allOf: [
@@ -619,6 +643,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -631,9 +658,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "ProcessInstanceKeyFilterProperty",
                             },
                           ],
+                          description: "The key of this process instance.",
                         },
                         parentProcessInstanceKey: {
-                          description: "The parent process instance key.",
                           allOf: [
                             {
                               description:
@@ -649,6 +676,7 @@ Get statistics about elements in currently running process instances by process 
                                       description:
                                         "System-generated key for a process instance.",
                                       format: "ProcessInstanceKey",
+                                      "x-semantic-type": "ProcessInstanceKey",
                                       example: "2251799813690746",
                                       type: "string",
                                       allOf: [
@@ -656,6 +684,9 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
+                                          pattern: "^-?[0-9]+$",
+                                          minLength: 1,
+                                          maxLength: 25,
                                           title: "LongKey",
                                         },
                                       ],
@@ -677,6 +708,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -684,6 +717,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -699,6 +735,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
+                                          "x-semantic-type":
+                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -706,6 +744,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -726,6 +767,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a process instance.",
                                         format: "ProcessInstanceKey",
+                                        "x-semantic-type": "ProcessInstanceKey",
                                         example: "2251799813690746",
                                         type: "string",
                                         allOf: [
@@ -733,6 +775,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -747,6 +792,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a process instance.",
                                         format: "ProcessInstanceKey",
+                                        "x-semantic-type": "ProcessInstanceKey",
                                         example: "2251799813690746",
                                         type: "string",
                                         allOf: [
@@ -754,6 +800,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -766,9 +815,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "ProcessInstanceKeyFilterProperty",
                             },
                           ],
+                          description: "The parent process instance key.",
                         },
                         parentElementInstanceKey: {
-                          description: "The parent element instance key.",
                           allOf: [
                             {
                               description:
@@ -784,6 +833,7 @@ Get statistics about elements in currently running process instances by process 
                                       description:
                                         "System-generated key for a element instance.",
                                       format: "ElementInstanceKey",
+                                      "x-semantic-type": "ElementInstanceKey",
                                       example: "2251799813686789",
                                       type: "string",
                                       allOf: [
@@ -791,6 +841,9 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
+                                          pattern: "^-?[0-9]+$",
+                                          minLength: 1,
+                                          maxLength: 25,
                                           title: "LongKey",
                                         },
                                       ],
@@ -812,6 +865,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a element instance.",
                                           format: "ElementInstanceKey",
+                                          "x-semantic-type":
+                                            "ElementInstanceKey",
                                           example: "2251799813686789",
                                           type: "string",
                                           allOf: [
@@ -819,6 +874,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -834,6 +892,8 @@ Get statistics about elements in currently running process instances by process 
                                           description:
                                             "System-generated key for a element instance.",
                                           format: "ElementInstanceKey",
+                                          "x-semantic-type":
+                                            "ElementInstanceKey",
                                           example: "2251799813686789",
                                           type: "string",
                                           allOf: [
@@ -841,6 +901,9 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
+                                              pattern: "^-?[0-9]+$",
+                                              minLength: 1,
+                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -861,6 +924,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a element instance.",
                                         format: "ElementInstanceKey",
+                                        "x-semantic-type": "ElementInstanceKey",
                                         example: "2251799813686789",
                                         type: "string",
                                         allOf: [
@@ -868,6 +932,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -882,6 +949,7 @@ Get statistics about elements in currently running process instances by process 
                                         description:
                                           "System-generated key for a element instance.",
                                         format: "ElementInstanceKey",
+                                        "x-semantic-type": "ElementInstanceKey",
                                         example: "2251799813686789",
                                         type: "string",
                                         allOf: [
@@ -889,6 +957,9 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
+                                            pattern: "^-?[0-9]+$",
+                                            minLength: 1,
+                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -901,9 +972,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "ElementInstanceKeyFilterProperty",
                             },
                           ],
+                          description: "The parent element instance key.",
                         },
                         batchOperationId: {
-                          description: "The batch operation ID.",
                           allOf: [
                             {
                               description:
@@ -971,10 +1042,9 @@ Get statistics about elements in currently running process instances by process 
                               title: "StringFilterProperty",
                             },
                           ],
+                          description: "The batch operation ID.",
                         },
                         errorMessage: {
-                          description:
-                            "The error message related to the process.",
                           allOf: [
                             {
                               description:
@@ -1042,6 +1112,8 @@ Get statistics about elements in currently running process instances by process 
                               title: "StringFilterProperty",
                             },
                           ],
+                          description:
+                            "The error message related to the process.",
                         },
                         hasRetriesLeft: {
                           description:
@@ -1049,8 +1121,6 @@ Get statistics about elements in currently running process instances by process 
                           type: "boolean",
                         },
                         elementInstanceState: {
-                          description:
-                            "The state of the element instances associated with the process instance.",
                           allOf: [
                             {
                               description:
@@ -1144,10 +1214,10 @@ Get statistics about elements in currently running process instances by process 
                               title: "ElementInstanceStateFilterProperty",
                             },
                           ],
+                          description:
+                            "The state of the element instances associated with the process instance.",
                         },
                         elementId: {
-                          description:
-                            "The element ID associated with the process instance.",
                           allOf: [
                             {
                               description:
@@ -1215,6 +1285,8 @@ Get statistics about elements in currently running process instances by process 
                               title: "StringFilterProperty",
                             },
                           ],
+                          description:
+                            "The element ID associated with the process instance.",
                         },
                         hasElementInstanceIncident: {
                           description:
@@ -1222,8 +1294,6 @@ Get statistics about elements in currently running process instances by process 
                           type: "boolean",
                         },
                         incidentErrorHashCode: {
-                          description:
-                            "The incident error hash code, associated with this process.",
                           allOf: [
                             {
                               description:
@@ -1233,7 +1303,6 @@ Get statistics about elements in currently running process instances by process 
                                 {
                                   type: "integer",
                                   format: "int32",
-                                  title: "Exact match",
                                   description: "Matches the value exactly.",
                                 },
                                 {
@@ -1298,6 +1367,8 @@ Get statistics about elements in currently running process instances by process 
                               title: "IntegerFilterProperty",
                             },
                           ],
+                          description:
+                            "The incident error hash code, associated with this process.",
                         },
                         tags: {
                           description:
@@ -1310,7 +1381,11 @@ Get statistics about elements in currently running process instances by process 
                               "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                             example: "business_key:1234",
                             format: "Tag",
+                            "x-semantic-type": "Tag",
                             type: "string",
+                            minLength: 1,
+                            maxLength: 100,
+                            pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                             title: "Tag",
                           },
                           uniqueItems: true,
@@ -1332,7 +1407,6 @@ Get statistics about elements in currently running process instances by process 
                             type: "object",
                             properties: {
                               startDate: {
-                                description: "The start date.",
                                 allOf: [
                                   {
                                     description:
@@ -1342,7 +1416,6 @@ Get statistics about elements in currently running process instances by process 
                                       {
                                         type: "string",
                                         format: "date-time",
-                                        title: "Exact match",
                                         description:
                                           "Matches the value exactly.",
                                       },
@@ -1408,9 +1481,9 @@ Get statistics about elements in currently running process instances by process 
                                     title: "DateTimeFilterProperty",
                                   },
                                 ],
+                                description: "The start date.",
                               },
                               endDate: {
-                                description: "The end date.",
                                 allOf: [
                                   {
                                     description:
@@ -1420,7 +1493,6 @@ Get statistics about elements in currently running process instances by process 
                                       {
                                         type: "string",
                                         format: "date-time",
-                                        title: "Exact match",
                                         description:
                                           "Matches the value exactly.",
                                       },
@@ -1486,9 +1558,9 @@ Get statistics about elements in currently running process instances by process 
                                     title: "DateTimeFilterProperty",
                                   },
                                 ],
+                                description: "The end date.",
                               },
                               state: {
-                                description: "The process instance state.",
                                 allOf: [
                                   {
                                     description:
@@ -1589,6 +1661,7 @@ Get statistics about elements in currently running process instances by process 
                                     title: "ProcessInstanceStateFilterProperty",
                                   },
                                 ],
+                                description: "The process instance state.",
                               },
                               hasIncident: {
                                 type: "boolean",
@@ -1596,7 +1669,6 @@ Get statistics about elements in currently running process instances by process 
                                   "Whether this process instance has a related incident or not.",
                               },
                               tenantId: {
-                                description: "The tenant ID.",
                                 allOf: [
                                   {
                                     description:
@@ -1665,6 +1737,7 @@ Get statistics about elements in currently running process instances by process 
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description: "The tenant ID.",
                               },
                               variables: {
                                 description: "The process instance variables.",
@@ -1754,144 +1827,168 @@ Get statistics about elements in currently running process instances by process 
                                 },
                               },
                               processInstanceKey: {
+                                allOf: [
+                                  {
+                                    description:
+                                      "ProcessInstanceKey property with full advanced search capabilities.",
+                                    type: "object",
+                                    oneOf: [
+                                      {
+                                        type: "string",
+                                        title: "Exact match",
+                                        description:
+                                          "Matches the value exactly.",
+                                        allOf: [
+                                          {
+                                            description:
+                                              "System-generated key for a process instance.",
+                                            format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
+                                            example: "2251799813690746",
+                                            type: "string",
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "Zeebe Engine resource key (Java long serialized as string)",
+                                                type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
+                                                title: "LongKey",
+                                              },
+                                            ],
+                                            title: "ProcessInstanceKey",
+                                          },
+                                        ],
+                                      },
+                                      {
+                                        title: "Advanced filter",
+                                        description:
+                                          "Advanced ProcessInstanceKey filter.",
+                                        type: "object",
+                                        properties: {
+                                          $eq: {
+                                            description:
+                                              "Checks for equality with the provided value.",
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "System-generated key for a process instance.",
+                                                format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
+                                                example: "2251799813690746",
+                                                type: "string",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                                    type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
+                                                    title: "LongKey",
+                                                  },
+                                                ],
+                                                title: "ProcessInstanceKey",
+                                              },
+                                            ],
+                                          },
+                                          $neq: {
+                                            description:
+                                              "Checks for inequality with the provided value.",
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "System-generated key for a process instance.",
+                                                format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
+                                                example: "2251799813690746",
+                                                type: "string",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                                    type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
+                                                    title: "LongKey",
+                                                  },
+                                                ],
+                                                title: "ProcessInstanceKey",
+                                              },
+                                            ],
+                                          },
+                                          $exists: {
+                                            description:
+                                              "Checks if the current property exists.",
+                                            type: "boolean",
+                                          },
+                                          $in: {
+                                            description:
+                                              "Checks if the property matches any of the provided values.",
+                                            type: "array",
+                                            items: {
+                                              description:
+                                                "System-generated key for a process instance.",
+                                              format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
+                                              example: "2251799813690746",
+                                              type: "string",
+                                              allOf: [
+                                                {
+                                                  description:
+                                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                                  type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
+                                                  title: "LongKey",
+                                                },
+                                              ],
+                                              title: "ProcessInstanceKey",
+                                            },
+                                          },
+                                          $notIn: {
+                                            description:
+                                              "Checks if the property matches none of the provided values.",
+                                            type: "array",
+                                            items: {
+                                              description:
+                                                "System-generated key for a process instance.",
+                                              format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
+                                              example: "2251799813690746",
+                                              type: "string",
+                                              allOf: [
+                                                {
+                                                  description:
+                                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                                  type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
+                                                  title: "LongKey",
+                                                },
+                                              ],
+                                              title: "ProcessInstanceKey",
+                                            },
+                                          },
+                                        },
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKeyFilterProperty",
+                                  },
+                                ],
                                 description:
                                   "The key of this process instance.",
-                                allOf: [
-                                  {
-                                    description:
-                                      "ProcessInstanceKey property with full advanced search capabilities.",
-                                    type: "object",
-                                    oneOf: [
-                                      {
-                                        type: "string",
-                                        title: "Exact match",
-                                        description:
-                                          "Matches the value exactly.",
-                                        allOf: [
-                                          {
-                                            description:
-                                              "System-generated key for a process instance.",
-                                            format: "ProcessInstanceKey",
-                                            example: "2251799813690746",
-                                            type: "string",
-                                            allOf: [
-                                              {
-                                                description:
-                                                  "Zeebe Engine resource key (Java long serialized as string)",
-                                                type: "string",
-                                                title: "LongKey",
-                                              },
-                                            ],
-                                            title: "ProcessInstanceKey",
-                                          },
-                                        ],
-                                      },
-                                      {
-                                        title: "Advanced filter",
-                                        description:
-                                          "Advanced ProcessInstanceKey filter.",
-                                        type: "object",
-                                        properties: {
-                                          $eq: {
-                                            description:
-                                              "Checks for equality with the provided value.",
-                                            allOf: [
-                                              {
-                                                description:
-                                                  "System-generated key for a process instance.",
-                                                format: "ProcessInstanceKey",
-                                                example: "2251799813690746",
-                                                type: "string",
-                                                allOf: [
-                                                  {
-                                                    description:
-                                                      "Zeebe Engine resource key (Java long serialized as string)",
-                                                    type: "string",
-                                                    title: "LongKey",
-                                                  },
-                                                ],
-                                                title: "ProcessInstanceKey",
-                                              },
-                                            ],
-                                          },
-                                          $neq: {
-                                            description:
-                                              "Checks for inequality with the provided value.",
-                                            allOf: [
-                                              {
-                                                description:
-                                                  "System-generated key for a process instance.",
-                                                format: "ProcessInstanceKey",
-                                                example: "2251799813690746",
-                                                type: "string",
-                                                allOf: [
-                                                  {
-                                                    description:
-                                                      "Zeebe Engine resource key (Java long serialized as string)",
-                                                    type: "string",
-                                                    title: "LongKey",
-                                                  },
-                                                ],
-                                                title: "ProcessInstanceKey",
-                                              },
-                                            ],
-                                          },
-                                          $exists: {
-                                            description:
-                                              "Checks if the current property exists.",
-                                            type: "boolean",
-                                          },
-                                          $in: {
-                                            description:
-                                              "Checks if the property matches any of the provided values.",
-                                            type: "array",
-                                            items: {
-                                              description:
-                                                "System-generated key for a process instance.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
-                                              type: "string",
-                                              allOf: [
-                                                {
-                                                  description:
-                                                    "Zeebe Engine resource key (Java long serialized as string)",
-                                                  type: "string",
-                                                  title: "LongKey",
-                                                },
-                                              ],
-                                              title: "ProcessInstanceKey",
-                                            },
-                                          },
-                                          $notIn: {
-                                            description:
-                                              "Checks if the property matches none of the provided values.",
-                                            type: "array",
-                                            items: {
-                                              description:
-                                                "System-generated key for a process instance.",
-                                              format: "ProcessInstanceKey",
-                                              example: "2251799813690746",
-                                              type: "string",
-                                              allOf: [
-                                                {
-                                                  description:
-                                                    "Zeebe Engine resource key (Java long serialized as string)",
-                                                  type: "string",
-                                                  title: "LongKey",
-                                                },
-                                              ],
-                                              title: "ProcessInstanceKey",
-                                            },
-                                          },
-                                        },
-                                      },
-                                    ],
-                                    title: "ProcessInstanceKeyFilterProperty",
-                                  },
-                                ],
                               },
                               parentProcessInstanceKey: {
-                                description: "The parent process instance key.",
                                 allOf: [
                                   {
                                     description:
@@ -1908,6 +2005,8 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
+                                            "x-semantic-type":
+                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -1915,6 +2014,9 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -1936,6 +2038,8 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "System-generated key for a process instance.",
                                                 format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
                                                 example: "2251799813690746",
                                                 type: "string",
                                                 allOf: [
@@ -1943,6 +2047,9 @@ Get statistics about elements in currently running process instances by process 
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -1958,6 +2065,8 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "System-generated key for a process instance.",
                                                 format: "ProcessInstanceKey",
+                                                "x-semantic-type":
+                                                  "ProcessInstanceKey",
                                                 example: "2251799813690746",
                                                 type: "string",
                                                 allOf: [
@@ -1965,6 +2074,9 @@ Get statistics about elements in currently running process instances by process 
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -1985,6 +2097,8 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -1992,6 +2106,9 @@ Get statistics about elements in currently running process instances by process 
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -2006,6 +2123,8 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
+                                              "x-semantic-type":
+                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -2013,6 +2132,9 @@ Get statistics about elements in currently running process instances by process 
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -2025,9 +2147,9 @@ Get statistics about elements in currently running process instances by process 
                                     title: "ProcessInstanceKeyFilterProperty",
                                   },
                                 ],
+                                description: "The parent process instance key.",
                               },
                               parentElementInstanceKey: {
-                                description: "The parent element instance key.",
                                 allOf: [
                                   {
                                     description:
@@ -2044,6 +2166,8 @@ Get statistics about elements in currently running process instances by process 
                                             description:
                                               "System-generated key for a element instance.",
                                             format: "ElementInstanceKey",
+                                            "x-semantic-type":
+                                              "ElementInstanceKey",
                                             example: "2251799813686789",
                                             type: "string",
                                             allOf: [
@@ -2051,6 +2175,9 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
+                                                pattern: "^-?[0-9]+$",
+                                                minLength: 1,
+                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -2072,6 +2199,8 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "System-generated key for a element instance.",
                                                 format: "ElementInstanceKey",
+                                                "x-semantic-type":
+                                                  "ElementInstanceKey",
                                                 example: "2251799813686789",
                                                 type: "string",
                                                 allOf: [
@@ -2079,6 +2208,9 @@ Get statistics about elements in currently running process instances by process 
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2094,6 +2226,8 @@ Get statistics about elements in currently running process instances by process 
                                                 description:
                                                   "System-generated key for a element instance.",
                                                 format: "ElementInstanceKey",
+                                                "x-semantic-type":
+                                                  "ElementInstanceKey",
                                                 example: "2251799813686789",
                                                 type: "string",
                                                 allOf: [
@@ -2101,6 +2235,9 @@ Get statistics about elements in currently running process instances by process 
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
+                                                    pattern: "^-?[0-9]+$",
+                                                    minLength: 1,
+                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2121,6 +2258,8 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
+                                              "x-semantic-type":
+                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -2128,6 +2267,9 @@ Get statistics about elements in currently running process instances by process 
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -2142,6 +2284,8 @@ Get statistics about elements in currently running process instances by process 
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
+                                              "x-semantic-type":
+                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -2149,6 +2293,9 @@ Get statistics about elements in currently running process instances by process 
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
+                                                  pattern: "^-?[0-9]+$",
+                                                  minLength: 1,
+                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -2161,9 +2308,9 @@ Get statistics about elements in currently running process instances by process 
                                     title: "ElementInstanceKeyFilterProperty",
                                   },
                                 ],
+                                description: "The parent element instance key.",
                               },
                               batchOperationId: {
-                                description: "The batch operation ID.",
                                 allOf: [
                                   {
                                     description:
@@ -2232,10 +2379,9 @@ Get statistics about elements in currently running process instances by process 
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description: "The batch operation ID.",
                               },
                               errorMessage: {
-                                description:
-                                  "The error message related to the process.",
                                 allOf: [
                                   {
                                     description:
@@ -2304,6 +2450,8 @@ Get statistics about elements in currently running process instances by process 
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description:
+                                  "The error message related to the process.",
                               },
                               hasRetriesLeft: {
                                 description:
@@ -2311,8 +2459,6 @@ Get statistics about elements in currently running process instances by process 
                                 type: "boolean",
                               },
                               elementInstanceState: {
-                                description:
-                                  "The state of the element instances associated with the process instance.",
                                 allOf: [
                                   {
                                     description:
@@ -2409,10 +2555,10 @@ Get statistics about elements in currently running process instances by process 
                                     title: "ElementInstanceStateFilterProperty",
                                   },
                                 ],
+                                description:
+                                  "The state of the element instances associated with the process instance.",
                               },
                               elementId: {
-                                description:
-                                  "The element ID associated with the process instance.",
                                 allOf: [
                                   {
                                     description:
@@ -2481,6 +2627,8 @@ Get statistics about elements in currently running process instances by process 
                                     title: "StringFilterProperty",
                                   },
                                 ],
+                                description:
+                                  "The element ID associated with the process instance.",
                               },
                               hasElementInstanceIncident: {
                                 description:
@@ -2488,8 +2636,6 @@ Get statistics about elements in currently running process instances by process 
                                 type: "boolean",
                               },
                               incidentErrorHashCode: {
-                                description:
-                                  "The incident error hash code, associated with this process.",
                                 allOf: [
                                   {
                                     description:
@@ -2499,7 +2645,6 @@ Get statistics about elements in currently running process instances by process 
                                       {
                                         type: "integer",
                                         format: "int32",
-                                        title: "Exact match",
                                         description:
                                           "Matches the value exactly.",
                                       },
@@ -2565,6 +2710,8 @@ Get statistics about elements in currently running process instances by process 
                                     title: "IntegerFilterProperty",
                                   },
                                 ],
+                                description:
+                                  "The incident error hash code, associated with this process.",
                               },
                               tags: {
                                 description:
@@ -2577,7 +2724,11 @@ Get statistics about elements in currently running process instances by process 
                                     "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                   example: "business_key:1234",
                                   format: "Tag",
+                                  "x-semantic-type": "Tag",
                                   type: "string",
+                                  minLength: 1,
+                                  maxLength: 100,
+                                  pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                   title: "Tag",
                                 },
                                 uniqueItems: true,
@@ -2594,6 +2745,7 @@ Get statistics about elements in currently running process instances by process 
                   title: "ProcessDefinitionStatisticsFilter",
                 },
               ],
+              description: "The process definition statistics search filters.",
             },
           },
           title: "ProcessDefinitionElementStatisticsQuery",
@@ -2624,17 +2776,18 @@ Get statistics about elements in currently running process instances by process 
                   type: "object",
                   properties: {
                     elementId: {
-                      description:
-                        "The element ID for which the results are aggregated.",
                       allOf: [
                         {
                           description: "The model-defined id of an element.",
                           format: "ElementId",
                           type: "string",
+                          "x-semantic-type": "ElementId",
                           example: "Activity_106kosb",
                           title: "ElementId",
                         },
                       ],
+                      description:
+                        "The element ID for which the results are aggregated.",
                     },
                     active: {
                       description:
@@ -2707,6 +2860,7 @@ Get statistics about elements in currently running process instances by process 
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -2755,6 +2909,7 @@ Get statistics about elements in currently running process instances by process 
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -2802,6 +2957,7 @@ Get statistics about elements in currently running process instances by process 
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -2813,7 +2969,7 @@ Get statistics about elements in currently running process instances by process 
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -2849,6 +3005,7 @@ Get statistics about elements in currently running process instances by process 
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

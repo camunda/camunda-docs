@@ -1,18 +1,16 @@
 ---
 id: create-document
 title: "Upload document"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Upload a document to the Camunda 8 cluster."
 sidebar_label: "Upload document"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/documents"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Upload a document to the Camunda 8 cluster.
 
@@ -64,7 +59,13 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       required: false,
       description:
         "The ID of the document to upload. If not provided, a new ID will be generated. Specifying an existing ID will result in an error if the document already exists.\n",
-      schema: { type: "string" },
+      schema: {
+        description: "Document Id that uniquely identifies a document.",
+        format: "DocumentId",
+        "x-semantic-type": "DocumentId",
+        type: "string",
+        title: "DocumentId",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -76,6 +77,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
     content: {
       "multipart/form-data": {
         schema: {
+          additionalProperties: false,
           type: "object",
           properties: {
             file: { type: "string", format: "binary" },
@@ -108,6 +110,9 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                         "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
                       format: "ProcessDefinitionId",
                       type: "string",
+                      "x-semantic-type": "ProcessDefinitionId",
+                      minLength: 1,
+                      pattern: "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
                       example: "new-account-onboarding-workflow",
                       title: "ProcessDefinitionId",
                     },
@@ -121,6 +126,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                       description:
                         "System-generated key for a process instance.",
                       format: "ProcessInstanceKey",
+                      "x-semantic-type": "ProcessInstanceKey",
                       example: "2251799813690746",
                       type: "string",
                       allOf: [
@@ -128,6 +134,9 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                           description:
                             "Zeebe Engine resource key (Java long serialized as string)",
                           type: "string",
+                          pattern: "^-?[0-9]+$",
+                          minLength: 1,
+                          maxLength: 25,
                           title: "LongKey",
                         },
                       ],
@@ -180,6 +189,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                     description:
                       "Document Id that uniquely identifies a document.",
                     format: "DocumentId",
+                    "x-semantic-type": "DocumentId",
                     type: "string",
                     title: "DocumentId",
                   },
@@ -219,6 +229,9 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                           "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
                         format: "ProcessDefinitionId",
                         type: "string",
+                        "x-semantic-type": "ProcessDefinitionId",
+                        minLength: 1,
+                        pattern: "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
                         example: "new-account-onboarding-workflow",
                         title: "ProcessDefinitionId",
                       },
@@ -232,6 +245,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                         description:
                           "System-generated key for a process instance.",
                         format: "ProcessInstanceKey",
+                        "x-semantic-type": "ProcessInstanceKey",
                         example: "2251799813690746",
                         type: "string",
                         allOf: [
@@ -239,6 +253,9 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
+                            pattern: "^-?[0-9]+$",
+                            minLength: 1,
+                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
@@ -299,6 +316,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -311,7 +329,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
     },
     "415": {
       description:
-        "The server cannot process the request because the media type (Content-Type) of the request payload is not supported  by the server for the requested resource and method.\n",
+        "The server cannot process the request because the media type (Content-Type) of the request payload is not supported\nby the server for the requested resource and method.\n",
       content: {
         "application/problem+json": {
           schema: {
@@ -347,6 +365,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

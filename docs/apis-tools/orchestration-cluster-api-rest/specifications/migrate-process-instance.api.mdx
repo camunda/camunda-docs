@@ -1,18 +1,16 @@
 ---
 id: migrate-process-instance
 title: "Migrate process instance"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Migrates a process instance to a new process definition."
 sidebar_label: "Migrate process instance"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/process-instances/{processInstanceKey}/migration"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Migrates a process instance to a new process definition.
 This request can contain multiple mapping instructions to define mapping between the active
@@ -60,10 +55,23 @@ latest process improvements.
       required: true,
       description: "The key of the process instance that should be migrated.",
       schema: {
+        description: "System-generated key for a process instance.",
+        format: "ProcessInstanceKey",
+        "x-semantic-type": "ProcessInstanceKey",
+        example: "2251799813690746",
         type: "string",
-        format: "string<ProcessInstanceKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "ProcessInstanceKey",
       },
     },
   ]}
@@ -77,12 +85,31 @@ latest process improvements.
       "application/json": {
         schema: {
           type: "object",
+          additionalProperties: false,
           description:
             "The migration instructions describe how to migrate a process instance from one process definition to another.\n",
           properties: {
-            mappingInstructions: {
+            targetProcessDefinitionKey: {
               description:
-                "Element mappings from the source process instance to the target process instance.",
+                "System-generated key for a deployed process definition.",
+              format: "ProcessDefinitionKey",
+              "x-semantic-type": "ProcessDefinitionKey",
+              example: "2251799813686749",
+              type: "string",
+              allOf: [
+                {
+                  description:
+                    "Zeebe Engine resource key (Java long serialized as string)",
+                  type: "string",
+                  pattern: "^-?[0-9]+$",
+                  minLength: 1,
+                  maxLength: 25,
+                  title: "LongKey",
+                },
+              ],
+              title: "ProcessDefinitionKey",
+            },
+            mappingInstructions: {
               type: "array",
               items: {
                 type: "object",
@@ -90,28 +117,20 @@ latest process improvements.
                   "The mapping instructions describe how to map elements from the source process definition to the target process definition.\n",
                 properties: {
                   sourceElementId: {
-                    description: "The element ID to migrate from.",
-                    allOf: [
-                      {
-                        description: "The model-defined id of an element.",
-                        format: "ElementId",
-                        type: "string",
-                        example: "Activity_106kosb",
-                        title: "ElementId",
-                      },
-                    ],
+                    description: "The model-defined id of an element.",
+                    format: "ElementId",
+                    type: "string",
+                    "x-semantic-type": "ElementId",
+                    example: "Activity_106kosb",
+                    title: "ElementId",
                   },
                   targetElementId: {
-                    description: "The element ID to migrate into.",
-                    allOf: [
-                      {
-                        description: "The model-defined id of an element.",
-                        format: "ElementId",
-                        type: "string",
-                        example: "Activity_106kosb",
-                        title: "ElementId",
-                      },
-                    ],
+                    description: "The model-defined id of an element.",
+                    format: "ElementId",
+                    type: "string",
+                    "x-semantic-type": "ElementId",
+                    example: "Activity_106kosb",
+                    title: "ElementId",
                   },
                 },
                 required: ["sourceElementId", "targetElementId"],
@@ -125,28 +144,6 @@ latest process improvements.
               format: "int64",
               minimum: 1,
               title: "OperationReference",
-            },
-            targetProcessDefinitionKey: {
-              allOf: [
-                {
-                  description:
-                    "System-generated key for a deployed process definition.",
-                  format: "ProcessDefinitionKey",
-                  example: "2251799813686749",
-                  type: "string",
-                  allOf: [
-                    {
-                      description:
-                        "Zeebe Engine resource key (Java long serialized as string)",
-                      type: "string",
-                      title: "LongKey",
-                    },
-                  ],
-                  title: "ProcessDefinitionKey",
-                },
-              ],
-              description:
-                "The key of process definition to migrate the process instance to.",
             },
           },
           required: ["targetProcessDefinitionKey", "mappingInstructions"],
@@ -199,6 +196,7 @@ latest process improvements.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -246,6 +244,7 @@ latest process improvements.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -294,6 +293,7 @@ latest process improvements.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -305,7 +305,7 @@ latest process improvements.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -341,6 +341,7 @@ latest process improvements.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -389,6 +390,7 @@ latest process improvements.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

@@ -1,18 +1,16 @@
 ---
 id: assign-user-to-tenant
 title: "Assign a user to a tenant"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions."
 sidebar_label: "Assign a user to a tenant"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "put api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/tenants/{tenantId}/users/{username}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions.
 
@@ -58,6 +53,10 @@ Assign a single user to a specified tenant. The user can then access tenant data
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -65,12 +64,16 @@ Assign a single user to a specified tenant. The user can then access tenant data
       name: "username",
       in: "path",
       required: true,
-      description: "The username of the user to assign.",
+      description: "The unique identifier of the user.",
       schema: {
         example: "swillis",
         format: "Username",
         description: "The unique name of a user.",
+        "x-semantic-type": "Username",
         type: "string",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "Username",
       },
     },
@@ -121,6 +124,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -168,6 +172,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -215,6 +220,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -226,7 +232,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -262,6 +268,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -310,6 +317,7 @@ Assign a single user to a specified tenant. The user can then access tenant data
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

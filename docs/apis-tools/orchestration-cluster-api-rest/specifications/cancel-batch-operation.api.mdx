@@ -1,18 +1,16 @@
 ---
 id: cancel-batch-operation
 title: "Cancel Batch operation"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Cancels a running batch operation."
 sidebar_label: "Cancel Batch operation"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWdty2zYQ/ZUdPNlTWZQvSRy+yYrTKk1tjy2n05H1AIIrETEJMAAomaPy3ztLkLJ1aetMn9KRZzziZblnF3vOElotmeMzy8Ixu+BOJKBzNNxJrdikw1Ynw5iFTHAlMK3NrldWHRajFUbm9VnIHtSDGo8H11d3w7vR5dXgj/Dyy+XV6L7/eTKhe4PaiQUOplBKqhlE67jdBzVKpAVpIdYKgdtSicRopQublh1wCUJu9MygtSC4ggjBGS4eMYbCkkOy2HAK1nFXWEAV51oqBwdBbXG0srDBMlrL7Fcsq8PuA2WYc8MzdGhonZZM8QxZyLbMWYdJWoKcu4R1mMFvhTQYs9CZAjfXaZQgPGIJB9o0YSKkOOOihOGHQ9DTXWn4cKxIMOMsXLKpNhl3LGQXm7HAn1AUMmYd5sqcorXOSDXbKtddaR1mRzNUdQhxHdNUG6CF3QBnHYZPPMtT8ndy8ub43fv358enb8/PTk+OCUm6+tZWMKyqJn490LoLHZcUu9DKoXJ0yPM8laK2Dr5aimtZVS8XcMpTi/UVm2tl0dJTJ70z+the1s3ae95Cgw8LbkEYpGwppec4CPOs19vtNDd6LmOMIeaOEzmVdjDnqdxwspZMbnSUYvZTk9SLyq0D9OHGW0KMjssUdPQVhQNuwRtGGINUML79OID3Z2/eTQ4S53IbBsFiseiaqTjCWDptutrMAjMV9E92h10YJWgQMl6SUHgcS8LkKSWUo3ESLdgchZxKAU638qqDIep4yjUk8mGRIlYPUzL+7nKLait6FkZuMa8P97dDkDEqJ6dlq9s16PqZKS9S8sEjXbgwSrl6XCPiy+vVioTbwWyi2yLLuClbpW0CPwNc8BhuPXcIwHeSFwhSOZyheZmvVO70ZAuTaPTLaHTTNiOhY6y15qjfNQGsYZ/1eh2WSSWzImvP+JM/e9vrVYRAfHlFvgrwKU+58pLYSFoqyLTBhn3r6Tept3wpYZzxp086siPdF07OuUM7IY2RICKEnBuLMa2UVNaR9F5TDeIC9c0tQmgjZ3Iz4PUIg/lJ8FVHNuA+HvJZPVOBNdr64JeqqrzOT7dl+FGbSMYxqlo1q4bRiJ2nqV5s9oy93Pdy38v9B5D7jr3ClXYw1YWKvdw3tw20T1Ark73q96rfq/7HUv2bXZv5vgIqpiF5oDH09UuIwhiMYZHItIYXaFffJJtdgJfIvgXsW8C+BfwwLaDqsAxdoml6lWtbM5qGMyF71fgn8JODtJ10WTTzdghUmJSFbOmVXoVBsEy0dVW4zLVxVTAnWsy5kTxKvXjotu8ILdNTLXia+LC2GUQ3aNLULsm1EQla12xOBmlhHRq4vbwbwc/c4YKXXSoGwa/DnPfOezsRyPQV3vs3Q/CZ1wAve1sLQU1qJ4Q3/l6QelxkURRGuvKOXPglvEBu0PQLquCKag12jVSP5Woj1mkOPrZa/fT7iMKPuJXi31yQTU0tqaa6NmwotjuD/s2Qqo3G+sx73ePmXcFFXYxmYjjgWaFiDpdqJhViIxHPpLbPz6RLiqgrdBYIb776lNYWaFm1paqbYd1ehM6yQtXvJDWDhXQJcGgxz0H4aElTqRSoLO4I7bO/A198MnDc7X1PiFGqoyDjUgUNhA0G/d/urz70jz4PB5dXd5dHx91e1z25enlJkxlXa3HUs7rNWfRGyi+mh//LgXPDS4dPLshTLhUVvS7CsmlgY7bpjnVYuGskvdbDJp2mD43Zchlxi/cmrSq6/K1AU7JwPHluW3Wfi6Wl43YI+w+FOLht5rWH8B+G2ztTby5yVdZdNS3ojHXYI5Y7B/HVpOqwBHmMpk7C2w18qEcj8vbsZ2v6XHXaJ/pCYO7+xnZt00cda/Wqubm+G1EDaibdmY7pWcMX9KsAX/jYde7LFi79tSVLuZoVfEa23if9/QVUmeTS
+api: eJztWU1z2zYQ/SsYnOIpJcofSRzdZMdpnaaJx1bag+PDElyJiEGABUBJHJX/vbMEKesrbZKbZ+QZj0Vysft2se8RWi+5h6njw3t+AV5kzBRowUuj+UPEVxfXKR9yAVqgasw+rawinqITVhbN1ZBfNkaOAbOl1lJPWbLpt/9FjzPpmHQsNRoZuEqLzBptSqeqiPkMWWHN1KJzTIBmCTJvQTxiykpHDsliyylzHnzpGOq0MFJ79iJuLHorCxcvkw3kv2NVH/W/UAYFWMjRo6U6LLmGHPmQ75jziEtKsQCf8Yhb/LuUFlM+9LbE7TqMM2SPWLEXxrYwkSmcgqjY9dsjZib70ujziDuRYQ58uOSLnsMctJei56uCIF3sgTQxNge/7yH7h5WlTHnE2+XOW6mnO1t2VzmPeW+KuoGZNrgnxjIq/i5AXEBeKPJ3cvLy+PWbN+fHp6/Oz05PjimS9Go/0rp+CDVD5y9MWlGGwmiP2tNHKAolRWMdf3WEa1nX60WegHLY3HGF0Q4drToZnNGf3dJv90foXdbGZ3NwTFikbCmlJxwU82ww2O+0sGYmU0xZCh6ogbXxbAZKbjnZSKawJlGY/9Imtba/mwFG7CZYshQ9SMVM8hWFZ+BYMEwwZVKz+9t3l+zN2cvXDy8y7ws3jOP5fN63E9HDVHpj+8ZOYzsR9Et2R302ztAiy6EiMkGaSooJihIq0HqJjrkChZxIwbzpKNiAodYJLGmbKMAi1qwWUzLh6XKn1VbtWVq503kj9vn2mskUtZeTquP2RuhmzQRKRT4gMaUfJgr040Yjrt+vV024C2Y7uivzHGzVsXE78FOAC0jZbegdChDUZi2C1B6naNfzldqfnuzEpDb6bTy+6QRLmBQbrnnSxBbARuyzwSDiudQyL/PuChbh6tVgUFME6pfvyFczXBQKdKDEVtJSs9xYbLtvM/029a5fKnafw+K9SdzYjISXM/DoHohjRIgEWQHWYUqVktp5ot5PtgZJ7U5/GCunchv/JuB4dhJ/NYmLIcAjn/VTZ/CWam9D5eo60P50l5XvjE1kmqJuSLTSj5b7oJSZb0vIgf0H9h/Y//zYv+ck8dF4NjGlTgP7tw8VdIrQK5ODCBxE4CACz1oEXu47+Y80o721xBa0lr7PCVFaiymbZ1I14QW61VfT9oxw0IODHhz04DnrQR3xRQ9nqH0JSlU9YbSTLhA6jHxw4VE7mi41g6NHrPjwm2siPgNVYlhLw5AcfWZosFYY17CH5kpD/l2TqzgMNFQ3hHNoZ938qrSKD/kyqEo9jONlZpyvh8vCWF/Hs5MGipWQqEBUehzUp2OVMgJUFmDtdis9oCFZV+9PVmTofHsqulSl82jZ7dXdmP0KHudQ9WnjKfxmmPPB+WBvBDL9Du+jm2sWMm8CrOtoF4IEcW+IYPyjQZoplkNRWumrO3IRSniBYNGOStrBVVu3sZtIzUSxMeJR++Fd1+zv/xoT/AScFP/ngmyavpV6YhrDtn/3ZzC6uabdRutC5oP+cfteAtFsRjvsvIS81CmwKz2VGrGlY+ik7p0ylT4rk74weSyC+eqvdK5Ex+sdyt5cN1ImTJ6Xunn/6SmbS58xYF3McyYCWiKskgK1wz3QPoQn7M+QDDvuD34EYqJMEucgddyGcPHl6I/PH9+Oeh+uL68+3l31jvuDvl/4przEyRz0Bo5mhLg9Jt9KeW2o+Sxn4W3feVz4uFAgNW1qU+RlK1D3fNsdj/hw37R8Q6MeolZn7vlymYDDz1bVNd3+u0Rb8eH9w5MsNTqWSkefu9nvfxT6xW07Jj5iPz1335t4exN09STfnEet0u/mXD/UEc8QUrRrb4TLALQ3Jm9PfnZG3nXUrRgJgYX/hu3G8XHjRXLz6W5M8tKO13OT0loLc/p3BcwDdlOETRsuw70lV6CnJUzJNvikn38BqbMQkQ==
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Cancels a running batch operation.
 This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
 
@@ -53,8 +48,9 @@ This is done asynchronously, the progress can be tracked using the batch operati
       name: "batchOperationKey",
       in: "path",
       required: true,
-      description: "The key (or operate legacy ID) of the batch operation.\n",
+      description: "The key (or operate legacy ID) of the batch operation.",
       schema: {
+        "x-semantic-type": "BatchOperationKey",
         format: "BatchOperationKey | uuid",
         type: "string",
         description: "System-generated key for an batch operation.",
@@ -115,6 +111,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -162,6 +159,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -209,6 +207,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -220,7 +219,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -256,6 +255,7 @@ This is done asynchronously, the progress can be tracked using the batch operati
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

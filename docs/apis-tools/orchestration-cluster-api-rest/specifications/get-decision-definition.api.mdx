@@ -1,18 +1,16 @@
 ---
 id: get-decision-definition
 title: "Get decision definition"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Returns a decision definition by key."
 sidebar_label: "Get decision definition"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Returns a decision definition by key.
 
 <Heading
@@ -55,10 +50,23 @@ Returns a decision definition by key.
       description:
         "The assigned key of the decision definition, which acts as a unique identifier for this decision.",
       schema: {
+        description: "System-generated key for a decision definition.",
+        format: "DecisionDefinitionKey",
+        "x-semantic-type": "DecisionDefinitionKey",
+        example: "2251799813326547",
         type: "string",
-        format: "string<DecisionDefinitionKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "DecisionDefinitionKey",
       },
     },
   ]}
@@ -71,7 +79,7 @@ Returns a decision definition by key.
   label={undefined}
   responses={{
     "200": {
-      description: "The decision definition is successfully returned.\n",
+      description: "The decision definition is successfully returned.",
       content: {
         "application/json": {
           schema: {
@@ -83,7 +91,11 @@ Returns a decision definition by key.
                     description:
                       "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
                     format: "DecisionDefinitionId",
+                    "x-semantic-type": "DecisionDefinitionId",
                     type: "string",
+                    minLength: 1,
+                    maxLength: 256,
+                    pattern: "^[A-Za-z0-9_@.+-]+$",
                     example: "new-hire-onboarding-workflow",
                     title: "DecisionDefinitionId",
                   },
@@ -96,7 +108,6 @@ Returns a decision definition by key.
               },
               version: {
                 type: "integer",
-                format: "int32",
                 description: "The assigned version of the decision definition.",
               },
               decisionRequirementsId: {
@@ -105,16 +116,20 @@ Returns a decision definition by key.
                   "the DMN ID of the decision requirements graph that the decision definition is part of.",
               },
               tenantId: {
-                description: "The tenant ID of the decision definition.",
                 allOf: [
                   {
                     example: "customer-service",
                     description: "The unique identifier of the tenant.",
                     format: "TenantId",
                     type: "string",
+                    "x-semantic-type": "TenantId",
+                    minLength: 1,
+                    maxLength: 256,
+                    pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                     title: "TenantId",
                   },
                 ],
+                description: "The tenant ID of the decision definition.",
               },
               decisionDefinitionKey: {
                 allOf: [
@@ -122,6 +137,7 @@ Returns a decision definition by key.
                     description:
                       "System-generated key for a decision definition.",
                     format: "DecisionDefinitionKey",
+                    "x-semantic-type": "DecisionDefinitionKey",
                     example: "2251799813326547",
                     type: "string",
                     allOf: [
@@ -129,6 +145,9 @@ Returns a decision definition by key.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -146,12 +165,16 @@ Returns a decision definition by key.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
                     description:
                       "System-generated key for a deployed decision requirements definition.",
                     format: "DecisionRequirementsKey",
+                    "x-semantic-type": "DecisionRequirementsKey",
                     example: "2251799813683346",
                     type: "string",
                     title: "DecisionRequirementsKey",
@@ -203,6 +226,7 @@ Returns a decision definition by key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -251,6 +275,7 @@ Returns a decision definition by key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -298,6 +323,7 @@ Returns a decision definition by key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -310,7 +336,7 @@ Returns a decision definition by key.
     },
     "404": {
       description:
-        "The decision with the given key was not found. More details are provided in the response body.\n",
+        "The decision definition with the given key was not found. More details are provided in the response body.\n",
       content: {
         "application/problem+json": {
           schema: {
@@ -346,6 +372,7 @@ Returns a decision definition by key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -357,7 +384,7 @@ Returns a decision definition by key.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -393,6 +420,7 @@ Returns a decision definition by key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

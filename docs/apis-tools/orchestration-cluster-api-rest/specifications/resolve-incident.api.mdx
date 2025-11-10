@@ -1,18 +1,16 @@
 ---
 id: resolve-incident
 title: "Resolve incident"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Marks the incident as resolved; most likely a call to Update job will be necessary"
 sidebar_label: "Resolve incident"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWftv2zgS/lcGvAO2xcqWk6bd1gfcwU2zt+m22yCPe6W525E0tthQpJak7GgN/++HISU/4hTdvZ+uQAIEiShynt98FIdL4XHmxPhanOpcFqS9uEmEqcmil0afFmIsLDmj5rSekIiCXG5lzTPEWLxHe+vAlwSymwLooFtV/Akq4zwoeUuqBYQclQJv4Kou0BN8MhkspFKQEWjKyTm07UftDQsgH8R+Mtk3LNBbSS6BqVHKLKiArAVfShdEDj9qkYgaLVbkybJLS6GxIjEWvVk/UisSIdnmGn0pEmHpl0ZaKsTY24buO/YjtWCmu55Fw9izoUiEy0uqUIyX91ZetM5TNZiR5kBSAbfUwtRYwLUkXj41tkIvxuvgRwvvBo4q1F7mA9/WtPee7rCqFY8fHj4/+O7Vq5cHz168fHX07FAkolvhvJV6JhKBSn2YhmjsmvgvoozgRM+kpuBSY3MKdj55i3MEZfQMHFmJSv5KBac0ynz6gJIavSfLYv89+Mv1aPDq5ts/ikRUUr8jPfOlGB8kosK7/unweSK89MGHd0bP2K/VzWZs298Vv+BEkfOvTdFytDd5m6JylIjcaM/YHC8F1rWSeYBv+smxr8utPHWWm+wT5QxlLArJU1GdWYa9l+TWUuutoeWmKs5pSpZ0TvuJn4DtX4ZY5qVxpCNSCRpHFnyJfg35Gq1njHFRWMqNLULlNMpLPYOpNVWE+Fr38KN+3zjPa/8MI5BTqK2Zy4KKWAGdf1J7mpHdxpjU/sVRTIqsmiqkpI/3h33XVqv9dJwz8ps4L+RDrFY8z5KrjXYxTIejo/24XG7XkHRQob2NoOp5YihWiTgajR5e2zsJBXpkAdp4mKOSBdfRZ7JfW5Mpqr7dR8H9pJ3FmVCQR6kgooOtixMzKkBquD7//hheHT3/7uZJ6X3txmm6WCyGdpoPqJDe2KGxs9ROc/7leU+HcFmSJaiw5YxtwAYbaIGrKZdTmTO3+OhrMIZTuZPUNWh3cRnfLveKcp35xso90p7A1fkphHzIactg21Md1kyxUSwDM9P4caZQ3+4w0Pb4BjH7xtzX7pqqQrvm1/uKNwpeYwFrtCXCefTNltufQXqgwn0Y/XB5eQZRBOSmoMDJocA6A3Z0H41GW+USn/AuPr0YjVasgfHyG/zVQHe1Qh2Aed9pqaEyljr07brfud7jpYXrCu/emsxdmknu5Rw9uRvIUXNBREJxVHCkpHYeO5L6H6DBO+QePoyVM3nf/l2D0/lh+slkLsVoHsvc5pKu1N7EyEX+OPoiZSykL3c2Yt6bOxqYmkY/0sAjDTzSwFdOA88f2v0nGji3lquFrDUWTJ431lIBi1KqoJ6PDb1t3ZfiIx888sEjH3ztfPDs4c8CR3Yuc+IPgEAF2qsWGo1zlAozRVxf4ZDRQol1TRqMVi0YDc5Ua4pwsAhVyDa7cGCH3BJHDjLMb2tLzjX83kBtaR5O/51yst8wUqq68ZvDs4vntYw4LHRXYuM8FQng3MiCx0I2Hc1Z6RSlaiy5IZzqvovhKAkaQkz6aHacF6mHGQ2ldvDz+cnFh6vz45P/nPzjh8nVxeXJm5+HcKwkae8ALYXTZFWR5kOTNxDsb1CpNjRS+Dxq3FYocOqJ2xPsuZlOoSYrTTGEf5qGYQSK0HZ4DLUdbNsJU0V5iVq6CjiqY+i5sDC5G+ZYNbrAoTThOeXYGc3Gpr9yIyL1lJda5qgGudE51d6lPe0PNgyf/qFEXSipZ4Md3ZEPH/n+ke8f+f5r5fsVNz43NMU84KSLBd314+jOk3bS6NjevaVWjD+7KBFzVA11i7mJWJEvDXe0a+N87FqWbGp/pnTpcut4uUrtut3Frd5A+1FxY5UYi2UkktU4TZelcX41XtbG+lU6PwzKreS9KICUX0fC6QtJmRxVGe3YByi/4OZ1H+IPNi/J+dijg2PFO4uF85OLS/grelpgG9pnrH5XzcvRy9GDGnjqb5A+OTvtNrygYJs6exXMgQ+qiJN/r5LQ7nWUN1b69oJFxBC+JrRkJw2nbI3kTnfQxM9ZmCSS7p/ve3y//fslm5+hk/mXRPCcAFXeL843feeTHtsPd4JHodamJoju26oP+jw5O2V8kHUxVqPhQbd5YR7S111bHMc9s+vRU1ezEXv9xjOTvmyyYW6qtNti13+lcw05sdqr67PTwHf8edDosEnqWWywIPQ6X0IereWqVjIn7egB097FN/C36AwcDEe/x8RMmSytUOq0U+HS48n7q5/eTAbvTo9Pfro4GRwMR0N/50NCuGwr1Ft2nMfm8bordB+Hy803wf/TNVUHPU93Pq0VSs1ZClFbdqR0vb60ciIR490brC1eukk6brkWy2WGjq6sWq14+JeGbCvG1zcbKoq3QNLx/5urk88G7Ml5d8vyFL58E/agS90g6nbDxkIkHXFvO7W6WSWiJCzIblH7cbRlcMlyNhL2bnhWSb9ikvO342fm7nwI7mwIZx8uLpk1uuulyhS81uKCo42LaLUJMQpkFMaWQqGeNTjjuVEm//wXeI81Fg==
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,10 +32,8 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
-Marks the incident as resolved; most likely a call to Update job will be necessary to reset the job’s retries, followed by this call.
+Marks the incident as resolved; most likely a call to Update job will be necessary
+to reset the job's retries, followed by this call.
 
 <Heading
   id={"request"}
@@ -54,10 +50,23 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
       required: true,
       description: "Key of the incident to resolve.",
       schema: {
+        description: "System-generated key for a incident.",
+        format: "IncidentKey",
+        "x-semantic-type": "IncidentKey",
+        example: "2251799813689432",
         type: "string",
-        format: "string<IncidentKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "IncidentKey",
       },
     },
   ]}
@@ -71,6 +80,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
       "application/json": {
         schema: {
           type: "object",
+          additionalProperties: false,
           properties: {
             operationReference: {
               description:
@@ -130,6 +140,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -177,6 +188,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -188,7 +200,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -224,6 +236,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -272,6 +285,7 @@ Marks the incident as resolved; most likely a call to Update job will be necessa
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

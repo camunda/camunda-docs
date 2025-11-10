@@ -1,18 +1,16 @@
 ---
 id: get-incident
 title: "Get incident"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Returns incident as JSON."
 sidebar_label: "Get incident"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Returns incident as JSON.
 
 <Heading
@@ -55,10 +50,23 @@ Returns incident as JSON.
       description:
         "The assigned key of the incident, which acts as a unique identifier for this incident.",
       schema: {
+        description: "System-generated key for a incident.",
+        format: "IncidentKey",
+        "x-semantic-type": "IncidentKey",
+        example: "2251799813689432",
         type: "string",
-        format: "string<IncidentKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "IncidentKey",
       },
     },
   ]}
@@ -84,6 +92,9 @@ Returns incident as JSON.
                       "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
                     format: "ProcessDefinitionId",
                     type: "string",
+                    "x-semantic-type": "ProcessDefinitionId",
+                    minLength: 1,
+                    pattern: "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
                     example: "new-account-onboarding-workflow",
                     title: "ProcessDefinitionId",
                   },
@@ -92,26 +103,30 @@ Returns incident as JSON.
                   "The process definition ID associated to this incident.",
               },
               errorType: {
-                type: "string",
-                description:
-                  "Incident error type with a defined set of values.",
-                enum: [
-                  "UNSPECIFIED",
-                  "UNKNOWN",
-                  "IO_MAPPING_ERROR",
-                  "JOB_NO_RETRIES",
-                  "EXECUTION_LISTENER_NO_RETRIES",
-                  "TASK_LISTENER_NO_RETRIES",
-                  "AD_HOC_SUB_PROCESS_NO_RETRIES",
-                  "CONDITION_ERROR",
-                  "EXTRACT_VALUE_ERROR",
-                  "CALLED_ELEMENT_ERROR",
-                  "UNHANDLED_ERROR_EVENT",
-                  "MESSAGE_SIZE_EXCEEDED",
-                  "CALLED_DECISION_ERROR",
-                  "DECISION_EVALUATION_ERROR",
-                  "FORM_NOT_FOUND",
-                  "RESOURCE_NOT_FOUND",
+                allOf: [
+                  {
+                    description:
+                      "Incident error type with a defined set of values.",
+                    enum: [
+                      "AD_HOC_SUB_PROCESS_NO_RETRIES",
+                      "CALLED_DECISION_ERROR",
+                      "CALLED_ELEMENT_ERROR",
+                      "CONDITION_ERROR",
+                      "DECISION_EVALUATION_ERROR",
+                      "EXECUTION_LISTENER_NO_RETRIES",
+                      "EXTRACT_VALUE_ERROR",
+                      "FORM_NOT_FOUND",
+                      "IO_MAPPING_ERROR",
+                      "JOB_NO_RETRIES",
+                      "MESSAGE_SIZE_EXCEEDED",
+                      "RESOURCE_NOT_FOUND",
+                      "TASK_LISTENER_NO_RETRIES",
+                      "UNHANDLED_ERROR_EVENT",
+                      "UNKNOWN",
+                      "UNSPECIFIED",
+                    ],
+                    title: "IncidentErrorTypeEnum",
+                  },
                 ],
               },
               errorMessage: {
@@ -120,45 +135,51 @@ Returns incident as JSON.
                   "Error message which describes the error in more detail.",
               },
               elementId: {
-                description: "The element ID associated to this incident.",
                 allOf: [
                   {
                     description: "The model-defined id of an element.",
                     format: "ElementId",
                     type: "string",
+                    "x-semantic-type": "ElementId",
                     example: "Activity_106kosb",
                     title: "ElementId",
                   },
                 ],
+                description: "The element ID associated to this incident.",
               },
-              creationTime: {
-                type: "string",
-                description: "Date of incident creation.",
-                format: "date-time",
-              },
+              creationTime: { type: "string", format: "date-time" },
               state: {
-                type: "string",
-                description:
-                  "State of this incident with a defined set of values.",
-                enum: ["ACTIVE", "MIGRATED", "RESOLVED", "PENDING"],
+                allOf: [
+                  {
+                    description:
+                      "Incident states with a defined set of values.",
+                    enum: ["ACTIVE", "MIGRATED", "PENDING", "RESOLVED"],
+                    title: "IncidentStateEnum",
+                  },
+                ],
               },
               tenantId: {
-                description: "The tenant ID of the incident.",
                 allOf: [
                   {
                     example: "customer-service",
                     description: "The unique identifier of the tenant.",
                     format: "TenantId",
                     type: "string",
+                    "x-semantic-type": "TenantId",
+                    minLength: 1,
+                    maxLength: 256,
+                    pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                     title: "TenantId",
                   },
                 ],
+                description: "The tenant ID of the incident.",
               },
               incidentKey: {
                 allOf: [
                   {
                     description: "System-generated key for a incident.",
                     format: "IncidentKey",
+                    "x-semantic-type": "IncidentKey",
                     example: "2251799813689432",
                     type: "string",
                     allOf: [
@@ -166,6 +187,9 @@ Returns incident as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -181,6 +205,7 @@ Returns incident as JSON.
                     description:
                       "System-generated key for a deployed process definition.",
                     format: "ProcessDefinitionKey",
+                    "x-semantic-type": "ProcessDefinitionKey",
                     example: "2251799813686749",
                     type: "string",
                     allOf: [
@@ -188,6 +213,9 @@ Returns incident as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -202,6 +230,7 @@ Returns incident as JSON.
                   {
                     description: "System-generated key for a process instance.",
                     format: "ProcessInstanceKey",
+                    "x-semantic-type": "ProcessInstanceKey",
                     example: "2251799813690746",
                     type: "string",
                     allOf: [
@@ -209,6 +238,9 @@ Returns incident as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -223,6 +255,7 @@ Returns incident as JSON.
                   {
                     description: "System-generated key for a element instance.",
                     format: "ElementInstanceKey",
+                    "x-semantic-type": "ElementInstanceKey",
                     example: "2251799813686789",
                     type: "string",
                     allOf: [
@@ -230,6 +263,9 @@ Returns incident as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -244,6 +280,7 @@ Returns incident as JSON.
                   {
                     description: "System-generated key for a job.",
                     format: "JobKey",
+                    "x-semantic-type": "JobKey",
                     example: "2251799813653498",
                     type: "string",
                     allOf: [
@@ -251,6 +288,9 @@ Returns incident as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -303,6 +343,7 @@ Returns incident as JSON.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -351,6 +392,7 @@ Returns incident as JSON.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -398,6 +440,7 @@ Returns incident as JSON.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -409,8 +452,7 @@ Returns incident as JSON.
       },
     },
     "404": {
-      description:
-        "The incident with the given key was not found. More details are provided in the response body.\n",
+      description: "The incident with the given key was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -446,6 +488,7 @@ Returns incident as JSON.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -457,7 +500,7 @@ Returns incident as JSON.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -493,6 +536,7 @@ Returns incident as JSON.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

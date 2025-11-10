@@ -1,18 +1,16 @@
 ---
 id: complete-job
 title: "Complete job"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Complete a job with the given payload, which allows completing the associated service task."
 sidebar_label: "Complete job"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Complete a job with the given payload, which allows completing the associated service task.
 
 <Heading
@@ -54,10 +49,23 @@ Complete a job with the given payload, which allows completing the associated se
       required: true,
       description: "The key of the job to complete.",
       schema: {
+        description: "System-generated key for a job.",
+        format: "JobKey",
+        "x-semantic-type": "JobKey",
+        example: "2251799813653498",
         type: "string",
-        format: "string<JobKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        title: "JobKey",
       },
     },
   ]}
@@ -71,6 +79,7 @@ Complete a job with the given payload, which allows completing the associated se
       "application/json": {
         schema: {
           type: "object",
+          additionalProperties: false,
           properties: {
             variables: {
               additionalProperties: true,
@@ -85,6 +94,8 @@ Complete a job with the given payload, which allows completing the associated se
                 propertyName: "type",
                 mapping: {
                   userTask: {
+                    description:
+                      "Job result details for a user task completion, optionally including a denial reason and corrected task properties.\n",
                     type: "object",
                     nullable: true,
                     properties: {
@@ -148,10 +159,18 @@ Complete a job with the given payload, which allows completing the associated se
                         },
                         title: "JobResultCorrections",
                       },
+                      type: {
+                        description:
+                          "Used to distinguish between different types of job results.",
+                        type: "string",
+                        example: "userTask",
+                      },
                     },
                     title: "JobResultUserTask",
                   },
                   adHocSubProcess: {
+                    description:
+                      "Job result details for an ad‑hoc sub‑process, including elements to activate and flags indicating completion or cancellation behavior.\n",
                     type: "object",
                     nullable: true,
                     properties: {
@@ -160,27 +179,28 @@ Complete a job with the given payload, which allows completing the associated se
                         description:
                           "Indicates which elements need to be activated in the ad-hoc subprocess.",
                         items: {
+                          description:
+                            "Instruction to activate a single BPMN element within an ad‑hoc sub‑process, optionally providing variables scoped to that element.",
                           type: "object",
                           properties: {
                             elementId: {
-                              description: "The ID of the element to activate.",
                               allOf: [
                                 {
                                   description:
                                     "The model-defined id of an element.",
                                   format: "ElementId",
                                   type: "string",
+                                  "x-semantic-type": "ElementId",
                                   example: "Activity_106kosb",
                                   title: "ElementId",
                                 },
                               ],
+                              description: "The element ID to activate.",
                             },
                             variables: {
-                              description:
-                                "JSON document that will create the variables on the scope of the activated element.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
-                              additionalProperties: true,
                               type: "object",
-                              nullable: true,
+                              additionalProperties: true,
+                              description: "Variables for the element.",
                             },
                           },
                           title: "JobResultActivateElement",
@@ -200,23 +220,21 @@ Complete a job with the given payload, which allows completing the associated se
                         default: false,
                         nullable: false,
                       },
+                      type: {
+                        description:
+                          "Used to distinguish between different types of job results.",
+                        type: "string",
+                        example: "adHocSubProcess",
+                      },
                     },
                     title: "JobResultAdHocSubProcess",
                   },
                 },
               },
-              required: ["type"],
-              properties: {
-                type: {
-                  type: "string",
-                  description:
-                    "Used to distinguish between different types of job results.",
-                  enum: ["userTask", "adHocSubProcess"],
-                  default: "userTask",
-                },
-              },
               oneOf: [
                 {
+                  description:
+                    "Job result details for a user task completion, optionally including a denial reason and corrected task properties.\n",
                   type: "object",
                   nullable: true,
                   properties: {
@@ -280,10 +298,18 @@ Complete a job with the given payload, which allows completing the associated se
                       },
                       title: "JobResultCorrections",
                     },
+                    type: {
+                      description:
+                        "Used to distinguish between different types of job results.",
+                      type: "string",
+                      example: "userTask",
+                    },
                   },
                   title: "JobResultUserTask",
                 },
                 {
+                  description:
+                    "Job result details for an ad‑hoc sub‑process, including elements to activate and flags indicating completion or cancellation behavior.\n",
                   type: "object",
                   nullable: true,
                   properties: {
@@ -292,27 +318,28 @@ Complete a job with the given payload, which allows completing the associated se
                       description:
                         "Indicates which elements need to be activated in the ad-hoc subprocess.",
                       items: {
+                        description:
+                          "Instruction to activate a single BPMN element within an ad‑hoc sub‑process, optionally providing variables scoped to that element.",
                         type: "object",
                         properties: {
                           elementId: {
-                            description: "The ID of the element to activate.",
                             allOf: [
                               {
                                 description:
                                   "The model-defined id of an element.",
                                 format: "ElementId",
                                 type: "string",
+                                "x-semantic-type": "ElementId",
                                 example: "Activity_106kosb",
                                 title: "ElementId",
                               },
                             ],
+                            description: "The element ID to activate.",
                           },
                           variables: {
-                            description:
-                              "JSON document that will create the variables on the scope of the activated element.\nIt must be a JSON object, as variables will be mapped in a key-value fashion.\n",
-                            additionalProperties: true,
                             type: "object",
-                            nullable: true,
+                            additionalProperties: true,
+                            description: "Variables for the element.",
                           },
                         },
                         title: "JobResultActivateElement",
@@ -331,6 +358,12 @@ Complete a job with the given payload, which allows completing the associated se
                         "Indicates whether the remaining instances of the ad-hoc subprocess should be canceled.",
                       default: false,
                       nullable: false,
+                    },
+                    type: {
+                      description:
+                        "Used to distinguish between different types of job results.",
+                      type: "string",
+                      example: "adHocSubProcess",
                     },
                   },
                   title: "JobResultAdHocSubProcess",
@@ -388,6 +421,7 @@ Complete a job with the given payload, which allows completing the associated se
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -435,6 +469,7 @@ Complete a job with the given payload, which allows completing the associated se
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -483,6 +518,7 @@ Complete a job with the given payload, which allows completing the associated se
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -494,7 +530,7 @@ Complete a job with the given payload, which allows completing the associated se
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -530,6 +566,7 @@ Complete a job with the given payload, which allows completing the associated se
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -578,6 +615,7 @@ Complete a job with the given payload, which allows completing the associated se
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

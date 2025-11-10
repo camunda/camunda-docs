@@ -1,18 +1,16 @@
 ---
 id: search-users-for-tenant
 title: "Search users for tenant"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Retrieves a filtered and sorted list of users for a specified tenant."
 sidebar_label: "Search users for tenant"
 hide_title: true
 hide_table_of_contents: true
-api: eJzVWFtv2zYU/isEnzpMsZyuGAq/ZY47eGjiLHY6DK6BUtKRxVYiVZJK4hn678MhaUmOZXfpgLXzi23x8Nwvn86WGrbWdLSkCxBMGLoKqCxBMcOlmCZ0RDUwFWd3GpR+I5WnCmgCOla8RDI6ou/Fe7FcjmfX8+l8Mbke/zmavJtcL+4u3q5WeHYLRnG4B00YSXluQEFCmEiIlspAQnKuDZEpqVAMSaUijOgSYp5ySIixQgc0oCVTrAADClXeUsEKoCPqzqcJDShHbUpmMhpQBZ8rriChI6MqCKiOMygYHW0pPLKizPFqXGkjC1BnGtQ9j+HAskUGpBL8cwWEJyAMaqRQVZNBR7FUqoIZpG91MZsSRWijuFjjf26szIakrldOS9DmF5lsULVW6ZTlGgIaS2FAGDxjZZnz2IYm/KhRvW3HKJbns9S6xQuW0UeIMValwpAaDhrpSrYG/N6384atubCsSay4AcUZ2tUy/TI5GTOBESQyTTWYs4hpSEjZUr5IlSzCnBfc/EBmtySulJaqh46lBlQYQSoVkB+JuxGQqDJESEMiaTJUTgo4YvHO1bN+TQ58good+gRjz0UCjxhvbqDQxEiiDVOGuLLgYk3w7qANNxcG1qC6OcGF+emlzayUVbmho2FACy54URV0NKwDag3sl1+wR6Qjoioil3iNIgpMpQThgkgBxOfRMzU5H3Z1Oa/rOjjuzXE3XqlUD0w98WqbvUtqg4j9ZN/V7vGBrXcabEl9AJE4OR/IPcsrsP61R6WCey4rTRToUgq8IEkKJs7ssYBHg9pg/iFJlRt9KoXRuyASn4XoRuajSj5XoDaeB9GwX+Fo/s+veuq77Sp//DXdXC8mP80Wn15dLa5ezi7jx6vL35KOLyc7M2m9+tYZ8IyoRyz+dDrsrmoP4+6fHw+8rauvC31z/Mzwu1L+Ngkwb839PlJg1dHNeuF3dMINW8Ot40otyV6W1HXvpeMXnmYFzv9Dm+dSGZJyyJO9YeRZMaXYBmc9+gAvnxZh+fT71YnAno4Co82gL6gCO+OSIjSxeANjJVXS18SQpz3CeDxkHNPTM8c0VZAzRDtW7ClZF/MxDejlZD7GOmri5J83DpfKzFDaBK9hKLp16MxePYUdCOQ6kUIeTbS60eyl7lBaaa4WrZdfDof9/vAV5WtpD+PtQ6h/DHSehvs48On6w8Keg670RTDEhasb/M0iWblI7hl1ss18BatTVhhpWD61iX9gS+fsMBJ45rtGwYxDLii+p776W4bteE2HO68DmjF9JRUsToidigTjCJrwlBSI5rydBB4R8kewkSLxxVG6d4HWDDcFBuSysv1eb7SBwqFB60UduBR6coHETJAIv8oSksF70ZoWSZkDE11LLMyuA9oZP/2J7MeEn0xSkTUYs3Pj0QlE3HzjGluCnXNuEH7wzUemhAkCQlfIqtO//zdzqwFsX+G2Xsx26DKLGf+Vx74ToFd3Lu8X7HlvPe2S8+hgdh3Ys+6dxA3F03bBj3QKizd8h7C9+utHbzMz99659QPPc667rr7bEZ54/cZzG3yrVd/43NnfcOsfaLc23KfHXUuDVAWYTOIypJTaWokLhhEN3fDS4Xa3gahD67HQpRcNKK4VdtuKSuV0RLdukNWjMNxmUpt6tMXGV4f3iMnumeIsyp378NgFaAcAchmzPHNKHDoKD3ZewrqZqTgDbdwyh4zzShtQ5HYyX5BfmYEHthnQOqBlg8F2Yl4PXw97JSDpP+B+cTMlznIroB3drYjMmLJXhCN+rhALXzXEleJmM0cWzoW/AFOgLiqMV5OtXraVZKeCJaKB//Fml5W//bFA9SOmefwlFkhj8w3xym2705m05e6w7rJBpG15NIDSIjxbqh6XuMXEsHk7sFAd11yptNrs9hy9brq4mWJKgdLOvcPBucdZLLYR9/uzMSsqkTAyEWsuAHw1uXRFQ/UoDNfcZFU0iGURxo68+eZaV6DRU/vRxABhw49lUVTC4jmxJg/cZISRnczXJHbaYkHnPAZsVoeqvXUn5J0zhpwPhs9RMcplFBaMi9CL0OH44uru+vLi7O10PLmeT87OB8OBeXSvNFjmBRMdPVxX6GLX3kXotkWx/9lO1GekgUcTljnjAiNhPbP1jWrpN6TYckedZanlbJuU7VarwHecJd1ucfjdqbyu8bEdk3S0XLUNys1ZrvF3u6w86owXtx7E/kCOqbwbMWJj+2Be4T8a0E+w6e54LebIgNl6WW798dhJOlsgk/b6wYsELjrcjYs4htKcpF11Ov/NbL7ADuHXtIVM8I5iDwjQ2YNTVVrLbeOxz7Y0Z2Jd2Vqmjid+/gaEpCPJ
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Retrieves a filtered and sorted list of users for a specified tenant.
 
 <Heading
@@ -52,11 +47,16 @@ Retrieves a filtered and sorted list of users for a specified tenant.
       name: "tenantId",
       in: "path",
       required: true,
+      description: "The unique identifier of the tenant.",
       schema: {
         example: "customer-service",
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -70,100 +70,111 @@ Retrieves a filtered and sorted list of users for a specified tenant.
     content: {
       "application/json": {
         schema: {
+          additionalProperties: false,
           allOf: [
             {
               type: "object",
               properties: {
                 page: {
-                  description: "Pagination criteria.",
-                  allOf: [
+                  "x-polymorphic-schema": true,
+                  description:
+                    "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                  oneOf: [
                     {
-                      description:
-                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
-                      oneOf: [
-                        {
-                          type: "object",
-                          title: "Offset-based pagination",
-                          properties: {
-                            from: {
-                              description:
-                                "The index of items to start searching from.",
-                              type: "integer",
-                              format: "int32",
-                              default: 0,
-                              minimum: 0,
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                              minimum: 1,
-                            },
-                          },
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based forward pagination",
-                          required: ["after"],
-                          properties: {
-                            after: {
-                              description:
-                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The end cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "EndCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based backward pagination",
-                          required: ["before"],
-                          properties: {
-                            before: {
-                              description:
-                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The start cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "StartCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
                         },
-                      ],
-                      title: "SearchQueryPageRequest",
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based forward pagination",
+                      required: ["after"],
+                      properties: {
+                        after: {
+                          description:
+                            "The start cursor in a search query result set.",
+                          format: "base64",
+                          type: "string",
+                          "x-semantic-type": "StartCursor",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "StartCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based backward pagination",
+                      required: ["before"],
+                      properties: {
+                        before: {
+                          description:
+                            "The end cursor in a search query result set.",
+                          format: "base64",
+                          "x-semantic-type": "EndCursor",
+                          type: "string",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "EndCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
                     },
                   ],
-                  type: "object",
+                  title: "SearchQueryPageRequest",
                 },
               },
               title: "SearchQueryRequest",
@@ -221,58 +232,49 @@ Retrieves a filtered and sorted list of users for a specified tenant.
                   page: {
                     description:
                       "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        required: ["totalItems"],
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                            example: 1,
-                          },
-                          hasMoreTotalItems: {
-                            description:
-                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
-                            type: "boolean",
-                            example: false,
-                          },
-                          startCursor: {
-                            description:
-                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The start cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "StartCursor",
-                              },
-                            ],
-                          },
-                          endCursor: {
-                            description:
-                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The end cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "EndCursor",
-                              },
-                            ],
-                          },
-                        },
-                        example: { totalItems: 1, hasMoreTotalItems: false },
-                        title: "SearchQueryPageResponse",
+                    type: "object",
+                    required: ["totalItems"],
+                    "x-semantic-provider": ["startCursor", "endCursor"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
                       },
-                    ],
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether there are more items matching the criteria beyond the returned items.\nThis is useful for determining if additional requests are needed to retrieve all results.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The start cursor in a search query result set.",
+                        format: "base64",
+                        type: "string",
+                        "x-semantic-type": "StartCursor",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "StartCursor",
+                      },
+                      endCursor: {
+                        description:
+                          "The end cursor in a search query result set.",
+                        format: "base64",
+                        "x-semantic-type": "EndCursor",
+                        type: "string",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "EndCursor",
+                      },
+                    },
+                    example: { totalItems: 1, hasMoreTotalItems: false },
+                    title: "SearchQueryPageResponse",
                   },
                 },
                 title: "SearchQueryResponse",
@@ -289,7 +291,11 @@ Retrieves a filtered and sorted list of users for a specified tenant.
                       example: "swillis",
                       format: "Username",
                       description: "The unique name of a user.",
+                      "x-semantic-type": "Username",
                       type: "string",
+                      minLength: 1,
+                      maxLength: 256,
+                      pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                       title: "Username",
                     },
                   },

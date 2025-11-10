@@ -1,18 +1,16 @@
 ---
 id: delete-document
 title: "Delete document"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Delete a document from the Camunda 8 cluster."
 sidebar_label: "Delete document"
 hide_title: true
 hide_table_of_contents: true
-api: eJztV91v2zYQ/1cOfGoxxXK7bOv05jpu56JLg9hdMbh+oKizxVYiFZJyYhj634cjJX8HTbGnDX0IHInH+/3uU3cb5vjSsmTGrrSoS1SOzSOmKzTcSa3GGUtYhgU63J5HLEMrjKxIgCXss/qsZrPhh+vJeDIdXQ//TibT2w/Xb+dzOrnyl4FD1t6HhdEluBxhyMtaZRxegShq69D06MK1dggu5w5cLi1IC6I2BpUr1mDrqtLGYQYLbXYardMGLegFuHWFCQw+TSJ4O7yJQKqLEktt1vBMaXVRGZ3Vgng/j6DQghcn7z8rFrGKG16iQ0Oe2TDFSyQ/tHjjjEVMkukVdzmLmMG7WhrMWOJMjcf+meYI4yvPLscdaachOLbHImZFjiVnyebobud0GGfBJ7WSdzUWa5AZKicXEu2eb0nVQpuSu727ni45hiXMOiPVkp6lK/BQqGmiraneozs772o06wNDF7ywT7XUK9vZe3hI2XDogUOqTTMnXFtpZdHS+cv+5amjpvs677ltsTKwtRBo7aIuinWPNRG7/PZ16XJPcilXqMgiUqi0g4WuVUZshVaOaiHZMF5VhRS+WuLK6LTA8qcvlrRuHg3rAG6CJGTouCxAp19QOPC8STDFDKSC2e2bIfx++ctv82e5c5VN4vj+/r5nFuICM+m06WmzjM1C0B/JPe/BNEeDUPI1pAg8yyRh8gIqQ1XtKGFshUIupKCYkJ0tbV89PV8AbQwCLSqI7eVdhI4jtZd6tZEnbWIAH2/HXdqupVqeQvs7C14XpIOnunZJWnD1lUUMH3hZ+Yzdf99sE/mUzDG6rcuSm3WXncfAO4DXPINbvKvROgKwjrt6z2wmlcMlmn17pXI/vzzBpKT6Yzq9gaAChM7QNy7f2FoCB9iX/X7ESqlkWZfdE38IT7/2+w0hUL48wV4F+FAVXPnEPDZaKiipJoO2Q/Nb07t8WcOs5A/vdGqneiCcXHGHdg6CKyqIFKHixmJGnpLKOq7Ek6JBuUDd8yQhtJFLeUz4kGG8ehl/0amNeeBDOptdKrC2tq6Cq5qGzn7p98+UoQIKpqHyQGO0AS38xyaD+1wWHp6aR8fNBNeEEvnRAn60gB8t4D/TApqIlehyvRto/ZznctLWffptvNkNeQ1NJWhW3RRYm4IlbBMKuknieJNr65pkQyNpE68o+ituJE+LUCN0HAq/S2g/cvrX5xKFDmj+6iz/YESO1oVJHIZhRobb0WQKb7nDex4GGoI/hHnVf9U/i0CiT9A+uBlDsNwD7LewDoJ60VmIIPy9IH7KsyhqI916QiqCC18jN2gGNYVpm1Ettkei59QLsaj9501Xku8+TYl+yq0U31JBMj6DpFpoL9hm0nkLBjdjijYaGyzv9160nwQufDDaObpbcUZqKRViWwkhk7p2vpQur9Oe0GUsgvj2V1pbo2XNSfHcjH0XEbosa+U/PWoZ5lZ+Zq1iESukQGXxDLX34QT+CsbAi17/eyimhU7jkksVtxA2Hg7+/Hh9Nbh4Px6Oriejixe9fs89OO/eSltXcrXHo10Qs0fWy83uQ/t/3DTbfHT44OKq4FJRsL3zN213mm33TssiluwtofOobTEzttmk3OJHUzQNvQ77GjWtTFrqR49sbPvO/TfL21krvuL6YJNc8aImKUa13jXK7yT57LbdQJ/DU9bqs7zal1yt90l1fPf828ybiOXIMzSeZhAYCIGV27v66PRHdm6/OVej96PpiDXNPwP5CZQ=
+api: eJztV0tz2zYQ/is7OCVTSlRcp011U2wnVSZNPbbSHBwfQHAlIiEBGg9bGg3/e2cBUqIenjjtKTM5eGQCi/2+XewudtfM8YVl4xt2roWvUDl2mzBdo+FOajXN2ZjlWKLDzX7CcrTCyJoE2Jidh23gkLcSMDe6AlcgnPHKq5zDKxCltw7N8LP6rD5oh+AK7sAV0oK0ILwxqFy5AuvrWhuHOcy12Wq0Thu0oOfgVjWOYfLpOoG3Z5cJSDWosNJmBc+UVoPa6NwLYvY8gVILXh6sf1YsYTU3vEKHhmxfM8UrJEtbvGnOEibJuJq7giXM4J2XBnM2dsbjvgdmBcL0PLArcEvaaYiuG7KEWVFgxdl4ve+9TnqaR594Je88liuQOSon5xJtz7ekaq5NxV3vbKC7HFisuHJSDMhH+9vtmnVGqgV9S1fuCTVNsvFEcPjWDXcezWrHD3Ne2qc6IijbumN3k4Jl10G7VJvmlnBtrZVFS/sno9NDP876Oh+4bbFysF4ItHbuy3I1ZE3CTr99XLoikFzIe1RkESlU2sFce5UTW6GVo2QYrxmv61KKkC5pbXRWYvXLF0ta14/e+gQuoyTk6LgsQWdfUDgIvEkwwxykgpurN2fwx+nL32+fFc7VdpymDw8PQzMXA8yl02aozSI1c0F/JPd8CLMCDULFV5Ah8DyXhMlLqA2ltaN4sjUKOZeC7oTsbGmH5BqG/GjvINKifNkc3t7Q/k31ItMbeVAnJvDxatpF9UqqxSF0ODPnviQdPNPejbOSq68sYbjkVR0itr/ebAL5kMw+uvVVxc2qi8594C3Aa57DFd55tI4ArOPO98xmUjlcoOnbK5X79eQAk4Lqz9nsEqIKEDrHUNdC3WsJ7GCfjkYJq6SSla+6L76MX7+NRg0hULw8wV4FuKxLrkJg7hstFVSUk1Hbrvmt6V28rOCm4st3OrMzPRFO3nOH9hYEV5QQGULNjcWcPCWVdVyJ/xoaVGsP4kMbuZD7/HcJp/cn6Red2ZRHeqSz2UYGa1PtPHquaWjv5Wh0JCsV0N0ayhY0RhvQIjxNOTwUsgzwVEs6biZ66mc9+FkPftaDH7keNNQ+4T0q53lZrgZCKyttTOi20cGlQ2WlVrFh/IorNn70UMLueemxPUwNTIWu0NtmOnSgriCyXddh0/W2/WyoIUJz3/Wn3pRszNaxfDTjNF0X2rpmvKZmuUnvTwKkkTwrY0bSdiwzXfqEZjgsHwtL2qDWr3Ps30YUaF2cAuAsdu9wdXE9g7fc4QOPvRTB78K8Gr0aHUUg0Sdon1xOIVoeAPoFs4OgyncUIgp/L0hoMC0Kb6RbXZOK6MLXyA2aiadr2sRvix2Q6DsLQixp/3nTRfW7TzOin3ErxbdUkEwIUKnmOgi2gXrcgsnllG4bjY2Wj4Yv2geIi3AZbQvfDV8XaiEVYpt3MZK6x2MhXeGzodBVKqL45lda69Gy5iA3L6ehZgldVV6Fh04tYsvMjwx8LGGlFKgsHqH2Pu7AP9EYeDEcfQ/FrNRZWnGp0hbCpmeTvz5+OJ8M3k/PLj5cXwxeDEdDt3TBvbW2ruKqx6MdXfNHRtv19ln/MafcNuIcLl1al1wqus7g3nVbf242M69lCRv3BuDbpC0iN2y9zrjFj6ZsGlqOwyCVpVxaqjiPjIN99/2fyfCoFbEAb8fUtuAyRtnclcLvJPnsqh1vn8NTRvqjvNpFrlZ9Uh3fnn+b2yZhBfIcTe9FmQiBde8Bebyb3HlVzi/eX8wuWNP8C9ERLB4=
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/documents/{documentId}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Delete a document from the Camunda 8 cluster.
 
@@ -58,6 +53,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       schema: {
         description: "Document Id that uniquely identifies a document.",
         format: "DocumentId",
+        "x-semantic-type": "DocumentId",
         type: "string",
         title: "DocumentId",
       },
@@ -116,6 +112,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -127,7 +124,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -163,6 +160,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

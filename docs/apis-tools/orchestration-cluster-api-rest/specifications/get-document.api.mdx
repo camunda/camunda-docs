@@ -1,18 +1,16 @@
 ---
 id: get-document
 title: "Download document"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Download a document from the Camunda 8 cluster."
 sidebar_label: "Download document"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWFFv2zYQ/isEn1pMsdwu2zq/uU6auujSIHFXDKkfKOpssZVIlTzaEQz99+EoyZZjp02xp219CByJ1N133x0/8rjhKJaOj275mZG+AI18HnFTghWojJ6mfMSXgNvBiKfgpFUljfIR/6g/6tvbybvLm+nN7Pxy8tfoZnb97vJiPqeRM7PWuREpEyxtLbCFNQXDDNhEFF6ngr1gMvcOwQ7ok0uDwDATyDBTjinHpLcWNOYVc74sjUVI2cLYnUWHxoJjZsGwKmHExh9uInYxuYqY0icFFMZW7Ik2+qS0JvWSkD+NWG6kyA/ef9Q84qWwogAES8RsuBYF8BHv/E1THnFFwZcCMx5xC1+8spDyEVoP9xmaZcCmZwFdBjvQaFjasjPgEXcyg0Lw0ebe1x3xbJo2rHitvnjIK6ZS0KgWClyPXTK1MLYQ2Ps2ACZq+Ig7tEov6VlhDvuT6jraBhs43UX6xYOt9kJdiNw9NtZgrB/x/jBVxD4H+2D7uKTRCBpfC5c9jK1Jw4PmjqHOhMsOcLfOGuLXwjFpitJT/SXVsQhTTw6YL0NW2daucqwUFg/sW1iABS3bgleOWUBvNaRsnYFuDZHJXobZtLEicxXIEyp3xG1pzUql0IwZa0Fi8B6FN0QOOGRrlecsoedPIBHSwUfN6zmR50qjHTji6/lweFiJsz5yIqNLJqTMeSnBuYXP84oy2RJHRkRZ5koGMYmNRMAThxZEQWMPZahXw4nSwla8rus64qfD02/hUpiFeJdqBZpqkZBqg2xhvE6/gq20Jsmh+OmTI6ubBxfkmF01M1kKKFTOTEJMMiIkTEwgZUqz2+tXE/b76S+/zZ9kiKUbxfF6vR7YhTyBVKGxA2OXsV1I+qN5T0PBWGCFqChDIk0V+RQ5pbYEi7TUXQlSLZSkjFOcLeygfIMgXi2VDSwSs+3HO6K/Qri36kDkx+z99bQTnIrq8cB1+GYhfE42RGI8jpJc6M884nAnijJoTf99vZWgQzD3vTtfFMJW3fq573jn4KVI2XVT6eTAoUDfC5srjbAE249Xafz5+YFPKqrXs9kVa0wwaVIIm07YlFoAe75Ph8OIF0qrwhfdk7hrnn4dDoPoUL08Il7N4K7MhQ6FeT9opVkRtCZY2w+/Db2rl4rdFuLujUnczIwlqpVAcHMmhaYFkQCJkoOUmFLaodDyUdmgWqCd76AgjFVLdR/wPsJ49Tz+ZBIXiwYP2ax3pcDbtXXWUNWs+l+OqdFYM0qmpeUB1hrLjAwHBZJOlQf3JEkdtlb/miXyQwJ+SMAPCfjXSEAd8QIwM20vEg7omJGpbt938WZ3Oq/pKAl21R3fvc35iG+a1VyP4niTGYf1aEO9RB2vKPUrYZVI8maB0HCz6rtqDr1CeH307Ggc0vG0C/udlRk4bDooNmmaG3Z9fjNjFwJhLaoBEU7u9928GL4YHvVAUx9hfXw1ZU3kwUFfvzoXJERHXTSTv9dJTWdHB9JbhdUNmWgofAnCgh17StO2nFrfwRM9J2ESj9p/XnXr8c2HGcFPhFPyWyZoTigfpRcmTGzL6HgE46spZRusayIfDp61+4GQIRltm9H1pud6qTRAuwyaSuq0fKkw88lAmiKWzfTtr3LOgzvsNIg7khBpisLrsO/oZXNoFUf6YR7xXEnQDo5Ae9uMsD+bYNizwfB7ICa5SeJCKB23Llw8Gf/x/vJsfPJ2Ojm/vDk/eTYYDvAOA72lcVgI3cOx7e3TB+4GNrt99r95TdDWJMIdxmUulKaEhwRsWoW63V4aOB7xUe8GYR61MnPLN5tEOHhv87qm1007S8KVKkea9ECz3af3n/XdR+P4DNXeNcBK5J5mcWrGH4/syXXblT9l//c2+6tE799r7Mie7/am76yJe8x/+wrqKLr2pdBVH1aHulfQ9byOeAYiBRuANhPGUkKJvU8fvA6gSLe7/MX5jNf13xikLF4=
+api: eJztWMFy2zYQ/RUMTsmUEhXXbVPdFNtJlElTj600B8cHEFyJSEiAARaSOBr+e2dBUqIsObHTU6Y5eGQS4O7bt4sHLDYcxcLx8Q0/N9IXoJHfRtyUYAUqo6cpH/MF4HYw4ik4aVVJo3zMz81K50akTLC0ncPm1hQMM2BnovA6Few5k7l3CHb4UX/U7wwCw0wgw0w5phyT3lrQmFfM+bI0FiFlc2N3Fh0aC46ZOcOqhDGbfLiO2Kuzy4gpPSigMLZiT7TRg9Ka1EvC9jRiuZEiP3j/UfOIl8KKAhAshb7hWhTAx7zzN015xBWFVwrMeMQtfPHKQsrHaD3c5WCWAZueB3QZ7ECjYWnLzpBH3MkMCsHHmwMG2/nTtGHFa/XFQ14xlYJGNVfgeuySqbmxhcDetwHweuCgEBqVHBBLd4fbdw6t0gt6VpjfmVTX0ZaLQPmOiC8ebLXHxFzk7qFUBGN9QvaHqWD2KdoH28cljUbQ+Fq47DuwZcJlB+hakw37K+GYNEXpqQiT6lgcqSdUzJchtWxrVzlWCosH9i3MwYKWbdUrxyygtxpStspAt4bIZC/NbNpYkbkKFAmVO2KwtGapUmjGjLUgMXiPwhuiAByylcpzltDzJ5AI6TBU/f383hJ7rjTagaPxk9HosFJn/aCIpy6bkDLnpQTn5j7PK0plyykZEWWZKxnkJDYSAQcOLYiCxu5D1KvxRGlhK17XdR3x09Hpt3ApzAIVC7UETcVISLVBNjdep1/BVlqT5FD88smR1c29C3bCLpuZLAUUKmcmIZIZERImJpAypdnN1csz9ufpb3/cPskQSzeO49VqNbRzOYBUobFDYxexnUv6o3lPQy1ZYIWoKHkiTRX5FDllvQSLJAWuBKnmSlIxUJwt7KCMTZpbKhtYJHbbj3dEf4Vwb9WBzE/Y+6tpJ0gVleqB6/DNXPicbIjEeBwnudCfecRhLYoyiE3/fb3VoEMwd707XxTCVt3Suut45+CFSNlVswjIgUOBvhc2VxphAbYfr9L468mBTyqq17PZJWtMMGlSCJtS2LRaAHu+T0ejiBdKq8IX3ZNYN0+/j0Y1eaB6eUC8msG6zIUOhXk3aKVZEWQoWNsPvw29q5eK3RRi/cYkbmYmEtVSILhbJoWmBZEA6ZWDlJhS2qHQ8ntLgzbKg/owVi3UXfz7gOPlSfzJJC4WDTyyWe8qg7dL7bxhrhGB346J00Qzyq2l1QLWGsuMDOcKElmVB/ekUB22Vil/6sFPPfipBz+yHtR08oUlaPQiz6uBNNop1yzo9hwIawTtlNHNaf8zVHx870cRX4rcQ/sxnYwKwMy0jVDoHTAjpN2Rw8WbXeNQ0zEL7LLrLLzN+ZhvGu2ox3G8yYzDeryhNqeOlyfBn1UiyZvlSMONxnRrJ7Qx4fXRE61xSEfjjtW/rczAYdO+sbOm72JXF9cz9kogrEQ1pPSS+303z0fPR0c90NQHWJ9cTlkTeXDQV8vOBcneURfN5Mc6CcdWB9JbhdU1mWgofAHCgp14StO2eFvfwRM9J2ESj9p/XnYl/ebDjOAnwin5LRM0J1Sn0nMTJrZVejyCyeWUsg3WNZGPhs/a3UfIkIy2xena5gu9UBqgXXRNJXU7x0Jh5pOhNEUsm+nbX+WcB8frg4V5OQ2CJU1ReB12Ob1ozsviSKvOI54rCdrBEWhvmxH2TxMMezYcPQZikpskLoTScevCxWeTv96/O58M3k7PLt5dXwyeDUdDXGOgtzQOC6F7OLbXDuk9FxOb3a7+o95RtFWHsMa4zIXSlNJA8abVoJvtjYXjER/3ri9uo1ZIbvhmkwgH721e1/S6aZZJmlLlSHXuaZf7BP63rv5oHI0G7y4ZWs3lnFr9xyH7f/f0X2F3/6pkx/Dtbst5ZCE8uWqvWJ6yh116HUXXvhS66sPqUPequL6tI56BSMH2Nu6JlFD29un7Lxj2Nu9XFzNe1/8CgaJLgQ==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/documents/{documentId}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Download a document from the Camunda 8 cluster.
 
@@ -58,6 +53,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       schema: {
         description: "Document Id that uniquely identifies a document.",
         format: "DocumentId",
+        "x-semantic-type": "DocumentId",
         type: "string",
         title: "DocumentId",
       },
@@ -73,10 +69,10 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
     {
       name: "contentHash",
       in: "query",
-      required: true,
-      schema: { type: "string" },
+      required: false,
       description:
         "The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.\n",
+      schema: { type: "string" },
     },
   ]}
 ></ParamsDetails>
@@ -132,6 +128,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -143,7 +140,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -179,6 +176,7 @@ Note that this is currently supported for document stores of type: AWS, GCP, in-
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

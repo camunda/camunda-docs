@@ -1,18 +1,16 @@
 ---
 id: get-mapping-rule
 title: "Get a mapping rule"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Gets the mapping rule with the given ID."
 sidebar_label: "Get a mapping rule"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWEtv2zgQ/isETy3WsZxuupvVzU3crIs2DRynwcL1gaLGFluJVMmRE8PQf18MKdXPtu5iD7tADoYscjTfPL4ZPlYcxdzxeMLfibJUes5slQOfdrgpwQpURg9THvM5YCMwovkOT8FJq0oS4DH/qD/qyeTi/fXt8HY8uL74Kx58GFyP7/pvp1OauwJ0DDNgxQYKe1CY+dG5WoBmw8vuR807vBRWFIBgya4V16IAHvNiDT9MeYcrwi0FZrzDLXyplIWUx2gr2DVunAEbXjIz27cADZsDdnmHO5lBIXi84rgsCc+hVXrO63pK+l1ptANH8y96PXrsY2z7JhyzgJXVkDJXSQnOzao8XxKYNBpBI6kRZZkr6QMdfXKka7Vvi0k+gUQKjaW0oAqWyFyo4tqHZ9fsQzGgQLZR8J+S+4Uou7zuBF0fRF4dqWxBot/Upv+RUZsB9Gq2c36UvsOJ7vK67nBUmNPnG0wegaty5HVN82e908OZJX6BQ5YL+dmR6yplosIMNDa5Y9JCSq8id5ThDETqCbzi9/f3J/21MBzM8Fe21d9kR2lNkkPxyz5Ltg3us5sgyVJAoXIW2MOEY0EwgZQpzSaj1xfsj7OXv0+fZYili6Po4eGha2fyBFKFxnaNnUd2JulHcs+7bJyBpcguWQJMpKkiTJGzNS+ZK0GqmZJEB0pDYzYjR0N9f5/UYXY/1TNjC4E85pVVe5nvs7vRkCmfgdmSsr4H7b+ZCcp2zEViKoyTXOjPvMPhURSlZ8bm+JowP+Jdn7mqKIRdttTbBV4DvBIpGwU2EYBDgdWG21xphDnYTX+Vxl9fHOT6n+PxDQsqmDQpsJmxDDPlWgO2sM96vQ4vlFZFVbRv4jG8/dbr1YRAfDnCX83gscyFDtTfcVppVhgLDfu23W9cb/myZJNCPL4xiRubvkS1EAhuyqTQ2iBRrBTWQUqRUtqh0PKobBAXaGXYI4Sxaq52Dd62MFq8iD6ZxEUi2EM6N3tHU1uXIVRt3zg7ZkVoV7utruYXCvJ2ZiqdfmdxeCr/p/J/Kv//Yvm/PLQh7GtGybRUHmCtscxIWVkLKXvIVO7haU/Y2tZsMUKJPLWApxbw1AL+Ny2ATiqAmWkOyv4Iixmpapb6E9oAuGi1tfLXdOoEu2jPuZXNecxXoajrOIpWmXFYx6vSWKyjBTFgIawSSR7qhKZD8bekzo0UuR8+RBaa2DxuvbcyA4fhlM8u8sohWDYa3I7ZlUB4EEt/CCP4bZjz3nnvIAKJHqG9fzNkwXMPsNnGWgjqRwchgvDPgvhTvANZWYXLW1IRQvgKhAVLp7MNVjXYHoneEy/EO82f121Zvrkfk/mJcEr+SAXJeBYpPTNesGHTYQ/6N0PKNlgXPO91T5tlQUifjOZS5EIUlU4FG+i50gBNNQQmtS19rjCrkq40RSSD+Nencq4Cx+u9AroZ+k4iTVFU2i8/eh42sIK1mOdMBmupfHIlQTs4YNrbMMM+BGfYabf3MyYmuUmiQigdNRAuuui/u7u+7J+8HV4Mrm8HJ6fdXhcf0Ye3NA4LoTfsuAJkYmsnvsur1Xq9/XcvshoyIDxiVOZCaYq093zVdIgJ3+oQvMPj7TuPaacp8wlfrRLh4M7mdU3DXyqwSx5Ppuuu4NtIqhz9T3k8E7nbvQzb9PXZqLk2e86OuiI76E4zKPTStyd/f8R5h3+G5d6lXT2t25sRb2qQ6UsJJW58vXclRsX7tcFeDca8rv8GfGgo7g==
+api: eJztWFtz0zgU/isaPcGsG6fdwrJ+C23phgG2EwJ96OZBlk9igSwZ6ThNJuP/vnMsmzgXoPDGTB86qa3j853Lp0+XDUex8Dy5429FWSqzYK7SwGcRtyU4gcqaccYTvgBsDSY0HvEMvHSqJAOe8GtAzzAHVvS8sHuFefN2oZZg2Phy8J/hES+FEwUgOMLdcCMK4Akvtu7HGY+4Ir+lwJxH3MGXSjnIeIKugn3waQ5sfMns/DACtGwBOOAR9zKHQvBkw3FdEp5Hp8yC1/WM/PvSGg+exs+GQ/o5xNjNTXjmACtnIGO+khK8n1darwlMWoNgkNyIstRKNoWMP3nytTmMxaafQCKVxlHZUYVIpBaqeNeUZz/sYzWgQnZVaD6l9AtRDngdBV8fha4e6GxJpt/0Zn4pqH4BGze7PX+Qv+ONHvC6jjgq1PR5j6kT8JVGXtc0fj48Pd5Z4hd4ZFrIz55SVxkTFeZgsO0dkw4yehTaU4dzEFlD4A2/vb09GW2N4WiHv7Kt/iY7SmdTDcUfhyzZDXjEboIlywCF0iywhwnPgmEKGVOG3U1eXbC/z5/9NXuSI5Y+ieP7+/uBm8sTyBRaN7BuEbu5pD+yezpg0xwcVXbNUmAiyxRhCs22vGS+BKnmShIdqA1t2IwSDfP7+6QOo4etnltXCOQJr5w66PyIfZiMmWo6MF9T1w+gm2/mgrqdcJHaCpNUC/OZRxxWoigbZvTfbwnzI96NmK+KQrh1R7194C3AS5GxSWATAXgUWPXS5sogLMD181UG/zw7yvV/ptMbFlwwaTNgc+sY5sp3Aexgnw+HES+UUUVVdE9iFZ6eD4c1IRBfHpCvYbAqtTCB+ntJK8MK66Bl3276beodX9bsrhCr1zb1UzuSqJYCwc+YFMZYJIqVwnnIqFLKeBRG/io1aKE44Id1aqH2498NOF6exZ9s6mMRwiOffSlpp9plqFwnI+cPWSC6xW9H5Jp1g5Kf28pk31krHtXgUQ0e1eA3UINnx7aLI8Oot45mCzhnHbNSVs5Bxu5zpRt42jF2sbUbkEc9eNSDRz34nfWgjvjqBJZgsBJar0+kNV75MKHD2RVWCMYra8Lp9zOsefLNbyK+DEc2+pZOqgVgbtsDeXOUxpzibPcYJ7Tz8PFmZ8tR0+kX3LI7b1dO84RvgoDUSRxvcuuxTjaldVjHy7MG1SmR6jAnaTgITTeBtJVCN6+PEZMG+se+f53MwWO4TWAXuvIIjk2u3k/ZtUC4F+vmMEjwuzAvhi+GRxHI9AHeRzdjFjJvAPqS2UGQ9h2FCMY/C9LcJniQlVO4fk8uQglfgnDg6JTYY3CL3SDRc9oY8aj951XH69e3Uwo/FV7JH7kgm4aiysxtY9hS9XgGo5sxdRucD5kPB6ftEiRk04z2cuZCFJXJBLsyC2UA2pkXmNQtHwuFeZUOpC1iGcy//irvK/C8PpidN+NGtaQtiso0S51ZhJ2zYB3mCyZDtDQ3tZJgPBwJ7U0YYR9DMux0MPyZEFNt07gQysQthI8vRm8/vLscnbwZX1y9e391cjoYDnCFTXlL67EQphfHNSATO0eAfV5ttmv7z12Ytc1GWGFcaqEMVbLJbNMqwB3fUQAe8WT3bmUWtdP4jm82qfDwwem6ptdfKnBrntzNtrO+kYlMefo/48lcaL9/6dbP5cmkvZ57yh50FXc0nfalMOut6HEetfq4m0w9q7sbmJ6GjqSEsieZh1dvOwJ6fTXldf0/gs9D2Q==
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/mapping-rules/{mappingRuleId}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Gets the mapping rule with the given ID.
 
@@ -131,6 +126,7 @@ Gets the mapping rule with the given ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -178,6 +174,7 @@ Gets the mapping rule with the given ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -189,7 +186,7 @@ Gets the mapping rule with the given ID.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -225,6 +222,7 @@ Gets the mapping rule with the given ID.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

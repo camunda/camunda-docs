@@ -1,18 +1,16 @@
 ---
 id: reset-clock
 title: "Reset internal clock (alpha)"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time."
 sidebar_label: "Reset internal clock (alpha)"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWN9z47YR/ld20IckU5rUXS7tRW+Kz2mcSXIeW26T+DzNElyKuAMBBgvKVjX83zsLUpZkO9Mkb525Bw9FAtxvf3z7LeGtirhiNb9Rp9brD+o2U76jgNF4d16puQrEFMe1TFXEOphOFtVcXcoSQ2wIfiYqCcitjKNPGIyLFBxa0PIiRJ826T4EchF4w5FaiKalDMhhaY1bgYlpn9EfwDgIhPZEduTv3LIxDA9egWHomereQu0DBIp9cGIgQUx475zzoUULJTW4Nj4A1pGCgDTIUBI56IxzVAkoAnekTW00TJATKLmq88ZFwUQHaLsGoSaMfSBAV0GLGygJuC/fk04B6Abdit4546Du075AlpCJ83dOZZLPzjsmVvOtejl7JZfjtC4f4rhDBu61Jua6t3YDqRi7dB6kMVdDpr6YzZ4aW7h9MSgEH8DrVIcK7hpjCbrgxf4ugYF+7YljrjKlvYvkotjErrNGp/QXXfClpfav71kAtop1Qy0+gwwX406oKKKx4MccIcO4saRKKn1z+fUpfPnqi7/fftrE2PG8KO7u7vJQ6xOqTPQh92FVhFrLn+z7LIdlQ4F2yceqMoKJVoLpKERDfFDRMVuT2xA3HY2VkF9qrka3VKb2L0sw4+ruqjgG41YqU7XwKqq56oN50hELuL48B1ORi6be7HJ6BJ3eqbG3YgNL38d5adFJd9E9tp2lR8+HTEUT7bPOPEbnvm0xbMDXzwLvAb7CCi7HUgsAR4z9QdhKOLOicBivcfHzl08whazfLJcXMJoA7StKfRmlfyYHjrBfzWaZao0zbd/u7vB+vPvbbDYIgvDld8TrgO47i27UhUdBGwetDzSx7zj8KfQdXzZw0+L9t77kpV/oaNYYiW9Bo3M+CsU6DEyVZMo4juj0n6VGh7F5wg8fzMo89v/Y4WL9snjvSy5wdE9sDntmqKnV3oyZG4Yh6cHnz4sLU1gbTSJqkyTbDfQO12gslpakvwyn9mqw68iBd3YD3gH79kEiGO5SFx5IkQ4kmYMS9YcuELPIX/TQBVqL8McJnMInwpS266OYY98HTQx18C2UJGmh+wZ7jlRlgGtvKnmWqsm0FtAaje0DcQ7nbqSaRqYsIaSc7LI5ad4oPaJoaBzDL5dnV2+vL0/P/n324zeL66vl2Ztfcji1hlxkwCTa2rctuWqcEMn/HkcNjmEDsfF8kIpxumCK3Nc1dBSMr3L4yfdCI7CEYeJj6u3k21GaWpLJYbgFyeocdlpYec25xrZ3FebGp/tCcuedOFv8RyZvEUk3zmi0J9o7TV3kYif7J3uFL/7SoKtk2p4cYY96+FHvP+r9R73/f9X7IVP3J3uZEh1gw2ND12iZxHwkx8Y7+d7fqg+0UfPffClTa7Q9TS8Pt5lqKTZejgSd59Q/GBtxNX2rFunTVGVq1PcRoQ9WzdV2VIxhXhTbxnMc5tvOhzgU65cJJRgZOomNsjwqy65jrNdomxHwKRNlwWH7oPZvg26I43RQOLUyQgJcnl0t4R8Y6Q436UtZ4I9hXs9ez55FkK2/w/ri4nyabAngUCN3ECJ2z0KMm/8oyCAlYdJ9MHFzJSbGFH5FGCgseqnNA2Un7IQk92XapLLpx9c7In/7r6W4XyIb/b9MyJ7ESeNqnzZO3Hw+gsXFuVSbAo+Rz/IX08xBnYohdVRzdTqOOjhLZ0maWm1k0m5erExs+jLXvi2myfhwNcw9sRqetOPFeZIpmeq9S7PNreDOxAYQdpivQY/eSjNao8kxPePad+MK/HMMBl7ksz/iYml9WbRoXDFBcHG6+P76hzeLk+/OT89+uDo7eZHP8ngfU3ql21p0B36kc/fjM/an6XD62WOGbfdj/eN5/c+c1yf6R7qPRWfROOFWqvV2UsAbpad/j4waeJtNOnajttsSma6DHQZ5/GtPYaPmN7d72ZO7IVMNYUXhQJYXWr7i9ir8259kR9J88fZqqYbhv8I2Qso=
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,17 +32,12 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
-Resets the Zeebe engine’s internal clock to the current system time, enabling it to tick in real-time.
+Resets the Zeebe engine's internal clock to the current system time, enabling it to tick in real-time.
 This operation is useful for returning the clock to
 normal behavior after it has been pinned to a specific time.
 
-:::note
-This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+This endpoint is an alpha feature and may be subject to change
 in future releases.
-:::
 
 <ParamsDetails parameters={undefined}></ParamsDetails>
 
@@ -58,7 +51,7 @@ in future releases.
       description: "The clock was successfully reset to the system time.",
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -94,6 +87,7 @@ in future releases.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -142,6 +136,7 @@ in future releases.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

@@ -1,18 +1,16 @@
 ---
 id: assign-role-to-client
 title: "Assign a role to a client"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Assigns the specified role to the client. The client will inherit the authorizations associated with this role."
 sidebar_label: "Assign a role to a client"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "put api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,11 +32,7 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
-Assigns the specified role to the client.
-The client will inherit the authorizations associated with this role.
+Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
 
 <Heading
   id={"request"}
@@ -110,6 +104,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -157,6 +152,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -204,6 +200,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -252,6 +249,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -263,7 +261,7 @@ The client will inherit the authorizations associated with this role.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -299,6 +297,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -347,6 +346,7 @@ The client will inherit the authorizations associated with this role.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

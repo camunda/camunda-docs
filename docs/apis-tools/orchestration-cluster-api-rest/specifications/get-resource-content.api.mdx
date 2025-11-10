@@ -1,18 +1,16 @@
 ---
 id: get-resource-content
 title: "Get resource content"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Returns the content of a deployed resource."
 sidebar_label: "Get resource content"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWEtz2zYQ/isYnJIpLcq2/OJNkR3XaWp7ZKWdVtYBBFcUEhJgANA2q+F/7yxA6h3HPjWdycEjE1js9+0Tjzm1LDU0GtMhGFVqDnQSUFWAZlYoeZXQiKZg28mBkhakpQFNwHAtChSiEb2X93I8Htxc313djS6uB39Fd6PhzfXlZIIzQ7CllobYGRDuNRA1JYwkUGSqgoToRn/nXkZRJORU3ctBqTVIm1UBsTNhCMikUAKXyqwipiwKpa0hw9v+Yrnx6+8lDWjBNMvBgkbr5lSyHGhEW8nfoKIBFci9YHZGA6rhayk0JDSyuoRNA0czIKUUX0sgX6AiIgFpxbQSMnVWLfjTgBo+g5zRaE5tVSCmsVrIlAZUSbiZOjbryu8qYyHfS0Gi2yFxEFOlVz1UaMXBGJLAVEiBCxFrqnTOLI3orZ8+X8x6A+GJ5UWGJA4OjvZPzs5O9w+PT49Pemc02KLHsmwnvb8BYiAXMhVyaanj+OYDe2AkUzIlBrRgmfgHEsIM8Trf7gCxwjo+H5VMkWM9WY7tNKIO5v8ds9fHKQEujFCSNPmUg7TfjNp5IzxckX0ucIeHveNnmH9LHbrw9ZYgyzW275XOn2PXOzw++hHTquX9Sjc0cfxO6F5ScYcHx0e9kx/RNbut2M58bH/GO4sZI1K54ivXnFcb4MJHw7Vm22KujtYIpcEUShow2DMPul382YZfuKHdQYQhpuTYMKZlllVEu10GEqTQyKAmVhSZ4G43Cz8bVDf/Zouu67oOaK/b26aw3GTIo7Az1/VT8QDS+eGRGSKVJVNVyucIFFrFGeS/bBPZRLv1kiQBy0RGVPwZuMVAe8EYEiIkGQ/fD8hZ7+hk8mZmbWGiMHx8fOzoKd+DRFilO0qnoZ5y/EO5tx0ymoEGkrOKxEBYkriwswx3mAK0FWCIKYCLqeDEKmdoQ5ugtzpud2385mnhbrtYvPTq9ga4yIxSi60zRJ98Gl5t7axr0G7NlJUZ6mCxKm0UZ0x+Wau71fF6kXbbZDbRTZnnTFd4MtkFvAR4xxKCLRaMRQBjmS1XzKZCWkhBr9orpD082MLEtP51NLolXgXhKoFlSTUE1rB73W5AcyFFXubtF3vyX8fdbo0ImC8vsFcSeCoyJl1ibhotJMmVhib71s1vTG/zpSLjnD19ULEZqT634oFZMBPCmcSCiIEUTBtI0FNCGsskf1E0MBfwZLaVEEqLVGwSXmcYPhyEn1VsQub5oM66Xjtn4KJz7ypf9Ee7+k5fEgymxvIArZUminM8libkcSYyaE9ly2Ogc40vkZ8t4GcL+NkC/jctoA5oDnammhuvu0HaGapa3C7D+cr1sQ754jJsQD+0F81SZzSic1/WdRSG85kyto7meF2twwfMgQemBYszXyk47cu/TetMcZa54V3pghN4m23tv9F8Bsb6CzsZZKWxoMnw4m5ELpmFR1Z10PMIvw5z2j3t7kRA0Rdo799eEW+5A1htZC0EdqSdEF74tSDuuGiAl1rY6g5VeBe+A6ZB90uM1yKvGmyHhN+xE6JB88/7tjA//DlC+jEzgn9PBcq4PMInCifY5NNuC/q3Vxht0MZb3u3sNxsD4y4YzavEgOWlTFhz4oemHnwmtU09FXZWxh2u8pB78cWvMKYEQ+utErq9cr2EqzwvpduAZOqPr4y0mKeEe7ZYQJngIA3soPbRz5A/vDFkv9N9DcU4U3GYMyHDBsKEg/7vn67P+3sfrwYX13cXe/udbsc+WefeQhmbM7nC4xLs1hVgM7Pmyz33R3yRapLKwpMNi4wJiRFzHpw3vWa8eJ8yNKDR+mNVa9skaFrGmM7nMTPwSWd1jcNfS9AVjcaTZYfxl0th8P+ERlOWmc23rVWvvWmeDpK35BUvXjsNawaZrFzDy0r8ogH9AtXGO1w9qQM6A5aAdnS9RJ9zKOzK2q2LHDaDRcu+vBjRuv4XQ501pw==
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/resources/{resourceKey}/content"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Returns the content of a deployed resource.
 :::info
@@ -63,6 +58,7 @@ Currently, this endpoint only supports RPA resources.
             description:
               "System-generated key for a deployed process definition.",
             format: "ProcessDefinitionKey",
+            "x-semantic-type": "ProcessDefinitionKey",
             example: "2251799813686749",
             type: "string",
             allOf: [
@@ -70,6 +66,9 @@ Currently, this endpoint only supports RPA resources.
                 description:
                   "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
+                pattern: "^-?[0-9]+$",
+                minLength: 1,
+                maxLength: 25,
                 title: "LongKey",
               },
             ],
@@ -81,12 +80,16 @@ Currently, this endpoint only supports RPA resources.
                 description:
                   "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
+                pattern: "^-?[0-9]+$",
+                minLength: 1,
+                maxLength: 25,
                 title: "LongKey",
               },
             ],
             description:
               "System-generated key for a deployed decision requirements definition.",
             format: "DecisionRequirementsKey",
+            "x-semantic-type": "DecisionRequirementsKey",
             example: "2251799813683346",
             type: "string",
             title: "DecisionRequirementsKey",
@@ -94,6 +97,7 @@ Currently, this endpoint only supports RPA resources.
           {
             description: "System-generated key for a deployed form.",
             format: "FormKey",
+            "x-semantic-type": "FormKey",
             example: "2251799813684365",
             type: "string",
             allOf: [
@@ -101,6 +105,9 @@ Currently, this endpoint only supports RPA resources.
                 description:
                   "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
+                pattern: "^-?[0-9]+$",
+                minLength: 1,
+                maxLength: 25,
                 title: "LongKey",
               },
             ],
@@ -109,6 +116,7 @@ Currently, this endpoint only supports RPA resources.
           {
             description: "System-generated key for a decision definition.",
             format: "DecisionDefinitionKey",
+            "x-semantic-type": "DecisionDefinitionKey",
             example: "2251799813326547",
             type: "string",
             allOf: [
@@ -116,6 +124,9 @@ Currently, this endpoint only supports RPA resources.
                 description:
                   "Zeebe Engine resource key (Java long serialized as string)",
                 type: "string",
+                pattern: "^-?[0-9]+$",
+                minLength: 1,
+                maxLength: 25,
                 title: "LongKey",
               },
             ],
@@ -138,7 +149,11 @@ Currently, this endpoint only supports RPA resources.
   responses={{
     "200": {
       description: "The resource content is successfully returned.",
-      content: { "application/json": { schema: { type: "string" } } },
+      content: {
+        "application/octet-stream": {
+          schema: { type: "string", format: "binary" },
+        },
+      },
     },
     "404": {
       description: "A resource with the given key was not found.",
@@ -177,6 +192,7 @@ Currently, this endpoint only supports RPA resources.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -188,7 +204,7 @@ Currently, this endpoint only supports RPA resources.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -224,6 +240,7 @@ Currently, this endpoint only supports RPA resources.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

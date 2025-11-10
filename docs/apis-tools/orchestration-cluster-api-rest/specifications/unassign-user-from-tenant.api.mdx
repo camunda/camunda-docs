@@ -1,18 +1,16 @@
 ---
 id: unassign-user-from-tenant
 title: "Unassign a user from a tenant"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Unassigns the user from the specified tenant."
 sidebar_label: "Unassign a user from a tenant"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/tenants/{tenantId}/users/{username}"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Unassigns the user from the specified tenant.
 The user can no longer access tenant data.
@@ -59,6 +54,10 @@ The user can no longer access tenant data.
         description: "The unique identifier of the tenant.",
         format: "TenantId",
         type: "string",
+        "x-semantic-type": "TenantId",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "TenantId",
       },
     },
@@ -71,7 +70,11 @@ The user can no longer access tenant data.
         example: "swillis",
         format: "Username",
         description: "The unique name of a user.",
+        "x-semantic-type": "Username",
         type: "string",
+        minLength: 1,
+        maxLength: 256,
+        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
         title: "Username",
       },
     },
@@ -124,6 +127,7 @@ The user can no longer access tenant data.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -171,6 +175,7 @@ The user can no longer access tenant data.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -218,6 +223,7 @@ The user can no longer access tenant data.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -229,7 +235,7 @@ The user can no longer access tenant data.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -265,6 +271,7 @@ The user can no longer access tenant data.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -313,6 +320,7 @@ The user can no longer access tenant data.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

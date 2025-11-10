@@ -1,18 +1,16 @@
 ---
 id: get-authorization
 title: "Get authorization"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Get authorization by the given key."
 sidebar_label: "Get authorization"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Get authorization by the given key.
 
 <Heading
@@ -54,10 +49,23 @@ Get authorization by the given key.
       required: true,
       description: "The key of the authorization to get.",
       schema: {
+        allOf: [
+          {
+            description:
+              "Zeebe Engine resource key (Java long serialized as string)",
+            type: "string",
+            pattern: "^-?[0-9]+$",
+            minLength: 1,
+            maxLength: 25,
+            title: "LongKey",
+          },
+        ],
+        description: "System-generated key for an authorization.",
+        format: "AuthorizationKey",
+        "x-semantic-type": "AuthorizationKey",
+        example: "2251799813684332",
         type: "string",
-        format: "string<AuthorizationKey>",
-        description:
-          "Zeebe Engine resource key (Java long serialized as string)",
+        title: "AuthorizationKey",
       },
     },
   ]}
@@ -95,33 +103,27 @@ Get authorization by the given key.
               },
               resourceType: {
                 description:
-                  "The type of resource that the permissions relate to.",
+                  "The type of resource to add/remove permissions to/from.",
                 type: "string",
-                allOf: [
-                  {
-                    description:
-                      "The type of resource to add/remove permissions to/from.",
-                    type: "string",
-                    enum: [
-                      "AUTHORIZATION",
-                      "MAPPING_RULE",
-                      "MESSAGE",
-                      "BATCH",
-                      "COMPONENT",
-                      "SYSTEM",
-                      "TENANT",
-                      "RESOURCE",
-                      "PROCESS_DEFINITION",
-                      "DECISION_REQUIREMENTS_DEFINITION",
-                      "DECISION_DEFINITION",
-                      "GROUP",
-                      "USER",
-                      "ROLE",
-                      "DOCUMENT",
-                    ],
-                    title: "ResourceTypeEnum",
-                  },
+                enum: [
+                  "AUTHORIZATION",
+                  "BATCH",
+                  "COMPONENT",
+                  "DECISION_DEFINITION",
+                  "DECISION_REQUIREMENTS_DEFINITION",
+                  "DOCUMENT",
+                  "GROUP",
+                  "MAPPING_RULE",
+                  "MESSAGE",
+                  "PROCESS_DEFINITION",
+                  "RESOURCE",
+                  "ROLE",
+                  "SYSTEM",
+                  "TENANT",
+                  "USER",
+                  "USER_TASK",
                 ],
+                title: "ResourceTypeEnum",
               },
               resourceId: {
                 description: "ID of the resource the permission relates to.",
@@ -131,46 +133,44 @@ Get authorization by the given key.
                 description: "Specifies the types of the permissions.",
                 type: "array",
                 items: {
-                  allOf: [
-                    {
-                      description: "Specifies the type of permissions.",
-                      type: "string",
-                      enum: [
-                        "ACCESS",
-                        "CREATE",
-                        "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE",
-                        "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE",
-                        "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE",
-                        "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE",
-                        "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT",
-                        "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE",
-                        "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION",
-                        "CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION",
-                        "CREATE_PROCESS_INSTANCE",
-                        "CREATE_DECISION_INSTANCE",
-                        "READ",
-                        "READ_PROCESS_INSTANCE",
-                        "READ_USER_TASK",
-                        "READ_DECISION_INSTANCE",
-                        "READ_PROCESS_DEFINITION",
-                        "READ_DECISION_DEFINITION",
-                        "READ_USAGE_METRIC",
-                        "UPDATE",
-                        "UPDATE_PROCESS_INSTANCE",
-                        "UPDATE_USER_TASK",
-                        "CANCEL_PROCESS_INSTANCE",
-                        "MODIFY_PROCESS_INSTANCE",
-                        "DELETE",
-                        "DELETE_PROCESS",
-                        "DELETE_DRD",
-                        "DELETE_FORM",
-                        "DELETE_RESOURCE",
-                        "DELETE_PROCESS_INSTANCE",
-                        "DELETE_DECISION_INSTANCE",
-                      ],
-                      title: "PermissionTypeEnum",
-                    },
+                  description: "Specifies the type of permissions.",
+                  type: "string",
+                  enum: [
+                    "ACCESS",
+                    "CANCEL_PROCESS_INSTANCE",
+                    "CLAIM",
+                    "COMPLETE",
+                    "CREATE",
+                    "CREATE_BATCH_OPERATION_CANCEL_PROCESS_INSTANCE",
+                    "CREATE_BATCH_OPERATION_DELETE_DECISION_DEFINITION",
+                    "CREATE_BATCH_OPERATION_DELETE_DECISION_INSTANCE",
+                    "CREATE_BATCH_OPERATION_DELETE_PROCESS_DEFINITION",
+                    "CREATE_BATCH_OPERATION_DELETE_PROCESS_INSTANCE",
+                    "CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE",
+                    "CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE",
+                    "CREATE_BATCH_OPERATION_RESOLVE_INCIDENT",
+                    "CREATE_DECISION_INSTANCE",
+                    "CREATE_PROCESS_INSTANCE",
+                    "DELETE",
+                    "DELETE_DECISION_INSTANCE",
+                    "DELETE_DRD",
+                    "DELETE_FORM",
+                    "DELETE_PROCESS",
+                    "DELETE_PROCESS_INSTANCE",
+                    "DELETE_RESOURCE",
+                    "MODIFY_PROCESS_INSTANCE",
+                    "READ",
+                    "READ_DECISION_DEFINITION",
+                    "READ_DECISION_INSTANCE",
+                    "READ_PROCESS_DEFINITION",
+                    "READ_PROCESS_INSTANCE",
+                    "READ_USAGE_METRIC",
+                    "READ_USER_TASK",
+                    "UPDATE",
+                    "UPDATE_PROCESS_INSTANCE",
+                    "UPDATE_USER_TASK",
                   ],
+                  title: "PermissionTypeEnum",
                 },
               },
               authorizationKey: {
@@ -181,11 +181,15 @@ Get authorization by the given key.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
                     description: "System-generated key for an authorization.",
                     format: "AuthorizationKey",
+                    "x-semantic-type": "AuthorizationKey",
                     example: "2251799813684332",
                     type: "string",
                     title: "AuthorizationKey",
@@ -237,6 +241,7 @@ Get authorization by the given key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -284,6 +289,7 @@ Get authorization by the given key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -331,6 +337,7 @@ Get authorization by the given key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -342,7 +349,7 @@ Get authorization by the given key.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -378,6 +385,7 @@ Get authorization by the given key.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

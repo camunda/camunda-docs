@@ -1,18 +1,16 @@
 ---
 id: get-status
 title: "Get cluster status"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader."
 sidebar_label: "Get cluster status"
 hide_title: true
 hide_table_of_contents: true
-api: eJzNVMFu2zAM/RWBl13c2O02oPAtS7MgQ5cUTbpiSHOgFSYWZkueRKczDP/7INtpmyFA29tOskWCj+89ijUw7hzEKxhlpWOysA7AFGSRldHTDcSwI14wcukggA05aVXhYxDDg37Qq9VoPltMF8vxbPQzXixv57PJeu0jo5TkLyc4JZESZpwK15YRZtteyg5QJJXYk1XbSumdUG3M0gcnkEVG6FgYTaJAy8rDikfFqcC+ZOVTNmQHEIAlVxjtyEFcw0X0yR/H/S5foCon7m4E6o1I8b1YTQCfo4+v1r+a389ahI0hJ7RhkeKeBOrqDRBNADlxanoHIIACOYUYQncww5Hdk/Xm1VDaDGKonUwpxyYOwzo1jpu4LozlJtxfQAB7tAqTrBPIhzsGWywzhhgyIzFrr//12fPyAY05HdybW5mS425ORD884na8WIoJMj1i1erk4Y9hLqPL6CSCT31D9eHNVHTMW4CO8TFEylychOiS3wvSNGsvtiyt4mrhS3QSfiG0ZIelt6UGrgp6xm6R/H/SJkHQf3w1Nkff47f7pW8/QafkayV8TjsRSm9Nm6g485HTDIY3U+82WdcxjwbnEIA0mlG2ZngfIYYR5qXeoBjrndJEVukdBP0k+R5cHIY7xWmZDKTJQ9mlP53KuZKcJ3EstNdua6yQJs9LrSSyf9j9nB8wLw8Pxb/cTEnSjk60dt1FxI+OjDgfRO9pMclMEuaodNhDuHA0/H43uxqeXU9H49lifHY+iAb8h1t5C+M4R/2ijwnx04t2J5dg3QpLmv+7fdhPE9MfDosMlfZWtdLV/S5ZQc9pHfT7YAV1naCjO5s1jb/+XZKtIF6tn9eH/3u5nSbjJTTNX+7yK8E=
+api: eJy9VE1v2zAM/SsCL7u4cdptQOFblmZFh64tlnY9FD0wDhMLlSVPpLMYhv/7INn9yJCh7WUn2SLxHvkexRa2B7QhKzUa0xzkzrJmISuQrdAwJSC4ZsjuYGpqFvJwn4CryKNoZ8+WkMGaZC4oNUMCS+Lc6yrEIINpQfkDKylIFYRGCsUxUblVvMx7SLVo1Ia8XjXarpWOMU8fWKEoQ8iinCVVoRcdgNVvLYXCAbIJKUvyI0jAE1fOMjFkLRyNP4Vjt6LrF6ya1c2VQrtUBb6Xq0vg8/jjq/gnl7cXkWHpiJV1ogrckELbvIGiS4C2Qpa1s8GBFh6ogeyfhiWwQVPTYFx3n0BJUrjBIkigQikgg5Qf3WLyG/I9du0NZNByXlCJXZambeFYuqytnJcu3RxFfK9xYXp9Q7gXYIW1EcjAuBxNvP57EIIsIWCxpEfzL31eEEs/SGqYLvVjNr9Wpyj0G5soc6DfpTkeH4/3MoTUN6BPrs5U33kk6DvepShEqr0UffJ7SbpgBlNeey3NPED0En4h9OQndbClBWkqeuaOTOF/EZMgGT6+Ol9iqPHb7XUof4Gs89cgQk4cKG1XLiZqMSGyv4PJ1Vlwmzz3nY9Hh5BA7qxgHs0IPob3jWVtl6hmdq0tkdd2DckwSaEGztJ0raWoF6PclWnepz+dmrkmDk3sCh20WzmvcleWtdU5StgLwzN55Dx+fGfh4Rudk2XaU9p5H1E/+2bU4Wj8nhIXxi3SErVNBwpOp5PvNxcnk4Pzs+nsYj47OByNR7KVKG/lWEq0L+o4JXlaCLx3S7ZR2Lhx//vCHOZFaCtpZVDbYEYUpx22xR0MVd8nw4u/g7ZdINONN10Xrn/V5BvI7u6fF0T4617sn9PZNXTdH/m/OsU=
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/status"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
 

@@ -1,18 +1,16 @@
 ---
 id: correlate-message
 title: "Correlate message"
-description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Publishes a message and correlates it to a subscription."
 sidebar_label: "Correlate message"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -33,9 +31,6 @@ import Heading from "@theme/Heading";
   path={"/messages/correlation"}
   context={"endpoint"}
 ></MethodEndpoint>
-
-<MarkerStronglyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Publishes a message and correlates it to a subscription.
 If correlation is successful it will return the first process instance key the message correlated with.
@@ -59,6 +54,7 @@ Use the publish message endpoint to send messages that can be buffered.
       "application/json": {
         schema: {
           type: "object",
+          additionalProperties: false,
           required: ["name"],
           properties: {
             name: {
@@ -84,6 +80,10 @@ Use the publish message endpoint to send messages that can be buffered.
                   description: "The unique identifier of the tenant.",
                   format: "TenantId",
                   type: "string",
+                  "x-semantic-type": "TenantId",
+                  minLength: 1,
+                  maxLength: 256,
+                  pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                   title: "TenantId",
                 },
               ],
@@ -110,45 +110,46 @@ Use the publish message endpoint to send messages that can be buffered.
             type: "object",
             properties: {
               tenantId: {
-                description: "The tenant ID of the correlated message",
-                allOf: [
-                  {
-                    example: "customer-service",
-                    description: "The unique identifier of the tenant.",
-                    format: "TenantId",
-                    type: "string",
-                    title: "TenantId",
-                  },
-                ],
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
+                type: "string",
+                "x-semantic-type": "TenantId",
+                minLength: 1,
+                maxLength: 256,
+                pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
+                title: "TenantId",
               },
               messageKey: {
                 allOf: [
                   {
-                    description:
-                      "System-generated key for a message correlation.",
-                    format: "MessageCorrelationKey",
-                    example: "2251799813634265",
-                    type: "string",
                     allOf: [
                       {
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
-                    title: "MessageCorrelationKey",
+                    description: "System-generated key for an message.",
+                    format: "MessageKey",
+                    "x-semantic-type": "MessageKey",
+                    example: "2251799813683467",
+                    type: "string",
+                    title: "MessageKey",
                   },
                 ],
-                description: "The key of the correlated message",
+                description: "The key of the correlated message.",
               },
               processInstanceKey: {
-                description:
-                  "The key of the first process instance the message correlated with",
                 allOf: [
                   {
                     description: "System-generated key for a process instance.",
                     format: "ProcessInstanceKey",
+                    "x-semantic-type": "ProcessInstanceKey",
                     example: "2251799813690746",
                     type: "string",
                     allOf: [
@@ -156,12 +157,17 @@ Use the publish message endpoint to send messages that can be buffered.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
+                        pattern: "^-?[0-9]+$",
+                        minLength: 1,
+                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
                     title: "ProcessInstanceKey",
                   },
                 ],
+                description:
+                  "The key of the first process instance the message correlated with",
               },
             },
             title: "MessageCorrelationResult",
@@ -206,6 +212,7 @@ Use the publish message endpoint to send messages that can be buffered.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -253,6 +260,7 @@ Use the publish message endpoint to send messages that can be buffered.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -300,6 +308,7 @@ Use the publish message endpoint to send messages that can be buffered.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -311,7 +320,7 @@ Use the publish message endpoint to send messages that can be buffered.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -347,6 +356,7 @@ Use the publish message endpoint to send messages that can be buffered.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -395,6 +405,7 @@ Use the publish message endpoint to send messages that can be buffered.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",

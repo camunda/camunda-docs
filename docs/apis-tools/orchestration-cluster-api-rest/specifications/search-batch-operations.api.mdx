@@ -1,18 +1,16 @@
 ---
 id: search-batch-operations
 title: "Search batch operations"
-description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+description: "Search for batch operations based on given criteria."
 sidebar_label: "Search batch operations"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
-
-import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -34,9 +32,6 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
-<MarkerEventuallyConsistentExtension /> [Learn about endpoint
-consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
-
 Search for batch operations based on given criteria.
 
 <Heading
@@ -55,6 +50,7 @@ Search for batch operations based on given criteria.
     content: {
       "application/json": {
         schema: {
+          additionalProperties: false,
           description: "Batch operation search request.",
           type: "object",
           allOf: [
@@ -62,95 +58,105 @@ Search for batch operations based on given criteria.
               type: "object",
               properties: {
                 page: {
-                  description: "Pagination criteria.",
-                  allOf: [
+                  "x-polymorphic-schema": true,
+                  description:
+                    "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                  oneOf: [
                     {
-                      description:
-                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
-                      oneOf: [
-                        {
-                          type: "object",
-                          title: "Offset-based pagination",
-                          properties: {
-                            from: {
-                              description:
-                                "The index of items to start searching from.",
-                              type: "integer",
-                              format: "int32",
-                              default: 0,
-                              minimum: 0,
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                              minimum: 1,
-                            },
-                          },
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based forward pagination",
-                          required: ["after"],
-                          properties: {
-                            after: {
-                              description:
-                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The end cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "EndCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
                         },
-                        {
-                          type: "object",
-                          title: "Cursor-based backward pagination",
-                          required: ["before"],
-                          properties: {
-                            before: {
-                              description:
-                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
-                              allOf: [
-                                {
-                                  description:
-                                    "The start cursor in a search query result set.",
-                                  format: "base64",
-                                  type: "string",
-                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                  title: "StartCursor",
-                                },
-                              ],
-                            },
-                            limit: {
-                              description:
-                                "The maximum number of items to return in one request.",
-                              type: "integer",
-                              format: "int32",
-                              default: 100,
-                            },
-                          },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
                         },
-                      ],
-                      title: "SearchQueryPageRequest",
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based forward pagination",
+                      required: ["after"],
+                      properties: {
+                        after: {
+                          description:
+                            "The start cursor in a search query result set.",
+                          format: "base64",
+                          type: "string",
+                          "x-semantic-type": "StartCursor",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "StartCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Cursor-based backward pagination",
+                      required: ["before"],
+                      properties: {
+                        before: {
+                          description:
+                            "The end cursor in a search query result set.",
+                          format: "base64",
+                          "x-semantic-type": "EndCursor",
+                          type: "string",
+                          pattern:
+                            "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                          minLength: 2,
+                          maxLength: 300,
+                          example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                          title: "EndCursor",
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
                     },
                   ],
-                  type: "object",
+                  title: "SearchQueryPageRequest",
                 },
               },
               title: "SearchQueryRequest",
@@ -188,7 +194,6 @@ Search for batch operations based on given criteria.
               },
             },
             filter: {
-              description: "The batch operation search filters.",
               allOf: [
                 {
                   description: "Batch operation filter request.",
@@ -487,6 +492,7 @@ Search for batch operations based on given criteria.
                   title: "BatchOperationFilter",
                 },
               ],
+              description: "The batch operation search filters.",
             },
           },
           title: "BatchOperationSearchQuery",
@@ -515,58 +521,49 @@ Search for batch operations based on given criteria.
                   page: {
                     description:
                       "Pagination information about the search results.",
-                    allOf: [
-                      {
-                        description:
-                          "Pagination information about the search results.",
-                        type: "object",
-                        required: ["totalItems"],
-                        properties: {
-                          totalItems: {
-                            description: "Total items matching the criteria.",
-                            type: "integer",
-                            format: "int64",
-                            example: 1,
-                          },
-                          hasMoreTotalItems: {
-                            description:
-                              "Indicates if more results exist beyond the reported totalItems value. Due to system limitations, the totalItems value can be capped.\n",
-                            type: "boolean",
-                            example: false,
-                          },
-                          startCursor: {
-                            description:
-                              "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The start cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "StartCursor",
-                              },
-                            ],
-                          },
-                          endCursor: {
-                            description:
-                              "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
-                            allOf: [
-                              {
-                                description:
-                                  "The end cursor in a search query result set.",
-                                format: "base64",
-                                type: "string",
-                                example: "WzIyNTE3OTk4MTM2ODcxMDJd",
-                                title: "EndCursor",
-                              },
-                            ],
-                          },
-                        },
-                        example: { totalItems: 1, hasMoreTotalItems: false },
-                        title: "SearchQueryPageResponse",
+                    type: "object",
+                    required: ["totalItems"],
+                    "x-semantic-provider": ["startCursor", "endCursor"],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
                       },
-                    ],
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether there are more items matching the criteria beyond the returned items.\nThis is useful for determining if additional requests are needed to retrieve all results.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The start cursor in a search query result set.",
+                        format: "base64",
+                        type: "string",
+                        "x-semantic-type": "StartCursor",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "StartCursor",
+                      },
+                      endCursor: {
+                        description:
+                          "The end cursor in a search query result set.",
+                        format: "base64",
+                        "x-semantic-type": "EndCursor",
+                        type: "string",
+                        pattern:
+                          "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}(?:==)?|[A-Za-z0-9+/]{3}=)?$",
+                        minLength: 2,
+                        maxLength: 300,
+                        example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                        title: "EndCursor",
+                      },
+                    },
+                    example: { totalItems: 1, hasMoreTotalItems: false },
+                    title: "SearchQueryPageResponse",
                   },
                 },
                 title: "SearchQueryResponse",
@@ -582,6 +579,7 @@ Search for batch operations based on given criteria.
                     batchOperationKey: {
                       allOf: [
                         {
+                          "x-semantic-type": "BatchOperationKey",
                           format: "BatchOperationKey | uuid",
                           type: "string",
                           description:
@@ -594,7 +592,7 @@ Search for batch operations based on given criteria.
                         "Key or (Operate Legacy ID = UUID) of the batch operation.",
                     },
                     state: {
-                      description: "The state of the batch operation.",
+                      description: "The batch operation state.",
                       type: "string",
                       enum: [
                         "ACTIVE",
@@ -605,6 +603,7 @@ Search for batch operations based on given criteria.
                         "PARTIALLY_COMPLETED",
                         "SUSPENDED",
                       ],
+                      title: "BatchOperationStateEnum",
                     },
                     batchOperationType: {
                       description: "The type of the batch operation.",
@@ -728,6 +727,7 @@ Search for batch operations based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
@@ -739,7 +739,7 @@ Search for batch operations based on given criteria.
       },
     },
     "500": {
-      description: "An internal error occurred while processing the request.\n",
+      description: "An internal error occurred while processing the request.",
       content: {
         "application/problem+json": {
           schema: {
@@ -775,6 +775,7 @@ Search for batch operations based on given criteria.
               },
               instance: {
                 type: "string",
+                format: "uri",
                 description:
                   "A URI path identifying the origin of the problem.",
                 example: "/v2/jobs/activation",
