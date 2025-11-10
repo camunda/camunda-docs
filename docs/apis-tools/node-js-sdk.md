@@ -4,6 +4,12 @@ title: Node.js
 description: Get started with the official Camunda 8 JavaScript SDK for Node.js.
 ---
 
+:::info
+As of 8.8.0, we recommend the use of the Orchestration Cluster (REST) API.
+
+The Node.js SDK includes that client, and the client is also available as a stand-alone package. See the new [TypeScript SDK](./typescript/typescript-sdk.md) documentation.
+:::
+
 The official [Camunda 8 JavaScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
 
 This SDK is written in TypeScript and has full type support for IDEs and editors that support IntelliSense. It can be used in JavaScript or TypeScript projects.

@@ -1163,7 +1163,16 @@ module.exports = {
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
-        "apis-tools/node-js-sdk",
+        {
+          TypeScript: [
+            "apis-tools/typescript/typescript-sdk",
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency",
+          ],
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
