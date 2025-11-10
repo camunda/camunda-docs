@@ -4,7 +4,7 @@ title: Managing eventual consistency over the Orchestration Cluster API
 description: How to manage the eventually consistent data characteristic with the Orchestration Cluster API
 ---
 
-Data in Camunda 8 is eventually consistent. Read more about this characteristic of the system [here](/docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md/#data-consistency).
+Data in Camunda 8 is eventually consistent. Read more about this characteristic of the system [here](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#data-consistency).
 
 To ensure that your applications have explicit and deterministic behaviour at runtime under different load scenarios, Orchestration Cluster API methods that access eventually consistent data take a required second parameter `consistency`. This parameter allows you to explicitly ignore eventual consistency, or to manage your application's interaction with it.
 
