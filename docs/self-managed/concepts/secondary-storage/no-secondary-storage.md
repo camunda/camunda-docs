@@ -4,6 +4,9 @@ title: "Run without secondary storage"
 description: "Run Zeebe clusters using only the engine and primary storage components, disabling all secondary-storage-dependent features."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Use **no secondary storage** mode to run Zeebe clusters with only the process engine and its primary storage layer.
 
 :::warning
@@ -26,7 +29,13 @@ This setup provides core process execution and orchestration capabilities throug
 
 You can enable this mode in several ways depending on your deployment method.
 
-### Helm
+<Tabs groupId="configuration" defaultValue="helm" queryString values={[
+{label: 'Helm', value: 'helm' },
+{label: 'Camunda 8 Run or manual', value: 'c8run' },
+{label: 'Docker Compose', value: 'docker-compose' },
+]}>
+
+<TabItem value="helm">
 
 To disable secondary storage in Helm-based installations, set the following flag in your `values.yaml` file:
 
@@ -37,7 +46,8 @@ global:
 
 When this value is set, the Helm charts automatically disable all components that depend on secondary storage.
 
-### Camunda 8 Run or manual configuration
+</TabItem>
+<TabItem value="c8run">
 
 To disable secondary storage in Camunda 8 Run or other manual setups, set the following property in your configuration file:
 
@@ -77,7 +87,8 @@ SPRING_PROFILES_ACTIVE=gateway,standalone
 CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
 ```
 
-### Docker Compose
+</TabItem>
+<TabItem value="docker-compose">
 
 In a Docker Compose setup, you can disable secondary storage by setting the following environment variable for the relevant service:
 
@@ -85,6 +96,9 @@ In a Docker Compose setup, you can disable secondary storage by setting the foll
 environment:
   - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
 ```
+
+</TabItem>
+</Tabs>
 
 ## Components and features disabled
 

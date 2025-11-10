@@ -17,7 +17,7 @@ Camunda 8 Run includes the following:
 
 - Orchestration Cluster
 - Connectors
-- Elasticsearch (default secondary storage)
+- Elasticsearch (default [secondary storage](/self-managed/concepts/secondary-storage/index.md))
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
@@ -239,16 +239,14 @@ Although Camunda 8 Run supports TLS, this is intended only for testing.
 Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://localhost:9600/actuator/prometheus](http://localhost:9600/actuator/prometheus).  
 For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
 
-### Configure secondary storage (Elasticsearch or H2)
+### Configure or switch secondary storage (Elasticsearch or H2)
 
-Camunda 8 Run supports multiple secondary storage options.  
-By default, it uses **Elasticsearch**, but you can switch to **H2** for lightweight local development.
+Camunda 8 Run supports multiple secondary-storage options.  
+By default, it uses **Elasticsearch**, but you can switch to **H2** for lightweight local development or testing.
 
-In version **8.9-alpha1**, Camunda 8 Run starts with **Elasticsearch** as its default secondary storage.  
-To test Camunda 8 Run using an **H2 database**, configure H2 as an alternative secondary storage.  
-This setup is intended for **local testing only**, as it runs entirely in memory and resets when the application stops.
+#### Default: Elasticsearch
 
-**Default (Elasticsearch) configuration:**
+In version 8.9-alpha1 and later, Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
 
 ```yaml
 data:
@@ -256,9 +254,13 @@ data:
     type: elasticsearch
 ```
 
-**Optional (H2) configuration (for local testing):**
+#### Optional: H2 (for local testing)
 
-When using H2, you must also disable Operate and backup for webapps. Otherwise, Camunda 8 Run will not start correctly.
+To test Camunda 8 Run with an in-memory H2 database, configure `type: rdbms` as shown below.
+
+:::note Important!
+Disable Operate and webapp backup when using H2; otherwise, Camunda 8 Run will not start correctly.
+:::
 
 ```yaml
 camunda:
@@ -280,14 +282,15 @@ spring:
     active: "broker,consolidated-auth,identity,tasklist"
 ```
 
-H2 runs in memory by default, so data will be lost when you stop Camunda 8 Run.
-To persist data, switch to a file-based configuration such as:
+H2 runs in memory by default, so data is lost when you stop Camunda 8 Run.
+To persist data locally, use a file-based configuration such as:
 
 ```yaml
 url: jdbc:h2:file:./camunda-data/h2db
 ```
 
 <details>
+
 <summary>Full example configuration</summary>
 
 ```yaml
@@ -339,8 +342,20 @@ spring:
 </details>
 
 :::note
-Operate and Tasklist are only supported with H2 once both applications have migrated to the v2 APIs. Use H2 for testing Camunda 8 Run only, and disable Operate and webapp backup.
+Operate and Tasklist work with H2 only after both migrate to the v2 APIs.  
+Use H2 for testing Camunda 8 Run only, and disable Operate and webapp backup.
 :::
+
+### Switching between storage types
+
+To change storage in Camunda 8 Run:
+
+- **Switch to Elasticsearch (default)** — remove or comment out the `data.secondary-storage` section.
+- **Switch to H2** — add the H2 configuration shown above and restart Camunda 8 Run.
+- **Switch back to Elasticsearch** — delete or comment out the H2 section and restart Camunda 8 Run.
+
+Choose **H2** for quick local development with minimal setup,  
+and **Elasticsearch** for production-like scenarios or when using Operate and Tasklist.
 
 ### Primary vs. secondary storage
 
@@ -351,17 +366,6 @@ Camunda 8 uses two layers of storage:
 
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).  
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
-
-### Switching between Elasticsearch and H2
-
-To switch between storage types:
-
-- **Use Elasticsearch (default)** – Remove or comment out the `data.secondary-storage` section in `application.yaml`.
-- **Use H2** – Add the H2 configuration section to `application.yaml` and restart Camunda 8 Run.
-- **Switch back to Elasticsearch** – Restore the default configuration or delete the H2 section.
-
-Choose H2 for quick local development with minimal setup.  
-Use Elasticsearch for closer alignment with production or when using Operate and Tasklist.
 
 ### Known limitations (8.9-alpha1)
 

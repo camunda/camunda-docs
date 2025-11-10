@@ -5,6 +5,9 @@ title: "Configure secondary storage"
 description: "Learn how to configure secondary storage in Camunda Self-Managed environments using Helm, Docker, or manual deployment."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Configure secondary storage to enable features such as Operate, Tasklist, Identity, and search-based REST APIs in Camunda Self-Managed environments.
 
 ## Configuration options
@@ -13,7 +16,13 @@ You can configure secondary storage using Helm charts, Docker Compose, or manual
 
 Camunda uses the `data.secondary-storage` configuration to define which database backend supports advanced web applications and APIs.
 
-### Helm
+<Tabs groupId="configuration" defaultValue="helm" queryString values={[
+{label: 'Helm', value: 'helm' },
+{label: 'Docker Compose', value: 'docker-compose' },
+{label: 'Manual (application.yaml)', value: 'manual' },
+]}>
+
+<TabItem value="helm">
 
 When deploying with Helm, set the secondary storage type and connection details in your `values.yaml` file:
 
@@ -46,7 +55,8 @@ global:
 
 When this flag is set, all secondary-storage-dependent components are automatically disabled.
 
-### Docker Compose
+</TabItem>
+<TabItem value="docker-compose">
 
 If you’re using Docker Compose, configure your environment variables within the relevant service definition:
 
@@ -73,7 +83,8 @@ environment:
   - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=none
 ```
 
-### Manual configuration (application.yaml)
+</TabItem>
+<TabItem value="manual">
 
 In Self-Managed or Camunda 8 Run deployments, you can also configure storage directly in the `application.yaml` file:
 
@@ -96,6 +107,9 @@ data:
     elasticsearch:
       url: http://localhost:9200/
 ```
+
+</TabItem>
+</Tabs>
 
 ## Choosing a storage backend
 
