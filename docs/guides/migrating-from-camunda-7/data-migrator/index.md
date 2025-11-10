@@ -8,7 +8,7 @@ description: "Overview of migrating Camunda 7 process data to Camunda 8 using th
 Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8.
 
 :::info Production Readiness Status
-[History migration](history.md): Experimental and not intended for production usage.
+- [History migration](history.md): Experimental and not intended for production usage.
   :::
 
 ![data-migration](../../img/data-migration.png)
