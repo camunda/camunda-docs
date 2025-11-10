@@ -14,7 +14,7 @@ Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaD
 
 | Database   | Default driver included | Notes                                                                  |
 | ---------- | ----------------------- | ---------------------------------------------------------------------- |
-| PostgreSQL | ✅ Yes                  | Supported for production use.                                          |
+| PostgreSQL | ✅ Yes                  |                                                                        |
 | H2         | ✅ Yes                  | For development, testing, or evaluation only.                          |
 | MariaDB    | ✅ Yes                  | Must use a case-sensitive collation.                                   |
 | MySQL      | ❌ No                   | Driver must be provided manually; must use a case-sensitive collation. |
@@ -179,9 +179,9 @@ jdbc:h2:mem:[DB_NAME];INIT=CREATE SCHEMA IF NOT EXISTS [CUSTOM_SCHEMA]\;SET SCHE
 
 ### MariaDB
 
-The MariaDB driver is provided by default, so no additional steps are required to include it.  
-To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver.  
-Otherwise, omit this variable.
+The MariaDB driver is provided by default, so no additional steps are necessary to provide the driver.
+
+To use a custom database driver, set `SPRING_DATASOURCE_DRIVER_CLASS_NAME` to the fully qualified class name of your driver. Otherwise, omit this variable.
 
 <Tabs groupId="mariadb-config" defaultValue="envVars" queryString values={[
 {label: 'Environment variables', value: 'envVars'},
