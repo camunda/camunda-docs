@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 ## Secondary storage
 
-Review [secondary storage management](/self-managed/concepts/secondary-storage-management.md) for guidance on best practices, ensuring data integrity and performance optimization.
+Review [secondary storage management](/self-managed/concepts/secondary-storage/managing-secondary-storage.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
 ### Connection
 
