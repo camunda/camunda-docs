@@ -16,18 +16,18 @@ export const gettingStartedCards = [
     description: "Announcements and release notes for all supported versions.",
   },
   {
-    link: "./announcements-release-notes/880/880-announcements/",
-    title: "8.8 release announcements",
+    link: "./announcements-release-notes/890/890-announcements/",
+    title: "8.9 release announcements",
     image: IconReleaseAnnouncementsImg,
     description:
       "Supported environment changes and breaking changes/deprecations.",
   },
   {
-    link: "./announcements-release-notes/880/880-release-notes/",
-    title: "8.8 release notes",
+    link: "./announcements-release-notes/890/890-release-notes/",
+    title: "8.9 release notes",
     image: IconReleaseNotesImg,
     description:
-      "New features included in 8.8, including alpha feature releases.",
+      "New features included in 8.9, including alpha feature releases.",
   },
 ];
 

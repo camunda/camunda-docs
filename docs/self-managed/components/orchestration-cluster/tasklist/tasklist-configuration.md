@@ -28,54 +28,6 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 Review the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md) and [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
-## Zeebe Elasticsearch or OpenSearch importer
-
-:::note
-Version 8.8: The importer is required only for migration scenarios (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
-
-:::
-
-For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
-
-Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
-
-:::note
-Version 8.8: The importer is required only for migration scenarios (upgrades from 8.7). Keep it enabled until all remaining 8.7 records have been imported. After that, the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) takes over and writes directly to the Tasklist indices. The importer can then be safely disabled for subsequent restarts or deployments.
-
-:::
-
-For Elasticsearch, Tasklist imports data from Elasticsearch indices created and filled in by [Zeebe Elasticsearch Exporter](https://github.com/camunda/camunda/tree/main/zeebe/exporters/elasticsearch-exporter). <br/>For OpenSearch, Tasklist imports data from indices created and filled in by the [Zeebe OpenSearch exporter](../zeebe/exporters/opensearch-exporter.md).
-
-Therefore, settings for this Elasticsearch or OpenSearch connection must be defined and must correspond to the settings on the Zeebe side.
-
-### Settings to connect and import
-
-See also [settings to connect to a secured Elasticsearch or OpenSearch instance](#settings-to-connect-to-a-secured-elasticsearch-or-opensearch-instance).
-
-| Name                                                    | Description                                                 | Default value         |
-| :------------------------------------------------------ | :---------------------------------------------------------- | :-------------------- |
-| camunda.tasklist.zeebeElasticsearch.clusterName         | Cluster name of Elasticsearch.                              | elasticsearch         |
-| camunda.tasklist.zeebeElasticsearch.url                 | URL of Elasticsearch REST API.                              | http://localhost:9200 |
-| camunda.tasklist.zeebeElasticsearch.prefix              | Index prefix as configured in Zeebe Elasticsearch exporter. | zeebe-record          |
-| camunda.tasklist.zeebeElasticsearch.username            | Username to access Elasticsearch REST API.                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.password            | Password to access Elasticsearch REST API.                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.ssl.certificatePath | Path to certificate used by Elasticsearch.                  | -                     |
-| camunda.tasklist.zeebeElasticsearch.ssl.selfSigned      | Certificate was self-signed.                                | false                 |
-| camunda.tasklist.zeebeElasticsearch.ssl.verifyHostname  | Should the hostname be validated.                           | false                 |
-
-### Snippet from application.yml
-
-```yaml
-camunda.tasklist:
-  zeebeElasticsearch:
-    # Cluster name
-    clusterName: elasticsearch
-    # Url
-    url: https://localhost:9200
-    # Index prefix, configured in Zeebe Elasticsearch exporter
-    prefix: zeebe-record
-```
-
 ## Intra-cluster secure connection
 
 You can enable intra-cluster TLS-secured connections between Tasklist and Zeebe by applying the following configuration properties:
@@ -97,7 +49,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Logging
 
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
 ## Clustering
 

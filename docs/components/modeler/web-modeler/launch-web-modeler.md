@@ -16,6 +16,6 @@ To launch Web Modeler, follow the steps below:
 3. Name your diagram. You can go back and change the name any time by clicking on the project name and **Edit name**.
 4. Select **Browse blueprints** to open the blueprints dialog and browse blueprints for various use cases as a starting point for your first diagram.
    ![web modeler blueprint browsing](img/web-modeler-blueprint.png)
-5. While browsing blueprints, open the details of a specific blueprint by selecting **More details**. This opens a new tab in [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md). Here, have a closer look at the diagram, and open it in SaaS or Self-Managed.
+5. While browsing blueprints, open the details of a specific blueprint by selecting **More details**. This opens a new tab in [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md). Here, have a closer look at the diagram, and open it in SaaS or Self-Managed.
    ![Camunda marketplace example](img/camunda-marketplace-example.png)
 6. Open a blueprint by selecting **Use blueprint**, which downloads the blueprint into the project and opens it in the diagram screen. Alternatively, click **Create new > BPMN diagram** to create a blank BPMN diagram.

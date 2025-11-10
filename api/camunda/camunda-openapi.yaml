@@ -10521,6 +10521,8 @@ components:
     JobSearchQueryResult:
       description: Job search response.
       type: object
+      required:
+        - items
       allOf:
         - $ref: "#/components/schemas/SearchQueryResponse"
       properties:
@@ -10535,7 +10537,6 @@ components:
         - customHeaders
         - elementId
         - elementInstanceKey
-        - hasFailedWithRetriesLeft
         - jobKey
         - kind
         - listenerEventType

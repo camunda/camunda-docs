@@ -56,7 +56,7 @@ To assign users to a group:
 2. Click on the group you want to assign users to.
 3. Click on the **Users** tab.
 4. Click on the **Assign user** button.
-5. Type the username of the user you want to assign to the group, and click on the **Assign user** button.
+5. Type the username of the user you want to assign to the group, and click on the **Assign user** button. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
 :::note
 For Self-Managed deployments with basic authentication, you must search for existing users.

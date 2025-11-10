@@ -72,6 +72,43 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled
+
+The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
+
+- Either the [Zeebe Java Client &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/java-client/index.md) OR the [Spring Zeebe SDK &lt;=8.7.15](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md#rest-over-grpc),
+- AND you opted into preferring REST over gRPC (setting `preferRestOverGrpc=true` explicitly on client setup).
+
+In this scenario, you will be affected by the following issue [Camunda 8.7 REST client fails on unknown response properties on job activate (#39675)](https://github.com/camunda/camunda/issues/39675).
+
+**Impact**
+
+When updating your Orchestration Cluster to 8.8 without updating your clients prior to at least 8.7.16, workers will fail to activate jobs with a log message such as the following:
+
+```bash
+io.camunda.zeebe.client.api.command.MalformedResponseException:
+ Expected to receive a response body, but got a problem: class ProblemDetail {
+    type: about:blank
+    title: Unexpected server response
+    status: 500
+    detail: {"jobs":[{"type":"check-generation-usage-job","processDefinitionId":"c[...]
+    instance: null
+}
+```
+
+**Required action**
+
+You must update your clients to at least 8.7.16, as this contains the fix for this issue. Alternatively, you can opt out of using `preferRestOverGrpc=true` before upgrading your cluster.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -738,7 +775,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 - Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
 - Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
-- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
+- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md)).
 - Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
 - OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
 - EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
