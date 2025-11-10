@@ -1219,18 +1219,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "8.9",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/890/890-announcements",
-            "reference/announcements-release-notes/890/890-release-notes",
-          ],
-        },
-        {
-          type: "category",
           label: "8.8",
           link: {
             type: "doc",
