@@ -31,12 +31,13 @@ Before migrating to Tasklist V2 API, review the features exclusive to the deprec
 :::caution
 The following features are only available in Tasklist API V1 and are not supported in V2:
 
-- Job worker-based user tasks
-- Draft variables
-- User task access restrictions (currently not supported; see [authorization-based access control](../concepts/access-control/authorizations.md) for interim access management)
-- Public start forms
-- Advanced process filtering (currently limited to search by process definition ID)
-- Task context description
+- Job worker-based user tasks.
+- Draft variables.
+- User task access restrictions (currently not supported; see [authorization-based access control](../concepts/access-control/authorizations.md) for interim access management).
+- Public start forms.
+- Advanced process filtering (currently limited to search by process definition ID).
+- Task context description.
+- Searching for user tasks with variable filters will not include tasks created prior to the upgrade to version 8.8.
 
 Ensure your application does not rely on these features before upgrading to the V2 API.
 :::

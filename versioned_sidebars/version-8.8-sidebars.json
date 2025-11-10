@@ -453,8 +453,7 @@
             },
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
-            "components/modeler/web-modeler/process-landscape-visualization",
-            "components/modeler/web-modeler/task-testing"
+            "components/modeler/web-modeler/process-landscape-visualization"
           ]
         },
         {
@@ -3173,7 +3172,8 @@
                     "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
-                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration"
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility"
                   ]
                 },
                 {
