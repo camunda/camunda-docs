@@ -28,20 +28,25 @@ Keep your secrets secure by avoiding direct inclusion in the BPMN `xml` file. In
 
 ### OAuth 2.0
 
-1. Create an app registration in the [Azure Portal](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Note the client id and tenant id.
-2. Go to `Certificates & secrets` and create a new client secret. Note the secret value.
-3. Go to Blob Storage, select the container and click on "Access control (IAM)". Click "Add" assign the app registration the `Storage Blob Data Contributor` or `Storage Blob Data Reader` role.
-4. Now enter the following details in the connector configuration:
-   - **Client ID**: The client id of the app registration.
-   - **Tenant ID**: The tenant id of the app registration.
-   - **Client Secret**: The client secret value of the app registration.
-   - **Account URL**: The URL of the storage account, e.g. `https://<storage_account_name>.blob.core.windows.net/`. Replace `<storage_account_name>` with the name of your storage account, where the container is located.
+1. In the [Azure Portal](https://portal.azure.com), open **Microsoft Entra ID** and select **+ Add > App registration** to create a new app registration.
+   - Note the **client ID** and **tenant ID** from the app registration’s **Overview** tab.
+2. Go to **Manage > Certificates & secrets**, select **+ New client secret**, and copy the **Value** (this is your client secret).
+3. In **Blob Storage**, open your container, select **Access control (IAM) > Add > Add role assignment**, and assign the app registration one of the following roles:
+   - `Storage Blob Data Contributor`
+   - `Storage Blob Data Reader`
+4. In the connector configuration, enter the following details:
+   - **Client ID** – Client ID of the app registration
+   - **Tenant ID** – Tenant ID of the app registration
+   - **Client Secret** – Client secret value of the app registration
+   - **Account URL** – URL of the storage account, for example:  
+     `https://<storage_account_name>.blob.core.windows.net/`  
+     Replace `<storage_account_name>` with your actual storage account name.
 
-### SAS Token
+### SAS token
 
-1. Go to your Container in the Azure Portal.
-2. Click on the three dots next to the container name and select `Generate SAS`.
-3. Now enter SAS token and SAS Url to the connector configuration.
+1. In the **Azure Portal**, open your **Storage account > Containers**, and select your container.
+2. From the container’s **toolbar**, click **Generate SAS**.
+3. In the connector configuration, enter the **SAS token** and **SAS URL**.
 
 ## Operation
 
