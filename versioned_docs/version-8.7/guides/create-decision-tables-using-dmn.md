@@ -43,6 +43,8 @@ Modeling starts here in the Decision Requirements Diagram (DRD) view. From here,
    - Click the decision directly, and click the input data element to drag and drop it onto the canvas. With the second option, you can see this input data will automatically be connected to the decision.
 3. Ensure you have also given appropriate IDs to the input data icons. In this example, our IDs are "temperature" and "activity".
 
+![dmn model example](./img/dmn-model-example.png)
+
 :::note
 Now that you've created a decision, add some logic to make it executable by morphing it into a decision table in the next section.
 :::
