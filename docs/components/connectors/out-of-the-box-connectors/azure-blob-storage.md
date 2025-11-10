@@ -16,16 +16,32 @@ To begin using the **Azure Blob Storage connector**, ensure you have created the
 
 - An Azure [storage account](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)
 - An Azure [container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction#containers)
-- An Azure [shared access signature (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json) for the container
 
 ## Authentication
 
 ### Create a new connector secret
 
-Keep your **SAS token** and **SAS URL** secure by avoiding direct inclusion in the BPMN `xml` file. Instead, create a secret:
+Keep your secrets secure by avoiding direct inclusion in the BPMN `xml` file. Instead, create a secret:
 
 1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
 2. Name your secrets (e.g., `AZURE_SAS_TOKEN`) so you can reference them later in the connector configuration.
+
+### OAuth 2.0
+
+1. Create an app registration in the [Azure Portal](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade). Note the client id and tenant id.
+2. Go to `Certificates & secrets` and create a new client secret. Note the secret value.
+3. Go to Blob Storage, select the container and click on "Access control (IAM)". Click "Add" assign the app registration the `Storage Blob Data Contributor` or `Storage Blob Data Reader` role.
+4. Now enter the following details in the connector configuration:
+   - **Client ID**: The client id of the app registration.
+   - **Tenant ID**: The tenant id of the app registration.
+   - **Client Secret**: The client secret value of the app registration.
+   - **Account URL**: The URL of the storage account, e.g. `https://<storage_account_name>.blob.core.windows.net/`. Replace `<storage_account_name>` with the name of your storage account, where the container is located.
+
+### SAS Token
+
+1. Go to your Container in the Azure Portal.
+2. Click on the three dots next to the container name and select `Generate SAS`.
+3. Now enter SAS token and SAS Url to the connector configuration.
 
 ## Operation
 
