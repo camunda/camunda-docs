@@ -69,23 +69,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Application.yaml', value: 'yaml'}]} >
-<TabItem value="env">
-
-```
-   CAMUNDA_IDENTITY_TYPE=GENERIC
-   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-   CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
-   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
-   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 3>
-   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
-   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 3>
-   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
-   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
-   SPRING_PROFILES_ACTIVE=oidc
-```
-
-</TabItem>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml'},{label: 'Environment variables', value: 'env' }]} >
 <TabItem value="yaml">
 
 ```yaml
@@ -105,6 +89,22 @@ identity:
 spring:
   profiles:
     active: oidc
+```
+
+</TabItem>
+<TabItem value="env">
+
+```
+   CAMUNDA_IDENTITY_TYPE=GENERIC
+   CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+   CAMUNDA_IDENTITY_ISSUER=<URL_OF_ISSUER>
+   CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=<URL_OF_ISSUER> // this is used for container to container communication
+   CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 3>
+   CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 3>
+   CAMUNDA_IDENTITY_AUDIENCE=<Audience from Step 3>
+   IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name  if not using the default "oid">
+   IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
+   SPRING_PROFILES_ACTIVE=oidc
 ```
 
 </TabItem>
@@ -165,23 +165,7 @@ Ensure you register a new application for each component.
 You can connect to your OIDC provider through either environment variables or Helm values. Ensure only one configuration option is used.
 :::
 
-<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Environment variables', value: 'env' },{label: 'Application.yaml', value: 'yaml' }]} >
-<TabItem value="env">
-
-```
-    CAMUNDA_IDENTITY_TYPE=MICROSOFT
-    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
-    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
-    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
-    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
-    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
-    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
-    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
-    SPRING_PROFILES_ACTIVE=oidc
-```
-
-</TabItem>
+<Tabs groupId="optionsType" defaultValue="env" queryString values={[{label: 'Application.yaml', value: 'yaml' },{label: 'Environment variables', value: 'env' }]} >
 <TabItem value="yaml">
 
 ```yaml
@@ -200,6 +184,22 @@ identity:
 spring:
   profiles:
     active: oidc
+```
+
+</TabItem>
+<TabItem value="env">
+
+```
+    CAMUNDA_IDENTITY_TYPE=MICROSOFT
+    CAMUNDA_IDENTITY_BASE_URL=<IDENTITY_URL>
+    CAMUNDA_IDENTITY_ISSUER=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    CAMUNDA_IDENTITY_ISSUER_BACKEND_URL=https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
+    CAMUNDA_IDENTITY_CLIENT_ID=<Client ID from Step 2>
+    CAMUNDA_IDENTITY_CLIENT_SECRET=<Client secret from Step 5>
+    CAMUNDA_IDENTITY_AUDIENCE=<Client ID from Step 2>
+    IDENTITY_INITIAL_CLAIM_NAME=<Initial claim name if not using the default "oid">
+    IDENTITY_INITIAL_CLAIM_VALUE=<Initial claim value>
+    SPRING_PROFILES_ACTIVE=oidc
 ```
 
 </TabItem>

@@ -127,17 +127,9 @@ For authentication, the Camunda components use the scopes `email`, `openid`, `of
 :::tip Optional scopes
 The `offline_access` scope is optional.
 
-If this scope is included, your OIDC provider issues a refresh token to Management Identity on user login. Management Identity uses the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
+If this scope is included, your OIDC provider issues a refresh token to Camunda components on user login. The components use the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
 
 If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
-
-If your organization restricts this scope for security reasons, you can adjust the scopes with:
-
-```
-CAMUNDA_IDENTITY_AUTH_SCOPES="openid profile email"
-```
-
-This configuration allows login without the `offline_access` scope.
 :::
 
 ### Component-specific configuration
