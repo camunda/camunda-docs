@@ -154,13 +154,11 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
-# Removed Web Modeler Task Testing page
-RewriteRule ^docs/next/components/modeler/web-modeler/validation/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
-
-# Moved Task Testing page
-RewriteRule ^/docs/next/components/concepts/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
-RewriteRule ^/docs/components/concepts/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
+# Removed Web Modeler Task testing page
+RewriteRule ^docs/next/components/concepts/task-testing/?$ /docs/next/components/modeler/task-testing/ [R=301,L]
+RewriteRule ^docs/components/concepts/task-testing/?$ /docs/components/modeler/task-testing/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/validation/task-testing/?$ /docs/next/components/concepts/task-testing/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/task-testing/?$ /docs/components/concepts/task-testing/ [R=301,L]
 
 # Removal of refactoring suggestions
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
