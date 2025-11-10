@@ -1219,18 +1219,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "8.9",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/890/890-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/890/890-announcements",
-            "reference/announcements-release-notes/890/890-release-notes",
-          ],
-        },
-        {
-          type: "category",
           label: "8.8",
           link: {
             type: "doc",
@@ -1617,6 +1605,28 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secondary storage",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/secondary-storage/index",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1679,8 +1689,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/secondary-storage-management",
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
