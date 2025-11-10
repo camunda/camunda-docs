@@ -1,16 +1,18 @@
 ---
 id: migrate-process-instance
 title: "Migrate process instance"
-description: "Migrates a process instance to a new process definition."
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Migrate process instance"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -31,6 +33,9 @@ import Heading from "@theme/Heading";
   path={"/process-instances/{processInstanceKey}/migration"}
   context={"endpoint"}
 ></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Migrates a process instance to a new process definition.
 This request can contain multiple mapping instructions to define mapping between the active
@@ -55,23 +60,10 @@ latest process improvements.
       required: true,
       description: "The key of the process instance that should be migrated.",
       schema: {
-        description: "System-generated key for a process instance.",
-        format: "ProcessInstanceKey",
-        "x-semantic-type": "ProcessInstanceKey",
-        example: "2251799813690746",
         type: "string",
-        allOf: [
-          {
-            description:
-              "Zeebe Engine resource key (Java long serialized as string)",
-            type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
-            title: "LongKey",
-          },
-        ],
-        title: "ProcessInstanceKey",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
       },
     },
   ]}
@@ -85,7 +77,6 @@ latest process improvements.
       "application/json": {
         schema: {
           type: "object",
-          additionalProperties: false,
           description:
             "The migration instructions describe how to migrate a process instance from one process definition to another.\n",
           properties: {
@@ -93,7 +84,6 @@ latest process improvements.
               description:
                 "System-generated key for a deployed process definition.",
               format: "ProcessDefinitionKey",
-              "x-semantic-type": "ProcessDefinitionKey",
               example: "2251799813686749",
               type: "string",
               allOf: [
@@ -101,9 +91,6 @@ latest process improvements.
                   description:
                     "Zeebe Engine resource key (Java long serialized as string)",
                   type: "string",
-                  pattern: "^-?[0-9]+$",
-                  minLength: 1,
-                  maxLength: 25,
                   title: "LongKey",
                 },
               ],
@@ -120,7 +107,6 @@ latest process improvements.
                     description: "The model-defined id of an element.",
                     format: "ElementId",
                     type: "string",
-                    "x-semantic-type": "ElementId",
                     example: "Activity_106kosb",
                     title: "ElementId",
                   },
@@ -128,7 +114,6 @@ latest process improvements.
                     description: "The model-defined id of an element.",
                     format: "ElementId",
                     type: "string",
-                    "x-semantic-type": "ElementId",
                     example: "Activity_106kosb",
                     title: "ElementId",
                   },

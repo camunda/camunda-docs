@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /system/usage-metrics:
     get:
@@ -7,7 +5,12 @@ paths:
         - System
       operationId: getUsageMetrics
       summary: Get usage metrics
-      description: Retrieve the usage metrics based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Retrieve the usage metrics based on given criteria.
       parameters:
         - name: startTime
           in: query
@@ -76,10 +79,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     UsageMetricsResponse:
@@ -100,7 +99,6 @@ components:
             description: The usage metrics for the specific tenant.
             allOf:
               - $ref: "#/components/schemas/UsageMetricsResponseItem"
-
     UsageMetricsResponseItem:
       type: object
       properties:

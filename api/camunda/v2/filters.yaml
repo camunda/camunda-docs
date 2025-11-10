@@ -1,4 +1,3 @@
-# Common filter schemas for advanced search
 components:
   schemas:
     LikeFilter:
@@ -12,7 +11,6 @@ components:
         * `?`: matches one, single character.
 
         Wildcard characters can be escaped with backslash, for instance: `\*`.
-
     BasicStringFilter:
       title: Advanced filter
       description: Basic advanced string filter.
@@ -37,7 +35,6 @@ components:
           type: array
           items:
             type: string
-
     AdvancedStringFilter:
       title: Advanced filter
       description: Advanced string filter.
@@ -47,7 +44,6 @@ components:
           properties:
             $like:
               $ref: "#/components/schemas/LikeFilter"
-
     BasicStringFilterProperty:
       description: String property with basic advanced search capabilities.
       type: object
@@ -56,7 +52,6 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/BasicStringFilter"
-
     StringFilterProperty:
       description: String property with full advanced search capabilities.
       type: object
@@ -65,7 +60,6 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedStringFilter"
-
     AdvancedIntegerFilter:
       title: Advanced filter
       description: Advanced integer (int32) filter.
@@ -104,7 +98,6 @@ components:
           items:
             type: integer
             format: int32
-
     IntegerFilterProperty:
       description: Integer property with advanced search capabilities.
       type: object
@@ -113,7 +106,6 @@ components:
           format: int32
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedIntegerFilter"
-
     AdvancedDateTimeFilter:
       title: Advanced filter
       description: Advanced date-time filter.
@@ -152,7 +144,6 @@ components:
           items:
             type: string
             format: date-time
-
     DateTimeFilterProperty:
       description: Date-time property with full advanced search capabilities.
       type: object
@@ -161,7 +152,6 @@ components:
           format: date-time
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedDateTimeFilter"
-
     ElementInstanceStateFilterProperty:
       description: ElementInstanceStateEnum property with full advanced search capabilities.
       type: object
@@ -172,7 +162,6 @@ components:
           allOf:
             - $ref: "enums.yaml#/components/schemas/ElementInstanceStateEnum"
         - $ref: "#/components/schemas/AdvancedElementInstanceStateFilter"
-
     AdvancedElementInstanceStateFilter:
       title: Advanced filter
       description: Advanced ElementInstanceStateEnum filter.
@@ -196,7 +185,6 @@ components:
             $ref: "enums.yaml#/components/schemas/ElementInstanceStateEnum"
         $like:
           $ref: "#/components/schemas/LikeFilter"
-
     ProcessDefinitionKeyFilterProperty:
       description: ProcessDefinitionKey property with full advanced search capabilities.
       type: object
@@ -207,7 +195,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
         - $ref: "#/components/schemas/AdvancedProcessDefinitionKeyFilter"
-
     AdvancedProcessDefinitionKeyFilter:
       title: Advanced filter
       description: Advanced ProcessDefinitionKey filter.
@@ -234,7 +221,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
-
     ProcessInstanceKeyFilterProperty:
       description: ProcessInstanceKey property with full advanced search capabilities.
       type: object
@@ -245,7 +231,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
         - $ref: "#/components/schemas/AdvancedProcessInstanceKeyFilter"
-
     AdvancedProcessInstanceKeyFilter:
       title: Advanced filter
       description: Advanced ProcessInstanceKey filter.
@@ -272,7 +257,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
-
     ElementInstanceKeyFilterProperty:
       description: ElementInstanceKey property with full advanced search capabilities.
       type: object
@@ -283,7 +267,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
         - $ref: "#/components/schemas/AdvancedElementInstanceKeyFilter"
-
     AdvancedElementInstanceKeyFilter:
       title: Advanced filter
       description: Advanced ElementInstanceKey filter.
@@ -310,7 +293,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
-
     JobKeyFilterProperty:
       description: JobKey property with full advanced search capabilities.
       type: object
@@ -319,7 +301,6 @@ components:
           title: Exact match
           description: Matches the value exactly.
         - $ref: "#/components/schemas/AdvancedJobKeyFilter"
-
     AdvancedJobKeyFilter:
       title: Advanced filter
       description: Advanced JobKey filter.

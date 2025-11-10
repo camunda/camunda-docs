@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /roles:
     post:
@@ -7,7 +5,12 @@ paths:
         - Role
       operationId: createRole
       summary: Create role
-      description: Create a new role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Create a new role.
       requestBody:
         content:
           application/json:
@@ -30,15 +33,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/search:
     post:
       tags:
         - Role
       operationId: searchRoles
       summary: Search roles
-      description: Search for roles based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for roles based on given criteria.
       requestBody:
         required: false
         content:
@@ -60,15 +66,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           description: An internal error occurred while processing the request.
-      x-eventually-consistent: true
-
   /roles/{roleId}:
     get:
       tags:
         - Role
       operationId: getRole
       summary: Get role
-      description: Get a role by its ID.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a role by its ID.
       parameters:
         - name: roleId
           in: path
@@ -95,14 +104,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
     put:
       tags:
         - Role
       operationId: updateRole
       summary: Update role
-      description: Update a role with the given ID.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Update a role with the given ID.
       parameters:
         - name: roleId
           in: path
@@ -137,14 +149,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
     delete:
       tags:
         - Role
       operationId: deleteRole
       summary: Delete role
-      description: Deletes the role with the given ID.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Deletes the role with the given ID.
       parameters:
         - name: roleId
           in: path
@@ -167,15 +182,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/{roleId}/users/{username}:
     put:
       tags:
         - Role
       operationId: assignRoleToUser
       summary: Assign a role to a user
-      description: Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns the specified role to the user. The user will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -212,14 +230,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
     delete:
       tags:
         - Role
       operationId: unassignRoleFromUser
       summary: Unassign a role from a user
-      description: Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -250,15 +271,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/{roleId}/users/search:
     post:
       tags:
         - Role
       operationId: searchUsersForRole
       summary: Search role users
-      description: Search users with assigned role.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search users with assigned role.
       parameters:
         - name: roleId
           in: path
@@ -293,15 +317,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /roles/{roleId}/clients/{clientId}:
     put:
       tags:
         - Role
       operationId: assignRoleToClient
       summary: Assign a role to a client
-      description: Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns the specified role to the client. The client will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -338,14 +365,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
     delete:
       tags:
         - Role
       operationId: unassignRoleFromClient
       summary: Unassign a role from a client
-      description: Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -376,15 +406,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/{roleId}/clients/search:
     post:
       tags:
         - Role
       operationId: searchClientsForRole
       summary: Search role clients
-      description: Search clients with assigned role.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search clients with assigned role.
       parameters:
         - name: roleId
           in: path
@@ -419,15 +452,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /roles/{roleId}/groups/{groupId}:
     put:
       tags:
         - Role
       operationId: assignRoleToGroup
       summary: Assign a role to a group
-      description: Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -464,14 +500,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
     delete:
       tags:
         - Role
       operationId: unassignRoleFromGroup
       summary: Unassign a role from a group
-      description: Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role.
       parameters:
         - name: roleId
           in: path
@@ -502,15 +541,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/{roleId}/groups/search:
     post:
       tags:
         - Role
       operationId: searchGroupsForRole
       summary: Search role groups
-      description: Search groups with assigned role.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search groups with assigned role.
       parameters:
         - name: roleId
           in: path
@@ -545,15 +587,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /roles/{roleId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
         - Role
       operationId: assignRoleToMappingRule
       summary: Assign a role to a mapping rule
-      description: Assigns a role to a mapping rule.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns a role to a mapping rule.
       parameters:
         - name: roleId
           in: path
@@ -590,14 +635,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
     delete:
       tags:
         - Role
       operationId: unassignRoleFromMappingRule
       summary: Unassign a role from a mapping rule
-      description: Unassigns a role from a mapping rule.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Unassigns a role from a mapping rule.
       parameters:
         - name: roleId
           in: path
@@ -628,15 +676,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /roles/{roleId}/mapping-rules/search:
     post:
       tags:
         - Role
       operationId: searchMappingRulesForRole
       summary: Search role mapping rules
-      description: Search mapping rules with assigned role.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search mapping rules with assigned role.
       parameters:
         - name: roleId
           in: path
@@ -671,14 +722,9 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     RoleCreateRequest:
-      additionalProperties: false
       type: object
       properties:
         roleId:
@@ -693,7 +739,6 @@ components:
       required:
         - roleId
         - name
-
     RoleCreateResult:
       type: object
       properties:
@@ -706,7 +751,6 @@ components:
         description:
           description: The description of the created role.
           type: string
-
     RoleUpdateRequest:
       type: object
       properties:
@@ -719,7 +763,6 @@ components:
       required:
         - name
         - description
-
     RoleUpdateResult:
       type: object
       properties:
@@ -732,7 +775,6 @@ components:
         roleId:
           type: string
           description: The ID of the updated role.
-
     RoleResult:
       description: Role search response item.
       type: object
@@ -746,7 +788,6 @@ components:
         description:
           type: string
           description: The description of the role.
-
     RoleSearchQuerySortRequest:
       type: object
       properties:
@@ -760,10 +801,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     RoleSearchQueryRequest:
       description: Role search request.
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       type: object
@@ -777,7 +816,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/RoleFilter"
           description: The role search filters.
-
     RoleFilter:
       description: Role filter request
       type: object
@@ -788,7 +826,6 @@ components:
         name:
           description: The role name search filters.
           type: string
-
     RoleSearchQueryResult:
       description: Role search response.
       type: object
@@ -800,13 +837,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleResult"
-
     RoleUserResult:
       type: object
       properties:
         username:
           $ref: "identifiers.yaml#/components/schemas/Username"
-
     RoleUserSearchResult:
       type: object
       allOf:
@@ -817,7 +852,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleUserResult"
-
     RoleUserSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -828,7 +862,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleUserSearchQuerySortRequest"
-
     RoleUserSearchQuerySortRequest:
       type: object
       properties:
@@ -841,14 +874,12 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     RoleClientResult:
       type: object
       properties:
         clientId:
           description: The ID of the client.
           type: string
-
     RoleClientSearchResult:
       type: object
       allOf:
@@ -859,7 +890,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleClientResult"
-
     RoleClientSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -870,7 +900,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleClientSearchQuerySortRequest"
-
     RoleClientSearchQuerySortRequest:
       type: object
       properties:
@@ -883,14 +912,12 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     RoleGroupResult:
       type: object
       properties:
         groupId:
           description: The id of the group.
           type: string
-
     RoleGroupSearchResult:
       type: object
       allOf:
@@ -901,7 +928,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleGroupResult"
-
     RoleGroupSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -912,7 +938,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RoleGroupSearchQuerySortRequest"
-
     RoleGroupSearchQuerySortRequest:
       type: object
       properties:

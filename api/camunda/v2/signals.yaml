@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /signals/broadcast:
     post:
@@ -7,7 +5,12 @@ paths:
         - Signal
       operationId: broadcastSignal
       summary: Broadcast signal
-      description: Broadcasts a signal.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Broadcasts a signal.
       requestBody:
         required: true
         content:
@@ -33,15 +36,10 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     SignalBroadcastRequest:
       type: object
-      additionalProperties: false
       properties:
         signalName:
           description: The name of the signal to broadcast.
@@ -56,13 +54,10 @@ components:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
       required:
         - signalName
-
     SignalBroadcastResult:
       type: object
       required:
         - tenantId
-        - signalKey
-      x-semantic-provider:
         - signalKey
       properties:
         tenantId:
@@ -71,14 +66,10 @@ components:
           allOf:
             - $ref: "#/components/schemas/SignalKey"
           description: The key of the broadcasted signal.
-
-    ## Keys
-
     SignalKey:
       allOf:
         - $ref: "keys.yaml#/components/schemas/LongKey"
       description: System-generated key for an signal.
       format: SignalKey
-      x-semantic-type: SignalKey
       example: "22517998136987467"
       type: string

@@ -1,16 +1,18 @@
 ---
 id: modify-process-instances-batch-operation
 title: "Create a batch operation to modify process instances"
-description: "Modify multiple process instances."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create a batch operation to modify process instances"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -31,6 +33,9 @@ import Heading from "@theme/Heading";
   path={"/process-instances/modification"}
   context={"endpoint"}
 ></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Modify multiple process instances.
 Since only process instances with ACTIVE state can be modified, any given
@@ -55,7 +60,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
     content: {
       "application/json": {
         schema: {
-          additionalProperties: false,
           type: "object",
           description:
             "The process instance filter to define on which process instances tokens should be moved,\nand new element instances should be activated or terminated.\n",
@@ -501,8 +505,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
-                                          "x-semantic-type":
-                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -510,9 +512,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              pattern: "^-?[0-9]+$",
-                                              minLength: 1,
-                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -534,8 +533,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
-                                              "x-semantic-type":
-                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -543,9 +540,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -561,8 +555,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
-                                              "x-semantic-type":
-                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -570,9 +562,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -593,8 +582,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
-                                            "x-semantic-type":
-                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -602,9 +589,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -619,8 +603,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
-                                            "x-semantic-type":
-                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -628,9 +610,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -661,8 +640,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "System-generated key for a process instance.",
                                           format: "ProcessInstanceKey",
-                                          "x-semantic-type":
-                                            "ProcessInstanceKey",
                                           example: "2251799813690746",
                                           type: "string",
                                           allOf: [
@@ -670,9 +647,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              pattern: "^-?[0-9]+$",
-                                              minLength: 1,
-                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -694,8 +668,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
-                                              "x-semantic-type":
-                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -703,9 +675,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -721,8 +690,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a process instance.",
                                               format: "ProcessInstanceKey",
-                                              "x-semantic-type":
-                                                "ProcessInstanceKey",
                                               example: "2251799813690746",
                                               type: "string",
                                               allOf: [
@@ -730,9 +697,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -753,8 +717,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
-                                            "x-semantic-type":
-                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -762,9 +724,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -779,8 +738,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a process instance.",
                                             format: "ProcessInstanceKey",
-                                            "x-semantic-type":
-                                              "ProcessInstanceKey",
                                             example: "2251799813690746",
                                             type: "string",
                                             allOf: [
@@ -788,9 +745,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -821,8 +775,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "System-generated key for a element instance.",
                                           format: "ElementInstanceKey",
-                                          "x-semantic-type":
-                                            "ElementInstanceKey",
                                           example: "2251799813686789",
                                           type: "string",
                                           allOf: [
@@ -830,9 +782,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              pattern: "^-?[0-9]+$",
-                                              minLength: 1,
-                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -854,8 +803,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
-                                              "x-semantic-type":
-                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -863,9 +810,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -881,8 +825,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a element instance.",
                                               format: "ElementInstanceKey",
-                                              "x-semantic-type":
-                                                "ElementInstanceKey",
                                               example: "2251799813686789",
                                               type: "string",
                                               allOf: [
@@ -890,9 +832,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -913,8 +852,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a element instance.",
                                             format: "ElementInstanceKey",
-                                            "x-semantic-type":
-                                              "ElementInstanceKey",
                                             example: "2251799813686789",
                                             type: "string",
                                             allOf: [
@@ -922,9 +859,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -939,8 +873,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a element instance.",
                                             format: "ElementInstanceKey",
-                                            "x-semantic-type":
-                                              "ElementInstanceKey",
                                             example: "2251799813686789",
                                             type: "string",
                                             allOf: [
@@ -948,9 +880,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -1372,11 +1301,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                 example: "business_key:1234",
                                 format: "Tag",
-                                "x-semantic-type": "Tag",
                                 type: "string",
-                                minLength: 1,
-                                maxLength: 100,
-                                pattern: "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                 title: "Tag",
                               },
                               uniqueItems: true,
@@ -1690,7 +1615,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                       description:
                                         "System-generated key for a deployed process definition.",
                                       format: "ProcessDefinitionKey",
-                                      "x-semantic-type": "ProcessDefinitionKey",
                                       example: "2251799813686749",
                                       type: "string",
                                       allOf: [
@@ -1698,9 +1622,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "Zeebe Engine resource key (Java long serialized as string)",
                                           type: "string",
-                                          pattern: "^-?[0-9]+$",
-                                          minLength: 1,
-                                          maxLength: 25,
                                           title: "LongKey",
                                         },
                                       ],
@@ -1722,8 +1643,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "System-generated key for a deployed process definition.",
                                           format: "ProcessDefinitionKey",
-                                          "x-semantic-type":
-                                            "ProcessDefinitionKey",
                                           example: "2251799813686749",
                                           type: "string",
                                           allOf: [
@@ -1731,9 +1650,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              pattern: "^-?[0-9]+$",
-                                              minLength: 1,
-                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -1749,8 +1665,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                           description:
                                             "System-generated key for a deployed process definition.",
                                           format: "ProcessDefinitionKey",
-                                          "x-semantic-type":
-                                            "ProcessDefinitionKey",
                                           example: "2251799813686749",
                                           type: "string",
                                           allOf: [
@@ -1758,9 +1672,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "Zeebe Engine resource key (Java long serialized as string)",
                                               type: "string",
-                                              pattern: "^-?[0-9]+$",
-                                              minLength: 1,
-                                              maxLength: 25,
                                               title: "LongKey",
                                             },
                                           ],
@@ -1781,8 +1692,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         description:
                                           "System-generated key for a deployed process definition.",
                                         format: "ProcessDefinitionKey",
-                                        "x-semantic-type":
-                                          "ProcessDefinitionKey",
                                         example: "2251799813686749",
                                         type: "string",
                                         allOf: [
@@ -1790,9 +1699,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            pattern: "^-?[0-9]+$",
-                                            minLength: 1,
-                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -1807,8 +1713,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         description:
                                           "System-generated key for a deployed process definition.",
                                         format: "ProcessDefinitionKey",
-                                        "x-semantic-type":
-                                          "ProcessDefinitionKey",
                                         example: "2251799813686749",
                                         type: "string",
                                         allOf: [
@@ -1816,9 +1720,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "Zeebe Engine resource key (Java long serialized as string)",
                                             type: "string",
-                                            pattern: "^-?[0-9]+$",
-                                            minLength: 1,
-                                            maxLength: 25,
                                             title: "LongKey",
                                           },
                                         ],
@@ -2299,8 +2200,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "System-generated key for a process instance.",
                                                 format: "ProcessInstanceKey",
-                                                "x-semantic-type":
-                                                  "ProcessInstanceKey",
                                                 example: "2251799813690746",
                                                 type: "string",
                                                 allOf: [
@@ -2308,9 +2207,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
-                                                    pattern: "^-?[0-9]+$",
-                                                    minLength: 1,
-                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2333,8 +2229,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2342,9 +2236,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2361,8 +2252,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2370,9 +2259,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2393,8 +2279,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2402,9 +2286,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2419,8 +2300,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2428,9 +2307,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2464,8 +2340,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "System-generated key for a process instance.",
                                                 format: "ProcessInstanceKey",
-                                                "x-semantic-type":
-                                                  "ProcessInstanceKey",
                                                 example: "2251799813690746",
                                                 type: "string",
                                                 allOf: [
@@ -2473,9 +2347,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
-                                                    pattern: "^-?[0-9]+$",
-                                                    minLength: 1,
-                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2498,8 +2369,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2507,9 +2376,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2526,8 +2392,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a process instance.",
                                                     format:
                                                       "ProcessInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ProcessInstanceKey",
                                                     example: "2251799813690746",
                                                     type: "string",
                                                     allOf: [
@@ -2535,9 +2399,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2558,8 +2419,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2567,9 +2426,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2584,8 +2440,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a process instance.",
                                                   format: "ProcessInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ProcessInstanceKey",
                                                   example: "2251799813690746",
                                                   type: "string",
                                                   allOf: [
@@ -2593,9 +2447,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2629,8 +2480,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "System-generated key for a element instance.",
                                                 format: "ElementInstanceKey",
-                                                "x-semantic-type":
-                                                  "ElementInstanceKey",
                                                 example: "2251799813686789",
                                                 type: "string",
                                                 allOf: [
@@ -2638,9 +2487,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
-                                                    pattern: "^-?[0-9]+$",
-                                                    minLength: 1,
-                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -2663,8 +2509,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a element instance.",
                                                     format:
                                                       "ElementInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ElementInstanceKey",
                                                     example: "2251799813686789",
                                                     type: "string",
                                                     allOf: [
@@ -2672,9 +2516,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2691,8 +2532,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       "System-generated key for a element instance.",
                                                     format:
                                                       "ElementInstanceKey",
-                                                    "x-semantic-type":
-                                                      "ElementInstanceKey",
                                                     example: "2251799813686789",
                                                     type: "string",
                                                     allOf: [
@@ -2700,9 +2539,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                         description:
                                                           "Zeebe Engine resource key (Java long serialized as string)",
                                                         type: "string",
-                                                        pattern: "^-?[0-9]+$",
-                                                        minLength: 1,
-                                                        maxLength: 25,
                                                         title: "LongKey",
                                                       },
                                                     ],
@@ -2723,8 +2559,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a element instance.",
                                                   format: "ElementInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ElementInstanceKey",
                                                   example: "2251799813686789",
                                                   type: "string",
                                                   allOf: [
@@ -2732,9 +2566,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -2749,8 +2580,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "System-generated key for a element instance.",
                                                   format: "ElementInstanceKey",
-                                                  "x-semantic-type":
-                                                    "ElementInstanceKey",
                                                   example: "2251799813686789",
                                                   type: "string",
                                                   allOf: [
@@ -2758,9 +2587,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                       description:
                                                         "Zeebe Engine resource key (Java long serialized as string)",
                                                       type: "string",
-                                                      pattern: "^-?[0-9]+$",
-                                                      minLength: 1,
-                                                      maxLength: 25,
                                                       title: "LongKey",
                                                     },
                                                   ],
@@ -3199,12 +3025,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
                                       example: "business_key:1234",
                                       format: "Tag",
-                                      "x-semantic-type": "Tag",
                                       type: "string",
-                                      minLength: 1,
-                                      maxLength: 100,
-                                      pattern:
-                                        "^[A-Za-z][A-Za-z0-9_\\-:.]{0,99}$",
                                       title: "Tag",
                                     },
                                     uniqueItems: true,
@@ -3524,8 +3345,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                             description:
                                               "System-generated key for a deployed process definition.",
                                             format: "ProcessDefinitionKey",
-                                            "x-semantic-type":
-                                              "ProcessDefinitionKey",
                                             example: "2251799813686749",
                                             type: "string",
                                             allOf: [
@@ -3533,9 +3352,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "Zeebe Engine resource key (Java long serialized as string)",
                                                 type: "string",
-                                                pattern: "^-?[0-9]+$",
-                                                minLength: 1,
-                                                maxLength: 25,
                                                 title: "LongKey",
                                               },
                                             ],
@@ -3557,8 +3373,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "System-generated key for a deployed process definition.",
                                                 format: "ProcessDefinitionKey",
-                                                "x-semantic-type":
-                                                  "ProcessDefinitionKey",
                                                 example: "2251799813686749",
                                                 type: "string",
                                                 allOf: [
@@ -3566,9 +3380,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
-                                                    pattern: "^-?[0-9]+$",
-                                                    minLength: 1,
-                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -3584,8 +3395,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                 description:
                                                   "System-generated key for a deployed process definition.",
                                                 format: "ProcessDefinitionKey",
-                                                "x-semantic-type":
-                                                  "ProcessDefinitionKey",
                                                 example: "2251799813686749",
                                                 type: "string",
                                                 allOf: [
@@ -3593,9 +3402,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                     description:
                                                       "Zeebe Engine resource key (Java long serialized as string)",
                                                     type: "string",
-                                                    pattern: "^-?[0-9]+$",
-                                                    minLength: 1,
-                                                    maxLength: 25,
                                                     title: "LongKey",
                                                   },
                                                 ],
@@ -3616,8 +3422,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a deployed process definition.",
                                               format: "ProcessDefinitionKey",
-                                              "x-semantic-type":
-                                                "ProcessDefinitionKey",
                                               example: "2251799813686749",
                                               type: "string",
                                               allOf: [
@@ -3625,9 +3429,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -3642,8 +3443,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               description:
                                                 "System-generated key for a deployed process definition.",
                                               format: "ProcessDefinitionKey",
-                                              "x-semantic-type":
-                                                "ProcessDefinitionKey",
                                               example: "2251799813686749",
                                               type: "string",
                                               allOf: [
@@ -3651,9 +3450,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                                   description:
                                                     "Zeebe Engine resource key (Java long serialized as string)",
                                                   type: "string",
-                                                  pattern: "^-?[0-9]+$",
-                                                  minLength: 1,
-                                                  maxLength: 25,
                                                   title: "LongKey",
                                                 },
                                               ],
@@ -3693,7 +3489,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                         description: "The model-defined id of an element.",
                         format: "ElementId",
                         type: "string",
-                        "x-semantic-type": "ElementId",
                         example: "Activity_106kosb",
                         title: "ElementId",
                       },
@@ -3706,7 +3501,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                         description: "The model-defined id of an element.",
                         format: "ElementId",
                         type: "string",
-                        "x-semantic-type": "ElementId",
                         example: "Activity_106kosb",
                         title: "ElementId",
                       },
@@ -3752,7 +3546,6 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
               batchOperationKey: {
                 allOf: [
                   {
-                    "x-semantic-type": "BatchOperationKey",
                     format: "BatchOperationKey | uuid",
                     type: "string",
                     description: "System-generated key for an batch operation.",

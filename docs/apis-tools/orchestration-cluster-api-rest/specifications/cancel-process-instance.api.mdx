@@ -1,16 +1,18 @@
 ---
 id: cancel-process-instance
 title: "Cancel process instance"
-description: "Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted."
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Cancel process instance"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted.
 
 <Heading
@@ -49,23 +54,10 @@ Cancels a running process instance. As a cancellation includes more than just th
       required: true,
       description: "The key of the process instance to cancel.",
       schema: {
-        description: "System-generated key for a process instance.",
-        format: "ProcessInstanceKey",
-        "x-semantic-type": "ProcessInstanceKey",
-        example: "2251799813690746",
         type: "string",
-        allOf: [
-          {
-            description:
-              "Zeebe Engine resource key (Java long serialized as string)",
-            type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
-            title: "LongKey",
-          },
-        ],
-        title: "ProcessInstanceKey",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
       },
     },
   ]}
@@ -80,7 +72,6 @@ Cancels a running process instance. As a cancellation includes more than just th
         schema: {
           type: "object",
           nullable: true,
-          additionalProperties: false,
           properties: {
             operationReference: {
               description:

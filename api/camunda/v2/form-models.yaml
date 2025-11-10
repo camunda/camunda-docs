@@ -2,9 +2,6 @@ components:
   schemas:
     FormResult:
       type: object
-      x-semantic-provider:
-        - formId
-        - formKey
       properties:
         tenantId:
           description: The tenant ID of the form.

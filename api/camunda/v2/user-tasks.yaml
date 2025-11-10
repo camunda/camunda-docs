@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /user-tasks/{userTaskKey}/completion:
     post:
@@ -14,7 +12,9 @@ paths:
           required: true
           description: The key of the user task to complete.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       requestBody:
         required: false
         content:
@@ -33,9 +33,8 @@ paths:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -44,8 +43,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-        x-eventually-consistent: false
-
   /user-tasks/{userTaskKey}/assignment:
     post:
       tags:
@@ -59,7 +56,9 @@ paths:
           required: true
           description: The key of the user task to assign.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       requestBody:
         required: true
         content:
@@ -78,9 +77,8 @@ paths:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -89,23 +87,27 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-        x-eventually-consistent: false
-
   /user-tasks/{userTaskKey}:
     get:
-      x-eventually-consistent: true
       tags:
         - User task
       operationId: getUserTask
       summary: Get user task
-      description: Get the user task by the user task key.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get the user task by the user task key.
       parameters:
         - name: userTaskKey
           in: path
           required: true
           description: The user task key.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       responses:
         "200":
           description: The user task is successfully returned.
@@ -127,7 +129,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
     patch:
       tags:
         - User task
@@ -140,7 +141,9 @@ paths:
           required: true
           description: The key of the user task to update.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       requestBody:
         required: false
         content:
@@ -159,9 +162,8 @@ paths:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -170,16 +172,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-        x-eventually-consistent: false
-
   /user-tasks/{userTaskKey}/form:
     get:
-      x-eventually-consistent: true
       tags:
         - User task
       operationId: getUserTaskForm
       summary: Get user task form
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Get the form of a user task.
         Note that this endpoint will only return linked forms. This endpoint does not support embedded forms.
       parameters:
@@ -188,7 +191,9 @@ paths:
           required: true
           description: The user task key.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       responses:
         "200":
           description: The form is successfully returned.
@@ -212,7 +217,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
   /user-tasks/{userTaskKey}/assignee:
     delete:
       tags:
@@ -226,7 +230,9 @@ paths:
           required: true
           description: The key of the user task.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       responses:
         "204":
           description: The user task was unassigned successfully.
@@ -239,9 +245,8 @@ paths:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
-          description: >
-            The user task with the given key is in the wrong state currently.
-            More details are provided in the response body.
+          description: |
+            The user task with the given key is in the wrong state currently. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
@@ -250,8 +255,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-        x-eventually-consistent: false
-
   /user-tasks/search:
     post:
       tags:
@@ -280,23 +283,27 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-        x-eventually-consistent: true
-
   /user-tasks/{userTaskKey}/variables/search:
     post:
-      x-eventually-consistent: true
       tags:
         - User task
       operationId: searchUserTaskVariables
       summary: Search user task variables
-      description: Search for user task variables based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for user task variables based on given criteria.
       parameters:
         - name: userTaskKey
           in: path
           required: true
           description: The key of the user task.
           schema:
-            $ref: "keys.yaml#/components/schemas/UserTaskKey"
+            type: string
+            format: string<UserTaskKey>
+            description: System-generated key for a user task.
       requestBody:
         required: false
         content:
@@ -314,9 +321,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
-## Schema definitions
-
 components:
   schemas:
     UserTaskSearchQuerySortRequest:
@@ -336,10 +340,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     UserTaskSearchQuery:
       description: User task search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -353,7 +355,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskFilter"
           description: The user task search filters.
-
     UserTaskFilter:
       description: User task filter request.
       type: object
@@ -376,9 +377,8 @@ components:
           description: The element ID of the user task.
         name:
           type: string
-          description: >
-            The task name. This only works for data created with 8.8 and onwards.
-            Instances from prior versions don't contain this data and cannot be found.
+          description: |
+            The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
         candidateGroup:
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
@@ -435,7 +435,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The key of the element instance.
-
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -447,7 +446,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UserTaskResult"
-
     UserTaskResult:
       type: object
       properties:
@@ -536,10 +534,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/FormKey"
           description: The key of the form.
-
     UserTaskCompletionRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           additionalProperties: true
@@ -547,38 +543,29 @@ components:
           type: object
           nullable: true
         action:
-          description: >
-            A custom action value that will be accessible from user task events resulting
-            from this endpoint invocation. If not provided, it will default to "complete".
+          description: |
+            A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "complete".
           type: string
           nullable: true
-
     UserTaskAssignmentRequest:
       type: object
-      additionalProperties: false
       properties:
         assignee:
           description: The assignee for the user task. The assignee must not be empty or `null`.
           type: string
           nullable: false
         allowOverride:
-          description: >
-            By default, the task is reassigned if it was already assigned. Set this to `false`
-            to return an error in such cases. The task must then first be unassigned to
-            be assigned again. Use this when you have users picking from group task
-            queues to prevent race conditions.
+          description: |
+            By default, the task is reassigned if it was already assigned. Set this to `false` to return an error in such cases. The task must then first be unassigned to be assigned again. Use this when you have users picking from group task queues to prevent race conditions.
           type: boolean
           nullable: true
         action:
-          description: >
-            A custom action value that will be accessible from user task events resulting
-            from this endpoint invocation. If not provided, it will default to "assign".
+          description: |
+            A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "assign".
           type: string
           nullable: true
-
     UserTaskUpdateRequest:
       type: object
-      additionalProperties: false
       properties:
         changeset:
           $ref: "#/components/schemas/Changeset"
@@ -586,7 +573,6 @@ components:
           description: The action performed.
           type: string
           nullable: true
-
     Changeset:
       description: |
         JSON object with changed task attribute values.
@@ -639,7 +625,6 @@ components:
           default: 50
           maximum: 100
           nullable: true
-
     UserTaskVariableSearchQuerySortRequest:
       type: object
       properties:
@@ -657,12 +642,10 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     UserTaskVariableSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       description: User task search query request.
-      additionalProperties: false
       type: object
       properties:
         sort:
@@ -674,9 +657,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskVariableFilter"
           description: The user task variable search filters.
-
-    ## Enums
-
     UserTaskStateEnum:
       description: The state of the user task.
       type: string
@@ -690,9 +670,6 @@ components:
         - CANCELING
         - CANCELED
         - FAILED
-
-    ## Filters
-
     UserTaskVariableFilter:
       description: The user task variable search filters.
       type: object
@@ -701,7 +678,6 @@ components:
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
           description: Name of the variable.
-
     UserTaskStateFilterProperty:
       description: UserTaskStateEnum property with full advanced search capabilities.
       type: object
@@ -712,7 +688,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskStateEnum"
         - $ref: "#/components/schemas/AdvancedUserTaskStateFilter"
-
     AdvancedUserTaskStateFilter:
       title: Advanced filter
       description: Advanced UserTaskStateEnum filter.

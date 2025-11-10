@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /incidents/search:
     post:
@@ -8,6 +6,10 @@ paths:
       operationId: searchIncidents
       summary: Search incidents
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Search for incidents based on given criteria.
       requestBody:
         required: false
@@ -30,8 +32,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /incidents/{incidentKey}:
     get:
       tags:
@@ -39,6 +39,10 @@ paths:
       operationId: getIncident
       summary: Get incident
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Returns incident as JSON.
       parameters:
         - name: incidentKey
@@ -46,7 +50,10 @@ paths:
           required: true
           description: The assigned key of the incident, which acts as a unique identifier for this incident.
           schema:
-            $ref: "keys.yaml#/components/schemas/IncidentKey"
+            type: string
+            format: string<IncidentKey>
+            example: "2251799813689432"
+            description: System-generated key for a incident.
       responses:
         "200":
           description: The incident is successfully returned.
@@ -68,8 +75,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /incidents/{incidentKey}/resolution:
     post:
       tags:
@@ -77,6 +82,10 @@ paths:
       operationId: resolveIncident
       summary: Resolve incident
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Marks the incident as resolved; most likely a call to Update job will be necessary
         to reset the job's retries, followed by this call.
       parameters:
@@ -85,7 +94,10 @@ paths:
           required: true
           description: Key of the incident to resolve.
           schema:
-            $ref: "keys.yaml#/components/schemas/IncidentKey"
+            type: string
+            format: string<IncidentKey>
+            example: "2251799813689432"
+            description: System-generated key for a incident.
       requestBody:
         required: false
         content:
@@ -107,14 +119,9 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     IncidentSearchQuery:
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -128,7 +135,6 @@ components:
           description: The incident search filters.
           allOf:
             - $ref: "#/components/schemas/IncidentFilter"
-
     IncidentFilter:
       description: Incident search filter.
       type: object
@@ -180,7 +186,6 @@ components:
           allOf:
             - $ref: "filters.yaml#/components/schemas/JobKeyFilterProperty"
           description: The job key, if exists, associated with this incident.
-
     IncidentErrorTypeFilterProperty:
       description: IncidentErrorTypeEnum with full advanced search capabilities.
       type: object
@@ -191,7 +196,6 @@ components:
           allOf:
             - $ref: "enums.yaml#/components/schemas/IncidentErrorTypeEnum"
         - $ref: "#/components/schemas/AdvancedIncidentErrorTypeFilter"
-
     AdvancedIncidentStateFilter:
       title: Advanced filter
       description: Advanced IncidentStateEnum filter
@@ -220,7 +224,6 @@ components:
             $ref: "enums.yaml#/components/schemas/IncidentStateEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
-
     AdvancedIncidentErrorTypeFilter:
       title: Advanced filter
       description: Advanced IncidentErrorTypeEnum filter
@@ -249,7 +252,6 @@ components:
             $ref: "enums.yaml#/components/schemas/IncidentErrorTypeEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
-
     IncidentStateFilterProperty:
       description: IncidentStateEnum with full advanced search capabilities.
       type: object
@@ -260,7 +262,6 @@ components:
           allOf:
             - $ref: "enums.yaml#/components/schemas/IncidentStateEnum"
         - $ref: "#/components/schemas/AdvancedIncidentStateFilter"
-
     IncidentSearchQuerySortRequest:
       type: object
       properties:
@@ -284,7 +285,6 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     IncidentSearchQueryResult:
       type: object
       allOf:
@@ -295,7 +295,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/IncidentResult"
-
     IncidentResult:
       type: object
       properties:
@@ -343,10 +342,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
           description: The job key, if exists, associated with this incident.
-
     IncidentResolutionRequest:
       type: object
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"

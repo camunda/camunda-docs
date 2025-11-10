@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /batch-operations/{batchOperationKey}:
     get:
@@ -7,7 +5,12 @@ paths:
         - Batch operation
       operationId: getBatchOperation
       summary: Get batch operation
-      description: Get batch operation by key.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get batch operation by key.
       parameters:
         - name: batchOperationKey
           in: path
@@ -36,15 +39,18 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /batch-operations/search:
     post:
       tags:
         - Batch operation
       operationId: searchBatchOperations
       summary: Search batch operations
-      description: Search for batch operations based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for batch operations based on given criteria.
       requestBody:
         required: false
         content:
@@ -66,8 +72,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /batch-operations/{batchOperationKey}/cancellation:
     post:
       tags:
@@ -75,6 +79,10 @@ paths:
       operationId: cancelBatchOperation
       summary: Cancel Batch operation
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Cancels a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
       parameters:
@@ -104,8 +112,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /batch-operations/{batchOperationKey}/suspension:
     post:
       tags:
@@ -113,6 +119,10 @@ paths:
       operationId: suspendBatchOperation
       summary: Suspend Batch operation
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Suspends a running batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
       parameters:
@@ -144,8 +154,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: true
-
   /batch-operations/{batchOperationKey}/resumption:
     post:
       tags:
@@ -153,6 +161,10 @@ paths:
       operationId: resumeBatchOperation
       summary: Resume Batch operation
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Resumes a suspended batch operation.
         This is done asynchronously, the progress can be tracked using the batch operation status endpoint (/batch-operations/{batchOperationKey}).
       parameters:
@@ -184,15 +196,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: true
-
   /batch-operation-items/search:
     post:
       tags:
         - Batch operation
       operationId: searchBatchOperationItems
       summary: Search batch operation items
-      description: Search for batch operation items based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for batch operation items based on given criteria.
       requestBody:
         required: false
         content:
@@ -214,10 +229,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     BatchOperationCreatedResult:
@@ -230,7 +241,6 @@ components:
           description: Key of the batch operation.
         batchOperationType:
           $ref: "#/components/schemas/BatchOperationTypeEnum"
-
     BatchOperationSearchQuerySortRequest:
       type: object
       properties:
@@ -247,9 +257,7 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     BatchOperationSearchQuery:
-      additionalProperties: false
       description: Batch operation search request.
       type: object
       allOf:
@@ -264,7 +272,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/BatchOperationFilter"
           description: The batch operation search filters.
-
     BatchOperationFilter:
       description: Batch operation filter request.
       type: object
@@ -281,7 +288,6 @@ components:
           description: The state of the batch operation.
           allOf:
             - $ref: "#/components/schemas/BatchOperationStateFilterProperty"
-
     BatchOperationSearchQueryResult:
       description: The batch operation search query result.
       type: object
@@ -293,7 +299,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/BatchOperationResponse"
-
     BatchOperationResponse:
       type: object
       properties:
@@ -330,7 +335,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/BatchOperationError"
-
     BatchOperationError:
       type: object
       properties:
@@ -347,7 +351,6 @@ components:
         message:
           description: The error message that occurred during the batch operation.
           type: string
-
     BatchOperationItemSearchQuerySortRequest:
       type: object
       properties:
@@ -363,10 +366,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     BatchOperationItemSearchQuery:
       description: Batch operation item search request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -380,7 +381,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/BatchOperationItemFilter"
           description: The batch operation item search filters.
-
     BatchOperationItemFilter:
       description: Batch operation item filter request.
       type: object
@@ -402,7 +402,6 @@ components:
           description: The state of the batch operation.
           allOf:
             - $ref: "#/components/schemas/BatchOperationItemStateFilterProperty"
-
     BatchOperationItemSearchQueryResult:
       type: object
       allOf:
@@ -413,7 +412,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/BatchOperationItemResponse"
-
     BatchOperationItemResponse:
       type: object
       properties:
@@ -446,10 +444,8 @@ components:
         errorMessage:
           description: the error message from the engine in case of a failed operation.
           type: string
-
     ProcessInstanceCancellationBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should be canceled.
       properties:
         filter:
@@ -460,10 +456,8 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
       required:
         - filter
-
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
-      additionalProperties: false
       description: The process instance filter that defines which process instances should have their incidents resolved.
       properties:
         filter:
@@ -474,10 +468,8 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
       required:
         - filter
-
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
-      additionalProperties: false
       properties:
         filter:
           allOf:
@@ -492,7 +484,6 @@ components:
       required:
         - filter
         - migrationPlan
-
     ProcessInstanceMigrationBatchOperationPlan:
       type: object
       description: |
@@ -510,9 +501,7 @@ components:
       required:
         - targetProcessDefinitionKey
         - mappingInstructions
-
     ProcessInstanceModificationBatchOperationRequest:
-      additionalProperties: false
       type: object
       description: |
         The process instance filter to define on which process instances tokens should be moved,
@@ -532,7 +521,6 @@ components:
       required:
         - filter
         - moveInstructions
-
     ProcessInstanceModificationMoveBatchOperationInstruction:
       description: |-
         Instructions describing a move operation. This instruction will terminate all active elementInstance
@@ -550,9 +538,6 @@ components:
       required:
         - sourceElementId
         - targetElementId
-
-    ## Enums
-
     BatchOperationItemStateEnum:
       description: The state, one of ACTIVE, COMPLETED, TERMINATED.
       type: string
@@ -561,7 +546,6 @@ components:
         - COMPLETED
         - CANCELED
         - FAILED
-
     BatchOperationStateEnum:
       description: The batch operation state.
       type: string
@@ -573,7 +557,6 @@ components:
         - FAILED
         - PARTIALLY_COMPLETED
         - SUSPENDED
-
     BatchOperationTypeEnum:
       description: The type of the batch operation.
       type: string
@@ -587,9 +570,6 @@ components:
         - UPDATE_VARIABLE
         - DELETE_DECISION_DEFINITION
         - DELETE_PROCESS_DEFINITION
-
-    ## Filters
-
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.
       type: object
@@ -600,7 +580,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/BatchOperationTypeEnum"
         - $ref: "#/components/schemas/AdvancedBatchOperationTypeFilter"
-
     AdvancedBatchOperationTypeFilter:
       title: Advanced filter
       description: Advanced BatchOperationTypeEnum filter.
@@ -624,7 +603,6 @@ components:
             $ref: "#/components/schemas/BatchOperationTypeEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
-
     BatchOperationStateFilterProperty:
       description: BatchOperationStateEnum property with full advanced search capabilities.
       type: object
@@ -635,7 +613,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/BatchOperationStateEnum"
         - $ref: "#/components/schemas/AdvancedBatchOperationStateFilter"
-
     AdvancedBatchOperationStateFilter:
       title: Advanced filter
       description: Advanced BatchOperationStateEnum filter.
@@ -659,7 +636,6 @@ components:
             $ref: "#/components/schemas/BatchOperationStateEnum"
         $like:
           $ref: "filters.yaml#/components/schemas/LikeFilter"
-
     BatchOperationItemStateFilterProperty:
       description: BatchOperationItemStateEnum property with full advanced search capabilities.
       type: object
@@ -670,7 +646,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/BatchOperationItemStateEnum"
         - $ref: "#/components/schemas/AdvancedBatchOperationItemStateFilter"
-
     AdvancedBatchOperationItemStateFilter:
       title: Advanced filter
       description: Advanced BatchOperationItemStateEnum filter.

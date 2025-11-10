@@ -1,16 +1,18 @@
 ---
 id: get-decision-instance
 title: "Get decision instance"
-description: "Returns a decision instance."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get decision instance"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns a decision instance.
 
 <Heading
@@ -50,23 +55,10 @@ Returns a decision instance.
       description:
         "The assigned key of the decision instance, which acts as a unique identifier for this decision instance.",
       schema: {
-        allOf: [
-          {
-            description:
-              "Zeebe Engine resource key (Java long serialized as string)",
-            type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
-            title: "LongKey",
-          },
-        ],
-        description: "System-generated key for a deployed decision instance.",
-        format: "DecisionInstanceKey",
-        "x-semantic-type": "DecisionInstanceKey",
-        example: "22517998136843567",
         type: "string",
-        title: "DecisionInstanceKey",
+        format: "string<DecisionInstanceKey>",
+        example: "22517998136843567",
+        description: "System-generated key for a deployed decision instance.",
       },
     },
   ]}
@@ -91,7 +83,6 @@ Returns a decision instance.
                     description:
                       "System-generated key for a decision evaluation instance.",
                     format: "DecisionEvaluationInstanceKey",
-                    "x-semantic-type": "DecisionEvaluationInstanceKey",
                     example: "2251799813684367",
                     type: "string",
                     allOf: [
@@ -99,9 +90,6 @@ Returns a decision instance.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
-                        pattern: "^-?[0-9]+$",
-                        minLength: 1,
-                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
@@ -130,11 +118,7 @@ Returns a decision instance.
                         description:
                           "Id of a decision definition, from the model. Only ids of decision definitions that are deployed are useful.",
                         format: "DecisionDefinitionId",
-                        "x-semantic-type": "DecisionDefinitionId",
                         type: "string",
-                        minLength: 1,
-                        maxLength: 256,
-                        pattern: "^[A-Za-z0-9_@.+-]+$",
                         example: "new-hire-onboarding-workflow",
                         title: "DecisionDefinitionId",
                       },
@@ -168,10 +152,6 @@ Returns a decision instance.
                         description: "The unique identifier of the tenant.",
                         format: "TenantId",
                         type: "string",
-                        "x-semantic-type": "TenantId",
-                        minLength: 1,
-                        maxLength: 256,
-                        pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                         title: "TenantId",
                       },
                     ],
@@ -184,16 +164,12 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
                         description:
                           "System-generated key for a decision evaluation.",
                         format: "DecisionEvaluationKey",
-                        "x-semantic-type": "DecisionEvaluationKey",
                         example: "2251792362345323",
                         type: "string",
                         title: "DecisionEvaluationKey",
@@ -208,7 +184,6 @@ Returns a decision instance.
                         description:
                           "System-generated key for a deployed process definition.",
                         format: "ProcessDefinitionKey",
-                        "x-semantic-type": "ProcessDefinitionKey",
                         example: "2251799813686749",
                         type: "string",
                         allOf: [
@@ -216,9 +191,6 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
@@ -233,7 +205,6 @@ Returns a decision instance.
                         description:
                           "System-generated key for a process instance.",
                         format: "ProcessInstanceKey",
-                        "x-semantic-type": "ProcessInstanceKey",
                         example: "2251799813690746",
                         type: "string",
                         allOf: [
@@ -241,9 +212,6 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
@@ -258,7 +226,6 @@ Returns a decision instance.
                         description:
                           "System-generated key for a decision definition.",
                         format: "DecisionDefinitionKey",
-                        "x-semantic-type": "DecisionDefinitionKey",
                         example: "2251799813326547",
                         type: "string",
                         allOf: [
@@ -266,9 +233,6 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
@@ -285,7 +249,6 @@ Returns a decision instance.
                         description:
                           "System-generated key for a element instance.",
                         format: "ElementInstanceKey",
-                        "x-semantic-type": "ElementInstanceKey",
                         example: "2251799813686789",
                         type: "string",
                         allOf: [
@@ -293,9 +256,6 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],
@@ -309,7 +269,6 @@ Returns a decision instance.
                         description:
                           "System-generated key for a decision definition.",
                         format: "DecisionDefinitionKey",
-                        "x-semantic-type": "DecisionDefinitionKey",
                         example: "2251799813326547",
                         type: "string",
                         allOf: [
@@ -317,9 +276,6 @@ Returns a decision instance.
                             description:
                               "Zeebe Engine resource key (Java long serialized as string)",
                             type: "string",
-                            pattern: "^-?[0-9]+$",
-                            minLength: 1,
-                            maxLength: 25,
                             title: "LongKey",
                           },
                         ],

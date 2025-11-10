@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /decision-instances/search:
     post:
@@ -7,7 +5,12 @@ paths:
         - Decision instance
       operationId: searchDecisionInstances
       summary: Search decision instances
-      description: Search for decision instances based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for decision instances based on given criteria.
       requestBody:
         required: false
         content:
@@ -29,22 +32,28 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-instances/{decisionEvaluationInstanceKey}:
     get:
       tags:
         - Decision instance
       operationId: getDecisionInstance
       summary: Get decision instance
-      description: Returns a decision instance.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns a decision instance.
       parameters:
         - name: decisionEvaluationInstanceKey
           in: path
           required: true
           description: The assigned key of the decision instance, which acts as a unique identifier for this decision instance.
           schema:
-            $ref: "keys.yaml#/components/schemas/DecisionInstanceKey"
+            type: string
+            format: string<DecisionInstanceKey>
+            example: "22517998136843567"
+            description: System-generated key for a deployed decision instance.
       responses:
         "200":
           description: The decision instance is successfully returned.
@@ -59,19 +68,14 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision instance with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision instance with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     DecisionInstanceSearchQuerySortRequest:
@@ -100,10 +104,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     DecisionInstanceSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       properties:
@@ -116,7 +118,6 @@ components:
           description: The decision instance search filters.
           allOf:
             - $ref: "#/components/schemas/DecisionInstanceFilter"
-
     DecisionInstanceFilter:
       description: Decision instance search filter.
       type: object
@@ -152,10 +153,8 @@ components:
         decisionEvaluationKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionEvaluationKey"
-          description: >
-            The key of the parent decision evaluation. Note that this is not the identifier of
-            an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier
-            for a decision instance.
+          description: |
+            The key of the parent decision evaluation. Note that this is not the identifier of an individual decision instance; the `decisionEvaluationInstanceKey` is the identifier for a decision instance.
         processDefinitionKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
@@ -176,7 +175,6 @@ components:
           description: The key of the root decision definition.
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionKeyFilterProperty"
-
     DecisionInstanceSearchQueryResult:
       type: object
       allOf:
@@ -187,7 +185,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DecisionInstanceResult"
-
     DecisionInstanceResult:
       type: object
       properties:
@@ -246,7 +243,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
           description: The key of the root decision definition.
-
     DecisionInstanceGetQueryResult:
       allOf:
         - $ref: "#/components/schemas/DecisionInstanceResult"
@@ -264,7 +260,6 @@ components:
                 $ref: "#/components/schemas/MatchedDecisionRuleItem"
               description: |
                 The matched rules of the decision instance.
-
     EvaluatedDecisionInputItem:
       type: object
       description: A decision input that was evaluated within this decision evaluation.
@@ -275,7 +270,6 @@ components:
           type: string
         inputValue:
           type: string
-
     EvaluatedDecisionOutputItem:
       type: object
       description: The evaluated decision outputs.
@@ -291,7 +285,6 @@ components:
         ruleIndex:
           type: integer
           format: int32
-
     MatchedDecisionRuleItem:
       type: object
       description: A decision rule that matched within this decision evaluation.
@@ -308,9 +301,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EvaluatedDecisionOutputItem"
-
-    ## Enums
-
     DecisionDefinitionTypeEnum:
       description: The type of the decision.
       type: string
@@ -318,7 +308,6 @@ components:
         - DECISION_TABLE
         - LITERAL_EXPRESSION
         - UNKNOWN
-
     DecisionInstanceStateEnum:
       description: The state of the decision instance.
       type: string
@@ -326,9 +315,6 @@ components:
         - EVALUATED
         - FAILED
         - UNSPECIFIED
-
-    ## Filters
-
     AdvancedDecisionDefinitionKeyFilter:
       title: Advanced filter
       description: Advanced DecisionDefinitionKey filter.
@@ -355,7 +341,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
-
     DecisionDefinitionKeyFilterProperty:
       description: DecisionDefinitionKey property with full advanced search capabilities.
       type: object

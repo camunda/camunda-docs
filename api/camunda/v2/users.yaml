@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /users:
     post:
@@ -7,7 +5,12 @@ paths:
         - User
       operationId: createUser
       summary: Create user
-      description: Create a new user.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Create a new user.
       requestBody:
         content:
           application/json:
@@ -37,15 +40,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: true
-
   /users/search:
     post:
       tags:
         - User
       operationId: searchUsers
       summary: Search users
-      description: Search for users based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for users based on given criteria.
       requestBody:
         content:
           application/json:
@@ -66,15 +72,18 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /users/{username}:
     get:
       tags:
         - User
       operationId: getUser
       summary: Get user
-      description: Get a user by its username.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get a user by its username.
       parameters:
         - name: username
           in: path
@@ -101,15 +110,17 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
     put:
-      x-eventually-consistent: true
       tags:
         - User
       operationId: updateUser
       summary: Update user
-      description: Updates a user.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Updates a user.
       parameters:
         - name: username
           in: path
@@ -144,13 +155,17 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-
     delete:
       tags:
         - User
       operationId: deleteUser
       summary: Delete user
-      description: Deletes a user.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Deletes a user.
       parameters:
         - name: username
           in: path
@@ -173,15 +188,10 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     UserRequest:
       type: object
-      additionalProperties: false
       properties:
         password:
           description: The password of the user.
@@ -198,11 +208,8 @@ components:
       required:
         - username
         - password
-
     UserCreateResult:
       type: object
-      x-semantic-provider:
-        - username
       properties:
         username:
           $ref: "identifiers.yaml#/components/schemas/Username"
@@ -212,7 +219,6 @@ components:
         email:
           description: The email of the user.
           type: string
-
     UserUpdateRequest:
       type: object
       properties:
@@ -225,7 +231,6 @@ components:
         email:
           description: The email of the user.
           type: string
-
     UserUpdateResult:
       type: object
       properties:
@@ -237,7 +242,6 @@ components:
         email:
           description: The email of the user.
           type: string
-
     UserResult:
       type: object
       properties:
@@ -249,7 +253,6 @@ components:
         email:
           description: The email of the user.
           type: string
-
     UserSearchQuerySortRequest:
       type: object
       properties:
@@ -264,12 +267,10 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     UserSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       type: object
-      additionalProperties: false
       properties:
         sort:
           description: Sort field criteria.
@@ -280,7 +281,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserFilter"
           description: The user search filters.
-
     UserFilter:
       description: User search filter.
       type: object
@@ -297,7 +297,6 @@ components:
           description: The email of the user.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
-
     UserSearchResult:
       type: object
       allOf:

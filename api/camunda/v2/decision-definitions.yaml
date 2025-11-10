@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /decision-definitions/search:
     post:
@@ -7,7 +5,12 @@ paths:
         - Decision definition
       operationId: searchDecisionDefinitions
       summary: Search decision definitions
-      description: Search for decision definitions based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for decision definitions based on given criteria.
       requestBody:
         required: false
         content:
@@ -29,22 +32,28 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-definitions/{decisionDefinitionKey}:
     get:
       tags:
         - Decision definition
       operationId: getDecisionDefinition
       summary: Get decision definition
-      description: Returns a decision definition by key.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns a decision definition by key.
       parameters:
         - name: decisionDefinitionKey
           in: path
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
+            type: string
+            format: string<DecisionDefinitionKey>
+            example: "2251799813326547"
+            description: System-generated key for a decision definition.
       responses:
         "200":
           description: The decision definition is successfully returned.
@@ -59,31 +68,36 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision definition with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision definition with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-definitions/{decisionDefinitionKey}/xml:
     get:
       tags:
         - Decision definition
       operationId: getDecisionDefinitionXML
       summary: Get decision definition XML
-      description: Returns decision definition as XML.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns decision definition as XML.
       parameters:
         - name: decisionDefinitionKey
           in: path
           required: true
           description: The assigned key of the decision definition, which acts as a unique identifier for this decision.
           schema:
-            $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
+            type: string
+            format: string<DecisionDefinitionKey>
+            example: "2251799813326547"
+            description: System-generated key for a decision definition.
       responses:
         "200":
           description: The XML of the decision definition is successfully returned.
@@ -98,17 +112,14 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision definition with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision definition with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-definitions/evaluation:
     post:
       tags:
@@ -116,6 +127,10 @@ paths:
       operationId: evaluateDecision
       summary: Evaluate decision
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Evaluates a decision.
         You specify the decision to evaluate either by using its unique key (as returned by
         DeployResource), or using the decision ID. When using the decision ID, the latest deployed
@@ -152,10 +167,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     DecisionDefinitionSearchQuerySortRequest:
@@ -176,10 +187,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     DecisionDefinitionSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       properties:
@@ -192,7 +201,6 @@ components:
           allOf:
             - $ref: "#/components/schemas/DecisionDefinitionFilter"
           description: The decision definition search filters.
-
     DecisionDefinitionFilter:
       description: Decision definition search filter.
       type: object
@@ -222,7 +230,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
           description: The assigned key of the decision requirements graph that the decision definition is part of.
-
     DecisionDefinitionSearchQueryResult:
       type: object
       allOf:
@@ -233,7 +240,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DecisionDefinitionResult"
-
     DecisionDefinitionResult:
       type: object
       properties:
@@ -262,17 +268,13 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
           description: The assigned key of the decision requirements graph that the decision definition is part of.
-
     DecisionEvaluationInstruction:
-      x-polymorphic-schema: true
       type: object
       oneOf:
         - $ref: "#/components/schemas/DecisionEvaluationById"
         - $ref: "#/components/schemas/DecisionEvaluationByKey"
-
     DecisionEvaluationById:
       type: object
-      additionalProperties: false
       title: Decision evaluation by ID
       properties:
         decisionDefinitionId:
@@ -284,11 +286,9 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
       required:
         - decisionDefinitionId
-
     DecisionEvaluationByKey:
       type: object
       title: Decision evaluation by key
-      additionalProperties: false
       properties:
         decisionDefinitionKey:
           $ref: "keys.yaml#/components/schemas/DecisionDefinitionKey"
@@ -300,10 +300,7 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
       required:
         - decisionDefinitionKey
-
     EvaluateDecisionResult:
-      x-semantic-provider:
-        - decisionEvaluationKey
       type: object
       required:
         - decisionDefinitionId
@@ -370,10 +367,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/EvaluatedDecisionResult"
-
     EvaluatedDecisionResult:
-      x-semantic-provider:
-        - decisionEvaluationInstanceKey
       type: object
       description: A decision that was evaluated.
       properties:

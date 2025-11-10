@@ -13,7 +13,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/activate-ad-hoc-sub-process-activities",
-          label: "Activate activities within an ad-hoc sub-process TEST",
+          label: "Activate activities within an ad-hoc sub-process",
           className: "api-method post",
         },
       ],

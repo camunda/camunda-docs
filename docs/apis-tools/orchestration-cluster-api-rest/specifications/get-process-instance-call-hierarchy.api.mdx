@@ -1,16 +1,18 @@
 ---
 id: get-process-instance-call-hierarchy
 title: "Get call hierarchy for process instance"
-description: "Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get call hierarchy for process instance"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWW1v2zYQ/isHfmoxx3LStE2MYYCXup27Lg0St8WW+gNFnSy2FKmSlBPP0H8fjpIdvyh9/bICDhDYIk/3+txDWbdgnk8d61+zC2sEOgdSO8+1QDbpMFOg5V4aPUpYn03RN0KjRuaMK/WHRMutyOaswxJ0wsqC7mB99l6/19fXZ6/Pr0ZX4+H52d/94dvh+fjN4NVkQnuX6EurHfgMQXClIFuqgtRY4DCVM9RQbDnWAZeZG6mnIL0DWnHezqEswJugyxrjV9Jd1mEFtzxHj5YCXTDNc2R9VmzG8idSBJIcL7jPWIdZ/FRKiwnre1vidnTjDOEjzsGkwei2l+RMil5kYXcjMnLJiQxzzvoL5ucFeeO8lXrKOiw1Nud+tfLrxY6bv7EOw1ueF4puPDp6fPj09PTk8NGT097T4yc7ZbiaO4/5wRQ1FROT4HWd4G2nu6yqJhS4K4x26Mi/o16PPnaD3yqZdOBKQerSUqk52FBdTChaYbRH7UkPLwolRQBV9MGRssVuMri1PFTDY+7W1k38AYXfKM11ex2bxWeYSi3J2D3L54SFSdgo0HpZx9yiklxX6nUaEPQDCV4r8G5lv1TYbazc59E/iDHCUE+lRrDoTGlFjdYHL/mMgzJ6Cg6t5Er+iwlwB7XOhy1GvPTBn1dGT8lHQshyrSUE2v6mTumy6p56fV/OEyyUmWOyMpSslLalfxsirQU4efL0+PR/XIDNIL66BOuZaStC6I4WjtpVTpx6v3Z4kBJZxFx8dEuWbpEaPQOZgjYe+IxLxWOFD4mS7sXbxvkz1N7OWUV/HXZ8H2sV1sxkggkk3HMiLTI340p+jqgKa2KF+S+7hLVpYAAXtSQk6LlUUBMWlbcWjDEBqeH68vkZnB4/fjp5kHlfuH4U3dzcdG0qDjCR3tiusdPIpoL+Se5hF8YZWoSczyFG4EkSUsYV3DEXuAKFTKVYS3FwhsrXfa/voLXi0U3aq3c/cySVVu5UfwBvLkcgE9RepnM6lndMh3tSXirSwWNT+n6suP640W3r63cV/xL2BuDKPOd2Hdobhu8M/M4TuMRPJTpPBpznvlw/XKT2OEW7Hq/U/tFRK97/GI8voFYBwiQYuMdn0i0d2LB93Ot1WC61zMt8ecVv66snvV5FFggvXxGvBrwtFNcBmNtBSw25sdigbzP8JvQlXuZwnfPblyZ2YzMQXs64RzcBwTU1RIxQcOswoUytngi/Dxr0NLWDD2PlVG77v+lwNDuKPpjYRbx2j3RucQHd9KzO3LLtD9vb3jbRq0BBod+Blz4jr+omB2ExOMmVI0cy5El4Ylywd+/eHQzuhLH1maVJSXBjTyN7GtnTyM9MI492u/K5sbFMEtShiVaM0jxCcKXMzWd/7ey7f9/9++7/Kbr/+N7fDpvveJreT02p952/7/x95//knf+47a3BQAPV1lK3oLXGghGitBYTuMmkWtHC0rfmwWDPB3s+2PPBz8wHVYfl6DPTzL7CIMlnpKrp+INlKC5a7I4MqogmJAfZ2nzMoZ0tp1ClVazPFnXvV/0oWmTG+aq/KIz1VTQjoMy4lfQWNOCKtmuOWGJfGcFVWG7DFG2sv5Z9bUVGo7K61GeqdB4tXA6vxvCCe7zh8/olsLFbZk56J71WCyT6FdoHFyOoIw8G1tluaYJoq9VELfytRsIUy6EorfTzK1JRp/B35BYtvcpZA19jO1ii6zgIsU7z5fkSki/fjcn9mDspvqSCZAK6pE5NEGxQ1h7B4GJE1Ubr6sh73cPm9OAiFKMZWZ7xvNQJbwYL2DRNjaQl80+lz8q4K0weiVp89SmdK9GxaqexLkaBcITJ81KHU0pP4Ub6DDgsbZ6AqL2ltlJSoHbY4tqregfe1sHAYbf3LS7GysRRzqWOGhMuOhv89eb82eDg1ehseH41PDjs9rr+1of0Fsb5nOs1P16gbxsmbz+6b4NtcXdW/3/m1g26PN76qFBcaipdSOWioaLV9POOiliH9VtHoltsNOk0jHLNFouYO3xjVVXR8qcS7Zz1ryd3BFSPuKSj7wnrp1y57YH4egYfXDbz2YfwY2Py1gwsh8R6HihSlXTFOuwjjQzbZrfVpFq+zw2B1IIDIbDwayp2RtPEIqsT4MVwzKrqP61Phlo=
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
 
 <Heading
@@ -50,23 +55,10 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
       description:
         "The key of the process instance to fetch the hierarchy for.",
       schema: {
-        description: "System-generated key for a process instance.",
-        format: "ProcessInstanceKey",
-        "x-semantic-type": "ProcessInstanceKey",
-        example: "2251799813690746",
         type: "string",
-        allOf: [
-          {
-            description:
-              "Zeebe Engine resource key (Java long serialized as string)",
-            type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
-            title: "LongKey",
-          },
-        ],
-        title: "ProcessInstanceKey",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
       },
     },
   ]}
@@ -98,7 +90,6 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
                       description:
                         "System-generated key for a process instance.",
                       format: "ProcessInstanceKey",
-                      "x-semantic-type": "ProcessInstanceKey",
                       example: "2251799813690746",
                       type: "string",
                       allOf: [
@@ -106,9 +97,6 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
                           description:
                             "Zeebe Engine resource key (Java long serialized as string)",
                           type: "string",
-                          pattern: "^-?[0-9]+$",
-                          minLength: 1,
-                          maxLength: 25,
                           title: "LongKey",
                         },
                       ],
@@ -123,7 +111,6 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
                       description:
                         "System-generated key for a deployed process definition.",
                       format: "ProcessDefinitionKey",
-                      "x-semantic-type": "ProcessDefinitionKey",
                       example: "2251799813686749",
                       type: "string",
                       allOf: [
@@ -131,9 +118,6 @@ Returns the call hierarchy for a given process instance, showing its ancestry up
                           description:
                             "Zeebe Engine resource key (Java long serialized as string)",
                           type: "string",
-                          pattern: "^-?[0-9]+$",
-                          minLength: 1,
-                          maxLength: 25,
                           title: "LongKey",
                         },
                       ],

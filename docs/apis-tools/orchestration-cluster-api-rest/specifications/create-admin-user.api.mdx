@@ -1,16 +1,18 @@
 ---
 id: create-admin-user
 title: "Create admin user"
-description: "Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Create admin user"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
 
 <Heading
@@ -50,7 +55,6 @@ Creates a new user and assigns the admin role to it. This endpoint is only usabl
       "application/json": {
         schema: {
           type: "object",
-          additionalProperties: false,
           properties: {
             password: {
               description: "The password of the user.",

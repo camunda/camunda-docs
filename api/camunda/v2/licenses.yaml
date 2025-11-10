@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /license:
     get:
@@ -7,7 +5,12 @@ paths:
         - License
       operationId: getLicense
       summary: Get license status
-      description: Obtains the status of the current Camunda license.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Obtains the status of the current Camunda license.
       responses:
         "200":
           description: Obtains the current status of the Camunda license.
@@ -17,10 +20,6 @@ paths:
                 $ref: "#/components/schemas/LicenseResponse"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     LicenseResponse:

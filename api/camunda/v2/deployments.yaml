@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /deployments:
     post:
@@ -8,6 +6,10 @@ paths:
       operationId: createDeployment
       summary: Deploy resources
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Deploys one or more resources (e.g. processes, decision models, or forms).
         This is an atomic call, i.e. either all resources are deployed or none of them are.
       requestBody:
@@ -15,7 +17,6 @@ paths:
         content:
           multipart/form-data:
             schema:
-              additionalProperties: false
               type: object
               properties:
                 resources:
@@ -40,8 +41,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /resources/{resourceKey}:
     get:
       tags:
@@ -49,6 +48,10 @@ paths:
       operationId: getResource
       summary: Get resource
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Returns a deployed resource.
         :::info
         Currently, this endpoint only supports RPA resources.
@@ -75,8 +78,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: false
-
   /resources/{resourceKey}/content:
     get:
       tags:
@@ -84,6 +85,10 @@ paths:
       operationId: getResourceContent
       summary: Get resource content
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Returns the content of a deployed resource.
         :::info
         Currently, this endpoint only supports RPA resources.
@@ -111,8 +116,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: false
-
   /resources/{resourceKey}/deletion:
     post:
       tags:
@@ -120,6 +123,10 @@ paths:
       operationId: deleteResource
       summary: Delete resource
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Deletes a deployed resource.
         This can be a process definition, decision requirements definition, or form definition
         deployed using the deploy resources endpoint. Specify the resource you want to delete in the `resourceKey` parameter.
@@ -154,10 +161,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     DeploymentResult:
@@ -180,7 +183,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DeploymentMetadataResult"
-
     DeploymentMetadataResult:
       type: object
       properties:
@@ -194,12 +196,8 @@ components:
           $ref: "#/components/schemas/DeploymentFormResult"
         resource:
           $ref: "#/components/schemas/DeploymentResourceResult"
-
     DeploymentProcessResult:
       description: A deployed process.
-      x-semantic-provider:
-        - processDefinitionKey
-        - processDefinitionId
       type: object
       required:
         - processDefinitionId
@@ -229,13 +227,9 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessDefinitionKey"
           description: The assigned key, which acts as a unique identifier for this process.
-
     DeploymentDecisionResult:
       description: A deployed decision.
       type: object
-      x-semantic-provider:
-        - decisionDefinitionKey
-        - decisionRequirementsKey
       properties:
         decisionDefinitionId:
           allOf:
@@ -268,12 +262,9 @@ components:
             - $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
           description: |
             The assigned key of the decision requirements graph that this decision is part of.
-
     DeploymentDecisionRequirementsResult:
       description: Deployed decision requirements.
       type: object
-      x-semantic-provider:
-        - decisionRequirementsKey
       properties:
         decisionRequirementsId:
           type: string
@@ -288,12 +279,9 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
         decisionRequirementsKey:
           $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
-
     DeploymentFormResult:
       description: A deployed form.
       type: object
-      x-semantic-provider:
-        - formKey
       properties:
         formId:
           $ref: "identifiers.yaml#/components/schemas/FormId"
@@ -306,11 +294,8 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
         formKey:
           $ref: "keys.yaml#/components/schemas/FormKey"
-
     DeploymentResourceResult:
       description: A deployed Resource.
-      x-semantic-provider:
-        - resourceKey
       type: object
       properties:
         resourceId:
@@ -324,15 +309,12 @@ components:
           $ref: "identifiers.yaml#/components/schemas/TenantId"
         resourceKey:
           $ref: "#/components/schemas/ResourceKey"
-
     DeleteResourceRequest:
       type: object
       nullable: true
-      additionalProperties: false
       properties:
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"
-
     ResourceResult:
       type: object
       properties:
@@ -357,17 +339,12 @@ components:
           allOf:
             - $ref: "#/components/schemas/ResourceKey"
           description: The unique key of this resource.
-
-    ## Keys
-
     DeploymentKey:
       description: Key for a deployment.
       format: DeploymentKey
-      x-semantic-type: DeploymentKey
       type: string
       allOf:
         - $ref: "keys.yaml#/components/schemas/LongKey"
-
     ResourceKey:
       type: string
       oneOf:

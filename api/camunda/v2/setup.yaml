@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /setup/user:
     post:
@@ -7,7 +5,12 @@ paths:
         - Setup
       operationId: createAdminUser
       summary: Create admin user
-      description: Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.
       requestBody:
         content:
           application/json:
@@ -25,4 +28,3 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: true

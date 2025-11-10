@@ -1,4 +1,3 @@
-## Endpoint definitions
 paths:
   /authentication/me:
     get:
@@ -6,7 +5,12 @@ paths:
         - Authentication
       operationId: getAuthentication
       summary: Get current user
-      description: Retrieves the current authenticated user.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Retrieves the current authenticated user.
       security:
         - BearerAuth: []
       responses:
@@ -22,10 +26,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     CamundaUserResult:

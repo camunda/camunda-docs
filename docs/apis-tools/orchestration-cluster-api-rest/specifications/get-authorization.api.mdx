@@ -1,16 +1,18 @@
 ---
 id: get-authorization
 title: "Get authorization"
-description: "Get authorization by the given key."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get authorization"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWltv27gS/isEcR5arHxJ2u6mflmotpKqG1+ObG+xm5MT0NLYZiuRXpJK4jX83w+GlOKLlCbdhwMUyENgiRrO9ZvRZKgNNWyhaeeK+rlZSsX/ZoZLQa89Kleg7E2Y0A5dgDmk8GgCOlZ8Ze869AIMYfsUZLYmZglkwW9BkK+wblKPrphiGRhQKHNDBcuAdujBvt9gTT3KkeeKmSX1qIK/cq4goR2jcjgWPFkCcidybsUd6mAkWYBByTpeQsZoZ0NZmg7nVvwhoz8BZkACseACiAItcxU71q8+sVtGUikWRIPiLOV/Q0KYJtooLhavqUfNeoWWuAVrqDGgkO1/G79etRvvr3/6F/VoxsUliIVZ0s6JRzN2X96dvvOo4SZFJpdSLNAL2+tjW8drbSBrLEBgbCCx2s2lIkwcGo4Wz6XKmKGdw9A69943NGRMGB43Cs1riOCeZSur0enpu5Nf3r8/O3nz89nbN29Oawwula/w2aIZCvRKCg0aA3DabuNPNYyHsbtDB+dxDFrP8zRdEwUmVwISNC6WwoAwNp6rVcpju6f1RSOzzV60Cz3l7AvEBgOjENiGO1XknQCFAK9TJ+yVoLJkeLMClXGtuRS6WXHC1nP8JnZ1U3FRVQJSPCUDRJ5hgk7HQUQ92r0Mg8GEejQaXgbUoxfRcDqiHu37o1E4uLiJpnZ5OhiPgm54HgY9TOYyOsNSvwC5bm1gLM5LnR/X8SEjjCQsSVoKMnkL+9oSI1tzJbOqZ3ZW+NPJx2EU/ulPwuGAevSDP+l+RLOG/dFw4CzrBd1wHA4HN73gPByEBeXDahT8expGQT8YTMZHJMPutO94POKWfjAe+xd4NYqG3WB8xCAKxsNp1A127h3/MZ4EferRSTDwLeciDvhzM/HHv+27N9rz5rGH61C2Q9jOu8t9nxIFKTOArq3F244SReqqhPEKYj7nyKGIpS5F1mOZKcVsATaQPYvfk2mxF/wuuhyj7Q+6weVNGYNwMJ7gioW3H/YLPFwGE7sUBf7exY2FzM1wFEQWRDffYFa/oRcg55t6mD1zz7Ol1OLseVueltEPLyL/+3YMe+H5H9+xAVPi8vfgJhx0w57LrYLyG76oYe9se7io3V0+inq7m/Nh1N/dFYwrCzVc9nL5caOjwO8VP4/g4fDR0db66B48Od4xxfpz0w8mUdjdrZW1xKPTUc+h3V3U8Sme1Fag0UFBcDVo61U7rIM+6KUj+v92RBUrvtXDNm0Aa5lFoPPU0O0WKd62T+pf4Ng+gzYkZfFXTW5ZyhMrAdBY12rFChK8Zamt30tgiW3RN/Tz588Nf0cMtc1V+T5CNR5pzFZKzlLIfqo2aIcK+2TkKEkChvGUuMYNoeUIZ5AQLshVdN4l79++++X61dKYle60Wnd3d001jxuQcCNVU6pFS81j/EO6100yWYICkrE1mQG2MBxlspTsWkKi3estxibHviMLZdDQ5n/ELsqP9JPmkdbvAXm54pVO0CfTKCTcRmC+5mJRFW33zBlGu0PZTOamM0uZ+HqAyf31HWSe6kN9ovMsY+oBfceCdwI+sIREDk0oQBtm8j2zKRcGFqD27eXC2OSowvLjZDIijgWJZQI2a82S61KBA9lv221bK3iGrYS7Y/fu7ud2e4sSEC/PsFcQuF+lTDjoHxnNBcmkggJ9h+YXppd4WZOrjN1/kjM9kX5s+C02atckZkJIgxBbMaUhQU9xoQ0T8T+FBv4fXMGHVHzBj/U/VLh1e9r6Ime6xZx6yHO/mBSp1nOeK8vIm2pWnks140kCwibRQ0XhmqCpLE3l3Tf/LXvJ/pfsf8n+HyL73z5rNMPN8nC4Z6c1aPlc5uKlFLyUgpdS8IOXgnd1U1pfEIytwmwBpaQiMo5zpSAhd0ueWvE4sC11KzqFl3rwUg9e6sGPXA+2OCGBWxAmZ2m6bsRSaK5dQrtTObg3IOwI2E6SvuKQ6dE9Hr1laQ5uL85DMjBLWRw0umHREvU8aDt0a3M8x9riyR6o2/JAMVcp7dCNKyLbTqu1WUpttp3NSiqzbd2eWsmKs1nq8hIfu2JTJlEqY5ba5Tpw4gM8tSzdO1TxErRxJ6Wkm+bagCJRMJ6QC2bgjq2bdk4v1ZGYs/ZZu1YCkj6Duz8KibPcCtgvm6UIrH+1Ihzx9wqxB3ka4lxxsx4jC+fCD8AUKBwS7aG4kG0l4f3MElGvuDgvsf3p8wTVnzHN46dYII2FKRdzaQnLU61aC/xRiNEGpZ3l7eZJ8RpisQ1GcfrcZVkuElbMOaHIPoek8hWy4GaZz5qxzFqxI3/45VrnoOm2kqGj0FauWGZZLuzrTixc58xIKfOMxE5bzM+UxyA01Kh26Z6Q350x5KTZ/h4VZ6mctTLGRasQoVtdvz8d9PzGZdgNBuOgcdJsN829se5dSW0yJvb0qBzuH8Nqs3u9P/NLgCLIBu5Na5UyLtCD1qJNkf1Xh1NrTT3aqcyxr70iha/oZjNjGqYq3W5x+a8c1Jp2rq53Ge9G3FzjdUI7c5bq488J9g15FRUfHrwmz/zIoNao8mBNrHdlj1KvqJAVi7bX23ICu1dI/TiG1V7drJ56H1TRi2BCt9v/Ac6ocd4=
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -31,6 +33,9 @@ import Heading from "@theme/Heading";
   path={"/authorizations/{authorizationKey}"}
   context={"endpoint"}
 ></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
 Get authorization by the given key.
 
@@ -54,15 +59,11 @@ Get authorization by the given key.
             description:
               "Zeebe Engine resource key (Java long serialized as string)",
             type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
             title: "LongKey",
           },
         ],
         description: "System-generated key for an authorization.",
         format: "AuthorizationKey",
-        "x-semantic-type": "AuthorizationKey",
         example: "2251799813684332",
         type: "string",
         title: "AuthorizationKey",
@@ -181,15 +182,11 @@ Get authorization by the given key.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
-                        pattern: "^-?[0-9]+$",
-                        minLength: 1,
-                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],
                     description: "System-generated key for an authorization.",
                     format: "AuthorizationKey",
-                    "x-semantic-type": "AuthorizationKey",
                     example: "2251799813684332",
                     type: "string",
                     title: "AuthorizationKey",

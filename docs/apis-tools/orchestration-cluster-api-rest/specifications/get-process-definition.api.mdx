@@ -1,16 +1,18 @@
 ---
 id: get-process-definition
 title: "Get process definition"
-description: "Returns process definition as JSON."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get process definition"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Returns process definition as JSON.
 
 <Heading
@@ -50,23 +55,10 @@ Returns process definition as JSON.
       description:
         "The assigned key of the process definition, which acts as a unique identifier for this process definition.\n",
       schema: {
-        description: "System-generated key for a deployed process definition.",
-        format: "ProcessDefinitionKey",
-        "x-semantic-type": "ProcessDefinitionKey",
-        example: "2251799813686749",
         type: "string",
-        allOf: [
-          {
-            description:
-              "Zeebe Engine resource key (Java long serialized as string)",
-            type: "string",
-            pattern: "^-?[0-9]+$",
-            minLength: 1,
-            maxLength: 25,
-            title: "LongKey",
-          },
-        ],
-        title: "ProcessDefinitionKey",
+        format: "string<ProcessDefinitionKey>",
+        example: "2251799813686749",
+        description: "System-generated key for a deployed process definition.",
       },
     },
   ]}
@@ -109,9 +101,6 @@ Returns process definition as JSON.
                       "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
                     format: "ProcessDefinitionId",
                     type: "string",
-                    "x-semantic-type": "ProcessDefinitionId",
-                    minLength: 1,
-                    pattern: "^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$",
                     example: "new-account-onboarding-workflow",
                     title: "ProcessDefinitionId",
                   },
@@ -126,10 +115,6 @@ Returns process definition as JSON.
                     description: "The unique identifier of the tenant.",
                     format: "TenantId",
                     type: "string",
-                    "x-semantic-type": "TenantId",
-                    minLength: 1,
-                    maxLength: 256,
-                    pattern: "^(<default>|[A-Za-z0-9_@.+-]+)$",
                     title: "TenantId",
                   },
                 ],
@@ -141,7 +126,6 @@ Returns process definition as JSON.
                     description:
                       "System-generated key for a deployed process definition.",
                     format: "ProcessDefinitionKey",
-                    "x-semantic-type": "ProcessDefinitionKey",
                     example: "2251799813686749",
                     type: "string",
                     allOf: [
@@ -149,9 +133,6 @@ Returns process definition as JSON.
                         description:
                           "Zeebe Engine resource key (Java long serialized as string)",
                         type: "string",
-                        pattern: "^-?[0-9]+$",
-                        minLength: 1,
-                        maxLength: 25,
                         title: "LongKey",
                       },
                     ],

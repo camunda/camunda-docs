@@ -1,14 +1,16 @@
-# Endpoint definitions
-
 paths:
   /topology:
     get:
-      x-eventually-consistent: false
       tags:
         - Cluster
       operationId: getTopology
       summary: Get cluster topology
-      description: Obtains the current topology of the cluster the gateway is part of.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Obtains the current topology of the cluster the gateway is part of.
       responses:
         "200":
           description: Obtains the current topology of the cluster the gateway is part of.
@@ -20,23 +22,23 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
   /status:
     get:
-      x-eventually-consistent: false
       tags:
         - Cluster
       operationId: getStatus
       summary: Get cluster status
-      description: Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
       responses:
         "204":
           description: The cluster is UP and has at least one partition with a healthy leader.
         "503":
           description: The cluster is DOWN and does not have any partition with a healthy leader.
-
-## Schema definitions
-
 components:
   schemas:
     TopologyResponse:
@@ -82,7 +84,6 @@ components:
           description: ID of the last completed change
           type: string
           example: "-1"
-
     BrokerInfo:
       description: Provides information on a broker node.
       type: object
@@ -116,7 +117,6 @@ components:
           description: The broker version.
           type: string
           example: 8.8.0
-
     Partition:
       description: Provides information on a partition within a broker node.
       type: object

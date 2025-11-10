@@ -1,10 +1,8 @@
-# Problem Detail schema per RFC 9457
 components:
   schemas:
     ProblemDetail:
-      description: >
-        A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
-        There may be additional properties specific to the problem type.
+      description: |
+        A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
       type: object
       properties:
         type:

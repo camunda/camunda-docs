@@ -1,16 +1,18 @@
 ---
 id: get-batch-operation
 title: "Get batch operation"
-description: "Get batch operation by key."
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
 sidebar_label: "Get batch operation"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "get api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
 hide_send_button: true
 ---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
 
 import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
 import ParamsDetails from "@theme/ParamsDetails";
@@ -32,6 +34,9 @@ import Heading from "@theme/Heading";
   context={"endpoint"}
 ></MethodEndpoint>
 
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
 Get batch operation by key.
 
 <Heading
@@ -49,7 +54,6 @@ Get batch operation by key.
       required: true,
       description: "The key (or operate legacy ID) of the batch operation.",
       schema: {
-        "x-semantic-type": "BatchOperationKey",
         format: "BatchOperationKey | uuid",
         type: "string",
         description: "System-generated key for an batch operation.",
@@ -76,7 +80,6 @@ Get batch operation by key.
               batchOperationKey: {
                 allOf: [
                   {
-                    "x-semantic-type": "BatchOperationKey",
                     format: "BatchOperationKey | uuid",
                     type: "string",
                     description: "System-generated key for an batch operation.",

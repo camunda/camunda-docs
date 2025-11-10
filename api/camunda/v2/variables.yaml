@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /variables/search:
     post:
@@ -7,7 +5,12 @@ paths:
         - Variable
       operationId: searchVariables
       summary: Search variables
-      description: Search for process and local variables based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for process and local variables based on given criteria.
       requestBody:
         required: false
         content:
@@ -29,22 +32,28 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /variables/{variableKey}:
     get:
       tags:
         - Variable
       operationId: getVariable
       summary: Get variable
-      description: Get the variable by the variable key.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get the variable by the variable key.
       parameters:
         - name: variableKey
           in: path
           required: true
           description: The variable key.
           schema:
-            $ref: "keys.yaml#/components/schemas/VariableKey"
+            type: string
+            format: string<VariableKey>
+            example: "2251799813683287"
+            description: System-generated key for a variable.
       responses:
         "200":
           description: The variable is successfully returned.
@@ -66,10 +75,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     VariableSearchQuerySortRequest:
@@ -89,10 +94,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     VariableSearchQuery:
       description: Variable search query request.
-      additionalProperties: false
       type: object
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -106,7 +109,6 @@ components:
           description: The variable search filters.
           allOf:
             - $ref: "#/components/schemas/VariableFilter"
-
     VariableFilter:
       description: Variable filter request.
       type: object
@@ -138,7 +140,6 @@ components:
           description: The key of the process instance of this variable.
           allOf:
             - $ref: "filters.yaml#/components/schemas/ProcessInstanceKeyFilterProperty"
-
     VariableSearchQueryResult:
       description: Variable search query response.
       type: object
@@ -150,7 +151,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/VariableSearchResult"
-
     VariableSearchResult:
       description: Variable search response item.
       type: object
@@ -163,7 +163,6 @@ components:
         isTruncated:
           description: Whether the value is truncated or not.
           type: boolean
-
     VariableResult:
       description: Variable search response item.
       type: object
@@ -173,7 +172,6 @@ components:
         value:
           description: Full value of this variable.
           type: string
-
     VariableResultBase:
       description: Variable response item.
       type: object
@@ -197,7 +195,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance of this variable.
-
     VariableValueFilterProperty:
       type: object
       properties:
@@ -211,10 +208,8 @@ components:
       required:
         - name
         - value
-
     SetVariableRequest:
       type: object
-      additionalProperties: false
       properties:
         variables:
           description: JSON object representing the variables to set in the element’s scope.
@@ -239,9 +234,6 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
       required:
         - variables
-
-    ## Filters
-
     AdvancedScopeKeyFilter:
       title: Advanced filter
       description: Advanced ScopeKey filter.
@@ -268,7 +260,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/ScopeKey"
-
     ScopeKeyFilterProperty:
       description: ScopeKey property with full advanced search capabilities.
       type: object
@@ -279,7 +270,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ScopeKey"
         - $ref: "#/components/schemas/AdvancedScopeKeyFilter"
-
     AdvancedVariableKeyFilter:
       title: Advanced filter
       description: Advanced VariableKey filter.
@@ -306,7 +296,6 @@ components:
           type: array
           items:
             $ref: "keys.yaml#/components/schemas/VariableKey"
-
     VariableKeyFilterProperty:
       description: VariableKey property with full advanced search capabilities.
       type: object

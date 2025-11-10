@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /mapping-rules:
     post:
@@ -8,6 +6,10 @@ paths:
       operationId: createMappingRule
       summary: Create mapping rule
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Create a new mapping rule
       requestBody:
         content:
@@ -39,7 +41,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: false
   /mapping-rules/{mappingRuleId}:
     put:
       tags:
@@ -47,6 +48,10 @@ paths:
       operationId: updateMappingRule
       summary: Update mapping rule
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Update a mapping rule.
       parameters:
         - name: mappingRuleId
@@ -87,13 +92,16 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
     delete:
       tags:
         - Mapping rule
       operationId: deleteMappingRule
       summary: Delete a mapping rule
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Deletes the mapping rule with the given ID.
       parameters:
         - name: mappingRuleId
@@ -117,13 +125,16 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
     get:
       tags:
         - Mapping rule
       operationId: getMappingRule
       summary: Get a mapping rule
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Gets the mapping rule with the given ID.
       parameters:
         - name: mappingRuleId
@@ -149,7 +160,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
   /mapping-rules/search:
     post:
       tags:
@@ -157,6 +167,10 @@ paths:
       operationId: searchMappingRule
       summary: Search mapping rules
       description: |
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
         Search for mapping rules based on given criteria.
       requestBody:
         content:
@@ -178,10 +192,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     MappingRuleCreateUpdateRequest:
@@ -200,10 +210,8 @@ components:
         - claimName
         - claimValue
         - name
-
     MappingRuleCreateRequest:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
       properties:
@@ -212,12 +220,10 @@ components:
           description: The unique ID of the mapping rule.
       required:
         - mappingRuleId
-
     MappingRuleUpdateRequest:
       type: object
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateRequest"
-
     MappingRuleCreateUpdateResult:
       type: object
       properties:
@@ -233,17 +239,14 @@ components:
         mappingRuleId:
           type: string
           description: The unique ID of the mapping rule.
-
     MappingRuleCreateResult:
       type: object
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
-
     MappingRuleUpdateResult:
       type: object
       allOf:
         - $ref: "#/components/schemas/MappingRuleCreateUpdateResult"
-
     MappingRuleSearchQueryResult:
       type: object
       allOf:
@@ -254,7 +257,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/MappingRuleResult"
-
     MappingRuleResult:
       type: object
       properties:
@@ -270,7 +272,6 @@ components:
         mappingRuleId:
           type: string
           description: The ID of the mapping rule.
-
     MappingRuleSearchQuerySortRequest:
       type: object
       properties:
@@ -286,9 +287,7 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     MappingRuleSearchQueryRequest:
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       type: object
@@ -302,7 +301,6 @@ components:
           description: The mapping rule search filters.
           allOf:
             - $ref: "#/components/schemas/MappingRuleFilter"
-
     MappingRuleFilter:
       description: Mapping rule search filter.
       type: object

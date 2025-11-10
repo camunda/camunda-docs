@@ -1,5 +1,3 @@
-# Common search-related schemas
-
 components:
   schemas:
     SearchQueryRequest:
@@ -7,16 +5,13 @@ components:
       properties:
         page:
           $ref: "#/components/schemas/SearchQueryPageRequest"
-
     SearchQueryPageRequest:
-      x-polymorphic-schema: true
       description: Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.
       oneOf:
         - $ref: "#/components/schemas/LimitPagination"
         - $ref: "#/components/schemas/OffsetPagination"
         - $ref: "#/components/schemas/CursorForwardPagination"
         - $ref: "#/components/schemas/CursorBackwardPagination"
-
     LimitPagination:
       type: object
       title: Limit-based pagination
@@ -28,7 +23,6 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
-
     OffsetPagination:
       type: object
       title: Offset-based pagination
@@ -43,7 +37,6 @@ components:
           format: int32
           default: 100
           minimum: 1
-
     CursorForwardPagination:
       type: object
       title: Cursor-based forward pagination
@@ -59,7 +52,6 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
-
     CursorBackwardPagination:
       type: object
       title: Cursor-based backward pagination
@@ -75,7 +67,6 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
-
     SearchQueryResponse:
       type: object
       required:
@@ -83,15 +74,11 @@ components:
       properties:
         page:
           $ref: "#/components/schemas/SearchQueryPageResponse"
-
     SearchQueryPageResponse:
       description: Pagination information about the search results.
       type: object
       required:
         - totalItems
-      x-semantic-provider:
-        - startCursor
-        - endCursor
       properties:
         totalItems:
           description: Total items matching the criteria.

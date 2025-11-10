@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /decision-requirements/search:
     post:
@@ -7,7 +5,12 @@ paths:
         - Decision requirements
       operationId: searchDecisionRequirements
       summary: Search decision requirements
-      description: Search for decision requirements based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for decision requirements based on given criteria.
       requestBody:
         required: false
         content:
@@ -29,22 +32,28 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-requirements/{decisionRequirementsKey}:
     get:
       tags:
         - Decision requirements
       operationId: getDecisionRequirements
       summary: Get decision requirements
-      description: Returns Decision Requirements as JSON.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns Decision Requirements as JSON.
       parameters:
         - name: decisionRequirementsKey
           in: path
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision requirements.
           schema:
-            $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
+            type: string
+            format: string<DecisionRequirementsKey>
+            example: "2251799813683346"
+            description: System-generated key for a deployed decision requirements definition.
       responses:
         "200":
           description: The decision requirements is successfully returned.
@@ -59,31 +68,36 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision requirements with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision requirements with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /decision-requirements/{decisionRequirementsKey}/xml:
     get:
       tags:
         - Decision requirements
       operationId: getDecisionRequirementsXML
       summary: Get decision requirements XML
-      description: Returns decision requirements as XML.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns decision requirements as XML.
       parameters:
         - name: decisionRequirementsKey
           in: path
           required: true
           description: The assigned key of the decision requirements, which acts as a unique identifier for this decision.
           schema:
-            $ref: "keys.yaml#/components/schemas/DecisionRequirementsKey"
+            type: string
+            format: string<DecisionRequirementsKey>
+            example: "2251799813683346"
+            description: System-generated key for a deployed decision requirements definition.
       responses:
         "200":
           description: The XML of the decision requirements is successfully returned.
@@ -98,19 +112,14 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: >
-            The decision requirements with the given key was not found.
-            More details are provided in the response body.
+          description: |
+            The decision requirements with the given key was not found. More details are provided in the response body.
           content:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
-## Schema definitions
-
 components:
   schemas:
     DecisionRequirementsSearchQuerySortRequest:
@@ -129,10 +138,8 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     DecisionRequirementsSearchQuery:
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       properties:
@@ -145,7 +152,6 @@ components:
           description: The decision definition search filters.
           allOf:
             - $ref: "#/components/schemas/DecisionRequirementsFilter"
-
     DecisionRequirementsFilter:
       description: Decision requirements search filter.
       type: object
@@ -167,7 +173,6 @@ components:
         resourceName:
           type: string
           description: The name of the resource from which the decision requirements were parsed
-
     DecisionRequirementsSearchQueryResult:
       type: object
       allOf:
@@ -178,10 +183,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/DecisionRequirementsResult"
-
     DecisionRequirementsResult:
       type: object
-      additionalProperties: false
       properties:
         decisionRequirementsName:
           type: string

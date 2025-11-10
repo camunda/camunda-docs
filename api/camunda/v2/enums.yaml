@@ -1,5 +1,3 @@
-# Common enumeration types
-
 components:
   schemas:
     SortOrderEnum:
@@ -9,7 +7,6 @@ components:
         - ASC
         - DESC
       default: ASC
-
     ElementInstanceStateEnum:
       description: Element states
       type: string
@@ -17,7 +14,6 @@ components:
         - ACTIVE
         - COMPLETED
         - TERMINATED
-
     IncidentErrorTypeEnum:
       description: Incident error type with a defined set of values.
       enum:
@@ -37,7 +33,6 @@ components:
         - UNHANDLED_ERROR_EVENT
         - UNKNOWN
         - UNSPECIFIED
-
     IncidentStateEnum:
       description: Incident states with a defined set of values.
       enum:

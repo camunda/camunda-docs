@@ -1,5 +1,3 @@
-## Endpoint definitions
-
 paths:
   /element-instances/search:
     post:
@@ -7,7 +5,12 @@ paths:
         - Element instance
       operationId: searchElementInstances
       summary: Search element instances
-      description: Search for element instances based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for element instances based on given criteria.
       requestBody:
         required: false
         content:
@@ -29,22 +32,28 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /element-instances/{elementInstanceKey}:
     get:
       tags:
         - Element instance
       operationId: getElementInstance
       summary: Get element instance
-      description: Returns element instance as JSON.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Returns element instance as JSON.
       parameters:
         - name: elementInstanceKey
           in: path
           required: true
           description: The assigned key of the element instance, which acts as a unique identifier for this element instance.
           schema:
-            $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey>
+            example: "2251799813686789"
+            description: System-generated key for a element instance.
       responses:
         "200":
           description: The element instance is successfully returned.
@@ -68,8 +77,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-      x-eventually-consistent: true
-
   /element-instances/{elementInstanceKey}/variables:
     put:
       tags:
@@ -77,6 +84,10 @@ paths:
       operationId: createElementInstanceVariables
       summary: Update element instance variables
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Updates all the variables of a particular scope (for example, process instance, element instance) with the given variable data.
         Specify the element instance in the `elementInstanceKey` parameter.
       parameters:
@@ -88,7 +99,10 @@ paths:
             This can be the process instance key (as obtained during instance creation), or a given
             element, such as a service task (see the `elementInstanceKey` on the job message).
           schema:
-            $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey>
+            example: "2251799813686789"
+            description: System-generated key for a element instance.
       requestBody:
         required: true
         content:
@@ -104,8 +118,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
   /element-instances/{elementInstanceKey}/incidents/search:
     post:
       tags:
@@ -126,7 +138,10 @@ paths:
           required: true
           description: The unique key of the element instance to search incidents for.
           schema:
-            $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey>
+            example: "2251799813686789"
+            description: System-generated key for a element instance.
       requestBody:
         required: true
         content:
@@ -154,7 +169,6 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
   /element-instances/ad-hoc-activities/{adHocSubProcessInstanceKey}/activation:
     post:
       tags:
@@ -162,6 +176,10 @@ paths:
       operationId: activateAdHocSubProcessActivities
       summary: Activate activities within an ad-hoc sub-process
       description: |
+
+
+        [[CONSISTENCY:STRONG]]
+
         Activates selected activities within an ad-hoc sub-process identified by element ID.
         The provided element IDs must exist within the ad-hoc sub-process instance identified by the
         provided adHocSubProcessInstanceKey.
@@ -171,7 +189,10 @@ paths:
           required: true
           description: The key of the ad-hoc sub-process instance that contains the activities.
           schema:
-            $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
+            type: string
+            format: string<ElementInstanceKey>
+            example: "2251799813686789"
+            description: System-generated key for a element instance.
       requestBody:
         required: true
         content:
@@ -188,9 +209,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description:
-            The ad-hoc sub-process instance is not found or the provided key does not identify an
-            ad-hoc sub-process.
+          description: The ad-hoc sub-process instance is not found or the provided key does not identify an ad-hoc sub-process.
           content:
             application/problem+json:
               schema:
@@ -199,10 +218,6 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
-      x-eventually-consistent: false
-
-## Schema definitions
-
 components:
   schemas:
     ElementInstanceSearchQuerySortRequest:
@@ -228,11 +243,9 @@ components:
           $ref: "enums.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
-
     ElementInstanceSearchQuery:
       description: Element instance search request.
       type: object
-      additionalProperties: false
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
       properties:
@@ -245,7 +258,6 @@ components:
           description: The element instance search filters.
           allOf:
             - $ref: "#/components/schemas/ElementInstanceFilter"
-
     ElementInstanceFilter:
       description: Element instance filter.
       type: object
@@ -295,9 +307,8 @@ components:
             - $ref: "identifiers.yaml#/components/schemas/ElementId"
         elementName:
           type: string
-          description: >
-            The element name. This only works for data created with 8.8 and onwards.
-            Instances from prior versions don't contain this data and cannot be found.
+          description: |
+            The element name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.
         hasIncident:
           type: boolean
           description: Shows whether this element instance has an incident related to.
@@ -329,15 +340,11 @@ components:
             - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
         elementInstanceScopeKey:
           type: string
-          description: >
-            The scope key of this element instance. If provided with a process instance
-            key it will return element instances that are immediate children of the process
-            instance. If provided with an element instance key it will return element instances that
-            are immediate children of the element instance.
+          description: |
+            The scope key of this element instance. If provided with a process instance key it will return element instances that are immediate children of the process instance. If provided with an element instance key it will return element instances that are immediate children of the element instance.
           oneOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
-
     ElementInstanceSearchQueryResult:
       type: object
       allOf:
@@ -348,7 +355,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ElementInstanceResult"
-
     ElementInstanceResult:
       type: object
       required:
@@ -441,7 +447,6 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/IncidentKey"
           description: Incident key associated with this element instance.
-
     ElementInstanceIncidentSearchQuery:
       type: object
       allOf:
@@ -452,7 +457,6 @@ components:
           type: array
           items:
             $ref: "incidents.yaml#/components/schemas/IncidentSearchQuerySortRequest"
-
     AdHocSubProcessActivateActivitiesInstruction:
       type: object
       properties:
@@ -467,7 +471,6 @@ components:
           default: false
       required:
         - elements
-
     AdHocSubProcessActivateActivityReference:
       type: object
       properties:
