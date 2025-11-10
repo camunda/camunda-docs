@@ -7,6 +7,10 @@ toc_max_heading_level: 2
 
 Camunda publishes security notices after fixes are available.
 
+:::tip Subscribe to security notices
+Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+:::
+
 ## Report a security issue or vulnerability
 
 Report security vulnerabilities to Camunda immediately, following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
