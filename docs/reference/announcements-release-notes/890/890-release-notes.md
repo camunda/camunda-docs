@@ -5,7 +5,7 @@ sidebar_label: Release notes
 description: "Release notes for 8.9, including alphas"
 toc_min_heading_level: 2
 toc_max_heading_level: 2
-keywords: ["8.8 release notes", "release notes for 8.9", "release notes"]
+keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---
 
