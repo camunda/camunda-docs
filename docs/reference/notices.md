@@ -27,21 +27,21 @@ November 11, 2025
 
 ### Products affected
 
-- Camunda Web Modeler Self Managed
+- Camunda Web Modeler Self-Managed
 
 ### Impact
 
-The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used by Camunda Web Modeler was affected by [CVE-2025-59250](https://nvd.nist.gov/vuln/detail/CVE-2025-59250), which allows improper input validation that could enable an attacker to perform spoofing over a network.
+The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used by Web Modeler was affected by [CVE-2025-59250](https://nvd.nist.gov/vuln/detail/CVE-2025-59250), which allows improper input validation that could enable an attacker to perform spoofing over a network.
 
 ### How to determine if the installation is affected
 
-You are using Camunda Web Modeler Self-Managed version <= 8.8.1.
+You are using Web Modeler Self-Managed version <= 8.8.1 and Microsoft SQL Server as database vendor.
 
 ### Solution
 
 Camunda has provided the following release which contains the fix:
 
-- Camunda Web Modeler Self-Managed 8.8.2
+- Web Modeler Self-Managed 8.8.2
 
 ## Notice 33
 
