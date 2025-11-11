@@ -57,13 +57,13 @@ Minimal configuration:
 
 ```bash
 # Self-Managed with Orchestration Cluster API
-export ZEEBE_REST_ADDRESS='http://localhost:8088/v2'
+export ZEEBE_REST_ADDRESS='http://localhost:8080/v2'
 ```
 
 With OAuth:
 
 ```bash
-export ZEEBE_REST_ADDRESS='http://localhost:8088/v2'
+export ZEEBE_REST_ADDRESS='http://localhost:8080/v2'
 export ZEEBE_GRPC_ADDRESS='grpc://localhost:26500'
 export ZEEBE_CLIENT_ID='zeebe'
 export ZEEBE_CLIENT_SECRET='zecret'
