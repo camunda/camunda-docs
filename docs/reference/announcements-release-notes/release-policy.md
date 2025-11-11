@@ -26,8 +26,9 @@ Refers to a release made available between minor versions that allows you to pre
 
 :::note
 
+- Alpha releases cannot be updated to newer releases and are not suitable for use in production.
 - An alpha release can also be made available where the entire version is an alpha with [alpha limitations](/components/early-access/alpha/alpha-features.md#alpha).
-- Additionally, "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
+- "Alpha channel" refers to the channel you can use when provisioning a SaaS cluster. See [alpha channel](#alpha-channel).
 
 :::
 
@@ -74,7 +75,6 @@ You can use the **Alpha** channel to access [alpha features](/components/early-a
 
 - Provides alpha releases to preview and prepare for the next stable release.
 - Alpha releases provide a short-term stability point to test new features and give feedback before they are released to the stable channel. Use an alpha release to test the upcoming minor release with your infrastructure.
-- Alpha releases cannot be updated to a newer release, and so are not suitable for use in production.
 
 ### Non-cluster components
 
@@ -99,7 +99,7 @@ An **Update available** notification is shown in Console, recommending that you 
 
 #### Generation names
 
-As of Camunda 8.5.0, the generation naming scheme in Camunda 8 SaaS changed to no longer include the patch version.
+The generation naming scheme in Camunda 8 SaaS no longer includes the patch version.
 
 - The naming scheme used for the Camunda 8.5 generations is `Camunda <Major>.<Minor>+gen<N>`, where `N` is incremented with every atomic change to the component version set.
 

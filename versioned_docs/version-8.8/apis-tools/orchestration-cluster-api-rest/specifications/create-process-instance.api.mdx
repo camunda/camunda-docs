@@ -1,0 +1,791 @@
+---
+id: create-process-instance
+title: "Create process instance"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Create process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create process instance"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Creates and starts an instance of the specified process.
+The process definition to use to create the instance can be specified either using its unique key
+(as returned by Deploy resources), or using the BPMN process ID and a version.
+
+Waits for the completion of the process instance before returning a result
+when awaitCompletion is enabled.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Instructions for creating a process instance. The process definition can be specified\neither by ID or by key.\n",
+          oneOf: [
+            {
+              type: "object",
+              title: "Process creation by ID",
+              required: ["processDefinitionId"],
+              properties: {
+                processDefinitionId: {
+                  description:
+                    "The BPMN process ID of the process definition to start an instance of.\n",
+                  allOf: [
+                    {
+                      description:
+                        "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                      format: "ProcessDefinitionId",
+                      type: "string",
+                      example: "new-account-onboarding-workflow",
+                      title: "ProcessDefinitionId",
+                    },
+                  ],
+                },
+                processDefinitionVersion: {
+                  description:
+                    "The version of the process. By default, the latest version of the process is used.\n",
+                  type: "integer",
+                  format: "int32",
+                  default: -1,
+                },
+                variables: {
+                  description:
+                    "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+                  type: "object",
+                  additionalProperties: true,
+                },
+                tenantId: {
+                  description: "The tenant ID of the process definition.",
+                  allOf: [
+                    {
+                      example: "customer-service",
+                      description: "The unique identifier of the tenant.",
+                      format: "TenantId",
+                      type: "string",
+                      title: "TenantId",
+                    },
+                  ],
+                },
+                operationReference: {
+                  description:
+                    "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+                  type: "integer",
+                  format: "int64",
+                  minimum: 1,
+                  title: "OperationReference",
+                },
+                startInstructions: {
+                  description:
+                    "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    required: ["elementId"],
+                    properties: {
+                      elementId: {
+                        description:
+                          'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                        allOf: [
+                          {
+                            description: "The model-defined id of an element.",
+                            format: "ElementId",
+                            type: "string",
+                            example: "Activity_106kosb",
+                            title: "ElementId",
+                          },
+                        ],
+                      },
+                    },
+                    title: "ProcessInstanceCreationStartInstruction",
+                  },
+                },
+                runtimeInstructions: {
+                  description:
+                    "Runtime instructions (alpha). List of instructions that affect the runtime behavior of\nthe process instance. Refer to specific instruction types for more details.\n\nThis parameter is an alpha feature and may be subject to change\nin future releases.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    description: "Runtime instructions",
+                    required: ["type"],
+                    properties: {
+                      type: {
+                        description: "The type of the runtime instruction",
+                        type: "string",
+                        enum: ["TERMINATE_PROCESS_INSTANCE"],
+                      },
+                    },
+                    oneOf: [
+                      {
+                        description:
+                          "Terminates the process instance after a specific BPMN element is completed or terminated.\n",
+                        type: "object",
+                        required: ["afterElementId"],
+                        properties: {
+                          afterElementId: {
+                            description:
+                              "The ID of the element that, once completed or terminated, will cause the process to be terminated.\n",
+                            example: "Activity_106kosb",
+                            allOf: [
+                              {
+                                description:
+                                  "The model-defined id of an element.",
+                                format: "ElementId",
+                                type: "string",
+                                example: "Activity_106kosb",
+                                title: "ElementId",
+                              },
+                            ],
+                          },
+                        },
+                        title: "ProcessInstanceCreationTerminateInstruction",
+                      },
+                    ],
+                    discriminator: {
+                      propertyName: "type",
+                      mapping: {
+                        TERMINATE_PROCESS_INSTANCE: {
+                          description:
+                            "Terminates the process instance after a specific BPMN element is completed or terminated.\n",
+                          type: "object",
+                          required: ["afterElementId"],
+                          properties: {
+                            afterElementId: {
+                              description:
+                                "The ID of the element that, once completed or terminated, will cause the process to be terminated.\n",
+                              example: "Activity_106kosb",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                          },
+                          title: "ProcessInstanceCreationTerminateInstruction",
+                        },
+                      },
+                    },
+                    title: "ProcessInstanceCreationRuntimeInstruction",
+                  },
+                },
+                awaitCompletion: {
+                  description:
+                    "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. This can lead to a 504\nresponse status. Disabled by default.\n",
+                  type: "boolean",
+                  default: false,
+                },
+                fetchVariables: {
+                  description:
+                    "List of variables by name to be included in the response when awaitCompletion is set to true.\nIf empty, all visible variables in the root scope will be returned.\n",
+                  type: "array",
+                  example: [],
+                  items: { type: "string" },
+                },
+                requestTimeout: {
+                  description:
+                    "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+                  type: "integer",
+                  format: "int64",
+                  default: 0,
+                },
+                tags: {
+                  description:
+                    "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                  type: "array",
+                  format: "string<Tag>[]",
+                  example: ["high-touch", "remediation"],
+                  items: {
+                    description:
+                      "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                    example: "business_key:1234",
+                    format: "Tag",
+                    type: "string",
+                    title: "Tag",
+                  },
+                  uniqueItems: true,
+                  maxItems: 10,
+                  title: "TagSet",
+                },
+              },
+            },
+            {
+              type: "object",
+              title: "Process creation by key",
+              required: ["processDefinitionKey"],
+              properties: {
+                processDefinitionKey: {
+                  allOf: [
+                    {
+                      description:
+                        "System-generated key for a deployed process definition.",
+                      format: "ProcessDefinitionKey",
+                      example: "2251799813686749",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessDefinitionKey",
+                    },
+                  ],
+                  description:
+                    "The unique key identifying the process definition, for example, returned for a process in the\ndeploy resources endpoint.\n",
+                },
+                variables: {
+                  description:
+                    "JSON object that will instantiate the variables for the root variable scope\nof the process instance.\n",
+                  type: "object",
+                  additionalProperties: true,
+                },
+                tenantId: {
+                  description: "The tenant ID of the process definition.",
+                  allOf: [
+                    {
+                      example: "customer-service",
+                      description: "The unique identifier of the tenant.",
+                      format: "TenantId",
+                      type: "string",
+                      title: "TenantId",
+                    },
+                  ],
+                },
+                operationReference: {
+                  description:
+                    "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+                  type: "integer",
+                  format: "int64",
+                  minimum: 1,
+                  title: "OperationReference",
+                },
+                startInstructions: {
+                  description:
+                    "List of start instructions. By default, the process instance will start at\nthe start event. If provided, the process instance will apply start instructions\nafter it has been created.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    required: ["elementId"],
+                    properties: {
+                      elementId: {
+                        description:
+                          'Future extensions might include:\n  - different types of start instructions\n  - ability to set local variables for different flow scopes\n\nFor now, however, the start instruction is implicitly a "startBeforeElement" instruction\n',
+                        allOf: [
+                          {
+                            description: "The model-defined id of an element.",
+                            format: "ElementId",
+                            type: "string",
+                            example: "Activity_106kosb",
+                            title: "ElementId",
+                          },
+                        ],
+                      },
+                    },
+                    title: "ProcessInstanceCreationStartInstruction",
+                  },
+                },
+                runtimeInstructions: {
+                  description:
+                    "Runtime instructions (alpha). List of instructions that affect the runtime behavior of\nthe process instance. Refer to specific instruction types for more details.\n\nThis parameter is an alpha feature and may be subject to change\nin future releases.\n",
+                  type: "array",
+                  items: {
+                    type: "object",
+                    description: "Runtime instructions",
+                    required: ["type"],
+                    properties: {
+                      type: {
+                        description: "The type of the runtime instruction",
+                        type: "string",
+                        enum: ["TERMINATE_PROCESS_INSTANCE"],
+                      },
+                    },
+                    oneOf: [
+                      {
+                        description:
+                          "Terminates the process instance after a specific BPMN element is completed or terminated.\n",
+                        type: "object",
+                        required: ["afterElementId"],
+                        properties: {
+                          afterElementId: {
+                            description:
+                              "The ID of the element that, once completed or terminated, will cause the process to be terminated.\n",
+                            example: "Activity_106kosb",
+                            allOf: [
+                              {
+                                description:
+                                  "The model-defined id of an element.",
+                                format: "ElementId",
+                                type: "string",
+                                example: "Activity_106kosb",
+                                title: "ElementId",
+                              },
+                            ],
+                          },
+                        },
+                        title: "ProcessInstanceCreationTerminateInstruction",
+                      },
+                    ],
+                    discriminator: {
+                      propertyName: "type",
+                      mapping: {
+                        TERMINATE_PROCESS_INSTANCE: {
+                          description:
+                            "Terminates the process instance after a specific BPMN element is completed or terminated.\n",
+                          type: "object",
+                          required: ["afterElementId"],
+                          properties: {
+                            afterElementId: {
+                              description:
+                                "The ID of the element that, once completed or terminated, will cause the process to be terminated.\n",
+                              example: "Activity_106kosb",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                          },
+                          title: "ProcessInstanceCreationTerminateInstruction",
+                        },
+                      },
+                    },
+                    title: "ProcessInstanceCreationRuntimeInstruction",
+                  },
+                },
+                awaitCompletion: {
+                  description:
+                    "Wait for the process instance to complete. If the process instance completion does\nnot occur within the requestTimeout, the request will be closed. This can lead to a 504\nresponse status. Disabled by default.\n",
+                  type: "boolean",
+                  default: false,
+                },
+                fetchVariables: {
+                  description:
+                    "List of variables by name to be included in the response when awaitCompletion is set to true.\nIf empty, all visible variables in the root scope will be returned.\n",
+                  type: "array",
+                  example: [],
+                  items: { type: "string" },
+                },
+                requestTimeout: {
+                  description:
+                    "Timeout (in ms) the request waits for the process to complete. By default or\nwhen set to 0, the generic request timeout configured in the cluster is applied.\n",
+                  type: "integer",
+                  format: "int64",
+                  default: 0,
+                },
+                tags: {
+                  description:
+                    "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                  type: "array",
+                  format: "string<Tag>[]",
+                  example: ["high-touch", "remediation"],
+                  items: {
+                    description:
+                      "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                    example: "business_key:1234",
+                    format: "Tag",
+                    type: "string",
+                    title: "Tag",
+                  },
+                  uniqueItems: true,
+                  maxItems: 10,
+                  title: "TagSet",
+                },
+              },
+            },
+          ],
+          title: "ProcessInstanceCreationInstruction",
+        },
+        examples: {
+          "By process definition key": {
+            summary: "Create a process instance by processDefinitionKey.",
+            value: { processDefinitionKey: "12345543223453245", variables: {} },
+          },
+          "By process definition ID": {
+            summary:
+              "Create a process instance by processDefinitionId and version.",
+            value: {
+              processDefinitionId: "my-business-process",
+              processDefinitionVersion: 1,
+              variables: {},
+            },
+          },
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The process instance was created.",
+      content: {
+        "application/json": {
+          schema: {
+            required: [
+              "processDefinitionId",
+              "processDefinitionKey",
+              "processDefinitionVersion",
+              "tenantId",
+              "variables",
+              "processInstanceKey",
+            ],
+            type: "object",
+            properties: {
+              processDefinitionId: {
+                description:
+                  "The BPMN process ID of the process definition which was used to create the process.\ninstance\n",
+                allOf: [
+                  {
+                    description:
+                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                    format: "ProcessDefinitionId",
+                    type: "string",
+                    example: "new-account-onboarding-workflow",
+                    title: "ProcessDefinitionId",
+                  },
+                ],
+                example: "my-process-model-1",
+              },
+              processDefinitionVersion: {
+                description:
+                  "The version of the process definition which was used to create the process instance.\n",
+                type: "integer",
+                format: "int32",
+                example: 3,
+              },
+              tenantId: {
+                allOf: [
+                  {
+                    example: "customer-service",
+                    description: "The unique identifier of the tenant.",
+                    format: "TenantId",
+                    type: "string",
+                    title: "TenantId",
+                  },
+                ],
+                description: "The tenant ID of the created process instance.",
+                example: "<default>",
+              },
+              variables: {
+                additionalProperties: true,
+                description: "All the variables visible in the root scope.",
+                type: "object",
+              },
+              processDefinitionKey: {
+                allOf: [
+                  {
+                    description:
+                      "System-generated key for a deployed process definition.",
+                    format: "ProcessDefinitionKey",
+                    example: "2251799813686749",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessDefinitionKey",
+                  },
+                ],
+                description:
+                  "The key of the process definition which was used to create the process instance.\n",
+              },
+              processInstanceKey: {
+                allOf: [
+                  {
+                    description: "System-generated key for a process instance.",
+                    format: "ProcessInstanceKey",
+                    example: "2251799813690746",
+                    type: "string",
+                    allOf: [
+                      {
+                        description:
+                          "Zeebe Engine resource key (Java long serialized as string)",
+                        type: "string",
+                        title: "LongKey",
+                      },
+                    ],
+                    title: "ProcessInstanceKey",
+                  },
+                ],
+                description:
+                  "The unique identifier of the created process instance; to be used wherever a request\nneeds a process instance key (e.g. CancelProcessInstanceRequest).\n",
+              },
+              tags: {
+                description:
+                  "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                type: "array",
+                format: "string<Tag>[]",
+                example: ["high-touch", "remediation"],
+                items: {
+                  description:
+                    "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                  example: "business_key:1234",
+                  format: "Tag",
+                  type: "string",
+                  title: "Tag",
+                },
+                uniqueItems: true,
+                maxItems: 10,
+                title: "TagSet",
+              },
+            },
+            title: "CreateProcessInstanceResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description:
+        "The process instance creation request timed out in the gateway.\n\nThis can happen if the `awaitCompletion` request parameter is set to `true`\nand the created process instance did not complete within the defined request timeout.\nThis often happens when the created instance is not fully automated or contains wait states.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

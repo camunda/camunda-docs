@@ -1,0 +1,362 @@
+---
+id: update-job
+title: "Update job"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Update job"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWutuGzcafRVC+6PJ1paU1G1T7aKAoqiN3cY2ZLndriNsqBlKojNDTkmOZFUQsK+xr7dPsucjObrn0nb/BFAARzND8rufQw45i5rjY1tr3dUu9LA2OKnpQhjupFbnaa1VK4uUO0FNJ7VU2MTIgtrQ8lq9Vnd3navLm/Obfvey80vrpt+7uvx+MKCWWz+OcXavh2wm3YS5iWBjORWKvRXzOsQV3PBcOGFI+6KmcAOx6P+DmKNZkpKCuwmujfi1lEbAIGdKsWtJH5Ihk+mRV0IanWbBclJkk4nIea21qLl5QTqsM1KN0TLSJudu9eTvF175t3u+/lOIoWBdNZZKMCOsLk0SdD664FPOMq3GzAojeSZ/EynjlgWJj2vL5SDYL6x7rtM5mbHrTqKVE8pREy+KTCY+/o17S8oX+/br4b1IHIXQULacFJZakwlXY2GFF7TtwMXN1SULw0I2Qt/UB4s72Doska4pz2BnnRJIQR3pLNMzuLHuYlnCFUMweHpfWgcJMbnSMqHSQkvlTtCYStLMs42Rr9VMZhmNlWOl4X6L9PyVvTECXYR9w04ZaVVixniuS+Uoo7ERtpgqu39jOVR7I1ihLTRNMarMh8LUvUAnc6FLVwlMy1DQVYGQgtiFScVye4JscYQRjo6Mzn2npDQGOWG5zvHjQ3Jt9FSmPhwqVpu2YjM2PhYctsBPH0sGq3UunZctHStQPMJM0ZV0IHdW+iCuZPz33/+xYegqC5QiBF1p73Ki8yITNAaiR1xm70hBCcu8H7G/FxOH+Ouqq0UMYANPoRAl9f4Si9nYqEVIEGNhNsGER1883cPQn04tJFJg+TATAThLWBvS+EF7vjo7aM//ozL2zfJ2ObolTu2sULncINeeGAlIScQ+VtsITGz0FJNQlQFzc68deaVoccJxQBN41IeT49aIRJvUEkeV2abZqI2VbiT6VYzyt6zJ5AhlSZUttkvgPZHMpZJ5mddaT9auXu27RpFYc93dBkENtkIUJoteIEmMCuNsoZUNtfa0ebYfpwobM7BtIPuU2TJJhLUjJARzDMScNZuHR1YuMwzkDOEhfAF4MqWMvoORMQhpzj/fZ+bdFF6HniwVjgAXqReWho5DKEaB3fW+67Bvzr78evBo4lxhW43GbDarm1FyKsCg2tS1GTdwS3/U73GdGM0IlvN5YOEV0a6BymwhEjmSCU2DLvjqjaHEfgzKQ+t7psvSyD08tdlt75whpMrJ0ZxKb0+1HzPiqEz050OgrDXMuHqL5+KBE0/tPF8jad+YXe22zHNuVquAXcVrBc95yla1htWB4678w4z2st+/ZkEEqDYVkcxQT9GALd2oxg3whDv+EO6+ajaXpIHq5SP8VUw8FAjSFn9VThN3YYaN1bftfnS9qpc5u4MJAKHt63YCvgWO7GBjwgG9WMB3SSsyOBop6w+UBq3l9upDG4lF1Y792wY3pk8bwLlt8GAeydzk2Ai1FyFygT3O3ksY1XI0rDUr8I8wLx3BfwT/EfyfPPi/+Qjwr95FCf+wgp7NjH+Rc/TqGpd5WEewV+twWsbNxuIhjqsWK2yIN7wAsiOJHEnkSCKfLol8eejFATGj3BpCizCGXu4TzxN4B5/gVZzU0/tHZVvc9zkywpERjozw6TPCF4eXFbSjJxNB64jVooGVik8xlraFCF9oI3hNgHysOrRCD4TY6nxFEhYUQigkm+3cOoQ8MYIix4Y8eUs7h7akdk27iFPagXJRuTCfWb/RR3u41fa0DVs/Q0FhEQ8T7rdrTxif6rCJ6bNpIQk/tCsI4bbOzlUotYRbceI1+JhU0YysF6iHGI0jg+xNr3tzddvrdP/V/cfL9u1Nv/viTZ11Milof5FWTLQxledC0aIJHnj7S54hDLQLOI9bqatQ8BFYlnHvuR6NaKdU6rTOftGl34DOBDexHj22vW1bYcoF7TZJmzOKaotVXJjqxNYTnuNdj9el9vcNip1WZGzjN9rqbziMVmDo7BQ+JqJAQ0X8p2uOb/wFKtIMV6dbuo98f+T7I99/2nyPxlyAlegQFFqTiT+xdBMS5iUtwu7Rkg4YPQeHY8zSIPK1RUD1EmBcgNncsrUotHFL2IH+U24kTQy+Yqg5oL+q6kyDePzjQ9VCDXRWWvl7ZaAKMQxJ7GRE84aBkPvse+RhxsNGOKnfVvOs+ax5UAN1/Qjp7evzOPt4BZs8VqkgQjqoInT+vUr8WaoVmGSlm9+QiBDC55gNhGmXlJ1VWUXdXhPdD30nPAkX31XFdvFzn8wfciuTD4mgPr5uiLx760PdblVoO4ewq+Oy5sZRVfMd50BND4+R9gZUhyoHI4OgUBXR6aGPaLP+JM43KG8aHs/SO2GaiwfXIsIsVGg1V4ylm5TDOmbARpwVV78SsxmMX+5BETkhiqIZvVR+XgMS49lnpfMZS4K1BERMfkJZccC0H0ML+yk4w57Um7/HxGGmh40ca5BGVGEbnfar28sX7dMfzzvdy5vuKSTW3YPzaSuAnZyrDTvidwr3+x84LNYT+J//1iEWlBMPrgHGlYqi6r1cRFa5oy8fLLq24hcQKPVADXe1xQKVJ25NtlzSY5SdmeP5YM0knnpSaekajDXimd39TGLTn0e9eCr3mH3o44mDlseHXM09m2Ul3eESgmqrTziWA/ScCJ4CdWReaOwEI077JGI9eO+7h+VJNaKd0ALsHX23VlNEDyvSvm73Oy8J7vGjixwzKx4bPqMPSvC/t1j76ISzbXq2qGE+HJd87L9F8ULp3/8Ack0+pQ==
+sidebar_class_name: "patch api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update job"}
+></Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/jobs/{jobKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Update a job with the given key.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "jobKey",
+      in: "path",
+      required: true,
+      description: "The key of the job to update.",
+      schema: {
+        type: "string",
+        format: "string<JobKey>",
+        description:
+          "Zeebe Engine resource key (Java long serialized as string)",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            changeset: {
+              description:
+                "JSON object with changed job attribute values.\n\nThe following attributes can be adjusted with this endpoint, additional attributes\nwill be ignored:\n\n* `retries` - The new amount of retries for the job; must be a positive number.\n* `timeout` - The duration of the new timeout in ms, starting from the current moment.\n\nProviding any of those attributes with a null value or omitting it preserves the persisted attribute’s value.\n\nThe job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.\n",
+              type: "object",
+              properties: {
+                retries: {
+                  type: "integer",
+                  format: "int32",
+                  description:
+                    "The new amount of retries for the job; must be a positive number.",
+                  nullable: true,
+                },
+                timeout: {
+                  type: "integer",
+                  format: "int64",
+                  description:
+                    "The duration of the new timeout in ms, starting from the current moment.",
+                  nullable: true,
+                },
+              },
+              title: "JobChangeset",
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          required: ["changeset"],
+          title: "JobUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The job was updated successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The job with the jobKey is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The job with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

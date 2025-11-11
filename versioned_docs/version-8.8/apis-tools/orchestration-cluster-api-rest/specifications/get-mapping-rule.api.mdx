@@ -1,0 +1,242 @@
+---
+id: get-mapping-rule
+title: "Get a mapping rule"
+description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get a mapping rule"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWEtv2zgQ/iuETi02sZ1supv1zXXcrIvWDRwnwcLxgaJom4lEaknKjiHov+8MKcXyo61b7KWAD0EscjjfPL4ZPvLA0pkJ2uPgM01TIWdEZzEPJieBSrmmVijZj4J2MOO2FBji/EkQccO0SFEAph/loxyPu18Gt/3bUW/Q/afdu+8NRnedT5MJzl1za4idc5LUUMhS2LkbnYkFl6R/1XiUoDqlmibcco125YGED4BI1vBg0UkgEDeldg6/Nf83E5qDoVZnfNu4ESD0r4ia7lpgFQHPGqDCsDlPaNDOA7tKEc9YDWJBUUxQv0mVNNzg/Hmrhf92MTZ9o4ZobjMteURMxhg3ZprF8QrBmJKWS4tqYE0smAt088mgrnzXFhU+cWYxNBrTYoW3hMVUJAMXnm2z98UAA1lFwS1F98HoRlCceF33NM4OVLZA0a9qkz9lVD2ATs1mzg/Stz/RoA3UWWFjXF5j8pCbLLYwi/MXrbP9mUV+cWNJTNmzQddFRGgGINKWuSMM6IefNDaY4TmnkSNwHjw8PJx21sJ8b4Zf2VZ8lR2Q+zDmyW+7LNk0uENuvCSJuKUiJp49BAjpBUNgpJBkPPzQJX9dvPtz8mZubWrazeZyuWzoKTvlkbBKN5SeNeET/1DubYNAMDRGdkVCTmgEYoBJY7LmJTEpZ2IqGNIB01CaTdBRX9/fJrWf3U31VOmEQlCCTIudzHfI3bBPhMvAdIVZ34F2a6YUs90OaKgy2w5jKp9hnL/QJHXMqI+vCfM93nWgwJOE6lVFvW3gNcB7GpGhZxMCGEttVnMbuprlM67r/sLQ7+d7uf73aHRDvArCVMQJrAF8YSoDNrAvWi2oKCFFkiXVF33xX3+0WgUiIF8O8FcS/pJCkDz1t5wGaiUKWOK1bbpful7xZUXGYMJHFZqR6jArFlAeZkIYlVJZpBhsBQbaeoHtHhyV7GepgRvFDj+UFjOxbf+mwc3FefMJ7GtSbx7qrLeSstSufOSqNnJxyAZRbX4bTc7tG+j8VGUy+sZecewGx25w7Aa/QDd4t++4CDHD3GqsFq41JEoxlmk4Q5DlXMQOHk+MlW3lAcRXzLEjHDvCsSP8qh0BrzXczlV5q3b3XbjEgqryIHCKxwPTzDfOBQVeUbleVJfiTEMegtzXeAGlmc+VsUU7T5W2BVgF8guqBQV0xx+c9r2g4nisGI3d8D7u4ET9bvZFAxRE1Ke0G2cG2hcZ9m5H5BqysqQrd2ND+E2Yy9Zlay8Cih6gvXPTJ95zB1DvahUEtqe9EF74R0Hcld9w6MfCrm5RhQ/he04113iVq5GsxHZI+B06IRjxPz5U1Pv4MELzQ2oE+54KlHEsEnKqnGDJpv0egPGYbaCG97zVOCt3CSAlLi9fULo0gTMlJT0JrOa8LA7PpKrDz+BUmoUNppIm8+Kv/4UxUJtBsVNAEDtsLLAGBN1uBPXjjreUVJiXhHlrsXxgy+LS8D2mffIz5N47Q84arR8xMYxVCGUkZLOEMM1u5/Pd4Kpz+qnf7Q1ue6egsWFfrAtvChxPqKzZcc1hH9w4p2/zKl9vv//vq1dJBstfbBN6p5AYaed5XnaIcbDRIWBNe/OBBGjry3wc5DmwiN/puChwGLqqXsH4ZN0VXBuJhMHf0IumNDbbL2d1X98Myze2t+Sg97S97pSDVK5ce3KPTQH8fOarnRe+YlJUzyjOVC/TYYyntrZ65/0Mi/e1wV73oOqK/wBZXDdD
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get a mapping rule"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/mapping-rules/{mappingRuleId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Gets the mapping rule with the given ID.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "mappingRuleId",
+      in: "path",
+      required: true,
+      description: "The ID of the mapping rule to get.",
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The mapping rule was returned successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              claimName: {
+                type: "string",
+                description: "The name of the claim to map.",
+              },
+              claimValue: {
+                type: "string",
+                description: "The value of the claim to map.",
+              },
+              name: {
+                type: "string",
+                description: "The name of the mapping rule.",
+              },
+              mappingRuleId: {
+                type: "string",
+                description: "The ID of the mapping rule.",
+              },
+            },
+            title: "MappingRuleResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The mapping rule with the mappingRuleId was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

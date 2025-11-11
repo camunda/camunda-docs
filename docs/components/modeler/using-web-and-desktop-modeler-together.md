@@ -17,13 +17,13 @@ Using both tools together allows you to combine the best of both worlds:
 
 This workflow bridges the gap between business users and developers, ensuring smooth handoffs and better alignment across the team.
 
-When using [Git sync](/components/modeler/web-modeler/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
+When using [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md) to keep your project in sync between Web Modeler and your local environment, there are a few considerations to ensure both modelers work together transparently.
 
 ## Process applications
 
-| Desktop Modeler                                                                            | Web Modeler                                                                                                       |
-| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications.md). |
+| Desktop Modeler                                                                            | Web Modeler                                                                                                                            |
+| ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| A process application is represented as a folder containing a `.process-application` file. | A process application is represented as a [type folder](/components/modeler/web-modeler/process-applications/process-applications.md). |
 
 Using a single folder structure to represent process applications makes it easier to work across both tools.
 

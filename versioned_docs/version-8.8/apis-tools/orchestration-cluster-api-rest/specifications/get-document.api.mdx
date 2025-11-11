@@ -1,0 +1,195 @@
+---
+id: get-document
+title: "Download document"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Download document"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWF1v2zYU/SuEnlrMsd0u3Tq/uU6auuiSIHFXDKkfaIm22UqkSlJODEP/feeSki1/ten2tK1Bk0rk5f04PDwktYocn9modxed6bjIhHLRuBXpXBjupFbDJOpFM+HWna0oETY2Mqde9H1UH9Xd3eDq8nZ4Ozq/HPzZux3dXF1ejMfUc6bvVap5wjhLKg9sanTG3FywAc8KlXD2ksVpYZ0wbRpyqZ1AN3f4Iy3Dv7gwBgPTJbNFnmvjRMKm2mw8WqeNsExPmVvmosf6H25b7GJw3WJSnWQi02bJniitTnKjkyKmzJ+2WKpjnu61f1QoMeeGZwIZETCrSOEFpdbxgEkrklR8zt0cz0Z8KaQRgMqZQuwiNEKpwzOfHZ7WSTuN54BOGz5sPBcZj3qrndE18GyYBFQKJb8UAmDIBM1yKlH5Bl1yBWwy7hpjfcIEDdqsM1LN6F26VGwblWVrXazHdFMpQprlVqlTntrH1uqdNSve7iZGbGOwnWwzr1grhzFvuJ0fzy1Mw1F3h7Kew+Fe3lWwAPw9BxV1lhfEv8nyUIVJQQFYkftZZWu/IDEo5fb8GzEVoHZcER5mRrjCKAS4nwtVOSKXjRlmw+AlTqUHj8vUErYg8QKcCH0aSyZ2PnrLtxA4wqIKmaZsQu+fYCASrLmoHBN4NtfKCkt4Pe9295k4amZOYNSTiWxtEcfC2mmRpkuayQo4csLzPJWxF5OORkR3gmkQPKO+YzPU4PBEKo7ZLfHTik67p9/KS7q5r3cmFwAQXKRMlQZOGmLzldwA3yQV2U+fLHldHV2QfXYdLFkiHLBnekJIMgLEG06Ah1Ts7ub1gP12+uLX8ZO5c7ntdTr39/dtM41PRCJBl7Y2sw5e6ZfsnnrCgEUZX9IM8QRmiAmRQm4QZEdL3eYixqKPacapziptr3xtL14VlCEtErP14A3QXwEcFN4T+T57fzOsBWdJfNwL7cdMeZGSDz7RhetNUq4+o1088Cz3WtNsL9cStJ/MbnRbZBlYUK+f3cCbAK8gLTeB6RTAOu6KRtnQCydmwjTrRdPPz/diEqnejEbXLLjAgsLKok3Hb0pVAluxT7vdVpRJJbMiq9/4Q3j7pdv1okN8eUS9iomHHCB5Yu4WDWplXmu8t+3yq9JrvizZHVJ4qyd2pPvY3hbcCTtmMVe0IEAxiJKFXpYkpCgUQvQ3qUEb4R4/tJEzuZv/dsKdxfPOJ+TX4SE98llumBFVS+0sIBdE4MUhcQJmNLeGVoswBhOlY39uICWVqQ9PClXnVslhWDE/FOGHIvxQhH+rIqATZ/W5rm4q/viOYzlc1acC21ltzu4lHTSFWdSH+8JgAqJVWNwl1uRqrq0reyu6aZRIB/YLbiRHWE8c6g4iUJPb3yR888GTJTro8FqXfWUQClCGuRyEqw+7Ob8dsQtMxz3HCQo1UfjtMC+7L7sHI5DpI7z3r4csVO4DNOWsDkG6dDBEMP7eICWdLK2AEEu3vCUXAcJXghth+gVN05pdVWwfid4n3ggt4eF1zbm3H0aU/oRbGX/LBdl4+kg11d6wotHhCpA8zTaoESrvtp9V2wPYSMOrS0h9cz1XoLMQ1aoITKqlfYaTaDFp48bQiYP5+n9pLRbl/j2EsCNFwRgY+m0IC8cfafmB2zJCYq8SOLQfSO1d6GF/hGLYs3b3e1KcpHrSybhUnSqE7Qz6v7+/POufvBsOzi9vz0/gse0enIc3B8czrhp5rG/+yZEvB6vNtvvf/IhQcdKJB9eBduOqWlYTsKoU6m79ScHCvtf4voBlE2TmLlqtwGLx3qRlSc3hskvClUhLmnTkKt6E95/dyg/W8Vkstz4SLHhakFVEV/XHZ/bkprqzP91clv+nl/CvAr391WMD9nizN30nJ3aQ//YHqoPZVY1cLZtp1Vk3CF2OYT0XPIGiU6LBoB/HIneNoUc/FlCl613+4hw7QPkX5yY17A==
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Download document"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/documents/{documentId}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Download a document from the Camunda 8 cluster.
+
+Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-production), local (non-production)
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "documentId",
+      in: "path",
+      required: true,
+      description: "The ID of the document to download.",
+      schema: {
+        description: "Document Id that uniquely identifies a document.",
+        format: "DocumentId",
+        type: "string",
+        title: "DocumentId",
+      },
+    },
+    {
+      name: "storeId",
+      in: "query",
+      required: false,
+      description:
+        "The ID of the document store to download the document from.",
+      schema: { type: "string" },
+    },
+    {
+      name: "contentHash",
+      in: "query",
+      required: true,
+      schema: { type: "string" },
+      description:
+        "The hash of the document content that was computed by the document store during upload. The hash is part of the document reference that is returned when uploading a document. If the client fails to provide the correct hash, the request will be rejected.\n",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The document was downloaded successfully.",
+      content: {
+        "application/octet-stream": {
+          schema: { type: "string", format: "binary" },
+        },
+      },
+    },
+    "404": {
+      description: "The document with the given ID was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

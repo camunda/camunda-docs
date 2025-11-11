@@ -1,0 +1,682 @@
+---
+id: activate-jobs
+title: "Activate jobs"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Activate jobs"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Activate jobs"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/activation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Iterate through all known partitions and activate jobs up to the requested maximum.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            type: {
+              description:
+                'The job type, as defined in the BPMN process (e.g. <zeebe:taskDefinition type="payment-service" />).\n',
+              type: "string",
+              example: "create-new-user-record",
+            },
+            worker: {
+              description:
+                "The name of the worker activating the jobs, mostly used for logging purposes.",
+              type: "string",
+              example: "worker-324",
+            },
+            timeout: {
+              description:
+                "A job returned after this call will not be activated by another call until the timeout (in ms) has been reached.\n",
+              type: "integer",
+              format: "int64",
+              example: 20000,
+            },
+            maxJobsToActivate: {
+              description: "The maximum jobs to activate by this request.",
+              type: "integer",
+              format: "int32",
+              example: 5,
+            },
+            fetchVariable: {
+              description:
+                "A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned.\n",
+              type: "array",
+              example: ["firstName", "lastName", "email"],
+              items: { type: "string" },
+            },
+            requestTimeout: {
+              description:
+                "The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout < 0, long polling is disabled and the request is completed immediately, even when no job is activated.\n",
+              type: "integer",
+              format: "int64",
+              default: 0,
+              example: 60000,
+            },
+            tenantIds: {
+              description:
+                "A list of IDs of tenants for which to activate jobs.",
+              type: "array",
+              items: {
+                example: "customer-service",
+                description: "The unique identifier of the tenant.",
+                format: "TenantId",
+                type: "string",
+                title: "TenantId",
+              },
+            },
+          },
+          required: ["type", "timeout", "maxJobsToActivate"],
+          title: "JobActivationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The list of activated jobs.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The list of activated jobs",
+            type: "object",
+            required: ["jobs"],
+            properties: {
+              jobs: {
+                description: "The activated jobs.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "type",
+                    "processDefinitionId",
+                    "processDefinitionVersion",
+                    "elementId",
+                    "customHeaders",
+                    "worker",
+                    "retries",
+                    "deadline",
+                    "variables",
+                    "tenantId",
+                    "jobKey",
+                    "processInstanceKey",
+                    "processDefinitionKey",
+                    "elementInstanceKey",
+                    "kind",
+                    "listenerEventType",
+                  ],
+                  properties: {
+                    type: {
+                      description:
+                        "The type of the job (should match what was requested).",
+                      type: "string",
+                      example: "create-new-user-record",
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The bpmn process ID of the job's process definition.",
+                      example: "new-customer-flow",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                    },
+                    processDefinitionVersion: {
+                      description:
+                        "The version of the job's process definition.",
+                      type: "integer",
+                      format: "int32",
+                      example: 1,
+                    },
+                    elementId: {
+                      description: "The associated task element ID.",
+                      allOf: [
+                        {
+                          description: "The model-defined id of an element.",
+                          format: "ElementId",
+                          type: "string",
+                          example: "Activity_106kosb",
+                          title: "ElementId",
+                        },
+                      ],
+                    },
+                    customHeaders: {
+                      description:
+                        "A set of custom headers defined during modelling; returned as a serialized JSON document.",
+                      type: "object",
+                      additionalProperties: true,
+                      example: {},
+                    },
+                    worker: {
+                      description:
+                        "The name of the worker which activated this job.",
+                      type: "string",
+                      example: "worker-324",
+                    },
+                    retries: {
+                      description:
+                        "The amount of retries left to this job (should always be positive).",
+                      type: "integer",
+                      format: "int32",
+                      example: 3,
+                    },
+                    deadline: {
+                      description:
+                        "When the job can be activated again, sent as a UNIX epoch timestamp.",
+                      type: "integer",
+                      format: "int64",
+                      example: 1757280974277,
+                    },
+                    variables: {
+                      description:
+                        "All variables visible to the task scope, computed at activation time.",
+                      type: "object",
+                      example: {
+                        firstName: "John",
+                        lastName: "Doe",
+                        email: "johndoe@acme.com",
+                      },
+                      additionalProperties: true,
+                    },
+                    tenantId: {
+                      description: "The ID of the tenant that owns the job.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                    jobKey: {
+                      allOf: [
+                        {
+                          description: "System-generated key for a job.",
+                          format: "JobKey",
+                          example: "2251799813653498",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "JobKey",
+                        },
+                      ],
+                      description: "The key, a unique identifier for the job.",
+                    },
+                    processInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a process instance.",
+                          format: "ProcessInstanceKey",
+                          example: "2251799813690746",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessInstanceKey",
+                        },
+                      ],
+                      description: "The job's process instance key.",
+                    },
+                    processDefinitionKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                      description: "The key of the job's process definition.",
+                    },
+                    elementInstanceKey: {
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a element instance.",
+                          format: "ElementInstanceKey",
+                          example: "2251799813686789",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ElementInstanceKey",
+                        },
+                      ],
+                      description:
+                        "The unique key identifying the associated task, unique within the scope of the process instance.\n",
+                    },
+                    kind: {
+                      description: "The job kind.",
+                      example: "BPMN_ELEMENT",
+                      type: "string",
+                      enum: [
+                        "BPMN_ELEMENT",
+                        "EXECUTION_LISTENER",
+                        "TASK_LISTENER",
+                        "AD_HOC_SUB_PROCESS",
+                      ],
+                      title: "JobKindEnum",
+                    },
+                    listenerEventType: {
+                      example: "UNSPECIFIED",
+                      description: "The listener event type of the job.",
+                      type: "string",
+                      enum: [
+                        "ASSIGNING",
+                        "CANCELING",
+                        "COMPLETING",
+                        "CREATING",
+                        "END",
+                        "START",
+                        "UNSPECIFIED",
+                        "UPDATING",
+                      ],
+                      title: "JobListenerEventTypeEnum",
+                    },
+                    userTask: {
+                      type: "object",
+                      description: "Contains properties of a user task.",
+                      properties: {
+                        action: {
+                          description: "The action performed on the user task.",
+                          type: "string",
+                        },
+                        assignee: {
+                          description: "The user assigned to the task.",
+                          type: "string",
+                          nullable: true,
+                        },
+                        candidateGroups: {
+                          description: "The groups eligible to claim the task.",
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        candidateUsers: {
+                          description: "The users eligible to claim the task.",
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        changedAttributes: {
+                          description:
+                            "The attributes that were changed in the task.",
+                          type: "array",
+                          items: { type: "string" },
+                        },
+                        dueDate: {
+                          description:
+                            "The due date of the user task in ISO 8601 format.",
+                          type: "string",
+                          format: "date-time",
+                          nullable: true,
+                        },
+                        followUpDate: {
+                          description:
+                            "The follow-up date of the user task in ISO 8601 format.",
+                          type: "string",
+                          format: "date-time",
+                          nullable: true,
+                        },
+                        formKey: {
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a deployed form.",
+                              format: "FormKey",
+                              example: "2251799813684365",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "FormKey",
+                            },
+                          ],
+                          description:
+                            "The key of the form associated with the user task.",
+                        },
+                        priority: {
+                          description: "The priority of the user task.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 0,
+                          maximum: 100,
+                          nullable: true,
+                        },
+                        userTaskKey: {
+                          allOf: [
+                            {
+                              description:
+                                "System-generated key for a user task.",
+                              format: "UserTaskKey",
+                              type: "string",
+                              allOf: [
+                                {
+                                  description:
+                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                  type: "string",
+                                  title: "LongKey",
+                                },
+                              ],
+                              title: "UserTaskKey",
+                            },
+                          ],
+                          description:
+                            "The unique key identifying the user task.",
+                          nullable: true,
+                        },
+                      },
+                      title: "UserTaskProperties",
+                    },
+                    tags: {
+                      description:
+                        "List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                      type: "array",
+                      format: "string<Tag>[]",
+                      example: ["high-touch", "remediation"],
+                      items: {
+                        description:
+                          "A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.",
+                        example: "business_key:1234",
+                        format: "Tag",
+                        type: "string",
+                        title: "Tag",
+                      },
+                      uniqueItems: true,
+                      maxItems: 10,
+                      title: "TagSet",
+                    },
+                  },
+                  title: "ActivatedJobResult",
+                },
+              },
+            },
+            title: "JobActivationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "An Internal Error occurred. More details are provided in the response body. If the response body contains RESOURCE_EXHAUSTED, this signals back pressure.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

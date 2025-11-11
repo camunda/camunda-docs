@@ -43,7 +43,7 @@ Compatibility is confirmed for [Camunda Helm chart releases version 11 and above
 
 #### Example usage
 
-You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks). Below is a quick reference for common usage options:
+You can find the complete usage details in the [c8-sm-checks repository](https://github.com/camunda/c8-sm-checks/). Below is a quick reference for common usage options:
 
 ```bash
 Usage: ./checks/kube/aws-irsa.sh [-h] [-n NAMESPACE] [-e EXCLUDE_COMPONENTS] [-p] [-l] [-s]

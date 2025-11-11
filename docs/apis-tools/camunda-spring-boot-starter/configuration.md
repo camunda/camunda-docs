@@ -11,6 +11,10 @@ Configuration properties can be defined as environment variables using [Spring B
 For example, the property `camunda.client.worker.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE`.
 :::
 
+:::note
+For a full set of properties, head over to the [properties reference](./properties-reference.md)
+:::
+
 ## Modes
 
 The Camunda Spring Boot Starter has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
@@ -70,6 +74,8 @@ This applies the following defaults:
 https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
+For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
+
 ## Connectivity
 
 The connection to Camunda API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
@@ -97,7 +103,7 @@ Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration
 ```yaml
 camunda:
   client:
-    rest-address: http://localhost:8080
+    rest-address: http://localhost:8088
 ```
 
 :::note
@@ -106,65 +112,55 @@ You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerEx
 
 #### Prefer REST over gRPC
 
-If true, the Camunda Client will use REST instead of gRPC whenever possible to communicate with the Camunda APIs:
+By default, the Camunda Client will use REST instead of gRPC whenever possible to communicate with the Camunda APIs.
+
+To use the gRPC by default, you can configure this:
 
 ```yaml
 camunda:
   client:
-    prefer-rest-over-grpc: true
+    prefer-rest-over-grpc: false
 ```
 
 ### Advanced connectivity settings
-
-#### Keep alive
-
-Time interval between keep alive messages sent to the gateway (default is 45s):
 
 ```yaml
 camunda:
   client:
     keep-alive: PT60S
-```
-
-#### Override authority
-
-The alternative authority to use, commonly in the form `host` or `host:port`:
-
-```yaml
-camunda:
-  client:
     override-authority: host:port
-```
-
-#### Max message size
-
-A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB):
-
-```yaml
-camunda:
-  client:
     max-message-size: 4194304
-```
-
-#### Max metadata size
-
-A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda:
-
-```yaml
-camunda:
-  client:
     max-metadata-size: 4194304
+    ca-certificate-path: path/to/certificate
+    request-timeout: PT10S
+    request-timeout-offset: PT1S
 ```
 
-#### CA certificate
+**Keep alive:** Time interval between keep alive messages sent to the gateway (default is 45s).
 
-Path to a root CA certificate to be used instead of the certificate in the default store:
+**Override authority:** The alternative authority to use, commonly in the form `host` or `host:port`.
+
+**Max message size:** A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB).
+
+**Max metadata size:** A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda.
+
+**CA certificate path:** Path to a root CA certificate to be used instead of the certificate in the default store.
+
+**Request timeout:** The timeout for all requests sent to Camunda. There is an additional option to define the timeout for workers.
+
+**Request timeout offset:** The offset being added to the timeout on asynchronous requests sent to Camunda to cover the network latency.
+
+### Multi-tenancy
+
+To connect the client to a specific tenant, you can configure:
 
 ```yaml
 camunda:
   client:
-    ca-certificate-path: path/to/certificate
+    tenant-id: myTenant
 ```
+
+This does also affect the default tenant being used by all job workers, however there are [more possibilities](#control-tenant-usage) to configure them.
 
 ## Authentication
 
@@ -411,6 +407,8 @@ public void handleJobFoo(final JobClient jobClient) {
 
 #### `ActivatedJob` parameter
 
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
@@ -458,7 +456,7 @@ You can also use your own class into which the process variables are mapped to (
 
 ```java
 @JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables){
+public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
   // do whatever you need to do
   variables.getMyAttributeX();
   variables.setMyAttributeY(42);
@@ -472,13 +470,29 @@ public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables)
 This will add the names of the fields of the used type to the joint list of variables to fetch. Jackson's `@JsonProperty` annotation is respected.
 :::
 
+#### Using `@Document`
+
+You can inject a `DocumentContext` by using the `@Document` annotation:
+
+```java
+@JobWorker
+public void processDocument(@Document DocumentContext doc) {
+  List<DocumentEntry> documents = doc.getDocuments();
+  // do what you need to do with the document entries
+}
+```
+
+Each `DocumentEntry` grants you access to the `DocumentReferenceResponse` that contains the reference data to the document and the `DocumentLinkResponse` that contains a link to the document.
+
+On top, you can directly retrieve the document content as `InputStream` or `byte[]`.
+
 #### Using `@CustomHeaders`
 
 You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
-@JobWorker(type = "foo")
-public void handleFoo(@CustomHeaders Map<String, String> headers){
+@JobWorker
+public void handleFoo(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -486,6 +500,21 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
 :::note
 This will not have any effect on the variable fetching behavior.
 :::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void handleFoo(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey) {
+  // do whatever you need to do
+}
+```
 
 ### Completing jobs
 
@@ -503,24 +532,18 @@ public void handleJobFoo(final ActivatedJob job) {
 }
 ```
 
-This is the same as:
-
-```java
-@JobWorker(type = "foo", autoComplete = true)
-public void handleJobFoo(final ActivatedJob job) {
-  // ...
-}
-```
-
 :::note
 The code within the handler method needs to be synchronously executed, as the completion will be triggered right after the method has finished.
 :::
 
-When using `autoComplete` you can:
+##### Returning results
 
-- Return a `Map`, `String`, `InputStream`, or `Object`, which will then be added to the process variables.
-- Throw a `BpmnError`, which results in a BPMN error being sent to Zeebe.
-- Throw any other `Exception` that leads in a failure handed over to Zeebe.
+When using `autoComplete` you can return:
+
+- a `Map<String, Object>` containing the process variables to set as result of the job
+- a `String` containing a valid JSON object
+- an `InputStream` streaming a valid JSON object
+- an `Object` that will be serialized to a JSON object
 
 ```java
 @JobWorker(type = "foo")
@@ -533,6 +556,41 @@ public Map<String, Object> handleJobFoo(final ActivatedJob job) {
    // problem shall be indicated to the process:
    throw new BpmnError("DOESNT_WORK", "This does not work because...");
   }
+}
+```
+
+##### Documents as job results
+
+If you want to send a document as job result, you can do this by making a `DocumentContext` part of the response.
+
+It can be part of a `Map<String, Object>`:
+
+```java
+@JobWorker
+public Map<String, Object> sendDocumentAsResult() {
+  String resultDocumentContent = documentService.loadResult();
+  Map<String, Object> result = new HashMap<>();
+  result.put("resultDocument", DocumentContext.result()
+          .addDocument(
+              "result.json", b -> b.content(resultDocumentContent).contentType("application/json"))
+          .build());
+  return result;
+}
+```
+
+It can also be part of an `Object`:
+
+```java
+public record DocumentResult(DocumentContext responseDocument) {}
+
+@JobWorker
+public DocumentResult sendDocumentAsResult() {
+  String resultDocumentContent = documentService.loadResult();
+  DocumentContext responseDocument = DocumentContext.result()
+          .addDocument(
+              "result.json", b -> b.content(resultDocumentContent).contentType("application/json"))
+          .build());
+  return new DocumentResult(responseDocument);
 }
 ```
 
@@ -614,10 +672,14 @@ Whenever you want a job to fail in a controlled way, you can throw a `JobError` 
 public void handleJobFoo() {
   try {
    // some work
-  } catch(Exception e) {
-   // problem shall be indicated to the process:
-   throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
-   // this is a static function that returns an instance of JobError
+  } catch(DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch(StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
   }
 }
 ```
@@ -627,7 +689,7 @@ The JobError takes 5 parameters:
 - `errorMessage`: String
 - `variables`: Object _(optional)_, default `null`
 - `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
-- `retryBackoff`: Duration _(optional)_, defaults to the configured retry backoff
+- `retryBackoff`: Duration _or_ Function (Integer -> Duration) _(optional)_, defaults to the configured retry backoff, function input are the retries that will be submitted
 - `cause`: Exception _(optional)_, defaults to `null`
 
 :::note
@@ -638,9 +700,7 @@ The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-
 
 If your handler method would throw any other exception than the ones listed above, the default Camunda Client error handling will apply, decrementing retries with a `retryBackoff` of 0.
 
-### Advanced job worker configuration options
-
-#### Execution threads
+### Configuring the job worker thread pool
 
 The number of threads for invocation of job workers (default 1):
 
@@ -653,6 +713,8 @@ camunda:
 :::note
 We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
 :::
+
+### Further job worker configuration options
 
 #### Disable a job worker
 
@@ -760,7 +822,7 @@ camunda:
 
 #### Control tenant usage
 
-Generally, the [client default `tenant-id`](#tenant-usage) is used for all job worker activations.
+Generally, the [client default `tenant-id`](#multi-tenancy) is used for all job worker activations.
 
 Configure global worker defaults for additional `tenant-ids` to be used by all workers:
 
@@ -828,43 +890,108 @@ camunda:
         timeout: PT1M
 ```
 
-#### Programmatic job worker modification
+## Deploying resources on start-up
 
-You could also provide a bean that can customize the `JobWorker` configuration values by implementing the `io.camunda.spring.client.annotation.customizer.JobWorkerValueCustomizer` interface.
+To deploy process models on application start-up, use the `@Deployment` annotation:
 
-## Additional configuration options
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
 
-For a full set of configuration options, see [CamundaClientProperties.java](https://github.com/camunda/camunda/blob/main/clients/spring-boot-starter-camunda-sdk/src/main/java/io/camunda/spring/client/properties/CamundaClientProperties.java).
+This annotation internally uses [the Spring resource loader](https://docs.spring.io/spring-framework/reference/core/resources.html) mechanism. This is powerful, and can also deploy multiple files at once, for example:
 
-### Message time to live
+```java
+@Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
+```
 
-The time-to-live which is used when none is provided for a message (default 1H):
+Or, define wildcard patterns:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+```
+
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the `tenantId` set to `camunda.client.tenant-id` is used.
+
+To disable the deployment of annotations, you can set:
 
 ```yaml
 camunda:
   client:
-    message-time-to-live: PT2H
+    deployment:
+      enabled: false
 ```
 
-### Request timeout
+## Reacting on events
 
-The request timeout used if not overridden by the command (default is 10s):
+The Camunda Spring Boot Starter is integrated with the Spring events and offers its own.
 
-```yaml
-camunda:
-  client:
-    request-timeout: PT20S
+### Camunda client lifecycle events
+
+#### Camunda client created event
+
+To react on the creation of the Camunda client, you can do this:
+
+```java
+@EventListener
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
+  // do what you need to do
+}
 ```
 
-### Tenant usage
+#### Camunda client closing event
 
-When using multi-tenancy, the Zeebe client will connect to the `<default>` tenant. To control this, you can configure:
+To react on the closing of the Camunda client, you can do this:
 
-```yaml
-camunda:
-  client:
-    tenant-id: foo
+```java
+@EventListener
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
+  // do what you need to do
+}
 ```
+
+#### Lifecycle aware interface
+
+To subscribe to the Camunda client lifecycle at once, you can also use an interface:
+
+```java
+@Component
+public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
+  @Override
+  public void onStart(CamundaClient client) {
+    // do what you need to do
+  }
+
+  @Override
+  public void onStop(CamundaClient client) {
+    // do what you need to do
+  }
+}
+```
+
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
 
 ## Observing metrics
 
