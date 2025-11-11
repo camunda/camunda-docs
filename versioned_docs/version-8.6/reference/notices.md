@@ -35,7 +35,7 @@ The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used b
 
 ### How to determine if the installation is affected
 
-You are using Web Modeler Self-Managed version <= 8.8.1 and Microsoft SQL Server as database vendor.
+You are using Web Modeler Self-Managed version &lt;= 8.8.1 and Microsoft SQL Server as database vendor.
 
 ### Solution
 
