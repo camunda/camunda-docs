@@ -106,7 +106,7 @@ The Orchestration Cluster consists of multiple components:
 
 - Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers.
 - Zeebe exports data to Elasticsearch instances in both regions using the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
-- Utilizing the new exporters ensures that Operate and Tasklist data is the same in both regions besides some V1 API related operations that are still region specific, see [active-active](#active-active).
+- Using the new exporters ensures that Operate and Tasklist data is the same in both regions besides some v1 API related operations that are still region specific. See [active-active](#active-active).
 - Identity is embedded in the Orchestration Cluster and provides cluster-level identity management.
 
 ### User traffic
