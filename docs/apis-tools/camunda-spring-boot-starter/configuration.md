@@ -756,7 +756,7 @@ camunda:
 
 #### Configure jobs in flight
 
-Number of jobs that are polled from the broker to be worked on in this client and thread pool size to handle the jobs:
+Number of jobs for a worker that are polled from the broker to be worked on in this client:
 
 ```java
 @JobWorker(maxJobsActive = 64)
@@ -888,6 +888,38 @@ camunda:
     worker:
       defaults:
         timeout: PT1M
+```
+
+#### Configure the retry backoff
+
+If you want to apply a retry backoff that should be applied if a job fails without a job error, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(retryBackoff=10000L)
+public void work() {
+  // worker's code
+}
+```
+
+Moreover, you can override the retry backoff for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        foo:
+          retry-backoff: PT10S
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        retry-backoff: PT10S
 ```
 
 ## Deploying resources on start-up
