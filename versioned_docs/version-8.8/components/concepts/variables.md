@@ -153,7 +153,8 @@ Examples:
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
 
 :::note
-Avoid using output mappings and result variables that contain a period (e.g., customer.name). Using a period is generally discouraged because it updates a property of an existing process variable within the Task's scope, leading to confusing behavior and potential bugs in the process flow.:::
+Avoid using output mappings or result variables that contain a period (for example, `customer.name`). Using a period is discouraged because it updates a property of an existing process variable within the task scope, which can lead to confusing behavior or unexpected results in the process flow.
+:::
 
 ### Context variable
 
