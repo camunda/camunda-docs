@@ -164,7 +164,7 @@ module.exports = {
         docsPluginId: "default",
         config: {
           camunda: {
-            specPath: "api/camunda/camunda-openapi.yaml",
+            specPath: "api/camunda/v2/camunda-openapi.yaml",
             outputDir:
               "docs/apis-tools/orchestration-cluster-api-rest/specifications",
             sidebarOptions: {
