@@ -26,7 +26,7 @@ Key points:
 - Encryption type is selected only when [creating a cluster](/components/console/manage-clusters/create-cluster.md)
 - Each cluster can have its own key
 - The key applies to all workloads and persists across updates
-- View encryption details in **Cluster details** on the **Console overview** tab
+- View encryption details on the cluster's **Overview** tab under **Cluster Details**
 
 :::note
 Backups use default provider GCP encryption.
