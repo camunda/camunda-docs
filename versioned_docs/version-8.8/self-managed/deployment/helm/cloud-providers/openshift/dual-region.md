@@ -206,7 +206,15 @@ Later in this guide, we will refer to it as **first cluster**.
      https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/dual-region/procedure/acm/auto-import-cluster-secret.yml.tpl
      ```
 
-   - Finally, import each cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
+   - If running on Red Hat OpenShift Service on AWS (ROSA), the following addition is required to ensure certificates are trusted.
+
+     Save the following file as `klusterlet-global-config.yml`:
+
+     ```bash reference
+     https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/dual-region/procedure/acm/klusterlet-global-config.yml
+     ```
+
+   - Finally, import the target cluster into the Managed Cluster Set and verify that they can be reached and managed successfully:
 
      ```bash reference
      https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/openshift/dual-region/procedure/acm/initiate-cluster-set.sh
