@@ -142,10 +142,6 @@ nodes:
         hostPort: 80
       - containerPort: 443
         hostPort: 443
-      - containerPort: 26500
-        hostPort: 26500
-      - containerPort: 18080
-        hostPort: 18080
 ```
 
 Modify the `kind create cluster` command to use the configuration file above. You might need to delete and re-create this cluster if you are planning to enable Ingress (see [delete kind cluster](#clean)):
