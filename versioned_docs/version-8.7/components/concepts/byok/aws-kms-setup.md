@@ -87,7 +87,7 @@ Use this script to create a multi-Region primary key in the cluster’s Region a
 For dual-region setups, you can also run the single-region script twice—once in the cluster’s Region and once in the backup Region. Make sure to modify the `REGION` variable before creating the second key.
 :::
 
-### Option B: Manual key creation in AWS Management Console
+### Option B: Manual key creation in AWS Console
 
 ![manual key creation in AWS Console](./img/manual-key-creation.png)
 
