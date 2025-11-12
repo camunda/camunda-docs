@@ -120,7 +120,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing",
       ],
     },
     {
@@ -545,6 +544,7 @@ module.exports = {
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
