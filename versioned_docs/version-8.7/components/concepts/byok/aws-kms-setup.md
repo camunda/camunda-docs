@@ -1,56 +1,56 @@
 ---
 id: aws-external-encryption-setup
 title: "Encryption at rest using external encryption keys"
-description: "Learn how to configure encryption at rest for Camunda 8 SaaS using external Amazon KMS encryption keys."
+description: "Learn how to configure encryption at rest for Camunda 8 SaaS using external AWS KMS encryption keys."
 ---
 
-Learn how to configure encryption at rest for your Camunda 8 SaaS cluster using Amazon KMS.
+Learn how to configure encryption at rest for your Camunda 8 SaaS cluster using AWS KMS.
 
 ## Prerequisites
 
-| Requirement           | Description                                                                |
-| --------------------- | -------------------------------------------------------------------------- |
-| Amazon account        | Access to an Amazon account with KMS permissions.                          |
-| KMS permissions       | Ability to create and manage KMS keys and attach policies.                 |
-| Cluster region        | KMS key must reside in the same Amazon region as your Camunda 8.8 cluster. |
-| Technical familiarity | Some experience with Amazon console, IAM roles, and KMS is recommended.    |
+| Requirement           | Description                                                                 |
+| --------------------- | --------------------------------------------------------------------------- |
+| AWS account           | Access to an AWS account with AWS KMS permissions.                          |
+| AWS KMS permissions   | Ability to create and manage AWS KMS keys and attach key policies.          |
+| Cluster region        | The AWS KMS key must reside in the same AWS Region as your Camunda cluster. |
+| Technical familiarity | Some experience with the AWS Management Console, IAM roles, and AWS KMS.    |
 
 :::warning Important
 
-- Deleting or disabling your KMS key will make your cluster and data inaccessible.
-- Key management is fully customer-side in Amazon KMS. Camunda cannot rotate keys.
+- Deleting or disabling your AWS KMS key will make your cluster and data inaccessible.
+- Key management is fully customer-side in AWS KMS. Camunda cannot rotate keys.
   :::
 
 ## Step 1: Create a Camunda 8 SaaS cluster
 
 1. Sign in to the [Camunda Console](https://console.camunda.io/).
-2. Navigate to the **Cluster** section and click **Create New Cluster**.
-3. Select an Amazon region for your cluster.
+2. Navigate to the **Cluster** section and click **Create new cluster**.
+3. Select an AWS Region for your cluster.
 4. Choose **Single region** or **Dual region backup**.
-   - Dual region requires one key per region. Keys can be separate.
-5. Under **Encryption at rest**, choose **External**.
+   - Dual region requires one key per region; keys can be separate.
+5. Under **Encryption at rest**, choose **External**.  
    ![external option encryption at rest](./img/external-encryption.png)
 6. Click **Create cluster**.
 
-After creation, note the **Amazon Role ARN** displayed in the Console for your cluster.
+After creation, note the **AWS Role ARN** displayed in the Console for your cluster.
 
 ## Step 2: Create and configure an AWS KMS key
 
-You can create the key either via CLI or manually in the AWS console.
+You can create the key either via AWS CLI or manually in the AWS Management Console.
 
 ### Option A: Create the key using AWS CLI
 
 ![create key using AWS CLI](./img/create-key-cli.png)
 
-We provide automated scripts to create the necessary KMS key(s) with the correct policy and permissions. Choose the option that matches your backup configuration.
+We provide automated scripts to create the necessary AWS KMS key(s) with the correct policy and permissions. Choose the option that matches your backup configuration.
 
 #### Single-region backup
 
-Use this script to create a single KMS key in the same region as the cluster.
+Use this script to create a single AWS KMS key in the same Region as the cluster.
 
 **What the script does:**
 
-- Creates a KMS key with the required policy for Camunda access.
+- Creates an AWS KMS key with the required policy for Camunda access.
 - Sets up an alias for easier key management.
 - Outputs the key ARN to provide to Camunda.
 
@@ -68,11 +68,11 @@ Use this script to create a single KMS key in the same region as the cluster.
 
 #### Dual-region backup
 
-Use this script to create a multi-region primary key in the cluster's region and a replica key in backup region.
+Use this script to create a multi-Region primary key in the cluster’s Region and a replica key in the backup Region.
 
 **What the script does:**
 
-- Creates a multi-region primary key and replica key.
+- Creates a multi-Region primary key and replica key.
 - Applies the correct policies to both keys.
 - Outputs both key ARNs to provide to Camunda.
 
@@ -84,25 +84,25 @@ Use this script to create a multi-region primary key in the cluster's region and
 4. Copy the two outputted key ARNs and provide them to Camunda.
 
 :::note Alternative
-For dual-region setups, you can also run the single-region script twice—once in the cluster's region and once in backup region. Make sure to modify the `REGION` variable before creating the second key.
+For dual-region setups, you can also run the single-region script twice—once in the cluster’s Region and once in the backup Region. Make sure to modify the `REGION` variable before creating the second key.
 :::
 
-### Option B: Manual key creation in AWS Console
+### Option B: Manual key creation in AWS Management Console
 
 ![manual key creation in AWS Console](./img/manual-key-creation.png)
 
 #### Single-region backup
 
-1. **Sign in to AWS Console**
-   - Navigate to the KMS service and select the correct region.
+1. **Sign in to the AWS Management Console**
+   - Navigate to the AWS KMS service and select the correct Region.
 2. **Create a customer managed key**
    - Click **Create key**.
    - Choose **Symmetric** and **Encrypt and decrypt** usage.
 3. **Add labels**
-   - Add an alias (e.g., `camunda-saas-byok`).
-   - Add a description (e.g., `KMS key for Camunda SaaS BYOK`).
+   - Add an alias (for example, `camunda-saas-byok`).
+   - Add a description (for example, `AWS KMS key for Camunda SaaS BYOK`).
 4. **Define key administrators**
-   - Select IAM users/roles that will administer the key.
+   - Select IAM users or roles that will administer the key.
 5. **Define key usage permissions**
    - Skip this step; permissions are configured in the next step.
 6. **Edit key policy**
@@ -113,24 +113,24 @@ For dual-region setups, you can also run the single-region script twice—once i
 
 #### Dual-region backup
 
-You can either create a multi-region key and replica or create two single-region keys.
+You can either create a multi-Region key and replica or create two single-Region keys.
 
-##### Method A: Multi-region key (recommended)
+##### Method A: Multi-Region key (recommended)
 
 1. Follow the single-region steps, selecting **Multi-Region key** under **Advanced options**.
-2. After creating the primary key in cluster's region, go to **Regional replicas** and click **Create replica key**.
-3. Select the region for the replica and confirm. The region should be the same as the backup region.
+2. After creating the primary key in the cluster’s Region, go to **Regional replicas** and click **Create replica key**.
+3. Select the Region for the replica and confirm. The Region should be the same as the backup Region.
 4. Copy both key ARNs and provide them to Camunda.
 
-##### Method B: Two single-region keys
+##### Method B: Two single-Region keys
 
-1. Create a key in the cluster's region using the single-region steps.
-2. Repeat the process in the backup region using a different alias (e.g., `camunda-saas-byok-replica`).
+1. Create a key in the cluster’s Region using the single-region steps.
+2. Repeat the process in the backup Region using a different alias (for example, `camunda-saas-byok-replica`).
 3. Provide both key ARNs to Camunda.
 
 ### Sample key policy
 
-Replace `<tenant-role-arn>` with the **Amazon Role ARN** from Step 1, and `<customer-aws-account>` with your AWS account ID.
+Replace `<tenant-role-arn>` with the **AWS Role ARN** from Step 1, and `<customer-aws-account>` with your AWS account ID.
 
 <details>
 <summary>View sample key policy JSON</summary>
@@ -149,7 +149,7 @@ Replace `<tenant-role-arn>` with the **Amazon Role ARN** from Step 1, and `<cust
       "Resource": "*"
     },
     {
-      "Sid": "Allow Camunda tenant IAM Role basic key access",
+      "Sid": "Allow Camunda tenant IAM role basic key access",
       "Effect": "Allow",
       "Principal": {
         "AWS": "<tenant-role-arn>"
@@ -164,7 +164,7 @@ Replace `<tenant-role-arn>` with the **Amazon Role ARN** from Step 1, and `<cust
       "Resource": "*"
     },
     {
-      "Sid": "Allow Camunda tenant IAM Role to create grants for provisioning encrypted EBS volumes",
+      "Sid": "Allow Camunda tenant IAM role to create grants for provisioning encrypted EBS volumes",
       "Effect": "Allow",
       "Principal": {
         "AWS": "<tenant-role-arn>"
@@ -180,17 +180,17 @@ Replace `<tenant-role-arn>` with the **Amazon Role ARN** from Step 1, and `<cust
 
 :::warning Key policy guidance
 
-- Don’t restrict the Camunda cluster **Role** from required KMS actions.
+- Don’t restrict the Camunda cluster **role** from required AWS KMS actions.
 - Key rotation is managed in AWS KMS; Camunda cannot rotate keys.
 - Revoking access immediately breaks the cluster.
   :::
 
-## Step 3: Associate the KMS key with your Camunda cluster
+## Step 3: Associate the AWS KMS key with your Camunda cluster
 
-1. Return to the **Camunda Console** and locate the **KMS Key ARN** input field.
+1. Return to the **Camunda Console** and locate the **AWS KMS key ARN** input field.  
    ![KMS AWS key ARN input field](./img/aws-key-arn.png)
-   - For dual region, two fields will be available—enter the correct key for each region.
-2. Paste your Amazon KMS Key ARN(s) from Step 2.
+   - For dual region, two fields will be available—enter the correct key for each Region.
+2. Paste your AWS KMS key ARN(s) from Step 2.
 3. Confirm and apply. Camunda provisions storage using your key for:
    - Document handling storage
    - Backup storage
@@ -203,32 +203,33 @@ Once a key is applied, it cannot be edited or replaced. To change keys, you must
 
 ## Step 4: Verify encryption and logging
 
-- In the **Camunda Console**, check the cluster details **Encryption at rest** tab to confirm the **KMS Key ARN** is applied correctly.
+- In the **Camunda Console**, check the cluster details **Encryption at rest** tab to confirm the **AWS KMS key ARN** is applied correctly.  
   ![cluster details page](./img/cluster-details-page.png)
 - In AWS, verify key usage:
   1. Navigate to **Customer managed keys**.
   2. Select your key and view **Key policy** and **Key usage** tabs.
   3. Review **Recent activity** to confirm operations (Encrypt, Decrypt, GenerateDataKey).
 
-### Monitor KMS usage
+### Monitor AWS KMS usage
 
-- **CloudTrail** logs all KMS operations.
-- **CloudWatch** can trigger alarms for:
+- **AWS CloudTrail** logs all AWS KMS operations.
+- **Amazon CloudWatch** can trigger alarms for:
   - Key deletion or disabling
   - Unauthorized access attempts
   - Policy or grant modifications
 - Regularly review logs to detect unauthorized activity.
+- Optionally, integrate with **Amazon EventBridge** for event-based monitoring and automation.
 
 :::warning Monitoring reminder
-You are responsible for monitoring key usage and access logs within your AWS account. Use CloudTrail and CloudWatch to detect misconfigurations or unauthorized access.
+You are responsible for monitoring key usage and access logs within your AWS account. Use AWS CloudTrail, Amazon CloudWatch, and Amazon EventBridge to detect misconfigurations or unauthorized access.
 :::
 
 ## Additional considerations
 
 - **Key rotation**: Enable [automatic rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) or rotate manually in AWS KMS.
-- **Cost**: Using Amazon KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/concepts/byok/index.md#cost-implications).
+- **Cost**: Using AWS KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/concepts/byok/index.md#cost-implications).
 - **Failure scenarios**: Deleting keys or revoking permissions makes cluster data inaccessible. See [troubleshooting steps](/components/concepts/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys).
 
 :::note Reference
-For more information, see the [Amazon KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html).
+For more information, see the [AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html).
 :::
