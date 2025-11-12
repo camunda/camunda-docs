@@ -27,7 +27,7 @@ jobs:
       - name: Sync documentation
         run: |
           cd docs
-          mv ../rest-spec/zeebe/gateway-protocol/src/main/proto/* api/camunda/v2
+          mv ../rest-spec/zeebe/gateway-protocol/src/main/proto/v2/* api/camunda/v2
           cd api/camunda/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm i
