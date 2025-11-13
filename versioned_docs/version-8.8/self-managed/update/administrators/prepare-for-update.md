@@ -46,6 +46,11 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
+    <td>Identity</td>
+    <td>HTTP port of the service changed from 8080 to 8084. All internal connections are adjusted. If you have restrictive network policies, please verify that the port is whitelisted.</td>
+    <td><span className="label-highlight">Low</span></td>
+</tr>
+<tr>
     <td>Orchestration Cluster API</td>
     <td><p>Introduced a new unified REST API for an Orchestration cluster.</p><p>
     <ul><li>Operate and Tasklist (V1) APIs are deprecated and should be replaced by the Orchestration Cluster API.</li>
