@@ -541,7 +541,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-statistics",
-          label: "Get statistics for process instances by process definition",
+          label: "Get process instance statistics",
           className: "api-method post",
         },
         {
@@ -567,6 +567,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
           label: "Get process definition XML",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-version-statistics",
+          label: "Get process instance statistics by version",
+          className: "api-method post",
         },
       ],
     },
