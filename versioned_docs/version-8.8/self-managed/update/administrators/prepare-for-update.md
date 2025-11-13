@@ -47,7 +47,7 @@ Start with the high-level overview [what's new in Camunda 8.8](/reference/announ
 </tr>
 <tr>
     <td>Identity</td>
-    <td>HTTP port of the service changed from 8080 to 8084. All internal connections are adjusted. If you have restrictive network policies, please verify that the port is whitelisted.</td>
+    <td>HTTP port of the application changed from 8080 to 8084. If you have restrictive network policies, please verify that the port is whitelisted.</td>
     <td><span className="label-highlight">Low</span></td>
 </tr>
 <tr>
