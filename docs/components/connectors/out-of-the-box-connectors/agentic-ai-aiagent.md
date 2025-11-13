@@ -79,7 +79,7 @@ A basic AI Agent sub-process might look similar to the following example.
 <img src={AgentSubprocessImg} alt="AI Agent Sub-process" class="img-700"/>
 
 - The connector is configured so the AI Agent resolves available tools and activates them as needed to complete it's goal.
-- Handling of event sub-processes within the ad-hoc sub-process is supported (See [Event Handling](#event-handling)). The AI Agent Task implementation does not support this.
+- Handling of event sub-processes within the ad-hoc sub-process is supported (See [Event Handling](./agentic-ai-aiagent-subprocess.md#event-handling)). The AI Agent Task implementation does not support this.
 
 This pattern can also be combined with a user feedback loop for verification or follow-up interactions. For example, instead of the showcased user task, this could also be another LLM acting as a judge, or any other task that validates the agent's response.
 
