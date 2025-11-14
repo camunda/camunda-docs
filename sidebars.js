@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
