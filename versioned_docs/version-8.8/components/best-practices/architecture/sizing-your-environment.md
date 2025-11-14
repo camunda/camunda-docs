@@ -120,7 +120,7 @@ Spinning up a Camunda 8 Cluster means you run multiple components that all need 
 
 All components are clustered to provide high-availability, fault-tolerance and resiliency.
 
-Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **number of partitions cannot be changed after the cluster was initially provisioned** (at least not yet), elastic scalability of partitions is not yet possible.
+Zeebe scales horizontally by adding more cluster nodes (pods). This is **limited by the [number of partitions](/components/zeebe/technical-concepts/partitions.md)** configured for a Zeebe cluster, as the work within one partition cannot be parallelized by design. Hence, you need to define enough partitions to utilize your hardware. The **[number of partitions can be scaled up](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) after the cluster is initially provisioned**, but not yet scaled down.
 
 If you anticipate the load increasing over time, prepare by configuring more partitions than you currently need as a buffer. For example, you could multiply the number of partitions you need for your current load by four to add a buffer. This typically has just a small impact on performance.
 
