@@ -1,7 +1,7 @@
 ---
 id: getting-started-agentic-orchestration
-title: "Build your first AI Agent"
-sidebar_label: Build your first AI Agent
+title: "Build your first AI agent"
+sidebar_label: Build your first AI agent
 description: "Get started with agentic orchestration by running your first AI agent in Camunda."
 keywords: [agentic orchestration, ai agent]
 ---
@@ -23,26 +23,25 @@ In this guide, you will:
 
 - Run Camunda 8 in either a local development environment (using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)) or [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup).
 - Deploy and start a business process using either [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda 8 Run, or [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) with Camunda 8 SaaS.
-- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction/reasoning capabilities for the AI agent.
+- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
-Once you have completed this guide, you will have an example running AI agent and Camunda 8 process.
+Once you have completed this guide, you will have an example of an AI agent running within Camunda 8.
 
 ## Prerequisites
 
 The following prerequisites are required to build your first AI agent:
 
-| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| :------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Running Camunda 8 environment    | <p>To run your agent, you must have a running Camunda 8 environment (version 8.8 or newer), either:</p><p><ul><li><p>A local (Self-Managed) Camunda 8 environment. For example, see [Run your first local project](../getting-started-example).</p></li><li><p>A Camunda 8 SaaS account. For example, [sign up for a free SaaS Trial Account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                                                                                                                                                                                                                                                                  |
-| A supported LLM provider account | <p>The [AI Agent connector](../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) supports multiple model providers, such as AWS Bedrock, OpenAI, and Anthropic.</p><p>For the purposes of this guide it is assumed you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> If you do not have access to an AWS account, you can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#model-provider).</p> |
+| Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running using either:</p><p><ul><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                  |
+| A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
 
-### AWS Bedrock Configuration
+:::important
+The AI Agent connector example in this guide is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the `us-east-1` region.
 
-The AI Agent example is preconfigured to use AWS Bedrock with Claude Sonnet 4 in the us-east-1 region.
-
-- To use the example process without changes you must first request access to **Anthropic Claude** foundation models using the AWS console.
-- Refer to the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more information.
+To use it without changes, you must first request access to Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
+:::
 
 ## Concepts
 
