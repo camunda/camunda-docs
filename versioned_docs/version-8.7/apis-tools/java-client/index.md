@@ -150,7 +150,7 @@ Refer to your identity provider documentation on how to configure X.509 authenti
 
 ## Javadoc
 
-The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
+The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java/8.7.17). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
 
 ## Next steps
 
