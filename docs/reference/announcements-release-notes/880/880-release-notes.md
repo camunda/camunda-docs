@@ -1261,7 +1261,7 @@ The new [Public API](/reference/public-api.md) documentation outlines what’s i
 
 ### Agentic orchestration
 
-The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) features are available in this alpha release:
+The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) features are available in this alpha release:
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 

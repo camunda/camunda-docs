@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -183,7 +186,7 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
