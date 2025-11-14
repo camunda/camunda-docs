@@ -1,4 +1,4 @@
-Regarding maintenant of the [by_models.csv](\static\data\by_models.csv) file which feeds into the component from [LiveBenchModelFilter](\components\react-components\livebench-model-filter.js)
+Regarding maintenance of the by_models.csv file (in static\data\by_models.csv) that feeds into the component from the LiveBenchModelFilter file (in components\react-components\livebench-model-filter.js).
 
 # Benchmark Data
 
@@ -7,7 +7,7 @@ They are exported manually (copy-pasted) from:
 
 - [LiveBench](https://livebench.ai/#/)
 
-You can use the [script](\static\data\script\Clean_and_Extend_getlivebench_data.ipynb) to fetch the artificial analysis data faster.
+You can use the script file (in static\data\script\Clean_and_Extend_getlivebench_data.ipynb) to fetch the artificial analysis data faster.
 
 ## How to update
 
