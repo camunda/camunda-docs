@@ -186,9 +186,6 @@ RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-note
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
-RewriteRule ^docs/next/components/agentic-orchestration/agentic-orchestration/?$ /docs/next/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
-RewriteRule ^docs/components/agentic-orchestration/agentic-orchestration/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
-
 # Restructure Web Modeler Docs (8.8)
 ## Web Modeler folder restructure - moved to modeling/
 RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]

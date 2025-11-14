@@ -11,27 +11,27 @@ export const introCards = [
     description: "Get started by building and running your first AI agent.",
   },
   {
-    link: "./agentic-orchestration/ao-design",
+    link: "../ao-design",
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
   },
   {
-    link: "./agentic-orchestration/ai-agents",
+    link: "../ai-agents/",
     title: "AI agents",
     image: IconAoAgentImg,
     description:
       "Learn how to build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "./agentic-orchestration/choose-right-model-agentic",
+    link: "../choose-right-model-agentic/",
     title: "Choose the right LLM",
     image: IconAoLlmImg,
     description:
       "Learn how to choose the right Large Language Model (LLM) for AI agents.",
   },
   {
-    link: "./agentic-orchestration/model-recommendations-agentic",
+    link: "../model-recommendations-agentic/",
     title: "LLM recommendations",
     image: IconAoLlmImg,
     description:
