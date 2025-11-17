@@ -49,18 +49,19 @@ To use it without changes, you must first request access to Anthropic Claude fou
 
 ## Step 1: Install the example model blueprint
 
-To start building your first AI agent, you can use a pre-built Camunda blueprint process model.
+To start building your first AI agent, you can use a prebuilt Camunda blueprint process model.
+
+In this tutorial, you will use the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint from [Camunda marketplace](https://marketplace.camunda.com/en-US/home).
+Depending on the environment you choose, follow the corresponding steps below.
 
 ### SaaS
 
-1. Navigate to the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
-1. Click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
+1. In the blueprint page, click **For SAAS** and select the project you want to save the blueprint in, or create a new project and save it in this.
 1. The blueprint BPMN diagram opens in Web Modeler.
 
 ### Self-Managed (local environment)
 
-1. Navigate to the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) blueprint in the Camunda marketplace.
-1. Click **For SM** and download the blueprint files from the repository.
+1. In the blueprint page, click **For SM** and download the blueprint files from the repository.
 1. Open the blueprint BPMN diagram in Desktop Modeler or in Web Modeler.
 
 ### About the example AI agent process
@@ -82,19 +83,21 @@ The example includes a form linked to the start event, allowing you to submit re
 
 ## Step 2: Configure connector secrets
 
-The example process is preconfigured to use AWS Bedrock as the model. For authentication, it is preconfigured to use the following connector secrets:
+The example process is preconfigured to use AWS Bedrock as the model.
+For authentication, it is preconfigured to use the following connector secrets:
 
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
 
-How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed (local) environment.
+How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed local environment.
 
 - For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
 - For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
 
 ## Step 3: Configure the AI Agent connector (optional)
 
-In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
+In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task.
+You can leave it as is or adjust its configuration to test other setups. To do so, use the properties panel of the AI Agent.
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
@@ -106,14 +109,14 @@ In the blueprint BPMN diagram, the AI Agent connector template is applied to the
 - **Connector secrets**: Update authentication credentials if changing providers.
 
 :::tip
-When configuring connectors, use FEEL expressions, by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
+When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction/), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
 :::
 
 :::info
 For a reference of available configuration options, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 :::
 
-## Step 4: Deploy, run, and test your AI agent
+## Step 4: Test your AI agent
 
 You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
 
@@ -141,18 +144,18 @@ In this example, you can quickly test the AI agent using the [Play](/components/
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
-:::note
-Instead of using Play, you can also deploy and run the process, and use Tasklist to complete the form.
+:::tip
+Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
 
 ### Self-Managed (local environment)
 
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Open Tasklist in your browser (for example at http://localhost:8080/tasklist, depending on your environment).
-1. On the `Processes` tab, find the `AI Agent Chat With Tools` process and click **Start process**.
+1. Open Tasklist in your browser. For example at http://localhost:8080/tasklist, depending on your environment.
+1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a [starting prompt](#example-prompts) for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
-1. Select the `Tasks` tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
+1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see either a `User Feedback` or a `Ask human to send email` task waiting for you to complete.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
 
 ### Example prompts {#example-prompts}
@@ -168,7 +171,7 @@ The following example prompts are provided as guidance to help you test your AI 
 
 ## Next steps
 
-Now that you have seen how easy it is to build a simple Camunda AI agent, why not try customizing it further?
+Now that you’ve built your first Camunda AI agent, why not try customizing it further?
 
 For example:
 
@@ -176,13 +179,12 @@ For example:
 - Change the provided system prompt to adjust the behavior of the AI agent.
 - Experiment with different model providers and configurations in the AI Agent connector.
 
-Learn more about building and deploying agentic orchestration and advanced AI agents in your processes:
+You can also:
 
-- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
-- [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
-- [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)
-- [Building Your First AI Agent in Camunda (blog)](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) - Step-by-step guide with video tutorial showing a fraud detection example
+- Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+- Read the [Building Your First AI Agent in Camunda](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) blog.
+- Explore other [blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
 
 :::info Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
 :::
