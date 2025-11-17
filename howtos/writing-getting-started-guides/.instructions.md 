@@ -1,0 +1,12 @@
+---
+applyTo: "*started*.md"
+---
+- Always use the `_guide_template.md` as a template and create a copy from that
+- Use the following file naming patter: `getting-started-[feature].md`
+- Replace contents from the template with the appropriate content you are writing
+- Always prioritize readability and clarity.
+- Target new users to the platform
+- Ask for clarification from the user about the actual content if not detailed enough
+- Aim for providing an example on how to actually do the given task
+- If there are multiple ways to achieve something, list the simplest one, mention others
+- Link other pages if the reader want to learn more about a certain aspect of the product
