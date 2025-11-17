@@ -481,7 +481,7 @@ The Email connector is enhanced as follows:
 - Supports custom headers.
 - Messages can now be sent as plaintext, HTML, or in both formats.
 
-To learn more about this connector, see [Email connector](/components/connectors/out-of-the-box-connectors/email.md).
+To learn more about this connector, see [Email inbound connector](/components/connectors/out-of-the-box-connectors/email-inbound.md) and [Email outbound connector](/components/connectors/out-of-the-box-connectors/email-outbound.md).
 
 #### Google Gemini connector
 
@@ -622,7 +622,7 @@ The new Email connector allows you to:
 - Integrate your BPMN service with any email server using POP3, IMAP, or SMTP.
 - Automate the retrieval, deletion, search, and organization of emails directly within your processes.
 
-To learn more about this connector, see [Email connector](/components/connectors/out-of-the-box-connectors/email.md).
+To learn more about this connector, see [Email inbound connector](/components/connectors/out-of-the-box-connectors/email-inbound.md) and [Email outbound connector](/components/connectors/out-of-the-box-connectors/email-outbound.md).
 
 ### Generate connector templates (OpenAPI + Postman) <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects connectors">Connectors</span>
 

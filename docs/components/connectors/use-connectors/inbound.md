@@ -195,6 +195,74 @@ Here are some examples of how this option will affect the behavior of the connec
   </tbody>
 </table>
 
+## Activation condition
+
+The optional **Activation condition** field allows you to specify a Friendly Enough Expression
+Language ([FEEL](/components/modeler/feel/what-is-feel.md)) expression to control when this connector should trigger a
+process instance. This condition acts as a filter, allowing the process to be initiated only when certain criteria are
+met by the incoming email.
+
+For example, the FEEL expression `subject = "urgent"` ensures that the process is only triggered if the
+subject of the incoming email matches "urgent". If this field is left blank, the process is triggered for every email
+received by the connector.
+
+## Correlation
+
+The **Correlation** section allows you to configure the message correlation parameters.
+
+### Correlation key
+
+- **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This
+  corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
+- **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This
+  expression is evaluated in the connector Runtime and the result is used to correlate the message.
+
+For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming email
+message contains `value:{correlationKey:myValue}`, your correlation key settings will look like this:
+
+- **Correlation key (process)**: `=myCorrelationKey`
+- **Correlation key (payload)**: `=message.plainTextBody.correlationKey`
+
+You can also use the key of the message to accomplish this in the **Correlation key (payload)** field with `=key`.
+
+:::info
+To learn more about correlation keys, see [messages](../../../concepts/messages).
+:::
+
+### Message ID expression
+
+The optional **Message ID expression** field allows you to extract the message ID from the incoming message.
+
+- The message ID serves as a unique identifier for the message and is used for message correlation.
+- This expression is evaluated in the connector Runtime and the result used to correlate the message.
+
+In most cases, you do not need to configure the **Message ID expression**. However, it is useful if you want to ensure
+message deduplication or achieve a specific message correlation behavior.
+
+:::info
+To learn more about how message IDs influence message correlation,
+see [messages](../../../concepts/messages#message-correlation-overview).
+:::
+
+For example, if you want to set the message ID to the value of the `messageId` field in the incoming message, you can
+configure the **Message ID expression** as follows:
+
+```
+= message.messageId
+```
+
+### Message TTL
+
+The optional **Message TTL** field allows you to set the time-to-live (TTL) for the correlated messages.
+
+- TTL defines the time for which the message is buffered in Zeebe before being correlated to the process instance (if it
+  cannot be correlated immediately).
+- The value is specified as an ISO 8601 duration. For example, `PT1H` sets the TTL to one hour.
+
+:::info
+To learn more about TTL in Zeebe, see [message correlation](../../../concepts/messages#message-buffering).
+:::
+
 ## Connector deduplication
 
 In the simplest case, each inbound connector element in a BPMN diagram corresponds to a unique endpoint, event consumer, or a polling task.
