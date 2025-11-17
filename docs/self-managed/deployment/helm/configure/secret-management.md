@@ -338,15 +338,48 @@ global:
 
 ## TLS certificates
 
-For TLS-enabled services, you'll need to configure certificate secrets.
+TLS certificate secrets for Camunda components and external services.
 
-### Secrets using the legacy pattern (all versions)
+### Secrets using the new pattern (Camunda 8.9+)
 
-| **Secret**                          | **Chart values key**                      | **Purpose**                                         |
-| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
-| **Console TLS Certificate**         | `console.tls.existingSecret`              | TLS certificate for Console web application         |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret` | TLS certificate for external Elasticsearch over SSL |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`    | TLS certificate for external OpenSearch over SSL    |
+| **Secret**                          | **Chart values key**              | **Purpose**                                         |
+| ----------------------------------- | --------------------------------- | --------------------------------------------------- |
+| **Console TLS Certificate**         | `console.tls.secret`              | TLS certificate for Console web application         |
+| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
+| **External OpenSearch TLS Cert**    | `global.opensearch.tls.secret`    | TLS certificate for external OpenSearch over SSL    |
+
+**TLS Certificate Configuration**: Unlike password-based secrets, TLS certificates do not support `inlineSecret` (certificates are binary files unsuitable for inline configuration).
+
+For Elasticsearch and OpenSearch, both `existingSecret` and `existingSecretKey` are required to specify which key in the secret contains the certificate file. For Console, only `existingSecret` is required as the entire secret is mounted as a directory.
+
+Create the secrets with your certificate files using `kubectl create secret generic`:
+
+```sh
+kubectl create secret generic <secret-name> \
+  --from-file=<key>=<path-to-certificate-file> \
+  --namespace camunda
+```
+
+Reference them in your values:
+
+```yaml
+# Elasticsearch/OpenSearch
+global:
+  elasticsearch:
+    tls:
+      enabled: true
+      secret:
+        existingSecret: elasticsearch-tls-secret
+        existingSecretKey: externaldb.jks
+
+# Console
+console:
+  tls:
+    enabled: true
+    secret:
+      existingSecret: console-tls-secret
+    certKeyFilename: ca.crt
+```
 
 ### Ingress TLS
 
@@ -358,42 +391,6 @@ global:
     tls:
       enabled: true
       secretName: camunda-platform
-```
-
-### External service TLS
-
-For external Elasticsearch or OpenSearch with TLS, configure the TLS certificate using the legacy pattern:
-
-```yaml
-global:
-  elasticsearch:
-    tls:
-      enabled: true
-      existingSecret: elasticsearch-tls-secret
-```
-
-### Console TLS (legacy pattern)
-
-```yaml
-console:
-  tls:
-    enabled: true
-    existingSecret: console-tls-secret
-    certKeyFilename: tls.key
-```
-
-Create TLS secrets using the standard Kubernetes TLS secret type:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: camunda-platform
-  namespace: camunda
-type: kubernetes.io/tls
-data:
-  tls.crt: <base64 encoded cert>
-  tls.key: <base64 encoded key>
 ```
 
 ## Extract plaintext values and reference them as Kubernetes Secrets

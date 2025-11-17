@@ -79,7 +79,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview" class="link-arrow">Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 

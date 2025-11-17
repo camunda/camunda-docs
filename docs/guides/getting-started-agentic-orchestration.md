@@ -15,7 +15,7 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.p
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
 ## About this guide
 
@@ -212,7 +212,7 @@ For example:
 
 Learn more about building and deploying agentic orchestration and advanced AI agents in your processes:
 
-- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 - [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
 - [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)
 - [Building Your First AI Agent in Camunda (blog)](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) - Step-by-step guide with video tutorial showing a fraud detection example
