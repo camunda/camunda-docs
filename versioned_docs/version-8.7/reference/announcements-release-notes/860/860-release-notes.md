@@ -15,15 +15,15 @@ These release notes identify the new features included in 8.6, including [alpha 
 
 ## 8.6.30
 
-### Spring Zeebe SDK - Spring-Boot 3.5 support
+### Spring Zeebe SDK - Spring Boot 3.5 support
 
-As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](../../../../version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verfied since the `8.6.30` patch onward.
+[Spring Boot 3.5.x compatibility](../../../../version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified for the `8.6.30` patch release onward, as [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot version 3.4 ends in December 2025.
 
 ## 8.6.7
 
-### Spring Zeebe SDK test support
+### Spring Zeebe SDK - test support
 
-[Testing support for the Spring Zeebe SDK](../../../../version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available in the 8.6.7 release.
+[Testing support for the Spring Zeebe SDK](../../../../version-8.6/apis-tools/spring-zeebe-sdk/getting-started.md#writing-test-cases) is available with the 8.6.7 release.
 
 :::note
 This closes the feature gap where the Spring Zeebe SDK released with Camunda 8.5.0 did not offer the testing support previously available in the [Spring Zeebe Community Project](https://github.com/camunda-community-hub/spring-zeebe/blob/main/README.md#writing-test-cases).

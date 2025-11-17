@@ -15,9 +15,9 @@ These release notes identify the new features included in 8.7, including [alpha 
 
 ## 8.7.17
 
-### Spring Zeebe SDK - Spring-Boot 3.5 support
+### Spring Zeebe SDK - Spring Boot 3.5 support
 
-As the [Spring-Boot OSS Support](https://spring.io/projects/spring-boot#support) for the bundled Spring-Boot version 3.4 ends in in 2025-12, [Spring-Boot 3.5.x compatibility](../../../apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verfied since the `8.7.17` patch onward.
+[Spring Boot 3.5.x compatibility](../../../apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified for the `8.7.17` patch onward, as [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot version 3.4 ends in December 2025.
 
 ## 8.7 minor
 
