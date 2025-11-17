@@ -17,12 +17,16 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.p
 
 Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
+In Camunda, an **AI agent** refers to an automation mechanism that leverages [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
+
+AI agents represent the practical implementation of agentic process orchestration within the Camunda ecosystem, combining the flexibility of AI with the reliability of traditional process automation.
+
 ## About this guide
 
 In this guide, you will:
 
-- Run Camunda 8 in either a local development environment (using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)) or [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup).
-- Deploy and start a business process using either [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda 8 Run, or [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) with Camunda 8 SaaS.
+- Run Camunda 8 using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
+- Deploy and start a business process using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) or locally with [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
@@ -42,44 +46,6 @@ The AI Agent connector example in this guide is preconfigured to use AWS Bedrock
 
 To use it without changes, you must first request access to Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for more details.
 :::
-
-## Concepts
-
-### Introducing dynamic workflows
-
-Business processes are traditionally modeled as a deterministic sequence of steps, with predefined flow logic following a strict order. This works well if flow logic can be defined in advance, but struggles to adapt in more complex, open-ended scenarios.
-
-- [Dynamic workflows](/components/agentic-orchestration/design-architecture.md#when-to-use-deterministic-or-non-deterministic-orchestration) adapt in real time, adjusting steps based on current information and AI insights. An agent works toward its goal in a loop, choosing actions from available tools until the goal is reached.
-
-- Camunda agentic orchestration blends both deterministic and dynamic (AI-driven) process orchestration into a single process model. This allows you to use deterministic control when needed, and flexibility where it makes sense.
-
-- The deterministic flow logic acts as a guardrail on dynamic execution, defining boundaries and constraints for the AI agent. This ensures the agent stays aligned with business goals and compliance requirements, so you can **build agents you can trust**.
-
-:::info
-To learn more about dynamic workflows, see [agentic orchestration design and architecture](/components/agentic-orchestration/design-architecture.md).
-:::
-
-### What is an AI agent?
-
-An **AI agent** in Camunda refers to an automation mechanism that leverages ad-hoc sub-processes to perform tasks with non-deterministic behavior. AI agents can:
-
-- Make autonomous decisions about task execution.
-- Adapt their behavior based on context and input.
-- Handle complex scenarios that require dynamic responses.
-- Integrate with other process components through standard interfaces.
-
-AI agents represent the practical implementation of agentic process orchestration within the Camunda ecosystem, combining the flexibility of AI with the reliability of traditional process automation.
-
-### Ad-hoc sub-processes
-
-An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a key building block in Camunda agentic orchestration. Unlike standard BPMN subprocesses with predefined sequences, ad-hoc subprocesses allow:
-
-- **Dynamic task selection**: Tasks within the subprocess can be executed in any order, repeatedly, or skipped entirely based on runtime needs.
-- **Non-deterministic execution**: The exact sequence and occurrence of tasks are determined at runtime by the AI agent.
-- **Parallel execution**: Multiple tasks can run simultaneously when appropriate.
-- **Flexible tool access**: The subprocess acts as a container of available actions, i.e., tools, that the AI agent can choose from.
-
-The AI Agent connector lets the LLM choose from the tools in that sub-process and dynamically orchestrates tool calling and request handling. This approach provides the AI agent freedom within constraints, ensuring it stays aligned with business goals while having the flexibility to adapt.
 
 ## Step 1: Install the example model blueprint
 
