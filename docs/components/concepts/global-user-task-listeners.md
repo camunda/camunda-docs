@@ -5,35 +5,37 @@ sidebar_label: "Global user task listeners"
 description: "Configure cluster‑wide listeners that react to user task lifecycle events across all processes."
 ---
 
-Global [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) listeners are [user task listeners](/components/concepts/user-task-listeners.md) defined once for all processes in the cluster, rather than individually per user task.
-They allow you to react to user task lifecycle events across all processes without modifying BPMN models.
+Global user task listeners are [user task listeners](/components/concepts/user-task-listeners.md) defined once for all processes in a cluster, instead of individually per [user task](/components/modeler/bpmn/user-tasks/user-tasks.md).
 
-They are configured at the cluster level and behave like model-level user task listeners, using the same lifecycle events, blocking behavior, deny/correction semantics, payload structure, and incident handling.
+## About global user task listeners
 
-Global listeners are particularly useful for:
+Use global listeners to react to user task lifecycle events across all processes without modifying BPMN models.
+
+Global listeners are configured at the cluster level and behave like model-level user task listeners, using the same lifecycle events, blocking behavior, deny/correction semantics, payload structure, and incident handling.
+
+They are particularly useful for:
 
 - Replicating user task changes and context to external systems, such as audit, analytics, or custom Tasklist apps.
 - Centralizing Service Level Agreements and notifications across all processes.
 - Enforcing governance rules and validations. For example, pre-completion checks.
-- Applying due date and priority policies consistently.
+- Consistently applying due date and priority policies.
 
-## Configure global listeners
+## Configure global user task listeners
 
-At the cluster level, set global user task listeners using the `zeebe.broker.experimental.listeners.task` path in the broker configuration.
+Set global user task listeners at the cluster level using the `zeebe.broker.experimental.listeners.task` path in the broker configuration.
 
 Each listener entry can be configured with the following properties:
 
-| Property      | Required | Description                                                                                                                                                                                                                                  |
-| :------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `event-types` | Yes      | List of user task event types that trigger the listener. Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. |
-| `type`        | Yes      | The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.                                                                                             |
-| `retries`     | No       | Number of retries for the user task listener job (defaults to three if omitted).                                                                                                                                                             |
-| `after-local` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                     |
+| Property      | Required | Description                                                                                                                                                                                                                                                     |
+| :------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `event-types` | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
+| `type`        | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
+| `retries`     | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
+| `after-local` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
 
 ### How the configuration is validated
 
-On startup, the configuration is validated according to the following rules.
-The system attempts to correct issues where possible instead of failing the startup:
+On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
 
 - Invalid event types are removed and ignored.
 - Listeners missing information about event types or job type are removed and ignored.
@@ -45,7 +47,7 @@ In all cases, a suitable warning is reported in the orchestration cluster startu
 
 ### Example configuration
 
-See an example YAML configuration:
+The following is an example YAML configuration and environment variables:
 
 ```yaml
 zeebe:
@@ -67,8 +69,6 @@ zeebe:
                 - canceling
               after-local: true
 ```
-
-And its environment variables:
 
 ```
 ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_0_TYPE=validate-task
