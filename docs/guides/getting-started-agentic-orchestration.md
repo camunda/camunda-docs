@@ -109,7 +109,7 @@ You can leave it as is or adjust its configuration to test other setups. To do s
 - **Connector secrets**: Update authentication credentials if changing providers.
 
 :::tip
-When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction/), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
+When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
 :::
 
 :::info
