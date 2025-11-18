@@ -187,42 +187,33 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
-| **Zeebe**                          |                     |         |       |
+| **Orchestration cluster**          |                     |         |       |
 | \# brokers                         | 3                   |         |       |
 | \# partitions                      | 3                   |         |       |
 | replication factor                 | 3                   |         |       |
-|                                    | vCPU \[cores\]      | 0.8     | 0.96  |
-|                                    | Mem \[GB\]          | 2       | 4     |
-|                                    | Disk \[GB\]         | 32      | 192   |
-| gateway                            | embedded in broker  |         |       |
-| **Operate**                        |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 1     |
-| **Tasklist**                       |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.2     | 2     |
-| **Optimize**                       |                     |         |       |
-| #importer                          | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.3     | 1     |
-|                                    | Mem \[GB\] limit    | 0.4     | 1     |
-| **Elastic**                        |                     |         |       |
-| #statefulset                       | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 1       | 2     |
-|                                    | Mem \[GB\] limit    | 3       | 6     |
-|                                    | Disk \[GB\] request | 64      | 100   |
+|                                    | Mem \[GB\]          | 2       | 3     |
+|                                    | Disk \[GB\]         | 32      | 128   |
 | **Connectors**                     |                     |         |       |
 | #                                  | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.2     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.25    | 0.5   |
+|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
+|                                    | Mem \[GB\] limit    | 0.512   | 1     |
+| **Optimize**                       |                     |         |       |
+| #importer                          | 1                   |         |       |
+|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
+|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
+| #webapp                            | 2                   |         |       |
+|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
+|                                    | Mem \[GB\] limit    | 0.8     | 0.8   |
+| **Elastic**                        |                     |         |       |
+| #statefulset                       | 2                   |         |       |
+|                                    | vCPU \[cores\]      | 1       | 1     |
+|                                    | Mem \[GB\] limit    | 1.5     | 1.5   |
+|                                    | Disk \[GB\] request | 32      | 128   |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.4     | 0.4   |
-|                                    | Mem \[GB\] limit    | 0.45    | 0.45  |
+|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
+|                                    | Mem \[GB\] limit    | 0.3     | 0.3   |
 
 ## Planning non-production environments
 
