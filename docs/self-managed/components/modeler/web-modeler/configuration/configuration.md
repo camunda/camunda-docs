@@ -147,9 +147,12 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 
 ### Logging
 
-| Environment variable | Description                                         | Example value                                  |
-| -------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
+| Environment variable                | Description                                                         | Example value                                 | Default value |
+| ----------------------------------- | ------------------------------------------------------------------- | --------------------------------------------- | ------------- |
+| `LOGGING_CONFIG`                    | [optional]<br/>Path to custom logback configuration                 | `file:/full/path/to/custom-log4j2-spring.xml` | -             |
+| `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Web Modeler components | `DEBUG`                                       | `INFO`        |
+| `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                         | `true`                                        | `false`       |
+| `CAMUNDA_MODELER_LOG_APPENDER`      | [optional]<br/>Defines which appender to use for logging.           | `Stackdriver`                                 | `Console`     |
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 
