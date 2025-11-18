@@ -194,6 +194,10 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | vCPU \[cores\]      | 1       | 2     |
 |                                    | Mem \[GB\]          | 2       | 3     |
 |                                    | Disk \[GB\]         | 32      | 128   |
+| **Connectors**                     |                     |         |       |
+| #                                  | 1                   |         |       |
+|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
+|                                    | Mem \[GB\] limit    | 0.512   | 1     |
 | **Optimize**                       |                     |         |       |
 | #importer                          | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.5     | 0.5   |
@@ -206,10 +210,6 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 |                                    | vCPU \[cores\]      | 1       | 1     |
 |                                    | Mem \[GB\] limit    | 1.5     | 1.5   |
 |                                    | Disk \[GB\] request | 32      | 128   |
-| **Connectors**                     |                     |         |       |
-| #                                  | 1                   |         |       |
-|                                    | vCPU \[cores\]      | 0.2     | 0.2   |
-|                                    | Mem \[GB\] limit    | 0.512   | 1     |
 | **Other** (Worker, Analytics, ...) |                     |         |       |
 | #                                  | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.2     | 0.2   |
