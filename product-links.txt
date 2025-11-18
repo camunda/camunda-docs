@@ -51,20 +51,23 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
  https://docs.camunda.io/docs/ms-teams/
 
 # Console
-#   updated at 2025-10-17T08:35:10.319Z
+#   updated at 2025-11-18T05:46:18.806Z
 
 https://docs.camunda.io
+https://docs.camunda.io/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/configuration/
 https://docs.camunda.io/docs/apis-tools/spring-zeebe-sdk/getting-started/
 https://docs.camunda.io/docs/components/
 https://docs.camunda.io/docs/components/concepts/clusters/#auto-pause
+https://docs.camunda.io/docs/components/concepts/multi-tenancy
 https://docs.camunda.io/docs/components/concepts/resource-authorizations/
 https://docs.camunda.io/docs/components/console/manage-clusters/create-cluster/
 https://docs.camunda.io/docs/components/console/manage-plan/available-plans/
 https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
-https://docs.camunda.io/docs/components/console/manage-plan/cancel-starter-subscription/
 https://docs.camunda.io/docs/components/saas/backups/
-https://docs.camunda.io/docs/guides/
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
+https://docs.camunda.io/docs/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
 https://docs.camunda.io/docs/guides/
 https://docs.camunda.io/docs/next/apis-tools/administration-api/administration-api-reference/
 https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-swagger/
@@ -77,8 +80,11 @@ https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-api-
 https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-allowlists/
 https://docs.camunda.io/docs/next/components/early-access/overview/
 https://docs.camunda.io/docs/next/components/identity/identity-introduction/
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-a-create-the-key-using-aws-cli
-https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
+https://docs.camunda.io/docs/reference/announcements-release-notes/880/880-announcements/#apis--tools
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
+https://docs.camunda.io/docs/self-managed/components/console/configuration/#telemetry
+https://docs.camunda.io/docs/self-managed/console-deployment/overview
+https://docs.camunda.io/docs/self-managed/operational-guides/backup-restore/backup-and-restore
+https://docs.camunda.io/docs/self-managed/reference-architecture
+https://docs.camunda.io/docs/self-managed/update/administrators/admin-upgrade-overview

@@ -5,60 +5,49 @@ sidebar_label: "Global user task listeners"
 description: "Configure cluster‑wide listeners that react to user task lifecycle events across all processes."
 ---
 
-Global user task listeners are [user task listeners](/components/concepts/user-task-listeners.md) defined once for all processes in the cluster rather than individually per [user task](/components/modeler/bpmn/user-tasks/user-tasks.md).
-They let you react to user task lifecycle events across all processes without modifying BPMN models.
-
-They are configured at the cluster level and behave like model-level [user task listeners](/components/concepts/user-task-listeners.md): using the exact same lifecycle events, blocking behavior, deny/correction semantics, payload structure, and incident behavior.
-
-:::tip
-Read the [user task listeners](/components/concepts/user-task-listeners.md) page before this one to understand the fundamentals of user task listeners.
-:::
+Global user task listeners are [user task listeners](/components/concepts/user-task-listeners.md) defined once for all processes in a cluster, instead of individually per [user task](/components/modeler/bpmn/user-tasks/user-tasks.md).
 
 ## About global user task listeners
 
-Global user task listeners are a cluster-level mechanism to consistently react to user task lifecycle events across all processes. They use the same job mechanism as model-level listeners, so your existing job workers can usually handle them with minimal changes.
+Use global listeners to react to user task lifecycle events across all processes without modifying BPMN models.
 
-Global listeners are particularly useful for:
+Global listeners are configured at the cluster level and behave like model-level user task listeners, using the same lifecycle events, blocking behavior, deny/correction semantics, payload structure, and incident handling.
 
-- Replicating user task changes and context to external systems (audit, analytics, custom Tasklist apps).
-- Centralizing SLAs and notifications across all processes.
-- Enforcing governance rules and validations (for example, pre-completion checks).
-- Applying due date and priority policies consistently.
+They are particularly useful for:
 
-### How they relate to model-level listeners
+- Replicating user task changes and context to external systems, such as audit, analytics, or custom Tasklist apps.
+- Centralizing Service Level Agreements and notifications across all processes.
+- Enforcing governance rules and validations. For example, pre-completion checks.
+- Consistently applying due date and priority policies.
 
-Global listeners:
+## Configure global user task listeners
 
-- Require no BPMN model changes. They are configured centrally and apply to all user tasks.
-- Use the exact same lifecycle events, blocking behavior, deny/correction semantics, payload structure, and incident behavior as model-level user task listeners.
-- Can be ordered before or after model-level listeners.
+Set global user task listeners at the cluster level using the `zeebe.broker.experimental.listeners.task` path in the broker configuration.
 
-## Configuration
+Each listener entry can be configured with the following properties:
 
-You configure global user task listeners at the cluster level in the broker configuration at configuration path: `zeebe.broker.experimental.listeners.task`.
+| Property      | Required | Description                                                                                                                                                                                                                                                     |
+| :------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `event-types` | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
+| `type`        | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
+| `retries`     | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
+| `after-local` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
 
-Each listener entry supports the following properties:
+### How the configuration is validated
 
-| Property      | Description                                                                                                                                                                                                                                             |
-| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `event-types` | (Required) List of user task event types that trigger the listener. Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. |
-| `type`        | (Required) The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.                                                                                             |
-| `retries`     | (Optional) Number of retries for the user task listener job (defaults to 3 if omitted).                                                                                                                                                                 |
-| `after-local` | (Optional) Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                     |
-
-### Validation behavior
-
-On startup, the configuration is validated against the following rules, trying to correct issues where possible instead of failing startup:
+On startup, the configuration is validated according to the following rules. The system attempts to correct issues where possible instead of failing the startup:
 
 - Invalid event types are removed and ignored.
-- Listeners with missing information about event types or job type are removed and ignored.
-  - This also includes listeners for which only invalid event types have been defined.
-- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to only include `all`.
-- Listeners with invalid information about retries (non-numeric or negative values) are removed and ignored.
+- Listeners missing information about event types or job type are removed and ignored.
+  - This also includes listeners for which only invalid event types are defined.
+- If a listener defines both the special `all` value and a normal event type for `event-types`, the configuration is corrected to include only `all`.
+- Listeners with invalid retry values, i.e., non-numeric or negative, are removed and ignored.
 
-In all the above cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
+In all cases, a suitable warning is reported in the orchestration cluster startup log, identifying the problem and its location in the configuration.
 
-### Example configuration (YAML)
+### Example configuration
+
+The following is an example YAML configuration and environment variables:
 
 ```yaml
 zeebe:
@@ -81,8 +70,6 @@ zeebe:
               after-local: true
 ```
 
-### Example configuration (environment variables)
-
 ```
 ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_0_TYPE=validate-task
 ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_0_EVENT_TYPES_0=creating
@@ -96,49 +83,46 @@ ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_EVENT_TYPES_2=canceling
 ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_AFTER_LOCAL=true
 ```
 
-### Applying changes
+### Apply changes
 
-Configuration changes take effect after a cluster restart. Use rolling restarts to avoid downtime.
+Configuration changes take effect after you restart the cluster. Use rolling restarts to avoid downtime.
 
-After the restart, the new configuration applies to new lifecycle events for both running and new instances, without the need for a redeployment of models.
+After the restart, the new configuration applies to new lifecycle events for both running and new instances, without requiring you to redeploy models.
 
-## Execution and ordering
+## Execution order
 
 For a given event on a task instance:
 
-- Global listeners run in configuration order.
-- Model-level listeners run next in the order defined in the BPMN model.
+- Global listeners run in the order defined in the configuration.
+- Model-level listeners run next, in the order defined in the BPMN model.
 - Global listeners marked with `after-local: true` run after model-level listeners.
 
-All listeners are blocking and execute sequentially.
-
-## Features
+## Supported features
 
 Global listeners support the same features as model-level user task listeners:
 
-- [Blocking behavior](/components/concepts/user-task-listeners.md#blocking-behavior)
-- [Triggering on a specific lifecycle event](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener)
+- [Blocking behavior](/components/concepts/user-task-listeners.md#blocking-behavior).
+- [Triggering on a specific lifecycle event](/components/concepts/user-task-listeners.md#trigger-a-user-task-listener).
 - [Accessing user task data in job workers](/components/concepts/user-task-listeners.md#accessing-user-task-data), in particular:
-  - task-specific data (assignee, due date, priority, etc.)
-  - attributes were changed by the event (either through an `updating` event or because of corrections done by previous listeners)
-  - headers defined in the user task model
-- [Correcting user task data](/components/concepts/user-task-listeners.md#correcting-user-task-data)
-- [Denying lifecycle transitions](/components/concepts/user-task-listeners.md#denying-the-lifecycle-transition)
-- [Incident recovery](/components/concepts/user-task-listeners.md#incident-recovery)
+  - Task-specific data, such as, assignee, due date, or priority.
+  - Attributes changed by the event, either through an `updating` event or because of corrections done by previous listeners.
+  - Headers defined in the user task model.
+- [Correcting user task data](/components/concepts/user-task-listeners.md#correcting-user-task-data).
+- [Denying lifecycle transitions](/components/concepts/user-task-listeners.md#denying-the-lifecycle-transition).
+- [Incident recovery](/components/concepts/user-task-listeners.md#incident-recovery).
 
-Additionally, you can configure a single global listener to be triggered by more than one lifecycle event (possibly all of them).
+Additionally, you can configure a single global listener to be triggered by multiple lifecycle events, possibly all of them.
 
 ## Limitations
 
 The [same limitations as model-level user task listeners](/components/concepts/user-task-listeners.md#limitations) apply.
 
-In addition to those:
+In addition to the above:
 
-- **No tenant-specific configuration**: Configuration is cluster-wide (not per tenant). Payloads include `tenantId` for downstream handling.
-- **Restart required**: Configuration changes require a cluster restart to take effect.
+- **No tenant-specific configuration**: Configuration is cluster-wide, not per tenant. Payloads include `tenantId` for downstream handling.
+- **Restart required**: Configuration changes take effect only after a cluster restart.
 
-## Related resources
+## See also
 
-- [User task listeners (fundamentals and APIs)](/components/concepts/user-task-listeners.md)
-- [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners)
-- [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md)
+- [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
+- [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
