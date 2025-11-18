@@ -7,14 +7,6 @@ description: "Monitor your dashboards and visualize your processes data with the
 
 Monitor your dashboards and visualize your processes data with the **View mode**. It provides interactive charts, raw data tables, and sharing features.
 
-## About this guide
-
-In this guide, you will:
-
-- Understand the features supported in View mode.
-- Learn how to interact with reports.
-- Explore how to add filters to customize your dashboards.
-
 ## Supported features
 
 View mode provides the following features for monitoring your processes:
