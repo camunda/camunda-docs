@@ -103,3 +103,22 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Changed logging framework from Logback to Apache Log4j 2
+
+Web Modeler now uses [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.12.x/index.html/) for logging, in aligment with what the orchestration cluster uses.
+
+This enhancement ensures consistency across environments and simplifies setup for administrators.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+:::
+
+</div>
+</div>

@@ -1228,6 +1228,7 @@ module.exports = {
             id: "reference/announcements-release-notes/890/890-announcements",
           },
           items: [
+            "reference/announcements-release-notes/890/whats-new-in-89",
             "reference/announcements-release-notes/890/890-announcements",
             "reference/announcements-release-notes/890/890-release-notes",
           ],
