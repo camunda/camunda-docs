@@ -17,9 +17,9 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.p
 
 Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
-In Camunda, an **AI agent** refers to an automation mechanism that leverages [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
+In Camunda, an **AI agent** refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
 
-AI agents represent the practical implementation of agentic process orchestration within the Camunda ecosystem, combining the flexibility of AI with the reliability of traditional process automation.
+AI agents represent the practical implementation of agentic process orchestration within Camunda, combining the flexibility of AI with the reliability of traditional process automation.
 
 ## About this guide
 
@@ -30,7 +30,7 @@ In this guide, you will:
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities for the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
-Once you have completed this guide, you will have an example of an AI agent running within Camunda 8.
+Once you have completed this guide, you will have an example AI agent running within Camunda 8.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ The following prerequisites are required to build your first AI agent:
 
 | Prerequisite                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running using either:</p><p><ul><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                  |
+| Camunda 8 environment            | <p>To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:</p><p><ul><li><p> [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, see [Run your first local project](../getting-started-example).</p></li><li><p> [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).</p></li></ul></p>                                                                                                  |
 | A supported LLM provider account | <p>The AI Agent connector supports multiple model providers. This guide assumes you have access to an AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</p> <p> You can use a different LLM provider instead, such as OpenAI or Anthropic. For more information on how to configure the connector with your preferred LLM provider, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).</p> |
 
 :::important
@@ -89,7 +89,7 @@ For authentication, it is preconfigured to use the following connector secrets:
 - `AWS_BEDROCK_ACCESS_KEY`: The AWS Access Key ID for your AWS account able to call the Bedrock Converse API.
 - `AWS_BEDROCK_SECRET_KEY`: The AWS Secret Access Key for your AWS account.
 
-How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed local environment.
+You will configure these secrets differently in a Camunda 8 SaaS or a Self-Managed local environment.
 
 - For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
 - For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
@@ -186,5 +186,5 @@ You can also:
 - Explore other [blueprints](https://marketplace.camunda.com/en-US/listing?q=ai&cat=107793&locale=en-US) from Camunda marketplace.
 
 :::info Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
 :::
