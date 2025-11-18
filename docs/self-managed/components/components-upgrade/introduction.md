@@ -25,6 +25,18 @@ See the dedicated update guides below for detailed version update instructions.
 Depending on your amount of data, run a minor version for at least 24 hours before updating to the next version.
 :::
 
+## [Camunda 8.8 to Camunda 8.9](../880-to-890)
+
+Update from 8.8.x to 8.9.x
+
+[Release notes](/reference/announcements-release-notes/890/890-release-notes.md)
+
+## [Camunda 8.7 to Camunda 8.8](../870-to-880)
+
+Update from 8.7.x to 8.8.x
+
+[Release notes](/reference/announcements-release-notes/880/880-release-notes.md)
+
 ## [Camunda 8.6 to Camunda 8.7](../860-to-870)
 
 Update from 8.6.x to 8.7.x

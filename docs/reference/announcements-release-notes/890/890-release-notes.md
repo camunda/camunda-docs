@@ -33,10 +33,24 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 </details>
 
+## 8.9.0-alpha2
+
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| 09 December 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2)</li></ul> | -    |
+
+### Web Modeler: Logging framework changes from Logback to Log4j2
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3191 -->
+
+Web Modeler now uses [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.12.x/index.html/) for logging. By aligning We Modeler logging with the OC, we are making it easier for administrators to configure and maintain your Self-Managed deployments.
+
 ## 8.9.0-alpha1
 
-| Release date     | Changelog(s)                                                                                                                                                                                       | Blog |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 November 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)</li></ul> | -    |
 
 ### JDBC driver management for RDBMS integrations
