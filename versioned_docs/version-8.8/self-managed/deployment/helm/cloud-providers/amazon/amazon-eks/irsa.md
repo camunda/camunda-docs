@@ -179,7 +179,7 @@ If nothing within your cluster relies on the implicit node role, Camunda recomme
 
 ### Configure IMDS hop limit
 
-**For new node groups**, using a Terraform module like the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), you can define the following:
+**For new node groups** that use a Terraform module such as the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), you can define the following:
 
 ```json
 eks_managed_node_group_defaults {
