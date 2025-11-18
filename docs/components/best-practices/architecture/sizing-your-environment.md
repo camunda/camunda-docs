@@ -187,22 +187,13 @@ Such a cluster can serve roughly 65 tasks per second as a peak load, and it can 
 
 |                                    |                     | request | limit |
 | ---------------------------------- | ------------------- | ------- | ----- |
-| **Zeebe**                          |                     |         |       |
+| **Orchestration cluster**          |                     |         |       |
 | \# brokers                         | 3                   |         |       |
 | \# partitions                      | 3                   |         |       |
 | replication factor                 | 3                   |         |       |
-|                                    | vCPU \[cores\]      | 0.5     | 2     |
-|                                    | Mem \[GB\]          | 2       | 2     |
+|                                    | vCPU \[cores\]      | 1       | 2     |
+|                                    | Mem \[GB\]          | 2       | 3     |
 |                                    | Disk \[GB\]         | 32      | 128   |
-| gateway                            | embedded in broker  |         |       |
-| **Operate**                        |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 1       | 1     |
-|                                    | Mem \[GB\] limit    | 1.5     | 1.5   |
-| **Tasklist**                       |                     |         |       |
-| #webapp                            | 2                   |         |       |
-|                                    | vCPU \[cores\]      | 0.5     | 0.5   |
-|                                    | Mem \[GB\] limit    | 0.6     | 6     |
 | **Optimize**                       |                     |         |       |
 | #importer                          | 1                   |         |       |
 |                                    | vCPU \[cores\]      | 0.5     | 0.5   |
