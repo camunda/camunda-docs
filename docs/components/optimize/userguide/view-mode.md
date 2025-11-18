@@ -1,7 +1,8 @@
 ---
 id: view-mode
-title: View mode
-description: "The view mode provides you with all the features to monitor you process."
+title: "Monitor dashboards"
+sidebar_label: "Monitor dashboards"
+description: "Monitor your dashboards and visualize your processes data with the View mode."
 ---
 
 Monitor your dashboards and visualize your processes data with the **View mode**. It provides interactive charts, raw data tables, and sharing features.
