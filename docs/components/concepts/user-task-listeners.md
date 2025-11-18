@@ -87,8 +87,8 @@ Once triggered, the workflow engine creates a job that you can process using a j
 
 You can configure user task listeners either:
 
-- per BPMN user task element
-- for all user tasks in the cluster (see [global user task listeners](/components/concepts/global-user-task-listeners.md))
+- Per BPMN user task element.
+- For all user tasks in the cluster. See [Global user task listeners](/components/concepts/global-user-task-listeners.md).
 
 ### User task listener properties
 
@@ -276,4 +276,3 @@ While you can use [Tasklist v1](components/tasklist/api-versions.md) or the depr
 - [Expressions](/components/concepts/expressions.md)
 - [Execution listeners](/components/concepts/execution-listeners.md)
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
-- [Global user task listeners](/components/concepts/global-user-task-listeners.md)
