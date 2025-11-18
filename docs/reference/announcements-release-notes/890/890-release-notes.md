@@ -39,6 +39,14 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 09 December 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2)</li></ul> | -    |
 
+### Web Modeler: Changed embedded server from Undertow to Tomcat
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3191 -->
+
+Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) for its embedded web server. By aligning We Modeler logging with the OC, we are making it easier for administrators to configure and maintain your Self-Managed deployments.
+
 ### Web Modeler: Logging framework changes from Logback to Log4j2
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
