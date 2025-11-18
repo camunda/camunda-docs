@@ -4,11 +4,23 @@ title: View mode
 description: "The view mode provides you with all the features to monitor you process."
 ---
 
-Once you've defined the layout of your dashboard, the view mode provides essential features for monitoring your processes:
+Monitor your dashboards and visualize your processes data with the **View mode**. It provides interactive charts, raw data tables, and sharing features.
 
-**Full-screen**: Display the dashboard in full-screen mode to focus solely on the reports, hiding the header, control panel, and footer. While in full-screen mode, toggle between the default light theme and a dark theme using the Toggle Theme button.
+## About this guide
 
-**Auto-refresh**: Periodically updates the dashboard with the latest data. You can customize the update frequency from 1 to 60 minutes. An animation indicates the timing of the next update. You can disable this feature if you no longer wish to use it.
+In this guide, you will:
+
+- Understand the features supported in View mode.
+- Learn how to interact with reports.
+- Explore how to add filters to customize your dashboards.
+
+## Supported features
+
+View mode provides the following features for monitoring your processes:
+
+- **Full-screen**: Display the dashboard in full-screen mode to focus solely on the reports, hiding the header, control panel, and footer. While in full-screen mode, toggle between the default light theme and a dark theme using the Toggle Theme button.
+
+- **Auto-refresh**: Periodically updates the dashboard with the latest data. You can customize the update frequency from one to 60 minutes. An animation indicates the timing of the next update. You can disable this feature if you no longer wish to use it.
 
 :::note
 The refresh rate will not be saved unless it is selected in the [edit mode](./edit-mode.md) of the dashboard.
@@ -27,7 +39,11 @@ If it was selected in the view mode, the refresh rate will not be saved when ref
 
 ![sharing](./img/dashboard-sharingPopover.png)
 
-- **Embedding**: Click the **Embed Link** button to copy a code to paste into your webpage. Everyone that views the webpage can then see the content of the dashboard. The shared versions of the dashboard allow only to view the dashboard itself. There is no possibility to alter it or interact with any other features of Optimize. Revoke the sharing anytime by disabling the share switch.
+:::important
+The shared versions of the dashboard allow only to view the dashboard itself. There is no possibility to alter it or interact with any other features of Optimize. Revoke the sharing anytime by disabling the share switch.
+:::
+
+- **Embedding**: Click the **Embed Link** button to copy a code to paste into your webpage. Everyone that views the webpage can then see the content of the dashboard.
 
 To hide the header of the shared dashboard or specific part of it, add the following parameter to the share URL:
 
