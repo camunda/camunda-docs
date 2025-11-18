@@ -203,7 +203,7 @@ aws ec2 modify-instance-metadata-options \
     --http-put-response-hop-limit 1
 ```
 
-Replace `<instance-id>` with your actual EC2 instance ID. You'll need to run this command for each worker node in your cluster.
+Replace `<instance-id>` with your actual EC2 instance ID. You must run this command for each worker node in your cluster.
 
 More details can be found in the [AWS documentation on modifying IMDS for existing instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-existing-instances.html#modify-PUT-response-hop-limit).
 
