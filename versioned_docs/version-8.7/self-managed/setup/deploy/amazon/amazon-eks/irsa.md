@@ -177,7 +177,7 @@ If issues remain unresolved, compare your configuration with Camunda’s [refere
 
 If nothing within your cluster relies on the implicit node role, Camunda recommends disabling it by configuring the `http_put_response_hop_limit` to 1. This decreases the default value from two to one, so pods are not allowed to assume the role of the node.
 
-### Configuring IMDS hop limit
+### Configure IMDS hop limit
 
 **For new node groups**, using a Terraform module like the [Amazon EKS module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest), you can define the following:
 
