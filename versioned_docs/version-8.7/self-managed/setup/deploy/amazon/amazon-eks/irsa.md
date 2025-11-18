@@ -175,7 +175,7 @@ If issues remain unresolved, compare your configuration with Camunda’s [refere
 
 [Instance Metadata Service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) is a default fallback for the AWS SDK due to the [default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html). Within the context of Amazon EKS, it means a pod will automatically assume the role of a node. This can hide many problems, including whether IRSA was set up correctly or not, since it will fall back to IMDS in case of failure and hide the actual error.
 
-Thus, if nothing within your cluster relies on the implicit node role, we recommend disabling it by configuring the `http_put_response_hop_limit` to 1. This decreases the default value of two to one, which results in pods not being allowed to assume the role of the node anymore.
+If nothing within your cluster relies on the implicit node role, Camunda recommends disabling it by configuring the `http_put_response_hop_limit` to 1. This decreases the default value from two to one, so pods are not allowed to assume the role of the node.
 
 ### Configuring IMDS hop limit
 
