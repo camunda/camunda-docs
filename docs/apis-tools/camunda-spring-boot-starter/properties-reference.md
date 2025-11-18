@@ -114,6 +114,22 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-http-connections" env="CAMUNDA_CLIENT_MAXHTTPCONNECTIONS"/><a href="#camundaclientmaxhttpconnections" id="camundaclientmaxhttpconnections" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of concurrent HTTP connections the client can open.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>100</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/><a href="#camundaclientmaxmessagesize" id="camundaclientmaxmessagesize" class="hash-link"/>
 </td>
 
@@ -370,6 +386,22 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.issuer-url" env="CAMUNDA_CLIENT_AUTH_ISSUERURL"/><a href="#camundaclientauthissuerurl" id="camundaclientauthissuerurl" class="hash-link"/>
+</td>
+
+<td>
+
+The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the `camunda.client.auth.well-known-configuration-url` is not set. A default is set by `camunda.client.auth.method: oidc`.
+
+Type: <code>url</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-key-password" env="CAMUNDA_CLIENT_AUTH_KEYSTOREKEYPASSWORD"/><a href="#camundaclientauthkeystorekeypassword" id="camundaclientauthkeystorekeypassword" class="hash-link"/>
 </td>
 
@@ -503,7 +535,7 @@ Type: <code>string</code>
 
 <td>
 
-The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
+The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas`.
 
 Type: <code>url</code>
 
@@ -554,6 +586,22 @@ Type: <code>file</code>
 The username to use for basic authentication. A default is set by `camunda.client.auth.method: basic`.
 
 Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.well-known-configuration-url" env="CAMUNDA_CLIENT_AUTH_WELLKNOWNCONFIGURATIONURL"/><a href="#camundaclientauthwellknownconfigurationurl" id="camundaclientauthwellknownconfigurationurl" class="hash-link"/>
+</td>
+
+<td>
+
+The url of the well-known configuration of the issuer. It is used to retrieve the `token-url`. Only applied if `camunda.client.auth.token-url` is not set.
+
+Type: <code>url</code>
 
 </td>
 <td>
@@ -781,7 +829,7 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>true</code>
 </td>
 </tr>
 <tr>
@@ -797,7 +845,7 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>true</code>
 </td>
 </tr>
 <tr>
@@ -829,7 +877,7 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>false</code>
 </td>
 </tr>
 <tr>
@@ -861,7 +909,7 @@ Type: <code>integer</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>0</code>
 </td>
 </tr>
 <tr>
@@ -909,7 +957,23 @@ Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT10S&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.retry-backoff" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_RETRYBACKOFF"/><a href="#camundaclientworkerdefaultsretrybackoff" id="camundaclientworkerdefaultsretrybackoff" class="hash-link"/>
+</td>
+
+<td>
+
+The backoff before a retry of a failed job is possible.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT0S&quot;</code>
 </td>
 </tr>
 <tr>
@@ -941,7 +1005,7 @@ Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT8H&quot;</code>
 </td>
 </tr>
 <tr>
@@ -998,6 +1062,52 @@ Type: <code>string</code>
 ### `camunda.client.worker.override`
 
 Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.
+
+### `management.endpoint.jobworkers`
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.access" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ACCESS"/><a href="#managementendpointjobworkersaccess" id="managementendpointjobworkersaccess" class="hash-link"/>
+</td>
+
+<td>
+
+Permitted level of access for the jobworkers endpoint.
+
+Type: <code>enum[none, read_only, unrestricted]</code>
+
+</td>
+<td>
+  <code>&quot;unrestricted&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.cache.time-to-live" env="MANAGEMENT_ENDPOINT_JOBWORKERS_CACHE_TIMETOLIVE"/><a href="#managementendpointjobworkerscachetimetolive" id="managementendpointjobworkerscachetimetolive" class="hash-link"/>
+</td>
+
+<td>
+
+Maximum time that a response can be cached.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;0ms&quot;</code>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## Deprecated properties
 
@@ -1700,6 +1810,33 @@ There is no keycloak-specific configuration for Camunda; the issuer is provided 
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
+</td>
+</tr>
+</tbody>
+</table>
+
+### `management.endpoint.jobworkers`
+
+Deprecated
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Replacement</th>
+    <th>Hint</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.enabled" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ENABLED"/><a href="#managementendpointjobworkersenabled" id="managementendpointjobworkersenabled" class="hash-link"/>
+</td>
+<td>
+  <a href="#managementendpointjobworkersaccess"><Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.access" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ACCESS"/></a>
+</td>
+<td>
+N/A
 </td>
 </tr>
 </tbody>

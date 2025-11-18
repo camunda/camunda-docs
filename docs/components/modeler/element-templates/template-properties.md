@@ -49,6 +49,8 @@ The property object keys are divided into required and optional keys:
 - [`group : String`](#grouping-fields-group): The group that the property belongs to.
 - [`condition : Object`](#showing-properties-conditionally-condition): A condition that determines when the property is active and visible.
 - `id : String`: An identifier that can be used to reference the property in conditional properties.
+- [`editable: Boolean`](#preventing-edits-editable): Setting this key's value determines whether properties are read-only or editable in the properties panel.
+- [`entriesVisible: Boolean`](#displaying-all-entries-entriesvisible): Setting this key's value determines whether all entries of a dropdown property are visible without opening the dropdown.
 
 Not all keys and values are compatible with each other.
 Some keys or values require other keys to be set to a certain value, even if the key is marked as optional above.
@@ -849,6 +851,78 @@ The `zeebe:script` binding allows you to configure the [FEEL expression](../../b
 :::note
 When `zeebe:script` is used, `zeebe:taskDefinition` cannot be used on the same element.
 If the input `type` is `String` or `Text`, then [`feel`](#adding-feel-editor-support-feel) must be set to `required`"
+:::
+
+### Ad-hoc sub-processes: `zeebe:adHoc`
+
+| **Binding `type`**         | `zeebe:adHoc`                                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Valid property `type`s** | `Hidden`                                                                                                                             |
+| **Binding parameters**     | `property`: The name of the property.<br/>Supported properties: `outputCollection`, `outputElement`, and `activeElementsCollection`. |
+| **Mapping result**         | `<zeebe:adHoc [property]="[userInput]" />`                                                                                           |
+
+The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. When configured, contained activities can be executed independently without following a predefined sequence flow.
+
+### Example
+
+```json
+{
+  ...,
+  "appliesTo": [ "bpmn:AdHocSubProcess" ],
+  "elementType": { "value": "bpmn:AdHocSubProcess" },
+  "properties": [
+    ...,
+    {
+      "type": "Hidden",
+      "binding": { "type": "zeebe:adHoc", "property": "outputCollection" },
+      "value": "results"
+    },
+    {
+      "type": "Hidden",
+      "binding": { "type": "zeebe:adHoc", "property": "outputElement" },
+      "value": "={ id: results._meta.id, name: results._meta.name, content: results }"
+    }
+  ]
+}
+```
+
+### Example with `activeElementsCollection`
+
+```json
+{
+  ...,
+  "appliesTo": [ "bpmn:AdHocSubProcess" ],
+  "elementType": { "value": "bpmn:AdHocSubProcess" },
+  "properties": [
+    {
+      "type": "Hidden",
+      "binding": {
+        "type": "property",
+        "name": "cancelRemainingInstances"
+      },
+      "value": "false"
+    },
+    {
+      "type": "String",
+      "feel": "required",
+      "binding": {
+        "type": "property",
+        "name": "completionCondition"
+      }
+    },
+    {
+      "type": "Hidden",
+      "binding": { "type": "zeebe:adHoc", "property": "activeElementsCollection" },
+      "value": "=anActiveElementsCollection"
+    }
+  ]
+}
+```
+
+:::note
+The `zeebe:adHoc` binding can only be used with elements of type `bpmn:AdHocSubProcess`.
+
+The `outputCollection` property defines where ad-hoc execution results are collected, while `outputElement` specifies the structure of each result item.
 :::
 
 ## Setting a task implementation

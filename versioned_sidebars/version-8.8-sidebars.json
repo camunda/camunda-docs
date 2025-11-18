@@ -118,8 +118,7 @@
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/resource-deletion",
-        "components/concepts/task-testing"
+        "components/concepts/resource-deletion"
       ]
     },
     {
@@ -183,11 +182,13 @@
           "label": "Agentic orchestration",
           "link": {
             "type": "doc",
-            "id": "components/agentic-orchestration/agentic-orchestration"
+            "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
           "items": [
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/ai-agents"
+            "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic"
           ]
         },
         {
@@ -444,7 +445,6 @@
                 "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
-                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
                     "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai"
                   ]
                 }
@@ -452,8 +452,7 @@
             },
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
-            "components/modeler/web-modeler/process-landscape-visualization",
-            "components/modeler/web-modeler/task-testing"
+            "components/modeler/web-modeler/process-landscape-visualization"
           ]
         },
         {
@@ -554,6 +553,7 @@
         },
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         {
           "Reference": [
             {
@@ -1089,6 +1089,7 @@
       "items": [
         "components/concepts/clusters",
         "components/saas/regions",
+        "components/saas/data-locations",
         {
           "type": "category",
           "label": "Encryption",
@@ -2735,18 +2736,6 @@
             "reference/announcements-release-notes/860/860-release-notes"
           ]
         },
-        {
-          "type": "category",
-          "label": "8.5",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/850/850-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes"
-          ]
-        },
         "reference/announcements-release-notes/release-policy"
       ]
     },
@@ -2902,8 +2891,19 @@
                   "items": [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider"
+                    {
+                      "type": "category",
+                      "label": "External OIDC provider",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider"
+                      },
+                      "items": [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider"
+                      ]
+                    }
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
@@ -3172,7 +3172,8 @@
                     "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
-                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration"
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility"
                   ]
                 },
                 {

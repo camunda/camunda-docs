@@ -7,6 +7,10 @@ toc_max_heading_level: 2
 
 Camunda publishes security notices after fixes are available.
 
+:::tip Subscribe to security notices
+Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+:::
+
 ## Report a security issue or vulnerability
 
 Report security vulnerabilities to Camunda immediately, following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
@@ -15,11 +19,63 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 34
+
+### Publication date
+
+November 11, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+
+### Impact
+
+The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used by Web Modeler was affected by [CVE-2025-59250](https://nvd.nist.gov/vuln/detail/CVE-2025-59250), which allows improper input validation that could enable an attacker to perform spoofing over a network.
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed version &lt;= 8.8.1 and Microsoft SQL Server as database vendor.
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Web Modeler Self-Managed 8.8.2
+
+## Notice 33
+
+### Publication date
+
+October 22, 2025
+
+### Products affected
+
+- Camunda Orchestration Cluster
+
+### Impact
+
+A bug in signal broadcast command processing allowed unauthorized users to trigger signal start events or signal intermediate catch events in certain process definitions without the required create or update permissions.
+
+This did not allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Orchestration Cluster 8.8.0
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Orchestration Cluster 8.8.1
+
 ## Notice 32
 
 ### Publication date
 
-October 21th, 2025
+October 21, 2025
 
 ### Products affected
 
@@ -55,6 +111,7 @@ October 16, 2025
 
 The embedded Undertow web server was affected by [CVE-2025-9784](https://nvd.nist.gov/vuln/detail/CVE-2025-9784),
 a flaw where malformed client requests can trigger server-side stream resets without incrementing abuse counters.
+
 This issue, referred to as the "MadeYouReset" attack, allows malicious clients to induce excessive server workload by
 repeatedly causing server-side stream aborts and could be exploited to cause a denial of service (DoS).
 

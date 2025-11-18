@@ -28,7 +28,7 @@ See [managing secrets](/components/console/manage-clusters/manage-secrets.md).
 
 You can authenticate to a mail server as follows.
 
-### Simple Authentication
+### Simple authentication
 
 This method allows the user to connect to any SMTP, POP3 or IMAP server using an email address and password.
 
@@ -36,6 +36,11 @@ This method allows the user to connect to any SMTP, POP3 or IMAP server using an
 | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `username` | Enter your full email address (for example, user@example.com) or the username provided by your email service. This is used to authenticate your access to the mail server. |
 | `password` | Enter the password for your email account. Keep your password secure and do not share it with others.                                                                      |
+
+### No authentication
+
+For SMTP servers that do not require authentication, select this option to connect without providing
+credentials.
 
 ## POP3
 

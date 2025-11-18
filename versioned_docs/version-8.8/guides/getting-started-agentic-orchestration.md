@@ -15,7 +15,7 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-example-properties-panel.p
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
 ## About this guide
 
@@ -23,8 +23,8 @@ In this guide, you will:
 
 - Run Camunda 8 in either a local development environment (using [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)) or [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup).
 - Deploy and start a business process using either [Desktop Modeler](/components/modeler/desktop-modeler/index.md) with Camunda 8 Run, or [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) with Camunda 8 SaaS.
-- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) applied to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide interaction/reasoning capabilities for the AI agent.
-- Define the tools the AI agent should use as activities within the ad-hoc sub-process.
+- Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction/reasoning capabilities for the AI agent.
+- Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 
 Once you have completed this guide, you will have an example running AI agent and Camunda 8 process.
 
@@ -60,14 +60,27 @@ Business processes are traditionally modeled as a deterministic sequence of step
 To learn more about dynamic workflows, see [agentic orchestration design and architecture](/components/agentic-orchestration/design-architecture.md).
 :::
 
+### What is an AI agent?
+
+An **AI agent** in Camunda refers to an automation mechanism that leverages ad-hoc sub-processes to perform tasks with non-deterministic behavior. AI agents can:
+
+- Make autonomous decisions about task execution.
+- Adapt their behavior based on context and input.
+- Handle complex scenarios that require dynamic responses.
+- Integrate with other process components through standard interfaces.
+
+AI agents represent the practical implementation of agentic process orchestration within the Camunda ecosystem, combining the flexibility of AI with the reliability of traditional process automation.
+
 ### Ad-hoc sub-processes
 
-An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a key building block in Camunda agentic orchestration.
+An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) is a key building block in Camunda agentic orchestration. Unlike standard BPMN subprocesses with predefined sequences, ad-hoc subprocesses allow:
 
-- It allows an AI agent to dynamically select and run tools (available actions) based on the current context and requirements.
-- It can perform tasks in parallel, handle exceptions, and make decisions on the fly.
+- **Dynamic task selection**: Tasks within the subprocess can be executed in any order, repeatedly, or skipped entirely based on runtime needs.
+- **Non-deterministic execution**: The exact sequence and occurrence of tasks are determined at runtime by the AI agent.
+- **Parallel execution**: Multiple tasks can run simultaneously when appropriate.
+- **Flexible tool access**: The subprocess acts as a container of available actions, i.e., tools, that the AI agent can choose from.
 
-The AI Agent connector lets the LLM choose from the tools in that sub-process and dynamically orchestrates tool calling and request handling.
+The AI Agent connector lets the LLM choose from the tools in that sub-process and dynamically orchestrates tool calling and request handling. This approach provides the AI agent freedom within constraints, ensuring it stays aligned with business goals while having the flexibility to adapt.
 
 ## Step 1: Install the example model blueprint
 
@@ -91,7 +104,14 @@ The example AI agent process is a chatbot that you (the user) can chat and inter
 
 <img src={AiAgentExampleDiagramImg} alt="A example AI agent BPMN process diagram"/>
 
-The example process comes with a form linked to the start event that you can use to provide a user request. The request can be either a simple test request, or can include a document upload.
+The process showcases how an AI agent can:
+
+- **Make autonomous decisions** about which tasks to execute based on your input.
+- **Adapt its behavior** dynamically using the context provided.
+- **Handle complex scenarios** by selecting and combining different tools.
+- **Integrate seamlessly** with other process components.
+
+The example comes with a form linked to the start event where you can provide requests—from simple questions to more complex tasks involving document uploads.
 
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
@@ -105,17 +125,24 @@ The example process is preconfigured to use AWS Bedrock as the model. For authen
 How you configure these secrets depends if you are running Camunda 8 SaaS or a Self-Managed (local) environment.
 
 - For SaaS and Self-Managed deployments, you can configure the secrets in the [Console](../components/console/manage-clusters/manage-secrets.md).
-- If you run Camunda 8 run locally, you can configure the secrets as follows:
-  - If you run it with Java, export the secrets as environment variables before starting the distribution.
-  - If you use Camunda 8 Run with Docker, navigate to the `docker-compose-8.x` folder in the new `c8run` directory and add the secrets in the `connector-secrets.txt` file.
+- For Camunda 8 Run, export the secrets as environment variables before starting the distribution. If you use Camunda 8 Run with Docker, add the secrets in the `connector-secrets.txt` file.
 
-## Step 3: Configure the AI Agent Sub-process connector (optional)
+## Step 3: Configure the AI Agent connector (optional)
 
-In the blueprint BPMN diagram, the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) connector template is applied to the `AI Agent` ad-hoc sub-process. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
+In the blueprint BPMN diagram, the AI Agent connector template is applied to the `AI Agent` service task. You can change the AI Agent configuration in the properties panel of the AI Agent if required.
 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel"/>
 
-For example, if you want to use a different model provider to AWS Bedrock, reconfigure the `Model provider` section for your alternative model provider. If you change the model provider, you might also need to change the connector secrets.
+### Key configuration options
+
+- **Model provider**: Change from AWS Bedrock to OpenAI, Anthropic, or other supported providers.
+- **System prompt**: Customize the agent's behavior and personality.
+- **Model parameters**: Adjust temperature, max tokens, and other LLM settings.
+- **Connector secrets**: Update authentication credentials if changing providers.
+
+:::tip
+When configuring connectors, use FEEL expressions, by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
+:::
 
 :::info
 For a reference of available configuration options, see [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
@@ -126,6 +153,18 @@ For a reference of available configuration options, see [AI Agent connector](/co
 You can now deploy and run your AI agent, and test it as a running process on your Camunda cluster running version 8.8 or higher.
 
 Once you have started your process, you can then monitor the execution in [Operate](/components/operate/operate-introduction.md).
+
+### What to expect during execution
+
+When you run the AI agent process:
+
+1. The AI agent receives your prompt and analyzes it.
+1. It determines which tools from the ad-hoc subprocess should be activated.
+1. Tasks can execute in parallel or sequentially, depending on the agent's decisions.
+1. Process variables are updated as each tool completes its execution.
+1. The agent may iterate through multiple tool calls to handle complex requests.
+
+You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
 ### SaaS
 
@@ -174,9 +213,10 @@ For example:
 
 Learn more about building and deploying agentic orchestration and advanced AI agents in your processes:
 
-- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+- [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 - [Camunda AI agents](/components/agentic-orchestration/ai-agents.md)
 - [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md)
+- [Building Your First AI Agent in Camunda (blog)](https://camunda.com/blog/2025/02/building-ai-agent-camunda/) - Step-by-step guide with video tutorial showing a fraud detection example
 
 :::info Camunda Academy
 Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.

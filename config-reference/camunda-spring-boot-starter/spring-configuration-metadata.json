@@ -91,6 +91,11 @@
       "description": "Keycloak-specific properties."
     },
     {
+      "name": "management.endpoint.jobworkers",
+      "type": "io.camunda.client.spring.actuator.JobWorkerController",
+      "sourceType": "io.camunda.client.spring.actuator.JobWorkerController"
+    },
+    {
       "name": "zeebe",
       "type": "io.camunda.spring.client.properties.CamundaSelfManagedProperties"
     },
@@ -193,6 +198,12 @@
       "defaultValue": "$HOME\/.camunda\/credentials"
     },
     {
+      "name": "camunda.client.auth.issuer-url",
+      "type": "java.net.URI",
+      "description": "The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the `camunda.client.auth.well-known-configuration-url` is not set. A default is set by `camunda.client.auth.method: oidc`.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
       "name": "camunda.client.auth.keystore-key-password",
       "type": "java.lang.String",
       "description": "The keystore key password for the OAuth identity provider.",
@@ -244,7 +255,7 @@
     {
       "name": "camunda.client.auth.token-url",
       "type": "java.net.URI",
-      "description": "The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.",
+      "description": "The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas`.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -263,6 +274,12 @@
       "name": "camunda.client.auth.username",
       "type": "java.lang.String",
       "description": "The username to use for basic authentication. A default is set by `camunda.client.auth.method: basic`.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.well-known-configuration-url",
+      "type": "java.net.URI",
+      "description": "The url of the well-known configuration of the issuer. It is used to retrieve the `token-url`. Only applied if `camunda.client.auth.token-url` is not set.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -328,6 +345,13 @@
       "type": "java.time.Duration",
       "description": "The time interval between keep-alive messages sent to the gateway.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
+    },
+    {
+      "name": "camunda.client.max-http-connections",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of concurrent HTTP connections the client can open.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": 100
     },
     {
       "name": "camunda.client.max-message-size",
@@ -401,13 +425,15 @@
       "name": "camunda.client.worker.defaults.auto-complete",
       "type": "java.lang.Boolean",
       "description": "Enable or disable automatic job completion after method invocation.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": true
     },
     {
       "name": "camunda.client.worker.defaults.enabled",
       "type": "java.lang.Boolean",
       "description": "Enable or disable the job worker.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": true
     },
     {
       "name": "camunda.client.worker.defaults.fetch-variables",
@@ -419,7 +445,8 @@
       "name": "camunda.client.worker.defaults.force-fetch-all-variables",
       "type": "java.lang.Boolean",
       "description": "Sets whether all variables are fetched. Overrides `fetch-variables`.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": false
     },
     {
       "name": "camunda.client.worker.defaults.max-jobs-active",
@@ -432,7 +459,8 @@
       "name": "camunda.client.worker.defaults.max-retries",
       "type": "java.lang.Integer",
       "description": "The maximum number of retries before automatic responses (complete, fail, bpmn error) for jobs are no longer attempted.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": 0
     },
     {
       "name": "camunda.client.worker.defaults.name",
@@ -452,7 +480,15 @@
       "name": "camunda.client.worker.defaults.request-timeout",
       "type": "java.time.Duration",
       "description": "The request timeout for the activate job request used to poll for new jobs.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PT10S"
+    },
+    {
+      "name": "camunda.client.worker.defaults.retry-backoff",
+      "type": "java.time.Duration",
+      "description": "The backoff before a retry of a failed job is possible.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PT0S"
     },
     {
       "name": "camunda.client.worker.defaults.stream-enabled",
@@ -465,7 +501,8 @@
       "name": "camunda.client.worker.defaults.stream-timeout",
       "type": "java.time.Duration",
       "description": "If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PT8H"
     },
     {
       "name": "camunda.client.worker.defaults.tenant-ids",
@@ -486,6 +523,20 @@
       "type": "java.lang.String",
       "description": "The type of jobs to work on.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+    },
+    {
+      "name": "management.endpoint.jobworkers.access",
+      "type": "org.springframework.boot.actuate.endpoint.Access",
+      "description": "Permitted level of access for the jobworkers endpoint.",
+      "sourceType": "io.camunda.client.spring.actuator.JobWorkerController",
+      "defaultValue": "unrestricted"
+    },
+    {
+      "name": "management.endpoint.jobworkers.cache.time-to-live",
+      "type": "java.time.Duration",
+      "description": "Maximum time that a response can be cached.",
+      "sourceType": "io.camunda.client.spring.actuator.JobWorkerController",
+      "defaultValue": "0ms"
     },
     {
       "name": "camunda.client.auth.issuer",
@@ -941,6 +992,18 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.auth.username"
+      }
+    },
+    {
+      "name": "management.endpoint.jobworkers.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the jobworkers endpoint.",
+      "sourceType": "io.camunda.client.spring.actuator.JobWorkerController",
+      "defaultValue": true,
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "management.endpoint.jobworkers.access",
+        "since": "3.4.0"
       }
     },
     {

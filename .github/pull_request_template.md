@@ -20,7 +20,7 @@
 
 <!-- Camunda maintains 18 months of minor versions. Backporting your change to multiple versions is common. -->
 
-- [ ] My changes are for **an upcoming minor release** and are in the `/docs` directory (version 8.8).
+- [ ] My changes are for **an upcoming minor release** and are in the `/docs` directory (version 8.9).
 - [ ] My changes are for an **already released minor** and are in a `/versioned_docs` directory.
 
 <!-- UNCOMMENT THIS SECTION IF APPLICABLE. Adding or removing pages requires extra steps.

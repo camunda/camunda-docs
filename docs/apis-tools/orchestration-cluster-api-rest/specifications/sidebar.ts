@@ -42,6 +42,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-authorizations",
+          label: "Search authorizations",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-authorization",
           label: "Update authorization",
           className: "api-method put",
@@ -58,12 +64,6 @@ const sidebar: SidebarsConfig = {
           label: "Delete authorization",
           className: "api-method delete",
         },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-authorizations",
-          label: "Search authorizations",
-          className: "api-method post",
-        },
       ],
     },
     {
@@ -72,9 +72,9 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation",
-          label: "Get batch operation",
-          className: "api-method get",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operation-items",
+          label: "Search batch operation items",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -84,14 +84,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-batch-operation",
-          label: "Cancel Batch operation",
-          className: "api-method post",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation",
+          label: "Get batch operation",
+          className: "api-method get",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-batch-operation",
-          label: "Suspend Batch operation",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-batch-operation",
+          label: "Cancel Batch operation",
           className: "api-method post",
         },
         {
@@ -102,8 +102,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-batch-operation-items",
-          label: "Search batch operation items",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-batch-operation",
+          label: "Suspend Batch operation",
           className: "api-method post",
         },
       ],
@@ -132,14 +132,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
-          label: "Get cluster topology",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
+          label: "Get cluster status",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
-          label: "Get cluster status",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
+          label: "Get cluster topology",
           className: "api-method get",
         },
       ],
@@ -148,6 +148,12 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "Decision definition",
       items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-decision",
+          label: "Evaluate decision",
+          className: "api-method post",
+        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-decision-definitions",
@@ -165,12 +171,6 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-decision-definition-xml",
           label: "Get decision definition XML",
           className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-decision",
-          label: "Evaluate decision",
-          className: "api-method post",
         },
       ],
     },
@@ -270,6 +270,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-incidents",
+          label: "Search for incidents of a specific element instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
           className: "api-method put",
@@ -284,6 +290,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-group",
           label: "Create group",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-groups",
+          label: "Search groups",
           className: "api-method post",
         },
         {
@@ -306,39 +318,9 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-group",
-          label: "Search group users",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-group",
-          label: "Search group mapping rules",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-group",
-          label: "Search group roles",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-group",
           label: "Search group clients",
           className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-group",
-          label: "Assign a user to a group",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-group",
-          label: "Unassign a user from a group",
-          className: "api-method delete",
         },
         {
           type: "doc",
@@ -354,6 +336,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-group",
+          label: "Search group mapping rules",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-mapping-rule-to-group",
           label: "Assign a mapping rule to a group",
           className: "api-method put",
@@ -366,9 +354,27 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-groups",
-          label: "Search groups",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-group",
+          label: "Search group roles",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-group",
+          label: "Search group users",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-group",
+          label: "Assign a user to a group",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-group",
+          label: "Unassign a user from a group",
+          className: "api-method delete",
         },
       ],
     },
@@ -376,12 +382,6 @@ const sidebar: SidebarsConfig = {
       type: "category",
       label: "Incident",
       items: [
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incident",
-          label: "Resolve incident",
-          className: "api-method post",
-        },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-incidents",
@@ -393,6 +393,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-incident",
           label: "Get incident",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incident",
+          label: "Resolve incident",
+          className: "api-method post",
         },
       ],
     },
@@ -414,8 +420,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
-          label: "Fail job",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-job",
+          label: "Update job",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-job",
+          label: "Complete job",
           className: "api-method post",
         },
         {
@@ -426,15 +438,9 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-job",
-          label: "Complete job",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
+          label: "Fail job",
           className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-job",
-          label: "Update job",
-          className: "api-method patch",
         },
       ],
     },
@@ -462,6 +468,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rule",
+          label: "Search mapping rules",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-mapping-rule",
           label: "Update mapping rule",
           className: "api-method put",
@@ -478,12 +490,6 @@ const sidebar: SidebarsConfig = {
           label: "Get a mapping rule",
           className: "api-method get",
         },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rule",
-          label: "Search mapping rules",
-          className: "api-method post",
-        },
       ],
     },
     {
@@ -492,14 +498,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/publish-message",
-          label: "Publish message",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/correlate-message",
+          label: "Correlate message",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/correlate-message",
-          label: "Correlate message",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/publish-message",
+          label: "Publish message",
           className: "api-method post",
         },
       ],
@@ -534,14 +540,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition",
-          label: "Get process definition",
-          className: "api-method get",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-statistics",
+          label: "Get process instance statistics",
+          className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
-          label: "Get process definition XML",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition",
+          label: "Get process definition",
           className: "api-method get",
         },
         {
@@ -556,6 +562,18 @@ const sidebar: SidebarsConfig = {
           label: "Get process definition statistics",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
+          label: "Get process definition XML",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-instance-version-statistics",
+          label: "Get process instance statistics by version",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -566,42 +584,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance",
           label: "Create process instance",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
-          label: "Get process instance",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
-          label: "Get process instance sequence flows",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
-          label: "Get process instance statistics",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
-          label: "Search process instances",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instance-incidents",
-          label: "Search for incidents associated with a process instance",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance",
-          label: "Cancel process instance",
           className: "api-method post",
         },
         {
@@ -631,6 +613,42 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
+          label: "Search process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
+          label: "Get process instance",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-call-hierarchy",
+          label: "Get call hierarchy for process instance",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance",
+          label: "Cancel process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-process-instance-incidents",
+          label: "Resolve process instance incidents",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instance-incidents",
+          label: "Search for incidents associated with a process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance",
           label: "Migrate process instance",
           className: "api-method post",
@@ -643,8 +661,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-call-hierarchy",
-          label: "Get call hierarchy for process instance",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
+          label: "Get process instance sequence flows",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
+          label: "Get process instance statistics",
           className: "api-method get",
         },
       ],
@@ -661,12 +685,6 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-resource",
-          label: "Delete resource",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource",
           label: "Get resource",
           className: "api-method get",
@@ -676,6 +694,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content",
           label: "Get resource content",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-resource",
+          label: "Delete resource",
+          className: "api-method post",
         },
       ],
     },
@@ -687,6 +711,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-role",
           label: "Create role",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles",
+          label: "Search roles",
           className: "api-method post",
         },
         {
@@ -709,27 +739,9 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-role",
-          label: "Search role users",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-role",
           label: "Search role clients",
           className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-user",
-          label: "Assign a role to a user",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
-          label: "Unassign a role from a user",
-          className: "api-method delete",
         },
         {
           type: "doc",
@@ -745,8 +757,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles",
-          label: "Search roles",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-groups-for-role",
+          label: "Search role groups",
           className: "api-method post",
         },
         {
@@ -763,8 +775,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-groups-for-role",
-          label: "Search role groups",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-role",
+          label: "Search role mapping rules",
           className: "api-method post",
         },
         {
@@ -781,9 +793,21 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-role",
-          label: "Search role mapping rules",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-role",
+          label: "Search role users",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-user",
+          label: "Assign a role to a user",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
+          label: "Unassign a role from a user",
+          className: "api-method delete",
         },
       ],
     },
@@ -835,6 +859,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-tenants",
+          label: "Search tenants",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-tenant",
           label: "Get tenant",
           className: "api-method get",
@@ -853,38 +883,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-tenant",
-          label: "Assign a user to a tenant",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-tenant",
-          label: "Unassign a user from a tenant",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-tenant",
-          label: "Search users for tenant",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-clients-for-tenant",
           label: "Search clients for tenant",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-group-ids-for-tenant",
-          label: "Search groups for tenant",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-tenant",
-          label: "Search roles for tenant",
           className: "api-method post",
         },
         {
@@ -901,20 +901,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-mapping-rule-to-tenant",
-          label: "Assign a mapping rule to a tenant",
-          className: "api-method put",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-mapping-rule-from-tenant",
-          label: "Unassign a mapping rule from a tenant",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
-          label: "Search mapping rules for tenant",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-group-ids-for-tenant",
+          label: "Search groups for tenant",
           className: "api-method post",
         },
         {
@@ -931,6 +919,30 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-mapping-rules-for-tenant",
+          label: "Search mapping rules for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-mapping-rule-to-tenant",
+          label: "Assign a mapping rule to a tenant",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-mapping-rule-from-tenant",
+          label: "Unassign a mapping rule from a tenant",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-roles-for-tenant",
+          label: "Search roles for tenant",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-role-to-tenant",
           label: "Assign a role to a tenant",
           className: "api-method put",
@@ -943,9 +955,21 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-tenants",
-          label: "Search tenants",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-users-for-tenant",
+          label: "Search users for tenant",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-to-tenant",
+          label: "Assign a user to a tenant",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-from-tenant",
+          label: "Unassign a user from a tenant",
+          className: "api-method delete",
         },
       ],
     },
@@ -973,15 +997,15 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-user",
-          label: "Delete user",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/update-user",
           label: "Update user",
           className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-user",
+          label: "Delete user",
+          className: "api-method delete",
         },
       ],
     },
@@ -991,14 +1015,8 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task",
-          label: "Complete user task",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
-          label: "Assign user task",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks",
+          label: "Search user tasks",
           className: "api-method post",
         },
         {
@@ -1015,21 +1033,27 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
-          label: "Get user task form",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-user-task",
           label: "Unassign user task",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks",
-          label: "Search user tasks",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-user-task",
+          label: "Assign user task",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task",
+          label: "Complete user task",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-user-task-form",
+          label: "Get user task form",
+          className: "api-method get",
         },
         {
           type: "doc",

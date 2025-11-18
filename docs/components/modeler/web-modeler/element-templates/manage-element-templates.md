@@ -42,9 +42,7 @@ The components of the editor interface are as follows:
   :::
 
 - On the right, you observe the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing it.
-  :::info
-  Any changes you make in the preview will _not_ get applied to the template JSON.
-  :::
+  You can also use the **Update JSON** button to update the template's JSON properties with the current input values from the visual preview.
 
 - In the upper right, you can **Add an icon** for your template. You can upload an image file with a maximum size of 8 KB. We recommend using squared SVG graphics. Icons appear as 18x18 pixels in the element on the modeling canvas, and as 32x32 pixels in the properties panel.
 
@@ -99,7 +97,7 @@ Organization members without special organization permissions can:
 
 ### Versioning element templates
 
-You can version your element templates [similar to diagrams](/components/modeler/web-modeler/versions.md).
+You can version your element templates [similar to diagrams](/components/modeler/web-modeler/modeling/versions.md).
 
 If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 

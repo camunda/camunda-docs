@@ -38,7 +38,7 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="SaaS mode"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
 ```
 
 The only thing you need to configure then, are the connection details to your Camunda SaaS cluster:
@@ -71,8 +71,10 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="Self-managed mode"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
+
+For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
 
 ## Connectivity
 
@@ -188,7 +190,7 @@ As alternative, do not provide any other property indicating an implicit authent
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="No authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
 ```
 
 ### Basic authentication
@@ -209,7 +211,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="Basic authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
 ```
 
 ### OIDC authentication
@@ -230,7 +232,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="OIDC authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
 
 #### Credentials cache path
@@ -405,6 +407,8 @@ public void handleJobFoo(final JobClient jobClient) {
 
 #### `ActivatedJob` parameter
 
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
 This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
 
 ```java
@@ -452,7 +456,7 @@ You can also use your own class into which the process variables are mapped to (
 
 ```java
 @JobWorker(type = "foo")
-public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables){
+public ProcessVariables handleFoo(@VariablesAsType MyProcessVariables variables) {
   // do whatever you need to do
   variables.getMyAttributeX();
   variables.setMyAttributeY(42);
@@ -487,8 +491,8 @@ On top, you can directly retrieve the document content as `InputStream` or `byte
 You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
 
 ```java
-@JobWorker(type = "foo")
-public void handleFoo(@CustomHeaders Map<String, String> headers){
+@JobWorker
+public void handleFoo(@CustomHeaders Map<String, String> headers) {
   // do whatever you need to do
 }
 ```
@@ -496,6 +500,21 @@ public void handleFoo(@CustomHeaders Map<String, String> headers){
 :::note
 This will not have any effect on the variable fetching behavior.
 :::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey` and `@ProcessDefinitionKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void handleFoo(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey) {
+  // do whatever you need to do
+}
+```
 
 ### Completing jobs
 
@@ -890,6 +909,17 @@ Or, define wildcard patterns:
 @Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
 ```
 
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the tenant id being set to `camunda.client.tenant-id` will be used.
+
 To disable the deployment of annotations, you can set:
 
 ```yaml
@@ -911,7 +941,7 @@ To react on the creation of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientCreated(CamundaClientCreatedEvent event){
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
   // do what you need to do
 }
 ```
@@ -922,7 +952,7 @@ To react on the closing of the Camunda client, you can do this:
 
 ```java
 @EventListener
-public void onCamundaClientClosing(CamundaClientClosingEvent event){
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
   // do what you need to do
 }
 ```
@@ -945,6 +975,19 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
   }
 }
 ```
+
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
 
 ## Observing metrics
 

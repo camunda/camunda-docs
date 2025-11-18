@@ -36,7 +36,7 @@ This guide is for developers who want to implement process automation solutions 
 
 ## Build your first AI agent
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
 
 <p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 

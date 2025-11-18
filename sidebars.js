@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -120,7 +123,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing",
       ],
     },
     {
@@ -184,11 +186,13 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic",
           ],
         },
         {
@@ -399,41 +403,77 @@ module.exports = {
           },
           items: [
             "components/modeler/web-modeler/launch-web-modeler",
-            "components/modeler/web-modeler/model-your-first-diagram",
-            "components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration",
-            "components/modeler/web-modeler/context-pad",
-            "components/modeler/web-modeler/git-sync",
-            "components/modeler/web-modeler/import-diagram",
-            "components/modeler/web-modeler/fix-problems-in-your-diagram",
-            "components/modeler/web-modeler/run-or-publish-your-process",
-            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
             {
-              type: "category",
-              label: "Process applications",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/process-applications/process-applications",
-              },
-              items: [
+              Modeling: [
+                "components/modeler/web-modeler/modeling/model-your-first-diagram",
+                "components/modeler/web-modeler/modeling/context-pad",
+                "components/modeler/web-modeler/modeling/fix-problems-in-your-diagram",
+                "components/modeler/web-modeler/modeling/versions",
+                "components/modeler/web-modeler/modeling/file-download",
+                "components/modeler/web-modeler/modeling/import-diagram",
+                "components/modeler/web-modeler/modeling/camunda-marketplace",
                 {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                  type: "category",
+                  label: "Process applications",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/process-applications/process-applications",
+                  },
+                  items: [
+                    {
+                      type: "doc",
+                      label: "Lifecycle",
+                      id: "components/modeler/web-modeler/process-applications/process-application-pipeline",
+                    },
+                    {
+                      type: "doc",
+                      label: "Creation",
+                      id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                    },
+                    {
+                      type: "doc",
+                      label: "Deployment",
+                      id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                    },
+                    {
+                      type: "doc",
+                      label: "Versioning",
+                      id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                    },
+                    {
+                      type: "doc",
+                      label: "Git Sync",
+                      id: "components/modeler/web-modeler/process-applications/git-sync",
+                    },
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/modeler/web-modeler/process-applications/create-a-process-application",
+                  type: "category",
+                  label: "Element templates",
+                  link: {
+                    type: "doc",
+                    id: "components/modeler/web-modeler/element-templates/manage-element-templates",
+                  },
+                  items: [
+                    "components/modeler/web-modeler/element-templates/element-template-generator",
+                    "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
+                    "components/modeler/web-modeler/element-templates/save-as-element-templates",
+                    "components/modeler/web-modeler/element-templates/best-practices",
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/modeler/web-modeler/process-applications/deploy-process-application",
+                  "AI features": [
+                    "components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai",
+                  ],
                 },
                 {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/modeler/web-modeler/process-applications/process-application-versioning",
+                  "Advanced modeling": [
+                    "components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking",
+                    "components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking",
+                    "components/modeler/web-modeler/modeling/advanced-modeling/form-linking",
+                    "components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes",
+                    "components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
+                  ],
                 },
               ],
             },
@@ -448,46 +488,24 @@ module.exports = {
                 "components/modeler/web-modeler/collaboration/collaborate-with-modes",
                 "components/modeler/web-modeler/collaboration/design-your-process",
                 "components/modeler/web-modeler/collaboration/implement-your-process",
-                "components/modeler/web-modeler/collaboration/play-your-process",
+                "components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
               ],
             },
             {
-              type: "category",
-              label: "Element templates",
-              link: {
-                type: "doc",
-                id: "components/modeler/web-modeler/element-templates/manage-element-templates",
-              },
-              items: [
-                "components/modeler/web-modeler/element-templates/element-template-generator",
-                "components/modeler/web-modeler/element-templates/using-templates-in-web-modeler",
-                "components/modeler/web-modeler/element-templates/save-as-element-templates",
-                "components/modeler/web-modeler/element-templates/best-practices",
+              Validation: [
+                "components/modeler/web-modeler/validation/play-your-process",
+                "components/modeler/web-modeler/validation/test-scenario-files",
+                "components/modeler/web-modeler/validation/token-simulation",
               ],
             },
-            "components/modeler/web-modeler/camunda-marketplace",
-            "components/modeler/web-modeler/versions",
-            "components/modeler/web-modeler/token-simulation",
-            {
-              "Advanced modeling": [
-                "components/modeler/web-modeler/advanced-modeling/business-rule-task-linking",
-                "components/modeler/web-modeler/advanced-modeling/call-activity-linking",
-                "components/modeler/web-modeler/advanced-modeling/form-linking",
-                "components/modeler/web-modeler/advanced-modeling/publish-public-processes",
-                "components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files",
-                "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
-                {
-                  "AI features": [
-                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
-                    "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai",
-                  ],
-                },
-              ],
-            },
-            "components/modeler/web-modeler/file-download",
-            "components/modeler/web-modeler/web-modeler-settings",
+            "components/modeler/web-modeler/run-or-publish-your-process",
             "components/modeler/web-modeler/process-landscape-visualization",
-            "components/modeler/web-modeler/task-testing",
+            {
+              type: "doc",
+              id: "components/modeler/web-modeler/web-modeler-settings",
+              label: "Settings",
+            },
+            "components/modeler/web-modeler/integrate-web-modeler-in-ci-cd",
           ],
         },
         {
@@ -529,6 +547,7 @@ module.exports = {
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -997,6 +1016,7 @@ module.exports = {
       items: [
         "components/concepts/clusters",
         "components/saas/regions",
+        "components/saas/data-locations",
         {
           type: "category",
           label: "Encryption",
@@ -1202,6 +1222,18 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.9",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/890/890-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/890/890-announcements",
+            "reference/announcements-release-notes/890/890-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.8",
           link: {
             type: "doc",
@@ -1235,18 +1267,6 @@ module.exports = {
           items: [
             "reference/announcements-release-notes/860/860-announcements",
             "reference/announcements-release-notes/860/860-release-notes",
-          ],
-        },
-        {
-          type: "category",
-          label: "8.5",
-          link: {
-            type: "doc",
-            id: "reference/announcements-release-notes/850/850-announcements",
-          },
-          items: [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes",
           ],
         },
         "reference/announcements-release-notes/release-policy",
@@ -1420,8 +1440,19 @@ module.exports = {
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider",
+                    {
+                      type: "category",
+                      label: "External OIDC provider",
+                      link: {
+                        type: "doc",
+                        id: "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider",
+                      },
+                      items: [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                      ],
+                    },
                   ],
                 },
                 "self-managed/deployment/helm/configure/secret-management",
@@ -1589,6 +1620,28 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secondary storage",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/secondary-storage/index",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1651,8 +1704,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/secondary-storage-management",
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1691,6 +1742,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility",
                   ],
                 },
               ],
