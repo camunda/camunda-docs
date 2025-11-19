@@ -7,6 +7,10 @@ description: "Learn how to configure an external identity provider like OpenID C
 
 If you are using the default (built-in) Keycloak you can configure an external identity provider (IdP) for user authentication, such as OpenID Connect, SAML, LDAP, or Active Directory.
 
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart guide for configuring an external IdP with Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
+:::
+
 ## Configuration steps
 
 1.  Log in to the Keycloak Administrator Console. Open the URL you have configured for Keycloak in your browser.

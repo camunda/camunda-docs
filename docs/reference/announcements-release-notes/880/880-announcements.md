@@ -378,6 +378,7 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 - The new Camunda Spring Boot Starter provides the `CamundaClient` when requested.
 - The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC.
 - If you want to continue using gRPC by default with the `CamundaClient`, you must explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
+- The new `CredentialsProvider` bean creation fails if there is a misconfiguration instead of falling back to a non-operational credentials provider
 
 :::
 :::info

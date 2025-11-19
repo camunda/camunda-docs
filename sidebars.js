@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -120,7 +123,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing",
       ],
     },
     {
@@ -184,7 +186,7 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
@@ -545,6 +547,7 @@ module.exports = {
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -1217,6 +1220,18 @@ module.exports = {
         id: "reference/announcements-release-notes/overview",
       },
       items: [
+        {
+          type: "category",
+          label: "8.9",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/890/890-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/890/890-announcements",
+            "reference/announcements-release-notes/890/890-release-notes",
+          ],
+        },
         {
           type: "category",
           label: "8.8",
