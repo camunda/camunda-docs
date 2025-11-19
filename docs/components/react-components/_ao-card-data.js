@@ -16,7 +16,7 @@ export const getStartedCards = [
 // Fundamentals cards on introduction page
 export const fundamentalCards = [
   {
-    link: "../ao-design",
+    link: "../ao-design/",
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
