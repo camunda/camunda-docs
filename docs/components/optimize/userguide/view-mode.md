@@ -33,7 +33,7 @@ If it was selected in the view mode, the refresh rate will not be saved when ref
 ![sharing](./img/dashboard-sharingPopover.png)
 
 :::important
-The shared versions of the dashboard allow only to view the dashboard itself. There is no possibility to alter it or interact with any other features of Optimize. Revoke the sharing anytime by disabling the share switch.
+Dashboard shared versions only allow you to view the dashboard. You cannot alter it or use any other Optimize features. To revoke the sharing, disable the share switch.
 :::
 
 - **Embedding**: Click the **Embed Link** button to copy a code to paste into your webpage. Everyone that views the webpage can then see the content of the dashboard.
