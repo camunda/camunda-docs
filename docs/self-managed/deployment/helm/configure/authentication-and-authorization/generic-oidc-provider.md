@@ -59,7 +59,7 @@ For each OIDC client, configure the redirect URIs that match where Camunda compo
 
 ### Redirect URI table
 
-| Component             | Redirect URI Pattern                         | Example (localhost)                                 | Example (ingress)                                                  |
+| Component             | Redirect URI Pattern                         | Example (localhost)                                 | Example (Ingress)                                                  |
 | --------------------- | -------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
 | Management Identity   | `<IDENTITY_URL>/auth/login-callback`         | `http://localhost:8084/auth/login-callback`         | `https://camunda.example.com/identity/auth/login-callback`         |
 | Orchestration Cluster | `<OC_URL>/sso-callback`                      | `http://localhost:8080/sso-callback`                | `https://camunda.example.com/orchestration/sso-callback`           |
@@ -67,7 +67,7 @@ For each OIDC client, configure the redirect URIs that match where Camunda compo
 | Web Modeler UI        | `<WEB_MODELER_URL>/login-callback`           | `http://localhost:8070/login-callback`              | `https://camunda.example.com/modeler/login-callback`               |
 | Console               | `<CONSOLE_URL>/`                             | `http://localhost:8087/`                            | `https://camunda.example.com/`                                     |
 
-Replace `<*_URL>` with the actual base URL where each component will be accessible. Use the localhost examples if testing locally with port-forwarding, or the ingress examples if exposing components via ingress.
+Replace `<*_URL>` with the actual base URL where each component will be accessible. Use the localhost examples if testing locally with port-forwarding, or the Ingress examples if exposing components via Ingress.
 
 :::important Security note
 Redirect URIs are security-critical. Only the URIs you configure in your OIDC provider are permitted as redirection targets after authentication. Ensure these values match the `redirectUrl` parameters you'll set in the Helm configuration.
@@ -297,7 +297,7 @@ For most deployments, all three issuer parameters have the same value (your OIDC
 Use different values only when:
 
 - Your OIDC provider has separate internal and external endpoints
-- You're using ingress with different internal/external DNS names
+- You're using Ingress with different internal/external DNS names
 - You want pods to use cluster-internal DNS for better performance
 
 **Example scenario:** External users access your provider at `https://login.example.com`, but Kubernetes pods can reach it faster via `http://oidc-provider.namespace.svc.cluster.local:8080`. In this case:
@@ -343,7 +343,7 @@ identityPostgresql:
 | ------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                         |
 | `audience`          | Expected audience in access tokens           | From token inspection (see [Discover provider configuration](#discover-provider-configuration)) |
-| `redirectUrl`       | Full URL where Identity is accessible        | `http://localhost:8084` (local) or `https://your-domain.com/identity` (ingress)                 |
+| `redirectUrl`       | Full URL where Identity is accessible        | `http://localhost:8084` (local) or `https://your-domain.com/identity` (Ingress)                 |
 | `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                     |
 | `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                     |
 
@@ -403,7 +403,7 @@ orchestration:
 | --------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `clientId`      | Orchestration client ID            | From your provider                                                                             |
 | `audience`      | Expected audience in tokens        | From token inspection                                                                          |
-| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (ingress)           |
+| `redirectUrl`   | Full URL for Orchestration Cluster | `http://localhost:8080` (local) or `https://your-domain.com/orchestration` (Ingress)           |
 | `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
 | `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
 
@@ -475,7 +475,7 @@ optimize:
 | ------------- | ------------------------------------------------------------------------------- |
 | `clientId`    | Optimize client ID from your provider                                           |
 | `audience`    | Expected audience (from token inspection)                                       |
-| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (ingress) |
+| `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress) |
 
 :::info Optimize OIDC limitations
 When using OIDC authentication, the following Optimize features are not currently available:
@@ -523,7 +523,7 @@ webModelerPostgresql:
 | Parameter           | Description                              | Value                                                                          |
 | ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ |
 | `clientId`          | Web Modeler UI client ID (public client) | From your provider                                                             |
-| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (ingress) |
+| `redirectUrl`       | Full URL for Web Modeler                 | `http://localhost:8070` (local) or `https://your-domain.com/modeler` (Ingress) |
 | `clientApiAudience` | Audience for UI-to-API communication     | Usually the UI client ID                                                       |
 | `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                           |
 
@@ -747,9 +747,9 @@ Once port forwarding is active, access each component through `http://localhost:
 For example, Management Identity at `http://localhost:8084` or the Orchestration Cluster at `http://localhost:8080` (which redirects to your OIDC provider for login).
 
 :::important Redirect URI configuration
-Ensure your redirect URIs in your OIDC provider match how you're accessing Camunda. If you configured redirect URIs for localhost testing (e.g., `http://localhost:8080/sso-callback`), the port-forward commands above will work. If you configured redirect URIs for ingress (e.g., `https://camunda.example.com/orchestration/sso-callback`), you'll need to access via ingress instead.
+Ensure your redirect URIs in your OIDC provider match how you're accessing Camunda. If you configured redirect URIs for localhost testing (e.g., `http://localhost:8080/sso-callback`), the port-forward commands above will work. If you configured redirect URIs for Ingress (e.g., `https://camunda.example.com/orchestration/sso-callback`), you'll need to access via Ingress instead.
 
-For production deployments, configure ingress to expose components. See <!--DOCLINK-->[Ingress configuration](/self-managed/deployment/helm/configure/ingress/index.md)<!--/DOCLINK-->.
+For production deployments, configure Ingress to expose components. See <!--DOCLINK-->[Ingress configuration](/self-managed/deployment/helm/configure/ingress/index.md)<!--/DOCLINK-->.
 :::
 
 ## Grant access to components
