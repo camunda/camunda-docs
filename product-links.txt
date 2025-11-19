@@ -82,3 +82,12 @@ https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-s
 https://docs.camunda.io/docs/next/components/saas/byok/aws-external-encryption-setup/#option-b-manual-key-creation-in-aws-console
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
+
+# Orchestration Identity
+
+https://docs.camunda.io/docs/next/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/next/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/next/components/identity/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/components/identity/role/#assign-users-to-a-role
