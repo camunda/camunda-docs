@@ -6,7 +6,7 @@ description: "Read details on additional logging configuration for Web Modeler."
 
 ## Logging configuration for the `restapi` component
 
-Web Modeler's `restapi` component uses the [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.x/) for logging. By default, the
+Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By default, the
 `restapi` component logs to the Docker container's standard output. To change the default logging behavior, create a
 custom configuration file and let the `restapi` know of it by specifying the following environment variable:
 
@@ -15,14 +15,14 @@ LOGGING_CONFIG=file:/full/path/to/custom-log4j2-spring.xml
 ```
 
 Refer to [Spring Boot's logging documentation](https://docs.spring.io/spring-boot/how-to/logging.html#howto.logging.log4j)
-for more information on how to customize the log4j2 configuration for specific use cases like logging to a file.
+for more information on how to customize the `log4j2` configuration for specific use cases, such as logging to a file.
 
 Enabling `DEBUG` logging for the `restapi` component can be useful for troubleshooting purposes, e.g. for
 [debugging Zeebe connection issues](../troubleshooting/troubleshoot-zeebe-connection.md#how-can-i-debug-log-grpc--zeebe-communication).
 
-By default, Web Modeler's `restapi` component logs in simple readable format to the console.
+By default, Web Modeler's `restapi` component logs in a simple, readable format to the console.
 
-You can configure log levels, output formats, appenders, and adjust logging dynamically at runtime.
+You can configure log levels, output formats, and appenders, and adjust logging dynamically at runtime.
 
 ### Changing log level at runtime
 
@@ -43,7 +43,7 @@ The base URL may differ depending on your environment configuration. The example
 
 ### Default Log4j2 configuration
 
-The default `log4j2-spring.xml` used by Web Modeler's `restapi` component is:
+The default `log4j2-spring.xml` used by Web Modeler's `restapi` component is as follows:
 
 ```xml
 <Configuration xmlns="https://logging.apache.org/xml/ns"
@@ -103,7 +103,7 @@ The default `log4j2-spring.xml` used by Web Modeler's `restapi` component is:
 ```
 
 :::note
-This is a simplified example. The actual `log4j2.xml` may include additional appenders, different file paths, or slightly different patterns.  
+This is a simplified example. The actual `log4j2.xml` may include additional appenders, use different file paths, or have slightly different patterns.  
 :::
 
 ## Environment variables
@@ -115,15 +115,15 @@ This is a simplified example. The actual `log4j2.xml` may include additional app
 
 ### JSON logging appenders
 
-| Appender           | Description                                         | Enable / Variable                                                                     |
-| ------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| Console            | Standard text output                                | `CAMUNDA_MODELER_LOG_APPENDER=Console`                                                |
-| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver          | `CAMUNDA_MODELER_LOG_APPENDER=Stackdriver`                                            |
-| RollingFile        | Writes logs to a rotating file, disabled by default | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_MODELER_LOG_APPENDER=RollingFile` |
+| Appender           | Description                                          | Enable / Variable                                                                     |
+| ------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Console            | Standard text output.                                | `CAMUNDA_MODELER_LOG_APPENDER=Console`                                                |
+| Stackdriver (JSON) | JSON output for Google Cloud / Stackdriver.          | `CAMUNDA_MODELER_LOG_APPENDER=Stackdriver`                                            |
+| RollingFile        | Writes logs to a rotating file, disabled by default. | `CAMUNDA_LOG_FILE_APPENDER_ENABLED=true` + `CAMUNDA_MODELER_LOG_APPENDER=RollingFile` |
 
 ### JSON structure
 
-When using the `Stackdriver` appender this is the entries structure:
+When using the `Stackdriver` appender, this is the structure of the entries :
 
 | Field                                   | Type              | Description                                                                        |
 | --------------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
@@ -143,7 +143,7 @@ When using the `Stackdriver` appender this is the entries structure:
 | `exception`                             | string (optional) | Stringified stack trace of any thrown exception.                                   |
 | `correlationId`                         | string (optional) | Value of the MDC entry `correlationId`, if present.                                |
 
-Example:
+See the following example:
 
 ```json
 {
@@ -168,11 +168,11 @@ Example:
 }
 ```
 
-### Pattern layout/format
+### Pattern layout
 
-- Default layout shows **time only**, thread name, MDC context, log level, logger name, and message.
+The default layout displays **time only**, thread name, MDC context, log level, logger name, and message.
 
-**Example pattern:**
+#### Example pattern
 
 ```perl
 %d{HH:mm:ss.SSS} [%t] %notEmpty{[%X] }%-5level %logger{36} - %msg%n

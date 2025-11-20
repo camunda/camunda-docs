@@ -2014,7 +2014,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
       link: {
         type: "doc",
         id: "self-managed/update/administrators/admin-upgrade-overview",

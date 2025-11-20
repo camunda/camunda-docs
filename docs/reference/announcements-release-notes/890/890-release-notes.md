@@ -45,7 +45,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
-Web Modeler now uses [Apache Log4j 2 framework]https://logging.apache.org/log4j/2.x/) for logging. By aligning Web Modeler logging with the OC, we are making it easier for administrators to configure and maintain your Self-Managed deployments.
+Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By aligning Web Modeler logging with the Orchestration Cluster, administrators are enabled to more easily configure and maintain Self-Managed deployments.
 
 ## 8.9.0-alpha1
 

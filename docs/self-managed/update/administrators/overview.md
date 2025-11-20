@@ -1,6 +1,7 @@
 ---
 id: admin-upgrade-overview
 title: "Upgrade to Camunda 8.9"
+sidebar_label: "Upgrade to Camunda 8.9"
 description: "Administrator overview for preparing and running a Camunda 8.9 Self-Managed upgrade."
 ---
 

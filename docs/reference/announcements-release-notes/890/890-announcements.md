@@ -110,9 +110,9 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler: Changed logging framework from Logback to Apache Log4j 2
+#### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
 
-Web Modeler now uses [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the orchestration cluster uses.
+Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the Orchestration Cluster uses.
 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
@@ -129,11 +129,11 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler: Changed default logging format
+#### Web Modeler: Default logging format changed
 
-By default, Web Modeler's `restapi` component now logs in simple readable format to the console instead of `JSON`.
+By default, Web Modeler's `restapi` component now logs in a simple, readable format to the console instead of `JSON`.
 
-This change aligns with the current Orchestration Cluster logging default [logging configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#pattern-layout-format).
+This change aligns with the current Orchestration Cluster logging default as defined in its [logging configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#pattern-layout-format).
 
 :::info
 To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
@@ -150,12 +150,12 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 #### Web Modeler: JSON format changes
 
-When using JSON as the output for the logs the structure has changed slightly:
+When using JSON as the output for the logs the structure has slightly changed:
 
-- `logger`: field is now renamed to `loggerName`.
-- `thread`: represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
+- `logger`: This field is now renamed to `loggerName`.
+- `thread`: Previously represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
 
-See the [logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more details.
+See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
 
 :::info
 To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).

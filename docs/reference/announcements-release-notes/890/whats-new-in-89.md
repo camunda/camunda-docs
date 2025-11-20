@@ -42,7 +42,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 
 ## Web Modeler
 
-Web Modeler's `restapi` component uses the [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.x/) for logging instead of [Logback](https://logback.qos.ch/).
+Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging instead of [Logback](https://logback.qos.ch/).
 
 You can now also change the log levels at runtime.
 
@@ -50,14 +50,14 @@ You can now also change the log levels at runtime.
 
 The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
-- You are using a custom logback configuration.
-- You are using any tool consuming the logs.
+- You are using a custom Logback configuration.
+- You are using any tools consuming the logs.
 
 ## Upgrade guides {#upgrade-guides}
 
-Camunda 8.9 lays the foundation for future releases. Upgrading ensures compatibility and access to improved features.
+Camunda 8.9 lays the foundation for future releases. Upgrading ensures compatibility and provides access to enhanced features.
 
-The following guides provide detailed information on how you can upgrade to Camunda 8.9.
+The following guides offer detailed information on how you can upgrade to Camunda 8.9.
 
 <table className="table-callout">
 <tr>
