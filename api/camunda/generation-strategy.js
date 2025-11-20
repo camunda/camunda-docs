@@ -3,13 +3,25 @@
 
 const legacy = require("./generation-strategy-legacy");
 const v88 = require("./generation-strategy-8.8");
+const next = require("./generation-strategy-next");
 
 function pick(apiConfig) {
-  const isv88 =
-    apiConfig.version === "next" || ["8.8"].includes(apiConfig.version);
+  const { version } = apiConfig;
+  switch (version) {
+    case "next":
+      return next;
 
-  console.log(`is v88`, isv88, apiConfig.version);
-  return isv88 ? v88 : legacy;
+    case parseFloat(version) > 8.8:
+      return next;
+
+    case "8.8":
+      console.log(`is v88`, true, version);
+      return v88;
+
+    default:
+      console.log(`is legacy`, true, version);
+      return legacy;
+  }
 }
 
 module.exports = {

@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -120,7 +123,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing",
       ],
     },
     {
@@ -184,7 +186,7 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
@@ -545,6 +547,7 @@ module.exports = {
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -1219,6 +1222,18 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.9",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/890/890-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/890/890-announcements",
+            "reference/announcements-release-notes/890/890-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.8",
           link: {
             type: "doc",
@@ -1605,6 +1620,28 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secondary storage",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/secondary-storage/index",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1667,8 +1704,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/secondary-storage-management",
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {

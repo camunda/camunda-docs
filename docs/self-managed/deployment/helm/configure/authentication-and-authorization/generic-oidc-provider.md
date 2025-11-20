@@ -12,7 +12,11 @@ In this guide, we step through the configuration required to connect Camunda to 
 
 ## Prerequisites
 
-- Information about your OIDC provider's configuration, including the issuer URL.
+- Information about your OIDC provider's configuration, including:
+  - The issuer URL
+  - Authorization URL
+  - Token endpoint
+  - JWKS endpoint
 - Ability to create applications in your OIDC provider.
 - Ability to access the following information about the applications you have created in your OIDC provider:
   - Client ID
@@ -69,8 +73,9 @@ You can connect to your OIDC provider through either environment variables or He
 global:
   identity:
     auth:
-      issuer: <URL_OF_ISSUER>
+      authUrl: <AUTH_URL_ENDPOINT>
       # this is used for container to container communication
+      publicIssuerUrl: <ISSUER_URL>
       issuerBackendUrl: <URL_OF_ISSUER>
       tokenUrl: <TOKEN_URL_ENDPOINT>
       jwksUrl: <JWKS_URL>
@@ -118,6 +123,14 @@ Once set, you cannot update your initial claim name and value using environment 
 <h3>Additional considerations</h3>
 
 For authentication, the Camunda components use the scopes `email`, `openid`, `offline_access`, and `profile`.
+
+:::tip Optional scopes
+The `offline_access` scope is optional.
+
+If this scope is included, your OIDC provider issues a refresh token to Camunda components on user login. The components use the refresh token to renew the user's access token when it expires, so that sessions remain active without requiring the user to log in again.
+
+If `offline_access` is not included, users will be redirected to the OIDC provider for re-authentication whenever their access token expires. For more information, see the [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
+:::
 
 ### Component-specific configuration
 

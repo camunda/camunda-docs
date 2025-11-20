@@ -38,7 +38,7 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="SaaS mode"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
 ```
 
 The only thing you need to configure then, are the connection details to your Camunda SaaS cluster:
@@ -71,7 +71,7 @@ camunda:
 This applies the following defaults:
 
 ```yaml reference referenceLinkText="Source" title="Self-managed mode"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
 ```
 
 For some specific OIDC setups (e.g [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
@@ -190,7 +190,7 @@ As alternative, do not provide any other property indicating an implicit authent
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="No authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
 ```
 
 ### Basic authentication
@@ -211,7 +211,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="Basic authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
 ```
 
 ### OIDC authentication
@@ -232,7 +232,7 @@ This authentication method will be implied if you set either `camunda.client.aut
 This will load this preset:
 
 ```yaml reference referenceLinkText="Source" title="OIDC authentication"
-https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
+https://github.com/camunda/camunda/blob/stable/8.8/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
 ```
 
 #### Credentials cache path

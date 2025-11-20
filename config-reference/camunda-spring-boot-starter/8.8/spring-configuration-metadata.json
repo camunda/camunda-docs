@@ -330,6 +330,13 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
+      "name": "camunda.client.max-http-connections",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of concurrent HTTP connections the client can open.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": 100
+    },
+    {
       "name": "camunda.client.max-message-size",
       "type": "org.springframework.util.unit.DataSize",
       "description": "A custom `maxMessageSize` sets the maximum inbound message size the client can receive from Camunda. It specifies the `maxInboundMessageSize` of the gRPC channel.",

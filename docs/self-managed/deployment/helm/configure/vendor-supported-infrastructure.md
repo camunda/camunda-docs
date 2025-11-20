@@ -283,7 +283,7 @@ This topology is an opinionated minimal baseline. Adjust node count/roles (e.g.,
 
 Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities.
 
-[Learn more about the secondary storage](/self-managed/concepts/no-secondary-storage.md#understanding-primary-vs-secondary-storage) and how it supports advanced features like web applications, search APIs, process monitoring, task management, and analytics.
+[Learn more about the secondary storage](/self-managed/concepts/secondary-storage/index.md) and how it supports advanced features like web applications, search APIs, process monitoring, task management, and analytics.
 
 ### Installation
 

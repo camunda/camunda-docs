@@ -13,7 +13,7 @@ import IconConsoleImg from "../assets/icon-console.png";
 
 export const featuresCards = [
   {
-    link: "./agentic-orchestration/",
+    link: "./agentic-orchestration/agentic-orchestration-overview",
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
@@ -97,7 +97,7 @@ export const usingCamundaCards = [
 
 export const featuresPageCards = [
   {
-    link: "../agentic-orchestration/",
+    link: "../agentic-orchestration/agentic-orchestration-overview",
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
