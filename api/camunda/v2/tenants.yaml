@@ -569,7 +569,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
+              $ref: "roles.yaml#/components/schemas/RoleSearchQueryRequest"
       responses:
         "200":
           description: The search result of roles for the tenant.
@@ -770,7 +770,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
+              $ref: "mapping-rules.yaml#/components/schemas/MappingRuleSearchQueryRequest"
       responses:
         "200":
           description: The search result of MappingRules for the tenant.
@@ -859,7 +859,7 @@ components:
             - name
             - tenantId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     TenantSearchQueryRequest:
@@ -931,7 +931,7 @@ components:
           enum:
             - username
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     TenantClientResult:
@@ -969,7 +969,7 @@ components:
           enum:
             - clientId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     TenantGroupResult:
@@ -1007,6 +1007,6 @@ components:
           enum:
             - groupId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
