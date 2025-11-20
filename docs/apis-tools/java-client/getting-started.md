@@ -279,7 +279,7 @@ The client will automatically read the environment variables and configure the a
 </TabItem>
 <TabItem value="mTLS">
 
-**Use for:** Production environments with X.509 certificate-based client authentication.
+**Use for:** Production environments with mTLS certificate-based client authentication.
 
 Several identity providers, such as Keycloak, support client mTLS authentication as an alternative to `client_secret_basic`.
 
