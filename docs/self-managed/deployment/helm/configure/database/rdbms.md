@@ -32,7 +32,7 @@ Requires a database accessible to the camunda components. Can be any of the foll
 | `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.auto-ddl`                                               | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.maxQueueSize`                                           | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | string | `""`    |             |
