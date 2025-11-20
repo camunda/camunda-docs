@@ -6,7 +6,7 @@ description: "Read details on additional logging configuration for Web Modeler."
 
 ## Logging configuration for the `restapi` component
 
-Web Modeler's `restapi` component uses the [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.12.x/index.html/) for logging. By default, the
+Web Modeler's `restapi` component uses the [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.x/) for logging. By default, the
 `restapi` component logs to the Docker container's standard output. To change the default logging behavior, create a
 custom configuration file and let the `restapi` know of it by specifying the following environment variable:
 

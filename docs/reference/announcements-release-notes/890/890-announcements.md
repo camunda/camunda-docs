@@ -112,9 +112,28 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 #### Web Modeler: Changed logging framework from Logback to Apache Log4j 2
 
-Web Modeler now uses [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.12.x/index.html/) for logging, in alignment with what the orchestration cluster uses.
+Web Modeler now uses [Apache Log4j 2 framework](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the orchestration cluster uses.
 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Changed default login format
+
+By default, Web Modeler's `restapi` component now logs in simple readable format to the console instead of `JSON`.
+
+This change aligns with the current Orchestration Cluster logging default [logging configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md#pattern-layout-format).
 
 :::info
 To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
