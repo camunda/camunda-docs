@@ -51,7 +51,7 @@ You can now also change the log levels at runtime.
 The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
 - You are using a custom logback configuration.
-- You are any tool consuming the logs.
+- You are using any tool consuming the logs.
 
 ## Upgrade guides {#upgrade-guides}
 
