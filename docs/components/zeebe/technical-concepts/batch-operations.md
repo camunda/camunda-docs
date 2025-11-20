@@ -252,35 +252,43 @@ Heavy querying of the secondary database can notably affect its performance, esp
 
 ### Configuration
 
-The batch-operations section in the broker configuration controls discovery (initialization) and robustness. Keys live under `zeebe.broker.experimental.engine.batchOperation.*` and are validated at startup.
+Batch operation behavior can be configured through broker settings under `zeebe.broker.experimental.engine.batchOperation.*`. All settings are validated at startup, and invalid values will cause the broker to fail with a descriptive error message.
 
-Recommended keys:
+:::note
+Default values are optimized for typical workloads. Only adjust these settings if you experience performance issues or have specific requirements.
+:::
 
-- `schedulerInterval` (Duration, positive): interval at which the background scheduler runs to progress initialization/continuations.
+#### Scheduler settings
 
-- `chunkSize` (int > 0): max items per chunk record written during initialization. Values > 5000 are allowed but not recommended due to exporter pressure and 4 MB record-size constraints; a warning is logged.
+Controls how frequently the batch operation scheduler checks for work:
 
-- `dbChunkSize` (int > 0): size used when writing item chunks to RocksDB; keeps state values small for cache efficiency.
+| Parameter           | Type     | Default | Description                                                                                                                                                                 |
+| ------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `schedulerInterval` | Duration | `PT1S`  | How often the background scheduler runs to progress initialization and continuation of batch operations. Lower values provide faster responsiveness but increase CPU usage. |
 
-- `queryPageSize` (int > 0): page size when querying secondary storage during initialization; interacts with ES/OS 10k page limit.
+#### Chunking and pagination settings
 
-- `queryInClauseSize` (int > 0): max keys per IN clause when queries use key lists (RDBMS).
+Controls how batch operations split large result sets into manageable pieces:
 
-- `queryRetryMax` (int >= 0): maximum retry attempts for transient query failures.
+| Parameter           | Type | Default | Description                                                                                                                                                                                                            |
+| ------------------- | ---- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chunkSize`         | int  | `1000`  | Maximum number of items written per chunk record during initialization. Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded. |
+| `dbChunkSize`       | int  | `3500`  | Number of items per chunk when writing to RocksDB state. Keeping chunks smaller improves cache efficiency.                                                                                                             |
+| `queryPageSize`     | int  | `10000` | Page size when querying the secondary database during initialization. For Elasticsearch/OpenSearch, this interacts with the default 10,000 result window limit.                                                        |
+| `queryInClauseSize` | int  | `1000`  | Maximum number of keys in a single IN clause when querying by key list (primarily for RDBMS-based secondary databases).                                                                                                |
 
-- `queryRetryInitialDelay` (Duration, positive): initial backoff delay for retryable query errors.
+#### Retry and error handling settings
 
-- `queryRetryMaxDelay` (Duration, positive, >= initialDelay): cap for exponential backoff during query retries.
+Controls how the system handles transient failures when querying the secondary database:
 
-- `queryRetryBackoffFactor`: multiplier applied between retries; validated at startup.
+| Parameter                 | Type     | Default | Description                                                                                                                                                                               |
+| ------------------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `queryRetryMax`           | int      | `3`     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability). Set to `0` to disable retries.                                 |
+| `queryRetryInitialDelay`  | Duration | `PT1S`  | Initial delay before the first retry attempt. Each subsequent retry uses exponential backoff.                                                                                             |
+| `queryRetryMaxDelay`      | Duration | `PT60S` | Maximum delay between retry attempts. Must be greater than or equal to `queryRetryInitialDelay`. Prevents excessive wait times.                                                           |
+| `queryRetryBackoffFactor` | double   | `2.0`   | Multiplier applied to the delay between consecutive retries. For example, with factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, etc. (capped by `queryRetryMaxDelay`). |
 
-Notes:
-
-- These settings appear in broker.yaml.template under `experimental.engine.batchOperation` and fail fast on invalid values; the broker startup will report the invalid key and reason.
-
-- The engine enforces the 4 MB per-record limit; the scheduler splits large item sets across multiple chunk records and, if necessary, across multiple scheduler runs. Prefer tuning `chunkSize`/`queryPageSize` rather than increasing global message size.
-
-Example (YAML fragment):
+#### Configuration example
 
 ```yaml
 zeebe:
@@ -288,26 +296,67 @@ zeebe:
     experimental:
       engine:
         batchOperation:
+          # Scheduler
           schedulerInterval: PT1S
-          chunkSize: 100
+
+          # Chunking and pagination
+          chunkSize: 1000
           dbChunkSize: 3500
           queryPageSize: 10000
           queryInClauseSize: 1000
-          queryRetryMax: 2
+
+          # Retry and error handling
+          queryRetryMax: 3
           queryRetryInitialDelay: PT1S
           queryRetryMaxDelay: PT60S
-          queryRetryBackoffFactor: 2
+          queryRetryBackoffFactor: 2.0
 ```
 
-#### Camunda Exporter option: exportItemsOnCreation
+#### Tuning recommendations
 
-If you use the Camunda Exporter (Self-Managed with Elasticsearch/OpenSearch), you can control whether pending batch items are exported immediately at batch creation:
+**For large batch operations (100k+ instances):**
 
-- `batchOperation.exportItemsOnCreation` (default: true)
+- Consider reducing `chunkSize` to `500` or lower to reduce memory pressure
+- Reduce `queryPageSize` if you encounter Elasticsearch/OpenSearch query timeouts
 
-  When `true`, the exporter writes “pending items” as soon as initialization starts so Operate can render a spinner (“has pending batch operations”). For very large batches (for example, 100,000+ items), this may cause a temporary spike in write load due to the high volume of document insertions. Set to `false` to reduce initial indexing pressure at the cost of the spinner not functioning; rely on the REST batch status endpoints and metrics instead.
+**For high-throughput environments:**
 
-YAML example:
+- Increase `schedulerInterval` to `PT5S` or `PT10S` to reduce scheduler overhead
+- Monitor partition CPU usage and adjust accordingly
+
+**For unreliable network connections:**
+
+- Increase `queryRetryMax` to `5` or higher
+- Increase `queryRetryMaxDelay` to `PT120S` for longer retry windows
+
+:::warning
+The engine enforces a 4MB per-record limit. If initialization queries return very large result sets, the scheduler automatically splits them across multiple chunk records. Prefer tuning `chunkSize` and `queryPageSize` rather than increasing global message size limits.
+:::
+
+:::tip
+These settings appear in `broker.yaml.template` under `experimental.engine.batchOperation`. You can reference this template for additional context and examples.
+:::
+
+#### Exporter configuration
+
+If you use the Camunda Exporter (Self-Managed with Elasticsearch/OpenSearch), you can control whether pending batch items are exported immediately at batch creation.
+
+##### Camunda Exporter: exportItemsOnCreation
+
+| Parameter                              | Type    | Default | Description                                                                                                                                                                                                          |
+| -------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `batchOperation.exportItemsOnCreation` | boolean | `true`  | Controls whether pending batch items are exported to Elasticsearch/OpenSearch immediately when batch initialization starts. When enabled, Operate can display a loading spinner indicating pending batch operations. |
+
+**When to disable:**
+
+For very large batches (100,000+ items), enabling this option causes a temporary spike in write load due to the high volume of document insertions into the secondary database. If you experience performance issues during batch creation, consider setting this to `false`.
+
+**Trade-offs:**
+
+- **Enabled (`true`)**: Operate UI shows real-time progress indicators, but may cause indexing pressure
+- **Disabled (`false`)**: Reduces initial indexing load, but Operate UI won't show the progress spinner. Use the REST API batch status endpoints and Grafana metrics for monitoring instead.
+
+**Configuration example:**
 
 ```yaml
 exporters:
