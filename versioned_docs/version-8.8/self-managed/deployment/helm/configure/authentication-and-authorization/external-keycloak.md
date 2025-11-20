@@ -295,3 +295,7 @@ For example:
 - Management Identity: `http://localhost:8084`
 
 Log in with the username `demo` and the password stored in the secret key `identity-firstuser-password`.
+
+## Troubleshooting
+
+For common issues and solutions when configuring OIDC authentication, see the [OIDC Troubleshooting guide](./troubleshooting-oidc.md).
