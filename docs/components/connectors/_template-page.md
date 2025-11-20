@@ -1,16 +1,24 @@
 ---
 id: template-page
-title: Template Page
-hide_table_of_contents: true
-custom_edit_url: null
-search: false
+title: Template connector
+description: "Description of this connector for SEO, search etc"
 ---
 
-import InboundConnectorBasics from '../../../components/react-components/connector-inbound-basics.md'
-import OutboundConnectorBasics from '../../../components/react-components/connector-outbound-basics.md'
-import ErrorHandling from '../../../components/react-components/connector-error-handling.md'
+import InboundConnectorBasics from '../../../components/react-components/\_connector-inbound-basics.md'
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-Overview & when to use this connector
+<!-- Start with a single-sentence that concisely sums up what the connector does, beginning with a verb typically (use, integrate, connect etc). For example, "Integrate an AI agent using an ad-hoc sub-process with an applied AI Agent connector template."  -->
+
+Single concise sentence of what you would use the connector for.
+
+## About this connector
+
+<!-- Provide any further useful overview information about the connector.  -->
+
+The [connector name] connector enables AI agents to integrate with an LLM to provide... This connector is designed for use with an ad-hoc sub-process in a feedback loop, providing automated user interaction and tool selection.
+
+For example, use this connector to...
 
 ## Prerequisites
 
@@ -51,6 +59,6 @@ Output: reference (or if not possible shape of output as code block) + if needed
 
 <ErrorHandling />
 
-## Related Resources
+## Further Resources
 
 - [Amazon Textract Documentation](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)
