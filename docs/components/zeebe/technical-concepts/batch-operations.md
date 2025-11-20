@@ -11,7 +11,40 @@ Zeebe supports executing certain operations as batch operations:
 - **Modify process instances** (`MODIFY_PROCESS_INSTANCE`)
 - **Resolve incidents** (`RESOLVE_INCIDENT`)
 
-## How do they work?
+## Overview
+
+Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to:
+
+- Cancel hundreds of process instances after discovering a critical bug
+- Migrate thousands of running instances to a new process version
+- Modify process instances to skip or add activities across multiple instances
+- Resolve incidents across multiple process instances simultaneously
+
+Instead of manually operating on each instance, batch operations distribute the work across your cluster, processing instances in parallel while maintaining system stability.
+
+### How it works at a high level
+
+When you create a batch operation, you provide filter criteria (such as process definition, version, or state) rather than a specific list of instances. The system then:
+
+1. Distributes the operation across all partitions in your cluster
+2. Each partition queries the secondary database to find matching instances
+3. Processes instances in parallel across partitions
+4. Tracks progress and aggregates results
+
+This distributed approach enables efficient processing of large numbers of instances while maintaining cluster performance.
+
+## Prerequisites
+
+To use batch operations, you need:
+
+- A Zeebe cluster with secondary storage configured (Elasticsearch or OpenSearch)
+- Appropriate [authorization permissions](#authorization) for the operations you want to perform
+- Access to one of the following:
+  - [Operate UI](/components/operate/operate-introduction.md) (for basic operations)
+  - [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) (for full lifecycle management)
+  - [Camunda Java client](/apis-tools/java-client/getting-started.md) (for programmatic access)
+
+## Batch operation components
 
 A Zeebe batch operation always consists of two parts:
 
@@ -26,16 +59,22 @@ A Zeebe batch operation always consists of two parts:
 
 ## Batch operation lifecycle
 
-Batch operations follow a structured lifecycle with distinct phases:
+Batch operations follow a structured lifecycle with distinct phases. Understanding these phases helps you monitor progress and troubleshoot issues.
 
 ### 1. Creation phase
 
+**What happens:**
+
 - User submits a batch operation request with filter criteria
-- **Validation**
+- System performs validation checks
 - The operation is distributed to all partitions in the cluster
 - A **leader partition** is designated (the partition that first processes the creation command)
 - All other partitions become **follower partitions**
 - A unique batch operation key is generated and assigned
+
+**Duration:** Milliseconds to seconds
+
+**What can go wrong:** See [Validation and rejection](#validation-and-rejection) below.
 
 #### Validation and rejection
 
@@ -49,13 +88,22 @@ Failed validations result in immediate rejection with specific error codes and m
 
 ### 2. Initialization phase
 
-- **Asynchronous processing**: The initialization runs in a separate scheduler component (not blocking the main stream processor)
-- **Concurrency control**: Only one initialization cycle runs at a time per partition using atomic execution flags
+**What happens:**
+
 - Each partition queries the secondary database using the provided filter
 - Results are paginated and split into manageable chunks to stay within the 4MB record size limit and prevent overloading exporters when processing individual records
 - Process instances are identified and prepared for processing
 - The total number of items to process is determined and fixed at this point
+
+**Duration:** Seconds to minutes (depending on the number of matching instances and cluster size)
+
+**Key characteristics:**
+
+- **Asynchronous processing**: The initialization runs in a separate scheduler component (not blocking the main stream processor)
+- **Concurrency control**: Only one initialization cycle runs at a time per partition using atomic execution flags
 - **State tracking**: The scheduler maintains state about currently initializing operations to prevent duplicate processing
+
+**What can go wrong:** See [Initialization failures](#initialization-failures) below.
 
 #### Dependency on secondary storage
 
@@ -68,17 +116,31 @@ Although the broker's internal state stores process instance data, the secondary
 
 ### 3. Execution phase
 
+**What happens:**
+
 - Each partition processes its assigned items independently
 - Individual commands (e.g., `CANCEL`, `MIGRATE`) are executed on each process instance
 - Progress is tracked and can be monitored
 - Failed items are recorded with error details
-- **Fire-and-forget execution**: Individual operation commands are executed without waiting for their completion status
+
+**Duration:** Minutes to hours (depending on the number of instances and operation type)
+
+**Key characteristics:**
+
+- **Fire-and-forget execution**: Individual operation commands are dispatched immediately without blocking. While the system does not wait for each command to complete before dispatching the next one, you can still monitor overall batch progress and view failed items through the monitoring APIs.
+- **Independent processing**: Each partition works independently, enabling parallel execution across the cluster
+
+**What can go wrong:** See [Execution failures](#execution-failures) below.
 
 ### 4. Completion phase
+
+**What happens:**
 
 - Follower partitions report completion or failure to the leader partition
 - Leader partition aggregates results from all partitions
 - Final status is determined (`COMPLETED` if at least one partition succeeded, `FAILED` if all failed)
+
+**Duration:** Seconds
 
 ## Error handling and recovery
 
@@ -133,7 +195,7 @@ Batch operations support several lifecycle management operations:
 - Cannot be resumed once canceled
 - Partially processed items remain in their modified state
 
-## Distribution and eventual consistency
+## How batch operations work in distributed clusters
 
 ![distributed-batch-operation](assets/batch-operation.png)
 
@@ -151,12 +213,6 @@ This distributed, asynchronous approach allows parallel processing of many proce
 
 ### Important considerations
 
-#### UI discrepancies
-
-When started from Operate UI, the displayed filtered instances may differ from those executed.  
- The batch operation defines filter criteria, not an exact set of instances. By the time the engine applies the batch, search results may have changed.  
- The number of instances to process is fixed at the batch start and does not include new instances created afterward.
-
 #### Partition independence
 
 Each partition fetches and processes matching instances independently.  
@@ -168,13 +224,17 @@ Each partition fetches and processes matching instances independently.
 The leader partition coordinates the overall operation status while follower partitions focus on execution.  
  Inter-partition communication ensures consistent final status reporting.
 
-## Creating and monitoring batch operations
+## How to create and monitor batch operations
 
 You can create batch operations using:
 
 - **[Operate UI](/components/operate/operate-introduction.md)**: Start batch operations directly from the Operate interface for process instances and incidents
 - **[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)**: REST endpoints to create, manage, and monitor batches programmatically
 - **[Camunda Java client](/apis-tools/java-client/getting-started.md)**: APIs for batch operations in Java applications
+
+:::warning Important for Operate users
+When you start a batch operation from Operate UI, the actual instances processed may differ from those displayed in the filter preview. The batch operation uses filter criteria to query the secondary database at execution time, and results may have changed since the preview was generated. The count is fixed when the batch starts and will not include instances created afterward.
+:::
 
 :::note
 Lifecycle management (suspend, resume, cancel) is only available via the REST API and Java client, not through Operate UI. More features may be added in future Operate versions.
@@ -262,35 +322,36 @@ Default values are optimized for typical workloads. Only adjust these settings i
 
 Controls how frequently the batch operation scheduler checks for work:
 
-| Parameter           | Type     | Default | Description                                                                                                                                                                 |
-| ------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `schedulerInterval` | Duration | `PT1S`  | How often the background scheduler runs to progress initialization and continuation of batch operations. Lower values provide faster responsiveness but increase CPU usage. |
+| Parameter           | Type     | Default    | Description                                                                                                                                                                                      |
+| ------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `schedulerInterval` | Duration | **`PT1S`** | How often the background scheduler runs to progress initialization and continuation of batch operations.<br/><br/>**Impact:** Lower values provide faster responsiveness but increase CPU usage. |
 
 #### Chunking and pagination settings
 
 Controls how batch operations split large result sets into manageable pieces:
 
-| Parameter           | Type | Default | Description                                                                                                                                                                                                            |
-| ------------------- | ---- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chunkSize`         | int  | `1000`  | Maximum number of items written per chunk record during initialization. Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded. |
-| `dbChunkSize`       | int  | `3500`  | Number of items per chunk when writing to RocksDB state. Keeping chunks smaller improves cache efficiency.                                                                                                             |
-| `queryPageSize`     | int  | `10000` | Page size when querying the secondary database during initialization. For Elasticsearch/OpenSearch, this interacts with the default 10,000 result window limit.                                                        |
-| `queryInClauseSize` | int  | `1000`  | Maximum number of keys in a single IN clause when querying by key list (primarily for RDBMS-based secondary databases).                                                                                                |
+| Parameter           | Type | Default     | Description                                                                                                                                                                                                                               |
+| ------------------- | ---- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chunkSize`         | int  | **`1000`**  | Maximum number of items written per chunk record during initialization.<br/><br/>**Note:** Values > 5000 are discouraged due to exporter pressure and the 4MB record size limit. The broker logs a warning if this threshold is exceeded. |
+| `dbChunkSize`       | int  | **`3500`**  | Number of items per chunk when writing to RocksDB state.<br/><br/>**Benefit:** Keeping chunks smaller improves cache efficiency.                                                                                                          |
+| `queryPageSize`     | int  | **`10000`** | Page size when querying the secondary database during initialization.<br/><br/>**For Elasticsearch/OpenSearch:** This interacts with the default 10,000 result window limit.                                                              |
+| `queryInClauseSize` | int  | **`1000`**  | Maximum number of keys in a single IN clause when querying by key list.<br/><br/>**Use case:** Primarily for RDBMS-based secondary databases.                                                                                             |
 
 #### Retry and error handling settings
 
 Controls how the system handles transient failures when querying the secondary database:
 
-| Parameter                 | Type     | Default | Description                                                                                                                                                                               |
-| ------------------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `queryRetryMax`           | int      | `3`     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability). Set to `0` to disable retries.                                 |
-| `queryRetryInitialDelay`  | Duration | `PT1S`  | Initial delay before the first retry attempt. Each subsequent retry uses exponential backoff.                                                                                             |
-| `queryRetryMaxDelay`      | Duration | `PT60S` | Maximum delay between retry attempts. Must be greater than or equal to `queryRetryInitialDelay`. Prevents excessive wait times.                                                           |
-| `queryRetryBackoffFactor` | double   | `2.0`   | Multiplier applied to the delay between consecutive retries. For example, with factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, etc. (capped by `queryRetryMaxDelay`). |
+| Parameter                 | Type     | Default     | Description                                                                                                                                                                                            |
+| ------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `queryRetryMax`           | int      | **`3`**     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability).<br/><br/>**To disable:** Set to `0` to disable retries.                     |
+| `queryRetryInitialDelay`  | Duration | **`PT1S`**  | Initial delay before the first retry attempt.<br/><br/>**Behavior:** Each subsequent retry uses exponential backoff.                                                                                   |
+| `queryRetryMaxDelay`      | Duration | **`PT60S`** | Maximum delay between retry attempts.<br/><br/>**Constraint:** Must be greater than or equal to `queryRetryInitialDelay`.<br/>**Purpose:** Prevents excessive wait times.                              |
+| `queryRetryBackoffFactor` | double   | **`2.0`**   | Multiplier applied to the delay between consecutive retries.<br/><br/>**Example:** With factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, 8s, etc. (capped by `queryRetryMaxDelay`). |
 
 #### Configuration example
 
 ```yaml
+# In your broker configuration file (e.g., broker.yaml)
 zeebe:
   broker:
     experimental:
@@ -314,7 +375,7 @@ zeebe:
 
 #### Tuning recommendations
 
-**For large batch operations (100k+ instances):**
+**For large batch operations (100,000+ instances):**
 
 - Consider reducing `chunkSize` to `500` or lower to reduce memory pressure
 - Reduce `queryPageSize` if you encounter Elasticsearch/OpenSearch query timeouts
@@ -343,9 +404,9 @@ If you use the Camunda Exporter (Self-Managed with Elasticsearch/OpenSearch), yo
 
 ##### Camunda Exporter: exportItemsOnCreation
 
-| Parameter                              | Type    | Default | Description                                                                                                                                                                                                          |
-| -------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `batchOperation.exportItemsOnCreation` | boolean | `true`  | Controls whether pending batch items are exported to Elasticsearch/OpenSearch immediately when batch initialization starts. When enabled, Operate can display a loading spinner indicating pending batch operations. |
+| Parameter                              | Type    | Default    | Description                                                                                                                                                                                                                       |
+| -------------------------------------- | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `batchOperation.exportItemsOnCreation` | boolean | **`true`** | Controls whether pending batch items are exported to Elasticsearch/OpenSearch immediately when batch initialization starts.<br/><br/>**When enabled:** Operate can display a loading spinner indicating pending batch operations. |
 
 **When to disable:**
 
@@ -359,6 +420,7 @@ For very large batches (100,000+ items), enabling this option causes a temporary
 **Configuration example:**
 
 ```yaml
+# In your broker configuration file (e.g., broker.yaml)
 exporters:
   camundaexporter:
     args:
