@@ -188,6 +188,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.cluster.replication-factor` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
 | `camunda.cluster.size`               | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
 
+### `camunda.cluster.global-listeners`
+
+| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.cluster.global-listeners.user-task[]`                  | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
+| `camunda.cluster.global-listeners.user-task[].event-types[]`    | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
+| `camunda.cluster.global-listeners.user-task[].type`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
+| `camunda.cluster.global-listeners.user-task[].retries`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
+| `camunda.cluster.global-listeners.user-task[].after-non-global` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
+
 ### `camunda.cluster.metadata`
 
 | Property                                        | Description                                                                                                                                                         | Default value |
@@ -219,6 +229,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `CAMUNDA_CLUSTER_PARTITIONCOUNT`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
 | `CAMUNDA_CLUSTER_REPLICATIONFACTOR` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
 | `CAMUNDA_CLUSTER_SIZE`              | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
+
+### `CAMUNDA_CLUSTER_GLOBAL_LISTENERS`
+
+| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK`                    | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES`      | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_RETRIES`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_AFTER_NON_GLOBAL` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
 
 ### `CAMUNDA_CLUSTER_METADATA`
 
