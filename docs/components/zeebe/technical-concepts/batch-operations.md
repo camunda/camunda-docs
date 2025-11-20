@@ -249,3 +249,70 @@ Large batch operations can temporarily impact cluster performance, especially du
 :::warning
 Heavy querying of the secondary database can notably affect its performance, especially for large batches with broad filters.
 :::
+
+### Configuration
+
+The batch-operations section in the broker configuration controls discovery (initialization) and robustness. Keys live under `zeebe.broker.experimental.engine.batchOperation.*` and are validated at startup.
+
+Recommended keys:
+
+- `schedulerInterval` (Duration, positive): interval at which the background scheduler runs to progress initialization/continuations.
+
+- `chunkSize` (int > 0): max items per chunk record written during initialization. Values > 5000 are allowed but not recommended due to exporter pressure and 4 MB record-size constraints; a warning is logged.
+
+- `dbChunkSize` (int > 0): size used when writing item chunks to RocksDB; keeps state values small for cache efficiency.
+
+- `queryPageSize` (int > 0): page size when querying secondary storage during initialization; interacts with ES/OS 10k page limit.
+
+- `queryInClauseSize` (int > 0): max keys per IN clause when queries use key lists (RDBMS).
+
+- `queryRetryMax` (int >= 0): maximum retry attempts for transient query failures.
+
+- `queryRetryInitialDelay` (Duration, positive): initial backoff delay for retryable query errors.
+
+- `queryRetryMaxDelay` (Duration, positive, >= initialDelay): cap for exponential backoff during query retries.
+
+- `queryRetryBackoffFactor`: multiplier applied between retries; validated at startup.
+
+Notes:
+
+- These settings appear in broker.yaml.template under `experimental.engine.batchOperation` and fail fast on invalid values; the broker startup will report the invalid key and reason.
+
+- The engine enforces the 4 MB per-record limit; the scheduler splits large item sets across multiple chunk records and, if necessary, across multiple scheduler runs. Prefer tuning `chunkSize`/`queryPageSize` rather than increasing global message size.
+
+Example (YAML fragment):
+
+```yaml
+zeebe:
+  broker:
+    experimental:
+      engine:
+        batchOperation:
+          schedulerInterval: PT1S
+          chunkSize: 100
+          dbChunkSize: 3500
+          queryPageSize: 10000
+          queryInClauseSize: 1000
+          queryRetryMax: 2
+          queryRetryInitialDelay: PT1S
+          queryRetryMaxDelay: PT60S
+          queryRetryBackoffFactor: 2
+```
+
+#### Camunda Exporter option: exportItemsOnCreation
+
+If you use the Camunda Exporter (Self-Managed with Elasticsearch/OpenSearch), you can control whether pending batch items are exported immediately at batch creation:
+
+- `batchOperation.exportItemsOnCreation` (default: true)
+
+  When `true`, the exporter writes “pending items” as soon as initialization starts so Operate can render a spinner (“has pending batch operations”). For very large batches (for example, 100,000+ items), this may cause a temporary spike in write load due to the high volume of document insertions. Set to `false` to reduce initial indexing pressure at the cost of the spinner not functioning; rely on the REST batch status endpoints and metrics instead.
+
+YAML example:
+
+```yaml
+exporters:
+  camundaexporter:
+    args:
+      batchOperation:
+        exportItemsOnCreation: false
+```
