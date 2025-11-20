@@ -129,7 +129,7 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler: Changed default login format
+#### Web Modeler: Changed default logging format
 
 By default, Web Modeler's `restapi` component now logs in simple readable format to the console instead of `JSON`.
 
