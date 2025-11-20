@@ -30,7 +30,7 @@ Requires a database accessible to the camunda components. Can be any of the foll
 | `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey`                               | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`                                    | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.auto-ddl`                                               | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | string | `""`    |             |
@@ -45,12 +45,12 @@ Requires a database accessible to the camunda components. Can be any of the foll
 | `orchestration.data.secondaryStorage.rdbms.history.usageMetricsCleanup`                            | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.processCache.maxSize`                           | string | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.history.batchOperationCache.maxSize`                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.minimumIdle`                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.idleTimeout`                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.maxLifetime`                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connection-pool.connectionTimeout`              | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`                     | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout`                     | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime`                     | string | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout`               | string | `""`    |             |
 
 ### Example usage
 
