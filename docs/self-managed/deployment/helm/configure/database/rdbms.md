@@ -21,35 +21,35 @@ Requires a database accessible to the camunda components. Can be any of the foll
 
 ### Parameters
 
-| Parameter                                                                              | Type   | Default | Description |
-| -------------------------------------------------------------------------------------- | ------ | ------- | ----------- |
-| `orchestration.exporters.rdbms.url`                                                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.username`                                               | string | `""`    |             |
-| `orchestration.exporters.rdbms.secret.existingSecret`                                  | string | `""`    |             |
-| `orchestration.exporters.rdbms.secret.existingSecretKey`                               | string | `""`    |             |
-| `orchestration.exporters.rdbms.secret.inlineSecret`                                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.flushInterval`                                          | string | `""`    |             |
-| `orchestration.exporters.rdbms.auto-ddl`                                               | string | `""`    |             |
-| `orchestration.exporters.rdbms.prefix`                                                 | string | `""`    |             |
-| `orchestration.exporters.rdbms.maxQueueSize`                                           | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.defaultHistoryTTL`                              | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.defaultBatchOperationHistoryTTL`                | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.minHistoryCleanupInterval`                      | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.maxHistoryCleanupInterval`                      | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.historyCleanupBatchSize`                        | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.usageMetricsCleanup`                            | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.processCache.maxSize`                           | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.batchOperationCache.maxSize`                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.minimumIdle`                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.idleTimeout`                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.maxLifetime`                    | string | `""`    |             |
-| `orchestration.exporters.rdbms.history.connection-pool.connectionTimeout`              | string | `""`    |             |
+| Parameter                                                                                           | Type   | Default | Description |
+| --------------------------------------------------------------------------------------------------- | ------ | ------- | ----------- |
+| `orchestration.data.secondary-storage.rdbms.url`                                                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.username`                                               | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.secret.existingSecret`                                  | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.secret.existingSecretKey`                               | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.secret.inlineSecret`                                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.flushInterval`                                          | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.auto-ddl`                                               | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.prefix`                                                 | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.maxQueueSize`                                           | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.defaultHistoryTTL`                              | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.defaultBatchOperationHistoryTTL`                | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.minHistoryCleanupInterval`                      | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.maxHistoryCleanupInterval`                      | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.historyCleanupBatchSize`                        | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.usageMetricsCleanup`                            | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.processCache.maxSize`                           | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.batchOperationCache.maxSize`                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.maximumPoolSize`                | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.minimumIdle`                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.idleTimeout`                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.maxLifetime`                    | string | `""`    |             |
+| `orchestration.data.secondary-storage.rdbms.history.connection-pool.connectionTimeout`              | string | `""`    |             |
 
 ### Example usage
 
@@ -60,12 +60,15 @@ Operate will not work with RDBMS until 8.9.0-alpha3
 :::
 
 ```yaml
-rdbms:
-  url: jdbc:postgresql://hostname:5432/camunda
-  username: camunda
-  password: camunda_password
-
 orchestration:
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:postgresql://hostname:5432/camunda
+        username: camunda
+        secret:
+          inlineSecret: camunda_password
+
   profiles:
     operate: false
 ```
@@ -88,11 +91,13 @@ This example uses /driver-lib, which is a filepath that the Orchestration Cluste
 
 ```yaml
 orchestration:
-  exporters:
-    rdbms:
-      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-      username: myuser
-      inlineSecret: mypassword
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+        username: myuser
+        secret:
+          inlineSecret: mypassword
   extraVolumeMounts:
     - name: jdbcdrivers
       mountPath: /driver-lib
@@ -138,11 +143,12 @@ Then use the new image in your Helm values:
 
 ```yaml
 orchestration:
-  exporters:
-    rdbms:
-      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-      username: myuser
-      inlineSecret: mypassword
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+        username: myuser
+        inlineSecret: mypassword
   image:
     repository: internal-registry/orchestration
     tag: 8.8.0
@@ -158,11 +164,12 @@ Not yet tested
 
 ```yaml
 orchestration:
-  exporters:
-    rdbms:
-      url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
-      username: myuser
-      inlineSecret: mypassword
+  data:
+    secondary-storage:
+      rdbms:
+        url: jdbc:oracle:thin:@//hostname:1521/FREEPDB1
+        username: myuser
+        inlineSecret: mypassword
   extraVolumeMounts:
     - name: jdbcdrivers
       mountPath: /driver-lib
