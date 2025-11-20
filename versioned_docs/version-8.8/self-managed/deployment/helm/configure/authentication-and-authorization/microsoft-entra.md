@@ -537,3 +537,7 @@ When using an OIDC provider, the following Optimize features are not currently a
 - Digests
 - Accessible user names for resource owners (the value of the `sub` claim is displayed instead).
   :::
+
+## Troubleshooting
+
+For common issues and solutions when configuring OIDC authentication, see the [OIDC Troubleshooting guide](./troubleshooting-oidc.md).
