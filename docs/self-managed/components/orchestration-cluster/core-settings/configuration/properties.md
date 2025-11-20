@@ -687,13 +687,16 @@ script-src-attr 'none'.
 | `camunda.security.authentication.oidc.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                       |                                      |
 | `camunda.security.authentication.oidc.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                 |                                      |
 | `camunda.security.authentication.oidc.token-uri`                    | Sets the OIDC provider's token URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                         |                                      |
-| `camunda.security.authentication.oidc.client-authentication-method` | Sets client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                              | `client_secret_basic`                |
+| `camunda.security.authentication.oidc.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
 
 ### `camunda.security.authentication.oidc.assertion`
 
-Configuration of the client assertion built for Bearer JWT client authentication (_private key JWT_).
-These properties are only applicable when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
-The _key ID_ refers to the private key being used to sign the client assertion JWT.
+Configuration options for the client assertion used in Bearer JWT client authentication.
+
+:::note
+These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
+The `key` value refers to the private key ID used to sign the client assertion JWT.
+:::
 
 | Property                                                              | Description                                                                | Default value |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
@@ -704,8 +707,11 @@ The _key ID_ refers to the private key being used to sign the client assertion J
 
 ### `camunda.security.authentication.oidc.assertion.keystore`
 
-Configuration of the keystore used to build the client assertion for Bearer JWT client authentication (_private key JWT_).
-These properties are only applicable when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
+Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
+
+:::note
+These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
+:::
 
 | Property                                                               | Description                                                       | Default value |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
@@ -794,13 +800,16 @@ These properties are only applicable when `camunda.security.authentication.oidc.
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`                    | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                        |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                  |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`                     | Sets the OIDC provider's token URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                          |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` | Sets client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                              | `client_secret_basic`                |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION`
 
-Configuration of the client assertion built for Bearer JWT client authentication (_private key JWT_).
-These properties are only applicable when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
-The _key ID_ refers to the private key being used to sign the client assertion JWT.
+Configuration options for the client assertion used in Bearer JWT client authentication.
+
+:::note
+These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
+The `key` value refers to the private key ID used to sign the client assertion JWT.
+:::
 
 | Property                                                              | Description                                                                | Default value |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
@@ -811,8 +820,11 @@ The _key ID_ refers to the private key being used to sign the client assertion J
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE`
 
-Configuration of the keystore used to build the client assertion for Bearer JWT client authentication (_private key JWT_).
-These properties are only applicable when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
+Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
+
+:::note
+These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
+:::
 
 | Property                                                               | Description                                                       | Default value |
 | ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |

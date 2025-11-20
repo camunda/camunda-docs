@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 This page provides guidance for less common OIDC configuration scenarios.
 
-## Using separate OIDC provider URIs for browser and backend
+## Use separate OIDC provider URIs for browser and backend
 
 In some cases, the Orchestration Cluster backend and the user’s browser may need to communicate with the OIDC provider using different URLs.
 
@@ -56,16 +56,16 @@ CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI=http://<Docker network domain nam
 
 The exact property values depend on your OIDC provider and environment.
 
-## Using the Bearer JWT client authentication method (_private key JWT_)
+## Use the Bearer JWT client authentication method
 
-In environments where extra security is required, the Orchestration Cluster backend can be configured to use the Bearer JWT client authentication method (_private key JWT_) instead of the standard _client id_ and _client secret_ (_client secret basic_) method.
-With this method the client secret will not be used as a credential, rather a client assertion JWT will be built and signed by the client's certificate.
-To learn more about the private key JWT authentication method, please refer to the [OAuth 2.0 Private Key JWT page](https://oauth.net/private-key-jwt/).
+In environments that require additional security, you can configure the Orchestration Cluster backend to use the Bearer JWT client authentication method, **private key JWT**, instead of the standard client ID and secret method.
 
-The OIDC client credentials flow will work as expected, only the client credentials used to authenticate with the IdP will change.
-Refer to your IdP documentation for setting up private key JWT. For example, here is the [Keycloak documentation page](https://www.keycloak.org/securing-apps/authz-client#_client_authentication_with_signed_jwt).
+With this approach, no client secret is used as a credential. Instead, a client assertion JWT is generated and signed using the client’s certificate.
+For more details on the private key JWT authentication method, refer to [OAuth 2.0 Private Key JWT](https://oauth.net/private-key-jwt/).
 
-This is the minimal needed configuration of client credentials when using the _private key JWT_ method. Please note the absence of `clientSecret`.
+The OIDC client credentials flow continues to operate normally, the only difference is the type of client credentials used to authenticate with the IdP. Consult your IdP’s documentation for instructions on configuring private key JWT. For example, see [Keycloak documentation](https://www.keycloak.org/securing-apps/authz-client#_client_authentication_with_signed_jwt).
+
+Below is the minimal required client credential configuration when using the private key JWT method. Note the absence of `clientSecret`:
 
 ```yaml
 camunda:
@@ -82,4 +82,4 @@ camunda:
             keyPassword: <YOUR_PRIVATE_KEY_PASSWORD>
 ```
 
-A comprehensive list of possible configuration properties can be found at [the oidc configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
+A comprehensive list of available configuration properties can be found in [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityauthenticationoidc).
