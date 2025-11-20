@@ -141,3 +141,25 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: JSON format changes
+
+When using JSON as the output for the logs the structure has changed slightly:
+
+- `logger`: field is now renamed to `loggerName`.
+- `thread`: represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
+
+See the [logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more details.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+:::
+
+</div>
+</div>
