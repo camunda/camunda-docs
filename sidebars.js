@@ -1439,6 +1439,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",
