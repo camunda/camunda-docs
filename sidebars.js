@@ -1993,6 +1993,7 @@ module.exports = {
             id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
+            "self-managed/components/components-upgrade/880-to-890",
             "self-managed/components/components-upgrade/870-to-880",
             "self-managed/components/components-upgrade/860-to-870",
             "self-managed/components/components-upgrade/850-to-860",
