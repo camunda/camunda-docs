@@ -1,12 +1,12 @@
 ---
 id: migrating-to-oca
-title: Migrating an application to the Orchestration Cluster API
+title: Migrate an application to the Orchestration Cluster API
 description: How to progressively adopt the Orchestration Cluster API in an existing application
 ---
 
-Understand these factors to migrate an existing Camunda 8 TypeScript application to use the new Orchestration Cluster API.
+Migrate an existing Camunda 8 TypeScript application to use the Orchestration Cluster API.
 
-## Using the SDK bundled client versus the @camunda8/orchestration-cluster-api package
+## Use the SDK bundled client or the Orchestration Cluster API package
 
 The `@camunda8/sdk` from version 8.8.0 includes a dedicated Orchestration Cluster API client. This is accomplished by depending on the `@camunda8/orchestration-cluster-api` and then normalising the client configuration to ensure forward-compatibility of your existing application with no configuration change.
 

@@ -1164,8 +1164,13 @@ module.exports = {
           ],
         },
         {
-          TypeScript: [
-            "apis-tools/typescript/typescript-sdk",
+          type: "category",
+          label: "TypeScript SDK",
+          link: {
+            type: "doc",
+            id: "apis-tools/typescript/typescript-sdk",
+          },
+          items: [
             "apis-tools/typescript/camunda8-sdk",
             "apis-tools/typescript/oca-client",
             "apis-tools/typescript/migrating-to-oca",

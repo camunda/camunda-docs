@@ -1,8 +1,12 @@
 ---
 id: eventual-consistency
-title: Managing eventual consistency over the Orchestration Cluster API
+title: Manage Orchestration Cluster API data consistency
 description: How to manage the eventually consistent data characteristic with the Orchestration Cluster API
 ---
+
+Learn how to manage the eventually consistent data characteristic with the Orchestration Cluster API.
+
+## About eventual consistency
 
 Data in Camunda 8 is eventually consistent. Read more about this characteristic of the system [here](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#data-consistency).
 
@@ -52,7 +56,7 @@ In this case, you are likely to receive an empty set — for a search operation,
 
 In some situations, you may want to wait for some time for eventual consistency to settle. In this situation, the SDK provides you with an ergonomic surface to do this.
 
-## Managing eventual consistency
+## Manage eventual consistency
 
 If `waitUpToMs` is set to a value greater than `0` — for example: `10_000` — then the SDK will poll every 500ms for _up to_ that time (in the case of our example 10 seconds), and will return a value as soon as one is available.
 

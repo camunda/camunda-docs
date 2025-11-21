@@ -4,30 +4,31 @@ title: TypeScript SDK
 description: Get started with the Camunda 8 TypeScript SDK.
 ---
 
-Camunda supports Camunda 8 application development using TypeScript.
+Build Camunda 8 applications in TypeScript using the official TypeScript SDK.
 
-You have two options:
+## Get started
 
-- [`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk) — a package that includes clients for all APIs, and can be used in Node.js.
-- [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) — a light-weight package with focused support for the Camunda 8.8+ Orchestration Cluster (REST) API, which can be used in Node.js or the browser.
+Get started with Camunda 8 TypeScript development using either of the following options:
 
-## Which package should you use?
+<table className="table-callout plain">
+<thead>
+    <td width="25%">SDK/package</td>
+    <td>Description</td>
+</thead>
+<tr>
+    <td>[TypeScript SDK](camunda8-sdk.md)</td>
+    <td><p>An SDK package that includes clients for all APIs. Can be used in Node.js.</p><p>[`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk)</p></td>
+</tr>
+<tr>
+    <td>[Orchestration Cluster API TypeScript client](oca-client.md)</td>
+    <td><p>A lightweight package with focused support for the Camunda 8.8+ Orchestration Cluster REST API. Can be used in Node.js or the browser.</p><p>[`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api)</p></td>
+</tr>
+</table>
 
-Use the `@camunda8/orchestration-cluster-api` package if:
+## Further resources
 
-- You are developing a green-field application; and
-- Your server target is 8.8 or later; and
-- You do not have a validated requirement to use the gRPC API; or
-- You are developing an application that runs in the web browser.
+Learn more about TypeScript SDK features and important concepts:
 
-Use the `@camunda8/sdk` package if:
-
-- You (definitely) need the gRPC API to do job streaming; or
-- Your server target is 8.7 or earlier; or
-- You have an existing application using this package that you want to progressively migrate to use the 8.8 Orchestration Cluster API.
-
-## Next steps
-
-- For guidance on migrating existing applications to the Orchestration Cluster API, see [Migrating an application to the Orchestration Cluster API](./migrating-to-oca.md).
-- For guidance on using the `@camunda8/sdk`, see [Getting started with the Camunda 8 TypeScript SDK](./camunda8-sdk.md).
-- For guidance on using the `@camunda8/orchestration-cluster-api`, see [Getting started with the Camunda 8 Orchestration Cluster API TypeScript client](./oca-client.md).
+- [Migrate an application to the Orchestration Cluster API](./migrating-to-oca.md): Guidance on migrating applications to the Orchestration Cluster API.
+- [Manage backpressure using the TypeScript SDK](./backpressure.md): Guidance on how to manage backpressure.
+- [Manage Orchestration Cluster API data consistency](./eventual-consistency.md): Guidance on how to manage the eventually consistent data characteristic with the Orchestration Cluster API.
