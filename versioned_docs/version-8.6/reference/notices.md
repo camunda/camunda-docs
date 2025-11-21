@@ -19,6 +19,37 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 35
+
+### Publication date
+
+November 24, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+- Camunda Management Identity
+
+### Impact
+
+The embedded JDBC driver for Amazon Aurora PostgreSQL (`software.amazon.jdbc:aws-advanced-jdbc-wrapper`) was affected by
+[CVE-2025-12967](https://nvd.nist.gov/vuln/detail/CVE-2025-12967), which may allow for privilege escalation to the `rds_superuser` role.
+A low privilege authenticated user can create a crafted function that could be executed with permissions of other Amazon Relational Database Service (RDS) users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.2, ≤ 8.7.12, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+- Management Identity ≤ 8.8.1, ≤ 8.7.9, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.8.3, 8.7.13, 8.6.22
+- Management Identity 8.8.2, 8.7.10, 8.6.22
+
 ## Notice 34
 
 ### Publication date
