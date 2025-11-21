@@ -1470,6 +1470,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
+                "self-managed/deployment/helm/upgrade/upgrade-hc-880-890",
                 {
                   type: "category",
                   label: "Upgrade 8.7 to 8.8",
