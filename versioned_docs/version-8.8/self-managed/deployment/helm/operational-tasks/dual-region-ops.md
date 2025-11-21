@@ -1174,6 +1174,7 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    ```
 
 3. Create an Elasticsearch backup in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`. Depending on the amount of data, this operation will take a while to complete.
+   It also explicitly includes the global state, which is required during restore because it contains the Camunda index templates.
 
    ```bash
    # The backup will be called failback
