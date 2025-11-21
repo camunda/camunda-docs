@@ -16,17 +16,17 @@ export const getStartedCards = [
 // Fundamentals cards on introduction page
 export const fundamentalCards = [
   {
-    link: "../ao-design/",
-    title: "Design and architecture",
-    image: IconAoDesignImg,
-    description: "Plan and design your agentic orchestration solutions.",
-  },
-  {
     link: "../ai-agents/",
     title: "AI agents",
     image: IconAoAgentImg,
     description:
       "Learn how to build and integrate AI agents into your end-to-end processes.",
+  },
+  {
+    link: "../ao-design/",
+    title: "Design and architecture",
+    image: IconAoDesignImg,
+    description: "Plan and design your agentic orchestration solutions.",
   },
 ];
 

@@ -25,10 +25,13 @@ Get started with Camunda agentic orchestration.
 
 <AoGrid ao={getStartedCards} />
 
+:::info Camunda Academy
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
+:::
+
 ## Learn the fundamentals
 
-Understand the fundamental concepts of Camunda agentic orchestration.
-Understand the fundamental concepts of Camunda agentic orchestration.
+Understand the core concepts of Camunda agentic orchestration.
 
 <AoGrid ao={fundamentalCards} />
 
@@ -37,10 +40,3 @@ Understand the fundamental concepts of Camunda agentic orchestration.
 Read our guidelines and recommendations for using Camunda AI agents.
 
 <AoGrid ao={recommendationCards} />
-
-:::info Further resources
-
-- Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
-- Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
-
-:::
