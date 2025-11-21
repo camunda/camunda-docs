@@ -5,7 +5,12 @@ paths:
         - User task
       operationId: completeUserTask
       summary: Complete user task
-      description: Completes a user task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Completes a user task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -49,7 +54,12 @@ paths:
         - User task
       operationId: assignUserTask
       summary: Assign user task
-      description: Assigns a user task with the given key to the given assignee.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns a user task with the given key to the given assignee.
       parameters:
         - name: userTaskKey
           in: path
@@ -134,7 +144,12 @@ paths:
         - User task
       operationId: updateUserTask
       summary: Update user task
-      description: Update a user task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Update a user task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -223,7 +238,12 @@ paths:
         - User task
       operationId: unassignUserTask
       summary: Unassign user task
-      description: Removes the assignee of a task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Removes the assignee of a task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -261,7 +281,12 @@ paths:
         - User task
       operationId: searchUserTasks
       summary: Search user tasks
-      description: Search for user tasks based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for user tasks based on given criteria.
       requestBody:
         required: false
         content:
@@ -337,7 +362,7 @@ components:
             - priority
             - name
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     UserTaskSearchQuery:
@@ -640,7 +665,7 @@ components:
             - scopeKey
             - processInstanceKey
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     UserTaskVariableSearchQueryRequest:
