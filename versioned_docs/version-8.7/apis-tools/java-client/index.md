@@ -5,6 +5,8 @@ sidebar_label: "Quick reference"
 description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more."
 ---
 
+import JavadocImg from './assets/javadoc.png';
+
 :::info
 Starting with 8.8, the Zeebe Java client will become the new Camunda Java client. This transition brings a new Java client structure designed to enhance the user experience and introduce new features while maintaining compatibility with existing codebases.
 
@@ -150,7 +152,15 @@ Refer to your identity provider documentation on how to configure X.509 authenti
 
 ## Javadoc
 
-The official Java client library API documentation can be found [here](https://javadoc.io/doc/io.camunda/zeebe-client-java/8.7.17). These are standard Javadocs, so your favorite JVM IDE will be able to install them locally as well.
+Refer to the official Java client library API documentation at [javadoc.io/doc/io.camunda/zeebe-client-java](https://javadoc.io/doc/io.camunda/zeebe-client-java/8.7.17).
+
+Select the relevant Javadoc version as the latest version is shown by default at this URL. For example:
+
+<img src={JavadocImg} alt="Example Javadoc version" class="img-500"/>
+
+:::tip
+As these are standard Javadocs, your favorite JVM IDE can install them locally.
+:::
 
 ## Next steps
 
