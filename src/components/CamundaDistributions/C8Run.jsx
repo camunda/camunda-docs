@@ -1,15 +1,10 @@
 import React from "react";
-import { camundaReleaseVersion } from "../Versions";
 
-const C8RunBaseURL = "https://downloads.camunda.cloud/release/camunda/c8run";
+const c8RunDocsUrl = "https://developers.camunda.com/install-camunda-8/";
 
 const C8Run = () => {
-  const version = camundaReleaseVersion();
   return (
-    <a
-      title={`${C8RunBaseURL}/${version}/`}
-      href={`${C8RunBaseURL}/${version}/`}
-    >
+    <a title={c8RunDocsUrl} href={c8RunDocsUrl}>
       Camunda 8 Run
     </a>
   );
