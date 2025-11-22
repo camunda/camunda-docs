@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -183,7 +186,7 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
@@ -1467,6 +1470,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
+                "self-managed/deployment/helm/upgrade/upgrade-hc-880-890",
                 {
                   type: "category",
                   label: "Upgrade 8.7 to 8.8",
