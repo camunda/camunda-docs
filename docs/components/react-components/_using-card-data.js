@@ -17,13 +17,13 @@ export const featuresCards = [
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
+      "Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes.",
   },
   {
     link: "./modeler/web-modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
-    description: "integrate automated document processing into your processes.",
+    description: "Integrate automated document processing into your processes.",
   },
   {
     link: "./rpa/overview/",
@@ -101,13 +101,13 @@ export const featuresPageCards = [
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
+      "Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes.",
   },
   {
     link: "../modeler/web-modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
-    description: "integrate automated document processing into your processes.",
+    description: "Integrate automated document processing into your processes.",
   },
   {
     link: "../rpa/overview/",
