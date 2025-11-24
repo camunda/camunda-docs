@@ -51,10 +51,10 @@ You can now also change the log levels at runtime.
 
 #### Are you affected by 8.9 Web Modeler changes?
 
-The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
+The 8.9 changes to the Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
 - You are using a custom Logback configuration.
-- You are using any tools consuming the logs.
+- You are using any tools that consume the logs files.
 
 ### Embedded web server changes from Undertow to Tomcat
 
@@ -62,10 +62,10 @@ Web Modeler's `restapi` component uses [Apache Tomcat](https://tomcat.apache.org
 
 #### Are you affected by 8.9 Web Modeler changes?
 
-The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
+The 8.9 changes to the Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
-- You are using a custom undertow configuration.
-- You are any tool consuming the logs.
+- You are using a custom Undertow configuration.
+- You are using any tools that consume the log files.
 
 ## Upgrade guides {#upgrade-guides}
 
