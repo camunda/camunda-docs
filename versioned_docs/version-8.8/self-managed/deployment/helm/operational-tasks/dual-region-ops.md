@@ -1158,7 +1158,10 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 
    ```bash
    ELASTIC_POD=$(kubectl --context $CLUSTER_SURVIVING get pod --selector=app\.kubernetes\.io/name=elasticsearch -o jsonpath='{.items[0].metadata.name}' -n $CAMUNDA_NAMESPACE_SURVIVING)
-   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' -H 'Content-Type: application/json' -d'
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup' \
+    -H 'Content-Type: application/json' \
+    -d'
    {
    "type": "s3",
    "settings": {
@@ -1171,10 +1174,14 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
    ```
 
 3. Create an Elasticsearch backup in the surviving namespace `CAMUNDA_NAMESPACE_SURVIVING`. Depending on the amount of data, this operation will take a while to complete.
+   It also explicitly includes the global state, which is required during restore because it contains the Camunda index templates.
 
    ```bash
    # The backup will be called failback
-   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true'
+   kubectl --context $CLUSTER_SURVIVING exec -n $CAMUNDA_NAMESPACE_SURVIVING -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPUT 'http://localhost:9200/_snapshot/camunda_backup/failback?wait_for_completion=true' \
+    -H 'Content-Type: application/json' \
+    -d '{"include_global_state": true}'
    ```
 
 4. Verify the backup has been completed successfully by checking all backups and ensuring the `state` is `SUCCESS`:
@@ -1283,7 +1290,10 @@ The procedure works for other Cloud providers and bare metal. You have to adjust
 7. Restore Elasticsearch backup in the new region namespace `CAMUNDA_NAMESPACE_RECREATED`. Depending on the amount of data, this operation may take a while to complete.
 
    ```bash
-   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true'
+   kubectl --context $CLUSTER_RECREATED exec -n $CAMUNDA_NAMESPACE_RECREATED -it $ELASTIC_POD -c elasticsearch -- \
+    curl -XPOST 'http://localhost:9200/_snapshot/camunda_backup/failback/_restore?wait_for_completion=true' \
+    -H 'Content-Type: application/json' \
+    -d '{"include_global_state": true}'
    ```
 
 8. Verify that the restore has been completed successfully in the new region:
