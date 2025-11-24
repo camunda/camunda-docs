@@ -260,36 +260,30 @@ global:
       type: "GENERIC"
 
       # OIDC Provider Endpoints (from discovery document)
-      issuer: <issuer-url>
       publicIssuerUrl: <issuer-url>
-      issuerBackendUrl: <issuer-url-or-internal-dns>
+      issuerBackendUrl: <issuer-url>
+      authUrl: <authorization-endpoint-url>
       tokenUrl: <token-endpoint-url>
       jwksUrl: <jwks-endpoint-url>
 ```
 
 **Parameter descriptions:**
 
-| Parameter          | Description                                             | Example                                           |
-| ------------------ | ------------------------------------------------------- | ------------------------------------------------- |
-| `issuer`           | Canonical issuer URL (must match `iss` claim in tokens) | `https://login.example.com`                       |
-| `publicIssuerUrl`  | Issuer URL accessible from users' browsers              | `https://login.example.com`                       |
-| `issuerBackendUrl` | Issuer URL accessible from Kubernetes pods              | `http://oidc-internal.svc.cluster.local`          |
-| `tokenUrl`         | Token endpoint from discovery document                  | `https://login.example.com/oauth/token`           |
-| `jwksUrl`          | JWKS endpoint for token signature verification          | `https://login.example.com/.well-known/jwks.json` |
+| Parameter          | Description                                               | Example                                                                 |
+| ------------------ | --------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `publicIssuerUrl`  | Issuer URL accessible from users' browsers                | `https://login.example.com`                                             |
+| `issuerBackendUrl` | Issuer URL accessible from Kubernetes pods                | `https://login.example.com` or `http://oidc-internal.svc.cluster.local` |
+| `authUrl`          | Authorization endpoint (must be accessible from browsers) | `https://login.example.com/oauth/authorize`                             |
+| `tokenUrl`         | Token endpoint (must be accessible from pods)             | `https://login.example.com/oauth/token`                                 |
+| `jwksUrl`          | JWKS endpoint for token signature verification            | `https://login.example.com/.well-known/jwks.json`                       |
 
-:::tip When to use different issuer URLs
-For most deployments, all three issuer parameters have the same value (your OIDC provider's issuer URL).
+:::info Different URLs for internal and external access
+In some setups, your OIDC provider is accessible through different URLs from within the cluster and from users' browsers. This can happen if you deployed your provider inside Kubernetes but didn't expose it under a domain name that's accessible both internally and externally.
 
-Use different values only when:
+In this case:
 
-- Your OIDC provider has separate internal and external endpoints
-- You're using Ingress with different internal/external DNS names
-- You want pods to use cluster-internal DNS for better performance
-
-**Example scenario:** External users access your provider at `https://login.example.com`, but Kubernetes pods can reach it faster via `http://oidc-provider.namespace.svc.cluster.local:8080`. In this case:
-
-- `issuer` and `publicIssuerUrl`: `https://login.example.com`
-- `issuerBackendUrl`: `http://oidc-provider.namespace.svc.cluster.local:8080`
+- Set `publicIssuerUrl` and `authUrl` to the URL reachable from users' browsers.
+- Set `issuerBackendUrl`, `tokenUrl`, and `jwksUrl` to the URL reachable from within the cluster.
   :::
 
 ### Configure Management Identity
@@ -522,11 +516,11 @@ global:
       type: "GENERIC"
 
       # OIDC Provider Endpoints
-      issuer: https://your-provider.example.com
-      publicIssuerUrl: https://your-provider.example.com
-      issuerBackendUrl: https://your-provider.example.com
-      tokenUrl: https://your-provider.example.com/oauth/token
-      jwksUrl: https://your-provider.example.com/.well-known/jwks.json
+      publicIssuerUrl: <issuer-url>
+      issuerBackendUrl: <issuer-url>
+      authUrl: <authorization-endpoint-url>
+      tokenUrl: <token-endpoint-url>
+      jwksUrl: <jwks-endpoint-url>
 
       # Management Identity
       identity:
