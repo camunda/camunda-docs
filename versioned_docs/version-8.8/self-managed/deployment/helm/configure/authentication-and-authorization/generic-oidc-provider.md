@@ -688,6 +688,7 @@ kubectl port-forward svc/camunda-optimize 8083:80
 
 # Web Modeler
 kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
+kubectl port-forward svc/camunda-web-modeler-websockets 8085:80
 
 # Console
 kubectl port-forward svc/camunda-console 8087:80
