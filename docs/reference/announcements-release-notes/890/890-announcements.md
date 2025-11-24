@@ -177,7 +177,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-changed-embedded-server-from-undertow-to-tomcat).
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-embedded-web-server-changed-from-undertow-to-tomcat).
 :::
 
 </div>
