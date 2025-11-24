@@ -16,7 +16,7 @@ Use this guide if you have an existing OIDC provider (such as Keycloak, Microsof
 
 **For provider-specific guides with streamlined setup:**
 
-- [External Keycloak](./external-keycloak.md) - Includes automatic configuration via Management Identity
+- [External Keycloak](./external-keycloak.md) - Includes automatic configuration of the Keycloak realm, OIDC clients, etc via Management Identity
 - [Microsoft Entra](./microsoft-entra.md) - Step-by-step guide for Microsoft Entra ID
 
 Choose a provider-specific guide if available, as they include detailed setup instructions tailored to that provider's interface.
