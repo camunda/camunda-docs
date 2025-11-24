@@ -30,6 +30,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 <tr>
     <td>[Web Modeler](#web-modeler)</td>
     <td>Migrated logging framework from `Logback` to `Log4j2`. </td>
+    <td>Migrated embedded web server from `Undertow` to `Tomcat`. </td>
 </tr>
 </table>
 
@@ -42,16 +43,29 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 
 ## Web Modeler
 
+### Logging framework changes from Logback to Log4j2
+
 Web Modeler's `restapi` component uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging instead of [Logback](https://logback.qos.ch/).
 
 You can now also change the log levels at runtime.
 
-### Are you affected by 8.9 Web Modeler changes?
+#### Are you affected by 8.9 Web Modeler changes?
 
 The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
 - You are using a custom Logback configuration.
 - You are using any tools consuming the logs.
+
+### Embedded web server changes from Undertow to Tomcat
+
+Web Modeler's `restapi` component uses [Apache Tomcat](https://tomcat.apache.org/) instead of [Undertow](https://undertow.io/).
+
+#### Are you affected by 8.9 Web Modeler changes?
+
+The 8.9 changes to Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
+
+- You are using a custom undertow configuration.
+- You are any tool consuming the logs.
 
 ## Upgrade guides {#upgrade-guides}
 

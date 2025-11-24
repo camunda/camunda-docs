@@ -47,6 +47,14 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By aligning Web Modeler logging with the Orchestration Cluster, administrators are enabled to more easily configure and maintain Self-Managed deployments.
 
+### Web Modeler: Embedded web server changed from Undertow to Tomcat
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3191 -->
+
+Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) for its embedded web server. By aligning We Modeler logging with the OC, we are making it easier for administrators to configure and maintain your Self-Managed deployments.
+
 ## 8.9.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
