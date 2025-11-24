@@ -389,7 +389,7 @@ orchestration:
 - `connectors.clients`: List of client IDs that should have Connectors role (typically the orchestration client ID itself)
 
 :::note
-The admin user specified in `defaultRoles.admin.users` must match the value used for `initialClaimValue` in Management Identity configuration.
+The admin user specified in `defaultRoles.admin.users` should match the value used for `initialClaimValue` in Management Identity configuration, so that the same user has admin access to both Management Identity and the Orchestration Cluster.
 :::
 
 ### Configure Connectors
