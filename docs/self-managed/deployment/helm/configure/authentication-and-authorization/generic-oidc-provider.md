@@ -411,7 +411,7 @@ connectors:
 ```
 
 :::info Connectors shares credentials
-Connectors typically uses the same OIDC client as the Orchestration Cluster, as it needs to authenticate to Zeebe Gateway. This is why both reference the same `orchestration-client-secret`.
+Connectors typically uses the same OIDC client as the Orchestration Cluster. This allows the Orchestration Cluster to accept the Connectors client's audience by default, since they share the same client configuration. If you prefer to use a separate OIDC client for Connectors, you'll need to configure the Orchestration Cluster to accept that client's audience.
 :::
 
 ### Configure Optimize
