@@ -29,8 +29,7 @@ Important changes introduced in Camunda 8.9 are summarized as follows:
 </tr>
 <tr>
     <td>[Web Modeler](#web-modeler)</td>
-    <td>Migrated logging framework from `Logback` to `Log4j2`. </td>
-    <td>Migrated embedded web server from `Undertow` to `Tomcat`. </td>
+    <td><ul><li>Migrated logging framework from `Logback` to `Log4j2`.</li><li>Migrated embedded web server from `Undertow` to `Tomcat`.</li></ul></td>
 </tr>
 </table>
 
