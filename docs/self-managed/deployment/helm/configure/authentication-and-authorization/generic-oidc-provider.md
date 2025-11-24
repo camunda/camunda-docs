@@ -443,15 +443,6 @@ optimize:
 | `audience`    | Expected audience (from token inspection)                                       |
 | `redirectUrl` | `http://localhost:8083` (local) or `https://your-domain.com/optimize` (Ingress) |
 
-:::info Optimize OIDC limitations
-When using OIDC authentication, the following Optimize features are not currently available:
-
-- User permissions tab in collections
-- Alerts tab in collections
-- Digests
-- Display of user names for resource owners (the `sub` claim value is shown instead)
-  :::
-
 ### Configure Web Modeler
 
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
