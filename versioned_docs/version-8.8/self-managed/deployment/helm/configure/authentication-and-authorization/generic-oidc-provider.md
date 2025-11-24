@@ -306,7 +306,6 @@ global:
 
 identity:
   enabled: true
-  contextPath: "/identity" # Optional: adjust if using custom context path
 
 identityPostgresql:
   enabled: true
@@ -338,7 +337,6 @@ Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist):
 ```yaml
 orchestration:
   enabled: true
-  contextPath: "/orchestration" # Optional: adjust if using custom context path
 
   security:
     authentication:
@@ -426,7 +424,6 @@ global:
 
 optimize:
   enabled: true
-  contextPath: "/optimize" # Optional: adjust if using custom context path
 ```
 
 **Optimize parameters:**
@@ -453,7 +450,6 @@ global:
 
 webModeler:
   enabled: true
-  contextPath: "/modeler" # Optional: adjust if using custom context path
 
   restapi:
     mail:
