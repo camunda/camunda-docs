@@ -35,7 +35,8 @@ A whole or floating point number. The number can be negative.
 
 ### String
 
-A sequence of characters enclosed in double quotes `"`. The sequence can also contain escaped characters starting with `\` (e.g. `\'`, `\"`, `\\`, `\n`, `\r`, `\t`, unicode like `\u269D` or `\U101EF`).
+A sequence of characters enclosed in double quotes `"`. The sequence can contain escaped characters starting with
+`\` (e.g. `\'`, `\"`, `\\`, `\n`, `\r`, `\t`, Unicode like `\u269D` or `\U101EF`) and can span multiple lines.
 
 - Java Type: `java.lang.String`
 
