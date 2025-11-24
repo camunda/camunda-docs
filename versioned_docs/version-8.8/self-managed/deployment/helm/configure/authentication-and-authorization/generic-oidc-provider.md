@@ -53,9 +53,11 @@ Create the following OIDC clients in your provider. The exact process varies by 
 - Client ID
 - Client secret (for confidential clients only)
 
+After creating each client, you'll configure its redirect URIs in the next section.
+
 ## Configure redirect URIs
 
-For each OIDC client, configure the redirect URIs that match where Camunda components will be accessible from users' browsers.
+For each OIDC client you created above, configure the redirect URIs that match where Camunda components will be accessible from users' browsers.
 
 ### Redirect URI table
 
