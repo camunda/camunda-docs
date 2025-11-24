@@ -530,36 +530,36 @@ global:
 
       # Management Identity
       identity:
-        clientId: identity
-        audience: identity
-        redirectUrl: http://localhost:8084
+        clientId: <identity-client-id>
+        audience: <identity-audience>
+        redirectUrl: <identity-url>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: identity-client-secret
-        initialClaimName: email
-        initialClaimValue: admin@example.com
+        initialClaimName: <user-claim-name>
+        initialClaimValue: <admin-user-claim-value>
 
       # Optimize
       optimize:
-        clientId: optimize
-        audience: optimize
-        redirectUrl: http://localhost:8083
+        clientId: <optimize-client-id>
+        audience: <optimize-audience>
+        redirectUrl: <optimize-url>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: optimize-client-secret
 
       # Web Modeler
       webModeler:
-        clientId: web-modeler-ui
-        redirectUrl: http://localhost:8070
-        clientApiAudience: web-modeler-ui
-        publicApiAudience: web-modeler-api
+        clientId: <web-modeler-ui-client-id>
+        redirectUrl: <web-modeler-url>
+        clientApiAudience: <web-modeler-ui-audience>
+        publicApiAudience: <web-modeler-api-audience>
 
       # Console
       console:
-        clientId: console
-        audience: console
-        redirectUrl: http://localhost:8087
+        clientId: <console-client-id>
+        audience: <console-audience>
+        redirectUrl: <console-url>
 
 # Orchestration Cluster
 orchestration:
@@ -568,9 +568,9 @@ orchestration:
     authentication:
       method: oidc
       oidc:
-        clientId: orchestration
-        audience: orchestration
-        redirectUrl: http://localhost:8080
+        clientId: <orchestration-client-id>
+        audience: <orchestration-audience>
+        redirectUrl: <orchestration-url>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: orchestration-client-secret
@@ -584,10 +584,10 @@ orchestration:
       defaultRoles:
         admin:
           users:
-            - admin@example.com
+            - <admin-user-claim-value>
         connectors:
           clients:
-            - orchestration
+            - <orchestration-client-id>
 
 # Connectors
 connectors:
@@ -596,8 +596,8 @@ connectors:
     authentication:
       method: oidc
       oidc:
-        clientId: orchestration
-        audience: orchestration
+        clientId: <orchestration-client-id>
+        audience: <orchestration-audience>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: orchestration-client-secret
@@ -627,7 +627,7 @@ webModeler:
   enabled: true
   restapi:
     mail:
-      fromAddress: noreply@example.com
+      fromAddress: <your-email-address>
 
 webModelerPostgresql:
   enabled: true
