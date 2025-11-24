@@ -9,11 +9,11 @@ import OverviewImg from './img/ao-overview-hero.png';
 import AoGrid from '../react-components/\_ao-card';
 import { getStartedCards, fundamentalCards, recommendationCards } from '../react-components/\_ao-card-data';
 
-<h3 class="subheading">Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes.</h3>
+<h3 class="subheading">Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.</h3>
 
 ## About agentic orchestration
 
-<img src={OverviewImg} title="Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes" alt="Get started" style={{padding:0,paddingLeft:20,margin:0,float: 'right', width: '50%'}} class="img-noborder img-transparent" />Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+<img src={OverviewImg} title="Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes" alt="Get started" style={{padding:0,paddingLeft:20,margin:0,float: 'right', width: '50%'}} class="img-noborder img-transparent" />Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
 Agentic orchestration ensures your AI-driven processes are efficient, compliant, and aligned with business goals.
 

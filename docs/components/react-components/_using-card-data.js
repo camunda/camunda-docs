@@ -17,7 +17,7 @@ export const featuresCards = [
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
-      "Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes.",
+      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
     link: "./modeler/web-modeler/idp/",
@@ -101,7 +101,7 @@ export const featuresPageCards = [
     title: "Agentic orchestration",
     image: IconAgenticImg,
     description:
-      "Orchestrate and integrate Artificial Intelligence (AI) agents into your end-to-end processes.",
+      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
   },
   {
     link: "../modeler/web-modeler/idp/",
