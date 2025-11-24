@@ -675,22 +675,22 @@ After deploying Camunda with this configuration, use the following `kubectl port
 
 ```bash
 # Management Identity
-kubectl port-forward svc/camunda-identity 8084:80 -n camunda
+kubectl port-forward svc/camunda-identity 8084:80
 
 # Orchestration Cluster (Operate/Tasklist)
-kubectl port-forward svc/camunda-zeebe-gateway 8080:8080 -n camunda
+kubectl port-forward svc/camunda-zeebe-gateway 8080:8080
 
 # Zeebe Gateway (gRPC for clients)
-kubectl port-forward svc/camunda-zeebe-gateway 26500:26500 -n camunda
+kubectl port-forward svc/camunda-zeebe-gateway 26500:26500
 
 # Optimize
-kubectl port-forward svc/camunda-optimize 8083:80 -n camunda
+kubectl port-forward svc/camunda-optimize 8083:80
 
 # Web Modeler
-kubectl port-forward svc/camunda-web-modeler-webapp 8070:80 -n camunda
+kubectl port-forward svc/camunda-web-modeler-webapp 8070:80
 
 # Console
-kubectl port-forward svc/camunda-console 8087:80 -n camunda
+kubectl port-forward svc/camunda-console 8087:80
 ```
 
 Once port forwarding is active, access each component through `http://localhost:<port>`.
