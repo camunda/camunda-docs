@@ -129,7 +129,7 @@ This returns a JSON response containing an `access_token`.
 
 **Step 2: Decode the token**
 
-Decode the JWT to inspect its claims:
+Decode the JWT to inspect its claims (Linux/macOS):
 
 ```bash
 echo "<access-token>" | cut -d'.' -f2 | base64 -d | jq
