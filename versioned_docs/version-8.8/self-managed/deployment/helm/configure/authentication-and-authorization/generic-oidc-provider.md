@@ -165,20 +165,6 @@ Look for these claims in the decoded token:
 | Auth0           | `email`                         | `client_id`          | Client ID              |
 | Okta            | `email`                         | `client_id`          | Client ID              |
 
-:::tip Standard OIDC claims
-The OpenID Connect specification defines standard claims:
-
-- **User identification**: `sub` (subject) is always present and uniquely identifies the user. Providers may also include `preferred_username`, `email`, or other profile claims.
-- **Client identification**: `azp` (authorized party) or `client_id` depending on the provider's implementation. Both are standard OIDC claims.
-
-**Camunda's default claim mappings** (used if not explicitly configured):
-
-- `usernameClaim`: `preferred_username` (fallback to `sub` if not present)
-- `clientIdClaim`: `client_id`
-
-These defaults work with many OIDC providers. Only configure these explicitly if your provider uses different claim names or if you want to use a different claim (such as `email` for user identification).
-:::
-
 :::caution Audience configuration
 The audience claim is critical for token validation. Camunda will reject tokens that don't include the expected audience value.
 
