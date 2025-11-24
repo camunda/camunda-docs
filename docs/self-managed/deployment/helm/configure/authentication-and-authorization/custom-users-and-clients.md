@@ -71,3 +71,19 @@ identity:
 - Public clients do not require a secret
 - User roles assign permissions across Management Identity components such as Web Modeler, Console and Optimize.
 - Ensure that the secrets referenced exist in the Kubernetes cluster before deploying the Helm chart.
+
+## Troubleshooting
+
+- If the Clients or Users don’t appear after initial Helm install, then double-check that referenced Kubernetes secrets exist and match the Helm values. Missing secrets will prevent creation of clients/users.
+- If there are Role or Permission issues, then review user and client role assignments to ensure permissions align with expected access.
+
+### Note on environment variables
+
+If you have defined Users or Clients as environment variables, then it is
+best to refactor your values.yaml to use this feature instead. If the array
+index for the Users or Clients is not managed correctly, then it is
+possible to get this sort of error in Management Identity:
+
+```
+Binding to target [Bindable@3e595da3 type = java.util.List<io.camunda.identity.impl.keycloak.config.record.KeycloakClient>, value = 'none', annotations = array<Annotation>[[empty]], bindMethod = [null]] failed:
+```
