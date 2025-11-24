@@ -91,17 +91,26 @@ time("10:31:10@Europe/Paris")
 
 A date with a local or zoned time component. The time can have an offset or time zone ID.
 
-- Format: `yyyy-MM-dd'T'HH:mm:ss` / `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm` / `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
+- Formats:
+  - `yyyy-MM-dd'T'HH:mm:ss`
+  - `yyyy-MM-dd'T'HH:mm:ssZ`
+  - `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm`
+  - `yyyy-MM-dd'T'HH:mm:ss@ZoneId`
+  - `yyyy-MM-dd'T'HH:mm:ss+/-HH:mm[ZoneId]`
 - Java Type: `java.time.LocalDateTime` / `java.time.DateTime`
 
 ```feel
 date and time("2015-09-18T10:31:10")
+date and time("2015-09-18T10:31:10Z")
 date and time("2015-09-18T10:31:10+01:00")
 date and time("2015-09-18T10:31:10@Europe/Paris")
+date and time("2015-09-18T10:31:10+02:00[Europe/Paris]")
 
 @"2015-09-18T10:31:10"
+@"2015-09-18T10:31:10Z"
 @"2015-09-18T10:31:10+01:00"
 @"2015-09-18T10:31:10@Europe/Paris"
+@"2015-09-18T10:31:10+02:00[Europe/Paris]"
 ```
 
 ### Days-time-duration
