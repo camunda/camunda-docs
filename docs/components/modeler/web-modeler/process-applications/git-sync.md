@@ -123,7 +123,10 @@ If you're using a self-hosted GitLab instance, ensure the environment variable `
 3. In the **Configure GitLab** modal, provide the following information:
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
-   - **GitLab API base URL:** (optional - **SaaS only**, configured globally for SM) The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is only required for self-hosted GitLab instances. If left empty, Web Modeler uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
+   - **GitLab API base URL:** The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is optional and only required for self-hosted GitLab instances. If left empty, Web Modeler uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
+     :::note
+     In Self-Managed, this is configured globally. See [Self-Managed Git sync](/docs/next/self-managed/components/modeler/web-modeler/configuration/#git-sync) for more details.  
+     :::
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
    - **Branch:** The name of the branch to use for merging and managing changes.
    - **Repository path:** (optional) The folder path that contains your process application files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
