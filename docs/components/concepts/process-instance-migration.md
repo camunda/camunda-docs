@@ -147,6 +147,22 @@ The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
 
+## Migrating active elements inside ad-hoc subprocesses
+
+![The service task A is inside the ad-hoc subprocess A.](assets/process-instance-migration/migration-adhoc-subprocess_before.png)
+
+After migrating active element `A` to `B` and `Ad-Hoc Subprocess A` to `Ad-Hoc Subprocess B`, the process instance will look like this:
+
+![After migrating the process instance, it is waiting at service task B inside the Ad-Hoc Subprocess B.](assets/process-instance-migration/migration-adhoc-subprocess_after.png)
+
+:::note
+A mapping instruction must be provided from the process instance's ad-hoc subprocess ID to the target ad-hoc subprocess ID to migrate ad-hoc subprocesses.
+:::
+
+:::note
+Changing the scope of ad-hoc subprocesses during migration is not possible.
+:::
+
 ## Dealing with catch events
 
 An exception to changing the process instance state is specific to catch events.
@@ -446,6 +462,7 @@ The following BPMN elements are supported by the migration tool.
 import EmbeddedSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/embedded-subprocess.svg';
 import CallActivitySvg from '../modeler/bpmn/assets/bpmn-symbols/call-activity.svg';
 import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subprocess.svg'
+import AdHocSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/ad-hoc-subprocess.svg'
 
 <div className="bpmn-symbol-container">
     <a href="../../modeler/bpmn/embedded-subprocesses/">
@@ -456,6 +473,9 @@ import EventSubprocessSvg from '../modeler/bpmn/assets/bpmn-symbols/event-subpro
     </a>
     <a href="../../modeler/bpmn/event-subprocesses/">
         <EventSubprocessSvg className="implemented" />
+    </a>
+    <a href="../../modeler/bpmn/ad-hoc-subprocesses/">
+        <AdHocSubprocessSvg className="implemented" />
     </a>
 </div>
 

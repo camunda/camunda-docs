@@ -47,6 +47,18 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By aligning Web Modeler logging with the Orchestration Cluster, administrators are enabled to more easily configure and maintain Self-Managed deployments.
 
+### Process Instance Migration: Ad-Hoc Sub-Process (AI Agent using Ad-Hoc Sub-Process migration not supported yet)
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Process Instance Migration">Migration</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3065 -->
+
+Process instance migration supports Ad-Hoc Sub-Process element migration.
+
+:::note
+This alpha release introduces Ad-Hoc Sub-Process element migration. AI Agent using Ad-Hoc Sub-Process migration follows in upcoming alpha releases.
+:::
+
 ## 8.9.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
