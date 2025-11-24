@@ -13,7 +13,7 @@ The Camunda Helm chart allows you to configure custom Management Identity users 
 
 To add custom OAuth2 clients, define them under the `identity.clients` list.
 
-Example confgiuration for client:
+Example configuration for client:
 
 ```yaml
 identity:
