@@ -70,21 +70,20 @@ date("2017-03-10")
 
 ### Time
 
-A local or zoned time. The time can have an offset or time zone ID.
+A local or zoned time. The time can have an optional timezone offset. The usage of a time zone ID is deprecated because
+it can lead to ambiguous results without a date component.
 
-- Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm` / `HH:mm:ss@ZoneId`
+- Format: `HH:mm:ss` / `HH:mm:ss+/-HH:mm`
 - Java Type: `java.time.LocalTime` / `java.time.OffsetTime`
 
 ```feel
 time("11:45:30")
 time("13:30")
 time("11:45:30+02:00")
-time("10:31:10@Europe/Paris")
 
 @"11:45:30"
 @"13:30"
 @"11:45:30+02:00"
-@"10:31:10@Europe/Paris"
 ```
 
 ### Date-time
