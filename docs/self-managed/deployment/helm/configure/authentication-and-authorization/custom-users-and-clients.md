@@ -5,7 +5,9 @@ title: Helm chart user and client setup on Management Identity
 description: Learn how to configure users and clients on Management Identity for Camunda 8 Self-Managed deployments using Helm chart.
 ---
 
-The Camunda Helm chart allows you to configure custom Management Identity users and OAuth2 clients through the `identity`` section in the Helm values file. This guide explains how to add users and clients by providing YAML examples and descriptions of the available fields.
+---
+
+The Camunda Helm chart allows you to configure custom Management Identity users and OAuth2 clients through the `identity` section in the Helm values file. This guide explains how to add users and clients by providing YAML examples and descriptions of the available fields.
 
 ## Adding OAuth2 Clients
 
