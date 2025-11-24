@@ -342,16 +342,6 @@ The `initialClaimName` and `initialClaimValue` parameters are used only during t
 Add configuration for the Orchestration Cluster (Zeebe, Operate, Tasklist):
 
 ```yaml
-global:
-  identity:
-    auth:
-      orchestration:
-        clientId: <orchestration-client-id>
-        audience: <orchestration-audience>
-        secret:
-          existingSecret: oidc-credentials
-          existingSecretKey: orchestration-client-secret
-
 orchestration:
   enabled: true
   contextPath: "/orchestration" # Optional: adjust if using custom context path
@@ -407,16 +397,6 @@ The admin user specified in `defaultRoles.admin.users` must match the value used
 Add configuration for Connectors:
 
 ```yaml
-global:
-  identity:
-    auth:
-      connectors:
-        clientId: <orchestration-client-id>
-        audience: <orchestration-audience>
-        secret:
-          existingSecret: oidc-credentials
-          existingSecretKey: orchestration-client-secret
-
 connectors:
   enabled: true
   security:
@@ -567,22 +547,6 @@ global:
           existingSecretKey: identity-client-secret
         initialClaimName: email
         initialClaimValue: admin@example.com
-
-      # Orchestration Cluster
-      orchestration:
-        clientId: orchestration
-        audience: orchestration
-        secret:
-          existingSecret: oidc-credentials
-          existingSecretKey: orchestration-client-secret
-
-      # Connectors (shares orchestration client)
-      connectors:
-        clientId: orchestration
-        audience: orchestration
-        secret:
-          existingSecret: oidc-credentials
-          existingSecretKey: orchestration-client-secret
 
       # Optimize
       optimize:
