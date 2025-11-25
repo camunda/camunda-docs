@@ -83,7 +83,7 @@ You can now manage your Camunda connections directly within Desktop Modeler.
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
 
-You can now use the open source OpenSearch project as a datastore for your self-managed Camunda deployments. This allows you to run a fully open source observability stack without relying on ElasticSearch.
+You can now use the open source OpenSearch project as a datastore for your self-managed Camunda deployments. This allows you to run a fully open source observability stack without relying on Elasticsearch.
 
 For configuration instructions, see the updated Helm chart values and compatibility matrix.
 
