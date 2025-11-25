@@ -64,9 +64,9 @@ Click **Create GitHub App** to finish.
    - **GitHub API Base URL:** The base URL of your [GitHub installation's REST API](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls). This is optional and only required for GitHub Enterprise instances. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
 
      :::note
-     When using Web Modeler Self-Managed with a self-hosted GitHub instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL` is set to the API URL of your self-hosted GitHub instance instead of configuring it in the UI.
-     It usually looks like `http(s)://HOSTNAME/api/v3`.
-     Refer to the [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) and choose the correct Enterprise Server version.
+     If you're using a self-hosted GitHub instance, see [Self-Managed Git sync](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for configuration details.
+
+     Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) for more information.
      :::
 
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
@@ -170,7 +170,7 @@ Ensure the following:
 <h3> Configure Azure in Web Modeler </h3>
 
 :::note
-When using Web Modeler Self-Managed with a self-hosted Azure DevOps Server instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_BASEURL` is set to the API URL of your self-hosted Azure DevOps Server instance.
+If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Git sync](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for configuration details.
 :::
 
 1. Within Web Modeler, navigate to the process application you would like to connect to Azure, and select **Connect repository**.
@@ -300,9 +300,9 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
    - **Bitbucket API Base URL:** The base URL of your [Bitbucket installation's REST API](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris), for example `https://bitbucket.example.com/rest/api/latest`. This is required for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
 
      :::note
-     When using Web Modeler Self-Managed with a self-hosted Bitbucket Data Center instance, ensure the environment variable `CAMUNDA_MODELER_GITSYNC_BITBUCKET_BASEURL` is set to the API URL of your self-hosted Bitbucket Data Center instance instead of configuring it in the UI.
-     It usually looks like `http(s)://HOSTNAME/rest/api/latest`.
-     Refer to the [Bitbucket documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris) for more information.
+     If you're using a self-hosted Bitbucket Data Center instance, see [Self-Managed Git sync](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for configuration details.
+
+     Refer to [Bitbucket documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris) for more information.
      :::
 
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path.
