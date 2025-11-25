@@ -53,7 +53,7 @@ You can now also change the log levels at runtime.
 The 8.9 changes to the Web Modeler `restapi` component could affect your organization if you are in a Self-Managed environment and:
 
 - You are using a custom Logback configuration.
-- You are using any tools that consume the logs files.
+- You are using any tools that consume the log files.
 
 ### Embedded web server changes from Undertow to Tomcat
 
