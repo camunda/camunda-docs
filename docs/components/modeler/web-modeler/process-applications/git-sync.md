@@ -123,7 +123,7 @@ To generate a project access token, follow the [GitLab documentation](https://do
    - **GitLab API base URL:** The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is optional and only required for self-hosted GitLab instances. If left empty, Web Modeler uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
 
      :::note
-     If you're using a self-hosted GitLab instance, see [Self-Managed Git sync](/docs/next/self-managed/components/modeler/web-modeler/configuration/#git-sync) for configuration details.
+     If you're using a self-hosted GitLab instance, see [Self-Managed Git sync](/self-managed/components/modeler/web-modeler/configuration/configuration.md#git-sync) for configuration details.
      :::
 
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
