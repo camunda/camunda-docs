@@ -262,7 +262,6 @@ global:
       enabled: true
       type: "GENERIC"
 
-      # OIDC Provider Endpoints (from discovery document)
       publicIssuerUrl: <issuer-url>
       issuerBackendUrl: <issuer-url>
       authUrl: <authorization-endpoint-url>
