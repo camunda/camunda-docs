@@ -105,7 +105,7 @@ export CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token'
 To set these values explicitly in code (not recommended), pass them with the same key names to the `Camunda8` constructor.
 :::
 
-## Using the SDK
+## Use the SDK
 
 1. Create a file `index.ts` in your IDE.
 2. Import the SDK:
@@ -243,7 +243,7 @@ const worker = camunda.createJobWorker({
 });
 ```
 
-This starts a service task worker that runs in an asynchronous loop, invoking the `jobHandler` function whenever a job for the service task type `service-task` is available.
+This code starts a service task worker that runs in an asynchronous loop and invokes `jobHandler` when a job of type `service-task` becomes available.
 
 The handler must return a job completion function like `fail`, `complete`, `error`, or `ignore`. The type system enforces this to ensure every code path responds to Zeebe after taking a job. The `job.complete` function can take an object with variables to update.
 

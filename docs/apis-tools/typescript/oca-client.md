@@ -27,7 +27,7 @@ Use the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@c
 | Configuration keys | One difference between using the package directly and using it through the SDK is the environment variable configuration. The SDK wraps the Orchestration Cluster API client package and allows you to use the previous configuration keys. When using the package directly, you must use the environment variable configuration keys it requires. Keys that were prefixed with `ZEEBE_` in the SDK are now prefixed with `CAMUNDA_` in the Orchestration Cluster API client package configuration. See the [Configuration Reference](https://github.com/camunda/orchestration-cluster-api-js/blob/main/documentation/CONFIG_REFERENCE.md?plain=1) for a list of the configuration parameters. |
 | ESM                | The Orchestration Cluster API client is a dual ESM/CJS package, allowing you to use ESM and tree shake the package as a dependency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
-## Using the Orchestration Cluster API package
+## Use the Orchestration Cluster API package
 
 The following example retrieves the cluster topology:
 
@@ -56,7 +56,7 @@ The following example retrieves the cluster topology:
 
 ## Example project
 
-See a complete working example of a [quick start project on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+See a [complete example project](https://github.com/camunda-community-hub/c8-sdk-demo) that demonstrates how to use the package.
 
 ## API documentation
 
