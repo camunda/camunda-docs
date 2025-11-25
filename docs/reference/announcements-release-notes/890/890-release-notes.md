@@ -117,16 +117,17 @@ Configuration-based global user task listeners are now available for Self-Manage
 - Administrators can define cluster-wide listeners using configuration files or environment variables. This ensures listeners are applied consistently from cluster startup and preserved across backup and restore operations.
 - All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
 
-### Process instance migration supports ad-hoc sub-processes
+### Process instance migration ad-hoc sub-process support
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Process Instance Migration">Migration</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3065 -->
 
-Camunda 8 now supports the migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+Process instance migration now supports ad-hoc sub-process element migration.
 
-- Safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state.
-- Implement flexible, agent-driven orchestration and faster iteration on live automations.
+:::note
+This does not apply to the ai Agent ad-hoc sub-process. Support for this will follow in upcoming alpha releases.
+:::
 
 ### Web Modeler
 
@@ -141,18 +142,6 @@ Camunda 8 now supports the migration of process instances that include ad-hoc su
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
 Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. Aligning Web Modeler logging with the Orchestration Cluster allows administrators to more easily configure and maintain Self-Managed deployments.
-
-### Process instance migration: Ad-hoc subprocess
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Process Instance Migration">Migration</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3065 -->
-
-Process instance migration supports ad-hoc subprocess element migration.
-
-:::note
-This does not apply to the AI Agent ad-hoc subprocess. Its support will follow in upcoming alpha releases.
-:::
 
 ## 8.9.0-alpha1
 
