@@ -1228,6 +1228,7 @@ module.exports = {
             id: "reference/announcements-release-notes/890/890-announcements",
           },
           items: [
+            "reference/announcements-release-notes/890/whats-new-in-89",
             "reference/announcements-release-notes/890/890-announcements",
             "reference/announcements-release-notes/890/890-release-notes",
           ],
@@ -1439,6 +1440,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",
@@ -1993,6 +1995,7 @@ module.exports = {
             id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
+            "self-managed/components/components-upgrade/880-to-890",
             "self-managed/components/components-upgrade/870-to-880",
             "self-managed/components/components-upgrade/860-to-870",
             "self-managed/components/components-upgrade/850-to-860",
@@ -2014,7 +2017,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
       link: {
         type: "doc",
         id: "self-managed/update/administrators/admin-upgrade-overview",

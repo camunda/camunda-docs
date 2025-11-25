@@ -476,7 +476,7 @@ For a comprehensive example demonstrating these steps, see the [DeployAndComplet
 **Advanced topics**
 
 - [Logging configuration](logging.md) – Set up proper logging for your application
-- [Client documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) – Complete Javadoc reference
+- [Client documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) – Complete Javadoc reference. Make sure you select the relevant Javadoc version as the latest version is shown by default at this URL.
 
 **Need help?**
 
