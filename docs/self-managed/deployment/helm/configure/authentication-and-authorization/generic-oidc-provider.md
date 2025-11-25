@@ -107,9 +107,10 @@ Access this URL (replacing `your-provider.example.com` with your provider's doma
 
 **Record these values for Helm configuration:**
 
-- `issuer` → Used for: `issuer`
-- `token_endpoint` → Used for: `tokenUrl` (Required for Connectors)
-- `jwks_uri` → Used for: `jwksUrl` (Required for Web Modeler)
+- `issuer` → Used for: `publicIssuerUrl`
+- `authorization_endpoint` → Used for: `authUrl`
+- `token_endpoint` → Used for: `tokenUrl`
+- `jwks_uri` → Used for: `jwksUrl`
 
 ### Identify token claims
 
@@ -260,18 +261,24 @@ global:
     auth:
       enabled: true
       type: "GENERIC"
-      issuer: <issuer-url>
+
+      # OIDC Provider Endpoints (from discovery document)
+      publicIssuerUrl: <issuer-url>
+      issuerBackendUrl: <issuer-url>
+      authUrl: <authorization-endpoint-url>
       tokenUrl: <token-endpoint-url>
       jwksUrl: <jwks-endpoint-url>
 ```
 
 **Parameter descriptions:**
 
-| Parameter  | Description                                                                                                    | Example                                           |
-| ---------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| `issuer`   | The Issuer URL of your OIDC provider. Must be accessible from both users' browsers and the Kubernetes cluster. | `https://login.example.com`                       |
-| `tokenUrl` | The token endpoint. Required for Connectors, which does not support OIDC discovery.                            | `https://login.example.com/oauth/token`           |
-| `jwksUrl`  | The JWKS endpoint. Required for Web Modeler, which does not support OIDC discovery.                            | `https://login.example.com/.well-known/jwks.json` |
+| Parameter          | Description                                               | Example                                                                 |
+| ------------------ | --------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `publicIssuerUrl`  | Issuer URL accessible from users' browsers                | `https://login.example.com`                                             |
+| `issuerBackendUrl` | Issuer URL accessible from Kubernetes pods                | `https://login.example.com` or `http://oidc-internal.svc.cluster.local` |
+| `authUrl`          | Authorization endpoint (must be accessible from browsers) | `https://login.example.com/oauth/authorize`                             |
+| `tokenUrl`         | Token endpoint (must be accessible from pods)             | `https://login.example.com/oauth/token`                                 |
+| `jwksUrl`          | JWKS endpoint for token signature verification            | `https://login.example.com/.well-known/jwks.json`                       |
 
 :::warning Network accessibility
 For Generic OIDC providers, the **Issuer URL** must be accessible from both:
@@ -506,7 +513,11 @@ global:
     auth:
       enabled: true
       type: "GENERIC"
-      issuer: <issuer-url>
+
+      # OIDC Provider Endpoints
+      publicIssuerUrl: <issuer-url>
+      issuerBackendUrl: <issuer-url>
+      authUrl: <authorization-endpoint-url>
       tokenUrl: <token-endpoint-url>
       jwksUrl: <jwks-endpoint-url>
 
