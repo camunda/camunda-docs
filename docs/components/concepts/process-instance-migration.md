@@ -24,7 +24,7 @@ You can also migrate your process instances using Operate's UI by following [the
 
 :::
 
-## Changing the process instance flow for inactive parts
+## Change the process instance flow for inactive parts
 
 Process instance migration allows you to adjust the process model of your process instance to fit to new requirements.
 
@@ -62,7 +62,7 @@ After migrating our process instance, we can now complete the service task `A` t
 
 Process instance migration allows you to change the inactive parts of the process instance. In our example, we placed a user task `B` between the active service task `A` and the inactive end event. We did not change the active service task `A`, just the steps that follow.
 
-## Changing the active elements
+## Change the active elements
 
 Sometimes your requirements change so much that the currently active element no longer exists in the new process version.
 
@@ -96,7 +96,7 @@ Simply cancel the service task instance, and add a new instance of the service t
 ![The process instance can be modified to recreate the service task's job.](assets/process-instance-migration/migration-active_after-modification.png)
 :::
 
-## Correcting mistakes in a process instance
+## Correct mistakes in a process instance
 
 Process instance migration can also be used to correct mistakes that led to an [incident](/components/concepts/incidents.md) in a process instance.
 
@@ -119,7 +119,7 @@ Afterward, the process instance will continue as expected:
 
 ![After migrating the process instance, the input mapping is corrected and the incident is resolved by retry. Afterward, the process instance will continue as expected:](assets/process-instance-migration/migration-process_instance_with_incident_resolved.png)
 
-## Migrating active elements inside subprocesses
+## Migrate active elements inside subprocesses
 
 Active elements located inside subprocesses can be migrated as part of a process instance migration.
 
@@ -147,7 +147,11 @@ The called process instance is not changed when migrating the call activity.
 
 You can migrate a called process instance in the same way as a regular process instance.
 
-## Migrating active elements inside ad-hoc subprocesses
+## Migrate active elements inside ad-hoc subprocesses
+
+Active elements located inside ad-hoc subprocesses can be migrated as part of a process instance migration.
+
+Consider the following example, where you want to migrate an active element that is located in an ad-hoc subprocess:
 
 ![The service task A is inside the ad-hoc subprocess A.](assets/process-instance-migration/migration-adhoc-subprocess_before.png)
 
@@ -155,15 +159,13 @@ After migrating active element `A` to `B` and `Ad-Hoc Subprocess A` to `Ad-Hoc S
 
 ![After migrating the process instance, it is waiting at service task B inside the Ad-Hoc Subprocess B.](assets/process-instance-migration/migration-adhoc-subprocess_after.png)
 
-:::note
-A mapping instruction must be provided from the process instance's ad-hoc subprocess ID to the target ad-hoc subprocess ID to migrate ad-hoc subprocesses.
-:::
+:::important
+To migrate ad-hoc subprocesses, you must provide a mapping instruction from the process instance’s ad-hoc subprocess ID to the target ad-hoc subprocess ID.
 
-:::note
 Changing the scope of ad-hoc subprocesses during migration is not possible.
 :::
 
-## Dealing with catch events
+## Deal with catch events
 
 An exception to changing the process instance state is specific to catch events.
 This is necessary to ensure that the process instance can be executed according to the new process definition.
@@ -286,14 +288,14 @@ If the process instance is migrated by providing mapping instruction between ser
 
 However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will **not** compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
 
-## Dealing with gateways
+## Deal with gateways
 
 Process instance migration allows you to migrate several scenarios for gateways:
 
 - An active exclusive gateway with an incident can be migrated like any other active element.
 - Parallel and inclusive gateways can be involved in [additional scenarios](#migrating-joining-parallel-and-inclusive-gateways).
 
-### Migrating joining parallel and inclusive gateways
+### Migrate joining parallel and inclusive gateways
 
 Joining parallel and inclusive gateways with taken incoming sequence flows, and which are still waiting for more incoming sequence flows, require a mapping instruction similar to active elements.
 
