@@ -4,23 +4,16 @@ title: Batch operations
 description: How distributed batch operations work in Zeebe engine.
 ---
 
-Zeebe supports executing certain operations as batch operations:
-
-- **Cancel process instances** (`CANCEL_PROCESS_INSTANCE`)
-- **Migrate process instances** (`MIGRATE_PROCESS_INSTANCE`)
-- **Modify process instances** (`MODIFY_PROCESS_INSTANCE`)
-- **Resolve incidents** (`RESOLVE_INCIDENT`)
-
 ## Overview
 
 Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to:
 
 - Cancel hundreds of process instances after discovering a critical bug
 - Migrate thousands of running instances to a new process version
-- Modify process instances to skip or add activities across multiple instances
+- Modify process instances to skip activities across multiple instances
 - Resolve incidents across multiple process instances simultaneously
 
-Instead of manually operating on each instance, batch operations distribute the work across your cluster, processing instances in parallel while maintaining system stability.
+Instead of manually operating on each instance, batch operations let you specify filter criteria and automatically identify and process matching instances across your cluster.
 
 ### How it works at a high level
 
@@ -28,10 +21,11 @@ When you create a batch operation, you provide filter criteria (such as process 
 
 1. Distributes the operation across all partitions in your cluster
 2. Each partition queries the secondary database to find matching instances
-3. Processes instances in parallel across partitions
+3. Executes operations in parallel across partitions
 4. Tracks progress and aggregates results
 
 This distributed approach enables efficient processing of large numbers of instances while maintaining cluster performance.
+Batch operations execute concurrently with regular partition processing—they do not block it. Just as multiple process instances can run in parallel on the same partition, batch operations process their target instances alongside all other partition activity without interruption.
 
 ## Prerequisites
 
@@ -50,7 +44,7 @@ A Zeebe batch operation always consists of two parts:
 
 - **The command:**  
   The batch operation type determines the action performed on the process instances.  
-  For example, the type `MIGRATE_PROCESS_INSTANCE` means process instances are migrated to a new process definition version.  
+  For example, the type `MIGRATE_PROCESS_INSTANCE` means a request to migrate process instances to a new process definition version.  
   Some batch types require more details, such as a migration plan for process instance migration or a modification plan for process instance modifications.
 
 - **The batch operation items:**  
@@ -74,34 +68,24 @@ Batch operations follow a structured lifecycle with distinct phases. Understandi
 
 **Duration:** Milliseconds to seconds
 
-**What can go wrong:** See [Validation and rejection](#validation-and-rejection) below.
-
-#### Validation and rejection
-
-Before processing begins, the system performs several validation checks:
-
-- **Empty filter validation**: Filters cannot be empty or null
-- **Authorization validation**: User permissions are checked before operation creation
-- **Command-specific validation**: Each command type has specific requirements (e.g., migration plan validity)
-
-Failed validations result in immediate rejection with specific error codes and messages (e.g., `INVALID_ARGUMENT`, `NOT_AUTHORIZED`).
+**What can go wrong:** See [Creation request validation](#creation-request-validation) below.
 
 ### 2. Initialization phase
 
 **What happens:**
 
 - Each partition queries the secondary database using the provided filter
-- Results are paginated and split into manageable chunks to stay within the 4MB record size limit and prevent overloading exporters when processing individual records
-- Process instances are identified and prepared for processing
+- Results are paginated and split into manageable chunks to avoid overwhelming exporters (each item in a chunk triggers a separate export operation)
 - The total number of items to process is determined and fixed at this point
+- Signals are sent to start the execution phase once initialization is complete
 
-**Duration:** Seconds to minutes (depending on the number of matching instances and cluster size)
+**Duration:** Seconds to minutes, depending on the number of matching instances, cluster size, and whether other batch operations are already queued for initialization. If multiple batch operations are created, they are initialized sequentially. Each operation must finish its initialization phase before the next one begins.
 
-**Key characteristics:**
+**API visibility:**
+In [Get Batch Operation](../../../apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation.api.mdx) API responses:
 
-- **Asynchronous processing**: The initialization runs in a separate scheduler component (not blocking the main stream processor)
-- **Concurrency control**: Only one initialization cycle runs at a time per partition using atomic execution flags
-- **State tracking**: The scheduler maintains state about currently initializing operations to prevent duplicate processing
+- The `operationsTotalCount` becomes eventually accurate once initialization completes on all partitions
+- The batch operation `state` transitions from `CREATED` to `ACTIVE` once initialization finishes and execution is triggered
 
 **What can go wrong:** See [Initialization failures](#initialization-failures) below.
 
@@ -144,6 +128,16 @@ Although the broker's internal state stores process instance data, the secondary
 
 ## Error handling and recovery
 
+### Creation request validation
+
+Before processing begins, the system performs several validation checks:
+
+- **Empty filter validation**: Filters cannot be empty or null
+- **Authorization validation**: User permissions are checked before operation creation
+- **Command-specific validation**: Each command type has specific requirements (e.g., migration plan validity)
+
+Failed validations result in immediate rejection with specific error codes and messages (e.g., `INVALID_ARGUMENT`, `NOT_AUTHORIZED`).
+
 ### Initialization failures
 
 Initialization can fail for several reasons:
@@ -154,6 +148,8 @@ Initialization can fail for several reasons:
 - **Query errors**: Invalid or malformed filter criteria
 
 **Error handling behavior:**
+
+The system automatically handles initialization failures based on the error type:
 
 - **Retryable errors**: Network issues, temporary database unavailability
   - Uses exponential backoff with configurable retry limits
