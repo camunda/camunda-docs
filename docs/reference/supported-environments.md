@@ -93,25 +93,24 @@ Camunda Helm chart version `13.x.x` works with Camunda version `8.8.x`. Check th
 
 ## Component requirements
 
-Requirements for the components can be seen below:
+Requirements for components are as follows:
 
 | Component                                                  | Java version | Other requirements                                                                                                                                                                                                                                                                                                                              |
 | ---------------------------------------------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+ (requires use of [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))</li><li>Elasticsearch 8.16+</li></ul>                                                                                                                                            |
-| Optimize                                                   | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+</li><li>Elasticsearch 8.16+</li></ul>                                                                                                                                                                                                                                                                           |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+ (requires use of [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md))</li><li>Open-source OpenSearch x.xx</li><li>Elasticsearch 8.16+</li></ul>                                                                                                        |
+| Optimize                                                   | OpenJDK 21+  | <ul><li>Amazon OpenSearch 2.17+</li><li>Open-source OpenSearch x.xx</li><li>Elasticsearch 8.16+</li></ul>                                                                                                                                                                                                                                       |
 | Connectors                                                 | OpenJDK 21+  |                                                                                                                                                                                                                                                                                                                                                 |
 | Management Identity                                        | OpenJDK 17+  | <ul><li>Keycloak 25.x, 26.x</li><li>Microsoft SQL Server: 2019</li><li>Oracle 19c</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x (required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration))</li></ul> |
 | Web Modeler                                                | -            | <ul><li>H2 2.3</li><li>MariaDB 10.4, 11.4, 11.8</li><li>Microsoft SQL Server (MSSQL): 2019, 2022</li><li>MySQL 8.4</li><li>Oracle 19c, 23ai</li><li>PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x</li></ul>                                                                           |
 | Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                                                                                                                               |
 
-When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
+### OpenSearch and Elasticsearch support
 
-Due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
-for the index refresh interval, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html). More information on configuring Amazon OpenSearch can be found [here](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
-
-:::note Elasticsearch support
-Camunda 8 works with the [default distribution](https://www.elastic.co/downloads/elasticsearch) of Elasticsearch, which is available under the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
-:::
+- Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
+- Due to a [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
+  for the index refresh interval, [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html) are not supported with Amazon OpenSearch. See [use Amazon OpenSearch Service with the Helm chart](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
+- When running Elasticsearch, you must have the appropriate [Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
+- Camunda 8 works with the Elasticsearch [default distribution](https://www.elastic.co/downloads/elasticsearch) available with the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 
 ### Component version matrix
 
