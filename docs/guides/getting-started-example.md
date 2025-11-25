@@ -1,7 +1,7 @@
 ---
 id: getting-started-example
-title: "Run your first local Camunda 8 project"
-sidebar_label: Run your first local project
+title: "Run your first Spring Boot or NodeJS project with Camunda 8"
+sidebar_label: Run your first Spring Boot or NodeJS project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
