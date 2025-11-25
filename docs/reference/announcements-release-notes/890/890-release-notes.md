@@ -142,6 +142,18 @@ Camunda 8 now supports the migration of process instances that include ad-hoc su
 
 Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. Aligning Web Modeler logging with the Orchestration Cluster allows administrators to more easily configure and maintain Self-Managed deployments.
 
+### Process instance migration: Ad-hoc subprocess
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Process Instance Migration">Migration</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3065 -->
+
+Process instance migration supports ad-hoc subprocess element migration.
+
+:::note
+This does not apply to the AI Agent ad-hoc subprocess. Its support will follow in upcoming alpha releases.
+:::
+
 ## 8.9.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
