@@ -39,73 +39,108 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 09 December 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2)</li></ul> | -    |
 
-### Console: Usage metrics for licence model and tenant (Self-Managed)
+### Console
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
+
+#### Bulk secrets import (SaaS)
+
+<!-- https://github.com/camunda/product-hub/issues/3283 -->
+
+You can now add secrets in Console by directly uploading or pasting the contents of a .env file.
+
+- Key–value pairs are automatically parsed, validated, and added as secrets.
+- This helps reduce configuration errors and copy-pasting when adding secrets.
+
+#### Cluster description (SaaS)
+
+<!-- https://github.com/camunda/product-hub/issues/3284 -->
+
+You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
+
+#### Usage metrics for licence model and tenant (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/2997 -->
 
 Self-Managed environment usage metrics now support per-tenant reporting and align with Camunda’s updated licensing model based on the number of tenants. This feature was available for Camunda 8 SaaS in the 8.8 release.
 
-### Console: SaaS Console: Bulk import of secrets
+### Desktop Modeler connections
 
-<!-- https://github.com/camunda/product-hub/issues/3283 -->
-
-You can now paste the full content of a .env file or upload it directly when adding secrets in Console. The system automatically parses key–value pairs, validates them, and populates the secrets list. This eliminates repetitive copy-paste steps and reduces configuration errors. Try it when adding secrets to your cluster.
-
-### Console: SaaS Console: Quick Win. Add cluster description field
-
-<!-- https://github.com/camunda/product-hub/issues/3284 -->
-
-You can now add an optional description to your cluster. This helps you document context, ownership, or operational notes without changing the cluster name. Add the description during cluster creation or update it later in Cluster Settings.
-
-### Desktop modeler managing connections
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/2970 -->
 
-Connection Management: Users can add, edit, delete, and save multiple Camunda connections (environment profiles), keeping credentials and settings yet accessible within the Modeler.
+You can now manage your Camunda connections directly within Desktop Modeler.
 
-Streamlined Deployment Workflow: Users can deploy to saved connections directly, select a target environment at deployment time, or add a new one as needed—all within a unified, user-friendly interface.
+- Add, edit, delete, and save multiple Camunda connections (environment profiles) within the Desktop Modeler.
+- Deploy directly to saved connections, select a target environment at deployment time, or add a new environment as required.
 
-### Define support policy for RDBMS versions
+### Data
 
-<!-- https://github.com/camunda/product-hub/issues/2654 -->
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
-Camunda 8 now includes a formal RDBMS Support Policy to guide both existing and prospective users. This policy clarifies which database versions are officially supported, the process for adopting newly released versions, and timelines for phasing out older versions. By adopting this policy, customers gain visibility into upgrade schedules while internal teams reduce the risk of unplanned releases or abrupt shifts in supported technologies.
-
-### Global User Task Listeners
-
-<!-- https://github.com/camunda/product-hub/issues/2586 -->
-
-Camunda 8.9 introduces configuration-based Global User Task Listeners for Self-Managed deployments. Administrators can define cluster-wide listeners using configuration files or environment variables, ensuring they are applied consistently from cluster startup and preserved across backup and restore operations. All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
-
-### Process Instance Migration: Support Migration for Ad-Hoc Subprocess Instances
-
-<!-- https://github.com/camunda/product-hub/issues/3065 -->
-
-Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants. With this enhancement, users can safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state. This unlocks flexible, agent-driven orchestration and faster iteration on live automations.
-
-### Support for OpenSource OpenSearch datastore
+#### OpenSource OpenSearch datastore support
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
 
-OpenSearch support for Camunda OSS
+You can now use the open source OpenSearch project as a datastore for your self-managed Camunda deployments. This allows you to run a fully open source observability stack without relying on ElasticSearch.
 
-You can now use the open-source OpenSearch project as the backing datastore in your self-managed Camunda deployments. This feature enables you to run a fully open-source observability stack without relying on ElasticSearch. For configuration instructions, see the updated Helm chart values and compatibility matrix.
+For configuration instructions, see the updated Helm chart values and compatibility matrix.
 
-### Web Modeler IP Egress configuration
+#### RDBMS version support policy
 
-<!-- https://github.com/camunda/product-hub/issues/3131 -->
+<!-- https://github.com/camunda/product-hub/issues/2654 -->
 
-### SQL and Liquibase scripts for supported Databases
+A new Camunda 8 Relational Database Management System (RDBMS) support policy provides information about:
 
-With this release, a comprehensive set of SQL and Liquibase scripts will be provided for all Camunda-supported databases. These scripts include database and schema creation, drop, and upgrade routines, following best practices for each supported database type and version. The full script package will be distributed as part of the official Camunda distribution, available via GitHub or Artifactory. Documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection.
+- Which database versions are officially supported
+- The process for adopting newly released versions
+- Timelines for phasing out older versions.
 
-### Web Modeler: Logging framework changes from Logback to Log4j2
+#### SQL and Liquibase database scripts
+
+SQL and Liquibase scripts are provided for all Camunda-supported databases.
+
+- These scripts include database and schema creation, drop, and upgrade routines, and follow best practices for each supported database type and version.
+- The full script package is distributed as part of the official Camunda distribution, available via GitHub or Artifactory.
+
+<!-- See the documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection. -->
+
+### Global user task listeners
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2586 -->
+
+Configuration-based global user task listeners are now available for Self-Managed deployments.
+
+- Administrators can define cluster-wide listeners using configuration files or environment variables. This ensures listeners are applied consistently from cluster startup and preserved across backup and restore operations.
+- All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
+
+### Process instance migration supports ad-hoc sub-processes
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3065 -->
+
+Camunda 8 now supports the migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+
+- Safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state.
+- Implement flexible, agent-driven orchestration and faster iteration on live automations.
+
+### Web Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
+#### IP Egress configuration
+
+<!-- https://github.com/camunda/product-hub/issues/3131 -->
+
+#### Logging framework changes from Logback to Log4j2
+
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
-Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. By aligning Web Modeler logging with the Orchestration Cluster, administrators are enabled to more easily configure and maintain Self-Managed deployments.
+Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. Aligning Web Modeler logging with the Orchestration Cluster allows administrators to more easily configure and maintain Self-Managed deployments.
 
 ## 8.9.0-alpha1
 
