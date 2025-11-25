@@ -169,7 +169,7 @@ Use an element template to extend the Desktop Modeler or Web Modeler with domain
 
 ### Embedding (Vector Embedding)
 
-A vector representation of data, including words, sentences,  images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
+A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
 
 - [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
 
@@ -213,7 +213,7 @@ See [Zeebe Gateway](#zeebe-gateway).
 
 ### Generative AI
 
-Any AI system that can produce new content, such as text, images, audio,  in response to prompts. Generative AI doesn’t just analyze existing data: it creates original output that is often contextually relevant to the input.
+Any AI system that can produce new content, such as text, images, audio, in response to prompts. Generative AI doesn’t just analyze existing data: it creates original output that is often contextually relevant to the input.
 
 ## H
 
@@ -507,7 +507,7 @@ A parameter that controls the randomness or creativity of AI-generated text. Low
 
 The smallest unit of text such as a word, subword, or character, that a language model processes. Models read and generate text as a sequence of tokens. Often, pricing for AI models is based on the number of input/output tokens.
 
-### Token (Process Instance)
+### Token (Process instance)
 
 In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed. When a process starts, a token is created at the start event and advances with every completed step. When the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
