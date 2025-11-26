@@ -176,4 +176,8 @@ When using Bitnami images, consider these constraints:
 
 ## Compatibility note
 
-This configuration follows Bitnami’s official image and chart usage guidelines. For licensing, support levels, and CVE management, refer to [Bitnami Documentation](https://docs.bitnami.com/) and [Bitnami Enterprise](https://bitnami.com/enterprise).
+:::info Registry migration notice
+As of November 30, 2025, our image vendor has migrated their repositories. All images downloaded before this date remain available but are not listable via the `skopeo` command. The `skopeo` command will only return new images added by Bitnami after November 30, 2025.
+:::
+
+This configuration follows Bitnami's official image and chart usage guidelines. For licensing, support levels, and CVE management, refer to [Bitnami Documentation](https://docs.bitnami.com/) and [Bitnami Enterprise](https://bitnami.com/enterprise).
