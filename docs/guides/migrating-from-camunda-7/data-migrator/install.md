@@ -17,7 +17,7 @@ Install the Data Migrator and run your first data migration.
 ## Installation
 
 1. Download the latest release from the GitHub releases page:
-   - https://github.com/camunda/camunda-7-to-8-data-migrator/releases
+   - https://github.com/camunda/camunda-7-to-8-migration-tooling/releases
 2. Extract the archive to your preferred directory.
 3. Navigate to the extracted directory.
 
@@ -26,7 +26,6 @@ Install the Data Migrator and run your first data migration.
 1. Make sure Camunda 8 is up and running, and all process models to migrate are deployed.
 
    To be used with the Runtime Data Migrator, **every process model requires**:
-
    - A blank start event (you must add one if the process model doesn't have one already).
    - An execution listener at the end of your blank start event with the job type `migrator`. You have to add this manually, or let it be added by the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
 
