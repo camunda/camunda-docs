@@ -19,7 +19,7 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
-## Notice 35
+## Notice 36
 
 ### Publication date
 
