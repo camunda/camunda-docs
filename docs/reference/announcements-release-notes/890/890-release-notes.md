@@ -41,7 +41,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 ### Web Modeler: Logging framework changes from Logback to Log4j2
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
@@ -49,7 +49,7 @@ Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for
 
 ### Web Modeler: Embedded web server changed from Undertow to Tomcat
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
