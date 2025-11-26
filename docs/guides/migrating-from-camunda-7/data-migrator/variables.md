@@ -198,7 +198,7 @@ camunda:
 
 The `enabled` property is supported for all interceptors (both built-in and custom) and defaults to `true`.
 
-See [example interceptor](https://github.com/camunda/camunda-7-to-8-data-migrator/tree/main/examples/variable-interceptor).
+See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator/examples/variable-interceptor).
 
 ### Execution Order
 
