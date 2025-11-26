@@ -51,15 +51,15 @@ For example, orchestrate when and how AI agents act within a process, what tools
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
-### AI (Artificial intelligence)
+### Artificial intelligence (AI)
 
 A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
 
 ### AI agent
 
-An autonomous system, typically powered by a LLM, that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
+An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
 
-For example, build an invoice processing AI agent in Camunda with BPMN, using an ad‑hoc sub‑process and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
@@ -167,7 +167,7 @@ Use an element template to extend the Desktop Modeler or Web Modeler with domain
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
 
-### Embedding (Vector Embedding)
+### Embedding (vector embedding)
 
 A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
 
@@ -213,13 +213,13 @@ See [Zeebe Gateway](#zeebe-gateway).
 
 ### Generative AI
 
-Any AI system that can produce new content, such as text, images, audio, in response to prompts. Generative AI doesn’t just analyze existing data: it creates original output that is often contextually relevant to the input.
+Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
 
 ## H
 
 ### Hallucination
 
-When an AI confidently produces incorrect or fabricated information that sounds plausible. It reflects the model’s tendency to generate patterns that appear coherent but are not factually grounded.
+When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
 
 ### Human task
 
@@ -286,9 +286,9 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 ## L
 
-### Large Language Model (LLM)
+### Large language model (LLM)
 
-A large language model is a type of AI program specifically designed to understand and generate human-like text. LLMs are giant AI models trained on massive amounts of text data, learning the structure of language to perform a variety of tasks such as conversation, summarization, and code generation.
+A large language model (LLM) is a type of AI program specifically designed to understand and generate human-like text. These models are trained on massive amounts of text data, enabling them to learn the structure of language and perform a variety of tasks, such as conversation, summarization, and code generation.
 
 ### Leader
 
@@ -401,9 +401,9 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
-## Prompt
+### Prompt
 
-A prompt is the input given to a [generative AI model](#generative-ai). Prompt engineering is the practice of crafting effective instructions to achieve desired results from the AI.
+A prompt is the input provided to a [generative AI model](#generative-ai). Prompt engineering refers to the practice of crafting effective instructions to achieve desired results from the AI.
 
 ### Protocol connector
 
@@ -460,9 +460,9 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 - [RFC](/components/camunda-integrations/sap/csap-cli.md)
 
-### Robotic Process Automation (RPA)
+### Robotic process automation (RPA)
 
-The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, improving speed and accuracy.
+The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
 
 ## S
 
@@ -501,15 +501,17 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ### Temperature
 
-A parameter that controls the randomness or creativity of AI-generated text. Lower values make responses more focused and predictable; higher values make them more creative and varied.
+A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
 
 ### Token (AI)
 
 The smallest unit of text such as a word, subword, or character, that a language model processes. Models read and generate text as a sequence of tokens. Often, pricing for AI models is based on the number of input/output tokens.
 
-### Token (Process instance)
+### Token (process instance)
 
-In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed. When a process starts, a token is created at the start event and advances with every completed step. When the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
+In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed.
+
+When a process starts, a token is created at the start event and advances with each completed step. Once the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
 ## U
 
