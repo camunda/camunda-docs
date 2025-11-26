@@ -23,7 +23,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ### Publication date
 
-November 24, 2025
+November 26, 2025
 
 ### Products affected
 
