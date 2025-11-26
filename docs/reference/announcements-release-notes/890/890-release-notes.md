@@ -144,11 +144,20 @@ This does not apply to the ai Agent ad-hoc sub-process. Support for this will fo
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-#### IP Egress configuration
+#### IP egress monitoring (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3131 -->
 
-A new API endpoint is available to monitor Web Modeler egress IP addresses.
+A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler egress IP addresses.
+
+- For example, the endpoint is available at https://api.cloud.camunda.io/meta/ip-ranges.
+- Send a GET request to the endpoint to retrieve a list of egress IP addresses.
+- Only IP addresses for the related services are exposed (Web Modeler).
+- Camunda expects interested customers to periodically read this list from the API and reflect any changes in their systems.
+
+:::note
+Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
+:::
 
 #### Logging framework changes from Logback to Log4j2 (Self-Managed)
 
