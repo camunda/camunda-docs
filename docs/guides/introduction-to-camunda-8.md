@@ -30,7 +30,7 @@ Get hands-on with [Camunda 8](https://camunda.io) with our getting started guide
 
 ## Run your first Spring Boot or NodeJS project with Camunda 8
 
-This guide is for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 <p><a href="./getting-started-example/" class="link-arrow">Run your first local project</a></p>
 
