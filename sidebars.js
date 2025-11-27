@@ -111,7 +111,10 @@ module.exports = {
                 type: "doc",
                 id: "components/concepts/user-task-listeners",
               },
-              items: ["components/concepts/listen-to-user-tasks"],
+              items: [
+                "components/concepts/global-user-task-listeners",
+                "components/concepts/listen-to-user-tasks",
+              ],
             },
           ],
         },
@@ -120,7 +123,6 @@ module.exports = {
         "components/concepts/variables",
         "components/concepts/expressions",
         "components/concepts/resource-deletion",
-        "components/concepts/task-testing",
       ],
     },
     {
@@ -184,7 +186,7 @@ module.exports = {
           label: "Agentic orchestration",
           link: {
             type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration",
+            id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
             "components/agentic-orchestration/ao-design",
@@ -545,6 +547,7 @@ module.exports = {
         require("./docs/components/modeler/element-templates/sidebar-schema"),
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         require("./docs/components/modeler/reference/sidebar-schema"),
       ],
     },
@@ -1233,6 +1236,19 @@ module.exports = {
       items: [
         {
           type: "category",
+          label: "8.9",
+          link: {
+            type: "doc",
+            id: "reference/announcements-release-notes/890/890-announcements",
+          },
+          items: [
+            "reference/announcements-release-notes/890/whats-new-in-89",
+            "reference/announcements-release-notes/890/890-announcements",
+            "reference/announcements-release-notes/890/890-release-notes",
+          ],
+        },
+        {
+          type: "category",
           label: "8.8",
           link: {
             type: "doc",
@@ -1438,6 +1454,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",
@@ -1469,6 +1486,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
+                "self-managed/deployment/helm/upgrade/upgrade-hc-880-890",
                 {
                   type: "category",
                   label: "Upgrade 8.7 to 8.8",
@@ -1619,6 +1637,28 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Secondary storage",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/secondary-storage/index",
+          },
+          items: [
+            {
+              type: "category",
+              label: "Configure",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+              },
+              items: [
+                "self-managed/concepts/secondary-storage/no-secondary-storage",
+              ],
+            },
+            "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1681,8 +1721,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "self-managed/concepts/secondary-storage-management",
-        "self-managed/concepts/no-secondary-storage",
       ],
     },
     {
@@ -1971,6 +2009,7 @@ module.exports = {
             id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
+            "self-managed/components/components-upgrade/880-to-890",
             "self-managed/components/components-upgrade/870-to-880",
             "self-managed/components/components-upgrade/860-to-870",
             "self-managed/components/components-upgrade/850-to-860",
@@ -1992,7 +2031,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
       link: {
         type: "doc",
         id: "self-managed/update/administrators/admin-upgrade-overview",

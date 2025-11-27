@@ -7,6 +7,10 @@ toc_max_heading_level: 2
 
 Camunda publishes security notices after fixes are available.
 
+:::tip Subscribe to security notices
+Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+:::
+
 ## Report a security issue or vulnerability
 
 Report security vulnerabilities to Camunda immediately, following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
@@ -14,6 +18,61 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 :::info
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
+
+## Notice 35
+
+### Publication date
+
+November 26, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+- Camunda Management Identity
+
+### Impact
+
+The embedded JDBC driver for Amazon Aurora PostgreSQL (`software.amazon.jdbc:aws-advanced-jdbc-wrapper`) was affected by
+[CVE-2025-12967](https://nvd.nist.gov/vuln/detail/CVE-2025-12967), which may allow for privilege escalation to the `rds_superuser` role.
+A low privilege authenticated user can create a crafted function that could be executed with permissions of other Amazon Relational Database Service (RDS) users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.2, ≤ 8.7.12, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+- Management Identity ≤ 8.8.1, ≤ 8.7.9, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.8.3, 8.7.13, 8.6.22
+- Management Identity 8.8.2, 8.7.10, 8.6.22
+
+## Notice 34
+
+### Publication date
+
+November 11, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+
+### Impact
+
+The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used by Web Modeler was affected by [CVE-2025-59250](https://nvd.nist.gov/vuln/detail/CVE-2025-59250), which allows improper input validation that could enable an attacker to perform spoofing over a network.
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed version &lt;= 8.8.1 and Microsoft SQL Server as database vendor.
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Web Modeler Self-Managed 8.8.2
 
 ## Notice 33
 

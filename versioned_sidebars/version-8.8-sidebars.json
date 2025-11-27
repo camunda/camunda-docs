@@ -118,8 +118,7 @@
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/resource-deletion",
-        "components/concepts/task-testing"
+        "components/concepts/resource-deletion"
       ]
     },
     {
@@ -183,7 +182,7 @@
           "label": "Agentic orchestration",
           "link": {
             "type": "doc",
-            "id": "components/agentic-orchestration/agentic-orchestration"
+            "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
           "items": [
             "components/agentic-orchestration/ao-design",
@@ -554,6 +553,7 @@
         },
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         {
           "Reference": [
             {

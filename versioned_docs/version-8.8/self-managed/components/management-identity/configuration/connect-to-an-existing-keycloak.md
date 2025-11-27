@@ -10,6 +10,10 @@ import TabItem from "@theme/TabItem";
 
 This guide describes how to connect Management Identity to your existing Keycloak instance.
 
+:::info Deploying with Helm?
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart guide for connecting to an external Keycloak instance](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) instead.
+:::
+
 ## Prerequisites
 
 - Access to your [Keycloak Admin Console](https://www.keycloak.org/docs/latest/server_admin/#using-the-admin-console)

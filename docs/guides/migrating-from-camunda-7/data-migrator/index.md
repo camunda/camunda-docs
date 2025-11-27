@@ -9,7 +9,6 @@ Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8
 
 :::info Production Readiness Status
 
-- [Runtime migration](runtime.md): Targeted for Camunda 8.8.
 - [History migration](history.md): Experimental and not intended for production usage.
   :::
 
@@ -60,7 +59,7 @@ As part of this step, you might also need to extract big payloads and binaries (
 
 ## Repository
 
-You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-data-migrator
+You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-migration-tooling
 
 ## Cockpit Plugin
 

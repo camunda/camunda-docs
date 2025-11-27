@@ -49,7 +49,7 @@ The governed coordination of AI agents, humans, and systems in a blended determi
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
 
-- [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md)
+- [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
 ### AI agent
 

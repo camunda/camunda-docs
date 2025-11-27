@@ -17,11 +17,13 @@ For more information, visit [announcements](/reference/announcements-release-not
 
 ## Version compatibility
 
-| Spring Zeebe SDK version | JDK  | Camunda version | Bundled Spring Boot version |
-| ------------------------ | ---- | --------------- | --------------------------- |
-| 8.6.x (< 8.6.14)         | ≥ 17 | 8.6.x           | 3.3.x                       |
-| 8.6.x (>= 8.6.14)        | ≥ 17 | 8.6.x           | 3.4.x                       |
-| 8.7.x                    | ≥ 17 | 8.7.x           | 3.4.x                       |
+| Spring Zeebe SDK version    | JDK  | Camunda version | Bundled Spring Boot version | Compatible Spring Boot version(s) |
+| --------------------------- | ---- | --------------- | --------------------------- | --------------------------------- |
+| 8.6.x (< 8.6.14)            | ≥ 17 | 8.6.x           | 3.3.x                       |                                   |
+| 8.6.x (>= 8.6.14, < 8.6.30) | ≥ 17 | 8.6.x           | 3.4.x                       |                                   |
+| 8.6.x (>= 8.6.30)           | ≥ 17 | 8.6.x           | 3.4.x                       | 3.5.x                             |
+| 8.7.x                       | ≥ 17 | 8.7.x           | 3.4.x                       |                                   |
+| 8.7.x (>= 8.7.17)           | ≥ 17 | 8.7.x           | 3.4.x                       | 3.5.x                             |
 
 ## Add the Spring Zeebe SDK to your project
 
