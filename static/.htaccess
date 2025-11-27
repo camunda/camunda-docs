@@ -155,8 +155,8 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #---------------------------------------------------------------------------------
 
 # Remove Node.js SDK and redirect to TypeScript SDK
-RewriteRule ^/docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]
-RewriteRule ^/docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescript-sdk/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]
+RewriteRule ^docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescript-sdk/ [R=301,L]
 
 # Removed Web Modeler Task testing page
 RewriteRule ^docs/next/components/modeler/web-modeler/validation/task-testing/?$ /docs/next/components/concepts/task-testing/ [R=301,L]
