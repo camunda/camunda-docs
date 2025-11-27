@@ -1,6 +1,6 @@
 ---
 id: typescript-sdk
-title: TypeScript SDK overview
+title: TypeScript SDK
 description: Camunda 8 TypeScript SDK overview.
 ---
 
