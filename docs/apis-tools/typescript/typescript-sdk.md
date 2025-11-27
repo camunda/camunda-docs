@@ -16,7 +16,7 @@ Choose how you want to get started with Camunda 8 TypeScript development:
 
 <ApiGrid api={gsCards} columns={2}/>
 
-## Further resources
+## Features and concepts
 
 Learn more about Camunda TypeScript SDK features and important concepts:
 
