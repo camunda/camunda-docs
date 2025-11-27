@@ -1,6 +1,7 @@
 ---
 id: eventual-consistency
 title: Manage Orchestration Cluster API data consistency
+sidebar_label: Manage data consistency
 description: Manage eventually consistent data when using the Orchestration Cluster API.
 ---
 
@@ -8,9 +9,11 @@ Learn how to manage eventually consistent data when using the Orchestration Clus
 
 ## About eventual consistency
 
-Data in Camunda 8 is eventually consistent. Read more about eventual consistency in the [Camunda 8 architecture overview](https://docs.camunda.io/docs/sections/components/architecture/architecture-overview/#eventual-consistency-between-components).
+Data in Camunda 8 is [eventually consistent](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-data-fetching.md#data-consistency).
 
-To ensure that your applications behave explicitly and deterministically at runtime under different load scenarios, Orchestration Cluster API methods that access eventually consistent data take a required second parameter `consistency`. This parameter lets you either ignore eventual consistency or manage how your application interacts with it.
+- To ensure that your applications behave explicitly and deterministically at runtime under different load scenarios, Orchestration Cluster API methods that access eventually consistent data take a required second parameter `consistency`.
+
+- This parameter lets you either ignore eventual consistency or manage how your application interacts with it.
 
 For example, if you search for a process instance immediately after you create it, the response may contain the new instance. If the data is not yet available, the search may return an empty result or a 404 error.
 
@@ -46,7 +49,7 @@ main();
 
 To ignore eventual consistency, set `waitUpToMs` to 0. The operation returns immediately with the current API response.
 
-In this case, you are more likely to receive an empty set for a search operation or a 404 error for a get operation than to find the process instance you just created. Even though the system already created the process instance and returned its key, you may still receive a result like:
+In this scenario, you are more likely to receive an empty set for a search operation or a 404 error for a get operation than to find the process instance you just created. Even though the system already created the process instance and returned its key, you might still receive a result such as:
 
 ```json
 {
@@ -54,7 +57,7 @@ In this case, you are more likely to receive an empty set for a search operation
 }
 ```
 
-In some situations, you may want to wait for eventual consistency to settle. The SDK provides you with an ergonomic surface to do this.
+In some situations, you may want to wait for eventual consistency to settle. The SDK provides you with an ergonomic surface for this.
 
 ## Manage eventual consistency
 

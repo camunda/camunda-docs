@@ -1,6 +1,7 @@
 ---
 id: migrating-to-oca
 title: Migrate to the Orchestration Cluster API
+sidebar_label: Migrate an application
 description: How to progressively adopt the Orchestration Cluster API in an existing application.
 ---
 
@@ -121,8 +122,9 @@ main();
 
 ## Integrate the strongly typed client
 
-You have two options to handle this: manage the type system boundary or erase nominal typing.
-The new client provides lifters to deal with interoperability:
+To handle this, you can either manage the type system boundary or erase nominal typing.
+
+The new client provides lifters to deal with interoperability. For example:
 
 ```typescript
 import { Camunda8, OrchestrationLifters } from '@camunda8/sdk'
@@ -177,7 +179,9 @@ async function cancelRunningProcessInstances(processDefinitionKey: string) {
 }
 ```
 
-This approach is the preferred method. This allows you to move the type and constraint validation boundary from the server API to the boundaries of your application. See [the presentation on patterns](https://www.camundacon.com/event-session/camundacon-new-york-2025/patterns-to-use-today-to-make-camunda-8-apps-even-more-reliable?on_demand=true) for more details (it is the third demo).
+:::info
+This approach is the preferred method. This allows you to move the type and constraint validation boundary from the server API to the boundaries of your application. See [the presentation on patterns](https://www.camundacon.com/event-session/camundacon-new-york-2025/patterns-to-use-today-to-make-camunda-8-apps-even-more-reliable?on_demand=true) for more information (refer to the third demo).
+:::
 
 ## Integrate the loosely-typed client
 
@@ -207,7 +211,7 @@ async function main() {
 main()
 ```
 
-You can use the loosely-typed in the first instance, then progressively migrate to the strongly typed variant.
+You can use loosely-typed in the first instance, then progressively migrate to the strongly typed variant.
 
 ## Configuration
 
@@ -221,9 +225,16 @@ Some method signatures have changed, mostly in the names of fields. Your IDE int
 
 ## Data access and consistency
 
-Search and get operations require a second parameter to manage eventual consistency.  
-See the examples in the [TypeScript SDK guide](./camunda8-sdk.md) and the conceptual overview in [Manage Orchestration Cluster API data consistency](./eventual-consistency.md).
+Search and get operations require a second parameter to manage eventual consistency.
+
+:::info
+See the examples in the [TypeScript SDK guide](./camunda8-sdk.md) and the [manage Orchestration Cluster API data consistency](./eventual-consistency.md) overview.
+:::
 
 ## Manage backpressure
 
-The new client has enhanced backpressure management. See [Manage backpressure using the TypeScript SDK](./backpressure.md).
+The new client has enhanced backpressure management.
+
+:::info
+See [manage backpressure using the TypeScript SDK](./backpressure.md).
+:::

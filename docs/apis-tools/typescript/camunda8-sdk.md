@@ -1,15 +1,18 @@
 ---
 id: camunda8-sdk
-title: Get started with the TypeScript SDK
-sidebar_label: "Get started with the SDK"
+title: TypeScript SDK
+sidebar_label: "TypeScript SDK"
 description: Use the TypeScript SDK to connect to Camunda 8.
 ---
 
 Use the TypeScript SDK to connect to Camunda 8, deploy process models, and work with the Orchestration Cluster API.
 
-## About the TypeScript SDK
+## About this SDK
 
-The TypeScript SDK provides typed access to Camunda 8 APIs. It includes IntelliSense support and works in both JavaScript and TypeScript projects. The [Camunda 8 TypeScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
+The TypeScript SDK provides typed access to Camunda 8 APIs.
+
+- It includes IntelliSense support and works in both JavaScript and TypeScript projects.
+- The [Camunda 8 TypeScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
 
 ### When to use this package
 
@@ -27,13 +30,13 @@ If you are new to Camunda 8.8 and do not need gRPC or v1 APIs, use the Orchestra
 
 The following prerequisites are required to use the TypeScript SDK:
 
-| Prerequisite | Description                                                                                                                                                                                                                                                                                                                                |
-| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Node.js      | The SDK runs in Node.js and cannot run in a web browser due to [technical limitations](https://github.com/camunda/camunda-8-js-sdk/issues/79). If you want to write an application in the web browser, use `@camunda8/orchestration-cluster-api`. See [Get started with the Orchestration Cluster API TypeScript client](./oca-client.md). |
+| Prerequisite | Description                                                                                                                                                                                                                                                                                                                                                                              |
+| :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js      | <ul><li><p>The SDK runs in Node.js and cannot run in a web browser due to [technical limitations](https://github.com/camunda/camunda-8-js-sdk/issues/79).</p></li><li><p>If you want to write an application in the web browser, use `@camunda8/orchestration-cluster-api`.</p><p>See [Get started with the Orchestration Cluster API TypeScript client](./oca-client.md).</p></li></ul> |
 
 ## Get started
 
-Get started with the Orchestration Cluster API on Camunda 8.8 and later. A complete working version of the quickstart code is [available on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+Get started with the Orchestration Cluster API on Camunda 8.8 and above.
 
 1. Create a new Node.js project that uses TypeScript:
 
@@ -49,8 +52,11 @@ Get started with the Orchestration Cluster API on Camunda 8.8 and later. A compl
    npm i @camunda8/sdk
    ```
 
-:::note
-For earlier versions using the v1 APIs, see the [SDK README file](https://github.com/camunda/camunda-8-js-sdk).
+:::info
+
+- A complete working version of the quickstart code is [available on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+- For earlier versions using the v1 APIs, refer to the [SDK README file](https://github.com/camunda/camunda-8-js-sdk).
+
 :::
 
 ## Configure the connection
@@ -62,9 +68,11 @@ Choose one of the following configuration options:
 
 The recommended configuration is via the zero-configuration constructor, with all values for configuration supplied via environment variables. This makes rotation, secret management, and environment promotion safer and simpler.
 
-The environment variables you must set are outlined below. Replace these with your secrets and URLs.
+**The environment variables you must set are outlined below. Replace these with your secrets and URLs.**
 
+:::info
 To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+:::
 
 ### Self-managed configuration
 
@@ -125,7 +133,7 @@ To set these values explicitly in code (not recommended), pass them with the sam
 
 ### Deploy a process model
 
-Now, deploy a process model. Network operations are asynchronous and methods that operate over the network return promises. Wrap the main function in an `async` function:
+Next, deploy a process model. Network operations are asynchronous and methods that operate over the network return promises. Wrap the main function in an `async` function:
 
 ```typescript
 async function main() {
@@ -140,7 +148,7 @@ async function main() {
 main(); // remember to invoke the function
 ```
 
-Paste the process model XML below into a file called `process.bpmn`:
+Paste the process model XML below into a file named `process.bpmn`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -207,13 +215,13 @@ For reference, this is the model you use in this example:
 
 ![Example BPMN process model](../img/process-model.png)
 
-Run the program now to deploy the process model to Camunda:
+Run the program to deploy the process model to Camunda:
 
 ```bash
 npx tsx index.ts
 ```
 
-If your configuration is correct, you see output similar to the following:
+If your configuration is correct, you should see output similar to the following:
 
 ```
 [Camunda] Deployed process c8-sdk-demo
@@ -245,7 +253,7 @@ const worker = camunda.createJobWorker({
 
 This code starts a service task worker that runs in an asynchronous loop and invokes `jobHandler` when a job of type `service-task` becomes available.
 
-The handler must return a job completion function like `fail`, `complete`, `error`, or `ignore`. The type system enforces this to ensure every code path responds to Zeebe after taking a job. The `job.complete` function can take an object with variables to update.
+The handler must return a job completion function such as `fail`, `complete`, `error`, or `ignore`. The type system enforces this to ensure every code path responds to Zeebe after taking a job. The `job.complete` function can take an object with variables to update.
 
 ### Create a programmatic user task worker
 
@@ -303,7 +311,7 @@ const userTaskPoller = camunda.searchUserTasks(
 
 You now have an asynchronously polling service and user task worker.
 
-The last step is to create a process instance.
+The final step is to create a process instance.
 
 ### Create a process instance
 
@@ -380,7 +388,7 @@ To examine the process instance status, use the process instance key to query th
    );
    ```
 
-2. After that line, inside the `main` function, add the following:
+2. Add the following after this line and inside the `main` function:
 
    ```typescript
    const historicalProcessInstance = await camunda.getProcessInstance(
@@ -392,7 +400,7 @@ To examine the process instance status, use the process instance key to query th
    console.log("[Camunda]", JSON.stringify(historicalProcessInstance, null, 2));
    ```
 
-When you run the program now, you see additional output similar to the following:
+When you run the program now, you should see additional output similar to the following:
 
 ```
 {
