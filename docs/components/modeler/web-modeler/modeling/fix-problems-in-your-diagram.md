@@ -16,7 +16,7 @@ An error is shown if any process ID, decision ID, or form ID is more than 255 ch
 
 ### Camunda version selection
 
-The version selector at the top right in the problems panel can be used to choose the Camunda version the diagram is validated against. The chosen version should match the version of the cluster where the diagram will be deployed so that the correct set of errors is shown (if you do not know the version, it is shown alongside the cluster name in the deployment dialog which can be opened by clicking the **Deploy diagram** button.)
+The version selector at the top right in the problems panel can be used to choose the Camunda version the diagram is validated against. The chosen version should match the version of the cluster where the diagram will be deployed so that the correct set of errors is shown. If you do not know the version, it is shown alongside the cluster name in the deployment dialog, which can be opened by clicking the **Deploy diagram** button.
 
 The version selector also provides information about the number of clusters available for each Camunda version within the current organization.
 
