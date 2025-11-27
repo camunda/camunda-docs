@@ -378,6 +378,7 @@ module.exports = {
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
                   ],
                 },
+                "components/early-access/alpha/a2a-client/a2a-client",
                 "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
