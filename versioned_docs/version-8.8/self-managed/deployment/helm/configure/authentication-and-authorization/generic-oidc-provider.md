@@ -8,30 +8,23 @@ description: "Learn how to configure Camunda 8 Self-Managed to use any OIDC-comp
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OIDC-compliant identity provider.
+This guide shows you how to configure Camunda 8 Self-Managed to authenticate with any OpenID connect (OIDC)-compliant identity provider.
 
-## When to use this guide
-
-Use this guide if you have an existing OIDC provider (such as Keycloak, Microsoft Entra, Okta, Auth0, or another OIDC-compliant service) and want to configure Camunda to use it for authentication.
-
-**For provider-specific guides with streamlined setup:**
-
-- [External Keycloak](./external-keycloak.md) - Includes automatic configuration via Management Identity
-- [Microsoft Entra](./microsoft-entra.md) - Step-by-step guide for Microsoft Entra ID
-
-Choose a provider-specific guide if available, as they include detailed setup instructions tailored to that provider's interface.
+:::info
+Before proceeding, since this is a general guide, refer to [External OIDC provider](./external-oidc-provider.md) to see the available provider-specific guides, as they include detailed setup instructions tailored to provider's interface.
+:::
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 
-- An OIDC-compliant provider already deployed and accessible
-- Administrative access to create and configure OIDC clients in your provider
-- Access to your provider's discovery document to obtain endpoint URLs
-- A Kubernetes cluster with Helm 3.x installed
-- kubectl configured to access your cluster
+- An OIDC-compliant provider already deployed and accessible.
+- Administrative access to create and configure OIDC clients in your provider.
+- Access to your provider's discovery document to obtain endpoint URLs.
+- A Kubernetes cluster with Helm 3.x installed.
+- kubectl configured to access your cluster.
 
-:::info
+:::note
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 :::
 
@@ -39,7 +32,7 @@ This guide assumes your OIDC provider is already operational. It does not cover 
 
 Create the following OIDC clients in your provider. The exact process varies by provider; consult your provider's documentation for client creation procedures.
 
-| Client Name           | Type         | Purpose                                          |
+| Client name           | Type         | Purpose                                          |
 | --------------------- | ------------ | ------------------------------------------------ |
 | Management Identity   | Confidential | User login and API authentication                |
 | Orchestration Cluster | Confidential | User login and machine-to-machine authentication |
@@ -48,20 +41,20 @@ Create the following OIDC clients in your provider. The exact process varies by 
 | Web Modeler UI        | Public       | User login                                       |
 | Console               | Public       | User login                                       |
 
-**For each client, record:**
+:::tip
+For each client, record:
 
 - Client ID
 - Client secret (for confidential clients only)
-
-After creating each client, you'll configure its redirect URIs in the next section.
+  :::
 
 ## Configure redirect URIs
 
-For each OIDC client you created above, configure the redirect URIs that match where Camunda components will be accessible from users' browsers.
+For each OIDC client you have created, configure the redirect URIs that correspond to where Camunda components will be accessible from users' browsers.
 
 ### Redirect URI table
 
-| Component             | Redirect URI Pattern                         | Example (localhost)                                 | Example (Ingress)                                                  |
+| Component             | Redirect URI pattern                         | Example (localhost)                                 | Example (Ingress)                                                  |
 | --------------------- | -------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------ |
 | Management Identity   | `<IDENTITY_URL>/auth/login-callback`         | `http://localhost:8084/auth/login-callback`         | `https://camunda.example.com/identity/auth/login-callback`         |
 | Orchestration Cluster | `<OC_URL>/sso-callback`                      | `http://localhost:8080/sso-callback`                | `https://camunda.example.com/orchestration/sso-callback`           |
@@ -69,19 +62,19 @@ For each OIDC client you created above, configure the redirect URIs that match w
 | Web Modeler UI        | `<WEB_MODELER_URL>/login-callback`           | `http://localhost:8070/login-callback`              | `https://camunda.example.com/modeler/login-callback`               |
 | Console               | `<CONSOLE_URL>/`                             | `http://localhost:8087/`                            | `https://camunda.example.com/`                                     |
 
-Replace `<*_URL>` with the actual base URL where each component will be accessible. Use the localhost examples if testing locally with port-forwarding, or the Ingress examples if exposing components via Ingress.
+Replace `<*_URL>` with the actual base URL where each component will be accessible. Use the localhost examples if testing locally with port forwarding, or the Ingress examples if exposing components via Ingress.
 
 :::important Security note
 Redirect URIs are security-critical. Only the URIs you configure in your OIDC provider are permitted as redirection targets after authentication. Ensure these values match the `redirectUrl` parameters you'll set in the Helm configuration.
 :::
 
 :::tip Wildcard support
-Some OIDC providers support wildcard redirect URIs (e.g., `https://camunda.example.com/*`). Check your provider's documentation to see if this simplifies your configuration.
+Some OIDC providers support wildcard redirect URIs (e.g., `https://camunda.example.com/*`). Check your provider's documentation to see if this can simplify your configuration.
 :::
 
 ## Discover provider configuration
 
-Since OIDC providers vary in their implementation details, you need to discover specific values from your provider.
+Since OIDC providers vary in their implementation details, you need to obtain the specific values from your provider.
 
 ### Find OIDC endpoints
 
@@ -93,7 +86,7 @@ https://your-provider.example.com/.well-known/openid-configuration
 
 Access this URL (replacing `your-provider.example.com` with your provider's domain) to retrieve a JSON document containing endpoint URLs.
 
-**Example discovery document:**
+#### Example discovery document
 
 ```json
 {
@@ -105,7 +98,7 @@ Access this URL (replacing `your-provider.example.com` with your provider's doma
 }
 ```
 
-**Record these values for Helm configuration:**
+#### Record these values for Helm configuration
 
 - `issuer` → Used for: `publicIssuerUrl`
 - `authorization_endpoint` → Used for: `authUrl`
@@ -116,7 +109,7 @@ Access this URL (replacing `your-provider.example.com` with your provider's doma
 
 Camunda needs to know which claims in access tokens identify users and clients. Claim names vary by provider.
 
-**Step 1: Obtain a test token**
+#### Step 1: Obtain a test token
 
 Use your OIDC client credentials to request an access token:
 
@@ -130,7 +123,7 @@ curl -X POST 'https://your-provider.example.com/oauth/token' \
 
 This returns a JSON response containing an `access_token`.
 
-**Step 2: Decode the token**
+#### Step 2: Decode the token
 
 Decode the JWT to inspect its claims (Linux/macOS):
 
@@ -140,72 +133,72 @@ echo "<access-token>" | cut -d'.' -f2 | base64 -d | jq
 
 Or use an online tool like [jwt.io](https://jwt.io) (paste the token to decode it).
 
-**Step 3: Identify required claims**
+#### Step 3: Identify required claims
 
 Look for these claims in the decoded token:
 
 1. **User identification claim** (for web login)
-   - Identifies users uniquely
-   - Common names: `email`, `preferred_username`, `sub`, `upn`, `unique_name`
-   - You'll configure this as: `usernameClaim`
+   - Identifies users uniquely.
+   - Common names: `email`, `preferred_username`, `sub`, `upn`, `unique_name`.
+   - You'll configure this as: `usernameClaim`.
 
 2. **Client identification claim** (for machine-to-machine authentication)
-   - Identifies the calling client application
-   - Common names: `client_id`, `azp`, `appid`, `clientId`
-   - You'll configure this as: `clientIdClaim`
+   - Identifies the calling client application.
+   - Common names: `client_id`, `azp`, `appid`, `clientId`.
+   - You'll configure this as: `clientIdClaim`.
 
 3. **Audience claim** (`aud`)
-   - Specifies the intended audience for the token
-   - Often contains the client ID or a custom value
-   - You'll configure this as: `audience`
+   - Specifies the intended audience for the token.
+   - Often contains the client ID or a custom value.
+   - You'll configure this as: `audience`.
 
-**Common claim patterns by provider:**
+**Common claim patterns by provider**
 
-| Provider        | User Claim                      | Client Claim         | Audience Default       |
+| Provider        | User claim                      | Client claim         | Audience default       |
 | --------------- | ------------------------------- | -------------------- | ---------------------- |
 | Microsoft Entra | `preferred_username`            | `azp`                | Client ID              |
 | Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May need configuration |
 | Auth0           | `email`                         | `client_id`          | Client ID              |
 | Okta            | `email`                         | `client_id`          | Client ID              |
 
-:::caution Audience configuration
+#### Step 4: Verify your audience configuration
+
+1. Decode a test token as shown above.
+2. Check the `aud` claim value.
+3. Use that value for the `audience` parameter in Camunda configuration.
+
+:::warning
 The audience claim is critical for token validation. Camunda will reject tokens that don't include the expected audience value.
+:::
 
-**If your tokens don't include an appropriate audience:**
+**If your tokens don't include an appropriate audience**
 
-- Check your OIDC provider's documentation on configuring token audiences
-- Some providers require explicit audience configuration in client settings
-- Keycloak specifically may default to `aud: "account"` and require additional configuration
-
-**To verify your audience configuration:**
-
-1. Decode a test token as shown above
-2. Check the `aud` claim value
-3. Use that value for the `audience` parameter in Camunda configuration
-   :::
+- Check your OIDC provider's documentation on configuring token audiences.
+- Some providers require explicit audience configuration in client settings.
+- Keycloak specifically may default to `aud: "account"` and require additional configuration.
 
 ### Scopes requested by Camunda
 
 Camunda components request OIDC scopes when authenticating users. The default scopes vary by component:
 
-**Management Identity, Optimize, Web Modeler, Console:**
+#### Management Identity, Optimize, Web Modeler, Console
 
-- `openid` - Required for OIDC authentication
-- `profile` - Access to user profile information
-- `email` - Access to user email address
-- `offline_access` - Enables refresh token issuance
+- `openid` - Required for OIDC authentication.
+- `profile` - Access to user profile information.
+- `email` - Access to user email address.
+- `offline_access` - Enables refresh token issuance.
 
-**Orchestration Cluster (Operate, Tasklist):**
+#### Orchestration Cluster (Operate, Tasklist)
 
-- `openid` - Required for OIDC authentication
-- `profile` - Access to user profile information
+- `openid` - Required for OIDC authentication.
+- `profile` - Access to user profile information.
 
-:::tip Refresh tokens and offline_access
+:::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
 
 If `offline_access` is not available or not granted, users will be redirected to your OIDC provider for re-authentication when their access token expires.
 
-For more information, see the <!--DOCLINK-->[OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess)<!--/DOCLINK-->.
+For more information, see [OpenID Connect Core specification](https://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess).
 :::
 
 ## Create secrets
@@ -223,7 +216,7 @@ kubectl create secret generic oidc-credentials \
 ```
 
 :::info
-The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the <!--DOCLINK-->[Web Modeler API](/apis-tools/web-modeler-api/authentication.md)<!--/DOCLINK--> programmatically.
+The secret key `webmodeler-api-client-secret` is not used elsewhere in this guide. This client is intended for your own use if you want to access the [Web Modeler API](/apis-tools/web-modeler-api/authentication.md)programmatically.
 :::
 
 Next, create a secret with the remaining credentials for the Camunda Helm chart:
@@ -240,7 +233,7 @@ Unlike the OIDC client secrets, these passwords initialize the component databas
 You can choose any values.
 
 :::tip Alternative secret management
-For production deployments, consider using external secret management solutions. See <!--DOCLINK-->[External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions)<!--/DOCLINK--> for more options.
+For production deployments, consider using external secret management solutions. See [External Kubernetes secrets](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions) for more options.
 :::
 
 ## Configure Camunda components
@@ -269,7 +262,7 @@ global:
       jwksUrl: <jwks-endpoint-url>
 ```
 
-**Parameter descriptions:**
+#### Parameter descriptions
 
 | Parameter          | Description                                               | Example                                                                 |
 | ------------------ | --------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -280,12 +273,12 @@ global:
 | `jwksUrl`          | JWKS endpoint for token signature verification            | `https://login.example.com/.well-known/jwks.json`                       |
 
 :::warning Network accessibility
-For Generic OIDC providers, the **Issuer URL** must be accessible from both:
+For generic OIDC providers, the **Issuer URL** must be accessible from both:
 
 1. **Users' browsers**: To redirect users to the login page.
 2. **Camunda components (backend)**: To fetch the provider's configuration and validate tokens.
 
-Split-horizon DNS setups (where the provider has different URLs for internal and external access) are **not supported** for Generic OIDC providers. Ensure your OIDC provider is exposed via a URL that is resolvable and reachable from both locations.
+Split-horizon DNS setups (where the provider has different URLs for internal and external access) are **not supported** for generic OIDC providers. Ensure your OIDC provider is exposed via a URL that is resolvable and reachable from both locations.
 :::
 
 ### Configure Management Identity
@@ -318,7 +311,7 @@ identityPostgresql:
       userPasswordKey: identity-postgresql-user-password
 ```
 
-**Identity-specific parameters:**
+#### Identity-specific parameters
 
 | Parameter           | Description                                  | How to Determine                                                                                |
 | ------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -328,7 +321,7 @@ identityPostgresql:
 | `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                     |
 | `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                     |
 
-:::danger Initial claim cannot be changed
+:::warning Initial claim cannot be changed
 The `initialClaimName` and `initialClaimValue` parameters are used only during the first startup to grant initial admin access. Once Management Identity has started, these values are stored in the database and cannot be changed via Helm values.
 :::
 
@@ -367,7 +360,7 @@ orchestration:
             - <orchestration-client-id>
 ```
 
-**Orchestration-specific parameters:**
+#### Orchestration-specific parameters
 
 | Parameter       | Description                        | Value                                                                                          |
 | --------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
@@ -377,10 +370,10 @@ orchestration:
 | `usernameClaim` | Claim identifying users            | Default: `preferred_username`. Override if your provider uses `email`, `sub`, or another claim |
 | `clientIdClaim` | Claim identifying clients          | Default: `client_id`. Override if your provider uses `azp` or another claim                    |
 
-**Default roles:**
+#### Default roles
 
-- `admin.users`: List of user claim values that should have admin access
-- `connectors.clients`: List of client IDs that should have Connectors role (typically the orchestration client ID itself)
+- `admin.users`: List of user claim values that should have admin access.
+- `connectors.clients`: List of client IDs that should have Connectors role (typically the orchestration client ID itself).
 
 :::note
 The admin user specified in `defaultRoles.admin.users` should match the value used for `initialClaimValue` in Management Identity configuration, so that the same user has admin access to both Management Identity and the Orchestration Cluster.
@@ -428,7 +421,7 @@ optimize:
   enabled: true
 ```
 
-**Optimize parameters:**
+#### Optimize parameters
 
 | Parameter     | Value                                                                           |
 | ------------- | ------------------------------------------------------------------------------- |
@@ -467,7 +460,7 @@ webModelerPostgresql:
       userPasswordKey: webmodeler-postgresql-user-password
 ```
 
-**Web Modeler parameters:**
+#### Web Modeler parameters
 
 | Parameter           | Description                              | Value                                                                          |
 | ------------------- | ---------------------------------------- | ------------------------------------------------------------------------------ |
@@ -476,8 +469,11 @@ webModelerPostgresql:
 | `clientApiAudience` | Audience for UI-to-API communication     | Usually the UI client ID                                                       |
 | `publicApiAudience` | Audience for external API access         | The API client ID or custom audience                                           |
 
-**Email configuration:**
-Web Modeler requires email configuration for notifications. Update `restapi.mail.fromAddress` with an appropriate sender address. For full SMTP configuration, see <!--DOCLINK-->[Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md)<!--/DOCLINK-->.
+#### Email configuration
+
+Web Modeler requires email configuration for notifications. Update `restapi.mail.fromAddress` with an appropriate sender address.
+
+For full SMTP configuration, see [Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md).
 
 ### Configure Console
 
@@ -636,21 +632,21 @@ console:
 
 **Placeholders to replace:**
 
-| Placeholder                                               | Replace With                                 |
+| Placeholder                                               | Replace with                                 |
 | --------------------------------------------------------- | -------------------------------------------- |
 | `https://your-provider.example.com`                       | Your OIDC provider's issuer URL              |
 | `identity`, `orchestration`, `optimize`, etc.             | Your actual client IDs                       |
 | `identity`, `orchestration`, `optimize` (audience values) | Actual audience values from token inspection |
 | `admin@example.com`                                       | Your admin user's claim value                |
 
-**Before deploying, verify:**
+### Verify before deploying
 
-- [ ] All `<placeholders>` replaced with actual values
-- [ ] All client secrets stored in the `oidc-credentials` secret
-- [ ] Database passwords stored in the `camunda-credentials` secret
-- [ ] Redirect URIs in OIDC provider match `redirectUrl` values
-- [ ] Token inspection confirms audience values
-- [ ] Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names
+- All `<placeholders>` replaced with actual values.
+- All client secrets stored in the `oidc-credentials` secret.
+- Database passwords stored in the `camunda-credentials` secret.
+- Redirect URIs in OIDC provider match `redirectUrl` values.
+- Token inspection confirms audience values.
+- Verify tokens contain `preferred_username` and `client_id` claims, or uncomment and configure alternative claim names.
 
 ## Connect to the cluster
 
@@ -683,7 +679,7 @@ For example, Management Identity at `http://localhost:8084` or the Orchestration
 :::important Redirect URI configuration
 Ensure your redirect URIs in your OIDC provider match how you're accessing Camunda. If you configured redirect URIs for localhost testing (e.g., `http://localhost:8080/sso-callback`), the port-forward commands above will work. If you configured redirect URIs for Ingress (e.g., `https://camunda.example.com/orchestration/sso-callback`), you'll need to access via Ingress instead.
 
-For production deployments, configure Ingress to expose components. See <!--DOCLINK-->[Ingress configuration](/self-managed/deployment/helm/configure/ingress/index.md)<!--/DOCLINK-->.
+For production deployments, configure Ingress to expose components. See [Ingress configuration](/self-managed/deployment/helm/configure/ingress/index.md) for more details.
 :::
 
 ## Grant access to components
@@ -707,12 +703,12 @@ To grant a user access to Optimize:
 :::info
 When using an OIDC provider, the following Optimize features are not currently available:
 
-- The **User permissions** tab in collections
-- The **Alerts** tab in collections
-- Digests
+- The **User permissions** tab in collections.
+- The **Alerts** tab in collections.
+- Digests.
 - Accessible user names for resource owners (the value of the `sub` claim is displayed instead).
   :::
 
 ## Troubleshooting
 
-For common issues and solutions when configuring OIDC authentication, see the [OIDC Troubleshooting guide](./troubleshooting-oidc.md).
+For common issues and solutions when configuring OIDC authentication, see [Troubleshooting OIDC authentication](./troubleshooting-oidc.md).

@@ -298,4 +298,4 @@ Log in with the username `demo` and the password stored in the secret key `ident
 
 ## Troubleshooting
 
-For common issues and solutions when configuring OIDC authentication, see the [OIDC Troubleshooting guide](./troubleshooting-oidc.md).
+For common issues and solutions when configuring OIDC authentication, see [Troubleshooting OIDC authentication](./troubleshooting-oidc.md).
