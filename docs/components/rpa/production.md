@@ -1,24 +1,26 @@
 ---
 id: production
-title: Setting up RPA for production deployments
-description: "Understand the specific configuration of your RPA runner to set up your workers for production use cases."
+title: RPA production setup
+description: Configure your RPA workers for production use cases.
 ---
 
-This document steps through the specific configuration of your RPA runner. For the basics on getting started, visit the [getting started guide](./getting-started.md).
+Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.
+
+For the basics on getting started, visit the [getting started guide](./getting-started.md).
 
 ## Configuration options
 
-### Transitioning from a development setup
+### Transition from a development setup
 
-To transition from a development setup to a production setup, there are a few things to consider:
+When moving from development to production, consider the following:
 
-- **Disable the local sandbox**: If your worker should only accept scripts from Zeebe and is not used for testing scripts from Modeler, disable the local execution by setting `camunda.rpa.sandbox.enabled` to `false`.
-- **If your scripts require third-party tools**: Install them along with the RPA worker so they are accessible from the scripts.
-- **Add tags to your worker and scripts**: Depending on your use case, it might be useful to tag your workers with their capabilities. Common ways for tagging include operation systems and available applications. [Read more on tags and labels](#labels).
+- **Disable the local sandbox**: If the worker should only accept scripts from Zeebe and not from Desktop Modeler, disable local execution by setting `camunda.rpa.sandbox.enabled=false`.
+- **Install required third-party tools**: Install any external tools your scripts rely on so the worker can access them.
+- **Add tags to your workers and scripts**: Tag workers based on their capabilities, such as operating systems or installed applications. See [Labels](#labels) for details.
 
-### Using secrets
+### Use secrets
 
-When running an RPA worker with Camunda SaaS, you can add access to [connector secrets](/components/connectors/use-connectors/index.md#using-secrets).
+When running an RPA worker with Camunda SaaS, you can access [connector secrets](/components/connectors/use-connectors/index.md#using-secrets).
 
 To do this:
 
@@ -33,7 +35,7 @@ In the RPA script, your secrets are stored in the `${secrets}` variable. You can
 
 ### Labels
 
-To differentiate capabilities of runners, use tags and labels.
+Use tags and labels to differentiate worker capabilities.
 
 1. In the `rpa-worker.properties`, add:
 
@@ -55,13 +57,13 @@ If no label is defined, both the task and worker will use the label `default`.
 
 ### Pre- and post-run scripts
 
-Some of your scripts might require a specific environment to be prepared before the main script starts. To use pre- or post-run scripts:
+Some scripts require environment setup before they run. To use pre- or post-run scripts:
 
 1. Create and deploy separate RPA scripts.
 2. Reference them in the properties panel of the RPA task.
 
 :::note
-The working directories of the worker’s job will be removed once the job is completed.
+The worker removes the job’s working directory after the job completes.
 :::
 
 ### Timeouts
@@ -73,7 +75,7 @@ To set timeouts:
 
 ### Concurrent jobs
 
-To enable concurrent jobs, set `camunda.rpa.zeebe.max-concurrent-jobs` in the worker config. Use this if your scripts (like browser automation) can run in parallel safely.
+To enable concurrent jobs, set `camunda.rpa.zeebe.max-concurrent-jobs` in the worker config. Enable this only if your scripts, such as browser automation, can run safely in parallel.
 
 ### Additional libraries
 
@@ -83,7 +85,7 @@ To install additional dependencies:
 2. Set `camunda.rpa.python.extra-requirements=extra-requirements.txt` in the properties file.
 3. Restart the worker to install them.
 
-Use [labels](#labels) to ensure scripts only run on compatible workers.
+Use [labels](#labels) to ensure scripts run only on compatible workers.
 
 For example, to use Playwright:
 
@@ -100,7 +102,7 @@ camunda.rpa.zeebe.worker-tags=default,playwright
 
 ## Installation and setup guide
 
-An RPA worker acts as a specialized job worker designed to run outside the main Camunda Orchestration Cluster.
+An RPA worker is a specialized job worker that runs outside the main Camunda Orchestration Cluster.
 
 ### Prerequisites
 
@@ -117,7 +119,7 @@ The RPA worker is a standalone binary.
 | Operating system | Required software | Optional software |
 | ---------------- | ----------------- | ----------------- |
 | Windows          | RPA worker        | -                 |
-| Linux + macOS    | RPA worker        | Python 3.12 + pip |
+| Linux and macOS  | RPA worker        | Python 3.12 + pip |
 
 #### Network configurations
 
@@ -126,7 +128,7 @@ The RPA worker is a standalone binary.
 
 ### Installation and configuration
 
-This section will focus on the setup of the RPA host machine.
+This section describes how to set up the RPA host machine.
 
 #### Scaling and operation
 
@@ -139,7 +141,7 @@ For scalable workloads:
 
 #### Setting up a VM
 
-We recommend using virtualization.
+Use virtualization to create scalable and repeatable worker deployments.
 
 ##### Create a template VM
 
@@ -152,7 +154,7 @@ We recommend using virtualization.
 7. Disable screen saver, sleep, and lock.
 8. Set the VM's time zone to match business requirements.
 9. Save the configured VM as a **template**.
-10. Keep a separate local admin/password in escrow for emergency access (audit all RDP/Console logons).
+10. Keep a separate local administrator account and password in escrow for emergency access, and audit all RDP and console logons.
 
 ##### Monitoring and scaling
 
