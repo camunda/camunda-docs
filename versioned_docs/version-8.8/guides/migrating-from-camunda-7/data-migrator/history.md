@@ -8,7 +8,7 @@ description: "Copy audit trail (history) data from Camunda 7 to Camunda 8. Exper
 Use the History Data Migrator to copy process instance audit data to Camunda 8.
 
 :::info
-The history migration mode of the Data Migrator will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-data-migrator/).
+The history migration mode of the Data Migrator will **not be released before Camunda 8.9 (April 2026)**. You can check the current state and track progress in the [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/).
 :::
 
 ## About history migration
