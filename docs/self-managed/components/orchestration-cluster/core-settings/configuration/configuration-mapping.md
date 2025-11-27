@@ -1,7 +1,7 @@
 ---
 id: configuration-mapping
-title: "Camunda 8.9 property changes"
-sidebar_label: 8.9 property changes
+title: "Property changes in Camunda 8.9"
+sidebar_label: Property changes in 8.9
 description: "Configuration property changes and backwards compatibility information for new Camunda 8.9 properties and legacy properties."
 hide_table_of_contents: true
 ---
@@ -15,7 +15,7 @@ Changes to component configuration properties introduced in Camunda 8.9.
 In Camunda 8.9, all remaining [unified configuration property changes](/versioned_docs/version-8.8/reference/announcements-release-notes/880/whats-new-in-88.md) are complete.
 
 :::info
-To learn more about the property changes introduced in Camunda 8.8, see [Camunda 8.8 property changes](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md).
+To learn more about the property changes introduced in Camunda 8.8, see [property changes in Camunda 8.8](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md).
 :::
 
 ### New properties and backwards compatibility
