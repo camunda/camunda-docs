@@ -1,7 +1,7 @@
 ---
 id: migrating-to-oca
 title: Migrate to the Orchestration Cluster API
-sidebar_label: Migrate an application
+sidebar_label: Migrate to the Orchestration Cluster API
 description: How to progressively adopt the Orchestration Cluster API in an existing application.
 ---
 
