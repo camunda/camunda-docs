@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is tailored for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 ## Get started with an example project
 
