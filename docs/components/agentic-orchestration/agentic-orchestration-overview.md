@@ -25,10 +25,6 @@ Get started with Camunda agentic orchestration.
 
 <AoGrid ao={getStartedCards} />
 
-:::note Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
-:::
-
 ## Learn the fundamentals
 
 Understand the core concepts of Camunda agentic orchestration.
