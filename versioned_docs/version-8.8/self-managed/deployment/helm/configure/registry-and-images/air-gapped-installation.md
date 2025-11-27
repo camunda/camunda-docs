@@ -102,6 +102,10 @@ docker pull registry.camunda.cloud/bitnami/postgresql:latest
 
 ### Access enterprise images with Skopeo
 
+:::info Registry migration notice
+As of November 30, 2025, our image vendor has migrated its repositories. All images downloaded before this date remain available but are no longer listable by the `skopeo` command. The `skopeo` command will return only images added by Bitnami after November 30, 2025.
+:::
+
 If you use Bitnami Premium images from the `vendor-ee` registry, you can use [Skopeo](https://github.com/containers/skopeo) to copy images directly to your private registry without requiring Docker locally:
 
 ```shell
