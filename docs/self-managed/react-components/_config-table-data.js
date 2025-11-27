@@ -1,6 +1,189 @@
 export const configs = [
-  // API keys
+  // 8.9 properties
+
   {
+    name: "camunda.cluster.network.advertised-host",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.port-offset",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.max-message-size",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.max-message-size",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+
+  {
+    name: "camunda.cluster.network.socket-send-buffer",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.socket-receive-buffer",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.heartbeat-timeout",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.heartbeat-interval",
+    legacy: ["?"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.command-api.host",
+    legacy: ["zeebe.broker.network.commandApi.host"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.command-api.port",
+    legacy: ["zeebe.broker.network.commandApi.port"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.command-api.advertisedHost",
+    legacy: ["zeebe.broker.network.commandApi.advertisedHost"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.command-api.advertisedPort",
+    legacy: ["zeebe.broker.network.commandApi.advertisedPort"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.internal-api.host",
+    legacy: [
+      "zeebe.gateway.cluster.host",
+      "zeebe.broker.network.internalApi.host",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.internal-api.port",
+    legacy: [
+      "zeebe.gateway.cluster.port",
+      "zeebe.broker.network.internalApi.port",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.internal-api.advertisedHost",
+    legacy: [
+      "zeebe.gateway.cluster.advertisedHost",
+      "zeebe.broker.network.internalApi.advertisedHost",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.network.internal-api.advertisedPort",
+    legacy: [
+      "zeebe.gateway.cluster.advertisedPort",
+      "zeebe.broker.network.internalApi.advertisedPort",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.name",
+    legacy: [
+      "zeebe.gateway.cluster.clusterName",
+      "zeebe.broker.cluster.clusterName",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.max-appends-per-follower",
+    legacy: ["zeebe.broker.experimental.maxAppendsPerFollower"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.max-appends-batch-size",
+    legacy: ["zeebe.broker.experimental.maxAppendBatchSize"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.request-timeout",
+    legacy: ["zeebe.broker.experimental.raft.requestTimeout"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.snapshot-request-timeout",
+    legacy: ["zeebe.broker.experimental.raft.snapshotRequestTimeout"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.snapshot-chunk-size",
+    legacy: ["zeebe.broker.experimental.raft.snapshotChunkSize"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.configuration-change-timeout",
+    legacy: ["zeebe.broker.experimental.raft.configurationChangeTimeout"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.max-quorum-response-timeout",
+    legacy: ["zeebe.broker.experimental.raft.maxQuorumResponseTimeout"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.min-step-down-failure-count",
+    legacy: ["zeebe.broker.experimental.raft.minStepDownFailureCount"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.prefer-snapshot-replicationThreshold",
+    legacy: [
+      "zeebe.broker.experimental.raft.preferSnapshotReplicationThreshold",
+    ],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.raft.preallocate-segment-files",
+    legacy: ["zeebe.broker.experimental.raft.preallocateSegmentFiles"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+
+  // API keys
+  /* {
     name: "camunda.api.grpc.address",
     legacy: ["zeebe.gateway.network.host", "zeebe.broker.gateway.network.host"],
     types: ["Direct mapping"],
@@ -900,5 +1083,5 @@ export const configs = [
     legacy: ["N/A"],
     types: ["New"],
     area: ["Licensing"],
-  },
+  }, */
 ];
