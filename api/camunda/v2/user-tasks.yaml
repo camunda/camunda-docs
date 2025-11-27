@@ -319,7 +319,7 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for user task variables based on given criteria.
+        Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
       parameters:
         - name: userTaskKey
           in: path
@@ -329,6 +329,12 @@ paths:
             type: string
             format: string<UserTaskKey>
             description: System-generated key for a user task.
+        - name: truncateValues
+          in: query
+          required: false
+          description: When true (default), long variable values in the response are truncated. When false, full variable values are returned.
+          schema:
+            type: boolean
       requestBody:
         required: false
         content:
@@ -460,6 +466,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The key of the element instance.
+        tags:
+          $ref: "identifiers.yaml#/components/schemas/TagSet"
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -559,6 +567,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/FormKey"
           description: The key of the form.
+        tags:
+          $ref: "identifiers.yaml#/components/schemas/TagSet"
     UserTaskCompletionRequest:
       type: object
       properties:
