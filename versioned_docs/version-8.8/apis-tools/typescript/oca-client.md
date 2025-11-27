@@ -1,61 +1,63 @@
 ---
 id: oca-client
-title: Getting started with the Camunda 8 Orchestration Cluster API TypeScript client
-description: et started with the @camunda8/orchestration-cluster-api package.
+title: Orchestration Cluster API TypeScript client
+sidebar_label: Orchestration Cluster API TypeScript client
+description: Use the @camunda8/orchestration-cluster-api package to connect to Camunda 8 and interact with the Orchestration Cluster REST API.
 ---
 
-Use the @camunda8/orchestration-cluster-api package directly when:
+Use the Orchestration Cluster API TypeScript client to connect to Camunda 8, deploy process models, and interact with the Orchestration Cluster REST API.
 
-1. You are starting a new project; and
-2. You do not need the gRPC API; and
-3. You are using Camunda 8.8 or later; or
-4. You are developing an application for the web browser (and all of the above)
+## About this client
 
-## Differences between the package and the SDK
+This lightweight package provides focused support for the Camunda 8.8 or later Orchestration Cluster REST API.
 
-### Configuration keys
+### When to use this package
 
-One difference between using the package directly and using it via the SDK is in the environment variable configuration.
+Use the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) package if:
 
-The SDK wraps the Orchestration Cluster API client package and allows you to use the legacy configuration keys. When using the package directly, you must use the environment variable configuration keys required by the package.
+- You are starting a new project.
+- You do not need the gRPC API.
+- You are using Camunda 8.8 or later.
+- You are developing an application for the web browser.
 
-The main change is that keys that were prefixed with `ZEEBE_` in the SDK are now prefixed with `CAMUNDA_` in the Orchestration Cluster API client package configuration.
+### Differences between the package and the SDK
 
-Refer to the [Configuration Reference](https://github.com/camunda/orchestration-cluster-api-js/blob/main/documentation/CONFIG_REFERENCE.md?plain=1) for a list of the configuration parameters.
+| Difference         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Configuration keys | <p>Environment variable configuration is different when using the package directly or using it via the SDK.</p><ul><li>The SDK wraps the Orchestration Cluster API client package and allows you to use the previous configuration keys.</li><li><p>When using the package directly, you must use the environment variable configuration keys it requires. Keys that were prefixed with `ZEEBE_` in the SDK are now prefixed with `CAMUNDA_` in the Orchestration Cluster API client package configuration.</p></li><li><p>See the [Configuration Reference](https://github.com/camunda/orchestration-cluster-api-js/blob/main/documentation/CONFIG_REFERENCE.md?plain=1) for a list of configuration parameters.</p></li></ul> |
+| ESM                | The Orchestration Cluster API client is a dual ESM/CJS package, allowing you to use ESM and tree shake the package as a dependency.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
-### ESM
+## Use the Orchestration Cluster API package
 
-The Orchestration Cluster API client is a dual ESM/CJS package, allowing you to use ESM and tree shake the package as a dependency.
+The following example retrieves the cluster topology:
 
-## Using the Orchestration Cluster API package
+1. Install the package in your project:
 
-Install the package to your project:
+   ```bash
+   npm i @camunda8/orchestration-cluster-api
+   ```
 
-```bash
-npm i @camunda8/orchestration-cluster-api
-```
+2. Import it into your application:
 
-Now import it in your application:
+   ```typescript
+   import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
 
-```typescript
-import { createCamundaClient } from "@camunda8/orchestration-cluster-api";
+   const camunda = createCamundaClient();
 
-const camunda = createCamundaClient();
+   async function main() {
+     const response = await camunda.getTopology();
+     console.log(JSON.stringify(response, null, 2));
+   }
 
-async function main() {
-  const response = await camunda.getTopology();
-  console.log(JSON.stringify(response, null, 2));
-}
+   main();
+   ```
 
-main();
-```
-
-The call to `createCamundaClient` returns a strongly typed client.
+   The `createCamundaClient` function returns a strongly typed client.
 
 ## Example project
 
-See a complete working example of a [quick start project on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+See a [complete example project](https://github.com/camunda-community-hub/c8-sdk-demo) that demonstrates how to use the package.
 
-## Full API Documentation
+## API documentation
 
-Refer to the [README](https://camunda.github.io/orchestration-cluster-api-js/) and the [full API documentation](https://camunda.github.io/orchestration-cluster-api-js/classes/index.CamundaClient.html).
+See the [package README](https://camunda.github.io/orchestration-cluster-api-js/) and the [full API documentation](https://camunda.github.io/orchestration-cluster-api-js/classes/index.CamundaClient.html) for more details.

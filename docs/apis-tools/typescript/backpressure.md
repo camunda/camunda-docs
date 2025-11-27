@@ -14,6 +14,10 @@ The Orchestration Cluster REST API client implements adaptive backpressure manag
 - It automatically handles retries and backoff in response to backpressure signals from the server.
 - The SDK applies global backpressure management to throttle operations when the server returns backpressure.
 
+:::info
+To learn more about backpressure in Camunda 8, see [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md).
+:::
+
 ### Enable backpressure management
 
 This behavior is controlled by the `CAMUNDA_SDK_BACKPRESSURE_PROFILE` environment variable and is enabled by default.

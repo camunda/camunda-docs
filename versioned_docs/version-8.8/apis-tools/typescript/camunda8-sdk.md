@@ -1,55 +1,80 @@
 ---
 id: camunda8-sdk
-title: Getting started with the Camunda 8 TypeScript SDK
-description: Get started with the @camunda/sdk package.
+title: TypeScript SDK
+sidebar_label: "TypeScript SDK"
+description: Use the TypeScript SDK to connect to Camunda 8.
 ---
 
+Use the TypeScript SDK to connect to Camunda 8, deploy process models, and work with the Orchestration Cluster API.
+
+## About this SDK
+
+The TypeScript SDK provides typed access to Camunda 8 APIs.
+
+- It includes IntelliSense support and works in both JavaScript and TypeScript projects.
+- The [Camunda 8 TypeScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
+
+### When to use this package
+
+Use the [`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk) package if:
+
+- You need to use the gRPC API for job streaming.
+- Your server target is 8.7 or earlier.
+- You want to migrate an existing application to the 8.8 Orchestration Cluster API.
+
 :::info
-If you are a new user and don't need gRPC or v1 APIs, and are using Camunda 8.8, then we recommend that you use the [Orchestration Cluster API client](./oca-client.md) directly.
+If you are new to Camunda 8.8+ and do not need gRPC or v1 APIs, use the [Orchestration Cluster API TypeScript client](oca-client.md).
 :::
-
-The [Camunda 8 TypeScript SDK for Node.js](https://github.com/camunda/camunda-8-js-sdk) is available via [npm](https://www.npmjs.com/package/@camunda8/sdk).
-
-This SDK is written in TypeScript and has full type support for IDEs and editors that support IntelliSense. It can be used in JavaScript or TypeScript projects.
 
 ## Prerequisites
 
-This SDK requires Node.js as a runtime environment. It cannot be used in a web browser for a number of [technical reasons](https://github.com/camunda/camunda-8-js-sdk/issues/79). If you want to write an application in the web browser, use `@camunda8/orchestration-cluster-api`, see [Getting started with the Camunda 8 Orchestration Cluster API TypeScript client](./oca-client.md).
+The following prerequisites are required to use the TypeScript SDK:
 
-## Quick start
+| Prerequisite | Description                                                                                                                                                                                                                                                                                                                                                                              |
+| :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js      | <ul><li><p>The SDK runs in Node.js and cannot run in a web browser due to [technical limitations](https://github.com/camunda/camunda-8-js-sdk/issues/79).</p></li><li><p>If you want to write an application in the web browser, use `@camunda8/orchestration-cluster-api`.</p><p>See [Get started with the Orchestration Cluster API TypeScript client](./oca-client.md).</p></li></ul> |
 
-This quick start gets you up and running with the Orchestration Cluster (REST) API on Camunda 8.8 and later. For earlier versions using the v1 APIs, see the [README file for the SDK](https://github.com/camunda/camunda-8-js-sdk).
+## Get started
 
-A complete working version of the quick start code is [available on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+Get started with the Orchestration Cluster API on Camunda 8.8 and above.
 
 1. Create a new Node.js project that uses TypeScript:
 
-```bash
-npm init -y
-npm install -D typescript
-npx tsc --init
-```
+   ```bash
+   npm init -y
+   npm install -D typescript
+   npx tsc --init
+   ```
 
 2. Install the SDK as a dependency:
 
-```bash
-npm i @camunda8/sdk
-```
+   ```bash
+   npm i @camunda8/sdk
+   ```
 
-## Connection configuration
+:::info
 
-You have two choices:
+- A complete working version of the quickstart code is [available on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
+- For earlier versions using the v1 APIs, refer to the [SDK README file](https://github.com/camunda/camunda-8-js-sdk).
+
+:::
+
+## Configure the connection
+
+Choose one of the following configuration options:
 
 - Explicit configuration in code
 - Zero-configuration constructor with environment variables
 
-The recommended way to do the configuration is via the zero-configuration constructor, with all values for configuration supplied via environment variables. This makes rotation, secret management, and environment promotion safer & simpler.
+The recommended configuration is via the zero-configuration constructor, with all values for configuration supplied via environment variables. This makes rotation, secret management, and environment promotion safer and simpler.
 
-The environment variables you need to set are outlined below. Replace these with your secrets and URLs.
+**The environment variables you must set are outlined below. Replace these with your secrets and URLs.**
 
-To configure a client, and to capture these values when creating the client, review our documentation on [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+:::info
+To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+:::
 
-### Self-Managed configuration
+### Self-managed configuration
 
 Minimal configuration:
 
@@ -84,29 +109,31 @@ export ZEEBE_CLIENT_SECRET='iJJu-SHg...'
 export CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token'
 ```
 
-To set these explicitly in code (not recommended), the `Camunda8` constructor takes these values, with the same key names, in the constructor.
+:::caution
+To set these values explicitly in code (not recommended), pass them with the same key names to the `Camunda8` constructor.
+:::
 
-### Using the SDK
+## Use the SDK
 
 1. Create a file `index.ts` in your IDE.
 2. Import the SDK:
 
-```typescript
-import { Camunda8 } from "@camunda8/sdk";
-import path from "path"; // we'll use this later
+   ```typescript
+   import { Camunda8 } from "@camunda8/sdk";
+   import path from "path"; // we'll use this later
 
-const clientFactory = new Camunda8();
-```
+   const clientFactory = new Camunda8();
+   ```
 
 3. Get an Orchestration API client. This is used to deploy process models and start process instances:
 
-```typescript
-const camunda = camunda.getOrchestrationClusterApiClient();
-```
+   ```typescript
+   const camunda = camunda.getOrchestrationClusterApiClient();
+   ```
 
 ### Deploy a process model
 
-Now, deploy a process model. Network operations are asynchronous and methods that operate over the network return promises, so we will wrap the main function of the program in an `async` function:
+Next, deploy a process model. Network operations are asynchronous and methods that operate over the network return promises. Wrap the main function in an `async` function:
 
 ```typescript
 async function main() {
@@ -121,7 +148,7 @@ async function main() {
 main(); // remember to invoke the function
 ```
 
-Paste the process model XML below into a file called `process.bpmn`:
+Paste the process model XML below into a file named `process.bpmn`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -184,17 +211,17 @@ Paste the process model XML below into a file called `process.bpmn`:
 </bpmn:definitions>
 ```
 
-For reference, this is the model we are using:
+For reference, this is the model you use in this example:
 
-![process model](../img/process-model.png)
+![Example BPMN process model](../img/process-model.png)
 
-You can run the program now, and see the process model deploy to Camunda:
+Run the program to deploy the process model to Camunda:
 
 ```bash
 npx tsx index.ts
 ```
 
-If your configuration is correct, you will see the following:
+If your configuration is correct, you should see output similar to the following:
 
 ```
 [Camunda] Deployed process c8-sdk-demo
@@ -224,15 +251,15 @@ const worker = camunda.createJobWorker({
 });
 ```
 
-This will start a service task worker that runs in an asynchronous loop, invoking the `taskHandler` function whenever a job for the service task type `service-task` is available.
+This code starts a service task worker that runs in an asynchronous loop and invokes `jobHandler` when a job of type `service-task` becomes available.
 
-The handler must return a job completion function - `fail`, `complete`, `error`, or `ignore`. This is enforced by the type system and ensures you do not write code that does not have code paths that do not respond to Zeebe after taking a job. The `job.complete` function can take an object with variables to update.
+The handler must return a job completion function such as `fail`, `complete`, `error`, or `ignore`. The type system enforces this to ensure every code path responds to Zeebe after taking a job. The `job.complete` function can take an object with variables to update.
 
 ### Create a programmatic user task worker
 
-Our process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the service task. The service task worker will complete the service task job, and we will complete the user task using the Tasklist API client.
+The process has a [user task](/guides/getting-started-orchestrate-human-tasks.md) after the service task. The service task worker completes the service task job. You complete the user task using the Tasklist API client.
 
-Add the following code beneath the service worker code:
+Add the following code below the service worker:
 
 ```typescript
 // User task poller
@@ -282,52 +309,56 @@ const userTaskPoller = camunda.searchUserTasks(
 );
 ```
 
-We now have an asynchronously polling service worker and an asynchronously polling user task worker.
+You now have an asynchronously polling service and user task worker.
 
-The last step is to create a process instance.
+The final step is to create a process instance.
 
 ### Create a process instance
 
 There are two options for creating a process instance:
 
-- For long-running processes, use `createProcessInstance`, which returns as soon as the process instance is created with the process instance ID.
-- For the shorter-running process we are using, set `awaitCompletion: true`, which awaits the completion of the process and returns with the final variable values.
+- For long-running processes, use `createProcessInstance`. It returns as soon as the process instance is created with the process instance ID.
+- For the shorter-running process we are using, set `awaitCompletion: true`. It awaits the completion of the process and returns with the final variable values.
 
 1. Locate the following line in the `main` function:
 
-```typescript
-console.log(
-  `[Zeebe] Deployed process ${res.deployments[0].process.bpmnProcessId}`
-);
-```
+   ```typescript
+   console.log(
+     `[Zeebe] Deployed process ${res.deployments[0].process.bpmnProcessId}`
+   );
+   ```
 
 2. Inside the `main` function, add the following:
 
-```typescript
-const result = await zeebe.createProcessInstanceWithResult({
-  processDefinitionId,
-  variables: {
-    userTaskStatus: "Needs doing",
-  },
-  awaitCompletion: true,
-});
-console.log(`[Camunda] Finished Process Instance ${result.processInstanceKey}`);
-console.log(`[Camunda] userTaskStatus is "${result.variables.userTaskStatus}"`);
-console.log(
-  `[Camunda] serviceTaskOutcome is "${result.variables.serviceTaskOutcome}"`
-);
-worker.stop();
-userTaskPoller.catch((e) => e); // Swallow cancel exception
-userTaskPoller.cancel(); // Cancel poller to exit app
-```
+   ```typescript
+   const result = await zeebe.createProcessInstanceWithResult({
+     processDefinitionId,
+     variables: {
+       userTaskStatus: "Needs doing",
+     },
+     awaitCompletion: true,
+   });
+   console.log(
+     `[Camunda] Finished Process Instance ${result.processInstanceKey}`
+   );
+   console.log(
+     `[Camunda] userTaskStatus is "${result.variables.userTaskStatus}"`
+   );
+   console.log(
+     `[Camunda] serviceTaskOutcome is "${result.variables.serviceTaskOutcome}"`
+   );
+   worker.stop();
+   userTaskPoller.catch((e) => e); // Swallow cancel exception
+   userTaskPoller.cancel(); // Cancel poller to exit app
+   ```
 
 3. Run the program with the following command:
 
-```bash
-npx tsx index.ts
-```
+   ```bash
+   npx tsx index.ts
+   ```
 
-You should see a output similar to the following:
+You see output similar to the following:
 
 ```
 [Camunda] Deployed process c8-sdk-demo
@@ -339,37 +370,37 @@ You should see a output similar to the following:
 [Camunda] serviceTaskOutcome is "We did it!"
 ```
 
-The program will continue running until you hit `Ctrl+C`. This is because both the service worker and the task poller we wrote are running in continuous loops.
+The program continues running until you press `Ctrl+C` because both the service worker and the user task poller run in continuous loops.
 
-To explore the functionality of the SDK, there are a few more things you can do, outlined below.
+To explore more SDK functionality, use the examples below.
 
 ### Retrieve a process instance
 
-When you create a process instance that runs for some time, many times you will do this by creating a process with `createProcessInstance` and getting back the process instance key of the running process, rather than waiting for it to complete.
+When you create a long-running process instance, you typically use `createProcessInstance` and get back the process instance key of the running process immediately instead of waiting for it to complete.
 
-To examine the process instance status, use the process instance key to query the Operate API. You can also examine process instances after they complete in the same way. We'll do this with the process instance that we created after it completes.
+To examine the process instance status, use the process instance key to query the Operate API. You can also check completed process instances in the same way. In the following example, you query the process instance created earlier.
 
 1. Locate the following line in the `main` function:
 
-```typescript
-console.log(
-  `[Camunda] serviceTaskOutcome is "${result.variables.serviceTaskOutcome}"`
-);
-```
+   ```typescript
+   console.log(
+     `[Camunda] serviceTaskOutcome is "${result.variables.serviceTaskOutcome}"`
+   );
+   ```
 
-2. After that line, inside the `main` function, add the following:
+2. Add the following after this line and inside the `main` function:
 
-```typescript
-const historicalProcessInstance = await camunda.getProcessInstance(
-  {
-    processInstanceKey: result.processInstanceKey,
-  },
-  { consistency: { waitUpToMs: 5000 } }
-);
-console.log("[Camunda]", JSON.stringify(historicalProcessInstance, null, 2));
-```
+   ```typescript
+   const historicalProcessInstance = await camunda.getProcessInstance(
+     {
+       processInstanceKey: result.processInstanceKey,
+     },
+     { consistency: { waitUpToMs: 5000 } }
+   );
+   console.log("[Camunda]", JSON.stringify(historicalProcessInstance, null, 2));
+   ```
 
-When you run the program now, you will see an additional output similar to the following:
+When you run the program now, you should see additional output similar to the following:
 
 ```
 {
@@ -383,8 +414,8 @@ When you run the program now, you will see an additional output similar to the f
 }
 ```
 
-The state may be `ACTIVE` rather than `COMPLETED`. This occurs because the data read over the API is historical data from the Zeebe exporter, and lags behind the actual state of the system. It is _eventually consistent_.
+The state may appear as `ACTIVE` rather than `COMPLETED`. This happens because the data read over the API is historical data from the Zeebe exporter, and lags behind the actual state of the system. It is _eventually consistent_.
 
-## Further steps
+## Further resources
 
-Consult the [complete API documentation for the SDK](https://camunda.github.io/camunda-8-js-sdk/), and the [Orchestration Cluster API client](https://camunda.github.io/orchestration-cluster-api-js/classes/index.CamundaClient.html).
+See the [complete API documentation for the SDK](https://camunda.github.io/camunda-8-js-sdk/) and the [Orchestration Cluster API client](https://camunda.github.io/orchestration-cluster-api-js/classes/index.CamundaClient.html).

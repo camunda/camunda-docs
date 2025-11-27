@@ -23,7 +23,7 @@ Use the [`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk) package i
 - You want to migrate an existing application to the 8.8 Orchestration Cluster API.
 
 :::info
-If you are new to Camunda 8.8 and do not need gRPC or v1 APIs, use the Orchestration Cluster API client instead.
+If you are new to Camunda 8.8+ and do not need gRPC or v1 APIs, use the [Orchestration Cluster API TypeScript client](oca-client.md).
 :::
 
 ## Prerequisites
