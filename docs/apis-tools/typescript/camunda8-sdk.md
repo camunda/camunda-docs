@@ -19,11 +19,11 @@ The TypeScript SDK provides typed access to Camunda 8 APIs.
 Use the [`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk) package if:
 
 - You need to use the gRPC API for job streaming.
-- Your server target is 8.7 or earlier.
-- You want to migrate an existing application to the 8.8 Orchestration Cluster API.
+- Your server target is Camunda 8.7 or earlier.
+- You want to migrate an existing application to the Orchestration Cluster API.
 
 :::info
-If you are new to Camunda 8.8+ and do not need gRPC or v1 APIs, use the [Orchestration Cluster API TypeScript client](oca-client.md).
+If you do not need to use gRPC or the V1 APIs, use the [Orchestration Cluster API TypeScript client](oca-client.md).
 :::
 
 ## Prerequisites
@@ -36,7 +36,7 @@ The following prerequisites are required to use the TypeScript SDK:
 
 ## Get started
 
-Get started with the Orchestration Cluster API on Camunda 8.8 and above.
+Get started with the Orchestration Cluster API.
 
 1. Create a new Node.js project that uses TypeScript:
 

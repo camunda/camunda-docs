@@ -9,7 +9,7 @@ Use the Orchestration Cluster API TypeScript client to connect to Camunda 8, dep
 
 ## About this client
 
-This lightweight package provides focused support for the Camunda 8.8 or later Orchestration Cluster REST API.
+This lightweight package provides focused support for the Orchestration Cluster REST API.
 
 ### When to use this package
 
@@ -17,7 +17,7 @@ Use the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@c
 
 - You are starting a new project.
 - You do not need the gRPC API.
-- You are using Camunda 8.8 or later.
+- You are using Camunda 8.9 or later.
 - You are developing an application for the web browser.
 
 ### Differences between the package and the SDK

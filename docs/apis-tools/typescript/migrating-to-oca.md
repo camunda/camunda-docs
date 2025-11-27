@@ -14,13 +14,13 @@ The SDK includes the Orchestration Cluster API client by depending on the `@camu
 Use the bundled client if:
 
 - You depend on APIs not supported by the focused client, such as gRPC.
-- Your application must use APIs that are not supported in 8.8, such as the earlier Operate query API.
+- Your application must use APIs that are not supported in 8.9, such as the earlier Operate query API.
 - You do not care about application size and do not want to modify your environment configuration.
 
 Import the focused client directly alongside the SDK if:
 
 - You do not use the gRPC API.
-- Your application targets Camunda 8.8 or later.
+- Your application targets Camunda 8.9 or later.
 - You intend to migrate completely to the Orchestration Cluster API and remove all other API usage in your application.
 - You do not mind changing or extending your application configuration.
 
