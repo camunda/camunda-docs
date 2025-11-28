@@ -183,10 +183,10 @@ Camunda components request OIDC scopes when authenticating users. The default sc
 
 | Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
 | ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
-| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
-| `email`          | Access to user email address.       | ✔                                                   |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
+| `openid`         | Required for OIDC authentication.   | ✔                                                  | ✔                                        |
+| `profile`        | Access to user profile information. | ✔                                                  | ✔                                        |
+| `email`          | Access to user email address.       | ✔                                                  |                                           |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                  |                                           |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
@@ -703,7 +703,3 @@ When using an OIDC provider, the following Optimize features are not currently a
 - Digests.
 - Accessible user names for resource owners (the value of the `sub` claim is displayed instead).
   :::
-
-## Troubleshoot
-
-For common issues and solutions when configuring OIDC authentication, see [Troubleshoot OIDC authentication](./troubleshooting-oidc.md).
