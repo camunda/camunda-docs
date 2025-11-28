@@ -28,4 +28,11 @@ export const overviewCards = [
     description:
       "Connect Camunda to any OIDC-compliant provider or Keycloak without Management Identity setup support.",
   },
+  {
+    link: "../troubleshooting-oidc",
+    title: "Troubleshoot OIDC authentication",
+    image: IconGear,
+    description:
+      "Common issues and solutions when configuring OIDC authentication for Camunda 8 Self-Managed.",
+  },
 ];
