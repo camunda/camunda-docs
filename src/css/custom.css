@@ -981,6 +981,14 @@ span.callout + p::after {
   white-space: pre;
 }
 
+.plain tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+.plain thead {
+  font-weight: bold !important;
+}
+
 /* Add space and thin border to images, remove drop shadow */
 .theme-doc-markdown img {
   border-style: solid;
