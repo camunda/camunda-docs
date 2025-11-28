@@ -14,9 +14,9 @@ This suite of connectors provides comprehensive capabilities for discovering rem
 
 The A2A Client connectors consist of three main components:
 
-1. **A2A Client Connector (Outbound)** - Retrieves remote agents' _Agent Card_ and sends messages to them
-2. **A2A Client Polling Connector (Inbound)** - Polls for responses from remote A2A agents
-3. **A2A Client Webhook Connector (Inbound)** - Receives responses from remote A2A agents via webhooks
+1. **A2A Client Connector (Outbound)**: Retrieves remote agents' _Agent Card_ and sends messages to them
+2. **A2A Client Polling Connector (Inbound)**: Polls for responses from remote A2A agents
+3. **A2A Client Webhook Connector (Inbound)**: Receives responses from remote A2A agents via webhooks
 
 These connectors work together to enable seamless integration with A2A-compliant agents, allowing you to build multi-agent workflows within Camunda processes.
 
@@ -125,6 +125,9 @@ Sends a message to the remote agent and handles the response based on the config
       - For a random token, you can use the FEEL expression `= uuid()`
     - **Authentication schemes** (optional): List of auth schemes required by the webhook
     - **Authentication credentials** (optional): Credentials to authenticate webhook requests
+      :::note
+      You can only use the **Notification** response retrieval method if the remote agent supports it. Check the agent's capabilities in its Agent Card.
+      :::
 - **History length** (optional): Number of most recent messages from task history to include in response
   - Default: `3`
 - **Response timeout** (optional): Maximum time to wait for (the first) response as ISO-8601 duration
@@ -225,7 +228,7 @@ The connector requires the following configuration:
 
 **How it works:**
 
-1. The AI Agent connector detects this connector as an available tool.
+1. The **AI Agent connector** detects this connector as an available tool.
 2. The AI agent perform a tool discovery using the `fetchAgentCard` operation.
 3. When the AI agent determines it needs to interact with the A2A agent, it issues a tool call containing the required parameters.
 4. The tool call is translated into a `sendMessage` operation.
@@ -233,6 +236,10 @@ The connector requires the following configuration:
 6. Results are returned to the AI agent.
 7. If needed, the AI agent engages in a multi-turn conversation with the A2A agent by issuing further tool calls referring to the same context and task IDs. This happens when the remote agent asks for further information.
 8. If needed, the AI agent can start new interactions with the A2A agent by issuing new tool calls without context and task IDs.
+
+:::info
+When the **AI Agent connector** detects at least one **A2A Client connector** that is configured as a tool, it injects special instructions into the system prompt to guide the LLM on how to use A2A tools.
+:::
 
 ## Response structure
 
@@ -295,13 +302,13 @@ The **A2A Client Polling connector** requires the following configuration:
 - Output mapping
   - **Result variable** (optional): You can typically leave empty
   - **Result expression**: FEEL expression to extract the result from the polled response
-    - Typically, we need to extract the `result` field from the [response](./?a2a=outbound#response-structure) using a FEEL expression like `= {a2aAgetntResponse: result}` or `= {toolCallResult: result}`
+    - Typically, we need to extract the `result` field from the [response](./?a2a=outbound#response-structure) using a FEEL expression like `= {a2aAgentResponse: result}` or `= {toolCallResult: result}`
 
 </TabItem>
 
 <TabItem value='webhook'>
 
-The **A2A Client Webhook connector** receives callbacks from remote A2A agents via HTTP webhooks. This is used when the **A2A Client connector** is configured with the **Notification** response retrieval method.
+The **A2A Client Webhook connector** receives callbacks from remote A2A agents via HTTP webhooks. It is typically paired with the **A2A Client connector** when using the **Notification** response retrieval method.
 This connector is based on the [HTTP Webhook connector](../../../connectors/protocol/http-webhook.md) and shares most of its configuration options.
 
 ## Create an A2A Client Webhook connector task
@@ -318,7 +325,7 @@ The webhook URL obtained in step 6 should be used in the **A2A Client connector*
 Currently, there is no automatic way to inject the webhook URL into the **A2A Client connector** configuration.
 :::
 
-:::info
+:::note
 In a Camunda 8 Self-Managed environment you need to construct the Webhook URL manually. See the [HTTP Webhook connector documentation](../../../connectors/protocol/http-webhook.md#activate-the-http-webhook-connector-by-deploying-your-diagram) for more information.
 :::
 
@@ -357,7 +364,7 @@ The **A2A Client Webhook connector** requires the following configuration:
 - Output mapping
   - **Result variable** (optional): You can typically leave empty
   - **Result expression**: FEEL expression to extract the result from the payload
-    - Typically, we need to extract the `request.body` field using a FEEL expression like `= {a2aAgetntResponse: request.body}` or `= {toolCallResult: request.body}`
+    - Typically, we need to extract the `request.body` field using a FEEL expression like `= {a2aAgentResponse: request.body}` or `= {toolCallResult: request.body}`
 
 :::tip
 As in the **HTTP Webhook connector**, the payload is accessible via the `request` variable. Use the following references to access data:
