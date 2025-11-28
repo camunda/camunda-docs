@@ -53,7 +53,7 @@ Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
-Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Tomcat. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
+Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
 ### Process instance migration: Ad-hoc subprocess
 
