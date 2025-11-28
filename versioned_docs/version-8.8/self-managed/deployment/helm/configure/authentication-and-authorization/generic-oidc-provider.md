@@ -181,17 +181,12 @@ The audience claim is critical for token validation. Camunda will reject tokens 
 
 Camunda components request OIDC scopes when authenticating users. The default scopes vary by component:
 
-#### Management Identity, Optimize, Web Modeler, Console
-
-- `openid` - Required for OIDC authentication.
-- `profile` - Access to user profile information.
-- `email` - Access to user email address.
-- `offline_access` - Enables refresh token issuance.
-
-#### Orchestration Cluster (Operate, Tasklist)
-
-- `openid` - Required for OIDC authentication.
-- `profile` - Access to user profile information.
+| Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
+| ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
+| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
+| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
+| `email`          | Access to user email address.       | ✔                                                   |                                           |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
