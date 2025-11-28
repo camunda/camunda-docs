@@ -182,3 +182,24 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+### Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Virtual threads support
+
+Camunda 8.9 adds support for virtual threads in the connector runtime. Virtual threads are now enabled by default for outbound connectors.
+
+See [Connectors performance](/self-managed/components/connectors/performance.md) for more information on optimizing connector performance with virtual threads.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#connectors-performance-improvements-with-virtual-threads-executor).
+:::
+
+</div>
+</div>

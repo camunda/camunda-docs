@@ -67,6 +67,18 @@ Process instance migration supports ad-hoc subprocess element migration.
 This does not apply to the AI Agent ad-hoc subprocess. Its support will follow in upcoming alpha releases.
 :::
 
+### Connectors: Performance improvements with virtual threads executor
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3050 -->
+
+Connectors now use a virtual threads executor by default, leveraging Project Loom for improved performance and scalability.
+
+This change allows the connector runtime to handle a larger number of concurrent jobs with lower resource consumption, particularly benefiting I/O-bound workloads typical in connector operations.
+
+See [Connectors performance](/self-managed/components/connectors/performance.md) for more information on optimizing connector performance with virtual threads.
+
 ## 8.9.0-alpha1
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
