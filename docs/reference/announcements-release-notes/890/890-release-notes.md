@@ -113,33 +113,6 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 <!-- See the documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection. -->
 
-### Global user task listeners
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/2586 -->
-
-Configuration-based global user task listeners are now available for Self-Managed deployments.
-
-- Administrators can define cluster-wide listeners using configuration files or environment variables. This ensures listeners are applied consistently from cluster startup and preserved across backup and restore operations.
-- All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
-
-To learn more, see [global user task listeners](/components/concepts/global-user-task-listeners.md).
-
-### Process instance migration ad-hoc sub-process support
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Process Instance Migration">Migration</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3065 -->
-
-Process instance migration now supports ad-hoc sub-process element migration.
-
-To learn more, see [process instance migration](/components/concepts/process-instance-migration.md).
-
-:::note
-This does not apply to the ai Agent ad-hoc sub-process. Support for this will follow in upcoming alpha releases.
-:::
-
 ### Web Modeler
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
@@ -158,14 +131,6 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 :::note
 Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
 :::
-
-#### Logging framework changes from Logback to Log4j2 (Self-Managed)
-
-<!-- https://github.com/camunda/product-hub/issues/3191 -->
-
-Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging. Aligning Web Modeler logging with the Orchestration Cluster allows administrators to more easily configure and maintain Self-Managed deployments.
-
-To learn more, see [Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md).
 
 ## 8.9.0-alpha1
 
