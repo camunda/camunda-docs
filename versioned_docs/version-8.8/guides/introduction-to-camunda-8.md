@@ -18,19 +18,19 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human tasks and APIs using connectors.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first local Camunda 8 project" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first local Camunda 8 project</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first Spring Boot or Node.js project with Camunda 8" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first Spring Boot or Node.js project with Camunda 8</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
 
-<img src={OverviewImg} alt="Run your first local Camunda 8 project" title="Run your first local Camunda 8 project" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
+<img src={OverviewImg} alt="Run your first local Camunda 8 project" title="Run your first Spring Boot or Node.js project with Camunda 8" class="img-noborder img-600 img-transparent hero-topic" style={{marginTop: '0', marginBottom: '0'}}/>
 
 </div>
 </div>
 
-## Run your first local project
+## Run your first Spring Boot or Node.js project with Camunda 8
 
-This guide is for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is for developers who want to implement process automation solutions using Spring Boot or Node.js. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 <p><a href="./getting-started-example/" class="link-arrow">Run your first local project</a></p>
 
