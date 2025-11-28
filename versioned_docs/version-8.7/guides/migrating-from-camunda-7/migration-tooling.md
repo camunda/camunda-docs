@@ -160,7 +160,7 @@ Options:
                                documentation
       --data-migration-execution-listener-job-type=<dataMigrationExecutionListen
         erJobType>
-                             Name of the job type of the listener. If set, the
+                             Job type name for the listener. If set, the
                                default value from the 'converter-properties.
                                properties' is overridden
       --default-job-type=<defaultJobType>
@@ -170,17 +170,19 @@ Options:
       --disable-append-elements
                              Disables adding conversion messages to the bpmn xml
   -h, --help                 Show this help message and exit.
-      --keep-job-type-blank  Sets all job types to blank so that you need to
-                               edit those after conversion yourself
-      --md, --markdown       If enabled, a markdown file will be created
-                               containing the results for all conversions
+      --keep-job-type-blank  Sets all job types to blank so
+      you can edit them after conversion.
+
+      --md, --markdown       If enabled, a markdown file with the results
+      for all conversions will be created.
+
       -nr, --not-recursive   If enabled, recursive search in subfolders will be
                                omitted
   -o, --override             If enabled, existing files are overridden
       --platform-version=<platformVersion>
                              Semantic version of the target platform, defaults
-                               to latest version
-      --prefix=<prefix>      Prefix for the name of the generated file
+                               to the latest version
+      --prefix=<prefix>      Prefix used for the name of the generated file
                                Default: converted-c8-
   -V, --version              Print version information and exit.
       --xlsx                 If enabled, a XLSX file will be created containing
