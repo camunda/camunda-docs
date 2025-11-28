@@ -1166,7 +1166,21 @@ module.exports = {
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
-        "apis-tools/node-js-sdk",
+        {
+          type: "category",
+          label: "TypeScript SDK",
+          link: {
+            type: "doc",
+            id: "apis-tools/typescript/typescript-sdk",
+          },
+          items: [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency",
+          ],
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -1440,6 +1454,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",

@@ -37,10 +37,10 @@ If you don't use Operate with your cluster, you can still use [outbound connecto
 For the modeling interface, you need to [provide connector templates](/components/connectors/custom-built-connectors/connector-templates.md#providing-and-using-connector-templates).
 
 For the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
-the Connectors Bundle project provides a set of all connector templates related to one [release version](https://github.com/camunda/connectors-bundle/releases).
+the Connectors Bundle project provides a set of all connector templates related to one [release version](https://github.com/camunda/connectors/releases).
 If you use the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) installation, you can thus fetch all connector templates that match the versions of the connectors used in the backend.
 
-Alternatively, you can fetch the JSON templates from the respective connector's releases in the respective connectors folder in the [bundle repository](https://github.com/camunda/connectors-bundle)
+Alternatively, you can fetch the JSON templates from the respective connector's releases in the respective connectors folder in the [bundle repository](https://github.com/camunda/connectors)
 at `connectors/{connector name}/element-templates`.
 
 You can use the connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
