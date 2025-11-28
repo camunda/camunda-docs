@@ -1,33 +1,35 @@
 ---
 id: troubleshooting-oidc
-sidebar_label: Troubleshooting OIDC
-title: Troubleshooting OIDC authentication
+sidebar_label: Troubleshoot OIDC authentication
+title: Troubleshoot OIDC authentication
 description: "Common issues and solutions when configuring OIDC authentication for Camunda 8 Self-Managed."
 ---
 
 This page provides solutions to common issues encountered when configuring OIDC authentication for Camunda 8 Self-Managed.
 
-## Invalid redirect_uri error
+## Invalid redirect_uri
 
-**Symptom:** OIDC provider shows "Invalid redirect_uri" error during login.
+**Observed behavior:** During login, your OIDC provider shows "Invalid redirect_uri".
 
-**Cause:** The `redirectUrl` in Helm values doesn't match the allowed redirect URIs in your OIDC provider.
+**Why this happens:** The `redirectUrl` in Helm values doesn't match an allowed redirect URI configured in your OIDC provider.
 
-**Solution:**
+**How to fix:**
 
-1. Open browser developer tools (F12) and check the `redirect_uri` parameter sent to your OIDC provider
-2. Ensure this exact URI is configured in your OIDC provider's allowed redirect URIs
-3. Update the `redirectUrl` parameter in Helm values to match how users actually access the component
+1. Open the browser's developer tools (F12) and check the `redirect_uri` parameter sent to your OIDC provider.
+2. Ensure this exact URI is configured in your OIDC provider's allowed redirect URIs.
+3. Update `redirectUrl` in Helm values to match how users actually access the component.
 
-**Common mismatch:** Using `http://localhost:8080` in Helm values when users access via `https://camunda.example.com/orchestration`
+:::info Common misconfiguration
+Use `http://localhost:8080` in Helm values when users access via `https://camunda.example.com/orchestration`.
+:::
 
-## Invalid audience or token validation fails
+## Invalid audience
 
-**Symptom:** Logs show "Invalid token" or "Audience mismatch" errors.
+**Observed behavior:** Logs show "Invalid token" or "Audience mismatch" errors.
 
-**Cause:** The `audience` parameter doesn't match the `aud` claim in tokens.
+**Why this happens:** The `audience` parameter doesn't match the `aud` claim in tokens.
 
-**Solution:**
+**How to fix:**
 
 1. Obtain and decode a token:
 
@@ -39,41 +41,45 @@ This page provides solutions to common issues encountered when configuring OIDC 
      cut -d'.' -f2 | base64 -d | jq '.aud'
    ```
 
-2. Update the `audience` parameter in Helm values to match this value
-3. Redeploy Camunda
+2. Update the `audience` parameter in Helm values to match this value.
+3. Redeploy Camunda.
 
 :::note
-Some providers (notably Keycloak) may not include an appropriate audience by default. Consult your provider's documentation on configuring token audiences. For Keycloak, see the [External Keycloak guide](./external-keycloak.md).
+Some providers, such as Keycloak, may not include the appropriate audience by default. Consult your provider's documentation on configuring token audiences. For Keycloak, see [External Keycloak](./external-keycloak.md).
 :::
 
-## User cannot log in - Insufficient permissions
+## Insufficient permissions
 
-**Symptom:** User authenticates but sees "Insufficient permissions" in Camunda.
+**Observed behavior:** You authenticate, but Camunda shows "Insufficient permissions".
 
-**Cause:** User not granted access via mapping rules.
+**Why this happens:** Your account hasn't been granted access via mapping rules.
 
-**Solution:** In Management Identity, create a mapping rule matching the user's claim values and assign the appropriate role. See [Managing Mapping Rules](/self-managed/components/management-identity/mapping-rules.md).
+**How to fix:** In Management Identity, create a mapping rule that matches your claim values and assign the appropriate role. See [Managing mapping rules](/self-managed/components/management-identity/mapping-rules.md) for more details.
 
-## Claim not found errors
+## Claim not found
 
-**Symptom:** Logs show "Claim not found" or "Required claim missing" errors.
+**Observed behavior:** Logs show "Claim not found" or "Required claim missing" errors.
 
-**Cause:** The configured claim name doesn't exist in tokens from your provider.
+**Why this happens:** The configured claim name doesn't exist in tokens issued by your provider.
 
-**Solution:**
+**How to fix:**
 
-1. Decode a token to see available claims: `echo "<token>" | cut -d'.' -f2 | base64 -d | jq`
-2. Update `usernameClaim` or `clientIdClaim` in Helm values to match actual claim names
-3. Redeploy Camunda
+1. Decode a token to see available claims: `echo "<token>" | cut -d'.' -f2 | base64 -d | jq`.
+2. Update `usernameClaim` or `clientIdClaim` in Helm values to match the actual claim names.
+3. Redeploy Camunda.
 
-**Common alternatives:** User claims: `email`, `preferred_username`, `sub` | Client claims: `client_id`, `azp`, `appid`
+**Common alternatives:**
+
+- User claims: `email`, `preferred_username`, `sub`
+- Client claims: `client_id`, `azp`, `appid`.
 
 ## Pods not starting
 
-**Symptom:** Pods remain in `Pending`, `CrashLoopBackOff`, or `Error` states.
+**Observed behavior:** Pods remain in `Pending`, `CrashLoopBackOff`, or `Error` states.
 
-**Solution:** Check pod status with `kubectl describe pod <pod-name> -n camunda` and `kubectl logs <pod-name> -n camunda`
+**Why this happens:** Required secrets are missing, PostgreSQL is still initializing, or there are configuration typos in OIDC URLs.
 
-**Common causes:** Missing secrets, PostgreSQL still initializing, or configuration typos in OIDC URLs
+**How to fix:**
 
-For further assistance, check component logs with `kubectl logs -n camunda deployment/<component-name> -f` and search for keywords: `auth`, `token`, `oidc`, `401`, `403`
+1. Inspect pod events and status with `kubectl describe pod <pod-name> -n camunda` and `kubectl logs <pod-name> -n camunda`.
+2. Check component logs with `kubectl logs -n camunda deployment/<component-name> -f` and search for keywords: `auth`, `token`, `oidc`, `401`, `403`.
