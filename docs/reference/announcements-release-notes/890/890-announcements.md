@@ -182,3 +182,11 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+#### Connectors: virtual threads support
+
+Camunda 8.9 adds support for virtual threads in the connector runtime. Virtual threads are now enabled by default for outbound connectors.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-embedded-web-server-changed-from-undertow-to-tomcat).
+:::
