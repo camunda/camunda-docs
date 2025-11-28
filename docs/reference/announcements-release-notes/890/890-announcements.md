@@ -163,3 +163,22 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 
 </div>
 </div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Embedded web server changed from Undertow to Tomcat
+
+Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of [Undertow](https://undertow.io/). This aligns with the Orchestration Cluster.
+
+This enhancement ensures consistency across environments and simplifies setup for administrators.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-embedded-web-server-changed-from-undertow-to-tomcat).
+:::
+
+</div>
+</div>
