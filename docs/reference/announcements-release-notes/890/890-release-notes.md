@@ -39,6 +39,21 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 09 December 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2)</li></ul> | -    |
 
+### Connectors
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+### Improved job handling
+
+<!-- https://github.com/camunda/product-hub/issues/3050 -->
+
+The Connectors runtime now allows parallel jobs processing.
+
+- Previously, the Connectors runtime blocked the Zeebe client thread while waiting for connector results and follow-up commands.
+- Zeebe client threads can now activate new jobs even if other jobs are still being executed.
+
+This feature improves outbound connector performance and responsiveness, especially under high load.
+
 ### Console
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
