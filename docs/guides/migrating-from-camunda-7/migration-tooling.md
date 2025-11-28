@@ -70,7 +70,7 @@ Click **Analyze and convert**:
 
 On this screen you can now:
 
-- Download the analyzer results as Microsoft Excel file (XSLX)
+- Download the analyzer results as Microsoft Excel file (XLSX)
 - Download the analyzer results as CSV file
 - Download the converted models (individually or as ZIP)
 
@@ -131,8 +131,10 @@ java -jar camunda-7-to-8-migration-analyzer-cli.jar local
 
 Missing required parameter: '<file>'
 Usage: camunda-7-to-8-migration-analyzer-cli local [-dhoV] [--check] [--csv]
-       [--delegate-execution-as-job-type] [--disable-append-elements]
-       [--disable-default-job-type] [--md] [-nr]
+       [--add-data-migration-execution-listener]
+       [--data-migration-execution-listener-job-type=<dataMigrationExecutionListenerJobType>]
+       [--disable-append-elements]
+       [--always-use-default-job-type] [--md] [-nr]
        [--default-job-type=<defaultJobType>]
        [--platform-version=<platformVersion>] [--prefix=<prefix>] <file>
 Converts the diagram from the given directory or file
@@ -144,25 +146,32 @@ java -Dfile.encoding=UTF-8 -jar camunda-7-to-8-migration-analyzer-cli.jar local
 Parameter:
       <file>                 The file to convert or directory to search in
 Options:
+      --add-data-migration-execution-listener
+                             Add an execution listener on blank start events
+                               that can be used for the Camunda 7 Data Migrator
+      --always-use-default-job-type
+                             Always fill in the configured default job type,
+                               interesting if you want to use one delegation
+                               job worker (like the Camunda 7 Adapter).
       --check                If enabled, no converted diagrams are exported
       --csv                  If enabled, a CSV file will be created containing
-                               the conversions results
-      --xslx                 If enabled, a XSLX file will be created containing
-                               the analysis results
+                               the results for the analysis
   -d, --documentation        If enabled, messages are also appended to
                                documentation
+      --data-migration-execution-listener-job-type=<dataMigrationExecutionListen
+        erJobType>
+                             Name of the job type of the listener. If set, the
+                               default value from the 'converter-properties.
+                               properties' is overridden
       --default-job-type=<defaultJobType>
-                             If set, the default value from the
-                               'converter-properties.properties' for the job
-                               type is overridden
-      --delegate-execution-as-job-type, --delegate-expression-as-job-type
-                             If enabled, sets the delegate expression as the
-                               job type
+                             Job type used when adjusting delegates. If set,
+                               the default value from the 'converter-properties.
+                               properties' is overridden
       --disable-append-elements
                              Disables adding conversion messages to the bpmn xml
-      --disable-default-job-type
-                             Disables the default job type
   -h, --help                 Show this help message and exit.
+      --keep-job-type-blank  Sets all job types to blank so that you need to
+                               edit those after conversion yourself
       --md, --markdown       If enabled, a markdown file will be created
                                containing the results for all conversions
       -nr, --not-recursive   If enabled, recursive search in subfolders will be
@@ -174,6 +183,8 @@ Options:
       --prefix=<prefix>      Prefix for the name of the generated file
                                Default: converted-c8-
   -V, --version              Print version information and exit.
+      --xlsx                 If enabled, a XLSX file will be created containing
+                               the results for the analysis
 ```
 
 ### Converting your models
