@@ -118,7 +118,15 @@ module.exports = {
             },
           ],
         },
-        "components/concepts/messages",
+        {
+          type: "category",
+          label: "Messages",
+          link: {
+            type: "doc",
+            id: "components/concepts/messages",
+          },
+          items: ["components/concepts/message-aggregation"],
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
