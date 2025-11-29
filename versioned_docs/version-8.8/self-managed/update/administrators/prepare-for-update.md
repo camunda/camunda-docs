@@ -112,6 +112,10 @@ The following table provides a high-level overview of the impact of these change
 
 Orchestration Cluster [Identity](/components/identity/identity-introduction.md) handles authentication and authorization for Orchestration Cluster components and resources.
 
+:::warning RBA Migration Impact
+If you use Resource-Based Authorization (RBA) and have users assigned to roles with `zeebe-api:write` permissions (especially the default Zeebe role) as well as other roles where RBA applies, then after migration these users will have wildcard permissions for the corresponding authorizations. This means access will not be restricted to specific resources in Tasklist or Operate while the user remains a member of this role.
+:::
+
 The following table provides a high-level overview of the impact of these changes:
 
 <table className="table-callout">
