@@ -242,10 +242,14 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-- Elasticsearch/OpenSearch
-  - Required by Orchestration Cluster and Optimize
-- PostgreSQL
-  - Required by Management Identity, Keycloak, and Web Modeler
+| Database                                                    | Requirement                                                 |
+| :---------------------------------------------------------- | :---------------------------------------------------------- |
+| Elasticsearch/OpenSearch (Amazon or open-source OpenSearch) | Required by Orchestration Cluster and Optimize.             |
+| PostgreSQL                                                  | Required by Management Identity, Keycloak, and Web Modeler. |
+
+:::info OpenSearch support
+Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
+:::
 
 For more information, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
