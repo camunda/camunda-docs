@@ -1,7 +1,7 @@
 ---
 id: save-as-element-templates
-title: Save tasks as element templates
-description: Learn how to save any task as a reusable element template in Camunda Web Modeler.
+title: Save activity and event properties as reusable element templates
+description: Learn how to save supported activities and events as a reusable element template in Camunda Web Modeler.
 ---
 
 import BusinessRuleTaskImg1 from './img/save-as-template/1-business-rule-task.png';
@@ -12,14 +12,16 @@ import FinalizedTemplateImg5 from './img/save-as-template/5-finalized-template.p
 import PublishTemplateImg6 from './img/save-as-template/6-publish-template.png';
 import ApplyTemplateImg7 from './img/save-as-template/7-apply-template.png';
 
-# Save tasks as element templates
+# Save activity and event properties as reusable element templates
 
 Element templates allow you to create reusable, configurable building blocks that can be shared across your organization.  
-With the **Save as template** feature, you can convert any supported task into an element template.
+With the **Save as template** feature, you can convert any supported element into an element template.
 
-## Supported task types
+## Supported element types
 
-The **Save as template** feature is available for the following BPMN activity types:
+The **Save as template** feature is available for the following BPMN element types:
+
+**Activities**
 
 - Service task
 - User task
@@ -30,30 +32,33 @@ The **Save as template** feature is available for the following BPMN activity ty
 - Manual task
 - Call activity
 
+**Events**
+
+- Message events
+
 You cannot create a template for the [undefined task type](../../../bpmn/undefined-tasks).
 
-## Create an element template from a task
+## Create an element template from an element
 
-You can save any supported task as an element template directly from the properties panel in Web Modeler.  
-Configure your task with the desired properties, save it as a template, and optionally customize it further in the template editor.
+You can save any supported element as an element template directly from the properties panel in Web Modeler.  
+Configure your element with the desired properties, save it as a template, and optionally customize it further in the template editor.
 
 ### Prerequisites
 
-Before saving a task as a template:
+Before saving an element as a template:
 
-- Ensure the task is properly configured with the desired properties.
-- Resolve any validation errors on the task. The **Save as template** button is disabled if errors are present.
+- Ensure the element is properly configured with the desired properties.
+- Resolve any validation errors on the element. The **Save as template** button is disabled if errors are present.
 
-### Step 1: Configure your task
+### Step 1: Configure your element
 
-First, configure your task with all the necessary properties you want to include in your template.  
-The configuration depends on your task type and use case.
+First, configure your element with all the necessary properties you want to include in your template.  
+The configuration depends on your element type and use case.
 
 In this example, we'll configure a business rule task for fraud detection:
 
-1. Select a task in your BPMN diagram.
-2. Configure the task with the properties you need. For example, set up a business rule task by defining:
-
+1. Select an element in your BPMN diagram.
+2. Configure the element with the properties you need. For example, set up a business rule task by defining:
    - **Implementation**: Choose the implementation type (for example, DMN decision).
    - **Called decision**: Reference the decision to be invoked.
    - **Binding type**: Select the [resource binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md). We recommend using `versionTag` to ensure that the template always references a compatible resource version.
@@ -62,9 +67,9 @@ In this example, we'll configure a business rule task for fraud detection:
 
    <img src={BusinessRuleTaskImg1} alt="Web Modeler interface showing a configured business rule task named 'Determine fraud rating confidence' with properties panel displaying DMN decision configuration, decision ID, and binding settings" style={{marginTop: '0', width: '600px'}} />
 
-### Step 2: Save the task as a template
+### Step 2: Save the element's properties as a template
 
-1. With your configured task selected, look for the **Save as** button (template icon) in the top-right corner of the properties panel.
+1. With your configured element selected, look for the **Save as** button (template icon) in the top-right corner of the properties panel.
 
    <img src={SaveAsTemplateButtonImg2} alt="Properties panel showing the 'Save as' button with template icon in the Template section, with a blue 'Select' button visible" style={{marginTop: '0', width: '600px'}} />
 
@@ -83,7 +88,6 @@ If you want to further customize or publish your template:
 
 1. Click **Edit template** from the notification to open the template editor.
 2. The template editor allows you to:
-
    - Modify template properties and [bindings](/components/modeler/element-templates/defining-templates.md#bindings).
    - Set up validation and [constraints](/components/modeler/element-templates/defining-templates.md#constraints) for user input.
    - Configure template groups and categories.
@@ -107,24 +111,24 @@ If you want to further customize or publish your template:
 
 Once you've created and published a template, you can use it in a diagram:
 
-1. Add a new task to your diagram or select an existing one.
+1. Add a new element to your diagram or select an existing one. Make sure it matches the `appliesTo` type defined in your template.
 2. Apply the template by:
-   - Clicking **Change element** on the task, or
+   - Clicking **Change element** on the element, or
    - Clicking **Select** in the Template section of the properties panel.
 3. In the template selection dialog, find your template (for example, "Determine fraud rating confidence template") under the assigned category. By default, templates are listed under "Templates".
-4. Select the template to apply it to your task. The task will automatically be configured with all template settings, including decision references, bindings, and variable mappings.
+4. Select the template to apply it to your element. The element will automatically be configured with all template settings, including decision references, bindings, and variable mappings.
 
    <img src={ApplyTemplateImg7} alt="Template selection sidebar showing available connectors and templates, with 'Determine fraud rating confidence template' listed under the Templates section" style={{marginTop: '0', width: '800px'}} />
 
 ## Understand template property bindings
 
-When you save a task as a template, Web Modeler automatically converts the task's properties into template bindings:
+When you save an element as a template, Web Modeler automatically converts the element's properties into template bindings:
 
 - Input/output mappings
 - Task headers
 - Zeebe properties
 - Element-specific properties (for example, `calledDecision`, `calledElement`)
-- Message references (for message-related tasks)
+- Message references (for message-related elements)
 
 Only properties supported by element templates are included. Unsupported properties remain visible in the properties panel after you apply the template.
 
@@ -135,22 +139,22 @@ For a list of supported properties, see the [element templates reference](/compo
 The **Save as template** button is disabled in the following scenarios:
 
 - You are not in Web Modeler's implementation mode.
-- The task has validation issues.
-- The element type is not supported (blank tasks, events, subprocesses, etc.).
+- The element has validation issues.
+- The element type is not supported (blank tasks, error events, subprocesses, etc.).
 - You don't have permissions to create templates.
 
-Fixing validation issues will enable the button if the task type is supported.
+Fixing validation issues will enable the button if the element type is supported.
 
 ## Best practices
 
-When creating templates from tasks:
+When creating templates from elements:
 
 - **Create focused templates**: Each template should serve a clear purpose.
 - **Hide details**: Expose only the necessary properties.
 - **Validate input**: Use [constraints](/components/modeler/element-templates/defining-templates.md#constraints) to enforce valid input and provide meaningful errors.
 - **Manage dependencies**: Ensure referenced decisions or variables exist in the runtime environment. Use `versionTag` bindings for dependencies to avoid version conflicts.
 - **Use meaningful parameter names**: Give configurable fields descriptive names.
-- **Test your templates**: Apply them to a task to confirm they work as expected.
+- **Test your templates**: Apply them to an element to confirm they work as expected.
 
 ## Related topics
 
