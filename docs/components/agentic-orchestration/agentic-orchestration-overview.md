@@ -7,7 +7,7 @@ keywords: ["agentic orchestration"]
 
 import OverviewImg from './img/ao-overview-hero.png';
 import AoGrid from '../react-components/\_ao-card';
-import { introCards } from '../react-components/\_ao-card-data';
+import { getStartedCards, fundamentalCards, recommendationCards } from '../react-components/\_ao-card-data';
 
 <h3 class="subheading">Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.</h3>
 
@@ -19,17 +19,20 @@ Agentic orchestration ensures your AI-driven processes are efficient, compliant,
 
 Build and use AI agents to execute the non-deterministic parts of a process, integrated with the proven foundation of BPMN.
 
-<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI Agent</a></p>
-
 ## Get started
 
 Get started with Camunda agentic orchestration.
 
-<AoGrid ao={introCards} />
+<AoGrid ao={getStartedCards} />
 
-:::info Further resources
+## Learn the fundamentals
 
-- Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
-- Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+Understand the core concepts of Camunda agentic orchestration.
 
-:::
+<AoGrid ao={fundamentalCards} />
+
+## Follow our best practices
+
+Read our guidelines and recommendations for using Camunda AI agents.
+
+<AoGrid ao={recommendationCards} />
