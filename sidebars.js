@@ -331,6 +331,7 @@ module.exports = {
               items: [
                 "components/camunda-integrations/servicenow/prerequisites",
                 "components/camunda-integrations/servicenow/setup-and-configuration",
+                "components/camunda-integrations/servicenow/camunda-spoke",
                 {
                   type: "category",
                   label: "Connectors",
