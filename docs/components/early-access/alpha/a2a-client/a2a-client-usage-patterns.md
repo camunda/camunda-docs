@@ -5,7 +5,7 @@ sidebar_label: A2A Client Usage Patterns
 description: "Usage patterns for the A2A Client connectors."
 ---
 
-The A2A Client connectors often work in combination with to interact with remote A2A agents. This section outlines common usage patterns for the A2A Client connectors.
+The A2A Client connectors often work in combination to interact with remote A2A agents. This section outlines common usage patterns for the A2A Client connectors.
 
 ## Synchronous request-response pattern
 
