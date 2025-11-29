@@ -500,6 +500,14 @@ The message ID is automatically generated when the template is applied. The `mes
 Remember that the message [name and correlation key](/components/concepts/messages.md#message-subscriptions) define the correlation characteristics of a message and can be shared by [multiple process definitions](/components/concepts/messages.md#message-cardinality).
 :::
 
+:::note
+
+Unlike for plain BPMN message events, templated message events have a one-to-one relationship with the message they reference.
+As a result, there can be multiple [message xml representations](/components/modeler/bpmn/message-events/#xml-representation)
+with the same name in a BPMN diagram when using a templated message event multiple times.
+
+:::
+
 ### Message correlation key: `bpmn:Message#zeebe:subscription#property`
 
 | **Binding `type`**         | `bpmn:Message#zeebe:subscription#property`         |
@@ -524,6 +532,36 @@ The `bpmn:Message#zeebe:subscription#property` binding allows you to set propert
 :::note
 
 The binding name of `correlationKey` is not applicable to message start events on a process. In such cases, the property is automatically hidden.
+
+:::
+
+### Signal name: `bpmn:Signal#property`
+
+| **Binding `type`**         | `bpmn:Signal#property`                                                 |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                     |
+| **Binding parameters**     | `name`: The name of the property. <br /> Supported properties: `name`. |
+| **Mapping result**         | `<bpmn:signal [name]="[userInput]" />`                                 |
+
+The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
+This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
+
+```json
+{
+  ...,
+  "value": "aSignalName",
+  "binding": {
+    "type": "bpmn:Signal#property",
+    "name": "name"
+  }
+}
+```
+
+:::note
+
+Unlike for plain BPMN signal events, templated signal events have a one-to-one relationship with the signal they reference.
+As a result, there can be multiple [signal xml representations](/components/modeler/bpmn/signal-events/#xml-representation)
+with the same name in a BPMN diagram when using a templated signal event multiple times.
 
 :::
 
@@ -863,7 +901,7 @@ If the input `type` is `String` or `Text`, then [`feel`](#adding-feel-editor-sup
 
 The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. When configured, contained activities can be executed independently without following a predefined sequence flow.
 
-### Example
+#### Example
 
 ```json
 {
@@ -886,7 +924,7 @@ The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. 
 }
 ```
 
-### Example with `activeElementsCollection`
+#### Example with `activeElementsCollection`
 
 ```json
 {
