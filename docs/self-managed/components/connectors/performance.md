@@ -63,7 +63,7 @@ To mitigate these issues, you can enable job streaming by setting the following 
 camunda.client.worker.defaults.stream-enabled=true
 ```
 
-We recommend enabling job streaming unless you have specific reasons to use polling mode. Learn more about [job streaming](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming).
+We recommend enabling job streaming unless you have specific reasons to use polling mode. Learn more about [job streaming](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/job-streaming.md).
 
 ## Configuring max in-flight
 
