@@ -71,7 +71,7 @@ camunda:
 - **SQL vs. Liquibase**
   - Do not mix SQL upgrade scripts with Liquibase-managed schema.
   - Liquibase changelogs are **forward-only**. Rollbacks are not supported.
-- **Backup first:** Always back up your database before applying scripts manually.
+- **Backup first:** Always [back up](/self-managed/operational-guides/backup-restore/backup-and-restore.md) your database before applying scripts manually.
 
 ## Optional
 
@@ -79,7 +79,3 @@ camunda:
 - **Liquibase CLI example:** See [Liquibase getting started](https://www.liquibase.org/get-started/running-your-first-update).
 - **Upgrade workflow:** Recommended approach is to allow Camunda to manage the schema automatically. Manual upgrades are supported, but users must apply scripts sequentially from the initial version to the target version.
 - **Performance:** Indexes are included in scripts as needed. Adding custom indexes may affect future upgrades.
-
-## References
-
-- [Backup and restore](../backup-restore.md)
