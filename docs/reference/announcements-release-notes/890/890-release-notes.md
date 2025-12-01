@@ -132,6 +132,14 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
+#### Embedded web server changed from Undertow to Tomcat (Self-Managed)
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3191 -->
+
+Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
+
 #### IP egress monitoring (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3131 -->
@@ -146,6 +154,8 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 :::note
 Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
 :::
+
+### Process instance migration: Ad-hoc subprocess
 
 ## 8.9.0-alpha1
 
