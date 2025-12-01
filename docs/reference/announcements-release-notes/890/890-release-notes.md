@@ -104,9 +104,8 @@ You can now manage your Camunda connections directly within Desktop Modeler.
 
 You can now use the [open-source OpenSearch](https://opensearch.org/) project for data storage in a Self-Managed deployment. This allows you to run a fully open source observability stack without using Elasticsearch or the Amazon OpenSearch Service.
 
-For configuration instructions, see the updated Helm chart values and compatibility matrix.
-
-To learn more about using OpenSearch as a datastore, see [secondary storage](/self-managed/concepts/secondary-storage/index.md).
+- For configuration instructions, see the updated Helm chart values and compatibility matrix.
+- To learn more about using OpenSearch as a datastore, see [secondary storage](/self-managed/concepts/secondary-storage/index.md).
 
 #### RDBMS version support policy
 
@@ -134,8 +133,6 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 #### Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
@@ -154,8 +151,6 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 :::note
 Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
 :::
-
-### Process instance migration: Ad-hoc subprocess
 
 ## 8.9.0-alpha1
 
