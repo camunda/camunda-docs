@@ -386,6 +386,9 @@ module.exports = {
                     id: "components/early-access/alpha/a2a-client/a2a-client",
                   },
                   items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
                     "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },

@@ -11,7 +11,7 @@ The [A2A Client connectors](./a2a-client.md) often work in combination to intera
 
 The most straightforward usage pattern is when the A2A Client connector sends a request to a remote A2A agent and waits for the response. This is suitable for scenarios where you need immediate results.
 
-The diagram below illustrates this pattern, with an A2A Client connector being used as a tool by an AI Agent connector:
+The diagram below illustrates this pattern, with an A2A Client connector being used as a tool by an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md):
 
 ![A2A Client connector - Blocking](img/a2a-blocking.png)
 

@@ -38,3 +38,33 @@ export const introCards = [
       "Recommendations and best practices for working with models and prompts.",
   },
 ];
+
+export const a2aConnectorCards = [
+  {
+    link: "../a2a-client/a2a-client-connector/",
+    title: "A2A Client connector",
+    image: IconAoImg,
+    description: "Get started by building and running your first AI agent.",
+  },
+  {
+    link: "../a2a-client/a2a-client-polling-connector/",
+    title: "A2A Client Polling connector",
+    image: IconAoImg,
+    description: "Get started by building and running your first AI agent.",
+  },
+  {
+    link: "../a2a-client/a2a-client-webhook-connector/",
+    title: "A2A Client Webhook connector",
+    image: IconAoImg,
+    description: "Get started by building and running your first AI agent.",
+  },
+];
+
+export const a2aIntroCards = [
+  {
+    link: "../a2a-client/a2a-client-usage-patterns/",
+    title: "A2A Client usage patterns",
+    image: IconAoImg,
+    description: "Get started by building and running your first AI agent.",
+  },
+];
