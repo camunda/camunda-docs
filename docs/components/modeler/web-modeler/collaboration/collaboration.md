@@ -4,6 +4,7 @@ title: Collaborate with your team
 description: Collaboration features and access rights for Web Modeler.
 ---
 
+import BulkAddUserImg from '../img/invite-all-organization-members.png';
 import SuperUserModeImg from '../img/super-user-mode.png';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
@@ -74,11 +75,19 @@ Refer to the documentation pages about [assigning roles](../../../../self-manage
 
 </Tabs>
 
-### Inviting users to projects
+### Adding users to projects
 
 :::note
 Users without email addresses will not receive any kind of notification about project invitations.
 :::
+
+<Tabs groupId="addingUsers" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
 
 On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
 
@@ -94,15 +103,65 @@ On the right side of a project, view a list of your collaborators and invite mor
 4. Write a message to your new collaborator about their invitation to the project.
    ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
 
-5. Click **Send** and your new collaborator will receive an email with the invitation.
-   ![invite sent](img/web-modeler-collaborator-invite-sent.png)
+5. Click **Add collaborator** and your new collaborator will be added to the project and notified via email.
+   ![invite added](img/web-modeler-collaborator-invite-added.png)
    ![invite email](img/web-modeler-collaborator-invite-email.png)
+
+If the individual is not a member of your organization, they will receive an organization invitation first.
+After accepting the invitation and logging into Web Modeler, they will be added to the project.
+They will appear as "invited" in the collaborator list until they accept.
+
+![invite sent](img/web-modeler-collaborator-invite-sent.png)
+
+#### Inviting the entire organization
+
+Alternatively, you can invite all existing members of your Camunda 8 organization to the project at once by using the **All users in the organization** option.
+
+<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
+
+1. Click **Add user**.
+   ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
+
+2. Choose a role for your new collaborator.
+   ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
+
+3. Begin typing the name or email of the individual and Web Modeler will suggest members that already logged into Web Modeler once and that you can invite to the project.
+   ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
+
+4. Write a message to your new collaborator about their invitation to the project.
+   ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
+
+5. Click **Add collaborator** and your new collaborator will be added to the project and notified via email.
+   ![invite added](img/web-modeler-collaborator-invite-added.png)
+   ![invite email](img/web-modeler-collaborator-invite-email.png)
+
+If the member has not logged into Web Modeler before, they will not appear in the suggestions, but you can still invite them by typing their full email address.
+They will appear as "invited" in the collaborator list until they log into Web Modeler for the first time.
+After logging in, they will be added to the project.
+
+![invite sent](img/web-modeler-collaborator-invite-sent.png)
+
+#### Inviting the entire organization
+
+Alternatively, you can invite all members who logged into Web Modeler once to the project at once by using the **All users in the organization** option.
+
+<img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 
 :::info Self-Managed license restrictions
 For Self-Managed non-production installations, the number of collaborators per project is limited to **five**, including the project administrator.
 
 For more information, refer to the [licensing documentation](/reference/licenses.md#web-modeler).
 :::
+
+</TabItem>
+
+</Tabs>
 
 ### Folders
 
