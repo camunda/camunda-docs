@@ -386,7 +386,6 @@ module.exports = {
                     id: "components/early-access/alpha/a2a-client/a2a-client",
                   },
                   items: [
-                    "components/early-access/alpha/a2a-client/a2a-client",
                     "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
