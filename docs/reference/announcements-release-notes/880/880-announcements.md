@@ -378,11 +378,31 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 - The new Camunda Spring Boot Starter provides the `CamundaClient` when requested.
 - The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC.
 - If you want to continue using gRPC by default with the `CamundaClient`, you must explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
+- The new `CredentialsProvider` bean creation fails if there is a misconfiguration instead of falling back to a non-operational credentials provider
 
 :::
 :::info
 To learn more about migrating to the Camunda Java client, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
 
 </div>
 </div>

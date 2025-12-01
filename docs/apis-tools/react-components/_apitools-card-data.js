@@ -1,6 +1,6 @@
 import IconJavaImg from "../img/icon-java.png";
 import IconSpringBootImg from "../img/icon-spring.png";
-import IconNodeImg from "../img/icon-node-js.png";
+import IconTypescriptImg from "../img/icon-typescript.png";
 import IconOrchClusterImg from "../img/icon-orchcluster.png";
 import IconAdminImg from "../img/icon-console.png";
 import IconOptimizeImg from "../img/icon-optimize.png";
@@ -71,11 +71,11 @@ export const clientCards = [
     type: "",
   },
   {
-    link: "../node-js-sdk/",
-    title: "Node.js SDK",
-    image: IconNodeImg,
+    link: "../typescript/typescript-sdk/",
+    title: "TypeScript SDK",
+    image: IconTypescriptImg,
     description:
-      "Get started with the official Camunda 8 JavaScript SDK for Node.js.",
+      "Build Camunda 8 applications using the Camunda TypeScript SDK.",
     type: "",
   },
 ];

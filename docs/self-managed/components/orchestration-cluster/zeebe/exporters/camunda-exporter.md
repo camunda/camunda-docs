@@ -90,13 +90,13 @@ size) can be controlled by configuration.
 
 | Option | Description                                                                                                                                                    | Default |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`     |
+| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `1`     |
 | size   | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`  |
 
 With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/OpenSearch:
 
 1. When it has aggregated 1000 records.
-2. Five seconds have elapsed since the last flush (regardless of how many
+2. One seconds have elapsed since the last flush (regardless of how many
    records were aggregated).
 
 </TabItem>

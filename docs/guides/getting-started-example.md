@@ -1,7 +1,7 @@
 ---
 id: getting-started-example
-title: "Run your first local Camunda 8 project"
-sidebar_label: Run your first local project
+title: "Run your first Spring Boot or Node.js project with Camunda 8"
+sidebar_label: Run your first Spring Boot or Node.js project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is tailored for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 ## Get started with an example project
 

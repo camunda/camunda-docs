@@ -798,7 +798,7 @@ components:
             - name
             - roleId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     RoleSearchQueryRequest:
@@ -871,7 +871,7 @@ components:
           enum:
             - username
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     RoleClientResult:
@@ -909,7 +909,7 @@ components:
           enum:
             - clientId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     RoleGroupResult:
@@ -947,6 +947,6 @@ components:
           enum:
             - groupId
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field

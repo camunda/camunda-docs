@@ -387,6 +387,25 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
+
+</div>
+</div>
+
 ### Connectors
 
 <div className="release-announcement-row">

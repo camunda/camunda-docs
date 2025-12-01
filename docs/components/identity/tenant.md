@@ -75,7 +75,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 ### Assign users to a tenant
 
 1. Select the **Users** tab.
-2. Click **Assign user**. In the modal, enter the username and confirm.
+2. Click **Assign user**. In the modal, enter the username and confirm. For SaaS deployments, the username field refers to the email address of the user. For Self-Managed deployments, the username field has to match [the value of the claim configured as `username-claim`](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md#step-4-configure-the-oidc-connection-details).
 
    ![tenant-management-assign-users-modal](./img/tenant-management-assign-users-modal.png)
 

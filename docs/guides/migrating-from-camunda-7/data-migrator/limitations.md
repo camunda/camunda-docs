@@ -176,6 +176,8 @@ The history migration has the following limitations.
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
 - Decision instance `inputs` and `outputs` are not yet migrated.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5364
+- Decision instance `state` and `type` are not yet migrated.
+  - See https://github.com/camunda/camunda-bpm-platform/issues/5370
 
 ## Cockpit plugin
 
