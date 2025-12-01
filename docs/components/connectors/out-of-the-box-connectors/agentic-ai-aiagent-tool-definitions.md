@@ -194,12 +194,11 @@ Similar to the [user prompt](agentic-ai-aiagent.md#user-prompt) **Documents** fi
 
 When serializing the tool call response to JSON, document references are transformed into a content block containing the plain text or base64 encoded document content, before being passed to the LLM.
 
-## Gateway Tool Definitions
+## Gateway tool definitions
 
-In addition to statically defined tools as described above, the AI Agent connector also supports tools which act as a gateway to multiple tool definitions. This allows integrations such as the [Model Context Protocol (MCP) Client connectors](../../early-access/alpha/mcp-client/mcp-client.md) to issue
-dedicated tool discovery tool calls when initializing the agent to resolve the available tools dynamically.
+Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
 
-To detect activity as a gateway tool definition, the agent needs to have access to an implementation handling the tool discovery (typically in self-managed/hybrid setups), paired with an [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) named `io.camunda.agenticai.gateway.type` set on the activity. The exension property value defines the type of gateway tool implementation to use.
+To configure an activity as a gateway tool, an [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) named `io.camunda.agenticai.gateway.type` must be set on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
 For more details, see the available gateway tool implementations:
 
