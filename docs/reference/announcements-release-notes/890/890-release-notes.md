@@ -54,6 +54,16 @@ The Connectors runtime now allows parallel jobs processing.
 
 This feature improves outbound connector performance and responsiveness, especially under high load.
 
+### Improved performance with virtual threads executor (Self-Managed)
+
+<!-- https://github.com/camunda/product-hub/issues/3050 -->
+
+Connectors now use a virtual threads executor by default, using Project Loom to improve performance and scalability.
+
+This allows the connector runtime to handle a larger number of concurrent jobs with lower resource consumption, particularly benefiting I/O-bound workloads typical in connector operations.
+
+<!-- To learn more about optimizing connector performance with virtual threads, see [Connectors performance](/self-managed/components/connectors/performance.md). -->
+
 ### Console
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
