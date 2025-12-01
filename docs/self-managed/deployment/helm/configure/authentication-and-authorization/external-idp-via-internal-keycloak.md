@@ -41,7 +41,7 @@ For details on Keycloak identity provider mappers, see the [Keycloak documentati
 
 #### Create attribute mappers
 
-In Keycloak Admin Console, navigate to **Identity Providers** → select your IdP → **Mappers** tab.
+In Keycloak Admin Console, navigate to **Identity Providers** > select your IdP > **Mappers** tab.
 
 Create attribute mappers to import user profile information:
 
@@ -60,7 +60,7 @@ Create a username mapper:
 
 #### Create group for external IdP users
 
-Navigate to **Groups** → **Create group** and create a group:
+Navigate to **Groups** > **Create group** and create a group:
 
 - **Name**: `external-idp-users`
 
@@ -82,7 +82,7 @@ Log in to **Orchestration Cluster Identity** as an administrator.
 
 Create a mapping rule to identify external IdP users:
 
-1. Navigate to **Mapping Rules** → **Create a mapping rule**.
+1. Navigate to **Mapping Rules** > **Create a mapping rule**.
 1. Configure the mapping rule:
    - **Mapping Rule ID**: `external-idp-users-rule`
    - **Mapping Rule name**: `External IdP Users`
@@ -93,7 +93,7 @@ Create a mapping rule to identify external IdP users:
 
 Grant access to Orchestration Cluster components:
 
-1. Navigate to **Authorizations** → select **Component** → **Create authorization**.
+1. Navigate to **Authorizations** > select **Component** > **Create authorization**.
 1. Configure the authorization:
    - **Owner type**: `Mapping rule`
    - **Owner ID**: `external-idp-users-rule`
@@ -113,7 +113,7 @@ Grant additional permissions as needed. For example, to allow users to view proc
 For more details on authorizations, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
 :::
 
-### Configure Management Identity access (optional)
+### Configure Management Identity access (Optional)
 
 For access to Console, Web Modeler, and Optimize, external IdP users need the corresponding realm roles assigned in Keycloak. The recommended approach is to assign users to groups that have these roles.
 
@@ -126,14 +126,14 @@ For access to Console, Web Modeler, and Optimize, external IdP users need the co
 
 Ensure each group has the corresponding realm role assigned:
 
-1. Select the group → **Role Mappings** tab.
+1. Select the group > **Role Mappings** tab.
 1. Click **Assign role** and add the role with the same name (e.g., `Console`).
 
 #### Create group mappers
 
 Create mappers to assign federated users to these groups:
 
-1. Navigate to **Identity Providers** → select your IdP → **Mappers** tab.
+1. Navigate to **Identity Providers** > select your IdP > **Mappers** tab.
 1. Click **Add mapper** for each component:
 
 | Mapper Name               | Mapper Type     | Group         |
@@ -148,14 +148,13 @@ You can also assign roles directly to users in Keycloak, or use [mapping rules i
 
 ## Understanding the two identity systems
 
-Camunda 8.8 uses two separate identity systems:
+Camunda 8.8 uses two separate identity systems: Orchestration Cluster Identity and Management Identity. Each system manages access to different components and uses different configuration methods.
 
-| System                         | Components                           | Configuration Method             |
-| ------------------------------ | ------------------------------------ | -------------------------------- |
-| Orchestration Cluster Identity | Operate, Tasklist, Identity UI, APIs | Mapping rules and authorizations |
-| Management Identity            | Console, Web Modeler, Optimize       | Keycloak groups and roles        |
+For a detailed explanation of the differences between these identity systems, see [Identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
 
+:::note
 Orchestration Cluster Identity does not automatically recognize Keycloak groups. You must create mapping rules that match JWT claims and then assign authorizations to those mapping rules.
+:::
 
 ## Next steps
 
