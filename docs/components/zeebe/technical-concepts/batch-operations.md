@@ -49,7 +49,7 @@ A Zeebe batch operation always consists of two parts:
 
 - **The batch operation items:**  
   The items are not directly defined at creation. Instead, a filter describes them.  
-  This filter is applied to the configured secondary database (e.g., Elasticsearch) to identify matching process instances.
+  This filter is applied to the configured secondary database (for example, Elasticsearch) to identify matching process instances.
 
 ## Batch operation lifecycle
 
@@ -93,8 +93,8 @@ In [Get Batch Operation](../../../apis-tools/orchestration-cluster-api-rest/spec
 
 Although the broker's internal state stores process instance data, the secondary storage is queried because:
 
-- RocksDB (our internal state db) is a key-value store, not optimized for complex queries.
-- The secondary database (e.g., Elasticsearch) efficiently supports complex filtering.
+- RocksDB (our internal state database) is a key-value store, not optimized for complex queries.
+- The secondary database (for example, Elasticsearch) efficiently supports complex filtering.
 - The user interface enables filter-based batch creation, which RocksDB cannot support.
 - Pagination and large result set handling is better supported by secondary databases.
 
@@ -103,7 +103,7 @@ Although the broker's internal state stores process instance data, the secondary
 **What happens:**
 
 - Each partition processes its assigned items independently
-- Individual commands (e.g., `CANCEL`, `MIGRATE`) are executed on each process instance
+- Individual commands (for example, `CANCEL`, `MIGRATE`) are executed on each process instance
 - Progress is tracked and can be monitored
 - Failed items are recorded with error details
 
@@ -134,9 +134,9 @@ Before processing begins, the system performs several validation checks:
 
 - **Empty filter validation**: Filters cannot be empty or null
 - **Authorization validation**: User permissions are checked before operation creation
-- **Command-specific validation**: Each command type has specific requirements (e.g., migration plan validity)
+- **Command-specific validation**: Each command type has specific requirements (for example, migration plan validity)
 
-Failed validations result in immediate rejection with specific error codes and messages (e.g., `INVALID_ARGUMENT`, `NOT_AUTHORIZED`).
+Failed validations result in immediate rejection with specific error codes and messages (for example, `INVALID_ARGUMENT`, `NOT_AUTHORIZED`).
 
 ### Initialization failures
 
@@ -167,7 +167,7 @@ Individual items may fail during execution for various reasons:
 - Migration or modification plan is invalid for the specific instance
 - Authorization insufficient for the specific process instance
 
-Failed items are marked as `FAILED` and cannot be retried within the same batch operation.
+The system marks failed items as `FAILED` and does not retry them within the same batch operation.
 
 ### Recovery strategies
 
@@ -179,7 +179,7 @@ Failed items are marked as `FAILED` and cannot be retried within the same batch 
 
 Batch operations support several lifecycle management operations:
 
-### Suspend and Resume
+### Suspend and resume
 
 - **Suspend**: Temporarily stops execution of a running batch operation
 - **Resume**: Restarts execution of a suspended batch operation
@@ -191,7 +191,7 @@ Batch operations support several lifecycle management operations:
 - Cannot be resumed once canceled
 - Partially processed items remain in their modified state
 
-## How batch operations work in distributed clusters
+## Batch operations in distributed clusters
 
 ![distributed-batch-operation](assets/batch-operation.png)
 
@@ -262,7 +262,7 @@ To execute a batch operation, users need two sets of permissions:
 - Permission to read process instances and incidents from the secondary database.
 - Permission to execute the specific operation on each targeted process instance.
 
-Authorization claims are stored with the batch operation and used throughout its lifecycle.
+The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
 
 :::info
 See the [authorizations](/components/concepts/access-control/authorizations.md) and [how to create authorizations in the Identity UI](/components/identity/authorization.md).
@@ -337,17 +337,17 @@ Controls how batch operations split large result sets into manageable pieces:
 
 Controls how the system handles transient failures when querying the secondary database:
 
-| Parameter                 | Type     | Default     | Description                                                                                                                                                                                            |
-| ------------------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `queryRetryMax`           | int      | **`3`**     | Maximum number of retry attempts for transient query failures (e.g., network timeouts, temporary database unavailability).<br/><br/>**To disable:** Set to `0` to disable retries.                     |
-| `queryRetryInitialDelay`  | Duration | **`PT1S`**  | Initial delay before the first retry attempt.<br/><br/>**Behavior:** Each subsequent retry uses exponential backoff.                                                                                   |
-| `queryRetryMaxDelay`      | Duration | **`PT60S`** | Maximum delay between retry attempts.<br/><br/>**Constraint:** Must be greater than or equal to `queryRetryInitialDelay`.<br/>**Purpose:** Prevents excessive wait times.                              |
-| `queryRetryBackoffFactor` | double   | **`2.0`**   | Multiplier applied to the delay between consecutive retries.<br/><br/>**Example:** With factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, 8s, etc. (capped by `queryRetryMaxDelay`). |
+| Parameter                 | Type     | Default     | Description                                                                                                                                                                                                 |
+| ------------------------- | -------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `queryRetryMax`           | int      | **`3`**     | Maximum number of retry attempts for transient query failures (for example, network timeouts, temporary database unavailability).<br/><br/>**To disable:** Set to `0` to disable retries.                   |
+| `queryRetryInitialDelay`  | Duration | **`PT1S`**  | Initial delay before the first retry attempt.<br/><br/>**Behavior:** Each subsequent retry uses exponential backoff.                                                                                        |
+| `queryRetryMaxDelay`      | Duration | **`PT60S`** | Maximum delay between retry attempts.<br/><br/>**Constraint:** Must be greater than or equal to `queryRetryInitialDelay`.<br/>**Purpose:** Prevents excessive wait times.                                   |
+| `queryRetryBackoffFactor` | double   | **`2.0`**   | Multiplier applied to the delay between consecutive retries.<br/><br/>**Example:** With factor `2.0` and initial delay `PT1S`, retries occur at 1s, 2s, 4s, 8s, and so on (capped by `queryRetryMaxDelay`). |
 
 #### Configuration example
 
 ```yaml
-# In your broker configuration file (e.g., broker.yaml)
+# In your broker configuration file (for example, broker.yaml)
 zeebe:
   broker:
     experimental:
@@ -398,7 +398,7 @@ These settings appear in `broker.yaml.template` under `experimental.engine.batch
 
 If you use the Camunda Exporter (Self-Managed with Elasticsearch/OpenSearch), you can control whether pending batch items are exported immediately at batch creation.
 
-##### Camunda Exporter: exportItemsOnCreation
+##### Camunda exporter exportItemsOnCreation
 
 | Parameter                              | Type    | Default    | Description                                                                                                                                                                                                                       |
 | -------------------------------------- | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -416,7 +416,7 @@ For very large batches (100,000+ items), enabling this option causes a temporary
 **Configuration example:**
 
 ```yaml
-# In your broker configuration file (e.g., broker.yaml)
+# In your broker configuration file (for example, broker.yaml)
 exporters:
   camundaexporter:
     args:
