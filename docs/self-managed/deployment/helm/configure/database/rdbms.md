@@ -21,36 +21,37 @@ Requires a database accessible to the camunda components. Can be any of the foll
 
 ### Parameters
 
-| Parameter                                                                                          | Type   | Default | Description |
-| -------------------------------------------------------------------------------------------------- | ------ | ------- | ----------- |
-| `orchestration.data.secondaryStorage.type`                                                         | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.url`                                                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.username`                                               | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.secret.existingSecret`                                  | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey`                               | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`                                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.minHistoryCleanupInterval`                      | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.maxHistoryCleanupInterval`                      | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.historyCleanupBatchSize`                        | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.usageMetricsCleanup`                            | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.processCache.maxSize`                           | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCache.maxSize`                    | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`                     | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout`                     | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime`                     | string | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout`               | string | `""`    |             |
+| Parameter                                                                                          | Type                      | Default | Description |
+| -------------------------------------------------------------------------------------------------- | ------------------------- | ------- | ----------- |
+| `orchestration.data.secondaryStorage.type`                                                         | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.url`                                                    | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.username`                                               | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.secret.existingSecret`                                  | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey`                               | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`                                    | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | boolean                   | `false` |             |
+| `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | integer                   | `1000`  |             |
+| `orchestration.data.secondaryStorage.rdbms.queueMemoryLimit`                                       | integer                   | `20`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultHistoryTTL`                              | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.defaultBatchOperationHistoryTTL`                | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCancelProcessInstanceHistoryTTL`  | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationMigrateProcessInstanceHistoryTTL` | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationModifyProcessInstanceHistoryTTL`  | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationResolveIncidentHistoryTTL`        | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.minHistoryCleanupInterval`                      | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.maxHistoryCleanupInterval`                      | ISO8601 Duration (string) | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.historyCleanupBatchSize`                        | integer                   | `1000`  |             |
+| `orchestration.data.secondaryStorage.rdbms.history.usageMetricsCleanup`                            | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.processCache.maxSize`                           | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.batchOperationCache.maxSize`                    | integer                   | `10000` |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maximumPoolSize`                 | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.minimumIdle`                     | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.idleTimeout`                     | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.maxLifetime`                     | string                    | `""`    |             |
+| `orchestration.data.secondaryStorage.rdbms.history.connectionPool.connectionTimeout`               | string                    | `""`    |             |
 
 ### Example usage
 
