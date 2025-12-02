@@ -5,12 +5,14 @@ sidebar_label: A2A Client Polling connector
 description: "Poll for responses from asynchronous A2A tasks."
 ---
 
-The A2A Client Polling connector polls for responses from asynchronous A2A tasks. It is typically paired with the [A2A Client connector](./a2a-client-connector.md) when using the `Polling` response retrieval method.
+The A2A Client Polling connector polls for responses from asynchronous A2A tasks.
+
+It is typically paired with the [A2A Client connector](./a2a-client-connector.md) when using the `Polling` response retrieval method.
 
 ## Create an A2A Client Polling connector task
 
-1. Start building your BPMN diagram. You can use the A2A Client Polling connector with an Intermediate Catch Event or with a Receive Task.
-2. Select the applicable element and change its template to a A2A Client Polling connector.
+1. Start building your BPMN diagram. You can use the A2A Client Polling connector with an **Intermediate Catch Event** or with a **Receive Task**.
+2. Select the applicable element and change its template to a **A2A Client Polling connector**.
 3. Fill in all required properties.
 4. Complete your BPMN diagram.
 5. Deploy the diagram to activate the A2A Client Polling connector.
@@ -36,4 +38,4 @@ Configure the following:
 :::
 
 - **Result variable** (optional): Typically leave empty.
-- **Result expression**: FEEL expression to extract the result from the polled response. Typically extract the `result` field from the [response](./a2a-client-connector.md#response-structure) using a FEEL expression such as `= {a2aAgentResponse: result}` or `= {toolCallResult: result}`.
+- **Result expression**: FEEL expression to extract the result from the polled response. Typically, extract the `result` field from the [response](./a2a-client-connector.md#response-structure) using a FEEL expression such as `= {a2aAgentResponse: result}` or `= {toolCallResult: result}`.

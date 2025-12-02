@@ -58,7 +58,7 @@ export const a2aConnectorCards = [
     link: "../a2a-client/a2a-client-webhook-connector/",
     title: "A2A Client Webhook connector",
     image: IconConnectorImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Receive callbacks from remote A2A agents via HTTP webhooks.",
   },
 ];
 
