@@ -52,7 +52,7 @@ export const a2aConnectorCards = [
     link: "../a2a-client/a2a-client-polling-connector/",
     title: "A2A Client Polling connector",
     image: IconConnectorImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Poll for responses from asynchronous A2A tasks.",
   },
   {
     link: "../a2a-client/a2a-client-webhook-connector/",
