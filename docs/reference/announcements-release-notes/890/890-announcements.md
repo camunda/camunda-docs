@@ -158,7 +158,7 @@ When using JSON as the output for the logs the structure has slightly changed:
 See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
@@ -177,7 +177,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-embedded-web-server-changed-from-undertow-to-tomcat).
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
@@ -198,7 +198,7 @@ You can now invite users who have not yet logged into Web Modeler by adding them
 Note that inviting the entire organization will also only work for users who have already logged in once.
 
 :::info
-To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#todo). // TODO
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
