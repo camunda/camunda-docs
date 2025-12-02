@@ -120,6 +120,8 @@ for (int i = 0; i < 3; i++) {
 
 The first message starts the workflow; the next two correlate to the existing instance.
 
+## Troubleshooting
+
 | Problem                                     | Cause                                                       | Solution                                                            |
 | ------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------------- |
 | Every message starts a new process instance | Missing or mismatched `correlationKey` in message variables | Ensure all messages use the same correlation key and name           |
