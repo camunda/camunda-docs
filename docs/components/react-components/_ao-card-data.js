@@ -2,6 +2,7 @@ import IconAoImg from "../assets/icon-play.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
+import IconConnectorImg from "../connectors/img/icon-connectors.png";
 
 export const introCards = [
   {
@@ -43,19 +44,20 @@ export const a2aConnectorCards = [
   {
     link: "../a2a-client/a2a-client-connector/",
     title: "A2A Client connector",
-    image: IconAoImg,
-    description: "Get started by building and running your first AI agent.",
+    image: IconConnectorImg,
+    description:
+      "Retrieve a remote agent's agent card and send messages to it.",
   },
   {
     link: "../a2a-client/a2a-client-polling-connector/",
     title: "A2A Client Polling connector",
-    image: IconAoImg,
+    image: IconConnectorImg,
     description: "Get started by building and running your first AI agent.",
   },
   {
     link: "../a2a-client/a2a-client-webhook-connector/",
     title: "A2A Client Webhook connector",
-    image: IconAoImg,
+    image: IconConnectorImg,
     description: "Get started by building and running your first AI agent.",
   },
 ];
@@ -65,6 +67,6 @@ export const a2aIntroCards = [
     link: "../a2a-client/a2a-client-usage-patterns/",
     title: "A2A Client usage patterns",
     image: IconAoImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Usage patterns for the A2A Client connectors.",
   },
 ];

@@ -24,12 +24,8 @@ The A2A Client include three connectors:
 
 <AoGrid ao={a2aConnectorCards} />
 
-1. **A2A Client connector ([outbound](/components/connectors/use-connectors/outbound.md))**: Retrieves an agent card from a remote agent and sends messages to it.
-2. **A2A Client Polling connector ([inbound](/components/connectors/use-connectors/inbound.md))**: Polls for responses from remote A2A agents.
-3. **A2A Client Webhook connector (inbound)**: Receives responses from remote A2A agents via webhooks.
-
 Together, these connectors enable seamless integration with A2A-compliant agents, allowing you to build multi-agent workflows within Camunda processes.
 
-Learn about A2A Client usage patterns with the following guide:
+Explore common A2A Client usage patterns in the guide below:
 
 <AoGrid ao={a2aIntroCards} />

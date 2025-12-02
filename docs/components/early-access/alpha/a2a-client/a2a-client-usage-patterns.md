@@ -1,7 +1,7 @@
 ---
 id: a2a-client-usage-patterns
-title: A2A usage patterns
-sidebar_label: A2A usage patterns
+title: A2A Client usage patterns
+sidebar_label: A2A Client usage patterns
 description: "Usage patterns for the A2A Client connectors."
 ---
 
