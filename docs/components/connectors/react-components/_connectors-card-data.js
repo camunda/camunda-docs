@@ -35,10 +35,10 @@ export const gettingStartedCards = [
   },
   {
     link: "../out-of-the-box-connectors/available-connectors-overview",
-    title: "Camunda connectors",
+    title: "Built-in connectors",
     image: IconConnectorImg,
     description:
-      "Find technical documentation for prebuilt Camunda connectors.",
+      "Find technical documentation for built-in Camunda connectors.",
   },
 ];
 
@@ -46,7 +46,7 @@ export const gettingStartedCards = [
 export const customConnectorCards = [
   {
     link: "../custom-built-connectors/build-connector",
-    title: "Custom connectors",
+    title: "Build custom connectors",
     image: IconConnectorCustomImg,
     description: "Learn how to build and deploy your own custom connectors.",
   },
