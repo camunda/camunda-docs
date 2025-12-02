@@ -39,11 +39,47 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 09 December 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha2)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha2)</li></ul> | -    |
 
+### Agentic orchestration
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+#### MCP client authentication and transport protocol
+
+<!-- https://github.com/camunda/product-hub/issues/3127, https://github.com/camunda/connectors/issues/5652 -->
+
+The Camunda MCP (Model Context Protocol) client now supports OAuth, API key, and custom header–based authentication.
+
+- System administrators can configure secure, policy-compliant access for Camunda AI agents.
+- AI developers can discover and invoke enterprise MCP tools safely without exposing open endpoints.
+- Prepares the MCP connector for production use while maintaining flexibility for both SaaS and Self-Managed environments.
+
+MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
+
+To learn more, see [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md).
+
 ### Connectors
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-### Improved performance with virtual threads executor (Self-Managed)
+#### Amazon Textract connector improvements
+
+<!-- https://github.com/camunda/connectors/pull/5490 -->
+
+The [Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md) is improved with input field visibility and polling fixes, new sections for enhanced usability, and updated documentation.
+
+#### Azure Blob Storage connector supports OAuth 2.0
+
+<!-- https://github.com/camunda/camunda-docs/pull/7280 -->
+
+The [Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md#oauth-20) now supports OAuth2.0 authentication with Microsoft Azure.
+
+#### Email connector supports SMTP no authentication mode
+
+<!-- https://github.com/camunda/connectors/issues/5473 -->
+
+The [Email connector](/components/connectors/out-of-the-box-connectors/email.md) now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
+
+#### Improved runtime performance with virtual threads executor (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3050 -->
 
