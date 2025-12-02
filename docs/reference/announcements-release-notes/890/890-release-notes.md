@@ -35,8 +35,8 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 ## 8.9.0-alpha1
 
-| Release date     | Changelog(s)                                                                                                                                                                                       | Blog |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
+| Release date     | Changelog(s)                                                                                                                                                                               | Blog |
+| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 November 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha1)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha1)</li></ul> | -    |
 
 ### JDBC driver management for RDBMS integrations
