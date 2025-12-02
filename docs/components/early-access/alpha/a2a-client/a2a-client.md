@@ -20,7 +20,7 @@ It also provides capabilities to discover remote agents, send messages, and rece
 
 ## A2A Client connectors
 
-The A2A Client include three connectors:
+The A2A Client includes three connectors:
 
 <AoGrid ao={a2aConnectorCards} />
 
