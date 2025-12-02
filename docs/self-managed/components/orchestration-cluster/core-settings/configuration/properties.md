@@ -882,6 +882,16 @@ child-src;
 script-src-attr 'none'.
 ```
 
+### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
+
+| Property                                                             | Description                                  | Default value |
+| -------------------------------------------------------------------- | -------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`      | The type of owner to assign this authorization to.       |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`       | The owner ID to assign this authorization to.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations/#available-resources) for this authorization to apply to. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`        | The resource ID for this authorization to apply to.         |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS` | Permissions to assign to this authorization. Permissions vary by resource type. | |
+
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
 | Property                                                             | Description                                  | Default value |
