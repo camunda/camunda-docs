@@ -30,7 +30,7 @@ Requires a database accessible to the camunda components. Can be any of the foll
 | `orchestration.data.secondaryStorage.rdbms.secret.existingSecretKey`                               | string                    | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.secret.inlineSecret`                                    | string                    | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.flushInterval`                                          | ISO8601 Duration (string) | `""`    |             |
-| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | boolean                   | `false` |             |
+| `orchestration.data.secondaryStorage.rdbms.autoDDL`                                                | boolean                   | `true`  |             |
 | `orchestration.data.secondaryStorage.rdbms.prefix`                                                 | string                    | `""`    |             |
 | `orchestration.data.secondaryStorage.rdbms.queueSize`                                              | integer                   | `1000`  |             |
 | `orchestration.data.secondaryStorage.rdbms.queueMemoryLimit`                                       | integer                   | `20`    |             |
@@ -70,9 +70,6 @@ orchestration:
         username: camunda
         secret:
           inlineSecret: camunda_password
-
-  profiles:
-    operate: false
 ```
 
 ## Loading drivers into pods
@@ -183,6 +180,30 @@ This will mount an empty volume into the container, but on first load you'll nee
 
 ```shell
 kubectl cp /path/to/ojdbc8.jar <pod-name>:/driver-lib/ojdbc8.jar
+```
+
+### Verifying connectivity
+
+To verify that camunda components can properly connect to the RDBMS database, check the following:
+
+1. Does the database have populated tables? (e.g., `\d` in PostgreSQL to list tables)
+2. Deploy a model and create a process instance using the Web Modeler. Then check the output of `SELECT * FROM process_instances;`
+3. Check the logs for the following log lines:
+
+:::note
+
+If the batch size is large, then deploying a model and creating a process instance may not immediately show up in the database, as the exporter flushes data based on the flush interval or when the queue is full.
+
+:::
+
+```
+io.camunda.application.commons.rdbms.MyBatisConfiguration - Initializing Liquibase for RDBMS with global table trimmedPrefix ''.
+...
+
+io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter[] RdbmsExporter created with Configuration: flushInterval=PT0.5S, queueSize=1000
+io.camunda.exporter.rdbms.RdbmsExporter - [RDBMS Exporter[] Exporter opened with last exported position 3318
+...
+org.springframework.web.servlet.DispatcherServlet - Completed initialization in 0 ms
 ```
 
 ## References
