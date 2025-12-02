@@ -209,13 +209,6 @@ const SearchableTable = () => {
       image: BoxImg,
     },
     {
-      name: "Camunda Operate",
-      description: "Fetch process execution data from Camunda Operate.",
-      type: "Outbound",
-      link: "../operate/",
-      image: CamundaImg,
-    },
-    {
       name: "CSV",
       description: "Read and write CSV documents.",
       type: "Outbound",
