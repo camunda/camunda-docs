@@ -182,7 +182,7 @@ This will mount an empty volume into the container, but on first load you'll nee
 kubectl cp /path/to/ojdbc8.jar <pod-name>:/driver-lib/ojdbc8.jar
 ```
 
-### Verifying connectivity
+## Verifying connectivity
 
 To verify that camunda components can properly connect to the RDBMS database, check the following:
 
