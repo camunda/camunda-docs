@@ -42,6 +42,10 @@ Prefix: `camunda.migrator`
 
 Prefix: `camunda.migrator.interceptors.[n]`
 
+There are two types of interceptors: **VariableInterceptors** for [Runtime migration](/guides/migrating-from-camunda-7/data-migrator/variables.md#transformation)
+and **EntityInterceptors** for [History migration](/guides/migrating-from-camunda-7/data-migrator/history.md#entity-transformation).
+The configuration is the same for both types.
+
 | Property     | Type      | Description                                                                                                                                   |
 | :----------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
 | `class-name` | `string`  | **Required.** Fully qualified class name of the interceptor (built-in or custom).                                                             |
