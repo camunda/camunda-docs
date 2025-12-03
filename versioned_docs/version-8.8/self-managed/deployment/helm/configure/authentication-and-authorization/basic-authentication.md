@@ -44,7 +44,9 @@ The following components do not support basic authentication and require Managem
 You can still enable these components alongside a basic auth Orchestration Cluster by using a hybrid authentication setup:
 
 - **Orchestration Cluster and Connectors** use basic authentication
-- **Console, Web Modeler, Optimize, and Management Identity** use OIDC via internal Keycloak
+- **Console, Web Modeler, Optimize, and Management Identity** use OIDC
+
+This guide shows how to configure hybrid authentication with internal Keycloak. You can also apply this approach with other OIDC setups, such as [external Keycloak](./external-keycloak.md) or an [external OIDC provider](./external-oidc-provider.md)
 
 When deploying process models from Web Modeler to a basic auth Orchestration Cluster, you will be prompted to enter credentials in the deployment dialog.
 
