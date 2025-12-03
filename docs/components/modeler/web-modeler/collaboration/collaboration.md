@@ -149,7 +149,7 @@ After logging in, they will be added to the project.
 
 #### Inviting the entire organization
 
-Alternatively, you can invite all members who logged into Web Modeler once to the project at once by using the **All users in the organization** option.
+Alternatively, you can invite all members who logged into Web Modeler once to the project in one go by using the **All users in the organization** option.
 
 <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 
