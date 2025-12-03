@@ -38,6 +38,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/identity",
             "guides/migrating-from-camunda-7/data-migrator/variables",
             "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
@@ -1166,7 +1167,21 @@ module.exports = {
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
-        "apis-tools/node-js-sdk",
+        {
+          type: "category",
+          label: "TypeScript SDK",
+          link: {
+            type: "doc",
+            id: "apis-tools/typescript/typescript-sdk",
+          },
+          items: [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency",
+          ],
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -1453,6 +1468,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
                   ],

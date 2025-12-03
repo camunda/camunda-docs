@@ -10,7 +10,14 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for process and local variables based on given criteria.
+        Search for process and local variables based on given criteria. By default, long variable values in the response are truncated.
+      parameters:
+        - name: truncateValues
+          in: query
+          required: false
+          description: When true (default), long variable values in the response are truncated. When false, full variable values are returned.
+          schema:
+            type: boolean
       requestBody:
         required: false
         content:
