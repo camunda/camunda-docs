@@ -45,9 +45,9 @@ This is the recommended transport for new implementations.
 | Headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`. |
 | Timeout | No       | Connection timeout as an ISO 8601 duration. For example, `PT60S`.                  |
 
-### Server-Sent Event
+### Server-Sent Events (SSE)
 
-Use for MCP servers exposing a Server-Sent Event (SSE) endpoint.
+Use for MCP servers exposing a Server-Sent Events (SSE) endpoint.
 
 :::info
 This transport type is considered legacy; use Streamable HTTP for new implementations where possible.
