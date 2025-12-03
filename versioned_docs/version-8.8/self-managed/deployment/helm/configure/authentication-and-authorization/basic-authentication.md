@@ -54,7 +54,7 @@ When deploying process models from Web Modeler to a basic auth Orchestration Clu
 
 Follow the [internal Keycloak guide](./internal-keycloak.md) with these modifications:
 
-1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using basic auth.
+1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using basic auth. See [Create a secret](./internal-keycloak.md#create-a-secret).
 
 2. **Set basic auth for the Orchestration Cluster and Connectors**:
 
@@ -70,7 +70,7 @@ connectors:
       method: basic
 ```
 
-3. **Skip the OIDC sections** for the Orchestration Cluster and Connectors in the internal Keycloak guide.
+3. **Skip the OIDC sections** for the [Orchestration Cluster](./internal-keycloak.md#configure-orchestration-cluster) and [Connectors](./internal-keycloak.md#configure-connectors) in the internal Keycloak guide.
 
 ## Full configuration example
 
