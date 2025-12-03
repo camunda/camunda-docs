@@ -8,7 +8,7 @@ description: "Enables interaction with remote agents using the Agent-to-Agent (A
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import AoGrid from '/docs/components/react-components/\_ao-card';
-import { a2aConnectorCards, a2aIntroCards } from '/docs/components/react-components/\_ao-card-data';
+import { a2aConnectorCards } from '/docs/components/react-components/\_ao-card-data';
 
 The Agent-to-Agent (A2A) Client connectors enable Camunda processes to interact with remote agents using the [A2A protocol](https://a2a-protocol.org/v0.3.0/specification/).
 
@@ -37,6 +37,4 @@ The A2A Client includes three connectors:
 
 Together, these connectors enable seamless integration with A2A-compliant agents, allowing you to build multi-agent workflows within Camunda processes.
 
-Explore common A2A Client usage patterns in the guide below:
-
-<AoGrid ao={a2aIntroCards} />
+<p><a href="./a2a-client-usage-patterns/" class="link-arrow">Explore common A2A Client usage patterns</a></p>

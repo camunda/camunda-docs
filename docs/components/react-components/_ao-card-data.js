@@ -61,12 +61,3 @@ export const a2aConnectorCards = [
     description: "Receive callbacks from remote A2A agents via HTTP webhooks.",
   },
 ];
-
-export const a2aIntroCards = [
-  {
-    link: "../a2a-client/a2a-client-usage-patterns/",
-    title: "A2A Client usage patterns",
-    image: IconAoImg,
-    description: "Usage patterns for the A2A Client connectors.",
-  },
-];
