@@ -25,9 +25,10 @@ To run the schema manager as a standalone application:
 The schema manager is a separate Java application responsible for creating and managing the database schema and applying index template settings (for example, shard/replica counts and retention policies).
 
 :::note
+
 - Initialization requires a user with cluster-level privileges (for example, an administrative role in OpenSearch with access to required action groups like `cluster_manage_index_templates`, `cluster_monitor`, and the index template CRUD permissions listed in [OpenSearch privileges](./opensearch-privileges.md)).
 - Initialization needs to be executed only once per installation (and again for minor upgrades requiring schema adjustments).
-:::
+  :::
 
 #### Configure the schema manager
 
@@ -284,12 +285,12 @@ Before running the standalone backup manager:
 
 ### High-level flow recap
 
-| Step | Action |
-| ---- | ------ |
-| 1 | Run privileged schema manager → prepares templates/indices |
-| 2 | Start application with restricted user → processes workload |
-| 3 | (Upgrade) Run future version schema manager privileged → apply adjustments |
-| 4 | Upgrade application with schema creation disabled |
-| 5 | (Optional) Run standalone backup application with snapshot privilege |
+| Step | Action                                                                     |
+| ---- | -------------------------------------------------------------------------- |
+| 1    | Run privileged schema manager → prepares templates/indices                 |
+| 2    | Start application with restricted user → processes workload                |
+| 3    | (Upgrade) Run future version schema manager privileged → apply adjustments |
+| 4    | Upgrade application with schema creation disabled                          |
+| 5    | (Optional) Run standalone backup application with snapshot privilege       |
 
 This staged approach reduces or eliminates downtime for minor upgrades and isolates cluster-level privileges to short-lived administrative tasks rather than long-running services.
