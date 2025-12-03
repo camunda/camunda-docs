@@ -18,6 +18,10 @@ Combined with the [AI Agent connector](../../../connectors/out-of-the-box-connec
 
 It also provides capabilities to discover remote agents, send messages, and receive responses through multiple mechanisms.
 
+:::info
+A2A Client connectors do not currently support authentication against a remote A2A server. This feature will be added in a future release.
+:::
+
 ## A2A Client connectors
 
 The A2A Client includes three connectors:
