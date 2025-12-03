@@ -19,8 +19,7 @@ CAMUNDA_DATABASE=opensearch
 :::info Elasticsearch and OpenSearch support
 
 - Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution. For version support information, see [supported environments](/reference/supported-environments.md).
-- Using Amazon OpenSearch requires a new Camunda installation.
-- Migration from previous Elasticsearch setups is not supported.
+- Using OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
 
 :::
 
