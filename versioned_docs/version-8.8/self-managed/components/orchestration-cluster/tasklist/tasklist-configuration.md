@@ -97,43 +97,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Logging
 
-See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/webserver.md).
-
-## Clustering
-
-### Distributed user sessions
-
-If more than one Camunda Tasklist instance is accessible by users for a failover scenario, for example, persistent sessions must be configured for all instances. This enables distributed sessions among all instances and users do not lose their session when being routed to another instance.
-
-| Name                                         | Description                                                | Default value |
-| :------------------------------------------- | :--------------------------------------------------------- | :------------ |
-| camunda.tasklist.persistent.sessions.enabled | Enables the persistence of user sessions in Elasticsearch. | false         |
-
-## Cross-site request forgery protection
-
-Cross-site request forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they are currently authenticated. To mitigate this risk, Camunda provides CSRF protection that can be enabled in the Tasklist web application.
-
-### Enabling CSRF protection
-
-CSRF protection is enabled by default on Camunda Self-Managed. To explicitly define this, set the configuration variable `camunda.tasklist.csrfPreventionEnabled` to `true`. This is the recommended setting for production environments to enhance security.
-
-```yaml
-camunda:
-  tasklist:
-    csrfPreventionEnabled: true
-```
-
-When CSRF protection is enabled, the Tasklist web application requires a valid `X-CSRF-Token` header to be present in all state-changing HTTP requests (POST, PUT, DELETE, etc.)
-
-### Disabling CSRF protection
-
-To disable CSRF protection, set the configuration property `camunda.tasklist.csrfPreventionEnabled` to `false`. This setting is not recommended for production environments as it may expose the application to CSRF attacks.
-
-```yaml
-camunda:
-  tasklist:
-    csrfPreventionEnabled: false
-```
+See the [core settings documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/logging.md).
 
 ## Allow non-self assignment
 

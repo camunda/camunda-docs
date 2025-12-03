@@ -114,6 +114,22 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-http-connections" env="CAMUNDA_CLIENT_MAXHTTPCONNECTIONS"/><a href="#camundaclientmaxhttpconnections" id="camundaclientmaxhttpconnections" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of concurrent HTTP connections the client can open.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>100</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/><a href="#camundaclientmaxmessagesize" id="camundaclientmaxmessagesize" class="hash-link"/>
 </td>
 

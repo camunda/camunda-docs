@@ -78,6 +78,100 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-color-warning-contrast-background: rgb(252, 243, 238);
 }
 
+/* Match Algolia colours to Camunda brand colours */
+:root {
+  --docsearch-muted-color: rgb(140, 140, 140) !important;
+  --docsearch-hit-highlight-color: #bc4223 !important;
+  --docsearch-highlight-color: #ad452a !important;
+  --docsearch-primary-color: #ad452a !important;
+  --docsearch-secondary-text-color: rgb(140, 140, 140) !important;
+  --docsearch-icon-color: rgb(140, 140, 140) !important;
+}
+.DocSearch-Button {
+  background-color: #ebebee !important;
+  border-radius: 20px !important;
+  height: 32px !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-title {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-path {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] mark {
+  color: white !important;
+}
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-action,
+.DocSearch-Hit[aria-selected="true"] .DocSearch-Hit-icon,
+.DocSearch-Hit[aria-selected="true"] mark {
+  color: white !important;
+}
+.DocSearch-SearchBar {
+  padding: 20px !important;
+}
+.DocSearch-Form {
+  border: 2px solid #ad452a !important;
+}
+/* Search bar general */
+
+/* As we now show the breadcrumbs with full path,
+we make it less bold compared to the search keyword */
+.DocSearch-Hit-source {
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 0.8rem !important;
+  font-weight: unset !important;
+}
+
+/* Landing page search bar */
+
+.homeSearch {
+  margin: auto;
+  max-width: 1000px;
+  padding: 15px 20px 20px 20px;
+}
+
+.homeSearch .DocSearch-Button {
+  height: 55px !important;
+  width: 100%;
+  border-radius: 8px !important;
+  background: white;
+  border: none !important;
+}
+.homeSearch .DocSearch-Button:hover {
+  height: 55px;
+  width: 100%;
+  border-radius: 8px;
+  background: white;
+  color: var(--docsearch-muted-color);
+}
+
+.DocSearch-Button-Keys {
+  display: none !important;
+}
+
+.homeSearch .DocSearch-Button-Placeholder::after {
+  content: " Camunda 8 docs";
+}
+
+@media (max-width: 768px) {
+  .homeSearch .DocSearch-Button-Placeholder {
+    display: inline;
+  }
+}
+[data-theme="dark"] .homeSearch .DocSearch-Button {
+  background-color: transparent;
+  border: 2px solid rgb(40, 40, 40) !important;
+}
+
+[data-theme="dark"] .homeSearch .DocSearch-Button:hover {
+  background-color: transparent;
+  border: 2px solid var(--ifm-color-primary) !important;
+  box-shadow: 0px 8px 16px 4px #78a9ff33;
+}
+
 .page-description {
   font-size: 18px;
   font-weight: 500;
@@ -478,63 +572,6 @@ body {
   border: 2px solid #333;
 }
 
-/* Search bar general */
-
-/* As we now show the breadcrumbs with full path,
-we make it less bold compared to the search keyword */
-.DocSearch-Hit-source {
-  color: var(--ifm-color-content-secondary) !important;
-  font-size: 0.8rem !important;
-  font-weight: unset !important;
-}
-
-/* Landing page search bar */
-
-.homeSearch {
-  margin: auto;
-  max-width: 1000px;
-  padding: 15px 20px 20px 20px;
-}
-
-.homeSearch .DocSearch-Button {
-  height: 55px;
-  width: 100%;
-  border-radius: 8px;
-  background: white;
-  border: none !important;
-}
-.homeSearch .DocSearch-Button:hover {
-  height: 55px;
-  width: 100%;
-  border-radius: 8px;
-  background: white;
-  color: var(--docsearch-muted-color);
-}
-
-.DocSearch-Button-Keys {
-  display: none !important;
-}
-
-.homeSearch .DocSearch-Button-Placeholder::after {
-  content: " Camunda 8 docs";
-}
-
-@media (max-width: 768px) {
-  .homeSearch .DocSearch-Button-Placeholder {
-    display: inline;
-  }
-}
-[data-theme="dark"] .homeSearch .DocSearch-Button {
-  background-color: transparent;
-  border: 2px solid rgb(40, 40, 40) !important;
-}
-
-[data-theme="dark"] .homeSearch .DocSearch-Button:hover {
-  background-color: transparent;
-  border: 2px solid var(--ifm-color-primary) !important;
-  box-shadow: 0px 8px 16px 4px #78a9ff33;
-}
-
 .table-of-contents__link .callout {
   display: none;
 }
@@ -656,6 +693,18 @@ h3 .badge:nth-of-type(1) {
 
 .badge--breaking-change {
   background-color: #ff1f00;
+  color: #ffffff;
+  width: 110px;
+  min-width: 110px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  display: inline-block;
+  text-align: center;
+  line-height: 1.5;
+}
+.badge--new {
+  background-color: var(--ifm-color-success);
   color: #ffffff;
   width: 110px;
   min-width: 110px;
@@ -930,6 +979,14 @@ span.callout + p {
 span.callout + p::after {
   content: "\a";
   white-space: pre;
+}
+
+.plain tr:nth-child(2n) {
+  background-color: transparent !important;
+}
+
+.plain thead {
+  font-weight: bold !important;
 }
 
 /* Add space and thin border to images, remove drop shadow */

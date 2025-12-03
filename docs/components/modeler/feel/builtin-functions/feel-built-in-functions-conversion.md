@@ -47,6 +47,44 @@ number("1500.5")
 // 1500.5
 ```
 
+## number(from, grouping separator)
+
+Parses the given string to a number using the specified grouping separator.
+
+Returns `null` if the string is not a number.
+
+**Function signature**
+
+```feel
+number(from: string, grouping separator: string): number
+```
+
+**Examples**
+
+```feel
+number("1,500", ",")
+// 1500
+```
+
+## number(from, grouping separator, decimal separator)
+
+Parses the given string to a number using the specified grouping and decimal separators.
+
+Returns `null` if the string is not a number.
+
+**Function signature**
+
+```feel
+number(from: string, grouping separator: string, decimal separator: string): number
+```
+
+**Examples**
+
+```feel
+number("1 500.5", " ", ".")
+// 1500.5
+```
+
 ## context(entries)
 
 Constructs a context of the given list of key-value pairs. It is the reverse function to [get entries()](feel-built-in-functions-context.md#get-entriescontext).
@@ -185,7 +223,9 @@ time(14, 30, 0, duration("PT1H"))
 
 ## date and time(from)
 
-Parses the given string into a date and time.
+Parses the given string into a date and time. The function supports strings in the format `YYYY-MM-DDThh:mm:ss` with
+optional timezone information either as offset (e.g., `+01:00` or `Z`), as IANA timezone ID (e.g., `@Europe/Berlin`), or
+as a combination of both (e.g., `+01:00[Europe/Berlin]`).
 
 Returns `null` if the string is not a valid calendar date. For example, `"2024-06-31T10:00:00"` is invalid because
 June has only 30 days.
@@ -201,6 +241,15 @@ date and time(from: string): date and time
 ```feel
 date and time("2018-04-29T09:30:00")
 // date and time("2018-04-29T09:30:00")
+
+date and time("2018-04-29T09:30:00+02:00")
+// date and time("2018-04-29T09:30:00+02:00")
+
+date and time("2018-04-29T09:30:00@Europe/Berlin")
+// date and time("2018-04-29T09:30:00@Europe/Berlin")
+
+date and time("2018-04-29T09:30:00+02:00[Europe/Berlin]")
+// date and time("2018-04-29T09:30:00@Europe/Berlin")
 ```
 
 ## date and time(date, time)
@@ -292,4 +341,60 @@ years and months duration(from: date, to: date): years and months duration
 ```feel
 years and months duration(date("2011-12-22"), date("2013-08-24"))
 // duration("P1Y8M")
+```
+
+## from json(value)
+
+Parses a JSON string into a FEEL value. The function converts JSON primitives, objects, and arrays into their corresponding FEEL types.
+
+Returns `null` if the string is not a valid JSON value.
+
+**Function signature**
+
+```feel
+from json(value: string): Any
+```
+
+**Examples**
+
+```feel
+from json("{\"a\": 1, \"b\": 2}")
+// {a: 1, b: 2}
+
+from json("true")
+// true
+
+from json("\"2023-06-14\"")
+// "2023-06-14"
+```
+
+## to json(value)
+
+Converts a FEEL value into a JSON string. The function converts FEEL primitives, contexts, and lists into their
+corresponding JSON types. Temporal values are converted to their ISO 8601 string representation, including timezone
+information for date and time values (format: `2025-11-24T10:00:00+01:00[Europe/Berlin]`).
+
+**Function signature**
+
+```feel
+to json(value: Any): string
+```
+
+**Examples**
+
+```feel
+to json({a: 1, b: 2})
+// "{\"a\":1,\"b\":2}"
+
+to json(true)
+// "true"
+
+to json(@"2023-06-14")
+// "\"2023-06-14\""
+
+to json(@"2025-11-24T10:00:00@Europe/Berlin")
+// "\"2025-11-24T10:00:00+01:00[Europe/Berlin]\""
+
+to json(@"P3Y")
+// "\"P3Y\""
 ```

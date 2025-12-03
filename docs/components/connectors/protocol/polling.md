@@ -8,7 +8,7 @@ description: The HTTP Polling connector polls an endpoint at regular intervals, 
 The **HTTP Polling connector** polls an endpoint at regular intervals, enabling periodic data fetching as an intermediate step in your BPMN processes. This connector is built on top of the [REST connector](../protocol/rest.md), ensuring consistent functionality and reliability.
 
 :::caution
-If you use the HTTP Polling connector, ensure you do not have any instance variable named in the list below, as these are reserved words for this connector:
+If you use the HTTP Polling connector, ensure you do not have any process variable named in the list below, as these are reserved words for this connector:
 
 - body, url, method, headers, authentication, queryParameters, connectionTimeoutInSeconds, httpRequestInterval
 
@@ -56,14 +56,12 @@ In the **Payload** section, you can include a **request body**. Learn more about
 ### Condition to proceed
 
 1. **Correlation key (process)**: Defines the correlation key based on the process instance.
-
    - **Example**: Using a process variable named `orderId`:
      ```
      Correlation key (process): =orderId
      ```
 
 2. **Correlation key (payload)**: Extracts the correlation key from the polled data.
-
    - **Example**: With data like `{"orderId": "123"}`:
      ```
      Correlation key (payload): =body.orderId

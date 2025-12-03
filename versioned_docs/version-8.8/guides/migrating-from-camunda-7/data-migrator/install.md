@@ -17,7 +17,7 @@ Install the Data Migrator and run your first data migration.
 ## Installation
 
 1. Download the latest release from the GitHub releases page:
-   - https://github.com/camunda/camunda-7-to-8-data-migrator/releases
+   - https://github.com/camunda/camunda-7-to-8-migration-tooling/releases
 2. Extract the archive to your preferred directory.
 3. Navigate to the extracted directory.
 

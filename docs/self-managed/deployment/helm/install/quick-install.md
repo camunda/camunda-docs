@@ -142,9 +142,6 @@ global:
         redirectUrl: "http://localhost:8070"
       console:
         redirectUrl: "http://localhost:8087"
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         redirectUrl: "http://localhost:8083"
         secret:

@@ -387,6 +387,25 @@ To learn more about migrating to the Camunda Java client, see the [migration gui
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
+
+</div>
+</div>
+
 ### Connectors
 
 <div className="release-announcement-row">
@@ -775,7 +794,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 - Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
 - Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
-- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md)).
+- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md)).
 - Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
 - OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
 - EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).

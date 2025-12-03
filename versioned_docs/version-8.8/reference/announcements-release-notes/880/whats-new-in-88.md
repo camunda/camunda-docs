@@ -79,7 +79,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview" class="link-arrow">Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -151,7 +151,7 @@ Camunda 8.8 introduces a new unified Camunda Exporter that directly populates da
 
 In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flows between components (such as Elasticsearch import/export).
 
-<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/" class="link-arrow">Camunda Exporter</a></p>
+<p class="link-arrow">[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)</p>
 
 :::info
 Learn more about the unified Camunda Exporter in the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
