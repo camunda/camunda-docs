@@ -23,6 +23,27 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
+### Agentic orchestration
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### MCP Client and MCP Remote Client connectors
+
+Breaking changes were [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+
+To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
+
+:::info
+To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
+:::
+
+</div>
+</div>
+
 ### Data
 
 <div className="release-announcement-row">

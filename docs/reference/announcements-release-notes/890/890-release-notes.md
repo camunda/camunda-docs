@@ -57,6 +57,10 @@ MCP client connectors now also support connections using the [streamable HTTP](h
 
 To learn more, see [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md).
 
+:::note breaking changes
+This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).
+:::
+
 ### Connectors
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
