@@ -67,6 +67,37 @@ Entity transformations are handled by built-in converters that transform Camunda
 into Camunda 8 database models during migration. The History Data Migrator uses the
 `EntityInterceptor` interface to allow customization of this conversion process.
 
+### Built-in Converters
+
+The following built-in converters handle the transformation of Camunda 7 historic entities:
+
+| Converter                                 | Camunda 7 Entity Type                    | Camunda 8 Model               |
+| ----------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `ProcessInstanceConverter`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
+| `ProcessDefinitionConverter`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
+| `FlowNodeConverter`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
+| `UserTaskConverter`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `IncidentConverter`                       | `HistoricIncident`                       | `IncidentDbModel`             |
+| `VariableConverter`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
+| `DecisionInstanceConverter`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
+| `DecisionDefinitionConverter`             | `HistoricDecisionDefinition`             | `DecisionDefinitionDbModel`   |
+| `DecisionRequirementsDefinitionConverter` | `HistoricDecisionRequirementsDefinition` | `DecisionRequirementsDbModel` |
+
+### Disabling Built-in Converters
+
+You can disable any built-in converter using the `enabled` configuration property. This is useful
+when your migration use case is more complex and doesn't work out-of-the-box, allowing you to handle
+entity migration entirely through custom interceptors:
+
+```yaml
+camunda:
+  migrator:
+    # Entity interceptor configuration
+    interceptors:
+      - class-name: io.camunda.migrator.converter.ProcessInstanceConverter
+        enabled: false
+```
+
 ## Custom Transformation
 
 The `EntityInterceptor` interface allows you to define custom logic that executes when a Camunda 7 historic entity is being converted to a Camunda 8 database model during migration. This is useful for enriching, auditing, or customizing entity conversion.
@@ -119,6 +150,7 @@ Entity interceptors can be restricted to specific entity types using the `getTyp
 public Set<Class<?>> getTypes() {
     // Handle only specific types
     return Set.of(
+        ProcessDefinition.class,            // Process definitions
         HistoricProcessInstance.class,      // Process instances
         HistoricActivityInstance.class,     // Flow nodes/activities
         HistoricTaskInstance.class,         // User tasks
