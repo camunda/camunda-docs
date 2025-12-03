@@ -33,6 +33,12 @@ For details on configuring initial users and their roles, see
 In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.
 :::
 
+## Connect to the cluster
+
+To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, see [Accessing components without Ingress](../ingress/accessing-components-without-ingress.md).
+
+Log in with the default credentials: username `demo`, password `demo`.
+
 ## Enable additional components
 
 The following components do not support basic authentication and require Management Identity with an OIDC provider:
@@ -136,7 +142,7 @@ console:
   enabled: true
 ```
 
-For secret creation and component access details, see the [internal Keycloak guide](./internal-keycloak.md).
+To access the additional components, see [Connect to the cluster](./internal-keycloak.md#connect-to-the-cluster) in the internal Keycloak guide.
 
 ## Next steps
 
