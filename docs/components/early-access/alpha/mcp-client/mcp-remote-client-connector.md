@@ -43,7 +43,7 @@ This is the recommended transport for new implementations.
 | :------ | :------- | :--------------------------------------------------------------------------------- |
 | URL     | Yes      | The Streamable HTTP endpoint URL. Typically ends in `/mcp`.                        |
 | Headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`. |
-| Timeout | No       | Connection timeout in seconds.                                                     |
+| Timeout | No       | Connection timeout as an ISO 8601 duration. For example, `PT60S`.                  |
 
 ### Server-Sent Event
 
@@ -57,7 +57,7 @@ This transport type is considered legacy; use Streamable HTTP for new implementa
 | :------ | :------- | :--------------------------------------------------------------------------------- |
 | URL     | Yes      | The SSE endpoint URL. Typically ends in `/sse`.                                    |
 | Headers | No       | Custom HTTP headers as a FEEL map. For example, `={ "X-Custom-Header": "value" }`. |
-| Timeout | No       | Connection timeout in seconds.                                                     |
+| Timeout | No       | Connection timeout as an ISO 8601 duration. For example, `PT60S`.                  |
 
 ## Authentication
 
