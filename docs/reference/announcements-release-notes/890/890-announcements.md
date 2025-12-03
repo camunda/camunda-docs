@@ -189,13 +189,13 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### Web Modeler: Inviting collaborators who never logged in before
+#### Web Modeler: Invite collaborators who haven't logged in before
 
-The behavior of different OIDC providers has been aligned. Invitation suggestions are only shown for users who have already logged in once. This is a breaking change for Web Modeler installations using Keycloak as their OIDC provider. Before 8.9, Keycloak would return all users in the organization, even if they had never logged in before.
+The behavior across OIDC providers is now aligned. Invitation suggestions only include users who have logged in at least once. This is a breaking change for Web Modeler installations using Keycloak as the OIDC provider. Before 8.9, Keycloak returned all organization users, including those who had never logged in.
 
-You can now invite users who have not yet logged into Web Modeler by adding them via their email address. They will be shown as invited in the collaborators panel. After their first login, they will be added automatically to the project.
+You can now invite users who have not yet logged in to Web Modeler by entering their email address. They will appear as “invited” in the collaborators panel. After their first log in, they will be added to the project automatically.
 
-Note that inviting the entire organization will also only work for users who have already logged in once.
+Inviting the entire organization only applies to users who have logged in at least once.
 
 :::info
 To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md).

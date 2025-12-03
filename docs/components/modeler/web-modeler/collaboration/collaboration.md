@@ -75,7 +75,7 @@ Refer to the documentation pages about [assigning roles](../../../../self-manage
 
 </Tabs>
 
-### Adding users to projects
+### Add users to projects
 
 :::note
 Users without email addresses will not receive any kind of notification about project invitations.
@@ -103,19 +103,19 @@ On the right side of a project, view a list of your collaborators and invite mor
 4. Write a message to your new collaborator about their invitation to the project.
    ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
 
-5. Click **Add collaborator** and your new collaborator will be added to the project and notified via email.
+5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
    ![invite added](img/web-modeler-collaborator-invite-added.png)
    ![invite email](img/web-modeler-collaborator-invite-email.png)
 
-If the individual is not a member of your organization, they will receive an organization invitation first.
+If the individual is not a member of your organization, they will first receive an organization invitation.
 After accepting the invitation and logging into Web Modeler, they will be added to the project.
 They will appear as "invited" in the collaborator list until they accept.
 
 ![invite sent](img/web-modeler-collaborator-invite-sent.png)
 
-#### Inviting the entire organization
+#### Invite the entire organization
 
-Alternatively, you can invite all existing members of your Camunda 8 organization to the project at once by using the **All users in the organization** option.
+You can invite all existing members of your Camunda 8 organization to the project at once by using the **All users in the organization** option.
 
 <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 
@@ -123,7 +123,7 @@ Alternatively, you can invite all existing members of your Camunda 8 organizatio
 
 <TabItem value='self-managed'>
 
-On the right side of a project, view a list of your collaborators and invite more by taking the steps below:
+On the right side of a project, view a list of your collaborators and invite more by following the steps below:
 
 1. Click **Add user**.
    ![invite user](img/web-modeler-collaborator-invite-modal-opened.png)
@@ -131,13 +131,13 @@ On the right side of a project, view a list of your collaborators and invite mor
 2. Choose a role for your new collaborator.
    ![invite choose role](img/web-modeler-collaborator-invite-choose-role.png)
 
-3. Begin typing the name or email of the individual and Web Modeler will suggest members that already logged into Web Modeler once and that you can invite to the project.
+3. Begin typing the individual's name or email. Web Modeler will suggest members who have already logged into Web Modeler at least once and whom you can invite to the project.
    ![invite suggestions](img/web-modeler-collaborator-invite-suggestions.png)
 
 4. Write a message to your new collaborator about their invitation to the project.
    ![invite type message](img/web-modeler-collaborator-invite-type-message.png)
 
-5. Click **Add collaborator** and your new collaborator will be added to the project and notified via email.
+5. Click **Add collaborator**. Your new collaborator will be added to the project and notified via email.
    ![invite added](img/web-modeler-collaborator-invite-added.png)
    ![invite email](img/web-modeler-collaborator-invite-email.png)
 
@@ -147,9 +147,9 @@ After logging in, they will be added to the project.
 
 ![invite sent](img/web-modeler-collaborator-invite-sent.png)
 
-#### Inviting the entire organization
+#### Invite the entire organization
 
-Alternatively, you can invite all members who logged into Web Modeler once to the project in one go by using the **All users in the organization** option.
+You can invite all members who logged into Web Modeler at least once to the project at once by using the **All users in the organization** option.
 
 <img src={BulkAddUserImg} alt="Add all organization users" width="750px"/>
 
