@@ -21,7 +21,7 @@ Agentic orchestration ensures your AI-driven processes are efficient, compliant,
 Build and use AI agents to execute the non-deterministic parts of a process, integrated with the proven foundation of BPMN.
 
 </div>
-<div style={{flex: '1 1 200px', minWidth: '200px'}}>
+<div style={{flex: '1 1 300px', minWidth: '300px'}}>
 
 <img src={OverviewImg} title="Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes" alt="Get started" style={{marginTop: '0', marginBottom: '0'}} class="img-noborder img-transparent img-600" />
 
