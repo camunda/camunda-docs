@@ -105,21 +105,13 @@ identityKeycloak:
         adminPasswordKey: "identity-keycloak-postgresql-admin-password"
         userPasswordKey: "identity-keycloak-postgresql-user-password"
 
-orchestration:
-  security:
-    authentication:
-      method: basic
+optimize:
+  enabled: true
 
 connectors:
   security:
     authentication:
       method: basic
-
-console:
-  enabled: true
-
-optimize:
-  enabled: true
 
 webModeler:
   enabled: true
@@ -134,6 +126,14 @@ webModelerPostgresql:
     secretKeys:
       adminPasswordKey: "webmodeler-postgresql-admin-password"
       userPasswordKey: "webmodeler-postgresql-user-password"
+
+orchestration:
+  security:
+    authentication:
+      method: basic
+
+console:
+  enabled: true
 ```
 
 For secret creation and component access details, see the [internal Keycloak guide](./internal-keycloak.md).
