@@ -16,7 +16,7 @@ For example, in the following image the activities marked in green are the ones 
 
 You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
 
-## Tool Resolution
+## Tool resolution
 
 To resolve available tools, the AI Agent connector either resolves the tools by reling on data provided by the Zeebe engine or reads the BPMN model directly. The approach depends on the chosen AI Agent implementation:
 
@@ -48,7 +48,7 @@ When using the **AI Agent Task** implementation, the connector reads the BPMN mo
 Refer to the [Anthropic](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview) and [OpenAI](https://platform.openai.com/docs/guides/function-calling) documentation for examples of how tool/function calling works in combination with an LLM.
 :::
 
-## Tool Definitions
+## Tool definitions
 
 :::important
 The AI Agent connector only considers the **root node** of the sub-flow when resolving a tool definition.
@@ -163,7 +163,7 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
 
-## Tool Call Responses
+## Tool call responses
 
 To collect the output of the called tool and pass it back to the agent, the task within the ad-hoc sub-process needs to
 set its output to a predefined variable name. For the **AI Agent Sub-process** implementation, this variable is predefined as
@@ -198,7 +198,7 @@ When serializing the tool call response to JSON, document references are transfo
 
 Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
 
-To configure an activity as a gateway tool, an [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) named `io.camunda.agenticai.gateway.type` must be set on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
+To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
 For more details, see the available gateway tool implementations:
 
