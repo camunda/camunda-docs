@@ -59,9 +59,9 @@ The AI agent is provided as 2 different variants, each with different capabiliti
 
 :::
 
-### AI Agent sub-process
+### AI Agent Sub-process
 
-The [AI Agent sub-process](./agentic-ai-aiagent-subprocess.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
+The [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) implementation uses the [job worker implementation type](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) of an [ad-hoc sub-process](../../../components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to provide an integrated solution
 to handle tool resolution and a feedback loop. This is the recommended implementation type for most use cases, and offers:
 
 - Simplified configuration as the tool feedback loop is handled internally
@@ -69,12 +69,12 @@ to handle tool resolution and a feedback loop. This is the recommended implement
 
 #### Restrictions
 
-- Because of BPMN semantics, the ad-hoc sub-process must contain at least one activity. This means you cannot create an AI Agent sub-process without any tools.
+- Because of BPMN semantics, the ad-hoc sub-process must contain at least one activity. This means you cannot create an AI Agent Sub-process without any tools.
 - As the tool calling feedback loop is implicitly handled within the AI Agent execution, you have less control over the tool calls.
 
 #### Example
 
-A basic AI Agent sub-process might look similar to the following example.
+A basic AI Agent Sub-process might look similar to the following example.
 
 <img src={AgentSubprocessImg} alt="AI Agent Sub-process" class="img-700"/>
 
@@ -207,7 +207,7 @@ The following migration scenarios are supported for running AI Agent process ins
 | Adding a new tool                                               | Adding a new activity to the ad-hoc sub-process. The new tool is picked up on the next AI Agent execution and added to the agent context.                                                                                                                                                                                                                                                                                                       |
 | Changing an existing tool without affecting the tool definition | For example, updating a form linked to a user task, or changing a script task implementation. No agent changes are necessary because the tool definition remains unchanged.                                                                                                                                                                                                                                                                     |
 | Changing an existing tool definition                            | Updating a tool's description or `fromAi()` parameters is supported, but proceed carefully. See [Considerations when changing tool definitions](#considerations-when-changing-tool-definitions) for details.                                                                                                                                                                                                                                    |
-| Changing AI Agent configuration (AI Agent Task only)            | Updating the system prompt or model parameters on an [AI Agent Task](#ai-agent-task). These changes are picked up on the next execution as input mappings are re-evaluated for each loop iteration. This is **not supported** for the [AI Agent sub-process](#ai-agent-sub-process) implementation because the parameters are applied via input mappings to the ad-hoc sub-process which are evaluated only once when entering the sub-process. |
+| Changing AI Agent configuration (AI Agent Task only)            | Updating the system prompt or model parameters on an [AI Agent Task](#ai-agent-task). These changes are picked up on the next execution as input mappings are re-evaluated for each loop iteration. This is **not supported** for the [AI Agent Sub-process](#ai-agent-sub-process) implementation because the parameters are applied via input mappings to the ad-hoc sub-process which are evaluated only once when entering the sub-process. |
 
 ### Unsupported migration scenarios
 
