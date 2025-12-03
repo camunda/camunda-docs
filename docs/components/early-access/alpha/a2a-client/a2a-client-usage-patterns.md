@@ -18,7 +18,7 @@ The diagram below illustrates this pattern, with an A2A Client connector being u
 ### Configure the A2A Client connector
 
 - **A2A server URL**: For example `https://a2a-agent.example.com`.
-- **Agent card location**: If different from the default `.well-known/agent-card.json`.
+- **Agent Card location**: If different from the default `.well-known/agent-card.json`.
 - **Response retrieval**: `Blocking`.
 - **Result expression**: `={toolCallResult: result}`.
 
@@ -39,14 +39,14 @@ The diagram below shows this pattern, with an A2A Client connector and an A2A Cl
 #### A2A Client connector
 
 - **A2A server URL**: For example `https://a2a-agent.example.com`.
-- **Agent card location**: If different from the default `.well-known/agent-card.json`.
+- **Agent Card location**: If different from the default `.well-known/agent-card.json`.
 - **Response retrieval**: `Polling`. An A2A Client Polling connector is used to fetch the result.
 - **Result variable**: A variable name to store the result used by the A2A Client Polling connector, e.g. `a2aAgentResponse`.
 
 #### A2A Client Polling connector
 
 - **A2A server URL**: Same as used in the A2A Client connector.
-- **Agent card location**: Same as used in the A2A Client connector.
+- **Agent Card location**: Same as used in the A2A Client connector.
 - **A2A Client response**: The variable name used in the A2A Client connector, e.g. `=a2aAgentResponse`.
 - **Task polling interval**: For example `PT5S`.
 - **Result expression**: `={toolCallResult: result}`.
@@ -93,7 +93,7 @@ The diagram below illustrates this pattern, showing an A2A Client connector comb
 #### A2A Client connector
 
 - **A2A server URL**: For example `https://a2a-agent.example.com`.
-- **Agent card location**: If different from the default `.well-known/agent-card.json`.
+- **Agent Card location**: If different from the default `.well-known/agent-card.json`.
 - **Response retrieval**: `Notification`. An A2A Client Webhook connector is used to wait for the notifications.
 - **Webhook URL**: For example `http://some-camunda-cluster.com/inbound/22083f06-72fa-4f09-b4c5-8e83a0d66cb1`.
 - **Result variable**: A variable name to store the result used by the A2A Client Polling connector, e.g. `a2aAgentResponse`.

@@ -22,6 +22,13 @@ It also provides capabilities to discover remote agents, send messages, and rece
 A2A Client connectors do not currently support authentication against a remote A2A server. This feature will be added in a future release.
 :::
 
+## Prerequisites
+
+To use any A2A Client connector, you need:
+
+- Access to an A2A-compliant agent.
+- Its [Agent Card URL](https://a2a-protocol.org/v0.3.0/specification/#5-agent-discovery-the-agent-card).
+
 ## A2A Client connectors
 
 The A2A Client includes three connectors:

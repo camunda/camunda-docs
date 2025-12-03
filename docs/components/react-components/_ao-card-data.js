@@ -46,7 +46,7 @@ export const a2aConnectorCards = [
     title: "A2A Client connector",
     image: IconConnectorImg,
     description:
-      "Retrieve a remote agent's agent card and send messages to it.",
+      "Retrieve a remote agent's Agent Card and send messages to it.",
   },
   {
     link: "../a2a-client/a2a-client-polling-connector/",

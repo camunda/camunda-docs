@@ -2,14 +2,10 @@
 id: a2a-client-connector
 title: A2A Client connector
 sidebar_label: A2A Client connector
-description: "Retrieve a remote agent's agent card and send messages to it."
+description: "Retrieve a remote agent's Agent Card and send messages to it."
 ---
 
-The A2A Client connector is used to interact with A2A agents, by retrieving remote agent’s [agent card](https://a2a-protocol.org/v0.3.0/specification/#5-agent-discovery-the-agent-card) and sending messages to that agent.
-
-## Prerequisites
-
-To use the A2A Client connector, you need access to an A2A-compliant agent and its agent card URL.
+The A2A Client connector is used to interact with A2A agents, by retrieving remote agent’s [Agent Card](https://a2a-protocol.org/v0.3.0/specification/#5-agent-discovery-the-agent-card) and sending messages to that agent.
 
 ## Create an A2A Client connector task
 
@@ -31,20 +27,20 @@ Configure the following:
 
 - HTTP connection:
   - **A2A server URL** (required): Base URL of the A2A server. For example, `http://localhost:10000`.
-  - **Agent card location** (optional): Path to the agent card endpoint relative to the base URL. By default, `.well-known/agent-card.json`.
+  - **Agent Card location** (optional): Path to the Agent Card endpoint relative to the base URL. By default, `.well-known/agent-card.json`.
 
 - Connector mode: Select **Standalone**.
 - Operation: Choose between two operations:
-  1.  [Fetch agent card](#fetch-agent-card).
+  1.  [Fetch Agent Card](#fetch-agent-card).
   2.  [Send message](#send-message).
 
-#### Fetch agent card
+#### Fetch Agent Card
 
-Use this operation to retrieve the agent card from the remote A2A server. The agent card describes the agent's capabilities and skills.
+Use this operation to retrieve the Agent Card from the remote A2A server. The Agent Card describes the agent's capabilities and skills.
 
 ##### Response
 
-This operation returns a JSON object containing the most relevant agent card details. Here's an example:
+This operation returns a JSON object containing the most relevant Agent Card details. Here's an example:
 
 ```json
 {
@@ -96,7 +92,7 @@ Use this operation to send a message to the remote agent and handle the response
     - **Authentication credentials** (optional): Credentials to authenticate webhook requests.
 
   :::note
-  You can use the `Notification` response retrieval method only if the remote agent supports it. Check the agent's capabilities in its agent card.
+  You can use the `Notification` response retrieval method only if the remote agent supports it. Check the agent's capabilities in its Agent Card.
   :::
 
 - **History length** (optional): Number of most recent messages from task history to include in the response. By default, it is three.
@@ -213,6 +209,6 @@ When the AI Agent connector detects at least one A2A Client connector that is co
 
 The response from the A2A Client connector is a JSON object with the following fields:
 
-- `result`: The remote agent's response. Depending on the operation, this is an agent card, a message, or a task object.
+- `result`: The remote agent's response. Depending on the operation, this is an Agent Card, a message, or a task object.
 - `pollingData`: Internal data used to poll task status when the response retrieval method is `Polling`.
 - `notificationData`: Internal data used when the response retrieval method is `Notification`.

@@ -25,7 +25,7 @@ Configure the following:
 
 - Connection: Match values used in the A2A Client connector:
   - **A2A server URL** (required): Base URL of the A2A server.
-  - **Agent card location** (optional): Path to the agent card endpoint.
+  - **Agent Card location** (optional): Path to the Agent Card endpoint.
 - **A2A Client response** (required): FEEL expression referencing the response from the A2A Client connector.
 - **History length** (optional): Number of messages to return as part of the history when polling. By default, it is three.
 - **Task polling interval** (optional): Delay between polling requests as ISO-8601 duration. By default, `PT10S` is 10 seconds.
