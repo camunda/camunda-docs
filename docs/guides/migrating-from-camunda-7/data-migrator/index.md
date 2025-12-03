@@ -16,10 +16,11 @@ Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8
 
 ## Modes of operation
 
-The Data Migrator offers two modes of operation:
+The Data Migrator offers three modes of operation:
 
 - [Runtime migration](runtime.md): Migrate running process instances and continue execution in C8. Production-ready with Camunda 8.8.
 - [History migration](history.md): Copy audit (history) data to Camunda 8 (experimental). Not intended for production, currently an experimental feature.
+- [Identity migration](identity.md): Migrate identity data to Camunda 8 (experimental). Not intended for production, currently an experimental feature.
 
 Migration details are summarized as follows:
 
