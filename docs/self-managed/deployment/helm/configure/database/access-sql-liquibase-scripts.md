@@ -50,9 +50,8 @@ Drop scripts are not provided.
 
 ## How to download
 
-- **Browser:** download directly from GitHub release page.
-- **C8Run distribution:** retrieve from `rdbms-schema/` folder.
-- **Optional automation:** use `curl` or similar tooling to pull the release asset from GitHub.
+- **From a GitHub release (ZIP):** Download the schema scripts from `https://github.com/camunda/camunda/releases/tag/<release version>/camunda-db-rdbms-schema-<release version>.zip`.
+- **From a C8Run distribution:** Retrieve the schema scripts from the `rdbms-schema/` folder included in the distribution.
 
 ## Usage guidance
 
