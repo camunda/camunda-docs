@@ -32,7 +32,7 @@ Build and use AI agents to execute the non-deterministic parts of a process, int
 
 Get started with Camunda agentic orchestration by building and running your first AI agent.
 
-<p><a href="../../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
+<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
 ## Learn the fundamentals
 
