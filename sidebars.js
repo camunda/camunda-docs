@@ -379,6 +379,20 @@ module.exports = {
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
                   ],
                 },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
+                  ],
+                },
                 "components/early-access/alpha/ms-teams/ms-teams",
               ],
             },
