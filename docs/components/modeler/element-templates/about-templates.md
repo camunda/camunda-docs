@@ -29,6 +29,15 @@ A _connector template_ is a specific type of element template tailored for outbo
 
 Connector templates are discoverable as first-class resources in Web Modeler. In Desktop Modeler, they appear as regular element templates shipped with or added to the local installation.
 
+| Topic               | Element template                                  | Connector template                                      |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------------- |
+| Definition          | Reusable configuration for any BPMN element       | Element template specifically for an outbound connector |
+| Used in             | Web & Desktop Modeler                             | Web & Desktop Modeler                                   |
+| Runtime dependency  | Optional                                          | Always backed by a job worker or connector runtime      |
+| Behavior configured | Inputs, outputs, headers, properties, constraints | Inputs, outputs, authentication, connector operations   |
+| File form           | JSON template                                     | JSON template                                           |
+| Is subset?          | Parent concept                                    | Subset of element templates                             |
+
 ## Where templates can be used
 
 Element templates are supported anywhere BPMN is modeled:
