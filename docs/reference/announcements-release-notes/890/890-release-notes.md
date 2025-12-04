@@ -43,11 +43,38 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
+#### A2A Client connectors (early access)
+
+Agent-to-Agent (A2A) Client connectors allow you to interact with remote agents using the [A2A protocol](https://a2a-protocol.org/v0.3.0/specification/).
+
+<table className="table-callout">
+<tr>
+    <td width="30%">**Connector**</td>
+    <td>**Description**</td>
+</tr>
+<tr>
+    <td>[A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client-connector.md)</td>
+    <td>Interact with A2A agents, by retrieving the remote agent’s Agent Card and sending messages to the agent.</td>
+</tr>
+<tr>
+    <td>[A2A Client Polling connector](/components/early-access/alpha/a2a-client/a2a-client-polling-connector.md)</td>
+    <td>Polls for responses from asynchronous A2A tasks. Typically paired with the A2A Client connector when using the Polling response retrieval method.</td>
+</tr>
+<tr>
+    <td>[A2A Client Webhook connector](/components/early-access/alpha/a2a-client/a2a-client-webhook-connector.md)</td>
+    <td>Receive callbacks from remote A2A agents via HTTP webhooks. Typically paired with the A2A Client connector when using the Notification response retrieval method. </td>
+</tr>
+</table>
+
+These connectors support multi-agent collaboration scenarios when combined with the AI Agent connector, as well as providing the ability to discover remote agents, send messages, and receive responses through multiple mechanisms.
+
+<p class="link-arrow">[A2A Client connectors](/components/early-access/alpha/a2a-client/a2a-client.md)</p>
+
 #### MCP client authentication and transport protocol
 
 <!-- https://github.com/camunda/product-hub/issues/3127, https://github.com/camunda/connectors/issues/5652 -->
 
-The Camunda MCP (Model Context Protocol) client now supports OAuth, API key, and custom header–based authentication.
+The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and custom header–based authentication.
 
 - System administrators can configure secure, policy-compliant access for Camunda AI agents.
 - AI developers can discover and invoke enterprise MCP tools safely without exposing open endpoints.
@@ -120,7 +147,7 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
 
-<p class="link-arrow">[Create a cluster](/docs/components/console/manage-clusters/create-cluster.md)</p>
+<p class="link-arrow">[Create a cluster](/components/console/manage-clusters/create-cluster.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 
@@ -199,8 +226,6 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 - For example, the endpoint is available at https://api.cloud.camunda.io/meta/ip-ranges.
 - Send a GET request to the endpoint to retrieve a list of egress IP addresses.
 - Only IP addresses for the related services are exposed (Web Modeler).
-
-<p class="link-arrow">[Web Modeler REST API](/docs/apis-tools/)</p>
 
 :::note IP address changes
 
