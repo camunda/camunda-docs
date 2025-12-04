@@ -31,7 +31,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link">Q</div>
     <div class="letter-link"><a href="#r">R</a></div>
     <div class="letter-link"><a href="#s">S</a></div>
-    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
     <div class="letter-link">V</div>
     <div class="letter-link"><a href="#w">W</a></div>
@@ -59,6 +59,16 @@ For example, build an invoice processing AI agent in Camunda using an ad‑hoc s
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
+
+### Apply template/applied template
+
+To **apply a template** means to attach an [element template](#element-template) to a BPMN element in Modeler.  
+Applying a template replaces the element’s properties panel with a UI defined in the template, and binds technical configuration (inputs, outputs, headers, authentication, version tags, and more) into the BPMN XML.
+
+An **applied template** refers to a BPMN element that already uses a template.  
+In Web Modeler, applied templates can be **saved as a new template**, allowing reuse across projects.
+
+- [Using element templates](/components/modeler/element-templates/getting-started/using-templates-in-web-modeler.md)
 
 ## B
 
@@ -117,6 +127,23 @@ Connector types:
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
 
+### Connector template
+
+A **connector template** is a specialized type of [element template](#element-template) that configures a Camunda Connector.  
+Connector templates define:
+
+- Input fields and validation
+- Authentication models
+- Output mappings
+- Runtime behavior bindings (for example `taskDefinition:type`)
+- UI organization and defaults
+
+Connector templates ensure consistent behavior and reduce modeling errors when using connectors such as HTTP, Slack, Kafka, or AI models.
+
+They follow the same schema as element templates but apply specifically to service tasks referencing a Connector.
+
+- [Connector templates in Web Modeler](/components/modeler/web-modeler/element-templates/manage-element-templates.md)
+
 ### Correlation
 
 Correlation refers to the act of matching a [message](#message) with an inflight [process instance](#process-instance).
@@ -155,9 +182,18 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 
 ### Element template
 
-Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
+An **element template** defines a reusable configuration that extends Modeler with domain-specific BPMN element behavior and UI. Templates describe:
 
-- [Element templates](/components/modeler/element-templates/about-templates.md)
+- The element(s) they apply to
+- The UI fields shown in the properties panel
+- How those fields bind to BPMN or Zeebe extension properties
+- Default values, constraints, and hidden technical fields
+- Compatibility and versioning
+
+Templates help modelers configure elements safely and consistently.  
+Connector templates are a **subset** of element templates.
+
+- [About element templates](/components/modeler/element-templates/about-templates.md)
 
 ### Event
 
@@ -458,6 +494,53 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+## T
+
+### Template metadata
+
+Metadata describes required and optional fields that identify a template and control how it behaves.  
+Common metadata fields include:
+
+- `id`: Unique template identifier
+- `name`: Visible label in Modeler
+- `version`: Version number for upgrade paths
+- `appliesTo`: BPMN element types
+- `category`, `description`, `keywords`
+- `icon`: Template icon configuration
+- `engines`: Engine compatibility range
+
+- [Template metadata](/components/modeler/element-templates/create/template-metadata.md)
+
+### Template properties
+
+The **properties** section defines the fields that appear in the Modeler UI when the template is applied.
+
+Properties describe:
+
+- Data type (`String`, `Number`, `Boolean`, `Dropdown`, `Hidden`, etc.)
+- Default values
+- Validation rules
+- Binding (for example, `zeebe:input`, `zeebe:taskDefinition`)
+- Grouping and conditional visibility
+
+Properties define the interactive experience for the modeler.
+
+- [Template properties](/components/modeler/element-templates/create/template-properties.md)
+
+### Template dependencies
+
+Dependencies describe external resources or runtime components required for a template to function, such as:
+
+- Forms used by user tasks
+- DMN decisions
+- Subprocesses (call activities)
+- Job workers / connector runtimes
+- Secrets
+
+Dependencies must be available **at design time** (for template selection) and **at runtime** (for correct execution).
+
+- [Templates with dependencies](/components/modeler/element-templates/create/element-templates-with-dependencies.md)
 
 ## U
 
