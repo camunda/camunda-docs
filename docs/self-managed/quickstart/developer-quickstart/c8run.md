@@ -824,8 +824,13 @@ When using `--docker` mode, services are available on different ports:
 
 1. For non-Docker mode, export secrets as environment variables:
 
+
    ```
-   MY_SECRET_KEY=secret_value
+   # macOS/Linux:
+   export MY_SECRET_KEY=secret_value
+
+   # Windows
+   set MY_SECRET_KEY="secret_value"
    ```
 
 2. For Docker mode, add secrets to `connector-secrets.txt` in the docker-compose folder.
