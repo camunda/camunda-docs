@@ -34,8 +34,7 @@ export const gettingStartedCards = [
     link: "../out-of-the-box-connectors/available-connectors-overview",
     title: "Built-in connectors",
     image: IconConnectorImg,
-    description:
-      "Find technical documentation for built-in Camunda connectors.",
+    description: "Find technical documentation for built-in connectors.",
   },
 ];
 

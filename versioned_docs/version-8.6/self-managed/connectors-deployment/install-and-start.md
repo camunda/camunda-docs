@@ -14,7 +14,7 @@ Using our [Connector runtime environments](/components/connectors/custom-built-c
 including the [out-of-the-box Connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and custom Connectors developed using the **[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)** and [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
 
 You can find a list of Connectors developed by Camunda, partners, and the community in our
-[Camunda Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
+[Built-in Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
 
 :::note
 Some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

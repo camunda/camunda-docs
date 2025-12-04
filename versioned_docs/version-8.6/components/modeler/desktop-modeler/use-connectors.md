@@ -16,15 +16,15 @@ Automatic Connector template fetching is enabled by default, and notifies you of
 
 After an update check has concluded, a notification indicates if the templates are up to date or have been updated:
 
-![Camunda Connector templates up to date notification](./img/use-connectors/up-to-date.png)
+![Built-in connector templates up to date notification](./img/use-connectors/up-to-date.png)
 
 In case of an error you'll see a notification:
 
-![Error updating Camunda Connector templates notification](./img/use-connectors/error.png)
+![Error updating built-in connector templates notification](./img/use-connectors/error.png)
 
 Once fetched, you can use the templates in the Camunda 8 BPMN editor.
 
-![Using Camunda Connector templates in the Camunda 8 BPMN editor](./img/use-connectors/apply.png)
+![Using built-in connector templates in the Camunda 8 BPMN editor](./img/use-connectors/apply.png)
 
 ## Disable automatic Connector template fetching
 

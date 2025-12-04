@@ -20,7 +20,7 @@ For example, you can:
 This guide assumes you are starting from a fresh Spring Boot project and intend to run a customized AI Agent connector in a self-managed or hybrid environment.
 
 1. Create a new Spring Boot project.
-2. Add the [Camunda Connector Spring Boot Starter](../custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
+2. Add the [built-in connector Spring Boot Starter](../custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
 
    ```xml
    <project>
