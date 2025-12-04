@@ -824,7 +824,6 @@ When using `--docker` mode, services are available on different ports:
 
 1. For non-Docker mode, export secrets as environment variables:
 
-
    ```
    # macOS/Linux:
    export MY_SECRET_KEY=secret_value
