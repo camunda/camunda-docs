@@ -107,7 +107,6 @@ data:
   tasklist-secret: VmVyeUxvbmdTdHJpbmc=
   optimize-secret: VmVyeUxvbmdTdHJpbmc=
   connectors-secret: VmVyeUxvbmdTdHJpbmc=
-  console-secret: VmVyeUxvbmdTdHJpbmc=
   keycloak-secret: VmVyeUxvbmdTdHJpbmc=
   zeebe-secret: VmVyeUxvbmdTdHJpbmc=
 ```
@@ -131,9 +130,6 @@ global:
         existingSecret:
           name: identity-secret-for-components
       connectors:
-        existingSecret:
-          name: identity-secret-for-components
-      console:
         existingSecret:
           name: identity-secret-for-components
       zeebe:

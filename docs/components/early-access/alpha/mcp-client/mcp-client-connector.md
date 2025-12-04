@@ -24,6 +24,10 @@ To use the MCP Client connector, it must be enabled in the connector runtime. An
 
 STDIO servers can use any programming language or execution runtime available on the machine running the connector runtime. The example below starts MCP servers using both Node.js and Docker, and therefore requires a Node.js and Docker environment to be available.
 
+:::warning
+Configuring STDIO servers results in the connector runtime starting and managing the lifecycle of the configured processes. When configuring third-party MCP servers, ensure that the configured commands are trusted and secure.
+:::
+
 ```yaml
 camunda:
   connector:
@@ -32,8 +36,9 @@ camunda:
         client:
           enabled: true # <-- disabled by default
           clients:
-            # STDIO server started Node.js process
+            # STDIO server started as Node.js process (requires Node.js runtime)
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
+              type: stdio
               stdio:
                 command: npx
                 args:
@@ -43,8 +48,9 @@ camunda:
                 env:
                   MY_ENV_VAR: "my-value" # <-- optional environment variables
 
-            # STDIO server started as docker container
+            # STDIO server started as docker container (requires Docker being available)
             time:
+              type: stdio
               stdio:
                 command: docker
                 args:
@@ -53,11 +59,40 @@ camunda:
                   - "--rm"
                   - "mcp/time"
 
+            # Remote Streamable HTTP MCP server (recommended for remote servers)
+            # fetch:
+            #   enabled: true
+            #   type: http
+            #   http:
+            #     url: https://remote.mcpservers.org/fetch/mcp
+            #     headers:
+            #       X-Dummy: dummy-value
+            #     # authentication examples
+            #     authentication:
+            #       type: basic # or bearer or oauth
+            #       basic:
+            #         username: my-username
+            #         password: my-password
+            #       bearer:
+            #         token: my-token
+            #       oauth:
+            #         oauth-token-endpoint: http://example.com/oauth/token
+            #         client-id: my-client-id
+            #         client-secret: my-client-secret
+            #         scopes: my-scope
+            #         audience: my-audience
+            #         client-authentication: basic-auth-header # or credentials-body
+
             # Connection to a remote HTTP/SSE MCP server
-            some-remote-server:
-              enabled: false
-              sse:
-                url: https://example.com/mcp/sse
+            # some-remote-sse-server:
+            #   enabled: false
+            #   type: sse
+            #   sse:
+            #     url: https://example.com/mcp/sse
+            #     headers:
+            #       X-Dummy: dummy-value
+            #     authentication:
+            #       ...
 ```
 
 The YAML structure above describes the overall configuration structure of the MCP Client connector. How to configure
@@ -65,7 +100,7 @@ this for your specific use case varies on the connector runtime you are using.
 
 ### Camunda 8 Run
 
-1. Download and extract the latest [Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md) release (at
+1. Download and extract the latest [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) release (at
    least version 8.8.0-alpha6).
 2. Before starting Camunda 8 Run, create a config file (for example `mcp-clients.yml`) in the same directory as
    `connectors-application.properties` and add the MCP Client configuration as shown above. Adapt the configuration as
@@ -74,7 +109,7 @@ this for your specific use case varies on the connector runtime you are using.
    ```properties
    spring.config.import=file:./mcp-client.yml
    ```
-4. [Start Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
+4. [Start Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
 5. While starting up, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
    initialization of the configured MCP clients and the registration of the MCP Client connector:
    ```log
@@ -93,7 +128,7 @@ this for your specific use case varies on the connector runtime you are using.
        <!-- .... -->
 
        <properties>
-           <version.connectors>8.8.0-alpha6</version.connectors>
+           <version.connectors>8.8.0</version.connectors>
        </properties>
 
        <dependencies>
@@ -136,8 +171,8 @@ this for your specific use case varies on the connector runtime you are using.
 
 ## Modeling
 
-1. Configure an AI agent tools feedback loop as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-example.md). Do not configure any tools within the ad-hoc sub-process yet.
-2. Install the [MCP Client element template](https://github.com/camunda/connectors/blob/8.8.0-alpha6/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
-3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template you installed in step 2.
+1. Configure an AI agent ad-hoc sub-process as described in the [example integration](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md). Do not configure any tools within the ad-hoc sub-process yet.
+2. In a Self-Managed environment, install the [MCP Client element template](https://raw.githubusercontent.com/camunda/connectors/refs/heads/main/connectors/agentic-ai/element-templates/agenticai-mcp-client-outbound-connector.json).
+3. Create a service task within the ad-hoc sub-process and apply the **MCP Client** element template.
 4. In the **MCP Client** section of the properties panel, configure the **Client ID** to match the value of the MCP client you used in the runtime configuration (example: `filesystem`).
 5. Execute your process. You should see tool discovery calls being routed to the MCP Client service task, and tool definitions provided by the MCP server listed in the agent context variable. As a result, the agent should be able to call the tools provided by the MCP server.

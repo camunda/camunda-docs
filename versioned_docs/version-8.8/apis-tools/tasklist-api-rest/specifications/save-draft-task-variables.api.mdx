@@ -1,0 +1,188 @@
+---
+id: save-draft-task-variables
+title: "Save draft variables"
+description: "This operation performs several actions: <br/><ol><li>Validates the task and draft variables.</li><li>Deletes existing draft variables for the task.</li><li>Checks for new draft variables. If a new variable's `name` matches an existing one but the `value` differs, it is saved. In case of duplicate draft variable names, the last variable's value is kept.</li></ol><b>NOTE:</b><ul><li>Invoking this method successively will overwrite all existing draft variables. Only draft variables submitted in the most recent request body will be persisted. Therefore, ensure you include all necessary variables in each request to maintain the intended variable set.</li><li>The UI does not currently display the values for draft variables that are created via this endpoint.</li></ul>"
+sidebar_label: "Save draft variables"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/tasklist-api-rest/specifications/tasklist-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Save draft variables"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/v1/tasks/{taskId}/variables"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+This operation performs several actions: <br/><ol><li>Validates the task and draft variables.</li><li>Deletes existing draft variables for the task.</li><li>Checks for new draft variables. If a new variable's `name` matches an existing one but the `value` differs, it is saved. In case of duplicate draft variable names, the last variable's value is kept.</li></ol><b>NOTE:</b><ul><li>Invoking this method successively will overwrite all existing draft variables. Only draft variables submitted in the most recent request body will be persisted. Therefore, ensure you include all necessary variables in each request to maintain the intended variable set.</li><li>The UI does not currently display the values for draft variables that are created via this endpoint.</li></ul>
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "taskId",
+      in: "path",
+      description: "The ID of the task.",
+      required: true,
+      schema: { type: "string" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            variables: {
+              type: "array",
+              description: "Variables to update or add to the task.",
+              items: {
+                type: "object",
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The name of the variable.",
+                  },
+                  value: {
+                    type: "string",
+                    description:
+                      "The value of the variable. When specifying the variable value, it's crucial to maintain consistency with JSON values (serialization for the complex objects such as list) and ensure that strings remain appropriately formatted.",
+                  },
+                },
+                title: "VariableInputDTO",
+              },
+            },
+          },
+          title: "SaveVariablesRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "On success returned.", content: { "*/*": {} } },
+    "400": {
+      description:
+        "An error is returned when the task is not active (not in the `CREATED` state).<br/>An error is returned if the task was not claimed (assigned) before, except the case when JWT authentication token used.<br/>An error is returned if the task is not assigned to the current user, except the case when JWT authentication token used.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "An error is returned when the task with the `taskId` is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+    "500": {
+      description:
+        "An error is returned if an unexpected error occurs while persisting draft task variables.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            type: "object",
+            properties: {
+              status: {
+                type: "integer",
+                description:
+                  "An integer that represents the HTTP status code of the error response. For example, 400 indicates a 'Bad Request' error, 404 indicates a 'Not Found' error, and so on.",
+                format: "int32",
+              },
+              message: {
+                type: "string",
+                description:
+                  "A string that provides a brief description of the error that occurred.",
+              },
+              instance: {
+                type: "string",
+                description:
+                  "Error instance UUID for lookup (e.g., in log messages).",
+              },
+            },
+            title: "Error",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

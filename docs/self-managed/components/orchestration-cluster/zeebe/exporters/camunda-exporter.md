@@ -8,45 +8,48 @@ description: "Use the Camunda Exporter to export Zeebe records to Elasticsearch/
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-The Camunda Exporter exports Zeebe records directly to Elasticsearch/OpenSearch. Unlike the Elasticsearch and OpenSearch exporters, records are exported in the format required by Operate and Tasklist, and configuring additional importers or data transformations is not required.
+The Camunda Exporter exports Zeebe records directly to Elasticsearch or OpenSearch. Unlike the Elasticsearch and OpenSearch exporters, it exports records in the format required by Operate and Tasklist, so you don’t need to configure additional importers or data transformations.
 
-Using the Camunda Exporter can increase process instance throughput, and can reduce the latency of changes appearing in Operate and Tasklist.
+Using the Camunda Exporter can increase process instance throughput and reduce the latency of changes appearing in Operate and Tasklist.
 
 :::note
-When exporting, indexes are created as required, and will not be created twice if they already exist. However, once disabled, they
-will not be deleted (that is up to the administrator.) A [retention](./camunda-exporter.md?configuration=retention#options) policy can be configured to automatically delete data after a certain number of days.
+When exporting, indexes are created as required and not recreated if they already exist. However, disabling the exporter does not delete indexes. Administrators must handle deletions. You can configure a [retention policy](./camunda-exporter.md?configuration=retention#options) to automatically delete data after a set number of days.
 :::
 
 ## Configuration
 
-Enable the exporter by configuring the `className` in your [broker configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexporters):
+Camunda Exporter is enabled by default if secondary storage is configured to use Elasticsearch or OpenSearch. See the properties prefixed with `CAMUNDA_DATA_SECONDARYSTORAGE` in [secondary-storage configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage).
 
-```yaml
-exporters:
-  camundaexporter:
-    className: io.camunda.exporter.CamundaExporter
-    args:
-    # Refer to the table below for the available args options
+You can also configure the following properties using exporter `args`:
+
+```
+zeebe:
+  brokers:
+    exporters:
+      # Camunda Exporter ----------
+      # An example configuration for the camunda exporter:
+      #
+      # These setting can also be overridden using the environment variables "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_..."
+      # To convert a YAML formatted variable to an environment variable, start with the top-level property and separate every nested property with an underscore (_).
+      # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
+      #
+      camundaexporter:
+        args:
+
 ```
 
-:::note
-As the exporter is packaged with Zeebe, it is not necessary to specify a `jarPath`.
-:::
-
-Configure the exporter by providing `args`. See the tables below for configuration options and default values, or review the [example YAML configuration](#example).
-
-| Option       | Description                                                                                                       | Default |
-| ------------ | ----------------------------------------------------------------------------------------------------------------- | ------- |
-| connect      | Refer to [Connect](./camunda-exporter.md?configuration=connect#options) for the connection configuration options. |         |
-| index        | Refer to [Index](./camunda-exporter.md?configuration=index#options) for the index configuration options.          |         |
-| bulk         | Refer to [Bulk](./camunda-exporter.md?configuration=bulk#options) for the bulk configuration options.             |         |
-| history      | Refer to [History](./camunda-exporter.md?configuration=history#options) for the retention configuration options.  |         |
-| createSchema | If `true` missing indexes will be created automatically.                                                          | true    |
+| Option       | Description                                                                                           | Default |
+| ------------ | ----------------------------------------------------------------------------------------------------- | ------- |
+| connect      | Connection configuration options. See [Connect](./camunda-exporter.md?configuration=connect#options). |         |
+| index        | Index configuration options. See [Index](./camunda-exporter.md?configuration=index#options).          |         |
+| bulk         | Bulk configuration options. See [Bulk](./camunda-exporter.md?configuration=bulk#options).             |         |
+| history      | Retention configuration options. See [History](./camunda-exporter.md?configuration=history#options).  |         |
+| createSchema | If `true`, checks schema readiness before exporting.                                                  | true    |
 
 ### Options
 
 <Tabs groupId="configuration" defaultValue="index" queryString
-values={[{label: 'Connect', value: 'connect' },{label: 'Security', value: 'security' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
+values={[{label: 'Connect', value: 'connect' },{label: 'Index', value: 'index' },{label: 'Bulk', value: 'bulk' },{label: 'Retention', value: 'retention' },{label: 'History', value: 'history' },{label: 'Other', value: 'other' }]} >
 
 <TabItem value="connect">
 
@@ -57,14 +60,9 @@ versions of Elasticsearch and/or OpenSearch are supported in a Camunda 8 Self-Ma
 
 | Option         | Description                                                                                                                   | Default                     |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| type           | the type of the underlying search engine to export to. Accepted values are `elasticsearch` or `opensearch`.                   | elasticsearch               |
-| clusterName    | The name of the Elasticsearch/OpenSearch cluster to export to.                                                                | elasticsearch               |
 | dateFormat     | Defines a custom date format that should be used for fetching date data from the engine (should be the same as in the engine) | yyyy-MM-dd'T'HH:mm:ss.SSSZZ |
 | socketTimeout  | Defines the socket timeout in milliseconds, which is the timeout for waiting for data.                                        |                             |
 | connectTimeout | Determines the timeout in milliseconds until a connection is established.                                                     |                             |
-| username       | Username used to authenticate.                                                                                                |                             |
-| password       | Password used to authenticate.                                                                                                |                             |
-| security       | Refer to [Security](./camunda-exporter.md?configuration=security#options) for security configuration.                         |                             |
 
 :::note
 If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/auth/credentials/DefaultCredentialsProvider.html) is used for authentication. For more details on configuring credentials, refer to the [AWS SDK documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html#credentials-default).
@@ -72,22 +70,10 @@ If you are using `opensearch` on AWS, the AWS SDK's [DefaultCredentialsProvider]
 
 </TabItem>
 
-<TabItem value="security">
-
-| Option          | Description                                                                                       | Default |
-| --------------- | ------------------------------------------------------------------------------------------------- | ------- |
-| enabled         | If `true`, enables the security (ssl) features for the exporter.                                  | false   |
-| certificatePath | The file path to the SSL certificate used for secure communication with Elasticsearch/OpenSearch. |         |
-| verifyHostname  | If `true`, the hostname of the SSL certificate will be validated.                                 | true    |
-| selfSigned      | If `true`, allows the use of self-signed SSL certificates.                                        | false   |
-
-</TabItem>
-
 <TabItem value="index">
 
 | Option                | Description                                                                                                                                                                                 | Default |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| prefix                | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                     |         |
 | numberOfShards        | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each created index.                              | 1       |
 | numberOfReplicas      | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for created index.                           | 0       |
 | variableSizeThreshold | Defines a threshold for variable size. Variables exceeding this threshold are split into two properties: `FULL_VALUE` (full content, not indexed) and `VALUE` (truncated content, indexed). | 8191    |
@@ -104,13 +90,13 @@ size) can be controlled by configuration.
 
 | Option | Description                                                                                                                                                    | Default |
 | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `5`     |
+| delay  | Delay, in seconds, before force flush of the current batch. This ensures that even when we have low traffic of records, we still export every once in a while. | `1`     |
 | size   | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`  |
 
 With the default configuration, the exporter will aggregate records and flush them to Elasticsearch/OpenSearch:
 
 1. When it has aggregated 1000 records.
-2. Five seconds have elapsed since the last flush (regardless of how many
+2. One seconds have elapsed since the last flush (regardless of how many
    records were aggregated).
 
 </TabItem>
@@ -129,6 +115,7 @@ All index templates created by this exporter apply the created ILM Policy.
 | policyName             | The name of the created and applied ILM policy.                                                                                                                      | `camunda-retention-policy`               |
 | usageMetricsMinimumAge | Specifies how old the usage metrics data must be, before the data is deleted as a duration. Applies to `camunda-usage-metric` and `camunda-usage-metric-tu` indices. | `730d`                                   |
 | usageMetricsPolicyName | The name of the created and applied usage metrics ILM policy.                                                                                                        | `camunda-usage-metrics-retention-policy` |
+| applyPolicyJobInterval | The interval at which the ILM policy is periodically applied to all historical indices (starting from version 8.8.1).                                                | `PT1H`                                   |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or nanoseconds
@@ -142,15 +129,17 @@ The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, 
 To keep the main runtime index performant, documents are periodically moved into historical
 indices. The history can be configured as follows:
 
-| Option                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Default |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| elsRolloverDateFormat     | Defines how date values are formatted for historical indices using Java DateTimeFormatter syntax. If no format is specified, the first date format defined in the field mapping is used.                                                                                                                                                                                                                                                                                                                                                                                                                                     | `date`  |
-| rolloverInterval          | The rollover period before an active index is rolled over. This means that `rolloveInterval` is the time gap between updates of historical indexes, therfore for a index `index-abc` and a `rolloverInterval` of 7 days (`7d`) we will have the historical indexes `index-abc-2025-01-01`, `index-abc-2025-01-08` and so on. The `elsRolloverDateFormat` must have sufficient resolution to compute the `rolloverInterval`. For example, if the `rolloverInterval` is `1h`, then the `elsRolloverDateFormat` should be `yyyy-MM-dd-HH`. Additionally, `rolloverInterval` cannot use seconds (`s`) or minutes (`m`) as units. | `1d`    |
-| rolloverBatchSize         | The maximum number of instances per batch to be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `100`   |
-| waitPeriodBeforeArchiving | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                             | `1h`    |
-| delayBetweenRuns          | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `2000`  |
-| maxDelayBetweenRuns       | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `60000` |
-| retention                 | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
+| Option                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Default |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| elsRolloverDateFormat        | Defines how date values are formatted for historical indices using Java DateTimeFormatter syntax. If no format is specified, the first date format defined in the field mapping is used.                                                                                                                                                                                                                                                                                                                                                                                                                                     | `date`  |
+| rolloverInterval             | The rollover period before an active index is rolled over. This means that `rolloveInterval` is the time gap between updates of historical indexes, therfore for a index `index-abc` and a `rolloverInterval` of 7 days (`7d`) we will have the historical indexes `index-abc-2025-01-01`, `index-abc-2025-01-08` and so on. The `elsRolloverDateFormat` must have sufficient resolution to compute the `rolloverInterval`. For example, if the `rolloverInterval` is `1h`, then the `elsRolloverDateFormat` should be `yyyy-MM-dd-HH`. Additionally, `rolloverInterval` cannot use seconds (`s`) or minutes (`m`) as units. | `1d`    |
+| usageMetricsRolloverInterval | The rollover period for usage metric indices before an active index is rolled over. Behaves the same way as the `rolloveInterval` but applies only to `usage-metric`, `usage-metric-tu` indices and only values of `1-4w` and `1M` are allowed.                                                                                                                                                                                                                                                                                                                                                                              | `1M`    |
+| rolloverBatchSize            | The maximum number of instances per batch to be archived.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `100`   |
+| waitPeriodBeforeArchiving    | Grace period during which completed process instances are excluded from archiving. For example, with a value of `1h`, any process instances completed within the last hour will not be archived.                                                                                                                                                                                                                                                                                                                                                                                                                             | `1h`    |
+| delayBetweenRuns             | Time in milliseconds between archiving runs for completed process instances.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `2000`  |
+| maxDelayBetweenRuns          | The maximum delay between archive runs when using an exponential backoff strategy in case of unsuccessful archiving attempts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `60000` |
+| processInstanceEnabled       | If `true`, enables the archiving of the completed process instances and their related objects.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | `true`  |
+| retention                    | Refer to [Retention](./camunda-exporter.md?configuration=retention#options) for retention configuration options.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |         |
 
 </TabItem>
 
@@ -180,30 +169,17 @@ exporters:
   # For example, the property "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards" would be converted to "ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_INDEX_NUMBEROFSHARDS".
   #
   camundaexporter:
-    className: io.camunda.exporter.CamundaExporter
-
     args:
       connect:
-        type: elasticsearch
-        url: http://localhost:9200
-        clusterName: elasticsearch
         dateFormat: yyyy-MM-dd'T'HH:mm:ss.SSSZZ
         socketTimeout: 1000
         connectTimeout: 1000
-        username: elastic
-        password: changeme
-        security:
-          enabled: false
-          certificatePath: /path/to/certificate
-          verifyHostname: true
-          selfSigned: false
 
       bulk:
         delay: 5
         size: 1000
 
       index:
-        prefix:
         numberOfShards: 3
         numberOfReplicas: 0
 
@@ -214,12 +190,14 @@ exporters:
         waitPeriodBeforeArchiving: "1h"
         delayBetweenRuns: 2000
         maxDelayBetweenRuns: 60000
+        processInstanceEnabled: true
         retention:
           enabled: false
           minimumAge: 30d
           policyName: camunda-retention-policy
           usageMetricsMinimumAge: 730d
           usageMetricsPolicyName: camunda-usage-metrics-retention-policy
+          applyPolicyJobInterval: PT1H
 
         batchOperation:
           exportItemsOnCreation: true

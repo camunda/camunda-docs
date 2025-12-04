@@ -1,7 +1,9 @@
 const fs = require("fs");
 const { execSync } = require("child_process");
 const metadataNext = require("./spring-configuration-metadata.json");
-const metadataForVersion = {};
+const additionalProperties = require("./additional-properties.json");
+
+const baseDir = "./config-reference/camunda-spring-boot-starter";
 
 function getOutputDir(version) {
   if (version === undefined) {
@@ -17,6 +19,13 @@ const getMetadata = (version) => {
     return require(`./${version}/spring-configuration-metadata.json`);
   }
 };
+const getAdditionalProperties = (version) => {
+  if (version === undefined) {
+    return additionalProperties;
+  } else {
+    return require(`./${version}/additional-properties.json`);
+  }
+};
 const getFilename = (version) => {
   return "properties-reference.md";
 };
@@ -25,27 +34,50 @@ const postGenerateDocs = async (generationConfig) => {};
 
 const downloadReference = async (version) => {
   if (version === undefined) {
-    execSync("mvn -f ./config-reference/spring-sdk/pom.xml");
+    execSync(`mvn -f ${baseDir}/pom.xml`);
     fs.copyFileSync(
-      "./config-reference/spring-sdk/target/dependency/META-INF/spring-configuration-metadata.json",
-      "./config-reference/spring-sdk/spring-configuration-metadata.json"
+      `${baseDir}/target/dependency/META-INF/spring-configuration-metadata.json`,
+      `${baseDir}/spring-configuration-metadata.json`
     );
-    fs.rmSync("./config-reference/spring-sdk/target", {
+    if (
+      fs.existsSync(
+        `${baseDir}/target/dependency/META-INF/additional-properties.json`
+      )
+    ) {
+      fs.copyFileSync(
+        `${baseDir}/target/dependency/META-INF/additional-properties.json`,
+        `${baseDir}/additional-properties.json`
+      );
+    }
+    fs.rmSync(`${baseDir}/target`, {
       recursive: true,
       force: true,
     });
   } else {
-    execSync(`mvn -f ./config-reference/spring-sdk/${version}/pom.xml`);
+    execSync(`mvn -f ${baseDir}/${version}/pom.xml`);
     fs.copyFileSync(
-      `./config-reference/spring-sdk/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
-      `./config-reference/spring-sdk/${version}/spring-configuration-metadata.json`
+      `${baseDir}/${version}/target/dependency/META-INF/spring-configuration-metadata.json`,
+      `${baseDir}/${version}/spring-configuration-metadata.json`
     );
-    fs.rmSync(`./config-reference/spring-sdk/${version}/target`, {
+    if (
+      fs.existsSync(
+        `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`
+      )
+    ) {
+      fs.copyFileSync(
+        `${baseDir}/${version}/target/dependency/META-INF/additional-properties.json`,
+        `${baseDir}/${version}/additional-properties.json`
+      );
+    }
+
+    fs.rmSync(`${baseDir}/${version}/target`, {
       recursive: true,
       force: true,
     });
   }
 };
+
+const componentName = "Camunda Spring Boot Starter";
 
 module.exports = {
   getOutputDir,
@@ -54,4 +86,7 @@ module.exports = {
   preGenerateDocs,
   postGenerateDocs,
   downloadReference,
+  componentName,
+  baseDir,
+  getAdditionalProperties,
 };

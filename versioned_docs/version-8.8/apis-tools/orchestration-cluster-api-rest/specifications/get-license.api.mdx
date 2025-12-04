@@ -1,0 +1,137 @@
+---
+id: get-license
+title: "Get license status"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Get license status"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VlFv2zYQ/iuEnjYssdys3TIDe3BdN0vRJoHtrBgcP1AUbTOVSJWk4hiC/vvuSMq2bAVtB+whcEQe7/vu7rsjq8jSlYkG8+ijYFwaHi3OIlVwTa1Q8jqNBtGK22bvLEq5YVoUuAlbD/JBzuej25vp9XQ2vhn9M5jOJrc3V4sF7twmlgppiF1zYiy1pSFq6b5YqTWXloxoXsqUksz77wGA5qZQ8D9wqqKLfh9/2qCHbhtHbfcdbpmSFgzRGy0K2HDxxY8GXVaRYWue01OsGXhrGKH3nU9Y/VpyY9G33RYcbFXyyJl1IXwtheYpZvWJZiLdpy+cnuGJs0iYkcpzrpmgGea90Jh5K3zwraOnzHTJieiMlwhD3OEzsqSZcWYK7PRGOBKBb6JUxqmEBf5M8yKDNQtO6zbLE+DPIssgeltq6cAbUPRKQgTbFyqxBzdWC7k6xI4MpSaqj7LSDZ/wENlmzeVBUbDKThuUSCXPmfMDtc7+xMh27E5zUCORAopmhrZbBSm1Aa4r4+FwR3xLpXMKPiN0cG5FjkmQZZbRZJdxQLfCuiSEek+C5qK6xt03XX0wlESAqLWkGeFaK00Uc/2QAk+RuXAZNwZ4OM6NYh/ky/0AR4BW/su3+mJI7rwlSTlkPCNe/IQa4g0TYCEkmU/ej8gfr9/8vvhpbW1hBnG82Wx6esnOeSqs0j2lVzF84h/a/dwjkG3NSU63WGaaghlgQoz77iCm4EwsBSNWudACbadBH99xT7ZbywZlv1isUouTYTck95NrIlJIm1hum6y2oN2ZJS0z9EETVdpBklH5paXzw/V95U/JHKObMs+p3rXWMfAe4C1NycQXGwH8bDxAQNWsuD6MF5Z+vTjBRN3/NZvdNeOVqRQaD4Rm1zBiAoEW9ut+/yzKhRR5mTdf9Nl//dbv14iAevmOeCU2FSTJCfM4aJBWrkAl3ls7/BD6fhbNgcIHlZiZGjIrnqAPzYIwKqWyKLGCagPDGiePhEAl+6/SKKhdn+hDabESx/zbhOOni/gR+MXU00OfhzMhtNo7n7naj4Sc27UK1zPqG7DR1X7QGq6fuMarvQLOkPGo8t1cQxNWa2VsPagKpW0N+GD/RLXAmeSUgtu+6xs1ZwrGqFvuUgluSJrzJs5bDVCQO1+8UVYaGFRkMp7OyBXkf0O3PUw4wrdhLvuX/U4ENP0O78O7a+IjdwCH86uBwEHUCeGNfxSkrheYbJi8wm6n6MKn8C2nmuthiXXZySlgOyR3/zgjWPH/vG9E9uHzDOkn1Aj2LRdo4/Qi5FI5w6Cb7giAPFYbpOEj7/dehfsA5IfHsY6w3lxxYwn65Ty0gVdSM8tXwq7LpAf3bMy8+e5XGANdGNUnrQK5wxGCd3Mp3b0DnbIBR3BpN5iXhHm2vf2bqYNauCzJ3z4Y8qrX/xGKSaaSOIf3QtM1Jh4NP93fvBuef7wejW+m43Pw2LPP1qW3AI3nVB7wuOJ29wIIU/Yo3Gp/0f4fj+UgCcufbQyzUriHjIu/ChNhvksfqNR39TyqKhANv9dZXeMyjEu9hfXFfgjgF7hac5qCPHGEfOFbrB5jvLBuWmSlu8yOH9PYDbvZdDUGGdf/AmZgTUg=
+sidebar_class_name: "get api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get license status"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/license"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Obtains the status of the current Camunda license.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Obtains the current status of the Camunda license.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The response of a license request.",
+            type: "object",
+            required: ["validLicense", "licenseType", "isCommercial"],
+            properties: {
+              validLicense: {
+                description:
+                  "True if the Camunda license is valid, false if otherwise",
+                type: "boolean",
+                example: true,
+              },
+              licenseType: {
+                description:
+                  "Will return the license type property of the Camunda license",
+                type: "string",
+                example: "saas",
+              },
+              isCommercial: {
+                description:
+                  "Will be false when a license contains a non-commerical=true property",
+                type: "boolean",
+              },
+              expiresAt: {
+                description: "The date when the Camunda license expires",
+                type: "string",
+                format: "date-time",
+                nullable: true,
+              },
+            },
+            title: "LicenseResponse",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -12,7 +12,6 @@ Properties for the Camunda Spring Boot Starter.
 ## Properties
 
 <Tabs groupId="property-format" defaultValue="property" queryString values={
-
 [
 {label: 'Configuration property', value: 'property' },
 {label: 'Environment variable', value: 'env' },
@@ -35,7 +34,7 @@ Properties for the Camunda client.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/><a href="#camundaclientca-certificate-path" id="camundaclientca-certificate-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/><a href="#camundaclientcacertificatepath" id="camundaclientcacertificatepath" class="hash-link"/>
 </td>
 
 <td>
@@ -67,7 +66,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/><a href="#camundaclientexecution-threads" id="camundaclientexecution-threads" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/><a href="#camundaclientexecutionthreads" id="camundaclientexecutionthreads" class="hash-link"/>
 </td>
 
 <td>
@@ -83,7 +82,7 @@ Type: <code>integer</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/><a href="#camundaclientgrpc-address" id="camundaclientgrpc-address" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/><a href="#camundaclientgrpcaddress" id="camundaclientgrpcaddress" class="hash-link"/>
 </td>
 
 <td>
@@ -99,7 +98,7 @@ Type: <code>url</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/><a href="#camundaclientkeep-alive" id="camundaclientkeep-alive" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/><a href="#camundaclientkeepalive" id="camundaclientkeepalive" class="hash-link"/>
 </td>
 
 <td>
@@ -115,7 +114,23 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/><a href="#camundaclientmax-message-size" id="camundaclientmax-message-size" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-http-connections" env="CAMUNDA_CLIENT_MAXHTTPCONNECTIONS"/><a href="#camundaclientmaxhttpconnections" id="camundaclientmaxhttpconnections" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of concurrent HTTP connections the client can open.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>100</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/><a href="#camundaclientmaxmessagesize" id="camundaclientmaxmessagesize" class="hash-link"/>
 </td>
 
 <td>
@@ -131,7 +146,7 @@ Type: <code>dataSize</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-metadata-size" env="CAMUNDA_CLIENT_MAXMETADATASIZE"/><a href="#camundaclientmax-metadata-size" id="camundaclientmax-metadata-size" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.max-metadata-size" env="CAMUNDA_CLIENT_MAXMETADATASIZE"/><a href="#camundaclientmaxmetadatasize" id="camundaclientmaxmetadatasize" class="hash-link"/>
 </td>
 
 <td>
@@ -147,7 +162,7 @@ Type: <code>dataSize</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/><a href="#camundaclientmessage-time-to-live" id="camundaclientmessage-time-to-live" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/><a href="#camundaclientmessagetimetolive" id="camundaclientmessagetimetolive" class="hash-link"/>
 </td>
 
 <td>
@@ -179,7 +194,7 @@ Type: <code>enum[self-managed, saas]</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/><a href="#camundaclientoverride-authority" id="camundaclientoverride-authority" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/><a href="#camundaclientoverrideauthority" id="camundaclientoverrideauthority" class="hash-link"/>
 </td>
 
 <td>
@@ -195,7 +210,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_PREFERRESTOVERGRPC"/><a href="#camundaclientprefer-rest-over-grpc" id="camundaclientprefer-rest-over-grpc" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_PREFERRESTOVERGRPC"/><a href="#camundaclientpreferrestovergrpc" id="camundaclientpreferrestovergrpc" class="hash-link"/>
 </td>
 
 <td>
@@ -211,7 +226,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/><a href="#camundaclientrequest-timeout" id="camundaclientrequest-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/><a href="#camundaclientrequesttimeout" id="camundaclientrequesttimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -227,7 +242,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout-offset" env="CAMUNDA_CLIENT_REQUESTTIMEOUTOFFSET"/><a href="#camundaclientrequest-timeout-offset" id="camundaclientrequest-timeout-offset" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout-offset" env="CAMUNDA_CLIENT_REQUESTTIMEOUTOFFSET"/><a href="#camundaclientrequesttimeoutoffset" id="camundaclientrequesttimeoutoffset" class="hash-link"/>
 </td>
 
 <td>
@@ -243,7 +258,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/><a href="#camundaclientrest-address" id="camundaclientrest-address" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/><a href="#camundaclientrestaddress" id="camundaclientrestaddress" class="hash-link"/>
 </td>
 
 <td>
@@ -259,7 +274,7 @@ Type: <code>url</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-id" env="CAMUNDA_CLIENT_TENANTID"/><a href="#camundaclienttenant-id" id="camundaclienttenant-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-id" env="CAMUNDA_CLIENT_TENANTID"/><a href="#camundaclienttenantid" id="camundaclienttenantid" class="hash-link"/>
 </td>
 
 <td>
@@ -307,7 +322,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/><a href="#camundaclientauthclient-id" id="camundaclientauthclient-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/><a href="#camundaclientauthclientid" id="camundaclientauthclientid" class="hash-link"/>
 </td>
 
 <td>
@@ -323,7 +338,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/><a href="#camundaclientauthclient-secret" id="camundaclientauthclient-secret" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/><a href="#camundaclientauthclientsecret" id="camundaclientauthclientsecret" class="hash-link"/>
 </td>
 
 <td>
@@ -339,7 +354,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.connect-timeout" env="CAMUNDA_CLIENT_AUTH_CONNECTTIMEOUT"/><a href="#camundaclientauthconnect-timeout" id="camundaclientauthconnect-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.connect-timeout" env="CAMUNDA_CLIENT_AUTH_CONNECTTIMEOUT"/><a href="#camundaclientauthconnecttimeout" id="camundaclientauthconnecttimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -355,7 +370,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.credentials-cache-path" env="CAMUNDA_CLIENT_AUTH_CREDENTIALSCACHEPATH"/><a href="#camundaclientauthcredentials-cache-path" id="camundaclientauthcredentials-cache-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.credentials-cache-path" env="CAMUNDA_CLIENT_AUTH_CREDENTIALSCACHEPATH"/><a href="#camundaclientauthcredentialscachepath" id="camundaclientauthcredentialscachepath" class="hash-link"/>
 </td>
 
 <td>
@@ -371,7 +386,23 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-key-password" env="CAMUNDA_CLIENT_AUTH_KEYSTOREKEYPASSWORD"/><a href="#camundaclientauthkeystore-key-password" id="camundaclientauthkeystore-key-password" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.issuer-url" env="CAMUNDA_CLIENT_AUTH_ISSUERURL"/><a href="#camundaclientauthissuerurl" id="camundaclientauthissuerurl" class="hash-link"/>
+</td>
+
+<td>
+
+The url of the issuer for the access token. It is used to generate the well-known configuration url from which the `token-url` is retrieved. Only applied if the `camunda.client.auth.well-known-configuration-url` is not set. A default is set by `camunda.client.auth.method: oidc`.
+
+Type: <code>url</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-key-password" env="CAMUNDA_CLIENT_AUTH_KEYSTOREKEYPASSWORD"/><a href="#camundaclientauthkeystorekeypassword" id="camundaclientauthkeystorekeypassword" class="hash-link"/>
 </td>
 
 <td>
@@ -387,7 +418,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-password" env="CAMUNDA_CLIENT_AUTH_KEYSTOREPASSWORD"/><a href="#camundaclientauthkeystore-password" id="camundaclientauthkeystore-password" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-password" env="CAMUNDA_CLIENT_AUTH_KEYSTOREPASSWORD"/><a href="#camundaclientauthkeystorepassword" id="camundaclientauthkeystorepassword" class="hash-link"/>
 </td>
 
 <td>
@@ -403,7 +434,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-path" env="CAMUNDA_CLIENT_AUTH_KEYSTOREPATH"/><a href="#camundaclientauthkeystore-path" id="camundaclientauthkeystore-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.keystore-path" env="CAMUNDA_CLIENT_AUTH_KEYSTOREPATH"/><a href="#camundaclientauthkeystorepath" id="camundaclientauthkeystorepath" class="hash-link"/>
 </td>
 
 <td>
@@ -451,7 +482,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.read-timeout" env="CAMUNDA_CLIENT_AUTH_READTIMEOUT"/><a href="#camundaclientauthread-timeout" id="camundaclientauthread-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.read-timeout" env="CAMUNDA_CLIENT_AUTH_READTIMEOUT"/><a href="#camundaclientauthreadtimeout" id="camundaclientauthreadtimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -499,12 +530,12 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/><a href="#camundaclientauthtoken-url" id="camundaclientauthtoken-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/><a href="#camundaclientauthtokenurl" id="camundaclientauthtokenurl" class="hash-link"/>
 </td>
 
 <td>
 
-The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas` and `camunda.client.auth.method: oidc`.
+The authorization server URL from which to request the access token. A default is set by `camunda.client.mode: saas`.
 
 Type: <code>url</code>
 
@@ -515,7 +546,7 @@ Type: <code>url</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.truststore-password" env="CAMUNDA_CLIENT_AUTH_TRUSTSTOREPASSWORD"/><a href="#camundaclientauthtruststore-password" id="camundaclientauthtruststore-password" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.truststore-password" env="CAMUNDA_CLIENT_AUTH_TRUSTSTOREPASSWORD"/><a href="#camundaclientauthtruststorepassword" id="camundaclientauthtruststorepassword" class="hash-link"/>
 </td>
 
 <td>
@@ -531,7 +562,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.truststore-path" env="CAMUNDA_CLIENT_AUTH_TRUSTSTOREPATH"/><a href="#camundaclientauthtruststore-path" id="camundaclientauthtruststore-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.truststore-path" env="CAMUNDA_CLIENT_AUTH_TRUSTSTOREPATH"/><a href="#camundaclientauthtruststorepath" id="camundaclientauthtruststorepath" class="hash-link"/>
 </td>
 
 <td>
@@ -561,6 +592,22 @@ Type: <code>string</code>
   <code>null</code>
 </td>
 </tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.well-known-configuration-url" env="CAMUNDA_CLIENT_AUTH_WELLKNOWNCONFIGURATIONURL"/><a href="#camundaclientauthwellknownconfigurationurl" id="camundaclientauthwellknownconfigurationurl" class="hash-link"/>
+</td>
+
+<td>
+
+The url of the well-known configuration of the issuer. It is used to retrieve the `token-url`. Only applied if `camunda.client.auth.token-url` is not set.
+
+Type: <code>url</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -579,7 +626,7 @@ Properties for OIDC authentication using a client assertion instead of a client 
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-key-alias" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREKEYALIAS"/><a href="#camundaclientauthclient-assertionkeystore-key-alias" id="camundaclientauthclient-assertionkeystore-key-alias" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-key-alias" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREKEYALIAS"/><a href="#camundaclientauthclientassertionkeystorekeyalias" id="camundaclientauthclientassertionkeystorekeyalias" class="hash-link"/>
 </td>
 
 <td>
@@ -595,7 +642,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-key-password" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREKEYPASSWORD"/><a href="#camundaclientauthclient-assertionkeystore-key-password" id="camundaclientauthclient-assertionkeystore-key-password" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-key-password" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREKEYPASSWORD"/><a href="#camundaclientauthclientassertionkeystorekeypassword" id="camundaclientauthclientassertionkeystorekeypassword" class="hash-link"/>
 </td>
 
 <td>
@@ -611,7 +658,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-password" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREPASSWORD"/><a href="#camundaclientauthclient-assertionkeystore-password" id="camundaclientauthclient-assertionkeystore-password" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-password" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREPASSWORD"/><a href="#camundaclientauthclientassertionkeystorepassword" id="camundaclientauthclientassertionkeystorepassword" class="hash-link"/>
 </td>
 
 <td>
@@ -627,7 +674,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-path" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREPATH"/><a href="#camundaclientauthclient-assertionkeystore-path" id="camundaclientauthclient-assertionkeystore-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-assertion.keystore-path" env="CAMUNDA_CLIENT_AUTH_CLIENTASSERTION_KEYSTOREPATH"/><a href="#camundaclientauthclientassertionkeystorepath" id="camundaclientauthclientassertionkeystorepath" class="hash-link"/>
 </td>
 
 <td>
@@ -659,7 +706,7 @@ Properties for connecting the Camunda client to SaaS. These are used to compose 
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/><a href="#camundaclientcloudcluster-id" id="camundaclientcloudcluster-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/><a href="#camundaclientcloudclusterid" id="camundaclientcloudclusterid" class="hash-link"/>
 </td>
 
 <td>
@@ -771,7 +818,7 @@ Global default properties for job workers registered to the Camunda client.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.auto-complete" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_AUTOCOMPLETE"/><a href="#camundaclientworkerdefaultsauto-complete" id="camundaclientworkerdefaultsauto-complete" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.auto-complete" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_AUTOCOMPLETE"/><a href="#camundaclientworkerdefaultsautocomplete" id="camundaclientworkerdefaultsautocomplete" class="hash-link"/>
 </td>
 
 <td>
@@ -782,7 +829,7 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>true</code>
 </td>
 </tr>
 <tr>
@@ -798,12 +845,12 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>true</code>
 </td>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.fetch-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FETCHVARIABLES"/><a href="#camundaclientworkerdefaultsfetch-variables" id="camundaclientworkerdefaultsfetch-variables" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.fetch-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FETCHVARIABLES"/><a href="#camundaclientworkerdefaultsfetchvariables" id="camundaclientworkerdefaultsfetchvariables" class="hash-link"/>
 </td>
 
 <td>
@@ -819,7 +866,7 @@ Type: <code>array[string]</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FORCEFETCHALLVARIABLES"/><a href="#camundaclientworkerdefaultsforce-fetch-all-variables" id="camundaclientworkerdefaultsforce-fetch-all-variables" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FORCEFETCHALLVARIABLES"/><a href="#camundaclientworkerdefaultsforcefetchallvariables" id="camundaclientworkerdefaultsforcefetchallvariables" class="hash-link"/>
 </td>
 
 <td>
@@ -830,12 +877,12 @@ Type: <code>boolean</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>false</code>
 </td>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/><a href="#camundaclientworkerdefaultsmax-jobs-active" id="camundaclientworkerdefaultsmax-jobs-active" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/><a href="#camundaclientworkerdefaultsmaxjobsactive" id="camundaclientworkerdefaultsmaxjobsactive" class="hash-link"/>
 </td>
 
 <td>
@@ -851,7 +898,7 @@ Type: <code>integer</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-retries" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXRETRIES"/><a href="#camundaclientworkerdefaultsmax-retries" id="camundaclientworkerdefaultsmax-retries" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-retries" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXRETRIES"/><a href="#camundaclientworkerdefaultsmaxretries" id="camundaclientworkerdefaultsmaxretries" class="hash-link"/>
 </td>
 
 <td>
@@ -862,7 +909,7 @@ Type: <code>integer</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>0</code>
 </td>
 </tr>
 <tr>
@@ -883,7 +930,7 @@ Type: <code>string</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/><a href="#camundaclientworkerdefaultspoll-interval" id="camundaclientworkerdefaultspoll-interval" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/><a href="#camundaclientworkerdefaultspollinterval" id="camundaclientworkerdefaultspollinterval" class="hash-link"/>
 </td>
 
 <td>
@@ -899,7 +946,7 @@ Type: <code>duration</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.request-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_REQUESTTIMEOUT"/><a href="#camundaclientworkerdefaultsrequest-timeout" id="camundaclientworkerdefaultsrequest-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.request-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_REQUESTTIMEOUT"/><a href="#camundaclientworkerdefaultsrequesttimeout" id="camundaclientworkerdefaultsrequesttimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -910,12 +957,28 @@ Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT10S&quot;</code>
 </td>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/><a href="#camundaclientworkerdefaultsstream-enabled" id="camundaclientworkerdefaultsstream-enabled" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.retry-backoff" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_RETRYBACKOFF"/><a href="#camundaclientworkerdefaultsretrybackoff" id="camundaclientworkerdefaultsretrybackoff" class="hash-link"/>
+</td>
+
+<td>
+
+The backoff before a retry of a failed job is possible.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT0S&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/><a href="#camundaclientworkerdefaultsstreamenabled" id="camundaclientworkerdefaultsstreamenabled" class="hash-link"/>
 </td>
 
 <td>
@@ -931,7 +994,7 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientworkerdefaultsstream-timeout" id="camundaclientworkerdefaultsstream-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientworkerdefaultsstreamtimeout" id="camundaclientworkerdefaultsstreamtimeout" class="hash-link"/>
 </td>
 
 <td>
@@ -942,12 +1005,12 @@ Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT8H&quot;</code>
 </td>
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/><a href="#camundaclientworkerdefaultstenant-ids" id="camundaclientworkerdefaultstenant-ids" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/><a href="#camundaclientworkerdefaultstenantids" id="camundaclientworkerdefaultstenantids" class="hash-link"/>
 </td>
 
 <td>
@@ -1000,6 +1063,52 @@ Type: <code>string</code>
 
 Properties for overriding settings of individual job workers registered to the Camunda client. Overrides are specified as key-value pairs, where the key is the worker's job type and the values have the same properties as `camunda.client.worker.defaults` each: `camunda.client.worker.override.<job-type>.<property-name>: <property-value>`.
 
+### `management.endpoint.jobworkers`
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.access" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ACCESS"/><a href="#managementendpointjobworkersaccess" id="managementendpointjobworkersaccess" class="hash-link"/>
+</td>
+
+<td>
+
+Permitted level of access for the jobworkers endpoint.
+
+Type: <code>enum[none, read_only, unrestricted]</code>
+
+</td>
+<td>
+  <code>&quot;unrestricted&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.cache.time-to-live" env="MANAGEMENT_ENDPOINT_JOBWORKERS_CACHE_TIMETOLIVE"/><a href="#managementendpointjobworkerscachetimetolive" id="managementendpointjobworkerscachetimetolive" class="hash-link"/>
+</td>
+
+<td>
+
+Maximum time that a response can be cached.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;0ms&quot;</code>
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Deprecated properties
 
 :::caution
@@ -1023,10 +1132,10 @@ Deprecated properties for the Camunda client.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-id" env="CAMUNDA_CLIENT_CLUSTERID"/><a href="#camundaclientcluster-id" id="camundaclientcluster-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-id" env="CAMUNDA_CLIENT_CLUSTERID"/><a href="#camundaclientclusterid" id="camundaclientclusterid" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientcloudcluster-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
+  <a href="#camundaclientcloudclusterid"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
 </td>
 <td>
 N/A
@@ -1045,10 +1154,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-ids" env="CAMUNDA_CLIENT_TENANTIDS"/><a href="#camundaclienttenant-ids" id="camundaclienttenant-ids" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-ids" env="CAMUNDA_CLIENT_TENANTIDS"/><a href="#camundaclienttenantids" id="camundaclienttenantids" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
+  <a href="#camundaclientworkerdefaultstenantids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
 </td>
 <td>
 N/A
@@ -1075,7 +1184,7 @@ Deprecated properties for authenticating the Camunda client.
   <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.issuer" env="CAMUNDA_CLIENT_AUTH_ISSUER"/><a href="#camundaclientauthissuer" id="camundaclientauthissuer" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
+  <a href="#camundaclientauthtokenurl"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
 N/A
@@ -1099,7 +1208,7 @@ Deprecated properties for connecting the Camunda client to SaaS. These are used 
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.base-url" env="CAMUNDA_CLIENT_CLOUD_BASEURL"/><a href="#camundaclientcloudbase-url" id="camundaclientcloudbase-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.base-url" env="CAMUNDA_CLIENT_CLOUD_BASEURL"/><a href="#camundaclientcloudbaseurl" id="camundaclientcloudbaseurl" class="hash-link"/>
 </td>
 <td>
   <a href="#camundaclientclouddomain"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.domain" env="CAMUNDA_CLIENT_CLOUD_DOMAIN"/></a>
@@ -1137,7 +1246,7 @@ Identity is now part of Camunda.
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.identity.base-url" env="CAMUNDA_CLIENT_IDENTITY_BASEURL"/><a href="#camundaclientidentitybase-url" id="camundaclientidentitybase-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.identity.base-url" env="CAMUNDA_CLIENT_IDENTITY_BASEURL"/><a href="#camundaclientidentitybaseurl" id="camundaclientidentitybaseurl" class="hash-link"/>
 </td>
 <td>
   
@@ -1197,10 +1306,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.base-url" env="CAMUNDA_CLIENT_ZEEBE_BASEURL"/><a href="#camundaclientzeebebase-url" id="camundaclientzeebebase-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.base-url" env="CAMUNDA_CLIENT_ZEEBE_BASEURL"/><a href="#camundaclientzeebebaseurl" id="camundaclientzeebebaseurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
+  <a href="#camundaclientrestaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1208,10 +1317,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.ca-certificate-path" env="CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH"/><a href="#camundaclientzeebeca-certificate-path" id="camundaclientzeebeca-certificate-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.ca-certificate-path" env="CAMUNDA_CLIENT_ZEEBE_CACERTIFICATEPATH"/><a href="#camundaclientzeebecacertificatepath" id="camundaclientzeebecacertificatepath" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientca-certificate-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
+  <a href="#camundaclientcacertificatepath"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
 </td>
 <td>
 N/A
@@ -1230,21 +1339,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.execution-threads" env="CAMUNDA_CLIENT_ZEEBE_EXECUTIONTHREADS"/><a href="#camundaclientzeebeexecution-threads" id="camundaclientzeebeexecution-threads" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.execution-threads" env="CAMUNDA_CLIENT_ZEEBE_EXECUTIONTHREADS"/><a href="#camundaclientzeebeexecutionthreads" id="camundaclientzeebeexecutionthreads" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientexecution-threads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.grpc-address" env="CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS"/><a href="#camundaclientzeebegrpc-address" id="camundaclientzeebegrpc-address" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
+  <a href="#camundaclientexecutionthreads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
 </td>
 <td>
 N/A
@@ -1252,21 +1350,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.keep-alive" env="CAMUNDA_CLIENT_ZEEBE_KEEPALIVE"/><a href="#camundaclientzeebekeep-alive" id="camundaclientzeebekeep-alive" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.grpc-address" env="CAMUNDA_CLIENT_ZEEBE_GRPCADDRESS"/><a href="#camundaclientzeebegrpcaddress" id="camundaclientzeebegrpcaddress" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientkeep-alive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.max-message-size" env="CAMUNDA_CLIENT_ZEEBE_MAXMESSAGESIZE"/><a href="#camundaclientzeebemax-message-size" id="camundaclientzeebemax-message-size" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientmax-message-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
+  <a href="#camundaclientgrpcaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1274,21 +1361,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.max-metadata-size" env="CAMUNDA_CLIENT_ZEEBE_MAXMETADATASIZE"/><a href="#camundaclientzeebemax-metadata-size" id="camundaclientzeebemax-metadata-size" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.keep-alive" env="CAMUNDA_CLIENT_ZEEBE_KEEPALIVE"/><a href="#camundaclientzeebekeepalive" id="camundaclientzeebekeepalive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientmax-metadata-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-metadata-size" env="CAMUNDA_CLIENT_MAXMETADATASIZE"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.message-time-to-live" env="CAMUNDA_CLIENT_ZEEBE_MESSAGETIMETOLIVE"/><a href="#camundaclientzeebemessage-time-to-live" id="camundaclientzeebemessage-time-to-live" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientmessage-time-to-live"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
+  <a href="#camundaclientkeepalive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
 </td>
 <td>
 N/A
@@ -1296,21 +1372,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.override-authority" env="CAMUNDA_CLIENT_ZEEBE_OVERRIDEAUTHORITY"/><a href="#camundaclientzeebeoverride-authority" id="camundaclientzeebeoverride-authority" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.max-message-size" env="CAMUNDA_CLIENT_ZEEBE_MAXMESSAGESIZE"/><a href="#camundaclientzeebemaxmessagesize" id="camundaclientzeebemaxmessagesize" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientoverride-authority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_ZEEBE_PREFERRESTOVERGRPC"/><a href="#camundaclientzeebeprefer-rest-over-grpc" id="camundaclientzeebeprefer-rest-over-grpc" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientprefer-rest-over-grpc"><Property defaultValue="property" groupId="property-format" property="camunda.client.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_PREFERRESTOVERGRPC"/></a>
+  <a href="#camundaclientmaxmessagesize"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
 </td>
 <td>
 N/A
@@ -1318,10 +1383,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.request-timeout" env="CAMUNDA_CLIENT_ZEEBE_REQUESTTIMEOUT"/><a href="#camundaclientzeeberequest-timeout" id="camundaclientzeeberequest-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.max-metadata-size" env="CAMUNDA_CLIENT_ZEEBE_MAXMETADATASIZE"/><a href="#camundaclientzeebemaxmetadatasize" id="camundaclientzeebemaxmetadatasize" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
+  <a href="#camundaclientmaxmetadatasize"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-metadata-size" env="CAMUNDA_CLIENT_MAXMETADATASIZE"/></a>
 </td>
 <td>
 N/A
@@ -1329,10 +1394,54 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.rest-address" env="CAMUNDA_CLIENT_ZEEBE_RESTADDRESS"/><a href="#camundaclientzeeberest-address" id="camundaclientzeeberest-address" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.message-time-to-live" env="CAMUNDA_CLIENT_ZEEBE_MESSAGETIMETOLIVE"/><a href="#camundaclientzeebemessagetimetolive" id="camundaclientzeebemessagetimetolive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
+  <a href="#camundaclientmessagetimetolive"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.override-authority" env="CAMUNDA_CLIENT_ZEEBE_OVERRIDEAUTHORITY"/><a href="#camundaclientzeebeoverrideauthority" id="camundaclientzeebeoverrideauthority" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientoverrideauthority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_ZEEBE_PREFERRESTOVERGRPC"/><a href="#camundaclientzeebepreferrestovergrpc" id="camundaclientzeebepreferrestovergrpc" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientpreferrestovergrpc"><Property defaultValue="property" groupId="property-format" property="camunda.client.prefer-rest-over-grpc" env="CAMUNDA_CLIENT_PREFERRESTOVERGRPC"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.request-timeout" env="CAMUNDA_CLIENT_ZEEBE_REQUESTTIMEOUT"/><a href="#camundaclientzeeberequesttimeout" id="camundaclientzeeberequesttimeout" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientrequesttimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.rest-address" env="CAMUNDA_CLIENT_ZEEBE_RESTADDRESS"/><a href="#camundaclientzeeberestaddress" id="camundaclientzeeberestaddress" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientrestaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1367,10 +1476,10 @@ Deprecated default properties for Zeebe job workers.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.auto-complete" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_AUTOCOMPLETE"/><a href="#camundaclientzeebedefaultsauto-complete" id="camundaclientzeebedefaultsauto-complete" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.auto-complete" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_AUTOCOMPLETE"/><a href="#camundaclientzeebedefaultsautocomplete" id="camundaclientzeebedefaultsautocomplete" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsauto-complete"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.auto-complete" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_AUTOCOMPLETE"/></a>
+  <a href="#camundaclientworkerdefaultsautocomplete"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.auto-complete" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_AUTOCOMPLETE"/></a>
 </td>
 <td>
 N/A
@@ -1389,21 +1498,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.fetch-variables" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_FETCHVARIABLES"/><a href="#camundaclientzeebedefaultsfetch-variables" id="camundaclientzeebedefaultsfetch-variables" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.fetch-variables" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_FETCHVARIABLES"/><a href="#camundaclientzeebedefaultsfetchvariables" id="camundaclientzeebedefaultsfetchvariables" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsfetch-variables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.fetch-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FETCHVARIABLES"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_FORCEFETCHALLVARIABLES"/><a href="#camundaclientzeebedefaultsforce-fetch-all-variables" id="camundaclientzeebedefaultsforce-fetch-all-variables" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientworkerdefaultsforce-fetch-all-variables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FORCEFETCHALLVARIABLES"/></a>
+  <a href="#camundaclientworkerdefaultsfetchvariables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.fetch-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FETCHVARIABLES"/></a>
 </td>
 <td>
 N/A
@@ -1411,10 +1509,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.max-jobs-active" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE"/><a href="#camundaclientzeebedefaultsmax-jobs-active" id="camundaclientzeebedefaultsmax-jobs-active" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_FORCEFETCHALLVARIABLES"/><a href="#camundaclientzeebedefaultsforcefetchallvariables" id="camundaclientzeebedefaultsforcefetchallvariables" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsmax-jobs-active"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
+  <a href="#camundaclientworkerdefaultsforcefetchallvariables"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.force-fetch-all-variables" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_FORCEFETCHALLVARIABLES"/></a>
 </td>
 <td>
 N/A
@@ -1422,10 +1520,21 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.max-retries" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXRETRIES"/><a href="#camundaclientzeebedefaultsmax-retries" id="camundaclientzeebedefaultsmax-retries" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.max-jobs-active" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXJOBSACTIVE"/><a href="#camundaclientzeebedefaultsmaxjobsactive" id="camundaclientzeebedefaultsmaxjobsactive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsmax-retries"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-retries" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXRETRIES"/></a>
+  <a href="#camundaclientworkerdefaultsmaxjobsactive"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.max-retries" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_MAXRETRIES"/><a href="#camundaclientzeebedefaultsmaxretries" id="camundaclientzeebedefaultsmaxretries" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientworkerdefaultsmaxretries"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-retries" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXRETRIES"/></a>
 </td>
 <td>
 N/A
@@ -1444,21 +1553,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.poll-interval" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_POLLINTERVAL"/><a href="#camundaclientzeebedefaultspoll-interval" id="camundaclientzeebedefaultspoll-interval" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.poll-interval" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_POLLINTERVAL"/><a href="#camundaclientzeebedefaultspollinterval" id="camundaclientzeebedefaultspollinterval" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultspoll-interval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.request-timeout" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_REQUESTTIMEOUT"/><a href="#camundaclientzeebedefaultsrequest-timeout" id="camundaclientzeebedefaultsrequest-timeout" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientworkerdefaultsrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.request-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_REQUESTTIMEOUT"/></a>
+  <a href="#camundaclientworkerdefaultspollinterval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
 </td>
 <td>
 N/A
@@ -1466,21 +1564,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.stream-enabled" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_STREAMENABLED"/><a href="#camundaclientzeebedefaultsstream-enabled" id="camundaclientzeebedefaultsstream-enabled" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.request-timeout" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_REQUESTTIMEOUT"/><a href="#camundaclientzeebedefaultsrequesttimeout" id="camundaclientzeebedefaultsrequesttimeout" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsstream-enabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.stream-timeout" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientzeebedefaultsstream-timeout" id="camundaclientzeebedefaultsstream-timeout" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientworkerdefaultsstream-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/></a>
+  <a href="#camundaclientworkerdefaultsrequesttimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.request-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_REQUESTTIMEOUT"/></a>
 </td>
 <td>
 N/A
@@ -1488,10 +1575,32 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.tenant-ids" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS"/><a href="#camundaclientzeebedefaultstenant-ids" id="camundaclientzeebedefaultstenant-ids" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.stream-enabled" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_STREAMENABLED"/><a href="#camundaclientzeebedefaultsstreamenabled" id="camundaclientzeebedefaultsstreamenabled" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
+  <a href="#camundaclientworkerdefaultsstreamenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.stream-timeout" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientzeebedefaultsstreamtimeout" id="camundaclientzeebedefaultsstreamtimeout" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientworkerdefaultsstreamtimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.zeebe.defaults.tenant-ids" env="CAMUNDA_CLIENT_ZEEBE_DEFAULTS_TENANTIDS"/><a href="#camundaclientzeebedefaultstenantids" id="camundaclientzeebedefaultstenantids" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientworkerdefaultstenantids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
 </td>
 <td>
 N/A
@@ -1568,21 +1677,10 @@ Deprecated common client properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="common.auth-url" env="COMMON_AUTHURL"/><a href="#commonauth-url" id="commonauth-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="common.auth-url" env="COMMON_AUTHURL"/><a href="#commonauthurl" id="commonauthurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="common.base-url" env="COMMON_BASEURL"/><a href="#commonbase-url" id="commonbase-url" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
+  <a href="#camundaclientauthtokenurl"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
 N/A
@@ -1590,10 +1688,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="common.client-id" env="COMMON_CLIENTID"/><a href="#commonclient-id" id="commonclient-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="common.base-url" env="COMMON_BASEURL"/><a href="#commonbaseurl" id="commonbaseurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthclient-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
+  <a href="#camundaclientrestaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1601,10 +1699,21 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="common.client-secret" env="COMMON_CLIENTSECRET"/><a href="#commonclient-secret" id="commonclient-secret" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="common.client-id" env="COMMON_CLIENTID"/><a href="#commonclientid" id="commonclientid" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthclient-secret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
+  <a href="#camundaclientauthclientid"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="common.client-secret" env="COMMON_CLIENTSECRET"/><a href="#commonclientsecret" id="commonclientsecret" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientauthclientsecret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
 </td>
 <td>
 N/A
@@ -1637,7 +1746,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="common.url" env="COMMON_URL"/><a href="#commonurl" id="commonurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
+  <a href="#camundaclientrestaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
 The REST address is the unified endpoint for all interaction with Camunda.
@@ -1683,10 +1792,10 @@ There is no keycloak-specific configuration for Camunda; the issuer is provided 
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="common.keycloak.token-url" env="COMMON_KEYCLOAK_TOKENURL"/><a href="#commonkeycloaktoken-url" id="commonkeycloaktoken-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="common.keycloak.token-url" env="COMMON_KEYCLOAK_TOKENURL"/><a href="#commonkeycloaktokenurl" id="commonkeycloaktokenurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
+  <a href="#camundaclientauthtokenurl"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
@@ -1697,10 +1806,37 @@ There is no keycloak-specific configuration for Camunda; the issuer is provided 
   <Property defaultValue="property" groupId="property-format" property="common.keycloak.url" env="COMMON_KEYCLOAK_URL"/><a href="#commonkeycloakurl" id="commonkeycloakurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
+  <a href="#camundaclientauthtokenurl"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
+</td>
+</tr>
+</tbody>
+</table>
+
+### `management.endpoint.jobworkers`
+
+Deprecated
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Replacement</th>
+    <th>Hint</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.enabled" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ENABLED"/><a href="#managementendpointjobworkersenabled" id="managementendpointjobworkersenabled" class="hash-link"/>
+</td>
+<td>
+  <a href="#managementendpointjobworkersaccess"><Property defaultValue="property" groupId="property-format" property="management.endpoint.jobworkers.access" env="MANAGEMENT_ENDPOINT_JOBWORKERS_ACCESS"/></a>
+</td>
+<td>
+N/A
 </td>
 </tr>
 </tbody>
@@ -1721,7 +1857,7 @@ Deprecated Zeebe client properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.apply-environment-variable-overrides" env="ZEEBE_CLIENT_APPLYENVIRONMENTVARIABLEOVERRIDES"/><a href="#zeebeclientapply-environment-variable-overrides" id="zeebeclientapply-environment-variable-overrides" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.apply-environment-variable-overrides" env="ZEEBE_CLIENT_APPLYENVIRONMENTVARIABLEOVERRIDES"/><a href="#zeebeclientapplyenvironmentvariableoverrides" id="zeebeclientapplyenvironmentvariableoverrides" class="hash-link"/>
 </td>
 <td>
   
@@ -1732,7 +1868,7 @@ Only the environment variables belonging to the Spring SDK are applied.
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.connection-mode" env="ZEEBE_CLIENT_CONNECTIONMODE"/><a href="#zeebeclientconnection-mode" id="zeebeclientconnection-mode" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.connection-mode" env="ZEEBE_CLIENT_CONNECTIONMODE"/><a href="#zeebeclientconnectionmode" id="zeebeclientconnectionmode" class="hash-link"/>
 </td>
 <td>
   <a href="#camundaclientmode"><Property defaultValue="property" groupId="property-format" property="camunda.client.mode" env="CAMUNDA_CLIENT_MODE"/></a>
@@ -1743,21 +1879,10 @@ Client modes are now available.
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-job-worker-stream-enabled" env="ZEEBE_CLIENT_DEFAULTJOBWORKERSTREAMENABLED"/><a href="#zeebeclientdefault-job-worker-stream-enabled" id="zeebeclientdefault-job-worker-stream-enabled" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-job-worker-stream-enabled" env="ZEEBE_CLIENT_DEFAULTJOBWORKERSTREAMENABLED"/><a href="#zeebeclientdefaultjobworkerstreamenabled" id="zeebeclientdefaultjobworkerstreamenabled" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsstream-enabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-job-worker-tenant-ids" env="ZEEBE_CLIENT_DEFAULTJOBWORKERTENANTIDS"/><a href="#zeebeclientdefault-job-worker-tenant-ids" id="zeebeclientdefault-job-worker-tenant-ids" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientworkerdefaultstenant-ids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
+  <a href="#camundaclientworkerdefaultsstreamenabled"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-enabled" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMENABLED"/></a>
 </td>
 <td>
 N/A
@@ -1765,10 +1890,21 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-tenant-id" env="ZEEBE_CLIENT_DEFAULTTENANTID"/><a href="#zeebeclientdefault-tenant-id" id="zeebeclientdefault-tenant-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-job-worker-tenant-ids" env="ZEEBE_CLIENT_DEFAULTJOBWORKERTENANTIDS"/><a href="#zeebeclientdefaultjobworkertenantids" id="zeebeclientdefaultjobworkertenantids" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclienttenant-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-id" env="CAMUNDA_CLIENT_TENANTID"/></a>
+  <a href="#camundaclientworkerdefaultstenantids"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.tenant-ids" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TENANTIDS"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.default-tenant-id" env="ZEEBE_CLIENT_DEFAULTTENANTID"/><a href="#zeebeclientdefaulttenantid" id="zeebeclientdefaulttenantid" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclienttenantid"><Property defaultValue="property" groupId="property-format" property="camunda.client.tenant-id" env="CAMUNDA_CLIENT_TENANTID"/></a>
 </td>
 <td>
 N/A
@@ -1787,10 +1923,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.request-timeout" env="ZEEBE_CLIENT_REQUESTTIMEOUT"/><a href="#zeebeclientrequest-timeout" id="zeebeclientrequest-timeout" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.request-timeout" env="ZEEBE_CLIENT_REQUESTTIMEOUT"/><a href="#zeebeclientrequesttimeout" id="zeebeclientrequesttimeout" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrequest-timeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
+  <a href="#camundaclientrequesttimeout"><Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/></a>
 </td>
 <td>
 N/A
@@ -1814,21 +1950,10 @@ Deprecated Zeebe broker properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.gateway-address" env="ZEEBE_CLIENT_BROKER_GATEWAYADDRESS"/><a href="#zeebeclientbrokergateway-address" id="zeebeclientbrokergateway-address" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.gateway-address" env="ZEEBE_CLIENT_BROKER_GATEWAYADDRESS"/><a href="#zeebeclientbrokergatewayaddress" id="zeebeclientbrokergatewayaddress" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.grpc-address" env="ZEEBE_CLIENT_BROKER_GRPCADDRESS"/><a href="#zeebeclientbrokergrpc-address" id="zeebeclientbrokergrpc-address" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientgrpc-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
+  <a href="#camundaclientgrpcaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1836,10 +1961,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.keep-alive" env="ZEEBE_CLIENT_BROKER_KEEPALIVE"/><a href="#zeebeclientbrokerkeep-alive" id="zeebeclientbrokerkeep-alive" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.grpc-address" env="ZEEBE_CLIENT_BROKER_GRPCADDRESS"/><a href="#zeebeclientbrokergrpcaddress" id="zeebeclientbrokergrpcaddress" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientkeep-alive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
+  <a href="#camundaclientgrpcaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.grpc-address" env="CAMUNDA_CLIENT_GRPCADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1847,10 +1972,21 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.rest-address" env="ZEEBE_CLIENT_BROKER_RESTADDRESS"/><a href="#zeebeclientbrokerrest-address" id="zeebeclientbrokerrest-address" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.keep-alive" env="ZEEBE_CLIENT_BROKER_KEEPALIVE"/><a href="#zeebeclientbrokerkeepalive" id="zeebeclientbrokerkeepalive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientrest-address"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
+  <a href="#camundaclientkeepalive"><Property defaultValue="property" groupId="property-format" property="camunda.client.keep-alive" env="CAMUNDA_CLIENT_KEEPALIVE"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.broker.rest-address" env="ZEEBE_CLIENT_BROKER_RESTADDRESS"/><a href="#zeebeclientbrokerrestaddress" id="zeebeclientbrokerrestaddress" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientrestaddress"><Property defaultValue="property" groupId="property-format" property="camunda.client.rest-address" env="CAMUNDA_CLIENT_RESTADDRESS"/></a>
 </td>
 <td>
 N/A
@@ -1874,10 +2010,10 @@ Deprecated Zeebe cloud connection properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.auth-url" env="ZEEBE_CLIENT_CLOUD_AUTHURL"/><a href="#zeebeclientcloudauth-url" id="zeebeclientcloudauth-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.auth-url" env="ZEEBE_CLIENT_CLOUD_AUTHURL"/><a href="#zeebeclientcloudauthurl" id="zeebeclientcloudauthurl" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthtoken-url"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
+  <a href="#camundaclientauthtokenurl"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-url" env="CAMUNDA_CLIENT_AUTH_TOKENURL"/></a>
 </td>
 <td>
 N/A
@@ -1885,7 +2021,7 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.base-url" env="ZEEBE_CLIENT_CLOUD_BASEURL"/><a href="#zeebeclientcloudbase-url" id="zeebeclientcloudbase-url" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.base-url" env="ZEEBE_CLIENT_CLOUD_BASEURL"/><a href="#zeebeclientcloudbaseurl" id="zeebeclientcloudbaseurl" class="hash-link"/>
 </td>
 <td>
   <a href="#camundaclientclouddomain"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.domain" env="CAMUNDA_CLIENT_CLOUD_DOMAIN"/></a>
@@ -1896,21 +2032,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.client-id" env="ZEEBE_CLIENT_CLOUD_CLIENTID"/><a href="#zeebeclientcloudclient-id" id="zeebeclientcloudclient-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.client-id" env="ZEEBE_CLIENT_CLOUD_CLIENTID"/><a href="#zeebeclientcloudclientid" id="zeebeclientcloudclientid" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthclient-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
-</td>
-<td>
-N/A
-</td>
-</tr>
-<tr>
-<td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.client-secret" env="ZEEBE_CLIENT_CLOUD_CLIENTSECRET"/><a href="#zeebeclientcloudclient-secret" id="zeebeclientcloudclient-secret" class="hash-link"/>
-</td>
-<td>
-  <a href="#camundaclientauthclient-secret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
+  <a href="#camundaclientauthclientid"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-id" env="CAMUNDA_CLIENT_AUTH_CLIENTID"/></a>
 </td>
 <td>
 N/A
@@ -1918,10 +2043,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.cluster-id" env="ZEEBE_CLIENT_CLOUD_CLUSTERID"/><a href="#zeebeclientcloudcluster-id" id="zeebeclientcloudcluster-id" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.client-secret" env="ZEEBE_CLIENT_CLOUD_CLIENTSECRET"/><a href="#zeebeclientcloudclientsecret" id="zeebeclientcloudclientsecret" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientcloudcluster-id"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
+  <a href="#camundaclientauthclientsecret"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.client-secret" env="CAMUNDA_CLIENT_AUTH_CLIENTSECRET"/></a>
 </td>
 <td>
 N/A
@@ -1929,10 +2054,21 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.credentials-cache-path" env="ZEEBE_CLIENT_CLOUD_CREDENTIALSCACHEPATH"/><a href="#zeebeclientcloudcredentials-cache-path" id="zeebeclientcloudcredentials-cache-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.cluster-id" env="ZEEBE_CLIENT_CLOUD_CLUSTERID"/><a href="#zeebeclientcloudclusterid" id="zeebeclientcloudclusterid" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientauthcredentials-cache-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.credentials-cache-path" env="CAMUNDA_CLIENT_AUTH_CREDENTIALSCACHEPATH"/></a>
+  <a href="#camundaclientcloudclusterid"><Property defaultValue="property" groupId="property-format" property="camunda.client.cloud.cluster-id" env="CAMUNDA_CLIENT_CLOUD_CLUSTERID"/></a>
+</td>
+<td>
+N/A
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.credentials-cache-path" env="ZEEBE_CLIENT_CLOUD_CREDENTIALSCACHEPATH"/><a href="#zeebeclientcloudcredentialscachepath" id="zeebeclientcloudcredentialscachepath" class="hash-link"/>
+</td>
+<td>
+  <a href="#camundaclientauthcredentialscachepath"><Property defaultValue="property" groupId="property-format" property="camunda.client.auth.credentials-cache-path" env="CAMUNDA_CLIENT_AUTH_CREDENTIALSCACHEPATH"/></a>
 </td>
 <td>
 N/A
@@ -1989,10 +2125,10 @@ Deprecated Zeebe job worker properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.job.poll-interval" env="ZEEBE_CLIENT_JOB_POLLINTERVAL"/><a href="#zeebeclientjobpoll-interval" id="zeebeclientjobpoll-interval" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.job.poll-interval" env="ZEEBE_CLIENT_JOB_POLLINTERVAL"/><a href="#zeebeclientjobpollinterval" id="zeebeclientjobpollinterval" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultspoll-interval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
+  <a href="#camundaclientworkerdefaultspollinterval"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.poll-interval" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_POLLINTERVAL"/></a>
 </td>
 <td>
 N/A
@@ -2027,10 +2163,10 @@ Deprecated Zeebe message properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.message.max-message-size" env="ZEEBE_CLIENT_MESSAGE_MAXMESSAGESIZE"/><a href="#zeebeclientmessagemax-message-size" id="zeebeclientmessagemax-message-size" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.message.max-message-size" env="ZEEBE_CLIENT_MESSAGE_MAXMESSAGESIZE"/><a href="#zeebeclientmessagemaxmessagesize" id="zeebeclientmessagemaxmessagesize" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientmax-message-size"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
+  <a href="#camundaclientmaxmessagesize"><Property defaultValue="property" groupId="property-format" property="camunda.client.max-message-size" env="CAMUNDA_CLIENT_MAXMESSAGESIZE"/></a>
 </td>
 <td>
 N/A
@@ -2038,10 +2174,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.message.time-to-live" env="ZEEBE_CLIENT_MESSAGE_TIMETOLIVE"/><a href="#zeebeclientmessagetime-to-live" id="zeebeclientmessagetime-to-live" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.message.time-to-live" env="ZEEBE_CLIENT_MESSAGE_TIMETOLIVE"/><a href="#zeebeclientmessagetimetolive" id="zeebeclientmessagetimetolive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientmessage-time-to-live"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
+  <a href="#camundaclientmessagetimetolive"><Property defaultValue="property" groupId="property-format" property="camunda.client.message-time-to-live" env="CAMUNDA_CLIENT_MESSAGETIMETOLIVE"/></a>
 </td>
 <td>
 N/A
@@ -2065,10 +2201,10 @@ Deprecated Zeebe security properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.cert-path" env="ZEEBE_CLIENT_SECURITY_CERTPATH"/><a href="#zeebeclientsecuritycert-path" id="zeebeclientsecuritycert-path" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.cert-path" env="ZEEBE_CLIENT_SECURITY_CERTPATH"/><a href="#zeebeclientsecuritycertpath" id="zeebeclientsecuritycertpath" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientca-certificate-path"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
+  <a href="#camundaclientcacertificatepath"><Property defaultValue="property" groupId="property-format" property="camunda.client.ca-certificate-path" env="CAMUNDA_CLIENT_CACERTIFICATEPATH"/></a>
 </td>
 <td>
 N/A
@@ -2076,10 +2212,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.override-authority" env="ZEEBE_CLIENT_SECURITY_OVERRIDEAUTHORITY"/><a href="#zeebeclientsecurityoverride-authority" id="zeebeclientsecurityoverride-authority" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.override-authority" env="ZEEBE_CLIENT_SECURITY_OVERRIDEAUTHORITY"/><a href="#zeebeclientsecurityoverrideauthority" id="zeebeclientsecurityoverrideauthority" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientoverride-authority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
+  <a href="#camundaclientoverrideauthority"><Property defaultValue="property" groupId="property-format" property="camunda.client.override-authority" env="CAMUNDA_CLIENT_OVERRIDEAUTHORITY"/></a>
 </td>
 <td>
 N/A
@@ -2114,7 +2250,7 @@ Deprecated Zeebe job worker properties.
 <tbody>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.default-name" env="ZEEBE_CLIENT_WORKER_DEFAULTNAME"/><a href="#zeebeclientworkerdefault-name" id="zeebeclientworkerdefault-name" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.default-name" env="ZEEBE_CLIENT_WORKER_DEFAULTNAME"/><a href="#zeebeclientworkerdefaultname" id="zeebeclientworkerdefaultname" class="hash-link"/>
 </td>
 <td>
   <a href="#camundaclientworkerdefaultsname"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.name" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_NAME"/></a>
@@ -2125,7 +2261,7 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.default-type" env="ZEEBE_CLIENT_WORKER_DEFAULTTYPE"/><a href="#zeebeclientworkerdefault-type" id="zeebeclientworkerdefault-type" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.default-type" env="ZEEBE_CLIENT_WORKER_DEFAULTTYPE"/><a href="#zeebeclientworkerdefaulttype" id="zeebeclientworkerdefaulttype" class="hash-link"/>
 </td>
 <td>
   <a href="#camundaclientworkerdefaultstype"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.type" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_TYPE"/></a>
@@ -2136,10 +2272,10 @@ N/A
 </tr>
 <tr>
 <td>
-  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.max-jobs-active" env="ZEEBE_CLIENT_WORKER_MAXJOBSACTIVE"/><a href="#zeebeclientworkermax-jobs-active" id="zeebeclientworkermax-jobs-active" class="hash-link"/>
+  <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.max-jobs-active" env="ZEEBE_CLIENT_WORKER_MAXJOBSACTIVE"/><a href="#zeebeclientworkermaxjobsactive" id="zeebeclientworkermaxjobsactive" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientworkerdefaultsmax-jobs-active"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
+  <a href="#camundaclientworkerdefaultsmaxjobsactive"><Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.max-jobs-active" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE"/></a>
 </td>
 <td>
 N/A
@@ -2150,7 +2286,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.worker.threads" env="ZEEBE_CLIENT_WORKER_THREADS"/><a href="#zeebeclientworkerthreads" id="zeebeclientworkerthreads" class="hash-link"/>
 </td>
 <td>
-  <a href="#camundaclientexecution-threads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
+  <a href="#camundaclientexecutionthreads"><Property defaultValue="property" groupId="property-format" property="camunda.client.execution-threads" env="CAMUNDA_CLIENT_EXECUTIONTHREADS"/></a>
 </td>
 <td>
 N/A

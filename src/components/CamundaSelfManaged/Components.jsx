@@ -26,7 +26,7 @@ const Components = () => {
       title: "Orchestration cluster",
       icon: ClusterOrchestrationIcon,
       description:
-        "The core component that powers automation and process orchestration.",
+        "The core component (includes Zeebe, Tasklist, Operate, Identity).",
       link: "/self-managed/components/orchestration-cluster/overview",
     },
     {
@@ -62,7 +62,7 @@ const Components = () => {
       icon: IdentityIcon,
       description:
         "Manage Camunda users, groups, roles, permissions, and applications.",
-      link: "/self-managed/components/management-identity/what-is-identity",
+      link: "/self-managed/components/management-identity/overview",
     },
   ];
 

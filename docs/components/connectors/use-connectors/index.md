@@ -9,7 +9,7 @@ Any task can be transformed into a connector task. This guide details the basic 
 Find the available connectors in Camunda 8 SaaS and how to use them in detail in
 the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)
 documentation. Additionally, learn how you can visit
-the [Camunda Marketplace](/components/modeler/web-modeler/camunda-marketplace.md) to add connectors from your BPMN
+the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md) to add connectors from your BPMN
 diagram.
 
 :::info
@@ -18,7 +18,7 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 
 :::note
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling
-tools. [Model your first diagram](/components/modeler/web-modeler/model-your-first-diagram.md) to learn how to work with
+tools. [Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with
 Web Modeler.
 :::
 
@@ -113,7 +113,7 @@ This field facilitates the mapping of a **Connector** response into multiple pro
 providing further flexibility of the variable utilization within the ongoing process.
 Additionally, the extracted values can be transformed with [FEEL expressions](/components/concepts/expressions.md).
 
-To ensure process isolation, note that connectors do not have access to process instance variables.
+To ensure process isolation, note that connectors do not have access to process variables.
 
 :::note
 While using this field, a process variable with the name `response` is reserved.
@@ -286,64 +286,64 @@ The [example expressions](#bpmn-error-examples) below can serve as templates for
 
 ### Function bpmnError()
 
-Returns a context entry with an `errorType`, `code` and `message`.
+Returns a context entry with an `errorType`, `errorCode` and `errorMessage`.
 
 - parameters:
-  - `code`: string
-  - `message`: string
+  - `errorCode`: string
+  - `errorMessage`: string
 - result: context
 
 ```feel
 bpmnError("123", "error received")
-// { errorType: "bpmnError", code: "123", message: "error received" }
+// { errorType: "bpmnError", errorCode: "123", errorMessage: "error received" }
 ```
 
 ### Function bpmnError() with variables
 
-Returns a context entry with an `errorType`, `code`, `message`, and `variables`.
+Returns a context entry with an `errorType`, `errorCode`, `errorMessage`, and `variables`.
 
 - Parameters:
-  - `code`: string
-  - `message`: string
+  - `errorCode`: string
+  - `errorMessage`: string
   - `variables`: context
 - Result: context
 
 ```feel
 bpmnError("123", "error received", {myVar: myValue})
-// { errorType: "bpmnError", code: "123", message: "error received", variables: {myVar: myValue}}
+// { errorType: "bpmnError", errorCode: "123", errorMessage: "error received", variables: {myVar: myValue}}
 ```
 
 ### Function jobError()
 
-Returns a context entry with an `errorType`, `message`, `variables`, `retries`, and `timeout`.
+Returns a context entry with an `errorType`, `errorMessage`, `variables`, `retries`, and `retryBackoff`.
 
 - Parameters:
-  - `message`: string
+  - `errorMessage`: string
   - `variables`: context _(optional), default_ `{}`
   - `retries`: number _(optional), default_ `0`
-  - `timeout`: days-time-duration _(optional), default_ `PT0S`
+  - `retryBackoff`: days-time-duration _(optional), default_ `PT0S`
 - Result: context
 
 Optional parameters can be omitted if no parameter needs to be set after.
 
 ```feel
 jobError("job failed", {myVar: myValue}, 2, @"PT30S")
-// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT30S" }
+// { errorType: "jobError", errorMessage: "job failed", variables: {myVar: myValue}, retries: 2, retryBackoff: @"PT30S" }
 ```
 
 ```feel
 jobError("job failed", {myVar: myValue}, 2)
-// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 2, timeout: @"PT0S" }
+// { errorType: "jobError", errorMessage: "job failed", variables: {myVar: myValue}, retries: 2, retryBackoff: @"PT0S" }
 ```
 
 ```feel
 jobError("job failed", {myVar: myValue})
-// { errorType: "jobError", message: "job failed", variables: {myVar: myValue}, retries: 0, timeout: @"PT0S" }
+// { errorType: "jobError", errorMessage: "job failed", variables: {myVar: myValue}, retries: 0, retryBackoff: @"PT0S" }
 ```
 
 ```feel
 jobError("job failed")
-// { errorType: "jobError", message: "job failed", variables: {}, retries: 0, timeout: @"PT0S" }
+// { errorType: "jobError", errorMessage: "job failed", variables: {}, retries: 0, retryBackoff: @"PT0S" }
 ```
 
 ### BPMN error examples

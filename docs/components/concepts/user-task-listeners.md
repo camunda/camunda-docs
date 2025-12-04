@@ -85,17 +85,20 @@ Once triggered, the workflow engine creates a job that you can process using a j
 
 ## Define a user task listener
 
-You can configure user task listeners per BPMN user task element.
+You can configure user task listeners either:
+
+- Per BPMN user task element.
+- For all user tasks in the cluster. See [Global user task listeners](/components/concepts/global-user-task-listeners.md).
 
 ### User task listener properties
 
 Each user task listener has the following properties:
 
-| Property    | Description                                                                                                                                                                                                                                                                                                                              |
-| :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `eventType` | (Required) Specifies the user task event type that triggers the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`.                                                                                                                                                                       |
-| `type`      | (Required) The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. `type` can be specified as any static value (`myType`) or as a FEEL expression prefixed by `=` that evaluates to any FEEL string; for example, `= "order-" + priorityGroup`. |
-| `retries`   | (Optional) The number of retries for the user task listener job (defaults to 3 if omitted).                                                                                                                                                                                                                                              |
+| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `eventType` | (Required) Specifies the user task event type that triggers the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`.                                                                                                                                                                                                                                                                                                                                            |
+| `type`      | (Required) The name of the job type, used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. The `type` can be specified as any static value (`myType`), or as a FEEL expression prefixed with `=`, that evaluates to a FEEL string; for example, `= "order-" + priorityGroup`. This is a case-sensitive field, if supported by the underlying operating system. For example, `orderProcess` refers to a different worker than `OrderProcess`. |
+| `retries`   | (Optional) The number of retries for the user task listener job (defaults to 3 if omitted).                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 :::note
 If multiple user task listeners of the same `eventType` (such as multiple `assigning` listeners) are defined on the same user task, they are executed sequentially, one after the other, in the order they are defined in the BPMN model.
@@ -253,6 +256,17 @@ User task listeners have the following limitations:
 
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
+
+### Limitations for Tasklist v1
+
+User task listeners are designed for use with [Tasklist v2](components/tasklist/api-versions.md) and the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+
+While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use Tasklist v2 and the Orchestration Cluster API.
+
+- **Tasklist v1 does not list tasks with pending task listeners**: If a task's lifecycle transition is blocked by a pending task listener, Tasklist v1 does not display the task in the task queue. However, Tasklist v1 can still show the details of such a task.
+- **Tasklist v1 incorrectly lists creating tasks when filtering for the "all" status (open and completed)**: If a task's creation is blocked by a pending task listener, Tasklist v1 includes it in the task queue when filtering for the "all" status, even though the task has not yet been created.
+- **Tasklist v1 API cannot filter for tasks with pending task listeners**: The deprecated Tasklist API cannot filter for the following task states when searching tasks: `CREATING`, `ASSIGNING`, `UPDATING`, `COMPLETING`, `CANCELING`. Tasks in these states are included in responses when not filtering by state.
+- **Tasklist v1 API responses may not reflect corrections applied by task listeners**: Requests made to the deprecated Tasklist API can trigger a listener. Responses to such requests will appear as if the listener did not make any [corrections](#correcting-user-task-data) to the user task data, even when the listener did make corrections.
 
 ## Related resources
 

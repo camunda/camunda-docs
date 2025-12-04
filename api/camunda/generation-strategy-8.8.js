@@ -33,6 +33,10 @@ function preGenerateDocs(config) {
   for (const update of stripCamundaKeyConstraintsForDocs(updatedSpec)) {
     updatedSpec = updatedSpec.replace(update.from, update.to);
   }
+  // Remove all occurrences of additionalProperties: false (rendering issue in docs) but retain true
+  for (const update of removeAdditionalPropertiesFalse(updatedSpec)) {
+    updatedSpec = updatedSpec.replace(update.from, update.to);
+  }
 
   fs.writeFileSync(config.specPath, updatedSpec);
 
@@ -456,6 +460,50 @@ module.exports = {
   postGenerateDocs,
 };
 
+/**
+ * Some of our schema objects specify `additionalProperties: false` to enforce strict objects.
+ * The current documentation renderer omits referenced schemas / behaves poorly when this flag is present.
+ * We want to strip ONLY the explicit `false` occurrences but preserve any `true` (or object) usage.
+ */
+function removeAdditionalPropertiesFalse(originalSpec) {
+  let doc;
+  try {
+    doc = yaml.load(originalSpec);
+  } catch (e) {
+    console.error(
+      "❌ Failed to parse spec in removeAdditionalPropertiesFalse",
+      e
+    );
+    return [];
+  }
+
+  function walk(node, depth = 0) {
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node)) {
+      for (const item of node) walk(item, depth + 1);
+      return;
+    }
+    if (
+      Object.prototype.hasOwnProperty.call(node, "additionalProperties") &&
+      node.additionalProperties === false
+    ) {
+      delete node.additionalProperties;
+    }
+    for (const key of Object.keys(node)) {
+      // Avoid descending into large example strings etc., but safe to traverse generically here
+      walk(node[key], depth + 1);
+    }
+  }
+
+  walk(doc);
+  return [
+    {
+      from: /[\s\S]*/, // replace entire document
+      to: yaml.dump(doc, { lineWidth: -1 }),
+    },
+  ];
+}
+
 // ---- Helpers to replace placeholder tokens with MDX components in generated files ----
 function replaceConsistencyMarkersWithComponents(outputDir) {
   try {
@@ -498,13 +546,13 @@ function replaceConsistencyMarkersWithComponents(outputDir) {
       if (hasEC) {
         updated = updated.replaceAll(
           "[[CONSISTENCY:EVENTUAL]]",
-          "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+          "<MarkerEventuallyConsistentExtension />"
         );
       }
       if (hasSC) {
         updated = updated.replaceAll(
           "[[CONSISTENCY:STRONG]]",
-          "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+          "<MarkerStronglyConsistentExtension />"
         );
       }
       if (updated !== content) fs.writeFileSync(file, updated, "utf8");

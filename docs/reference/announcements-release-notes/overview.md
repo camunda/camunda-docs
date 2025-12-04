@@ -15,6 +15,13 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>**Scheduled End of maintenance**</td>
 </tr>
 <tr>
+<td>8.9</td>
+<td>14 April 2026</td>
+<td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
+<td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
+<td>13 October 2028</td>
+</tr>
+<tr>
 <td>8.8</td>
 <td>14 October 2025</td>
 <td>[8.8 release announcements](/reference/announcements-release-notes/880/880-announcements.md)</td>
@@ -34,13 +41,6 @@ Announcements and release notes for supported versions of the Camunda documentat
 <td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md)</td>
 <td>[8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
 <td>14 April 2026</td>
-</tr>
-<tr>
-<td>8.5</td>
-<td>9 April 2024</td>
-<td>[8.5 release announcements](/reference/announcements-release-notes/850/850-announcements.md)</td>
-<td>[8.5 release notes](/reference/announcements-release-notes/850/850-release-notes.md)</td>
-<td>14 October 2025</td>
 </tr>
 </table>
 

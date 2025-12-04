@@ -1,0 +1,358 @@
+---
+id: delete-resource
+title: "Delete resource"
+description: "<MarkerStronglyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
+sidebar_label: "Delete resource"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWltz27gV/isY9aHJ1JYU3+LooTOO7Ow6zdoeSd7t1vE0EAlJSEiABUDbWo3+e78DkBRpyUncl25mlBnHJHGAc//OAeBFy/GpbfVuWgNhdW4i0brdaelMGO6kVudxq9eKRSKcqMZ38MFGRmZEgOGP6qO6uelfXgzPh6Ozi/7vveFocHnx0+0tjZz6yZZxFoss0XMRM1Os1P6oRjNpWcQVGwtQZEZHwlpQTqSStPwOniNp8YRZ/8mlEalQrkmhDZtok9a+fVQVr9xKNWVuJgr2FXPLhIozLZVrs2EGJpO5JyvH2Vzn7J4rx5xmwQJMKk/yqaT5h5h/Yhk3PMWogTqwTfVKRl20FF5go9oM0EgyW8bdDM+FWrCzM7l4bNsR2H0Rc6YnTeEqmR7Z0K3oN5uzQbDRtmS8kp5s25ixZmhoYKOZSHmrt2i5eUbKWmdgdIxoJS4n3gxNrYZz60S6OxWKwgxeovWxdD1I1oVvY0Xizx2WuArDp9VosKx44GmWkBB7e4evXr95c/xq/+j46PXBGww+Fo8nyUbx/iUETHmmplLVTE4yvnjP7zhLNELKCiN5Iv+AqNyysObLDUycdF6eD5hEMi5vV982KrHcWfz/JHu+n76Vnw2vnRbEgxrt1xy3v39w9BXJn1qOTPh8TUjKhrTv8PA16Q72jw7/jGFVyv1MMxR+/Ibrvifj9veODg9e/xlNs1mL9cgn3LXBWNxaOVU1WznC26qG1W00aKB8ybP+dUmsKFOEdW91PCfUXFWACU8sSkCklUMo0xjPskRGvhR3PlsSbbGOt3r8WUQOHFWeJHxMTEMtAYaikDspLFFXRX0gJsIIhVLee+yIEyhWDHp9o5m2ApUl1MYcLsADd+xeJgnVG1Q75ysDXo2ItIm9afLEUdmdGJ0Gc1W8Ua9+ya2juX9nXSYnBPR3MhZxKJ+FSijLYipM3bj4dHSADykcl+Zpq/dqZeLLddWWy7rX6w3MIJgfFEQDaTOtbDDRXre7bpNRvfBKWxTeuI38ah08NaHUisXccZqltGN3CN+YIuYJD2MSvJf+bd3Tj710FSghi+MyYSECKC0C4RiM0azcDN712ZuDw9e3L2bOZbbX6dzf37fNJNoVsXTatLWZdvBKP0T3ss0gvBEs5XPfksWxTxKesFUsMevbJRlRF+KCrl4Y8l3Di1VgNgMxjK63C5WrcyPXuswTdj04ZzCpcmjVyqauwdrPmXAEH+j5WOeuN064+tJAqfr3VYisC/OYu83TlJuqE3vMeMXgLY9ZFWLojhx3eU3tJ0J7f2+NJ4XRz6PRFQtLsEjHYgVAhQAN3ojGWn6EN/4Q3o663SVxoHj5Dn0VEw8ZjMRDG9hUGqGVaiOK6GuqX6hexsuc3UCE93psR/okcvIOZcfeUrtKCREQxAL7ltQVQ9EClf6H0KB+ei0+tJGoKY/kbwrcudvrfIZ8HR7EozXr4FGk2mmwXACNg+7Bt3GCFJzoXG0zfpvx24z/wTP+cFOhh83It4ayRRgDR+koyg16OXY/k4koN7GlbEXjFzJmiwhbRNgiwo+MCPubewBsku5kaAE8GCiXzFmusI+VfndG+YUxSq8ZMh/bK61AARNbnVYgYQEhlIWu2omyyAiyHBvz6EuGTsPmxp8E4vlO0EFlwVyYv1KkpFnuRO280+/GxoLMIh5mHLswEe8wfqdlTN+8Ny1Wwq8JRMXits3OVQi1iGNn6jl4m5TWLFAvQA8hGocH2afB2fDyetA/+/fZP38+uR6Ozk4/tVk/kf5siBvh94ppKhTtkKCBlz/HJpLOZ52h3Sb2nStT8AlQlnGvuZ5gzyiM1HGb/a5zf/KZCG6KePS57WVrmCkV0YwraVNGVu2xEgtjHdl2xFO0abwttX/vkO20ImE7f9DJRMdhtgJCJ7vQMRIZBkrg311hfOcvYBEneNpt8N7i/Rbvt3j/Y+M9BlMBVKL7sExbH+B0gYO1KoTtLGrXPMuOPyeilREQHpXDjVBu4IvWIuT5Eum5ANa5ZW+RaeOWkAz0d9xIKhU+hmg44EEZ54kGFM2CFOvxQwN07VRa4NKAFawa3NpPCPgNA0SP2E/wzD2f+6MsYt9kc9w97m7kQKTfsfrJ1XlRjzyDOrKVLAiiNrIIxM9l4o9XrUDZlW4+pCWCCd+iPghzkpPDqkAreHtO9D72RPgSHt6V4ff+txGJP+ZWRt9agmh8JBGcD1bnvGdl6G0+hu36VJhov3R5prlRZ6hL8YFgCrbqtl8VtQWhTNOLC8d+KGnFmbooUirEXlkXptLN8nEb1a5TVMDqt0TlgumWa2kHaxMcUfXOla9hyLp7LITqXPI8ZlGQlpIOhU4oKzaI9iGMsF+DMuxVu/scEceJHndS9BudgoXt9E9+ub44Pdn9cN4/uxie7WLFtntw3iGUtClXNTnCqXDVID0Ow8WqYm+vuBtX3EXwO/HgOqgXUlGceL8tClC8qS68Leh7zdvvCheRqwHbblqLBVJHXJtkuaTPyBszx/fbFRSGWyNp6Xl1VfKkx14Ud4LxS/Yj3KFvNGnxkau5LwlJTm94xEqt5p8ULG9BPhM8Bn6RnQJFP1hjd0TrrFZYu1Oie8Iw4ySi5vYJ2kanSkBbFcSry+GIcLO40ErRtJCA/J7+vgH/e6m195KHY/9t0UKrMc35lGjDmvTvv14CEB4=
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.8/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete resource"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/resources/{resourceKey}/deletion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension /> [Learn about endpoint
+consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
+
+Deletes a deployed resource.
+This can be a process definition, decision requirements definition, or form definition
+deployed using the deploy resources endpoint. Specify the resource you want to delete in the `resourceKey` parameter.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "resourceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the resource to delete.\nThis can be the key of a process definition, the key of a decision requirements\ndefinition or the key of a form definition\n",
+      schema: {
+        type: "string",
+        oneOf: [
+          {
+            description:
+              "System-generated key for a deployed process definition.",
+            format: "ProcessDefinitionKey",
+            example: "2251799813686749",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "ProcessDefinitionKey",
+          },
+          {
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            description:
+              "System-generated key for a deployed decision requirements definition.",
+            format: "DecisionRequirementsKey",
+            example: "2251799813683346",
+            type: "string",
+            title: "DecisionRequirementsKey",
+          },
+          {
+            description: "System-generated key for a deployed form.",
+            format: "FormKey",
+            example: "2251799813684365",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "FormKey",
+          },
+          {
+            description: "System-generated key for a decision definition.",
+            format: "DecisionDefinitionKey",
+            example: "2251799813326547",
+            type: "string",
+            allOf: [
+              {
+                description:
+                  "Zeebe Engine resource key (Java long serialized as string)",
+                type: "string",
+                title: "LongKey",
+              },
+            ],
+            title: "DecisionDefinitionKey",
+          },
+        ],
+        description: "The system-assigned key for this resource.",
+        format: "ResourceKey",
+        title: "ResourceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          nullable: true,
+          properties: {
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          title: "DeleteResourceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": { description: "The resource is deleted." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The resource is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

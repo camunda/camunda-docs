@@ -27,22 +27,22 @@ The following GCP regions are currently supported in Camunda 8 SaaS.
 | :----------------------------------------------- | :------------------------------------------------ |
 | Belgium, Europe (europe-west1)                   | Germany, Europe (europe-west3)                    |
 | Iowa, North America (us-central1)                | Salt Lake City, North America (us-west1)          |
-| London, Europe (europe-west2)                    | _Not available_                                   |
+| London, Europe (europe-west2)                    | Germany, Europe (europe-west3)                    |
 | Singapore, Asia (asia-southeast1)                | Changhua County, Taiwan (asia-east1)              |
 | South Carolina, North America (us-east1)         | Iowa, North America (us-central1)                 |
 | Sydney, Australia (australia-southeast1)         | Melbourne, Australia (australia-southeast2)       |
 | Toronto, North America (northamerica-northeast2) | Montréal, North America (northamerica-northeast1) |
 
-To learn more about each region code/location, refer to [Google cloud locations](https://cloud.google.com/about/locations).
+To learn more about each region code/location, refer to [Google Cloud locations](https://cloud.google.com/about/locations).
 
 ## Amazon Web Services (AWS) regions
 
 The following AWS regions are currently supported in Camunda 8 SaaS.
 
-| AWS region                          | Secondary backups region |
-| :---------------------------------- | :----------------------- |
-| Frankfurt, Europe (eu-central-1)    | _Not available_          |
-| North America, Virginia (us-east-1) | _Not available_          |
-| Singapore, Asia (ap-southeast-1)    | _Not available_          |
+| AWS region                          | Secondary backups region            |
+| :---------------------------------- | :---------------------------------- |
+| Frankfurt, Europe (eu-central-1)    | Ireland, Europe (eu-west-1)         |
+| North America, Virginia (us-east-1) | Oregon, North America (us-west-2)   |
+| Singapore, Asia (ap-southeast-1)    | Jakarta, Indonesia (ap-southeast-3) |
 
 To learn more about each region code/location, refer to [AWS regions and availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
