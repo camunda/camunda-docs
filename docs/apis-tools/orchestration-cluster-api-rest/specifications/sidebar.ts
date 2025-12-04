@@ -660,6 +660,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instances-batch-operation",
+          label: "Create a batch operation to delete process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-incidents-batch-operation",
           label:
             "Create a batch operation to resolve incidents of process instances",
@@ -699,6 +705,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/cancel-process-instance",
           label: "Cancel process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-process-instance",
+          label: "Delete process instance",
           className: "api-method post",
         },
         {
