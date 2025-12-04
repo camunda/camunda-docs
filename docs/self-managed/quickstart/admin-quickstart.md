@@ -2,16 +2,28 @@
 id: admin-quickstart
 title: "Administrator quickstart"
 sidebar_label: "For Administrators"
-description: "Get started with Camunda 8 Self-Managed as an administrator using kind and Kubernetes."
+description: "Get started with Camunda 8 Self-Managed as an administrator."
 ---
 
-This quickstart guide helps administrators set up a local Kubernetes cluster and deploy Camunda 8 Self-Managed for testing and development purposes.
+import DocCard from "@theme/DocCard";
 
-Follow the [kind installation guide](/self-managed/deployment/helm/cloud-providers/kind.md) to:
+This quickstart guide helps administrators deploy Camunda 8 Self-Managed. Select the deployment approach that best fits your needs:
 
-- Install kind (Kubernetes in Docker)
-- Set up a local Kubernetes cluster
-- Deploy Camunda 8 Self-Managed using Helm charts
-- Access and test your local Camunda 8 installation
-
-For production deployments, refer to our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md).
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<DocCard
+  item={{
+    type: "link",
+    href: "../../deployment/helm/cloud-providers/kind/",
+    label: "Local development (kind)",
+    description: "Deploy on a local Kubernetes cluster using kind for testing, development, and learning purposes. Ideal for testing and evaluation.",
+  }}
+/>
+<DocCard
+  item={{
+    type: "link",
+    href: "../../deployment/helm/cloud-providers/",
+    label: "Production deployment",
+    description: "Deploy on cloud providers like Amazon, Azure, Google Cloud Platform, Red Hat and others for production workloads.",
+  }}
+/>
+</div>

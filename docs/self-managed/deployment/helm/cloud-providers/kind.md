@@ -1,836 +1,451 @@
 ---
 id: kind
-title: "Install kind and set up a local Kubernetes cluster"
+title: "Deploy Camunda 8 on kind (local development)"
 sidebar_label: "kind (local)"
-description: "Learn how to install kind and deploy Camunda 8 Self-Managed to a local Kubernetes cluster for development purposes."
+description: "Deploy Camunda 8 Self-Managed on a local Kubernetes cluster using kind for development and testing purposes."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import { HelmChartValuesFileLocalLink } from "@site/src/components/CamundaDistributions";
 
-This tutorial guides platform engineers and DevOps practitioners through setting up a local Kubernetes development environment using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/) and deploying **Camunda 8 Self-Managed** to it.
+This guide provides a step-by-step tutorial for deploying Camunda 8 Self-Managed on a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). This setup is ideal for development, testing, and learning purposes.
 
-:::tip
-If you already have a Kubernetes cluster and want to go straight to installing Camunda 8, see the [quick install guide](/self-managed/deployment/helm/install/quick-install.md).
+:::info Other local Kubernetes tools
+While this guide uses kind, the same concepts apply to other local Kubernetes tools like [K3s](https://k3s.io/), [minikube](https://minikube.sigs.k8s.io/), or [MicroK8s](https://microk8s.io/). The goal is to reduce the resources required by Camunda components so they can run on a personal machine.
 :::
 
-By the end of this tutorial, you will have:
+:::warning Local development only
+This setup is intended for **local development only** and should not be used in production environments. For production deployments, refer to our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md).
+:::
 
-- kind installed on your local machine
-- A running local Kubernetes cluster
-- Camunda 8 Self-Managed deployed and accessible
-- The knowledge to verify and interact with your cluster
+## Overview
+
+Two deployment modes are available:
+
+| Mode          | Access                        | Requirements                    | Use case                              |
+| ------------- | ----------------------------- | ------------------------------- | ------------------------------------- |
+| **Domain**    | `https://camunda.example.com` | mkcert, hosts file modification | Full TLS setup, realistic environment |
+| **No-domain** | `localhost` via port-forward  | None                            | Quick setup, minimal configuration    |
+
+### How domain mode works
+
+In domain mode, we simulate a production-like environment locally by:
+
+1. **Local DNS resolution**: Your machine's `/etc/hosts` file is configured to resolve `camunda.example.com` to `127.0.0.1`. Inside the cluster, CoreDNS is configured to rewrite DNS queries for this domain to the Ingress controller, allowing pods to communicate with each other using the same domain name.
+
+2. **TLS certificates with mkcert**: [mkcert](https://github.com/FiloSottile/mkcert) generates locally-trusted certificates by installing a local Certificate Authority (CA) in your system's trust store. This allows your browser to trust the self-signed certificates without security warnings. The CA certificate is also mounted into pods that need to make HTTPS calls to other Camunda components.
+
+:::note Firefox compatibility
+mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-stores) to work properly with Firefox. Without it, Firefox will display certificate errors. We recommend using **Chrome** or **Chromium-based browsers** for the best experience with domain mode.
+:::
 
 ## Prerequisites
 
 Before you begin, ensure you have:
 
-- Docker installed and running on your machine ([Docker Desktop](https://www.docker.com/products/docker-desktop) or Docker Engine)
-- At least 4 GB of RAM available for the cluster
-- Terminal access with administrator/sudo privileges (for some installation steps)
+- **Docker** installed and running ([Docker Desktop](https://www.docker.com/products/docker-desktop) or Docker Engine)
+- **4+ CPU cores** and **8GB+ RAM** available for Docker
+- Terminal access with administrator/sudo privileges (for hosts file modification in domain mode)
 
-## Step 1: Install required tools
+### Required tools
 
-You'll need three command-line tools to complete this tutorial. Follow the installation instructions for your operating system.
+The following tools are required. Install them using [asdf](https://asdf-vm.com/) with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/.tool-versions), or manually via the official installation guides:
 
-### Install kind
+- [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
+- [Helm](https://helm.sh/docs/intro/install/)
+- [mkcert](https://github.com/FiloSottile/mkcert#installation) (domain mode only)
 
-kind (Kubernetes in Docker) allows you to run Kubernetes clusters in Docker containers, making it perfect for local development and testing.
+## Outcome
 
-<Tabs groupId="os" defaultValue="macos" values={[
-{label: 'macOS', value: 'macos'},
-{label: 'Linux', value: 'linux'},
-{label: 'Windows', value: 'windows'}
-]}>
+By the end of this tutorial, you will have:
 
-<TabItem value="macos">
+- A local Kubernetes cluster running with kind (1 control-plane + 2 worker nodes)
+- (Domain mode) Ingress NGINX controller deployed for traffic routing
+- (Domain mode) TLS certificates configured with mkcert
+- Camunda 8 Self-Managed fully deployed and accessible
 
-Using Homebrew:
+## Obtain the reference architecture
 
-```shell
-brew install kind
+Download the reference architecture files that will be used throughout this guide:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/get-your-copy.sh
 ```
 
-Or download the binary directly:
+Navigate to the reference architecture directory:
 
-```shell
-# For Intel Macs
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-darwin-amd64
-# For M1/M2 Macs
-[ $(uname -m) = arm64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-darwin-arm64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
+```bash
+cd local/kubernetes/kind-single-region
 ```
 
-</TabItem>
+All subsequent commands should be run from this directory.
 
-<TabItem value="linux">
+:::info Explore the repository
+Before proceeding, take some time to explore the repository structure and understand the configuration files, scripts, and Helm values. This will help you understand what each step does and how to customize the deployment for your needs.
+:::
 
-```shell
-# For AMD64 / x86_64
-[ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
-# For ARM64
-[ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-arm64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
+:::tip Makefile utilities
+The reference architecture includes a `Makefile` with useful commands to automate the deployment process. Run `make help` to see all available targets, or consult the [Makefile](https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/Makefile) directly.
+:::
+
+## Create the Kubernetes cluster
+
+Create a kind cluster with the provided configuration. This configuration sets up a cluster with one control-plane node and two worker nodes, with port mappings for Ingress.
+
+The cluster is configured with port mappings for HTTP (80) and HTTPS (443) traffic:
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/configs/kind-cluster-config.yaml
 ```
 
-</TabItem>
+Run the cluster creation script:
 
-<TabItem value="windows">
-
-Using PowerShell:
-
-```powershell
-curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.20.0/kind-windows-amd64
-Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/cluster-create.sh
 ```
 
-Or using [Chocolatey](https://chocolatey.org/packages/kind):
+This script:
 
-```powershell
-choco install kind
-```
+1. Creates a kind cluster named `camunda-platform-local`
+2. Waits for all nodes to be ready
+3. Creates the `camunda` namespace
 
-</TabItem>
+Verify the cluster is running:
 
-</Tabs>
-
-Verify the installation:
-
-```shell
-kind version
-```
-
-You should see output similar to: `kind v0.20.0 go1.20.4 linux/amd64`
-
-### Install kubectl
-
-kubectl is the Kubernetes command-line tool that lets you interact with your cluster.
-
-<Tabs groupId="os" defaultValue="macos" values={[
-{label: 'macOS', value: 'macos'},
-{label: 'Linux', value: 'linux'},
-{label: 'Windows', value: 'windows'}
-]}>
-
-<TabItem value="macos">
-
-Using Homebrew:
-
-```shell
-brew install kubectl
-```
-
-Or download the binary:
-
-```shell
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-```
-
-</TabItem>
-
-<TabItem value="linux">
-
-```shell
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
-```
-
-</TabItem>
-
-<TabItem value="windows">
-
-Using PowerShell:
-
-```powershell
-curl.exe -LO "https://dl.k8s.io/release/v1.28.0/bin/windows/amd64/kubectl.exe"
-```
-
-Or using [Chocolatey](https://chocolatey.org/):
-
-```powershell
-choco install kubernetes-cli
-```
-
-</TabItem>
-
-</Tabs>
-
-Verify the installation:
-
-```shell
-kubectl version --client
-```
-
-### Install Helm
-
-Helm is a package manager for Kubernetes that simplifies deploying applications.
-
-<Tabs groupId="os" defaultValue="macos" values={[
-{label: 'macOS', value: 'macos'},
-{label: 'Linux', value: 'linux'},
-{label: 'Windows', value: 'windows'}
-]}>
-
-<TabItem value="macos">
-
-Using Homebrew:
-
-```shell
-brew install helm
-```
-
-</TabItem>
-
-<TabItem value="linux">
-
-```shell
-curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-```
-
-</TabItem>
-
-<TabItem value="windows">
-
-Using [Chocolatey](https://chocolatey.org/):
-
-```powershell
-choco install kubernetes-helm
-```
-
-</TabItem>
-
-</Tabs>
-
-Verify the installation:
-
-```shell
-helm version
-```
-
-## Step 2: Create your local Kubernetes cluster
-
-Now that you have all the required tools installed, you'll create a local Kubernetes cluster using kind.
-
-### Choose your cluster configuration
-
-Depending on how you plan to access Camunda 8, you can create either a basic cluster (recommended for first-time users) or a cluster with Ingress support (for more advanced networking).
-
-<Tabs groupId="cluster-type" defaultValue="basic" queryString values={[
-{label: 'Basic cluster (recommended)', value: 'basic'},
-{label: 'Cluster with Ingress support', value: 'ingress'}
-]}>
-
-<TabItem value="basic">
-
-For most users getting started with Camunda 8, a basic cluster is sufficient. You'll access services using port-forwarding.
-
-Create the cluster with this command:
-
-```shell
-kind create cluster --name camunda-platform-local
-```
-
-This creates a single-node Kubernetes cluster running in a Docker container. The process takes about 1-2 minutes.
-
-</TabItem>
-
-<TabItem value="ingress">
-
-If you want to access Camunda 8 services through proper domain names (like `camunda.local`), create a cluster with Ingress support.
-
-First, create a configuration file named `kind-config.yaml`:
-
-```yaml
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-nodes:
-  - role: control-plane
-    kubeadmConfigPatches:
-      - |
-        kind: InitConfiguration
-        nodeRegistration:
-          kubeletExtraArgs:
-            node-labels: "ingress-ready=true"
-    extraPortMappings:
-      - containerPort: 80
-        hostPort: 80
-      - containerPort: 443
-        hostPort: 443
-      - containerPort: 26500
-        hostPort: 26500
-      - containerPort: 18080
-        hostPort: 18080
-```
-
-Then create the cluster using this configuration:
-
-```shell
-kind create cluster --name camunda-platform-local --config kind-config.yaml
-```
-
-This configuration exposes additional ports that will be used by the Ingress controller and Camunda services.
-
-</TabItem>
-
-</Tabs>
-
-### Verify your cluster is running
-
-After creating the cluster, verify that it's working correctly:
-
-1. Check the cluster information:
-
-```shell
-kubectl cluster-info --context kind-camunda-platform-local
-```
-
-You should see output showing the Kubernetes control plane is running, similar to:
-
-```
-Kubernetes control plane is running at https://127.0.0.1:xxxxx
-CoreDNS is running at https://127.0.0.1:xxxxx/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-```
-
-2. List all nodes in your cluster:
-
-```shell
+```bash
 kubectl get nodes
 ```
 
-You should see one node with the `Ready` status:
+You should see three nodes in `Ready` state.
 
-```
-NAME                                    STATUS   ROLES           AGE   VERSION
-camunda-platform-local-control-plane   Ready    control-plane   2m    v1.27.3
-```
+Switch to the new cluster context:
 
-3. Check that system pods are running:
-
-```shell
-kubectl get pods -n kube-system
+```bash
+kubectl cluster-info --context kind-camunda-platform-local
 ```
 
-You should see several pods in the `Running` state, including `coredns`, `etcd`, `kube-apiserver`, and others.
+## Domain mode deployment {#domain-mode-deployment}
 
-4. View all namespaces:
+:::tip Quick setup without TLS
+If you prefer a simpler setup without domain configuration, skip to [No-domain mode deployment](#no-domain-mode-deployment).
+:::
 
-```shell
-kubectl get namespaces
+This section covers the full domain mode setup with TLS certificates and Ingress.
+
+### Deploy the Ingress controller
+
+Deploy the Ingress NGINX controller to handle incoming traffic:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/ingress-nginx-deploy.sh
 ```
 
-You should see the default Kubernetes namespaces:
+This script:
 
-```
-NAME              STATUS   AGE
-default           Active   2m
-kube-node-lease   Active   2m
-kube-public       Active   2m
-kube-system       Active   2m
-```
+1. Installs Ingress NGINX via Helm
+2. Configures it to run on the control-plane node with `hostNetwork: true`
+3. Waits for the controller to be ready
 
-Congratulations! Your local Kubernetes cluster is now ready.
+Verify the Ingress controller is running:
 
-## Step 3: (Optional) Set up Ingress controller
-
-This step is optional and only required if you created your cluster with Ingress support in Step 2. If you created a basic cluster, skip to [Step 4](#step-4-deploy-camunda-8).
-
-### Install the Ingress NGINX controller
-
-The Ingress controller manages external access to services in your cluster.
-
-1. Install the Ingress NGINX controller:
-
-```shell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-```
-
-2. Wait for the Ingress controller to be ready (this may take 2-3 minutes):
-
-```shell
-kubectl wait --namespace ingress-nginx \
-  --for=condition=ready pod \
-  --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
-```
-
-3. Verify the Ingress controller is running:
-
-```shell
+```bash
 kubectl get pods -n ingress-nginx
 ```
 
-You should see the `ingress-nginx-controller` pod in `Running` state.
+### Configure DNS resolution
 
-4. Check the Ingress controller service:
+For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS to rewrite DNS queries:
 
-```shell
-kubectl get services -n ingress-nginx
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/coredns-config.sh
 ```
 
-### Configure local DNS resolution
+This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Ingress NGINX controller service (`ingress-nginx-controller.ingress-nginx.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
 
-To access Camunda services using friendly domain names, add local hostname mappings:
+<details>
+<summary>CoreDNS configuration</summary>
 
-<Tabs groupId="os" defaultValue="macos" values={[
-{label: 'macOS/Linux', value: 'macos'},
-{label: 'Windows', value: 'windows'}
-]}>
-
-<TabItem value="macos">
-
-Edit the `/etc/hosts` file with administrator privileges:
-
-```shell
-sudo nano /etc/hosts
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/configs/coredns-configmap.yaml
 ```
 
-Add these lines at the end:
+</details>
 
-```
-127.0.0.1 camunda.local
-127.0.0.1 zeebe.camunda.local
-```
+### Configure local hosts file
 
-Save the file (Ctrl+O, Enter, Ctrl+X in nano).
+Add entries to your `/etc/hosts` file to resolve `camunda.example.com` locally:
 
-</TabItem>
-
-<TabItem value="windows">
-
-Open Notepad as Administrator and open the file `C:\Windows\System32\drivers\etc\hosts`.
-
-Add these lines at the end:
-
-```
-127.0.0.1 camunda.local
-127.0.0.1 zeebe.camunda.local
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/hosts-add.sh
 ```
 
-Save the file.
+This adds the following entry:
 
-</TabItem>
-
-</Tabs>
-
-Verify DNS resolution:
-
-```shell
-ping -c 1 camunda.local
 ```
-
-## Step 4: Deploy Camunda 8
-
-Now you'll deploy Camunda 8 to your Kubernetes cluster using Helm.
-
-### Add the Camunda Helm repository
-
-1. Add the Camunda 8 Helm repository:
-
-```shell
-helm repo add camunda https://helm.camunda.io
-```
-
-2. Update your Helm repositories to fetch the latest charts:
-
-```shell
-helm repo update
-```
-
-3. Verify the Camunda repository was added:
-
-```shell
-helm search repo camunda
-```
-
-You should see the available Camunda charts listed.
-
-### Download and configure values
-
-1. Download the Camunda 8 <HelmChartValuesFileLocalLink/> optimized for local development.
-
-2. If you set up Ingress in Step 3, add the following Ingress configuration to your `values-local.yaml` file:
-
-```yaml
-global:
-  ingress:
-    enabled: true
-    className: nginx
-    host: "camunda.local"
-
-operate:
-  contextPath: "/operate"
-
-tasklist:
-  contextPath: "/tasklist"
-
-zeebeGateway:
-  ingress:
-    enabled: true
-    className: nginx
-    host: "zeebe.camunda.local"
-```
-
-### Install Camunda 8
-
-Install Camunda 8 using the Helm chart:
-
-```shell
-helm install camunda-platform camunda/camunda-platform \
-    -f values-local.yaml
+127.0.0.1 camunda.example.com
 ```
 
 :::note
-The installation will download Docker images for all Camunda 8 components. Depending on your internet connection, this may take 5-10 minutes.
+This step requires `sudo` privileges. You will be prompted for your password.
 :::
 
-### Verify the deployment
+### Generate TLS certificates
+
+Using certificates from real certificate authorities (CAs) for local development can be dangerous or impossible (for hosts like `localhost` or `127.0.0.1`), and self-signed certificates cause trust errors. [mkcert](https://github.com/FiloSottile/mkcert) solves this by automatically creating and installing a local CA in the system root store, and generating locally-trusted certificates.
+
+Generate locally-trusted TLS certificates using mkcert:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/certs-generate.sh
+```
+
+This script:
+
+1. Installs the mkcert CA in your system trust store (first run only)
+2. Generates certificates for `camunda.example.com` and `*.camunda.example.com`
+3. Stores certificates in the `.certs/` directory
+
+### Create Kubernetes secrets for TLS
+
+Create the TLS secret in Kubernetes. This secret will be used by the Ingress controller to serve HTTPS traffic for `camunda.example.com`:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/certs-create-secret.sh
+```
+
+Create a ConfigMap with the CA certificate for pods that need to trust it:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/certs-create-ca-configmap.sh
+```
+
+### Deploy Camunda 8
+
+Deploy Camunda 8 with the domain mode Helm values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/camunda-deploy-domain.sh
+```
+
+This uses the following Helm values:
+
+<details>
+<summary>Domain mode Helm values</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/helm-values/values-domain.yml
+```
+
+</details>
+
+<details>
+<summary>mkcert CA trust configuration</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/helm-values/values-mkcert.yml
+```
+
+</details>
+
+---
+
+## No-domain mode deployment {#no-domain-mode-deployment}
+
+This section covers the simplified setup using port-forwarding without TLS.
+
+### Deploy Camunda 8
+
+Deploy Camunda 8 with the no-domain mode Helm values:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/camunda-deploy-no-domain.sh
+```
+
+This uses the following Helm values:
+
+<details>
+<summary>No-domain mode Helm values</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/helm-values/values-no-domain.yml
+```
+
+</details>
+
+:::info Other installation profiles
+This guide deploys the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md) which covers different installation profiles (core only, with Connectors, with Web Modeler, etc.).
+:::
+
+---
+
+## Verify deployment
 
 Monitor the deployment progress:
 
-1. Watch pods being created and starting:
-
-```shell
-kubectl get pods -w
+```bash
+kubectl get pods -n camunda -w
 ```
 
-Press Ctrl+C to stop watching once all pods are running.
+Wait until all pods show `Running` status. This may take 5-10 minutes depending on your internet connection and system resources.
 
-2. Check the status of all pods:
+You can also use the deployment readiness check script:
 
-```shell
-kubectl get pods
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-Wait until all pods show `Running` status and are ready (e.g., `1/1` or `2/2` in the READY column):
+Verify the Helm release:
 
-```
-NAME                                                   READY   STATUS    RESTARTS   AGE
-camunda-platform-operate-xxx                          1/1     Running   0          5m
-camunda-platform-tasklist-xxx                         1/1     Running   0          5m
-camunda-platform-zeebe-0                              1/1     Running   0          5m
-camunda-platform-zeebe-gateway-xxx                    1/1     Running   0          5m
-...
+```bash
+helm list -n camunda
 ```
 
-3. If a pod is stuck in `Pending` state, check why:
+## Accessing Camunda 8
 
-```shell
-kubectl describe pod <POD_NAME>
-```
-
-Look for events at the bottom of the output that explain the issue (usually insufficient resources).
-
-4. Check all services that were created:
-
-```shell
-kubectl get services
-```
-
-5. Verify the Helm release:
-
-```shell
-helm list
-```
-
-You should see `camunda-platform` with a status of `deployed`.
-
-## Step 5: Access Camunda 8 components
-
-By default, Camunda services in Kubernetes are not accessible from outside the cluster. Depending on whether you set up Ingress, you'll access them differently.
-
-:::note
-This local setup uses simplified authentication with username and password `demo`/`demo` for all components.
-:::
-
-<Tabs groupId="cluster-type" defaultValue="basic" queryString values={[
-{label: 'Basic cluster (port-forwarding)', value: 'basic'},
-{label: 'Cluster with Ingress', value: 'ingress'}
+<Tabs groupId="mode" defaultValue="domain" queryString values={[
+{label: 'Domain mode', value: 'domain'},
+{label: 'No-domain mode', value: 'no-domain'}
 ]}>
 
-<TabItem value="basic">
+<TabItem value="domain">
 
-### Using port-forwarding
-
-Port-forwarding tunnels traffic from your local machine to services running in the cluster. This is perfect for development and testing.
-
-#### Access the Zeebe Gateway
-
-The Zeebe Gateway handles workflow engine interactions. Forward port 26500:
-
-```shell
-kubectl port-forward svc/camunda-platform-zeebe-gateway 26500:26500
-```
-
-Keep this terminal open. The gateway is now accessible at `localhost:26500`.
-
-You can test the connection:
-
-```shell
-# In a new terminal, check if the port is listening
-curl -v telnet://localhost:26500
-```
-
-#### Access web applications
-
-Get port-forward commands for all components:
-
-```shell
-helm status camunda-platform
-```
-
-This displays commands to access each component. Common examples:
-
-**Operate** (monitor workflow instances):
-
-```shell
-kubectl port-forward svc/camunda-platform-operate 8081:80
-```
-
-Access at: http://localhost:8081
-
-**Tasklist** (user task management):
-
-```shell
-kubectl port-forward svc/camunda-platform-tasklist 8082:80
-```
-
-Access at: http://localhost:8082
-
-**Optimize** (analytics and reports):
-
-```shell
-kubectl port-forward svc/camunda-platform-optimize 8083:80
-```
-
-Access at: http://localhost:8083
-
-:::tip
-Open a separate terminal for each port-forward command, as they need to stay running. Alternatively, run them in the background or use a terminal multiplexer like `tmux`.
-:::
-
-#### Verify connectivity
-
-1. List all services and their ports:
-
-```shell
-kubectl get services
-```
-
-2. Check which ports are currently forwarded on your machine:
-
-```shell
-lsof -i -P | grep kubectl
-```
+| Component      | URL                                  |
+| -------------- | ------------------------------------ |
+| Operate        | https://camunda.example.com/operate  |
+| Tasklist       | https://camunda.example.com/tasklist |
+| Identity       | https://camunda.example.com/identity |
+| Optimize       | https://camunda.example.com/optimize |
+| Zeebe REST API | https://camunda.example.com/         |
+| Keycloak       | https://camunda.example.com/auth     |
 
 </TabItem>
 
-<TabItem value="ingress">
+<TabItem value="no-domain">
 
-### Using Ingress
+Start port-forwarding to access the services:
 
-With Ingress configured, you can access Camunda components using domain names.
-
-#### Verify Ingress resources
-
-Check that Ingress routes were created:
-
-```shell
-kubectl get ingress
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/port-forward.sh
 ```
 
-You should see ingress resources for various Camunda components.
+:::tip Localhost development with kubefwd
+For a richer localhost experience (and to avoid managing many individual port-forward commands), you can use [kubefwd](https://github.com/txn2/kubefwd) to forward all Services in the target namespace and make them resolvable by their in-cluster DNS names on your workstation.
 
-#### Access the components
-
-The Camunda web applications are available at:
-
-- **Operate**: http://camunda.local/operate
-- **Tasklist**: http://camunda.local/tasklist
-- **Optimize**: http://camunda.local/optimize
-
-For the Zeebe Gateway (gRPC communication):
-
-- **Zeebe Gateway**: zeebe.camunda.local:26500
-
-#### Verify connectivity
-
-Test web application access:
+Example (requires `sudo` to bind privileged ports and modify `/etc/hosts`):
 
 ```shell
-curl -I http://camunda.local/operate
+sudo kubefwd services -n "camunda"
 ```
 
-You should receive an HTTP response (likely a redirect to a login page).
+After this runs, you can reach services directly, for example:
 
-For more details on Ingress configuration, see the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
+- Identity: `http://camunda-identity/managementidentity`
+- Keycloak: `http://camunda-keycloak`
+- Zeebe Gateway gRPC: `camunda-zeebe-gateway:26500`
+
+You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
+:::
+
+| Component            | URL                            |
+| -------------------- | ------------------------------ |
+| Zeebe Gateway (gRPC) | localhost:26500                |
+| Zeebe Gateway (HTTP) | http://localhost:8080/         |
+| Operate              | http://localhost:8080/operate  |
+| Tasklist             | http://localhost:8080/tasklist |
+| Identity             | http://localhost:8080/identity |
+| Optimize             | http://localhost:8083          |
+| Web Modeler          | http://localhost:8070          |
+| Console              | http://localhost:8087          |
+| Connectors           | http://localhost:8085          |
+| Keycloak             | http://localhost:18080         |
+
+:::tip Connecting to the workflow engine
+To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
+:::
+
+:::note
+Run `kubectl get services -n camunda` to get a full list of deployed Camunda components and their network properties.
+:::
 
 </TabItem>
 
 </Tabs>
 
-### Login to web applications
+### Default credentials
 
-Open your browser and navigate to Operate, Tasklist, or Optimize using the URLs above. Login with:
+- **Username**: `admin`
 
-- **Username**: `demo`
-- **Password**: `demo`
+Get the password:
 
-## Step 6: Explore your cluster
-
-Now that Camunda 8 is running, familiarize yourself with your Kubernetes environment using these commands.
-
-### View cluster resources
-
-List all resources in the default namespace:
-
-```shell
-kubectl get all
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/get-password.sh
 ```
 
-This shows pods, services, deployments, and other resources.
+## Cleanup
 
-### Inspect pods
+:::warning Destructive action
+This will destroy all data of Camunda 8 in the local development cluster.
+:::
 
-Get detailed information about a specific pod:
+```bash
+# Uninstall Camunda
+helm uninstall camunda -n camunda
 
-```shell
-kubectl describe pod <POD_NAME>
+# Delete cluster
+kind delete cluster --name camunda-platform-local
+
+# (domain mode) Remove hosts entries (requires sudo)
+sudo sed -i '' '/camunda.example.com/d' /etc/hosts
+
+# (domain mode) Clean certificates
+rm -rf .certs
 ```
-
-View logs from a pod:
-
-```shell
-kubectl logs <POD_NAME>
-```
-
-For pods with multiple containers, specify the container:
-
-```shell
-kubectl logs <POD_NAME> -c <CONTAINER_NAME>
-```
-
-Follow logs in real-time:
-
-```shell
-kubectl logs -f <POD_NAME>
-```
-
-### Check resource usage
-
-See CPU and memory usage (requires metrics-server, not installed by default in kind):
-
-```shell
-kubectl top nodes
-kubectl top pods
-```
-
-### View deployments and statefulsets
-
-```shell
-kubectl get deployments
-kubectl get statefulsets
-```
-
-### Explore namespaces
-
-Check all namespaces in your cluster:
-
-```shell
-kubectl get namespaces
-```
-
-View resources in a specific namespace:
-
-```shell
-kubectl get all -n ingress-nginx
-```
-
-### Check persistent volumes
-
-If using persistence:
-
-```shell
-kubectl get pv
-kubectl get pvc
-```
-
-## Next steps
-
-Congratulations! You now have a fully functional local Kubernetes cluster with Camunda 8 running. Here are some things you can do next:
-
-- **Deploy your first process**: Visit the [getting started guide](/guides/getting-started/) to learn how to model and deploy a BPMN process.
-- **Explore the APIs**: Check out the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) documentation.
-- **Configure Identity**: Set up proper authentication by configuring [Camunda Identity](#todo).
-- **Learn about production deployment**: Review the [production deployment guide](#todo) when you're ready to deploy to a real cluster.
 
 ## Troubleshooting
 
-### Pods won't start
+### Pods not starting
 
-If pods are stuck in `Pending` or `CrashLoopBackOff`:
+Check pod status and events:
 
-1. Check pod events:
-
-   ```shell
-   kubectl describe pod <POD_NAME>
-   ```
-
-2. Check logs:
-
-   ```shell
-   kubectl logs <POD_NAME>
-   ```
-
-3. Verify resources are available:
-   ```shell
-   docker stats
-   ```
-
-### Can't connect to services
-
-1. Verify services exist:
-
-   ```shell
-   kubectl get services
-   ```
-
-2. Check that pods are running:
-
-   ```shell
-   kubectl get pods
-   ```
-
-3. For port-forwarding, ensure the terminal running the port-forward command is still active.
-
-4. For Ingress, verify:
-   ```shell
-   kubectl get ingress
-   kubectl get pods -n ingress-nginx
-   ```
-
-### Delete and recreate the cluster
-
-If you need to start fresh:
-
-:::warning
-This is a destructive action and will delete all data in your local cluster.
-:::
-
-```shell
-kind delete cluster --name camunda-platform-local
+```bash
+kubectl get pods -n camunda
+kubectl describe pod <pod-name> -n camunda
+kubectl logs <pod-name> -n camunda
 ```
 
-Then follow the tutorial again from [Step 2](#step-2-create-your-local-kubernetes-cluster).
+### Certificate errors in browser (domain mode)
 
-## Additional resources
+Ensure the mkcert CA is installed:
 
-- [kind documentation](https://kind.sigs.k8s.io/)
-- [kubectl cheat sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
-- [Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md)
-- [Camunda 8 architecture](#todo)
+```bash
+mkcert -install
+```
+
+Regenerate certificates:
+
+```bash
+./procedure/certs-generate.sh
+./procedure/certs-create-secret.sh
+kubectl rollout restart deployment -n camunda
+```
+
+### Ingress not working
+
+Check Ingress controller status:
+
+```bash
+kubectl get pods -n ingress-nginx
+kubectl get ingress -n camunda
+```
+
+### Insufficient resources
+
+Ensure Docker has enough resources allocated (4+ CPU cores, 8GB+ RAM). Check Docker Desktop settings or `/etc/docker/daemon.json`.
+
+## Next steps
+
+- [Getting started guide](/guides/getting-started-orchestrate-human-tasks.md): Deploy your first process
+- [Camunda APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): Explore the REST APIs
+- [Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md): Learn more about Helm chart configuration
+- [Production deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md): Deploy to a production-ready cluster
