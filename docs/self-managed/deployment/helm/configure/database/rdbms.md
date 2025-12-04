@@ -66,6 +66,11 @@ Operate does not support RDBMS until **Camunda 8.9.0-alpha3**.
 
 ```yaml
 orchestration:
+  exporters:
+    camunda:
+      enabled: false
+    rdbms:
+      enabled: true
   data:
     secondaryStorage:
       type: rdbms
@@ -93,6 +98,11 @@ This example uses `/driver-lib`, which the Orchestration Cluster automatically a
 
 ```yaml
 orchestration:
+  exporters:
+    camunda:
+      enabled: false
+    rdbms:
+      enabled: true
   data:
     secondaryStorage:
       type: rdbms
@@ -144,6 +154,11 @@ To use this custom image:
 
 ```yaml
 orchestration:
+  exporters:
+    camunda:
+      enabled: false
+    rdbms:
+      enabled: true
   image:
     repository: internal-registry/orchestration
     tag: 8.8.0
@@ -165,6 +180,11 @@ Mounting an `emptyDir volume` does not persist across pod restarts. Use a Config
 
 ```yaml
 orchestration:
+  exporters:
+    camunda:
+      enabled: false
+    rdbms:
+      enabled: true
   data:
     secondaryStorage:
       type: rdbms
