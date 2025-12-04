@@ -45,7 +45,7 @@ The ZIP contains SQL scripts and Liquibase change sets for all supported databas
 ```
 
 :::note
-Drop scripts are not provided. Use the Liquibase main changelog for rollback or schema recreation if needed.
+Drop scripts are not provided.
 :::
 
 ## How to download
