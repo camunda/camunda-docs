@@ -136,6 +136,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
@@ -147,6 +148,16 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 - Postgresql is currently supported.
 - Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
 - Operate is not yet supported with RDBMS until alpha3.
+
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart is no longer enabled by default
+
+Previously, the Elasticsearch subchart would be enabled, and if you want OpenSearch instead, you would disable Elasticsearch and enable OpenSearch. Now with the inclusion of RDBMS instead, we are making it mandatory to specify which secondary storage you want to use, and present them as equally valid options.
+
+If you rely on Elasticsearch provided as a subchart, you will need to add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml` to continue using it.
 
 </div>
 </div>
