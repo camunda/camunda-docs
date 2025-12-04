@@ -55,7 +55,7 @@ The Camunda MCP (Model Context Protocol) client now supports OAuth, API key, and
 
 MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
 
-To learn more, see [MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md).
+<p class="link-arrow">[MCP Client](/components/early-access/alpha/mcp-client/mcp-client.md)</p>
 
 :::note breaking changes
 This feature introduces breaking changes in the element templates and the runtime configuration of the MCP Client. To learn more, see [announcements](890-announcements.md#agentic-orchestration).
@@ -69,21 +69,27 @@ This feature introduces breaking changes in the element templates and the runtim
 
 <!-- https://github.com/camunda/connectors/pull/5490 -->
 
-The [Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md) is improved with input field visibility and polling fixes, new sections for enhanced usability, and updated documentation.
+The Amazon Textract connector is improved with input field visibility and polling fixes, new sections for enhanced usability, and updated documentation.
+
+<p class="link-arrow">[Amazon Textract connector](/components/connectors/out-of-the-box-connectors/amazon-textract.md)</p>
 
 #### Azure Blob Storage connector supports OAuth 2.0
 
 <!-- https://github.com/camunda/camunda-docs/pull/7280 -->
 
-The [Azure Blob Storage connector](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md#oauth-20) now supports OAuth2.0 authentication with Microsoft Azure.
+The Azure Blob Storage connector now supports OAuth2.0 authentication with Microsoft Azure.
+
+<p class="link-arrow">[Azure Blob Storage connector OAuth 2.0](/components/connectors/out-of-the-box-connectors/azure-blob-storage.md#oauth-20)</p>
 
 #### Email connector supports SMTP no authentication mode
 
 <!-- https://github.com/camunda/connectors/issues/5473 -->
 
-The [Email connector](/components/connectors/out-of-the-box-connectors/email.md) now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
+The Email connector now supports `noAuth` authentication mode for SMTP. This feature is useful for customers running local mail servers without authentication requirements.
 
-#### Improved runtime performance with virtual threads executor (Self-Managed)
+<p class="link-arrow">[Email connector](/components/connectors/out-of-the-box-connectors/email.md)</p>
+
+#### Runtime performance improvements with virtual threads executor (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3050 -->
 
@@ -101,16 +107,20 @@ This allows the connector runtime to handle a larger number of concurrent jobs w
 
 <!-- https://github.com/camunda/product-hub/issues/3283 -->
 
-You can now add secrets in Console by directly uploading or pasting the contents of a .env file.
+You can now add/import secrets in Console by directly uploading or pasting the contents of a .env file.
 
 - Key–value pairs are automatically parsed, validated, and added as secrets.
 - This helps reduce configuration errors and copy-pasting when adding secrets.
+
+<p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
 
 #### Cluster description (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3284 -->
 
 You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
+
+<p class="link-arrow">[Create a cluster](/docs/components/console/manage-clusters/create-cluster.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 
@@ -119,19 +129,8 @@ You can now add a cluster description when creating a cluster or by editing the 
 Self-Managed environment usage metrics now support per-tenant reporting and align with Camunda’s updated licensing model based on the number of tenants.
 
 :::note
-This feature was already available for Camunda 8 SaaS in the 8.8 release.
+This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
 :::
-
-### Desktop Modeler connections
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/2970 -->
-
-You can now manage your Camunda connections directly within Desktop Modeler.
-
-- Add, edit, delete, and save multiple Camunda connections (environment profiles) within the Desktop Modeler.
-- Deploy directly to saved connections, select a target environment at deployment time, or add a new environment as required.
 
 ### Database and data storage
 
@@ -141,10 +140,12 @@ You can now manage your Camunda connections directly within Desktop Modeler.
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
 
-You can now use the [open-source OpenSearch](https://opensearch.org/) project for data storage in a Self-Managed deployment. This allows you to run a fully open source observability stack without using Elasticsearch or the Amazon OpenSearch Service.
+You can now use the [open-source OpenSearch](https://opensearch.org/) project for data storage in a Self-Managed deployment.
 
+- This allows you to run a fully open source observability stack without using Elasticsearch or the Amazon OpenSearch Service.
 - For configuration instructions, see the updated Helm chart values and compatibility matrix.
-- To learn more about using OpenSearch as a datastore, see [secondary storage](/self-managed/concepts/secondary-storage/index.md).
+
+<p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
 
 #### RDBMS version support policy
 
@@ -166,17 +167,30 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 <!-- See the documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection. -->
 
-### Web Modeler
+### Modeler
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-#### Embedded web server changed from Undertow to Tomcat (Self-Managed)
+#### Element template signal support
+
+<!-- https://github.com/camunda/camunda-modeler/issues/5381 -->
+
+Element templates now support reusable [BPMN signals](/components/modeler/bpmn/signal-events/signal-events.md).
+
+- The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
+- This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
+
+<p class="link-arrow">[Element template bpmn:Signal binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
+
+#### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
 <!-- https://github.com/camunda/product-hub/issues/3191 -->
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
-#### IP egress monitoring (SaaS)
+<p class="link-arrow">[Web Modeler embedded web server](/self-managed/components/components-upgrade/880-to-890.md#embedded-web-server)</p>
+
+#### Web Modeler: IP egress monitoring (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3131 -->
 
@@ -185,10 +199,14 @@ A new `/meta/ip-ranges` REST API endpoint allows you to monitor SaaS Web Modeler
 - For example, the endpoint is available at https://api.cloud.camunda.io/meta/ip-ranges.
 - Send a GET request to the endpoint to retrieve a list of egress IP addresses.
 - Only IP addresses for the related services are exposed (Web Modeler).
-- Camunda expects interested customers to periodically monitor this list via the API, and make any changes in their systems as required.
 
-:::note
-Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
+<p class="link-arrow">[Web Modeler REST API](/docs/apis-tools/)</p>
+
+:::note IP address changes
+
+- You should periodically monitor this list via the API, and make any changes in your systems as required.
+- Although expected changes are published via the API at least 24 hours in advance, in exceptional cases Camunda might have to update these addresses within 24 hours and without prior notice. See [static outbound IP addresses](/components/saas/ip-addresses.md#static-outbound-ip-addresses).
+
 :::
 
 ## 8.9.0-alpha1
