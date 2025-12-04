@@ -1,15 +1,24 @@
 ---
 id: element-templates
 title: Element templates
-description: An element template is a way to extend the Modeler with domain-specific diagram elements.
+description: An element template extends the Modeler with reusable, domain-specific configuration for BPMN elements.
 ---
 
 import propertiesNoTemplate from './assets/element-templates/properties-no-template.png'
 import propertiesWithTemplate from './assets/element-templates/properties-with-template.png'
 
-An **element template** extends the [Modeler](../modeler/about-modeler.md) with domain-specific diagram elements, such as service and user tasks. They allow you to customize how a BPMN element is displayed and how it can be configured by process developers.
+An **element template** defines a reusable, domain-specific configuration for BPMN elements in the [Modeler](../modeler/about-modeler.md).
 
-The example below shows how a generic service task can be transformed into a customized user interface that guides users through its configuration:
+Templates shape both **how an element is configured** and **how its properties appear in the UI**, helping modelers apply consistent technical settings without needing to understand engine-level details.
+
+Element templates are commonly used to:
+
+- Ensure consistent configuration of service and user tasks
+- Predefine input/output mappings, headers, authentication, or runtime types
+- Provide structured, validated UI fields in the properties panel
+- Encapsulate best practices into reusable building blocks
+
+The example below illustrates how a generic service task becomes easier and safer to configure once a template is applied:
 
 | Without an element template                                                                        | With an element template                                                                          |
 | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -17,13 +26,12 @@ The example below shows how a generic service task can be transformed into a cus
 | <img src={propertiesNoTemplate} alt="Properties panel without an element template" />              | <img src={propertiesWithTemplate} alt="Properties panel with an element template" />              |
 
 :::tip
-[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template.
+A **connector template** is a specialized element template used for configuring connectors. All connector templates are element templates, but not all element templates represent a connector.
 :::
 
 ## Next steps
 
-Read more about element templates and how to use them:
+Learn more about working with element templates:
 
-- [Element templates in Modeler](/components/modeler/element-templates/about-templates.md)
-- [Using element templates in Web Modeler](/components/modeler/web-modeler/element-templates/using-templates.md)
-- [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)
+- [Overview: Element templates in Modeler](/components/modeler/element-templates/about-templates.md)
+- [Using element templates in Desktop Modeler](/components/modeler/element-templates/getting-started/using-templates-in-desktop-modeler.md)
