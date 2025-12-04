@@ -1876,7 +1876,7 @@ module.exports = {
           Modeler: [
             {
               "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+                "self-managed/components/modeler/web-modeler/web-modeler-overview",
                 {
                   Configuration: [
                     "self-managed/components/modeler/web-modeler/configuration/configuration",
