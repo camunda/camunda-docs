@@ -100,7 +100,7 @@ Identity requires a database to store information about resource authorization a
 :::note
 There are no default values for the variables above. See
 [supported environments](/reference/supported-environments.md#camunda-platform-8-self-managed) for a list of
-supported databases.
+supported databases. You may also review the [RDBMS support policy](/self-managed/deployment/helm/configure/database/rdbms-support-policy.md).
 :::
 
 ### Running Identity on Amazon Aurora PostgreSQL

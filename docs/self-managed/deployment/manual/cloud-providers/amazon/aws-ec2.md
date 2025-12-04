@@ -89,7 +89,7 @@ With the reference architecture in place, you can proceed with the remaining ste
 
 ### Terraform prerequisites
 
-To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent state storage for your infrastructure.
+To manage Camunda 8 infrastructure on AWS using Terraform, you need to configure Terraform's backend to store the state file remotely in an S3 bucket. This provides secure, persistent primary storage for your infrastructure.
 
 :::note
 Advanced users may choose to configure a different backend. The setup described here is a recommended starting point for new users.
