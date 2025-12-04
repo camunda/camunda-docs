@@ -2,6 +2,7 @@ import IconAoImg from "../assets/icon-play.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
+import IconConnectorImg from "../connectors/img/icon-connectors.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -45,5 +46,27 @@ export const recommendationCards = [
     image: IconAoLlmImg,
     description:
       "Recommendations and best practices for working with models and prompts.",
+  },
+];
+
+export const a2aConnectorCards = [
+  {
+    link: "../a2a-client/a2a-client-connector/",
+    title: "A2A Client connector",
+    image: IconConnectorImg,
+    description:
+      "Retrieve a remote agent's Agent Card and send messages to it.",
+  },
+  {
+    link: "../a2a-client/a2a-client-polling-connector/",
+    title: "A2A Client Polling connector",
+    image: IconConnectorImg,
+    description: "Poll for responses from asynchronous A2A tasks.",
+  },
+  {
+    link: "../a2a-client/a2a-client-webhook-connector/",
+    title: "A2A Client Webhook connector",
+    image: IconConnectorImg,
+    description: "Receive callbacks from remote A2A agents via HTTP webhooks.",
   },
 ];
