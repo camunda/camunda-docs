@@ -17,9 +17,14 @@ Because basic authentication is enabled by default, components that depend on Ma
 - Optimize
   :::
 
-## Enable Orchestration Cluster and Connectors
+In this guide, you'll learn how to:
 
-The Orchestration Cluster and Connectors are enabled by default with basic authentication. No additional configuration is required—simply deploy the Helm chart and these components will be available.
+- Deploy the Orchestration Cluster and Connectors with basic authentication.
+- Add additional components, using a hybrid approach, combining basic authentication and OIDC.
+
+## Enable the Orchestration Cluster and Connectors
+
+The Orchestration Cluster and Connectors are enabled, by default, with basic authentication. No additional configuration is required—simply deploy the Helm chart, and these components will be available.
 
 ### Default users
 
@@ -30,8 +35,7 @@ Two users are created by default:
 | `demo`      | `demo`      | `admin`      | Initial administrative user                                                         |
 | `connector` | `connector` | `connectors` | Used by the Connectors component to authenticate with the Orchestration Cluster API |
 
-For details on configuring initial users and their roles, see  
-[Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration).
+For details on configuring initial users and their roles, see [Orchestration Cluster Identity initialization](/self-managed/components/orchestration-cluster/identity/overview.md#option-3-configuration).
 
 :::note Helm arrays
 In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.
@@ -39,34 +43,39 @@ In Helm, arrays must be overwritten in full. If you change these configuration s
 
 ### Connect to the cluster
 
-To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, see [Accessing components without Ingress](../ingress/accessing-components-without-ingress.md).
+To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, refer to [Accessing components without Ingress](../ingress/accessing-components-without-ingress.md).
 
-Log in with the default credentials: username `demo`, password `demo`.
+Log in with the default credentials:
+
+- **Username:** `demo`
+- **Password:** `demo`
 
 ## Enable additional components
 
-The following components do not support basic authentication and require Management Identity with an OIDC provider:
+The following components require Management Identity with an OIDC provider and, therefore, don't support basic authentication:
 
 - Console
 - Web Modeler
 - Optimize
 
-You can still enable these components alongside a basic auth Orchestration Cluster by using a hybrid authentication setup:
+However, you can still enable these components alongside a basic authentication Orchestration Cluster by using a hybrid authentication setup:
 
 - **Orchestration Cluster and Connectors** use basic authentication
 - **Console, Web Modeler, Optimize, and Management Identity** use OIDC
 
-This guide shows how to configure hybrid authentication with internal Keycloak. You can also apply this approach with other OIDC setups, such as [external Keycloak](./external-keycloak.md) or an [external OIDC provider](./external-oidc-provider.md)
+In this section, you'll learn how to configure hybrid authentication with internal Keycloak. You can also apply this approach with other OIDC setups, such as [external Keycloak](./external-keycloak.md) or an [external OIDC provider](./external-oidc-provider.md)
 
-When deploying process models from Web Modeler to a basic auth Orchestration Cluster, you will be prompted to enter credentials in the deployment dialog.
+When deploying process models from Web Modeler to a basic authentication Orchestration Cluster, you'll be prompted to enter credentials in the deployment dialog.
 
 ### Configuration steps
 
 Follow the [internal Keycloak guide](./internal-keycloak.md) with these modifications:
 
-1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using basic auth. See [Create a secret](./internal-keycloak.md#create-a-secret).
+1. When you [create a secret](./internal-keycloak.md#create-a-secret), omit the following keys. They aren't needed for basic authentication setups:
+   - `identity-connectors-client-token`
+   - `identity-orchestration-client-token`
 
-2. **Set basic auth for the Orchestration Cluster and Connectors**:
+2. Set `basic` as the authentication method for the Orchestration Cluster and Connectors:
 
 ```yaml
 orchestration:
@@ -80,11 +89,11 @@ connectors:
       method: basic
 ```
 
-3. **Skip the OIDC sections** for the [Orchestration Cluster](./internal-keycloak.md#configure-orchestration-cluster) and [Connectors](./internal-keycloak.md#configure-connectors) in the internal Keycloak guide.
+3. Skip the OIDC sections for the [Orchestration Cluster](./internal-keycloak.md#configure-orchestration-cluster) and [Connectors](./internal-keycloak.md#configure-connectors).
 
 ### Full configuration example
 
-The following example shows the complete configuration for hybrid authentication with internal Keycloak:
+This example shows a complete configuration of hybrid authentication with internal Keycloak:
 
 ```yaml
 global:
@@ -148,9 +157,9 @@ console:
 
 ### Connect to the cluster
 
-To access the additional components, see [Connect to the cluster](./internal-keycloak.md#connect-to-the-cluster) in the internal Keycloak guide.
+To access the additional components, refer to [Connect to the cluster](./internal-keycloak.md#connect-to-the-cluster) in the internal Keycloak guide.
 
 ## Next steps
 
-- To enable centralized OIDC authentication for all components, see [Internal Keycloak](./internal-keycloak.md).
-- To integrate with an external identity provider, see [External OIDC provider](./external-oidc-provider.md).
+- [Enable centralized OIDC authentication for all components](./internal-keycloak.md).
+- [Integrate with an external identity provider](./external-oidc-provider.md).
