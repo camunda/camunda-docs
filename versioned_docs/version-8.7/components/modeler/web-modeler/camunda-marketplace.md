@@ -52,7 +52,7 @@ You can also host custom connectors developed with [Connector SDK](/components/c
 
 For the out-of-the-box connectors provided by Camunda, the connectors Bundle project provides a set of all connector templates related to one release version. These are templates that are reusing the built-in connectors via the [Protocol connector Approach](/components/connectors/protocol/rest.md).
 
-This means a developer created a template and reused one of the built-in connector runtimes. Only for these templates is direct **Download to project** available.
+This means a developer created a template and reused one of the built-in connectors. Only for these templates is direct **Download to project** available.
 :::
 
 ## Browse Marketplace blueprints

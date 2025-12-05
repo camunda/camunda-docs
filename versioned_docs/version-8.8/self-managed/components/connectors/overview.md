@@ -13,8 +13,7 @@ In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage
 Using our [Connector runtime environments](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments), you can consume any set of connectors,
 including the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and custom connectors developed using the **[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)** and [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
 
-You can find a list of connectors developed by Camunda, partners, and the community in our
-[built-in connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors#readme).
+You can find connectors developed by Camunda, partners, and the community in [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 
 :::note
 Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).

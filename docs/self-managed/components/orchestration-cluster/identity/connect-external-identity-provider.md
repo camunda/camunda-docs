@@ -398,7 +398,7 @@ public class App implements CommandLineRunner
 ```
 
 </TabItem>
-<TabItem value="connectorruntime" label="Built-in Connector Runtime">
+<TabItem value="connectorruntime" label="Camunda Connector Runtime">
 1. Configure your application.yaml:
 
 ```yaml

@@ -61,7 +61,7 @@ Your Camunda Weather Report for {{location}}
 Body:
 Hi {{name}},
 
-Thanks for using built-in connectors to check your current weather report.
+Thanks for using Camunda connectors to check your current weather report.
 Your current weather in Berlin is {{weather}} with {{actual-temp}}°C and feels like {{feel-temp}}°C
 
 The Camunda Team

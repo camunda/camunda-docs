@@ -32,11 +32,11 @@ The public IP addresses exposed for connecting to the cluster depends on the clo
 
 ## Outbound connections
 
-If you use a [built-in connector](/components/connectors/introduction.md), your cluster sends requests from the Camunda SaaS infrastructure to the external services you configure in your processes.
+If you use a [Camunda connector](/components/connectors/introduction.md), your cluster sends requests from the Camunda SaaS infrastructure to the external services you configure in your processes.
 
 Depending on the cloud provider, [region](/components/saas/regions.md), and type of configured connector, connections are made from different IP addresses.
 
 To ensure the security of incoming connector connections, you can:
 
-- Authenticate the requests made by the built-in connector(s). For example, see [REST connector authentication](/components/connectors/protocol/rest.md#authentication).
+- Authenticate the requests made by the Camunda connector(s). For example, see [REST connector authentication](/components/connectors/protocol/rest.md#authentication).
 - Run the connectors into your own infrastructure and remove incoming calls from the Camunda infrastructure to your own services. For example, see [Self-Managed connectors](/self-managed/components/connectors/overview.md).

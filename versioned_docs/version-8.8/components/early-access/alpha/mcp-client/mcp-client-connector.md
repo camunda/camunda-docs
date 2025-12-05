@@ -90,7 +90,7 @@ this for your specific use case varies on the connector runtime you are using.
 ### Custom project using the Spring Boot starter runtime
 
 1. Create a new Spring Boot project.
-2. Add the [built-in connector Spring Boot starter](../../../connectors/custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
+2. Add the [Camunda Connector Spring Boot starter](../../../connectors/custom-built-connectors/connector-sdk.md#spring-boot-starter-runtime) and the Agentic AI dependencies to your `pom.xml`:
 
    ```xml
    <project>
