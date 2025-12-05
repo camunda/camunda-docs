@@ -657,7 +657,7 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 Web Modeler now provides a low-coder friendly UX for creating building blocks.
 Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+<p><a href="../../../components/modeler/element-templates/create/generate-element-template" class="link-arrow">Generate an element template</a></p>
 
 ### Element template support for all tasks
 
@@ -669,7 +669,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more.
 - Publish templates to your project or organization for reuse.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+<p><a href="../../../components/modeler/element-templates/getting-started/save-as-element-template" class="link-arrow">Save tasks as element templates</a></p>
 
 ### Unlock element template fields
 
@@ -681,7 +681,7 @@ Element template management is now more flexible for developers and DevOps teams
 - Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
+<p><a href="../../../components/modeler/element-templates/getting-started/using-templates-in-web-modeler" class="link-arrow">Manage element templates</a></p>
 
 ### FEEL Copilot
 
