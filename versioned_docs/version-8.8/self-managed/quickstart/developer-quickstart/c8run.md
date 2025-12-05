@@ -287,4 +287,4 @@ The following advanced configuration options can be provided via environment var
 ## Next steps
 
 - Check out the [getting started guide](/guides/getting-started-example.md) to start a new Java Project to connect to this local cluster.
-- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/docs/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).
+- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).
