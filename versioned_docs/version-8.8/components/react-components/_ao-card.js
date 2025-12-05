@@ -11,9 +11,11 @@ const AoCard = ({ link, title, image, description }) => {
   );
 };
 
-const AoGrid = ({ ao }) => {
+const AoGrid = ({ ao, className, columns = 3 }) => {
+  // allow override via className and/or columns prop
+  const colsClass = `ts-grid-cols-${columns}`;
   return (
-    <div className="ao-grid">
+    <div className={`ts-grid ${colsClass} ${className || ""}`.trim()}>
       {ao.map((ao, index) => (
         <AoCard
           key={index}
