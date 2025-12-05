@@ -125,12 +125,12 @@ The separated Ingress Helm configuration has been deprecated in 8.6, and will be
 
 #### Helm chart: Custom users and clients for Management Identity
 
-It is now possible to add customer users and clients for Management Identity
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
 
-See the [Adding Customer Users and Clients](/self-managed/concepts/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity on intial Helm install.
+See [adding users and clients](/self-managed/concepts/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity during initial Helm install.
 
 :::caution
-Additional upgrade considerations are necessary for deployments that use custom env vars, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, customers should remove the env vars referencing the clients and users, and use the method in the guide mentioned above.
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and migrate to the configuration method described in the guide linked above.
 :::
 
 #### OpenShift Changes
