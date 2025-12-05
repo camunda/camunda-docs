@@ -1729,9 +1729,9 @@ module.exports = {
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [
-            "self-managed/concepts/elasticsearch-privileges",
+            "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
             "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/opensearch-privileges",
+            "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
           ],
         },
         {
@@ -1753,8 +1753,8 @@ module.exports = {
             },
           ],
         },
-        "self-managed/concepts/multi-tenancy",
-        "self-managed/concepts/mapping-rules",
+        "components/concepts/multi-tenancy",
+        "components/concepts/access-control/mapping-rules",
       ],
     },
     {

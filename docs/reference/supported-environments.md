@@ -104,7 +104,7 @@ Requirements for the components can be seen below:
 | Web Modeler                                                | -            | <ul><li>H2 2.3</li><li>MariaDB 10.11, 11.4, 11.8</li><li>Microsoft SQL Server (MSSQL): 2019, 2022</li><li>MySQL 8.4</li><li>Oracle 19c, 23ai</li><li>PostgreSQL 14.x, 15.x, 16.x, 17.x, 18.x, or Amazon Aurora PostgreSQL 13.x, 14.x, 15.x, 16.x, 17.x</li></ul>                                                                                |
 | Self-Managed Console                                       | -            | -                                                                                                                                                                                                                                                                                                                                               |
 
-When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/elasticsearch-privileges.md).
+When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md).
 
 Due to the [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
 for the index refresh interval, we do not support [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html). More information on configuring Amazon OpenSearch can be found [here](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).

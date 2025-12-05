@@ -247,11 +247,11 @@ We recommend using the timestamp as the backup id.
 
 To back up a Camunda cluster using an RDBMS, follow these steps:
 
-1. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+1. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 2. Take a backup of the relational database. See the documentation of the database system you are using. It is recommended to identify the database backup with the same backupId `x` as will be used for the Zeebe backup.
 3. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
 4. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
-   Resume exporting in Zeebe. See [Zeebe management API](/self-managed/zeebe-deployment/operations/management-api.md).
+   Resume exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
 
 #### Restoring using an RDBMS
 
