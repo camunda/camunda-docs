@@ -114,6 +114,16 @@ The Spring Zeebe SDK will not be developed further and will only receive bug fix
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
+#### Helm chart: Customer users and clients for Identity
+
+It is now possible to add customer users and clients for Management Identity
+
+See the [Adding Customer Users and Clients](/self-managed/concepts/custom-users-and-clients/) for more information on configuring custom users and clients on Management Identity on intial Helm install.
+
+:::caution
+Additional upgrade considerations are necessary for deployments that use custom env vars, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, customers should remove the env vars referencing the clients and users, and use the method in the guide mentioned above.
+:::
+
 ##### ExtraVolumeClaimTemplates
 
 You can now add custom `extraVolumeClaimTemplates` to the Zeebe/Core StatefulSet by supplying an array of templates in your Helm values file. This allows you to attach additional persistent volumes to each Zeebe/Core pod for use cases such as custom storage or log directories.
