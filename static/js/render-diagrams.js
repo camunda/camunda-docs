@@ -271,6 +271,48 @@ function scrollToHash() {
   }
 }
 
+/**
+ * Waits for BpmnJS and DmnJS libraries to be loaded.
+ * Uses polling with exponential backoff, max 10 seconds.
+ *
+ * @param {boolean} needsBpmn - Whether BpmnJS is required
+ * @param {boolean} needsDmn - Whether DmnJS is required
+ * @returns {Promise<void>}
+ */
+function waitForLibraries(needsBpmn, needsDmn) {
+  return new Promise((resolve, reject) => {
+    const maxWait = 10000; // 10 seconds
+    const startTime = Date.now();
+    let delay = 50;
+
+    function check() {
+      const bpmnReady = !needsBpmn || typeof window.BpmnJS === "function";
+      const dmnReady = !needsDmn || typeof window.DmnJS === "function";
+
+      if (bpmnReady && dmnReady) {
+        resolve();
+        return;
+      }
+
+      if (Date.now() - startTime > maxWait) {
+        reject(
+          new Error(
+            "Timeout waiting for diagram libraries to load. " +
+              `BpmnJS: ${typeof window.BpmnJS}, DmnJS: ${typeof window.DmnJS}`
+          )
+        );
+        return;
+      }
+
+      // Exponential backoff with cap at 500ms
+      delay = Math.min(delay * 1.5, 500);
+      setTimeout(check, delay);
+    }
+
+    check();
+  });
+}
+
 async function renderDiagrams() {
   const diagramElements = [
     ...Array.from(document.querySelectorAll("div[bpmn]")),
@@ -281,6 +323,18 @@ async function renderDiagrams() {
   // do not invoke scrollToHash (avoids errors for numeric-start anchors when
   // querySelector would be used elsewhere or future changes reintroduce it).
   if (diagramElements.length === 0) {
+    return;
+  }
+
+  // Check which libraries we need
+  const needsBpmn = diagramElements.some((el) => el.hasAttribute("bpmn"));
+  const needsDmn = diagramElements.some((el) => el.hasAttribute("dmn"));
+
+  // Wait for required libraries to be available
+  try {
+    await waitForLibraries(needsBpmn, needsDmn);
+  } catch (error) {
+    console.error("Failed to load diagram libraries:", error);
     return;
   }
 

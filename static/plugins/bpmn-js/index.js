@@ -1,5 +1,9 @@
 const path = require("path");
 
+// Pin versions to ensure stability
+const BPMN_JS_VERSION = "18.9.1";
+const DMN_JS_VERSION = "17.4.0";
+
 module.exports = function () {
   return {
     name: "bpmn-js-plugin",
@@ -12,14 +16,14 @@ module.exports = function () {
           {
             tagName: "script",
             attributes: {
-              src: "https://unpkg.com/bpmn-js/dist/bpmn-viewer.production.min.js",
+              src: `https://unpkg.com/bpmn-js@${BPMN_JS_VERSION}/dist/bpmn-viewer.production.min.js`,
               defer: true,
             },
           },
           {
             tagName: "script",
             attributes: {
-              src: "https://unpkg.com/dmn-js/dist/dmn-viewer.production.min.js",
+              src: `https://unpkg.com/dmn-js@${DMN_JS_VERSION}/dist/dmn-viewer.production.min.js`,
               defer: true,
             },
           },
@@ -34,42 +38,42 @@ module.exports = function () {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/bpmn-js/dist/assets/diagram-js.css",
+              href: `https://unpkg.com/bpmn-js@${BPMN_JS_VERSION}/dist/assets/diagram-js.css`,
             },
           },
           {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/bpmn-js/dist/assets/bpmn-js.css",
+              href: `https://unpkg.com/bpmn-js@${BPMN_JS_VERSION}/dist/assets/bpmn-js.css`,
             },
           },
           {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css",
+              href: `https://unpkg.com/bpmn-js@${BPMN_JS_VERSION}/dist/assets/bpmn-font/css/bpmn-embedded.css`,
             },
           },
           {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/dmn-js/dist/assets/dmn-js-shared.css",
+              href: `https://unpkg.com/dmn-js@${DMN_JS_VERSION}/dist/assets/dmn-js-shared.css`,
             },
           },
           {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/dmn-js/dist/assets/dmn-js-decision-table.css",
+              href: `https://unpkg.com/dmn-js@${DMN_JS_VERSION}/dist/assets/dmn-js-decision-table.css`,
             },
           },
           {
             tagName: "link",
             attributes: {
               rel: "stylesheet",
-              href: "https://unpkg.com/dmn-js/dist/assets/dmn-font/css/dmn.css",
+              href: `https://unpkg.com/dmn-js@${DMN_JS_VERSION}/dist/assets/dmn-font/css/dmn.css`,
             },
           },
         ],
