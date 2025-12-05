@@ -111,19 +111,7 @@ This script:
 2. Waits for all nodes to be ready
 3. Creates the `camunda` namespace
 
-Verify the cluster is running:
-
-```bash
-kubectl get nodes
-```
-
-You should see three nodes in `Ready` state.
-
-Switch to the new cluster context:
-
-```bash
-kubectl cluster-info --context kind-camunda-platform-local
-```
+Verify the cluster is running, you should see three nodes in `Ready` state.
 
 ## Domain mode deployment {#domain-mode-deployment}
 
@@ -180,10 +168,11 @@ Add entries to your `/etc/hosts` file to resolve `camunda.example.com` locally:
 https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/hosts-add.sh
 ```
 
-This adds the following entry:
+This adds the following entries:
 
 ```
 127.0.0.1 camunda.example.com
+127.0.0.1 zeebe-camunda.example.com
 ```
 
 :::note
@@ -203,7 +192,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local
 This script:
 
 1. Installs the mkcert CA in your system trust store (first run only)
-2. Generates certificates for `camunda.example.com` and `*.camunda.example.com`
+2. Generates certificates for `camunda.example.com`, `zeebe-camunda.example.com` and `*.camunda.example.com`
 3. Stores certificates in the `.certs/` directory
 
 ### Create Kubernetes secrets for TLS
@@ -315,7 +304,6 @@ helm list -n camunda
 | Operate        | https://camunda.example.com/operate  |
 | Tasklist       | https://camunda.example.com/tasklist |
 | Identity       | https://camunda.example.com/identity |
-| Optimize       | https://camunda.example.com/optimize |
 | Zeebe REST API | https://camunda.example.com/         |
 | Keycloak       | https://camunda.example.com/auth     |
 
@@ -354,7 +342,6 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Operate              | http://localhost:8080/operate  |
 | Tasklist             | http://localhost:8080/tasklist |
 | Identity             | http://localhost:8080/identity |
-| Optimize             | http://localhost:8083          |
 | Web Modeler          | http://localhost:8070          |
 | Console              | http://localhost:8087          |
 | Connectors           | http://localhost:8085          |
