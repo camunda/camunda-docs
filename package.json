@@ -78,7 +78,7 @@
     "jest": "^30.0.0",
     "lint-staged": "^16.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.6.2"
+    "prettier": "3.7.3"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
