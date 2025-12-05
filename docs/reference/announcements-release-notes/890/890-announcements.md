@@ -104,6 +104,23 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart values.yaml options for RDBMS
+
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
+
+- Postgresql is currently supported.
+- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
+- Operate is not yet supported with RDBMS until alpha3.
+
+</div>
+</div>
+
 ### Modeler
 
 <div className="release-announcement-row">
