@@ -56,7 +56,7 @@ Agent-to-Agent (A2A) Client connectors allow you to interact with remote agents 
 </tr>
 <tr>
     <td>[A2A Client Polling connector](/components/early-access/alpha/a2a-client/a2a-client-polling-connector.md)</td>
-    <td>Polls for responses from asynchronous A2A tasks. Typically paired with the A2A Client connector when using the Polling response retrieval method.</td>
+    <td>Poll for responses from asynchronous A2A tasks. Typically paired with the A2A Client connector when using the Polling response retrieval method.</td>
 </tr>
 <tr>
     <td>[A2A Client Webhook connector](/components/early-access/alpha/a2a-client/a2a-client-webhook-connector.md)</td>
@@ -76,7 +76,6 @@ The Camunda Model Context Protocol (MCP) client now supports OAuth, API key, and
 
 - System administrators can configure secure, policy-compliant access for Camunda AI agents.
 - AI developers can discover and invoke enterprise MCP tools safely without exposing open endpoints.
-- Prepares the MCP connector for production use while maintaining flexibility for both SaaS and Self-Managed environments.
 
 MCP client connectors now also support connections using the [streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) transport protocol.
 

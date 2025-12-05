@@ -33,7 +33,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 #### MCP Client and MCP Remote Client connectors
 
-Breaking changes were [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
 
 To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
 
