@@ -1,5 +1,5 @@
 ---
-id: cluster-variables-overview
+id: cluster-variable-overview
 title: "Cluster variables overview"
 description: "Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster."
 ---

@@ -35,8 +35,8 @@ module.exports = {
     },
     {
       "Cluster variables": [
-        "components/modeler/feel/cluster-variable/overview",
-        "components/modeler/feel/cluster-variable/get-started",
+        "components/modeler/feel/cluster-variable/cluster-variable-overview",
+        "components/modeler/feel/cluster-variable/cluster-variable-get-started",
       ],
     },
   ],
