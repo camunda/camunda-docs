@@ -38,6 +38,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/identity",
             "guides/migrating-from-camunda-7/data-migrator/variables",
             "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
@@ -376,6 +377,20 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
                 "components/early-access/alpha/ms-teams/ms-teams",
@@ -833,7 +848,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",

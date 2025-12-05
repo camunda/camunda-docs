@@ -200,6 +200,16 @@ See [Connector runtime performance](/self-managed/components/connectors/performa
 :::info
 To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#connectors-performance-improvements-with-virtual-threads-executor).
 :::
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removal of the Operator Connector
+
+With the deprecation of Operate API in this release (see [the original announcement on deprecating the Operate and Tasklist V1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)), we have also deprecated the Operate Connector.
+
+Going forward, consider using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
+via the [REST Connector](/components/connectors/protocol/rest.md).
 
 </div>
 </div>
