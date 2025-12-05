@@ -304,6 +304,7 @@ helm list -n camunda
 | Operate        | https://camunda.example.com/operate  |
 | Tasklist       | https://camunda.example.com/tasklist |
 | Identity       | https://camunda.example.com/identity |
+| Optimize       | https://camunda.example.com/optimize |
 | Zeebe REST API | https://camunda.example.com/         |
 | Keycloak       | https://camunda.example.com/auth     |
 
@@ -342,6 +343,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Operate              | http://localhost:8080/operate  |
 | Tasklist             | http://localhost:8080/tasklist |
 | Identity             | http://localhost:8080/identity |
+| Optimize             | http://localhost:8083          |
 | Web Modeler          | http://localhost:8070          |
 | Console              | http://localhost:8087          |
 | Connectors           | http://localhost:8085          |
