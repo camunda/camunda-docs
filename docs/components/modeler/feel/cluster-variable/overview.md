@@ -1,39 +1,41 @@
 ---
 id: cluster-variable-overview
-title: "Cluster variables overview"
-description: "Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster."
+title: Cluster variables
+description: "Cluster variables provide a centralized way to manage configuration values across your Camunda cluster."
 ---
 
-Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster.
+Cluster variables provide a centralized way to manage configuration values across your Camunda cluster.
 
-These variables can be defined at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
-This allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
+## About cluster variables
 
-## Key benefits
+Within your Camunda cluster, you can define variables at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
 
-- **Centralized Configuration Management**: Define configuration once and use it across all processes
-- **Environment Flexibility**: Maintain different values for development, staging, and production without modifying BPMN
-  files
-- **Multi-Tenant Support**: Provide tenant-specific overrides while maintaining global defaults
-- **Simplified Deployment**: Promote processes across environments without changes to the process definition
-- **Dynamic Updates**: Modify configuration values without redeploying processes
+Cluster variables allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
+
+### Key benefits
+
+- **Centralized configuration management**: Define configurations once and reuse them across processes.
+- **Environment flexibility**: Maintain different values for development, staging, and production without modifying BPMN files.
+- **Multi-tenant support**: Provide tenant-specific overrides while maintaining global defaults.
+- **Simplified deployment**: Promote processes across environments without changing process definitions.
+- **Dynamic updates**: Modify configuration values without redeploying processes.
 
 ### When to use cluster variables
 
-Cluster Variables are ideal for:
+They are ideal for:
 
-- API endpoints and service URLs that vary by environment
-- Feature flags to control functionality availability
-- Configuration values shared across multiple processes
-- Tenant-specific customization in multi-tenant deployments
-- Environment-specific thresholds, timeouts, and limits
-- Integration credentials and connection strings
+- Environment-specific API endpoints and service URLs.
+- Feature flags to control functionality availability.
+- Shared configuration used across multiple processes.
+- Tenant-specific customization in multi-tenant deployments.
+- Environment-specific thresholds, timeouts, and limits.
+- Integration credentials and connection strings.
 
 ### When not to use cluster variables
 
 Consider alternatives for:
 
-- Process instance-specific data (use process variables instead)
-- Frequently changing values during process execution (use process variables)
-- Sensitive credentials requiring encryption at rest (use secrets management)
-- Large data payloads (consider external storage with references)
+- Process instance-specific data. Use process variables.
+- Frequently-changing values during execution. Use process variables.
+- Sensitive credentials requiring encryption at rest. Use secrets management.
+- Large data payloads. Use external storage with references.

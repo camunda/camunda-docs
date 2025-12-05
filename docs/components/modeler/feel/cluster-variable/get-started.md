@@ -1,12 +1,13 @@
 ---
 id: cluster-variable-get-started
-title: Get started
+title: Get started with cluster variables
+sidebar_label: "Get started"
 description: "Get started with cluster variables."
 ---
 
-This guide will walk you through creating your first cluster variable and using it in a BPMN process.
+This guide shows you how to create your first cluster variable and use it in a BPMN process.
 
-#### Step 1: Create a Global Cluster Variable
+## Create a global cluster variable
 
 Use the Camunda Orchestration Cluster API to create a global variable:
 
@@ -20,26 +21,27 @@ Content-Type: application/json
 }
 ```
 
-#### Step 2: Access the Variable in Your BPMN Process
+## Access the variable in your BPMN process
 
-In the Camunda Modeler, you can now access this variable using a FEEL expression:
+In Camunda Modeler, you can access this variable using a FEEL expression:
 
 ```
 camunda.vars.env.API_ENDPOINT
 ```
 
-Use this in any expression field, such as:
+Use it in any expression field, such as:
 
-- Service task input mappings
-- Gateway condition expressions
-- Script task variables
-- Output parameter expressions
+- Service task input mappings.
+- Gateway condition expressions.
+- Script task variables.
+- Output parameter expressions.
 
-#### Step 3: Test Your Process
+## Test your process
 
-Deploy your process and create an instance. The cluster variable will be automatically resolved during execution.
+Deploy your process and create an instance.
+The cluster variable is automatically resolved during execution.
 
-### Creating Your First Tenant Variable
+### Create your first tenant variable
 
 If you're using multi-tenancy, you can create tenant-specific overrides:
 
@@ -53,11 +55,13 @@ Content-Type: application/json
 }
 ```
 
-Processes running in this tenant will automatically use the tenant-specific value.
+:::note
+Processes running in this tenant automatically use the tenant-specific value.
+:::
 
-### Common Patterns
+### Common patterns
 
-#### Pattern 1: Environment Configuration
+#### Environment configuration
 
 ```json
 {
@@ -70,14 +74,14 @@ Processes running in this tenant will automatically use the tenant-specific valu
 }
 ```
 
-Access nested values:
+Access nested values as follows:
 
 ```
 camunda.vars.env.ENV_CONFIG.api_url
 camunda.vars.env.ENV_CONFIG.timeout_ms
 ```
 
-#### Pattern 2: Feature Flags
+#### Feature flags
 
 ```json
 {
@@ -86,13 +90,13 @@ camunda.vars.env.ENV_CONFIG.timeout_ms
 }
 ```
 
-Use in conditional flows:
+Use it in conditional flows as follows:
 
 ```
 camunda.vars.env.FEATURE_ENABLE_NEW_WORKFLOW = true
 ```
 
-#### Pattern 3: Thresholds and Limits
+#### Thresholds and limits
 
 ```json
 {
@@ -101,7 +105,7 @@ camunda.vars.env.FEATURE_ENABLE_NEW_WORKFLOW = true
 }
 ```
 
-Use in gateway conditions:
+Use it in gateway conditions as follows:
 
 ```
 orderAmount > camunda.vars.env.APPROVAL_THRESHOLD
