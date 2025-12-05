@@ -275,6 +275,10 @@ function scrollToHash() {
  * Waits for BpmnJS and DmnJS libraries to be loaded.
  * Uses polling with exponential backoff, max 10 seconds.
  *
+ * The polling starts at 50ms to catch scripts that load quickly (typically
+ * cached from CDN), then uses a 1.5x multiplier for gradual backoff. This
+ * provides a good balance between responsiveness and reducing CPU usage.
+ *
  * @param {boolean} needsBpmn - Whether BpmnJS is required
  * @param {boolean} needsDmn - Whether DmnJS is required
  * @returns {Promise<void>}
@@ -283,6 +287,7 @@ function waitForLibraries(needsBpmn, needsDmn) {
   return new Promise((resolve, reject) => {
     const maxWait = 10000; // 10 seconds
     const startTime = Date.now();
+    // Start with short delay for fast-loading cached scripts
     let delay = 50;
 
     function check() {
@@ -304,7 +309,8 @@ function waitForLibraries(needsBpmn, needsDmn) {
         return;
       }
 
-      // Exponential backoff with cap at 500ms
+      // Gradual backoff (1.5x) with cap at 500ms - balances responsiveness
+      // with reduced CPU usage for slow connections
       delay = Math.min(delay * 1.5, 500);
       setTimeout(check, delay);
     }
