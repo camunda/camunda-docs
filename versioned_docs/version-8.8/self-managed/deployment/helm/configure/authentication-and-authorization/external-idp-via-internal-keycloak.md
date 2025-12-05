@@ -33,7 +33,7 @@ Configure Keycloak to use your external identity provider by following the [Conf
 
 ### Configure identity provider mappers
 
-After adding the identity provider, configure mappers to import user attributes and assign users to a group for authorization.
+After adding the identity provider, configure mappers in the **Camunda realm** (default: `camunda-platform`) to import user attributes and assign users to a group for authorization.
 
 :::tip
 For details on Keycloak identity provider mappers, see the [Keycloak documentation on identity broker mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_mappers).
