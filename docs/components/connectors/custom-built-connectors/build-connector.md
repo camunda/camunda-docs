@@ -27,7 +27,7 @@ and how it can be configured by process developers. Connector templates are a sp
     <h3>Connector templates</h3>
     <p>Create a connector task and start using connector secrets.</p>
   </a>
-    <a href="../../modeler/element-templates/create/generate-element-template" class="connector-card" title="Generate a connector template">
+    <a href="../../../modeler/element-templates/create/generate-element-template" class="connector-card" title="Generate a connector template">
     <img src={IconConnectorGenerateImg} alt="Generate a connector template"/>
     <h3>Generate a connector template</h3>
     <p>Automatically generate a custom connector template in Web Modeler.</p>
