@@ -1498,10 +1498,10 @@ module.exports = {
                         id: "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider",
                       },
                       items: [
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
