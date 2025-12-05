@@ -10,13 +10,13 @@ import TabItem from "@theme/TabItem";
 import AoGrid from '/docs/components/react-components/\_ao-card';
 import { a2aConnectorCards } from '/docs/components/react-components/\_ao-card-data';
 
-Web Modeler on Self‑Managed provides you with Camunda SaaS’s browser‑based modeling experience in your own infrastructure.
+Web Modeler on Self‑Managed lets you run Camunda's modeling experience in your own infrastructure.
 
 ## About Web Modeler on Self-Managed
 
-Web Modeler on Self‑Managed provides the same collaborative BPMN and DMN modeling capabilities available in Camunda SaaS, but deployed under your control for compliance, data residency, and customization needs.
+Web Modeler on Self‑Managed provides the same BPMN and DMN modeling capabilities [available in Camunda SaaS](/components/modeler/web-modeler/index.md), but deployed under your control for compliance, data residency, and customization needs.
 
-Teams can design, review, and version process models in a web UI, integrate with your identity provider, and align environments with your existing networking, security, and backup practices.
+You can collaboratively design, review, and version process models in a web user interface, integrate with your identity provider, and align environments with your existing networking, security, and backup practices.
 
 ## Configure
 
