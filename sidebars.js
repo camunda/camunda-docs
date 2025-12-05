@@ -1336,7 +1336,17 @@ module.exports = {
             id: "self-managed/quickstart/developer-quickstart",
           },
           items: [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              type: "category",
+              label: "Camunda 8 Run",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/c8run",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+              ],
+            },
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
