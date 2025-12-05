@@ -1,4 +1,8 @@
-### Quick Start Guide
+---
+id: cluster-variable-get-started
+title: Get started
+description: "Get started with cluster variables."
+---
 
 This guide will walk you through creating your first cluster variable and using it in a BPMN process.
 
