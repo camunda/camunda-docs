@@ -156,6 +156,10 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
 
+# Change ID of choose-right-model-agentic
+RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
+
 # Remove Node.js SDK and redirect to TypeScript SDK
 RewriteRule ^docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]
 RewriteRule ^docs/apis-tools/node-js-sdk/$ /docs/apis-tools/typescript/typescript-sdk/ [R=301,L]
