@@ -6,7 +6,9 @@ description: Configure your RPA workers for production use cases.
 
 Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.
 
-For the basics on getting started, visit the [getting started guide](./getting-started.md).
+:::info
+To get started, see [get started with RPA](./getting-started.md).
+:::
 
 ## Configuration options
 
@@ -39,15 +41,15 @@ Use tags and labels to differentiate worker capabilities.
 
 1. In the `rpa-worker.properties`, add:
 
-```properties
-camunda.rpa.zeebe.worker-tags=accounting-system
-```
+   ```properties
+   camunda.rpa.zeebe.worker-tags=accounting-system
+   ```
 
 2. If you also want the worker to work on unlabeled tasks, use:
 
-```properties
-camunda.rpa.zeebe.worker-tags=default,accounting-system
-```
+   ```properties
+   camunda.rpa.zeebe.worker-tags=default,accounting-system
+   ```
 
 3. Add a label to your script when configuring the RPA task in your diagram.
 

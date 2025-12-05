@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Getting started with RPA
+title: Get started with RPA
 description: Learn how to create, test, and automate RPA scripts.
 ---
 
@@ -11,11 +11,11 @@ import RpaTaskConfig from './img/rpa-task-configuration.png';
 
 Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts.
 
-:::note
-New to RPA? Visit the [overview page](/components/rpa/overview.md) to learn about robotic process automation (RPA) capabilities.
+:::tip
 
-Before you begin, review the [known issues for RPA](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure compatibility with your environment.
-:::
+- New to RPA? See the [overview page](/components/rpa/overview.md) to learn about robotic process automation (RPA) capabilities.
+- Before getting started, review [RPA known issues](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+  :::
 
 ## About the RPA worker
 
@@ -23,7 +23,7 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 
 ## Create your first script
 
-To get started with RPA, write your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
+Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts:
 
 1. **Download Camunda Modeler**: Download the latest version of Camunda Modeler from the [Camunda website](https://camunda.com/download/modeler/). Because RPA scripts run locally, the RPA editor is only available in [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
@@ -45,6 +45,7 @@ Once you have written your script, you can test it on a local RPA worker.
 3. **Test the script**:
    1. Click the test tube (🧪) icon in the footer of Desktop Modeler to open the run dialog. Add any variables required by the process in JSON format. Once you start the execution, the execution tab will open.
    2. Review the execution log and the variables created during the script execution within Modeler.
+
       <img src={RpaEditorResults} alt="RPA testing panel in Desktop Modeler showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 ## Automate execution
