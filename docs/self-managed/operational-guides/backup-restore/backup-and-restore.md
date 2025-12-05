@@ -230,3 +230,33 @@ curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 
 </summary>
 </details>
+
+<!-- TODO: This section was based on the early 8.8 documentation. Since then the page was restructured, so the RDBMS backup & restore instructions must be integrated again into the page -->
+
+### Using a relational database management system (RDBMS)
+
+#### Backups using an RDBMS
+
+When using an RDBMS like PostgreSQL, Oracle or MariaDB, the backups of Zeebe and the database have to be taken separately and also depend on the database system.
+
+The backup of Zeebe is identified by an id `x`. The backup ID must be an integer and greater than the previous backups.
+
+:::note
+We recommend using the timestamp as the backup id.
+:::
+
+To back up a Camunda cluster using an RDBMS, follow these steps:
+
+1. Soft pause exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+2. Take a backup of the relational database. See the documentation of the database system you are using. It is recommended to identify the database backup with the same backupId `x` as will be used for the Zeebe backup.
+3. Take a backup `x` of Zeebe. See [how to take a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+4. Wait until the backup `x` of Zeebe is completed before proceeding. See [how to monitor a Zeebe backup](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+   Resume exporting in Zeebe. See [Zeebe management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md).
+
+#### Restoring using an RDBMS
+
+To restore an RDBMS based Camunda 8 cluster from a backup, follow these steps:
+
+1. Restore the relational database backup into an empty database.
+2. Restore [Zeebe](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md).
+3. Start Zeebe, Operate, Tasklist, and Optimize.
