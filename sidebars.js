@@ -1907,6 +1907,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {
