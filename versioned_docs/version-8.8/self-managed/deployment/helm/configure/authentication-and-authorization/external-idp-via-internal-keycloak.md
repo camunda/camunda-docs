@@ -55,6 +55,7 @@ Create attribute mappers to import user profile information:
 
 Create a username mapper:
 
+- **Name**: `username`
 - **Mapper Type**: Username Template Importer
 - **Template**: `${CLAIM.preferred_username}`
 
