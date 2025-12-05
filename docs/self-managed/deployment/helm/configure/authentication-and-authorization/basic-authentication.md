@@ -1,7 +1,7 @@
 ---
 id: basic-authentication
 sidebar_label: Basic authentication
-title: Helm chart basic authentication setup
+title: Set up the Helm chart with basic authentication
 description: Learn how to configure and manage basic authentication for Camunda 8 Self-Managed deployments using Helm chart.
 ---
 
