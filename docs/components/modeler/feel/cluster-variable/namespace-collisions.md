@@ -1,12 +1,18 @@
-### Understanding Namespace Collisions
+---
+id: cluster-variable-namespace-collisions
+title: Namespace collisions
+sidebar_label: "Namespace collisions"
+description: "Understand namespace collisions."
+---
 
-Namespace collisions occur when the same variable key is defined with different structures or values across multiple
-scopes. While the priority system determines which value is used, certain collision patterns can lead to unexpected
+Understand namespace collisions. They occur when the same variable key is defined with different structures or values across multiple scopes.
+
+While the priority system determines which value is used, certain collision patterns can lead to unexpected
 behavior.
 
-### Types of Collisions
+## Types of collisions
 
-#### Type 1: Process Variable Shadowing
+### Process variable shadowing
 
 When you create a process variable that uses the cluster variable namespace, it shadows cluster variables completely.
 
@@ -33,7 +39,7 @@ process variable under `camunda.vars.env`, it takes precedence over cluster vari
 **Best practice**: Use this pattern sparingly and document it clearly when you do. Consider using a different namespace
 for process variables to avoid confusion.
 
-#### Type 2: Structural Collisions Across Scopes
+### Structural collisions across scopes
 
 This is the most common source of unexpected behavior. It occurs when the same key has different data types or
 structures at different scopes.
@@ -55,7 +61,7 @@ camunda.vars.env.CONFIG_KEY.nested → null (trying to access property on string
 **Why this happens**: The TENANT scope takes priority and returns a string. The GLOBAL nested object is never evaluated.
 Attempting to access properties on a string returns null.
 
-#### Detailed Collision Example
+## Detailed collision example
 
 **Setup:**
 
@@ -98,9 +104,9 @@ camunda.vars.tenant.KEY_1.KEY_2
 ✓ Correctly returns null (KEY_1 in TENANT is string)
 ```
 
-### Preventing Namespace Collisions
+## Preventing namespace collisions
 
-#### Strategy 1: Consistent Data Structures
+### Consistent data structures
 
 Always use the same data type and structure for a given key across all scopes.
 
@@ -126,7 +132,7 @@ TENANT: {
 
 Both scopes use the same object structure, just with different values.
 
-#### Strategy 2: Use Distinct Keys
+### Use distinct keys
 
 When you need fundamentally different structures, use different key names.
 
@@ -144,7 +150,7 @@ TENANT: {
 }
 ```
 
-#### Strategy 3: Document Your Schema
+### Document your schema
 
 Maintain a schema registry or documentation that specifies:
 
@@ -153,9 +159,9 @@ Maintain a schema registry or documentation that specifies:
 - Which keys can be overridden at TENANT scope
 - Deprecation notices for keys being phased out
 
-### Collision Detection Patterns
+## Collision detection patterns
 
-#### Runtime Null Checking
+### Runtime null checking
 
 Always check for null when accessing nested properties:
 
@@ -165,9 +171,9 @@ if camunda.vars.env.CONFIG.nested_value != null
   else "default"
 ```
 
-### Process Variable Namespace Best Practices
+## Process variable namespace best practices
 
-#### Avoid Using camunda.vars Namespace
+### Avoid using camunda.vars namespace
 
 To prevent shadowing cluster variables, avoid creating process variables that use the `camunda.vars` namespace.
 
@@ -183,7 +189,7 @@ Set process variable: camunda.vars.env.TIMEOUT = 5000
 Set process variable: processTimeout = 5000
 ```
 
-#### When Override Is Intentional
+### When override is intentional
 
 If you deliberately want to override cluster variables at the process level, document this behavior explicitly in your
 process documentation.

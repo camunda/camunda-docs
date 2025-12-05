@@ -42,6 +42,8 @@ module.exports = {
       },
       items: [
         "components/modeler/feel/cluster-variable/cluster-variable-get-started",
+        "components/modeler/feel/cluster-variable/cluster-variable-core-concepts",
+        "components/modeler/feel/cluster-variable/cluster-variable-namespace-collisions",
       ],
     },
   ],

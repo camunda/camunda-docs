@@ -1,8 +1,17 @@
-### Scope Levels
+---
+id: cluster-variable-core-concepts
+title: Core concepts about cluster variables
+sidebar_label: "Core concepts"
+description: "Learn the core concepts of cluster variables."
+---
+
+Explore an understand the core concepts of cluster variables.
+
+## Scope Levels
 
 Cluster variables exist at two distinct scope levels:
 
-#### GLOBAL Scope
+### GLOBAL Scope
 
 Variables defined at the GLOBAL scope are available across the entire cluster and accessible by all processes,
 regardless of tenant context. These typically represent cluster-wide defaults and shared configuration.
@@ -14,7 +23,7 @@ regardless of tenant context. These typically represent cluster-wide defaults an
 - Ideal for default values and cluster-wide settings
 - Managed via the global cluster variables API
 
-#### TENANT Scope
+### TENANT Scope
 
 Variables defined at the TENANT scope are specific to a particular tenant and only accessible within that tenant's
 context. These allow for tenant-specific customization and overrides.
@@ -27,11 +36,11 @@ context. These allow for tenant-specific customization and overrides.
 - Managed via the tenant-specific cluster variables API
 - Only available when multi-tenancy is enabled
 
-### Access Namespaces
+## Access namespaces
 
 Cluster variables are accessed through three distinct namespaces in FEEL expressions:
 
-#### camunda.vars.cluster
+### camunda.vars.cluster
 
 Provides direct access to GLOBAL scope variables only. Variables defined at the TENANT scope are not accessible through
 this namespace.
@@ -48,7 +57,7 @@ this namespace.
 camunda.vars.cluster.GLOBAL_DEFAULT_TIMEOUT
 ```
 
-#### camunda.vars.tenant
+### camunda.vars.tenant
 
 Provides direct access to TENANT scope variables only. Variables defined at the GLOBAL scope are not accessible through
 this namespace.
@@ -65,7 +74,7 @@ this namespace.
 camunda.vars.tenant.TENANT_SPECIFIC_CONFIG
 ```
 
-#### camunda.vars.env (Recommended)
+### camunda.vars.env (Recommended)
 
 Provides a merged view of both GLOBAL and TENANT scope variables, with automatic priority resolution. This is the
 recommended namespace for most use cases.
@@ -83,22 +92,22 @@ camunda.vars.env.API_ENDPOINT
 camunda.vars.env.CONFIG.timeout
 ```
 
-### Variable Types
+## Variable types
 
 Cluster variables support multiple data types to accommodate different configuration needs:
 
-#### Simple Values
+### Simple values
 
 - **String**: Text values for URLs, names, identifiers
 - **Number**: Numeric values for thresholds, timeouts, counts
 - **Boolean**: True/false values for feature flags, toggles
 
-#### Complex Values
+### Complex values
 
 - **Objects**: Nested structures for grouped configuration
 - **Arrays**: Lists of values (Note: Access patterns may vary)
 
-### Variable Resolution Priority
+## Variable resolution priority
 
 Understanding the complete priority order is crucial for predictable behavior:
 
