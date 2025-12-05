@@ -190,8 +190,8 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -377,6 +377,20 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
                 "components/early-access/alpha/ms-teams/ms-teams",
@@ -834,7 +848,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
@@ -1427,6 +1440,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1912,6 +1926,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {

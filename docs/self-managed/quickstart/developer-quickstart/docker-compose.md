@@ -37,6 +37,10 @@ To start a complete Camunda 8 Self-Managed environment locally:
 
 1. Wait for the environment to initialize (this can take several minutes). Monitor the logs (especially the Keycloak container log) to ensure all components start.
 
+:::note c8run with Docker
+If you start Docker Compose via `./c8run start --docker` (or `.\c8run.exe start --docker`), override environment variables in the `docker-compose/.env` file included in the distribution. Passing variables inline on the command line is ignored because the Camunda 8 Run helper script invokes Docker Compose via that `.env` file.
+:::
+
 ### Docker Compose configurations
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
