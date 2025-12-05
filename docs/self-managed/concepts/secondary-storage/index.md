@@ -23,12 +23,18 @@ Secondary storage is not a duplicate of primary data. It represents the historic
 
 ### Supported storage options
 
-Camunda supports the following secondary storage backends, depending on the version and use case:
+Camunda supports multiple secondary storage backends.  
+For the latest list of supported database versions, see the  
+[RDBMS version support policy](/self-managed/deployment/helm/configure/database/rdbms-support-policy.md).
 
-| Database type                   | Availability         | Use case                                                             |
-| :------------------------------ | :------------------- | :------------------------------------------------------------------- |
-| Elasticsearch / OpenSearch      | General availability | Default for most production installations.                           |
-| RDBMS (H2, PostgreSQL, MariaDB) | 8.9-alpha1+          | Lightweight local testing (H2) or future enterprise-grade RDBMS use. |
+| Storage backend                 | Availability         | Primary use cases                                                                                    |
+| :------------------------------ | :------------------- | :--------------------------------------------------------------------------------------------------- |
+| Elasticsearch / OpenSearch      | General availability | Default backend for most production installations.                                                   |
+| RDBMS (H2, PostgreSQL, MariaDB) | Self-Managed 8.9+    | Lightweight development (H2) and enterprise-grade RDBMS deployments for Operate, Tasklist, and APIs. |
+
+:::note
+Camunda’s RDBMS support depends on the versions defined in the RDBMS support policy. Always consult the policy before choosing a database version.
+:::
 
 ### Data flow
 

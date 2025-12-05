@@ -1442,6 +1442,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
                     "self-managed/deployment/helm/configure/database/rdbms",
                     "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
+                    "self-managed/deployment/helm/configure/database/rdbms-support-policy",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
