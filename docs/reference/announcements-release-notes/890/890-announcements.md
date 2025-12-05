@@ -116,6 +116,25 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch subchart no longer enabled by default
+
+Previously, the Elasticsearch subchart was enabled by default. To use OpenSearch, you would need to disable Elasticsearch and enable OpenSearch.
+
+With the inclusion of RDBMS, you must now specify the secondary storage you want to enable and use.
+
+:::note
+To continue using Elasticsearch provided as a subchart, you must add `global.elasticsearch.enabled: true` and `elasticsearch.enabled: true` to your `values.yaml`.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
