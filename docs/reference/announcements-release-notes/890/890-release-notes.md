@@ -204,7 +204,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 - The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
 - This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
 
-<p class="link-arrow">[Element template bpmn:Signal binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
+<p class="link-arrow">[Element template `bpmn:Signal` binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
 
 #### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
@@ -212,7 +212,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
-<p class="link-arrow">[Web Modeler embedded web server](/self-managed/components/components-upgrade/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/self-managed/components/components-upgrade/880-to-890.md#embedded-web-server)</p>
 
 #### Web Modeler: IP egress monitoring (SaaS)
 
