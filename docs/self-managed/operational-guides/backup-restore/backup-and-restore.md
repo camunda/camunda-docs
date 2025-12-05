@@ -51,7 +51,6 @@ This guide includes procedures to:
 
 :::
 
-<<<<<<< HEAD
 ## Why you should use backup and restore
 
 The Camunda 8 components like the Orchestration Cluster and Optimize store data in various formats and across multiple indices in Elasticsearch or OpenSearch. Because of this distributed and interdependent architecture, creating a consistent and reliable backup requires coordination between the components.
@@ -232,7 +231,7 @@ curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 </summary>
 </details>
 
-<!-- TODO: This section was based on the early 8.8 documentation. Since then the page was restructured, so the RDBMS backup & restore instructions must be integrated again into the page --> 
+<!-- TODO: This section was based on the early 8.8 documentation. Since then the page was restructured, so the RDBMS backup & restore instructions must be integrated again into the page -->
 
 ### Using a relational database management system (RDBMS)
 
