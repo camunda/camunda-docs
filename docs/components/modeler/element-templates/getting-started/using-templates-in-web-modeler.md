@@ -72,8 +72,6 @@ Saving an applied template allows you to:
 - Assign a name and description
 - Publish the new template to a project or organization
 
-Learn more in [save as element template](./save-as-element-template.md).
-
 ## Next steps
 
 - Learn how to [use templates in Desktop Modeler](./using-templates-in-desktop-modeler.md)

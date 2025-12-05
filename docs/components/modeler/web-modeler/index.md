@@ -19,7 +19,7 @@ It enables teams to collaboratively design executable processes as the foundatio
 | Feature                                                                       | Description                                                                                     |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | [BPMN, DMN, and Forms modeling](../bpmn/bpmn.md)                              | Create and edit BPMN diagrams, DMN decision tables, and Camunda Forms directly in your browser. |
-| [Element templates](./element-templates/using-templates.md)                   | Reuse building blocks to standardize modeling across teams and projects.                        |
+| [Element templates](../element-templates/about-templates.md)                  | Reuse building blocks to standardize modeling across teams and projects.                        |
 | [Collaboration](./collaboration/collaboration.md)                             | Work with team members to speed up the process development cycle.                               |
 | [Play mode](validation/play-your-process.md)                                  | Test and validate processes during development.                                                 |
 | [Camunda Marketplace](./modeling/camunda-marketplace.md)                      | Extend Web Modeler with prebuilt blueprints and connectors.                                     |

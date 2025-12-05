@@ -838,7 +838,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more
 - Publish templates to your project or organization for reuse
 
-See [save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
+See [save tasks as element templates](/components/modeler/element-templates/about-templates.md) for details.
 
 Additional support includes:
 

@@ -98,7 +98,7 @@ This template defines five fields and maps each one to a specific BPMN or Zeebe 
 
 When this template is applied to a service task, Modeler hides the technical configuration and surfaces only the user-editable fields.
 
-![Custom Fields](./img/overview.png)
+![Custom Fields](../img/overview.png)
 
 ## Key concepts demonstrated
 
@@ -123,4 +123,4 @@ Use this example as a baseline when you need to:
 - Learn about [template metadata](./template-metadata.md).
 - Explore how [properties work](./template-properties.md).
 - [Understand dependencies](./element-templates-with-dependencies.md).
-- Return to the [overview](./about-templates.md).
+- Return to the [overview](../about-templates.md).

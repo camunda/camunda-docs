@@ -293,4 +293,4 @@ Example: Show `priority` only when `operationType = addQueueItem`.
 
 - Explore [full examples](./template-example.md).
 - Learn how to structure and manage related resources in [element templates with dependencies](./element-templates-with-dependencies.md).
-- Return to the [main overview](./about-templates.md).
+- Return to the [main overview](../about-templates.md).

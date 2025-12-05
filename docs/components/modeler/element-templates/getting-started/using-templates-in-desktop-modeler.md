@@ -55,7 +55,7 @@ To restore editing:
 - Unlink or remove the template, or
 - Add the missing template file to a valid search path.
 
-Learn more about search paths in [configuring templates for Desktop Modeler](../desktop/configuring-templates-for-desktop-modeler.md).
+Learn more about search paths in [configuring templates for Desktop Modeler](../../desktop-modeler/element-templates/configuring-templates.md).
 
 ## Save an applied template
 
@@ -66,8 +66,6 @@ Using this function, you can:
 - Save the current element configuration as a reusable template
 - Assign a name and description
 - Store the template as a JSON file that can be reused locally or shared across projects
-
-Learn more in [save as element template](./save-as-element-template.md).
 
 ## Next steps
 

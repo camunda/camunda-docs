@@ -639,7 +639,7 @@ You can now configure and automatically generate a custom connector template in 
 - You can start from a blank template or import an existing API definition such as an OpenAPI specification, Swagger specification, or a Postman collection.
 - For example, download a Postman collection as a YAML file, import this into the generator, and choose which methods to include in the generated template.
 
-To learn more about generating connector templates, see [generate a connector template](/components/modeler/web-modeler/element-templates/element-template-generator.md).
+To learn more about generating connector templates, see [generate a connector template](/components/modeler/element-templates/create/generate-element-template.md).
 
 ### Monorepo Git sync <span class="badge badge--medium" title="This feature affects Modeler">Modeler</span>
 

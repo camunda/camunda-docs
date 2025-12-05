@@ -147,7 +147,7 @@ Use:
 - Require FEEL only when necessary.
 - Optional FEEL can be used for flexible inputs.
 
-More information: [FEEL editor support](/components/modeler/element-templates/template-properties.md#adding-feel-editor-support-feel).
+More information: [FEEL editor support](/components/modeler/element-templates/create/template-properties.md).
 
 ### Free input vs. dropdown vs. constraints
 

@@ -183,4 +183,4 @@ This template:
 - Learn how [template metadata](./template-metadata.md) works.
 - Explore [property configuration](./template-properties.md).
 - See a complete [working example](./template-example.md).
-- Return to the [main overview](./about-templates.md).
+- Return to the [main overview](../about-templates.md).

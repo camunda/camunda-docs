@@ -92,6 +92,5 @@ If generation is unavailable, resolve any errors or verify the element type befo
 
 ## Next steps
 
-- Learn how to [save an element as a template](./save-as-element-template.md)
 - Explore how to [define templates manually](./defining-templates.md)
 - Review [best practices for creating templates](../best-practices/element-template-guidelines.md)

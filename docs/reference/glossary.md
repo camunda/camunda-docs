@@ -142,7 +142,7 @@ Connector templates ensure consistent behavior and reduce modeling errors when u
 
 They follow the same schema as element templates but apply specifically to service tasks referencing a Connector.
 
-- [Connector templates in Web Modeler](/components/modeler/web-modeler/element-templates/manage-element-templates.md)
+- [Element templates](/components/modeler/element-templates/about-templates.md)
 
 ### Correlation
 
