@@ -33,5 +33,11 @@ module.exports = {
         "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous",
       ],
     },
+    {
+      "Cluster variables": [
+        "components/modeler/feel/cluster-variable/overview",
+        "components/modeler/feel/cluster-variable/get-started",
+      ],
+    },
   ],
 };

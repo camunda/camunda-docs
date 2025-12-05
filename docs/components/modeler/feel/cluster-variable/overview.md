@@ -1,11 +1,16 @@
-### What are Cluster Variables?
+---
+id: cluster-variables-overview
+title: Cluster variables overview
+sidebar_label: "Overview"
+description: "Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster."
+---
 
-Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster. These variables
-can be defined at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
-This allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values
-without hardcoding them into individual process definitions.
+Cluster Variables provide a centralized way to manage configuration values across your Camunda cluster.
 
-### Key Benefits
+These variables can be defined at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
+This allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
+
+## Key benefits
 
 - **Centralized Configuration Management**: Define configuration once and use it across all processes
 - **Environment Flexibility**: Maintain different values for development, staging, and production without modifying BPMN
@@ -14,7 +19,7 @@ without hardcoding them into individual process definitions.
 - **Simplified Deployment**: Promote processes across environments without changes to the process definition
 - **Dynamic Updates**: Modify configuration values without redeploying processes
 
-### When to Use Cluster Variables
+### When to use cluster variables
 
 Cluster Variables are ideal for:
 
@@ -25,7 +30,7 @@ Cluster Variables are ideal for:
 - Environment-specific thresholds, timeouts, and limits
 - Integration credentials and connection strings
 
-### When Not to Use Cluster Variables
+### When not to use cluster variables
 
 Consider alternatives for:
 
