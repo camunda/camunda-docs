@@ -205,7 +205,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 - The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
 - This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
 
-<p class="link-arrow">[Element template bpmn:Signal binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
+<p class="link-arrow">[Element template `bpmn:Signal` binding](/components/modeler/element-templates/template-properties.md#signal-name-bpmnsignalproperty)</p>
 
 #### Web Modeler: Embedded web server changed from Undertow to Tomcat (Self-Managed)
 
