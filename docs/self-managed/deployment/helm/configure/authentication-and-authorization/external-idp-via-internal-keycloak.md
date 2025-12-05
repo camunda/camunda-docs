@@ -128,6 +128,10 @@ For more details on authorizations, see [Orchestration Cluster authorization](/c
 
 For access to Console, Web Modeler, and Optimize, external IdP users need the corresponding realm roles assigned in Keycloak. The recommended approach is to assign users to groups that have these roles.
 
+:::note
+The hardcoded group mappers in this section grant access to **all users** authenticating through the external IdP. For more granular access control based on groups or attributes from your external IdP, see the [Keycloak documentation on identity provider mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_mappers).
+:::
+
 #### Verify or create groups
 
 1. In Keycloak Admin Console, navigate to **Groups**.
