@@ -41,6 +41,8 @@ For details on Keycloak identity provider mappers, see the [Keycloak documentati
 
 #### Create attribute mappers
 
+Attribute mappers import user profile information from the external IdP into Keycloak user accounts.
+
 In Keycloak Admin Console, navigate to **Identity Providers** > select your IdP > **Mappers** tab.
 
 Create attribute mappers to import user profile information:
@@ -52,6 +54,8 @@ Create attribute mappers to import user profile information:
 | `lastName`  | Attribute Importer | `family_name` | `lastName`     |
 
 #### Create username mapper
+
+The username mapper determines how Keycloak assigns usernames to federated users based on claims from the external IdP.
 
 Create a username mapper:
 
@@ -66,6 +70,8 @@ Navigate to **Groups** > **Create group** and create a group:
 - **Name**: `external-idp-users`
 
 #### Assign users to the group
+
+The hardcoded group mapper automatically assigns all users authenticating through this IdP to a specified group. This group membership is then included in the user's access token.
 
 Create a mapper to assign federated users to this group:
 
