@@ -98,7 +98,7 @@ For backward compatibility, both variants are also available without the prefix 
 The open-source variant is based on the `bitnamilegacy` repository and receives no further updates from Bitnami. For production environments, use the enterprise variant or a managed Keycloak service.
 :::
 
-:::tip Using original Bitnami Keycloak images
+:::tip About the original Bitnami Keycloak images
 If you prefer to use the original Bitnami Keycloak images directly (`bitnamilegacy/keycloak` or `registry.camunda.cloud/vendor-ee/keycloak`), you can override the image in your Helm values. This is not required, as Camunda Keycloak images are fully compatible and recommended.
 :::
 
