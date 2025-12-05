@@ -161,18 +161,9 @@ Create mappers to assign federated users to these groups:
 You can also assign roles directly to users in Keycloak, or use [mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md) to map token claims to roles.
 :::
 
-## Understanding the two identity systems
-
-Camunda 8.8 uses two separate identity systems: Orchestration Cluster Identity and Management Identity. Each system manages access to different components and uses different configuration methods.
-
-For a detailed explanation of the differences between these identity systems, see [Identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
-
-:::note
-Orchestration Cluster Identity does not automatically recognize Keycloak groups. You must create mapping rules that match JWT claims and then assign authorizations to those mapping rules.
-:::
-
 ## Next steps
 
+- To understand the differences between Orchestration Cluster Identity and Management Identity, see [Identity types in Camunda 8](/components/concepts/access-control/access-control-overview.md#identity-types-in-camunda-8).
 - To learn more about mapping rules, see [Mapping rules](/components/concepts/access-control/mapping-rules.md).
 - To configure additional authorizations, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
 - To use an external IdP without the internal Keycloak, see [Set up the Helm chart with an external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md).
