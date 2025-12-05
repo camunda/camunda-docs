@@ -123,6 +123,16 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 
 The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
 
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/concepts/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and migrate to the configuration method described in the guide linked above.
+:::
+
 #### OpenShift Changes
 
 We added the `global.compatibility.openshift.adaptSecurityContext` variable in the values.yaml that can be used to set the following possible values:
