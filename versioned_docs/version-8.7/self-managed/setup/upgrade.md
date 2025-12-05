@@ -123,7 +123,7 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 
 The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
 
-#### Helm chart: Custom users and clients for Identity
+#### Helm chart: Custom users and clients for Management Identity
 
 It is now possible to add customer users and clients for Management Identity
 

@@ -114,7 +114,7 @@ The separated Ingress Helm configuration for Camunda 8 Self-Managed has been dep
 
 #### Helm chart: Custom users and clients for Identity
 
-It is now possible to add customer users and clients for Management Identity
+It is now possible to add customer users and clients for Identity
 
 See the [Adding Customer Users and Clients](/self-managed/concepts/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity on intial Helm install.
 
