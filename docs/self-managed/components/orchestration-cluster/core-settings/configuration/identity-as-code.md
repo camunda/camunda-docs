@@ -4,17 +4,20 @@ title: Identity as Code
 description: Configure Identity as Code for a Camunda 8 Self-Managed Orchestration Cluster.
 ---
 
-This page explains how to configure Identity as Code in the **Camunda 8 Self-Managed Orchestration Cluster**, which means creating users, roles, groups, authorizations, mapping rules, and tenants at application start.
+This page explains how to configure Identity as Code in the Camunda 8 Self-Managed Orchestration Cluster.
+Use Identity as Code to create users, roles, groups, authorizations, mapping rules, and tenants at application start.
 
-## What can it be used for?
+## Use cases
 
-Identity as Code can be used to simplify configuring Self-Managed Orchestration Clusters e.g. across multiple stages.
-It allows you to create [all Identity related entities](/components/identity/identity-introduction.md#manage-access) on one stage afterwards deploy them to other stages without further interaction and thus chance for error.
-Another use case is local development setups, where a cluster might be recreated regularly.
+Identity as Code simplifies configuring Self-Managed orchestration clusters across multiple stages.
+You can create [all Identity-related entities](/components/identity/identity-introduction.md#manage-access) on one stage and then deploy them to other stages without further interaction, reducing the chance of error.
 
-It should be noted, that modifying entities in the configuration after they have already been created will not have any effect as they are checked for existence purely by id.
+Another use case is local development, where a cluster might be recreated regularly.
 
-## Configuring Authorizations
+After Identity creates an entity, changing its configuration does not update the existing entity.
+Identity checks only the ID to decide whether an entity already exists.
+
+## Configure authorizations
 
 ```bash
 CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATION_0_OWNER_TYPE=USER
@@ -24,7 +27,7 @@ CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATION_0_RESOURCE_ID=*
 CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATION_0_PERMISSIONS=CREATE,READ
 ```
 
-## Configuring Mapping Rules
+## Configure mapping rules
 
 ```bash
 CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMNAME=isAllowedToDoStuff
@@ -32,9 +35,9 @@ CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_CLAIMVALUE=true
 CAMUNDA_SECURITY_INITIALIZATION_MAPPINGRULES_0_MAPPINGRULEID=my-mapping-rule
 ```
 
-## Configuring Users
+## Configure users
 
-When configuring users, the password should never be hardcoded and instead be resolved from a vault.
+When configuring users, never hardcode the password. Resolve it from a vault instead.
 
 ```bash
 CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL=john.doe@example.com
