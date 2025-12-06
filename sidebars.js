@@ -1742,6 +1742,7 @@ module.exports = {
             "self-managed/concepts/elasticsearch-privileges",
             "self-managed/concepts/elasticsearch-without-cluster-privileges",
             "self-managed/concepts/opensearch-privileges",
+            "self-managed/concepts/opensearch-without-cluster-privileges",
           ],
         },
         {
