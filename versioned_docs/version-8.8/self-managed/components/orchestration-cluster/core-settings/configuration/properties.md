@@ -607,6 +607,10 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
+
 ### `camunda.security.http-headers`
 
 | Property                                                                  | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
@@ -1005,10 +1009,6 @@ script-src-attr 'none'.
 
 </TabItem>
 </Tabs>
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 import SecondaryStorage from './partials/\_secondary-storage.md'
 
