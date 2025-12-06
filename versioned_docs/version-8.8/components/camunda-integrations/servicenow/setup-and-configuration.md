@@ -8,15 +8,6 @@ Connect your ServiceNow instance with Camunda to enable end-to-end orchestration
 
 Install and configure the Camunda Spoke in ServiceNow, set up ServiceNow connectors in Camunda, and configure secure credentials. After setup, you can interact with ServiceNow tables and flows from Camunda and start or control Camunda processes from ServiceNow.
 
-:::tip
-**Before you begin**  
-Ensure the following prerequisites are in place:
-
-- Administrator access to both Camunda and ServiceNow.
-- ServiceNow instance meets all [prerequisites](./prerequisites.md), including required plugins and user permissions.
-- Network connectivity between Camunda and ServiceNow is allowed by your organization's security settings.
-  :::
-
 ## Configure Camunda
 
 1. Create a [Camunda API credential](../../../components/react-components/create-api-credentials.md) for ServiceNow connectivity.
