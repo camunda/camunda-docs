@@ -59,10 +59,10 @@ Choose one of the following image options:
 
 #### Option A: Open-source Bitnami images (community default)
 
-- [bitnami/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
-- [bitnami/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
-- [bitnami/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
-- [bitnami/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
+- [bitnamilegacy/postgresql](https://hub.docker.com/r/bitnamilegacy/postgresql)
+- [bitnamilegacy/keycloak](https://hub.docker.com/r/bitnamilegacy/keycloak)
+- [bitnamilegacy/os-shell](https://hub.docker.com/r/bitnamilegacy/os-shell/)
+- [bitnamilegacy/elasticsearch](https://hub.docker.com/r/bitnamilegacy/elasticsearch/)
 
 :::warning Not recommended for production
 These open-source images are the community default but are not recommended for production environments due to security and support limitations. Customers should transition to Option B or use managed infrastructure services.
