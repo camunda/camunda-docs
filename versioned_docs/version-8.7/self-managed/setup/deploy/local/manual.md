@@ -190,7 +190,7 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 ### Bundle
 
-Bundle includes runtime with all available Camunda connectors.
+Bundle includes runtime with all available built-in connectors.
 
 The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
 outbound connectors available on the `classpath` automatically.
@@ -238,7 +238,7 @@ This starts a Zeebe client, registering the defined connector as a job worker. B
 
 ### Configuring runtime
 
-Visit the [Camunda Connector Runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
+Visit the [built-in connector runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
 to find up-to-date runtime configuration options.
 
 ## Run Identity

@@ -467,7 +467,7 @@ const SearchableTable = () => {
     <div className="connector-input">
       <input
         type="text"
-        placeholder="Find a Camunda connector"
+        placeholder="Find a built-in connector"
         value={searchTerm}
         onChange={handleSearch}
         className="connector-input-box"

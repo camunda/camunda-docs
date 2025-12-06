@@ -482,7 +482,7 @@ Let AI teach you how to prevent and fix the incidents you run into while playing
 
 Offering seamless data exchange between Camunda 8 and databases, the [new database connector](/components/connectors/out-of-the-box-connectors/sql.md) for Camunda 8 simplifies data exchange with MySQL, MS SQL, and PostgreSQL databases, allowing you to read and write data directly within your Camunda processes.
 
-This integration enables a wide range of process blueprints and use cases to be executed on the Camunda platform without any additional installation or development. With the new Camunda connector, you can now seamlessly integrate database operations into your workflows. This feature reduces complexity, enhances security, and lowers maintenance costs by providing a robust and efficient method for data exchange directly within the Camunda platform.
+This integration enables a wide range of process blueprints and use cases to be executed on the Camunda platform without any additional installation or development. With the new built-in connector, you can now seamlessly integrate database operations into your workflows. This feature reduces complexity, enhances security, and lowers maintenance costs by providing a robust and efficient method for data exchange directly within the Camunda platform.
 
 ### Create Camunda Wizard <span class="badge badge--long" title="This feature affects Modeler">Modeler</span>
 

@@ -33,7 +33,7 @@ For a standard overview of the steps involved in the SAP RFC connector, see the 
 
 ## Configuration and deployment
 
-Unlike other Camunda connectors, the SAP RFC connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC connector.
+Unlike other built-in connectors, the SAP RFC connector must be deployed as a Java `.war` archive. This is because it uses SAP's [JCo Java library](https://support.sap.com/en/product/connectors/jco.html) to connect via RFC to the configured SAP system. the JCo library's license prohibits redistribution, but it is available at runtime on BTP and auto-discovered by Camunda's RFC connector.
 
 A descriptor file is required to deploy the SAP RFC connector to a space in a SAP BTP subaccount. An exemplary deployment descriptor `mtad.yaml.example` is provided by Camunda. This is a standard format in SAP BTP's Cloud Foundry environment to describe the application that needs deployment.
 
