@@ -1,10 +1,10 @@
 ---
 id: overview
 title: Encryption
-description: Learn how to configure Amazon BYOK (Bring Your Own Key) for Camunda 8 SaaS clusters.
+description: Learn how to configure AWS BYOK (Bring Your Own Key) for Camunda 8 SaaS clusters.
 ---
 
-Camunda 8 SaaS encrypts all cluster data at rest. By default, encryption uses cloud provider–managed keys. For stricter compliance or control, you can configure **Bring Your Own Key (BYOK)** with **Amazon KMS**, available for clusters hosted in AWS regions.
+Camunda 8 SaaS encrypts all cluster data at rest. By default, encryption uses cloud provider–managed keys. For stricter compliance or control, you can configure **Bring Your Own Key (BYOK)** with **AWS KMS**, available for clusters hosted in AWS Regions.
 
 ## Encryption overview
 
@@ -28,11 +28,11 @@ Camunda 8 SaaS supports three encryption models:
 | Type                    | Managed by | Description                                                |
 | ----------------------- | ---------- | ---------------------------------------------------------- |
 | Camunda-managed         | Camunda    | Default encryption, handled automatically                  |
-| Amazon-managed          | AWS        | Encryption in your account, but AWS controls key lifecycle |
+| AWS managed             | AWS        | Encryption in your account, but AWS controls key lifecycle |
 | Customer-managed (BYOK) | You        | You create, own, and manage the key in your AWS account    |
 
 Industries such as finance, healthcare, and government often require this level of control for compliance reasons.  
-With BYOK, you maintain visibility through **CloudTrail** and **CloudWatch**, apply your own rotation policies, and centralize audit logs in your AWS account.
+With BYOK, you maintain visibility through **AWS CloudTrail** and **Amazon CloudWatch**, apply your own rotation policies, and centralize audit logs in your AWS account.
 
 </details>
 
@@ -40,32 +40,34 @@ With BYOK, you maintain visibility through **CloudTrail** and **CloudWatch**, ap
 
 | Owner    | Responsibility                                           |
 | -------- | -------------------------------------------------------- |
-| Customer | Create and manage the KMS key in AWS                     |
-| Customer | Ensure the key and cluster are in the same AWS region    |
+| Customer | Create and manage the AWS KMS key                        |
+| Customer | Ensure the key and cluster are in the same AWS Region    |
 | Customer | Configure key policies granting Camunda access           |
 | Camunda  | Encrypt and decrypt customer data using the provided key |
 | Camunda  | Surface any key-related errors in the Console            |
 
 :::warning Key management
-If your KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible.
+If your AWS KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible.
 :::
 
 ## Cost implications
 
-Using external encryption keys with **Amazon KMS** incurs costs directly in your Amazon account. Camunda does not charge for the feature itself, but you are responsible for all Amazon KMS usage.
+Using external encryption keys with **AWS KMS** incurs costs directly in your AWS account. Camunda does not charge for the feature itself, but you are responsible for AWS KMS key storage, management, and persistence of logs.
 
-| Cost type       | Description                                                              | Notes                                                      |
-| --------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| KMS key storage | Monthly charge for each KMS key                                          | Depends on Amazon region and key type                      |
-| API requests    | Charges for KMS API calls (Encrypt, Decrypt, GenerateDataKey, ReEncrypt) | Costs increase with frequent operations                    |
-| CloudTrail logs | Charges for storing and accessing CloudTrail events                      | Includes encryption/decryption activity by Camunda cluster |
+| Cost type       | Description                                             | Notes                                                      |
+| --------------- | ------------------------------------------------------- | ---------------------------------------------------------- |
+| KMS key storage | Monthly charge for each AWS KMS key                     | Depends on AWS Region and key type                         |
+| CloudTrail logs | Charges for storing and accessing AWS CloudTrail events | Includes encryption/decryption activity by Camunda cluster |
+
+:::note
+Customers are not charged for key usage operations (for example, encrypting or decrypting) as per [AWS KMS pricing](https://aws.amazon.com/kms/pricing/).
+:::
 
 :::warning Cost responsibility
-You are responsible for monitoring Amazon KMS usage and associated costs.
+You are responsible for monitoring AWS KMS key storage, management, and log persistence costs.
 :::
 
 ### Cost optimization tips
 
 - Use separate keys only when necessary to avoid extra storage fees.
-- Aggregate audit logging to reduce frequent API calls.
-- Review CloudTrail retention settings to balance compliance and storage cost.
+- Review AWS CloudTrail retention settings to balance compliance and storage cost.
