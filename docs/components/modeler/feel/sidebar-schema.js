@@ -33,5 +33,18 @@ module.exports = {
         "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous",
       ],
     },
+    {
+      type: "category",
+      label: "Cluster variables",
+      link: {
+        type: "doc",
+        id: "components/modeler/feel/cluster-variable/cluster-variable-overview",
+      },
+      items: [
+        "components/modeler/feel/cluster-variable/cluster-variable-get-started",
+        "components/modeler/feel/cluster-variable/cluster-variable-core-concepts",
+        "components/modeler/feel/cluster-variable/cluster-variable-namespace-collisions",
+      ],
+    },
   ],
 };
