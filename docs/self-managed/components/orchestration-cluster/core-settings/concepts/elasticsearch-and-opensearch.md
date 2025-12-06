@@ -1,10 +1,14 @@
 ---
 id: elasticsearch-and-opensearch
-title: "Elasticsearch and Opensearch"
+title: "Elasticsearch and OpenSearch"
 description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch."
 ---
 
-The Orchestration Cluster stores and reads data from either **Elasticsearch** or **OpenSearch**. You can select the database by setting the `CAMUNDA_DATABASE` environment variable or the equivalent configuration property.
+The Orchestration Cluster stores and reads data from either **Elasticsearch** or **OpenSearch**.
+
+## Select a database
+
+Select the database by setting the `CAMUNDA_DATABASE` environment variable or the equivalent configuration property.
 
 **Valid values:** `elasticsearch` (default) or `opensearch`.
 
@@ -12,7 +16,12 @@ The Orchestration Cluster stores and reads data from either **Elasticsearch** or
 CAMUNDA_DATABASE=opensearch
 ```
 
-We now support [Amazon OpenSearch](https://aws.amazon.com/de/opensearch-service/). To see which versions are supported, refer to [supported environments](/reference/supported-environments.md). Using Amazon OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
+:::info Elasticsearch and OpenSearch support
+
+- Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution. For version support information, see [supported environments](/reference/supported-environments.md).
+- Using OpenSearch requires a new Camunda installation. Migration from previous Elasticsearch setups is not supported.
+
+:::
 
 ## Connection settings
 

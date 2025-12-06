@@ -153,7 +153,9 @@ The currently supported Camunda 8 Self-Managed components are:
 
 Two Kubernetes clusters are required for the Helm chart installation.
 
-Amazon OpenSearch is **not supported** in dual-region configurations.
+:::note
+OpenSearch is **not supported** in dual-region configurations.
+:::
 
 #### Network requirements
 
