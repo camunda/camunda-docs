@@ -281,6 +281,7 @@ The following variables are available in the context of the response expression:
 - **headers**: Response headers.
 - **document**: If the `Store response` checkbox is selected, this field represents the stored document:
   - **documentId**: The ID of the stored document.
+  - **contentHash**: The hash of the stored document.
   - **storeId**: The store ID.
   - **metadata**: Metadata of the stored document (if available).
     - **size**: Size of the stored document (in bytes).
