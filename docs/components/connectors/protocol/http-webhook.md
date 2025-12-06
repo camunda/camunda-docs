@@ -270,34 +270,121 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-Verification expression is used whenever a webhook needs to return response data **without** starting a process.
-A common use-case may be a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
+The **Verification expression** allows you to return a custom HTTP response **without triggering process correlation**. This powerful feature can be used for multiple scenarios:
 
-For example, consider the following verification challenge from [Slack](https://slack.com/):
+- **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub)
+- **Request validation**: Reject invalid requests before creating a process instance
+- **Conditional responses**: Return different responses based on the request content
+- **Health check endpoints**: Respond to health checks or status queries
+- **Early response without correlation**: Return immediate responses without starting a workflow
 
-`{"token": "Jhj5dZrVaK7ZwHHjRyZWjbDl","challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P","type": "url_verification"}`
+#### How it works
 
-To confirm the Slack events subscription, you must return the following response:
+When the verification expression evaluates to a **non-null** value, the webhook:
 
-`HTTP 200 OK Content-type: application/json {"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}`
+1. Returns the specified response immediately
+2. **Does NOT** trigger process correlation
+3. **Does NOT** evaluate activation conditions or other webhook configuration
 
-To do so, the **Verification expression** field may look like:
+When the verification expression evaluates to **null**, the webhook:
 
-`=if request.body.type = "url_verification" then {"body": {"challenge": request.body.challenge}, "statusCode": 200} else null`.
+1. Continues with normal webhook processing
+2. Evaluates activation conditions
+3. Performs HMAC validation (if configured)
+4. Triggers process correlation as usual
+
+#### Response format
 
 When working with `request` data, use the following references to access data:
 
-- Body: `request.body.`.
-- Headers: `request.headers.`.
-- URL parameters: `request.params.`.
+- Body: `request.body.`
+- Headers: `request.headers.`
+- URL parameters: `request.params.`
 
 When working with response, you can use the following placeholders:
 
-- Body: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`.
-- Status code: `statusCode`, for example `{"statusCode": 201, "body": {"challenge": request.body.challenge}}`.
-- Headers: `headers`, for example `{"headers": {"X-Challenge": request.body.challenge}, "body": {"challenge": request.body.challenge}}`.
+- **Body**: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`
+- **Status code**: `"statusCode"`, for example `{"statusCode": 201, "body": {"result": "ok"}}`. The default status code is `200` if not specified.
+- **Headers**: `"headers"`, for example `{"headers": {"Content-Type": "application/json"}, "body": {"result": "ok"}}`
 
-You can also use FEEL expressions to modify the data you return.
+You can use FEEL expressions to modify the data you return.
+
+#### Example: One-time verification challenge
+
+A common use-case is a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
+
+For example, consider the following verification challenge from [Slack](https://slack.com/):
+
+```json
+{
+  "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+  "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+  "type": "url_verification"
+}
+```
+
+To confirm the Slack events subscription, you must return the following response:
+
+```
+HTTP 200 OK
+Content-type: application/json
+{"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}
+```
+
+To do so, the **Verification expression** field may look like:
+
+```feel
+=if request.body.type = "url_verification"
+then {"body": {"challenge": request.body.challenge}, "statusCode": 200}
+else null
+```
+
+#### Example: Request validation
+
+You can validate incoming requests and reject invalid payloads before creating a process instance:
+
+```feel
+=if request.body.requiredField = null
+then {"body": {"error": "Missing required field"}, "statusCode": 400}
+else null
+```
+
+This expression checks if `requiredField` is missing and returns a `400 Bad Request` status with an error message. If the field is present, it returns `null`, allowing normal webhook processing to continue.
+
+#### Example: Custom status codes
+
+You can return any HTTP status code, including non-standard or conflict codes:
+
+```feel
+=if request.body.challenge != null
+then {"body": {"challenge": request.body.challenge}, "statusCode": 409}
+else null
+```
+
+#### Example: Custom headers
+
+You can include custom headers in your response:
+
+```feel
+=if request.body.challenge != null
+then {
+  "body": {"challenge": request.body.challenge},
+  "headers": {"Content-Type": "application/camunda-bin"}
+}
+else null
+```
+
+#### Example: Nested body structure
+
+You can access and respond to nested data structures in the request:
+
+```feel
+=if request.body.event_type = "verification"
+then {"body": {"challenge": request.body.event.challenge}}
+else null
+```
+
+This example extracts the challenge from a nested `event` object and returns it in the response.
 
 ### Response expression
 
