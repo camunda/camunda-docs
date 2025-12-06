@@ -370,6 +370,8 @@ The following example shows a full configuration to enable Microsoft Entra:
 
 ```yaml
 global:
+  elasticsearch:
+    enabled: true
   identity:
     auth:
       enabled: true
@@ -475,6 +477,9 @@ webModelerPostgresql:
       userPasswordKey: "webmodeler-postgresql-user-password"
 
 console:
+  enabled: true
+
+elasticsearch:
   enabled: true
 ```
 

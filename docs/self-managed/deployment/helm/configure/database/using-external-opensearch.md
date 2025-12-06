@@ -49,8 +49,6 @@ To connect to OpenSearch using basic authentication, follow the configuration be
 
 ```yaml
 global:
-  elasticsearch:
-    enabled: false
   opensearch:
     enabled: true
     auth:
@@ -65,9 +63,6 @@ global:
       protocol: https
       host: opensearch.example.com
       port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 This configuration disables the internal Elasticsearch component and the Elasticsearch configuration for all components. This is required to use Amazon OpenSearch Service.
