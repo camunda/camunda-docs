@@ -30,7 +30,7 @@ For the latest list of supported database versions, see the
 | Database type            | Availability         | Use case                                                                                                                                                                |
 | :----------------------- | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Elasticsearch/OpenSearch | General availability | Default for most production installations.                                                                                                                              |
-| RDBMS                    | 8.9-alpha1+          | Supports relational databases for secondary storage. See the [RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md) for supported vendors and versions. |
+| RDBMS                    | 8.9-alpha1+          | Supports relational databases for secondary storage. See the [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md) for supported vendors and versions. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
