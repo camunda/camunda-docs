@@ -1695,8 +1695,13 @@ module.exports = {
             "self-managed/concepts/rdbms-support-policy",
             {
               Elasticsearch: [
-                "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                {
+                  Privileges: [
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                    "self-managed/concepts/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                  ],
+                },
               ],
             },
             {
@@ -1760,11 +1765,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Privileges: [
-            "self-managed/concepts/elasticsearch-without-cluster-privileges",
-          ],
-        },
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
