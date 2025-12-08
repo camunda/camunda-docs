@@ -134,7 +134,7 @@ The catalog covers the following types of code:
 
 The complete pattern catalog with code examples is maintained on GitHub:
 
-**[Browse the pattern catalog →](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/patterns)**
+**[Browse the pattern catalog](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/patterns)**
 
 :::tip
 The pattern catalog is actively maintained by Camunda consultants, partners, and community members. You can contribute your own patterns or request additions via GitHub issues and pull requests.
@@ -182,7 +182,7 @@ The recipes are organized by code type and transformation phase:
 | **Cleanup**    | AllClientCleanupRecipes | AllDelegateCleanupRecipes | AllExternalWorkerCleanupRecipes |
 | **Combined**   | AllClientRecipes        | AllDelegateRecipes        | AllExternalWorkerRecipes        |
 
-You can apply recipes individually by phase, or use the **Combined** recipes to run all three phases at once.
+You can apply recipes individually by phase, or use the **combined** recipes to run all three phases at once.
 
 ### Using the recipes
 
