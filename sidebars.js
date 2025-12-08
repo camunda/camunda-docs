@@ -1681,6 +1681,7 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
+            "self-managed/concepts/rdbms-support-policy",
           ],
         },
         {
