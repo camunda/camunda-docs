@@ -77,6 +77,43 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                              |
 | `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                |
 
+### Start external Elasticsearch
+
+In Camunda 8.9 and later, Camunda 8 Run may not include an embedded Elasticsearch instance.
+If you want to use Elasticsearch, run your own instance and point Camunda 8 Run to it.
+
+Start a single-node Elasticsearch container:
+
+```bash
+docker run \
+  -m 1GB \
+  -d \
+  --name elasticsearch \
+  -p 9200:9200 \
+  -p 9300:9300 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  elasticsearch:8.18.6
+```
+
+Create an `application.yaml` that points Camunda 8 Run to your external Elasticsearch:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      elasticsearch:
+        url: "http://127.0.0.1:9200/"
+```
+
+Start Camunda 8 Run with the embedded Elasticsearch disabled and your custom config:
+
+```bash
+./start.sh --disable-elasticsearch --config application.yaml
+```
+
+Use external Elasticsearch when you need indexing, search, or full Operate/Tasklist functionality.
+
 ## Work with Camunda 8 Run
 
 ### Access Camunda components
