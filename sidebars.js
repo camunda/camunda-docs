@@ -1692,13 +1692,13 @@ module.exports = {
             id: "self-managed/concepts/databases/overview",
           },
           items: [
-            "self-managed/concepts/rdbms-support-policy",
+            "self-managed/concepts/databases/rdbms-support-policy",
             {
               Elasticsearch: [
                 {
                   Privileges: [
                     "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                    "self-managed/concepts/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
                     "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
                   ],
                 },
