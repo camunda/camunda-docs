@@ -9,13 +9,9 @@ Camunda 8 Self-Managed supports using an external relational database (RDBMS) as
 
 ## Prerequisites
 
-Provide a supported database that is reachable by the Camunda components:
+Provide a supported relational database that is reachable by the Camunda components.
 
-- PostgreSQL 15, 16, 17
-- Oracle 19c, 23ai
-- MariaDB 10.11, 11.4, 11.8
-- MySQL
-- MS SQL Server
+See the [RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md) for the complete list of supported databases and versions.
 
 Ensure that:
 
