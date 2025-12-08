@@ -93,7 +93,7 @@ docker run \
   -p 9300:9300 \
   -e "discovery.type=single-node" \
   -e "xpack.security.enabled=false" \
-  elasticsearch:8.15.2
+  elasticsearch:8.18.6
 ```
 
 Create an `application.yaml` that points Camunda 8 Run to your external Elasticsearch:
