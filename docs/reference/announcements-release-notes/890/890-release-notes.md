@@ -138,6 +138,16 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 <p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
 
+#### Cluster secrets import (SaaS)
+
+<!-- https://github.com/camunda/product-hub/issues/3307 -->
+
+You can now import and export connector secrets between clusters within your organization.
+
+Export a cluster’s secrets to a key-value file for backup or external workflows, and import secrets from another cluster in a single action. Imports automatically match keys, update existing values, create missing ones, and provide clear feedback on the result. Permissions are enforced so that only authorized users can perform these actions.
+
+<p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
+
 #### Cluster description (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3284 -->
@@ -188,6 +198,8 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 - These scripts include database and schema creation, drop, and upgrade routines.
 - Scripts follow best practices for each supported database type and version.
 - The full script package is distributed as part of the official Camunda distribution, available via GitHub or Artifactory.
+
+<p class="link-arrow">[SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)</p>
 
 <!-- See the documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection. -->
 
