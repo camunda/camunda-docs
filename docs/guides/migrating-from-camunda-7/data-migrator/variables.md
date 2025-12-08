@@ -104,7 +104,7 @@ camunda:
     # Variable interceptor plugins configuration
     interceptors:
       # Disable date transformation
-      - class-name: io.camunda.migrator.impl.interceptor.DateVariableTransformer
+      - class-name: io.camunda.migration.data.impl.interceptor.DateVariableTransformer
         enabled: false
 ```
 
