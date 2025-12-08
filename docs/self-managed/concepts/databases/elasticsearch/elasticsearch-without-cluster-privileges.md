@@ -338,7 +338,7 @@ This staged approach reduces or eliminates downtime for minor upgrades that requ
 
 You can use the standalone schema manager to roll out certain index template setting changes without granting cluster privileges to the continuously running Camunda application.
 
-Supported settings (see [configuration references](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings) and the [Elasticsearch exporter configuration](../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
+Supported settings (see [configuration references](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings) and the [Elasticsearch exporter configuration](../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)):
 
 - **numberOfShards** (Operate / Tasklist / Camunda / Zeebe Elasticsearch exporter) — static: applies only to new indices created after the change. Existing indices keep their shard count.
 - **numberOfReplicas** (Operate / Tasklist / Camunda) — dynamic: applied to existing indices and index templates.

@@ -4,7 +4,7 @@ title: Overview
 description: Learn how Camunda uses document and relational databases for secondary storage, including supported options, limitations, and where to find configuration details.
 ---
 
-Camunda applications such as Operate, Tasklist, Identity, and the Camunda REST API depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
+Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
 
 This storage layer can use either document databases or relational databases (RDBMS), depending on your requirements.
 
@@ -54,7 +54,7 @@ When using an RDBMS as secondary storage, keep the following limitations in mind
 ## Working with variables
 
 When retrieving variables through the  
-[Camunda REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview),  
+[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md),  
 the following comparison operators only apply to the first 4000 characters of large String or JSON variables:
 
 - equals
@@ -64,7 +64,7 @@ the following comparison operators only apply to the first 4000 characters of la
 
 This ensures consistent performance on large datasets.  
 For details, see the  
-[get variable specification](/apis-tools/camunda-api-rest/specifications/get-variable).
+[get variable specification](/apis-tools/orchestration-cluster-api-rest/specifications/get-variable.api.mdx).
 
 ## Related database topics
 
