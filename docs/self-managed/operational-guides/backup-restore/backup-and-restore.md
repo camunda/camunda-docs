@@ -290,5 +290,3 @@ To restore a Camunda 8 system backed by an RDBMS:
    - Start Optimize
 
    Ensure all components use the restored database and backup ID.
-
-If you'd like, I can also add a diagram or include a short list of RDBMS backup tooling examples (pg_dump, oracle expdp, mariadb backups, etc.).

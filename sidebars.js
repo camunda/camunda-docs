@@ -1768,8 +1768,6 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
-        "components/concepts/multi-tenancy",
-        "components/concepts/access-control/mapping-rules",
       ],
     },
     {
