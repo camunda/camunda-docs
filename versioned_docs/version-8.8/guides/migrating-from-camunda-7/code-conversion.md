@@ -55,10 +55,10 @@ History data:
 
 To help you understand the differences between the two APIs, we provide an interactive web application that maps the complete Camunda 7 REST API to its Camunda 8 counterparts. The tool shows:
 
-- ✅ Direct mappings: Camunda 7 endpoints that map one-to-one to Camunda 8
-- 🔄 Conceptual mappings: Functionality that exists in Camunda 8 but works differently
-- 🚧 Roadmap items: Features planned for future Camunda 8 releases
-- ❌ Discontinued features: Camunda 7 endpoints that are no longer available and why
+- Direct mappings: Camunda 7 endpoints that map one-to-one to Camunda 8
+- Conceptual mappings: Functionality that exists in Camunda 8 but works differently
+- Roadmap items: Features planned for future Camunda 8 releases
+- Discontinued features: Camunda 7 endpoints that are no longer available and why
 
 [Open the API Mapping Guide](https://camunda.github.io/camunda-7-to-8-migration-tooling/).
 
