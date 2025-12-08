@@ -23,7 +23,7 @@ Camunda 8 Run also supports document storage and management with [document handl
 
 :::note
 For the latest list of supported relational databases and versions, see the  
-[RDBMS version support policy](/self-managed/deployment/helm/configure/database/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
 :::
 
 ## Prerequisites

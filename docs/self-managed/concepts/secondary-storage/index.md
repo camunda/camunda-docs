@@ -25,7 +25,7 @@ Secondary storage is not a duplicate of primary data. It represents the historic
 
 Camunda supports multiple secondary storage backends.  
 For the latest list of supported database versions, see the  
-[RDBMS version support policy](/self-managed/deployment/helm/configure/database/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
 
 | Database type            | Availability         | Use case                                                                                                                                                                |
 | :----------------------- | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
