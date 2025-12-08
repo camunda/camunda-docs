@@ -27,10 +27,10 @@ Camunda supports multiple secondary storage backends.
 For the latest list of supported database versions, see the  
 [RDBMS version support policy](/self-managed/deployment/helm/configure/database/rdbms-support-policy.md).
 
-| Database type                   | Availability         | Use case                                                             |
-| :------------------------------ | :------------------- | :------------------------------------------------------------------- |
-| Elasticsearch/OpenSearch        | General availability | Default for most production installations.                           |
-| RDBMS (H2, PostgreSQL, MariaDB) | 8.9-alpha1+          | Lightweight local testing (H2) or future enterprise-grade RDBMS use. |
+| Database type            | Availability         | Use case                                                                                                                                                                |
+| :----------------------- | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch | General availability | Default for most production installations.                                                                                                                              |
+| RDBMS                    | 8.9-alpha1+          | Supports relational databases for secondary storage. See the [RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md) for supported vendors and versions. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
