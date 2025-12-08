@@ -11,8 +11,8 @@ As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (B
 
 You must especially rewrite code that does the following:
 
-- **Uses the Client API**: Starting process instances, correlating messages, managing tasks, etc.
-- **Implements service tasks**, including:
+- Uses the Client API: Starting process instances, correlating messages, managing tasks, etc.
+- Implements service tasks, including:
   - [External tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/#the-external-task-pattern) where workers subscribe to the engine
   - [Java code attached to service tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) called directly by the engine (in-VM)
 
@@ -20,11 +20,11 @@ You must especially rewrite code that does the following:
 
 This guide covers three main tools to help with code conversion:
 
-1. **[API Mapping Guide](#api-mapping-guide)**: Understand how Camunda 7 REST API endpoints map to Camunda 8
-2. **[OpenRewrite Recipes](#refactoring-recipes-using-openrewrite)**: Automatically refactor Java code with configurable recipes
-3. **[Code Conversion Patterns](#code-conversion-patterns)**: Detailed technical reference for manual migration
+1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
+2. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Automatically refactor Java code with configurable recipes
+3. [Code Conversion Patterns](#code-conversion-patterns): Detailed technical reference for manual migration
 
-Additionally, you'll find information about:
+Additionally, you will find information about:
 
 - [Diagram Converter](#diagram-converter) for BPMN and DMN model conversion
 - [Leveraging AI](#leveraging-ai-for-refactoring) to assist with refactoring tasks
@@ -36,31 +36,31 @@ The Camunda 7 and Camunda 8 Orchestration Cluster APIs share many similarities, 
 
 ### Key structural changes
 
-**Streamlined search endpoints:**
+Streamlined search endpoints:
 
 - **Camunda 7**: Separate endpoints like `GET /resource` and `GET /resource/count`
 - **Camunda 8**: Single `POST /search` endpoint with filtering capabilities
 
-**Tenant handling:**
+Tenant handling:
 
 - **Camunda 7**: `tenantId` passed as path parameter with multiple endpoint variants
 - **Camunda 8**: `tenantId` passed in request body, simplifying the API surface
 
-**History data:**
+History data:
 
-- **Camunda 7**: Separate endpoints for historic data (e.g., HistoryService)
+- **Camunda 7**: Separate endpoints for historic data (for example, HistoryService)
 - **Camunda 8**: No separate historic endpoints; history is managed through Operate
 
 ### Using the interactive mapping tool
 
 To help you understand the differences between the two APIs, we provide an interactive web application that maps the complete Camunda 7 REST API to its Camunda 8 counterparts. The tool shows:
 
-- ✅ **Direct mappings**: Camunda 7 endpoints that map one-to-one to Camunda 8
-- 🔄 **Conceptual mappings**: Functionality that exists in Camunda 8 but works differently
-- 🚧 **Roadmap items**: Features planned for future Camunda 8 releases
-- ❌ **Discontinued features**: Camunda 7 endpoints that are no longer available and why
+- ✅ Direct mappings: Camunda 7 endpoints that map one-to-one to Camunda 8
+- 🔄 Conceptual mappings: Functionality that exists in Camunda 8 but works differently
+- 🚧 Roadmap items: Features planned for future Camunda 8 releases
+- ❌ Discontinued features: Camunda 7 endpoints that are no longer available and why
 
-**[Open the API Mapping Guide →](https://camunda.github.io/camunda-7-to-8-migration-tooling/)**
+[Open the API Mapping Guide →](https://camunda.github.io/camunda-7-to-8-migration-tooling/).
 
 :::tip When to use this tool
 Use the API mapping guide to:
@@ -88,21 +88,21 @@ Code conversion patterns are detailed, technical examples showing how specific C
 
 Use the code conversion patterns when:
 
-- **Manual migration is needed**: The OpenRewrite recipes cannot handle your specific code structure
-- **Understanding changes**: You want to understand what the recipes are doing under the hood
-- **Extending recipes**: You're developing custom recipes for your organization's specific patterns
-- **Complex scenarios**: Your code uses advanced features that require careful manual conversion
+- Manual migration is needed: The OpenRewrite recipes cannot handle your specific code structure
+- Understanding changes: You want to understand what the recipes are doing under the hood
+- Extending recipes: You're developing custom recipes for your organization's specific patterns
+- Complex scenarios: Your code uses advanced features that require careful manual conversion
 
 ### Pattern categories
 
 The catalog covers the following types of code:
 
-**General patterns:**
+General patterns:
 
 - Maven dependencies and configuration
 - Handling process variables
 
-**Client code** (code that calls the Camunda API):
+Client code (code that calls the Camunda API):
 
 - Starting process instances
 - Correlating messages
@@ -115,13 +115,13 @@ The catalog covers the following types of code:
 - Handling resources
 - Class-level changes
 
-**Glue code** (code executed by the process engine):
+Glue code (code executed by the process engine):
 
 - Converting JavaDelegates to Job Workers
 - Converting External Task Workers to Job Workers
 - Converting expressions
 
-**Test code**:
+Test code:
 
 - Complete test cases
 - Process instance assertions
@@ -247,7 +247,7 @@ mvn rewrite:run
 Carefully examine all changes using your version control system's diff tool. The recipes add comments where manual review is needed:
 
 - Parameters that were removed or have different semantics in Camunda 8
-- Methods with no direct one-to-one replacement (e.g., executionId-based operations)
+- Methods with no direct one-to-one replacement (for example, executionId-based operations)
 - Dummy literal strings that need to be replaced with actual values
 
 :::warning Important
@@ -275,9 +275,9 @@ If Camunda 7 code remains after applying recipes:
 
 ### Additional resources
 
-- **Recipe source code and developer guide**: [GitHub repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/recipes)
-- **OpenRewrite documentation**: [docs.openrewrite.org](https://docs.openrewrite.org/)
-- **Complete migration example**: [camunda-7-to-8-migration-example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
+- [Recipe source code and developer guide](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/recipes)
+- [OpenRewrite documentation](https://docs.openrewrite.org/)
+- [Complete migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example)
 
 ## Diagram converter
 
@@ -285,13 +285,13 @@ Your BPMN and DMN models need to be adjusted to work with Camunda 8.
 
 The [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
-Find the diagram conversion tooling and its documentation in the [camunda-7-to-8-migration-analyzer repository](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer).
+Find the diagram conversion tooling and its documentation in the [Camunda 7 to 8 migration tooling – Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer).
 
 ## Leveraging AI for refactoring
 
-You can use AI tools like ChatGPT, GitHub Copilot, or other AI assistants to help with refactoring tasks. In our experiments, we found success with relatively simple prompts, though you may need several iterations to ensure the AI refactors correctly according to your target architecture.
+You can use AI tools such as ChatGPT, GitHub Copilot, or other AI assistants to help with refactoring tasks. In testing, simple prompts often produce correct results, although you may need several iterations to ensure the refactored code aligns with your target architecture.
 
-In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases), we used ChatGPT to rewrite test cases with this sample prompt:
+In the [migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration-example?tab=readme-ov-file#migrating-test-cases), we used ChatGPT to rewrite test cases with the following sample prompt:
 
 ```
 Please refactor the following Camunda 7 JUnit test case to Camunda 8 using the official migration pattern described in https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md. The refactored test must:
