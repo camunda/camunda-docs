@@ -1656,7 +1656,7 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
-            "self-managed/deployment/helm/configure/database/rdbms-support-policy",
+            "self-managed/concepts/rdbms-support-policy",
           ],
         },
         {
