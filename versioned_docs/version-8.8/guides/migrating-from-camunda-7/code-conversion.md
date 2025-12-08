@@ -206,9 +206,9 @@ Add the following to your `pom.xml`:
                 <version>6.0.5</version>
                 <configuration>
                     <activeRecipes>
-                        <recipe>org.camunda.migration.rewrite.recipes.AllClientRecipes</recipe>
-                        <recipe>org.camunda.migration.rewrite.recipes.AllDelegateRecipes</recipe>
-                        <recipe>org.camunda.migration.rewrite.recipes.AllExternalWorkerRecipes</recipe>
+                        <recipe>io.camunda.migration.code.recipes.AllClientRecipes</recipe>
+                        <recipe>io.camunda.migration.code.recipes.AllDelegateRecipes</recipe>
+                        <recipe>io.camunda.migration.code.recipes.AllExternalWorkerRecipes</recipe>
                     </activeRecipes>
                     <skipMavenParsing>false</skipMavenParsing>
                 </configuration>
