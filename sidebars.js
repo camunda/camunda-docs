@@ -1426,7 +1426,6 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                    "self-managed/deployment/helm/configure/database/rdbms-support-policy",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1657,6 +1656,7 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
+            "self-managed/deployment/helm/configure/database/rdbms-support-policy",
           ],
         },
         {
