@@ -1682,7 +1682,28 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
+          ],
+        },
+        {
+          type: "category",
+          label: "Databases",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/databases/overview",
+          },
+          items: [
             "self-managed/concepts/rdbms-support-policy",
+            {
+              Elasticsearch: [
+                "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
           ],
         },
         {
@@ -1741,29 +1762,11 @@ module.exports = {
         "self-managed/operational-guides/data-purge",
         {
           Privileges: [
-            "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
             "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
           ],
         },
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
-        {
-          Databases: [
-            "self-managed/concepts/databases/overview",
-            {
-              Elasticsearch: [
-                "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
-              ],
-            },
-            {
-              "Relational databases": [
-                "self-managed/concepts/databases/relational-db/database-configuration",
-              ],
-            },
-          ],
         },
         "components/concepts/multi-tenancy",
         "components/concepts/access-control/mapping-rules",

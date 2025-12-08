@@ -1,56 +1,81 @@
 ---
 id: overview
-title: "Overview"
-description: "An overview about possible databases"
+title: Overview
+description: Learn how Camunda uses document and relational databases for secondary storage, including supported options, limitations, and where to find configuration details.
 ---
 
-To service applications like Operate, Tasklist and the Camunda REST API with data, Camunda 8 requires a database. This database stores data for all processes, processInstances, decisions, tasks, users etc.
+Camunda applications such as Operate, Tasklist, Identity, and the Camunda REST API depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.
 
-Camunda 8 supports the following databases:
+This storage layer can use either document databases or relational databases (RDBMS), depending on your requirements.
 
-## Document based databases
+For an architectural explanation of how secondary storage fits into Camunda 8, see the  
+[secondary storage overview](/self-managed/concepts/secondary-storage/index.md).
 
-TODO: Add more text about behavior and limitations?
+## Document databases
 
-Document based databases like Elasticsearch and Opensearch
+Camunda supports document-oriented backends such as Elasticsearch and OpenSearch.
 
-## Relational databases
+These systems are optimized for high-volume ingestion and flexible search queries, and they remain the default choice for most production deployments.
 
-TODO: Decide which minimal version is supported
+Related documentation:
 
-Currently, the following relational databases are officially supported:
+- [Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md)
+- [OpenSearch privileges](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md)
+- [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)
+- [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
 
-- PostgreSQL (15+)
-- Oracle (23+)
-- MariaDB (11.6+)
-- MySQL (8.0+)
-- Microsoft SQL Server (2019+)
-- H2 (2.3)
+## Relational databases (RDBMS)
 
-To use and configure an RDBMS as storage backend, follow the instructions in the [Configuration](./relational-db/configuration.md) section.
+Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
 
-### Limitations
+A full list of supported vendors and versions is published in the  
+[RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md).
 
-When using a relational database as storage backend, the following limitations apply:
+For configuration details in Helm deployments, see the  
+[RDBMS configuration guide](/self-managed/deployment/helm/configure/database/rdbms.md).
 
-- **ID size limit:** The length of various string properties is limited to 255 characters. Trying to store a value with more than 400 characters will result in an error. Note, that the Zeebe broker itself does not have this limitation and will not reject entities with longer IDs. This size limit applies to:
-  - `id` properties like processDefinitionId, decisionDefinitionId...)
-  - `name` properties like username, processDefinitionName
-  - TODO: With https://github.com/camunda/camunda/issues/36717 this behaviour will change and this section should be revisited after completion
-- **Comparing / sorting variables:**
-  - When using the Camunda REST API to fetch and filter for variables, the comparison operations are only applied on the first 8191 characters of a String or JSON variable value (4000 when using OracleDB). The LIKE operator is not affected by this limitation.
-  - **OracleDB:** When using the Camunda REST API to fetch variables, by default longer variables will be truncated to 4000 characters instead of 8191 with other database vendors or when using document databases.
-- **Sorting:**
-  - Different databases have different behaviors when sorting string values with special characters (e.g. accents). This might lead to different sort orders when using different database vendors. Camunda does not enforce a specific collation or sorting behavior and relies on the database defaults.
+### RDBMS behavior and limitations
 
-#### Variables
+When using an RDBMS as secondary storage, keep the following limitations in mind:
 
-[The Camunda REST API](./../../../../apis-tools/camunda-api-rest/camunda-api-rest-overview) allows to fetch and filter for [Variables](./../../../../apis-tools/camunda-api-rest/specifications/get-variable).
-To keep the API performant, the following comparison operations are only applied on the first 4000 characters of a String or JSON variable value:
+- **ID size limits:**  
+  Identifiers such as process definition IDs, decision IDs, and usernames are limited to 255 characters.  
+  Storing values significantly longer may result in errors.  
+  (This behavior will change once [this issue](https://github.com/camunda/camunda/issues/36717) is complete.)
+
+- **Variable comparisons:**  
+  For String and JSON variables, comparison operators (`equals`, `notEquals`, `in`, `notIn`) only consider the first  
+  8191 characters (or 4000 characters with Oracle).  
+  `LIKE` comparisons are not affected.
+
+- **Sorting may differ by vendor:**  
+  Because collation behavior varies across database vendors, results sorted by string fields may differ between systems.
+
+## Working with variables
+
+When retrieving variables through the  
+[Camunda REST API](/apis-tools/camunda-api-rest/camunda-api-rest-overview),  
+the following comparison operators only apply to the first 4000 characters of large String or JSON variables:
 
 - equals
 - notEquals
 - in
 - notIn
 
-The LIKE operator is not affected by this limitation.
+This ensures consistent performance on large datasets.  
+For details, see the  
+[get variable specification](/apis-tools/camunda-api-rest/specifications/get-variable).
+
+## Related database topics
+
+These pages provide deeper detail for operators, DBAs, and administrators:
+
+- [RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md)
+- [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md)
+- [OpenSearch privileges](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md)
+- [Configure the RDBMS exporter](/self-managed/concepts/databases/relational-db/configuration.md)
+
+:::note
+For guidance on coordinating backups between Zeebe (primary storage) and your configured secondary storage backend—whether Elasticsearch, OpenSearch, or an RDBMS—see the [backup and restore overview](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+:::

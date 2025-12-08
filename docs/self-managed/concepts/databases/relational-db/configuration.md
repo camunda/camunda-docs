@@ -1,175 +1,217 @@
 ---
 id: database-configuration
-title: "Configuration"
+title: "RDBMS configuration overview"
+description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
 ---
 
-## Installation
+Camunda can use a relational database (RDBMS) as the secondary storage backend for Operate, Tasklist, Identity, and the Camunda REST API.
 
-To enable Camunda to use a relational database, two main configuration steps are required:
+This page explains how RDBMS configuration works at the application level. If you are deploying with Helm, see:
 
-1. Add the RDBMS [Exporter](./../../exporters.md) to the Zeebe broker configuration.
-2. Enable the RDBMS as primary database
-   for [Camunda REST API](./../../../../apis-tools/camunda-api-rest/camunda-api-rest-overview)
-3. Configure the database connection. This is done by configuring the Spring datasource.
+- [RDBMS configuration in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
+
+For supported database vendors and versions, see the  
+[RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md).
+
+## Enable RDBMS as secondary storage
+
+To activate an RDBMS backend, configure two components:
+
+1. **Enable the RDBMS exporter in Zeebe**, which streams workflow data to the database.
+2. **Configure the application layer** (Operate, Tasklist, Identity, REST API) to use RDBMS for secondary storage.
+
+Example configuration:
 
 ```yaml
-# enable the exporter
+# Enable the RDBMS exporter in Zeebe
 zeebe:
   broker:
     exporters:
       rdbms:
         className: io.camunda.exporter.rdbms.RdbmsExporter
 
-# set the RDBMS as primary database for Camunda REST API
+# Configure secondary storage for Camunda applications
 camunda:
   data:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:postgresql:camunda # example for a local PostgreSQL database with schema "camunda"
+        url: jdbc:postgresql://localhost:5432/camunda
         username: camunda
         password: camunda
 ```
 
-The RDBMS [Exporter](./../../exporters.md) configuration can be enabled in addition to
-other [Exporter](./../../exporters.md) as well. Note, that adding more exporters, can slow down the cluster.
+The RDBMS exporter can be used alongside other exporters, but enabling multiple exporters may affect performance.
 
-#### DB Schema management
+## Schema management
 
-By default, Camunda will automatically create and update the database schema on startup. For this it uses the
-tool [Liquibase](https://www.liquibase.com/). In addition to the Camunda core tables, Liquibase will create the two
-tables `DATABASECHANGELOG` and `DATABASECHANGELOGLOCK`. These tables must not be changed or updated.
+Camunda uses Liquibase to automatically create and update the database schema on startup.
 
-If the target database schema is not empty, it sometimes can be useful to define a prefix for the Camunda tables. This
-can be done by setting the following property in the configuration:
+Liquibase creates two internal management tables:
+
+- `DATABASECHANGELOG`
+- `DATABASECHANGELOGLOCK`
+
+These tables must not be modified or deleted.
+
+For Helm deployments requiring manual schema control or access to vendor-specific SQL, see:  
+**[Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)**.
+
+### Configure table prefix
+
+To add a prefix to all Camunda-managed database tables:
 
 ```yaml
 camunda.data.secondary-storage.rdbms.prefix: c8_
 ```
 
-To disable the automatic schema management, set the following property in the configuration:
+## Disable automatic schema creation
+
+If your organization manages schema manually:
 
 ```yaml
 camunda.data.secondary-storage.rdbms.auto-ddl: false
 ```
 
-Native SQL scripts for all supported databases can be found in the Camunda distribution (TODO:LINK). These scripts can
-be used to create the schema manually.
+SQL scripts for manual schema creation are documented in the Liquibase/SQL access guide linked above.
 
-### Database privileges
+## Database privileges
 
-To use Camunda with the RDBMS, the configured database user must have the following privileges on the all Camunda
-tables (the actual privilege names might depend on the database vendor):
+The configured database user must have the following privileges on all Camunda tables:
 
 - SELECT
 - INSERT
 - UPDATE
 - DELETE
 
-Optionally, to enable the automatic schema management by Camunda and [Liquibase](https://www.liquibase.com/), the
-additional privileges must have been granted before the first start of any Camunda instance:
+### Additional privileges for automatic schema management
+
+If Liquibase schema management is enabled, the following privileges must be granted before the first startup:
 
 - CREATE
 - ALTER
 - DROP
 
-Optionally, to enable the PURGE (TODO: Link) feature of the RDBMS Exporter, the following privilege must be granted to
-the camunda database user on all Camunda tables:
+### Additional privilege for purge operations
+
+If using the RDBMS purge feature, the following privilege is required:
 
 - TRUNCATE
 
 ## History cleanup
 
-The RDBMS Exporter supports automatic history cleanup. This is implemented in two parts:
+The RDBMS exporter performs automatic history cleanup using two mechanisms:
 
-When a process instance is finished (completed or terminated), all related data is marked for deletion after a
-configurable time-to-live (rdbms exporter configuration `default-history-ttl`).
+1. **TTL-based marking**  
+   Finished process instances and related data are marked for deletion after their configured history TTL expires.
 
-In addition to that, a periodic cleanup job is executed to delete all marked data. But to not overload the database, not
-all marked data is deleted in one run. Instead, the cleanup job deletes a configurable amount of data (rdbms exporter
-configuration `history-cleanup-batch-size`) in each run.
-The interval between two cleanup runs can be configured with the `min-history-cleanup-interval`
-and `max-history-cleanup-interval` properties (both ISO-8601
-duration). The cleanup scheduler will dynamically determine the duration until the next cleanup run depending on the
-amount of deleted
-data.
+2. **Periodic cleanup job**  
+   A scheduled cleanup process deletes marked data in batches, adjusting its interval dynamically:
 
-- When no data is deleted at all, the scheduler will double the duration until the next cleanup run up to the
-  configured `max-history-cleanup-interval`.
-- When the amount of deleted data at the configured `history-cleanup-batch-size` limit, the scheduler will half the
-  duration until the next cleanup run to the configured `min-history-cleanup-interval`.
-- Otherwise, the duration until the next cleanup run will stay the same.
+- If no data is deleted → interval doubles (up to `max-history-cleanup-interval`)
+- If the batch limit is reached → interval halves (down to `min-history-cleanup-interval`)
+- Otherwise → the interval remains unchanged
 
-## Configuration
+## Database driver
 
-### Database driver
+Camunda images include JDBC drivers for all supported databases **except**:
 
-The Camunda docker images ship the required database drivers for all the supported databases, except for Oracle and MySQL. If one of these is the preferred database, the driver must be added during the deployment by mounting it into the container. The Docker image provides a `/driver-lib` mount point for this purpose.
+- Oracle
+- MySQL
 
-Please note that the driver must be placed directly in the **directory that is mounted, not in a subdirectory**.
+If one of these databases is used, the driver must be mounted into `/driver-lib`:
 
 ```yaml
 services:
   camunda:
     image: camunda/camunda:<tag>
-    ports:
-      - "8080:8080"
-      - "26500:26500"
-      - "9600:9600"
-    environment:
-      # environment configuration
     volumes:
       - <local-path>/driver-lib:/driver-lib
 ```
 
-### Database configuration
+The driver JAR must be placed directly inside the mounted directory (not in subfolders).
 
-Camunda RDBMS database configuration reference:
+## Database configuration
 
-| Property name                                           | Description                                                                                                                                                                                      | Default setting |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| camunda.data.secondary-storage.rdbms.url                | The JDBC connection url of the database                                                                                                                                                          | _empty_         |
-| camunda.data.secondary-storage.rdbms.user               | The username for the database connection                                                                                                                                                         | _empty_         |
-| camunda.data.secondary-storage.rdbms.password           | The password for the database connection                                                                                                                                                         | _empty_         |
-| camunda.data.secondary-storage.rdbms.auto-ddl           | If the Liquibase schemamanagement should be used or not. If not, the DBA has to install the schema from available [scripts](#db-schema-management)                                               | true            |
-| camunda.data.secondary-storage.rdbms.prefix             | A custom prefix for all camunda related database objects.                                                                                                                                        | '' (empty)      |
-| camunda.data.secondary-storage.rdbms.database-vendor-id | Camunda uses vendor auto-detection vendor specific functions. With this property this auto-detection can be overridden. Possible values: _h2_, _mariadb_, _oracle_, _postgres_, _mysql_, _mssql_ | _empty_         |
+RDBMS configuration properties are defined under:
 
-#### Advanced database connection pool configuration
+```yaml
+camunda.data.secondary-storage.rdbms.*
+```
 
-By default, Camunda uses Hikari connection pool to manage database connections. This connection pool can be configured with the following additional properties:
+| Property             | Description                                                      | Default |
+| -------------------- | ---------------------------------------------------------------- | ------- |
+| `url`                | JDBC connection URL                                              | _empty_ |
+| `user`               | Username for the connection                                      | _empty_ |
+| `password`           | Password for the connection                                      | _empty_ |
+| `auto-ddl`           | Enables Liquibase schema management                              | `true`  |
+| `prefix`             | Optional table name prefix                                       | `""`    |
+| `database-vendor-id` | Manually override vendor detection (`postgres`, `mariadb`, etc.) | _empty_ |
 
-| Property name                                                           | Description                                                                                                          | Default setting |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------- |
-| camunda.data.secondary-storage.rdbms.connection-pool.maximum-pool-size  | The maximum number of simultaneous connections                                                                       | 10              |
-| camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle       | The minimum number of idle connections                                                                               | 10              |
-| camunda.data.secondary-storage.rdbms.connection-pool.idle-timeout       | The timeout (ms) until an idle connection is closed                                                                  | 600000          |
-| camunda.data.secondary-storage.rdbms.connection-pool.max-lifetime       | The maximum lifetime (ms) of a connection in the pool after which it will be closed and replaced by a new connection | 1800000         |
-| camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout | The maximum time (ms) the application is waiting for a connection from the pool                                      | 30000           |
+## Connection pool configuration
 
-### Exporter Configuration
+Camunda uses HikariCP for JDBC connection pooling. The following properties can be adjusted:
 
-The RDBMS Exporter is automatically enabled when configuring `camunda.data.secondary-storage.type=rdbms`.
+| Property name                                                             | Description                                                               | Default |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------- |
+| `camunda.data.secondary-storage.rdbms.connection-pool.maximum-pool-size`  | Maximum number of simultaneous connections                                | 10      |
+| `camunda.data.secondary-storage.rdbms.connection-pool.minimum-idle`       | Minimum number of idle connections                                        | 10      |
+| `camunda.data.secondary-storage.rdbms.connection-pool.idle-timeout`       | Timeout (ms) before closing an idle connection                            | 600000  |
+| `camunda.data.secondary-storage.rdbms.connection-pool.max-lifetime`       | Maximum lifetime (ms) of each connection before it is closed and replaced | 1800000 |
+| `camunda.data.secondary-storage.rdbms.connection-pool.connection-timeout` | Maximum time (ms) the application waits for a connection from the pool    | 30000   |
 
-The following additional configuration options are available with the prefix `camunda.data.secondary-storage.rdbms`:
+## Exporter configuration
 
-| Property name                                        | Description                                                                                                           | Default setting |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------- |
-| flush-interval                                       | The maximum time an exported record waits in the flush queue before being flushed and committed to the database       | PT0.5S          |
-| max-queue-size                                       | The maximum number of records that can be added to the flush queue before being flushed and committed to the database | 1000            |
-| queue-memory-limit                                   | The maximum number of records that can be added to the flush queue before being flushed and committed to the database | 20              |
-|                                                      | **History cleanup configuration**                                                                                     |                 |
-| history.default-history-ttl                          | The duration a finished processInstance and its related data is kept in the database (ISO-8601 duration)              | P30D            |
-| history.default-batch-operation-ttl                  | The duration a finished batch operation and its related data is kept in the database (ISO-8601 duration)              | P5D             |
-| history.batch-operation-cancel-process-instance-ttl  | The duration a finished batch operation to cancel process instances (ISO-8601 duration)                               | P5D             |
-| history.batch-operation-migrate-process-instance-ttl | The duration a finished batch operation to cancel process instances (ISO-8601 duration)                               | P5D             |
-| history.batch-operation-modify-process-instance-ttl  | The duration a finished batch operation to cancel process instances (ISO-8601 duration)                               | P5D             |
-| history.batch-operation-resolve-incident-ttl         | The duration a finished batch operation to cancel process instances (ISO-8601 duration)                               | P5D             |
-| history.historyCleanupBatchSize                      | Maximum amount of deleted entries per cleanup run                                                                     | 1000            |
-| history.minHistoryCleanupInterval                    | The minimal duration between two history cleanup runs (ISO-8601 duration)                                             | PT1M            |
-| history.maxHistoryCleanupInterval                    | The maximal duration between two history cleanup runs (ISO-8601 duration)                                             | PT60M           |
-| history.usage-metrics-ttl                            | The duration usage metrics will be kept in the database (ISO-8601 duration)                                           | P730D           |
-| history.usage-metrics-cleanup                        | The interval between two cleanup intervals for usage metrics (ISO-8601 duration)                                      | PT24H           |
-|                                                      | **Exporter cache configuration**                                                                                      |                 |
-| process-cache.max-size                               | The maximum number of process definitions kept in the internal exporter cache                                         | 1000            |
-| batch-operation-cache.max-size                       | The maximum number of batch operations kept in the internal exporter cache                                            | 1000            |
+The RDBMS exporter is automatically enabled when:
+
+```yaml
+camunda.data.secondary-storage.type: rdbms
+```
+
+The following additional configuration options are available under `camunda.data.secondary-storage.rdbms`:
+
+### Exporter performance settings
+
+| Property name        | Description                                                                                       | Default |
+| -------------------- | ------------------------------------------------------------------------------------------------- | ------- |
+| `flush-interval`     | Maximum time a record waits in the flush queue before being flushed and committed to the database | PT0.5S  |
+| `max-queue-size`     | Maximum number of records allowed in the flush queue before a forced flush                        | 1000    |
+| `queue-memory-limit` | Maximum memory usage (MB) allowed for queued records before a forced flush                        | 20      |
+
+## History cleanup
+
+The RDBMS exporter provides automatic history cleanup, which works in two stages:
+
+1. **TTL marking**  
+   When a process instance finishes, its data is marked for deletion once its time-to-live expires.
+
+2. **Periodic cleanup job**  
+   A scheduled cleanup job deletes marked records in batches and adjusts future intervals dynamically:
+
+- If no records are deleted → interval doubles (up to `maxHistoryCleanupInterval`)
+- If the batch size is fully used → interval halves (down to `minHistoryCleanupInterval`)
+- Otherwise → interval remains unchanged
+
+### History cleanup configuration
+
+| Property name                                          | Description                                                             | Default |
+| ------------------------------------------------------ | ----------------------------------------------------------------------- | ------- |
+| `history.default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration) | P30D    |
+| `history.default-batch-operation-ttl`                  | TTL for batch operation history                                         | P5D     |
+| `history.batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                        | P5D     |
+| `history.batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                       | P5D     |
+| `history.batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                        | P5D     |
+| `history.batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                               | P5D     |
+| `history.historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                       | 1000    |
+| `history.minHistoryCleanupInterval`                    | Minimum duration between cleanup runs (ISO-8601 duration)               | PT1M    |
+| `history.maxHistoryCleanupInterval`                    | Maximum duration between cleanup runs (ISO-8601 duration)               | PT60M   |
+| `history.usage-metrics-ttl`                            | TTL for usage metrics                                                   | P730D   |
+| `history.usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)         | PT24H   |
+
+## Exporter cache configuration
+
+| Property name                    | Description                                                      | Default |
+| -------------------------------- | ---------------------------------------------------------------- | ------- |
+| `process-cache.max-size`         | Maximum number of process definitions held in the exporter cache | 1000    |
+| `batch-operation-cache.max-size` | Maximum number of cached batch operations                        | 1000    |
