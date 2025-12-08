@@ -6,6 +6,10 @@ description: Defines Camunda’s official RDBMS version support policy, includin
 
 Camunda offers a support policy for relational databases (RDBMS) in Self-Managed Camunda 8 and Camunda 8 Run, including supported versions, adoption and deprecation rules, and JDBC driver guidance.
 
+:::caution work in progress
+The RDBMS support policy is a work in progress, content can change until completion in a future alpha release.
+:::
+
 ## Supported RDBMS
 
 The following RDBMS databases are supported:
