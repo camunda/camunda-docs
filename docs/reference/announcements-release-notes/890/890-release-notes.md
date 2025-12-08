@@ -185,7 +185,7 @@ You can now use the [open-source OpenSearch](https://opensearch.org/) project fo
 
 <!-- https://github.com/camunda/product-hub/issues/2654 -->
 
-A new Camunda 8 Relational Database Management System (RDBMS) support policy provides information about:
+A new Camunda 8 Relational Database Management System (RDBMS) [support policy](/self-managed/concepts/rdbms-support-policy.md) provides information about:
 
 - Officially supported database versions
 - The process for adopting new database versions
@@ -201,7 +201,14 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 
 <p class="link-arrow">[SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)</p>
 
-<!-- See the documentation and guides will instruct both DBAs and developers on script usage, version compatibility, and recommended JDBC driver selection. -->
+#### Configure external RDBMS in Helm
+
+A [new guide](/self-managed/deployment/helm/configure/database/rdbms.md) explains how to configure an external relational database (RDBMS) as secondary storage for the Orchestration Cluster when deploying with Helm.
+
+- Supports all databases listed in the RDBMS support policy.
+- Includes full configuration parameters, history-cleanup options, and exporter settings.
+- Describes how to load JDBC drivers via init containers, custom images, or mounted volumes.
+- Provides steps to verify database connectivity.
 
 ### Modeler
 
