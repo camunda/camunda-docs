@@ -50,13 +50,13 @@ Authentication and authorization are the two fundamental concepts for access con
 
 ### Authentication
 
-Authentication verifies **who** a user or system is.  
+Authentication verifies **who** a user or client is.
 Example: Logging in with a username/password or via SSO.
 
 ### Authorization
 
-Authorization determines **what** an authenticated user or system is allowed to do.  
-Example: Accessing Operate data, starting a process instance, or managing tasks.
+Authorization determines **what** an authenticated user or client is allowed to access and **what** that authenticated user or client is allowed to do with that access.
+Example: **Access** Operate, **view** or **start** process instances, or **manage** tasks.
 
 | Identity type                  | Authorization model              | Description                                                                                                          | Management interface                   |
 | :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
@@ -98,6 +98,18 @@ The Operate, Tasklist, and Zeebe REST APIs are **deprecated**. While they contin
 
 Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
 :::
+
+<<<<<<< HEAD
+
+### Users and clients
+
+Actions in an Orchestration Cluster can be executed by two kinds of authenticated entities (so-called principals): users, and clients. [Users](/components/identity/user.md) typically interact with the cluster via the browser, and [clients](/components/identity/client.md) programmatically via one of the APIs. It **is** possible for each to interact with both Web UIs and APIs, of course, but the distinction is important: users represent **individuals** who are granted access to an orchestration cluster, whereas clients represent **systems** or **applications**.
+
+:::note
+There is one caveat here: if you're using basic auth to secure your cluster, then both clients and users are simply managed as users. There is no dedicated client concept in this case.
+:::
+
+The distinction between users (individuals) and clients (systems or applications) is particularly important, and allows you to keep modeling your access management as it is done with your identity provider. Both are typically authenticated differently (e.g. username/password versus client certificate), have different authorization requirements (e.g. admin user versus process deployment client), and distinguishing between them simplifies auditing.
 
 ## How to obtain tokens
 

@@ -254,3 +254,11 @@ When working on Camunda 8 Self-Managed, you can define access permissions on a p
 When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog.
 The warning offers a link to manage the missing or misconfigured credentials.
 Client credentials with access to the Orchestration Cluster API are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
+
+### Incorrect authorizations
+
+When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md).
+
+Make sure to double-check that the credentials you are using have the right authorizations to deploy a process model, or start a process instance, on the chosen cluster and tenant.
+
+Keep in mind that if you're using Web Modeler, it will _automatically_ deploy resources or start process instances as your logged-in user, so the authorizations must be assigned to you.

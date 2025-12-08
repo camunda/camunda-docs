@@ -331,3 +331,10 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 skopeo login registry.camunda.cloud --username <your-username> --password <your-password>
 skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/elasticsearch | jq '.RepoTags'
 ```
+
+## Incorrect authorizations when deploying resources from Modeler
+
+If you have issues with missing or invalid authorizations when deploying resources or starting process instances from Web/Desktop Modeler, double-check what credentials you're using:
+
+- If you're using Web Modeler, it will automatically deploy as your logged-in user, so make sure that [user](/components/identity/user.md) has the right permissions.
+- If you're using Desktop Modeler, it will use whatever client credentials you passed, so make sure that [client](/components/identity/client.md) has the right permissions.
