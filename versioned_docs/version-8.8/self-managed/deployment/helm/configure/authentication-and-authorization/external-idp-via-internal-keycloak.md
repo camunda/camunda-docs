@@ -83,31 +83,16 @@ Create a mapper to assign federated users to this group:
 
 External IdP users can now authenticate, but require authorization to access Camunda components.
 
-:::tip Alternative: Direct group authorization
-If you have configured the groups claim feature (`orchestration.security.authentication.oidc.groups-claim`), you can create authorizations directly for the `external-idp-users` group without creating mapping rules. This is enabled by default when using the internal Keycloak with the Helm chart. Navigate to **Authorizations** > **Component** > **Create authorization**, select **Owner type**: `Group`, and **Owner ID**: `external-idp-users`.
-:::
-
 Log in to **Orchestration Cluster Identity** as an administrator.
-
-#### Create a mapping rule
-
-Create a mapping rule to identify external IdP users:
-
-1. Navigate to **Mapping Rules** > **Create a mapping rule**.
-1. Configure the mapping rule:
-   - **Mapping Rule ID**: `external-idp-users-rule`
-   - **Mapping Rule name**: `External IdP Users`
-   - **Claim name**: `groups`
-   - **Claim value**: `external-idp-users`
 
 #### Grant component access
 
-Grant access to Orchestration Cluster components:
+Grant access to Orchestration Cluster components for the external IdP users group:
 
 1. Navigate to **Authorizations** > select **Component** > **Create authorization**.
 1. Configure the authorization:
-   - **Owner type**: `Mapping rule`
-   - **Owner ID**: `external-idp-users-rule`
+   - **Owner type**: `Group`
+   - **Owner ID**: `external-idp-users`
    - **Resource ID**: `*`
    - **Permissions**: `ACCESS`
 
