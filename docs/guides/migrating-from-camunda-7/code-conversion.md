@@ -60,7 +60,7 @@ To help you understand the differences between the two APIs, we provide an inter
 - 🚧 Roadmap items: Features planned for future Camunda 8 releases
 - ❌ Discontinued features: Camunda 7 endpoints that are no longer available and why
 
-[Open the API Mapping Guide →](https://camunda.github.io/camunda-7-to-8-migration-tooling/).
+[Open the API Mapping Guide](https://camunda.github.io/camunda-7-to-8-migration-tooling/).
 
 :::tip When to use this tool
 Use the API mapping guide to:
