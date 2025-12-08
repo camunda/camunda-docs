@@ -49,8 +49,8 @@ Increase logging levels to get more detail:
 logging:
   level:
     root: INFO
-    io.camunda.migrator: DEBUG
-    io.camunda.migrator.RuntimeMigrator: TRACE
+    io.camunda.migration.data: DEBUG
+    io.camunda.migration.data.RuntimeMigrator: TRACE
   file:
     name: logs/camunda-7-to-8-data-migrator.log
 ```

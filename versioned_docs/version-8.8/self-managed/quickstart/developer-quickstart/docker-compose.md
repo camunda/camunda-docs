@@ -146,7 +146,7 @@ The `-v` flag deletes all volumes, removing all data (process instances, users, 
 
 ## Connectors
 
-Both the lightweight and full Docker Compose configurations include Camunda Connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
+Both the lightweight and full Docker Compose configurations include built-in connectors for integrating with external systems. The connector runtime executes both outbound connectors (called from BPMN processes) and inbound connectors (triggering process instances from external events).
 
 For details on available connectors and how to use them, see:
 
