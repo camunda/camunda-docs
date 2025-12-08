@@ -388,3 +388,4 @@ The following advanced configuration options can be provided via environment var
 <!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
 - Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).
