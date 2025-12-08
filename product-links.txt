@@ -81,10 +81,15 @@ https://docs.camunda.io/docs/next/components/console/manage-clusters/manage-ip-a
 https://docs.camunda.io/docs/next/components/early-access/overview/
 https://docs.camunda.io/docs/next/components/identity/identity-introduction/
 https://docs.camunda.io/docs/next/components/tasklist/api-versions/
-https://docs.camunda.io/docs/reference/announcements-release-notes/880/880-announcements/#apis--tools
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/
-https://docs.camunda.io/docs/self-managed/components/console/configuration/#telemetry
-https://docs.camunda.io/docs/self-managed/console-deployment/overview
-https://docs.camunda.io/docs/self-managed/operational-guides/backup-restore/backup-and-restore
-https://docs.camunda.io/docs/self-managed/reference-architecture
-https://docs.camunda.io/docs/self-managed/update/administrators/admin-upgrade-overview
+
+# Orchestration Identity
+
+https://docs.camunda.io/docs/next/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/next/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/next/components/identity/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/next/components/identity/tenant/#assign-users-to-a-tenant
+https://docs.camunda.io/docs/components/identity/authorization/#about-authorizations
+https://docs.camunda.io/docs/components/identity/group/#assign-users-to-a-group
+https://docs.camunda.io/docs/components/identity/role/#assign-users-to-a-role
+https://docs.camunda.io/docs/components/identity/tenant/#assign-users-to-a-tenant

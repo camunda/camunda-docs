@@ -254,7 +254,7 @@ components:
             - startDate
             - endDate
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     BatchOperationSearchQuery:
@@ -361,9 +361,10 @@ components:
             - batchOperationKey
             - itemKey
             - processInstanceKey
+            - processedDate
             - state
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     BatchOperationItemSearchQuery:
@@ -396,7 +397,7 @@ components:
         processInstanceKey:
           description: The process instance key of the processed item.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/ProcessInstanceKeyFilterProperty"
+            - $ref: "keys.yaml#/components/schemas/ProcessInstanceKeyFilterProperty"
         state:
           type: string
           description: The state of the batch operation.
@@ -459,6 +460,18 @@ components:
     ProcessInstanceIncidentResolutionBatchOperationRequest:
       type: object
       description: The process instance filter that defines which process instances should have their incidents resolved.
+      properties:
+        filter:
+          allOf:
+            - $ref: "process-instances.yaml#/components/schemas/ProcessInstanceFilter"
+          description: The process instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
+    ProcessInstanceDeletionBatchOperationRequest:
+      type: object
+      description: The process instance filter that defines which process instances should be deleted.
       properties:
         filter:
           allOf:

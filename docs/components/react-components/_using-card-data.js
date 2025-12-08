@@ -23,7 +23,7 @@ export const featuresCards = [
     link: "./modeler/web-modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
-    description: "integrate automated document processing into your processes.",
+    description: "Integrate automated document processing into your processes.",
   },
   {
     link: "./rpa/overview/",
@@ -107,7 +107,7 @@ export const featuresPageCards = [
     link: "../modeler/web-modeler/idp/",
     title: "Intelligent document processing (IDP)",
     image: IconIdpImg,
-    description: "integrate automated document processing into your processes.",
+    description: "Integrate automated document processing into your processes.",
   },
   {
     link: "../rpa/overview/",

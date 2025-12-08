@@ -5,7 +5,12 @@ paths:
         - User task
       operationId: completeUserTask
       summary: Complete user task
-      description: Completes a user task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Completes a user task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -49,7 +54,12 @@ paths:
         - User task
       operationId: assignUserTask
       summary: Assign user task
-      description: Assigns a user task with the given key to the given assignee.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns a user task with the given key to the given assignee.
       parameters:
         - name: userTaskKey
           in: path
@@ -134,7 +144,12 @@ paths:
         - User task
       operationId: updateUserTask
       summary: Update user task
-      description: Update a user task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Update a user task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -223,7 +238,12 @@ paths:
         - User task
       operationId: unassignUserTask
       summary: Unassign user task
-      description: Removes the assignee of a task with the given key.
+      description: |-
+
+
+        [[CONSISTENCY:STRONG]]
+
+        Removes the assignee of a task with the given key.
       parameters:
         - name: userTaskKey
           in: path
@@ -261,7 +281,12 @@ paths:
         - User task
       operationId: searchUserTasks
       summary: Search user tasks
-      description: Search for user tasks based on given criteria.
+      description: |-
+
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for user tasks based on given criteria.
       requestBody:
         required: false
         content:
@@ -294,7 +319,7 @@ paths:
 
         [[CONSISTENCY:EVENTUAL]]
 
-        Search for user task variables based on given criteria.
+        Search for user task variables based on given criteria. By default, long variable values in the response are truncated.
       parameters:
         - name: userTaskKey
           in: path
@@ -304,6 +329,12 @@ paths:
             type: string
             format: string<UserTaskKey>
             description: System-generated key for a user task.
+        - name: truncateValues
+          in: query
+          required: false
+          description: When true (default), long variable values in the response are truncated. When false, full variable values are returned.
+          schema:
+            type: boolean
       requestBody:
         required: false
         content:
@@ -337,7 +368,7 @@ components:
             - priority
             - name
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     UserTaskSearchQuery:
@@ -435,6 +466,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
           description: The key of the element instance.
+        tags:
+          $ref: "identifiers.yaml#/components/schemas/TagSet"
     UserTaskSearchQueryResult:
       description: User task search query response.
       type: object
@@ -534,6 +567,8 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/FormKey"
           description: The key of the form.
+        tags:
+          $ref: "identifiers.yaml#/components/schemas/TagSet"
     UserTaskCompletionRequest:
       type: object
       properties:
@@ -640,7 +675,7 @@ components:
             - scopeKey
             - processInstanceKey
         order:
-          $ref: "enums.yaml#/components/schemas/SortOrderEnum"
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
     UserTaskVariableSearchQueryRequest:

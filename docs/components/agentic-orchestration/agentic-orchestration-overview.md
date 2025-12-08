@@ -7,29 +7,41 @@ keywords: ["agentic orchestration"]
 
 import OverviewImg from './img/ao-overview-hero.png';
 import AoGrid from '../react-components/\_ao-card';
-import { introCards } from '../react-components/\_ao-card-data';
+import { getStartedCards, fundamentalCards, recommendationCards } from '../react-components/\_ao-card-data';
 
 <h3 class="subheading">Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.</h3>
 
-## About agentic orchestration
+<div style={{marginBottom: '50px', display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'flex-start'}}>
+<div style={{marginRight: '50px', flex: '1 1 300px', minWidth: '300px'}}>
 
-<img src={OverviewImg} title="Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes" alt="Get started" style={{padding:0,paddingLeft:20,margin:0,float: 'right', width: '50%'}} class="img-noborder img-transparent" />Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
+Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
 Agentic orchestration ensures your AI-driven processes are efficient, compliant, and aligned with business goals.
 
 Build and use AI agents to execute the non-deterministic parts of a process, integrated with the proven foundation of BPMN.
 
-<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI Agent</a></p>
+</div>
+<div style={{flex: '1 1 300px', minWidth: '300px'}}>
+
+<img src={OverviewImg} title="Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes" alt="Get started" style={{marginTop: '0', marginBottom: '0'}} class="img-noborder img-transparent img-600" />
+
+</div>
+</div>
 
 ## Get started
 
-Get started with Camunda agentic orchestration.
+Get started with Camunda agentic orchestration by building and running your first AI agent.
 
-<AoGrid ao={introCards} />
+<p><a href="../../../guides/getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
-:::info Further resources
+## Learn the fundamentals
 
-- Download the [AI Email Support Agent blueprint](https://marketplace.camunda.com/en-US/apps/522492/ai-email-support-agent) from the Camunda Marketplace.
-- Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course and learn how to model, deploy, and manage AI agents seamlessly into your end-to-end processes.
+Understand the core concepts of Camunda agentic orchestration.
 
-:::
+<AoGrid ao={fundamentalCards} columns={2}/>
+
+## Follow our best practices
+
+Read our guidelines and recommendations for using Camunda AI agents.
+
+<AoGrid ao={recommendationCards} columns={2} />

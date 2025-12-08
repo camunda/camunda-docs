@@ -8,6 +8,7 @@ description: "Overview of migrating Camunda 7 process data to Camunda 8 using th
 Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8.
 
 :::info Production Readiness Status
+
 - [History migration](history.md): Experimental and not intended for production usage.
   :::
 
@@ -15,16 +16,17 @@ Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8
 
 ## Modes of operation
 
-The Data Migrator offers two modes of operation:
+The Data Migrator offers three modes of operation:
 
 - [Runtime migration](runtime.md): Migrate running process instances and continue execution in C8. Production-ready with Camunda 8.8.
 - [History migration](history.md): Copy audit (history) data to Camunda 8 (experimental). Not intended for production, currently an experimental feature.
+- [Identity migration](identity.md): Migrate identity data to Camunda 8 (experimental). Not intended for production, currently an experimental feature.
 
 Migration details are summarized as follows:
 
-| What is migrated                                                                                                                                                                   | What is NOT migrated                                                                                                                                                                                                                                                                                                                                                                                         |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <p><ul><li><p>Running process instances (state-preserving).</p></li><li>Process variables and their values.</li><li>Execution history (experimental mode available).</li></ul></p> | <ul><li><p>BPMN process models (use the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)).</p></li><li>Custom code or integrations (use [Code Conversion Utilities](../code-conversion)).</li><li>Users, groups, tenants, and authorizations.</li><li>Task assignments and states (due date, priority, etc.).</li></ul> |
+| What is migrated                                                                                                                                                                                                                        | What is NOT migrated                                                                                                                                                                                                                                                                                                                                                                                |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <p><ul><li><p>Running process instances (state-preserving).</p></li><li>Process variables and their values.</li><li>Execution history (experimental mode available).</li><li>Identity data (experimental mode available).</li></ul></p> | <ul><li><p>BPMN process models (use the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)).</p></li><li>Custom code or integrations (use [Code Conversion Utilities](../code-conversion)).</li><li>Users, groups, and authorizations.</li><li>Task assignments and states (due date, priority, etc.).</li></ul> |
 
 ## Key Features
 
@@ -58,7 +60,7 @@ As part of this step, you might also need to extract big payloads and binaries (
 
 ## Repository
 
-You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-data-migrator
+You can track progress and releases in the repository: https://github.com/camunda/camunda-7-to-8-migration-tooling
 
 ## Cockpit Plugin
 

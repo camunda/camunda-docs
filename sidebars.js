@@ -38,6 +38,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/identity",
             "guides/migrating-from-camunda-7/data-migrator/variables",
             "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
@@ -189,8 +190,8 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -376,6 +377,20 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
                 "components/early-access/alpha/ms-teams/ms-teams",
@@ -741,7 +756,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Camunda connectors",
+          label: "Built-in connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -833,7 +848,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
@@ -850,16 +864,15 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom element and connector templates",
+          label: "Build custom connectors",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Element and connector templates",
+              label: "Connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
@@ -870,6 +883,7 @@ module.exports = {
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors",
           ],
         },
       ],
@@ -1166,7 +1180,21 @@ module.exports = {
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
-        "apis-tools/node-js-sdk",
+        {
+          type: "category",
+          label: "TypeScript SDK",
+          link: {
+            type: "doc",
+            id: "apis-tools/typescript/typescript-sdk",
+          },
+          items: [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency",
+          ],
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -1228,6 +1256,7 @@ module.exports = {
             id: "reference/announcements-release-notes/890/890-announcements",
           },
           items: [
+            "reference/announcements-release-notes/890/whats-new-in-89",
             "reference/announcements-release-notes/890/890-announcements",
             "reference/announcements-release-notes/890/890-release-notes",
           ],
@@ -1307,7 +1336,17 @@ module.exports = {
             id: "self-managed/quickstart/developer-quickstart",
           },
           items: [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              type: "category",
+              label: "Camunda 8 Run",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/c8run",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+              ],
+            },
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
@@ -1411,6 +1450,7 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1439,6 +1479,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",
@@ -1451,6 +1492,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
                   ],
@@ -1470,6 +1512,7 @@ module.exports = {
                 id: "self-managed/deployment/helm/upgrade/index",
               },
               items: [
+                "self-managed/deployment/helm/upgrade/upgrade-hc-880-890",
                 {
                   type: "category",
                   label: "Upgrade 8.7 to 8.8",
@@ -1875,6 +1918,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {
@@ -1992,6 +2036,7 @@ module.exports = {
             id: "self-managed/components/components-upgrade/introduction",
           },
           items: [
+            "self-managed/components/components-upgrade/880-to-890",
             "self-managed/components/components-upgrade/870-to-880",
             "self-managed/components/components-upgrade/860-to-870",
             "self-managed/components/components-upgrade/850-to-860",
@@ -2013,7 +2058,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.8",
+      label: "Upgrade to Camunda 8.9",
       link: {
         type: "doc",
         id: "self-managed/update/administrators/admin-upgrade-overview",

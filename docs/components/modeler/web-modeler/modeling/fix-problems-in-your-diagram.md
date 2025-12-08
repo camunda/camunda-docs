@@ -14,11 +14,11 @@ Based on a set of lint rules, Web Modeler continuously validates implementation 
 An error is shown if any process ID, decision ID, or form ID is more than 255 characters in length. To resolve this error, check and shorten any IDs that exceed this character limit.
 :::
 
-### Engine version selection
+### Camunda version selection
 
-The version selector at the top right in the problems panel can be used to choose the Zeebe version the diagram is validated against. The version chosen should match the Zeebe version of the cluster the diagram is going to be deployed in to get the correct set of errors (if you do not know the version, it is shown alongside the cluster name in the deployment dialog which can be opened by clicking the **Deploy diagram** button.)
+The version selector at the top right in the problems panel can be used to choose the Camunda version the diagram is validated against. The chosen version should match the version of the cluster where the diagram will be deployed so that the correct set of errors is shown. If you do not know the version, it is shown alongside the cluster name in the deployment dialog, which can be opened by clicking the **Deploy diagram** button.
 
-The version selector also provides information about the number of clusters available for each Zeebe version within the current organization.
+The version selector also provides information about the number of clusters available for each Camunda version within the current organization.
 
 ![error panel](../img/diagram-errors/version-selector.png)
 
@@ -30,6 +30,10 @@ The errors are interactive. Clicking on the row highlights the corresponding ele
 
 ### Deploy time errors
 
-If all the design time errors are fixed and further errors are thrown by the engine when deploying the diagram, a separate output tab will open up where you can observe the error thrown by the engine.
+If errors are thrown by the engine when deploying a diagram (whether they were caught by design time errors or not), they will be displayed in a modal.
 
 ![error panel](../img/diagram-errors/engine-error.png)
+
+They will also be kept available in the output panel while you remain on the modeling page.
+
+![error panel](../img/diagram-errors/engine-error-output.png)
