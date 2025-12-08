@@ -25,10 +25,10 @@ Secondary storage is not a duplicate of primary data. It represents the historic
 
 Camunda supports the following secondary storage backends, depending on the version and use case:
 
-| Database type                                               | Availability         | Use case                                                             |
-| :---------------------------------------------------------- | :------------------- | :------------------------------------------------------------------- |
-| Elasticsearch/OpenSearch (Amazon or open-source OpenSearch) | General availability | Default for most production installations.                           |
-| RDBMS (H2, PostgreSQL, MariaDB)                             | 8.9-alpha1+          | Lightweight local testing (H2) or future enterprise-grade RDBMS use. |
+| Database type                   | Availability         | Use case                                                             |
+| :------------------------------ | :------------------- | :------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch        | General availability | Default for most production installations.                           |
+| RDBMS (H2, PostgreSQL, MariaDB) | 8.9-alpha1+          | Lightweight local testing (H2) or future enterprise-grade RDBMS use. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
