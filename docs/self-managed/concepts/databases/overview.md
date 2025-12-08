@@ -29,7 +29,7 @@ Related documentation:
 Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
 
 A full list of supported vendors and versions is published in the  
-[RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md).
+[RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md).
 
 For configuration details in Helm deployments, see the  
 [RDBMS configuration guide](/self-managed/deployment/helm/configure/database/rdbms.md).
@@ -70,7 +70,7 @@ For details, see the
 
 These pages provide deeper detail for operators, DBAs, and administrators:
 
-- [RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md)
+- [RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md)
 - [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md)
 - [OpenSearch privileges](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md)

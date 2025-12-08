@@ -12,7 +12,7 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
 
 For supported database vendors and versions, see the  
-[RDBMS release policy](/self-managed/concepts/rdbms-release-policy.md).
+[RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md).
 
 ## Enable RDBMS as secondary storage
 
