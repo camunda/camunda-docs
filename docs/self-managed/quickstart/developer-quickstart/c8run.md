@@ -374,7 +374,7 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 ### Known limitations
 
-- Operate and Tasklist do not currently support running against H2.
+- Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
 - H2 is intended for testing and local development only.
 - Data stored in H2 is ephemeral unless configured as file-based.
 - Performance and memory use may vary depending on local environment.
