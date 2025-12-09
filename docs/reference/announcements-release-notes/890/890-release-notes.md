@@ -41,7 +41,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-#### A2A Client connectors (early access)
+#### A2A Client connectors
 
 Agent-to-Agent (A2A) Client connectors allow you to interact with remote agents using the [A2A protocol](https://a2a-protocol.org/v0.3.0/specification/).
 
@@ -127,7 +127,7 @@ This allows the connector runtime to handle a larger number of concurrent jobs w
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
-#### Bulk secrets import (SaaS)
+#### Bulk import secrets (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3283 -->
 
@@ -138,7 +138,15 @@ You can now add/import secrets in Console by directly uploading or pasting the c
 
 <p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
 
-#### Cluster secrets import (SaaS)
+#### Cluster description (SaaS)
+
+<!-- https://github.com/camunda/product-hub/issues/3284 -->
+
+You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
+
+<p class="link-arrow">[Create a cluster](/components/console/manage-clusters/create-cluster.md)</p>
+
+#### Import cluster secrets (SaaS)
 
 <!-- https://github.com/camunda/product-hub/issues/3307 -->
 
@@ -147,14 +155,6 @@ You can now import and export connector secrets between clusters within your org
 Export a cluster’s secrets to a key-value file for backup or external workflows, and import secrets from another cluster in a single action. Imports automatically match keys, update existing values, create missing ones, and provide clear feedback on the result. Permissions are enforced so that only authorized users can perform these actions.
 
 <p class="link-arrow">[Connector secrets](/components/console/manage-clusters/manage-secrets.md)</p>
-
-#### Cluster description (SaaS)
-
-<!-- https://github.com/camunda/product-hub/issues/3284 -->
-
-You can now add a cluster description when creating a cluster or by editing the cluster settings. This helps you document context, ownership, or add operational notes without changing the cluster name.
-
-<p class="link-arrow">[Create a cluster](/components/console/manage-clusters/create-cluster.md)</p>
 
 #### Usage metrics for licence model and tenant (Self-Managed)
 
