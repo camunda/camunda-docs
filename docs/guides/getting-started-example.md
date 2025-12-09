@@ -35,13 +35,13 @@ You will:
 <TabItem value="javaspring">
 
 <ul>
-    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
+    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Maven 3](https://maven.apache.org/index.html)</li>
     </ul>
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[JDK 21-23](https://www.oracle.com/de/java/technologies/downloads/)</li>
+    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Node.js](https://nodejs.org/en) 20+</li>
     <li>NPM 11+</li>
 </ul>
