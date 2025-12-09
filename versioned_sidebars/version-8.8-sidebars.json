@@ -185,9 +185,9 @@
             "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
           "items": [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
         },
@@ -818,7 +818,7 @@
         },
         {
           "type": "category",
-          "label": "Camunda connectors",
+          "label": "Built-in connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/out-of-the-box-connectors/available-connectors-overview"
@@ -927,16 +927,15 @@
         },
         {
           "type": "category",
-          "label": "Custom element and connector templates",
+          "label": "Build custom connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/custom-built-connectors/build-connector"
           },
           "items": [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               "type": "category",
-              "label": "Element and connector templates",
+              "label": "Connector templates",
               "link": {
                 "type": "doc",
                 "id": "components/connectors/custom-built-connectors/connector-templates"
@@ -946,7 +945,8 @@
                 "components/connectors/custom-built-connectors/create-connector-from-rest"
               ]
             },
-            "components/connectors/custom-built-connectors/connector-sdk"
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors"
           ]
         }
       ]
@@ -2787,7 +2787,18 @@
             "id": "self-managed/quickstart/developer-quickstart"
           },
           "items": [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              "type": "category",
+              "label": "Camunda 8 Run",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/quickstart/developer-quickstart/c8run"
+              },
+              "items": [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
+              ]
+            },
+
             "self-managed/quickstart/developer-quickstart/docker-compose"
           ]
         },
@@ -2904,6 +2915,7 @@
                   },
                   "items": [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       "type": "category",

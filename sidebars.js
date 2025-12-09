@@ -190,8 +190,8 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -756,7 +756,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Camunda connectors",
+          label: "Built-in connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -864,16 +864,15 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom element and connector templates",
+          label: "Build custom connectors",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Element and connector templates",
+              label: "Connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
@@ -884,6 +883,7 @@ module.exports = {
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors",
           ],
         },
       ],
@@ -1336,7 +1336,17 @@ module.exports = {
             id: "self-managed/quickstart/developer-quickstart",
           },
           items: [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              type: "category",
+              label: "Camunda 8 Run",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/c8run",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+              ],
+            },
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
@@ -1440,6 +1450,8 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1675,6 +1687,7 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
+            "self-managed/concepts/rdbms-support-policy",
           ],
         },
         {
@@ -1912,6 +1925,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {
