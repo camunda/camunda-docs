@@ -1,7 +1,7 @@
 ---
 id: kind
 title: "Deploy Camunda 8 on kind (local development)"
-sidebar_label: "kind (local)"
+sidebar_label: "kind"
 description: "Deploy Camunda 8 Self-Managed on a local Kubernetes cluster using kind for development and testing purposes."
 ---
 
@@ -16,7 +16,9 @@ While this guide uses kind, the same concepts apply to other local Kubernetes to
 This setup is intended for **local development only** and should not be used in production environments. For production deployments, refer to our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md).
 :::
 
-## Overview
+If you encounter issues during deployment, refer to the [Troubleshooting](#troubleshooting) section.
+
+## Deployment modes
 
 Two deployment modes are available:
 
@@ -71,17 +73,9 @@ Download the reference architecture files that will be used throughout this guid
 https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/get-your-copy.sh
 ```
 
-Navigate to the reference architecture directory:
+All subsequent commands in this guide should be run from the `local/kubernetes/kind-single-region` directory.
 
-```bash
-cd local/kubernetes/kind-single-region
-```
-
-All subsequent commands should be run from this directory.
-
-:::info Explore the repository
 Before proceeding, take some time to explore the repository structure and understand the configuration files, scripts, and Helm values. This will help you understand what each step does and how to customize the deployment for your needs.
-:::
 
 :::tip Makefile utilities
 The reference architecture includes a `Makefile` with useful commands to automate the deployment process. Run `make help` to see all available targets, or consult the [Makefile](https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/Makefile) directly.
@@ -121,17 +115,17 @@ This section covers the full domain mode setup with TLS certificates and Ingress
 
 ### Deploy the Ingress controller
 
-Deploy the Ingress NGINX controller to handle incoming traffic:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/ingress-nginx-deploy.sh
-```
-
-This script:
+Deploy the [Ingress NGINX controller](https://kubernetes.github.io/ingress-nginx/) to handle incoming traffic. This script:
 
 1. Installs Ingress NGINX via Helm
 2. Configures it to run on the control-plane node with `hostNetwork: true`
 3. Waits for the controller to be ready
+
+Run the Ingress controller deployment script:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/ingress-nginx-deploy.sh
+```
 
 Verify the Ingress controller is running:
 
@@ -141,13 +135,7 @@ kubectl get pods -n ingress-nginx
 
 ### Configure DNS resolution
 
-For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS to rewrite DNS queries:
-
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/coredns-config.sh
-```
-
-This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Ingress NGINX controller service (`ingress-nginx-controller.ingress-nginx.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
+For pods inside the cluster to resolve `camunda.example.com`, configure CoreDNS to rewrite DNS queries. This configuration rewrites DNS queries for `camunda.example.com` and `zeebe-camunda.example.com` to the Ingress NGINX controller service (`ingress-nginx-controller.ingress-nginx.svc.cluster.local`), allowing pods to reach Camunda services using the same domain names as external clients.
 
 <details>
 <summary>CoreDNS configuration</summary>
@@ -158,19 +146,25 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local
 
 </details>
 
-### Configure local hosts file
-
-Add entries to your `/etc/hosts` file to resolve `camunda.example.com` locally:
+Run the CoreDNS configuration script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/hosts-add.sh
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/coredns-config.sh
 ```
 
-This adds the following entries:
+### Configure local hosts file
+
+Add entries to your `/etc/hosts` file to resolve `camunda.example.com` locally. This adds the following entries:
 
 ```
 127.0.0.1 camunda.example.com
 127.0.0.1 zeebe-camunda.example.com
+```
+
+Run the hosts file configuration script:
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/hosts-add.sh
 ```
 
 :::note
@@ -181,17 +175,17 @@ This step requires `sudo` privileges. You will be prompted for your password.
 
 Using certificates from real certificate authorities (CAs) for local development can be dangerous or impossible (for hosts like `localhost` or `127.0.0.1`), and self-signed certificates cause trust errors. [mkcert](https://github.com/FiloSottile/mkcert) solves this by automatically creating and installing a local CA in the system root store, and generating locally-trusted certificates.
 
+The certificate generation script:
+
+1. Installs the mkcert CA in your system trust store (first run only)
+2. Generates certificates for `camunda.example.com`, `zeebe-camunda.example.com` and `*.camunda.example.com`
+3. Stores certificates in the `.certs/` directory
+
 Generate locally-trusted TLS certificates using mkcert:
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/procedure/certs-generate.sh
 ```
-
-This script:
-
-1. Installs the mkcert CA in your system trust store (first run only)
-2. Generates certificates for `camunda.example.com`, `zeebe-camunda.example.com` and `*.camunda.example.com`
-3. Stores certificates in the `.certs/` directory
 
 ### Create Kubernetes secrets for TLS
 
@@ -241,8 +235,6 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local
 
 This section covers the simplified setup using port-forwarding without TLS.
 
-### Deploy Camunda 8
-
 Deploy Camunda 8 with the no-domain mode Helm values:
 
 ```bash reference
@@ -276,7 +268,11 @@ kubectl get pods -n camunda -w
 
 Wait until all pods show `Running` status. This may take 5-10 minutes depending on your internet connection and system resources.
 
-You can also use the deployment readiness check script:
+You can also use the deployment readiness check script from the `camunda-deployment-references` repository root directory. This script requires [jq](https://jqlang.github.io/jq/) to be installed.
+
+```bash
+export CAMUNDA_NAMESPACE=camunda
+```
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
