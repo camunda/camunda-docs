@@ -236,6 +236,10 @@ docker ps
 TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although C8Run supports TLS, this is intended only for testing.
 
+:::note
+If you use a proxy in combination with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may prevent components such as Zeebe, Operate, or Identity from communicating correctly. Add these services to your `nonProxyHosts` configuration. For details, see [Configure a proxy server in Self-Managed](https://docs.camunda.io/docs/components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
+
 ### Access metrics
 
 Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://localhost:9600/actuator/prometheus](http://localhost:9600/actuator/prometheus). For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
