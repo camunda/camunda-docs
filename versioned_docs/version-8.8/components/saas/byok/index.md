@@ -47,7 +47,7 @@ With BYOK, you maintain visibility through **CloudTrail** and **CloudWatch**, ap
 | Camunda  | Surface any key-related errors in the Console            |
 
 :::warning Key management
-If your KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible.
+If your KMS key is disabled, deleted, or permissions are revoked, your cluster and its data become inaccessible. For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/saas/byok/key-state-behavior.md).
 :::
 
 ## Cost implications

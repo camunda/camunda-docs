@@ -73,6 +73,10 @@ Setup instructions: [external encryption setup guide](/components/concepts/byok/
 | CloudTrail does not show activity | CloudTrail not enabled or retention too short                    | Enable CloudTrail in cluster region and store logs beyond 90 days. [View CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html) |
 | Key rotation issues               | Cluster encryption update not supported                          | Create a new key and associate it with a new cluster. Verify encryption settings before use.                                                                                        |
 
+:::note
+For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/concepts/byok/key-state-behavior.md).
+:::
+
 :::note Support
 For persistent issues with key policies, region, or key status, contact [Amazon support](https://aws.amazon.com/contact-us/).  
 For Camunda-specific cluster provisioning issues, contact [Camunda support](https://camunda.com/services/support-guide/).

@@ -1042,6 +1042,7 @@ module.exports = {
             "components/saas/encryption-at-rest",
             "components/saas/byok/aws-external-encryption-setup",
             "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
             "components/saas/byok/faq-and-troubleshooting",
           ],
         },

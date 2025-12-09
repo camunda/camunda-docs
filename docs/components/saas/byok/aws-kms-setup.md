@@ -17,7 +17,8 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
 
 :::warning Important
 
-- Deleting or disabling your KMS key will make your cluster and data inaccessible.
+- Deleting or disabling your KMS key will make your cluster and data inaccessible. To understand how Camunda behaves if a key is disabled, deleted, or its policy is changed, see [key state behavior](/components/saas/byok/key-state-behavior.md).
+
 - Key management is fully customer-side in Amazon KMS. Camunda cannot rotate keys.
   :::
 
