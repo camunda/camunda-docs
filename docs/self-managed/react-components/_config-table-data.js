@@ -1268,7 +1268,257 @@ export const configs = [
     name: "camunda.data.exporters.opensearch.args",
     legacy: ["zeebe.broker.exporters.[opensearch].args"],
     types: ["Breaking change"],
-    area: ["Data"],
+    area: ["Monitoring"],
+  },
+  {
+    name: "camunda.monitoring.metrics.actor",
+    legacy: ["zeebe.broker.experimental.features.enableActorMetrics"],
+    types: ["Direct mapping"],
+    area: ["Monitoring"],
+  },
+  {
+    name: "camunda.monitoring.metrics.enable-exporter-execution-metrics",
+    legacy: ["zeebe.broker.executionMetricsExporterEnabled"],
+    types: ["Direct mapping"],
+    area: ["Monitoring"],
+  },
+  {
+    name: "camunda.monitoring.jfr",
+    legacy: ["camunda.flags.jfr.metrics"],
+    types: ["Direct mapping"],
+    area: ["Monitoring"],
+  },
+  {
+    name: "camunda.processing.max-commands-in-batch",
+    legacy: ["zeebe.broker.processingCfg.maxCommandsInBatch"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-async-scheduled-tasks",
+    legacy: ["zeebe.broker.processingCfg.enableAsyncScheduledTasks"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.scheduled-tasks-check-interval",
+    legacy: ["zeebe.broker.processingCfg.scheduledTaskCheckInterval"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.skip-positions",
+    legacy: ["zeebe.broker.processingCfg.skipPositions"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.engine.distribution.max-backoff-duration",
+    legacy: [
+      "zeebe.broker.experimental.engine.distribution.maxBackoffDuration",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.engine.distribution.redistribution-interval",
+    legacy: [
+      "zeebe.broker.experimental.engine.distribution.redistributionInterval",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-preconditions-check",
+    legacy: ["zeebe.broker.experimental.consistencyChecks.enablePreconditions"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-foreign-key-checks",
+    legacy: [
+      "zeebe.broker.experimental.consistencyChecks.enableForeignKeyChecks",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-yielding-duedate-checker",
+    legacy: ["zeebe.broker.experimental.features.enableYieldingDueDateChecker"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-async-message-ttl-checker",
+    legacy: ["zeebe.broker.experimental.features.enableMessageTtlCheckerAsync"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-async-timer-duedate-checker",
+    legacy: [
+      "zeebe.broker.experimental.features.enableTimerDueDateCheckerAsync",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-straightthrough-processing-loop-detector",
+    legacy: [
+      "zeebe.broker.experimental.features.enableStraightThroughProcessingLoopDetector",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.enable-message-body-on-expired",
+    legacy: ["zeebe.broker.experimental.features.enableMessageBodyOnExpired"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.enabled",
+    legacy: [
+      "zeebe.broker.flowControl.request.enabled",
+      "zeebe.broker.backpressure.enabled",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.windowed",
+    legacy: [
+      "zeebe.broker.flowControl.request.useWindowed",
+      "zeebe.broker.backpressure.useWindowed",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.algorithm",
+    legacy: [
+      "zeebe.broker.flowControl.request.algorithm",
+      "zeebe.broker.backpressure.algorithm",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.aimd.request-timeout",
+    legacy: [
+      "zeebe.broker.flowControl.request.aimd.requestTimeout",
+      "zeebe.broker.backpressure.aimd.requestTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.aimd.initial-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.aimd.initialLimit",
+      "zeebe.broker.backpressure.aimd.initialLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.aimd.min-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.aimd.minLimit",
+      "zeebe.broker.backpressure.aimd.minLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.aimd.max-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.aimd.maxLimit",
+      "zeebe.broker.backpressure.aimd.maxLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.aimd.backoff-ratio",
+    legacy: [
+      "zeebe.broker.flowControl.request.aimd.backoffRatio",
+      "zeebe.broker.backpressure.aimd.backoffRatio",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.fixed.limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.fixed.limit",
+      "zeebe.broker.backpressure.fixed.limit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient.min-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient.minLimit",
+      "zeebe.broker.backpressure.gradient.minLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient.initial-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient.initialLimit",
+      "zeebe.broker.backpressure.gradient.initialLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient.rtt-tolerance",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient.rttTolerance",
+      "zeebe.broker.backpressure.gradient.rttTolerance",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient2.min-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient2.minLimit",
+      "zeebe.broker.backpressure.gradient2.minLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient2.initial-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient2.initialLimit",
+      "zeebe.broker.backpressure.gradient2.initialLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient2.rtt-tolerance",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient2.rttTolerance",
+      "zeebe.broker.backpressure.gradient2.rttTolerance",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.gradient2.long-window",
+    legacy: [
+      "zeebe.broker.flowControl.request.gradient2.longWindow",
+      "zeebe.broker.backpressure.gradient2.longWindow",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
   },
 ];
 
