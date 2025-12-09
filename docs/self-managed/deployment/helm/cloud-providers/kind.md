@@ -10,9 +10,7 @@ import TabItem from "@theme/TabItem";
 
 This guide provides a step-by-step tutorial for deploying Camunda 8 Self-Managed on a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). This setup is ideal for development, testing, and learning purposes.
 
-:::info Other local Kubernetes tools
-While this guide uses kind, the same concepts apply to other local Kubernetes tools like [K3s](https://k3s.io/), [minikube](https://minikube.sigs.k8s.io/), or [MicroK8s](https://microk8s.io/). The goal is to reduce the resources required by Camunda components so they can run on a personal machine.
-:::
+While this guide uses kind, the same concepts apply to other local Kubernetes tools like [K3s](https://k3s.io/), [minikube](https://minikube.sigs.k8s.io/), or [MicroK8s](https://microk8s.io/). The goal is to reduce the resources required by Camunda 8 so they can run on a personal machine.
 
 :::warning Local development only
 This setup is intended for **local development only** and should not be used in production environments. For production deployments, refer to our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md).
@@ -299,14 +297,15 @@ helm list -n camunda
 
 <TabItem value="domain">
 
-| Component      | URL                                  |
-| -------------- | ------------------------------------ |
-| Operate        | https://camunda.example.com/operate  |
-| Tasklist       | https://camunda.example.com/tasklist |
-| Identity       | https://camunda.example.com/identity |
-| Optimize       | https://camunda.example.com/optimize |
-| Zeebe REST API | https://camunda.example.com/         |
-| Keycloak       | https://camunda.example.com/auth     |
+| Component           | URL                                            |
+| ------------------- | ---------------------------------------------- |
+| Operate             | https://camunda.example.com/operate            |
+| Tasklist            | https://camunda.example.com/tasklist           |
+| Identity            | https://camunda.example.com/identity           |
+| Management Identity | https://camunda.example.com/managementidentity |
+| Optimize            | https://camunda.example.com/optimize           |
+| Zeebe REST API      | https://camunda.example.com/                   |
+| Keycloak            | https://camunda.example.com/auth               |
 
 </TabItem>
 
@@ -336,18 +335,19 @@ After this runs, you can reach services directly, for example:
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily; it restores the file when it exits.
 :::
 
-| Component            | URL                            |
-| -------------------- | ------------------------------ |
-| Zeebe Gateway (gRPC) | localhost:26500                |
-| Zeebe Gateway (HTTP) | http://localhost:8080/         |
-| Operate              | http://localhost:8080/operate  |
-| Tasklist             | http://localhost:8080/tasklist |
-| Identity             | http://localhost:8080/identity |
-| Optimize             | http://localhost:8083          |
-| Web Modeler          | http://localhost:8070          |
-| Console              | http://localhost:8087          |
-| Connectors           | http://localhost:8085          |
-| Keycloak             | http://localhost:18080         |
+| Component            | URL                                       |
+| -------------------- | ----------------------------------------- |
+| Zeebe Gateway (gRPC) | localhost:26500                           |
+| Zeebe Gateway (HTTP) | http://localhost:8080/                    |
+| Operate              | http://localhost:8080/operate             |
+| Tasklist             | http://localhost:8080/tasklist            |
+| Identity             | http://localhost:8080/identity            |
+| Management Identity  | http://localhost:18081/managementidentity |
+| Optimize             | http://localhost:8083                     |
+| Web Modeler          | http://localhost:8070                     |
+| Console              | http://localhost:8087                     |
+| Connectors           | http://localhost:8085                     |
+| Keycloak             | http://localhost:18080                    |
 
 :::tip Connecting to the workflow engine
 To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).

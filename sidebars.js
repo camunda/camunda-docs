@@ -1340,7 +1340,7 @@ module.exports = {
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
-        "self-managed/quickstart/admin-quickstart",
+        "self-managed/quickstart/administrator-quickstart",
       ],
     },
     {
