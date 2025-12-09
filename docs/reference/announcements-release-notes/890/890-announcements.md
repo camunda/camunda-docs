@@ -23,6 +23,27 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
+### Agentic orchestration
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### MCP Client and MCP Remote Client connectors
+
+Breaking changes are [introduced in alpha 2](/reference/announcements-release-notes/890/890-release-notes.md#890-alpha2) to the element templates and the runtime configuration of the MCP Client.
+
+To resolve this, you must update both the MCP Client and MCP Remote Client connectors to use the element template version 1.
+
+:::info
+To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-client.md) documentation.
+:::
+
+</div>
+</div>
+
 ### Data
 
 <div className="release-announcement-row">
@@ -79,6 +100,23 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 :::info
 To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#jdbc-driver-management-for-rdbms-integrations).
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Helm chart values.yaml options for RDBMS
+
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
+
+- Postgresql is currently supported.
+- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
+- Operate is not yet supported with RDBMS until alpha3.
 
 </div>
 </div>
@@ -191,12 +229,30 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### Removal of the Operator Connector
+#### Deprecated: Operate Connector
 
-With the deprecation of Operate API in this release (see [the original announcement on deprecating the Operate and Tasklist V1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)), we have also deprecated the Operate Connector.
+The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
 
-Going forward, consider using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
-via the [REST Connector](/components/connectors/protocol/rest.md).
+Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Virtual threads support
+
+Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
+
+See [connector runtime performance](/self-managed/components/connectors/performance.md) for more information on optimizing connector performance with virtual threads.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
 
 </div>
 </div>

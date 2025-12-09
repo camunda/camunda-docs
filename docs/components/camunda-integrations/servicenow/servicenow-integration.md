@@ -27,7 +27,7 @@ This documentation is intended for:
 Camunda’s ServiceNow integration combines:
 
 - Custom actions in the ServiceNow Camunda Spoke to start or correlate Camunda processes from ServiceNow.
-- Camunda connectors and element templates to interact with ServiceNow tables and flows from Camunda processes.
+- Built-in connectors and element templates to interact with ServiceNow tables and flows from Camunda processes.
 
 ## Architecture
 
@@ -36,7 +36,7 @@ _This diagram shows how Camunda and ServiceNow interact._
 
 ## Integration features
 
-The integration provides bi-directional orchestration using two main components: the Camunda Spoke and Camunda connectors.
+The integration provides bi-directional orchestration using two main components: the Camunda Spoke and built-in connectors.
 
 ### Camunda Spoke in ServiceNow
 
