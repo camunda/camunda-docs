@@ -128,7 +128,7 @@ To set these values explicitly in code (not recommended), pass them with the sam
 3. Get an Orchestration API client. This is used to deploy process models and start process instances:
 
    ```typescript
-   const camunda = camunda.getOrchestrationClusterApiClient();
+   const camunda = clientFactory.getOrchestrationClusterApiClient();
    ```
 
 ### Deploy a process model
@@ -331,7 +331,7 @@ There are two options for creating a process instance:
 2. Inside the `main` function, add the following:
 
    ```typescript
-   const result = await zeebe.createProcessInstanceWithResult({
+   const result = await camunda.createProcessInstanceWithResult({
      processDefinitionId,
      variables: {
        userTaskStatus: "Needs doing",
