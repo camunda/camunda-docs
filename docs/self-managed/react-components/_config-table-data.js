@@ -419,6 +419,91 @@ export const configs = [
     area: ["Cluster"],
   },
   {
+    name: "camunda.data.secondary-storage.retention.enabled",
+    legacy: [
+      "camunda.database.retention.enabled",
+      "zeebe.broker.exporters.camundaexporter.args.history.retention.enabled",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.retention.minimum-age",
+    legacy: [
+      "camunda.database.retention.minimumAge",
+      "zeebe.broker.exporters.camundaexporter.args.history.retention.minimumAge",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.date-format",
+    legacy: [
+      "camunda.database.dateFormat",
+      "camunda.tasklist.elasticsearch.dateFormat",
+      "camunda.operate.elasticsearch.dateFormat",
+      "zeebe.broker.exporters.camundaexporter.args.connect.dateFormat",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.socket-timeout",
+    legacy: [
+      "camunda.database.socketTimeout",
+      "camunda.tasklist.elasticsearch.socketTimeout",
+      "camunda.operate.elasticsearch.socketTimeout",
+      "zeebe.broker.exporters.camundaexporter.args.connect.socketTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.elasticsearch.connection-timeout",
+    legacy: [
+      "camunda.database.connectionTimeout",
+      "camunda.tasklist.elasticsearch.connectionTimeout",
+      "camunda.operate.elasticsearch.connectionTimeout",
+      "zeebe.broker.exporters.camundaexporter.args.connect.connectionTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+
+  {
+    name: "camunda.data.secondary-storage.opensearch.date-format",
+    legacy: [
+      "camunda.database.dateFormat",
+      "camunda.tasklist.opensearch.dateFormat",
+      "camunda.operate.opensearch.dateFormat",
+      "zeebe.broker.exporters.camundaexporter.args.connect.dateFormat",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.socket-timeout",
+    legacy: [
+      "camunda.database.socketTimeout",
+      "camunda.tasklist.opensearch.socketTimeout",
+      "camunda.operate.opensearch.socketTimeout",
+      "zeebe.broker.exporters.camundaexporter.args.connect.socketTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.connection-timeout",
+    legacy: [
+      "camunda.database.connectionTimeout",
+      "camunda.tasklist.opensearch.connectionTimeout",
+      "camunda.operate.opensearch.connectionTimeout",
+      "zeebe.broker.exporters.camundaexporter.args.connect.connectionTimeout",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
     name: "camunda.data.backup.repository-name",
     legacy: [
       "camunda.operate.backup.repositoryName",
@@ -598,14 +683,6 @@ export const configs = [
     area: ["Data"],
   },
   {
-    name: "camunda.data.secondary-storage.elasticsearch.post-export.ignore-missing-data",
-    legacy: [
-      "zeebe.broker.exporters.camundaexporter.args.postExport.ignoreMissingData",
-    ],
-    types: ["Direct mapping"],
-    area: ["Data"],
-  },
-  {
     name: "camunda.data.secondary-storage.elasticsearch.incident-notifier.auth0-protocol",
     legacy: [
       "zeebe.broker.exporters.camundaexporter.args.notifier.auth0Protocol",
@@ -631,14 +708,6 @@ export const configs = [
     name: "camunda.data.secondary-storage.elasticsearch.incident-notifier.m2m-client-id",
     legacy: [
       "zeebe.broker.exporters.camundaexporter.args.notifier.m2mClientId",
-    ],
-    types: ["Direct mapping"],
-    area: ["Data"],
-  },
-  {
-    name: "camunda.data.secondary-storage.elasticsearch.incident-notifier.m2m-client-secret",
-    legacy: [
-      "zeebe.broker.exporters.camundaexporter.args.notifier.m2mClientSecret",
     ],
     types: ["Direct mapping"],
     area: ["Data"],
@@ -716,8 +785,495 @@ export const configs = [
     area: ["Data"],
   },
 
-  // API keys
-  /* {
+  {
+    name: "camunda.data.secondary-storage.opensearch.interceptor-plugins.[x].id",
+    legacy: [
+      "camunda.operate.opensearch.interceptorPlugins.[x].id",
+      "camunda.tasklist.opensearch.interceptorPlugins.[x].id",
+      "camunda.database.interceptorPlugins.id",
+      "zeebe.broker.exporters.camundaexporter.args.connect.interceptorPlugins.[x].id",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.interceptor-plugins.[x].className",
+    legacy: [
+      "camunda.operate.opensearch.interceptorPlugins.[x].className",
+      "camunda.tasklist.opensearch.interceptorPlugins.[x].className",
+      "camunda.database.interceptorPlugins.className",
+      "zeebe.broker.exporters.camundaexporter.args.connect.interceptorPlugins.[x].className",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.interceptor-plugins.[x].jarPath",
+    legacy: [
+      "camunda.operate.opensearch.interceptorPlugins.[x].jarPath",
+      "camunda.tasklist.opensearch.interceptorPlugins.[x].jarPath",
+      "camunda.database.interceptorPlugins.jarPath",
+      "zeebe.broker.exporters.camundaexporter.args.connect.interceptorPlugins.[x].jarPath",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.number-of-shards",
+    legacy: [
+      "camunda.database.index.numberOfShards",
+      "zeebe.broker.exporters.camundaexporter.args.index.numberOfShards",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.number-of-replicas",
+    legacy: [
+      "camunda.database.index.numberOfReplicas",
+      "zeebe.broker.exporters.camundaexporter.args.index.numberOfReplicas",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.template-priority",
+    legacy: [
+      "camunda.database.index.templatePriority",
+      "zeebe.broker.exporters.camundaexporter.args.index.templatePriority",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.variable-size-threshold",
+    legacy: [
+      "camunda.database.index.variableSizeThreshold",
+      "zeebe.broker.exporters.camundaexporter.args.index.variableSizeThreshold",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.number-of-shards-per-index",
+    legacy: [
+      "camunda.database.index.shardsByIndexName",
+      "zeebe.broker.exporters.camundaexporter.args.index.shardsByIndexName",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.number-of-replicas-per-index",
+    legacy: [
+      "camunda.database.index.replicasByIndexName",
+      "zeebe.broker.exporters.camundaexporter.args.index.replicasByIndexName",
+    ],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.bulk.delay",
+    legacy: ["zeebe.broker.exporters.camundaexporter.args.bulk.delay"],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.bulk.size",
+    legacy: ["zeebe.broker.exporters.camundaexporter.args.bulk.size"],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.bulk.memory-limit",
+    legacy: ["zeebe.broker.exporters.camundaexporter.args.bulk.memoryLimit"],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.process-cache.max-cache-size",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.processCache.maxCacheSize",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.form-cache.max-cache-size",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.formCache.maxCacheSize",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.batch-operation-cache.max-cache-size",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.batchOperationCache.maxCacheSize",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.post-export.batch-size",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.postExport.batchSize",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.post-export.delay-between-runs",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.postExport.delayBetweenRuns",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.post-export.max-delay-between-runs",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.postExport.maxDelayBetweenRuns",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.post-export.ignore-missing-data",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.postExport.ignoreMissingData",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.auth0-protocol",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.notifier.auth0Protocol",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.webhook",
+    legacy: ["zeebe.broker.exporters.camundaexporter.args.notifier.webhook"],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.auth0-domain",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.notifier.auth0Domain",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.m2m-client-id",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.notifier.m2mClientId",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.m2m-client-secret",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.notifier.m2mClientSecret",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.incident-notifier.m2m-audience",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.notifier.m2mAudience",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.batch-operations.export-items-on-creation",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.batchOperation.exportItemsOnCreation",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.els-rollover-date-format",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.elsRolloverDateFormat",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.rollover-interval",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.rolloverInterval",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.rollover-batch-size",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.rolloverBatchSize",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.wait-period-before-archiving",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.waitPeriodBeforeArchiving",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.delay-between-runs",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.delayBetweenRuns",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.opensearch.history.max-delay-between-runs",
+    legacy: [
+      "zeebe.broker.exporters.camundaexporter.args.history.maxDelayBetweenRuns",
+    ],
+    types: ["Direct mapping"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.url",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.url",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.username",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.password",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.prefix",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.flush-interval",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.queue-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.queue-memory-limit",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.auto-ddl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.database-vendor-id",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.default-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.default-batch-operation-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.batch-operation-cancel-process-instance-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.batch-operation-migrate-process-instance-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.batch-operation-modify-process-instance-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.batch-operation-resolve-incident-history-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.usage-metrics-cleanup",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.usage-metrics-ttl",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.min-history-cleanup-interval",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.max-history-cleanup-interval",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.history.history-cleanup-batch-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.process-cache.max-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.batch-operation-cache.max-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.export-batch-operation-items-on-creation",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.rdbms.batch-operation-item-inserts-block-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool.maximum-pool-size",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool.minimum-idle",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool.idle-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool.max-lifetime",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.secondary-storage.connection-pool.connection-timeout",
+    legacy: ["N/A"],
+    types: ["New"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.elasticsearch.class-name",
+    legacy: ["zeebe.broker.exporters.[elasticsearch].className"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.elasticsearch.jar-path",
+    legacy: ["zeebe.broker.exporters.[elasticsearch].jarPath"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.elasticsearch.args",
+    legacy: ["zeebe.broker.exporters.[elasticsearch].args"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.opensearch.class-name",
+    legacy: ["zeebe.broker.exporters.[opensearch].className"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.opensearch.jar-path",
+    legacy: ["zeebe.broker.exporters.[opensearch].jarPath"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+  {
+    name: "camunda.data.exporters.opensearch.args",
+    legacy: ["zeebe.broker.exporters.[opensearch].args"],
+    types: ["Breaking change"],
+    area: ["Data"],
+  },
+];
+
+// API keys
+/* {
     name: "camunda.api.grpc.address",
     legacy: ["zeebe.gateway.network.host", "zeebe.broker.gateway.network.host"],
     types: ["Direct mapping"],
@@ -1618,4 +2174,3 @@ export const configs = [
     types: ["New"],
     area: ["Licensing"],
   }, */
-];
