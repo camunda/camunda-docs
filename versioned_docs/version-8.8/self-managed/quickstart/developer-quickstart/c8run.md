@@ -237,7 +237,7 @@ TLS can be enabled by providing a local keystore file using the `--keystore` arg
 Although C8Run supports TLS, this is intended only for testing.
 
 :::note
-If you use a proxy in combination with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may prevent components such as Zeebe, Operate, or Identity from communicating correctly. Add these services to your `nonProxyHosts` configuration. For details, see [Configure a proxy server in Self-Managed](/components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+If you use a proxy in combination with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may prevent components such as Zeebe, Operate, or Identity from communicating correctly. Add these services to your `nonProxyHosts` configuration. For details, see [Configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
 :::
 
 ### Access metrics
