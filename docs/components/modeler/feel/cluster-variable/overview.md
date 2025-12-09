@@ -53,6 +53,6 @@ Get started with cluster variables with the following tutorial:
 
 ## Learn the fundamentals
 
-Understand the fundamental of cluster variables:
+Understand the fundamental concepts of cluster variables:
 
 <AoGrid ao={fundamentalCards}/>
