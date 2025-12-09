@@ -1,91 +1,95 @@
 ---
 id: cluster-variable-core-concepts
-title: Core concepts about cluster variables
+title: Core concepts of cluster variables
 sidebar_label: "Core concepts"
-description: "Learn the core concepts of cluster variables."
+description: "Learn how cluster variables work, including scope levels, FEEL namespaces, supported types, and resolution priority."
 ---
 
-Explore an understand the core concepts of cluster variables.
+Learn how cluster variables work, including scope levels, FEEL namespaces, supported types, and resolution priority.
 
-## Scope Levels
+## Scope levels
 
-Cluster variables exist at two distinct scope levels:
+Cluster variables exist at the **global** and **tenant** scope levels.
 
-### GLOBAL Scope
+### Global scope
 
-Variables defined at the GLOBAL scope are available across the entire cluster and accessible by all processes,
-regardless of tenant context. These typically represent cluster-wide defaults and shared configuration.
+Variables defined at the global scope are available across the entire cluster and accessible by all processes, regardless of tenant context.
 
-**Characteristics:**
+:::info
+Global-scope cluster variables are ideal for cluster-wide defaults and shared configuration.
+:::
 
-- Available to all tenants and processes
-- Lowest priority in variable resolution
-- Ideal for default values and cluster-wide settings
-- Managed via the global cluster variables API
+They have lowest priority in variable resolution and are managed via the global cluster variables API.
 
-### TENANT Scope
+### Tenant scope
 
-Variables defined at the TENANT scope are specific to a particular tenant and only accessible within that tenant's
-context. These allow for tenant-specific customization and overrides.
+Variables defined at the tenant scope are specific to a particular tenant and only accessible within that tenant's context.
 
-**Characteristics:**
+:::note
+Tenant-scope cluster variables are ideal for tenant-specific customization and overrides.
+:::
 
-- Available only within the specific tenant
-- Higher priority than GLOBAL scope
-- Ideal for tenant-specific customization
-- Managed via the tenant-specific cluster variables API
-- Only available when multi-tenancy is enabled
+They have higher priority than global-scope ones in variable resolution and are managed via the tenant-specific cluster variables API.
+
+:::important
+They are available only when multi-tenancy is enabled.
+:::
 
 ## Access namespaces
 
-Cluster variables are accessed through three distinct namespaces in FEEL expressions:
+Cluster variables are available in FEEL expressions through three namespaces:
 
-### camunda.vars.cluster
+- `camunda.vars.cluster`
+- `camunda.vars.tenant`
+- `camunda.vars.env`
 
-Provides direct access to GLOBAL scope variables only. Variables defined at the TENANT scope are not accessible through
-this namespace.
+:::tip
+Camunda recommends using the `camunda.vars.env` namespace for most use cases.
+:::
+
+### `camunda.vars.cluster`
+
+Provides direct access **only** to global-scope variables. Tenant-scope variables are not accessible through this namespace.
 
 **Use when:**
 
-- You explicitly want to access only global variables
-- You need to bypass tenant overrides
-- You're debugging scope resolution
+- You want to access only global variables.
+- You need to bypass tenant-level overrides.
+- You're debugging scope resolution.
 
-**Example:**
+For example:
 
 ```
 camunda.vars.cluster.GLOBAL_DEFAULT_TIMEOUT
 ```
 
-### camunda.vars.tenant
+### `camunda.vars.tenant`
 
-Provides direct access to TENANT scope variables only. Variables defined at the GLOBAL scope are not accessible through
-this namespace.
+Provides direct access **only** to tenant-scope variables. Global-scope variables are not accessible through this namespace.
 
 **Use when:**
 
-- You explicitly want to access only tenant variables
-- You need to verify tenant-specific values
-- You're debugging scope resolution
+- You want to access only tenant variables.
+- You need to check tenant-specific values.
+- You're debugging scope resolution.
 
-**Example:**
+For example:
 
 ```
 camunda.vars.tenant.TENANT_SPECIFIC_CONFIG
 ```
 
-### camunda.vars.env (Recommended)
+### `camunda.vars.env`
 
-Provides a merged view of both GLOBAL and TENANT scope variables, with automatic priority resolution. This is the
-recommended namespace for most use cases.
+Provides a merged view of both global- and tenant-scope variables, applying automatic priority resolution. This is the recommended namespace for most cases.
 
 **Use when:**
 
-- You want automatic scope resolution
-- You need the most specific value available
-- You're writing portable process definitions
+- You want automatic scope resolution.
+- You need the most specific value available.
+- You're writing portable process definitions.
 
-**Example:**
+For example:
 
 ```
 camunda.vars.env.API_ENDPOINT
@@ -94,26 +98,29 @@ camunda.vars.env.CONFIG.timeout
 
 ## Variable types
 
-Cluster variables support multiple data types to accommodate different configuration needs:
+Cluster variables support multiple data types to accommodate different configuration needs.
 
 ### Simple values
 
-- **String**: Text values for URLs, names, identifiers
-- **Number**: Numeric values for thresholds, timeouts, counts
-- **Boolean**: True/false values for feature flags, toggles
+- **String**: Text values for URLs, names, identifiers.
+- **Number**: Numeric values for thresholds, timeouts, counts.
+- **Boolean**: True/false values for feature flags and toggles.
 
 ### Complex values
 
-- **Objects**: Nested structures for grouped configuration
-- **Arrays**: Lists of values (Note: Access patterns may vary)
+- **Objects**: Nested structures for grouped configuration.
+- **Arrays**: Lists of values
+
+:::note
+Access patterns may vary depending on how the array is used.
+:::
 
 ## Variable resolution priority
 
-Understanding the complete priority order is crucial for predictable behavior:
+Understand the variable resolution priority for predictable behavior. From highest to lowest, the cluster priority order is:
 
-1. **Process-level variables** (highest priority)
-2. **TENANT scope cluster variables**
-3. **GLOBAL scope cluster variables** (lowest priority)
+1. Process-level variables.
+2. Tenant-scope cluster variables.
+3. Global-scope cluster variables.
 
-When the same key exists at multiple levels, the highest priority value is used. This enables a cascading configuration
-pattern where specific contexts override broader ones.
+When the same key exists at multiple levels, the highest priority value is used. This enables a cascading configuration pattern where more specific contexts override broader ones.

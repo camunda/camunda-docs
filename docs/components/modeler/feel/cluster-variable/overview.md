@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 import AoGrid from '/docs/components/react-components/\_ao-card';
 import { fundamentalCards } from '/docs/components/react-components/\_modeler-card-data';
 
-Cluster variables provide a centralized way to manage configuration values across your Camunda cluster.
+Manage configuration values centrally across your Camunda cluster with cluster variables.
 
 ## About cluster variables
 

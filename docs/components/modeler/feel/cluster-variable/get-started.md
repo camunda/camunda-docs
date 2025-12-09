@@ -5,7 +5,7 @@ sidebar_label: "Get started"
 description: "Get started with cluster variables."
 ---
 
-This guide shows you how to create your first cluster variable and use it in a BPMN process.
+Create your first cluster variable and use it in a BPMN process.
 
 ## Create a global cluster variable
 
