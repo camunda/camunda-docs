@@ -21,6 +21,11 @@ Camunda 8 Run includes the following:
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
+:::note
+For the latest list of supported relational databases and versions, see the  
+[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
+:::
+
 ## Prerequisites
 
 - **OpenJDK 21–23**: Required for running Camunda 8 as a Java application.
@@ -279,11 +284,11 @@ For more information, see the [metrics](/self-managed/operational-guides/monitor
 ### Configure or switch secondary storage (Elasticsearch or H2)
 
 Camunda 8 Run supports multiple secondary-storage options.  
-By default, it uses **Elasticsearch**, but you can switch to **H2** for lightweight local development or testing.
+By default, it uses **Elasticsearch**, but you can switch to an RDBMS backend such as **H2** for lightweight local development or testing.
 
 #### Default: Elasticsearch
 
-In version 8.9-alpha1 and later, Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
+Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
 
 ```yaml
 data:
@@ -404,10 +409,10 @@ Camunda 8 uses two layers of storage:
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).  
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
 
-### Known limitations (8.9-alpha1)
+### Known limitations
 
-- Operate and Tasklist are **not yet supported** when using H2.
-- H2 is intended for **testing only** in this alpha release.
+- Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
+- H2 is intended for testing and local development only.
 - Data stored in H2 is ephemeral unless configured as file-based.
 - Performance and memory use may vary depending on local environment.
 
