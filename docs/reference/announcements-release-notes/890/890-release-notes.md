@@ -170,6 +170,17 @@ This feature is already available in the Camunda 8.8 release for Camunda 8 SaaS.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
+#### Configure external RDBMS in Helm
+
+Configure an external relational database (RDBMS) as secondary storage for the Orchestration Cluster when deploying with Helm.
+
+- Supports all databases listed in the RDBMS support policy.
+- Includes full configuration parameters, history-cleanup options, and exporter settings.
+- Describes how to load JDBC drivers via init containers, custom images, or mounted volumes.
+- Provides steps to verify database connectivity.
+
+<p class="link-arrow">[Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md)</p>
+
 #### Open-source OpenSearch support
 
 <!-- https://github.com/camunda/product-hub/issues/3009 -->
@@ -185,11 +196,13 @@ You can now use the [open-source OpenSearch](https://opensearch.org/) project fo
 
 <!-- https://github.com/camunda/product-hub/issues/2654 -->
 
-A new Camunda 8 Relational Database Management System (RDBMS) [support policy](/self-managed/concepts/rdbms-support-policy.md) provides information about:
+A new Camunda 8 Relational Database Management System RDBMS support policy provides information about:
 
-- Officially supported database versions
-- The process for adopting new database versions
+- Officially supported database versions.
+- The process for adopting new database versions.
 - Timelines for phasing out older database versions.
+
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md)</p>
 
 #### SQL and Liquibase database scripts
 
@@ -200,15 +213,6 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 - The full script package is distributed as part of the official Camunda distribution, available via GitHub or Artifactory.
 
 <p class="link-arrow">[SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)</p>
-
-#### Configure external RDBMS in Helm
-
-A [new guide](/self-managed/deployment/helm/configure/database/rdbms.md) explains how to configure an external relational database (RDBMS) as secondary storage for the Orchestration Cluster when deploying with Helm.
-
-- Supports all databases listed in the RDBMS support policy.
-- Includes full configuration parameters, history-cleanup options, and exporter settings.
-- Describes how to load JDBC drivers via init containers, custom images, or mounted volumes.
-- Provides steps to verify database connectivity.
 
 ### Modeler
 
