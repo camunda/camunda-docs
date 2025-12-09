@@ -1,7 +1,7 @@
 ---
 id: cluster-variable-overview
 title: Cluster variables
-description: "Cluster variables provide a centralized way to manage configuration values across your Camunda cluster."
+description: "Manage configuration values centrally across your Camunda cluster with cluster variables."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,7 +11,7 @@ import { fundamentalCards } from '/docs/components/react-components/\_modeler-ca
 
 Manage configuration values centrally across your Camunda cluster with cluster variables.
 
-## About cluster variables
+## About
 
 Within your Camunda cluster, you can define variables at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
 
@@ -19,11 +19,11 @@ Cluster variables allows you to maintain environment-specific configurations, AP
 
 ### Key benefits
 
-- **Centralized configuration management**: Define configurations once and reuse them across processes.
-- **Environment flexibility**: Maintain different values for development, staging, and production without modifying BPMN files.
+- **Centralized configuration**: Define configurations once and reuse them across processes.
+- **Environment flexibility**: Use different values for development, staging, and production without modifying BPMN files.
 - **Multi-tenant support**: Provide tenant-specific overrides while maintaining global defaults.
 - **Simplified deployment**: Promote processes across environments without changing process definitions.
-- **Dynamic updates**: Modify configuration values without redeploying processes.
+- **Dynamic updates**: Adjust configuration values without redeploying processes.
 
 ### When to use cluster variables
 
@@ -36,14 +36,14 @@ They are ideal for:
 - Environment-specific thresholds, timeouts, and limits.
 - Integration credentials and connection strings.
 
-### When not to use cluster variables
+Consider alternatives for the following use cases:
 
-Consider alternatives for:
-
-- Process instance-specific data. Use process variables.
-- Frequently-changing values during execution. Use process variables.
-- Sensitive credentials requiring encryption at rest. Use secrets management.
-- Large data payloads. Use external storage with references.
+| Use case                                       | Recommended alternative          |
+| ---------------------------------------------- | -------------------------------- |
+| Process instance-specific data                 | Process variables                |
+| Values that change frequently during execution | Process variables                |
+| Sensitive credentials                          | Secrets management               |
+| Large payloads                                 | External storage with references |
 
 ## Get started
 
