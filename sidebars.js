@@ -38,6 +38,7 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
+            "guides/migrating-from-camunda-7/data-migrator/identity",
             "guides/migrating-from-camunda-7/data-migrator/variables",
             "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
             "guides/migrating-from-camunda-7/data-migrator/limitations",
@@ -118,7 +119,15 @@ module.exports = {
             },
           ],
         },
-        "components/concepts/messages",
+        {
+          type: "category",
+          label: "Messages",
+          link: {
+            type: "doc",
+            id: "components/concepts/messages",
+          },
+          items: ["components/concepts/message-aggregation"],
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -189,8 +198,8 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -376,6 +385,20 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
                 "components/early-access/alpha/ms-teams/ms-teams",
@@ -741,7 +764,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Camunda connectors",
+          label: "Built-in connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -833,7 +856,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
@@ -850,16 +872,15 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom element and connector templates",
+          label: "Build custom connectors",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Element and connector templates",
+              label: "Connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
@@ -870,6 +891,7 @@ module.exports = {
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors",
           ],
         },
       ],
@@ -1166,7 +1188,21 @@ module.exports = {
             "apis-tools/camunda-spring-boot-starter/properties-reference",
           ],
         },
-        "apis-tools/node-js-sdk",
+        {
+          type: "category",
+          label: "TypeScript SDK",
+          link: {
+            type: "doc",
+            id: "apis-tools/typescript/typescript-sdk",
+          },
+          items: [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency",
+          ],
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -1308,7 +1344,17 @@ module.exports = {
             id: "self-managed/quickstart/developer-quickstart",
           },
           items: [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              type: "category",
+              label: "Camunda 8 Run",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/c8run",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+              ],
+            },
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
@@ -1412,6 +1458,8 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1440,6 +1488,7 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       type: "category",
@@ -1452,6 +1501,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
                   ],
@@ -1640,6 +1690,7 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
+            "self-managed/concepts/rdbms-support-policy",
           ],
         },
         {
@@ -1845,18 +1896,32 @@ module.exports = {
         {
           Modeler: [
             {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+              type: "category",
+              label: "Web Modeler",
+              link: {
+                type: "doc",
+                id: "self-managed/components/modeler/web-modeler/overview",
+              },
+              items: [
                 {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  type: "category",
+                  label: "Configuration",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  },
+                  items: [
                     "self-managed/components/modeler/web-modeler/configuration/database",
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
                     "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
-                  Troubleshooting: [
+                },
+                {
+                  type: "category",
+                  label: "Troubleshooting",
+                  items: [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
@@ -1877,6 +1942,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {
