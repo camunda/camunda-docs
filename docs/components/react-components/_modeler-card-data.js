@@ -12,6 +12,12 @@ export const fundamentalCards = [
     description: "Learn the core concepts of cluster variables.",
   },
   {
+    link: "../cluster-variable-scope-priority/",
+    title: "Scope priority",
+    image: IconPlayImg,
+    description: "Learn how cluster variable scope resolution works.",
+  },
+  {
     link: "../cluster-variable-namespace-collisions/",
     title: "Namespace collisions",
     image: IconPlayImg,

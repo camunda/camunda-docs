@@ -1,40 +1,85 @@
-### Understanding Scope Resolution
+---
+id: cluster-variable-scope-priority
+title: Scope resolution
+sidebar_label: "Scope resolution"
+description: "Learn how cluster variable scope resolution works, the available scopes, and how to access and use them."
+---
 
-Cluster variables use a hierarchical scope system to determine which value is used when the same key exists at multiple
-levels. This section explains how scope resolution works and how to predict variable values in your processes.
+Learn how cluster variable scope resolution works, the available scopes, and how to access and use them.
 
-### The Three-Level Hierarchy
+## About
 
-#### Level 1: Process Variables (Highest Priority)
+Cluster variables use a scope priority process to determine which value is used when the same key exists at multiple levels.
 
-Variables defined directly within a process instance always take precedence over cluster variables. This includes:
+This guide helps you understand this scope resolution to predict values in your processes and avoid unexpected behavior.
 
-- Variables set during process instantiation
-- Variables created or modified during process execution
-- Variables passed from parent to child processes
+## Scope levels
 
-**Important Note**: If you create a process variable with a key that matches a cluster variable path (e.g., setting a
-process variable named `camunda.vars.env.API_URL`), the process variable will shadow the cluster variable completely.
+Cluster variables exist at the **global** and **tenant** scope levels.
 
-#### Level 2: TENANT Scope Cluster Variables
+### Global scope
 
-When multi-tenancy is enabled, tenant-scoped cluster variables provide the second level of priority. These variables:
+Variables defined at the global scope are available across the entire cluster and accessible by all processes, regardless of tenant context.
 
-- Override any GLOBAL scope variables with the same key
-- Are only visible to processes running within that specific tenant
-- Allow for tenant-specific customization without affecting other tenants
+:::info
+Global-scope cluster variables are ideal for cluster-wide defaults and shared configuration.
+:::
 
-#### Level 3: GLOBAL Scope Cluster Variables (Lowest Priority)
+They have lowest priority in variable resolution and are managed via the global cluster variables API.
+
+### Tenant scope
+
+Variables defined at the tenant scope are specific to a particular tenant and only accessible within that tenant's context.
+
+:::note
+Tenant-scope cluster variables are ideal for tenant-specific customization and overrides.
+:::
+
+They have higher priority than global-scope ones in variable resolution and are managed via the tenant-specific cluster variables API.
+
+:::important
+They are available only when multi-tenancy is enabled.
+:::
+
+## Resolution priority
+
+From highest to lowest priority, the cluster variable resolution order is:
+
+1. Process variables.
+2. Tenant-scope cluster variables.
+3. Global-scope cluster variables.
+
+### Process variables
+
+Variables defined on the process instance always take precedence over cluster variables. This includes:
+
+- Variables set during instantiation.
+- Variables created or updated during execution.
+- Variables passed from parent to child processes.
+
+:::note
+If you create a process variable with a key that matches a cluster variable path (for example, `camunda.vars.env.API_URL`), the process variable will shadow the cluster variable completely.
+:::
+
+### Tenant-scope cluster variables
+
+When multi-tenancy is enabled, tenant-scoped variables:
+
+- Override global scope variables with the same key.
+- Are visible only to processes in that tenant.
+- Enable tenant-specific customization without affecting other tenants.
+
+### Global-scope cluster variables
 
 Global cluster variables provide cluster-wide defaults and baseline configuration. These variables:
 
-- Are accessible by all processes across all tenants
-- Serve as fallback values when no tenant-specific override exists
-- Provide consistent defaults for new tenants
+- Are accessible to all processes across all tenants.
+- Serve as fallbacks when no tenant-specific override exists.
+- Provide consistent defaults for new tenants.
 
-### Resolution Examples
+### Resolution examples
 
-#### Example 1: Basic Scope Override
+#### Basic scope override
 
 ```
 GLOBAL:  { API_TIMEOUT: 5000 }
@@ -45,7 +90,7 @@ Result when accessing camunda.vars.env.API_TIMEOUT:
 → 10000 (TENANT value)
 ```
 
-#### Example 2: Partial Override
+#### Partial override
 
 ```
 GLOBAL:  { API_CONFIG: { timeout: 5000, retry: 3, url: "https://api.global.com" } }
@@ -59,10 +104,12 @@ Result when accessing camunda.vars.env.API_CONFIG.retry:
 → null (TENANT defined API_CONFIG as a different object)
 ```
 
-**Critical Note**: When you override a key at TENANT scope, the entire value at that key is replaced, not merged.
+:::warning
+When you override a key at the tenant scope, the entire value at that key is replaced, not merged.
 Partial object merging does not occur.
+:::
 
-#### Example 3: Process Variable Override
+#### Process variable override
 
 ```
 GLOBAL:  { MAX_AMOUNT: 1000 }
@@ -73,36 +120,76 @@ Result when accessing camunda.vars.env.MAX_AMOUNT:
 → 10000 (PROCESS variable)
 ```
 
-### Scope-Specific Access
+## Access by scope
 
-When you need to explicitly access a specific scope, bypassing the resolution hierarchy:
+Cluster variables are available in FEEL expressions through three namespaces:
 
-#### Access Only Global Values
+- `camunda.vars.cluster`
+- `camunda.vars.tenant`
+- `camunda.vars.env`
+
+:::tip
+Camunda recommends using the `camunda.vars.env` namespace for most use cases.
+:::
+
+### `camunda.vars.cluster`
+
+Provides direct access **only** to global-scope variables. Tenant-scope variables are not accessible through this namespace.
+
+**Use when:**
+
+- You want to access only global variables.
+- You need to bypass tenant-level overrides.
+- You're debugging scope resolution.
+
+For example:
 
 ```
-camunda.vars.cluster.GLOBAL_DEFAULT
+camunda.vars.cluster.GLOBAL_DEFAULT_TIMEOUT
 ```
 
-This will return the GLOBAL scope value even if a TENANT override exists.
+### `camunda.vars.tenant`
 
-#### Access Only Tenant Values
+Provides direct access **only** to tenant-scope variables. Global-scope variables are not accessible through this namespace.
+
+**Use when:**
+
+- You want to access only tenant variables.
+- You need to check tenant-specific values.
+- You're debugging scope resolution.
+
+For example:
 
 ```
-camunda.vars.tenant.TENANT_OVERRIDE
+camunda.vars.tenant.TENANT_SPECIFIC_CONFIG
 ```
 
-This will return only the TENANT scope value, or null if not defined at TENANT scope.
+### `camunda.vars.env`
 
-### Multi-Tenant Considerations
+Provides a merged view of both global- and tenant-scope variables, applying automatic priority resolution. This is the recommended namespace for most cases.
 
-#### Tenant Isolation
+**Use when:**
 
-Each tenant's cluster variables are completely isolated. A process running in Tenant A cannot access cluster variables
-defined for Tenant B, even through explicit namespace access.
+- You want automatic scope resolution.
+- You need the most specific value available.
+- You're writing portable process definitions.
 
-#### Global Defaults Pattern
+For example:
 
-A common pattern is to define sensible defaults at GLOBAL scope and override only specific values at TENANT scope:
+```
+camunda.vars.env.API_ENDPOINT
+camunda.vars.env.CONFIG.timeout
+```
+
+## Multi-tenant considerations
+
+### Tenant isolation
+
+Each tenant's cluster variables are fully isolated. A process running in one tenant cannot access cluster variables defined for another tenant, even with explicit namespace access.
+
+### Global defaults pattern
+
+Define sensible defaults globally and override only what you need at the tenant level:
 
 ```
 GLOBAL: {
@@ -122,12 +209,10 @@ TENANT (premium): {
 }
 ```
 
-### Debugging Scope Resolution
+## Troubleshoot scope resolution
 
-When troubleshooting unexpected variable values:
-
-1. **Check all three levels**: Verify values at GLOBAL, TENANT, and PROCESS levels
-2. **Use scope-specific namespaces**: Test with `camunda.vars.cluster` and `camunda.vars.tenant` to isolate scope
-3. **Verify tenant context**: Ensure the process is running in the expected tenant
-4. **Check for process variable shadowing**: Look for process variables that might shadow cluster variables
-5. **Review variable structure**: Ensure objects are consistently structured across scopes
+1. **Check all three scope levels**: Verify values at global, tenant, and process levels.
+2. **Use scope-specific namespaces**: Test with `camunda.vars.cluster` and `camunda.vars.tenant` to isolate scope.
+3. **Verify tenant context**: Ensure the process is running in the expected tenant.
+4. **Look for shadowing**: Check for process variables that might shadow cluster variables.
+5. **Validate structure**: Ensure objects have consistent structure across scopes.

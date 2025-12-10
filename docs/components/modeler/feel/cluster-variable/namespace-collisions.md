@@ -38,7 +38,7 @@ camunda.vars.env.API_ENDPOINT → "https://api.override.com"
 
 #### Why this happens
 
-Process variables [have the highest priority](./concepts.md#variable-resolution-priority) in the resolution hierarchy. When you namespace a process variable under `camunda.vars.env`, it takes precedence over cluster variables.
+Process variables [have the highest priority](./scope-and-priority.md) in the resolution hierarchy. When you namespace a process variable under `camunda.vars.env`, it takes precedence over cluster variables.
 
 This allows intentional, runtime overrides of cluster configuration when necessary.
 
