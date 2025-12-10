@@ -33,7 +33,7 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 #### OpenJDK 25 support
 
-Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
 
 </div>
 </div>
