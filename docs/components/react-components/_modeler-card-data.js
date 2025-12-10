@@ -6,10 +6,10 @@ import IconConnectorImg from "../connectors/img/icon-connectors.png";
 // Fundamentals cards on cluster variables page
 export const fundamentalCards = [
   {
-    link: "../cluster-variable-core-concepts/",
-    title: "Core concepts",
+    link: "../cluster-variable-use/",
+    title: "How to use",
     image: IconPlayImg,
-    description: "Learn the core concepts of cluster variables.",
+    description: "Learn how to use and access cluster variables.",
   },
   {
     link: "../cluster-variable-scope-priority/",
@@ -22,5 +22,11 @@ export const fundamentalCards = [
     title: "Namespace collisions",
     image: IconPlayImg,
     description: "Understand namespace collisions in cluster variables.",
+  },
+  {
+    link: "../cluster-variable-data-types/",
+    title: "Supported data types",
+    image: IconPlayImg,
+    description: "Understand data types supported by cluster variables.",
   },
 ];

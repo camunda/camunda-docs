@@ -55,4 +55,4 @@ Get started with cluster variables with the following tutorial:
 
 Understand the fundamental concepts of cluster variables:
 
-<AoGrid ao={fundamentalCards}/>
+<AoGrid ao={fundamentalCards} columns={2}/>

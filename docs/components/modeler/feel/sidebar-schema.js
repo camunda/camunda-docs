@@ -42,10 +42,11 @@ module.exports = {
       },
       items: [
         "components/modeler/feel/cluster-variable/cluster-variable-get-started",
-        "components/modeler/feel/cluster-variable/cluster-variable-core-concepts",
+        "components/modeler/feel/cluster-variable/cluster-variable-use",
         "components/modeler/feel/cluster-variable/cluster-variable-scope-priority",
         "components/modeler/feel/cluster-variable/cluster-variable-namespace-collisions",
-        "components/modeler/feel/cluster-variable/cluster-variable-access",
+        "components/modeler/feel/cluster-variable/cluster-variable-data-types",
+        "components/modeler/feel/cluster-variable/cluster-variable-examples",
       ],
     },
   ],

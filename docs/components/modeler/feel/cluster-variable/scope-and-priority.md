@@ -120,67 +120,6 @@ Result when accessing camunda.vars.env.MAX_AMOUNT:
 → 10000 (PROCESS variable)
 ```
 
-## Access by scope
-
-Cluster variables are available in FEEL expressions through three namespaces:
-
-- `camunda.vars.cluster`
-- `camunda.vars.tenant`
-- `camunda.vars.env`
-
-:::tip
-Camunda recommends using the `camunda.vars.env` namespace for most use cases.
-:::
-
-### `camunda.vars.cluster`
-
-Provides direct access **only** to global-scope variables. Tenant-scope variables are not accessible through this namespace.
-
-**Use when:**
-
-- You want to access only global variables.
-- You need to bypass tenant-level overrides.
-- You're debugging scope resolution.
-
-For example:
-
-```
-camunda.vars.cluster.GLOBAL_DEFAULT_TIMEOUT
-```
-
-### `camunda.vars.tenant`
-
-Provides direct access **only** to tenant-scope variables. Global-scope variables are not accessible through this namespace.
-
-**Use when:**
-
-- You want to access only tenant variables.
-- You need to check tenant-specific values.
-- You're debugging scope resolution.
-
-For example:
-
-```
-camunda.vars.tenant.TENANT_SPECIFIC_CONFIG
-```
-
-### `camunda.vars.env`
-
-Provides a merged view of both global- and tenant-scope variables, applying automatic priority resolution. This is the recommended namespace for most cases.
-
-**Use when:**
-
-- You want automatic scope resolution.
-- You need the most specific value available.
-- You're writing portable process definitions.
-
-For example:
-
-```
-camunda.vars.env.API_ENDPOINT
-camunda.vars.env.CONFIG.timeout
-```
-
 ## Multi-tenant considerations
 
 ### Tenant isolation
