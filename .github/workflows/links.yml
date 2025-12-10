@@ -2,6 +2,10 @@ name: Check external links
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/links.yml"
+      - "lychee-external-links.toml"
   schedule:
     - cron: "0 3 1 * *"
 
