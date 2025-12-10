@@ -19,10 +19,6 @@ Open the **Settings** window either from the application menu or by using the `C
 
 ## Settings overview
 
-Use the following table to understand what each Desktop Modeler setting does and when to use it.
-
-## Settings overview
-
 Use the following table to understand the available Desktop Modeler settings.
 
 | Setting                     | Description                                                             | More information                                                                                  |
