@@ -257,8 +257,8 @@ Client credentials with access to the Orchestration Cluster API are required whe
 
 ### Incorrect authorizations
 
-When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md).
+When using Modeler to deploy a process model or start a process instance, you may encounter issues related to [resource authorizations](/components/concepts/access-control/authorizations.md).
 
-Make sure to double-check that the credentials you are using have the right authorizations to deploy a process model, or start a process instance, on the chosen cluster and tenant.
+Verify that the credentials you are using have the required authorizations to deploy a process model or start a process instance on the selected cluster and tenant.
 
-Keep in mind that if you're using Web Modeler, it will _automatically_ deploy resources or start process instances as your logged-in user, so the authorizations must be assigned to you.
+If you're using Web Modeler, note that deployments and process starts are performed **as your logged-in user**, so the necessary authorizations must be assigned to your user account.

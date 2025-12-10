@@ -334,7 +334,7 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/vendor-ee/ela
 
 ## Incorrect authorizations when deploying resources from Modeler
 
-If you have issues with missing or invalid authorizations when deploying resources or starting process instances from Web/Desktop Modeler, double-check what credentials you're using:
+If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
 
-- If you're using Web Modeler, it will automatically deploy as your logged-in user, so make sure that [user](/components/identity/user.md) has the right permissions.
-- If you're using Desktop Modeler, it will use whatever client credentials you passed, so make sure that [client](/components/identity/client.md) has the right permissions.
+- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
+- **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
