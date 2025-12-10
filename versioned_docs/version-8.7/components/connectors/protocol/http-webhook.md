@@ -270,44 +270,48 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-The **Verification expression** allows you to return a custom HTTP response **without triggering process correlation**. This powerful feature can be used for multiple scenarios:
+The verification expression allows you to return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
 
-- **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub)
-- **Request validation**: Reject invalid requests before creating a process instance
-- **Conditional responses**: Return different responses based on the request content
-- **Health check endpoints**: Respond to health checks or status queries
-- **Early response without correlation**: Return immediate responses without starting a workflow
+- **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
+- **Request validation**: Reject invalid or malformed requests before a process instance is created.
+- **Conditional responses**: Return different responses based on request content.
+- **Health checks**: Provide lightweight status or readiness responses.
+- **Early responses**: Return a response immediately without starting a workflow.
 
 #### How it works
 
-When the verification expression evaluates to a **non-null** value, the webhook:
+When the verification expression evaluates to a **non-null** value:
 
-1. Returns the specified response immediately
-2. **Does NOT** trigger process correlation
-3. **Does NOT** evaluate activation conditions or other webhook configuration
+1. The webhook returns the specified response immediately.
+2. Process correlation does not occur.
+3. Activation conditions, HMAC validation, and the rest of the webhook pipeline are skipped.
 
-When the verification expression evaluates to **null**, the webhook:
+When the verification expression evaluates to **null**:
 
-1. Continues with normal webhook processing
-2. Evaluates activation conditions
-3. Performs HMAC validation (if configured)
-4. Triggers process correlation as usual
+1. The webhook continues with normal processing.
+2. Activation conditions are evaluated.
+3. HMAC validation (if configured) is performed.
+4. Process correlation proceeds as usual.
 
 #### Response format
 
-When working with `request` data, use the following references to access data:
+Use the following references to access incoming request data:
 
 - Body: `request.body.`
 - Headers: `request.headers.`
 - URL parameters: `request.params.`
 
-When working with response, you can use the following placeholders:
+To construct a response, use these fields in the returned object:
 
-- **Body**: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`
-- **Status code**: `"statusCode"`, for example `{"statusCode": 201, "body": {"result": "ok"}}`. The default status code is `200` if not specified.
-- **Headers**: `"headers"`, for example `{"headers": {"Content-Type": "application/json"}, "body": {"result": "ok"}}`
+- **`body`** – for example:  
+  `{"body": {"challenge": request.body.challenge}}`
+- **`statusCode`** – for example:  
+  `{"statusCode": 201, "body": {"result": "ok"}}`  
+  If omitted, the default status code is **200**.
+- **`headers`** – for example:  
+  `{"headers": {"Content-Type": "application/json"}, "body": {"result": "ok"}}`
 
-You can use FEEL expressions to modify the data you return.
+Use FEEL expressions to build and transform the response content as needed.
 
 #### Example: One-time verification challenge
 
