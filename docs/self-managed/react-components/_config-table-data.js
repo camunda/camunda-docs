@@ -117,6 +117,9 @@ export const configs = [
     ],
     types: ["Direct mapping"],
     area: ["Cluster"],
+    notes: [
+      "Note: The deprecated property 'zeebe.gateway.cluster.contactPoint' is removed in 8.9.",
+    ],
   },
   {
     name: "camunda.cluster.network.internal-api.host",
