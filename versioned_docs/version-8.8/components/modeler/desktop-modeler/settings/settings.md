@@ -23,14 +23,14 @@ Use the following table to understand the available Desktop Modeler settings.
 
 | Setting                     | Description                                                             | More information                                                                                  |
 | --------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Enable new context pad      | Enables the new context pad.                                            | —                                                                                                 |
-| Disable plugins             | Disables installed plugins when running Desktop Modeler.                | —                                                                                                 |
-| Disable connector templates | Disables automatic connector template fetching.                         | [Automatic connector template fetching](../use-connectors/#automatic-connector-template-fetching) |
+| Enable new context pad      | Enables the new context pad interface.                                  | —                                                                                                 |
+| Disable plugins             | Disables all installed plugins when running Desktop Modeler.            | —                                                                                                 |
+| Disable connector templates | Disables automatic fetching of connector templates.                     | [Automatic connector template fetching](../use-connectors/#automatic-connector-template-fetching) |
 | Default Camunda 8 version   | Sets the default Camunda 8 execution platform version for new diagrams. | —                                                                                                 |
 | Default Camunda 7 version   | Sets the default Camunda 7 execution platform version for new diagrams. | —                                                                                                 |
 
 :::note
-Some plugins may also provide their own settings dynamically in the **Settings** window.
+Plugins may also provide their own settings dynamically in the **Settings** window.
 :::
 
 ## Settings JSON file
