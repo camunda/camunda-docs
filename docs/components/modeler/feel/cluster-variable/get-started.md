@@ -56,15 +56,17 @@ Use it in any expression field, such as:
 
 ## Test your process
 
-Deploy your process and create an instance.
+Deploy your process and start a new instance to validate the variable is read correctly in expressions and flow conditions.
 
 :::info
 The cluster variable is automatically resolved during execution.
 :::
 
-### Common patterns
+### Common usage patterns
 
 #### Environment configuration
+
+Store multiple related settings in one object and reference nested values in FEEL:
 
 ```json
 {
@@ -77,7 +79,7 @@ The cluster variable is automatically resolved during execution.
 }
 ```
 
-Access nested values as follows:
+Use in expressions:
 
 ```
 camunda.vars.env.ENV_CONFIG.api_url
@@ -86,6 +88,8 @@ camunda.vars.env.ENV_CONFIG.timeout_ms
 
 #### Feature flags
 
+Use booleans to enable or disable behavior across processes:
+
 ```json
 {
   "key": "FEATURE_ENABLE_NEW_WORKFLOW",
@@ -93,13 +97,15 @@ camunda.vars.env.ENV_CONFIG.timeout_ms
 }
 ```
 
-Use it in conditional flows as follows:
+Use in conditional flows:
 
 ```
 camunda.vars.env.FEATURE_ENABLE_NEW_WORKFLOW = true
 ```
 
 #### Thresholds and limits
+
+Centralize numeric thresholds used in decision logic:
 
 ```json
 {
@@ -108,7 +114,7 @@ camunda.vars.env.FEATURE_ENABLE_NEW_WORKFLOW = true
 }
 ```
 
-Use it in gateway conditions as follows:
+Use in gateway conditions:
 
 ```
 orderAmount > camunda.vars.env.APPROVAL_THRESHOLD
