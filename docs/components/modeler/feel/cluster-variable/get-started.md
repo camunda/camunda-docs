@@ -21,6 +21,24 @@ Content-Type: application/json
 }
 ```
 
+### Create a tenant cluster variable
+
+If you're using multi-tenancy, you can create tenant-specific overrides:
+
+```bash
+POST /v2/cluster-variables/tenant/{tenantId}
+Content-Type: application/json
+
+{
+  "key": "API_ENDPOINT",
+  "value": "https://api.tenant-specific.example.com"
+}
+```
+
+:::note
+Processes running in this tenant automatically use the tenant-specific value.
+:::
+
 ## Access the variable in your BPMN process
 
 In Camunda Modeler, you can access this variable using a FEEL expression:
@@ -39,24 +57,9 @@ Use it in any expression field, such as:
 ## Test your process
 
 Deploy your process and create an instance.
+
+:::info
 The cluster variable is automatically resolved during execution.
-
-### Create your first tenant variable
-
-If you're using multi-tenancy, you can create tenant-specific overrides:
-
-```bash
-POST /v2/cluster-variables/tenant/{tenantId}
-Content-Type: application/json
-
-{
-  "key": "API_ENDPOINT",
-  "value": "https://api.tenant-specific.example.com"
-}
-```
-
-:::note
-Processes running in this tenant automatically use the tenant-specific value.
 :::
 
 ### Common patterns
