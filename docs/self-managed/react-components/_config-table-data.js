@@ -8,6 +8,12 @@ export const configs = [
     area: ["System"],
   },
   {
+    name: "camunda.system.restore.ignore-files-in-target",
+    legacy: ["zeebe.restore.ignoreFilesInTarget"],
+    types: ["Direct mapping"],
+    area: ["System"],
+  },
+  {
     name: "camunda.cluster.network.advertised-host",
     legacy: [
       "zeebe.gateway.cluster.advertisedHost",
