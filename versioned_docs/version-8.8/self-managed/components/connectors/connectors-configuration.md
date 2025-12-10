@@ -324,8 +324,8 @@ export SUPER_SECRETS_tenant1_MY_SECRET='foo' # This will be resolved by using {{
 
 <TabItem value='helm'>
 
-Connector secrets can be used in Helm charts, e.g. referencing a [Kubernetes Secret
-](https://kubernetes.io/docs/concepts/configuration/secret/):
+Connector secrets can be used in Helm charts, for example by referencing a [Kubernetes secret](https://kubernetes.io/docs/concepts/configuration/secret/):
+
 ```yaml
 connectors:
   envFrom:
