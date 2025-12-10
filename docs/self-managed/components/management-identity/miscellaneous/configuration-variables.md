@@ -44,6 +44,7 @@ Use the following names and values for the Identity SDK to ensure proper authent
 | `CAMUNDA_IDENTITY_CLIENTSECRET`      | `camunda.identity.client-secret`        | The client secret for the Identity client.                                                                                            | -                             |
 | `CAMUNDA_IDENTITY_AUTHSCOPES`        | `camunda.identity.auth-scopes`          | Defines the scopes that should be applied to the token, provided as list separated by spaces.                                         | `openid email offline_access` |
 | `CAMUNDA_IDENTITY_USEBACKENDAUTHURL` | `camunda.identity.use-backend-auth-url` | Whether the fetching refresh tokens and logout will be performed against the `issuer` or the `issuer-backend-url`.                    | `false`                       |
+| `CAMUNDA_IDENTITY_CLOCKSKEW`         | `camunda.identity.clock-skew`           | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601                                             | `60S`                         |
 
 ## License configuration
 
@@ -100,7 +101,7 @@ Identity requires a database to store information about resource authorization a
 :::note
 There are no default values for the variables above. See
 [supported environments](/reference/supported-environments.md#camunda-platform-8-self-managed) for a list of
-supported databases.
+supported databases. You may also review the [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md).
 :::
 
 ### Running Identity on Amazon Aurora PostgreSQL

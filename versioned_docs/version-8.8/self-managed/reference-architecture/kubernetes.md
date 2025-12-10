@@ -46,9 +46,9 @@ The [reference architecture overview](/self-managed/reference-architecture/refer
 - **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
-:::
 
-_Infrastructure diagram for a single region setup (click on the image to open the PDF version):_
+_Infrastructure diagram for a single-region setup (click the image to open the PDF version)_
+
 [![Architecture Overview](./img/k8s-single.jpg)](./img/k8s-single.pdf)
 
 This Kubernetes architecture illustrates a high-availability setup across multiple availability zones (A, B, and C), with key networking components to ensure scalability, security, and reliability. We recommend using multiple availability zones to improve fault tolerance and eliminate single points of failure.

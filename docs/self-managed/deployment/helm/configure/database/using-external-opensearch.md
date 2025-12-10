@@ -5,6 +5,10 @@ title: Use Amazon OpenSearch Service with the Helm chart
 description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance.
 ---
 
+Learn how to configure and use Amazon OpenSearch with the Helm chart.
+
+## About this guide
+
 Camunda 8 Self-Managed includes two types of components:
 
 - **Camunda components** such as Operate, Optimize, and Tasklist.
@@ -13,6 +17,10 @@ Camunda 8 Self-Managed includes two types of components:
 For more details, see the [architecture overview](/self-managed/about-self-managed.md#architecture).
 
 By default, the [Helm chart deployment](/self-managed/setup/overview.md) installs a new Elasticsearch instance. This guide explains how to configure the Camunda Helm chart to use an external Amazon OpenSearch Service instance instead.
+
+:::info OpenSearch support
+Camunda 8 also supports the open-source [OpenSearch](https://opensearch.org/) distribution as well as [Amazon OpenSearch](https://aws.amazon.com/opensearch-service).
+:::
 
 ## Prerequisites
 

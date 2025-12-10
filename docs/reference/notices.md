@@ -19,6 +19,32 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 36
+
+### Publication date
+
+December 03, 2025
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application is vulnerable to [CVE-2025-53066](https://nvd.nist.gov/vuln/detail/CVE-2025-53066), which allows an unauthenticated attacker with network access via multiple protocols to compromise Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition. Successful attacks of this vulnerability can result in unauthorized access to critical data or complete access to all Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition accessible data.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.2, ≤ 8.7.10, or ≤ 8.6.22
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.3, 8.7.11, 8.6.23
+
 ## Notice 35
 
 ### Publication date

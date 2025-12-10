@@ -166,7 +166,9 @@ These two key-value pairs define what BPMN types the template can be applied to 
   - `bpmn:Event`
 - `elementType : Object`: If you configure `elementType` on a template, the element is replaced with the specified type when a user applies the template.
   - `value : String`: Is a required key. The BPMN element is changed to this type the template is applied.
-  - `eventDefinition: String`: You must set this key's value to `"bpmn:MessageEventDefinition"` if you are templating any message event. Otherwise, this key should be ignored.
+  - `eventDefinition: String`: This key is used when templating an event. It can be ignored when templating any other element type. Supported values are:
+    - `"bpmn:MessageEventDefinition"` use this value when you template a message event.
+    - `"bpmn:SignalEventDefinition"` use this value when you template a signal event.
 
 Some properties require a specific BPMN type, and thus a specific value for `elementType`, to work correctly.
 For example, if the template sets `zeebe:calledDecision` on an element and `appliesTo` is set to `bpmn:Task`, the `elementType` must be set to `bpmn:BusinessRuleTask`.

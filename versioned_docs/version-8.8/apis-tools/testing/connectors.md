@@ -338,7 +338,7 @@ tests, for example, setting the URL expression to `"{{secrets.BASE_URL}}" + "/te
 
 ## Custom connectors
 
-By default, the runtime uses the Camunda connectors bundle in the same version as the Maven module. You can change the
+By default, the runtime uses the built-in connectors bundle in the same version as the Maven module. You can change the
 version or use a custom connectors bundle in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={

@@ -161,6 +161,8 @@ When the instance ends and messages with the same correlation key are not correl
 You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/components/modeler/bpmn/events.md).
 :::
 
+Learn more in our [message aggregation guide](./message-aggregation.md).
+
 ### Single instance
 
 **Problem**: Create exactly one instance of a process
