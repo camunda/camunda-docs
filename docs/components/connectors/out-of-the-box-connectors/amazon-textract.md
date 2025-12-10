@@ -17,8 +17,6 @@ Use this connector to orchestrate Amazon Textract-powered extraction as part of 
 
 The [Amazon Textract](https://aws.amazon.com/textract/) machine learning (ML) service can automatically extract text, handwriting, layout elements, and data from scanned documents.
 
-For example, ...
-
 :::tip Camunda marketplace
 The [Amazon Textract connector](https://marketplace.camunda.com/en-US/apps/473161/amazon-textract-connector) is available in the Camunda marketplace.
 :::
