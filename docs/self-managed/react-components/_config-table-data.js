@@ -9,50 +9,73 @@ export const configs = [
   },
   {
     name: "camunda.cluster.network.advertised-host",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.advertisedHost",
+      "zeebe.broker.network.advertisedHost",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.port-offset",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.portOffset",
+      "zeebe.broker.network.portOffset",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.max-message-size",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.maxMessageSize",
+      "zeebe.broker.network.maxMessageSize",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.max-message-size",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.maxMessageSize",
+      "zeebe.broker.network.maxMessageSize",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
-
   {
     name: "camunda.cluster.network.socket-send-buffer",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.socketSendBuffer",
+      "zeebe.broker.network.socketSendBuffer",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.socket-receive-buffer",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.socketReceiveBuffer",
+      "zeebe.broker.network.socketReceiveBuffer",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.heartbeat-timeout",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.heartbeatTimeout",
+      "zeebe.broker.network.heartbeatTimeout",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.heartbeat-interval",
-    legacy: ["?"],
+    legacy: [
+      "zeebe.gateway.cluster.heartbeatInterval",
+      "zeebe.broker.network.heartbeatInterval",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
@@ -77,6 +100,15 @@ export const configs = [
   {
     name: "camunda.cluster.network.command-api.advertisedPort",
     legacy: ["zeebe.broker.network.commandApi.advertisedPort"],
+    types: ["Direct mapping"],
+    area: ["Cluster"],
+  },
+  {
+    name: "camunda.cluster.initial-contact-points",
+    legacy: [
+      "zeebe.gateway.cluster.initialContactPoints",
+      "zeebe.broker.cluster.initialContactPoints",
+    ],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
@@ -1518,6 +1550,111 @@ export const configs = [
       "zeebe.broker.backpressure.gradient2.longWindow",
     ],
     types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.vegas.alpha",
+    legacy: [
+      "zeebe.broker.flowControl.request.vegas.alpha",
+      "zeebe.broker.backpressure.vegas.alpha",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.vegas.beta",
+    legacy: [
+      "zeebe.broker.flowControl.request.vegas.beta",
+      "zeebe.broker.backpressure.vegas.beta",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.vegas.initial-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.vegas.initialLimit",
+      "zeebe.broker.backpressure.vegas.initialLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.legacy-vegas.initial-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.legacy-vegas.initialLimit",
+      "zeebe.broker.backpressure.legacy-vegas.initialLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.legacy-vegas.max-concurrency",
+    legacy: [
+      "zeebe.broker.flowControl.request.legacyVegas.maxConcurrency",
+      "zeebe.broker.backpressure.legacyVegas.maxConcurrency",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.legacy-vegas.alpha-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.legacyVegas.alphaLimit",
+      "zeebe.broker.backpressure.legacyVegas.alphaLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.request.legacy-vegas.beta-limit",
+    legacy: [
+      "zeebe.broker.flowControl.request.legacyVegas.betaLimit",
+      "zeebe.broker.backpressure.legacyVegas.betaLimit",
+    ],
+    types: ["Breaking change"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.enabled",
+    legacy: ["zeebe.broker.flowControl.write.enabled"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.limit",
+    legacy: ["zeebe.broker.flowControl.write.limit"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.ramp-up",
+    legacy: ["zeebe.broker.flowControl.write.rampUp"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.throttle.enabled",
+    legacy: ["zeebe.broker.flowControl.write.throttling.enabled"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.throttle.acceptable-backlog",
+    legacy: ["zeebe.broker.flowControl.write.throttling.acceptableBacklog"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.throttle.minimum-limit",
+    legacy: ["zeebe.broker.flowControl.write.throttling.minimumLimit"],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
+    name: "camunda.processing.flow-control.write.throttle.resolution",
+    legacy: ["zeebe.broker.flowControl.write.throttling.resolution"],
+    types: ["Direct mapping"],
     area: ["Processing"],
   },
 ];
