@@ -24,10 +24,7 @@ export const configs = [
   },
   {
     name: "camunda.cluster.network.port-offset",
-    legacy: [
-      "zeebe.gateway.cluster.portOffset",
-      "zeebe.broker.network.portOffset",
-    ],
+    legacy: ["zeebe.broker.network.portOffset"],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
@@ -69,19 +66,13 @@ export const configs = [
   },
   {
     name: "camunda.cluster.network.heartbeat-timeout",
-    legacy: [
-      "zeebe.gateway.cluster.heartbeatTimeout",
-      "zeebe.broker.network.heartbeatTimeout",
-    ],
+    legacy: ["zeebe.broker.network.heartbeatTimeout"],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
   {
     name: "camunda.cluster.network.heartbeat-interval",
-    legacy: [
-      "zeebe.gateway.cluster.heartbeatInterval",
-      "zeebe.broker.network.heartbeatInterval",
-    ],
+    legacy: ["zeebe.broker.network.heartbeatInterval"],
     types: ["Direct mapping"],
     area: ["Cluster"],
   },
