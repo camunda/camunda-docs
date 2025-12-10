@@ -2,21 +2,26 @@
 id: cluster-variable-namespace-collisions
 title: Namespace collisions
 sidebar_label: "Namespace collisions"
-description: "Understand namespace collisions."
+description: "Understand namespace collisions in cluster variables, how scope priority affects variable resolution, and how to safely handle overrides to avoid unexpected behavior."
 ---
 
-Understand namespace collisions. They occur when the same variable key is defined with different structures or values across multiple scopes.
+Understand namespace collisions in cluster variables, how scope priority affects variable resolution, and how to safely handle overrides to avoid unexpected behavior.
 
-While the priority system determines which value is used, certain collision patterns can lead to unexpected
-behavior.
+## About
 
-## Types of collisions
+Namespace collisions occur when the same variable key is defined differently across scopes (process, tenant, global). While scope priority determines which value is used, mismatched data types or structures can cause unexpected results.
+
+This guide explains common collision types, shows real examples, and shares best practices to prevent or intentionally manage overrides.
+
+## Collision types
+
+The examples below show you common patterns and how to reason about them.
 
 ### Process variable shadowing
 
-When you create a process variable that uses the cluster variable namespace, it shadows cluster variables completely.
+If you create a process variable using the cluster variable namespace, it completely shadows cluster variables.
 
-**Scenario:**
+#### Scenario
 
 ```
 GLOBAL: { API_ENDPOINT: "https://api.global.com" }
@@ -25,45 +30,51 @@ Process Variable Created:
 camunda.vars.env.API_ENDPOINT = "https://api.override.com"
 ```
 
-**Result:**
+#### Result
 
 ```
 camunda.vars.env.API_ENDPOINT → "https://api.override.com"
 ```
 
-**Why this happens**: Process variables have the highest priority in the resolution hierarchy. When you namespace a
-process variable under `camunda.vars.env`, it takes precedence over cluster variables.
+#### Why this happens
 
-**Use case**: This is intentional behavior that allows runtime override of cluster configuration when necessary.
+Process variables [have the highest priority](./concepts.md#variable-resolution-priority) in the resolution hierarchy. When you namespace a process variable under `camunda.vars.env`, it takes precedence over cluster variables.
 
-**Best practice**: Use this pattern sparingly and document it clearly when you do. Consider using a different namespace
-for process variables to avoid confusion.
+This allows intentional, runtime overrides of cluster configuration when necessary.
+
+:::tip
+Use sparingly and document clearly. Prefer a different namespace for process variables to avoid confusion.
+:::
 
 ### Structural collisions across scopes
 
-This is the most common source of unexpected behavior. It occurs when the same key has different data types or
-structures at different scopes.
+It happens when you define the same key with different data types or structures at different scopes.
 
-**Scenario:**
+:::note
+This is the most common source of unexpected behavior.
+:::
+
+#### Scenario
 
 ```
 TENANT: { CONFIG_KEY: "simple string value" }
 GLOBAL: { CONFIG_KEY: { nested: "object", with: "properties" } }
 ```
 
-**Problem:**
+#### Result
 
 ```
 camunda.vars.env.CONFIG_KEY → "simple string value" (TENANT wins)
 camunda.vars.env.CONFIG_KEY.nested → null (trying to access property on string)
 ```
 
-**Why this happens**: The TENANT scope takes priority and returns a string. The GLOBAL nested object is never evaluated.
-Attempting to access properties on a string returns null.
+#### Why this happens
 
-## Detailed collision example
+Tenant scope has higher priority and returns a string, so the global object is never evaluated. Accessing properties on a string yields null.
 
-**Setup:**
+### Detailed collision example
+
+#### Scenario
 
 ```
 GLOBAL scope:
@@ -80,7 +91,7 @@ TENANT scope:
 }
 ```
 
-**Access Attempts and Results:**
+#### Results
 
 ```
 camunda.vars.env.KEY_1
@@ -104,13 +115,15 @@ camunda.vars.tenant.KEY_1.KEY_2
 ✓ Correctly returns null (KEY_1 in TENANT is string)
 ```
 
-## Preventing namespace collisions
+## Prevent namespace collisions
 
-### Consistent data structures
+Avoid collisions by keeping structures consistent, separating fundamentally different data under different keys, and documenting what each key represents at each scope.
 
-Always use the same data type and structure for a given key across all scopes.
+### Keep data structures consistent
 
-**Good Example:**
+Use the same data type and shape for a given key across all scopes.
+
+#### Example
 
 ```
 GLOBAL: {
@@ -130,13 +143,13 @@ TENANT: {
 }
 ```
 
-Both scopes use the same object structure, just with different values.
+Both scopes use the same object structure, with tenant‑specific values.
 
 ### Use distinct keys
 
-When you need fundamentally different structures, use different key names.
+If the structures differ, store them under different keys to avoid type conflicts.
 
-**Good Example:**
+#### Example
 
 ```
 GLOBAL: {
@@ -150,20 +163,11 @@ TENANT: {
 }
 ```
 
-### Document your schema
+### Detect collisions at runtime
 
-Maintain a schema registry or documentation that specifies:
+Add simple guards when accessing nested properties to avoid nulls if a higher‑priority scope supplies a different type.
 
-- Expected keys at each scope
-- Data type and structure for each key
-- Which keys can be overridden at TENANT scope
-- Deprecation notices for keys being phased out
-
-## Collision detection patterns
-
-### Runtime null checking
-
-Always check for null when accessing nested properties:
+#### Example
 
 ```
 if camunda.vars.env.CONFIG.nested_value != null
@@ -171,19 +175,28 @@ if camunda.vars.env.CONFIG.nested_value != null
   else "default"
 ```
 
+### Document your schema
+
+Maintain a schema registry or documentation that specifies:
+
+- Expected keys at each scope.
+- Data type and structure for each key.
+- Which keys can be overridden at the tenant scope.
+- Deprecation notices for keys being phased out.
+
 ## Process variable namespace best practices
 
-### Avoid using camunda.vars namespace
+### Avoid using `camunda.vars` namespace
 
 To prevent shadowing cluster variables, avoid creating process variables that use the `camunda.vars` namespace.
 
-**Problematic:**
+For example, instead of:
 
 ```
 Set process variable: camunda.vars.env.TIMEOUT = 5000
 ```
 
-**Better:**
+Do:
 
 ```
 Set process variable: processTimeout = 5000
@@ -191,5 +204,4 @@ Set process variable: processTimeout = 5000
 
 ### When override is intentional
 
-If you deliberately want to override cluster variables at the process level, document this behavior explicitly in your
-process documentation.
+If you need to override a cluster variable at the process level, document the intent and scope in the process documentation so consumers understand why the override exists and where it applies.
