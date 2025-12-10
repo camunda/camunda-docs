@@ -7,7 +7,7 @@ description: "Learn how cluster variables work, including scope levels, FEEL nam
 
 Learn how cluster variables work, including scope levels, FEEL namespaces, supported types, and resolution priority.
 
-## Variable types
+## Data types
 
 Cluster variables support multiple data types to accommodate different configuration needs.
 

@@ -79,7 +79,7 @@ Store multiple related settings in one object and reference nested values in FEE
 }
 ```
 
-Use in expressions:
+Use in FEEL expressions:
 
 ```
 camunda.vars.env.ENV_CONFIG.api_url
