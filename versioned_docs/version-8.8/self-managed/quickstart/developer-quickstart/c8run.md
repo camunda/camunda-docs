@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guide application developers through deploying Camunda 8 Self-Managed to a local Orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import Tabs from "@theme/Tabs";
