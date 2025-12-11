@@ -95,6 +95,8 @@ Different tenants have different Service Level Agreements (SLAs) with varying ap
 
 **Setup:**
 
+Tenant scope, e.g., `tenant-a`:
+
 ```json
 {
   "SLA_CONFIG": {
@@ -106,6 +108,8 @@ Different tenants have different Service Level Agreements (SLAs) with varying ap
 }
 ```
 
+Tenant scope, e.g., `tenant-b`:
+
 ```json
 {
   "SLA_CONFIG": {
@@ -116,6 +120,8 @@ Different tenants have different Service Level Agreements (SLAs) with varying ap
   "auto_approve_limit": 5000
 }
 ```
+
+Tenant scope, e.g., `tenant-c`:
 
 ```json
 {
