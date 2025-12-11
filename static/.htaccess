@@ -148,6 +148,11 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
 
+## Redirect update-guide introduction to new components-upgrade introduction
+
+RewriteRule ^docs/guides/update-guide/introduction/?$ \
+/docs/self-managed/components/components-upgrade/introduction/ [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
