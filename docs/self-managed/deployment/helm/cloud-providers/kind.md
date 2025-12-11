@@ -256,6 +256,26 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local
 
 This section covers the simplified setup using port-forwarding without TLS.
 
+### Configure your hosts file for Keycloak
+
+When running without a domain, Console validates the JWT issuer claim against the configured Keycloak base URL. To keep token issuance consistent and avoid mismatches, the chart configuration sets Keycloak's hostname to its Kubernetes Service name when operating locally. This means you need to map the service hostname to `127.0.0.1` so that browser redirects and token issuer values align.
+
+Add (or update) the following entry in your `/etc/hosts` file:
+
+```text
+127.0.0.1  camunda-keycloak
+```
+
+:::note
+The hostname `camunda-keycloak` is derived from the Helm release name (`camunda`) followed by `-keycloak`. If you use a different release name, adjust accordingly (e.g., `my-release-keycloak`).
+:::
+
+After adding this entry, you'll be able to reach Keycloak at `http://camunda-keycloak:18080/auth`.
+
+**Why port `18080`?** We forward container port `8080` to a non-privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using port 8080.
+
+### Deploy Camunda 8
+
 Deploy Camunda 8 with the no-domain mode Helm values:
 
 ```bash reference
