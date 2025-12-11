@@ -30,7 +30,7 @@ Use the following table to understand the available Desktop Modeler settings.
 | Default Camunda 7 version   | Sets the default Camunda 7 execution platform version for new diagrams. | —                                                                                                 |
 
 :::note
-Plugins may also provide their own settings dynamically in the **Settings** window.
+Plugins may also provide their own settings in the **Settings** window.
 :::
 
 ## Settings JSON file
