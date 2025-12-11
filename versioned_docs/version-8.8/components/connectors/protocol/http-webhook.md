@@ -275,7 +275,6 @@ The verification expression allows you to return a custom HTTP response without 
 - **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
 - **Request validation**: Reject invalid or malformed requests before a process instance is created.
 - **Conditional responses**: Return different responses based on request content.
-- **Early responses**: Return a response immediately without starting a workflow.
 
 #### How it works
 
