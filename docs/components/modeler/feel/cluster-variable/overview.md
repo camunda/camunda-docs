@@ -17,7 +17,7 @@ Within your Camunda cluster, you can define variables at two levels: globally fo
 
 Cluster variables allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
 
-### Why use cluster variables
+### Why use
 
 Cluster variables provide **centralized**, **flexible**, and **environment-aware configuration** for your processes. They allow you to:
 
@@ -28,7 +28,7 @@ Cluster variables provide **centralized**, **flexible**, and **environment-aware
 - Update configuration at runtime without redeploying.
 - Manage shared settings such as API endpoints and service URLs, feature flags, and integration credentials.
 
-### When not to use them
+### When not to use
 
 Consider alternatives for the following use cases:
 
@@ -53,6 +53,6 @@ Understand the fundamental concepts of cluster variables:
 
 ## Explore further resources
 
-Understand the fundamental concepts of cluster variables:
+Dive into common use cases and the API documentation to extend your knowledge:
 
 <AoGrid ao={resourcesCards} columns={2}/>

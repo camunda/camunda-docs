@@ -5,7 +5,7 @@ sidebar_label: "Supported data types"
 description: "Understand data types supported by cluster variables."
 ---
 
-Understand data types supported by cluster variables for different configuration needs.
+Understand the data types supported by cluster variables for different configuration needs.
 
 ## Simple values
 
@@ -16,7 +16,7 @@ Understand data types supported by cluster variables for different configuration
 ## Complex values
 
 - **Objects**: Nested structures for grouped configuration.
-- **Arrays**: Lists of values
+- **Arrays**: Lists of values.
 
 :::note
 Access patterns may vary depending on how the array is used.
