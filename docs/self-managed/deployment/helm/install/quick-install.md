@@ -14,8 +14,8 @@ Use this guide to install Camunda 8 Self-Managed with the orchestration cluster,
 :::tip Need a Kubernetes cluster?
 If you don't have a Kubernetes cluster yet, check out our setup guides:
 
-- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster
-- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift
+- **Local development**: Follow our [kind tutorial](/self-managed/deployment/helm/cloud-providers/kind.md) to set up a local Kubernetes cluster.
+- **Cloud providers**: See our [cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md) for Amazon EKS, Google GKE, Azure AKS, and Red Hat OpenShift.
   :::
 
 :::note
