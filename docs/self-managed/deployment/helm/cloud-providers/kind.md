@@ -382,7 +382,7 @@ helm uninstall camunda -n camunda
 kind delete cluster --name camunda-platform-local
 
 # (domain mode) Remove hosts entries (requires sudo)
-sudo sed -i '' '/camunda.example.com/d' /etc/hosts
+sudo sed -i '/camunda.example.com/d' /etc/hosts
 
 # (domain mode) Clean certificates
 rm -rf .certs
