@@ -23,6 +23,36 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
+### Supported environments
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenJDK 25 support
+
+Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch minimum version raised to 8.18.6+
+
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3). This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates. Upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
 ### Agentic orchestration
 
 <div className="release-announcement-row">

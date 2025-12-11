@@ -30,7 +30,7 @@ For the latest list of supported relational databases and versions, see the
 
 ## Prerequisites
 
-- **OpenJDK 21–23**: Required for running Camunda 8 as a Java application.
+- **OpenJDK 21–25**: Required for running Camunda 8 as a Java application.
 - **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
@@ -277,6 +277,12 @@ docker ps
 
 TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.  
 Although Camunda 8 Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 
