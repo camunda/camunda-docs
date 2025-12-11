@@ -53,7 +53,7 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
 
 **Solution:**
 
-1. Verify Java is installed (OpenJDK 21–23 required):
+1. Verify Java is installed (OpenJDK 21–25 required):
 
    ```bash
    java -version
@@ -82,7 +82,7 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
    setx JAVA_HOME "C:\Program Files\Java\jdk-21"
    ```
 
-Open a new terminal after setting `JAVA_HOME`.
+Replace `21` in the examples with the version you installed (21–25), and open a new terminal after setting `JAVA_HOME`.
 
 ### Incomplete startup
 

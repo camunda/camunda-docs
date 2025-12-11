@@ -10,7 +10,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 <div class="alphabet-rows">
   <div class="alphabet-navigation">
-    <div class="letter-link"><a href="#b">A</a></div>
+    <div class="letter-link"><a href="#a">A</a></div>
     <div class="letter-link"><a href="#b">B</a></div>
     <div class="letter-link"><a href="#c">C</a></div>
     <div class="letter-link"><a href="#d">D</a></div>
@@ -31,7 +31,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link">Q</div>
     <div class="letter-link"><a href="#r">R</a></div>
     <div class="letter-link"><a href="#s">S</a></div>
-    <div class="letter-link">T</div>
+    <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
     <div class="letter-link">V</div>
     <div class="letter-link"><a href="#w">W</a></div>
@@ -45,17 +45,21 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ### Agentic orchestration
 
-The governed coordination of AI agents, humans, and systems in a blended deterministic and dynamic BPMN process workflow to achieve a business goal.
+The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
 
-For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop.
+For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
+### Artificial intelligence (AI)
+
+A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
+
 ### AI agent
 
-The whole or part of an autonomous (LLM-powered) solution built in BPMN that interprets goals and context, plans steps, calls tools/APIs, and returns results.
+An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
 
-For example, build an invoice processing AI agent in Camunda using an ad‑hoc sub‑process and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
@@ -117,6 +121,10 @@ Connector types:
 - [Inbound](#inbound-connector)
 - [Protocol](#protocol-connector)
 
+### Context window
+
+The amount of text (in [tokens](#token-ai)) a model can consider at once when generating a response. A larger context window allows the model to handle longer inputs.
+
 ### Correlation
 
 Correlation refers to the act of matching a [message](#message) with an inflight [process instance](#process-instance).
@@ -159,6 +167,12 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
 
+### Embedding (vector embedding)
+
+A vector representation of data, including words, sentences, images, in a numerical space, where similar items are positioned near each other. Embeddings allow AI systems to compare meaning and perform tasks like semantic search.
+
+- [Vector database connector](/components/connectors/out-of-the-box-connectors/embeddings-vector-db.md)
+
 ### Event
 
 An event represents a state change associated with an aspect of an executing [process instance](#process-instance). Events capture [variable](#process-variable) changes, state transition in process elements, and so on. An event is represented by a timestamp, the variable name, and variable value. Events are stored in an append-only log.
@@ -177,6 +191,10 @@ See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
 
+### Fine-tuning
+
+The process of adapting a pre-trained AI model to a specific task or dataset, allowing it to specialize while leveraging prior knowledge.
+
 ### Flow node
 
 Flow nodes refer to a specific subset of BPMN [elements](#element). They comprise events, activities, and gateways. Other elements, such as sequence flows, participants, and data objects, are not considered flow nodes.
@@ -193,7 +211,15 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 See [Zeebe Gateway](#zeebe-gateway).
 
+### Generative AI
+
+Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
 ## H
+
+### Hallucination
+
+When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
 
 ### Human task
 
@@ -259,6 +285,10 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 - [Job workers](/components/concepts/job-workers.md)
 
 ## L
+
+### Large language model (LLM)
+
+A large language model (LLM) is a type of AI program specifically designed to understand and generate human-like text. These models are trained on massive amounts of text data, enabling them to learn the structure of language and perform a variety of tasks, such as conversation, summarization, and code generation.
 
 ### Leader
 
@@ -371,6 +401,10 @@ A process variable represents the execution state (i.e data) of a process instan
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
 
+### Prompt
+
+A prompt is the input provided to a [generative AI model](#generative-ai). Prompt engineering refers to the practice of crafting effective instructions to achieve desired results from the AI.
+
 ### Protocol connector
 
 Protocol connectors are a type of [Connector](#connector) in Camunda that can serve as either [inbound](#inbound-connector) or [outbound](#outbound-connector) connectors, supporting a variety of technical protocols. These connectors are highly generic, designed to provide a flexible and customizable means of integrating with external systems and services.
@@ -426,6 +460,10 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 - [RFC](/components/camunda-integrations/sap/csap-cli.md)
 
+### Robotic process automation (RPA)
+
+The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
+
 ## S
 
 ### SAP
@@ -458,6 +496,22 @@ Soft pause exporting is a feature that allows you to continue exporting records 
 An [inbound connector](#inbound-connector) that subscribes to a message queue.
 
 This way, a [Camunda workflow](#workflow) can receive messages from an external system or service (like Kafka or RabbitMQ) using message queuing technology. This type of inbound connector is commonly used in distributed systems where different components of the system need to communicate with each other asynchronously.
+
+## T
+
+### Temperature
+
+A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
+
+### Token (AI)
+
+The smallest unit of text such as a word, subword, or character, that a language model processes. Models read and generate text as a sequence of tokens. Often, pricing for AI models is based on the number of input/output tokens.
+
+### Token (process instance)
+
+In the context of a running process instance in Camunda, a token represents the current point of execution within the BPMN process model. You can think of it as a marker that moves through the process diagram, following the sequence flows as tasks and events are completed.
+
+When a process starts, a token is created at the start event and advances with each completed step. Once the token reaches the end event, it is consumed and the process instance ends. Tokens are not data themselves, but they determine which elements of the process are currently active.
 
 ## U
 

@@ -119,7 +119,15 @@ module.exports = {
             },
           ],
         },
-        "components/concepts/messages",
+        {
+          type: "category",
+          label: "Messages",
+          link: {
+            type: "doc",
+            id: "components/concepts/messages",
+          },
+          items: ["components/concepts/message-aggregation"],
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -1893,18 +1901,32 @@ module.exports = {
         {
           Modeler: [
             {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+              type: "category",
+              label: "Web Modeler",
+              link: {
+                type: "doc",
+                id: "self-managed/components/modeler/web-modeler/overview",
+              },
+              items: [
                 {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  type: "category",
+                  label: "Configuration",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  },
+                  items: [
                     "self-managed/components/modeler/web-modeler/configuration/database",
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
                     "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
-                  Troubleshooting: [
+                },
+                {
+                  type: "category",
+                  label: "Troubleshooting",
+                  items: [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
