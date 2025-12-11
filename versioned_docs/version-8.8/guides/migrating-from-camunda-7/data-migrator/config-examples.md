@@ -69,9 +69,9 @@ You can apply any HikariCP property (for example, pool size) under `camunda.migr
 logging:
   level:
     root: INFO # Root logger level
-    io.camunda.migrator: INFO # Migrator logging
-    io.camunda.migrator.RuntimeMigrator: DEBUG # Runtime migration logging
-    io.camunda.migrator.persistence.IdKeyMapper: DEBUG # ID mapping logging
+    io.camunda.migration.data: INFO # Migrator logging
+    io.camunda.migration.data.RuntimeMigrator: DEBUG # Runtime migration logging
+    io.camunda.migration.data.persistence.IdKeyMapper: DEBUG # ID mapping logging
   file:
     name: logs/camunda-7-to-8-data-migrator.log
 ```

@@ -58,19 +58,19 @@ The following built-in interceptors are available and can be disabled:
 
 **Validators (reject unsupported types):**
 
-- `io.camunda.migrator.impl.interceptor.ByteArrayVariableValidator`
-- `io.camunda.migrator.impl.interceptor.FileVariableValidator`
-- `io.camunda.migrator.impl.interceptor.ObjectJavaVariableValidator`
+- `io.camunda.migration.data.impl.interceptor.ByteArrayVariableValidator`
+- `io.camunda.migration.data.impl.interceptor.FileVariableValidator`
+- `io.camunda.migration.data.impl.interceptor.ObjectJavaVariableValidator`
 
 **Transformers (convert supported types):**
 
-- `io.camunda.migrator.impl.interceptor.PrimitiveVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.NullVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.DateVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.ObjectJsonVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.ObjectXmlVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.SpinJsonVariableTransformer`
-- `io.camunda.migrator.impl.interceptor.SpinXmlVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.PrimitiveVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.NullVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.DateVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.ObjectJsonVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.ObjectXmlVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.SpinJsonVariableTransformer`
+- `io.camunda.migration.data.impl.interceptor.SpinXmlVariableTransformer`
 
 ## `camunda.migrator.c7.data-source`
 
@@ -120,8 +120,8 @@ If the `c8.data-source` configuration is absent, the RDBMS history data migrator
 
 Prefix: `logging`
 
-| Property                     | Type     | Description                                                                                                           |
-| :--------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `.level.root`                | `string` | Root logger level. Default: `INFO`                                                                                    |
-| `.level.io.camunda.migrator` | `string` | Migrator logging level. Default: `INFO`                                                                               |
-| `.file.name`                 | `string` | Log file location. Set to: `logs/camunda-7-to-8-data-migrator.log`. If not specified, logs are output to the console. |
+| Property                           | Type     | Description                                                                                                           |
+| :--------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------- |
+| `.level.root`                      | `string` | Root logger level. Default: `INFO`                                                                                    |
+| `.level.io.camunda.migration.data` | `string` | Migrator logging level. Default: `INFO`                                                                               |
+| `.file.name`                       | `string` | Log file location. Set to: `logs/camunda-7-to-8-data-migrator.log`. If not specified, logs are output to the console. |

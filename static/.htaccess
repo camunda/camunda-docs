@@ -120,6 +120,8 @@ RewriteRule ^docs/components/connectors/out-of-the-box-connectors/http-webhook/?
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/automation-anywhere/? /docs/components/connectors/out-of-the-box-connectors/automation-anywhere/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
+RewriteRule ^/docs/next/components/connectors/out-of-the-box-connectors/operate/? /docs/next/reference/announcements-release-notes/890/890-announcements/#removal-of-the-operator-connector [R=301,L]
+
 
 ## Reabsorbed Optimize docs
 RewriteRule ^optimize/next/apis-tools/optimize-api/(.*)$ /docs/next/apis-tools/optimize-api/$1 [R=301,L]
@@ -146,6 +148,10 @@ RewriteRule ^optimize/3.11.0/self-managed/(.*)$ /docs/8.3/self-managed/$1 [R=301
 
 RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=301,L]
 
+## Redirect update-guide introduction to new components-upgrade introduction
+
+RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/components/components-upgrade/introduction/ [R=301,L]
+
 ##################################################################################
 # 3. Specific content moves
 ##################################################################################
@@ -153,6 +159,10 @@ RewriteRule ^docs/ms-teams/?$ /docs/components/early-access/alpha/ms-teams/ [R=3
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# Change ID of choose-right-model-agentic
+RewriteRule ^docs/next/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/next/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/choosing-right-model-agentic/$ /docs/components/agentic-orchestration/choose-right-model-agentic/ [R=301,L]
 
 # Remove Node.js SDK and redirect to TypeScript SDK
 RewriteRule ^docs/next/apis-tools/node-js-sdk/$ /docs/next/apis-tools/typescript/typescript-sdk/ [R=301,L]

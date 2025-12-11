@@ -614,6 +614,25 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">

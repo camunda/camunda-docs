@@ -136,6 +136,21 @@ public Set<Class<?>> getTypes() {
 }
 ```
 
+### Execution Order
+
+- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
+  - Built-in converters run first, followed by custom interceptors
+- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
+
+### Error Handling
+
+When entity transformation fails:
+
+- The entire entity is skipped
+- Detailed error messages are logged with the specific entity type and error cause
+- The entity is marked for potential retry after fixing the underlying issue
+- You can use `--history --list-skipped` and `--history --retry-skipped` commands to manage failed migrations
+
 ### Configuring Custom Interceptors
 
 Configure your custom interceptors in `application.yml`:
@@ -161,21 +176,6 @@ camunda:
 4. Restart the Data Migrator
 
 The `enabled` property is supported for all interceptors (both built-in and custom) and defaults to `true`.
-
-### Execution Order
-
-- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
-  - Built-in converters run first, followed by custom interceptors
-- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
-
-### Error Handling
-
-When entity transformation fails:
-
-- The entire entity is skipped
-- Detailed error messages are logged with the specific entity type and error cause
-- The entity is marked for potential retry after fixing the underlying issue
-- You can use `--history --list-skipped` and `--history --retry-skipped` commands to manage failed migrations
 
 ## History cleanup
 
