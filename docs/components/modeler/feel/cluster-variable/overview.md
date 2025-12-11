@@ -7,7 +7,7 @@ description: "Manage configuration values centrally across your Camunda cluster 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import AoGrid from '/docs/components/react-components/\_ao-card';
-import { fundamentalCards } from '/docs/components/react-components/\_modeler-card-data';
+import { fundamentalCards, resourcesCards } from '/docs/components/react-components/\_modeler-card-data';
 
 Manage configuration values centrally across your Camunda cluster with cluster variables.
 
@@ -50,3 +50,9 @@ Get started with cluster variables with the following tutorial:
 Understand the fundamental concepts of cluster variables:
 
 <AoGrid ao={fundamentalCards} columns={2}/>
+
+## Explore further resources
+
+Understand the fundamental concepts of cluster variables:
+
+<AoGrid ao={resourcesCards} columns={2}/>

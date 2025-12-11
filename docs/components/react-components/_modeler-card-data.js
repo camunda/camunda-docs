@@ -30,3 +30,19 @@ export const fundamentalCards = [
     description: "Understand data types supported by cluster variables.",
   },
 ];
+
+// Further resources cards on cluster variables page
+export const resourcesCards = [
+  {
+    link: "../cluster-variable-examples/",
+    title: "Use cases",
+    image: IconPlayImg,
+    description: "Play around with real-world examples.",
+  },
+  {
+    link: "../apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable/",
+    title: "Cluster variable API",
+    image: IconPlayImg,
+    description: "Learn about the cluster variable API.",
+  },
+];
