@@ -74,7 +74,7 @@ Camunda supports different types of network storage volumes, including block sto
 
 For details on typical volume usage, refer to these examples:
 
-- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks-1)
+- [Amazon EKS](/self-managed/reference-architecture/kubernetes.md#amazon-eks)
 - [Microsoft AKS](/self-managed/reference-architecture/kubernetes.md#microsoft-aks)
 - [Google GKE](/self-managed/reference-architecture/kubernetes.md#google-gke)
 
@@ -82,12 +82,12 @@ For details on typical volume usage, refer to these examples:
 
 Camunda guarantees support for Amazon Elastic File System (EFS).
 
-If you want to use another, it must meet these requirements:
+If you want to use another NFS, it must meet these requirements:
 
-- It must be POSIX-compliant.
-- It must never reorder file operations.
-- It must be a hard mount, and not a soft mount, to avoid SIGBUS errors during a network partition.
-- There must always be only one container mounting the disk in write mode at a time. Two containers mounting the same disk in write mode could cause data corruption.
+- Be POSIX-compliant.
+- Never reorder file operations.
+- Be a hard mount, not a soft mount, to avoid SIGBUS errors during a network partition.
+- Only one container may mount the disk in write mode at a time. Two containers mounting the same disk in write mode could cause data corruption.
 
 #### Performance
 
