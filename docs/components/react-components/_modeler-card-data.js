@@ -1,4 +1,6 @@
 import IconPlayImg from "../assets/icon-play.png";
+import IconAPI from "../assets/icon-reference-api.png";
+import IconDocs from "../assets/icon-docs.png";
 import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
 import IconConnectorImg from "../connectors/img/icon-connectors.png";
@@ -36,13 +38,13 @@ export const resourcesCards = [
   {
     link: "../cluster-variable-examples/",
     title: "Use cases",
-    image: IconPlayImg,
+    image: IconDocs,
     description: "Play around with real-world examples.",
   },
   {
-    link: "../apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable/",
+    link: "../../../../../apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable/",
     title: "Cluster variable API",
-    image: IconPlayImg,
+    image: IconAPI,
     description: "Learn about the cluster variable API.",
   },
 ];
