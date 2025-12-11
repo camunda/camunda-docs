@@ -9,11 +9,11 @@ Explore practical ways to use cluster variables with real-world examples, includ
 
 ## Environment-specific configuration
 
-**Scenario**: You need different API endpoints and timeouts across development, staging, and production environments.
+You need different API endpoints and timeouts across development, staging, and production environments.
 
-**Setup**:
+**Setup:**
 
-GLOBAL (Production):
+Global scope, e.g., production:
 
 ```json
 {
@@ -25,7 +25,7 @@ GLOBAL (Production):
 }
 ```
 
-TENANT (dev-environment):
+Tenant scope, e.g., dev environment:
 
 ```json
 {
@@ -37,23 +37,24 @@ TENANT (dev-environment):
 }
 ```
 
-**Usage in BPMN**:
-In a service task making a payment API call:
+**Usage in BPMN:**
+
+For example, in a service task making a payment API call:
 
 ```
 URL: = camunda.vars.env.PAYMENT_API.endpoint
 Timeout: = camunda.vars.env.PAYMENT_API.timeout_ms
 ```
 
-**Benefit**: The same BPMN file works across all environments without modification.
+**Benefit:** The same BPMN file works across all environments without modification.
 
 ## Feature flags
 
-**Scenario**: You want to gradually roll out a new approval workflow to specific tenants.
+You want to gradually roll out a new approval workflow to specific tenants.
 
-**Setup**:
+**Setup:**
 
-GLOBAL:
+Global scope, e.g., production:
 
 ```json
 {
@@ -61,7 +62,7 @@ GLOBAL:
 }
 ```
 
-TENANT (tenant-a):
+Tenant scope, e.g., `tenant-a`:
 
 ```json
 {
@@ -69,7 +70,7 @@ TENANT (tenant-a):
 }
 ```
 
-TENANT (beta-customer-2):
+Tenant scope, e.g., `beta-customer`:
 
 ```json
 {
@@ -77,20 +78,22 @@ TENANT (beta-customer-2):
 }
 ```
 
-**Usage in BPMN**:
-In an exclusive gateway condition:
+**Usage in BPMN:**
+
+For example, in an exclusive gateway condition:
 
 ```
 Condition for new flow: camunda.vars.env.ENABLE_NEW_APPROVAL_FLOW = true
 Condition for old flow: camunda.vars.env.ENABLE_NEW_APPROVAL_FLOW = false
 ```
 
-**Benefit**: Control feature rollout per tenant without deploying different process versions.
+**Benefit:** Control feature rollout per tenant without deploying different process versions.
 
 ## Multi-tenant SLA configuration
 
-**Scenario**: Different tenants have different Service Level Agreements with varying approval thresholds and escalation
-timeouts.
+Different tenants have different Service Level Agreements (SLAs) with varying approval thresholds and escalation timeouts.
+
+**Setup:**
 
 ```json
 {
@@ -125,30 +128,29 @@ timeouts.
 }
 ```
 
-**Usage in BPMN**:
+**Usage in BPMN:**
 
-Gateway condition for auto-approval:
+For example, in a gateway condition for auto-approval:
 
 ```
-
 amount <= camunda.vars.env.SLA_CONFIG.auto_approve_limit
-
 ```
 
 Timer boundary event for escalation:
 
 ```
-
 Duration: = duration("PT" + string(camunda.vars.env.SLA_CONFIG.escalation_hours) + "H")
-
 ```
 
-**Benefit**: Customize business rules per tenant while maintaining a single process definition.
+**Benefit:** Customize business rules per tenant while maintaining a single process definition.
 
 ## Integration credentials and endpoints
 
-**Scenario**: Your processes integrate with multiple external services that have different configurations per
-environment.
+Your processes integrate with multiple external services that have different configurations per environment.
+
+**Setup:**
+
+Global scope, e.g., production:
 
 ```json
 {
@@ -172,7 +174,7 @@ environment.
 }
 ```
 
-TENANT (sandbox):
+Tenant scope, e.g., `sandbox`:
 
 ```json
 {
@@ -186,15 +188,13 @@ TENANT (sandbox):
 }
 ```
 
-**Usage in BPMN**:
+**Usage in BPMN:**
 
-Service task for CRM integration:
+For example, a service task for CRM integration:
 
 ```
-
 URL: = camunda.vars.env.INTEGRATIONS.crm.base_url + "/" +
 camunda.vars.env.INTEGRATIONS.crm.api_version + "/customers"
-
 ```
 
-**Benefit**: Centralize integration configuration and easily switch between environments.
+**Benefit:** Centralize integration configuration and easily switch between environments.

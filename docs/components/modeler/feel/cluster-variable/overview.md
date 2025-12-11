@@ -17,24 +17,18 @@ Within your Camunda cluster, you can define variables at two levels: globally fo
 
 Cluster variables allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
 
-### Key benefits
+### Why use cluster variables
 
-- **Centralized configuration**: Define configurations once and reuse them across processes.
-- **Environment flexibility**: Use different values for development, staging, and production without modifying BPMN files.
-- **Multi-tenant support**: Provide tenant-specific overrides while maintaining global defaults.
-- **Simplified deployment**: Promote processes across environments without changing process definitions.
-- **Dynamic updates**: Adjust configuration values without redeploying processes.
+Cluster variables provide **centralized**, **flexible**, and **environment-aware configuration** for your processes. They allow you to:
 
-### When to use cluster variables
+- Define configuration once and reuse it across multiple processes.
+- Use different values for development, staging, and production without changing BPMN models.
+- Support multi-tenant setups with tenant-specific overrides on top of global defaults.
+- Promote processes across environments without modifying process definitions.
+- Update configuration at runtime without redeploying.
+- Manage shared settings such as API endpoints and service URLs, feature flags, and integration credentials.
 
-They are ideal for:
-
-- Environment-specific API endpoints and service URLs.
-- Feature flags to control functionality availability.
-- Shared configuration used across multiple processes.
-- Tenant-specific customization in multi-tenant deployments.
-- Environment-specific thresholds, timeouts, and limits.
-- Integration credentials and connection strings.
+### When not to use them
 
 Consider alternatives for the following use cases:
 
