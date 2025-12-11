@@ -1,18 +1,21 @@
-import BedrockApiKeyAuth from './\_aws-bedrock-api-key.md'
+To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
-The following authentication methods are currently supported:
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key provides permissions to the Amazon SageMaker `InvokeModel` and/or `Converse` actions.
 
-- Choose **Credentials** in the **Authentication** dropdown if you have a valid pair of access and secret keys provided by your AWS account administrator. This option is applicable for both SaaS and Self-Managed users.
-  { props.showApiKeyAuth && <BedrockApiKeyAuth/>}
-- Choose **Default Credentials Chain (Hybrid/Self-Managed only)** in the **Authentication** dropdown if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This option is applicable only for Self-Managed or hybrid distributions. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+:::note
+This option is applicable for both SaaS and Self-Managed users.
+:::
 
-If you select **Credentials** to access the **Amazon Bedrock connector**, the connector requires the appropriate
-credentials. The following authentication options are available:
+- Use **API Key** if you have a valid long-term API Key for Amazon Bedrock. See [Amazon Bedrock API Keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) for more details.
 
-- **Access key**: Provide an access key of a user with permissions to the Amazon SageMaker `InvokeModel` and/or `Converse` actions.
-- **Secret key**: Provide the secret key of the user with the access key provided above.
+:::note
+This option is applicable for both SaaS and Self-Managed users.
+:::
 
-The **Access key** and the **Secret key** are required properties and must be provided to use the connector.
+- Choose **Default Credentials Chain** if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
 
-For more information on authentication and security in Amazon Bedrock, refer to
-the [Amazon Bedrock security and privacy documentation](https://aws.amazon.com/bedrock/security-compliance/).
+:::note
+This option is applicable only for Self-Managed or hybrid distributions.
+:::
+
+For more information on authentication and security in Amazon Bedrock, see [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).

@@ -1,4 +1,4 @@
-### Model Provider
+### Model provider
 
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
@@ -33,10 +33,10 @@ For more information about Anthropic Claude LLM models, refer to the [Claude mod
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
-| Field          | Required | Description                                                                                       |
-| :------------- | :------- | :------------------------------------------------------------------------------------------------ |
-| Region         | Yes      | The AWS region. Example: `us-east-1`                                                              |
-| Authentication | Yes      | Select the authentication type you want to use to authenticate the connector with Amazon Bedrock. |
+| Field          | Required | Description                                                       |
+| :------------- | :------- | :---------------------------------------------------------------- |
+| Region         | Yes      | The AWS region. Example: `us-east-1`.                             |
+| Authentication | Yes      | Select how the connector should authenticate with Amazon Bedrock. |
 
 import AwsBedrockAuthentication from '../../../authentication/\_aws-bedrock.md';
 

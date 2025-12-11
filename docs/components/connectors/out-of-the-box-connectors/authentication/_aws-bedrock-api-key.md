@@ -1,1 +1,0 @@
-- Choose **API Key** in the **Authentication** dropdown if you have a valid long-term API Key for Amazon Bedrock. For more information, refer to [Amazon Bedrock API Keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html).
