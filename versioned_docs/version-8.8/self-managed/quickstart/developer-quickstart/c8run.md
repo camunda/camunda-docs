@@ -2,7 +2,7 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,7 +10,9 @@ import TabItem from "@theme/TabItem";
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run is not supported for production use.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping.
+For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
 Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
@@ -235,6 +237,12 @@ docker ps
 
 TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although C8Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 

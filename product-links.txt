@@ -42,7 +42,6 @@ https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/error-reference/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/escalation-reference/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/feel/
-https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/history-time-to-live/
 https://docs.camunda.io/docs/next/components/modeler/reference/modeling-guidance/rules/message-reference/
 
 
