@@ -19,7 +19,7 @@ Open the **Settings** window either from the application menu or by using the `C
 
 ## Settings overview
 
-Use the following table to understand the available Desktop Modeler settings.
+The following Desktop Modeler settings are available:
 
 | Setting                     | Description                                                             | More information                                                                                  |
 | --------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
