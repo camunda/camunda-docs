@@ -41,18 +41,18 @@ Consider alternatives for the following use cases:
 
 ## Get started
 
-Get started with cluster variables with the following tutorial:
+Get started with cluster variables with the following tutorial.
 
 <p><a href="../cluster-variable-get-started/" class="link-arrow">Create your first cluster variable</a></p>
 
 ## Learn the fundamentals
 
-Understand the fundamental concepts of cluster variables:
+Understand the fundamental concepts of cluster variables.
 
 <AoGrid ao={fundamentalCards} columns={2}/>
 
 ## Explore further resources
 
-Dive into common use cases and the API documentation to extend your knowledge:
+Dive into common use cases and the API documentation to extend your knowledge.
 
 <AoGrid ao={resourcesCards} columns={2}/>
