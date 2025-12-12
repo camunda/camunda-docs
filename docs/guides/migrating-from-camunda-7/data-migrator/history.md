@@ -151,6 +151,32 @@ When entity transformation fails:
 - The entity is marked for potential retry after fixing the underlying issue
 - You can use `--history --list-skipped` and `--history --retry-skipped` commands to manage failed migrations
 
+### Configuring Custom Interceptors
+
+Configure your custom interceptors in `application.yml`:
+
+```yaml
+# Entity interceptor plugins configuration
+# These plugins can be packaged in JARs and dropped in the userlib folder
+camunda:
+  migrator:
+    interceptors:
+      - class-name: com.example.migrator.ProcessInstanceEnricher
+        enabled: true
+        properties:
+          customProperty: "value"
+          enableAudit: true
+```
+
+### Deployment
+
+1. Package your custom interceptor as a JAR file
+2. Place the JAR in the `configuration/userlib/` folder
+3. Configure the interceptor in `configuration/application.yml`
+4. Restart the Data Migrator
+
+The `enabled` property is supported for all interceptors (both built-in and custom) and defaults to `true`.
+
 ## History cleanup
 
 The history cleanup date is migrated if the Camunda 7 instance has a removal time.
