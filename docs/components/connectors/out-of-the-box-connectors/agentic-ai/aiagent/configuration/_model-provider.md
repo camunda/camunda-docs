@@ -38,7 +38,7 @@ Select this option to use a model provided by the [Amazon Bedrock](https://docs.
 | Region         | Yes      | The AWS region. Example: `us-east-1`.                             |
 | Authentication | Yes      | Select how the connector should authenticate with Amazon Bedrock. |
 
-import AwsBedrockAuthentication from '../../../authentication/\_aws-bedrock.md';
+import AwsBedrockAuthentication from './authentication/\_aws-bedrock.md';
 
 <AwsBedrockAuthentication showApiKeyAuth="true"/>
 
