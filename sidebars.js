@@ -1785,6 +1785,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code",
                   ],
                 },
                 {
