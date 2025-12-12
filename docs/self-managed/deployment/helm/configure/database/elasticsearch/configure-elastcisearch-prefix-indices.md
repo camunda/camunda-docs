@@ -32,7 +32,7 @@ Changing the index prefix after a Camunda instance has been running will create 
 
 ```sh
 # zeebe-records indices prefix
-ZEEBE_BROKER_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 
 # unified camunda indices prefix
 CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_INDEXPREFIX=custom-camunda
@@ -46,7 +46,7 @@ CAMUNDA_OPTIMIZE_ZEEBE_NAME=custom-zeebe
 
 ```sh
 # zeebe-records indices prefix
-ZEEBE_BROKER_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
+CAMUNDA_DATA_EXPORTERS_OPENSEARCH_ARGS_INDEX_PREFIX=custom-zeebe
 
 # unified camunda indices prefix
 CAMUNDA_DATA_SECONDARYSTORAGE_OPENSEARCH_INDEXPREFIX=custom-camunda
@@ -103,15 +103,13 @@ optimize:
 ### Elasticsearch
 
 ```yaml
-zeebe:
-  broker:
+camunda:
+  data:
     exporters:
       elasticsearch:
         args:
           index:
             prefix: custom-zeebe # zeebe-records indices prefix
-camunda:
-  data:
     secondary-storage:
       elasticsearch:
         index-prefix: custom-camunda # unified camunda indices prefix
@@ -120,15 +118,13 @@ camunda:
 ### OpenSearch
 
 ```yaml
-zeebe:
-  broker:
+camunda:
+  data:
     exporters:
       opensearch:
         args:
           index:
             prefix: custom-zeebe # zeebe-records indices prefix
-camunda:
-  data:
     secondary-storage:
       opensearch:
         index-prefix: custom-camunda # unified camunda indices prefix
