@@ -30,7 +30,7 @@ For the latest list of supported relational databases and versions, see the
 
 ## Prerequisites
 
-- **OpenJDK 21–23**: Required for running Camunda 8 as a Java application.
+- **OpenJDK 21–25**: Required for running Camunda 8 as a Java application.
 - **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
@@ -275,7 +275,7 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.  
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.  
 Although Camunda 8 Run supports TLS, this is intended only for testing.
 
 :::note
