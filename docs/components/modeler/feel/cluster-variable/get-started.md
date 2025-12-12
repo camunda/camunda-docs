@@ -9,7 +9,7 @@ Get started with cluster variables by creating your first one and using it in a 
 
 ## Create a global cluster variable
 
-Use the Camunda Orchestration Cluster API to create a global variable:
+Use the Orchestration Cluster API to create a global variable:
 
 ```bash
 POST /v2/cluster-variables/global
