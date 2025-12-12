@@ -31,7 +31,8 @@ Migration details are summarized as follows:
 ## Key Features
 
 - **State-preserving migration**: Maintains exact execution state of running process instances
-- **Variable data migration**: Converts and migrates process variables with proper type handling
+- **Variable data migration**: Converts and migrates process variables, decision inputs, and decision outputs with proper type handling
+- **Flexible variable transformation**: Customizable variable interceptors support both runtime and history migration contexts
 - **Validation and verification**: Pre-migration validation to ensure successful migration
 - **Skip and retry capabilities**: Handle problematic instances gracefully with retry options
 - **Detailed logging and reporting**: Comprehensive logging for monitoring migration progress
