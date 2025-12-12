@@ -28,49 +28,36 @@ Related documentation:
 
 Camunda also supports several relational databases for secondary storage, enabling Operate, Tasklist, Identity, and REST APIs to run without Elasticsearch or OpenSearch.
 
-A full list of supported vendors and versions is published in the  
-[RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md).
+A full list of supported vendors and versions is published in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
-For configuration details in Helm deployments, see the  
-[RDBMS configuration guide](/self-managed/deployment/helm/configure/database/rdbms.md).
+For configuration details in Helm deployments, see the [RDBMS configuration guide](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 ### RDBMS behavior and limitations
 
 When using an RDBMS as secondary storage, keep the following limitations in mind:
 
-- **ID size limits:**  
-  Identifiers such as process definition IDs, decision IDs, and usernames are limited to 255 characters.  
-  Storing values significantly longer may result in errors.  
-  (This behavior will change once [this issue](https://github.com/camunda/camunda/issues/36717) is complete.)
+- **ID size limits:** Identifiers such as process definition IDs, decision IDs, and usernames are limited to 255 characters. Storing values significantly longer may result in errors. (This behavior will change once [this issue](https://github.com/camunda/camunda/issues/36717) is complete.)
 
-- **Variable comparisons:**  
-  For String and JSON variables, comparison operators (`equals`, `notEquals`, `in`, `notIn`) only consider the first  
-  8191 characters (or 4000 characters with Oracle).  
-  `LIKE` comparisons are not affected.
+- **Variable comparisons:** For String and JSON variables, comparison operators (`equals`, `notEquals`, `in`, `notIn`) only consider the first 8191 characters (or 4000 characters with Oracle). `LIKE` comparisons are not affected.
 
-- **Sorting may differ by vendor:**  
-  Because collation behavior varies across database vendors, results sorted by string fields may differ between systems.
+- **Sorting may differ by vendor:** Because collation behavior varies across database vendors, results sorted by string fields may differ between systems.
 
-## Working with variables
+#### Working with variables
 
-When retrieving variables through the  
-[Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md),  
-the following comparison operators only apply to the first 4000 characters of large String or JSON variables:
+When retrieving variables through the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the following comparison operators only apply to the first 4000 characters of large String or JSON variables:
 
 - equals
 - notEquals
 - in
 - notIn
 
-This ensures consistent performance on large datasets.  
-For details, see the  
-[get variable specification](/apis-tools/orchestration-cluster-api-rest/specifications/get-variable.api.mdx).
+This ensures consistent performance on large datasets. For details, see the [get variable specification](/apis-tools/orchestration-cluster-api-rest/specifications/get-variable.api.mdx).
 
 ## Related database topics
 
 These pages provide deeper detail for operators, DBAs, and administrators:
 
-- [RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md)
+- [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md)
 - [OpenSearch privileges](/self-managed/concepts/databases/elasticsearch/opensearch-privileges.md)

@@ -1692,7 +1692,6 @@ module.exports = {
             id: "self-managed/concepts/databases/overview",
           },
           items: [
-            "self-managed/concepts/databases/rdbms-support-policy",
             {
               Elasticsearch: [
                 {
@@ -1706,6 +1705,7 @@ module.exports = {
             },
             {
               "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
                 "self-managed/concepts/databases/relational-db/database-configuration",
               ],
             },

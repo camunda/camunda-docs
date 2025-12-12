@@ -12,7 +12,7 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
 
 For supported database vendors and versions, see the  
-[RDBMS support policy](/self-managed/concepts/databases/rdbms-support-policy.md).
+[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 ## Enable RDBMS as secondary storage
 
@@ -29,7 +29,7 @@ zeebe:
   broker:
     exporters:
       rdbms:
-        className: io.camunda.exporter.rdbms.RdbmsExporter
+        className: camunda.data.exporters.rdbms.className
 
 # Configure secondary storage for Camunda applications
 camunda:
@@ -115,12 +115,13 @@ The RDBMS exporter performs automatic history cleanup using two mechanisms:
 
 ## Database driver
 
-Camunda images include JDBC drivers for all supported databases **except**:
+Camunda images include JDBC drivers for all supported databases except Oracle and MySQL.
 
-- Oracle
-- MySQL
+If you use one of these databases, you must provide the driver yourself.
 
-If one of these databases is used, the driver must be mounted into `/driver-lib`:
+### Docker Compose
+
+When running Camunda with Docker Compose, mount the driver into `/driver-lib`:
 
 ```yaml
 services:
@@ -130,7 +131,13 @@ services:
       - <local-path>/driver-lib:/driver-lib
 ```
 
-The driver JAR must be placed directly inside the mounted directory (not in subfolders).
+Place the driver JAR directly inside the mounted directory (not in subfolders).
+
+### Helm
+
+If you are using the Helm charts, refer to the database configuration guide for the supported driver configuration options:
+
+- [Helm database configuration](../../../../self-managed/deployment/helm/configure/database/index.md)
 
 ## Database configuration
 
