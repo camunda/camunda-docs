@@ -25,7 +25,7 @@ To use a new KMS key instead of rotating, contact Camunda Support to update clus
 
 :::warning Key rotation caution
 
-- Do not delete or disable an old key until the cluster uses a replacement.
+- Do not delete or disable an old key until the cluster uses a replacement. For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/concepts/byok/key-state-behavior.md).
 - Improper key management may block data access.
 - Ensure backup storage and persistent volumes remain accessible.
 - See [KMS key rotation](https://docs.aws.amazon.com/kms/latest/userguide/list-rotations.html) and [S3 server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html).
