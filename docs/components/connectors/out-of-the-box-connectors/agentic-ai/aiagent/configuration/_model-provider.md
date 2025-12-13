@@ -1,4 +1,4 @@
-### Model Provider
+### Model provider
 
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
@@ -28,15 +28,19 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
-#### Bedrock
+#### Amazon Bedrock
 
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
-| Field          | Required | Description                                                                                                                                                                                                                          |
-| :------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Region         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                                 |
-| Authentication | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [Amazon Bedrock connector authentication](../../../amazon-bedrock.md#authentication). |
+| Field          | Required | Description                                                       |
+| :------------- | :------- | :---------------------------------------------------------------- |
+| Region         | Yes      | The AWS region. Example: `us-east-1`.                             |
+| Authentication | Yes      | Select how the connector should authenticate with Amazon Bedrock. |
+
+import AwsBedrockAuthentication from './authentication/\_aws-bedrock.md';
+
+<AwsBedrockAuthentication showApiKeyAuth="true"/>
 
 Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 

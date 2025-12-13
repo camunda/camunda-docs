@@ -1,4 +1,4 @@
-### System Prompt
+### System prompt
 
 The **System Prompt** is a crucial part of the AI Agent connector configuration, as it defines the behavior and goal of the agent and instructs the LLM on how to act.
 
