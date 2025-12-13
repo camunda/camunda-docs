@@ -53,6 +53,10 @@ Desktop Modeler can directly deploy diagrams and start process instances in Camu
 
    For **OAuth**, input the credentials for your OAuth provider. These are configured as part of the default [Helm installation](/self-managed/deployment/helm/install/quick-install.md) and can be discovered in [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md), or are set by Zeebe [environment variables](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#environment-variables).
 
+   :::note
+   When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md). Make sure your [client](/components/identity/client.md) has the right authorizations assigned to it.
+   :::
+
    ![oauth configuration](./img/deploy-with-oauth.png)
 
    | Name            | Description                          | Example value                                                                             |
