@@ -403,6 +403,10 @@ components:
           description: The state of the batch operation.
           allOf:
             - $ref: "#/components/schemas/BatchOperationItemStateFilterProperty"
+        operationType:
+          description: The type of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
     BatchOperationItemSearchQueryResult:
       type: object
       allOf:
@@ -535,9 +539,11 @@ components:
         - filter
         - moveInstructions
     ProcessInstanceModificationMoveBatchOperationInstruction:
-      description: |-
-        Instructions describing a move operation. This instruction will terminate all active elementInstance
-        at sourceElementId and activate a new element instance for each terminated one at targetElementId.
+      description: |
+        Instructions describing a move operation. This instruction will terminate all active
+        element instances at `sourceElementId` and activate a new element instance for each
+        terminated one at `targetElementId`. The new element instances are created in the parent
+        scope of the source element instances.
       type: object
       properties:
         sourceElementId:
