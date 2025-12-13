@@ -232,6 +232,10 @@ RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/com
 ## Web Modeler folder restructure - moved to collaboration/
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 
+# Removed power automate
+
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/power-automate/?$ /docs/components/connectors/introduction-to-connectors/ [R=301,L]
+
 # Add mapping rules
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/managing-mapping-rules/?$ /docs/components/identity/mapping-rules/ [R=301,L]
 RewriteRule ^docs/self-managed/components/orchestration-cluster/identity/mapping-rules/mapping-rule-authorizations/?$ /docs/components/identity/mapping-rules/ [R=301,L]
