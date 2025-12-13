@@ -12,11 +12,12 @@ By default, Camunda uses basic authentication with predefined demo users. Altern
 
 ### Authentication options
 
-| Method                                                | Description                                                                                         | Recommended for                                                           |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [Basic authentication](./basic-authentication.md)     | Default authentication with preconfigured demo users. No external identity provider (IdP) required. | Local development and testing, as well as smaller scale production setups |
-| [Internal Keycloak](./internal-keycloak.md)           | Deploys a Keycloak pod with the Helm release, preconfigured by Management Identity.                 | Small teams or self-contained environments                                |
-| [External OIDC provider](./external-oidc-provider.md) | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure                               |
+| Method                                                                        | Description                                                                                         | Recommended for                                                               |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Basic authentication](./basic-authentication.md)                             | Default authentication with preconfigured demo users. No external identity provider (IdP) required. | Local development and testing, as well as smaller scale production setups     |
+| [Internal Keycloak](./internal-keycloak.md)                                   | Deploys a Keycloak pod with the Helm release, preconfigured by Management Identity.                 | Small teams or self-contained environments                                    |
+| [External IdP via Internal Keycloak](./external-idp-via-internal-keycloak.md) | Uses internal Keycloak as identity broker, delegating to external IdPs like SAML, LDAP, or AD.      | Organizations with existing identity infrastructure wanting Keycloak benefits |
+| [External OIDC provider](./external-oidc-provider.md)                         | Integrates Camunda with external IdPs such as Microsoft Entra ID or Okta via OpenID Connect.        | Existing enterprise identity infrastructure                                   |
 
 ### Limitations of OIDC setups
 
@@ -27,6 +28,7 @@ front channel single sign out is not supported. This means that when a user logs
 
 - [Basic authentication guide](./basic-authentication.md)
 - [Internal Keycloak guide](./internal-keycloak.md)
+- [External IdP via Internal Keycloak guide](./external-idp-via-internal-keycloak.md)
 - [External Keycloak guide](./external-keycloak.md)
 - [Microsoft Entra guide](./microsoft-entra.md)
 - [Generic OIDC provider](./generic-oidc-provider.md)

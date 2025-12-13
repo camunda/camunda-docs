@@ -8,6 +8,13 @@ import IconGear from "../../../../../../components/assets/icon-orchcluster.png";
 // Backup and Restore overview cards data
 export const overviewCards = [
   {
+    link: "../external-idp-via-internal-keycloak",
+    title: "External IdP via Internal Keycloak",
+    image: IconGear,
+    description:
+      "Use internal Keycloak as identity broker, delegating authentication to external IdPs like SAML, LDAP, or Active Directory.",
+  },
+  {
     link: "../external-keycloak",
     title: "External Keycloak",
     image: IconGear,
