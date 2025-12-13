@@ -11,7 +11,7 @@ The Camunda 8.8 release introduces breaking changes for [Operate and Tasklist](.
 :::
 
 :::note
-If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application. For details, see the [standalone backup application](/self-managed/concepts/elasticsearch-without-cluster-privileges.md#standalone-backup-application).
+If the Camunda applications cannot access Elasticsearch with cluster-level privileges, run the backup of Operate and Tasklist indices (steps 2 and 4 from the [backup](./backup.md) procedure) as a standalone application separate from the main application. For details, see the [standalone backup application](/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges.md#standalone-backup-application).
 :::
 
 import Tabs from '@theme/Tabs';
@@ -230,3 +230,63 @@ curl $ORCHESTRATION_CLUSTER_MANAGEMENT_API/actuator/health
 
 </summary>
 </details>
+
+<!-- TODO: This section was originally written before the storage architecture changes.
+It has now been modernized, but should be reviewed again once full RDBMS support for Operate/Tasklist is GA. -->
+
+### Using a relational database management system (RDBMS)
+
+When Camunda uses an RDBMS as **secondary storage**, backups and restores involve **two independent systems**:
+
+- **Zeebe (primary storage)**
+- **The external RDBMS used for secondary storage**
+
+Because these systems maintain complementary portions of the data, **their backups must be coordinated**.  
+A consistent restore requires restoring _both_ to the same backup point.
+
+## Backing up when using an RDBMS
+
+When using PostgreSQL, MariaDB, Oracle, SQL Server, or MySQL as secondary storage, follow this process:
+
+1. **Soft-pause exporting in Zeebe**  
+   Pausing ensures Zeebe stops writing new records to secondary storage.  
+   See the [Zeebe management API](../../components/orchestration-cluster/zeebe/operations/management-api.md).
+
+2. **Back up the relational database**  
+   Use your database system’s native tools (e.g., `pg_dump`, Oracle RMAN, MariaDB `mysqldump`, SQL Server backups).  
+   Use a backup identifier (recommended: **timestamp**) that matches the Zeebe backup ID in the next step.
+
+3. **Take a Zeebe backup**  
+   Create a Zeebe backup using the Backup Management API.  
+   See [Take a Zeebe backup](../../operational-guides/backup-restore/zeebe-backup-and-restore.md).
+
+4. **Wait for backup completion**  
+   Confirm Zeebe has finished creating the backup.  
+   See [Monitor a backup](../../operational-guides/backup-restore/zeebe-backup-and-restore.md).
+
+5. **Resume exporting in Zeebe**  
+   Once both backups are complete, resume exporting.  
+   See the [Zeebe management API](../../components/orchestration-cluster/zeebe/operations/management-api.md).
+
+:::note
+We recommend using a **timestamp** as the shared backup ID to simplify correlation between Zeebe and RDBMS backups.
+:::
+
+## Restoring when using an RDBMS
+
+To restore a Camunda 8 system backed by an RDBMS:
+
+1. **Restore the RDBMS backup**  
+   Restore the database backup into an empty or clean database instance using your RDBMS-specific tooling.
+
+2. **Restore Zeebe from its backup**  
+   See [Restore Zeebe](../../operational-guides/backup-restore/zeebe-backup-and-restore.md).
+
+3. **Start dependent applications**  
+   After both primary and secondary storage are restored:
+   - Start Zeebe
+   - Start Operate (requires consistent secondary storage)
+   - Start Tasklist
+   - Start Optimize
+
+   Ensure all components use the restored database and backup ID.

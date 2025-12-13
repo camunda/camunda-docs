@@ -92,7 +92,7 @@ Ensure that an Elasticsearch user with sufficient privileges exists. The applica
 
 You can either use an existing user with the required privileges or assign the necessary privileges to an example user named `camunda-app` by sending the following request to the Elasticsearch REST API:
 
-```
+```yaml
 PUT _security/role/read_write_role
 {
   "indices": [
@@ -291,8 +291,8 @@ Prepare a Camunda minor version upgrade by running the standalone schema manager
 :::important
 Upgrading from 8.7 → 8.8 requires migration steps. Follow the relevant guides and plan a maintenance window:
 
-- [Components update 8.7 to 8.8](../components/components-upgrade/870-to-880.md)
-- [Helm chart upgrade guide: 8.7 to 8.8](../deployment/helm/upgrade/helm-870-880.md)
+- [Components update 8.7 to 8.8](../../../components/components-upgrade/870-to-880.md)
+- [Helm chart upgrade guide: 8.7 to 8.8](../../../deployment/helm/upgrade/helm-870-880.md)
 
 These steps may require stopping or scaling down the Camunda application before running the migration.
 :::
@@ -338,7 +338,7 @@ This staged approach reduces or eliminates downtime for minor upgrades that requ
 
 You can use the standalone schema manager to roll out certain index template setting changes without granting cluster privileges to the continuously running Camunda application.
 
-Supported settings (see [configuration references](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings) and the [Elasticsearch exporter configuration](../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter/#configuration)):
+Supported settings (see [configuration references](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#index--retention-settings) and the [Elasticsearch exporter configuration](../../../components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)):
 
 - **numberOfShards** (Operate / Tasklist / Camunda / Zeebe Elasticsearch exporter) — static: applies only to new indices created after the change. Existing indices keep their shard count.
 - **numberOfReplicas** (Operate / Tasklist / Camunda) — dynamic: applied to existing indices and index templates.
@@ -472,7 +472,7 @@ camunda_webapps_123_8.8.0_part_6_of_7
 camunda_webapps_123_8.8.0_part_7_of_7
 ```
 
-Once completed, you can proceed with step 7 of the [backup procedure](self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
+Once completed, you can proceed with step 7 of the [backup procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md#backup-process).
 
 ### Limitations
 
