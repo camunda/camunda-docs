@@ -7,9 +7,10 @@ description: "How the Data Migrator transforms Camunda 7 variables to Camunda 8.
 
 The Data Migrator automatically handles the transformation of Camunda 7 variables to Camunda 8 compatible formats during migration.
 
-:::info
-The handling and intercepting of variables described on this page is currently only supported for the **Runtime Data Migrator**.
-:::
+Variable transformation is supported for:
+
+- **Runtime migration**: Process instance variables
+- **History migration**: Process variables, decision inputs, and decision outputs
 
 ## About variables
 
@@ -65,16 +66,18 @@ Variable transformations are handled by built-in transformers that run in a spec
 
 ### JSON
 
-JSON variables are handled differently depending on their origin:
+JSON variables are handled differently depending on their origin and migration mode:
 
 **Spin JSON Variables** and **JSON Object Variables** (serialized with `application/json`):
 
-- Deserialized into Map structures for Camunda 8
-- Maintains nested object structure
-- Example: `{"name": "John", "age": 30}` becomes a Map object
+- **Runtime migration**: Deserialized into Map structures for Camunda 8
+  - Maintains nested object structure
+  - Example: `{"name": "John", "age": 30}` becomes a Map object
+- **History migration**: Preserved as raw JSON strings
+  - Example: `{"name": "John", "age": 30}` stored as-is
 
 **Invalid JSON**:
-If JSON cannot be parsed, the process instance is skipped.
+If JSON cannot be parsed during runtime migration, the process instance is skipped.
 
 ### XML
 
@@ -96,7 +99,7 @@ These variables are migrated as-is, but may require special handling in FEEL exp
 
 ## Disabling Built-in Interceptors
 
-You can disable any built-in transformer or validator using the `enabled` configuration property. Use the class names from the tables above:
+You can disable any built-in transformer or validator using the `enabled` configuration property:
 
 ```yaml
 camunda:
@@ -141,8 +144,18 @@ public class MyVariableInterceptor implements VariableInterceptor {
     }
 
     @Override
-    public void execute(VariableInvocation invocation) {
-      // ...
+    public void execute(VariableContext context) {
+      // Access the variable name
+      String name = context.getName();
+
+      // Get the Camunda 7 value
+      Object c7Value = context.getC7Value();
+
+      // Get the Camunda 7 entity
+      VariableInstanceEntity variableInstance = context.getEntity();
+
+      // Transform and set the Camunda 8 value
+      context.setC8Value(transformedValue);
     }
 
 }
@@ -169,6 +182,87 @@ public Set<Class<?>> getTypes() {
 @Override
 public Set<Class<?>> getTypes() {
     return Set.of(); // Empty set = handle all types
+}
+```
+
+### Entity Type Filtering
+
+In addition to filtering by variable type, interceptors can also filter by the source entity type. This is useful when you want different behavior for history/runtime process variables and decision inputs/outputs.
+
+**Available entity types:**
+
+- `VariableInstanceEntity.class` - Runtime process variables
+- `HistoricVariableInstanceEntity.class` - Historic process variables
+- `HistoricDecisionInputInstanceEntity.class` - Decision input variables
+- `HistoricDecisionOutputInstanceEntity.class` - Decision output variables
+
+**Example: Process variables only**
+
+```java
+public class ProcessVariableInterceptor implements VariableInterceptor {
+
+    @Override
+    public Set<Class<? extends ValueFields>> getEntityTypes() {
+        // Only handle process variables (runtime and history)
+        return Set.of(
+            VariableInstanceEntity.class,
+            HistoricVariableInstanceEntity.class
+        );
+    }
+
+    @Override
+    public void execute(VariableContext context) {
+        // This is only called for process variables
+        // not for decision inputs/outputs
+    }
+}
+```
+
+**Example: Decision variables only**
+
+```java
+public class DecisionVariableInterceptor implements VariableInterceptor {
+
+    @Override
+    public Set<Class<? extends ValueFields>> getEntityTypes() {
+        // Only handle decision inputs and outputs
+        return Set.of(
+            HistoricDecisionInputInstanceEntity.class,
+            HistoricDecisionOutputInstanceEntity.class
+        );
+    }
+
+    @Override
+    public void execute(VariableContext context) {
+        // This is only called for decision variables
+    }
+}
+```
+
+**Default behavior:**
+
+```java
+// Empty set = handle all entity types
+@Override
+public Set<Class<? extends ValueFields>> getEntityTypes() {
+    return Set.of();
+}
+```
+
+### Detecting Migration Context
+
+Variable interceptors can detect whether they are running in a runtime or history migration context:
+
+```java
+@Override
+public void execute(VariableContext context) {
+    if (context.isRuntime()) {
+        // Handle runtime migration
+        // Example: Deserialize JSON to Map
+    } else if (context.isHistory()) {
+        // Handle history migration
+        // Example: Keep JSON as string
+    }
 }
 ```
 
@@ -210,7 +304,28 @@ See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-to
 
 When variable transformation fails:
 
+**Runtime migration:**
+
 - The entire process instance is skipped
 - Detailed error messages are logged with the specific variable name and error cause
 - The instance is marked for potential retry after fixing the underlying issue
-- You can use `--list-skipped` and `--retry-skipped` commands to manage failed migrations
+
+**History migration:**
+
+- Individual variables, decision inputs, or outputs that fail are skipped
+- The parent entity (process instance or decision instance) continues migration
+- Skipped items are logged with detailed error information
+- You can review and retry skipped items using `--list-skipped` and `--retry-skipped` commands
+
+**Example commands:**
+
+```bash
+# List all skipped variables
+./start.sh --history --list-skipped HISTORY_VARIABLE
+
+# List all skipped decision instances
+./start.sh --history --list-skipped HISTORY_DECISION_INSTANCE
+
+# Retry skipped entities after fixing issues
+./start.sh --history --retry-skipped
+```

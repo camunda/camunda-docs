@@ -26,7 +26,6 @@ The runtime migration has the following limitations.
 
 ### Variables
 
-- Proper handling and intercepting of variables is currently only supported for the Runtime Data Migrator.
 - [Unsupported Camunda 7 types](../variables#unsupported-types).
 - [Camunda 8 variable name restrictions](/components/concepts/variables.md#variable-values).
   - Variables that do not follow the restrictions will cause issues in FEEL expression evaluation.
