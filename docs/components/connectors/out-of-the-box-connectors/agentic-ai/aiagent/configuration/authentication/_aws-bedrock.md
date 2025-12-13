@@ -1,12 +1,12 @@
 To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
-- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key provides permissions to the Amazon Bedrock `InvokeModel` actions, as mentioned in the [AWS Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-perform-actions-pt).
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key provides permissions to the Amazon Bedrock `InvokeModel` actions, as mentioned in the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-perform-actions-pt).
 
 :::note
 This option is applicable for both SaaS and Self-Managed users.
 :::
 
-- Use **API Key** if you have a valid long-term API Key for Amazon Bedrock. The associated IAM user additionally requires the `CallWithBearerToken` Action attached to it. See [Amazon Bedrock API Keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) and [Amazon Bedrock API Keys Permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-modify.html) for more details.
+- Use **API Key** if you have a valid long-term API key for Amazon Bedrock. The associated IAM user also requires the `CallWithBearerToken` action to be attached. See [Amazon Bedrock API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) and [Amazon Bedrock API keys permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-modify.html) for more details.
 
 :::note
 This option is applicable for both SaaS and Self-Managed users.

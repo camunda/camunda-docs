@@ -28,7 +28,7 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
-#### Bedrock
+#### Amazon Bedrock
 
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
