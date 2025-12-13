@@ -2,8 +2,12 @@
 id: mcp-client-human-in-the-loop
 title: Human in the loop
 sidebar_label: Human in the loop
-description: "..."
+description: "Learn how to build human-in-the-loop AI workflows by combining MCP with BPMN."
 ---
+
+Learn how to build human-in-the-loop AI workflows in Camunda by combining MCP Client tool discovery with BPMN elements like gateways, intermediate events, and user tasks to control and approve tool execution.
+
+## About
 
 ![MCP Client connector human-in-the-loop example](img/mcp-client-hitl.png)
 

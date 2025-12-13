@@ -5,6 +5,9 @@ sidebar_label: MCP Client
 description: "Integrate MCP (Model Context Protocol) clients with agentic orchestration."
 ---
 
+import AoGrid from '../../../react-components/\_ao-card';
+import { fundamentalCards } from '../../../react-components/\_mcp-card-data';
+
 Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration-overview.md).
 
 ## About
@@ -32,10 +35,10 @@ See the MCP Client architecture below:
 
 Camunda provides two MCP connectors with distinct purposes.
 
-| Connector                                                       | STDIO | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                                                                                |
-| :-------------------------------------------------------------- | :---- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [MCP Remote Client connector](./mcp-remote-client-connector.md) | ❌    | ✅          | Properties panel                     | Available on SaaS                                                                                           | Suited for prototyping with remote MCP servers. HTTP connections are opened on demand during execution instead of maintaining persistent connections, per protocol design. |
-| [MCP Client connector](./mcp-client-connector.md)               | ✅    | ✅          | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers.                                                     |
+| Connector                                                       | STDIO | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                            |
+| :-------------------------------------------------------------- | :---- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| [MCP Remote Client connector](./mcp-remote-client-connector.md) | ❌    | ✅          | Properties panel                     | Available on SaaS                                                                                           | Suitable for prototyping with remote MCP servers. Uses on-demand HTTP connections instead of persistent ones.          |
+| [MCP Client connector](./mcp-client-connector.md)               | ✅    | ✅          | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers. |
 
 :::info
 They are not mutually exclusive and can be used together as long as your environment is configured accordingly.
@@ -43,7 +46,7 @@ They are not mutually exclusive and can be used together as long as your environ
 
 ### Common configuration options
 
-The provided connectors share a set of common options for configuring tool access and availability.
+The MCP Client connectors share a set of common options for configuring tool access and availability.
 
 #### Connector mode
 
@@ -68,7 +71,7 @@ Select the operation to perform:
 
 #### Tools
 
-Allows filtering the list of tools provided by the MCP server. If not configured, all tools provided by the MCP server will be available to the AI agent.
+Filter the list of tools provided by the MCP server. If not configured, all tools provided by the MCP server will be available to the AI agent.
 
 | Field          | Required | Description                                             | Example                                |
 | :------------- | :------- | :------------------------------------------------------ | :------------------------------------- |
@@ -82,7 +85,7 @@ Alternatively, it could be configured with `["write_file"]` as a list of exclude
 
 #### Operation
 
-Configures the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
+Configure the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
 
 | Field      | Required | Description                                                                                                                                       |
 | :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -102,12 +105,12 @@ Specify the process variables to map and export the tool calling response into.
 
 Understand the fundamental concepts of the MCP Client.
 
-...TBD
+<AoGrid ao={fundamentalCards} columns={2}/>
 
 ## Explore further resources
 
-Dive into common use cases and the API documentation to extend your knowledge.
+Dive into practical resources to see the MCP Client in action.
 
-A ready-to-go example using both connector types and a human-in-the-loop interaction is available in the [connectors repository](https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/ad-hoc-sub-process/ai-agent-chat-mcp). See its [README](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/examples/ai-agent/ad-hoc-sub-process/ai-agent-chat-mcp/README.md) for further details on the necessary configuration.
+<p><a href="https://github.com/camunda/connectors/tree/main/connectors/agentic-ai/examples/ai-agent/ad-hoc-sub-process/ai-agent-chat-mcp#readme" class="link-arrow" target="_blank">Try out this example</a></p>
 
-ADD [webinar link](https://page.camunda.com/webinar-using-mcp-with-camunda-success)
+<p><a href="https://page.camunda.com/webinar-using-mcp-with-camunda-success" class="link-arrow" target="_blank"> Watch this webinar on using MCP with Camunda</a></p>

@@ -31,7 +31,7 @@ To use any A2A Client connector, you need:
 
 ## A2A Client connectors
 
-The A2A Client includes three connectors:
+The A2A Client includes three connectors.
 
 <AoGrid ao={a2aConnectorCards} />
 
