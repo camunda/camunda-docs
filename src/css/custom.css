@@ -152,10 +152,6 @@ we make it less bold compared to the search keyword */
   display: none !important;
 }
 
-.homeSearch .DocSearch-Button-Placeholder::after {
-  content: " Camunda 8 docs";
-}
-
 @media (max-width: 768px) {
   .homeSearch .DocSearch-Button-Placeholder {
     display: inline;

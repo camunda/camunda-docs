@@ -449,7 +449,11 @@ module.exports = {
       apiKey: "68db7725a8410eace68419c29385ad1e",
       appId: "6KYF3VMCXZ",
       indexName: "camunda-v2",
-      placeholder: "Search Camunda 8 docs",
+      translations: {
+        button: {
+          buttonText: "Search Camunda 8 docs",
+        },
+      },
     },
     languageTabs: [
       {
