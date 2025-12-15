@@ -1,31 +1,31 @@
 ---
 id: external-idp-via-internal-keycloak
-sidebar_label: External IdP via Internal Keycloak
-title: Set up the Helm chart with an external IdP through the internal Keycloak
-description: Learn how to configure an external identity provider to authenticate users while using the internal Keycloak as an identity broker.
+sidebar_label: External IdP via internal Keycloak
+title: Set up an external IdP with internal Keycloak
+description: Configure an external identity provider to authenticate users through the internal Keycloak identity broker.
 ---
 
-This guide shows you how to configure the internal Keycloak instance to act as an identity broker, delegating authentication to an external identity provider (IdP) such as a corporate OIDC provider, SAML, LDAP, or Active Directory.
+This guide explains how to configure the internal Keycloak instance as an identity broker that delegates authentication to an external identity provider (IdP), such as an OIDC provider, SAML, LDAP, or Active Directory.
 
 This setup allows you to:
 
 - Use your organization's existing identity provider for user authentication
 - Retain the internal Keycloak for Camunda's OIDC integration
-- Manage user authorization through Camunda's identity systems
+- Manage user authorization in Camunda identity components
 
 ## Prerequisites
 
-- A Camunda 8 deployment with internal Keycloak enabled. See [Set up the Helm chart with the internal Keycloak instance](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
+- A Camunda 8 deployment with internal Keycloak enabled. For setup instructions, see [Configure internal Keycloak for Helm deployments](/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak.md).
 - Access to your external IdP's configuration (client credentials, endpoints, etc.)
 
 ## Configure the external identity provider
 
-Complete the following steps to integrate your external IdP:
+Complete the following steps:
 
 1. [Add your external IdP to Keycloak](#add-your-external-idp-to-keycloak)
-1. [Configure identity provider mappers](#configure-identity-provider-mappers)
-1. [Configure Orchestration Cluster Identity](#configure-orchestration-cluster-identity)
-1. [Configure Management Identity access](#configure-management-identity-access-optional) (optional)
+2. [Configure identity provider mappers](#configure-identity-provider-mappers)
+3. [Configure Orchestration Cluster Identity](#configure-orchestration-cluster-identity)
+4. [Configure Management Identity access](#configure-management-identity-access-optional) (optional)
 
 ### Add your external IdP to Keycloak
 
@@ -47,7 +47,7 @@ In Keycloak Admin Console, navigate to **Identity Providers** > select your IdP 
 
 Create attribute mappers to import user profile information:
 
-| Name        | Mapper Type        | Claim         | User Attribute |
+| Name        | Mapper type        | Claim         | User attribute |
 | ----------- | ------------------ | ------------- | -------------- |
 | `email`     | Attribute Importer | `email`       | `email`        |
 | `firstName` | Attribute Importer | `given_name`  | `firstName`    |
@@ -81,7 +81,7 @@ Create a mapper to assign federated users to this group:
 
 ### Configure Orchestration Cluster Identity
 
-External IdP users can now authenticate, but require authorization to access Camunda components.
+External IdP users can authenticate, but still require authorization to access Camunda components.
 
 Log in to **Orchestration Cluster Identity** as an administrator.
 
@@ -90,7 +90,7 @@ Log in to **Orchestration Cluster Identity** as an administrator.
 Grant access to Orchestration Cluster components for the external IdP users group:
 
 1. Navigate to **Authorizations** > select **Component** > **Create authorization**.
-1. Configure the authorization:
+2. Configure the authorization:
    - **Owner type**: `Group`
    - **Owner ID**: `external-idp-users`
    - **Resource ID**: `*`
@@ -100,43 +100,43 @@ Grant access to Orchestration Cluster components for the external IdP users grou
 
 Grant additional permissions as needed. For example, to allow users to view processes and complete tasks:
 
-| Resource Type      | Resource ID | Permissions                                                          |
+| Resource type      | Resource ID | Permissions                                                          |
 | ------------------ | ----------- | -------------------------------------------------------------------- |
-| Process Definition | `*`         | `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK` |
-| Process Definition | `*`         | `UPDATE_USER_TASK`                                                   |
+| Process definition | `*`         | `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK` |
+| User task          | `*`         | `UPDATE_USER_TASK`                                                   |
 
 :::info
-For more details on authorizations, see [Orchestration Cluster authorization](/components/concepts/access-control/authorizations.md).
+For more details, see [Configure Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md).
 :::
 
-### Configure Management Identity access (Optional)
+### Configure Management Identity access (optional)
 
 For access to Console, Web Modeler, and Optimize, external IdP users need the corresponding realm roles assigned in Keycloak. The recommended approach is to assign users to groups that have these roles.
 
 :::note
-The hardcoded group mappers in this section grant access to **all users** authenticating through the external IdP. For more granular access control based on groups or attributes from your external IdP, see the [Keycloak documentation on identity provider mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_mappers).
+The hardcoded group mappers in this section grant access to all users authenticating through the external IdP. For more granular access control based on groups or attributes from your external IdP, see the [Keycloak documentation on identity provider mappers](https://www.keycloak.org/docs/latest/server_admin/index.html#_mappers).
 :::
 
 #### Verify or create groups
 
 1. In Keycloak Admin Console, navigate to **Groups**.
-1. Verify that groups exist for each component (e.g., `Console`, `Optimize`, `Web Modeler`). If not, create them.
+2. Verify that groups exist for each component (e.g., `Console`, `Optimize`, `Web Modeler`). If not, create them.
 
 #### Assign roles to groups
 
 Ensure each group has the corresponding realm role assigned:
 
 1. Select the group > **Role Mappings** tab.
-1. Click **Assign role** and add the role with the same name (e.g., `Console`).
+2. Click **Assign role** and add the role with the same name (e.g., `Console`).
 
 #### Create group mappers
 
 Create mappers to assign federated users to these groups:
 
 1. Navigate to **Identity Providers** > select your IdP > **Mappers** tab.
-1. Click **Add mapper** for each component:
+2. Click **Add mapper** for each component:
 
-| Mapper Name               | Mapper Type     | Group         |
+| Mapper name               | Mapper type     | Group         |
 | ------------------------- | --------------- | ------------- |
 | `assign-console-group`    | Hardcoded Group | `Console`     |
 | `assign-optimize-group`   | Hardcoded Group | `Optimize`    |
