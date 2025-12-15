@@ -34,7 +34,6 @@ For more information about Anthropic Claude LLM models, refer to the [Claude mod
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
-
 | Field              | Required | Description                                                                                                                                                                                                                          |
 | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Region**         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                                 |
