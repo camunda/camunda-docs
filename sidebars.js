@@ -1221,6 +1221,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
+            "apis-tools/testing/test-scenario-dsl",
           ],
         },
         {
