@@ -28,15 +28,15 @@ Migration details are summarized as follows:
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <p><ul><li><p>Running process instances (state-preserving).</p></li><li>Process variables and their values.</li><li>Execution history (experimental mode available).</li><li>Identity data (experimental mode available).</li></ul></p> | <ul><li><p>BPMN process models (use the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)).</p></li><li>Custom code or integrations (use [Code Conversion Utilities](../code-conversion)).</li><li>Users, groups, and authorizations.</li><li>Task assignments and states (due date, priority, etc.).</li></ul> |
 
-## Key Features
+## Key features
 
-- **State-preserving migration**: Maintains exact execution state of running process instances
-- **Variable data migration**: Converts and migrates process variables, decision inputs, and decision outputs with proper type handling
-- **Flexible variable transformation**: Customizable variable interceptors support both runtime and history migration contexts
-- **Validation and verification**: Pre-migration validation to ensure successful migration
-- **Skip and retry capabilities**: Handle problematic instances gracefully with retry options
-- **Detailed logging and reporting**: Comprehensive logging for monitoring migration progress
-- **Database flexibility**: Support for multiple database vendors (H2, PostgreSQL, Oracle)
+- Preserves the execution state of running process instances during migration.
+- Converts and migrates process variables, decision inputs, and decision outputs with proper type handling.
+- Supports customizable variable interceptors for both runtime and history migration contexts.
+- Validates data before migration to help ensure a successful run.
+- Allows you to skip or retry problematic instances during migration.
+- Provides detailed logging and reporting to monitor migration progress.
+- Supports multiple database vendors, including H2, PostgreSQL, and Oracle.
 
 ## Typical choreography of runtime and history migration
 

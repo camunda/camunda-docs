@@ -2,43 +2,41 @@
 id: update-guide
 title: Update Guide
 sidebar_label: Update Guide
-description: "Breaking changes and migration steps when updating the Data Migrator between versions."
+description: "Breaking changes and migration steps for updating the Data Migrator between versions."
 ---
 
-This guide documents breaking changes and important updates when upgrading the Data Migrator between different versions.
+This guide explains breaking changes and migration steps when you upgrade Data Migrator.
 
 The Data Migrator follows [semantic versioning](https://semver.org/).
 
-## Version Compatibility
+## Version compatibility
 
-Before updating:
+Before you update, do the following:
 
-1. Check the [version compatibility matrix](version-compatibility.md) to ensure compatibility with your Camunda 7 and Camunda 8 versions
-2. Review the Data Migrator [release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version
+1. Check the [version compatibility matrix](version-compatibility.md) to confirm compatibility with your Camunda 7 and Camunda 8 versions.
+2. Review the [Data Migrator release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
 
-## Update Process
+## Update process
 
-1. Review the breaking changes for your target version below
-2. Update any custom interceptors or configurations
-3. Test the migration in a non-production environment
-4. Back up your migration state database
-5. Update the Data Migrator binaries
-6. Validate that your custom code still works
+1. Review the breaking changes for your target version.
+2. Update your custom interceptors and configuration.
+3. Test the migration in a non-production environment.
+4. Back up the migration state database.
+5. Update the Data Migrator binaries.
+6. Validate your custom code.
 
-## Breaking Changes by Version
+## Breaking changes by version
 
 <!-- HEADS-UP: ADD NEW VERSIONS ALWAYS TO THE TOP OF THIS LIST -->
 
-### Version 0.1.x → 0.2.0
+### Version 0.1.x to 0.2.0
 
-**Release Date**: TBD\
-**Camunda 8 Compatibility**: 8.9
+Release date: TBD
+Camunda 8 compatibility: 8.9
 
-#### Variable Interceptor API Changes
+#### Variable interceptor API changes
 
-The variable interceptor API has been improved to support history migration and provide better context awareness.
-
-**Breaking Changes**:
+This release updates the variable interceptor API to support history migration and improve context awareness.
 
 1. **`VariableInvocation` renamed to `VariableContext`**
 
@@ -66,7 +64,7 @@ The variable interceptor API has been improved to support history migration and 
    - Use `VariableContext` methods directly instead
    - `getName()` and `getC8Value()`/`setC8Value()` replace DTO access
 
-**Migration Steps**:
+#### Migration steps
 
 1. Update method signature from `VariableInvocation` to `VariableContext`
 2. Replace `invocation.getC7Variable()` with `context.getC7Value()` or `context.getC7TypedValue()`
@@ -75,4 +73,6 @@ The variable interceptor API has been improved to support history migration and 
 5. Optionally add entity type filtering using `getEntityTypes()`
 6. Optionally add runtime/history context detection using `context.isRuntime()` or `context.isHistory()`
 
-**See Also**: [Variables documentation](variables.md)
+#### See also
+
+- [Variables documentation](variables.md)
