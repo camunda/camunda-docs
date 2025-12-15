@@ -136,7 +136,7 @@ Select this option to use an LLM provider that provides OpenAI-compatible endpoi
 | **API endpoint**     | Yes      | The base URL of the OpenAI-compatible endpoint. Example value: `https://api.your-llm-provider.com/v1`                                                                                                               |
 | **API key**          | No       | The API key for authentication. Leave blank if using HTTP headers for authentication. If an <b>Authorization</b> header is specified in the headers, then the API key is ignored.                                   |
 | **Headers**          | No       | Optional HTTP headers to include in the request to the OpenAI-compatible endpoint.                                                                                                                                  |
-| **Query Parameters** | No       | Optional Query Parameters to include in the request URL to the OpenAI-compatible endpoint.                                                                                                                          |
+| **Query Parameters** | No       | Optional query parameters to include in the request URL to the OpenAI-compatible endpoint.                                                                                                                          |
 | **Timeout**          | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified. |
 
 :::note
