@@ -109,73 +109,13 @@ Access this URL (replacing `your-provider.example.com` with your provider's doma
 
 Camunda needs to know which claims in access tokens identify users and clients. Claim names vary by provider.
 
-#### Step 1: Obtain a test token
+You need to identify:
 
-Use your OIDC client credentials to request an access token:
+- **User identification claim** (`usernameClaim`): Identifies users during web login (e.g., `email`, `preferred_username`).
+- **Client identification claim** (`clientIdClaim`): Identifies calling applications for M2M authentication (e.g., `client_id`, `azp`).
+- **Audience claim** (`audience`): The expected `aud` value in tokens.
 
-```bash
-curl -X POST 'https://your-provider.example.com/oauth/token' \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d 'client_id=<your-client-id>' \
-  -d 'client_secret=<your-client-secret>' \
-  -d 'grant_type=client_credentials'
-```
-
-This returns a JSON response containing an `access_token`.
-
-#### Step 2: Decode the token
-
-Decode the JWT to inspect its claims (Linux/macOS):
-
-```bash
-echo "<access-token>" | cut -d'.' -f2 | base64 -d | jq
-```
-
-Or use an online tool like [jwt.io](https://jwt.io) (paste the token to decode it).
-
-#### Step 3: Identify required claims
-
-Look for these claims in the decoded token:
-
-1. **User identification claim** (for web login)
-   - Identifies users uniquely.
-   - Common names: `email`, `preferred_username`, `sub`, `upn`, `unique_name`.
-   - You'll configure this as: `usernameClaim`.
-
-2. **Client identification claim** (for machine-to-machine authentication)
-   - Identifies the calling client application.
-   - Common names: `client_id`, `azp`, `appid`, `clientId`.
-   - You'll configure this as: `clientIdClaim`.
-
-3. **Audience claim** (`aud`)
-   - Specifies the intended audience for the token.
-   - Often contains the client ID or a custom value.
-   - You'll configure this as: `audience`.
-
-**Common claim patterns by provider**
-
-| Provider        | User claim                      | Client claim         | Audience default       |
-| --------------- | ------------------------------- | -------------------- | ---------------------- |
-| Microsoft Entra | `preferred_username`            | `azp`                | Client ID              |
-| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May need configuration |
-| Auth0           | `email`                         | `client_id`          | Client ID              |
-| Okta            | `email`                         | `client_id`          | Client ID              |
-
-#### Step 4: Verify your audience configuration
-
-1. Decode a test token as shown above.
-2. Check the `aud` claim value.
-3. Use that value for the `audience` parameter in Camunda configuration.
-
-:::warning
-The audience claim is critical for token validation. Camunda will reject tokens that don't include the expected audience value.
-:::
-
-**If your tokens don't include an appropriate audience**
-
-- Check your OIDC provider's documentation on configuring token audiences.
-- Some providers require explicit audience configuration in client settings.
-- Keycloak specifically may default to `aud: "account"` and require additional configuration.
+For detailed instructions on obtaining and decoding tokens to identify these claims, see [JWT token claims reference](./jwt-token-claims.md).
 
 ### Scopes requested by Camunda
 

@@ -64,7 +64,7 @@ Some providers, such as Keycloak, may not include the appropriate audience by de
 
 **How to fix:**
 
-1. Decode a token to see available claims: `echo "<token>" | cut -d'.' -f2 | base64 -d | jq`.
+1. Decode a token to see available claims. See [JWT token claims reference](./jwt-token-claims.md) for instructions.
 2. Update `usernameClaim` or `clientIdClaim` in Helm values to match the actual claim names.
 3. Redeploy Camunda.
 
@@ -72,6 +72,8 @@ Some providers, such as Keycloak, may not include the appropriate audience by de
 
 - User claims: `email`, `preferred_username`, `sub`
 - Client claims: `client_id`, `azp`, `appid`.
+
+For a complete list of common claim patterns by provider, see [JWT token claims reference](./jwt-token-claims.md#common-claim-patterns-by-provider).
 
 ## Pods not starting
 
