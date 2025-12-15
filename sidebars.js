@@ -1323,8 +1323,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-
     "reference/contact",
+    "reference/legal",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
