@@ -1,4 +1,4 @@
-### Model Provider
+### Model provider
 
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
@@ -29,16 +29,39 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
-#### Bedrock
+#### Amazon Bedrock
 
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
+
 
 | Field              | Required | Description                                                                                                                                                                                                                          |
 | :----------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Region**         | Yes      | The AWS region. Example: `us-east-1`                                                                                                                                                                                                 |
 | **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [Amazon Bedrock connector authentication](../../../amazon-bedrock.md#authentication). |
 | **Timeout**        | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified.                  |
+
+To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
+
+- Use **Credentials** if you have a valid pair of access and secret keys provided by your AWS account administrator. The access key provides permissions to the Amazon Bedrock `InvokeModel` actions, as mentioned in the [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-perform-actions-pt).
+
+:::note
+This option is applicable for both SaaS and Self-Managed users.
+:::
+
+- Use **API Key** if you have a valid long-term API key for Amazon Bedrock. The associated IAM user also requires the `CallWithBearerToken` action to be attached. See [Amazon Bedrock API keys](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html) and [Amazon Bedrock API keys permissions](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys-modify.html) for more details.
+
+:::note
+This option is applicable for both SaaS and Self-Managed users.
+:::
+
+- Use **Default Credentials Chain** if your system is configured as an implicit authentication mechanism, such as role-based authentication, credentials supplied via environment variables, or files on target host. This approach uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve required credentials.
+
+:::note
+This option is applicable only for Self-Managed or hybrid distributions.
+:::
+
+For more information on authentication and security in Amazon Bedrock, see [Amazon Bedrock security and privacy](https://aws.amazon.com/bedrock/security-compliance/).
 
 Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 
