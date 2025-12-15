@@ -627,6 +627,10 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
 
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
+
 ### `camunda.security.http-headers`
 
 | Property                                                                  | Description                                                                                                                                                      | Related Header                                                                                                                                                                                                                                           | Default value                     |
@@ -688,6 +692,7 @@ script-src-attr 'none'.
 | `camunda.security.authentication.oidc.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                 |                                      |
 | `camunda.security.authentication.oidc.token-uri`                    | Sets the OIDC provider's token URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                         |                                      |
 | `camunda.security.authentication.oidc.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
+| `camunda.security.authentication.oidc.clock-skew`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                                                                                                                      | `60S`                                |
 
 ### `camunda.security.authentication.oidc.assertion`
 
@@ -801,6 +806,7 @@ These properties apply only when `camunda.security.authentication.oidc.client-au
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                  |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`                     | Sets the OIDC provider's token URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                          |                                      |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLOCK_SKEW`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                                                                                                                      | `60S`                                |
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION`
 
@@ -881,6 +887,16 @@ worker-src 'self' blob:;
 child-src;
 script-src-attr 'none'.
 ```
+
+### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
+
+| Property                                                         | Description                                                                                                                        | Default value |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`    | The owner type to assign to this authorization.                                                                                    |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`      | The owner ID to assign to this authorization.                                                                                      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`   | The resource ID that this authorization applies to.                                                                                |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS`   | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
 
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
@@ -1023,10 +1039,6 @@ script-src-attr 'none'.
 
 </TabItem>
 </Tabs>
-
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
 
 import SecondaryStorage from './partials/\_secondary-storage.md'
 

@@ -22,7 +22,7 @@ Tasklist, Operate and Zeebe distributions are available for download on the [rel
 
 All Connector-related resources are available on [Maven Central](https://search.maven.org/search?q=g:io.camunda.connector). Make sure to download `*-jar-with-dependencies.jar` files in order to run Connectors locally including their necessary dependencies.
 Note that some out-of-the-box Connectors are licensed under the [Camunda Self-Managed Free Edition license](https://camunda.com/legal/terms/cloud-terms-and-conditions/camunda-cloud-self-managed-free-edition-terms/).
-Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors-bundle).
+Find an overview in the [Connectors Bundle project](https://github.com/camunda/connectors).
 
 ## Download and run Elasticsearch
 
@@ -190,7 +190,7 @@ If you've already developed user tasks in Zeebe, you can see these on the left p
 
 ### Bundle
 
-Bundle includes runtime with all available Camunda Connectors.
+Bundle includes runtime with all available built-in connectors.
 
 The [Connector runtime bundle](https://repo1.maven.org/maven2/io/camunda/connector/connector-runtime-bundle/) picks up
 outbound Connectors available on the `classpath` automatically.
@@ -238,7 +238,7 @@ This starts a Zeebe client, registering the defined Connector as a job worker. B
 
 ### Configuring runtime
 
-Visit the [Camunda Connector Runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
+Visit the [built-in connector runtime GitHub page](https://github.com/camunda/connectors/tree/main/connector-runtime#configuration-options)
 to find up-to-date runtime configuration options.
 
 ## Run Identity

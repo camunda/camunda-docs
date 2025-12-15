@@ -114,7 +114,15 @@
             }
           ]
         },
-        "components/concepts/messages",
+        {
+          "type": "category",
+          "label": "Messages",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/messages"
+          },
+          "items": ["components/concepts/message-aggregation"]
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -185,9 +193,9 @@
             "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
           "items": [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/choosing-right-model-agentic",
+            "components/agentic-orchestration/ao-design",
+            "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic"
           ]
         },
@@ -818,7 +826,7 @@
         },
         {
           "type": "category",
-          "label": "Camunda connectors",
+          "label": "Built-in connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/out-of-the-box-connectors/available-connectors-overview"
@@ -927,16 +935,15 @@
         },
         {
           "type": "category",
-          "label": "Custom element and connector templates",
+          "label": "Build custom connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/custom-built-connectors/build-connector"
           },
           "items": [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               "type": "category",
-              "label": "Element and connector templates",
+              "label": "Connector templates",
               "link": {
                 "type": "doc",
                 "id": "components/connectors/custom-built-connectors/connector-templates"
@@ -946,7 +953,8 @@
                 "components/connectors/custom-built-connectors/create-connector-from-rest"
               ]
             },
-            "components/connectors/custom-built-connectors/connector-sdk"
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors"
           ]
         }
       ]
@@ -2638,7 +2646,21 @@
             "apis-tools/camunda-spring-boot-starter/properties-reference"
           ]
         },
-        "apis-tools/node-js-sdk",
+        {
+          "type": "category",
+          "label": "TypeScript SDK",
+          "link": {
+            "type": "doc",
+            "id": "apis-tools/typescript/typescript-sdk"
+          },
+          "items": [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency"
+          ]
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -2753,7 +2775,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/contact"
+    "reference/contact",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -2773,7 +2796,18 @@
             "id": "self-managed/quickstart/developer-quickstart"
           },
           "items": [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              "type": "category",
+              "label": "Camunda 8 Run",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/quickstart/developer-quickstart/c8run"
+              },
+              "items": [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
+              ]
+            },
+
             "self-managed/quickstart/developer-quickstart/docker-compose"
           ]
         },
@@ -2890,6 +2924,7 @@
                   },
                   "items": [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
                     {
                       "type": "category",
@@ -2901,7 +2936,9 @@
                       "items": [
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
-                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider"
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc"
                       ]
                     }
                   ]
@@ -3279,18 +3316,32 @@
         {
           "Modeler": [
             {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+              "type": "category",
+              "label": "Web Modeler",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/components/modeler/web-modeler/overview"
+              },
+              "items": [
                 {
-                  "Configuration": [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  "type": "category",
+                  "label": "Configuration",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/components/modeler/web-modeler/configuration/configuration"
+                  },
+                  "items": [
                     "self-managed/components/modeler/web-modeler/configuration/database",
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
                     "self-managed/components/modeler/web-modeler/configuration/copilot"
-                  ],
-                  "Troubleshooting": [
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Troubleshooting",
+                  "items": [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",

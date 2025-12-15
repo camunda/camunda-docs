@@ -2,13 +2,15 @@
 id: c8run
 title: "Developer quickstart – Camunda 8 Run"
 sidebar_label: "Camunda 8 Run"
-description: "This quickstart guides application developers through deploying Camunda 8 Self-Managed to a local orchestration cluster using Camunda 8 Run."
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Camunda 8 Run, including setup, configuration, and key components."
 ---
 
 import {C8Run} from "@site/src/components/CamundaDistributions";
 
 :::note
-Camunda 8 Run is not supported for production use.
+Camunda 8 Run provides a lightweight, self-managed environment for local development and prototyping.
+For production deployments, install the Orchestration Cluster manually as a Java application.
+For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
 Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
@@ -21,9 +23,14 @@ Camunda 8 Run includes the following:
 
 Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
 
+:::note
+For the latest list of supported relational databases and versions, see the  
+[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
+:::
+
 ## Prerequisites
 
-- **OpenJDK 21–23**: Required for running Camunda 8 as a Java application.
+- **OpenJDK 21–25**: Required for running Camunda 8 as a Java application.
 - **Docker 20.10.21+**: Required for running Camunda 8 via Docker Compose.
 - **[Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md)**
 - **If using Ubuntu**: Ubuntu 22.04 or newer
@@ -76,6 +83,43 @@ For more advanced or permanent configuration, modify the default `configuration/
 | `--docker`                 | Downloads and runs the Camunda Docker Compose distribution. This option provides an easy shortcut to run Camunda in Docker Compose. However, additional Camunda 8 Run options are not supported and will be ignored. For more information on running Camunda with Docker Compose see the [documentation](./docker-compose.md). See the [shutdown script](#shut-down-camunda-8-run) for information on stopping the Docker application. |
 | `--disable-elasticsearch`  | Prevents the built-in Elasticsearch from starting. Ensure another Elasticsearch instance is provided via `--config`. See the [external Elasticsearch](#start-external-elasticsearch) section for details.                                                                                                                                                                                                                              |
 | `--startup-url`            | The URL to open after startup (e.g., `'http://localhost:8080/operate'`). By default, Operate is opened.                                                                                                                                                                                                                                                                                                                                |
+
+### Start external Elasticsearch
+
+In Camunda 8.9 and later, Camunda 8 Run may not include an embedded Elasticsearch instance.
+If you want to use Elasticsearch, run your own instance and point Camunda 8 Run to it.
+
+Start a single-node Elasticsearch container:
+
+```bash
+docker run \
+  -m 1GB \
+  -d \
+  --name elasticsearch \
+  -p 9200:9200 \
+  -p 9300:9300 \
+  -e "discovery.type=single-node" \
+  -e "xpack.security.enabled=false" \
+  elasticsearch:8.18.6
+```
+
+Create an `application.yaml` that points Camunda 8 Run to your external Elasticsearch:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      elasticsearch:
+        url: "http://127.0.0.1:9200/"
+```
+
+Start Camunda 8 Run with the embedded Elasticsearch disabled and your custom config:
+
+```bash
+./start.sh --disable-elasticsearch --config application.yaml
+```
+
+Use external Elasticsearch when you need indexing, search, or full Operate/Tasklist functionality.
 
 ## Work with Camunda 8 Run
 
@@ -231,8 +275,14 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.  
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.  
 Although Camunda 8 Run supports TLS, this is intended only for testing.
+
+:::note
+If you use a proxy together with TLS, ensure internal Camunda services are excluded from proxy routing. JVM-level proxy settings apply to all internal HTTP clients and may block communication between components such as Zeebe, Operate, Identity, or the connector runtime. Add these services to your `nonProxyHosts` configuration.
+
+For details, see [configure a proxy server in Self-Managed](../../../../components/connectors/protocol/rest/#configure-a-proxy-server-in-self-managed) in the REST connector documentation.
+:::
 
 ### Access metrics
 
@@ -242,11 +292,11 @@ For more information, see the [metrics](/self-managed/operational-guides/monitor
 ### Configure or switch secondary storage (Elasticsearch or H2)
 
 Camunda 8 Run supports multiple secondary-storage options.  
-By default, it uses **Elasticsearch**, but you can switch to **H2** for lightweight local development or testing.
+By default, it uses **Elasticsearch**, but you can switch to an RDBMS backend such as **H2** for lightweight local development or testing.
 
 #### Default: Elasticsearch
 
-In version 8.9-alpha1 and later, Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
+Camunda 8 Run starts with **Elasticsearch** as the default secondary storage.
 
 ```yaml
 data:
@@ -367,10 +417,10 @@ Camunda 8 uses two layers of storage:
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).  
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
 
-### Known limitations (8.9-alpha1)
+### Known limitations
 
-- Operate and Tasklist are **not yet supported** when using H2.
-- H2 is intended for **testing only** in this alpha release.
+- Tasklist can use H2 through the v2 APIs. Operate support for H2 is under active development and may have limitations in current alpha versions.
+- H2 is intended for testing and local development only.
 - Data stored in H2 is ephemeral unless configured as file-based.
 - Performance and memory use may vary depending on local environment.
 
@@ -388,3 +438,4 @@ The following advanced configuration options can be provided via environment var
 <!-- - Learn how to [configure a relational database](/self-managed/concepts/databases/relational-db/configuration.md). -->
 
 - Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+- Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run-troubleshooting.md).
