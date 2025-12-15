@@ -28,7 +28,7 @@ Administrators can manage all tenants centrally using [Identity](../identity/ten
 This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
 :::note
-Note that if you are using [Optimize](/components/optimize/what-is-optimize.md), then you must keep tenants synchronized with [Management Identity](#management-identity).
+If you are using [Optimize](/components/optimize/what-is-optimize.md), you must keep tenants synchronized with [Management Identity](#management-identity).
 :::
 
 ## Security
@@ -89,6 +89,6 @@ The following diagram illustrates tenant ownership inheritance:
 
 ## Management Identity
 
-[Management Identity](/self-managed/components/management-identity/overview.md) is a component of Camunda 8 Self-Managed used for identity and access management of components outside of the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md). Of those, only [Optimize](/self-managed/components/optimize/overview.md) is tenant aware, and can make use of multi-tenancy.
+[Management Identity](/self-managed/components/management-identity/overview.md) is a component of Camunda 8 Self-Managed used for identity and access management of components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md). Of those, only [Optimize](/self-managed/components/optimize/overview.md) is tenant aware, and can make use of multi-tenancy.
 
-If you wish to use it with the same tenants as in Orchestration Cluster, you will have to manually synchronize the tenants in both Orchestration Cluster and Management Identity. This means manually creating them, and updating them whenever they change. Two tenants are considered the same if they have the same ID.
+If you wish to use it with the same tenants as an Orchestration Cluster, you will have to manually synchronize the tenants in both the Orchestration Cluster and Management Identity. This means manually creating them, and updating them whenever they change. Two tenants are considered the same if they have the same ID.
