@@ -1,7 +1,6 @@
 ### Model Provider
 
-Select and configure authentication for the LLM model **Provider** you want to use, from the following supported
-providers:
+Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
 - [Anthropic](http://anthropic.com/) (Claude models)
 - [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
@@ -13,15 +12,13 @@ providers:
 :::note
 
 - Different setup/authentication fields are shown depending on the provider you select.
-- Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing
-  sensitive information directly from the process.
+- Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
 
 :::
 
 #### Anthropic
 
-Select this option to use an Anthropic Claude LLM model (uses
-the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
+Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
 
 | Field                 | Required | Description                                                                                                                                                                                                         |
 | :-------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -29,14 +26,12 @@ the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
 | **Timeout**           | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified. |
 
 :::info
-For more information about Anthropic Claude LLM models, refer to
-the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
+For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
 #### Bedrock
 
-Select this option to use a model provided by
-the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
+Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
 | Field              | Required | Description                                                                                                                                                                                                                          |
@@ -45,13 +40,10 @@ the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-i
 | **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with AWS. To learn more about configuring AWS authentication, see [Amazon Bedrock connector authentication](../../../amazon-bedrock.md#authentication). |
 | **Timeout**        | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified.                  |
 
-Model availability depends on the region and model you use. You might need to request a model is made available for your
-account. To learn more about configuring access to foundation models, refer
-to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
+Model availability depends on the region and model you use. You might need to request a model is made available for your account. To learn more about configuring access to foundation models, refer to [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
 
 :::info
-For a list of Amazon Bedrock LLM models, refer
-to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+For a list of Amazon Bedrock LLM models, refer to [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
 :::
 
 #### Azure OpenAI
@@ -66,21 +58,16 @@ Select this option to use [Azure OpenAI models](https://learn.microsoft.com/en-u
 
 Two authentication methods are currently supported:
 
-- **API key**: Authenticate using an Azure OpenAI API key, available in
-  the [Azure AI Foundry portal](https://ai.azure.com/).
+- **API key**: Authenticate using an Azure OpenAI API key, available in the [Azure AI Foundry portal](https://ai.azure.com/).
 
-- **Client credentials**: Authenticate using a client ID and secret. This method requires registering an application
-  in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide the following fields:
+- **Client credentials**: Authenticate using a client ID and secret. This method requires registering an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908). Provide the following fields:
   - **Client ID** – The Microsoft Entra application ID.
   - **Client secret** – The application’s client secret.
   - **Tenant ID** – The Microsoft Entra tenant ID.
-  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can
-    also be an OAuth 2.0 token endpoint.
+  - **Authority host** – (Optional) The authority host URL. Defaults to `https://login.microsoftonline.com/`. This can also be an OAuth 2.0 token endpoint.
 
 :::note
-To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry portal. For details,
-see [Deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model).
-The deployment ID must then be provided in the **Model** field.
+To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry portal. For details, see [Deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model). The deployment ID must then be provided in the **Model** field.
 :::
 
 #### Google Vertex AI
@@ -99,16 +86,13 @@ Timeout settings are currently not supported for Google Vertex AI models.
 
 Two authentication methods are currently supported:
 
-- **Service Account Credentials**: Authenticate using
-  a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
+- **Service Account Credentials**: Authenticate using a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format.
 - **Application Default Credentials (ADC)**: Authenticate using the default credentials available in your environment.  
   This method is only supported in Self-Managed or hybrid environments.  
-  To set up ADC in a local development environment, follow the
-  instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
+  To set up ADC in a local development environment, follow the instructions [here](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment).
 
 :::info
-For more information about Google Vertex AI models, see
-the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
+For more information about Google Vertex AI models, see the [Vertex AI documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/models).
 :::
 
 #### OpenAI
@@ -123,8 +107,7 @@ Select this option to use the [OpenAI Chat Completion API](https://platform.open
 | **Timeout**         | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified. |
 
 :::info
-To learn more about authentication to the OpenAPI API, refer
-to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
+To learn more about authentication to the OpenAPI API, refer to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
 :::
 
 #### OpenAI-compatible
@@ -140,6 +123,5 @@ Select this option to use an LLM provider that provides OpenAI-compatible endpoi
 | **Timeout**          | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), e.g. `PT60S` for a 60-second timeout. System defaults will be used, if left unspecified. |
 
 :::note
-A **Custom parameters** field is available in the model parameters to provide any additional parameters supported by
-your OpenAI-compatible provider.
+A **Custom parameters** field is available in the model parameters to provide any additional parameters supported by your OpenAI-compatible provider.
 :::
