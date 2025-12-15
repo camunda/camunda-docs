@@ -258,6 +258,7 @@ module.exports = {
       "data-website-id": "1a0b2863-2767-4583-9d33-ded0095731e7",
       "data-project-name": "Camunda",
       "data-project-color": "#000000",
+      "data-button-hide": "true",
       "data-project-logo":
         "https://avatars.githubusercontent.com/u/2443838?s=200&v=4",
       "data-modal-disclaimer":
