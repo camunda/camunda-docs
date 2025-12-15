@@ -1,12 +1,12 @@
 ---
 id: legal
 title: "Legal center"
-description: "Explore our licenses, privacy practices, terms of use, and other key legal agreements that explain how Camunda protects your rights and data."
+description: "Explore Camunda's licenses, privacy practices, terms of use, and other key legal agreements that explain how Camunda protects your rights and data."
 ---
 
-Here, you'll find clear explanations of our licenses, privacy practices, terms of use, and other legal commitments:
+Explore Camunda's licenses, privacy practices, terms of use, and other legal commitments:
 
-- [Licensing and other legal terms](https://legal.camunda.com/licensing-and-other-legal-terms)
-- [Privacy and data protection](https://legal.camunda.com/privacy-and-data-protection)
-- [Environmental, social, and governance](https://legal.camunda.com/ESG)
-- [Data processing agreement](https://legal.camunda.com/dpa)
+- [Licensing and other legal terms](https://legal.camunda.com/licensing-and-other-legal-terms).
+- [Privacy and data protection](https://legal.camunda.com/privacy-and-data-protection).
+- [Environmental, social, and governance](https://legal.camunda.com/ESG).
+- [Data processing agreement](https://legal.camunda.com/dpa).
