@@ -23,7 +23,7 @@ The following Desktop Modeler settings are available:
 
 | Setting | Description |
 |--------|-------------|
-| Enable new context pad | Enables the new context pad interface. |
+| Enable new context pad | Enables the context pad interface. |
 | Disable plugins | Disables all installed plugins when running Desktop Modeler. |
 | Disable connector templates | Disables automatic fetching of connector templates. See [automatic connector template fetching](../use-connectors/#automatic-connector-template-fetching) for details. |
 | Default Camunda 8 version | Sets the default Camunda 8 execution platform version for new diagrams. |
