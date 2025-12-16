@@ -438,7 +438,7 @@ Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda
     <td>**Description**</td>
 </tr>
 <tr>
-    <td>[Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)</td>
+    <td>[Data migration tool](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/index.md)</td>
     <td>Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.</td>
 </tr>
 <tr>
