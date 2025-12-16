@@ -9,21 +9,10 @@ This guide explains breaking changes and migration steps when you upgrade Migrat
 
 The Migration Tooling follows [semantic versioning](https://semver.org/).
 
-## Version compatibility
-
 Before you update, do the following:
 
 1. Check the [version compatibility matrix](version-compatibility.md) to confirm compatibility with your Camunda 7 and Camunda 8 versions.
 2. Review the [Migration Tooling release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
-
-## Update process
-
-1. Review the breaking changes for your target version.
-2. Update your custom interceptors and configuration.
-3. Test the migration in a non-production environment.
-4. Back up the migration state database.
-5. Update the Migration Tooling binaries.
-6. Validate your custom code.
 
 ## Breaking changes by version
 
@@ -180,13 +169,13 @@ import org.camunda.migration.rewrite.*;
 import io.camunda.migration.code.*;
 ```
 
-#### Model Converter: Repository and module changes
+#### Diagram Converter: Repository and module changes
 
-Model converter is now officially supported by Camunda. The code repository location and module names have changed.
+Diagram converter is now officially supported by Camunda. The code repository location and module names have changed.
 
 ##### Repository location
 
-- **Old**: `camunda-community-hub/camunda-7-to-8-model-conversion`
+- **Old**: `camunda-community-hub/camunda-7-to-8-diagram-conversion`
 - **New**: `camunda/camunda-7-to-8-migration-tooling`
 
 ##### Documentation location
@@ -198,23 +187,23 @@ Model converter is now officially supported by Camunda. The code repository loca
 
 The following Maven modules are now available:
 
-- **Parent Module**: `io.camunda:camunda-7-to-8-model-converter-parent`
-- **Core Module**: `io.camunda:camunda-7-to-8-model-converter-core`
-- **Web Application**: `io.camunda:camunda-7-to-8-model-converter-webapp`
-- **CLI**: `io.camunda:camunda-7-to-8-model-converter-cli`
+- **Parent Module**: `io.camunda:camunda-7-to-8-diagram-converter-parent`
+- **Core Module**: `io.camunda:camunda-7-to-8-diagram-converter-core`
+- **Web Application**: `io.camunda:camunda-7-to-8-diagram-converter-webapp`
+- **CLI**: `io.camunda:camunda-7-to-8-diagram-converter-cli`
 
 All artifacts now use the `io.camunda` groupId.
 
 ##### Migration steps
 
-If you are embedding the model converter as a library, update your dependencies:
+If you are embedding the diagram converter as a library, update your dependencies:
 
 ###### 0.1.x
 
 ```xml
 <dependency>
   <groupId>org.camunda.migration</groupId>
-  <artifactId>camunda-7-to-8-model-converter-core</artifactId>
+  <artifactId>camunda-7-to-8-diagram-converter-core</artifactId>
 </dependency>
 ```
 
@@ -223,10 +212,10 @@ If you are embedding the model converter as a library, update your dependencies:
 ```xml
 <dependency>
   <groupId>io.camunda</groupId>
-  <artifactId>camunda-7-to-8-model-converter-core</artifactId>
+  <artifactId>camunda-7-to-8-diagram-converter-core</artifactId>
   <version>0.2.0</version>
 </dependency>
 ```
 
 For the web application or CLI, download the latest releases from:
-`https://github.com/camunda/camunda-7-to-8-migration-tooling/releases`
+https://github.com/camunda/camunda-7-to-8-migration-tooling/releases
