@@ -126,7 +126,7 @@ public void retrievePayment(ActivatedJob job) {
 :::info
 
 - You can find more information on the programming model in Camunda 8 in this blog post on [how to write glue code without Java Delegates in Camunda Cloud](https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5).
-- You can check out [code conversion patterns](../code-conversion/) for more details.
+- You can check out [code conversion patterns](../migration-tooling/code-conversion/) for more details.
 
 :::
 
