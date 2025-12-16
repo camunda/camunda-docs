@@ -184,8 +184,9 @@ The client will automatically read the environment variables and configure the a
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
 - By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `BasicAuthCredentialsProviderBuilder`.
-- The client adds an `Authorization` header to each request with the value `Basic username:password` (where `username:password` is base64 encoded).  
-  :::
+- The client adds an `Authorization` header to each request with the value `Basic username:password` (where `username:password` is base64 encoded).
+
+:::
 
 </TabItem>
 
@@ -285,8 +286,13 @@ The client will automatically read the environment variables and configure the a
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
 - By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.
-- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.  
-  :::
+- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.
+- There are 3 ways to define the token url and the priority they are selected is:
+  1. directly as `camunda.client.auth.token-url`
+  2. by providing the issuers' well-known configuration url `camunda.client.auth.well-known-configuration-url` which will then extract the token url from the field `token_url` inside the loaded configuration
+  3. by providing the issuers' url `camunda.client.auth.issuer-url` which will generate the well-known configuration url and then extract the token url from the field `token_url` inside the loaded configuration
+
+:::
 
 </TabItem>
 <TabItem value="mTLS">
@@ -387,8 +393,14 @@ Refer to your identity provider documentation for configuring mutual TLS authent
 :::note
 
 - Ensure addresses use absolute URI format: `scheme://host(:port)`.
-- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.  
-  :::
+- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.
+- The client adds an `Authorization` header to each request with the value `Bearer <token>`. The token is obtained from the authorization server, cached to avoid unnecessary requests, and refreshed lazily upon expiration.
+- There are 3 ways to define the token url and the priority they are selected is:
+  1. directly as `camunda.client.auth.token-url`
+  2. by providing the issuers' well-known configuration url `camunda.client.auth.well-known-configuration-url` which will then extract the token url from the field `token_url` inside the loaded configuration
+  3. by providing the issuers' url `camunda.client.auth.issuer-url` which will generate the well-known configuration url and then extract the token url from the field `token_url` inside the loaded configuration
+
+:::
 
 </TabItem>
 
