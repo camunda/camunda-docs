@@ -175,7 +175,7 @@ Install the Helm chart by either making it available in a [private repository](h
 helm install camunda --version $HELM_CHART_VERSION ./camunda-platform-11.1.0.tgz
 ```
 
-For supported versions, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed) and the [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md).
+For supported versions, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed) and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 ### Dependency overview
 

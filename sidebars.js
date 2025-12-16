@@ -1692,7 +1692,33 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
-            "self-managed/concepts/rdbms-support-policy",
+          ],
+        },
+        {
+          type: "category",
+          label: "Databases",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/databases/overview",
+          },
+          items: [
+            {
+              Elasticsearch: [
+                {
+                  Privileges: [
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                  ],
+                },
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
           ],
         },
         {
@@ -1749,13 +1775,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Privileges: [
-            "self-managed/concepts/elasticsearch-privileges",
-            "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/opensearch-privileges",
-          ],
-        },
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
