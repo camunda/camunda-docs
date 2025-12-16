@@ -36,7 +36,7 @@ Then, add the following content:
     xsi:schemaLocation="http://logging.apache.org/log4j/2.0/config https://raw.githubusercontent.com/apache/logging-log4j2/log4j-2.8.1/log4j-core/src/main/resources/Log4j-config.xsd">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level Java Client: %logger{36} - %msg%n"/>
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %X Java Client: %logger{36} - %msg%n"/>
     </Console>
   </Appenders>
   <Loggers>
@@ -48,3 +48,14 @@ Then, add the following content:
 ```
 
 This will log every log message to the console.
+
+## MDC Context
+
+Job workers consist of an MDC context that contains:
+
+- `processDefinitionKey`
+- `processInstanceKey`
+- `elementInstanceKey`
+- `jobKey`
+
+The example above contains the `%X` in the pattern which simply prints out the whole MDC context.
