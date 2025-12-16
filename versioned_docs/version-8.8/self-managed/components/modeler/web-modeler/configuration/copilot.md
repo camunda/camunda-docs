@@ -4,6 +4,8 @@ title: "Copilot"
 description: "Configure Copilot in Web Modeler with a custom LLM provider."
 ---
 
+<span class="badge badge--alpha">Alpha</span>
+
 Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. You can configure the default LLM provider for BPMN, FEEL, and form copilots.
 
 Copilot supports the following LLM providers:
@@ -108,6 +110,13 @@ For OpenAI‑compatible providers, you can authenticate with:
 - `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication)
 - `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers)
   :::
+
+:::warning
+When using the Bring your own model option in Self-Managed, results can vary depending on your chosen LLM’s capabilities.
+If a weaker or smaller model is used, it may fail to generate a valid BPMN XML. In such cases, the Copilot library will attempt automatic repair up to three times. If those attempts fail, the system will return an empty XML and an optional chat message instead of a model.
+
+We recommend using a stronger model (e.g., GPT-4 or comparable) for reliable BPMN generation. This limitation will be addressed in a future release when BPMN generation transitions to a JSON-schema-based approach.
+:::
 
 | Environment variable                       | Description                                                                                   | Example value                        |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------ |
