@@ -17,23 +17,22 @@ To install [Desktop Modeler](./index.md) for Windows, macOS, and Linux, visit th
 2. For macOS users, move the app to your applications folder (macOS).
 3. Start the Camunda Modeler (Windows) or `camunda-modeler` (Linux) executable, or the Camunda Modeler application (macOS).
 
-<Tabs groupId="language" defaultValue="linux" values={
+<Tabs groupId="language" defaultValue="linux" queryString values={
 [
-{ label: 'Linux', value='linux'},
+{ label: 'Linux', value: 'linux'},
 ] }>
 </Tabs>
 
 <TabItem value="linux">
-Unpacking the archive into the `/usr/bin` folder ensures that the installation is owned by `root and that it is accessible to all users of the machine. 
-To do this follow the steps below.
+Ensure the installation is owned by `root` and accessible to all users of the machine by following the steps below:
 
-Unpack the zip archive using the `tar` command
+1. Unpack the zip archive using the `tar` command
 ```shell
 cd /usr/bin
 sudo tar xvfz ~/Downloads/camunda-modeler-5.41.0-linux-x64.tar.gz
 ```
-Ensure the access permissions of the `chrome-sandbox` file are correct and create a link to this version
-```shell
+2. Ensure the access permissions of the `chrome-sandbox` file are correct and create a link to this version:
+```
 sudo chmod 4755 camunda-modeler-5.41.0-linux-x64/chrome-sandbox
 sudo ln -s camunda-modeler-5.41.0-linux-x64/camunda-modeler camunda-modeler
 ```
