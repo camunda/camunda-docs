@@ -49,7 +49,7 @@ The runtime migration typically follows these phases:
 ### 1. Preparation
 
 - Stop Camunda 7 process execution to avoid starting new instances during migration.
-- Migrate BPMN models using the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
+- Migrate BPMN models using the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/index.md#migration-analyzer--diagram-converter).
 - Add required `migrator` execution listeners to None Start Events in Camunda 8 models.
 - Adjust Camunda 8 models to comply with migration limitations.
 - Test migrated models in a Camunda 8 environment.
@@ -220,7 +220,7 @@ This approach ensures that:
 
 ### Example
 
-Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#camundamigrator)
+Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties.md#camundamigrator)
 to specify which tenants should be included in the migration process. This property accepts a
 comma-separated list of tenant identifiers.
 

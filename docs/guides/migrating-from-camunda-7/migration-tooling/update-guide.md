@@ -2,19 +2,19 @@
 id: update-guide
 title: Update Guide
 sidebar_label: Update Guide
-description: "Breaking changes and migration steps for updating the Data Migrator between versions."
+description: "Breaking changes and migration steps for updating the Migration Tooling between versions."
 ---
 
-This guide explains breaking changes and migration steps when you upgrade Data Migrator.
+This guide explains breaking changes and migration steps when you upgrade Migraiton Tooling.
 
-The Data Migrator follows [semantic versioning](https://semver.org/).
+The Migration Tooling follows [semantic versioning](https://semver.org/).
 
 ## Version compatibility
 
 Before you update, do the following:
 
 1. Check the [version compatibility matrix](version-compatibility.md) to confirm compatibility with your Camunda 7 and Camunda 8 versions.
-2. Review the [Data Migrator release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
+2. Review the [Migration Tooling release notes](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases) for your target version.
 
 ## Update process
 
@@ -22,7 +22,7 @@ Before you update, do the following:
 2. Update your custom interceptors and configuration.
 3. Test the migration in a non-production environment.
 4. Back up the migration state database.
-5. Update the Data Migrator binaries.
+5. Update the Migration Tooling binaries.
 6. Validate your custom code.
 
 ## Breaking changes by version
@@ -31,10 +31,48 @@ Before you update, do the following:
 
 ### Version 0.1.x to 0.2.0
 
-Release date: TBD
-Camunda 8 compatibility: 8.9
+Release date: 17/12/2025 \
+Camunda 8 compatibility: 8.8.x
 
-#### Variable interceptor API changes
+#### Data Migrator: Package name changes
+
+The package name of the Data Migrator has changed from `io.camunda.migrator` to `io.camunda.migration.data`.
+
+Please ensure your custom interceptors and `application.yml` configuration are updated accordingly.
+
+Change your import statements from:
+
+#### 0.1.x
+
+```java
+import io.camunda.migrator.interceptor.VariableInterceptor;
+```
+
+#### 0.2.0
+
+```java
+import io.camunda.migration.data.interceptor.VariableInterceptor;
+```
+
+Change your `application.yml` configuration as follows for built-in interceptors:
+
+#### 0.1.x
+
+```yaml
+camunda.migrator.interceptors:
+  - class-name: io.camunda.migrator.impl.interceptor.DateVariableTransformer
+    enabled: false
+```
+
+#### 0.2.0
+
+```yaml
+camunda.migrator.interceptors:
+  - class-name: io.camunda.migration.data.impl.interceptor.DateVariableTransformer
+    enabled: false
+```
+
+#### Data Migrator: Variable interceptor API changes
 
 This release updates the variable interceptor API to support history migration and improve context awareness.
 
@@ -75,4 +113,4 @@ This release updates the variable interceptor API to support history migration a
 
 #### See also
 
-- [Variables documentation](variables.md)
+- [Variables documentation](data-migrator/variables.md)

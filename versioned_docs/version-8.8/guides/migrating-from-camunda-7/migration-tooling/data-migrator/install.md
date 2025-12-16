@@ -27,7 +27,7 @@ Install the Data Migrator and run your first data migration.
 
    To be used with the Runtime Data Migrator, **every process model requires**:
    - A blank start event (you must add one if the process model doesn't have one already).
-   - An execution listener at the end of your blank start event with the job type `migrator`. You have to add this manually, or let it be added by the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter).
+   - An execution listener at the end of your blank start event with the job type `migrator`. You have to add this manually, or let it be added by the [Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/index.md#migration-analyzer--diagram-converter).
 
    ```xml
     <bpmn:startEvent id="StartEvent_1">

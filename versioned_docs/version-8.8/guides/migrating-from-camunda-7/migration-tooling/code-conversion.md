@@ -11,8 +11,8 @@ As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (B
 
 You must especially rewrite code that does the following:
 
-- **Uses the Client API**: Starting process instances, correlating messages, managing tasks, etc.
-- **Implements service tasks**, including:
+- Uses the Client API: Starting process instances, correlating messages, managing tasks, etc.
+- Implements service tasks, including:
   - [External tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/external-tasks/#the-external-task-pattern) where workers subscribe to the engine
   - [Java code attached to service tasks](https://docs.camunda.org/manual/latest/user-guide/process-engine/delegation-code/) called directly by the engine (in-VM)
 
@@ -88,21 +88,21 @@ Code conversion patterns are detailed, technical examples showing how specific C
 
 Use the code conversion patterns when:
 
-- **Manual migration is needed**: The OpenRewrite recipes cannot handle your specific code structure
-- **Understanding changes**: You want to understand what the recipes are doing under the hood
-- **Extending recipes**: You're developing custom recipes for your organization's specific patterns
-- **Complex scenarios**: Your code uses advanced features that require careful manual conversion
+- Manual migration is needed: The OpenRewrite recipes cannot handle your specific code structure
+- Understanding changes: You want to understand what the recipes are doing under the hood
+- Extending recipes: You're developing custom recipes for your organization's specific patterns
+- Complex scenarios: Your code uses advanced features that require careful manual conversion
 
 ### Pattern categories
 
 The catalog covers the following types of code:
 
-**General patterns:**
+General patterns:
 
 - Maven dependencies and configuration
 - Handling process variables
 
-**Client code** (code that calls the Camunda API):
+Client code (code that calls the Camunda API):
 
 - Starting process instances
 - Correlating messages
@@ -115,13 +115,13 @@ The catalog covers the following types of code:
 - Handling resources
 - Class-level changes
 
-**Glue code** (code executed by the process engine):
+Glue code (code executed by the process engine):
 
 - Converting JavaDelegates to Job Workers
 - Converting External Task Workers to Job Workers
 - Converting expressions
 
-**Test code**:
+Test code:
 
 - Complete test cases
 - Process instance assertions
@@ -215,8 +215,8 @@ Add the following to your `pom.xml`:
                 <dependencies>
                     <dependency>
                         <groupId>io.camunda</groupId>
-                        <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
-                        <version>0.2.0-alpha1</version>
+                        <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
+                        <version>0.2.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -284,9 +284,9 @@ If Camunda 7 code remains after applying recipes:
 
 Your BPMN and DMN models need to be adjusted to work with Camunda 8.
 
-The [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Migration Analyzer & Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/model-converter) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
 
-Find the diagram conversion tooling and its documentation in the [Camunda 7 to 8 migration tooling – Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer).
+Find the diagram conversion tooling and its documentation in the [Camunda 7 to 8 migration tooling – Migration Analyzer & Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/model-converter).
 
 ## Leveraging AI for refactoring
 

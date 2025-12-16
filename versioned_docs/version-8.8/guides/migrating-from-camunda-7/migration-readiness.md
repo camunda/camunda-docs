@@ -66,7 +66,7 @@ public class CreateCustomerInCrmJavaDelegate implements JavaDelegate {
 
 Never cast to Camunda implementation classes, use any ThreadLocal object, or influence the transaction manager in any way. Java delegates should always be stateless and not store any data in their fields.
 
-Such a delegate can be easily migrated according to our [code conversion patterns](./code-conversion.md#code-conversion-patterns), for example using [OpenRewrite recipes](./code-conversion.md#refactoring-recipes-using-openrewrite).
+Such a delegate can be easily migrated according to our [code conversion patterns](./migration-tooling/code-conversion.md#code-conversion-patterns), for example using [OpenRewrite recipes](./migration-tooling/code-conversion.md#refactoring-recipes-using-openrewrite).
 
 ## No transaction managers
 

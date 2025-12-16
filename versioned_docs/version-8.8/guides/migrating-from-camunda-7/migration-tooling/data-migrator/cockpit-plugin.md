@@ -8,7 +8,7 @@ description: "Web-based interface for viewing information about skipped entities
 :::warning Experimental feature
 
 - The Cockpit plugin is an **experimental** feature and we don't recommend using it in production environments.
-- You can read more about limitations in the [limitations](/guides/migrating-from-camunda-7/data-migrator/limitations.md#cockpit-plugin) page.
+- You can read more about limitations in the [limitations](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations.md#cockpit-plugin) page.
   :::
 
 The Cockpit plugin provides a web-based interface for viewing information about skipped and migrated runtime and history data. It integrates with Camunda 7 Cockpit to give you visibility into which runtime process instances or history data (like variables, flow nodes, etc.) were successfully migrated or skipped during migration and the reasons why.
