@@ -49,13 +49,13 @@ Then, add the following content:
 
 This will log every log message to the console.
 
-## MDC Context
+## MDC context
 
-Job workers consist of an MDC context that contains:
+Job workers include an MDC context that contains the following:
 
 - `processDefinitionKey`
 - `processInstanceKey`
 - `elementInstanceKey`
 - `jobKey`
 
-The example above contains the `%X` in the pattern which simply prints out the whole MDC context.
+See [the example above](#configuration), which includes `%X` in the pattern to print the entire MDC context.
