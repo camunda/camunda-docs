@@ -1,7 +1,7 @@
 ---
 id: mcp-client-tool-discovery
-title: MCP Client tool discovery and calling
-sidebar_label: Tool discovery and calling
+title: MCP Client tool discovery
+sidebar_label: Tool discovery
 description: "Learn how AI agents use gateway tool definitions to automatically discover and invoke MCP client tools."
 ---
 

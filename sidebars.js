@@ -386,6 +386,7 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
+                    "components/early-access/alpha/mcp-client/mcp-client-config",
                     "components/early-access/alpha/mcp-client/mcp-client-tool-discovery",
                     "components/early-access/alpha/mcp-client/mcp-client-human-in-the-loop",
                   ],
