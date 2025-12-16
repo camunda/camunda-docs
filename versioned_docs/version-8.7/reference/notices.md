@@ -609,14 +609,14 @@ You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
+- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda/releases/tag/8.4.16)
+- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda/releases/tag/8.5.13)
 - [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
 - [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
-- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
-- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+- Camunda Optimize 3.12.16
+- Camunda Optimize 3.13.13
+- Camunda Optimize 3.14.4
+- Camunda Optimize 3.15.2
 
 ## Notice 17
 
@@ -754,7 +754,7 @@ You are using Camunda Identity version 8.5.3 or previous.
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- [Camunda Identity 8.5.4](https://github.com/camunda/identity/releases/tag/8.5.4)
 
 ## Notice 12
 
