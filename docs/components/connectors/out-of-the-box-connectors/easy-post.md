@@ -50,7 +50,7 @@ Refer to the [parcel object documentation](https://docs.easypost.com/docs/parcel
 Allows you to create a shipment, save it, and get the shipment ID for use in follow-up operations.
 Set required properties in the **Input** section: ID of destination address, ID of origin address, and ID of parcel.
 Refer to the [shipment object documentation](https://docs.easypost.com/docs/shipments) to learn more about the shipment object and to observe response examples.
-In the **Output** section, the pre-filled **Result Expression** returns the ID of the shipment and the ID of [rate](https://docs.easypost.com/docs/rates).
+In the **Output** section, the pre-filled **Result Expression** returns the ID of the shipment and the ID of [rate](https://docs.easypost.com/docs/shipments/rates).
 
 FEEL expression:
 
@@ -70,7 +70,7 @@ Response:
 ### Buy a shipment
 
 Allows you to buy a shipment. Set required properties in the **Input** section: IDs of rate and shipment.
-Refer to the [shipment object documentation](https://docs.easypost.com/docs/buy-a-shipment) to learn more about the shipment object and to observe response examples.
+Refer to the [shipment object documentation](https://docs.easypost.com/docs/shipments#buy-a-shipment) to learn more about the shipment object and to observe response examples.
 In the **Output** section the pre-filled **Result Expression** returns the ID of a tracker, tracking code, and status of the shipment.
 
 FEEL expression:
