@@ -5,7 +5,7 @@ sidebar_label: Update Guide
 description: "Breaking changes and migration steps for updating the Migration Tooling between versions."
 ---
 
-This guide explains breaking changes and migration steps when you upgrade Migraiton Tooling.
+This guide explains breaking changes and migration steps when you upgrade Migration Tooling.
 
 The Migration Tooling follows [semantic versioning](https://semver.org/).
 
@@ -42,13 +42,13 @@ Please ensure your custom interceptors and `application.yml` configuration are u
 
 Change your import statements from:
 
-#### 0.1.x
+##### 0.1.x
 
 ```java
 import io.camunda.migrator.interceptor.VariableInterceptor;
 ```
 
-#### 0.2.0
+##### 0.2.0
 
 ```java
 import io.camunda.migration.data.interceptor.VariableInterceptor;
@@ -56,7 +56,7 @@ import io.camunda.migration.data.interceptor.VariableInterceptor;
 
 Change your `application.yml` configuration as follows for built-in interceptors:
 
-#### 0.1.x
+##### 0.1.x
 
 ```yaml
 camunda.migrator.interceptors:
@@ -64,7 +64,7 @@ camunda.migrator.interceptors:
     enabled: false
 ```
 
-#### 0.2.0
+##### 0.2.0
 
 ```yaml
 camunda.migrator.interceptors:
@@ -102,7 +102,7 @@ This release updates the variable interceptor API to support history migration a
    - Use `VariableContext` methods directly instead
    - `getName()` and `getC8Value()`/`setC8Value()` replace DTO access
 
-#### Migration steps
+##### Migration steps
 
 1. Update method signature from `VariableInvocation` to `VariableContext`
 2. Replace `invocation.getC7Variable()` with `context.getC7Value()` or `context.getC7TypedValue()`
@@ -111,20 +111,25 @@ This release updates the variable interceptor API to support history migration a
 5. Optionally add entity type filtering using `getEntityTypes()`
 6. Optionally add runtime/history context detection using `context.isRuntime()` or `context.isHistory()`
 
-#### See also
+##### See also
 
 - [Variables documentation](data-migrator/variables.md)
 
-### Code Conversion
+#### Code Conversion: Repository and package changes
 
-Code conversion is now officially supported by Camunda. The following changes have been made:
+Code conversion is now officially supported by Camunda. The code repository and package names have changed.
 
-#### Package Naming
+##### Repository location
+
+- **Old**: `camunda-community-hub/camunda-7-to-8-code-conversion`
+- **New**: `camunda/camunda-7-to-8-migration-tooling`
+
+##### Package naming
 
 - **Old**: `org.camunda.migration.rewrite.*`
 - **New**: `io.camunda.migration.code.*`
 
-#### Module Naming
+##### Module naming
 
 The following Maven modules have been renamed:
 
@@ -136,15 +141,22 @@ The following Maven modules have been renamed:
   - **Old**: `org.camunda.migration:camunda-7-to-8-rewrite-recipes`
   - **New**: `io.camunda:camunda-7-to-8-code-conversion-recipes`
 
-#### GroupId Change
-
 All artifacts now use the `io.camunda` groupId instead of `org.camunda.migration`.
 
-#### Migration Guide
+##### Migration steps
 
 If you are using the OpenRewrite recipes in your project, update your dependencies:
 
-**Maven**:
+###### 0.1.x
+
+```xml
+<dependency>
+  <groupId>org.camunda.migration</groupId>
+  <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
+</dependency>
+```
+
+###### 0.2.0
 
 ```xml
 <dependency>
@@ -154,23 +166,35 @@ If you are using the OpenRewrite recipes in your project, update your dependenci
 </dependency>
 ```
 
-**Update Imports**: Change all imports from:
+Update imports: Change all imports from:
+
+###### 0.1.x
 
 ```java
 import org.camunda.migration.rewrite.*;
 ```
 
-to:
+###### 0.2.0
 
 ```java
 import io.camunda.migration.code.*;
 ```
 
-### Model Converter
+#### Model Converter: Repository and module changes
 
-Model converter is now officially supported by Camunda. The following changes have been made:
+Model converter is now officially supported by Camunda. The code repository location and module names have changed.
 
-#### Module Naming
+##### Repository location
+
+- **Old**: `camunda-community-hub/camunda-7-to-8-model-conversion`
+- **New**: `camunda/camunda-7-to-8-migration-tooling`
+
+##### Documentation location
+
+- **Old**: `https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/`
+- **New**: `https://camunda.github.io/camunda-7-to-8-migration-tooling/`
+
+##### Module naming
 
 The following Maven modules are now available:
 
@@ -179,15 +203,22 @@ The following Maven modules are now available:
 - **Web Application**: `io.camunda:camunda-7-to-8-model-converter-webapp`
 - **CLI**: `io.camunda:camunda-7-to-8-model-converter-cli`
 
-### GroupId Change
-
 All artifacts now use the `io.camunda` groupId.
 
-### Migration Guide
+##### Migration steps
 
 If you are embedding the model converter as a library, update your dependencies:
 
-**Maven**:
+###### 0.1.x
+
+```xml
+<dependency>
+  <groupId>org.camunda.migration</groupId>
+  <artifactId>camunda-7-to-8-model-converter-core</artifactId>
+</dependency>
+```
+
+###### 0.2.0
 
 ```xml
 <dependency>
