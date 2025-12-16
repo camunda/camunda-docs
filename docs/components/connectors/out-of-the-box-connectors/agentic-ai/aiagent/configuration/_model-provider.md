@@ -20,9 +20,10 @@ Select and configure authentication for the LLM model **Provider** you want to u
 
 Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages)).
 
-| Field             | Required | Description                                                                                                                   |
-| :---------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| Anthropic API key | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+| Field                 | Required | Description                                                                                                                                                                                                             |
+| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Anthropic API key** | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages).                                                                                           |
+| **Timeout**           | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 :::info
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
@@ -33,10 +34,11 @@ For more information about Anthropic Claude LLM models, refer to the [Claude mod
 Select this option to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service, using the
 [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
-| Field          | Required | Description                                                       |
-| :------------- | :------- | :---------------------------------------------------------------- |
-| Region         | Yes      | The AWS region. Example: `us-east-1`.                             |
-| Authentication | Yes      | Select how the connector should authenticate with Amazon Bedrock. |
+| Field              | Required | Description                                                                                                                                                                                                             |
+| :----------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Region**         | Yes      | The AWS region. For example, `us-east-1`.                                                                                                                                                                               |
+| **Authentication** | Yes      | Select the authentication method you want to use for the connector to authenticate with AWS. See [Amazon Bedrock connector authentication](../../../amazon-bedrock.md#authentication) for more details.                 |
+| **Timeout**        | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 To authenticate, choose one of the methods from the **Authentication** dropdown. The supported options are:
 
@@ -70,10 +72,11 @@ For a list of Amazon Bedrock LLM models, refer to [supported foundation models i
 
 Select this option to use [Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview).
 
-| Field              | Required | Description                                                                                     |
-| ------------------ | -------- | ----------------------------------------------------------------------------------------------- |
-| **Endpoint**       | Yes      | The Azure OpenAI endpoint URL. Example: `https://<your-resource-name>.openai.azure.com/`        |
-| **Authentication** | Yes      | Select the authentication type you want to use to authenticate the connector with Azure OpenAI. |
+| Field              | Required | Description                                                                                                                                                                                                             |
+| ------------------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Endpoint**       | Yes      | The Azure OpenAI endpoint URL. For example, `https://<your-resource-name>.openai.azure.com/`                                                                                                                            |
+| **Authentication** | Yes      | Select the authentication method you want to use for the connector to authenticate with Azure OpenAI.                                                                                                                   |
+| **Timeout**        | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 Two authentication methods are currently supported:
 
@@ -97,7 +100,11 @@ Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai)
 | ------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                       |
 | **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place. |
-| **Authentication** | Yes      | Select the authentication type to use for connecting to Google Cloud.                                                              |
+| **Authentication** | Yes      | Select the authentication method you want to use for the connector to authenticate with Google Cloud.                              |
+
+:::note
+Timeout settings are currently not supported for Google Vertex AI models.
+:::
 
 Two authentication methods are currently supported:
 
@@ -114,11 +121,12 @@ For more information about Google Vertex AI models, see the [Vertex AI documenta
 
 Select this option to use the [OpenAI Chat Completion API](https://platform.openai.com/docs/api-reference/chat).
 
-| Field           | Required | Description                                                                                                                                              |
-| :-------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenAI API key  | Yes      | Your OpenAI account API key for authorization.                                                                                                           |
-| Organization ID | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector. |
-| Project ID      | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests with this connector.                                |
+| Field               | Required | Description                                                                                                                                                                                                             |
+| ------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **OpenAI API key**  | Yes      | Your OpenAI account API key for authorization.                                                                                                                                                                          |
+| **Organization ID** | No       | For members of multiple organizations. If you belong to multiple organizations, specify the organization ID to use for API requests with this connector.                                                                |
+| **Project ID**      | No       | If you access projects through a legacy user API key, specify the project ID to use for API requests made with this connector.                                                                                          |
+| **Timeout**         | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 :::info
 To learn more about authentication to the OpenAPI API, refer to [OpenAPI platform API reference](https://platform.openai.com/docs/api-reference/introduction).
@@ -128,11 +136,13 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 Select this option to use an LLM provider that provides OpenAI-compatible endpoints.
 
-| Field        | Required | Description                                                                                                                                                                       |
-| :----------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| API endpoint | Yes      | The base URL of the OpenAI-compatible endpoint. Example value: `https://api.your-llm-provider.com/v1`                                                                             |
-| API key      | No       | The API key for authentication. Leave blank if using HTTP headers for authentication. If an <b>Authorization</b> header is specified in the headers, then the API key is ignored. |
-| Headers      | No       | Optional HTTP headers to include in the request to the OpenAI-compatible endpoint.                                                                                                |
+| Field                | Required | Description                                                                                                                                                                                                             |
+| :------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **API endpoint**     | Yes      | The base URL of the OpenAI-compatible endpoint. For example, `https://api.your-llm-provider.com/v1`                                                                                                                     |
+| **API key**          | No       | The API key for authentication. Leave blank if you are using HTTP headers for authentication. If an <b>Authorization</b> header is specified in the headers, the API key is ignored.                                    |
+| **Headers**          | No       | Optional HTTP headers to include in the request to the OpenAI-compatible endpoint.                                                                                                                                      |
+| **Query Parameters** | No       | Optional query parameters to include in the request URL to the OpenAI-compatible endpoint.                                                                                                                              |
+| **Timeout**          | No       | Provide a timeout for Model API calls in the [ISO-8601 Duration Format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout. If left unspecified, system defaults are used. |
 
 :::note
 A **Custom parameters** field is available in the model parameters to provide any additional parameters supported by your OpenAI-compatible provider.
