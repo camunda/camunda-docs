@@ -37,6 +37,7 @@ runs:
       if: ${{ steps.tool-cache-muffet.outputs.cache-hit != 'true' }}
       run: |-
         curl -sSL -o /usr/local/bin/muffet_linux_amd64.tar.gz https://github.com/raviqqe/muffet/releases/download/${{ inputs.muffet_version }}/muffet_linux_amd64.tar.gz
+        file /usr/local/bin/muffet_linux_amd64.tar.gz
         tar -xvf /usr/local/bin/muffet_linux_amd64.tar.gz -C /usr/local/bin
         chmod +x /usr/local/bin/muffet
         muffet --version
