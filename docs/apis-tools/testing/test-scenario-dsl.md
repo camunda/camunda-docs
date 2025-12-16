@@ -28,7 +28,7 @@ It defines the following structure:
     - Each instruction has a `type` that defines the action to be performed (e.g., `CREATE_PROCESS_INSTANCE`).
     - Additional properties depend on the instruction type (e.g., process definition ID, variables, etc.).
 
-Start with creating a new JSON file and placing it in your test resources folder (e.g.
+Start by creating a new JSON file and placing it in your test resources folder (e.g.
 `src/test/resources/scenarios/invoice-approval-scenario.json`). Add your test cases and use the available instructions
 to define the behavior of your process test.
 
@@ -78,7 +78,7 @@ test method to read the files and provide their test cases as arguments. Then, e
 `TestScenarioRunner` provided by CPT.
 
 The runner executes the test case instructions by leveraging CPT's assertions and utilities. If an assertion instruction
-fails, the runner throw an assertion error, causing the test to fail. If all instructions pass, the test case is
+fails, the runner throws an assertion error, causing the test to fail. If all instructions pass, the test case is
 considered successful.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={
@@ -141,8 +141,8 @@ You can set the following fields in the `@TestScenarioSource` annotation to conf
 
 ## Connect your process application
 
-The `TestScenarioRunner` integrates seamlessly in CPT's [test lifecycle](getting-started.md#test-lifecycle) and connects
-to your process application and start the job workers, if enabled.
+The `TestScenarioRunner` integrates seamlessly with CPT's [test lifecycle](getting-started.md#test-lifecycle) and connects
+to your process application and starts the job workers, if enabled.
 
 You can add additional steps before and after running the test case, for example to deploy additional resources, or to
 mock external services of your process application.
