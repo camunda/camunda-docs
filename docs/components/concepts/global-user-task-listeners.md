@@ -22,16 +22,18 @@ They are particularly useful for:
 
 ## Configure global user task listeners
 
-Set global user task listeners at the cluster level using the `zeebe.broker.experimental.listeners.task` path in the broker configuration.
+You configure global user task listeners at the cluster level in the [Unified Configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
+
+Configuration path: `camunda.cluster.global-listeners.user-task`
 
 Each listener entry can be configured with the following properties:
 
-| Property      | Required | Description                                                                                                                                                                                                                                                     |
-| :------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `event-types` | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
-| `type`        | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
-| `retries`     | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
-| `after-local` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
+| Property           | Required | Description                                                                                                                                                                                                                                                     |
+| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `event-types`      | Yes      | <p>List of user task event types that trigger the listener.</p><p>Supported values: `creating`, `assigning`, `updating`, `completing`, `canceling`.</p><p>The shorthand `all` value is also available if the listener should react to all lifecycle events.</p> |
+| `type`             | Yes      | <p>The name of the job type.</p><p>Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`.</p>                                                                                                   |
+| `retries`          | No       | Number of retries for the user task listener job. Defaults to `3` if not set.                                                                                                                                                                                   |
+| `after-non-global` | No       | Boolean indicating whether the listener should run after model-level listeners. Defaults to `false` (runs before model-level listeners).                                                                                                                        |
 
 ### How the configuration is validated
 
@@ -50,37 +52,35 @@ In all cases, a suitable warning is reported in the orchestration cluster startu
 The following is an example YAML configuration and environment variables:
 
 ```yaml
-zeebe:
-  broker:
-    experimental:
-      engine:
-        listeners:
-          task:
-            - type: "validate-task"
-              event-types:
-                - creating
-            - type: "audit-generic"
-              event-types: all
-              retries: 5
-            - type: "notify-assignee"
-              event-types:
-                - assigning
-                - updating
-                - canceling
-              after-local: true
+camunda:
+  cluster:
+    global-listeners:
+      user-task:
+        - type: "validate-task"
+          event-types:
+            - creating
+        - type: "audit-generic"
+          event-types: all
+          retries: 5
+        - type: "notify-assignee"
+          event-types:
+            - assigning
+            - updating
+            - canceling
+          after-non-global: true
 ```
 
 ```
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_0_TYPE=validate-task
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_0_EVENT_TYPES_0=creating
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_1_TYPE=audit-generic
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_1_EVENT_TYPES_0=all
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_1_RETRIES=5
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_TYPE=notify-assignee
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_EVENT_TYPES_0=assigning
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_EVENT_TYPES_1=updating
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_EVENT_TYPES_2=canceling
-ZEEBE_BROKER_EXPERIMENTAL_ENGINE_LISTENERS_TASK_2_AFTER_LOCAL=true
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE=validate-task
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES_0=creating
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_TYPE=audit-generic
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_EVENT_TYPES_0=all
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_1_RETRIES=5
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_TYPE=notify-assignee
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_0=assigning
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_1=updating
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_EVENT_TYPES_2=canceling
+CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_2_AFTER_NON_GLOBAL=true
 ```
 
 ### Apply changes
@@ -95,7 +95,7 @@ For a given event on a task instance:
 
 - Global listeners run in the order defined in the configuration.
 - Model-level listeners run next, in the order defined in the BPMN model.
-- Global listeners marked with `after-local: true` run after model-level listeners.
+- Global listeners marked with `after-non-global: true` run after model-level listeners.
 
 ## Supported features
 

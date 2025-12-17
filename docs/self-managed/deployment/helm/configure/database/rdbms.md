@@ -11,7 +11,7 @@ Camunda 8 Self-Managed supports using an external relational database (RDBMS) as
 
 Provide a supported relational database that is reachable by the Camunda components.
 
-See the [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md) for the complete list of supported databases and versions.
+See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 
 Ensure that:
 
