@@ -130,11 +130,11 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 Ready to upgrade and migrate? Complete the following steps:
 
 1. Coordinate your platform and development teams:
-   - Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients (Self-Managed).
-   - Start with the [Upgrade to Camunda 8.8 (Self-Managed)](/docs/self-managed/update/administrators/admin-upgrade-overview/) guide.
-   - For cluster-specific steps, see:
-     - [Components update 8.7 to 8.8](/docs/self-managed/components/components-upgrade/870-to-880/)
-     - [Helm 8.7 to 8.8 upgrade guide](/docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/)
+   - For Self-Managed environments, ensure your Orchestration Cluster is upgraded before upgrading your application clients.
+   - Start with the [Self-Managed upgrade overview](../../self-managed/update/administrators/admin-upgrade-overview/) to plan the upgrade.
+   - Review the relevant component and deployment upgrade guides as part of the cluster upgrade process:
+     - [Components upgrade guides](../../self-managed/components/components-upgrade/introduction/)
+     - [Helm upgrade guides](../../self-managed/deployment/helm/upgrade/)
 
 2. Review the migration guides relevant to your setup:
    - [Migrate from V1 APIs to the Orchestration Cluster API](./migrate-to-camunda-api/)
