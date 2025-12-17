@@ -80,6 +80,36 @@ You can now create, discover, and apply templates for more BPMN event types, inc
 
 Global event templates are reusable across projects, allowing teams to standardize event configurations, such as company-wide message structures or event names, and ensure consistency in process modeling.
 
+### Orchestration Cluster
+
+<!-- https://github.com/camunda/product-hub/issues/2626 -->
+
+This release lets you migrate active instances from legacy job-based user tasks to modern, engine-managed Camunda User Tasks through both the API and the Operate UI as part of process instance migration.
+
+With this capability, you can standardize on the Orchestration Cluster APIs and the recommended user task type ahead of the removal of job-based user task querying and management from the consolidated API.
+
+### Self-Managed
+
+#### Camunda 8 Run
+
+<!-- https://github.com/camunda/product-hub/issues/2866, https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
+
+Camunda 8 Run is now easier to get started with. The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
+
+A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
+
+Besides, Camunda 8 Run now ships with H2 as the default secondary data storage, enabling an easier and lighter local development experience. This update reduces installation complexity and memory usage, allowing developers to validate processes in a fully functional stack without managing an external database.
+
+On this matter, comprehensive documentation has been introduced to guide developers through installing Camunda 8 Run with H2 as the default secondary storage. It includes detailed instructions for seamlessly switching from H2 to Elasticsearch or OpenSearch as a secondary data store, ensuring teams can adapt storage solutions with ease.
+
+#### Helm
+
+<!-- https://github.com/camunda/product-hub/issues/2690 -->
+
+Camunda 8 Helm charts now support RDBMS as fully integrated secondary storage options for orchestration clusters, providing a first-class alternative to Elasticsearch and OpenSearch.
+
+Administrators can configure RDBMS connections (including advanced authentication and custom JDBC drivers) directly in `values.yaml` for production deployments. This lets enterprises run Camunda 8 on familiar, enterprise-managed RDBMS technology aligned with organizational security, backup, and compliance policies.
+
 ## 8.9.0-alpha2
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
