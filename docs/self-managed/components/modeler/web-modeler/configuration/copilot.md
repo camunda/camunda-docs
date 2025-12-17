@@ -4,6 +4,8 @@ title: "Copilot"
 description: "Configure Copilot in Web Modeler with a custom LLM provider."
 ---
 
+<span class="badge badge--alpha">Alpha</span>
+
 Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms. You can configure the default LLM provider for BPMN, FEEL, and form copilots.
 
 Copilot supports the following LLM providers:
@@ -81,7 +83,7 @@ To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true`. 
 
 ### AWS Bedrock
 
-:::caution
+:::warning
 When configuring AWS Bedrock, make sure the model is available in the provided AWS region.
 :::
 
@@ -96,18 +98,26 @@ When configuring AWS Bedrock, make sure the model is available in the provided A
 
 :::note
 This configuration applies to OpenAI and OpenAI-compatible providers.
+:::
 
-Provide exactly one of:
+Provide exactly one of the following:
 
-- `RESTAPI_FEELCOPILOT_API_KEY` for OpenAI’s public API (no custom endpoint needed), or
+- `RESTAPI_FEELCOPILOT_API_KEY` for OpenAI’s public API (no custom endpoint needed).
 - `RESTAPI_COPILOT_OPENAI_ENDPOINT` for OpenAI‑compatible providers or proxies.
 
 For OpenAI‑compatible providers, you can authenticate with:
 
-- `RESTAPI_COPILOT_OPENAI_BEARER`
-- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication)
-- `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers)
-  :::
+- `RESTAPI_COPILOT_OPENAI_BEARER`.
+- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication).
+- `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers).
+
+When using the Bring your own model option in Self-Managed, results may vary depending on your chosen LLM’s capabilities.
+
+If a weaker or smaller model is used, it may fail to generate a valid BPMN XML. In such cases, the Copilot library attempts automatic repair up to three times. If those attempts fail, the system will return an empty XML and an optional chat message instead of a model.
+
+:::tip
+Camunda recommends using a stronger model, such as GPT-4 or comparable, for reliable BPMN generation.
+:::
 
 | Environment variable                       | Description                                                                                   | Example value                        |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------- | ------------------------------------ |
