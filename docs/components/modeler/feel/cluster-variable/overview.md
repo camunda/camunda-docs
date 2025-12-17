@@ -13,7 +13,7 @@ Manage configuration values centrally across your Camunda cluster with cluster v
 
 ## About
 
-Within your Camunda cluster, you can define variables at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
+Within your Camunda cluster, you can define [variables](../../../../components/concepts/variables.md) at two levels: globally for the entire cluster, or at the tenant level when multi-tenancy is enabled.
 
 Cluster variables allows you to maintain environment-specific configurations, API endpoints, feature flags, and other shared values without hardcoding them into individual process definitions.
 
