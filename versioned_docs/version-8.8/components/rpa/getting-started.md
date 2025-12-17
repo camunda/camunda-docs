@@ -17,11 +17,9 @@ Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts
 - Before getting started, review [RPA known issues](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
   :::
 
-The RPA worker is available on all major platforms (Windows, Linux, and Mac). This allows you to automate your applications on their native platforms. In most cases, this will be Windows. For console applications or browser automation, you can use a more light-weight distribution, such as the [Docker image](/self-managed/setup/deploy/other/docker.md).
-
 ## About the RPA worker
 
-The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as the [Docker image](/self-managed/deployment/docker/docker.md).
+The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as this [Docker image](../../self-managed/deployment/docker/docker.md).
 
 ## Create your first script
 
@@ -58,7 +56,7 @@ Once you are happy with your script and have tested it locally, you can start au
 
 1. **Deploy the RPA file**:
    1. If you have not already, [set up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client) for your Modeler.
-   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../identity/role.md#assign-client-to-a-role).
+   2. Assign the **RPA role** to the client in the [Orchestration Cluster Identity](../../identity/role.md#assign-client-to-a-role).
    3. Deploy your RPA script file by clicking on the rocket (🚀) icon in Modeler.
    4. Note the ID of your RPA script. You will need this in the next step.
 
