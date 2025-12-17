@@ -19,7 +19,7 @@ username: `postgres`
 password: `examplePassword`
 ```
 
-- **Supported versions:**: Check the [supported environments](/reference/supported-environments.md) and [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md) pages to confirm which PostgreSQL versions are supported.
+- **Supported versions:**: Check the [supported environments](/reference/supported-environments.md) and [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) pages to confirm which PostgreSQL versions are supported.
 - **Database setup:** Ensure the required databases exist in your PostgreSQL instance. For this guide, create the following databases:
 
 ```SQL

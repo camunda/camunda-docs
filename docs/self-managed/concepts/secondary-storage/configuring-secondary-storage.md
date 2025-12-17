@@ -18,7 +18,7 @@ Camunda uses the `data.secondary-storage` configuration to define which database
 
 :::note
 For the latest list of supported relational databases and versions, see the  
-[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 <Tabs groupId="configuration" defaultValue="helm" queryString values={[
@@ -130,7 +130,7 @@ data:
 :::note
 H2 is suitable for testing and local development only.  
 For production use, Operate and Tasklist require a persistent secondary storage backend such as a supported RDBMS or Elasticsearch.  
-Consult the [RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md) when choosing a relational database.
+Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
 :::
 
 ## Run without secondary storage
