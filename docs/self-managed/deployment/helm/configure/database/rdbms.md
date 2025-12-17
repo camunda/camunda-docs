@@ -227,3 +227,11 @@ org.springframework.web.servlet.DispatcherServlet - Completed initialization in 
 ```
 
 If the flush interval is long or the queue size is large, exported data may take several seconds to appear in the database.
+
+## Using AWS Aurora PostgreSQL (optional)
+
+If you are using AWS Aurora PostgreSQL as your relational database, you can configure it the same way as a standard PostgreSQL instance.
+
+Optionally, Camunda also supports the AWS JDBC wrapper driver, which provides additional features such as improved failover handling and IAM-based authentication.
+
+For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../concepts/databases/relational-db/usage-with-aws-aurora.md).

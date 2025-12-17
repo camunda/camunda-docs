@@ -223,13 +223,18 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 | `process-cache.max-size`         | Maximum number of process definitions held in the exporter cache | 1000    |
 | `batch-operation-cache.max-size` | Maximum number of cached batch operations                        | 1000    |
 
-## Usage with AWS Aurora
+## Usage with AWS Aurora PostgreSQL
 
-Camunda supports AWS Aurora PostgreSQL as a secondary storage backend. While configuring it similar to
-a common PostgreSQL will work, the [AWS JDBC driver](https://github.com/aws/aws-advanced-jdbc-wrapper) is
-also supported and comes with additional benefits for failover and authentication..
+Camunda supports **PostgreSQL** as a secondary storage backend.  
+AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and is expected to work when configured like a standard PostgreSQL database.
 
-To leverage the AWS JDBC driver, configure your database connection URL as follows:
+In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+
+:::note
+PostgreSQL-compatible managed services (including AWS Aurora PostgreSQL) are not tested separately. Compatibility is expected to be provided by the service vendor.
+:::
+
+To use the AWS JDBC wrapper, configure the JDBC URL as follows:
 
 ```yaml
 camunda:
@@ -242,9 +247,9 @@ camunda:
         password: camunda
 ```
 
-You can use the AWS JDBC driver with username and password based authentication, but it also supports advanced
-IAM based authentication. To leverage IAM authentication, activate the respective wrapper plugin and configure a user
-(without a password) that has the required IAM roles:
+The AWS JDBC wrapper supports standard username/password authentication as well as IAM-based authentication.
+
+To use IAM authentication, enable the corresponding wrapper plugin and configure a database user without a password that has the required IAM permissions:
 
 ```yaml
 camunda:
@@ -255,3 +260,5 @@ camunda:
         url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam
         username: camunda
 ```
+
+Ensure the required AWS JDBC wrapper JAR is available to the Camunda runtime when using this configuration.
