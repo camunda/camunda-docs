@@ -37,6 +37,49 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> | -    |
 
+### Agentic orchestration
+
+<!-- https://github.com/camunda/product-hub/issues/3065 -->
+
+Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants. With this enhancement, you can safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state. This unlocks more flexible, agent-driven orchestration and faster iteration on live automations.
+
+#### A2A Client connectors
+
+<!-- https://github.com/camunda/product-hub/issues/2924 -->
+
+Camunda agentic orchestration now supports multi-agent collaboration scenarios using the A2A protocol. The Camunda A2A Client suite of connectors includes:
+
+- An A2A outbound connector for calling external agents.
+- A polling intermediate catch event connector that polls for completion or progress of external agent A2A tasks.
+- A webhook intermediate catch event connector that receives completion or progress updates for external agent A2A tasks.
+
+### Database and data storage
+
+<!-- https://github.com/camunda/product-hub/issues/3025 -->
+
+Camunda 8 now officially supports Amazon Aurora as a secondary data store for orchestration clusters, in addition to existing options. Customers can use Aurora PostgreSQL - compatible with PostgreSQL versions 14 through 17 - for secure, high-performance, cloud-native deployments.
+
+This enables seamless AWS integration, advanced authentication (IAM/IRSA), production-grade HA and failover, and alignment with DBA best practices. Helm charts and manual installation guides are updated with tested configurations and step-by-step references for Aurora, reducing operational complexity and accelerating adoption for AWS-centric organizations.
+
+### Modeler
+
+#### Desktop Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/2970 -->
+
+You can now manage your Camunda connections directly within Desktop Modeler:
+
+- Connection management: Add, edit, delete, and save multiple Camunda connections, keeping credentials and settings securely stored yet easily accessible within the Modeler.
+- Streamlined deployment workflow: Deploy to saved connections, select a target Orchestration Cluster, or add a new one as needed.
+
+#### Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3173 -->
+
+You can now create, discover, and apply templates for more BPMN event types, including message, signal, and timer, directly within the element template editor.
+
+Global event templates are reusable across projects, allowing teams to standardize event configurations, such as company-wide message structures or event names, and ensure consistency in process modeling.
+
 ## 8.9.0-alpha2
 
 | Release date     | Changelog(s)                                                                                                                                                                               | Blog |
