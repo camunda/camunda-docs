@@ -754,7 +754,7 @@ You are using Camunda Identity version 8.5.3 or previous.
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- [Camunda Identity 8.5.4](https://github.com/camunda/identity/releases/tag/8.5.4)
 
 ## Notice 12
 
