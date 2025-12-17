@@ -450,7 +450,7 @@ Use the Data Migrator to copy running process instances from Camunda 7 to Camund
 - Handle problematic instances gracefully with retry options.
 - Write custom code to intercept variable migration.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/data-migrator" class="link-arrow">Data Migrator</a></p>
 
 ### Migration Analyzer & Diagram Converter
 
@@ -464,7 +464,7 @@ It can also automatically convert these files from Camunda 7 format to Camunda 8
 
 Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/code-conversion" class="link-arrow">Code conversion</a></p>
 
 ## Optimize
 
