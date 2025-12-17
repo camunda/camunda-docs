@@ -897,6 +897,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/azure-blob-storage",
                 "components/connectors/out-of-the-box-connectors/microsoft-teams",
                 "components/connectors/out-of-the-box-connectors/microsoft-o365-mail",
+                "components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound",
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
