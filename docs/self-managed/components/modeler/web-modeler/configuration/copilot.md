@@ -83,7 +83,7 @@ To enable Copilot, set the `FEATURE_AI_ENABLED` environment variable to `true`. 
 
 ### AWS Bedrock
 
-:::caution
+:::warning
 When configuring AWS Bedrock, make sure the model is available in the provided AWS region.
 :::
 
@@ -98,24 +98,25 @@ When configuring AWS Bedrock, make sure the model is available in the provided A
 
 :::note
 This configuration applies to OpenAI and OpenAI-compatible providers.
+:::
 
-Provide exactly one of:
+Provide exactly one of the following:
 
-- `RESTAPI_FEELCOPILOT_API_KEY` for OpenAI’s public API (no custom endpoint needed), or
+- `RESTAPI_FEELCOPILOT_API_KEY` for OpenAI’s public API (no custom endpoint needed).
 - `RESTAPI_COPILOT_OPENAI_ENDPOINT` for OpenAI‑compatible providers or proxies.
 
 For OpenAI‑compatible providers, you can authenticate with:
 
-- `RESTAPI_COPILOT_OPENAI_BEARER`
-- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication)
-- `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers)
-  :::
+- `RESTAPI_COPILOT_OPENAI_BEARER`.
+- `RESTAPI_COPILOT_OPENAI_USERNAME` and `RESTAPI_COPILOT_OPENAI_PASSWORD` (basic authentication).
+- `RESTAPI_COPILOT_OPENAI_HEADERS` (custom authentication headers).
 
-:::warning
-When using the Bring your own model option in Self-Managed, results can vary depending on your chosen LLM’s capabilities.
-If a weaker or smaller model is used, it may fail to generate a valid BPMN XML. In such cases, the Copilot library will attempt automatic repair up to three times. If those attempts fail, the system will return an empty XML and an optional chat message instead of a model.
+When using the Bring your own model option in Self-Managed, results may vary depending on your chosen LLM’s capabilities.
 
-We recommend using a stronger model (e.g., GPT-4 or comparable) for reliable BPMN generation. This limitation will be addressed in a future release when BPMN generation transitions to a JSON-schema-based approach.
+If a weaker or smaller model is used, it may fail to generate a valid BPMN XML. In such cases, the Copilot library attempts automatic repair up to three times. If those attempts fail, the system will return an empty XML and an optional chat message instead of a model.
+
+:::tip
+Camunda recommends using a stronger model, such as GPT-4 or comparable, for reliable BPMN generation.
 :::
 
 | Environment variable                       | Description                                                                                   | Example value                        |
