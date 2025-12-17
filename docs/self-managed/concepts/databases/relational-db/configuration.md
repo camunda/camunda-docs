@@ -222,3 +222,36 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 | -------------------------------- | ---------------------------------------------------------------- | ------- |
 | `process-cache.max-size`         | Maximum number of process definitions held in the exporter cache | 1000    |
 | `batch-operation-cache.max-size` | Maximum number of cached batch operations                        | 1000    |
+
+## Usage with AWS Aurora
+
+Camunda also supports AWS Aurora PostgreSQL as a secondary storage backend. While configuring it similar to
+a common PostgreSQL will also work, the [AWS JDBC driver](https://github.com/aws/aws-advanced-jdbc-wrapper) is
+also supported and comes with additional benefits for failover and authentication..
+
+To leverage the AWS JDBC driver, configure your database connection URL as follows:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda
+        username: camunda
+        password: camunda
+```
+
+You can use the AWS JDBC driver with username and password based authentication, but is also supports advanced
+IAM based authentication. To leverage IAM authentication, activate the respective wrapper plugin and configure a user
+(without a password) that has the required IAM roles:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam
+        username: camunda
+```
