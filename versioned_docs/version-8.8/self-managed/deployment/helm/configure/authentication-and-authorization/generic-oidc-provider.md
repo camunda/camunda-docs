@@ -111,8 +111,8 @@ Camunda needs to know which claims in access tokens identify users and clients. 
 
 You need to identify:
 
-- **User identification claim** (`usernameClaim`): Identifies users during web login (e.g., `email`, `preferred_username`).
-- **Client identification claim** (`clientIdClaim`): Identifies calling applications for M2M authentication (e.g., `client_id`, `azp`).
+- **User identification claim** (`usernameClaim`): Identifies users during web login (for example, `email`, `preferred_username`).
+- **Client identification claim** (`clientIdClaim`): Identifies calling applications for M2M authentication (for example, `client_id`, `azp`).
 - **Audience claim** (`audience`): The expected `aud` value in tokens.
 
 For detailed instructions on obtaining and decoding tokens to identify these claims, see [JWT token claims reference](./jwt-token-claims.md).
@@ -123,10 +123,10 @@ Camunda components request OIDC scopes when authenticating users. The default sc
 
 | Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
 | ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                  | ✔                                        |
-| `profile`        | Access to user profile information. | ✔                                                  | ✔                                        |
-| `email`          | Access to user email address.       | ✔                                                  |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                  |                                           |
+| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
+| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
+| `email`          | Access to user email address.       | ✔                                                   |                                           |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.

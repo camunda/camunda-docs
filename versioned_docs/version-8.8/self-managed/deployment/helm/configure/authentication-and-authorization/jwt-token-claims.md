@@ -2,14 +2,14 @@
 id: jwt-token-claims
 sidebar_label: JWT token claims reference
 title: JWT token claims reference
-description: "Reference for identifying and decoding JWT token claims when configuring OIDC authentication for Camunda 8 Self-Managed."
+description: Reference for identifying and decoding JWT token claims when configuring OIDC authentication for Camunda 8 Self-Managed.
 ---
 
-This reference explains how to obtain and decode JWT tokens to identify the claims your OIDC provider uses. You'll need this information when configuring Camunda to authenticate with an external identity provider.
+Use this reference to understand the structure of JWT access tokens and identify the claims your OIDC provider uses. This information is required when configuring Camunda 8 to authenticate with an external identity provider.
 
 ## Obtain a test token
 
-Use your OIDC client credentials to request an access token:
+Request an access token using your OIDC client credentials:
 
 ```bash
 curl -X POST 'https://your-provider.example.com/oauth/token' \
@@ -19,7 +19,7 @@ curl -X POST 'https://your-provider.example.com/oauth/token' \
   -d 'grant_type=client_credentials'
 ```
 
-This returns a JSON response containing an `access_token`.
+The response includes an `access_token` field containing the JWT.
 
 ## Decode the token
 
@@ -33,59 +33,61 @@ echo "<access-token>" | cut -d'.' -f2 | base64 -d | jq
 
 ### Online tools
 
-You can use online tools like [jwt.io](https://jwt.io) to decode tokens by pasting the token value.
+You can also use online tools such as [jwt.io](https://jwt.io) by pasting the token value.
 
 :::caution Security warning
-Only use online JWT decoders with tokens from **test or development environments**. Never paste production tokens or tokens containing sensitive information into online tools, as they could be logged or leaked.
+Only decode tokens from **test or development environments** using online tools.  
+Never paste production tokens or tokens containing sensitive information into third-party sites, as they may be logged or leaked.
 :::
 
 ## Required claims
 
-When configuring Camunda, you need to identify three types of claims in your tokens:
+When configuring OIDC authentication, Camunda requires you to identify the following claims in the token.
 
 ### User identification claim
 
-Identifies users uniquely during web login.
+Used to uniquely identify users during interactive login.
 
 - **Helm configuration:** `usernameClaim`
 - **Common claim names:** `email`, `preferred_username`, `sub`, `upn`, `unique_name`
 
 ### Client identification claim
 
-Identifies the calling client application for machine-to-machine authentication.
+Used for machine-to-machine authentication to identify the calling client.
 
 - **Helm configuration:** `clientIdClaim`
 - **Common claim names:** `client_id`, `azp`, `appid`, `clientId`
 
 ### Audience claim
 
-Specifies the intended audience for the token.
+Specifies the intended audience of the token.
 
 - **Helm configuration:** `audience`
 - **Claim name:** `aud`
-- **Value:** Often contains the client ID or a custom value configured in your provider.
+- **Typical value:** Client ID or a custom value configured in the provider
 
 ## Common claim patterns by provider
 
-| Provider        | User claim                      | Client claim         | Audience default       |
-| --------------- | ------------------------------- | -------------------- | ---------------------- |
-| Microsoft Entra | `preferred_username`            | `azp`                | Client ID              |
-| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May need configuration |
-| Auth0           | `email`                         | `client_id`          | Client ID              |
-| Okta            | `email`                         | `client_id`          | Client ID              |
+| Provider        | User claim                      | Client claim         | Audience default          |
+| --------------- | ------------------------------- | -------------------- | ------------------------- |
+| Microsoft Entra | `preferred_username`            | `azp`                | Client ID                 |
+| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May require configuration |
+| Auth0           | `email`                         | `client_id`          | Client ID                 |
+| Okta            | `email`                         | `client_id`          | Client ID                 |
 
 ## Verify audience configuration
 
-1. Decode a test token as shown above.
-2. Check the `aud` claim value.
-3. Use that value for the `audience` parameter in your Camunda Helm configuration.
+1. Decode a test token.
+2. Inspect the value of the `aud` claim.
+3. Use that value for the `audience` setting in your Camunda Helm configuration.
 
 :::warning
-The audience claim is critical for token validation. Camunda will reject tokens that don't include the expected audience value.
+The audience claim is required for token validation.  
+Camunda rejects tokens that do not include the expected audience value.
 :::
 
-### If tokens don't include an appropriate audience
+### If the token does not include the expected audience
 
-- Check your OIDC provider's documentation on configuring token audiences.
-- Some providers require explicit audience configuration in client settings.
-- Keycloak specifically may default to `aud: "account"` and require additional configuration. See [External Keycloak](./external-keycloak.md) for details.
+- Review your OIDC provider’s documentation for configuring token audiences.
+- Some providers require explicit audience configuration on the client.
+- Keycloak may default to `aud: "account"` and require additional setup. See [External Keycloak](./external-keycloak.md) for details.
