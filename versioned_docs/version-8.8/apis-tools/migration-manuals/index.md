@@ -129,6 +129,17 @@ Check the Orchestration Cluster API on User Tasks for more information on how to
 
 Ready to upgrade and migrate? Complete the following steps:
 
-1. **Coordinate your platform and development teams**: Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients.
+1. Coordinate your platform and development teams:
+   - Ensure your Orchestration Cluster is upgraded to 8.8 before upgrading your application clients (Self-Managed).
+   - Start with the [Upgrade to Camunda 8.8 (Self-Managed)](/docs/self-managed/update/administrators/admin-upgrade-overview/) guide.
+   - For cluster-specific steps, see:
+     - [Components update 8.7 to 8.8](/docs/self-managed/components/components-upgrade/870-to-880/)
+     - [Helm 8.7 to 8.8 upgrade guide](/docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/)
 
-2. **Review migration guides**: Coming soon: Links to detailed guides on each component migration.
+2. Review the migration guides relevant to your setup:
+   - [Migrate from V1 APIs to the Orchestration Cluster API](./migrate-to-camunda-api/)
+   - [Migrate from gRPC to the Orchestration Cluster API](./migrate-from-grpc-to-orchestration-cluster-api/)
+   - [Migrate to the Camunda Java Client](./migrate-to-camunda-java-client/)
+   - [Migrate to Camunda Spring Boot Starter](./migrate-to-camunda-spring-boot-starter/)
+   - [Migrate to Camunda Process Test](./migrate-to-camunda-process-test/)
+   - [Migrate to Camunda user tasks](./migrate-to-camunda-user-tasks/)
