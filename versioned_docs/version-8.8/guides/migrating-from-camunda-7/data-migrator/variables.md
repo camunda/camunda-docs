@@ -96,7 +96,7 @@ These variables are migrated as-is, but may require special handling in FEEL exp
 
 ## Disabling Built-in Interceptors
 
-You can disable any built-in transformer or validator using the `enabled` configuration property. Use the class names from the tables above:
+You can disable any built-in transformer or validator using the `enabled` configuration property:
 
 ```yaml
 camunda:
