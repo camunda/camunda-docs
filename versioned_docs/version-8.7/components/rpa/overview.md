@@ -4,11 +4,11 @@ title: Robotic process automation (RPA)
 description: Integrate legacy applications into Camunda with robotic process automation (RPA).
 ---
 
-Use RPA to integrate legacy systems without APIs into your Camunda processes.
+Use Robotic process automation (RPA) to integrate legacy systems without APIs into your Camunda processes.
 
 ## About RPA
 
-Robotic process automation (RPA) allows you to automate manual, repetitive tasks by interacting with legacy mainframe applications, desktop applications such as ERP systems, or websites that do not expose APIs.
+RPA allows you to automate manual, repetitive tasks by interacting with legacy mainframe applications, desktop applications such as ERP systems, or websites that do not expose APIs.
 
 Camunda uses RPA to integrate legacy applications without accessible APIs into your process orchestration.
 
