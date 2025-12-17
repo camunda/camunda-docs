@@ -225,8 +225,8 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 
 ## Usage with AWS Aurora
 
-Camunda also supports AWS Aurora PostgreSQL as a secondary storage backend. While configuring it similar to
-a common PostgreSQL will also work, the [AWS JDBC driver](https://github.com/aws/aws-advanced-jdbc-wrapper) is
+Camunda supports AWS Aurora PostgreSQL as a secondary storage backend. While configuring it similar to
+a common PostgreSQL will work, the [AWS JDBC driver](https://github.com/aws/aws-advanced-jdbc-wrapper) is
 also supported and comes with additional benefits for failover and authentication..
 
 To leverage the AWS JDBC driver, configure your database connection URL as follows:
@@ -242,7 +242,7 @@ camunda:
         password: camunda
 ```
 
-You can use the AWS JDBC driver with username and password based authentication, but is also supports advanced
+You can use the AWS JDBC driver with username and password based authentication, but it also supports advanced
 IAM based authentication. To leverage IAM authentication, activate the respective wrapper plugin and configure a user
 (without a password) that has the required IAM roles:
 
