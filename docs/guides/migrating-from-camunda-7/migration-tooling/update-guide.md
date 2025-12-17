@@ -123,14 +123,14 @@ Code conversion is now officially supported by Camunda. The code repository and 
 The following Maven modules have been renamed:
 
 - **Parent Module**:
-  - **Old**: `org.camunda.migration:camunda-7-to-8-rewrite-recipes-parent`
+  - **Old**: `org.camunda.community:camunda-7-to-8-rewrite-recipes-root`
   - **New**: `io.camunda:camunda-7-to-8-code-conversion-parent`
 
 - **Recipes Module**:
-  - **Old**: `org.camunda.migration:camunda-7-to-8-rewrite-recipes`
+  - **Old**: `org.camunda.community:camunda-7-to-8-rewrite-recipes`
   - **New**: `io.camunda:camunda-7-to-8-code-conversion-recipes`
 
-All artifacts now use the `io.camunda` groupId instead of `org.camunda.migration`.
+All artifacts now use the `io.camunda` groupId instead of `org.camunda.community`.
 
 ##### Migration steps
 
@@ -140,7 +140,7 @@ If you are using the OpenRewrite recipes in your project, update your dependenci
 
 ```xml
 <dependency>
-  <groupId>org.camunda.migration</groupId>
+  <groupId>org.camunda.community</groupId>
   <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
 </dependency>
 ```
@@ -202,8 +202,8 @@ If you are embedding the diagram converter as a library, update your dependencie
 
 ```xml
 <dependency>
-  <groupId>org.camunda.migration</groupId>
-  <artifactId>camunda-7-to-8-diagram-converter-core</artifactId>
+  <groupId>org.camunda.community.migration</groupId>
+  <artifactId>camunda-7-to-8-migration-analyzer-core</artifactId>
 </dependency>
 ```
 
