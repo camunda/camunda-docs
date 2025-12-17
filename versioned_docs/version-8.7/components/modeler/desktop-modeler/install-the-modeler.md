@@ -38,9 +38,9 @@ sudo ln -s camunda-modeler-5.41.0-linux-x64/camunda-modeler camunda-modeler
 ```
 </TabItem>
 
-## Wire File Associations
+## Wire file associations
 
-On Windows and Linux you can carry out additional steps to register Modeler as the default editor for BPMN, DMN, RPA, and Form files. With macOS, Modeler is automatically registered as the default editor.
+On Windows and Linux you can carry out additional steps to register Modeler as the default editor for BPMN, DMN, RPA, and Form files. On macOS, Modeler is automatically registered as the default editor.
 
 ### Windows
 
