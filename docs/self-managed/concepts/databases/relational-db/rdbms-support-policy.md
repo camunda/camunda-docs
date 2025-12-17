@@ -14,14 +14,14 @@ The RDBMS support policy is a work in progress, content can change until complet
 
 The following RDBMS databases are supported:
 
-| Database             | Supported versions |
-| :------------------- | :----------------- |
-| PostgreSQL           | 14, 15             |
-| MariaDB              | 10.6, 10.11        |
-| MySQL                | 8.0                |
-| Microsoft SQL Server | 2019, 2022         |
-| Oracle               | 19c (LTS), 21c     |
-| H2                   | 2.x                |
+| Database             | Supported versions      |
+| :------------------- | :---------------------- |
+| PostgreSQL           | 14, 15, 16, 17, 18      |
+| MariaDB              | 10.6, 10.11, 11.4, 11.8 |
+| MySQL                | 8.4, 9.5                |
+| Microsoft SQL Server | 2019, 2022, 2025        |
+| Oracle               | 19c, 21c, 23ai          |
+| H2                   | 2.x                     |
 
 :::info
 Changes to supported versions are announced in [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
