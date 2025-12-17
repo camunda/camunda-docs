@@ -48,14 +48,14 @@ The migrator supports migration only within the same database vendor:
 
 The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instances.
 
-If you wish to drop this table after migration is completed, you can use the `--drop-schema` flag when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped).
+To drop this table after the migration is complete, use `--drop-schema` when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped):
 
 ```bash
-# Migrate and drop the migration mapping schema on shutdown if migration was succcesful
+# Migrate and drop the migration mapping schema on shutdown if migration was successful
 ./start.sh --runtime --drop-schema
 ```
 
-If you wish to drop the table regardless of the migration status, you can use the `--force` flag in combination with `--drop-schema`. This will perform the drop in all cases.
+To drop the table regardless of the migration status, use `--force` in combination with `--drop-schema`. This will perform the drop in all cases:
 
 ```bash
 # Migrate and force drop the migration mapping schema on shutdown

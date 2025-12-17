@@ -1,7 +1,7 @@
 ---
 id: code-conversion
 title: Code Conversion
-sidebar_label: Code conversion
+sidebar_label: Code Conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---
 
@@ -284,7 +284,7 @@ If Camunda 7 code remains after applying recipes:
 
 Your BPMN and DMN models need to be adjusted to work with Camunda 8.
 
-The [Migration Analyzer & Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/model-converter) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Migration Analyzer & Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/model-converter) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the Diagram Converter to suit your needs.
 
 Find the diagram conversion tooling and its documentation in the [Camunda 7 to 8 migration tooling – Migration Analyzer & Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/model-converter).
 

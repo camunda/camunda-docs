@@ -26,7 +26,7 @@ module.exports = {
         "guides/migrating-from-camunda-7/conceptual-differences",
         {
           type: "category",
-          label: "Migration Tooling",
+          label: "Migration tools",
           link: {
             type: "doc",
             id: "guides/migrating-from-camunda-7/migration-tooling/index",

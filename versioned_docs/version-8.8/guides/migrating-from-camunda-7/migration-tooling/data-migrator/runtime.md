@@ -220,9 +220,7 @@ This approach ensures that:
 
 ### Example
 
-Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties.md#camundamigrator)
-to specify which tenants should be included in the migration process. This property accepts a
-comma-separated list of tenant identifiers.
+Use the `camunda.migrator.tenant=ids` [property](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties.md#camundamigrator) to specify which tenants should be included in the migration process. This property accepts a comma-separated list of tenant identifiers.
 
 ```yaml
 camunda:
