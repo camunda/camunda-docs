@@ -34,8 +34,8 @@ Camunda supports **PostgreSQL as a database engine**, not specific managed servi
 
 This means:
 
-- Any **PostgreSQL-compatible managed service** (for example, **Azure Database for PostgreSQL** or **AWS Aurora PostgreSQL**) is expected to work.
-- Camunda **does not test or certify** individual managed service implementations.
+- Any PostgreSQL-compatible managed service (for example, Azure Database for PostgreSQL or AWS Aurora PostgreSQL) is expected to work.
+- Camunda does not test or certify individual managed service implementations.
 - Compatibility and correct behavior of the managed service itself are the responsibility of the service provider.
 
 If a managed service is fully compatible with the supported PostgreSQL versions listed above, it is considered supported from Camunda’s perspective.
@@ -66,6 +66,6 @@ Database versions are deprecated and removed based on:
 
 ## JDBC driver policy
 
-- Camunda supports the **latest vendor-compatible JDBC driver** for each supported RDBMS.
+- Camunda supports the latest vendor-compatible JDBC driver for each supported RDBMS.
 - Customers are responsible for providing JDBC drivers when required (for example, Oracle or MySQL).
 - Driver versions are not pinned unless a specific version is required for compatibility.
