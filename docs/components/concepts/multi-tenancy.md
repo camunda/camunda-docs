@@ -27,6 +27,10 @@ Multi-tenancy provides cost efficiency by allowing multiple tenants to share the
 Administrators can manage all tenants centrally using [Identity](../identity/tenant.md).
 This unified management interface simplifies monitoring, configuration, and maintenance tasks across tenant environments.
 
+:::note
+If you are using [Optimize](/components/optimize/what-is-optimize.md), you must keep tenants synchronized with [Management Identity](#management-identity).
+:::
+
 ## Security
 
 Strong access control mechanisms prevent tenants from accessing each other's data or processes.
@@ -39,7 +43,6 @@ When a user deploys a process model or starts a process instance, the system val
 For example, assume a user belongs to `Tenant A` but not `Tenant B`:
 
 1. **Deploying a process model**
-
    - If the user deploys to `Tenant A`, the Orchestration Cluster verifies the assignment. If valid, the model is deployed and all related process instances belong to `Tenant A`.
    - If the user deploys to `Tenant B`, the deployment fails because the user lacks access to that tenant.
 
@@ -83,3 +86,9 @@ A user can only deploy resources to authorized tenants. Any data created by thos
 The following diagram illustrates tenant ownership inheritance:
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
+
+## Management Identity
+
+[Management Identity](/self-managed/components/management-identity/overview.md) is a component of Camunda 8 Self-Managed used for identity and access management of components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md). Of those, only [Optimize](/self-managed/components/optimize/overview.md) is tenant aware, and can make use of multi-tenancy.
+
+If you wish to use it with the same tenants as an Orchestration Cluster, you will have to manually synchronize the tenants in both the Orchestration Cluster and Management Identity. This means manually creating them, and updating them whenever they change. Two tenants are considered the same if they have the same ID.
