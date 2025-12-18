@@ -62,7 +62,7 @@ This deployment approach separates infrastructure management from application de
 This approach uses three vendor-supported infrastructure components, each maintained by their respective project teams:
 | Component | Purpose | Official Documentation |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/current/) |
 | **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
 | **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
@@ -141,7 +141,7 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 [CloudNativePG](https://cloudnative-pg.io/) is a CNCF project that provides the official Kubernetes deployment method for PostgreSQL. It's designed specifically for cloud-native environments with enterprise-grade features including automated backups, point-in-time recovery, and rolling updates.
 
-**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/)
+**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/current/)
 
 ### Architecture
 
@@ -694,7 +694,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - Check client configurations in Keycloak admin console
 - Verify redirect URLs match your deployment setup
 
-**Reference:** [Keycloak Operator Troubleshooting](https://www.keycloak.org/operator/troubleshooting)
+**Reference:** [Keycloak Operator Documentation](https://www.keycloak.org/operator/basic-deployment)
 
 ## Production considerations
 
@@ -736,7 +736,7 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Additional resources
 
-- [CloudNativePG documentation](https://cloudnative-pg.io/documentation/)
+- [CloudNativePG documentation](https://cloudnative-pg.io/documentation/current/)
 - [Elastic Cloud on Kubernetes guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - [Keycloak Operator documentation](https://www.keycloak.org/operator/installation)
 - [Camunda 8 Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)
