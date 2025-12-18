@@ -56,7 +56,7 @@ You can also run this setup using a single AWS EC2 instance. However, in the eve
 
 - An AWS account to provision resources.
   - At a high level, permissions are needed for **ec2**, **iam**, **elasticloadbalancing**, **kms**, **logs**, and **es** services.
-  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/stable/8.8/aws/ec2/example/policy.json).
+  - For detailed permissions, refer to this [example policy](https://github.com/camunda/camunda-deployment-references/tree/main/aws/compute/ec2-single-region/example/policy.json).
 - Terraform (v1.7 or later)
 - A Unix-based operating system with `ssh` and `sftp`
   - Windows may be used with [Cygwin](https://www.cygwin.com/) or [Windows WSL](https://learn.microsoft.com/en-us/windows/wsl/install), though these configurations have not been tested.

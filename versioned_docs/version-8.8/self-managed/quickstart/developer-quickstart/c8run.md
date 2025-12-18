@@ -15,7 +15,7 @@ For production deployments, install the Orchestration Cluster manually as a Java
 For detailed steps, see the [manual installation](../../../deployment/manual/install) guide.
 :::
 
-Camunda 8 Run enables you to run [Orchestration cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
+Camunda 8 Run enables you to run the [Orchestration Cluster](../../../../reference/glossary#orchestration-cluster), including Zeebe, Operate, Tasklist, Identity, and Elasticsearch, with minimal configuration. It is intended for developers who want to model BPMN diagrams, deploy them, and interact with running process instances in a simple environment. This guide explains how to get started on your local or virtual machine.
 
 Camunda 8 Run includes the following:
 
@@ -235,7 +235,7 @@ docker ps
 
 ### Enable TLS
 
-TLS can be enabled by providing a local keystore file using the `--keystore` argument at startup. Camunda 8 Run accepts `.jks` certificate files.
+TLS can be enabled by providing a local keystore file using the [`--keystore` and `--keystorePassword` configuration options](#configuration-options) at startup. Camunda 8 Run accepts `.jks` certificate files.
 Although C8Run supports TLS, this is intended only for testing.
 
 :::note

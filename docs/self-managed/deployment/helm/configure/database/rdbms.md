@@ -11,7 +11,7 @@ Camunda 8 Self-Managed supports using an external relational database (RDBMS) as
 
 Provide a supported relational database that is reachable by the Camunda components.
 
-See the [RDBMS support policy](/self-managed/concepts/rdbms-support-policy.md) for the complete list of supported databases and versions.
+See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
 
 Ensure that:
 
@@ -227,3 +227,11 @@ org.springframework.web.servlet.DispatcherServlet - Completed initialization in 
 ```
 
 If the flush interval is long or the queue size is large, exported data may take several seconds to appear in the database.
+
+## Using AWS Aurora PostgreSQL (optional)
+
+If you are using AWS Aurora PostgreSQL as your relational database, you can configure it the same way as a standard PostgreSQL instance.
+
+Optionally, Camunda also supports the AWS JDBC wrapper driver, which provides additional features such as improved failover handling and IAM-based authentication.
+
+For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../../concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).

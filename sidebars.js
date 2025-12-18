@@ -24,37 +24,47 @@ module.exports = {
       items: [
         "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
-        "guides/migrating-from-camunda-7/migration-tooling",
-
         {
           type: "category",
-          label: "Data Migrator",
+          label: "Migration tools",
           link: {
             type: "doc",
-            id: "guides/migrating-from-camunda-7/data-migrator/index",
+            id: "guides/migrating-from-camunda-7/migration-tooling/index",
           },
           items: [
-            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
-            "guides/migrating-from-camunda-7/data-migrator/install",
-            "guides/migrating-from-camunda-7/data-migrator/runtime",
-            "guides/migrating-from-camunda-7/data-migrator/history",
-            "guides/migrating-from-camunda-7/data-migrator/identity",
-            "guides/migrating-from-camunda-7/data-migrator/variables",
-            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
-            "guides/migrating-from-camunda-7/data-migrator/limitations",
+            "guides/migrating-from-camunda-7/migration-tooling/diagram-converter",
+            "guides/migrating-from-camunda-7/migration-tooling/code-conversion",
             {
               type: "category",
-              label: "Configuration & reference",
+              label: "Data Migrator",
+              link: {
+                type: "doc",
+                id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/index",
+              },
               items: [
-                "guides/migrating-from-camunda-7/data-migrator/database",
-                "guides/migrating-from-camunda-7/data-migrator/config-examples",
-                "guides/migrating-from-camunda-7/data-migrator/config-properties",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations",
+                {
+                  type: "category",
+                  label: "Configuration & reference",
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/database",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties",
+                  ],
+                },
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting",
               ],
             },
-            "guides/migrating-from-camunda-7/data-migrator/troubleshooting",
+            "guides/migrating-from-camunda-7/migration-tooling/version-compatibility",
+            "guides/migrating-from-camunda-7/migration-tooling/update-guide",
           ],
         },
-        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
       ],
     },
@@ -1221,6 +1231,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
+            "apis-tools/testing/test-scenario-dsl",
           ],
         },
         {
@@ -1323,8 +1334,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-
     "reference/contact",
+    "reference/legal",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1501,6 +1512,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
@@ -1695,7 +1707,33 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
-            "self-managed/concepts/rdbms-support-policy",
+          ],
+        },
+        {
+          type: "category",
+          label: "Databases",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/databases/overview",
+          },
+          items: [
+            {
+              Elasticsearch: [
+                {
+                  Privileges: [
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                  ],
+                },
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
           ],
         },
         {
@@ -1753,13 +1791,6 @@ module.exports = {
         },
         "self-managed/operational-guides/data-purge",
         {
-          Privileges: [
-            "self-managed/concepts/elasticsearch-privileges",
-            "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/opensearch-privileges",
-          ],
-        },
-        {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
       ],
@@ -1790,6 +1821,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code",
                   ],
                 },
                 {
