@@ -160,6 +160,11 @@ Process instances with active joining parallel gateways cannot currently be migr
 
 The history migration has the following limitations.
 
+### General
+
+- To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
+  - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
+
 ### Process instance
 
 - Process instance migration doesn't populate the `parentElementInstanceKey` and `tree` fields.
