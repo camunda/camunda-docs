@@ -1,4 +1,4 @@
-# Cache the results of Lychee if ran locally in order to minimise the chance of rate limiting
+# Cache the results of Lychee if ran locally in order to minimize the chance of rate limiting
 cache = true
 # Ignore all private link (such as localhost) to avoid errors
 exclude_all_private = true
