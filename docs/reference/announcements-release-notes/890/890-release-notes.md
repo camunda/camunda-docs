@@ -41,15 +41,30 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 <!-- https://github.com/camunda/product-hub/issues/3065 -->
 
-Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants. With this enhancement, you can safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state. This unlocks more flexible, agent-driven orchestration and faster iteration on live automations.
+Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+
+With this enhancement, you can:
+
+- Safely migrate running instances.
+- Update AI agent flows.
+- Modernize process definitions without losing execution state.
+
+This unlocks more flexible, agent-driven orchestration and faster iteration on live automations.
 
 ### Database and data storage
 
 <!-- https://github.com/camunda/product-hub/issues/3025 -->
 
-Camunda 8 now officially supports Amazon Aurora as a secondary data store for orchestration clusters, in addition to existing options. Customers can use Aurora PostgreSQL - compatible with PostgreSQL versions 14 through 17 - for secure, high-performance, cloud-native deployments.
+Camunda 8 now supports Amazon Aurora as a secondary data store for orchestration clusters, in addition to existing options.
 
-This enables seamless AWS integration, advanced authentication (IAM/IRSA), production-grade HA and failover, and alignment with DBA best practices. Helm charts and manual installation guides are updated with tested configurations and step-by-step references for Aurora, reducing operational complexity and accelerating adoption for AWS-centric organizations.
+- Supports Aurora PostgreSQL (compatible with PostgreSQL 14–17).
+- Designed for secure, high-performance, cloud-native deployments.
+- Seamless integration with AWS features, including:
+  - IAM / IRSA authentication.
+  - High availability and failover.
+  - Alignment with DBA best practices.
+
+Helm charts and manual installation guides now include tested configurations and step-by-step references for Aurora, reducing operational complexity and accelerating adoption for AWS-centric organizations.
 
 ### Modeler
 
@@ -57,10 +72,14 @@ This enables seamless AWS integration, advanced authentication (IAM/IRSA), produ
 
 <!-- https://github.com/camunda/product-hub/issues/2970 -->
 
-You can now manage your Camunda connections directly within Desktop Modeler:
+You can now manage Camunda connections directly in Desktop Modeler:
 
-- Connection management: Add, edit, delete, and save multiple Camunda connections, keeping credentials and settings securely stored yet easily accessible within the Modeler.
-- Streamlined deployment workflow: Deploy to saved connections, select a target Orchestration Cluster, or add a new one as needed.
+- Add, edit, delete, and save multiple connections.
+- Securely store credentials and connection settings.
+- Deploy directly to saved connections.
+- Select an existing Orchestration Cluster or add a new one during deployment.
+
+This streamlines the deployment workflow and reduces setup friction.
 
 #### Web Modeler
 
@@ -68,17 +87,33 @@ You can now manage your Camunda connections directly within Desktop Modeler:
 
 You can now create, discover, and apply templates for more BPMN event types, including message, signal, and timer, directly within the element template editor.
 
-Global event templates are reusable across projects, allowing teams to standardize event configurations, such as company-wide message structures or event names, and ensure consistency in process modeling.
+You can also create global event templates that:
+
+- Are reusable across projects.
+- Standardize event configurations (for example, message names or payload structures).
+- Help ensure consistency across teams and models.
 
 ### Orchestration Cluster
 
 <!-- https://github.com/camunda/product-hub/issues/2626 -->
 
-This release lets you migrate active instances from legacy job-based user tasks to modern, engine-managed Camunda User Tasks through both the API and the Operate UI as part of process instance migration.
+You can now migrate active instances from legacy job-based user tasks to modern, engine-managed Camunda User Tasks through both the API and the Operate UI as part of process instance migration.
 
-With this capability, you can standardize on the Orchestration Cluster APIs and the recommended user task type ahead of the removal of job-based user task querying and management from the consolidated API.
+This lets you:
+
+- Standardize on the Orchestration Cluster APIs.
+- Adopt the recommended user task type.
+- Prepare for the removal of job-based user task querying and management from the consolidated API.
 
 ### Self-Managed
+
+<!-- https://github.com/camunda/product-hub/issues/2586 -->
+
+Camunda 8 now introduces configuration-based global user task listeners for Self-Managed deployments.
+
+Administrators can define cluster-wide listeners using configuration files or environment variables, ensuring they are applied consistently from cluster startup and preserved across backup and restore operations.
+
+All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
 
 #### Camunda 8 Run
 
@@ -88,9 +123,16 @@ Camunda 8 Run is now easier to get started with. The CLI includes a helpful usag
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
 
-Besides, Camunda 8 Run now ships with H2 as the default secondary data storage, enabling an easier and lighter local development experience. This update reduces installation complexity and memory usage, allowing developers to validate processes in a fully functional stack without managing an external database.
+In addition, Camunda 8 Run now ships with H2 as the default secondary data store, providing:
 
-On this matter, comprehensive documentation has been introduced to guide developers through installing Camunda 8 Run with H2 as the default secondary storage. It includes detailed instructions for seamlessly switching from H2 to Elasticsearch or OpenSearch as a secondary data store, ensuring teams can adapt storage solutions with ease.
+- A lighter, simpler local development experience.
+- Lower memory usage.
+- A fully functional stack without requiring an external database.
+
+New documentation walks you through:
+
+- Installing Camunda 8 Run with H2 as the default secondary storage.
+- Seamlessly switching from H2 to Elasticsearch or OpenSearch when needed.
 
 #### Helm
 
@@ -98,7 +140,13 @@ On this matter, comprehensive documentation has been introduced to guide develop
 
 Camunda 8 Helm charts now support RDBMS as fully integrated secondary storage options for orchestration clusters, providing a first-class alternative to Elasticsearch and OpenSearch.
 
-Administrators can configure RDBMS connections (including advanced authentication and custom JDBC drivers) directly in `values.yaml` for production deployments. This lets enterprises run Camunda 8 on familiar, enterprise-managed RDBMS technology aligned with organizational security, backup, and compliance policies.
+With this update, administrators can:
+
+- Use RDBMS as an alternative to Elasticsearch or OpenSearch.
+- Configure database connections directly in `values.yaml`.
+- Enable advanced authentication and custom JDBC drivers.
+
+This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS infrastructure aligned with existing security, backup, and compliance requirements.
 
 ## 8.9.0-alpha2
 
