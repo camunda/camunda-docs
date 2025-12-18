@@ -478,5 +478,5 @@ Ensure your container runtime has enough resources allocated (4+ CPU cores, 8GB+
 
 - [Getting started guide](/guides/getting-started-orchestrate-human-tasks.md): Deploy your first process
 - [Camunda APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): Explore the REST APIs
-- [Production Helm deployment](/self-managed/deployment/helm/install/install.md): Learn more about Helm chart configuration for production
+- [Production Helm deployment](/self-managed/deployment/helm/install/production/index.md): Learn more about Helm chart configuration for production
 - [Cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md): Deploy to cloud platforms like AWS, Azure, or GCP
