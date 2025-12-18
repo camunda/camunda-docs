@@ -43,16 +43,6 @@ These release notes identify the main new features included in the 8.9 minor rel
 
 Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants. With this enhancement, you can safely migrate running instances, update AI agent flows, and modernize process definitions without losing execution state. This unlocks more flexible, agent-driven orchestration and faster iteration on live automations.
 
-#### A2A Client connectors
-
-<!-- https://github.com/camunda/product-hub/issues/2924 -->
-
-Camunda agentic orchestration now supports multi-agent collaboration scenarios using the A2A protocol. The Camunda A2A Client suite of connectors includes:
-
-- An A2A outbound connector for calling external agents.
-- A polling intermediate catch event connector that polls for completion or progress of external agent A2A tasks.
-- A webhook intermediate catch event connector that receives completion or progress updates for external agent A2A tasks.
-
 ### Database and data storage
 
 <!-- https://github.com/camunda/product-hub/issues/3025 -->
