@@ -230,10 +230,6 @@ AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and is expected
 
 In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
 
-:::note
-PostgreSQL-compatible managed services (including AWS Aurora PostgreSQL) are not tested separately. Compatibility is expected to be provided by the service vendor.
-:::
-
 To use the AWS JDBC wrapper, configure the JDBC URL as follows:
 
 ```yaml
@@ -261,4 +257,5 @@ camunda:
         username: camunda
 ```
 
-Ensure the required AWS JDBC wrapper JAR is available to the Camunda runtime when using this configuration.
+The AWS JDBC wrapper JAR is shipped with the Camunda distribution, alongside most of the other JDBC drivers. There is
+no need to provide it separately.
