@@ -34,7 +34,7 @@ Camunda supports **PostgreSQL as a database engine**, not specific managed servi
 
 This means:
 
-- Any PostgreSQL-compatible managed service (for example, Azure Database for PostgreSQL or AWS Aurora PostgreSQL) is expected to work.
+- Any PostgreSQL-compatible managed service (for example, Azure Database for PostgreSQL) is expected to work.
 - Camunda does not test or certify individual managed service implementations.
 - Compatibility and correct behavior of the managed service itself are the responsibility of the service provider.
 
