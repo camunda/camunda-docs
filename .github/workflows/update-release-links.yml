@@ -56,7 +56,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.update-links.outputs.changes_detected == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ steps.generate_token.outputs.token }}
           commit-message: "docs: update release links in release notes"

@@ -106,7 +106,7 @@ The packaging of a process solution is the same with Camunda 7 and Camunda 8. Yo
 Process solution definition is taken from [Practical Process Automation](https://processautomationbook.com/).
 :::
 
-You can find a complete Java Spring Boot example, showing the Camunda 7 process solution alongside the comparable Camunda 8 process solution in the [Camunda 7 to Camunda 8 migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration/tree/main/example).
+You can find a complete Java Spring Boot example, showing the Camunda 7 process solution alongside the comparable Camunda 8 process solution in the [Camunda 7 to Camunda 8 migration example](https://github.com/camunda-community-hub/camunda-7-to-8-migration).
 
 ## Programming model
 

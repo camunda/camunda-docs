@@ -34,7 +34,6 @@ module.exports = {
             id: "guides/migrating-from-camunda-7/data-migrator/index",
           },
           items: [
-            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
             "guides/migrating-from-camunda-7/data-migrator/install",
             "guides/migrating-from-camunda-7/data-migrator/runtime",
             "guides/migrating-from-camunda-7/data-migrator/history",
@@ -54,6 +53,8 @@ module.exports = {
             "guides/migrating-from-camunda-7/data-migrator/troubleshooting",
           ],
         },
+        "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
+        "guides/migrating-from-camunda-7/data-migrator/update-guide",
         "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
       ],
@@ -1221,6 +1222,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
+            "apis-tools/testing/test-scenario-dsl",
           ],
         },
         {
@@ -1323,8 +1325,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-
     "reference/contact",
+    "reference/legal",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1691,7 +1693,33 @@ module.exports = {
               ],
             },
             "self-managed/concepts/secondary-storage/managing-secondary-storage",
-            "self-managed/concepts/rdbms-support-policy",
+          ],
+        },
+        {
+          type: "category",
+          label: "Databases",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/databases/overview",
+          },
+          items: [
+            {
+              Elasticsearch: [
+                {
+                  Privileges: [
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                  ],
+                },
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
           ],
         },
         {
@@ -1748,13 +1776,6 @@ module.exports = {
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Privileges: [
-            "self-managed/concepts/elasticsearch-privileges",
-            "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/opensearch-privileges",
-          ],
-        },
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
