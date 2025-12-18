@@ -106,18 +106,17 @@ See the [Variables documentation](data-migrator/variables.md) for more informati
 Code Conversion is now officially supported by Camunda. The code repository and package names have changed.
 
 - Repository location
-  - **0.1.x**: `camunda-community-hub/camunda-7-to-8-code-conversion`
-  - **0.2.0**: `camunda/camunda-7-to-8-migration-tooling`
+  - **Old**: `camunda-community-hub/camunda-7-to-8-code-conversion`
+  - **New**: `camunda/camunda-7-to-8-migration-tooling`
 - Package names
-  - **0.1.x**: `org.camunda.migration.rewrite.*`
-  - **0.2.0**: `io.camunda.migration.code.*`
+  - **Old**: `org.camunda.migration.rewrite.*`
+  - **New**: `io.camunda.migration.code.*`
 - Maven module names
-  - **Parent Module**:
-    - **0.1.x**: `org.camunda.community:camunda-7-to-8-rewrite-recipes-root`
-    - **0.2.0**: `io.camunda:camunda-7-to-8-code-conversion-parent`
-  - **Recipes Module**:
-    - **0.1.x**: `org.camunda.community:camunda-7-to-8-rewrite-recipes`
-    - **0.2.0**: `io.camunda:camunda-7-to-8-code-conversion-recipes`
+  - **Old**: `org.camunda.community:camunda-7-to-8-rewrite-recipes`
+  - **New**: `io.camunda:camunda-7-to-8-code-conversion-recipes`
+- Documentation location
+  - **Old**: `https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/`
+  - **New**: `https://camunda.github.io/camunda-7-to-8-migration-tooling/`
 
 All artifacts now use the `io.camunda` groupId instead of `org.camunda.community`.
 
@@ -126,13 +125,13 @@ All artifacts now use the `io.camunda` groupId instead of `org.camunda.community
 If you're using OpenRewrite recipes in your project, update your dependencies:
 
 ```xml
-<!-- 0.1.x -->
+<!-- OLD -->
 <dependency>
   <groupId>org.camunda.community</groupId>
   <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
 </dependency>
 
-<!-- 0.2.0 -->
+<!-- NEW -->
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
@@ -143,10 +142,10 @@ If you're using OpenRewrite recipes in your project, update your dependencies:
 Change all imports:
 
 ```java
-// 0.1.x
+// OLD
 import org.camunda.migration.rewrite.*;
 
-// 0.2.0
+// NEW
 import io.camunda.migration.code.*;
 ```
 
@@ -155,13 +154,9 @@ import io.camunda.migration.code.*;
 Diagram Converter is now officially supported by Camunda. The code repository location and module names have changed.
 
 - Repository location
-  - **0.1.x**: `camunda-community-hub/camunda-7-to-8-diagram-conversion`
-  - **0.2.0**: `camunda/camunda-7-to-8-migration-tooling`
-- Documentation location
-  - **0.1.x**: `https://camunda-community-hub.github.io/camunda-7-to-8-code-conversion/`
-  - **0.2.0**: `https://camunda.github.io/camunda-7-to-8-migration-tooling/`
+  - **Old**: `camunda-community-hub/camunda-7-to-8-migration-analyzer`
+  - **New**: `camunda/camunda-7-to-8-migration-tooling`
 - Maven module names
-  - **Parent Module**: `io.camunda:camunda-7-to-8-diagram-converter-parent`
   - **Core Module**: `io.camunda:camunda-7-to-8-diagram-converter-core`
   - **Web Application**: `io.camunda:camunda-7-to-8-diagram-converter-webapp`
   - **CLI**: `io.camunda:camunda-7-to-8-diagram-converter-cli`
@@ -173,13 +168,13 @@ All artifacts now use the `io.camunda` groupId.
 If you're embedding the Diagram Converter as a library, update your dependencies:
 
 ```xml
-<!-- 0.1.x -->
+<!-- OLD -->
 <dependency>
   <groupId>org.camunda.community.migration</groupId>
   <artifactId>camunda-7-to-8-migration-analyzer-core</artifactId>
 </dependency>
 
-<!-- 0.2.0 -->
+<!-- NEW -->
 <dependency>
   <groupId>io.camunda</groupId>
   <artifactId>camunda-7-to-8-diagram-converter-core</artifactId>
