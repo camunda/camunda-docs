@@ -234,4 +234,4 @@ If you are using AWS Aurora PostgreSQL as your relational database, you can conf
 
 Optionally, Camunda also supports the AWS JDBC wrapper driver, which provides additional features such as improved failover handling and IAM-based authentication.
 
-For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../concepts/databases/relational-db/usage-with-aws-aurora.md).
+For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../../../concepts/databases/relational-db/usage-with-aws-aurora.md).
