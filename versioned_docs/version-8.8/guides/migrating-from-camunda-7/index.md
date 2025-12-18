@@ -20,10 +20,6 @@ It is important to understand that **Camunda 8 is not a drop-in replacement for 
 
 It is not sufficient to exchange a library; you might have to adjust your BPMN models, refactor code, and probably also re-architect your solution. This effort greatly depends on how your existing Camunda 7 solution is built. This guide dives deeper into all the aspects involved.
 
-:::note
-This guide covers [migration tooling](migration-tooling/index.md) in development for Camunda 8.8 that might not be complete at the time of reading.
-:::
-
 ## What you will learn
 
 This guide covers the following main aspects involved in migrating from Camunda 7 to Camunda 8.

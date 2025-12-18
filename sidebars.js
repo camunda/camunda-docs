@@ -32,6 +32,8 @@ module.exports = {
             id: "guides/migrating-from-camunda-7/migration-tooling/index",
           },
           items: [
+            "guides/migrating-from-camunda-7/migration-tooling/diagram-converter",
+            "guides/migrating-from-camunda-7/migration-tooling/code-conversion",
             {
               type: "category",
               label: "Data Migrator",
@@ -59,7 +61,6 @@ module.exports = {
                 "guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting",
               ],
             },
-            "guides/migrating-from-camunda-7/migration-tooling/code-conversion",
             "guides/migrating-from-camunda-7/migration-tooling/version-compatibility",
             "guides/migrating-from-camunda-7/migration-tooling/update-guide",
           ],

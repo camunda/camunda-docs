@@ -452,13 +452,13 @@ Use the Data Migrator to copy running process instances from Camunda 7 to Camund
 
 <p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/data-migrator" class="link-arrow">Data Migrator</a></p>
 
-### Migration Analyzer & Diagram Converter
+### Diagram Converter
 
-The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+The Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
 
 It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/diagram-converter" class="link-arrow">Diagram Converter</a></p>
 
 ### Code conversion
 
