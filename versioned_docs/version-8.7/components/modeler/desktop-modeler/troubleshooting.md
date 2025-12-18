@@ -29,6 +29,12 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 %APPDATA%\camunda-modeler\logs
 ```
 
+Example:
+
+```plain
+C:\Users\Camunda\AppData\Roaming\camunda-modeler\logs
+```
+
 </TabItem>
 
 <TabItem value='macos'>

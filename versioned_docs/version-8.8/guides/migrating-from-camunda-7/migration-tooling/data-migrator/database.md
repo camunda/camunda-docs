@@ -43,3 +43,25 @@ The migrator supports migration only within the same database vendor:
 | H2 → H2                 | ✅ Supported     |
 | PostgreSQL → Oracle     | ❌ Not supported |
 | Oracle → PostgreSQL     | ❌ Not supported |
+
+## Dropping the migration mapping schema
+
+The migrator uses the `{prefix}MIGRATION_MAPPING` table to keep track of instances.
+
+To drop this table after the migration is complete, use `--drop-schema` when starting the migrator. This will drop the migration mapping schema on shutdown if the migration was successful (no entities were skipped):
+
+```bash
+# Migrate and drop the migration mapping schema on shutdown if migration was successful
+./start.sh --runtime --drop-schema
+```
+
+To drop the table regardless of the migration status, use `--force` in combination with `--drop-schema`. This will perform the drop in all cases:
+
+```bash
+# Migrate and force drop the migration mapping schema on shutdown
+./start.sh --runtime --drop-schema --force
+```
+
+:::warning
+Using `--force` can lead to data loss. Use with caution.
+:::
