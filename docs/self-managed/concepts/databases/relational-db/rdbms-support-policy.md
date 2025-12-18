@@ -44,6 +44,11 @@ If a managed service is fully compatible with the supported PostgreSQL versions 
 This support model is similar to Camunda’s Kubernetes support policy: Camunda supports the underlying technology and versions, while cloud providers are responsible for ensuring their managed offerings remain compatible.
 :::
 
+## PostgreSQL-compatible managed services
+
+Camunda officially supports PostgreSQL as listed above.  
+PostgreSQL-compatible managed services (for example, AWS Aurora PostgreSQL or Azure Database for PostgreSQL) are expected to work because
+
 ## New version support
 
 New database versions are added based on the following criteria:

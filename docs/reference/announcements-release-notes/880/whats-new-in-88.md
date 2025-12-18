@@ -249,7 +249,7 @@ In Camunda 8.8, Orchestration Cluster [Identity](/components/identity/identity-i
 
 ### Tenant interceptors
 
-Tenant interceptors are **not supported in Camunda 8.8**.  
+Tenant interceptors are **not supported in Camunda 8.8**.
 If you are using tenant interceptors in Camunda 8.7, you must migrate to the new Orchestration Cluster Identity [tenant management](/components/identity/tenant.md).
 
 Administrators must:
@@ -438,15 +438,15 @@ Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda
     <td>**Description**</td>
 </tr>
 <tr>
-    <td>[Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)</td>
+    <td>[Data Migrator](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/index.md)</td>
     <td>Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.</td>
 </tr>
 <tr>
-    <td>[Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)</td>
+    <td>[Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md)</td>
     <td>Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.</td>
 </tr>
 <tr>
-    <td>[Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)</td>
+    <td>[Code Conversion](/guides/migrating-from-camunda-7/migration-tooling/code-conversion.md)</td>
     <td>Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.</td>
 </tr>
 </table>
