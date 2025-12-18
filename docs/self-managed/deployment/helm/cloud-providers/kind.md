@@ -25,7 +25,7 @@ You can choose from two deployment modes:
 | Mode          | Access                        | Requirements                    | Use case                              |
 | ------------- | ----------------------------- | ------------------------------- | ------------------------------------- |
 | **Domain**    | `https://camunda.example.com` | mkcert, hosts file modification | Full TLS setup, realistic environment |
-| **No-domain** | `localhost` via port-forward  | None                            | Quick setup, minimal configuration    |
+| **No-domain** | `localhost` via port-forward  | hosts file modification         | Quick setup, minimal configuration    |
 
 ### How domain mode works
 
@@ -44,17 +44,17 @@ mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-store
 
 ## Prerequisites
 
-Before you begin, ensure you've installed:
+Before you begin, you'll need:
 
-- Docker ([Docker Desktop](https://www.docker.com/products/docker-desktop) or Docker Engine) with at least 4 CPU cores and 8 GB RAM available
+- Terminal access with administrator/sudo privileges for modifying the hosts file (`/etc/hosts`)
+- A container runtime with at least 4 CPU cores and 8 GB RAM available:
+  - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - [Docker Engine](https://docs.docker.com/engine/install/)
+  - [Podman](https://podman.io/docs/installation)
 - [kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)
 - [Helm](https://helm.sh/docs/intro/install/)
-
-If you're deploying with **domain mode**, you'll also need:
-
-- Terminal access with administrator/sudo privileges for modifying `/etc/hosts`
-- [mkcert](https://github.com/FiloSottile/mkcert#installation)
+- [mkcert](https://github.com/FiloSottile/mkcert#installation) (Domain mode only)
 
 :::tip
 You can also use [asdf](https://asdf-vm.com/) to install the tools, with the versions defined in [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/.tool-versions)
@@ -95,7 +95,7 @@ To clean up, use `make domain.clean` or `make no-domain.clean` respectively.
 
 Run `make help` to see all available targets, or consult the [Makefile](https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local/local/kubernetes/kind-single-region/Makefile) directly.
 
-The following sections detail each step if you prefer to run them manually or want to understand the process.
+The following sections detail each step if you prefer to run them manually or want to understand the process. If you've used the quick setup commands above, you can skip ahead to [Accessing Camunda 8](#accessing-camunda-8).
 :::
 
 ## Create the Kubernetes cluster
@@ -270,9 +270,9 @@ Add (or update) the following entry in your `/etc/hosts` file:
 The hostname `camunda-keycloak` is derived from the Helm release name (`camunda`) followed by `-keycloak`. If you use a different release name, adjust accordingly (e.g., `my-release-keycloak`).
 :::
 
-After adding this entry, you'll be able to reach Keycloak at `http://camunda-keycloak:18080/auth`.
+After adding this entry and deploying Camunda 8 in the next step, you'll be able to reach Keycloak at `http://camunda-keycloak:18080/auth`.
 
-**Why port `18080`?** We forward container port `8080` to a non-privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using port 8080.
+**Why port `18080`?** We forward container port `18080` to a non-privileged local port (`18080`) to avoid requiring elevated privileges and to reduce conflicts with other processes using port 18080.
 
 ### Deploy Camunda 8
 
@@ -364,19 +364,19 @@ Now, you can reach services directly, for example:
 You can still use localhost ports if you prefer traditional port-forwarding. Stop kubefwd with **Ctrl+C** when finished. Be aware kubefwd modifies your `/etc/hosts` temporarily, then restores the file when it exits.
 :::
 
-| Component            | URL                                       |
-| -------------------- | ----------------------------------------- |
-| Zeebe Gateway (gRPC) | localhost:26500                           |
-| Zeebe Gateway (HTTP) | http://localhost:8080/                    |
-| Operate              | http://localhost:8080/operate             |
-| Tasklist             | http://localhost:8080/tasklist            |
-| Identity             | http://localhost:8080/identity            |
-| Management Identity  | http://localhost:18081/managementidentity |
-| Optimize             | http://localhost:8083                     |
-| Web Modeler          | http://localhost:8070                     |
-| Console              | http://localhost:8087                     |
-| Connectors           | http://localhost:8085                     |
-| Keycloak             | http://localhost:18080                    |
+| Component            | URL                                |
+| -------------------- | ---------------------------------- |
+| Zeebe Gateway (gRPC) | localhost:26500                    |
+| Zeebe Gateway (HTTP) | http://localhost:8080/             |
+| Operate              | http://localhost:8080/operate      |
+| Tasklist             | http://localhost:8080/tasklist     |
+| Identity             | http://localhost:8080/identity     |
+| Management Identity  | http://localhost:8085              |
+| Optimize             | http://localhost:8083              |
+| Web Modeler          | http://localhost:8070              |
+| Console              | http://localhost:8087              |
+| Connectors           | http://localhost:8088              |
+| Keycloak             | http://camunda-keycloak:18080/auth |
 
 :::tip Connecting to the workflow engine
 To interact with the Camunda workflow engine via Zeebe Gateway using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) or a local client/worker, connect to `localhost:26500` (gRPC) or `http://localhost:8080` (REST).
@@ -403,15 +403,27 @@ https://github.com/camunda/camunda-deployment-references/blob/feature/kind-local
 This will destroy all data of Camunda 8 in the local development cluster.
 :::
 
-```bash
-# Uninstall Camunda
-helm uninstall camunda -n camunda
+If you used the Makefile for setup, you can use the corresponding clean command:
 
+```bash
+# Domain mode
+make domain.clean
+
+# No-domain mode
+make no-domain.clean
+```
+
+Alternatively, you can clean up manually:
+
+```bash
 # Delete cluster
 kind delete cluster --name camunda-platform-local
 
 # (domain mode) Remove hosts entries (requires sudo)
 sudo sed -i '/camunda.example.com/d' /etc/hosts
+
+# (no-domain mode) Remove Keycloak hosts entry (requires sudo)
+sudo sed -i '/camunda-keycloak/d' /etc/hosts
 
 # (domain mode) Clean certificates
 rm -rf .certs
@@ -456,11 +468,15 @@ kubectl get ingress -n camunda
 
 ### Insufficient resources
 
-Ensure Docker has enough resources allocated (4+ CPU cores, 8GB+ RAM). Check Docker Desktop settings or `/etc/docker/daemon.json`.
+Ensure your container runtime has enough resources allocated (4+ CPU cores, 8GB+ RAM).
+
+- **Docker Desktop**: Check the [Resources settings](https://docs.docker.com/desktop/settings-and-maintenance/settings/#resources)
+- **Docker Engine**: Configure the [Docker daemon](https://docs.docker.com/engine/daemon/) (configuration varies by OS)
+- **Podman**: Resources are managed by your system; ensure sufficient resources are available
 
 ## Next steps
 
 - [Getting started guide](/guides/getting-started-orchestrate-human-tasks.md): Deploy your first process
 - [Camunda APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md): Explore the REST APIs
-- [Helm deployment guide](/self-managed/deployment/helm/install/quick-install.md): Learn more about Helm chart configuration
-- [Production deployment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md): Deploy to a production-ready cluster
+- [Production Helm deployment](/self-managed/deployment/helm/install/install.md): Learn more about Helm chart configuration for production
+- [Cloud provider guides](/self-managed/deployment/helm/cloud-providers/index.md): Deploy to cloud platforms like AWS, Azure, or GCP
