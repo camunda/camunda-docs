@@ -16,6 +16,11 @@ You can configure secondary storage using Helm charts, Docker Compose, or manual
 
 Camunda uses the `data.secondary-storage` configuration to define which database backend supports advanced web applications and APIs.
 
+:::note
+For the latest list of supported relational databases and versions, see the  
+[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+:::
+
 <Tabs groupId="configuration" defaultValue="helm" queryString values={[
 {label: 'Helm', value: 'helm' },
 {label: 'Docker Compose', value: 'docker-compose' },
@@ -36,7 +41,7 @@ data:
       password:
 ```
 
-You can switch to Elasticsearch by using:
+To configure Elasticsearch instead:
 
 ```yaml
 data:
@@ -46,7 +51,7 @@ data:
       url: http://elasticsearch:9200/
 ```
 
-To explicitly disable secondary storage (for example, when running only the Zeebe engine), you can set:
+To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 
 ```yaml
 global:
@@ -56,6 +61,7 @@ global:
 When this flag is set, all secondary-storage-dependent components are automatically disabled.
 
 </TabItem>
+
 <TabItem value="docker-compose">
 
 If you’re using Docker Compose, configure your environment variables within the relevant service definition:
@@ -72,8 +78,8 @@ For Elasticsearch:
 
 ```yaml
 environment:
-  - CAMUNDA_DATA_SECONDSTORAGE_TYPE=elasticsearch
-  - CAMUNDA_DATA_SECONDSTORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
+  - CAMUNDA_DATA_SECONDARYSTORAGE_TYPE=elasticsearch
+  - CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_URL=http://elasticsearch:9200
 ```
 
 To disable secondary storage:
@@ -84,6 +90,7 @@ environment:
 ```
 
 </TabItem>
+
 <TabItem value="manual">
 
 In Self-Managed or Camunda 8 Run deployments, you can also configure storage directly in the `application.yaml` file:
@@ -109,19 +116,21 @@ data:
 ```
 
 </TabItem>
+
 </Tabs>
 
 ## Choosing a storage backend
 
-| Scenario                                  | Recommended backend                             | Reason                                                        |
-| :---------------------------------------- | :---------------------------------------------- | :------------------------------------------------------------ |
-| Local testing or Camunda 8 Run quickstart | H2                                              | Fast, lightweight, and runs entirely in memory or file-based. |
-| Production workloads                      | Elasticsearch or supported RDBMS                | Scalable and persistent; designed for concurrent queries.     |
-| Debugging and troubleshooting             | H2 or PostgreSQL (for debugging and inspection) | Easier to inspect and visualize data.                         |
+| Scenario                                  | Recommended backend                | Reason                                                        |
+| :---------------------------------------- | :--------------------------------- | :------------------------------------------------------------ |
+| Local testing or Camunda 8 Run quickstart | H2                                 | Fast, lightweight, and runs entirely in memory or file-based. |
+| Production workloads                      | Elasticsearch or a supported RDBMS | Scalable and persistent; designed for concurrent queries.     |
+| Debugging and troubleshooting             | H2 or PostgreSQL                   | Easier to inspect and visualize data.                         |
 
 :::note
 H2 is suitable for testing and local development only.  
-For production use, Operate and Tasklist require a persistent secondary storage backend such as an RDBMS or Elasticsearch.
+For production use, Operate and Tasklist require a persistent secondary storage backend such as a supported RDBMS or Elasticsearch.  
+Consult the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) when choosing a relational database.
 :::
 
 ## Run without secondary storage
@@ -134,4 +143,4 @@ In this mode:
 - The Zeebe engine and primary storage remain active for process execution.
 - This configuration is best suited for local development or minimal-resource environments.
 
-See [Run without secondary storage](./no-secondary-storage.md) for configuration examples and limitations.
+See [run without secondary storage](./no-secondary-storage.md) for configuration examples and limitations.
