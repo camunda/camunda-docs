@@ -9,7 +9,7 @@ Mapping rules are used to dynamically manage access control by [connecting your 
 
 ## Support for mapping rules in SaaS and Self-Managed
 
-In **Camunda 8 SaaS**, mapping rules are not configurable. They are automatically applied based on your organization's setup.
+In **Camunda 8 SaaS**, mapping rules are not supported.
 
 In **Camunda 8 Self-Managed**, you may need to configure mapping rules in two components:
 
