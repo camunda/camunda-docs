@@ -52,14 +52,14 @@ You can manually or automatically update a cluster to a new Camunda 8 version.
 
 ### Minor updates
 
-If you update a cluster to another minor version, you cannot immediately update the cluster again until a 24-hour period has elapsed. This ensures there are no issues that could arise from immediately upgrading between multiple minor versions.
+If you update a cluster to another minor version, you cannot immediately update the cluster again until a 24-hour period has elapsed. This ensures all background processes have completed and the cluster is ready for further updates.
 
 This does not apply when upgrading between generations of the same minor version.
 
-| Example scenario           | Limitation applied?                                        |
+| Example scenario           | Time limit applied?                                        |
 | :------------------------- | :--------------------------------------------------------- |
 | `8.8 gen22` to `8.9 gen1`  | 24 hours required before the cluster can be updated again. |
-| `8.8 gen22` to `8.8 gen23` | No limitation applies.                                     |
+| `8.8 gen22` to `8.8 gen23` | No time limit applied.                                     |
 
 :::note
 Clusters must be healthy before an update can be performed.
