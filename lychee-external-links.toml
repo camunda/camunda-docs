@@ -21,5 +21,6 @@ exclude = [
   "^http(s)?://optimize.myorg",
   "^http(s)?://identity:8084",
   "^http(s)?://keycloak:8080",
+  "^http(s)?://keycloak:18080",
   "^http(s)?://camunda-platform-keycloak",
 ]
