@@ -56,10 +56,10 @@ If you update a cluster to another minor version, you cannot immediately update 
 
 This does not apply when upgrading between generations of the same minor version.
 
-| Example scenario           | Limitation applied?                                                     |
-| :------------------------- | :---------------------------------------------------------------------- |
-| `8.8 gen22` to `8.9 gen1`  | 24 hours required before another minor version update can be performed. |
-| `8.8 gen22` to `8.8 gen23` | No limitation applies.                                                  |
+| Example scenario           | Limitation applied?                                        |
+| :------------------------- | :--------------------------------------------------------- |
+| `8.8 gen22` to `8.9 gen1`  | 24 hours required before the cluster can be updated again. |
+| `8.8 gen22` to `8.8 gen23` | No limitation applies.                                     |
 
 :::note
 Clusters must be healthy before an update can be performed.
