@@ -7,9 +7,10 @@ description: "How the Data Migrator transforms Camunda 7 variables to Camunda 8.
 
 The Data Migrator automatically handles the transformation of Camunda 7 variables to Camunda 8 compatible formats during migration.
 
-:::info
-The handling and intercepting of variables described on this page is currently only supported for the **Runtime Data Migrator**.
-:::
+Variable transformation is supported for the following migration types:
+
+- Runtime migration: process instance variables.
+- History migration: process variables, decision inputs, and decision outputs.
 
 ## About variables
 
@@ -17,9 +18,9 @@ This section documents which variable types are supported and how they are trans
 
 For complete details on Camunda 7 variable types, see the [official Camunda 7 documentation](https://docs.camunda.org/manual/latest/user-guide/process-engine/variables/#supported-variable-values).
 
-## Supported Types
+## Supported types
 
-The following table shows how different Camunda 7 variable types are handled during migration:
+The following table shows how the migrator handles different Camunda 7 variable types:
 
 | Camunda 7 Type                 | Example Value         | Migration Behavior      | Camunda 8 Result  | Interceptor Type                   |
 | ------------------------------ | --------------------- | ----------------------- | ----------------- | ---------------------------------- |
@@ -36,7 +37,7 @@ The following table shows how different Camunda 7 variable types are handled dur
 | Spin XML                       | `SpinXmlElement`      | Converted to String     | String (raw XML)  | `SpinValue`, `SerializableValue`   |
 | Java Object serialized as XML  | XML serialized object | Converted to String     | String (raw XML)  | `ObjectValue`, `SerializableValue` |
 
-## Unsupported Types
+## Unsupported types
 
 When a process instance contains unsupported variable types, the migrator will:
 
@@ -58,32 +59,36 @@ Variable transformations are handled by built-in transformers that run in a spec
 
 ### Date
 
-- **Input**: Java `Date` objects from Camunda 7
-- **Output**: ISO 8601 formatted strings (`yyyy-MM-dd'T'HH:mm:ss.SSSZ`)
-  - **Example**: `2024-07-25T14:30:45.123+0200`
-- **Timezone**: Uses the JVM's default timezone setting
+- Input: Java `Date` objects from Camunda 7
+- Output: ISO 8601 formatted strings (`yyyy-MM-dd'T'HH:mm:ss.SSSZ`)
+- Example: `2024-07-25T14:30:45.123+0200`
+- Timezone: Uses the JVM's default timezone setting
 
 ### JSON
 
-JSON variables are handled differently depending on their origin:
+JSON variables are handled differently depending on their origin and migration mode:
 
-**Spin JSON Variables** and **JSON Object Variables** (serialized with `application/json`):
+Spin JSON Variables and JSON Object Variables (serialized with `application/json`):
 
-- Deserialized into Map structures for Camunda 8
-- Maintains nested object structure
-- Example: `{"name": "John", "age": 30}` becomes a Map object
+- Runtime migration:
+  - Deserializes JSON into Map structures for Camunda 8.
+  - Preserves the nested object structure.
+  - Example: `{"name": "John", "age": 30}` becomes a Map object.
+- History migration:
+  - Preserves JSON values as raw strings.
+  - Example: `{"name": "John", "age": 30}` is stored as-is.
 
 **Invalid JSON**:
-If JSON cannot be parsed, the process instance is skipped.
+If JSON cannot be parsed during runtime migration, the migrator skips the process instance.
 
 ### XML
 
-**Spin XML Variables** and **XML Object Variables** (serialized with `application/xml`):
+Spin XML Variables and XML Object Variables (serialized with `application/xml`):
 
 - Raw XML string content is preserved
 - No parsing or transformation applied
 
-### Name Compatibility
+### Name compatibility
 
 The migrator handles variable names that are invalid in FEEL expressions:
 
@@ -94,7 +99,7 @@ The migrator handles variable names that are invalid in FEEL expressions:
 
 These variables are migrated as-is, but may require special handling in FEEL expressions using bracket notation.
 
-## Disabling Built-in Interceptors
+## Disabling built-in interceptors
 
 You can disable any built-in transformer or validator using the `enabled` configuration property:
 
@@ -108,15 +113,15 @@ camunda:
         enabled: false
 ```
 
-You can find a complete list of built-in interceptors in the [property reference](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#built-in-interceptors).
+You can find a complete list of built-in interceptors in the [property reference](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties.md#built-in-interceptors).
 
-## Custom Transformation
+## Custom transformation
 
 The `VariableInterceptor` interface allows you to define custom logic that executes whenever a variable is accessed or modified during migration. This is useful for auditing, transforming, or validating variable values.
 
 Custom interceptors are enabled by default and can be restricted to specific variable types.
 
-### How to Implement a `VariableInterceptor`
+### How to implement a `VariableInterceptor`
 
 1. Create a new Maven project with the provided `pom.xml` structure
 2. Add a dependency on `camunda-7-to-8-data-migrator-core` (scope: `provided`)
@@ -125,7 +130,7 @@ Custom interceptors are enabled by default and can be restricted to specific var
 5. Package as JAR and deploy to the `configuration/userlib` folder
 6. Configure in `configuration/application.yml`
 
-### Creating a Custom Variable Interceptor
+### Creating a custom variable interceptor
 
 Here's an example of a custom variable interceptor which is only called for string variables:
 
@@ -141,14 +146,24 @@ public class MyVariableInterceptor implements VariableInterceptor {
     }
 
     @Override
-    public void execute(VariableInvocation invocation) {
-      // ...
+    public void execute(VariableContext context) {
+      // Access the variable name
+      String name = context.getName();
+
+      // Get the Camunda 7 value
+      Object c7Value = context.getC7Value();
+
+      // Get the Camunda 7 entity
+      VariableInstanceEntity variableInstance = context.getEntity();
+
+      // Transform and set the Camunda 8 value
+      context.setC8Value(transformedValue);
     }
 
 }
 ```
 
-### Type Restrictions
+### Type restrictions
 
 Variable interceptors can be restricted to specific variable types using the `getTypes()` method. You can find a complete list of available variable types for restriction as subinterfaces of the `TypedValue` interface in the [JavaDoc](https://docs.camunda.org/javadoc/camunda-bpm-platform/7.24/org/camunda/bpm/engine/variable/value/TypedValue.html#:~:text=All%20Known%20Subinterfaces%3A).
 
@@ -172,7 +187,88 @@ public Set<Class<?>> getTypes() {
 }
 ```
 
-### Configuring Custom Interceptors
+### Entity type filtering
+
+In addition to filtering by variable type, interceptors can also filter by the source entity type. This is useful when you want different behavior for history/runtime process variables and decision inputs/outputs.
+
+#### Available entity types
+
+- `VariableInstanceEntity.class`: runtime process variables
+- `HistoricVariableInstanceEntity.class`: historic process variables
+- `HistoricDecisionInputInstanceEntity.class`: decision input variables
+- `HistoricDecisionOutputInstanceEntity.class`: decision output variables
+
+#### Example: process variables only
+
+```java
+public class ProcessVariableInterceptor implements VariableInterceptor {
+
+    @Override
+    public Set<Class<? extends ValueFields>> getEntityTypes() {
+        // Only handle process variables (runtime and history)
+        return Set.of(
+            VariableInstanceEntity.class,
+            HistoricVariableInstanceEntity.class
+        );
+    }
+
+    @Override
+    public void execute(VariableContext context) {
+        // This is only called for process variables
+        // not for decision inputs/outputs
+    }
+}
+```
+
+#### Example: decision variables only
+
+```java
+public class DecisionVariableInterceptor implements VariableInterceptor {
+
+    @Override
+    public Set<Class<? extends ValueFields>> getEntityTypes() {
+        // Only handle decision inputs and outputs
+        return Set.of(
+            HistoricDecisionInputInstanceEntity.class,
+            HistoricDecisionOutputInstanceEntity.class
+        );
+    }
+
+    @Override
+    public void execute(VariableContext context) {
+        // This is only called for decision variables
+    }
+}
+```
+
+#### Default behavior
+
+```java
+// Empty set = handle all entity types
+@Override
+public Set<Class<? extends ValueFields>> getEntityTypes() {
+    return Set.of();
+}
+```
+
+### Detecting migration context
+
+Variable interceptors can detect whether they are running in a runtime or history migration context:
+
+```java
+@Override
+public void execute(VariableContext context) {
+    if (context.isRuntime()) {
+        // Handle runtime migration
+        // Example: Deserialize JSON to Map
+    } else if (context.isHistory()) {
+        // Handle history migration
+        // Example: Keep JSON as string
+    }
+}
+```
+
+### Configuring custom interceptors
 
 Configure your custom interceptors in `application.yml`:
 
@@ -200,17 +296,37 @@ The `enabled` property is supported for all interceptors (both built-in and cust
 
 See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator/examples/variable-interceptor).
 
-### Execution Order
+### Execution order
 
 - Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
   - Built-in interceptors run first, followed by custom interceptors
 - In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
 
-### Error Handling
+### Error handling
 
 When variable transformation fails:
 
-- The entire process instance is skipped
-- Detailed error messages are logged with the specific variable name and error cause
-- The instance is marked for potential retry after fixing the underlying issue
-- You can use `--list-skipped` and `--retry-skipped` commands to manage failed migrations
+#### Runtime migration
+
+- The migrator skips the entire process instance.
+- Logs detailed error messages with the variable name and cause.
+- Marks the instance for potential retry after you fix the underlying issue.
+
+#### History migration
+
+- Skips only the affected variables, decision inputs, or outputs.
+- Continues migrating the parent entity.
+- Logs skipped items with detailed error information.
+
+#### Example commands
+
+```bash
+# List all skipped variables
+./start.sh --history --list-skipped HISTORY_VARIABLE
+
+# List all skipped decision instances
+./start.sh --history --list-skipped HISTORY_DECISION_INSTANCE
+
+# Retry skipped entities after fixing issues
+./start.sh --history --retry-skipped
+```
