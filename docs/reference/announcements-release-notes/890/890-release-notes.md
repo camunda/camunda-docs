@@ -37,7 +37,9 @@ These release notes identify the main new features included in the 8.9 minor rel
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--- |
 | 13 January 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.9.0-alpha3)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.9.0-alpha3)</li></ul> | -    |
 
-### Agentic orchestration
+### Process instance migration support
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3065 -->
 
@@ -51,7 +53,9 @@ With this enhancement, you can:
 
 This unlocks more flexible, agent-driven orchestration and faster iteration on live automations.
 
-### Database and data storage
+### Amazon Aurora support for Orchestration Cluster secondary storage
+
+<div class="release"><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3025 -->
 
@@ -66,9 +70,9 @@ Camunda 8 now supports Amazon Aurora as a secondary data store for orchestration
 
 Helm charts and manual installation guides now include tested configurations and step-by-step references for Aurora, reducing operational complexity and accelerating adoption for AWS-centric organizations.
 
-### Modeler
+### Manage Camunda connections in Desktop Modeler
 
-#### Desktop Modeler
+<div class="release"><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/2970 -->
 
@@ -81,7 +85,9 @@ You can now manage Camunda connections directly in Desktop Modeler:
 
 This streamlines the deployment workflow and reduces setup friction.
 
-#### Web Modeler
+### Added event templates functionality in Web Modeler
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3173 -->
 
@@ -93,7 +99,9 @@ You can also create global event templates that:
 - Standardize event configurations (for example, message names or payload structures).
 - Help ensure consistency across teams and models.
 
-### Orchestration Cluster
+### Migrate legacy job-based user tasks to engine-managed user tasks
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/2626 -->
 
@@ -105,7 +113,9 @@ This lets you:
 - Adopt the recommended user task type.
 - Prepare for the removal of job-based user task querying and management from the consolidated API.
 
-### Self-Managed
+### Added global user task listeners in Self-Managed
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/2586 -->
 
@@ -115,15 +125,23 @@ Administrators can define cluster-wide listeners using configuration files or en
 
 All user task lifecycle events emit payloads containing full variable context and metadata, enabling standardized integrations across all processes.
 
-#### Camunda 8 Run
+### Simplified Camunda 8 Run development experience
 
-<!-- https://github.com/camunda/product-hub/issues/2866, https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2866 -->
 
 Camunda 8 Run is now easier to get started with. The CLI includes a helpful usage page, clearer error messages, especially for Elasticsearch startup, and prominently displays connection properties and credential information.
 
 A revamped Java detection guided setup, log cleanup options, and better defaults for development environments (such as disk watermark thresholds) have been added. You can also start fresh using a new clean-state command, and the unified configuration file is now included and thoroughly documented.
 
-In addition, Camunda 8 Run now ships with H2 as the default secondary data store, providing:
+### H2 data storage support
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/2832, https://github.com/camunda/product-hub/issues/2656 -->
+
+Camunda 8 Run now ships with H2 as the default secondary data store, providing:
 
 - A lighter, simpler local development experience.
 - Lower memory usage.
@@ -134,7 +152,9 @@ New documentation walks you through:
 - Installing Camunda 8 Run with H2 as the default secondary storage.
 - Seamlessly switching from H2 to Elasticsearch or OpenSearch when needed.
 
-#### Helm
+### RDBMS as a secondary storage option in Helm
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects data storage">Data</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/2690 -->
 
