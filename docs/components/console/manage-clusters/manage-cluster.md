@@ -41,19 +41,37 @@ You can resume your paused cluster from the **Console** at any time.
 
 ## Update a cluster
 
-:::note
-This action cannot be undone. Updated clusters cannot be reverted to the previous version.
+:::caution
+Updating a cluster is permanent. Updated clusters cannot be reverted to the previous version.
 :::
 
-Clusters can be updated to new versions of Camunda 8 manually or automatically.
+You can manually or automatically update a cluster to a new Camunda 8 version.
 
-Clusters eligible for updates will show a button on the UI.
+- If a cluster can be updated, a **Review Update** button is shown.
+- Currently, updates do not automatically trigger backups. You can start a manual backup via the Console **Backups** tab.
 
-At this time, updates do not trigger backups, however, manual backups can be initiated through the Console Backups tab.
+### Minor updates
+
+If you update a cluster to another minor version, you cannot immediately update the cluster again until a 24-hour period has elapsed. This ensures there are no issues that could arise from immediately upgrading between multiple minor versions.
+
+This does not apply when upgrading between generations of the same minor version.
+
+| Example scenario           | Limitation applied?                                                     |
+| :------------------------- | :---------------------------------------------------------------------- |
+| `8.8 gen22` to `8.9 gen1`  | 24 hours required before another minor version update can be performed. |
+| `8.8 gen22` to `8.8 gen23` | No limitation applies.                                                  |
+
+:::note
+Clusters must be healthy before an update can be performed.
+:::
 
 ### Update a cluster manually
 
-When an update is available, an **Update** button will appear. This button is not available for clusters enrolled in [automatic updates](/components/saas/auto-updates.md).
+If an update is available, a **Review Update** button is shown.
+
+:::note
+This button is not available for clusters enrolled in [automatic updates](/components/saas/auto-updates.md).
+:::
 
 ### Automated cluster updates
 
