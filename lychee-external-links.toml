@@ -5,8 +5,13 @@ max_cache_age = "1d"
 # Ignore all private links (such as localhost) to avoid errors
 exclude_all_private = true
 
-# HTTP status code: 429 (Too Many Requests) will also be treated as a valid link if Lychee gets rate limited
-accept = ["200", "403", "429"]
+# A list of accepted status codes for valid links
+accept = [
+  "200",
+  "403",
+  "429",  # HTTP status code: 429 (Too Many Requests) will also be treated as a valid link if Lychee gets rate limited
+  "307",  # HTTP status code: 307 (Temporary Redirect) will also be treated as a valid link. Some Medium blog posts require this.
+]
 
 # Improve rate limit handling
 max_retries = 6
