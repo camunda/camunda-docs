@@ -40,7 +40,7 @@ jobs:
         with:
           fail: false
           failIfEmpty: false
-          args: -c ./lychee-external-links.toml --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
+          args: --config ./lychee-external-links.toml --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
           token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Save lychee cache

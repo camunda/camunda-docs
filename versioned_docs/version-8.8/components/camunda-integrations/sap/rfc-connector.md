@@ -7,7 +7,7 @@ description: "The SAP RFC connector is a Java Spring Boot application that runs 
 The [SAP RFC](/reference/glossary.md#rfc) [Connector](/components/connectors/introduction.md) is a [protocol and outbound connector](/components/connectors/connector-types.md).<br/>
 This connector is a Java Spring Boot application that runs as a `.war` on the SAP Business Technology Platform (BTP).
 
-It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://learning.sap.com/learning-journeys/administrating-sap-business-technology-platform/using-destinations) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
+It connects to Camunda 8 SaaS, and utilizes SAP BTP's [Destination](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/destination-service) and [Connectivity](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/what-is-sap-btp-connectivity) concepts to query a SAP system via the RFC protocol to interact with remote-enabled Function Modules and BAPIs.
 
 ## Overview
 
@@ -60,8 +60,8 @@ csap setup --for rfc \
 
 #### Manual configuration
 
-1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).  
-   The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.  
+1. Find the matching `.war` archive for the targeted Camunda 8 SaaS version on the [respective GitHub release page](https://github.com/camunda/sap-rfc-connector/releases).
+   The version follows the format `<C8 version major>.<C8 version minor>.<RFC connector version>`.
    Examples:
    - `rfc-8.6.0.war` is the RFC connector in version `0` for Camunda 8 SaaS version `8.6`
    - `rfc-8.5.1.war` is the RFC connector in version `1` for Camunda 8 SaaS version `8.5`
