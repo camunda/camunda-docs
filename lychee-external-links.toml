@@ -1,6 +1,6 @@
 # Cache the results of Lychee to minimize the chance of rate limiting
-cache = true
-max_cache_age = "1d"
+# cache = true
+# max_cache_age = "1d"
 
 # Ignore all private links (such as localhost) to avoid errors
 exclude_all_private = true
