@@ -77,7 +77,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   }
 }
 
-/* Show only Ask AI and Search on screens between 800px and 1026px */
+/* Show only Ask AI and Search on screens between 801px and 996px */
 @media screen and (min-width: 801px) and (max-width: 996px) {
   /* Hide all navbar items except search and AI button */
   .navbar__items--right
