@@ -113,7 +113,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 </div>
 <div className="release-announcement-content">
 
-#### Webhook Alerts JSON format
+#### Webhook alerts JSON format
 
 In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
 

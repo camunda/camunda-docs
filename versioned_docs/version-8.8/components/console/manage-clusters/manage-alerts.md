@@ -59,3 +59,7 @@ Webhook alerts contain a JSON body with following structure:
   ]
 }
 ```
+
+:::caution breaking change
+The JSON format was changed in 8.8.9. See [release announcements](/reference/announcements-release-notes/880/880-announcements.md#apis--tools#webhook-alerts-json-format) for more information and required actions.
+:::
