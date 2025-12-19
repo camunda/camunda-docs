@@ -28,6 +28,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --ifm-breadcrumb-padding-horizontal: 0rem;
   --kapa-button-text: #fff;
   --kapa-button-bg: #fff;
+  --kapa-button-bg: white;
   --kapa-border-gradient: linear-gradient(
     to right,
     #fc5d0d,
@@ -36,7 +37,86 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
     #ffc600,
     #ffc600
   );
-  --kapa-button-bg: white;
+}
+
+/* Show only Ask AI and Search on smaller screens */
+@media screen and (max-width: 800px) {
+  /* Hide all navbar items except search and AI button */
+  .navbar__items--right
+    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
+    display: none !important;
+  }
+
+  /* Reorder navbar items - AI button first, then search */
+  .navbar__items--right {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+  }
+
+  /* Ensure Search and AI button remain visible */
+  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
+  .navbar__items--right > .navbar__item:has(.kapa-open) {
+    display: flex !important;
+  }
+
+  /* Keep the actual buttons visible */
+  .DocSearch-Button,
+  .kapa-open {
+    display: inline-flex !important;
+  }
+
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 2rem;
+  }
+
+  /* Show Try-Free button in hamburger menu */
+  .navbar-sidebar .try-free {
+    display: inline-block !important;
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+}
+
+/* Show only Ask AI and Search on screens between 800px and 1026px */
+@media screen and (min-width: 801px) and (max-width: 996px) {
+  /* Hide all navbar items except search and AI button */
+  .navbar__items--right
+    > .navbar__item:not(:has(.DocSearch-Button)):not(:has(.kapa-open)) {
+    display: none !important;
+  }
+
+  /* Ensure Search and AI button remain visible */
+  .navbar__items--right > .navbar__item:has(.DocSearch-Button),
+  .navbar__items--right > .navbar__item:has(.kapa-open) {
+    display: flex !important;
+  }
+
+  /* Keep the actual buttons visible */
+  .DocSearch-Button,
+  .kapa-open {
+    display: inline-flex !important;
+  }
+
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 7rem;
+  }
+
+  /* Show Try-Free button in hamburger menu */
+  .navbar-sidebar .try-free {
+    display: inline-block !important;
+    color: #ffffff !important;
+    font-weight: 600;
+  }
+}
+
+/* Show only Ask AI and Search on screens between 800px and 1026px */
+@media screen and (min-width: 769px) and (max-width: 800px) {
+  /* Add some spacing between buttons */
+  .navbar__item:has(.kapa-open) {
+    margin-right: 7rem;
+  }
 }
 
 .markdown {
@@ -482,9 +562,24 @@ body {
   padding: 0.2rem 1rem;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: opacity 0.25s;
+  transition: all 0.3s ease;
   display: inline-flex;
   position: relative;
+}
+
+.kapa-open:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 12px rgba(252, 93, 13, 0.3);
+  border-color: #fc5d0d;
+}
+
+[data-theme="dark"] .kapa-open {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .kapa-open:hover {
+  box-shadow: 0px 4px 12px rgba(252, 93, 13, 0.3);
+  border-color: #fc5d0d;
 }
 
 [data-theme="dark"] .try-free {
@@ -573,6 +668,11 @@ we make it less bold compared to the search keyword */
 
 .table-of-contents__link .callout {
   display: none;
+}
+
+/* Add padding to bottom of hamburger menu to prevent cookie button overlap */
+.navbar-sidebar__items {
+  padding-bottom: 60px;
 }
 
 /* style PushFeedback widget */
@@ -801,14 +901,21 @@ h3 .badge:nth-of-type(1) {
     font-size: 0.9em;
   }
 
+  .try-free {
+    font-size: 0.9em !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
   .navbar .navbar__item {
     padding: var(--ifm-navbar-item-padding-vertical)
-      calc(0.5 * var(--ifm-navbar-item-padding-horizontal));
+      calc(0.4 * var(--ifm-navbar-item-padding-horizontal));
   }
 }
 
-@media screen and (max-width: 1124px) {
-  .navbar .navbar__title {
+@media screen and (max-width: 1200px) {
+  /* Hide Try-Free from navbar only, not from hamburger menu */
+  .navbar__items--right .try-free {
     display: none;
   }
 }
