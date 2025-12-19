@@ -109,6 +109,49 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook Alerts JSON format
+
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified so that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+
+In 8.8.9, the `processVersion` field reverts to returning an integer value representing the process version only. A new `processVersionTag` field is introduced to include the process version tag when available.
+
+**Example JSON format change**
+
+Before 8.8.9:
+
+```json
+{
+  "processVersion": "v2.1.0" // String - could be tag or number
+}
+```
+
+After 8.8.9:
+
+```json
+{
+  "processVersion": 3, // Integer - always the version number
+  "processVersionTag": "v2.1.0" // String - the version tag (if exists)
+}
+```
+
+**Action required**
+
+You should adapt any integrations you have created for 8.8.x that depend on the webhook to handle the updated JSON structure:
+
+1. Update your integration to read `processVersion` as an integer value representing the process version number.
+2. If you need the process version tag, use the new `processVersionTag` field that contains the string value of the version tag (if one exists).
+3. Ensure your integration handles cases where `processVersionTag` might be null or absent (for processes without version tags).
+4. Test your webhook consumers to verify they correctly parse both the integer `processVersion` and string `processVersionTag` fields.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
@@ -406,18 +449,6 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 
 </div>
 </div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Webhook Alerts JSON format
-
-In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified in that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
-
-In 8.8.9, the `processVersion` was reverted to return an integer value representing the process version only. A new `processVersionTag` field was introduced to include the process version tag.
 
 ### Connectors
 
