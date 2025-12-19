@@ -13,7 +13,7 @@ This tutorial guides you through creating and using cluster variables in a BPMN 
 
 First, create a global cluster variable that serves as your production API configuration. This variable is available to all processes across your cluster.
 
-Use the Orchestration Cluster API to [create](https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable/) a global variable:
+Use the Orchestration Cluster API to [create](../../../../apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable.api.mdx) a global variable:
 
 ```bash
 POST /v2/cluster-variables/global
@@ -106,4 +106,4 @@ To learn more about cluster variables and explore additional patterns:
 - **[Use cases and examples](examples.md)**: Explore more scenarios including feature flags, approval thresholds, and complex configurations.
 - **[Usage guide](usage-guide.md)**: Learn about all the different ways to access cluster variables in BPMN elements.
 - **[Scope and priority](scope-and-priority.md)**: Understand how global and tenant variables interact and override each other.
-- **[Orchestration Cluster API reference](https://docs.camunda.io/docs/next/apis-tools/orchestration-cluster-api-rest/)**: Complete API documentation for managing cluster variables.
+- **[Orchestration Cluster API reference](../../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)**: Complete API documentation for managing cluster variables.
