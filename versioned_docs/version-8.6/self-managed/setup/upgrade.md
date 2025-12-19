@@ -96,6 +96,16 @@ The following keys were deprecated in 8.5, and their removal has been delayed un
 
 The separated Ingress Helm configuration has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. If using a separated Ingress, switch to a [combined Ingress](/self-managed/setup/guides/ingress-setup.md) to ensure a smooth upgrade experience.
 
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/concepts/custom-users-and-clients.md) for more information on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
+:::
+
 #### OpenShift Changes
 
 We added the `global.compatibility.openshift.adaptSecurityContext` variable in the values.yaml that can be used to set the following possible values:
@@ -114,6 +124,11 @@ We have introduced a new base path for both the Operate and Tasklist web applica
 <TabItem value='8.5'>
 
 <h3>Helm chart 10.2.0+</h3>
+
+:::note
+When upgrading to **Camunda 8.5.x** using Helm, use the **8.4 chart** (for example, `9.7.0`) and set the **Operate image tag** to `8.4.20` instead of the default `8.4.22` to avoid a known issue.  
+See [the related issue](https://github.com/camunda/camunda/issues/39791) for details.
+:::
 
 As of this Helm chart version, the image tags for all components are independent, and do not reference the global image tag. The value of the key `global.image.tag` is `null`, and each component now sets its own version.
 
@@ -242,6 +257,12 @@ In v10.0.0, it is possible to use external OpenSearch. For more information on h
 </TabItem>
 
 <TabItem value="8.4">
+
+:::warning Operate 8.4.21 and 8.4.22 known issue
+We advise customers to **upgrade directly from Operate 8.4.20 to 8.5.latest**, skipping **8.4.21** and **8.4.22** to avoid the risk of running into a bug in these unsupported patch versions.  
+The bug prevents decision instances with evaluation failures from being imported.  
+See [the related issue](https://github.com/camunda/camunda/issues/39791) for details.
+:::
 
 <h3>Helm Chart 9.3.0</h3>
 
@@ -575,8 +596,6 @@ If not specified on installation, the Helm chart generates random secrets for al
 To extract the secrets, use the following code snippet, replacing `camunda` with your actual Helm release name:
 
 ```shell
-# Uncomment if Console is enabled.
-# export CONSOLE_SECRET=$(kubectl get secret "camunda-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
 export TASKLIST_SECRET=$(kubectl get secret "camunda-tasklist-identity-secret" -o jsonpath="{.data.tasklist-secret}" | base64 --decode)
 export OPTIMIZE_SECRET=$(kubectl get secret "camunda-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 export OPERATE_SECRET=$(kubectl get secret "camunda-operate-identity-secret" -o jsonpath="{.data.operate-secret}" | base64 --decode)
@@ -593,8 +612,6 @@ After exporting all secrets into environment variables, run the following upgrad
 
 ```shell
 helm upgrade camunda camunda/camunda-platform \
-  # Uncomment if Console is enabled.
-  # --set global.identity.auth.console.existingSecret=$CONSOLE_SECRET \
   --set global.identity.auth.tasklist.existingSecret=$TASKLIST_SECRET \
   --set global.identity.auth.optimize.existingSecret=$OPTIMIZE_SECRET \
   --set global.identity.auth.operate.existingSecret=$OPERATE_SECRET \

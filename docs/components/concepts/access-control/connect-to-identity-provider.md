@@ -4,8 +4,6 @@ sidebar_label: Connect to an identity provider
 description: Learn how to connect Camunda 8 components to an external Identity Provider (IdP) for authentication and user management.
 ---
 
-# Connect to an identity provider
-
 Integrate with an external identity provider (IdP) for single sign-on (SSO), centralized user management, and secure authentication.
 
 ## About IdP integration
@@ -23,7 +21,7 @@ Self-Managed deployments only support external IdP integration using **OpenID Co
 
 You can integrate an IdP with both the Identity (for the Orchestration Cluster) and Management Identity (for Web Modeler, Console, and Optimize).
 
-- [Connect Orchestration Cluster Identity to an identity provider](../../../self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
+- [Connect Orchestration Cluster Identity to an identity provider](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [Connect Management Identity to an identity provider](../../../../self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/)
 
 ## SaaS

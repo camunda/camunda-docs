@@ -64,7 +64,7 @@ With this version, we ship a breaking change to how Web Modeler **Deploy diagram
 The following authentication methods for a [configured cluster in Web Modeler](/self-managed/components/modeler/web-modeler/configuration/configuration.md#clusters) are now being deprecated and will no longer be supported in version 8.8:
 
 - `OAUTH`: This method was replaced by `BEARER_TOKEN`.
-- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
+- `CLIENT_CREDENTIALS`: This method was introduced as a temporary solution to support deployments from Web Modeler when using [Microsoft Entra ID or a generic OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md).
   It is marked for removal in 8.8 as the `BEARER_TOKEN` authentication will be supported for Entra ID and generic providers as well.
 
 ### Breaking changes in Camunda Process Test
@@ -113,6 +113,16 @@ The Spring Zeebe SDK will not be developed further and will only receive bug fix
 ##### Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed has been deprecated in 8.6, and will be removed from the Helm chart in 8.8. Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
+
+#### Helm chart: Custom users and clients for Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on setting up custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+If your deployment currently defines custom users or clients using environment variables (for example, `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`), additional upgrade steps are required. Remove any environment variables that reference users or clients and migrate to the configuration method described in the guide linked above.
+:::
 
 ##### ExtraVolumeClaimTemplates
 

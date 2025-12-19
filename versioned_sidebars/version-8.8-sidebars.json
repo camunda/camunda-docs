@@ -24,35 +24,46 @@
       "items": [
         "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
-        "guides/migrating-from-camunda-7/migration-tooling",
         {
           "type": "category",
-          "label": "Data Migrator",
+          "label": "Migration tools",
           "link": {
             "type": "doc",
-            "id": "guides/migrating-from-camunda-7/data-migrator/index"
+            "id": "guides/migrating-from-camunda-7/migration-tooling/index"
           },
           "items": [
-            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
-            "guides/migrating-from-camunda-7/data-migrator/install",
-            "guides/migrating-from-camunda-7/data-migrator/runtime",
-            "guides/migrating-from-camunda-7/data-migrator/history",
-            "guides/migrating-from-camunda-7/data-migrator/variables",
-            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
-            "guides/migrating-from-camunda-7/data-migrator/limitations",
+            "guides/migrating-from-camunda-7/migration-tooling/diagram-converter",
+            "guides/migrating-from-camunda-7/migration-tooling/code-conversion",
             {
               "type": "category",
-              "label": "Configuration & reference",
+              "label": "Data Migrator",
+              "link": {
+                "type": "doc",
+                "id": "guides/migrating-from-camunda-7/migration-tooling/data-migrator/index"
+              },
               "items": [
-                "guides/migrating-from-camunda-7/data-migrator/database",
-                "guides/migrating-from-camunda-7/data-migrator/config-examples",
-                "guides/migrating-from-camunda-7/data-migrator/config-properties"
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations",
+                {
+                  "type": "category",
+                  "label": "Configuration & reference",
+                  "items": [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/database",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties"
+                  ]
+                },
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting"
               ]
             },
-            "guides/migrating-from-camunda-7/data-migrator/troubleshooting"
+            "guides/migrating-from-camunda-7/migration-tooling/version-compatibility",
+            "guides/migrating-from-camunda-7/migration-tooling/update-guide"
           ]
         },
-        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness"
       ]
     }
@@ -114,12 +125,19 @@
             }
           ]
         },
-        "components/concepts/messages",
+        {
+          "type": "category",
+          "label": "Messages",
+          "link": {
+            "type": "doc",
+            "id": "components/concepts/messages"
+          },
+          "items": ["components/concepts/message-aggregation"]
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
-        "components/concepts/resource-deletion",
-        "components/concepts/task-testing"
+        "components/concepts/resource-deletion"
       ]
     },
     {
@@ -183,11 +201,13 @@
           "label": "Agentic orchestration",
           "link": {
             "type": "doc",
-            "id": "components/agentic-orchestration/agentic-orchestration"
+            "id": "components/agentic-orchestration/agentic-orchestration-overview"
           },
           "items": [
+            "components/agentic-orchestration/ai-agents",
             "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/ai-agents"
+            "components/agentic-orchestration/choose-right-model-agentic",
+            "components/agentic-orchestration/model-recommendations-agentic"
           ]
         },
         {
@@ -444,7 +464,6 @@
                 "components/modeler/web-modeler/advanced-modeling/test-scenario-files",
                 {
                   "AI features": [
-                    "components/modeler/web-modeler/advanced-modeling/refactoring-suggestions",
                     "components/modeler/web-modeler/advanced-modeling/camunda-docs-ai"
                   ]
                 }
@@ -452,8 +471,7 @@
             },
             "components/modeler/web-modeler/file-download",
             "components/modeler/web-modeler/web-modeler-settings",
-            "components/modeler/web-modeler/process-landscape-visualization",
-            "components/modeler/web-modeler/task-testing"
+            "components/modeler/web-modeler/process-landscape-visualization"
           ]
         },
         {
@@ -554,6 +572,7 @@
         },
         "components/modeler/data-handling",
         "components/modeler/using-web-and-desktop-modeler-together",
+        "components/modeler/task-testing",
         {
           "Reference": [
             {
@@ -818,7 +837,7 @@
         },
         {
           "type": "category",
-          "label": "Camunda connectors",
+          "label": "Built-in connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/out-of-the-box-connectors/available-connectors-overview"
@@ -927,16 +946,15 @@
         },
         {
           "type": "category",
-          "label": "Custom element and connector templates",
+          "label": "Build custom connectors",
           "link": {
             "type": "doc",
             "id": "components/connectors/custom-built-connectors/build-connector"
           },
           "items": [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               "type": "category",
-              "label": "Element and connector templates",
+              "label": "Connector templates",
               "link": {
                 "type": "doc",
                 "id": "components/connectors/custom-built-connectors/connector-templates"
@@ -946,7 +964,8 @@
                 "components/connectors/custom-built-connectors/create-connector-from-rest"
               ]
             },
-            "components/connectors/custom-built-connectors/connector-sdk"
+            "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors"
           ]
         }
       ]
@@ -1089,7 +1108,21 @@
       "items": [
         "components/concepts/clusters",
         "components/saas/regions",
-        "components/saas/encryption-at-rest",
+        "components/saas/data-locations",
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/byok/overview"
+          },
+          "items": [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/faq-and-troubleshooting"
+          ]
+        },
         "components/saas/backups",
         "components/saas/auto-updates",
         "components/saas/data-retention",
@@ -2624,7 +2657,21 @@
             "apis-tools/camunda-spring-boot-starter/properties-reference"
           ]
         },
-        "apis-tools/node-js-sdk",
+        {
+          "type": "category",
+          "label": "TypeScript SDK",
+          "link": {
+            "type": "doc",
+            "id": "apis-tools/typescript/typescript-sdk"
+          },
+          "items": [
+            "apis-tools/typescript/camunda8-sdk",
+            "apis-tools/typescript/oca-client",
+            "apis-tools/typescript/migrating-to-oca",
+            "apis-tools/typescript/backpressure",
+            "apis-tools/typescript/eventual-consistency"
+          ]
+        },
         {
           "Community clients": [
             "apis-tools/community-clients/index",
@@ -2722,18 +2769,6 @@
             "reference/announcements-release-notes/860/860-release-notes"
           ]
         },
-        {
-          "type": "category",
-          "label": "8.5",
-          "link": {
-            "type": "doc",
-            "id": "reference/announcements-release-notes/850/850-announcements"
-          },
-          "items": [
-            "reference/announcements-release-notes/850/850-announcements",
-            "reference/announcements-release-notes/850/850-release-notes"
-          ]
-        },
         "reference/announcements-release-notes/release-policy"
       ]
     },
@@ -2751,7 +2786,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/contact"
+    "reference/contact",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -2771,7 +2807,18 @@
             "id": "self-managed/quickstart/developer-quickstart"
           },
           "items": [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              "type": "category",
+              "label": "Camunda 8 Run",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/quickstart/developer-quickstart/c8run"
+              },
+              "items": [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting"
+              ]
+            },
+
             "self-managed/quickstart/developer-quickstart/docker-compose"
           ]
         },
@@ -2888,9 +2935,23 @@
                   },
                   "items": [
                     "self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication",
+                    "self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients",
                     "self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/using-external-keycloak",
-                    "self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider"
+                    {
+                      "type": "category",
+                      "label": "External OIDC provider",
+                      "link": {
+                        "type": "doc",
+                        "id": "self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider"
+                      },
+                      "items": [
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc"
+                      ]
+                    }
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
@@ -3159,7 +3220,8 @@
                     "self-managed/components/orchestration-cluster/core-settings/concepts/backups",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/data-retention",
                     "self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics",
-                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration"
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/schema-and-migration",
+                    "self-managed/components/orchestration-cluster/core-settings/concepts/version-compatibility"
                   ]
                 },
                 {
@@ -3224,19 +3286,7 @@
                   },
                   "items": [
                     "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter",
-                    {
-                      "type": "category",
-                      "label": "Camunda Exporter indices",
-                      "link": {
-                        "type": "doc",
-                        "id": "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices"
-                      },
-                      "items": [
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-identity",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-operate",
-                        "self-managed/components/orchestration-cluster/zeebe/exporters/index-diagrams/camunda-exporter-indices-tasklist"
-                      ]
-                    },
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter"
                   ]
@@ -3277,18 +3327,32 @@
         {
           "Modeler": [
             {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+              "type": "category",
+              "label": "Web Modeler",
+              "link": {
+                "type": "doc",
+                "id": "self-managed/components/modeler/web-modeler/overview"
+              },
+              "items": [
                 {
-                  "Configuration": [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  "type": "category",
+                  "label": "Configuration",
+                  "link": {
+                    "type": "doc",
+                    "id": "self-managed/components/modeler/web-modeler/configuration/configuration"
+                  },
+                  "items": [
                     "self-managed/components/modeler/web-modeler/configuration/database",
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
                     "self-managed/components/modeler/web-modeler/configuration/copilot"
-                  ],
-                  "Troubleshooting": [
+                  ]
+                },
+                {
+                  "type": "category",
+                  "label": "Troubleshooting",
+                  "items": [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",

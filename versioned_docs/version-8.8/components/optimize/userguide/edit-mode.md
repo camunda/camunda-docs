@@ -1,14 +1,15 @@
 ---
 id: edit-mode
-title: Edit mode
-description: "The edit mode allows you to configure the dashboard and adjust it to your needs."
+title: "Configure dashboards"
+sidebar_label: "Configure dashboards"
+description: "Configure and customize your dashboards in Edit mode."
 ---
 
 import TileEditButton from './img/tile-edit-button.png'
 import TileCopyButton from './img/tile-copy-button.png'
 import TileDeleteButton from './img/tile-delete-button.png'
 
-Configure and customize your dashboard in edit mode, performing operations such as renaming, modifying or removing descriptions, adding, editing, copying or removing tiles, saving changes, canceling applied changes, setting dashboard filters, and defining a default auto-refresh rate for periodic updates in [view mode](./view-mode.md).
+Configure and customize your dashboards in **Edit mode**. It allows you to perform operations such as renaming, modifying or removing descriptions; adding, editing, copying or removing tiles; saving or canceling applied changes; setting dashboard filters; and defining a default auto-refresh rate for periodic updates in [View mode](./view-mode.md).
 
 ![edit mode](./img/dashboard-dashboardEditActions.png)
 
@@ -55,7 +56,7 @@ In dashboard edit mode, click **Add a Filter** to reveal the **Filters** panel. 
 - Start date: Allows filtering by process instance start date
 - End date: Allows filtering by process instance end date
 - Instance state: Allows filtering by process instance state, such as running, completed, or canceled
-- Variable: Allows filtering by process instance variable value
+- Variable: Allows filtering by process variable value
 - Assignee: Allows filtering flow node data by their assignee
 - Candidate Group: Allows filtering flow node data by their candidate group
 

@@ -5,7 +5,7 @@ sidebar_label: MCP Client
 description: "Integrate MCP (Model Context Protocol) clients with agentic orchestration."
 ---
 
-Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration.md).
+Integrate [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) clients with [agentic orchestration](../../../agentic-orchestration/agentic-orchestration-overview.md).
 
 Camunda's MCP Client integration allows using the [AI agent connector](../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) in combination with MCP clients to access tools provided by MCP servers. This includes both locally started [STDIO](https://modelcontextprotocol.io/specification/draft/basic/transports#stdio) servers and remote MCP servers using the [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transport.
 

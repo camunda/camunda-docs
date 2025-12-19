@@ -205,6 +205,20 @@ public class MyProcessTest {
 
 </Tabs>
 
+### Deploy resources
+
+You can deploy additional BPMN processes and other resources by adding the annotation `@TestDeployment` on the test
+class or the method. An annotation on the test method takes precedence over an annotation on the test class. The
+resources are loaded from the root classpath of the test.
+
+```java
+@Test
+@TestDeployment(resources = "my-process.bpmn")
+void shouldCreateProcessInstance() {
+  // the given resources are deployed before running the test
+}
+```
+
 ## Test lifecycle
 
 CPT performs the following actions during the JUnit 5 lifecycle when running a test class:
@@ -219,9 +233,10 @@ CPT performs the following actions during the JUnit 5 lifecycle when running a t
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
   - Publish the client created event for the Spring Boot process application to trigger the deployment and start job
     workers
+  - Deploy resources defined via `@TestDeployment`
 - `afterEach` (test method)
   - Collect the data for the coverage report
   - Print the created process instances if the test failed
@@ -282,7 +297,8 @@ public class TestProcessApplication {}
 - `beforeAll` (test methods)
   - Start the test runtime
 - `beforeEach` (test method)
-  - Inject the `CamundaClient` and the `CamundaProcessTestContext`
+  - Inject the `CamundaClient`, the `CamundaProcessTestContext`, and the `TestScenarioRunner`
+  - Deploy resources defined via `@TestDeployment`
 - `afterEach` (test method)
   - Collect the data for the coverage report
   - Print the created process instances if the test failed

@@ -10,7 +10,9 @@ import TabItem from "@theme/TabItem";
 
 The Camunda Java Client is the official Java library for building process applications that integrate with Camunda 8. Whether you are orchestrating microservices, managing human tasks, or visualizing process data, this client provides everything needed to interact with the Orchestration Cluster programmatically.
 
+:::info Public API
 The Camunda Java Client is part of the Camunda 8 [public API](/reference/public-api.md) and follows [Semantic Versioning](https://semver.org/) (except for alpha features). Minor and patch releases will not introduce breaking changes.
+:::
 
 ## What is the Camunda Java Client?
 
@@ -42,7 +44,7 @@ Use the Camunda Java Client to build:
 - **Integration services** that connect Camunda processes with existing systems or third-party services
 - **Data processing applications** that leverage process data for visualization, analytics, or business intelligence
 
-## Getting started in three steps
+## Get started
 
 ### Step 1: Add the dependency
 
@@ -66,16 +68,16 @@ implementation 'io.camunda:camunda-client-java:${camunda.version}'
 
 Use the latest version from [Maven Central](https://search.maven.org/artifact/io.camunda/camunda-client-java).
 
-### Step 2: Connect to your Camunda 8 cluster
+### Step 2a: Connect to a Self-Managed Orchestration Cluster
 
-Instantiate a client to connect to your Camunda 8 cluster. Choose the [authentication method](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) based on your environment:
+Create a client instance to connect to your Self-Managed Camunda 8 cluster.  
+Select the appropriate [authentication method](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) for your environment:
 
 <Tabs groupId="authentication" defaultValue="no-auth" queryString values={[
-{label: 'No Authentication', value: 'no-auth' },
-{label: 'Basic Authentication', value: 'basic-auth' },
-{label: 'OIDC Access Token Authentication - Self-Managed', value: 'oidc-self-managed' },
-{label: 'OIDC Access Token Authentication - SaaS', value: 'oidc-saas' },
-{label: 'OIDC Access Token Authentication with X.509 Client Certificate', value: 'x509' },
+{label: 'No authentication', value: 'no-auth' },
+{label: 'Basic authentication', value: 'basic-auth' },
+{label: 'OIDC-based authentication (Self-Managed)', value: 'oidc-self-managed' },
+{label: 'OIDC-based mutual TLS authentication', value: 'mTLS' },
 ]}>
 
 <TabItem value="no-auth">
@@ -103,11 +105,12 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Creates a no-authentication provider** – Configures the client to skip authentication.
-2. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
-3. **Tests the connection** – Verifies connectivity by requesting cluster topology information.
+2. **Builds a client using the protocol-specified transport** – Uses plaintext or TLS depending on whether the addresses use `http` or `https`.
+3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
+4. **Tests the connection** – Verifies connectivity by requesting cluster topology information.
 
 **Environment variables option**  
-You can also set connection details via environment variables to create the client more simply:
+You can also configure the client using environment variables:
 
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
@@ -118,11 +121,9 @@ export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default
 CamundaClient client = CamundaClient.newClientBuilder().build();
 ```
 
-The client will automatically read the environment variables and configure the appropriate authentication method.
+The client will automatically read these environment variables and configure the appropriate authentication method.
 
-:::note
-Ensure addresses are in absolute URI format: `scheme://host(:port)`.
-:::
+Ensure addresses are in absolute URI format: `scheme://host(:port)`. The protocol (`http` or `https`) determines whether the connection is encrypted.
 
 </TabItem>
 
@@ -159,7 +160,7 @@ public static void main(String[] args) {
 **What this code does**
 
 1. **Sets up username/password authentication** – Configures the client to use basic credentials.
-2. **Builds a secure client** – Establishes an encrypted connection to the cluster (default).
+2. **Builds a client using the protocol-specified transport** – Establishes an unencrypted connection if the addresses use `http` or an encrypted connection if they use `https`.
 3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
 4. **Tests the connection** – Verifies authentication by requesting cluster topology information.
 
@@ -190,21 +191,27 @@ The client will automatically read the environment variables and configure the a
 
 <TabItem value="oidc-self-managed">
 
-**Use for:** Self-Managed production environments with OIDC access token authentication.
+**Use for:** Self-Managed production environments with OIDC-based authentication. Standard `client_secret_basic` authentication method.
 
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-private static final String AUDIENCE = "[Audience]";
-private static final String CLIENT_ID = "[Client ID]";
+
+// Audience is the API that will receive the token, such as the Orchestration Cluster for example
+private static final String AUDIENCE = "[Orchestration Cluster audience]";
+
+// Scope is the permission requested from the IdP (or leave empty)
+private static final String SCOPE = "[optional additional scopes]";
+
+private static final String CLIENT_ID = "[Client ID registered in your IdP]";
 private static final String CLIENT_SECRET = "[Client Secret]";
 
 public static void main(String[] args) {
-
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
             .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
             .audience(AUDIENCE)
+            .scope(SCOPE)
             .clientId(CLIENT_ID)
             .clientSecret(CLIENT_SECRET)
             .build();
@@ -221,6 +228,21 @@ public static void main(String[] args) {
     }
 }
 ```
+
+**Notes for Microsoft Entra ID**
+
+- Use `scope=CLIENT_ID_OC + "/.default"` instead of `scope=CLIENT_ID_OC`.
+- The authorization URI is typically in the format:
+
+```
+https://login.microsoftonline.com/<tenant_id>/oauth2/v2.0/token
+```
+
+:::note Audience validation
+If you have [configured the audiences property for the Orchestration Cluster (`camunda.security.authentication.oidc.audiences`)](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camunda.security.authentication.oidc), the Orchestration Cluster will validate the audience claim in the token against the configured audiences.
+
+Make sure your token includes the correct audience from the Orchestration Cluster configuration, or add your audience to the configuration. Often this is the client ID you used when setting up the Orchestration Cluster.
+:::
 
 **What this code does**
 
@@ -255,8 +277,100 @@ The client will automatically read the environment variables and configure the a
   :::
 
 </TabItem>
+<TabItem value="mTLS">
 
-<TabItem value="oidc-saas">
+**Use for:** Production environments with mTLS certificate-based client authentication.
+
+Several identity providers, such as Keycloak, support client mTLS authentication as an alternative to `client_secret_basic`.
+
+**Prerequisites**
+
+- Properly configured KeyStore and TrustStore
+- Both your application and identity provider share the same CA trust certificates
+- Certificates for the identity provider are signed by a trusted CA
+- The application DN is registered in the identity provider client authorization details
+
+```java
+private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
+private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
+private static final String OAUTH_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
+private static final String AUDIENCE = "[Audience - default: zeebe-api]";
+private static final String CLIENT_ID = "[Client ID]";
+private static final Path KEYSTORE_PATH = Paths.get("/path/to/keystore.p12");
+private static final String KEYSTORE_PASSWORD = "password";
+private static final String KEYSTORE_KEY_PASSWORD = "password";
+private static final Path TRUSTSTORE_PATH = Paths.get("/path/to/truststore.jks");
+private static final String TRUSTSTORE_PASSWORD = "password";
+
+public static void main(String[] args) {
+
+    CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
+            .authorizationServerUrl(OAUTH_URL)
+            .audience(AUDIENCE)
+            .clientId(CLIENT_ID)
+            .keystorePath(KEYSTORE_PATH)
+            .keystorePassword(KEYSTORE_PASSWORD)
+            .keystoreKeyPassword(KEYSTORE_KEY_PASSWORD)
+            .truststorePath(TRUSTSTORE_PATH)
+            .truststorePassword(TRUSTSTORE_PASSWORD)
+            .build();
+
+    try (CamundaClient client = CamundaClient.newClientBuilder()
+            .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
+            .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
+            .credentialsProvider(credentialsProvider)
+            .build()) {
+
+        // Test the connection
+        client.newTopologyRequest().send().join();
+        System.out.println("Connected to Camunda 8!");
+    }
+}
+```
+
+**What this code does**
+
+1. **Sets up mTLS certificate authentication** – Configures the client to authenticate using client certificates with OAuth.
+2. **Builds a secure client** – Establishes an encrypted connection using mutual TLS authentication.
+3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
+4. **Tests the connection** – Verifies certificate authentication by requesting cluster topology information.
+
+**Environment variables option**  
+You can also set connection details via environment variables to create the client more simply:
+
+```bash
+export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
+export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
+export CAMUNDA_OAUTH_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
+export CAMUNDA_TOKEN_AUDIENCE='[Audience - default: zeebe-api]'
+export CAMUNDA_CLIENT_ID='[Client ID]'
+export CAMUNDA_CLIENT_SECRET='[Client Secret]'
+export CAMUNDA_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
+export CAMUNDA_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
+export CAMUNDA_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
+export CAMUNDA_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
+export CAMUNDA_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
+```
+
+```java
+CamundaClient client = CamundaClient.newClientBuilder().build();
+```
+
+The client automatically reads environment variables and configures the appropriate authentication method.
+
+Refer to your identity provider documentation for configuring mutual TLS authentication. For example, see [Keycloak](https://www.keycloak.org/server/mutual-tls).
+
+:::note
+
+- Ensure addresses use absolute URI format: `scheme://host(:port)`.
+- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.  
+  :::
+
+</TabItem>
+
+</Tabs>
+
+### Step 2b: Configure the Orchestration Cluster connection for SaaS
 
 **Use for:** Camunda 8 SaaS environments.
 Get the values below from your [Camunda Console client credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
@@ -294,8 +408,8 @@ public static void main(String[] args) {
 You can also set connection details via environment variables to create the client more simply:
 
 ```bash
-export ZEEBE_GRPC_ADDRESS='[Zeebe gRPC Address from Console]'
-export ZEEBE_REST_ADDRESS='[Zeebe REST Address from Console]'
+export CAMUNDA_GRPC_ADDRESS='[Orchestration Cluster gRPC Address from Console]'
+export CAMUNDA_REST_ADDRESS='[Orchestration Cluster REST Address from Console]'
 export CAMUNDA_OAUTH_URL='[OAuth URL from Console]'
 export CAMUNDA_TOKEN_AUDIENCE='[Audience from Console - default: zeebe.camunda.io]'
 export CAMUNDA_CLIENT_ID='[Client ID from Console]'
@@ -311,104 +425,6 @@ The client will automatically read the environment variables and configure the a
 :::note
 Ensure addresses are in absolute URI format: `scheme://host(:port)`.
 :::
-
-</TabItem>
-
-<TabItem value="x509">
-
-**Use for:** Production environments with X.509 certificate-based authentication.
-
-Several identity providers, such as Keycloak, support client X.509 authentication as an alternative to the client credentials flow.
-
-**Prerequisites**
-
-- Properly configured KeyStore and TrustStore
-- Both the Spring Camunda application and identity provider share the same CA trust certificates
-- Certificates for both Spring Camunda and the identity provider are signed by a trusted CA
-- The Spring Camunda application certificate has a proper Distinguished Name (DN), e.g., `CN=My Camunda Client, OU=Camunda Users, O=Best Company, C=DE`
-- The application DN is registered in the identity provider client authorization details
-
-```java
-private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
-private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
-private static final String OAUTH_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-private static final String AUDIENCE = "[Audience - default: zeebe-api]";
-private static final String CLIENT_ID = "[Client ID]";
-private static final String CLIENT_SECRET = "[Client Secret]";
-private static final Path KEYSTORE_PATH = Paths.get("/path/to/keystore.p12");
-private static final String KEYSTORE_PASSWORD = "password";
-private static final String KEYSTORE_KEY_PASSWORD = "password";
-private static final Path TRUSTSTORE_PATH = Paths.get("/path/to/truststore.jks");
-private static final String TRUSTSTORE_PASSWORD = "password";
-
-public static void main(String[] args) {
-
-    CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
-            .authorizationServerUrl(OAUTH_URL)
-            .audience(AUDIENCE)
-            .clientId(CLIENT_ID)
-            .clientSecret(CLIENT_SECRET)
-            .keystorePath(KEYSTORE_PATH)
-            .keystorePassword(KEYSTORE_PASSWORD)
-            .keystoreKeyPassword(KEYSTORE_KEY_PASSWORD)
-            .truststorePath(TRUSTSTORE_PATH)
-            .truststorePassword(TRUSTSTORE_PASSWORD)
-            .build();
-
-    try (CamundaClient client = CamundaClient.newClientBuilder()
-            .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
-            .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
-            .credentialsProvider(credentialsProvider)
-            .build()) {
-
-        // Test the connection
-        client.newTopologyRequest().send().join();
-        System.out.println("Connected to Camunda 8!");
-    }
-}
-```
-
-**What this code does**
-
-1. **Sets up X.509 certificate authentication** – Configures the client to authenticate using client certificates with OAuth.
-2. **Builds a secure client** – Establishes an encrypted connection using mutual TLS authentication.
-3. **Connects to both APIs** – Configures access to the Zeebe gRPC and Orchestration Cluster REST APIs.
-4. **Tests the connection** – Verifies certificate authentication by requesting cluster topology information.
-
-**Environment variables option**  
-You can also set connection details via environment variables to create the client more simply:
-
-```bash
-export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
-export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
-export CAMUNDA_OAUTH_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
-export CAMUNDA_TOKEN_AUDIENCE='[Audience - default: zeebe-api]'
-export CAMUNDA_CLIENT_ID='[Client ID]'
-export CAMUNDA_CLIENT_SECRET='[Client Secret]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_PATH='[Keystore path]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_SECRET='[Keystore password]'
-export CAMUNDA_SSL_CLIENT_KEYSTORE_KEY_SECRET='[Keystore material password]'
-export CAMUNDA_SSL_CLIENT_TRUSTSTORE_PATH='[Truststore path]'
-export CAMUNDA_SSL_CLIENT_TRUSTSTORE_SECRET='[Truststore password]'
-```
-
-```java
-CamundaClient client = CamundaClient.newClientBuilder().build();
-```
-
-The client automatically reads environment variables and configures the appropriate authentication method.
-
-Refer to your identity provider documentation for configuring X.509 authentication. For example, see [Keycloak](https://www.keycloak.org/server/mutual-tls).
-
-:::note
-
-- Ensure addresses use absolute URI format: `scheme://host(:port)`.
-- By default, environment variables override any values provided in Java code. To give Java code values precedence, use the `.applyEnvironmentOverrides(false)` method on `OAuthCredentialsProviderBuilder`.  
-  :::
-
-</TabItem>
-
-</Tabs>
 
 ### Step 3: Start building your process application
 
@@ -460,7 +476,7 @@ For a comprehensive example demonstrating these steps, see the [DeployAndComplet
 **Advanced topics**
 
 - [Logging configuration](logging.md) – Set up proper logging for your application
-- [Client documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) – Complete Javadoc reference
+- [Client documentation](https://javadoc.io/doc/io.camunda/camunda-client-java) – Complete Javadoc reference. Make sure you select the relevant Javadoc version as the latest version is shown by default at this URL.
 
 **Need help?**
 

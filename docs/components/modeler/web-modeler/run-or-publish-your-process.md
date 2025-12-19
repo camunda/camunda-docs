@@ -42,8 +42,8 @@ In Self-Managed, you can deploy your diagram to the cluster defined in your Web 
 ### Before deploying a process
 
 - If the target cluster has [authorizations](/components/identity/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
-- Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](./fix-problems-in-your-diagram.md).
-- Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](./advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
+- Make sure your process is free of errors, otherwise it can't be deployed. Use the [problems panel to detect and fix errors](modeling/fix-problems-in-your-diagram.md).
+- Make sure all dependent files are deployed first, such as DMN diagrams, forms, or called processes. You can use the [link tool](modeling/advanced-modeling/call-activity-linking.md) to drill-down into linked resources and deploy them.
   If you are using [`versionTag` binding](/components/best-practices/modeling/choosing-the-resource-binding-type.md) for a linked resource, make sure it is deployed with the correct version tag.
   :::tip
   Consider using a [process application](process-applications/process-applications.md) that allows you to deploy a process and all dependent files together in a single bundle.
@@ -75,7 +75,7 @@ Running a process means that you execute the process as a process instance on Ca
 
 ### Test run using Play mode
 
-Before you publish or run a process, you can test it manually using the Play mode. With the Play mode, you can build and test your process iteratively in small steps. To enter the Play mode, click the Play tab in the top left corner of the modeling screen. Refer to the [Play mode documentation](collaboration/play-your-process.md) for details of how the Play environment works.
+Before you publish or run a process, you can test it manually using the Play mode. With the Play mode, you can build and test your process iteratively in small steps. To enter the Play mode, click the Play tab in the top left corner of the modeling screen. Refer to the [Play mode documentation](validation/play-your-process.md) for details of how the Play environment works.
 
 ### Run manually from Modeler
 
@@ -107,7 +107,7 @@ Starting an instance from Web Modeler [deploys](#deploy-a-process) recent change
 :::
 
 :::tip
-By [linking a Camunda Form to a start event](/components/modeler/web-modeler/advanced-modeling/form-linking.md), process instances can be started with the form's input [via a public form](#publish-via-a-public-form) (SaaS only) or directly [in Tasklist](#publish-to-tasklist).
+By [linking a Camunda Form to a start event](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md), process instances can be started with the form's input [via a public form](#publish-via-a-public-form) (SaaS only) or directly [in Tasklist](#publish-to-tasklist).
 :::
 
 ### Schedule via timer
@@ -204,7 +204,7 @@ Publishing a process via a public form allows you to share your process with ext
 
 <img src={PublicFormImg} alt="A public form" />
 
-To publish a process via a public form, you first need to [link a Camunda Form](/components/modeler/web-modeler/advanced-modeling/form-linking.md#using-the-link-button) to the process' start event, then you can follow these steps:
+To publish a process via a public form, you first need to [link a Camunda Form](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#using-the-link-button) to the process' start event, then you can follow these steps:
 
 #### Deploy process to the public
 
@@ -224,7 +224,7 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda 8, using the submitted data as input.
 
-For further configuration and how to unpublish a process again, refer to the [full documentation](./advanced-modeling/publish-public-processes.md).
+For further configuration and how to unpublish a process again, refer to the [full documentation](modeling/advanced-modeling/publish-public-processes.md).
 
 ### Listen to message or signal events
 
@@ -239,8 +239,8 @@ As soon as a matching event is received, a process instance will be started. To 
 
 ### Best practices for publishing a process
 
-- Use the [problems panel](./fix-problems-in-your-diagram.md) to make sure that the process free of errors before publishing it.
-- Ensure the process works by testing it interactively using the [Play mode](collaboration/play-your-process.md).
+- Use the [problems panel](modeling/fix-problems-in-your-diagram.md) to make sure that the process free of errors before publishing it.
+- Ensure the process works by testing it interactively using the [Play mode](validation/play-your-process.md).
 - Use meaningful names and descriptions for the process and its elements.
 - Document the process with clear instructions and details on how it should be used.
 - Make sure that the process is accessible to the appropriate users only.
@@ -254,3 +254,11 @@ When working on Camunda 8 Self-Managed, you can define access permissions on a p
 When you deploy a process requiring client credentials, a warning appears in the **Deploy diagram** dialog.
 The warning offers a link to manage the missing or misconfigured credentials.
 Client credentials with access to the Orchestration Cluster API are required when at least one of the following elements is used in the process: `service tasks`, `messages`, `signals`, and elements with a `non-connector` task definition.
+
+### Incorrect authorizations
+
+When using Modeler to deploy a process model or start a process instance, you may encounter issues related to [resource authorizations](/components/concepts/access-control/authorizations.md).
+
+Verify that the credentials you are using have the required authorizations to deploy a process model or start a process instance on the selected cluster and tenant.
+
+If you're using Web Modeler, note that deployments and process starts are performed **as your logged-in user**, so the necessary authorizations must be assigned to your user account.

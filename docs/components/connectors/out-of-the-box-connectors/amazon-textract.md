@@ -2,195 +2,130 @@
 id: amazon-textract
 title: Amazon Textract connector
 sidebar_label: AWS Textract
-description: Extract printed text, handwriting, layout elements, and data from any document.
+description: Extract printed text, handwriting, layout elements, and structured data from documents using Amazon Textract.
 ---
 
-import ConnectorTask from '../../../components/react-components/connector-task.md'
+import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
+import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
+import AsyncImg from '../img/connector-textract-async.png';
 
-:::info
-The **Amazon Textract connector** is available for `8.6.0` or later.
+Integrate Amazon Textract to automatically extract document text and data in your BPMN service.
+
+## About this connector
+
+Use this connector to orchestrate Amazon Textract-powered extraction as part of business processes that rely on documents. Using machine learning allows you to read and process any type of document, reducing manual work and increasing accuracy in document-centric processes.
+
+The [Amazon Textract](https://aws.amazon.com/textract/) machine learning (ML) service can automatically extract text, handwriting, layout elements, and data from scanned documents.
+
+:::tip Camunda marketplace
+The [Amazon Textract connector](https://marketplace.camunda.com/en-US/apps/473161/amazon-textract-connector) is available in the Camunda marketplace.
 :::
-
-The **Amazon Textract connector** allows you to integrate your BPMN service with [Amazon Textract](https://aws.amazon.com/textract/) to extract text from documents.
 
 ## Prerequisites
 
-To use this connector, you'll need an **AWS IAM Access Key** and **Secret Key** with the appropriate Textract permissions. Refer to the [AWS Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html) for setup instructions.
+The following prerequisites are required to use this connector:
 
-:::note
-Use **Camunda secrets** to avoid exposing your AWS IAM credentials as plain text. See [manage secrets](components/console/manage-clusters/manage-secrets.md).
+| Prerequisite                                                                                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Amazon Web Services (AWS) IAM user and permissions](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html) | <ul><li><p>A valid AWS Identity and Access Management (IAM) user with permissions configured to allow access to Amazon Textract (and Amazon S3 if used), such as:<ul><li><p>`AmazonTextractFullAccess`: Required</p></li><li><p>`AmazonS3ReadOnlyAccess`: Required if using Amazon S3 as the document source</p></li><li><p>`AmazonS3FullAccess`: Optional if using Amazon S3 as the output location for asynchronous execution</p></li></ul></p></li><li><p>The [access key pair](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) (_access key_ and _secret access key_) for this IAM user. This is required for connector authentication.</p></li></ul> |
+
+:::info
+For Amazon Textract setup instructions, refer to the [Amazon Textract Developer Guide](https://docs.aws.amazon.com/textract/latest/dg/getting-started.html).
 :::
 
-## Create an Amazon Textract connector task
+<OutboundConnectorBasics />
 
-<ConnectorTask/>
+## Authentication
 
-## Make your Amazon Textract connector executable
+Select an authentication type from the **Authentication** dropdown.
 
-To execute the connector, you must ensure all mandatory fields are correctly filled.
+### Credentials
 
-### Authentication
+Use AWS authentication.
 
-Select an authentication type from the **Authentication** dropdown:
-
-1. **Credentials**: Select this option if you have an AWS **Access Key** and **Secret Key**. This method is applicable for both SaaS and Self-Managed users. If you select this option, you must provide the following required fields to use the connector:
-   - **Access Key**: AWS access key for the user with Textract permissions.
-   - **Secret Key**: The corresponding AWS secret key.
-
-2. **Default Credentials Chain** (hybrid/Self-Managed only): Select this option if your system uses implicit authentication methods such as role-based access, environment variables, or files on the target host. This method is only applicable for Self-Managed or hybrid environments. It uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
-
-### Configure AWS region
-
-Set the AWS **Region** where the Textract service is hosted:
-
-- **Region**: Specify the region (for example, `us-east-1`, `eu-west-1`).
+| Property   | Type   | Required | Description                  | Example                          |
+| :--------- | :----- | :------- | :--------------------------- | :------------------------------- |
+| Access Key | String | Yes      | AWS access key for Textract. | `AKIAIOSFODNN37`                 |
+| Secret Key | String | Yes      | AWS secret key for Textract. | `wJalrXUtnFEgfMIK7MDENGbPxRfiCY` |
 
 :::note
-Ensure the region matches the location of your Textract service and S3 buckets to reduce latency and meet compliance requirements. For a full list of AWS regions, refer to [AWS Regional Data](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/).
+Requires your AWS access key and secret access key (see [prerequisites](#prerequisites)).
 :::
 
-### Configure input
+### Default Credentials Chain (hybrid/Self-Managed only)
 
-#### Execution types
+Use this authentication type if your system relies on implicit authentication (for example, IAM roles, environment variables, or credentials files). Uses the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html) to resolve credentials.
 
-Select the desired execution type from the **Execution Type** dropdown:
+## Configuration
 
-- **Real-time**: Use for small files that require immediate text extraction. This method processes the document instantly, allowing you to quickly retrieve the data.
+### Region
 
-  In this mode, you can select the document location using **Document location type** field.
-  - S3
-  - Camunda Document
+Configure the AWS region for this connector.
 
-  :::note
-  **Real-time** execution with **S3** document location only supports single-page PDFs. For multi-page PDFs, consider using **Polling** or **Asynchronous** execution. For more information, refer to [real-time PDF processing](https://aws.amazon.com/about-aws/whats-new/2022/01/amazon-textract-pdf-processing-jpeg-encoded-images/).
-  :::
+| Property | Type   | Required | Description                                                                       | Example     |
+| :------- | :----- | :------- | :-------------------------------------------------------------------------------- | :---------- |
+| Region   | String | Yes      | Specify the AWS region where the Textract service and your S3 buckets are hosted. | `us-east-1` |
 
-  :::note
-  **Real-time** execution with **Camunda Document** location supports only PNG or JPEG formats.
-  :::
+## Operations
 
-- **Polling**: The **Polling** execution type collects data in chunks. After processing the document, it returns a token that allows you to retrieve the next result. This method is ideal for multi-page documents or large files that take longer to process.
+### Analyze Document
 
-  Polling continues retrieving results until the entire document is processed or until there are no more tokens remaining.
+Analyze documents using Textract. Different input parameters are available depending on the **Execution type** you select.
 
-  :::note
-  Use **Polling** for documents that exceed the limitations of **Real-time** execution.
-  :::
+#### Input parameters
 
-- **Asynchronous**
+| Property          | Type     | Required               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example           |
+| :---------------- | :------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------- |
+| Execution type    | Dropdown | Yes                    | <p>Specify the inference endpoint type:</p><ul><li><p>**Real-time**: For small files requiring immediate text extraction. Only single-page PDFs are supported when using S3. For multi-page PDFs, use **Polling** or **Asynchronous**.</p></li><li><p>**Polling**: Starts analysis and polls every five seconds until the result is available. Best for larger documents where blocking execution is acceptable.</p></li><li><p>**Asynchronous**: For large or complex documents processed in the background.</p></li></ul> | document          |
+| Document location | Dropdown | Yes                    | Where the document that should be analyzed is stored. S3 is best for most use-cases                                                                                                                                                                                                                                                                                                                                                                                                                                         | S3                |
+| Document bucket   | String   | Yes for S3 source      | Name of the S3 bucket containing the document. Ensure proper permissions for Textract access.                                                                                                                                                                                                                                                                                                                                                                                                                               | automation-test   |
+| Document name     | String   | Yes for S3 source      | Full path from the bucket root to the document.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | my-document.pdf   |
+| Document version  | String   | No                     | Specify if you need to process a specific document version. If not set, the latest version is used.                                                                                                                                                                                                                                                                                                                                                                                                                         | 5                 |
+| Camunda document  | String   | Yes for Camunda source | Select the document from the Camunda document store. Only PNG and JPEG formats are supported. Real-time execution only.                                                                                                                                                                                                                                                                                                                                                                                                     | document          |
+| Output S3 Bucket  | String   | Yes for Asynchronous   | Output S3 Bucket                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | automation-output |
 
-  Use **Asynchronous** execution when processing large or complex documents that do not require immediate results. This method allows you to submit a document for analysis and receive results at a later time, making it ideal for background processing or batch operations.
+You must select at least one feature type. Combining multiple options can produce richer extraction results.
 
-  **Asynchronous** execution offers more flexibility than real-time or polling execution, as it allows you to process documents without waiting for immediate responses. This is particularly useful for larger files or when handling multiple documents simultaneously.
+| Property           | Type    | Required                        | Description                                                         | Example                          |
+| :----------------- | :------ | :------------------------------ | :------------------------------------------------------------------ | :------------------------------- |
+| Analyze form       | Boolean | No                              | Select this to return information detected form data.               |                                  |
+| Analyze signatures | Boolean | No                              | Select this to return the locations of detected signatures.         |                                  |
+| Analyze layout     | Boolean | No                              | Select this to return information about the layout of the document. |                                  |
+| Analyze queries    | Boolean | No                              | Select this to return an answer to a query.                         |                                  |
+| Query              | String  | Yes, if analyze queries is true | The query to be applied to the document.                            | What is the IBAN in the invoice? |
 
-  In this mode, you can configure the following optional fields:
-  - **Client Request Token**: An idempotent token used to identify the start request.
-  - **Job Tag**: A tag included in the completion notification, published to the Amazon SNS topic.
-  - **KMS Key ID**: The KMS key used to encrypt inference results.
-  - **Notification Channel Role ARN**: The Amazon SNS role ARN for publishing the operation's completion status. Also requires the **Notification Channel SNS Topic ARN** field.
-  - **Notification Channel SNS Topic ARN**: The SNS topic ARN for publishing the operation's completion status. Also requires the **Notification Channel Role ARN** field.
-  - **Output S3 Bucket**: The bucket where the processed document's output will be stored.
-  - **Output S3 Prefix**: The prefix under which the output will be saved. Also requires the **Output S3 Bucket** field.
+Additional optional parameters for advanced configuration:
+| Property | Type | Required | Description | Example |
+|:--------------------|:----------|:---------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
+| Client Request Token | String | No | The idempotent token that you use to identify the start request. | |
+| Job Tag | String | No | An identifier that you specify that's included in the completion notification published to the Amazon SNS topic. | |
+| KMS Key ID | String | No | The KMS key used to encrypt the inference results. | |
+| Notification Channel Role ARN | String | No | The Amazon SNS topic role ARN that you want Amazon Textract to publish the completion status of the operation to. | |
+| Notification Channel SNS Topic ARN | String | No | The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. | |
 
-  For example, you can use optional fields to set up notifications for when the processing is complete, or to define specific output locations for results.
+#### Output
 
-#### Document Bucket
+The connector response mirrors the [AWS Textract API](https://docs.aws.amazon.com/textract/latest/dg/API_Reference.html), depending on the execution type:
 
-Enter the **S3 Bucket** that contains the document to be processed. Ensure the bucket has the correct permissions to allow Textract to access the document.
+- [Real-time Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_AnalyzeDocument.html#API_AnalyzeDocument_ResponseSyntax)
+- [Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)
+- [Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)
 
-#### Document path
-
-Enter the **S3 Document Path** to the file you want to process. This should include the full path from the bucket root to the document. Make sure the document path is properly structured and accessible by the Textract service.
-
-#### Feature types
-
-Select one or more **Feature Types** from the following options:
-
-- **Analyze Tables**: Identifies and extracts tabular data from the document.
-- **Analyze Forms**: Extracts key-value pairs from forms for further processing.
-- **Analyze Signatures**: Detects and analyzes signatures within the document.
-- **Analyze Layout**: Analyzes and extracts layout elements such as lines and words, and their spatial relationships.
-
-At least one feature type must be selected, and choosing multiple options can provide richer data extraction results depending on your document’s format.
-
-#### Document version (optional)
-
-Specify the **Document Version** if you need to process a specific version of the document. If unspecified, the latest version of the document is processed. Document versioning is useful for tracking changes over time or processing a specific document iteration.
-
-#### Document
-
-Mandatory only for **Real-time** execution with **Camunda Document** location type.
-
-:::note
-To work with document you must upload them first, [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
-:::
-
-## Response
-
-The response from the **Amazon Textract connector** mirrors the AWS Textract service’s response. The type of response you receive depends on the execution mode selected:
-
-- **[Real-time Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_AnalyzeDocument.html#API_AnalyzeDocument_ResponseSyntax)**: Provides immediate analysis for single-page documents.
-- **[Polling Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_GetDocumentAnalysis.html#API_GetDocumentAnalysis_ResponseSyntax)**: Returns chunks of data in a paginated format for multi-page or complex documents.
-- **[Asynchronous Execution Response](https://docs.aws.amazon.com/textract/latest/dg/API_StartDocumentAnalysis.html#API_StartDocumentAnalysis_ResponseSyntax)**: Used for batch processing where results are returned later through job completion.
-
-:::note
-Starting from version 8.7.0, the Amazon Textract connector can read the input document directly from the Camunda document store. Review the **Document** field in the properties panel where the document reference can be provided. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
-:::
-
-### Use the Textract connector response in your process
-
-The **Amazon Textract connector** provides the same response structure as the AWS Textract API. You can map fields from the response to process variables, depending on your needs.
-
-For example, to extract specific fields using **Result Expression** and **Result Variable**:
-
-#### Example Textract Response (real-time execution)
-
-Use output mapping to align this response with process variables:
-
-1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`. This approach stores the entire Textract message as a process variable named `myResultVariable`.
-2. Use **Result Expression** to map fields from the response into process variables. This approach allows for more granularity. Instead of storing the entire response in one variable, you can extract specific fields from the **Textract connector** message and assign them to different process variables. This is particularly useful when you are only interested in certain parts of the message, or when different parts of the message need to be used separately in your process.
-
-Example:
-
-```json
-{
-  "DocumentMetadata": {
-    "Pages": 1
-  },
-  "Blocks": [
-    {
-      "BlockType": "LINE",
-      "Confidence": 99.1,
-      "Text": "Hello World",
-      "Geometry": {
-        "BoundingBox": {
-          "Width": 0.5,
-          "Height": 0.1,
-          "Left": 0.1,
-          "Top": 0.1
-        }
-      },
-      "Id": "abcd1234"
-    }
-  ]
-}
-```
-
-#### Mapping example
-
-To store the **Text** from the first block in a variable `lineText`, the **Confidence** in `textConfidence`, and the **BlockType** in `blockType`, use the following result **expression**:
+To get the answer of the query when using the Analyze queries feature:
 
 ```feel
-= {lineText: blocks[0].text, textConfidence: blocks[0].confidence, blockType: blocks[0].blockType}
+= {"answer": response.blocks[item.blockType = "QUERY_RESULT"][1].text}
 ```
 
-Mapped values **result**:
+For example, to get the response, when using asynchronous execution, use a timer event for example and retrieve the result with the S3 connector.
 
-```json
-{
-  "lineText": "V3",
-  "textConfidence": 91.60225677490234,
-  "blockType": "LINE"
-}
-```
+<img src={AsyncImg} alt="Example process using asynchronous execution" class="img-500"/>
+
+## Troubleshooting
+
+<ErrorHandling />
+
+## Further Resources
+
+- [Amazon Textract connector](https://marketplace.camunda.com/en-US/apps/473161/amazon-textract-connector) in the Camunda marketplace
+- [Amazon Textract Documentation](https://docs.aws.amazon.com/textract/latest/dg/what-is.html)

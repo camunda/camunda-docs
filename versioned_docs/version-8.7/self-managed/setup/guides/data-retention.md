@@ -159,9 +159,9 @@ curl -X PUT "${DATABASE_URL}/**<INDEX_PATTERN>**/_settings" \
 **Replace:**
 
 - `<INDEX_PATTERN>` with dated index patterns:
-  - `zeebe-record-*` - for Zeebe dated indices
-  - `operate-*-<date>` or `operate-list-view-*` - for Operate dated indices
-  - `tasklist-*-<date>` - for Tasklist dated indices
+  - `zeebe-record-*` (all Zeebe record indices include dates) - for Zeebe dated indices
+  - `operate*_<date>` (e.g., `operate*_202*`) - for Operate dated indices
+  - `tasklist*_<date>` (e.g., `tasklist*_202*`) - for Tasklist dated indices
 - `<POLICY_NAME>` - see policy names above
 
 ### Creating and updating ISM policies (OpenSearch)
@@ -237,9 +237,9 @@ curl -X POST "${DATABASE_URL}/_plugins/_ism/add/**<INDEX_PATTERN>**" \
 **Replace:**
 
 - `<INDEX_PATTERN>` with dated index patterns:
-  - `zeebe-record-*` - for Zeebe dated indices
-  - `operate-*-<date>` or `operate-list-view-*` - for Operate dated indices
-  - `tasklist-*-<date>` - for Tasklist dated indices
+  - `zeebe-record-*` (all Zeebe record indices include dates) - for Zeebe dated indices
+  - `operate*_<date>` (e.g., `operate*_202*`) - for Operate dated indices
+  - `tasklist*_<date>` (e.g., `tasklist*_202*`) - for Tasklist dated indices
 - `<POLICY_NAME>` - see policy names above
 
 ## Verification

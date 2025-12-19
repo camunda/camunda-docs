@@ -12,7 +12,7 @@ The **Design** mode view is tailored to business users, and the **Implement** an
 
 Business users can now focus on modeling, sharing, and collaborating, while developers can work on implementation and debugging with ease.
 
-When accessing a BPMN diagram for the [first time](/components/modeler/web-modeler/model-your-first-diagram.md), the **Design** mode is the first selected option. To switch between modes, you can select one of the tabs on the left side of the screen, above the diagram; any further selection is remembered and kept for the next sessions.
+When accessing a BPMN diagram for the [first time](/components/modeler/web-modeler/modeling/model-your-first-diagram.md), the **Design** mode is the first selected option. To switch between modes, you can select one of the tabs on the left side of the screen, above the diagram; any further selection is remembered and kept for the next sessions.
 
 ![modes tab navigation](../img/mode-tab-navigation.png)
 
@@ -25,6 +25,6 @@ When a process template is selected, the default mode is **Implement**.
 - **Project Admin** and **Editors** can access all modes.
 - **Commenters** can access all modes, but with read-only permission. This role can be assigned to stakeholders who need to see the implementation properties without the ability to modify them.
   ![read only properties](../img/read-only-properties.png)
-- **Viewers** can access only the **Design** mode with read-only permission,
+- **Viewers** can access all modes with read-only permissions and cannot leave comments. This role is suitable for stakeholders who only need to view the process design and implementation without making any changes or comments.
 
 Read more about the [different roles and how to assign them](./collaboration.md#access-rights-and-permissions).

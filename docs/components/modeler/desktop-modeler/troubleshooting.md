@@ -29,6 +29,12 @@ Depending on your operating system, you can find Desktop Modeler logs in differe
 %APPDATA%\camunda-modeler\logs
 ```
 
+Example:
+
+```plain
+C:\Users\Camunda\AppData\Roaming\camunda-modeler\logs
+```
+
 </TabItem>
 
 <TabItem value='macos'>
@@ -60,11 +66,26 @@ If you run against a Camunda 8 SaaS free-trial cluster, ensure it is [not paused
 
 To resolve this issue, check if you can connect to Zeebe through another client, for example, community-supported [`zbctl`](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md). If that works, [further debug your Zeebe connection](#debug-zeebe-connection-issues). If that does not work, resolve the [general connection issue](#resolve-a-general-zeebe-connection-issue) first.
 
+Additionally, if authorizations are enabled, ensure that your [client](/components/identity/client.md) credentials have the required permissions. These differ from [user](/components/identity/user.md) credentials and are evaluated separately.
+
 ## I cannot connect to a local orchestration cluster {#i-cannot-connect-to-local-zeebe}
 
 You try to connect (i.e., to deploy) to a local orchestration cluster, and Desktop Modeler tells you it "Cannot connect to orchestration cluster."
 
 Ensure your local orchestration cluster is running. If you don't have one installed, consider [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), a lightweight all-in-one distribution.
+
+## How to configure a REST connection
+
+You try out [task testing](./task-testing.md) and Desktop Modeler tells you "Configure a REST connection to a Camunda 8 cluster."
+
+Some features of Desktop Modeler, such as task testing, require a REST connection to a Camunda 8 cluster. Orchestration clusters from version 8.6 support connections with gRPC or the newer [Orchestration Cluster REST API](../../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). Depending on the provided URL, the corresponding client will be used. Ensure you use the REST URL in your deployment configuration:
+
+- If you are using Camunda 8 SaaS clusters, create an [API client](../../console/manage-clusters/manage-api-clients.md) and use the value of `Camunda REST API`.
+- If you are using [Camunda 8 Run](../../../self-managed/quickstart/developer-quickstart/c8run.md), you should use the value of `Orchestration Cluster API`.
+
+:::tip
+Even if the URL starts with `http://`, it may still be a gRPC endpoint. Ensure you use the correct URL provided by your orchestration cluster.
+:::
 
 ## Resolve a general Zeebe connection issue
 

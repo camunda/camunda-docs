@@ -15,33 +15,33 @@ The following index diagrams show Camunda Exporter indices for Camunda identity.
 - [camunda-user](#camunda-user)
 - [camunda-web-session](#camunda-web-session)
 
-## camunda-authorization
+### camunda-authorization
 
 ![diagram](./camunda-diagrams-1.png)
 
-## camunda-group
+### camunda-group
 
 ![diagram](./camunda-diagrams-2.png)
 ![diagram](./camunda-diagrams-3.png)
 
-## camunda-mapping
+### camunda-mapping
 
 ![diagram](./camunda-diagrams-4.png)
 
-## camunda-role
+### camunda-role
 
 ![diagram](./camunda-diagrams-5.png)
 ![diagram](./camunda-diagrams-6.png)
 
-## camunda-tenant
+### camunda-tenant
 
 ![diagram](./camunda-diagrams-7.png)
 ![diagram](./camunda-diagrams-8.png)
 
-## camunda-user
+### camunda-user
 
 ![diagram](./camunda-diagrams-9.png)
 
-## camunda-web-session
+### camunda-web-session
 
 ![diagram](./camunda-diagrams-10.png)

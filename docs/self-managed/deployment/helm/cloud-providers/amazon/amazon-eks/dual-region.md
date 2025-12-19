@@ -448,7 +448,7 @@ Key changes of the dual-region setup:
 - `orchestration.exporters.camunda.enabled: false`
   - Disables the automatic Camunda Exporter configuration in the Helm chart. Values are supplied manually through environment variables.
 - `orchestration.env`
-  - `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+  - `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
     - These are the contact points for the brokers to know how to form the cluster. Find more information on what the variable means in [setting up a cluster](../../../../../components/orchestration-cluster/zeebe/operations/setting-up-a-cluster.md).
   - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
     - The Elasticsearch endpoint for region 0.
@@ -481,7 +481,7 @@ You must change the following environment variables for Zeebe. The default value
 
 The base `camunda-values.yml` in `aws/dual-region/kubernetes` requires adjustments before installing the Helm chart:
 
-- `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS`
+- `CAMUNDA_CLUSTER_INITIALCONTACTPOINTS`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
 - `ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
@@ -507,9 +507,9 @@ For illustration purposes only. These values will not work in your environment.
 ./generate_zeebe_helm_values.sh
 Enter Zeebe cluster size (total number of Zeebe brokers in both Kubernetes clusters): 8
 
-Use the following to set the environment variable ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe:
+Use the following to set the environment variable CAMUNDA_CLUSTER_INITIALCONTACTPOINTS in the base Camunda Helm chart values file for Zeebe:
 
-- name: ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS
+- name: CAMUNDA_CLUSTER_INITIALCONTACTPOINTS
   value: camunda-zeebe-0.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-0.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-1.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-2.camunda-zeebe.camunda-paris.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-london.svc.cluster.local:26502,camunda-zeebe-3.camunda-zeebe.camunda-paris.svc.cluster.local:26502
 
 Use the following to set the environment variable ZEEBE_BROKER_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL in the base Camunda Helm chart values file for Zeebe:
@@ -549,6 +549,12 @@ helm install $CAMUNDA_RELEASE_NAME camunda/camunda-platform \
 ```
 
 ### Verify Camunda 8
+
+:::info Authentication changes in 8.8+
+
+Starting from version 8.8, the Orchestration Cluster is configured by default with [Identity](/self-managed/components/orchestration-cluster/identity/overview.md) and is protected by basic authentication using `demo:demo` as the default username and password.
+
+:::
 
 1. Open a terminal and port-forward the Zeebe Gateway via `kubectl` from one of your clusters. Zeebe is stretching over both clusters and is `active-active`, meaning it doesn't matter which Zeebe Gateway to use to interact with your Zeebe cluster.
 

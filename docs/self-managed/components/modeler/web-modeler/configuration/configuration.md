@@ -72,11 +72,11 @@ The available configuration options depend on the version of the cluster:
 
 ### Database
 
-Web Modeler currently supports PostgreSQL, Oracle, and Microsoft SQL Server (MSSQL) as persistent data storage.
+Web Modeler currently supports PostgreSQL, Oracle, Microsoft SQL Server (MSSQL), MySQL, MariaDB, and H2 as persistent data storage.
 
-:::info Oracle driver
-The Oracle driver is not provided by default and must be downloaded and supplied for the application to load.
-Refer to the [Oracle database configuration section](database.md#oracle) for details.
+:::info Oracle and MySQL driver
+The Oracle and MySQL drivers are not provided by default and must be downloaded and supplied for the application to load.
+Refer to the [Oracle](database.md#oracle) and [MySQL](database.md#mysql) database configuration section for details.
 :::
 
 | Environment variable                  | Description                                                                                                                                                                                                                                                                                                        | Example value                                            |
@@ -88,9 +88,6 @@ Refer to the [Oracle database configuration section](database.md#oracle) for det
 | `SPRING_DATASOURCE_HIKARI_SCHEMA`     | [optional; only supported for PostgreSQL]<br/>Database schema.<br/>Defaults to the default schema of the database user (usually `public`) if not set.<br/>Refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS) for naming restrictions. | `custom_schema`                                          |
 
 Refer to the [Advanced Database Configuration Guide](./database.md) for additional details on how to configure Web Modeler's database connection.
-
-Using a custom database schema via `SPRING_DATASOURCE_HIKARI_SCHEMA` is supported for PostgreSQL only. Oracle does not support custom schemas. MSSQL supports custom schemas, but this is not configurable in Web Modeler.
-If you want to use a custom schema in MSSQL, you must set the default schema for the database user accordingly.
 
 ### SMTP / email
 
@@ -150,9 +147,12 @@ For more details, [see the Zeebe connection troubleshooting section](/self-manag
 
 ### Logging
 
-| Environment variable | Description                                         | Example value                                  |
-| -------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| `LOGGING_CONFIG`     | [optional]<br/>Path to custom logback configuration | `file:/full/path/to/custom-logback-config.xml` |
+| Environment variable                | Description                                                          | Example value                                 | Default value |
+| ----------------------------------- | -------------------------------------------------------------------- | --------------------------------------------- | ------------- |
+| `LOGGING_CONFIG`                    | [optional]<br/>Path to custom Log4j2 configuration.                  | `file:/full/path/to/custom-log4j2-spring.xml` | -             |
+| `CAMUNDA_MODELER_LOG_LEVEL`         | [optional]<br/>Defines the log level for the Web Modeler components. | `DEBUG`                                       | `INFO`        |
+| `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                          | `true`                                        | `false`       |
+| `CAMUNDA_MODELER_LOG_APPENDER`      | [optional]<br/>Defines which appender to use for logging.            | `Stackdriver`                                 | `Console`     |
 
 Refer to the [advanced logging configuration guide](./logging.md#logging-configuration-for-the-restapi-component) for additional details on how to customize the `restapi` logging output.
 
@@ -172,7 +172,7 @@ Refer to the [advanced SSL configuration guide](./ssl.md) for additional details
 
 ### Git Sync
 
-Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
+Web Modeler supports syncing files via [Git Sync](../../../../../components/modeler/web-modeler/process-applications/git-sync.md). Provide the base URL for your provider if you are using a self-hosted GitLab, GitHub, or Azure DevOps Server instance.
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                                |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
@@ -213,12 +213,12 @@ The proxy-related environment variables are lowercase because they follow a wide
 
 ### Feature Flags
 
-| Environment variable            | Description                                                                                                                                                                                                                                                                    | Example value | Default value |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- | ------------- |
-| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../../components/modeler/web-modeler/collaboration/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                 | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.              | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                      | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../../components/modeler/web-modeler/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
+| Environment variable            | Description                                                                                                                                                                                                                                                                             | Example value | Default value |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `PLAY_ENABLED`                  | [optional]<br/>Enables the [**Play** mode](../../../../../components/modeler/web-modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED` | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`  | [optional]<br/>Enables the [**Deploy**](../../../../../components/modeler/web-modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `MARKETPLACE_ENABLED`           | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../../components/modeler/web-modeler/modeling/camunda-marketplace.md) directly inside Web Modeler. | `false`       | `true`        |
 
 ### Identity / Keycloak
 

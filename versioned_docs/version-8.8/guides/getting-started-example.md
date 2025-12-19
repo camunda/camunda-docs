@@ -1,7 +1,7 @@
 ---
 id: getting-started-example
-title: "Run your first local Camunda 8 project"
-sidebar_label: Run your first local project
+title: "Run your first Spring Boot or Node.js project with Camunda 8"
+sidebar_label: Run your first Spring Boot or Node.js project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
 keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
 ---
@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-This guide is tailored for developers who want to implement process automation solutions using Java and Spring. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is tailored for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 ## Get started with an example project
 
@@ -85,12 +85,12 @@ The service tasks in the process are executed by job workers. The `java` and `no
 ] }>
 <TabItem value="maclinux">
     ```bash
-./1-camunda-starter.sh
+./camunda-start.sh
 ```
 </TabItem>
 <TabItem value="windows">
 ```bash
-.\1-camunda-starter.bat
+.\camunda-start.bat
 ```
 </TabItem>
 </Tabs>
@@ -244,7 +244,7 @@ You have completed your first process instance by:
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
 
-Find more examples on the [Developer Portal](https://developers.camunda.com/developer-resources/orchestration-use-cases/).
+Find more examples on the [Developer Portal](https://camunda.com/developers/).
 
 ## Teardown
 
@@ -259,14 +259,14 @@ You can stop Camunda 8 Run by executing:
 <TabItem value="maclinux">
 
 ```bash
-cd c8run && ./c8run stop
+./camunda-stop.sh
 
 ```
 
 </TabItem>
 <TabItem value="windows">
 ```bash
-cd c8run && .\c8run.exe stop
+./camunda-stop.bat
 ````
 
 </TabItem>

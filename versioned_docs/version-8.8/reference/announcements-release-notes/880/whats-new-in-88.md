@@ -32,7 +32,7 @@ Upgrading to Camunda 8.8 delivers significant benefits:
 
 - **Enhanced productivity**: This upgrade introduces streamlined [identity and access management](#identity), a consolidated configuration model, and modernized & consolidated [APIs and SDKs](#apis-and-tools), making development, integration, and permission handling faster and more intuitive.
 
-- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance with accelerated data visibility in Operate and Tasklist, as well as available via query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
+- **Increased efficiency**: The new [unified exporter architecture](#unified-exporter) improves performance with accelerated data visibility in Operate and Tasklist, as well as public query APIs. It also enables easier operation and administration, and improves resilience when deploying across multiple data centers.
 
 </div>
 
@@ -79,7 +79,7 @@ Important changes introduced in Camunda 8.8 are summarized as follows:
 
 Camunda agentic orchestration allows you to build and orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and AI-driven decisions to collaborate in a robust, end-to-end process.
 
-<p><a href="../../../../components/agentic-orchestration/" class="link-arrow">Agentic orchestration</a></p>
+<p><a href="../../../../components/agentic-orchestration/agentic-orchestration-overview" class="link-arrow">Agentic orchestration</a></p>
 
 Use the following new features to build and integrate AI agents into your processes:
 
@@ -147,11 +147,15 @@ Camunda 8.8 introduces a single unified Orchestration Cluster REST API you can u
 
 ### Unified Exporter
 
-Camunda 8.8 introduces a new unified exporter architecture to improve cluster management and data migration. The new exporter architecture provides two dedicated Helm jobs for Identity migration and process application migration.
+Camunda 8.8 introduces a new unified Camunda Exporter that directly populates data records that are consumable by read APIs on the secondary storage. This significantly reduces latency until eventually consistent data becomes available on Get and Search APIs.
 
 In Camunda 8.7 and earlier, dedicated importers/exporters were used for data flows between components (such as Elasticsearch import/export).
 
-<p><a href="../../../../self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter/" class="link-arrow">Camunda Exporter</a></p>
+<p class="link-arrow">[Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)</p>
+
+:::info
+Learn more about the unified Camunda Exporter in the blog post [One Exporter to Rule Them All: Exploring Camunda Exporter](https://camunda.com/blog/2025/02/one-exporter-to-rule-them-all-exploring-camunda-exporter/).
+:::
 
 ### Unified component configuration
 
@@ -434,15 +438,15 @@ Camunda 8.8 includes new tools and enhancements to help you migrate from Camunda
     <td>**Description**</td>
 </tr>
 <tr>
-    <td>[Data migration tool](/guides/migrating-from-camunda-7/data-migrator/index.md)</td>
+    <td>[Data migration tool](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/index.md)</td>
     <td>Use the Data Migrator to copy running process instances from Camunda 7 to Camunda 8.</td>
 </tr>
 <tr>
-    <td>[Migration Analyzer & Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling.md#migration-analyzer--diagram-converter)</td>
+    <td>[Diagram Converter](/guides/migrating-from-camunda-7/migration-tooling/diagram-converter.md)</td>
     <td>Analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration. It can also automatically convert these files from Camunda 7 format to Camunda 8 format.</td>
 </tr>
 <tr>
-    <td>[Code conversion](/guides/migrating-from-camunda-7/code-conversion.md)</td>
+    <td>[Code conversion](/guides/migrating-from-camunda-7/migration-tooling/code-conversion.md)</td>
     <td>Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.</td>
 </tr>
 </table>

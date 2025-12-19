@@ -38,6 +38,7 @@ camunda:
           clients:
             # STDIO server started as Node.js process (requires Node.js runtime)
             filesystem: # <-- client ID, needed to reference the client in the MCP Client connector configuration
+              type: stdio
               stdio:
                 command: npx
                 args:
@@ -49,6 +50,7 @@ camunda:
 
             # STDIO server started as docker container (requires Docker being available)
             time:
+              type: stdio
               stdio:
                 command: docker
                 args:
@@ -57,11 +59,40 @@ camunda:
                   - "--rm"
                   - "mcp/time"
 
+            # Remote Streamable HTTP MCP server (recommended for remote servers)
+            # fetch:
+            #   enabled: true
+            #   type: http
+            #   http:
+            #     url: https://remote.mcpservers.org/fetch/mcp
+            #     headers:
+            #       X-Dummy: dummy-value
+            #     # authentication examples
+            #     authentication:
+            #       type: basic # or bearer or oauth
+            #       basic:
+            #         username: my-username
+            #         password: my-password
+            #       bearer:
+            #         token: my-token
+            #       oauth:
+            #         oauth-token-endpoint: http://example.com/oauth/token
+            #         client-id: my-client-id
+            #         client-secret: my-client-secret
+            #         scopes: my-scope
+            #         audience: my-audience
+            #         client-authentication: basic-auth-header # or credentials-body
+
             # Connection to a remote HTTP/SSE MCP server
-            some-remote-server:
-              enabled: false
-              sse:
-                url: https://example.com/mcp/sse
+            # some-remote-sse-server:
+            #   enabled: false
+            #   type: sse
+            #   sse:
+            #     url: https://example.com/mcp/sse
+            #     headers:
+            #       X-Dummy: dummy-value
+            #     authentication:
+            #       ...
 ```
 
 The YAML structure above describes the overall configuration structure of the MCP Client connector. How to configure
@@ -69,7 +100,7 @@ this for your specific use case varies on the connector runtime you are using.
 
 ### Camunda 8 Run
 
-1. Download and extract the latest [Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md) release (at
+1. Download and extract the latest [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) release (at
    least version 8.8.0-alpha6).
 2. Before starting Camunda 8 Run, create a config file (for example `mcp-clients.yml`) in the same directory as
    `connectors-application.properties` and add the MCP Client configuration as shown above. Adapt the configuration as
@@ -78,7 +109,7 @@ this for your specific use case varies on the connector runtime you are using.
    ```properties
    spring.config.import=file:./mcp-client.yml
    ```
-4. [Start Camunda 8 Run](../../../../self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
+4. [Start Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md#install-and-start-camunda-8-run).
 5. While starting up, you can follow `logs/connectors.log`. If configured correctly, you should see log messages for the
    initialization of the configured MCP clients and the registration of the MCP Client connector:
    ```log

@@ -1,6 +1,6 @@
 ---
 id: dual-region
-title: "Dual-region setup"
+title: "Dual-region"
 sidebar_label: "Dual-region"
 description: "A dual-region setup allows you to run Camunda in two regions synchronously."
 ---
@@ -25,12 +25,14 @@ Before implementing a dual-region setup, ensure you understand the topic, the [l
 
 The dual-region setup is a hybrid active-active/active-passive architecture:
 
-| **Component** | **Mode**                                             | **Both Regions Running** | **User Traffic**          | **RPO** |
-| ------------- | ---------------------------------------------------- | ------------------------ | ------------------------- | ------- |
-| Zeebe         | Active-active                                        | ✅ Required              | Both regions process data | 0       |
-| Elasticsearch | Active-active                                        | ✅ Required              | Data replicated to both   | 0       |
-| Operate       | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
-| Tasklist      | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
+|                                 **Component** | **Mode**                                             | **Both Regions Running** | **User Traffic**          | **RPO** |
+| --------------------------------------------: | ---------------------------------------------------- | ------------------------ | ------------------------- | ------- |
+| <p align="left">**Orchestration Cluster**</p> |                                                      | ✅ Required              |                           |         |
+|                                         Zeebe | Active-active                                        | ✅ Required              | Both regions process data | 0       |
+|                                      Identity | Active-active                                        | ✅ Required              | Cluster-level identity    | 0       |
+|                                       Operate | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
+|                                      Tasklist | Active-passive (see [Active-active](#active-active)) | ✅ Required              | One region serves users   | 0       |
+|         <p align="left">**Elasticsearch**</p> | Active-active                                        | ✅ Required              | Data replicated to both   | 0       |
 
 :::important
 
@@ -100,7 +102,12 @@ Both regions actively participate in data processing and replication.
 The visual representation shows both regions as operational. Any grayed-out appearance in the diagram represents user traffic routing, not system operational status. All components in both regions must be running and operational.
 :::
 
-Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers. Zeebe exports data to Elasticsearch instances in both regions. Operate and Tasklist in both regions import data but only the primary region serves users.
+The Orchestration Cluster consists of multiple components:
+
+- Zeebe stretches across regions using the [Raft protocol](<https://en.wikipedia.org/wiki/Raft_(algorithm)>), allowing communication and data replication between all brokers.
+- Zeebe exports data to Elasticsearch instances in both regions using the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md).
+- Using the new exporters ensures that Operate and Tasklist data is the same in both regions besides some v1 API related operations that are still region specific. See [active-active](#active-active).
+- Identity is embedded in the Orchestration Cluster and provides cluster-level identity management.
 
 ### User traffic
 
@@ -122,19 +129,23 @@ Traffic redirection must be performed as part of the complete failover procedure
 
 The currently supported Camunda 8 Self-Managed components are:
 
-- Zeebe (process automation engine)
+- Orchestration Cluster
+  - Zeebe (process automation engine)
+  - Identity
+  - Operate
+  - Tasklist
 - Elasticsearch (database)
-- Operate
-- Tasklist
 
 #### Component requirements
 
-| Component     | Mode                                                                | Requirement                             | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                      |
-| ------------- | ------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| Zeebe         | Active-active                                                       | All brokers in both regions must run    | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                |
-| Elasticsearch | Active-active                                                       | Both clusters must run                  | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                           |
-| Operate       | Active-passive (user traffic) (see [Active-active](#active-active)) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations if not submitted via v2 API</li></ul>                                                                                                                                         | Data loss possible if using v1 API as changes are isolated to the initiated region. |
-| Tasklist      | Active-passive (user traffic) (see [Active-active](#active-active)) | Both instances must run and import data | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments if not utilizing Tasklist v2 API</li></ul>                                                                                                                                                | Data loss possible if using v1 API as changes are isolated to the initiated region. |
+|                                     Component | Mode                                                                | Requirement                           | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                      |
+| --------------------------------------------: | ------------------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| <p align="left">**Orchestration Cluster**</p> |                                                                     |                                       |                                                                                                                                                                                                                                                                                                                                      |                                                                                     |
+|                                         Zeebe | Active-active                                                       | All brokers in both regions must run  | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                |
+|                                      Identity | Active-active                                                       | Embedded in the Orchestration cluster | <ul><li>Identity provides unified, cluster-level identity management and authorization</li></ul>                                                                                                                                                                                                                                     | Can handle region failure without data loss                                         |
+|                                       Operate | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Uncompleted batch operations if not submitted via v2 API</li></ul>                                                                                                                                         | Data loss possible if using v1 API as changes are isolated to the initiated region. |
+|                                      Tasklist | Active-passive (user traffic) (see [Active-active](#active-active)) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Only primary serves users</li><li>**Region-specific data**: Task assignments if not utilizing Tasklist v2 API</li></ul>                                                                                                                                                | Data loss possible if using v1 API as changes are isolated to the initiated region. |
+|         <p align="left">**Elasticsearch**</p> | Active-active                                                       | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                           |
 
 ## Requirements and limitations
 
@@ -142,7 +153,9 @@ The currently supported Camunda 8 Self-Managed components are:
 
 Two Kubernetes clusters are required for the Helm chart installation.
 
-Amazon OpenSearch is **not supported** in dual-region configurations.
+:::note
+OpenSearch is **not supported** in dual-region configurations.
+:::
 
 #### Network requirements
 
@@ -175,12 +188,12 @@ This numbering and the round-robin partition distribution assures the even repli
 | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Installation methods        | <p><ul><li>For Kubernetes we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) installed in two Kubernetes clusters.</li><li>For other platforms, using alternative installation methods (for example, docker-compose) is not covered by our guides.</li></ul></p>                                                                                                                       |
 | Traffic Management          | <p>Hybrid active-active/active-passive architecture:</p><p><ul><li>**Data Layer**: Active-active replication with zero RPO.</li><li>**User Traffic**: Active-passive routing to prevent conflicts.</li><li>**All Components**: Must be operational in both regions.</li></ul></p>                                                                                                                                                                                           |
-| Management Identity Support | Management Identity, including multi-tenancy and role-based access control (RBAC), is currently unavailable in this setup.                                                                                                                                                                                                                                                                                                                                                  |
+| Management Identity Support | Management Identity, including multi-tenancy and role-based access control (RBAC), is currently unavailable in this setup. Multi-tenancy and RBAC are supported using the Orchestration Cluster level Identity.                                                                                                                                                                                                                                                             |
 | Optimize Support            | Not supported (requires Management Identity with specific configuration).                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Connectors Deployment       | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments, so using message idempotency is critical.                                                                                                                                                   |
 | Connectors                  | If you are running Connectors and have a process with an inbound connector deployed in a dual-region setup, consider the following: <ul><li> when you want to delete the process deployment, delete it via Operate, otherwise the inbound connector won't deregister.</li><li>if you have multiple Operate instances running, then perform the delete operation in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
 | Zeebe Cluster Scaling       | Not supported.                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| Web Modeler                 | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the orchestration clusters.                                                                                                                                                                                                                                                                                                            |
+| Web Modeler                 | Web Modeler is a standalone component that is not covered in this guide. Modelling applications can operate independently outside of the orchestration clusters. Web Modeler also has a dependency on Management Identity.                                                                                                                                                                                                                                                  |
 
 ### Infrastructure and deployment platform considerations
 

@@ -56,7 +56,6 @@ These secrets are used by Camunda applications and must be configured manually w
 | **Enterprise License Key**              | `global.license.secret`                             | Camunda Enterprise license key                          |
 | **Identity First User Password**        | `identity.firstUser.secret`                         | Default user password (`demo/demo`)                     |
 | **OAuth Client Secret (Admin)**         | `global.identity.auth.admin.secret`                 | OAuth admin client secret for administrative operations |
-| **OAuth Client Secret (Console)**       | `global.identity.auth.console.secret`               | OAuth client secret for Console                         |
 | **OAuth Client Secret (Connectors)**    | `connectors.security.authentication.oidc.secret`    | OAuth client secret for connectors                      |
 | **OAuth Client Secret (Orchestration)** | `orchestration.security.authentication.oidc.secret` | OAuth client secret for Orchestration Cluster           |
 | **OAuth Client Secret (Optimize)**      | `global.identity.auth.optimize.secret`              | OAuth client secret for Optimize                        |
@@ -121,7 +120,7 @@ For production environments, create a Kubernetes Secret and reference it from yo
 Create a secret using `kubectl` or a YAML manifest:
 
 ```sh
-kubectl create secret generic console-secret \
+kubectl create secret generic optimize-secret \
   --from-literal=client-secret=camundapassword \
   --namespace camunda
 ```
@@ -132,7 +131,7 @@ Or using YAML:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: console-secret
+  name: optimize-secret
   namespace: camunda
 type: Opaque
 stringData:
@@ -147,9 +146,9 @@ stringData:
 global:
   identity:
     auth:
-      console:
+      optimize:
         secret:
-          existingSecret: "console-secret"
+          existingSecret: "optimize-secret"
           existingSecretKey: "client-secret"
 ```
 
@@ -261,9 +260,9 @@ This scenario applies when your legacy configuration references a Kubernetes sec
 global:
   identity:
     auth:
-      console:
+      optimize:
         existingSecret:
-          name: console-secret
+          name: optimize-secret
         existingSecretKey: client-secret
 ```
 
@@ -273,9 +272,9 @@ global:
 global:
   identity:
     auth:
-      console:
+      optimize:
         secret:
-          existingSecret: console-secret
+          existingSecret: optimize-secret
           existingSecretKey: client-secret
 ```
 
@@ -289,7 +288,7 @@ This scenario applies when your legacy configuration provided a plaintext string
 global:
   identity:
     auth:
-      console:
+      optimize:
         existingSecret: "my-plaintext-secret"
 ```
 
@@ -299,7 +298,7 @@ global:
 global:
   identity:
     auth:
-      console:
+      optimize:
         secret:
           inlineSecret: "my-plaintext-secret"
 ```
@@ -339,15 +338,48 @@ global:
 
 ## TLS certificates
 
-For TLS-enabled services, you'll need to configure certificate secrets.
+TLS certificate secrets for Camunda components and external services.
 
-### Secrets using the legacy pattern (all versions)
+### Secrets using the new pattern (Camunda 8.9+)
 
-| **Secret**                          | **Chart values key**                      | **Purpose**                                         |
-| ----------------------------------- | ----------------------------------------- | --------------------------------------------------- |
-| **Console TLS Certificate**         | `console.tls.existingSecret`              | TLS certificate for Console web application         |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.existingSecret` | TLS certificate for external Elasticsearch over SSL |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.existingSecret`    | TLS certificate for external OpenSearch over SSL    |
+| **Secret**                          | **Chart values key**              | **Purpose**                                         |
+| ----------------------------------- | --------------------------------- | --------------------------------------------------- |
+| **Console TLS Certificate**         | `console.tls.secret`              | TLS certificate for Console web application         |
+| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
+| **External OpenSearch TLS Cert**    | `global.opensearch.tls.secret`    | TLS certificate for external OpenSearch over SSL    |
+
+**TLS Certificate Configuration**: Unlike password-based secrets, TLS certificates do not support `inlineSecret` (certificates are binary files unsuitable for inline configuration).
+
+For Elasticsearch and OpenSearch, both `existingSecret` and `existingSecretKey` are required to specify which key in the secret contains the certificate file. For Console, only `existingSecret` is required as the entire secret is mounted as a directory.
+
+Create the secrets with your certificate files using `kubectl create secret generic`:
+
+```sh
+kubectl create secret generic <secret-name> \
+  --from-file=<key>=<path-to-certificate-file> \
+  --namespace camunda
+```
+
+Reference them in your values:
+
+```yaml
+# Elasticsearch/OpenSearch
+global:
+  elasticsearch:
+    tls:
+      enabled: true
+      secret:
+        existingSecret: elasticsearch-tls-secret
+        existingSecretKey: externaldb.jks
+
+# Console
+console:
+  tls:
+    enabled: true
+    secret:
+      existingSecret: console-tls-secret
+    certKeyFilename: ca.crt
+```
 
 ### Ingress TLS
 
@@ -359,42 +391,6 @@ global:
     tls:
       enabled: true
       secretName: camunda-platform
-```
-
-### External service TLS
-
-For external Elasticsearch or OpenSearch with TLS, configure the TLS certificate using the legacy pattern:
-
-```yaml
-global:
-  elasticsearch:
-    tls:
-      enabled: true
-      existingSecret: elasticsearch-tls-secret
-```
-
-### Console TLS (legacy pattern)
-
-```yaml
-console:
-  tls:
-    enabled: true
-    existingSecret: console-tls-secret
-    certKeyFilename: tls.key
-```
-
-Create TLS secrets using the standard Kubernetes TLS secret type:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: camunda-platform
-  namespace: camunda
-type: kubernetes.io/tls
-data:
-  tls.crt: <base64 encoded cert>
-  tls.key: <base64 encoded key>
 ```
 
 ## Extract plaintext values and reference them as Kubernetes Secrets
@@ -494,9 +490,6 @@ RELEASE_NAMESPACE=camunda-dev
 # Only if "connectors.enabled: true".
 export IDENTITY_CONNECTORS_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-connectors-identity-secret" -o jsonpath="{.data.connectors-secret}" | base64 --decode)
 
-# Only if "console.enabled: true".
-export IDENTITY_CONSOLE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-console-identity-secret" -o jsonpath="{.data.console-secret}" | base64 --decode)
-
 # Only if "optimize.enabled: true".
 export IDENTITY_OPTIMIZE_CLIENT_SECRET=$(kubectl get secret "${RELEASE_NAME}-optimize-identity-secret" -o jsonpath="{.data.optimize-secret}" | base64 --decode)
 
@@ -533,9 +526,6 @@ type: Opaque
 stringData:
   # Only if "connectors.enabled: true".
   identity-connectors-client-token: "${IDENTITY_CONNECTORS_CLIENT_SECRET}"
-
-  # Only if "console.enabled: true".
-  identity-console-client-token: "${IDENTITY_CONSOLE_CLIENT_SECRET}"
 
   # Only if "optimize.enabled: true".
   identity-optimize-client-token: "${IDENTITY_OPTIMIZE_CLIENT_SECRET}"
@@ -576,10 +566,6 @@ If a component already uses its own existing secret, make sure to remove that se
 global:
   identity:
     auth:
-      console:
-        secret:
-          existingSecret: "camunda-credentials"
-          existingSecretKey: "identity-console-client-token"
       optimize:
         secret:
           existingSecret: "camunda-credentials"

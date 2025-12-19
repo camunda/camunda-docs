@@ -2,11 +2,185 @@
 id: notices
 title: "Security notices"
 description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information."
+toc_max_heading_level: 2
 ---
 
-## Security notices
-
 Camunda publishes security notices after fixes are available.
+
+:::tip Subscribe to security notices
+Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
+:::
+
+## Report a security issue or vulnerability
+
+Report security vulnerabilities to Camunda immediately, following the instructions at [Camunda Security](https://camunda.com/security#report-a-vulnerability).
+
+:::info
+To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
+:::
+
+## Notice 37
+
+### Publication date
+
+December 12, 2025
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application is vulnerable to [CVE-2025-12183](https://nvd.nist.gov/vuln/detail/CVE-2025-12183), which allows remote attackers to cause denial of service and read adjacent memory via untrusted compressed input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist/Zeebe/Operate ≤ 8.8.6, ≤ 8.7.20, or ≤ 8.6.32
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist/Zeebe/Operate 8.8.7, 8.7.21, 8.6.33
+
+## Notice 36
+
+### Publication date
+
+December 03, 2025
+
+### Products affected
+
+- Management Identity
+
+### Impact
+
+The application is vulnerable to [CVE-2025-53066](https://nvd.nist.gov/vuln/detail/CVE-2025-53066), which allows an unauthenticated attacker with network access via multiple protocols to compromise Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition. Successful attacks of this vulnerability can result in unauthorized access to critical data or complete access to all Oracle Java SE, Oracle GraalVM for JDK, Oracle GraalVM Enterprise Edition accessible data.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Management Identity ≤ 8.8.2, ≤ 8.7.10, or ≤ 8.6.22
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Management Identity 8.8.3, 8.7.11, 8.6.23
+
+## Notice 35
+
+### Publication date
+
+November 26, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+- Camunda Management Identity
+
+### Impact
+
+The embedded JDBC driver for Amazon Aurora PostgreSQL (`software.amazon.jdbc:aws-advanced-jdbc-wrapper`) was affected by
+[CVE-2025-12967](https://nvd.nist.gov/vuln/detail/CVE-2025-12967), which may allow for privilege escalation to the `rds_superuser` role.
+A low privilege authenticated user can create a crafted function that could be executed with permissions of other Amazon Relational Database Service (RDS) users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.2, ≤ 8.7.12, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+- Management Identity ≤ 8.8.1, ≤ 8.7.9, or ≤ 8.6.21 with Amazon Aurora PostgreSQL
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.8.3, 8.7.13, 8.6.22
+- Management Identity 8.8.2, 8.7.10, 8.6.22
+
+## Notice 34
+
+### Publication date
+
+November 11, 2025
+
+### Products affected
+
+- Camunda Web Modeler Self-Managed
+
+### Impact
+
+The version of the MSSQL JDBC driver `com.microsoft.sqlserver:mssql-jdbc` used by Web Modeler was affected by [CVE-2025-59250](https://nvd.nist.gov/vuln/detail/CVE-2025-59250), which allows improper input validation that could enable an attacker to perform spoofing over a network.
+
+### How to determine if the installation is affected
+
+You are using Web Modeler Self-Managed version &lt;= 8.8.1 and Microsoft SQL Server as database vendor.
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Web Modeler Self-Managed 8.8.2
+
+## Notice 33
+
+### Publication date
+
+October 22, 2025
+
+### Products affected
+
+- Camunda Orchestration Cluster
+
+### Impact
+
+A bug in signal broadcast command processing allowed unauthorized users to trigger signal start events or signal intermediate catch events in certain process definitions without the required create or update permissions.
+
+This did not allow users to access process definitions of other tenants, or leak any information about these process instances back to the unauthorized users.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Orchestration Cluster 8.8.0
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Orchestration Cluster 8.8.1
+
+## Notice 32
+
+### Publication date
+
+October 21, 2025
+
+### Products affected
+
+- Camunda Identity
+
+### Impact
+
+The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Identity 8.7.0 - 8.7.4 or 8.7.6 - 8.7.7
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Identity 8.7.8
 
 ## Notice 31
 
@@ -22,6 +196,7 @@ October 16, 2025
 
 The embedded Undertow web server was affected by [CVE-2025-9784](https://nvd.nist.gov/vuln/detail/CVE-2025-9784),
 a flaw where malformed client requests can trigger server-side stream resets without incrementing abuse counters.
+
 This issue, referred to as the "MadeYouReset" attack, allows malicious clients to induce excessive server workload by
 repeatedly causing server-side stream aborts and could be exploited to cause a denial of service (DoS).
 
@@ -79,27 +254,27 @@ Camunda has provided the following releases which contain the fix:
 - Optimize 8.7.10, 8.6.17
 - Identity 8.7.7, 8.6.20, 8.5.22
 
-### Notice 29
+## Notice 29
 
-#### Publication date
+### Publication date
 
 October 3, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Zeebe
 
-#### Impact
+### Impact
 
 Zeebe may be affected by [CVE-2024-41996](https://nvd.nist.gov/vuln/detail/CVE-2024-41996), which allows remote attackers to trigger expensive server-side DHE modular-exponentiation calculations, potentially causing asymmetric resource consumption and DoS attacks.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are potentially affected if you have configured Zeebe to accept DHE or ECDHE cipher suites through the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable.
 
 Default Zeebe installations are not affected.
 
-#### Solution
+### Solution
 
 Configure the `server.ssl.ciphers` property or `SERVER_SSL_CIPHERS` environment variable to exclude DHE and ECDHE cipher suites. For example:
 
@@ -109,102 +284,102 @@ server.ssl.ciphers=TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA2
 
 There is no known mitigation other than disabling the use of DHE and ECDHE cipher suites.
 
-### Notice 28
+## Notice 28
 
-#### Publication date
+### Publication date
 
 September 9, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 Optimize was affected by [CVE-2025-5115](https://nvd.nist.gov/vuln/detail/CVE-2025-5115), which allows a remote attacker to repeatedly send malformed HTTP/2 frames that exhaust a Jetty server’s CPU and memory, causing a denial-of-service.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Optimize 8.7.0 - 8.7.8 or 8.6.0 - 8.6.15
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Optimize 8.7.9, 8.6.16
 
-### Notice 27
+## Notice 27
 
-#### Publication date
+### Publication date
 
 August 27, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 Optimize's email functionality was affected by [CVE-2025-7962](https://nvd.nist.gov/vuln/detail/CVE-2025-7962), which allowed for SMTP injection by providing forged email recipient addresses that could lead to malicious content being sent to arbitrary recipients.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Optimize 8.7.8, 8.6.15
 
-### Notice 26
+## Notice 26
 
-#### Publication date
+### Publication date
 
-August 27th, 2025
+August 27, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 Optimize was affected by [CVE-2025-53864](https://nvd.nist.gov/vuln/detail/CVE-2025-53864) which allows a remote attacker to cause a denial of service via a deeply nested JSON object supplied in a JWT claim set, because of uncontrolled recursion.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Optimize 8.7.8, 8.6.15
 
-### Notice 25
+## Notice 25
 
-#### Publication date
+### Publication date
 
-August 27th, 2025
+August 27, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The embedded Apache Tomcat was affected by [CVE-2025-48989](https://nvd.nist.gov/vuln/detail/CVE-2025-48989) which made Tomcat vulnerable to the MadeYouReset attack.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -213,7 +388,7 @@ You are using:
 - Operate 8.7.0 - 8.7.10 or 8.6.0 - 8.6.24 or 8.5.0 - 8.5.18
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -222,13 +397,13 @@ Camunda has provided the following releases which contain the fix:
 - Operate 8.7.11, 8.6.25, 8.5.19
 - Optimize 8.7.8, 8.6.15
 
-### Notice 24
+## Notice 24
 
-#### Publication date
+### Publication date
 
-August 27th, 2025
+August 27, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
@@ -236,11 +411,11 @@ August 27th, 2025
 - Camunda Identity
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The embedded Netty was affected by [CVE-2025-55163](https://nvd.nist.gov/vuln/detail/CVE-2025-55163) which allows malformed HTTP/2 control frames usage that results in resource exhaustion and distributed denial of service.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -250,7 +425,7 @@ You are using:
 - Identity 8.7.0 - 8.7.5 or 8.6.0 - 8.6.18 or 8.5.0 - 8.5.19
 - Optimize 8.7.0 - 8.7.7 or 8.6.0 - 8.6.14
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -260,13 +435,13 @@ Camunda has provided the following releases which contain the fix:
 - Identity 8.7.6, 8.6.19, 8.5.20
 - Optimize 8.7.8, 8.6.15
 
-### Notice 23
+## Notice 23
 
-#### Publication date
+### Publication date
 
-July 31st, 2025
+July 31, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
@@ -274,11 +449,11 @@ July 31st, 2025
 - Camunda Identity
 - Camunda Optimize
 
-#### Impact
+### Impact
 
 The embedded Spring Boot Tomcat was affected by [CVE-2025-53506](https://nvd.nist.gov/vuln/detail/CVE-2025-53506) which allowed for uncontrolled resource consumption that could be used to exhaust system resources in a potential DoS (denial of service) attack.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -288,7 +463,7 @@ You are using:
 - Identity 8.7.0 - 8.7.4 or 8.6.0 - 8.6.17 or 8.5.0 - 8.5.18
 - Optimize 8.7.0 - 8.7.6 or 8.6.0 - 8.6.12
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -298,23 +473,23 @@ Camunda has provided the following releases which contain the fix:
 - Identity 8.7.5, 8.6.18, 8.5.19
 - Optimize 8.7.7, 8.6.13
 
-### Notice 22
+## Notice 22
 
-#### Publication date
+### Publication date
 
-July 31st, 2025
+July 31, 2025
 
-#### Products affected
+### Products affected
 
 - Camunda Tasklist
 - Camunda Zeebe
 - Camunda Operate
 
-#### Impact
+### Impact
 
 Part of our RESTful API that supported multipart file uploads was affected by [CVE-2025-52520](https://nvd.nist.gov/vuln/detail/CVE-2025-52520), which could lead to potential DoS (denial of service) attacks.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using:
 
@@ -322,7 +497,7 @@ You are using:
 - Zeebe 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
 - Operate 8.6.0 - 8.6.22 or 8.7.0 - 8.7.8
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -333,75 +508,75 @@ Camunda has provided the following releases which contain the fix:
 - Operate 8.6.23
 - Operate 8.7.9
 
-### Notice 21
+## Notice 21
 
-#### Publication date
+### Publication date
 
-June 18th, 2025
+June 18, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Web Modeler Self-Managed
 
-#### Impact
+### Impact
 
 The version of `org.postgresql:postgresql` used by Camunda Web Modeler Self-Managed was affected by [CVE-2025-49146](https://nvd.nist.gov/vuln/detail/CVE-2025-49146) potentially allowing a man-in-the-middle attacker to intercept connections when the PostgreSQL JDBC driver was configured with channel binding set to required.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Web Modeler Self-Managed version 8.6.0 - 8.6.12, or 8.7.0 - 8.7.3.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
 - Camunda Web Modeler Self-Managed 8.6.12
 - Camunda Web Modeler Self-Managed 8.7.3
 
-### Notice 20
+## Notice 20
 
-#### Publication date
+### Publication date
 
-June 17th, 2025
+June 17, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Optimize
 
-#### Impact
+### Impact
 
 Camunda Optimize was affected by a vulnerability that allowed an attacker to gain improper access to Optimize data by using a modified JWT (JSON Web Token).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Optimize ≤ 8.6.9 or ≤ 8.7.2.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
 - [Camunda Optimize 8.6.10](https://github.com/camunda/camunda/releases/tag/8.6.10-optimize)
 - [Camunda Optimize 8.7.3](https://github.com/camunda/camunda/releases/tag/8.7.3-optimize)
 
-### Notice 19
+## Notice 19
 
-#### Publication date
+### Publication date
 
-May 21st, 2025
+May 21, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `nodejs` used by Camunda Web Modeler was affected by [CVE-2025-23166](https://nvd.nist.gov/vuln/detail/CVE-2025-23166) potentially allowing an adversary to remotely crash the Node.js runtime.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Web Modeler Self-Managed version ≤ 8.4.17, ≤ 8.5.18, ≤ 8.6.10, or ≤ 8.7.1.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -412,25 +587,25 @@ Camunda has provided the following releases which contain the fix:
 
 The fix was deployed to Web Modeler SaaS on May 19, 2025, 15:10 CET.
 
-### Notice 18
+## Notice 18
 
-#### Publication date
+### Publication date
 
-April 8th, 2025
+April 8, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Optimize
 
-#### Impact
+### Impact
 
 Camunda Optimize was affected by a vulnerability that allowed an attacker to modify a JWT (JSON Web Token) so that they would be given improper access to Optimize.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤ 3.11.20, ≤ 3.12.15, ≤ 3.13.12, ≤ 3.14.3, ≤ 3.15.1.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
@@ -443,17 +618,17 @@ Camunda has provided the following release which contains a fix:
 - [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
 - [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
 
-### Notice 17
+## Notice 17
 
-#### Publication date
+### Publication date
 
-April 8th, 2025
+April 8, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Zeebe
 
-#### Impact
+### Impact
 
 When parsing unknown fields in the Protobuf Java Lite and Full library, a maliciously crafted message can cause a StackOverflow error and lead to a
 program crash.
@@ -466,85 +641,85 @@ No data is leaked, lost, or corrupted. This issue only affects application avail
 
 [Learn more about this CVE at the GitHub Advisory Database](https://github.com/advisories/GHSA-735f-pc8j-v9w8).
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Zeebe 8.6.11.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
 - [Camunda Zeebe 8.6.13](https://github.com/camunda/camunda/releases/tag/8.6.13)
 
-### Notice 16
+## Notice 16
 
-#### Publication date
+### Publication date
 
-March 14th, 2025
+March 14, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Zeebe
 
-#### Impact
+### Impact
 
 Some Camunda Zeebe versions were affected by a vulnerability that allowed a malicious attacker to craft network packets that could crash the gateway.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Zeebe 8.6.0 - 8.6.11
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
 - [Camunda Zeebe 8.6.12](https://github.com/camunda/camunda/releases/tag/8.6.12)
 
-### Notice 15
+## Notice 15
 
-#### Publication date
+### Publication date
 
-March 11th, 2025
+March 11, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Optimize
 
-#### Impact
+### Impact
 
 Some Camunda Optimize versions were affected by a vulnerability that allowed a malicious attacker to craft Camunda URLs that could execute JavaScript code.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Optimize ≤ 8.6.5.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
 - [Camunda Optimize 8.6.6](https://github.com/camunda/camunda/releases/tag/8.6.6-optimize)
 
-### Notice 14
+## Notice 14
 
-#### Publication date
+### Publication date
 
-March 11th, 2025
+March 11, 2025
 
-#### Product affected
+### Products affected
 
 Camunda Web Modeler
 
-#### Impact
+### Impact
 
 The version of `koa` used by Camunda Web Modeler was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2025-25200
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Web Modeler Self-Managed version ≤ 8.3.16, ≤ 8.4.14, ≤ 8.5.15, or ≤ 8.6.7.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain the fix:
 
@@ -555,69 +730,69 @@ Camunda has provided the following releases which contain the fix:
 
 The fix was deployed to Web Modeler SaaS on February 14, 2025, 08:50 CET.
 
-### Notice 13
+## Notice 13
 
-#### Publication date
+### Publication date
 
-July 18th, 2024
+July 18, 2024
 
-#### Product affected
+### Products affected
 
 Camunda Identity
 
-#### Impact
+### Impact
 
 The version of `Apache Tomcat` used by Camunda Identity was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2024-34750
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Identity version 8.5.3 or previous.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- [Camunda Identity 8.5.4](https://github.com/camunda/identity/releases/tag/8.5.4)
 
-### Notice 12
+## Notice 12
 
-#### Publication date
+### Publication date
 
-October 3rd, 2023
+October 3, 2023
 
-#### Product affected
+### Products affected
 
 Camunda Desktop Modeler
 
-#### Impact
+### Impact
 
 The version of `libwebp` shipped with Camunda Desktop Modeler was affected by the following vulnerability:
 
 - https://nvd.nist.gov/vuln/detail/CVE-2023-4863
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Camunda Desktop Modeler version 5.15.1 or previous.
 
-#### Solution
+### Solution
 
 Camunda has provided the following release which contains a fix:
 
 - [Camunda Desktop Modeler 5.15.2](https://downloads.camunda.cloud/release/camunda-modeler/5.15.2/)
 
-### Notice 11
+## Notice 11
 
-#### Publication date
+### Publication date
 
 April 17, 2023
 
-#### Product affected
+### Products affected
 
 Tasklist
 
-#### Impact
+### Impact
 
 The Tasklist REST API functionality of Tasklist 8.2.0 and 8.2.1 allows unauthenticated access to the following methods/URLs:
 
@@ -631,27 +806,27 @@ Find more information about the methods in our [Tasklist REST API documentation]
 
 Therefore, if you use Tasklist 8.2.0 or 8.2.1, and if you have sensible data stored in process variables (accessed by user tasks), this data could have been accessed by users knowing the endpoint of the Tasklist instance without authentication.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Tasklist version 8.2.0 or 8.2.1.
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Tasklist 8.2.2](https://github.com/camunda/camunda-platform/releases/tag/8.2.2)
 
-### Notice 10
+## Notice 10
 
-#### Publication Date:
+### Publication Date:
 
-November 10th, 2022
+November 10, 2022
 
-#### Product affected:
+### Products affected:
 
 Tasklist
 
-#### Impact:
+### Impact:
 
 The Tasklist Docker image contain an OpenSSL version 3.0.2 for which the following CVEs have been published:
 
@@ -660,132 +835,132 @@ The Tasklist Docker image contain an OpenSSL version 3.0.2 for which the followi
 
 At this point, Camunda is not aware of any specific attack vector in Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are Tasklist version (8.0.3 ≥ version ≤ 8.0.7) or ≤ 8.1.2
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Tasklist 8.1.3](https://github.com/camunda/camunda-platform/releases/tag/8.1.3)
 - [Tasklist 8.0.8](https://github.com/camunda/camunda-platform/releases/tag/8.0.8)
 
-### Notice 9
+## Notice 9
 
-#### Publication Date:
+### Publication Date:
 
-April 11th, 2022
+April 11, 2022
 
-#### Product affected:
+### Products affected:
 
 Zeebe, Operate, Tasklist, IAM
 
-#### Impact:
+### Impact:
 
 Zeebe, Operate, Tasklist and IAM are using the Spring framework for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2022-22965
 
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate, Tasklist or IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version ≤ 1.2.11 or ≤ 1.3.6
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Zeebe, Operate and Tasklist 1.3.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.3.7)
 - [Zeebe, Operate and Tasklist 1.2.12](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.12)
 
-### Notice 8
+## Notice 8
 
-#### Publication Date:
+### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
-#### Product affected:
+### Products affected:
 
 Zeebe, Operate, Tasklist
 
-#### Impact:
+### Impact:
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44832.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version ≤ 1.2.8 or ≤ 1.1.9
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Zeebe, Operate and Tasklist 1.2.9](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.9)
 - [Zeebe, Operate and Tasklist 1.1.10](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.10)
 
-### Notice 7
+## Notice 7
 
-#### Publication Date:
+### Publication Date:
 
-December 31th, 2021
+December 31, 2021
 
-#### Product affected:
+### Products affected:
 
 IAM
 
-#### Impact:
+### Impact:
 
 IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44832.
 Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability. Still, Camunda recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using IAM version ≤ 1.2.8
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.9](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.9)
 
-### Notice 6
+## Notice 6
 
-#### Publication Date:
+### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
-#### Product affected:
+### Products affected:
 
 Zeebe, Operate, Tasklist
 
-#### Impact:
+### Impact:
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45105.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version ≤ 1.2.7 or ≤ 1.1.8
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Zeebe, Operate and Tasklist 1.2.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.8)
 - [Zeebe, Operate and Tasklist 1.1.9](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.9)
 
-### Notice 5
+## Notice 5
 
-#### Publication Date:
+### Publication Date:
 
-December 22th, 2021
+December 22, 2021
 
-#### Product affected:
+### Products affected:
 
 IAM
 
-#### Impact:
+### Impact:
 
 IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45105.
 Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability. Still, Camunda recommends applying fixes as mentioned in the Solution section below.
@@ -793,53 +968,53 @@ Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bu
 IAM bundles logback libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-42550.
 At this point, Camunda is not aware of any specific attack vector in IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using IAM version ≤ 1.2.7
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.8)
 
-### Notice 4
+## Notice 4
 
-#### Publication Date:
+### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
-#### Product affected:
+### Products affected:
 
 Zeebe, Operate, Tasklist
 
-#### Impact:
+### Impact:
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45046.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version ≤ 1.2.6 or ≤ 1.1.7
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [Zeebe, Operate and Tasklist 1.2.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.7)
 - [Zeebe, Operate and Tasklist 1.1.8](https://github.com/camunda-cloud/zeebe/releases/tag/1.1.8)
 
-### Notice 3
+## Notice 3
 
-#### Publication Date:
+### Publication Date:
 
-December 17th, 2021
+December 17, 2021
 
-#### Product affected:
+### Products affected:
 
 IAM
 
-#### Impact:
+### Impact:
 
 IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-45046.
 Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability. Still, Camunda recommends applying fixes as mentioned in the Solution section below.
@@ -847,36 +1022,36 @@ Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bu
 IAM bundles logback libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-42550.
 At this point, Camunda is not aware of any specific attack vector in IAM allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using IAM version ≤ 1.2.6
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.7](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.7)
 
-### Notice 2
+## Notice 2
 
-#### Publication Date:
+### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
-#### Product affected:
+### Products affected:
 
 Zeebe, Operate, Tasklist
 
-#### Impact:
+### Impact:
 
 Zeebe, Operate and Tasklist bundle log4j-core for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
 At this point, Camunda is not aware of any specific attack vector in Zeebe, Operate or Tasklist allowing attackers to exploit the vulnerability but recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using Zeebe, Operate or Tasklist version ≤ 1.2.5 or ≤ 1.1.6
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
@@ -885,37 +1060,29 @@ Camunda has provided the following releases which contain a fix
 
 Apply the patches mentioned above or set the JVM option `-Dlog4j2.formatMsgNoLookups=true`
 
-### Notice 1
+## Notice 1
 
-#### Publication Date:
+### Publication Date:
 
-December 14th, 2021
+December 14, 2021
 
-#### Product affected:
+### Products affected:
 
 IAM
 
-#### Impact:
+### Impact:
 
 IAM bundles log4j libraries for which the following CVE has been published: https://nvd.nist.gov/vuln/detail/CVE-2021-44228.
 Specifically, IAM bundles log4j-api and log4j-to-slf4j. However, IAM does not bundle the log4j-core library which contains the vulnerability referred to by the CVE. As a result, Camunda does not consider IAM to be affected by the vulnerability.
 
 Still, Camunda recommends applying fixes as mentioned in the Solution section below.
 
-#### How to determine if the installation is affected
+### How to determine if the installation is affected
 
 You are using IAM version ≤ 1.2.5
 
-#### Solution
+### Solution
 
 Camunda has provided the following releases which contain a fix
 
 - [IAM 1.2.6](https://github.com/camunda-cloud/zeebe/releases/tag/1.2.6)
-
-## Report a vulnerability
-
-Please report security vulnerabilities to Camunda immediately. Please follow the steps on our [Camunda Security page](https://camunda.com/security#report-a-vulnerability) to report a vulnerability.
-
-## Additional security information
-
-For more information about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).

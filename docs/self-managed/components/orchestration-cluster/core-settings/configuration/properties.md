@@ -17,7 +17,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.long-polling`
 
@@ -29,7 +29,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.long-polling.min-empty-responses` | <p>Set the number of minimum empty responses. A minimum number of responses with jobCount of 0 infers that no jobs are available.</p> | `10s`         |
 
   </TabItem>
-    <TabItem value="env" label="Environment variable">
+    <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_LONGPOLLING`
 
@@ -46,7 +46,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - gRPC
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.grpc`
 
@@ -78,7 +78,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.grpc.interceptors[].class-name` | <p>Set the fully qualified class name of a custom gRPC interceptor implementation that should be loaded and executed by the Camunda gRPC server.</p>                                                                                                                | Null          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_GRPC`
 
@@ -115,7 +115,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## API - REST
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.api.rest.filters`
 
@@ -143,7 +143,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.api.rest.executor.queue-capacity`            | <p>Capacity of the executor's task queue. A small bounded queue (for example, `64`) is recommended to handle short bursts while still allowing the pool to grow.</p>                                                                                                                                                                                                                                        | `64`          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_API_REST_FILTERS`
 
@@ -176,7 +176,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Cluster
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.cluster`
 
@@ -187,6 +187,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.cluster.partition-count`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
 | `camunda.cluster.replication-factor` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
 | `camunda.cluster.size`               | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
+
+### `camunda.cluster.global-listeners`
+
+| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `camunda.cluster.global-listeners.user-task[]`                  | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
+| `camunda.cluster.global-listeners.user-task[].event-types[]`    | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
+| `camunda.cluster.global-listeners.user-task[].type`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
+| `camunda.cluster.global-listeners.user-task[].retries`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
+| `camunda.cluster.global-listeners.user-task[].after-non-global` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
 
 ### `camunda.cluster.metadata`
 
@@ -208,7 +218,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.cluster.raft.election-timeout`          | <p>The election timeout for Raft. If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election.</p><p>The `electionTimeout` should be greater than the configured `heartbeatInterval`.</p><p>When the `electionTimeout` is large, there will be a delay in detecting a leader failure.</p><p>When the `electionTimeout` is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes.</p><p>If the network latency between the nodes is high, it is recommended to have a higher election timeout.</p><p>This is an advanced setting.</p> | `2.5s`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_CLUSTER`
 
@@ -219,6 +229,16 @@ The following configurations apply to all components within the Orchestration Cl
 | `CAMUNDA_CLUSTER_PARTITIONCOUNT`    | <p>The number of partitions in the cluster.</p>                                                                                                    | `1`           |
 | `CAMUNDA_CLUSTER_REPLICATIONFACTOR` | <p>The number of replicas for each partition in the cluster. The replication factor cannot be greater than the number of nodes in the cluster.</p> | `1`           |
 | `CAMUNDA_CLUSTER_SIZE`              | <p>The number of nodes in the cluster.</p>                                                                                                         | `1`           |
+
+### `CAMUNDA_CLUSTER_GLOBAL_LISTENERS`
+
+| Property                                                        | Description                                                                                                                                                                                                                                                 | Default value |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK`                    | <p>List of configuration entries for global user task listeners (see also [Global user task listeners](/components/concepts/global-user-task-listeners.md).)</p>                                                                                            | No entries    |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_EVENT_TYPES`      | <p>List of user task event types that trigger the listener. Supported values are `creating`, `assigning`, `updating`, `completing`, and `canceling`. The shorthand `all` value is also available if the listener should react to all lifecycle events. </p> | -             |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_TYPE`             | <p>The name of the job type. Used as a reference to specify which job workers request the respective task listener job. For example, `order-items`. </p>                                                                                                    | -             |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_RETRIES`          | <p>The number of retries for the user task listener job. </p>                                                                                                                                                                                               | `"3"`         |
+| `CAMUNDA_CLUSTER_GLOBAL_LISTENERS_USER_TASK_0_AFTER_NON_GLOBAL` | <p>Boolean flag indicating whether the listener should run after model-level listeners. </p>                                                                                                                                                                | `false`       |
 
 ### `CAMUNDA_CLUSTER_METADATA`
 
@@ -245,7 +265,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data`
 
@@ -256,7 +276,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.export.skip-records`          | <p>Enable the exporters to skip record position. Allows to skip certain records by their position.</p><p>This is useful for debugging or skipping a record that is preventing processing or exporting to continue.</p><p>Record positions defined to skip in this definition will be skipped in all exporters. The value is a comma-separated list of records ids to skip. Whitespace is ignored.</p>                                                                    | `[]`          |
 
 </TabItem>
-  <TabItem value="env" label="Environment variable">
+  <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA`
 
@@ -272,7 +292,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - backup
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.backup`
 
@@ -329,7 +349,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.backup.filesystem.base-path` | <p>Set the base path to store all related backup files in.</p> | Null          |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_BACKUP`
 
@@ -391,7 +411,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - secondary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.secondary-storage`
 
@@ -431,7 +451,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.secondary-storage.opensearch.history.process-instance-enabled` | <p>If `true`, enables the archiving of the completed process instances and their related objects.</p> | `true`                  |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_SECONDARYSTORAGE`
 
@@ -474,7 +494,7 @@ The following configurations apply to all components within the Orchestration Cl
 ## Data - primary storage
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.data.primary-storage`
 
@@ -514,7 +534,7 @@ The following configurations apply to all components within the Orchestration Cl
 | `camunda.data.primary-storage.rocksdb.sst-partitioning-enabled`         | <p>Configures if the RocksDB SST files should be partitioned based on some virtual column families.</p><p>By default, RocksDB will not partition the SST files, which could influence the compacting of certain key ranges.</p><p>Enabling this option gives RocksDB some good hints how to improve compaction and reduce the write amplification.</p><p>Benchmarks have shown impressive results, allowing sustained performance on larger states.</p><p>This setting will increase the general file count of runtime and snapshots.</p>                                            | `true`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_PRIMARYSTORAGE`
 
@@ -561,7 +581,7 @@ The following configurations apply to all components within the Orchestration Cl
 Installations of Camunda 8 Self-Managed that require a license can provide their license key to the components. See [licensing](./licensing.md).
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.license`
 
@@ -570,7 +590,7 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | `camunda.license.key` | <p>Your Camunda 8 license key, if your installation requires a license.</p> | Null          |
 
 </TabItem>
-  <TabItem value="env" label="Environment variable">
+  <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_LICENSE`
 
@@ -584,7 +604,7 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 ## Security
 
 <Tabs>
-<TabItem value="conf" label="Configuration property" default>
+<TabItem value="conf" label="Application properties" default>
 
 ### `camunda.security`
 
@@ -606,6 +626,10 @@ Installations of Camunda 8 Self-Managed that require a license can provide their
 | Property                        | Description                                                                                                                                                                                   | Default value |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `camunda.security.csrf.enabled` | Enables or disables CSRF protection. Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. | `true`        |
+
+:::caution
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+:::
 
 ### `camunda.security.http-headers`
 
@@ -652,21 +676,54 @@ script-src-attr 'none'.
 
 ### `camunda.security.authentication.oidc`
 
-| Property                                                 | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `camunda.security.authentication.oidc.client-id`         | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
-| `camunda.security.authentication.oidc.client-secret`     | The client secret for OIDC authentication.                                                                                                                                                                                                                                                                                                |                                      |
-| `camunda.security.authentication.oidc.issuer-uri`        | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). In this case, any individually configured token, authorization, and JWKS URIs do not take effect. |                                      |
-| `camunda.security.authentication.oidc.redirect-uri`      | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                               | `http://localhost:8080/sso-callback` |
-| `camunda.security.authentication.oidc.username-claim`    | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                             | `sub`                                |
-| `camunda.security.authentication.oidc.groups-claim`      | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                                                                                                                         |                                      |
-| `camunda.security.authentication.oidc.client-id-claim`   | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's ID. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                              |                                      |
-| `camunda.security.authentication.oidc.prefer-username-claim` | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client. | `false`                              |
-| `camunda.security.authentication.oidc.audiences`         | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                          |                                      |
-| `camunda.security.authentication.oidc.scope`             | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                              | `openid, profile`                    |
-| `camunda.security.authentication.oidc.jwk-set-uri`       | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                       |                                      |
-| `camunda.security.authentication.oidc.authorization-uri` | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                 |                                      |
-| `camunda.security.authentication.oidc.token-uri`         | Sets the OIDC provider's token URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                         |                                      |
+| Property                                                            | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `camunda.security.authentication.oidc.client-id`                    | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
+| `camunda.security.authentication.oidc.client-secret`                | The client secret for OIDC authentication. Only takes effect if `camunda.security.authentication.oidc.client-authentication-method` is set to `client_secret_basic` or left default.                                                                                                                                                      |                                      |
+| `camunda.security.authentication.oidc.issuer-uri`                   | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). In this case, any individually configured token, authorization, and JWKS URIs do not take effect. |                                      |
+| `camunda.security.authentication.oidc.redirect-uri`                 | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                               | `http://localhost:8080/sso-callback` |
+| `camunda.security.authentication.oidc.username-claim`               | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                             | `sub`                                |
+| `camunda.security.authentication.oidc.groups-claim`                 | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                                                                                                                         |                                      |
+| `camunda.security.authentication.oidc.client-id-claim`              | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's ID. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                              |                                      |
+| `camunda.security.authentication.oidc.prefer-username-claim`        | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client.                                                                                                        | `false`                              |
+| `camunda.security.authentication.oidc.audiences`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                          |                                      |
+| `camunda.security.authentication.oidc.scope`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                              | `openid, profile`                    |
+| `camunda.security.authentication.oidc.jwk-set-uri`                  | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                       |                                      |
+| `camunda.security.authentication.oidc.authorization-uri`            | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                 |                                      |
+| `camunda.security.authentication.oidc.token-uri`                    | Sets the OIDC provider's token URI explicitly. Only takes effect if `camunda.security.authentication.oidc.issuer-uri` is not set.                                                                                                                                                                                                         |                                      |
+| `camunda.security.authentication.oidc.client-authentication-method` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
+| `camunda.security.authentication.oidc.clock-skew`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                                                                                                                      | `60S`                                |
+
+### `camunda.security.authentication.oidc.assertion`
+
+Configuration options for the client assertion used in Bearer JWT client authentication.
+
+:::note
+These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
+The `key` value refers to the private key ID used to sign the client assertion JWT.
+:::
+
+| Property                                                              | Description                                                                | Default value |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
+| `camunda.security.authentication.oidc.assertion.kid-source`           | Source for generating the key ID. Options: `CERTIFICATE`, `PUBLIC_KEY`.    | `PUBLIC_KEY`  |
+| `camunda.security.authentication.oidc.assertion.kid-digest-algorithm` | Hash algorithm used to generate the key ID. Options: `SHA256`, `SHA1`.     | `SHA256`      |
+| `camunda.security.authentication.oidc.assertion.kid-encoding`         | Key ID encoding. Options: `BASE64URL`, `HEX`.                              | `BASE64URL`   |
+| `camunda.security.authentication.oidc.assertion.kid-case`             | Key ID case. Only applicable to `HEX` encoding. Options: `UPPER`, `LOWER`. |               |
+
+### `camunda.security.authentication.oidc.assertion.keystore`
+
+Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
+
+:::note
+These properties apply only when `camunda.security.authentication.oidc.client-authentication-method` is set to `private_key_jwt`.
+:::
+
+| Property                                                               | Description                                                       | Default value |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
+| `camunda.security.authentication.oidc.assertion.keystore.path`         | Path to the `PKCS12` keystore.                                    |               |
+| `camunda.security.authentication.oidc.assertion.keystore.password`     | Keystore password.                                                |               |
+| `camunda.security.authentication.oidc.assertion.keystore.key-alias`    | Alias of the private key to be used to sign the client assertion. |               |
+| `camunda.security.authentication.oidc.assertion.keystore.key-password` | Password of the private key.                                      |               |
 
 ### `camunda.security.initialization.default-roles`
 
@@ -714,7 +771,7 @@ script-src-attr 'none'.
 | `spring.profiles.active` | **Note:** This property will be deprecated as additional authentication methods become available. | `consolidated-auth` |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_SECURITY`
 
@@ -733,21 +790,54 @@ script-src-attr 'none'.
 
 ### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC`
 
-| Property                                                | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
-| ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`         | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`     | The client secret for OIDC authentication.                                                                                                                                                                                                                                                                                                |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`        | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). In this case, any individually configured token, authorization, and JWKS URIs do not take effect. |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`      | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                               | `http://localhost:8080/sso-callback` |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM`    | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                             | `sub`                                |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`      | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                                                                                                                         |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM`    | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's id. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                              |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_PREFERUSERNAMECLAIM` | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client. | `false`                              |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`        | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                          |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE`            | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                              | `openid, profile`                    |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`        | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                        |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI` | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                  |                                      |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`         | Sets the OIDC provider's token URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                          |                                      |
+| Property                                                            | Description                                                                                                                                                                                                                                                                                                                               | Default value                        |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`                     | The client ID for OIDC authentication.                                                                                                                                                                                                                                                                                                    |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`                 | The client secret for OIDC authentication. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `client_secret_basic` or left default.                                                                                                                                                      |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`                    | The issuer URI for OIDC authentication. If set, the individual endpoints of your OIDC provider will be fetched from its [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig). In this case, any individually configured token, authorization, and JWKS URIs do not take effect. |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_REDIRECTURI`                  | The URI for redirects from the OIDC provider to the Orchestration Cluster after user login.                                                                                                                                                                                                                                               | `http://localhost:8080/sso-callback` |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM`                | The JWT claim that identifies a user. Extracted from a token, this claim value becomes the user's username. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                             | `sub`                                |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_GROUPSCLAIM`                  | The JWT claim that contains a user's or client's groups. Expects an array of String values. If not set, groups can be managed in the Orchestration Cluster through its REST APIs.                                                                                                                                                         |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTIDCLAIM`                | The JWT claim that identifies a client. Extracted from a token, this claim value becomes the clients's id. This setting is evaluated on any token-based access, regardless of the underying OIDC/OAuth flow.                                                                                                                              |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_PREFERUSERNAMECLAIM`          | Determines if a token that contains both, the configured username claim and the configured client id claim, is treated as a user or a client. If set to true, it is treated as a user. If set to false, it is treated as a client.                                                                                                        | `false`                              |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`                    | Comma-separated list of audiences to validate in the OIDC token.                                                                                                                                                                                                                                                                          |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_SCOPE`                        | Comma-separated list of scopes to request in the OIDC token.                                                                                                                                                                                                                                                                              | `openid, profile`                    |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_JWKSETURI`                    | Sets the OIDC provider's JWK Set URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                        |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUTHORIZATIONURI`             | Sets the OIDC provider's authorization URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                  |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_TOKENURI`                     | Sets the OIDC provider's token URI explicitly. Only takes effect if `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI` is not set.                                                                                                                                                                                                          |                                      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` | Sets the client authentication method to use. Options: `client_secret_basic`, `private_key_jwt`.                                                                                                                                                                                                                                          | `client_secret_basic`                |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLOCK_SKEW`                   | Sets the allowed clock skew when validating JWT issuance and expiration. Format: ISO 8601 duration (`PnDTnHnMn.nS`).                                                                                                                                                                                                                      | `60S`                                |
+
+### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION`
+
+Configuration options for the client assertion used in Bearer JWT client authentication.
+
+:::note
+These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
+The `key` value refers to the private key ID used to sign the client assertion JWT.
+:::
+
+| Property                                                              | Description                                                                | Default value |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_SOURCE`           | Source for generating the key ID. Options: `CERTIFICATE`, `PUBLIC_KEY`.    | `PUBLIC_KEY`  |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_DIGEST_ALGORITHM` | Hash algorithm used to generate the key ID. Options: `SHA256`, `SHA1`.     | `SHA256`      |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_ENCODING`         | Key ID encoding. Options: `BASE64URL`, `HEX`.                              | `BASE64URL`   |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KID_CASE`             | Key ID case. Only applicable to `HEX` encoding. Options: `UPPER`, `LOWER`. |               |
+
+### `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE`
+
+Configuration of the keystore used to build the client assertion for Bearer JWT client authentication.
+
+:::note
+These properties apply only when `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENT_AUTHENTICATION_METHOD` is set to `private_key_jwt`.
+:::
+
+| Property                                                               | Description                                                       | Default value |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_PATH`         | Path to the `PKCS12` keystore.                                    |               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_PASSWORD`     | Keystore password.                                                |               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_ALIAS`    | Alias of the private key to be used to sign the client assertion. |               |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ASSERTION_KEYSTORE_KEY_PASSWORD` | Password of the private key.                                      |               |
 
 ### `CAMUNDA_SECURITY_CSRF`
 
@@ -798,6 +888,16 @@ child-src;
 script-src-attr 'none'.
 ```
 
+### `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS`
+
+| Property                                                         | Description                                                                                                                        | Default value |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_TYPE`    | The owner type to assign to this authorization.                                                                                    |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_OWNER_ID`      | The owner ID to assign to this authorization.                                                                                      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_TYPE` | The [resource type](/components/concepts/access-control/authorizations.md#available-resources) that this authorization applies to. |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_RESOURCE_ID`   | The resource ID that this authorization applies to.                                                                                |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_AUTHORIZATIONS_0_PERMISSIONS`   | Permissions to assign to this authorization. The available permissions vary by resource type.                                      |               |
+
 ### `CAMUNDA_SECURITY_INITIALIZATION_DEFAULTROLES`
 
 | Property                                                             | Description                                  | Default value |
@@ -822,6 +922,7 @@ script-src-attr 'none'.
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_EMAIL`    | The email address of the first user. |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_NAME`     | The name of the first user.          |               |
 | `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_PASSWORD` | The password of the first user.      |               |
+| `CAMUNDA_SECURITY_INITIALIZATION_USERS_0_USERNAME` | The username of the first user.      |               |
 
 ### `CAMUNDA_SECURITY_MULTITENANCY`
 
@@ -844,12 +945,6 @@ script-src-attr 'none'.
 
 </TabItem>
 <TabItem value="helm" label="Helm values">
-
-### `global`
-
-| Property                             | Description                                                                            | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------- | ------------- |
-| `global.persistent.sessions.enabled` | Stores session data in secondary storage so users stay logged in across cluster nodes. | `true`        |
 
 ### `orchestration.security.authentication`
 
@@ -931,10 +1026,9 @@ script-src-attr 'none'.
 
 ### `orchestration.security.initialization`
 
-| Property                                         | Description                                                                          | Default value |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------- |
-| `orchestration.security.initiation.users`        | List of users to initialize (each with username, password, name, email).             |               |
-| `orchestration.security.initiation.mappingRules` | List of mapping rule to initialize (each with mappingRuleId, claimName, claimValue). |               |
+| Property                                      | Description                                                              | Default value |
+| --------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
+| `orchestration.security.initialization.users` | List of users to initialize (each with username, password, name, email). |               |
 
 ### `orchestration.security.multiTenancy`
 
@@ -946,10 +1040,6 @@ script-src-attr 'none'.
 </TabItem>
 </Tabs>
 
-:::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
-:::
-
 import SecondaryStorage from './partials/\_secondary-storage.md'
 
 <SecondaryStorage />
@@ -957,7 +1047,7 @@ import SecondaryStorage from './partials/\_secondary-storage.md'
 ## System
 
 <Tabs>
-  <TabItem value="application.yaml" label="Configuration property">
+  <TabItem value="application.yaml" label="Application properties">
 
 ### `camunda.system`
 
@@ -982,7 +1072,7 @@ import SecondaryStorage from './partials/\_secondary-storage.md'
 | `camunda.system.upgrade.enable-version-check` | <p>Toggles the version check restriction, used for migration.</p><p>This is useful for testing migration logic on snapshot or alpha versions.</p><p>The default value `True` means it is not allowed to migrate to an incompatible version such as: `SNAPSHOT` or `alpha`.</p> | `true`        |
 
 </TabItem>
-<TabItem value="env" label="Environment variable">
+<TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_SYSTEM`
 

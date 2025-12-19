@@ -1,7 +1,7 @@
 ---
 id: schema-and-migration
 title: Schema and data migration
-description: "The orchestration cluster stores data in Elasticsearch and provides tools to manage schema and migrations."
+description: "The orchestration cluster stores data with secondary storage and provides tools to manage schema and migrations."
 ---
 
 The orchestration cluster persists runtime and task data in Elasticsearch. On first startup, all required indices and templates are automatically created.
@@ -25,3 +25,5 @@ Cluster data is stored in Elasticsearch indices, each governed by a schema versi
 For more information about the specific indices used by the orchestration cluster, refer to the [Index Diagrams](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter-indices.md).
 
 From 8.8 onwards, no schema migrations are required when upgrading the orchestration cluster. For older versions, follow the migration instructions below.
+
+> See also: [Version compatibility checks](./version-compatibility.md) for the rules governing supported upgrade paths and how schema version metadata is validated.

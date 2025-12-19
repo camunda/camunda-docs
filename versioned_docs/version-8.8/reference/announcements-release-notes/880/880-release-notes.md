@@ -450,21 +450,21 @@ Use the Data Migrator to copy running process instances from Camunda 7 to Camund
 - Handle problematic instances gracefully with retry options.
 - Write custom code to intercept variable migration.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/data-migrator" class="link-arrow">Data Migrator</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/data-migrator" class="link-arrow">Data Migrator</a></p>
 
-### Migration Analyzer & Diagram Converter
+### Diagram Converter
 
-The Migration Analyzer & Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
+The Diagram Converter helps you get a first understanding of migration tasks when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 model files (BPMN or DMN) and generates a list of tasks required for the migration.
 
 It can also automatically convert these files from Camunda 7 format to Camunda 8 format (updating namespaces, XML structures/properties, and simple expression transforms), with a web UI and CLI that outputs XLSX/CSV reports, for prioritization and batch conversion.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling#migration-analyzer--diagram-converter" class="link-arrow">Migration Analyzer & Diagram Converter</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/diagram-converter" class="link-arrow">Diagram Converter</a></p>
 
 ### Code conversion
 
 Code conversion utilities provide code mapping tables, conversion patterns, and automatable refactoring recipes to systematically translate Camunda 7 implementation patterns to Camunda 8 equivalents.
 
-<p><a href="../../../../guides/migrating-from-camunda-7/code-conversion" class="link-arrow">Code conversion</a></p>
+<p><a href="../../../../guides/migrating-from-camunda-7/migration-tooling/code-conversion" class="link-arrow">Code conversion</a></p>
 
 ## Optimize
 
@@ -499,7 +499,7 @@ The 8.8 release cycle includes updates across multiple Self-Managed reference ar
 
 - **Managed search (EKS single-region and EC2)**: Upgraded OpenSearch from 2.15 to 2.19 to align with the latest [supported environments](/reference/supported-environments.md).
 - **Database layer (EKS and EC2)**: Raised the Aurora PostgreSQL baseline from version 15 to 17. See the updated versions in [supported environments](/reference/supported-environments.md).
-- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/connect-to-an-oidc-provider.md).
+- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
 - **Private access (OpenShift ROSA, EKS, EC2)**: Documented an optional VPN pattern. See [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture).
 - **OpenShift (single and dual region)**: Updated validation and guidance for OpenShift 4.19. See [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 - **EKS networking**: Added alternative NAT gateway strategies. See [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
@@ -748,7 +748,7 @@ Use the version **Description** field to track changes alongside the version tag
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<ul><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -1261,7 +1261,7 @@ The new [Public API](/reference/public-api.md) documentation outlines what’s i
 
 ### Agentic orchestration
 
-The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration.md) features are available in this alpha release:
+The following [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) features are available in this alpha release:
 
 #### AI Agent connector <span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Dektop Modeler</span>
 

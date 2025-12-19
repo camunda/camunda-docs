@@ -4,7 +4,7 @@ title: Task testing
 description: "Test implementation of a single BPMN task in Desktop Modeler."
 ---
 
-[Test a single task](../../concepts/task-testing.md) in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process.
+[Test a single task](../task-testing.md) in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process.
 
 Task testing deploys the process and executes the selected task on the engine, as if it would be executed in a process flow. You control the context (process variables) that can verify if the outputs match your expectation.
 
@@ -63,5 +63,4 @@ If the task execution fails due to an error, the response message is displayed.
 
 ## Related
 
-- [Test a task in Web Modeler](/components/modeler/web-modeler/task-testing.md)
-- [Learn about task testing concepts](../../concepts/task-testing.md)
+- [Learn about task testing concepts](../task-testing.md)

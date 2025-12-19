@@ -13,11 +13,11 @@ SAP eventing uses three connectors that enable bidirectional communication betwe
 
 <!-- add links of Element Template from marketplace! -->
 
-| Connector                                  | Description                                                                                                                                                                                                                               |
-| :----------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SAP Eventing Outbound Connector            | Sends CloudEvents from Camunda to an AEM topic or queue endpoint.                                                                                                                                                                         |
-| SAP Eventing Message Start Event Connector | Translates an incoming CloudEvent from AEM into a [BPMN Message Start Event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) to trigger a new process instance.                                           |
-| SAP Eventing Intermediate Event Connector  | Translates an incoming CloudEvent from AEM into a [BPMN Intermediate Catch Event](/components/modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events) to allow an active process to continue based on the event. |
+| Connector                                                                                                                                  | Description                                                                                                                                                                                                                               |
+| :----------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [SAP Eventing Outbound Connector](https://marketplace.camunda.com/en-US/apps/632606/sap-eventing-outbound-connector)                       | Sends CloudEvents from Camunda to an AEM topic or queue endpoint.                                                                                                                                                                         |
+| [SAP Eventing Message Start Event Connector](https://marketplace.camunda.com/en-US/apps/632607/sap-eventing-message-start-event-connector) | Translates an incoming CloudEvent from AEM into a [BPMN Message Start Event](/components/modeler/bpmn/message-events/message-events.md#message-start-events) to trigger a new process instance.                                           |
+| [SAP Eventing Intermediate Event Connector](https://marketplace.camunda.com/en-US/apps/632751/sap-eventing-intermediate-event-connector)   | Translates an incoming CloudEvent from AEM into a [BPMN Intermediate Catch Event](/components/modeler/bpmn/message-events/message-events.md#intermediate-message-catch-events) to allow an active process to continue based on the event. |
 
 The integration uses **HTTP** as the transport protocol:
 
@@ -65,7 +65,7 @@ The host portion of the URL (`https://<region>.connectors.camunda.io`) is used w
 ### Authentication
 
 In the REST consumer configuration, set up authentication from AEM to the Camunda webhook endpoint.  
-The credentials configured in the **Authorization** section of the Camunda connector must match the **authentication scheme** used in AEM.
+The credentials configured in the **Authorization** section of the built-in connector must match the **authentication scheme** used in AEM.
 
 ![Camunda and AEM credentials](./img/eventing-authorization.png)
 

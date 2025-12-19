@@ -16,7 +16,7 @@ A subscription is opened when a process instance awaits a message; for example, 
 
 When a message is published and the message name and correlation key match to a subscription, the message is correlated to the corresponding process instance. If no proper subscription is opened, the message is discarded.
 
-A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process instance variable is changed.)
+A subscription is closed when the corresponding element (e.g. the message catch event), or its scope is left. After a subscription is opened, it is not updated (for example, when the referenced process variable is changed.)
 
 <details>
    <summary>Publish message via Orchestration Cluster REST API</summary>
@@ -160,6 +160,8 @@ When the instance ends and messages with the same correlation key are not correl
 :::note
 You may also use TTL to wait for messages that may arrive earlier when combining [start events and intermediate catch events](/components/modeler/bpmn/events.md).
 :::
+
+Learn more in our [message aggregation guide](./message-aggregation.md).
 
 ### Single instance
 

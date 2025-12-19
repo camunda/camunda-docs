@@ -270,39 +270,128 @@ Below, find several ways to return data from your Webhook connector.
 
 ### Verification expression
 
-Verification expression is used whenever a webhook needs to return response data **without** starting a process.
-A common use-case may be a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
+The verification expression allows you to return a custom HTTP response without triggering process correlation. This feature supports multiple scenarios beyond one-time verification challenges, including:
+
+- **One-time verification challenges**: Respond to webhook provider verification requests (e.g., Slack, GitHub).
+- **Request validation**: Reject invalid or malformed requests before a process instance is created.
+- **Conditional responses**: Return different responses based on request content.
+
+#### How it works
+
+When the verification expression evaluates to a **non-null** value:
+
+1. The webhook returns the specified response immediately.
+2. Process correlation does not occur.
+3. Activation conditions, HMAC validation, and the rest of the webhook pipeline are skipped.
+
+When the verification expression evaluates to **null**:
+
+1. The webhook continues with normal processing.
+2. Activation conditions are evaluated.
+3. HMAC validation (if configured) is performed.
+4. Process correlation proceeds as usual.
+
+#### Response format
+
+Use the following references to access incoming request data:
+
+- Body: `request.body.`
+- Headers: `request.headers.`
+- URL parameters: `request.params.`
+
+To construct a response, use these fields in the returned object:
+
+- **`body`** – for example:  
+  `{"body": {"challenge": request.body.challenge}}`
+- **`statusCode`** – for example:  
+  `{"statusCode": 201, "body": {"result": "ok"}}`  
+  If omitted, the default status code is **200**.
+- **`headers`** – for example:  
+  `{"headers": {"Content-Type": "application/json"}, "body": {"result": "ok"}}`
+
+Use FEEL expressions to build and transform the response content as needed.
+
+#### Example: One-time verification challenge
+
+A common use-case is a [one-time verification challenge](https://webhooks.fyi/security/one-time-verification-challenge).
 
 For example, consider the following verification challenge from [Slack](https://slack.com/):
 
-`{"token": "Jhj5dZrVaK7ZwHHjRyZWjbDl","challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P","type": "url_verification"}`
+```json
+{
+  "token": "Jhj5dZrVaK7ZwHHjRyZWjbDl",
+  "challenge": "3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P",
+  "type": "url_verification"
+}
+```
 
 To confirm the Slack events subscription, you must return the following response:
 
-`HTTP 200 OK Content-type: application/json {"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}`
+```
+HTTP 200 OK
+Content-type: application/json
+{"challenge":"3eZbrw1aBm2rZgRNFdxV2595E9CY3gmdALWMmHkvFXO7tYXAYM8P"}
+```
 
 To do so, the **Verification expression** field may look like:
 
-`=if request.body.type = "url_verification" then {"body": {"challenge": request.body.challenge}, "statusCode": 200} else null`.
+```feel
+=if request.body.type = "url_verification"
+then {"body": {"challenge": request.body.challenge}, "statusCode": 200}
+else null
+```
 
-When working with `request` data, use the following references to access data:
+#### Example: Request validation
 
-- Body: `request.body.`.
-- Headers: `request.headers.`.
-- URL parameters: `request.params.`.
+You can validate incoming requests and reject invalid payloads before creating a process instance:
 
-When working with response, you can use the following placeholders:
+```feel
+=if request.body.requiredField = null
+then {"body": {"error": "Missing required field"}, "statusCode": 400}
+else null
+```
 
-- Body: `"body"`, for example `{"body": {"challenge": request.body.challenge}}`.
-- Status code: `statusCode`, for example `{"statusCode": 201, "body": {"challenge": request.body.challenge}}`.
-- Headers: `headers`, for example `{"headers": {"X-Challenge": request.body.challenge}, "body": {"challenge": request.body.challenge}}`.
+This expression checks if `requiredField` is missing and returns a `400 Bad Request` status with an error message. If the field is present, it returns `null`, allowing normal webhook processing to continue.
 
-You can also use FEEL expressions to modify the data you return.
+#### Example: Custom status codes
+
+You can return any HTTP status code, including non-standard or conflict codes:
+
+```feel
+=if request.body.challenge != null
+then {"body": {"challenge": request.body.challenge}, "statusCode": 409}
+else null
+```
+
+#### Example: Custom headers
+
+You can include custom headers in your response:
+
+```feel
+=if request.body.challenge != null
+then {
+  "body": {"challenge": request.body.challenge},
+  "headers": {"Content-Type": "application/camunda-bin"}
+}
+else null
+```
+
+#### Example: Nested body structure
+
+You can access and respond to nested data structures in the request:
+
+```feel
+=if request.body.event_type = "verification"
+then {"body": {"challenge": request.body.event.challenge}}
+else null
+```
+
+This example extracts the challenge from a nested `event` object and returns it in the response.
 
 ### Response expression
 
 :::note
-Prior to 8.6, the HTTP Webhook connector supported a [response body expression](</versioned_docs/version-8.5/components/connectors/protocol/http-webhook.md#Response Body Expression>).
+Prior to 8.6, the HTTP Webhook connector supported a response body expression.
 As of 8.6, this was replaced with a more powerful construct that allows control over
 not only the response body, but also the headers and the HTTP status returned by
 the connector.
