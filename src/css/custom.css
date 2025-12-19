@@ -110,7 +110,7 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   }
 }
 
-/* Show only Ask AI and Search on screens between 800px and 1026px */
+/* Adjust Ask AI button spacing on screens between 769px and 800px */
 @media screen and (min-width: 769px) and (max-width: 800px) {
   /* Add some spacing between buttons */
   .navbar__item:has(.kapa-open) {
