@@ -1,0 +1,348 @@
+[38;5;197m[1mIssues found in 96 inputs. Find details below.
+
+[0m[38;5;11m[1m[./broken-links.txt]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+[38;5;197m   [ERROR][0m https://altair.sirmuel.design/ | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+[38;5;197m     [404][0m https://github.com/camunda/camunda-docs/blob/main/versioned_sidebars/version-8.1-sidebars.json#L47 | Error (cached)
+[38;5;197m     [404][0m https://github.com/camunda/camunda-optimize | Error (cached)
+[38;5;197m     [404][0m https://github.com/camunda/camunda-optimize/blob/main/optimize/client/e2e/tests/Dashboard.js#L41 | Error (cached)
+[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+[38;5;197m   [ERROR][0m https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html | Error (cached)
+
+[38;5;11m[1m[./docs/apis-tools/camunda-spring-boot-starter/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[./docs/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[./docs/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[./docs/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[./docs/components/camunda-integrations/servicenow/setup-and-configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html | Error (cached)
+
+[38;5;11m[1m[./docs/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[./docs/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[./docs/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./docs/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./docs/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[./docs/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[./docs/self-managed/deployment/helm/install/production/index.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+[38;5;11m[1m[./howtos/documentation-guidelines.md]:
+[0m[38;5;197m     [404][0m https://github.com/camunda/camunda-docs/blob/main/versioned_sidebars/version-8.1-sidebars.json#L47 | Error (cached)
+[38;5;197m     [404][0m https://github.com/camunda/camunda-optimize | Error (cached)
+[38;5;197m     [404][0m https://github.com/camunda/camunda-optimize/blob/main/optimize/client/e2e/tests/Dashboard.js#L41 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/apis-tools/spring-zeebe-sdk/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/apis-tools/tasklist-api/tasklist-api-overview.md]:
+[0m[38;5;197m   [ERROR][0m https://altair.sirmuel.design/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/best-practices/architecture/deciding-about-your-stack-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/best-practices/development/invoking-services-from-the-process-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.6/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/apis-tools/tasklist-api/tasklist-api-overview.md]:
+[0m[38;5;197m   [ERROR][0m https://altair.sirmuel.design/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/best-practices/architecture/deciding-about-your-stack-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/best-practices/development/invoking-services-from-the-process-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/apis-tools/camunda-spring-boot-starter/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/camunda-integrations/servicenow/setup-and-configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[./versioned_docs/version-8.8/self-managed/deployment/helm/install/production/index.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+[38;5;11m[1m[docs/apis-tools/camunda-spring-boot-starter/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[docs/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[docs/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[docs/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[docs/components/camunda-integrations/servicenow/setup-and-configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html | Error (cached)
+
+[38;5;11m[1m[docs/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[docs/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[docs/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[docs/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[docs/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[docs/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[docs/self-managed/deployment/helm/install/production/index.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/apis-tools/spring-zeebe-sdk/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/apis-tools/tasklist-api/tasklist-api-overview.md]:
+[0m[38;5;197m   [ERROR][0m https://altair.sirmuel.design/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/best-practices/architecture/deciding-about-your-stack-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/best-practices/development/invoking-services-from-the-process-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.6/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/apis-tools/tasklist-api/tasklist-api-overview.md]:
+[0m[38;5;197m   [ERROR][0m https://altair.sirmuel.design/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/best-practices/architecture/deciding-about-your-stack-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/best-practices/development/invoking-services-from-the-process-c7.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/apis-tools/camunda-spring-boot-starter/configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/best-practices/development/dealing-with-problems-and-exceptions.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/best-practices/development/service-integration-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/3-common-pitfalls-in-microservice-integration-and-how-to-avoid-them-3f27a442cd07 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/communication-between-loosely-coupled-microservices-webinar-faq-a02708b3c8b5 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/best-practices/modeling/choosing-the-dmn-hit-policy.md]:
+[0m[38;5;197m   [ERROR][0m https://consulting.camunda.com/dmn-simulator/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/camunda-integrations/servicenow/setup-and-configuration.md]:
+[0m[38;5;197m   [ERROR][0m https://www.servicenow.com/docs/bundle/yokohama-integrate-applications/page/administer/flow-designer/concept/request-ih-overview.html | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/concepts/workflow-patterns.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/saga-how-to-implement-complex-business-transactions-without-two-phase-commit-e00aa41a1b1b | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/components/connectors/custom-built-connectors/create-connector-from-rest.md]:
+[0m[38;5;197m   [ERROR][0m https://swapi.dev/ | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/guides/migrating-from-camunda-7/conceptual-differences.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/how-to-write-glue-code-without-java-delegates-in-camunda-cloud-9ec0495d2ba5 | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/guides/migrating-from-camunda-7/migration-readiness.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/achieving-consistency-without-transaction-managers-7cb480bd08c | Error (cached)
+[38;5;197m   [ERROR][0m https://blog.bernd-ruecker.com/moving-from-embedded-to-remote-workflow-engines-8472992cc371 | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md]:
+[0m[38;5;197m   [ERROR][0m http://keycloak:18080/auth/realms/camunda-platform | Error (cached)
+
+[38;5;11m[1m[versioned_docs/version-8.8/self-managed/deployment/helm/install/production/index.md]:
+[0m[38;5;197m   [ERROR][0m https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e | Error (cached)
+
+🔍 46292 Total[2m (in 1s)[0m[38;5;82m[1m ✅ 20928 OK[0m[38;5;197m[1m 🚫 153 Errors[0m[38;5;11m[1m 👻 25199 Excluded[0m[38;5;11m[1m ⛔ 12 Unsupported[0m

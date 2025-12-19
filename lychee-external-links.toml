@@ -1,13 +1,23 @@
-# Cache the results of Lychee if ran locally in order to minimize the chance of rate limiting
+# Cache the results of Lychee to minimize the chance of rate limiting
 cache = true
-# Ignore all private link (such as localhost) to avoid errors
+max_cache_age = "1d"
+
+# Ignore all private links (such as localhost) to avoid errors
 exclude_all_private = true
+
 # HTTP status code: 429 (Too Many Requests) will also be treated as a valid link if Lychee gets rate limited
-accept = ["200", "403"]
-# retry
+accept = ["200", "403", "429"]
+
+# Improve rate limit handling
 max_retries = 6
 retry_wait_time = 10
 max_concurrency = 3
+
+# Proceed for server connections considered insecure (invalid TLS).
+insecure = true
+
+# Decrease noisy logs
+verbose = "error"
 
 # Exclude all unsupported versioned_docs
 exclude_path = [
