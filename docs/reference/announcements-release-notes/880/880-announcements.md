@@ -407,6 +407,18 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Webhook Alerts JSON format
+
+In 8.8.0, a regression was introduced to [Webhooks Alerting](/components/console/manage-clusters/manage-alerts.md#webhook-alerts). The JSON format was modified in that the `processVersion` field returns a `String` value representing either the process version tag, if it exists, or otherwise the process version.
+
+In 8.8.9, the `processVersion` was reverted to return an integer value representing the process version only. A new `processVersionTag` field was introduced to include the process version tag.
+
 ### Connectors
 
 <div className="release-announcement-row">

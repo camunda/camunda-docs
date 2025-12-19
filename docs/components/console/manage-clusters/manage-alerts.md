@@ -53,7 +53,8 @@ Webhook alerts contain a JSON body with following structure:
       "jobKey": 1234567890123456,
       "creationTime": "2021-07-22T08:00:00.000+0000",
       "processName": "process-name",
-      "processVersion": 1
+      "processVersion": 1,
+      "processVersionTag": "versionTag"
     }
   ]
 }
