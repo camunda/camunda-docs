@@ -10,10 +10,10 @@ Task testing deploys the process and executes the selected task on the engine, a
 
 ## Prerequisites
 
-Task testing requires a **REST connection** to a Camunda 8.8 or higher cluster.  
+Task testing requires a **REST connection** to a Camunda 8.8 or higher cluster.
 gRPC connections are not supported.
 
-When configuring a connection, make sure to **remember credentials**; otherwise, task testing won’t be able to deploy the process.
+You can set up a connection by following the [Connect to Camunda 8](./connect-to-camunda-8.md) guide.
 
 ## Testing a single activity
 
