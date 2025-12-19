@@ -62,7 +62,7 @@ This deployment approach separates infrastructure management from application de
 This approach uses three vendor-supported infrastructure components, each maintained by their respective project teams:
 | Component | Purpose | Official Documentation |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/current/) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
 | **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
 | **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
@@ -141,7 +141,7 @@ While this guide demonstrates manual deployment using command-line tools, these 
 
 [CloudNativePG](https://cloudnative-pg.io/) is a CNCF project that provides the official Kubernetes deployment method for PostgreSQL. It's designed specifically for cloud-native environments with enterprise-grade features including automated backups, point-in-time recovery, and rolling updates.
 
-**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/documentation/current/)
+**Official documentation**: [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)
 
 ### Architecture
 
@@ -665,7 +665,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - Check node resources and storage availability
 - Review CloudNativePG operator logs: `kubectl logs -n cnpg-system deployment/cnpg-controller-manager`
 
-**Reference:** [CloudNativePG Troubleshooting](https://cloudnative-pg.io/documentation/current/troubleshooting/)
+**Reference:** [CloudNativePG Troubleshooting](https://cloudnative-pg.io/docs/1.28/troubleshooting)
 
 #### Elasticsearch cluster yellow/red status
 
@@ -708,7 +708,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 ### Backup and disaster recovery
 
 - **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/backup.md)).
-- **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/documentation/1.16/backup_recovery/)
+- **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/docs/1.28/recovery)
 - **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control
 
@@ -736,7 +736,7 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 ## Additional resources
 
-- [CloudNativePG documentation](https://cloudnative-pg.io/documentation/current/)
+- [CloudNativePG documentation](https://cloudnative-pg.io/docs/1.28/)
 - [Elastic Cloud on Kubernetes guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
 - [Keycloak Operator documentation](https://www.keycloak.org/operator/installation)
 - [Camunda 8 Helm chart parameters](https://artifacthub.io/packages/helm/camunda/camunda-platform#parameters)

@@ -70,7 +70,7 @@ Camunda does not yet support the hit policy **output order**. In essence, output
 
 ## Understanding DMN hit policy use cases
 
-Most situations can be addressed using different hit policies. In that case, the hit policy will have an effect on the readability and maintainability of the table. Often it is worth trying different varieties until you have a feel for what will work best. In practice, we often use the free [online simulator](https://consulting.camunda.com/dmn-simulator/) to experiment with various alternatives.
+Most situations can be addressed using different hit policies. In that case, the hit policy will have an effect on the readability and maintainability of the table. Often it is worth trying different varieties until you have a feel for what will work best.
 
 ### Unique: granting categories of customers a specified discount
 

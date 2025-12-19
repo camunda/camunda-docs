@@ -970,6 +970,36 @@ RewriteRule ^optimize/self-managed/components/optimize/migration-update/instruct
 # Updated web-modeler troubleshooting
 RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
 
+# Migrating from Camunda 7 - Migration Tooling reorganization
+RewriteRule ^docs/guides/migrating-from-camunda-7/code-conversion/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/code-conversion/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/config-examples/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/config-properties/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/database/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/database/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/history/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/install/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/install/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/limitations/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/runtime/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/troubleshooting/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/variables/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables/ [R=301,L]
+RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/version-compatibility/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/version-compatibility/ [R=301,L]
+
+# Migrating from Camunda 7 - Migration Tooling reorganization (version 8.8)
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/code-conversion/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/code-conversion/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/config-examples/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/config-properties/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/database/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/database/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/history/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/install/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/install/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/limitations/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/runtime/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/troubleshooting/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/variables/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables/ [R=301,L]
+RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/version-compatibility/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/version-compatibility/ [R=301,L]
+
 ##################################################################################
 #
 #  Hey friend! There's a good chance you've left the redirect party, come back!

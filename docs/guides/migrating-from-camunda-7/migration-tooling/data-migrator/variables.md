@@ -113,7 +113,7 @@ camunda:
         enabled: false
 ```
 
-You can find a complete list of built-in interceptors in the [property reference](/guides/migrating-from-camunda-7/data-migrator/config-properties.md#built-in-interceptors).
+You can find a complete list of built-in interceptors in the [property reference](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties.md#built-in-interceptors).
 
 ## Custom transformation
 
