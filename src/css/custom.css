@@ -630,11 +630,14 @@ body {
   border-radius: 20px !important;
   margin-right: 10px;
   border: 1px solid #fc5d0d;
+  transition: all 0.3s ease;
 }
+
 .try-free:hover {
   background-color: #171c29;
   color: #ffffff;
   border: 1px solid #171c29;
+  transform: translateY(-2px);
 }
 
 .kapa-open {
@@ -677,7 +680,7 @@ body {
 
 [data-theme="dark"] .try-free {
   border-color: rgb(255, 255, 255);
-  transition: 0.3s;
+  transition: 0.3s ease;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: 1px solid white;
@@ -687,6 +690,7 @@ body {
   background-color: #ffffff;
   color: var(--ifm-color-black);
   border: 1px solid #171c29;
+  transform: translateY(-2px);
 }
 
 .dropdown {
