@@ -140,7 +140,7 @@ After 8.8.9:
 
 **Action required**
 
-You should adapt any integrations you have created for 8.8.x that depend on the webhook to handle the updated JSON structure:
+Adapt any webhook-dependent integrations you have created for 8.8.x to handle the updated JSON structure:
 
 1. Update your integration to read `processVersion` as an integer value representing the process version number.
 2. If you need the process version tag, use the new `processVersionTag` field that contains the string value of the version tag (if one exists).
