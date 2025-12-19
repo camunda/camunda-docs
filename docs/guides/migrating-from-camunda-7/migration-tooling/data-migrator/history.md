@@ -67,6 +67,37 @@ Entity transformations are handled by built-in converters that transform Camunda
 into Camunda 8 database models during migration. The History Data Migrator uses the
 `EntityInterceptor` interface to allow customization of this conversion process.
 
+### Built-in Converters
+
+The following built-in converters handle the transformation of Camunda 7 historic entities:
+
+| Converter                                   | Camunda 7 Entity Type                    | Camunda 8 Model               |
+| ------------------------------------------- | ---------------------------------------- | ----------------------------- |
+| `ProcessInstanceTransformer`                | `HistoricProcessInstance`                | `ProcessInstanceDbModel`      |
+| `ProcessDefinitionTransformer`              | `ProcessDefinition`                      | `ProcessDefinitionDbModel`    |
+| `FlowNodeTransformer`                       | `HistoricActivityInstance`               | `FlowNodeInstanceDbModel`     |
+| `UserTaskTransformer`                       | `HistoricTaskInstance`                   | `UserTaskDbModel`             |
+| `IncidentTransformer`                       | `HistoricIncident`                       | `IncidentDbModel`             |
+| `VariableTransformer`                       | `HistoricVariableInstance`               | `VariableDbModel`             |
+| `DecisionInstanceTransformer`               | `HistoricDecisionInstance`               | `DecisionInstanceDbModel`     |
+| `DecisionDefinitionTransformer`             | `HistoricDecisionDefinition`             | `DecisionDefinitionDbModel`   |
+| `DecisionRequirementsDefinitionTransformer` | `HistoricDecisionRequirementsDefinition` | `DecisionRequirementsDbModel` |
+
+### Disabling Built-in Converters
+
+You can disable any built-in converter using the `enabled` configuration property. This is useful
+when your migration use case is more complex and doesn't work out-of-the-box, allowing you to handle
+entity migration entirely through custom interceptors:
+
+```yaml
+camunda:
+  migrator:
+    # Entity interceptor configuration
+    interceptors:
+      - class-name: io.camunda.migration.data.impl.interceptor.history.entity.ProcessInstanceTransformer
+        enabled: false
+```
+
 ## Custom Transformation
 
 The `EntityInterceptor` interface allows you to define custom logic that executes when a Camunda 7 historic entity is being converted to a Camunda 8 database model during migration. This is useful for enriching, auditing, or customizing entity conversion.
@@ -110,6 +141,29 @@ public class ProcessInstanceEnricher implements EntityInterceptor {
 }
 ```
 
+#### Accessing Camunda 7 Process Engine
+
+To retrieve information from Camunda 7 entities, you can use the `processEngine` available in the
+`EntityConversionContext`. That allows you to access services like the `RepositoryService`,
+`RuntimeService`, and others. Then fetch additional data as needed from other Camunda 7 entities.
+
+```java
+@Override
+public void execute(EntityConversionContext<?, ?> context) {
+  // Use ProcessEngine to retrieve deployment information from Camunda 7 process engine
+  ProcessEngine processEngine = context.getProcessEngine();
+
+  // Example: Get process definition to retrieve deployment ID
+  String deploymentId = processEngine.getRepositoryService()
+      .createProcessDefinitionQuery()
+      .processDefinitionKey(processInstance.getProcessDefinitionKey())
+      .singleResult()
+      .getDeploymentId();
+  // Custom conversion logic
+  // ...
+}
+```
+
 ### Type Restrictions
 
 Entity interceptors can be restricted to specific entity types using the `getTypes()` method. Use Camunda 7 historic entity classes:
@@ -119,6 +173,7 @@ Entity interceptors can be restricted to specific entity types using the `getTyp
 public Set<Class<?>> getTypes() {
     // Handle only specific types
     return Set.of(
+        ProcessDefinition.class,            // Process definitions
         HistoricProcessInstance.class,      // Process instances
         HistoricActivityInstance.class,     // Flow nodes/activities
         HistoricTaskInstance.class,         // User tasks
@@ -135,21 +190,6 @@ public Set<Class<?>> getTypes() {
     return Set.of(); // Empty set = handle all types
 }
 ```
-
-### Execution Order
-
-- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
-  - Built-in converters run first, followed by custom interceptors
-- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
-
-### Error Handling
-
-When entity transformation fails:
-
-- The entire entity is skipped
-- Detailed error messages are logged with the specific entity type and error cause
-- The entity is marked for potential retry after fixing the underlying issue
-- You can use `--history --list-skipped` and `--history --retry-skipped` commands to manage failed migrations
 
 ### Configuring Custom Interceptors
 
@@ -176,6 +216,24 @@ camunda:
 4. Restart the Data Migrator
 
 The `enabled` property is supported for all interceptors (both built-in and custom) and defaults to `true`.
+
+See [example interceptor](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/data-migrator/examples/entity-interceptor).
+
+### Execution Order
+
+- Custom interceptors configured in the `application.yml` are executed in their order of appearance from top to bottom
+  - Built-in transformers run first (Order: 1-15), followed by custom interceptors
+- In a Spring Boot environment, you can register interceptors as beans and change their execution order with the `@Order` annotation (lower values run first)
+
+### Error Handling
+
+When entity transformation fails:
+
+1. The entire entity is skipped
+2. Detailed error messages are logged with the specific entity type and error cause
+3. The entity is marked as skipped
+4. You can use `--history --list-skipped` to view skipped entities
+5. After fixing the the underlying issue you can use `--history --retry-skipped` to retry migration
 
 ## History cleanup
 
