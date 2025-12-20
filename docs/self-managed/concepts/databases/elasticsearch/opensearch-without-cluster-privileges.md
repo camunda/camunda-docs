@@ -12,12 +12,12 @@ This approach mirrors the Elasticsearch procedure, but uses OpenSearch-specific 
 
 When running the schema manager as a standalone application, cluster‑level privileges are required only during schema creation and schema settings updates. The continuously running Camunda single application then operates only with index‑level privileges.
 
-- **Database support**: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration file section).
+- **Database support**: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration).
 - **Privileges required by the single application**: The Camunda single application requires an index‑level privilege of at least `manage` on its indices to function properly (see [OpenSearch privileges](./opensearch-privileges.md)).
 
 To run the schema manager as a standalone application:
 
-1. [Initialize the schema manager](#initialize): Create templates, indices (as required), and apply retention / ILM (ISM) policies.
+1. [Initialize the schema manager](#initialize): Create templates, indices (as required), and apply retention ISM policies.
 2. [Start the Camunda single application](#start): Run without cluster-level privileges using a restricted user.
 
 ### 1. Initialize the schema manager {#initialize}
@@ -95,15 +95,29 @@ Create or reuse a user with at least the following index privileges on all Camun
 You can create a role using OpenSearch Security plugin APIs (for IAM roles on AWS OpenSearch Service, please refer to [Identity and Access Management in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html)). Example role definition:
 
 ```bash
-curl -XPUT https://localhost:9200/_plugins/_security/api/roles/camunda_read_write_role \
+curl -XPUT https://localhost:9200/_plugins/_security/api/roles/camunda_app_role \
   -H 'Content-Type: application/json' \
   -u admin:admin \
   -d '{
-    "cluster": [],
-    "index": [
-      {"names": ["camunda-*", "operate-*", "tasklist-*", "zeebe-*"], "privileges": ["manage"]}
+    "cluster_permissions": [
+      "indices:data/read/scroll/clear"
     ],
-    "tenant_patterns": []
+    "index_permissions": [
+      {
+        "index_patterns": [
+          "zeebe-*",
+          "operate-*",
+          "tasklist-*",
+          "camunda-*"
+        ],
+        "allowed_actions": [
+          "indices:data/write/*",
+          "indices:data/read/*",
+          "indices:admin/create",
+          "indices:admin/shards/search_shards"
+        ]
+      }
+    ]
   }'
 ```
 
@@ -113,7 +127,7 @@ Then assign the role to the user (example using Security plugin user API):
 curl -XPUT https://localhost:9200/_plugins/_security/api/internalusers/camunda-app \
   -H 'Content-Type: application/json' \
   -u admin:admin \
-  -d '{"password": "camunda123", "roles": ["camunda_read_write_role"]}'
+  -d '{"password": "camunda123", "opendistro_security_roles": ["camunda_app_role"]}'
 ```
 
 #### Configure the Camunda single application
@@ -138,8 +152,10 @@ camunda:
   database:
     schema-manager:
       createSchema: false
-  # Only required for upgrades from 8.7 (legacy component configs)
   tasklist:
+    opensearch:
+      health-check-enabled: false
+    # Only required for upgrades from 8.7 (legacy component configs)
     zeebe-elasticsearch: # legacy key retained for backward compatibility
       username: camunda-app
       password: camunda123
@@ -149,6 +165,9 @@ camunda:
         verify-hostname: false
         certificate-path: PATH_TO_CA_CERT
   operate:
+    opensearch:
+      health-check-enabled: false
+    # Only required for upgrades from 8.7 (legacy component configs)
     zeebe-elasticsearch: # legacy key retained for backward compatibility
       username: camunda-app
       password: camunda123
@@ -215,9 +234,9 @@ orchestration:
     camunda.database:
       schema-manager:
         create-schema: false
-    camunda.tasklist.elasticsearch:
+    camunda.tasklist.opensearch:
       health-check-enabled: false
-    camunda.operate.elasticsearch:
+    camunda.operate.opensearch:
       health-check-enabled: false
     zeebe.broker.exporters:
       camundaexporter:
