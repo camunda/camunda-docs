@@ -92,7 +92,7 @@ Create or reuse a user with at least the following index privileges on all Camun
 
 - `manage` (covers create index, mappings updates, search, read, write)
 
-You can create a role using OpenSearch Security plugin APIs (syntax may vary slightly for Amazon OpenSearch Service). Example role definition:
+You can create a role using OpenSearch Security plugin APIs (for IAM roles on AWS OpenSearch Service, please refer to [Identity and Access Management in Amazon OpenSearch Service](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html)). Example role definition:
 
 ```bash
 curl -XPUT https://localhost:9200/_plugins/_security/api/roles/camunda_read_write_role \
