@@ -152,3 +152,7 @@ The Camunda Docs MCP server exposes a single semantic search tool:
 `search_camunda_knowledge_sources`
 
 This tool allows AI tools/agents to perform semantic retrieval over the Camunda 8 documentation and other knowledge sources, such as forum posts, repos, podcasts, and product blogs.
+
+:::info
+The Camunda Docs MCP server is powered by the [Kapa.ai](https://www.kapa.ai) AI assistant.
+:::
