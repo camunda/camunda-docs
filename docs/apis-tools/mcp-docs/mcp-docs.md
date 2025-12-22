@@ -11,7 +11,7 @@ import McpServerImg from './img/camunda-docs-mcpserver.png';
 Use the Camunda Docs MCP server to access and query Camunda 8 documentation directly from your IDE or AI tool.
 
 :::info Intended usage and limits
-The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer queries and coding assistance, evaluation, and testing. See [authentication and usage limits](#authentication-and-usage-limits).
+The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer IDE queries and coding assistance, evaluation, and testing. See [authentication and usage limits](#authentication-and-usage-limits).
 :::
 
 ## About
