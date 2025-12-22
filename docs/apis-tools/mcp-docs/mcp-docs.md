@@ -8,11 +8,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import McpServerImg from './img/camunda-docs-mcpserver.png';
 
-Connect to Camunda 8 documentation directly from your IDE or AI tool.
+Use the Camunda Docs MCP server to access and query Camunda 8 documentation directly from your IDE or AI tool.
+
+:::info Intended usage and limits
+The Camunda Docs MCP server is not designed for use in production environments, high-volume automation, or as part of a CI/CD pipeline. It is provided to help support Camunda developer queries and coding assistance, evaluation, and testing. See [authentication and usage limits](#authentication-and-usage-limits).
+:::
 
 ## About
 
-The Camunda 8 Docs [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/getting-started/intro) allows your AI agent to access and use the latest official Camunda 8 documentation, without leaving the editor.
+The Camunda Docs [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/getting-started/intro) allows your AI agent to access and use the latest official Camunda 8 documentation, without leaving the editor.
 
 For example, if you use an AI coding tool such as Cursor or Copilot, using the MCP server helps ensure more accurate AI responses and code generation via up-to-date Camunda documentation and context.
 
@@ -29,8 +33,9 @@ https://camunda-docs.mcp.kapa.ai
 The steps required to add the MCP server varies depending on the AI assistant you want to use. For example:
 
 <Tabs groupId="ai-assistant" defaultValue="vscode" values={[
-{label: 'Copilot (in VS Code)', value: 'vscode'},
+{label: 'VS Code Copilot', value: 'vscode'},
 {label: 'Cursor', value: 'cursor'},
+{label: 'ChatGPT Desktop', value: 'chatgpt'},
 {label: 'Other MCP clients', value: 'other'}
 ]}>
 
@@ -43,7 +48,7 @@ Create an `mcp.json` file in your workspace `.vscode` folder:
 ```json title=".vscode/mcp.json"
 {
   "servers": {
-    "camunda": {
+    "camunda docs": {
       "type": "http",
       "url": "https://camunda-docs.mcp.kapa.ai"
     }
@@ -64,7 +69,7 @@ Add the following to your `.cursor/mcp.json` file:
 ```json
 {
   "mcpServers": {
-    "camunda": {
+    "camunda docs": {
       "type": "http",
       "url": "https://camunda-docs.mcp.kapa.ai"
     }
@@ -78,6 +83,24 @@ For more information, refer to the [Cursor MCP](https://cursor.com/docs/context/
 
 </TabItem>
 
+<TabItem value="chatgpt">
+
+ChatGPT Desktop supports MCP servers in developer mode:
+
+1. Open ChatGPT Desktop.
+1. Navigate to **Settings > Features**.
+1. Enable **Developer mode**.
+1. Navigate to **Settings > MCP Servers**.
+1. Click **Add Server** and enter:
+   - **Name**: camunda docs
+   - **URL**: https://camunda-docs.mcp.kapa.ai
+
+:::info
+For more information, refer to the [ChatGPT Desktop MCP](https://platform.openai.com/docs/guides/developer-mode) documentation.
+:::
+
+</TabItem>
+
 <TabItem value="other">
 
 Use the server URL `https://camunda-docs.mcp.kapa.ai` and refer to your client's documentation for installation instructions.
@@ -87,7 +110,7 @@ Most clients accept the standard MCP protocol JSON configuration format:
 ```json
 {
   "mcpServers": {
-    "camunda": {
+    "camunda docs": {
       "url": "https://camunda-docs.mcp.kapa.ai"
     }
   }
@@ -98,6 +121,15 @@ Most clients accept the standard MCP protocol JSON configuration format:
 
 </Tabs>
 
+### Authentication and usage limits
+
+When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
+
+This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
+
+- 40 requests per user per hour.
+- 200 requests per user per day.
+
 ## Use the Camunda Docs MCP server
 
 Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda. For example:
@@ -106,14 +138,12 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
 
-### Authentication and rate limits
+### Example: VS Code Copilot
 
-When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
-
-This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
-
-- 40 requests per user per hour.
-- 200 requests per user per day.
+1. In VS Code, open Copilot Chat.
+1. Select **Agent** mode from the **Set Agent** drop-down menu.
+1. Click **Configure Tools** to check the `search_camunda_knowledge_sources` tool is available and selected.
+1. Ask context-aware questions about Camunda.
 
 ### Tools
 
