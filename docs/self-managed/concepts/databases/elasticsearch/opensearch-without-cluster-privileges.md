@@ -10,27 +10,30 @@ This approach mirrors the Elasticsearch procedure, but uses OpenSearch-specific 
 
 ## Standalone schema manager
 
-When running the schema manager as a standalone application, cluster‑level privileges are required only during schema creation and schema settings updates. The continuously running Camunda single application then operates only with index‑level privileges.
+When you run the schema manager as a standalone application, it requires
+cluster-level privileges only during schema creation and settings updates.
+The Camunda application then runs with index-level privileges only.
 
-- **Database support**: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration).
-- **Privileges required by the single application**: The Camunda single application requires an index‑level privilege of at least `manage` on its indices to function properly (see [OpenSearch privileges](./opensearch-privileges.md)).
+- Database support: This setup is supported only for OpenSearch installations (Elasticsearch procedure uses a different configuration).
+- Required privileges: The Camunda application requires the `manage` index-level privilege to operate (see [OpenSearch privileges](./opensearch-privileges.md)).
 
 To run the schema manager as a standalone application:
 
 1. [Initialize the schema manager](#initialize): Create templates, indices (as required), and apply retention ISM policies.
+
 2. [Start the Camunda single application](#start): Run without cluster-level privileges using a restricted user.
 
-### 1. Initialize the schema manager {#initialize}
+### Initialize the schema manager {#initialize}
 
 The schema manager is a separate Java application responsible for creating and managing the database schema and applying index template settings (for example, shard/replica counts and retention policies).
 
 :::note
 
-- Initialization requires a user with cluster-level privileges (for example, an administrative role in OpenSearch with access to required action groups like `cluster_manage_index_templates`, `cluster_monitor`, and the index template CRUD permissions listed in [OpenSearch privileges](./opensearch-privileges.md)).
+- Initialization requires a user with cluster-level privileges. For example, use an OpenSearch administrative role with access to action groups such as `cluster_manage_index_templates`, `cluster_monitor`, and the index template CRUD permissions listed in [OpenSearch privileges](./opensearch-privileges.md).
 - Initialization needs to be executed only once per installation (and again for minor upgrades requiring schema adjustments).
   :::
 
-#### Configure the schema manager
+#### Configure the schema manager settings
 
 Create a custom configuration file for the schema manager with the following values:
 
@@ -72,7 +75,7 @@ For additional configuration options, review the [secondary storage configuratio
 
 #### Start the schema manager
 
-Using the custom configuration file, start the Java application `schema` (or `schema.bat` on Windows) located in the `bin` folder of the distribution.
+Start the `schema` Java application (or `schema.bat` on Windows) from the `bin` directory by using your custom configuration file.
 
 Assuming your configuration is saved as `schema-manager-opensearch.yaml`:
 
@@ -82,11 +85,11 @@ SPRING_CONFIG_ADDITIONALLOCATION=/path/to/schema-manager-opensearch.yaml ./bin/s
 
 Wait for successful completion (application exits cleanly) before moving to step 2.
 
-### 2. Start the Camunda single application {#start}
+### Start the Camunda single application {#start}
 
 Start the application with a less privileged OpenSearch user—only index‑level privileges (`manage` for required indices) are needed.
 
-#### OpenSearch user with sufficient privileges
+#### OpenSearch user with required privileges
 
 Create or reuse a user with at least the following index privileges on all Camunda indices:
 
@@ -252,7 +255,7 @@ orchestration:
             enabled: false
 ```
 
-### Minor version upgrades using the standalone schema manager {#minor-upgrades}
+### Minor version upgrades with the standalone schema manager {#minor-upgrades}
 
 For a minor upgrade (N → N+1), pre-run the standalone schema manager of version N+1 with a privileged user to apply new templates/mappings. Then upgrade the application with schema creation disabled.
 
@@ -277,22 +280,22 @@ Supported settings (see [configuration references](/self-managed/components/orch
 
 Procedure:
 
-1. Prepare schema manager config including updated settings (and, for Operate/Tasklist ≥8.7.11, set `updateSchemaSettings: true` if applicable).
+1. For Operate and Tasklist 8.7.11+, set `updateSchemaSettings: true` if applicable.
 2. Run schema manager with privileged user while application remains online.
 3. Verify successful completion.
 
 ### Limitations
 
-- Only applies to OpenSearch installations.
-- Optimize support for OpenSearch is available (see release notes). However, Optimize cannot be part of this reduced-privilege single application model when it requires additional cluster features (for example advanced aggregations). Evaluate privileges before including Optimize.
+- This procedure applies to OpenSearch installations only.
+- Optimize supports OpenSearch (see release notes). However, you cannot include Optimize in this reduced-privilege model if it requires additional cluster features, such as advanced aggregations. Evaluate required privileges before including Optimize.
 - Does not remove the need for appropriate ISM permissions if retention is enabled.
 
 ## Standalone backup application
 
-Backups (snapshot creation) require `manage_snapshots` cluster-level privilege. If the main application cannot hold this privilege, run a separate backup application using an elevated user.
+Snapshot backups require the `manage_snapshots` cluster-level privilege. If the main application cannot hold this privilege, run a separate backup application with an elevated user.
 
-- **Database support**: Supported only for OpenSearch installations in this procedure.
-- **Indices covered**: Operate and Tasklist indices (Optimize indices excluded from this simplified procedure; handle separately if used).
+- Database support: Supported only for OpenSearch installations in this procedure.
+- Indices covered: Operate and Tasklist indices (Optimize indices excluded from this simplified procedure; handle separately if used).
 
 Before running the standalone backup manager:
 
@@ -304,12 +307,12 @@ Before running the standalone backup manager:
 
 ### High-level flow recap
 
-| Step | Action                                                                     |
-| ---- | -------------------------------------------------------------------------- |
-| 1    | Run privileged schema manager → prepares templates/indices                 |
-| 2    | Start application with restricted user → processes workload                |
-| 3    | (Upgrade) Run future version schema manager privileged → apply adjustments |
-| 4    | Upgrade application with schema creation disabled                          |
-| 5    | (Optional) Run standalone backup application with snapshot privilege       |
+| Step | Action                                                               |
+| ---- | -------------------------------------------------------------------- |
+| 1    | Run the privileged schema manager to prepare templates and indices   |
+| 2    | Start the application with a restricted user                         |
+| 3    | (Upgrade) Run the next version of the schema manager with privileges |
+| 4    | Upgrade the application with schema creation disabled                |
+| 5    | (Optional) Run the standalone backup application                     |
 
 This staged approach reduces or eliminates downtime for minor upgrades and isolates cluster-level privileges to short-lived administrative tasks rather than long-running services.
