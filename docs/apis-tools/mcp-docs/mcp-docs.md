@@ -1,7 +1,6 @@
 ---
 id: docs-mcp
-title: Camunda Docs MCP
-sidebar_label: "Camunda Docs MCP"
+title: Camunda Docs MCP server
 description: "Connect to Camunda documentation directly from your IDE or AI tool using the Camunda Docs MCP Server"
 ---
 
@@ -17,9 +16,7 @@ The Camunda 8 Docs [Model Context Protocol (MCP) server](https://modelcontextpro
 
 For example, if you use an AI coding tool such as Cursor or Copilot, using the MCP server helps ensure more accurate AI responses and code generation via up-to-date Camunda documentation and context.
 
-<img src={McpServerImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-800" style={{marginTop: '0', marginBottom: '0'}}/>
-
-### MCP Server URL
+<img src={McpServerImg} alt="Ask context-aware questions about Camunda within VS Code." title="Ask context-aware questions about Camunda within VS Code." class="img-800" style={{marginTop: '0'}}/>
 
 The MCP server is available at the following URL:
 
@@ -117,3 +114,11 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 - "What is BPMN?"
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
+
+### Tools
+
+The Camunda Docs MCP server exposes a single semantic search tool:
+
+`search_camunda_knowledge_sources`
+
+This tool allows AI tools/agents to perform semantic retrieval over the Camunda 8 documentation and other knowledge sources, such as forum posts, repos, podcasts, and product blogs.
