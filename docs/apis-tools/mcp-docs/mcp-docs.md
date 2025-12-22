@@ -98,15 +98,6 @@ Most clients accept the standard MCP protocol JSON configuration format:
 
 </Tabs>
 
-### Authentication and usage
-
-When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
-
-This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
-
-- 40 requests per user per hour.
-- 200 requests per user per day.
-
 ## Use the Camunda Docs MCP server
 
 Once connected to the MCP server within your editor, you can ask context-aware questions about Camunda. For example:
@@ -114,6 +105,15 @@ Once connected to the MCP server within your editor, you can ask context-aware q
 - "What is BPMN?"
 - "How do I build an AI agent?"
 - "What properties are changed for Camunda 8.8?"
+
+### Authentication and rate limits
+
+When connecting to the MCP server for the first time, you must authenticate via Google sign-in.
+
+This anonymous Google ID is only used to enforce per-user rate limits and prevent abuse of the Camunda Docs MCP server:
+
+- 40 requests per user per hour.
+- 200 requests per user per day.
 
 ### Tools
 
