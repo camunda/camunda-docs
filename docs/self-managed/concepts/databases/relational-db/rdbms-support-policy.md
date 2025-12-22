@@ -27,6 +27,11 @@ The following RDBMS databases are supported:
 Changes to supported versions are announced in [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
+## PostgreSQL-compatible managed services
+
+Camunda officially supports PostgreSQL as listed above.  
+PostgreSQL-compatible managed services (for example, AWS Aurora PostgreSQL or Azure Database for PostgreSQL) are expected to work because
+
 ## New version support
 
 New versions are added based on:

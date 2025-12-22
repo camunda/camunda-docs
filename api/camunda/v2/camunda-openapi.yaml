@@ -33,11 +33,13 @@ tags:
   - name: Clock
   - name: Cluster
   - name: Cluster Variable
+  - name: Conditional
   - name: Decision definition
   - name: Decision instance
   - name: Decision requirements
   - name: Document
   - name: Element instance
+  - name: Expression
   - name: Group
   - name: Incident
   - name: Job
@@ -95,6 +97,8 @@ paths:
     $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1tenants~1{tenantId}"
   /cluster-variables/tenants/{tenantId}/{name}:
     $ref: "cluster-variables.yaml#/paths/~1cluster-variables~1tenants~1{tenantId}~1{name}"
+  /conditionals/evaluation:
+    $ref: "conditionals.yaml#/paths/~1conditionals~1evaluation"
   /correlated-message-subscriptions/search:
     $ref: "messages.yaml#/paths/~1correlated-message-subscriptions~1search"
   /decision-definitions/evaluation:
@@ -135,6 +139,8 @@ paths:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1incidents~1search"
   /element-instances/{elementInstanceKey}/variables:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1variables"
+  /expression/evaluation:
+    $ref: "expression.yaml#/paths/~1expression~1evaluation"
   /groups:
     $ref: "groups.yaml#/paths/~1groups"
   /groups/search:
@@ -161,6 +167,8 @@ paths:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}"
   /incidents/{incidentKey}/resolution:
     $ref: "incidents.yaml#/paths/~1incidents~1{incidentKey}~1resolution"
+  /incidents/statistics/process-instances:
+    $ref: "incidents.yaml#/paths/~1incidents~1statistics~1process-instances"
   /jobs/activation:
     $ref: "jobs.yaml#/paths/~1jobs~1activation"
   /jobs/search:
@@ -189,6 +197,8 @@ paths:
     $ref: "messages.yaml#/paths/~1messages~1publication"
   /process-definitions/search:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1search"
+  /process-definitions/statistics/message-subscriptions:
+    $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1message-subscriptions"
   /process-definitions/statistics/process-instances:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1statistics~1process-instances"
   /process-definitions/{processDefinitionKey}:

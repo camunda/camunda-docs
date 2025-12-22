@@ -1,7 +1,7 @@
 ---
 id: code-conversion
 title: Code Conversion
-sidebar_label: Code conversion
+sidebar_label: Code Conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---
 
@@ -135,7 +135,7 @@ Test code:
 The complete pattern catalog with code examples is maintained on GitHub.
 
 Browse the complete pattern catalog with code examples in the
-[Camunda 7 to 8 migration tooling repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/patterns).
+[Migration Tooling repository](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/code-conversion/patterns).
 
 :::tip
 The pattern catalog is actively maintained by Camunda consultants, partners, and community members. You can contribute your own patterns or request additions via GitHub issues and pull requests.
@@ -215,7 +215,7 @@ Add the following to your `pom.xml`:
                 <dependencies>
                     <dependency>
                         <groupId>io.camunda</groupId>
-                        <artifactId>camunda-7-to-8-rewrite-recipes</artifactId>
+                        <artifactId>camunda-7-to-8-code-conversion-recipes</artifactId>
                         <version>0.2.0</version>
                     </dependency>
                 </dependencies>
@@ -284,9 +284,9 @@ If Camunda 7 code remains after applying recipes:
 
 Your BPMN and DMN models need to be adjusted to work with Camunda 8.
 
-The [Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the diagram converter to suit your needs.
+The [Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter) handles most common changes automatically. Depending on how you refactor your code and what elements of Camunda 7 you have used, you can extend or customize the Diagram Converter to suit your needs.
 
-Find the diagram conversion tooling and its documentation in the [Camunda 7 to 8 migration tooling – Migration Analyzer & Diagram Converter](https://github.com/camunda-community-hub/camunda-7-to-8-migration-analyzer).
+Find the diagram conversion tooling and its documentation in the [Migration Tooling – Diagram Converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/diagram-converter).
 
 ## Leveraging AI for refactoring
 

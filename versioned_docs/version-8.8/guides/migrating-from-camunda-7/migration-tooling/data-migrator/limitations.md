@@ -26,7 +26,6 @@ The runtime migration has the following limitations.
 
 ### Variables
 
-- Proper handling and intercepting of variables is currently only supported for the Runtime Data Migrator.
 - [Unsupported Camunda 7 types](../variables#unsupported-types).
 - [Camunda 8 variable name restrictions](/components/concepts/variables.md#variable-values).
   - Variables that do not follow the restrictions will cause issues in FEEL expression evaluation.
@@ -173,13 +172,15 @@ The history migration has the following limitations.
 ### DMN
 
 - The Data Migrator only migrates instances which are linked to process definition business rule tasks.
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/634 
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
-- Decision instance `inputs` and `outputs` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5364
+- Decision instance `state` is always set to `EVALUATED`
+- Decisions containing only a single decision table or literal expression are currently not displayed correctly in Operate
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/619
 
 ## Cockpit plugin
 
-The [Cockpit plugin](/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin.md) has the following limitations:
+The [Cockpit plugin](/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin.md) has the following limitations:
 
 - The migration schema has no authorization mechanism. Anyone with authenticated access to the Camunda 7 Cockpit can see the Cockpit Plugin and read the migration schema.
 - If the migration of a process instance or any other entity is skipped for multiple reasons, only one reason is stored and displayed.
