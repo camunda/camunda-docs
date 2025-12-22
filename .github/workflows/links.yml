@@ -45,7 +45,7 @@ jobs:
 
       - name: Save lychee cache
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
