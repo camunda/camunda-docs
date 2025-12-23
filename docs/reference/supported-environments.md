@@ -77,7 +77,7 @@ The [sizing of a Camunda 8 installation](/components/best-practices/architecture
 
 ### Persistent volumes
 
-Camunda supports different types of network storage volumes, including block storage and network file systems (NFS).
+Camunda supports different types of storage volumes, including block storage and network file systems (NFS).
 
 For details on typical volume usage, refer to these examples:
 
@@ -94,7 +94,7 @@ If you want to use another NFS, it must meet these requirements:
 - Be POSIX-compliant.
 - Never reorder file operations.
 - Be a hard mount, not a soft mount, to avoid SIGBUS errors during a network partition.
-- Only one container may mount the disk in write mode at a time. Two containers mounting the same disk in write mode could cause data corruption.
+- **Only one container may mount the disk in write mode at a time.** Two containers mounting the same disk in write mode could cause data corruption.
 
 #### Performance
 
