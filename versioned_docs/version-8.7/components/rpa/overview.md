@@ -14,13 +14,13 @@ Camunda uses RPA to integrate legacy applications without accessible APIs into y
 
 ## Get started with RPA
 
-Camunda’s RPA functionality is built around a standalone RPA worker and Robot Framework–based RPA scripts. This setup allows you to develop and execute RPA scripts that integrate seamlessly with your existing Camunda components.
-
-<p class="link-arrow">[Get started with RPA](./getting-started.md)</p>
+Camunda RPA uses a standalone RPA worker and Robot Framework–based scripts. This setup lets you build and run RPA scripts that integrate with your existing Camunda components.
 
 :::tip
-Before getting started, review [RPA known issues](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to ensure environment compatibility.
+Before you begin, review the [RPA known issues](https://github.com/camunda/rpa-worker/discussions/categories/known-issues) to check environment compatibility.
 :::
+
+To start building RPA scripts, see [Get started with RPA](./getting-started.md).
 
 ## Further resources
 
