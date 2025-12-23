@@ -137,25 +137,29 @@ vast majority of dependencies Camunda _only_ applies patch updates.
 
 However, certain dependencies used by Camunda 8 may have a shorter maintenance policy than Camunda itself. Camunda may adopt a different update policy for these dependencies, as listed below.
 
-### Spring Boot/Framework/Security Update Policies
+### Spring Boot/Framework/Security updates
 
 Spring has a [different maintenance window](https://spring.io/projects/spring-boot#support) than Camunda for its open-source software (OSS) offering.
-Camunda addresses this with a dedicated Spring Boot/Framework/Security Update Policy for the Camunda Orchestration Cluster and for client artifacts.
+Camunda addresses this with Spring Boot/Framework/Security update policies for the Camunda Orchestration Cluster and client libraries.
 
-Note: The version of the Spring Framework and Spring Security as well as other dependencies managed via Spring Boot (see [Managed Dependency Coordinates](https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html)) are covered by the same policy.
+:::info
+The update policy covers the Spring Framework and Security versions, as well as [other dependencies managed via Spring Boot](https://docs.spring.io/spring-boot/appendix/dependency-versions/coordinates.html).
+:::
 
-#### Camunda Orchestration Cluster Spring Boot/Framework/Security Update Policy
+#### Orchestration Cluster
 
-The Camunda Orchestration Cluster is a Spring Boot application and leverages Spring Boot to execute fundamental functionality such as application configuration, REST infrastructure (including security), production ready features, etc.
+The Camunda Orchestration Cluster leverages Spring Boot to implement core functionality, like application configuration, REST infrastructure (including security), and other production-ready features.
 
-Orchestration Cluster patch releases may contain updates to newer Spring Boot minor versions, such that the **latest available patch release of Camunda Orchestration Cluster component uses a Spring version with an active OSS support window**.
+Camunda ensures that **the latest available patch releases make use of a Spring version with an active OSS support window**. Therefore, Orchestration Cluster patch releases **may contain updates to newer Spring Boot minor versions**.
 
-#### Camunda Client libraries Spring Boot Starters
+#### Client libraries and SDKs
 
-Camunda Clients or SDKs, such as the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md), that are meant to be included in third-party applications, may depend on a particular Spring Boot release.
+Camunda clients or SDKs, such as the [Camunda Spring Boot Starter](../../apis-tools/camunda-spring-boot-starter/getting-started.md), that are meant to be included in third-party applications, may depend on a particular Spring Boot release.
 
-To not risk breaking backward compatibility in Camunda library patch releases, the Spring Boot version referenced is kept on the same minor release as used with the original Camunda minor release.
+To ensure backward compatibility, every Camunda library patch release references the same Spring Boot minor version as the one referenced in the Camunda library's latest minor release.
 
-However Camunda tests Camunda library patch releases for compatibility with newer Spring Boot minor releases, declaring compatibility with a newer Spring version with an active OSS support window at last one month before the OSS support window of the current latest supported Spring release ends. This is reflected in the Compatibility Matrix of these artifacts, e.g. the [Camunda Spring Boot Starter Compatibility Matrix](../../apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
+However, Camunda tests against newer Spring Boot minor releases and declares compatible versions in the library's compatibility matrix. For an example, refer to the [Camunda Spring Boot Starter Compatibility Matrix](../../apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
 
-This policy allows users to update their applications to a new Spring Boot version by overriding the Spring release to a different than default listed as compatible Spring Boot Release.
+If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends at latest.
+
+With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
