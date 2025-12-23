@@ -160,6 +160,6 @@ To ensure backward compatibility, every Camunda library patch release references
 
 However, Camunda tests against newer Spring Boot minor releases and declares compatible versions in the library's compatibility matrix. For an example, refer to the [Camunda Spring Boot Starter Compatibility Matrix](../../apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility).
 
-If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends at latest.
+If the library is compatible with a newer Spring version with an active OSS support window, Camunda declares compatibility one month before the support window ends, at the latest.
 
 With this policy, you can safely update your applications to a new Spring Boot version by overriding the default Spring release with another compatible version.
