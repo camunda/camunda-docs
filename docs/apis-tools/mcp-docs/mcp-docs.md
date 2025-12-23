@@ -1,6 +1,7 @@
 ---
 id: docs-mcp
 title: Camunda Docs MCP server
+sidebar_label: "Docs MCP server"
 description: "Connect to Camunda documentation directly from your IDE or AI tool using the Camunda Docs MCP Server"
 ---
 
