@@ -30,11 +30,11 @@ See: https://docusaurus.io/docs/styling-layout#styling-your-site-with-infima
   --kapa-button-bg: #fff;
   --kapa-border-gradient: linear-gradient(
     to right,
-    #fc5d0d,
-    #ffc600,
-    #ffc600,
-    #ffc600,
-    #ffc600
+    #6967ff,
+    #78a9ff,
+    #78a9ff,
+    #78a9ff,
+    #78a9ff
   );
 }
 
@@ -665,8 +665,8 @@ body {
 
 .kapa-open:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 4px 12px rgba(252, 93, 13, 0.3);
-  border-color: #fc5d0d;
+  box-shadow: 0px 4px 12px rgba(40, 8, 146, 0.3);
+  border-color: #6967ff;
 }
 
 [data-theme="dark"] .kapa-open {
@@ -674,8 +674,8 @@ body {
 }
 
 [data-theme="dark"] .kapa-open:hover {
-  box-shadow: 0px 4px 12px rgba(252, 93, 13, 0.3);
-  border-color: #fc5d0d;
+  box-shadow: 0px 4px 12px rgba(120, 169, 255, 0.3);
+  border-color: #6967ff;
 }
 
 [data-theme="dark"] .try-free {
