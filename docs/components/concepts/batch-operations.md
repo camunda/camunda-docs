@@ -22,10 +22,12 @@ Example use cases include:
 
 There are four types of batch operations:
 
-- **Resolve incidents:** Resolves the [incidents](./incidents.md) associated with a batch of process instances.
-- **Modify process instances:** Moves a batch of process instances from one node to another.
-- **Migrate process instances:** Migrates a batch of process instances to a new process version.
-- **Cancel process instances:** Cancels a batch of process instances.
+| Type                      | Description                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------- |
+| Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances. |
+| Modify process instances  | Moves a batch of process instances from one node to another.                           |
+| Migrate process instances | Migrates a batch of process instances to a new process version.                        |
+| Cancel process instances  | Cancels a batch of process instances.                                                  |
 
 Furthermore, depending on the status of the batch operation, you may be able to suspend, cancel, or resume the operation.
 
@@ -33,13 +35,15 @@ Furthermore, depending on the status of the batch operation, you may be able to 
 
 A batch operation can have one of the following statuses:
 
-- **Created:** The batch operation was created, but hasn't yet been processed.
-- **Active:** The batch operation is actively being processed.
-- **Completed:** All items in the batch operation were processed, regardless of whether the individual operations succeeded or failed.
-- **Partially completed:** The batch operation successfully processed at least one partition and failed to process at least one partition.
-- **Suspended:** The batch operation was temporarily stopped. Suspended batch operations can be resumed.
-- **Canceled:** The batch operation was permanently stopped. Canceled batch operations can't be resumed.
-- **Failed:** Every item in the batch operation failed.
+| Type                | Description                                                                                                           |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Created             | The batch operation was created, but hasn't yet been processed.                                                       |
+| Active              | The batch operation is actively being processed.                                                                      |
+| Completed           | All items in the batch operation were processed, regardless of whether the individual operations succeeded or failed. |
+| Partially completed | The batch operation successfully processed at least one partition and failed to process at least one partition.       |
+| Suspended           | The batch operation was temporarily stopped. Suspended batch operations can be resumed.                               |
+| Canceled            | The batch operation was permanently stopped. Canceled batch operations can't be resumed.                              |
+| Failed              | Every item in the batch operation failed.                                                                             |
 
 :::info
 Learn more about batch partitions in our [implementation explainer](../zeebe/technical-concepts/batch-operations.md).
@@ -49,12 +53,10 @@ Learn more about batch partitions in our [implementation explainer](../zeebe/tec
 
 To execute a batch operation, you need two sets of permissions:
 
-- **Batch operation permissions**
-  - Permission to create the batch operation.
-  - Permission to manage batch operations (suspend, resume, cancel).
-- **Item-level permissions**
-  - Permission to read process instances and incidents from the secondary database.
-  - Permission to execute the specific operation on each targeted process instance.
+| Batch operation permissions                                      | Item-level permissions                                                          |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Permission to create the batch operation.                        | Permission to read process instances and incidents from the secondary database. |
+| Permission to manage batch operations (suspend, resume, cancel). | Permission to execute the specific operation on each targeted process instance. |
 
 The system stores authorization claims with the batch operation and uses them throughout its lifecycle.
 
