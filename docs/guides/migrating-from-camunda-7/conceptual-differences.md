@@ -46,7 +46,7 @@ Camunda 7 uses [Java Unified Expression Language (JUEL)](https://docs.camunda.or
 
 Camunda 8 uses [Friendly-Enough Expression Language (FEEL)](/components/modeler/feel/what-is-feel.md) and expressions can only access the process instance data and variables.
 
-Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/model-converter/core/src/main/java/io/camunda/migration/model/converter/expression/ExpressionTransformer.java) as a starting point), but you may need to completely rewrite others. Some expressions might even require an additional service task to prepare necessary data that may have been calculated on the fly in Camunda 7.
+Most expressions can be converted (see [this code in the diagram converter](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/5e66012c2ef5f301ab6e61b6a3120b13c9c26459/diagram-converter/core/src/main/java/io/camunda/migration/diagram/converter/expression/ExpressionTransformer.java#L21) as a starting point), but you may need to completely rewrite others. Some expressions might even require an additional service task to prepare necessary data that may have been calculated on the fly in Camunda 7.
 
 <!-- TODO extensive docs for the diagram converter -->
 
