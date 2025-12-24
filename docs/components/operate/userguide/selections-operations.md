@@ -1,30 +1,70 @@
 ---
 id: selections-operations
-title: Selections and operations
-description: "In some cases, you’ll need to retry or cancel many process instances at once."
+title: Initiate a batch operation
+description: "In this user guide, you'll learn how to initiate batch operations in Camunda 8."
 ---
 
-In some cases, you’ll need to retry or cancel many process instances at once. Operate also supports this type of operation.
+A user guide for initiating [batch operations](../../concepts/batch-operations.md) in Camunda 8 Operate.
 
-Imagine a case where many process instances have an incident caused by the same issue. At some point, the underlying problem will have been resolved (for example, maybe a microservice was down for an extended period of time, then was brought back up.)
+## Retry or cancel process instances
 
-Though the underlying problem was resolved, the affected process instances are stuck until they are “retried."
+Imagine one of your microservices was down for a long time, and this caused an incident in many of your process instances. After you've resolved the underlying issue and brought the microservice back up, you'll need to retry the process instances or they'll remain stuck, indefinitely.
 
-![operate-batch-retry](./img/selections-and-operations/operate-many-instances-with-incident.png)
+You can use batch operations to retry or cancel many process instances at once:
 
-Let's create a **selection** in Operate. A selection is a set of process instances on which you can carry out a batch retry or batch cancellation.
+1. In Operate, navigate to **Processes**.
+2. In the **Process Instances** table, check the boxes next to the process instances to retry or cancel.
+3. Click **Retry** or **Cancel**.
+4. In the confirmation modal, click **Apply**.
 
-To create a selection and apply an operation, take the following steps:
+## Move process instances
 
-1. Check the box next to the process instances you'd like to include.
-2. Select the operation you want to apply.
+If there was an issue in process execution that caused you to enter the wrong process branch or data to be corrupted, you might need to move multiple process instances to another process node in a single operation.
 
-![operate-batch-retry](./img/selections-and-operations/operate-select-operation.png)
+You can use batch operations to move many process instances at once.
 
-After confirmation, you can see the **Operations** panel with the current status of all operations.
+:::note
+If you only need to modify a single, active process instance to allow execution to continue, use [process instance modification](./process-instance-modification.md) instead. This mode provides additional modification options beyond moving the instance, like activating an element and terminating an element instance.
+:::
 
-![operate-batch-retry](./img/selections-and-operations/operate-operations-panel.png)
+### Enter Batch Modification Mode
 
-## Monitor the operation status
+1. In Operate, navigate to **Processes**.
+2. Select the **Name** and **Version** of the process you want to modify.
+3. In the diagram, select the node containing the process instances to move.
+4. In the **Process Instances** table, check the boxes next to the process instances to move.
+5. Click **Move**.
+6. In the modal, click **Continue**.
 
-Review the [monitor operation status documentation](../monitor-operation-status) to learn how to monitor the status of an operation.
+When you enter Batch Modification Mode, the UI changes to include a blue border and banner at the top.
+
+:::note
+Click **Exit** below the **Process instances** table to exit Batch Modification Mode.
+:::
+
+### Move selected process instances
+
+In Batch Modification Mode, you can continue to select or deselect instances as needed. You can also click **Discard** to discard all currently-selected instances.
+
+When you've finalized the process instances, move them to a new node:
+
+1. In the diagram, select the destination node to move the process instances.
+2. Click **Apply Modification** below the **Process instances** table.
+3. A confirmation modal appears, indicating you are about to apply the selected modifications.
+4. In the confirmation modal, click **Apply**.
+
+:::warning Unsupported modifications
+The following elements don't support move modifications:
+
+- Start events
+- Boundary events
+- Events attached to event-based gateways
+- Subprocesses
+- Elements with multiple running scopes.
+  :::
+
+## Next steps
+
+- [Monitor the operation status](../monitor-operation-status).
+- [Learn how batch operations work](../../zeebe/technical-concepts/batch-operations.md).
+- [Check out the batch operations API](/apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation.api.mdx).
