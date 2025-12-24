@@ -4,17 +4,19 @@ title: Batch operations
 description: Get an overview of batch operations in Camunda 8.
 ---
 
-For a given process, you may have tens, hundreds, or even thousands of process instances. If an instance encounters an incident, or you need to update the instance for any other reason, you can perform an instance operation. However, if you need to perform the same operation on multiple instances, a batch operation is usually more suitable.
+Learn about the concept of batch operations.
+
+## About batch operations
+
+For a given process, you might have tens, hundreds, or even thousands of process instances. If an instance encounters an incident, or you need to update the instance for any other reason, you can perform an instance operation. However, if you need to perform the same operation on multiple instances, a batch operation is usually more suitable.
 
 A **batch operation** is an operation on a selection, or batch, of process instances. Instead of manually operating on each instance, you can specify filter criteria and automatically identify and process matching instances across your cluster in parallel. The individual operation in the batch applied to a process instance is called a [**batch item**](../zeebe/technical-concepts/batch-operations.md#batch-operation-components).
 
-Here are some examples when batch operations are useful:
+Example use cases include:
 
 - Many process instances have encountered a critical bug.
 - You need to skip an activity across multiple instances.
 - There was in issue when executing a process that corrupted many or all instances of that process.
-
-In this explainer, you'll learn about the concept of batch operations.
 
 ## Types
 
