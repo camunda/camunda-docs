@@ -641,11 +641,10 @@ body {
 }
 
 .kapa-open {
-  color: var(--kapa-button-text);
+  color: #ffffff !important;
   cursor: pointer;
   background-image:
-    linear-gradient(var(--kapa-button-bg), var(--kapa-button-bg)),
-    var(--kapa-border-gradient);
+    linear-gradient(135deg, #6967ff, #280892), var(--kapa-border-gradient);
   background-size:
     100% 100%,
     600% 600%;
@@ -665,7 +664,6 @@ body {
 
 .kapa-open:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 4px 12px rgba(40, 8, 146, 0.3);
   border-color: #6967ff;
 }
 
