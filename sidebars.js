@@ -94,6 +94,7 @@ module.exports = {
           ],
         },
         "components/concepts/process-applications",
+        "components/concepts/batch-operations",
         "components/concepts/workflow-patterns",
         {
           type: "category",
