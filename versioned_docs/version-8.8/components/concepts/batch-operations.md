@@ -4,7 +4,7 @@ title: Batch operations
 description: Get an overview of batch operations in Camunda 8.
 ---
 
-Learn about the concept of batch operations.
+A high-level overview of batch operations in Camunda 8.
 
 ## About batch operations
 
