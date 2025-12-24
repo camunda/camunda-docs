@@ -64,4 +64,4 @@ Read more about [authorizations](/components/concepts/access-control/authorizati
 
 - [Learn how batch operations work](../zeebe/technical-concepts/batch-operations.md).
 - [Use batch operations in the Camunda 8 web interface](../operate/userguide/selections-operations.md).
-- [Use the batch operations API](/docs/apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation/).
+- [Use the batch operations API](/apis-tools/orchestration-cluster-api-rest/specifications/get-batch-operation.api.mdx).
