@@ -84,6 +84,7 @@
             "components/concepts/encryption-at-rest",
             "components/concepts/byok/aws-external-encryption-setup",
             "components/concepts/byok/key-rotation-audit-logging",
+            "components/concepts/byok/key-state-behavior",
             "components/concepts/byok/faq-and-troubleshooting"
           ]
         },
