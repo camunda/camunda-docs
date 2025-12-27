@@ -82,6 +82,10 @@ Set this variable to `false` to continue using Tasklist V1 mode during the migra
 For detailed configuration options, including YAML configuration, see the [Tasklist configuration guide](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md#tasklist-api-mode-configuration).
 :::
 
+### Authorization differences
+
+While Tasklist V2 uses fine-grained [authorization-based access control](../concepts/access-control/authorizations.md), accessing resources in Tasklist V1 API mode requires wildcard authorizations. More details for authorization changes in the V1 API can be found in the [migration guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-component-apis.md#mapping-tasklist-permissions-to-new-authorizations). When switching between V1 and V2 mode, ensure authorizations are adjusted accordingly.
+
 ### User task access restrictions
 
 [User task access restrictions](./user-task-access-restrictions.md) are only supported when using the Tasklist V1 API and are currently not supported in V2.
