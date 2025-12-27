@@ -169,7 +169,7 @@ const SearchableTable = () => {
                   onClick={() => handleSort("name")}
                   style={{ cursor: "pointer" }}
                 >
-                  New property (8.8){getSortIcon("name")}
+                  New property (8.9){getSortIcon("name")}
                 </th>
                 <th
                   className="sortable-header"
