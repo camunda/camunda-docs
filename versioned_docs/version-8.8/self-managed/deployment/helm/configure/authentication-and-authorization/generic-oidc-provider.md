@@ -183,10 +183,10 @@ Camunda components request OIDC scopes when authenticating users. The default sc
 
 | Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
 | ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                  | ✔                                        |
-| `profile`        | Access to user profile information. | ✔                                                  | ✔                                        |
-| `email`          | Access to user email address.       | ✔                                                  |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                  |                                           |
+| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
+| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
+| `email`          | Access to user email address.       | ✔                                                   |                                           |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
@@ -287,7 +287,6 @@ global:
       identity:
         clientId: <identity-client-id>
         audience: <identity-audience>
-        redirectUrl: <identity-base-url>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: identity-client-secret
@@ -295,6 +294,7 @@ global:
         initialClaimValue: <admin-user-claim-value>
 
 identity:
+  fullURL: <identity-base-url>
   enabled: true
 
 identityPostgresql:
@@ -312,7 +312,6 @@ identityPostgresql:
 | ------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `clientId`          | Client ID from your OIDC provider            | From your Identity client configuration                                                         |
 | `audience`          | Expected audience in access tokens           | From token inspection (see [Discover provider configuration](#discover-provider-configuration)) |
-| `redirectUrl`       | Full URL where Identity is accessible        | `http://localhost:8084` (local) or `https://your-domain.com/identity` (Ingress)                 |
 | `initialClaimName`  | Claim that identifies the initial admin user | `email`, `sub`, or another user claim from token inspection                                     |
 | `initialClaimValue` | Value granting initial admin access          | Your admin user's value for the specified claim (e.g., `admin@example.com`)                     |
 
@@ -515,7 +514,6 @@ global:
       identity:
         clientId: <identity-client-id>
         audience: <identity-audience>
-        redirectUrl: <identity-url>
         secret:
           existingSecret: oidc-credentials
           existingSecretKey: identity-client-secret
@@ -587,6 +585,7 @@ connectors:
 
 # Management Identity
 identity:
+  fullURL: <identity-base-url>
   enabled: true
 
 identityPostgresql:
