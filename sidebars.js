@@ -1932,6 +1932,7 @@ module.exports = {
         {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
+        "self-managed/operational-guides/helm-v4",
       ],
     },
     {
