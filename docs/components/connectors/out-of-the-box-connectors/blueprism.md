@@ -7,7 +7,7 @@ sidebar_label: Blue Prism
 
 The **Blue Prism connector** allows you to orchestrate a Blue Prism queue from your BPMN process with [Blue Prism RPA](https://www.blueprism.com/).
 
-To start using the connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://docs.blueprism.com/en-US/bundle/blue-prism-enterprise-7-4/page/Guides/bp-api/api-introduction.htm) to learn more about how to install and configure Blue Prism API service.
+To start using the connector, you must have a running Blue Prism instance configured API service. Refer to the [official documentation page](https://documentation.blueprism.com/bp-7-5/en-us/Guides/bp-api/api-introduction.htm?tocpath=Installation%7CInstall%20the%20Blue%20Prism%20API%7C_____0) to learn more about how to install and configure Blue Prism API service.
 
 ## Create a Blue Prism connector task
 
