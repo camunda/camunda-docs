@@ -28,7 +28,7 @@ To use a new KMS key instead of rotating, contact Camunda Support to update clus
 - Do not delete or disable an old key until the cluster uses a replacement.
 - Improper key management may block data access.
 - Ensure backup storage and persistent volumes remain accessible.
-- See [KMS key rotation](https://docs.aws.amazon.com/kms/latest/userguide/list-rotations.html) and [S3 server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html).
+- See [KMS key rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) and [S3 server-side encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html).
   :::
 
 ### Best practices
@@ -57,7 +57,7 @@ All KMS operations performed by Camunda appear in CloudTrail in your Amazon acco
 1. Enable CloudTrail in the cluster region and persist logs.
 2. Set up CloudWatch or EventBridge alerts for key deletion, disabled keys, or access denied events.
 3. Review logs regularly for compliance.
-4. Use tools like [CloudTrail Lake](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html) or [Access Analyzer for KMS](https://docs.aws.amazon.com/kms/latest/userguide/viewing-grants.html) to simplify auditing.
+4. Use tools like [CloudTrail Lake](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake.html) or [Access Analyzer for KMS](https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) to simplify auditing.
 5. Export logs to a centralized SIEM if required.
 
 :::warning Audit responsibility

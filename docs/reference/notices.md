@@ -19,6 +19,34 @@ Report security vulnerabilities to Camunda immediately, following the instructio
 To learn more about security at Camunda, including our security policy, security issue management, and more, see [Camunda.com/security](https://camunda.com/security).
 :::
 
+## Notice 37
+
+### Publication date
+
+December 12, 2025
+
+### Products affected
+
+- Camunda Tasklist
+- Camunda Zeebe
+- Camunda Operate
+
+### Impact
+
+The application is vulnerable to [CVE-2025-12183](https://nvd.nist.gov/vuln/detail/CVE-2025-12183), which allows remote attackers to cause denial of service and read adjacent memory via untrusted compressed input.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Tasklist/Zeebe/Operate ≤ 8.8.6, ≤ 8.7.20, or ≤ 8.6.32
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Tasklist/Zeebe/Operate 8.8.7, 8.7.21, 8.6.33
+
 ## Notice 36
 
 ### Publication date
@@ -581,14 +609,7 @@ You are using Camunda Optimize ≤ 8.4.15, ≤ 8.5.12, ≤ 8.6.6, ≤ 8.7.0, ≤
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Optimize 8.4.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 8.5.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 8.6.7](https://github.com/camunda/camunda/releases/tag/8.6.7-optimize)
-- [Camunda Optimize 8.7.0](https://github.com/camunda/camunda/releases/tag/8.7.0-optimize)
-- [Camunda Optimize 3.12.16](https://github.com/camunda/camunda-optimize/releases/tag/3.12.16)
-- [Camunda Optimize 3.13.13](https://github.com/camunda/camunda-optimize/releases/tag/3.13.13)
-- [Camunda Optimize 3.14.4](https://github.com/camunda/camunda-optimize/releases/tag/3.14.4)
-- [Camunda Optimize 3.15.2](https://github.com/camunda/camunda-optimize/releases/tag/3.15.2)
+- Camunda Optimize 8.4.16, 8.5.13, 8.6.7, 8.7.0, 3.12.16, 3.13.13, 3.14.4, 3.15.2
 
 ## Notice 17
 
@@ -726,7 +747,7 @@ You are using Camunda Management Identity version 8.5.3 or previous.
 
 Camunda has provided the following release which contains a fix:
 
-- [Camunda Management Identity 8.5.4](https://github.com/camunda-cloud/identity/releases/tag/8.5.4)
+- Camunda Management Identity 8.5.4
 
 ## Notice 12
 
