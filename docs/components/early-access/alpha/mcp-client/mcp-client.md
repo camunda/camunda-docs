@@ -21,11 +21,7 @@ The MCP Client supports only tool-related functionality. Other MCP features, suc
 This includes:
 
 - Locally started standard input/output servers [STDIO](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#stdio). These are operating system processes launched and managed by the connector runtime.
-- Remote MCP servers using the [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) and [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) transports.
-
-:::tip
-Camunda recommends the Streamable HTTP transport protocol over HTTP with SSE.
-:::
+- Remote MCP servers using [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) and [HTTP with SSE](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (deprecated).
 
 See the MCP Client architecture below:
 
@@ -35,13 +31,13 @@ See the MCP Client architecture below:
 
 Camunda provides two MCP connectors with distinct purposes.
 
-| Connector                                                       | STDIO | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                            |
-| :-------------------------------------------------------------- | :---- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [MCP Remote Client connector](./mcp-remote-client-connector.md) | ❌    | ✅          | Properties panel                     | Available on SaaS                                                                                           | Suitable for prototyping with remote MCP servers. Uses on-demand HTTP connections instead of persistent ones.          |
-| [MCP Client connector](./mcp-client-connector.md)               | ✅    | ✅          | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers. |
+| Connector                                                       | STDIO       | Remote/HTTP | Configuration                        | Availability                                                                                                | Description                                                                                                            |
+| :-------------------------------------------------------------- | :---------- | :---------- | :----------------------------------- | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| [MCP Remote Client connector](./mcp-remote-client-connector.md) | Unsupported | Supported   | Properties panel                     | Available on SaaS                                                                                           | Suitable for prototyping with remote MCP servers. Uses on-demand HTTP connections instead of persistent ones.          |
+| [MCP Client connector](./mcp-client-connector.md)               | Supported   | Supported   | Connector runtime + properties panel | Not directly available on SaaS, but a custom runtime running the client connector can be connected to SaaS. | Flexible MCP integration based on persistent connections managed by the connector runtime. Supports STDIO MCP servers. |
 
 :::info
-They are not mutually exclusive and can be used together as long as your environment is configured accordingly.
+The two connectors are not mutually exclusive and can be used together as long as your environment is configured accordingly.
 :::
 
 ## Learn the fundamentals

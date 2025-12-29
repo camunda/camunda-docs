@@ -2,10 +2,10 @@
 id: mcp-client-config
 title: Configure MCP Client connectors
 sidebar_label: Configure
-description: "Learn how to configure MCP Client connectors, including connector mode, tool access and availability."
+description: "Learn how to configure MCP Client connectors, including connector mode, tool access, and availability."
 ---
 
-Learn how to configure MCP Client connectors, including connector mode, tool access and availability.
+Learn how to configure MCP Client connectors, including connector mode, tool access, and availability.
 
 ## Connector mode
 
@@ -16,6 +16,15 @@ Choose how the connector operates based on your use case.
 Use when the connector is invoked as a tool from within an AI Agent ad-hoc sub-process. This is the default mode.
 
 The **Method** and **Parameters** fields accept FEEL expressions and default to `toolCall.method` and `toolCall.params`, which are automatically populated by the AI Agent connector during tool discovery and tool calling.
+
+#### Operation
+
+Configure the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
+
+| Field      | Required | Description                                                                                                                                       |
+| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
+| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
 ### Standalone mode
 
@@ -41,15 +50,6 @@ For example, an MCP client connected to
 a [file system MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) could be configured
 with `["read_file", "read_multiple_files"]` as included tools to only allow read-only operations to the file system.
 Alternatively, it could be configured with `["write_file"]` as a list of excluded tools to prevent write operations.
-
-## Operation
-
-Configure the operation to execute on the MCP server. You typically only need to change the default value if the ad-hoc sub-process multi-instance uses an input element other than `toolCall`.
-
-| Field      | Required | Description                                                                                                                                       |
-| :--------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Method     | Yes      | The [MCP method](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#protocol-messages) to call. Defaults to `toolCall.method`. |
-| Parameters | Yes      | The parameters to pass with the MCP client execution. Defaults to `toolCall.params`.                                                              |
 
 ## Output mapping
 
