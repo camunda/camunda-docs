@@ -62,22 +62,22 @@ Open Camunda Modeler and create or open a BPMN process. Add a service task to yo
 To use your cluster variable in a service task:
 
 1. Select the service task in your diagram.
-2. In the properties panel, navigate to the **Input mappings** section.
-3. Click **Add input mapping**.
-4. For the **Source** field, enter the following FEEL expression to access the API endpoint:
+2. In the properties panel, navigate to the **Inputs** section.
+3. Add an input mapping.
+4. For the **Variable assignment value** field, enter the following FEEL expression to access the API endpoint:
 
 ```
 = camunda.vars.env.PAYMENT_API_CONFIG.endpoint
 ```
 
-5. For the **Target** field, enter `apiUrl`. This creates a local variable for your service task.
+5. For the **Local variable name** field, enter `apiUrl`. This creates a local variable for your service task.
 6. Add another input mapping for the timeout using the following expression:
 
 ```
 = camunda.vars.env.PAYMENT_API_CONFIG.timeout_ms
 ```
 
-Set the target to `timeoutMs`.
+7. Set the local variable name to `timeoutMs`.
 
 Your service task now has access to both the `apiUrl` and `timeoutMs` variables, which automatically resolve to the correct values based on whether the process runs in your production cluster or the development tenant.
 
