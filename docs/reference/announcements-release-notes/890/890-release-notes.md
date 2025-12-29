@@ -202,7 +202,7 @@ A new Camunda 8 Relational Database Management System RDBMS support policy provi
 - The process for adopting new database versions.
 - Timelines for phasing out older database versions.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 #### SQL and Liquibase database scripts
 
