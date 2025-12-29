@@ -31,7 +31,7 @@ identity:
 
 then the rendered identity deployment will have:
 
-```
+```yaml
 spec:
   containers:
     - name: identity
@@ -52,7 +52,7 @@ and a `helm install` will result in the following error:
 
 To mitigate this issue, you can either:
 
-1. Leverage values.yaml overrides outside of the env section wherever possible. For example, in the above example, we have the `global.license` options in `values.yaml` that can be used instead.
+1. Leverage `values.yaml` overrides outside of the env section wherever possible. For example, in the above example, we have the `global.license` options in `values.yaml` that can be used instead.
 2. Override `application.yaml` configuration via the `configuration` and `extraConfiguration` options in `values.yaml` instead of using environment variables.
 3. Disable server-side apply by setting `--server-side=false` in the `helm install` or `helm upgrade` command.
 4. Use Helm v3. However, note that Helm v3 will stop receiving bugfix updates on July 8th 2026, and will no longer receive security updates after November 11th 2026. [Helm support policy](https://helm.sh/blog/helm-4-released#helm-v3-support).
