@@ -1719,6 +1719,7 @@ module.exports = {
                     "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
                     "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
                     "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
                   ],
                 },
               ],

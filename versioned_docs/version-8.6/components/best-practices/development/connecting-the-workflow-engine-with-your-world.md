@@ -157,7 +157,7 @@ Similarly, you can leverage the [Spring Boot extension](https://github.com/zeebe
 
 ![REST example](connecting-the-workflow-engine-with-your-world-assets/rest-example.png)
 
-You can find [Node.js sample code for the REST endpoint](https://github.com/berndruecker/flowing-retail/blob/master/zeebe/nodejs/nestjs-zeebe/checkout/src/app.controller.ts) in the [Flowing Retail example](https://github.com/berndruecker/flowing-retail).
+You can find [Spring Boot sample code for the REST endpoint](https://github.com/berndruecker/flowing-retail/blob/master/zeebe/java/checkout/src/main/java/io/flowing/retail/checkout/rest/ShopRestController.java) in the [Flowing Retail example](https://github.com/berndruecker/flowing-retail).
 
 ### Messaging
 
