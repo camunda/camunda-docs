@@ -24,36 +24,47 @@ module.exports = {
       items: [
         "guides/migrating-from-camunda-7/migration-journey",
         "guides/migrating-from-camunda-7/conceptual-differences",
-        "guides/migrating-from-camunda-7/migration-tooling",
-
         {
           type: "category",
-          label: "Data Migrator",
+          label: "Migration tools",
           link: {
             type: "doc",
-            id: "guides/migrating-from-camunda-7/data-migrator/index",
+            id: "guides/migrating-from-camunda-7/migration-tooling/index",
           },
           items: [
-            "guides/migrating-from-camunda-7/data-migrator/version-compatibility",
-            "guides/migrating-from-camunda-7/data-migrator/install",
-            "guides/migrating-from-camunda-7/data-migrator/runtime",
-            "guides/migrating-from-camunda-7/data-migrator/history",
-            "guides/migrating-from-camunda-7/data-migrator/variables",
-            "guides/migrating-from-camunda-7/data-migrator/cockpit-plugin",
-            "guides/migrating-from-camunda-7/data-migrator/limitations",
+            "guides/migrating-from-camunda-7/migration-tooling/diagram-converter",
+            "guides/migrating-from-camunda-7/migration-tooling/code-conversion",
             {
               type: "category",
-              label: "Configuration & reference",
+              label: "Data Migrator",
+              link: {
+                type: "doc",
+                id: "guides/migrating-from-camunda-7/migration-tooling/data-migrator/index",
+              },
               items: [
-                "guides/migrating-from-camunda-7/data-migrator/database",
-                "guides/migrating-from-camunda-7/data-migrator/config-examples",
-                "guides/migrating-from-camunda-7/data-migrator/config-properties",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/install",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/history",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/identity",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin",
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations",
+                {
+                  type: "category",
+                  label: "Configuration & reference",
+                  items: [
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/database",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples",
+                    "guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties",
+                  ],
+                },
+                "guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting",
               ],
             },
-            "guides/migrating-from-camunda-7/data-migrator/troubleshooting",
+            "guides/migrating-from-camunda-7/migration-tooling/version-compatibility",
+            "guides/migrating-from-camunda-7/migration-tooling/update-guide",
           ],
         },
-        "guides/migrating-from-camunda-7/code-conversion",
         "guides/migrating-from-camunda-7/migration-readiness",
       ],
     },
@@ -118,7 +129,15 @@ module.exports = {
             },
           ],
         },
-        "components/concepts/messages",
+        {
+          type: "category",
+          label: "Messages",
+          link: {
+            type: "doc",
+            id: "components/concepts/messages",
+          },
+          items: ["components/concepts/message-aggregation"],
+        },
         "components/concepts/signals",
         "components/concepts/variables",
         "components/concepts/expressions",
@@ -189,8 +208,8 @@ module.exports = {
             id: "components/agentic-orchestration/agentic-orchestration-overview",
           },
           items: [
-            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/ai-agents",
+            "components/agentic-orchestration/ao-design",
             "components/agentic-orchestration/choose-right-model-agentic",
             "components/agentic-orchestration/model-recommendations-agentic",
           ],
@@ -376,6 +395,20 @@ module.exports = {
                   items: [
                     "components/early-access/alpha/mcp-client/mcp-remote-client-connector",
                     "components/early-access/alpha/mcp-client/mcp-client-connector",
+                  ],
+                },
+                {
+                  type: "category",
+                  label: "A2A Client",
+                  link: {
+                    type: "doc",
+                    id: "components/early-access/alpha/a2a-client/a2a-client",
+                  },
+                  items: [
+                    "components/early-access/alpha/a2a-client/a2a-client-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-polling-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-webhook-connector",
+                    "components/early-access/alpha/a2a-client/a2a-client-usage-patterns",
                   ],
                 },
                 "components/early-access/alpha/ms-teams/ms-teams",
@@ -741,7 +774,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Camunda connectors",
+          label: "Built-in connectors",
           link: {
             type: "doc",
             id: "components/connectors/out-of-the-box-connectors/available-connectors-overview",
@@ -833,7 +866,6 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
-            "components/connectors/out-of-the-box-connectors/operate",
             "components/connectors/protocol/polling",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
@@ -850,16 +882,15 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Custom element and connector templates",
+          label: "Build custom connectors",
           link: {
             type: "doc",
             id: "components/connectors/custom-built-connectors/build-connector",
           },
           items: [
-            "components/connectors/custom-built-connectors/host-custom-connectors",
             {
               type: "category",
-              label: "Element and connector templates",
+              label: "Connector templates",
               link: {
                 type: "doc",
                 id: "components/connectors/custom-built-connectors/connector-templates",
@@ -870,6 +901,7 @@ module.exports = {
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
+            "components/connectors/custom-built-connectors/host-custom-connectors",
           ],
         },
       ],
@@ -1199,6 +1231,7 @@ module.exports = {
             "apis-tools/testing/assertions",
             "apis-tools/testing/utilities",
             "apis-tools/testing/connectors",
+            "apis-tools/testing/test-scenario-dsl",
           ],
         },
         {
@@ -1301,8 +1334,8 @@ module.exports = {
       },
       items: ["reference/data-collection/usage-metrics"],
     },
-
     "reference/contact",
+    "reference/legal",
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1322,7 +1355,17 @@ module.exports = {
             id: "self-managed/quickstart/developer-quickstart",
           },
           items: [
-            "self-managed/quickstart/developer-quickstart/c8run",
+            {
+              type: "category",
+              label: "Camunda 8 Run",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/c8run",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+              ],
+            },
             "self-managed/quickstart/developer-quickstart/docker-compose",
           ],
         },
@@ -1426,6 +1469,8 @@ module.exports = {
                     "self-managed/deployment/helm/configure/database/using-external-opensearch",
                     "self-managed/deployment/helm/configure/database/using-existing-postgres",
                     "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
+                    "self-managed/deployment/helm/configure/database/rdbms",
+                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
                     {
                       Troubleshooting: [
                         "self-managed/deployment/helm/configure/database/all-shards-failed",
@@ -1467,6 +1512,7 @@ module.exports = {
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc",
                       ],
                     },
@@ -1660,6 +1706,34 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Databases",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/databases/overview",
+          },
+          items: [
+            {
+              Elasticsearch: [
+                {
+                  Privileges: [
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
+                    "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
+                  ],
+                },
+              ],
+            },
+            {
+              "Relational databases": [
+                "self-managed/concepts/databases/relational-db/rdbms-support-policy",
+                "self-managed/concepts/databases/relational-db/database-configuration",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Back up and restore",
           link: {
             type: "doc",
@@ -1713,13 +1787,6 @@ module.exports = {
         },
         "self-managed/operational-guides/data-purge",
         {
-          Privileges: [
-            "self-managed/concepts/elasticsearch-privileges",
-            "self-managed/concepts/elasticsearch-without-cluster-privileges",
-            "self-managed/concepts/opensearch-privileges",
-          ],
-        },
-        {
           Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
         },
       ],
@@ -1750,6 +1817,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/identity-as-code",
                   ],
                 },
                 {
@@ -1861,18 +1929,32 @@ module.exports = {
         {
           Modeler: [
             {
-              "Web Modeler": [
-                "self-managed/components/modeler/web-modeler/overview",
+              type: "category",
+              label: "Web Modeler",
+              link: {
+                type: "doc",
+                id: "self-managed/components/modeler/web-modeler/overview",
+              },
+              items: [
                 {
-                  Configuration: [
-                    "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  type: "category",
+                  label: "Configuration",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/components/modeler/web-modeler/configuration/configuration",
+                  },
+                  items: [
                     "self-managed/components/modeler/web-modeler/configuration/database",
                     "self-managed/components/modeler/web-modeler/configuration/identity",
                     "self-managed/components/modeler/web-modeler/configuration/logging",
                     "self-managed/components/modeler/web-modeler/configuration/ssl",
                     "self-managed/components/modeler/web-modeler/configuration/copilot",
                   ],
-                  Troubleshooting: [
+                },
+                {
+                  type: "category",
+                  label: "Troubleshooting",
+                  items: [
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection",
                     "self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data",
@@ -1893,6 +1975,7 @@ module.exports = {
           Connectors: [
             "self-managed/components/connectors/overview",
             "self-managed/components/connectors/connectors-configuration",
+            "self-managed/components/connectors/performance",
           ],
         },
         {

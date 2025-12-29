@@ -2,13 +2,22 @@ name: Check external links
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/links.yml"
+      - "lychee-external-links.toml"
   schedule:
     - cron: "0 3 1 * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   lint:
     name: links-check
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v6
 
@@ -17,10 +26,13 @@ jobs:
         run: echo "DATEOFDAY=$(date +%Y-%m-%d)" >> "$GITHUB_ENV"
 
       - name: Restore lychee cache
-        uses: actions/cache/restore@v4
+        id: cache-restore
+        uses: actions/cache/restore@v5
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
+          restore-keys: |
+            cache-lychee-
 
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2.7.0
@@ -28,16 +40,17 @@ jobs:
         with:
           fail: false
           failIfEmpty: false
-          args: -c ./lychee-external-links.toml --base . --cache --max-cache-age 1d . --verbose --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
+          args: --config ./lychee-external-links.toml --no-progress 'docs/**/*.md' 'versioned_docs/**/*.md'
           token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Cache links
-        uses: actions/cache/save@v4
+      - name: Save lychee cache
+        if: always()
+        uses: actions/cache/save@v5
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
 
-      - name: Fail if checker failed in non-schedule triger mode
+      - name: Fail if checker failed in non-schedule trigger mode
         if: github.event_name != 'schedule' && steps.link-checker.outputs.exit_code != 0
         run: |
           echo "Link checker failed with exit code ${{ steps.link-checker.outputs.exit_code }}"

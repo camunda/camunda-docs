@@ -318,6 +318,11 @@ components:
           type: string
           description: The end date of the batch operation.
           format: date-time
+        actorType:
+          $ref: "#/components/schemas/BatchOperationActorTypeEnum"
+        actorId:
+          type: string
+          description: The ID of the actor who performed the operation. Available for batch operations created since 8.9.
         operationsTotalCount:
           type: integer
           description: The total number of items contained in this batch operation.
@@ -361,6 +366,7 @@ components:
             - batchOperationKey
             - itemKey
             - processInstanceKey
+            - processedDate
             - state
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
@@ -402,6 +408,10 @@ components:
           description: The state of the batch operation.
           allOf:
             - $ref: "#/components/schemas/BatchOperationItemStateFilterProperty"
+        operationType:
+          description: The type of the batch operation.
+          allOf:
+            - $ref: "#/components/schemas/BatchOperationTypeFilterProperty"
     BatchOperationItemSearchQueryResult:
       type: object
       allOf:
@@ -468,6 +478,18 @@ components:
           $ref: "keys.yaml#/components/schemas/OperationReference"
       required:
         - filter
+    ProcessInstanceDeletionBatchOperationRequest:
+      type: object
+      description: The process instance filter that defines which process instances should be deleted.
+      properties:
+        filter:
+          allOf:
+            - $ref: "process-instances.yaml#/components/schemas/ProcessInstanceFilter"
+          description: The process instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
     ProcessInstanceMigrationBatchOperationRequest:
       type: object
       properties:
@@ -522,9 +544,11 @@ components:
         - filter
         - moveInstructions
     ProcessInstanceModificationMoveBatchOperationInstruction:
-      description: |-
-        Instructions describing a move operation. This instruction will terminate all active elementInstance
-        at sourceElementId and activate a new element instance for each terminated one at targetElementId.
+      description: |
+        Instructions describing a move operation. This instruction will terminate all active
+        element instances at `sourceElementId` and activate a new element instance for each
+        terminated one at `targetElementId`. The new element instances are created in the parent
+        scope of the source element instances.
       type: object
       properties:
         sourceElementId:
@@ -561,15 +585,21 @@ components:
       description: The type of the batch operation.
       type: string
       enum:
-        - CANCEL_PROCESS_INSTANCE
-        - RESOLVE_INCIDENT
-        - MIGRATE_PROCESS_INSTANCE
-        - MODIFY_PROCESS_INSTANCE
-        - DELETE_PROCESS_INSTANCE
         - ADD_VARIABLE
-        - UPDATE_VARIABLE
+        - CANCEL_PROCESS_INSTANCE
         - DELETE_DECISION_DEFINITION
         - DELETE_PROCESS_DEFINITION
+        - DELETE_PROCESS_INSTANCE
+        - MIGRATE_PROCESS_INSTANCE
+        - MODIFY_PROCESS_INSTANCE
+        - RESOLVE_INCIDENT
+        - UPDATE_VARIABLE
+    BatchOperationActorTypeEnum:
+      description: The type of the actor. Available for batch operations created since 8.9.
+      type: string
+      enum:
+        - CLIENT
+        - USER
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.
       type: object

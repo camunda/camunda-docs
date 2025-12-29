@@ -527,6 +527,28 @@ The binding name of `correlationKey` is not applicable to message start events o
 
 :::
 
+### Signal name: `bpmn:Signal#property`
+
+| **Binding `type`**         | `bpmn:Signal#property`                                                 |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **Valid property `type`s** | `String`<br />`Text`<br />`Hidden`<br />`Dropdown`                     |
+| **Binding parameters**     | `name`: The name of the property. <br /> Supported properties: `name`. |
+| **Mapping result**         | `<bpmn:signal [name]="[userInput]" />`                                 |
+
+The `bpmn:Signal#property` binding allows you to set the name of a `bpmn:Signal` referred to by the templated element.
+This binding is only valid for templates of events with `bpmn:SignalEventDefinition`.
+
+```json
+{
+  ...,
+  "value": "aSignalName",
+  "binding": {
+    "type": "bpmn:Signal#property",
+    "name": "name"
+  }
+}
+```
+
 ### Called element: `zeebe:calledElement`
 
 | **Binding `type`**         | `zeebe:calledElement`                                                                                          |
@@ -863,7 +885,7 @@ If the input `type` is `String` or `Text`, then [`feel`](#adding-feel-editor-sup
 
 The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. When configured, contained activities can be executed independently without following a predefined sequence flow.
 
-### Example
+#### Example
 
 ```json
 {
@@ -886,7 +908,7 @@ The `zeebe:adHoc` binding marks a sub-process as ad-hoc when deployed to Zeebe. 
 }
 ```
 
-### Example with `activeElementsCollection`
+#### Example with `activeElementsCollection`
 
 ```json
 {
