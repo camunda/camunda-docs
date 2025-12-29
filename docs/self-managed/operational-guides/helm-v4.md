@@ -20,7 +20,7 @@ Server-side apply is a kubernetes feature that improves the way resources are me
 
 #### Problem
 
-Server-side apply has a known limitation where multiple environment variables on the same resource gets treated as an error rather than latter entries overwriting earlier ones. In the Camunda Helm chart, it's pretty common to want to set environment variables as an override mechanism for environment variables that the Helm chart sets by default. For example if the following is set in `values.yaml`: 
+Server-side apply has a known limitation where multiple environment variables on the same resource gets treated as an error rather than latter entries overwriting earlier ones. In the Camunda Helm chart, it's pretty common to want to set environment variables as an override mechanism for environment variables that the Helm chart sets by default. For example if the following is set in `values.yaml`:
 
 ```yaml
 identity:
