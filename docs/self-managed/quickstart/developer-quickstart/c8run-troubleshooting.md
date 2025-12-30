@@ -9,7 +9,7 @@ Camunda 8 Run provides log files in the `c8run/logs` directory that can help dia
 
 - `c8run.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
-- `elasticsearch.log` – embedded [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) instance (if used). This instance serves as secondary storage for indexing and search.
+- `elasticsearch.log` – embedded [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) instance (if used). This instance serves as secondary storage for indexing and search.
 
 ## Startup failures
 

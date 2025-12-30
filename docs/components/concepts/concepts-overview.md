@@ -19,6 +19,19 @@ Camunda 8 combines powerful execution engines for BPMN processes and DMN decisio
 
 <img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
 
+:::note Storage architecture
+
+In the diagram above, storage components appear in two roles:
+
+- **Primary storage** — The authoritative store for runtime state the Orchestration Cluster needs to execute and recover processes (partition logs, snapshots). See [primary storage](/reference/glossary.md#primary-storage).
+- **Secondary storage** — Systems used for indexing, search, analytics, and long-term retention, typically populated from primary storage (for example, Elasticsearch or OpenSearch). See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+
+For deployment and configuration guidance, see the Self-Managed deployment documentation:
+
+- [About Self-Managed](/self-managed/about-self-managed.md)
+- [Helm quick install](/self-managed/deployment/helm/install/quick-install.md)
+  :::
+
 :::info
 
 - Want to migrate your Camunda 7 process solutions to run on Camunda 8? See our [Camunda 7 migration guide](/guides/migrating-from-camunda-7/index.md).

@@ -5,7 +5,7 @@ title: Configure data retention
 description: "Learn how to configure data retention policies in Camunda 8.8 Helm charts to automatically manage and delete old data."
 ---
 
-Data retention policies automatically delete old data from Elasticsearch or OpenSearch (secondary storage) after a specified time period. This prevents unlimited data growth, reduces storage costs, and maintains system performance by using Index Lifecycle Management (ILM) for Elasticsearch or Index State Management (ISM) for OpenSearch — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) for details.
+Data retention policies automatically delete old data from Elasticsearch or OpenSearch (secondary storage) after a specified time period. This prevents unlimited data growth, reduces storage costs, and maintains system performance by using Index Lifecycle Management (ILM) for Elasticsearch or Index State Management (ISM) for OpenSearch — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for details.
 
 :::tip Best practice
 **Configure data retention during initial installation.** Adding retention configuration after deployment may require manual policy creation in Elasticsearch/OpenSearch. See [Differences from previous versions](#differences-from-previous-versions) for version-specific behavior.

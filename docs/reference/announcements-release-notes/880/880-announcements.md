@@ -558,7 +558,7 @@ To learn more, see [Elasticsearch changes in Components update 8.7 to 8.8](/self
 
 #### Camunda Exporter
 
-Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by Elasticsearch or OpenSearch (secondary storage) exporters — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch).
+Previously, Camunda web applications used importers and archivers to consume, aggregate, and archive historical data provided by Elasticsearch or OpenSearch (secondary storage) exporters — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 ![87-orchestration-cluster-state](../../img/87-orchestration-cluster-state.png)
 

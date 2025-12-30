@@ -35,7 +35,7 @@ All the steps below are applicable to ElasticSearch and OpenSearch installations
 
 ### 2. Rolling update to the new database version
 
-You only need to execute this step if you want to update the Elasticsearch or OpenSearch (secondary storage) version during the update. If the Elasticsearch/OpenSearch version stays the same, you can skip this step. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) for the canonical definition of secondary storage.
+You only need to execute this step if you want to update the Elasticsearch or OpenSearch (secondary storage) version during the update. If the Elasticsearch/OpenSearch version stays the same, you can skip this step. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) for the canonical definition of secondary storage.
 
 The database update is usually performed in a rolling fashion. Read all about how to do the update in the general [Elasticsearch Update Guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html) / [OpenSearch Update Guide](https://opensearch.org/docs/latest/install-and-configure/upgrade-opensearch/index/) and consult the [rolling upgrade ES](https://www.elastic.co/guide/en/elasticsearch/reference/current/rolling-upgrades.html) / [rolling upgrade OS](https://opensearch.org/docs/2.17/install-and-configure/upgrade-opensearch/rolling-upgrade/) guide on how to conduct the rolling update.
 

@@ -504,7 +504,7 @@ SAP stands for Systems, Applications, and Products in Data Processing; it's an e
 
 Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from primary storage and consumed by tools for observability and analytics (examples: Elasticsearch/OpenSearch and RDBMS-based secondary stores).
 
-See also: [Elasticsearch/OpenSearch](#elasticsearch--opensearch)
+See also: [Elasticsearch/OpenSearch](#elasticsearchopensearch)
 
 ### Segment
 
