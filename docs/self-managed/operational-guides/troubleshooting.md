@@ -338,3 +338,56 @@ If you encounter missing or invalid authorizations when deploying resources or s
 
 - **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/identity/user.md) has the required permissions.
 - **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/identity/client.md) has the required permissions.
+
+
+## Cannot connect to elasticsearch after upgrade to 8.9
+
+The Camunda Helm charts for version 8.9 do not enable elasticsearch by default. If you upgrade from 8.8 to 8.9 without enabling elasticsearch explicitly, the elasticsearch pod will not come up, and the Orchestration Cluster will fail to connect to an elasticsearch instance.
+
+If you do not explicitly put a secondary storage type, you get the following:
+
+```shell
+> helm upgrade \
+    -f ../testing-values/code/camunda-platform-helm/base-combined-home-8.8.yaml \
+    cpt charts/camunda-platform-8.9
+
+Error: UPGRADE FAILED: execution error at (camunda-platform/templates/orchestration/statefulset.yaml:29:28): Please enable a secondary storage type. Either Elasticsearch, OpenSearch or Postgres
+
+```
+
+If you respond to this by enabling global.elasticsearch without enabling the elasticsearch subchart, you get the following in your Orchestration Cluster pod logs:
+```
+Caused by: java.net.UnknownHostException: cpt-elasticsearch
+	at java.base/java.net.InetAddress$CachedLookup.get(Unknown Source)
+	at java.base/java.net.InetAddress.getAllByName0(Unknown Source)
+	at java.base/java.net.InetAddress.getAllByName(Unknown Source)
+	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:45)
+	at org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager$InternalAddressResolver.resolveRemoteAddress(PoolingNHttpClientConnectionManager.java:666)
+	at org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager$InternalAddressResolver.resolveRemoteAddress(PoolingNHttpClientConnectionManager.java:637)
+	at org.apache.http.nio.pool.AbstractNIOConnPool.processPendingRequest(AbstractNIOConnPool.java:472)
+	at org.apache.http.nio.pool.AbstractNIOConnPool.lease(AbstractNIOConnPool.java:280)
+	at org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager.requestConnection(PoolingNHttpClientConnectionManager.java:295)
+	at org.apache.http.impl.nio.client.AbstractClientExchangeHandler.requestConnection(AbstractClientExchangeHandler.java:381)
+	at org.apache.http.impl.nio.client.DefaultClientExchangeHandlerImpl.start(DefaultClientExchangeHandlerImpl.java:130)
+	at org.apache.http.impl.nio.client.CloseableHttpAsyncClientBase.execute(CloseableHttpAsyncClientBase.java:116)
+	at org.apache.http.impl.nio.client.InternalHttpAsyncClient.execute(InternalHttpAsyncClient.java:138)
+	at org.elasticsearch.client.RestClient.lambda$performRequestAsync$0(RestClient.java:397)
+	at org.elasticsearch.client.Cancellable$RequestCancellable.runIfNotCancelled(Cancellable.java:90)
+	at org.elasticsearch.client.RestClient.performRequestAsync(RestClient.java:395)
+	at org.elasticsearch.client.RestClient.performRequestAsync(RestClient.java:382)
+	at org.elasticsearch.client.RestHighLevelClient.getVersionValidationFuture(RestHighLevelClient.java:2735)
+	... 53 more
+```
+
+This error indicates that the Orchestration Cluster cannot connect to elasticsearch, because there is no elasticsearch pod logs. The pod not being present does not indicate that there is data loss, as the PVC will still be present. To resolve this, enable the elasticsearch subchart.
+
+```
+helm upgrade \
+  -f ../testing-values/code/camunda-platform-helm/base-combined-home-8.8.yaml \
+  cpt charts/camunda-platform-8.9 \
+  --set global.elasticsearch.enabled=true \
+  --set elasticsearch.enabled=true
+```
+
+
+
