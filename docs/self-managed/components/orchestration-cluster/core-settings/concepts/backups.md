@@ -19,7 +19,7 @@ Learn more about the backup procedure and why it must be triggered in the [backu
 
 When you deploy Camunda 8 Self-Managed on Kubernetes, set the backup repository name as an application configuration value.
 
-See [application configurations](/self-managed/deployment/helm/configure/application-configs) for how to provide configuration keys using Helm (for example, via values files or environment variable mappings).
+See [application configurations](/self-managed/deployment/helm/configure/application-configs.md) for how to provide configuration keys using Helm (for example, via values files or environment variable mappings).
 
 ## Configuration parameters
 
