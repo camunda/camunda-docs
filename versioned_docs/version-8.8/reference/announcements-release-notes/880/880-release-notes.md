@@ -1257,7 +1257,7 @@ The new [Public API](/reference/public-api.md) documentation outlines what’s i
 
 | Release date | Changelog(s)                                                                                                                                                                               | Blog                                                                              |
 | :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
-| 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/05/camunda-alpha-release-june-2025/) |
+| 10 June 2025 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.8.0-alpha5)</li><li>[ Connectors ](https://github.com/camunda/connectors/releases/tag/8.8.0-alpha5)</li></ul> | [Release blog](https://camunda.com/blog/2025/06/camunda-alpha-release-june-2025/) |
 
 ### Agentic orchestration
 

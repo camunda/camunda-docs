@@ -172,11 +172,11 @@ The history migration has the following limitations.
 ### DMN
 
 - The Data Migrator only migrates instances which are linked to process definition business rule tasks.
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/634 
 - The properties `evaluationFailure` and `evaluationFailureMessage` are not populated in migrated decision instances.
-- Decision instance `inputs` and `outputs` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5364
-- Decision instance `state` and `type` are not yet migrated.
-  - See https://github.com/camunda/camunda-bpm-platform/issues/5370
+- Decision instance `state` is always set to `EVALUATED`
+- Decisions containing only a single decision table or literal expression are currently not displayed correctly in Operate
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/619
 
 ## Cockpit plugin
 
