@@ -1,7 +1,7 @@
 ---
 id: client
 title: Clients
-description: "Configure and manage client access to a cluster so the client application has the permissions it requires. A client is an application that interacts with an..."
+description: "## About client application access A client is an application that interacts with an Orchestration Cluster via its APIs."
 ---
 
 Configure and manage client access to a cluster so the client application has the permissions it requires.

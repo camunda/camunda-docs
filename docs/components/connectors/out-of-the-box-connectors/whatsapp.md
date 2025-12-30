@@ -2,7 +2,7 @@
 id: whatsapp
 title: WhatsApp connector
 sidebar_label: WhatsApp
-description: "The WhatsApp connector is an outbound connector that allows you to send messages to users from your BPMN process. To start using the WhatsApp connector, you..."
+description: "Learn about WhatsApp connector including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The **WhatsApp connector** is an outbound connector that allows you to send messages to users from your BPMN process.

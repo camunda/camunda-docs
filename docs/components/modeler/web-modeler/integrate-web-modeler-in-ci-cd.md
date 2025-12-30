@@ -1,7 +1,7 @@
 ---
 id: integrate-web-modeler-in-ci-cd
 title: Integrate Web Modeler into CI/CD
-description: "Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of process applications. Web Modeler serves as a powerful tool f..."
+description: "Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of process applications. Web Modeler serves as a powerful tool f."
 keywords:
   [CI/CD, devops, modeler, processops, process applications, integration guide]
 ---

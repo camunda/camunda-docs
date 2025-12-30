@@ -1,7 +1,7 @@
 ---
 id: process-lifecycles
 title: "Process lifecycles"
-description: "In Zeebe, the process execution is represented internally by events of type ProcessInstance. The events are written to the log stream and can be observed by..."
+description: "Learn about Process lifecycles including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 In Zeebe, the process execution is represented internally by events of type `ProcessInstance`. The events are written to the log stream and can be observed by an exporter.

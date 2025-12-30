@@ -1,6 +1,6 @@
 ---
 id: zeebe-in-production
-description: "This chapter covers topics relevant to anyone who wants to operate Zeebe in production. - Resource planning - Gives an introduction for calculating how many..."
+description: "This chapter covers topics relevant to anyone who wants to operate Zeebe in production. - Resource planning - Gives an introduction for calculating how many."
 title: "Operating Zeebe in production"
 sidebar_label: "Overview"
 keywords: ["backpressure", "back-pressure", "back pressure"]

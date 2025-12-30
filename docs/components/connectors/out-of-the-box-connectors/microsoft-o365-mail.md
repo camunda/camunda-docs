@@ -2,7 +2,7 @@
 id: microsoft-o365-mail
 title: Microsoft 365 connector
 sidebar_label: Microsoft 365
-description: "The Microsoft 365 connector is an outbound connector that allows you to connect your BPMN service with Microsoft 365 mail to send, read e-mails, and manage..."
+description: "The Microsoft 365 connector is an outbound connector that allows you to connect your BPMN service with Microsoft 365 mail."
 ---
 
 The **Microsoft 365 connector** is an outbound connector that allows you to connect your BPMN service with [Microsoft 365](https://outlook.office.com/mail/) mail to send, read e-mails, and manage folders.

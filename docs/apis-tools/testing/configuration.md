@@ -1,7 +1,7 @@
 ---
 id: configuration
 title: Configuration
-description: "By default, CPT uses a runtime based on Testcontainers. You can customize the runtime to your needs, or replace it with a Remote runtime, for example, if you..."
+description: "Configuration guide for Configuration with setup instructions and available customization options. This guide provides detailed information for your deployment."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: variable-labeling
 title: "Variable labeling"
-description: "With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize. The variable labeling API allows users to add, update,..."
+description: "## Functionality The variable labeling API allows users to add, update, and delete batches of variable label data, which Optimize stores in a dedicated index."
 ---
 
 With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.

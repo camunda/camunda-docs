@@ -3,7 +3,7 @@ id: backup-and-restore
 sidebar_label: Back up and restore
 title: Camunda back up and restore
 keywords: ["backup", "backups"]
-description: "The Camunda 8.8 release introduces breaking changes for Operate and Tasklist. If the Camunda applications cannot access Elasticsearch with cluster-level..."
+description: "The Camunda 8.8 release introduces breaking changes for Operate and Tasklist. If the Camunda applications cannot access Elasticsearch with cluster-level."
 ---
 
 :::note

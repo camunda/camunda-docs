@@ -2,7 +2,7 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed..."
+description: "Learn about Get started with human task orchestration including key features, configuration, and implementation details."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 

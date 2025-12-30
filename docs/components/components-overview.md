@@ -3,7 +3,7 @@ id: components-overview
 title: Using Camunda 8
 sidebar_label: Using Camunda 8
 slug: /components/
-description: "This section contains product manual content for each component in Camunda 8, including conceptual content. Orchestrate and automate complex business process..."
+description: "Learn about Using Camunda 8 including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 keywords:
   [
     "workflow process",

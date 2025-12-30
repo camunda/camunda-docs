@@ -1,7 +1,7 @@
 ---
 id: defining-templates
 title: Defining templates
-description: "An element template is defined in a template descriptor files as a JSON object. The element template object is divided into required and optional key-value..."
+description: "The element template object is divided into required and optional key-value pairs: ## Required keys - [$schema : String](."
 ---
 
 An element template is defined in a template descriptor files as a JSON object.

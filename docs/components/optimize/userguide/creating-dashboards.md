@@ -2,7 +2,7 @@
 id: creating-dashboards
 title: "Create dashboards"
 sidebar_label: "Create dashboards"
-description: "Define reports in Optimize according to Key Performance Indicators relevant to your business objectives. Efficiently monitor business performance by defining..."
+description: "Efficiently monitor business performance by defining reports in Optimize based on relevant Key Performance Indicators (KPIs)."
 ---
 
 Efficiently monitor business performance by defining reports in Optimize based on relevant Key Performance Indicators (KPIs). Dashboards, comprising [**Edit mode**](./edit-mode.md) and [**View mode**](./view-mode.md), offer a comprehensive view of system productivity.

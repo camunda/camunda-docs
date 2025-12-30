@@ -2,7 +2,7 @@
 id: zeebe-backup-and-restore
 sidebar_label: Zeebe
 title: Zeebe backup management API
-description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions. As of the Camunda 8.8 release, the /actuator e..."
+description: "Backup API to create a backup of a running Zeebe cluster comprised of a consistent snapshot of all partitions. As of the Camunda 8.8 release, the /actuator e."
 keywords: ["backup", "backups"]
 ---
 

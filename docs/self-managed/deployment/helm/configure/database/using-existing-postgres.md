@@ -2,7 +2,7 @@
 id: using-existing-postgres
 title: "Use external PostgreSQL"
 sidebar_label: External PostgreSQL
-description: "The Helm chart deployment can optionally install an internal PostgreSQL using Bitnami subcharts. For production environments, we advise deploying PostgreSQL..."
+description: "The Helm chart deployment can optionally install an internal PostgreSQL using Bitnami subcharts. For production environments, we advise deploying PostgreSQL."
 ---
 
 The [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md) can optionally install an internal PostgreSQL using [Bitnami subcharts](../../configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.

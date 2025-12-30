@@ -1,7 +1,7 @@
 ---
 id: feel-expressions-introduction
 title: Introduction
-description: "FEEL expressions are powerful and can be used for various cases. This section is split into expressions based on their operational data type: - Boolean -..."
+description: "Overview of Introduction covering key concepts, features, and getting started information. This guide provides detailed information for your deployment."
 ---
 
 FEEL expressions are powerful and can be used for various cases.

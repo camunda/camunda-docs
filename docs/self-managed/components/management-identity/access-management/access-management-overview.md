@@ -2,7 +2,7 @@
 id: access-management-overview
 title: "Manage access and permissions"
 sidebar_label: "Access and permissions"
-description: "Learn how to manage access and permissions for Web Modeler, Console, and Optimize using Management Identity. With Management Identity, you can manage and con..."
+description: "With Management Identity, you can manage and control access to management and modeling component REST APIs and custom applications using permissions and roles."
 ---
 
 With Management Identity, you can manage and control access to management and modeling component REST APIs and custom applications using permissions and roles.

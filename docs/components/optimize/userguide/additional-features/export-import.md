@@ -1,7 +1,7 @@
 ---
 id: export-import
 title: Export and import
-description: "Users can export entities by accessing the Export option in the entity menu. This downloads a JSON file which includes all relevant information that defines..."
+description: "Learn about Export and import including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 ## Exporting entities

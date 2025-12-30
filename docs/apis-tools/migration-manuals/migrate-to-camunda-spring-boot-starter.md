@@ -1,7 +1,7 @@
 ---
 id: migrate-to-camunda-spring-boot-starter
 title: Migrate to Camunda Spring Boot Starter
-description: "Migrate to the Camunda Spring Boot Starter from the Zeebe Spring SDK. This guide provides an overview of the process for migrating to the Camunda Spring Boot..."
+description: "Migrate to the Camunda Spring Boot Starter from the Zeebe Spring SDK. This guide provides an overview of the process for migrating to the Camunda Spring Boot."
 sidebar_label: Camunda Spring Boot Starter
 ---
 

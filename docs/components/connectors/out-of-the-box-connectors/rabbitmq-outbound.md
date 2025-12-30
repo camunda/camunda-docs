@@ -2,7 +2,7 @@
 id: rabbitmq
 title: RabbitMQ connector
 sidebar_label: RabbitMQ
-description: "[ {label: 'RabbitMQ Producer connector', value: 'outbound' }, {label: 'RabbitMQ inbound connector', value: 'inbound' } ]}> The RabbitMQ connector is an..."
+description: "[ {label: 'RabbitMQ Producer connector', value: 'outbound' }, {label: 'RabbitMQ inbound connector', value: 'inbound' } ]}>."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -2,7 +2,7 @@
 id: tasklist-api-rest-authentication
 title: Authentication
 sidebar_position: 2
-description: "The Tasklist REST API is deprecated. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the..."
+description: "Learn about Authentication including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 :::warning

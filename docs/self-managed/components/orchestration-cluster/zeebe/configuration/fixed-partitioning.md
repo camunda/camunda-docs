@@ -1,7 +1,7 @@
 ---
 id: fixed-partitioning
 title: "Fixed partitioning"
-description: "Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme; this means you can manually..."
+description: "Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme."
 ---
 
 Starting with 1.2.0, there is a new experimental configuration option which lets you specify a fixed partitioning scheme; this means you can manually configure which partitions belong to which brokers.

@@ -2,7 +2,7 @@
 id: overview
 title: "Quickstart"
 sidebar_label: "Quickstart"
-description: "Welcome to the Quickstart section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local..."
+description: "Welcome to the Quickstart section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local."
 ---
 
 Welcome to the **Quickstart** section for Camunda 8 Self-Managed. This guide is designed to help you get up and running quickly with Camunda 8 in a local environment—whether you're a developer building process solutions or an administrator responsible for deploying and running Camunda clusters.

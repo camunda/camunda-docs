@@ -2,7 +2,7 @@
 id: custom-users-and-clients
 sidebar_label: Adding users and clients
 title: Helm chart user and client setup for Management Identity
-description: "Configure users and OAuth2 clients for Management Identity in Camunda 8 Self-Managed deployments using the Helm chart. When connected to Keycloak, the Camund..."
+description: "When connected to Keycloak, the Camunda Helm chart allows you to configure Management Identity users and OAuth2 clients through."
 ---
 
 When connected to Keycloak, the Camunda Helm chart allows you to configure Management Identity users and OAuth2 clients through the `identity` section in your Helm values file. This page explains how to define users and clients with YAML examples and descriptions of common fields.

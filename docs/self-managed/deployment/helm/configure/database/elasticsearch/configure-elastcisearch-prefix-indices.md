@@ -2,7 +2,7 @@
 id: prefix-elasticsearch-indices
 sidebar_label: Prefix Elasticsearch/OpenSearch indices
 title: Helm chart Elasticsearch/OpenSearch indices prefix
-description: "Configure Elasticsearch/OpenSearch index prefixes to structure your data, and ensure data isolation. Elasticsearch and OpenSearch prefixes allow you to appen..."
+description: "Elasticsearch and OpenSearch prefixes allow you to append a unique identifier to each index, making it easier to organize."
 ---
 
 import Tabs from "@theme/Tabs";

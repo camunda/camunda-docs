@@ -1,7 +1,7 @@
 ---
 id: servicenow-integration
 title: ServiceNow
-description: "Use Camunda to automate workflows that interact with ServiceNow IT Service Management (ITSM), enabling seamless communication between BPMN processes and..."
+description: "Use Camunda to automate workflows that interact with ServiceNow IT Service Management (ITSM), enabling seamless communication."
 ---
 
 Use Camunda to automate workflows that interact with ServiceNow IT Service Management (ITSM), enabling seamless communication between BPMN processes and ServiceNow workflows.

@@ -1,7 +1,7 @@
 ---
 id: escalation-events
 title: "Escalation events"
-description: "Escalation events are events which reference a named escalation, and are used to communicate to a higher flow scope. Unlike an error, an escalation event is..."
+description: "Learn about Escalation events including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Escalation events are events which reference a named escalation, and are used to communicate to a higher flow scope.

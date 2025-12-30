@@ -2,7 +2,7 @@
 id: camunda8-sdk
 title: TypeScript SDK
 sidebar_label: "TypeScript SDK"
-description: "Use the TypeScript SDK to connect to Camunda 8, deploy process models, and work with the Orchestration Cluster API. The TypeScript SDK provides typed access..."
+description: "Learn about TypeScript SDK including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Use the TypeScript SDK to connect to Camunda 8, deploy process models, and work with the Orchestration Cluster API.

@@ -2,7 +2,7 @@
 id: mapping-rules
 title: "Mapping rules"
 sidebar_label: "Mapping rules"
-description: "Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens. You can only use mapping rules if..."
+description: "Learn about Mapping rules including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens.

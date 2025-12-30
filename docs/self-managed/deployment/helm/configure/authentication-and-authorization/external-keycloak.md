@@ -2,7 +2,7 @@
 id: external-keycloak
 sidebar_label: External Keycloak
 title: Set up the Helm chart with an external Keycloak instance
-description: "The external Keycloak setup requires administrative access to the Keycloak server. The Camunda Helm chart can connect to an external Keycloak instance that..."
+description: "Learn about Set up the Helm chart with an external Keycloak instance in Camunda, including key features and implementation details."
 ---
 
 :::caution Admin access required

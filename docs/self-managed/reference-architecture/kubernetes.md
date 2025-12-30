@@ -2,7 +2,7 @@
 id: kubernetes
 title: "Kubernetes deployment overview"
 sidebar_label: "Kubernetes"
-description: "This reference architecture provides guidance for deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who..."
+description: "This reference architecture provides guidance for deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who."
 ---
 
 This reference architecture provides guidance for deploying Camunda 8 Self-Managed within a Kubernetes cluster. This deployment method is ideal for users who want to leverage the benefits of containerization and self-healing. It supports quick scalability and offers increased resilience through multi-zone deployments.

@@ -1,7 +1,7 @@
 ---
 id: settings
 title: Settings
-description: "Configure and manage your Desktop Modeler application and plugin preferences and defaults via the Settings window. Open the Settings window either from the..."
+description: "Learn about Settings including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import SettingsImg from './img/settings.png';

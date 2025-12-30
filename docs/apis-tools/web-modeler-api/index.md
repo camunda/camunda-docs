@@ -3,7 +3,7 @@ id: overview
 title: "Overview"
 slug: /apis-tools/web-modeler-api/overview
 sidebar_position: 1
-description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation. Web Modeler provides a REST API at /api/*..."
+description: "Overview of Overview covering key concepts, features, and getting started information. This guide provides detailed information for your deployment."
 ---
 
 Web Modeler provides a REST API at `/api/*`.

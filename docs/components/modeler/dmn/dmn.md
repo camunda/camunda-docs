@@ -1,7 +1,7 @@
 ---
 id: desktop-modeler-dmn
 title: DMN in Modeler
-description: "Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group (OMG), which also operates worldwide..."
+description: "Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group (OMG)."
 ---
 
 Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group ([OMG](https://www.omg.org/)), which also operates worldwide standards for [BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).

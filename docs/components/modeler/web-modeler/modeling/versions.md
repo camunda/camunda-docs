@@ -1,7 +1,7 @@
 ---
 id: versions
 title: Versions
-description: "With 8.7, "milestone" has been renamed to "version". To learn more about this change, see the related release note. You can create a version at any time to..."
+description: "Create versions to save snapshots of BPMN or DMN diagrams. Restore previous versions or compare differences between diagram versions."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

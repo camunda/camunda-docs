@@ -1,7 +1,7 @@
 ---
 id: aks-helm
 title: "Install Camunda 8 on an AKS cluster"
-description: "This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster, and..."
+description: "This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes."
 ---
 
 import Tabs from "@theme/Tabs";

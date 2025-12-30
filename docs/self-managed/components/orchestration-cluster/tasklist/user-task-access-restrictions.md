@@ -2,7 +2,7 @@
 id: user-task-access-restrictions
 title: "Configure user task access restrictions"
 sidebar_label: "User task access restrictions"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions. User task access restrictions are only supp..."
+description: "Configuration guide for Configure user task access restrictions, including setup and available options for your environment."
 ---
 
 :::caution Tasklist V1 only

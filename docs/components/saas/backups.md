@@ -1,7 +1,7 @@
 ---
 id: backups
 title: "Backups"
-description: "You can use the backup feature of Camunda 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate, Tasklist, and Optimize) with _zero..."
+description: "You can use the backup feature of Camunda 8 SaaS to regularly back up the state of all of its components (Zeebe, Operate."
 ---
 
 <span class="badge badge--enterprise-only">Camunda Enterprise</span>

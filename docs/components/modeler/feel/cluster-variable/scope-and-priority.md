@@ -2,7 +2,7 @@
 id: cluster-variable-scope-priority
 title: Scope resolution
 sidebar_label: "Scope resolution"
-description: "Learn how cluster variable scope resolution works, the available scopes, and how to access and use them. Learn how cluster variable scope resolution works, t..."
+description: "Learn about Scope resolution including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Learn how cluster variable scope resolution works, the available scopes, and how to access and use them.

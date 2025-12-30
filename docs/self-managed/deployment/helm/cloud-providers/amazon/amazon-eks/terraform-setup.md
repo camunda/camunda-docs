@@ -1,7 +1,7 @@
 ---
 id: eks-terraform
 title: "Deploy an EKS cluster with Terraform"
-description: "This guide explains how to provision an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster using Terraform, a widely used Infrastructure as..."
+description: "This guide explains how to provision an Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster using Terraform."
 ---
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, similar to the ROSA HCP Terraform setup. The user should have a similar experience when reading both guides. -->

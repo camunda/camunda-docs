@@ -1,7 +1,7 @@
 ---
 id: element-templates
 title: Element templates
-description: "An element template extends the Modeler with domain-specific diagram elements, such as service and user tasks. They allow you to customize how a BPMN element..."
+description: "Learn about Element templates including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import propertiesNoTemplate from './assets/element-templates/properties-no-template.png'

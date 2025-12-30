@@ -2,7 +2,7 @@
 id: cluster-variable-get-started
 title: Get started with cluster variables
 sidebar_label: "Get started"
-description: "Get started with cluster variables by creating your first one and using it in a BPMN process. Throughout this tutorial, you'll build a payment processing..."
+description: "Throughout this tutorial, you'll build a payment processing workflow that calls different payment API endpoints depending on the environment."
 ---
 
 Get started with cluster variables by creating your first one and using it in a BPMN process.

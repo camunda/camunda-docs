@@ -2,7 +2,7 @@
 id: broker-config
 title: "Broker configuration"
 sidebar_label: "Broker configuration"
-description: "A complete broker configuration template is available in the Zeebe repo. Take the following conventions into consideration when working with the broker..."
+description: "A complete broker configuration template is available in the Zeebe repo. Take the following conventions into consideration when working with the broker."
 ---
 
 A complete broker configuration template is available in the [Zeebe repo](https://github.com/camunda/camunda/blob/main/dist/src/main/config/broker.yaml.template).

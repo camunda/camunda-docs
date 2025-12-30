@@ -2,7 +2,7 @@
 id: basic-authentication
 sidebar_label: Basic authentication
 title: Set up the Helm chart with basic authentication
-description: "Learn how to configure and manage basic authentication for Camunda 8 Self-Managed deployments using Helm chart. By default, Camunda 8 Self-Managed uses basic..."
+description: "Learn about Set up the Helm chart with basic authentication in Camunda, including key features and implementation details."
 ---
 
 By default, Camunda 8 Self-Managed uses basic authentication for all components deployed through the Helm chart. This method requires no additional configuration and is ideal for local or development environments.

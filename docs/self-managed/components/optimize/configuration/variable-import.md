@@ -1,7 +1,7 @@
 ---
 id: variable-import
 title: "Enable or disable variable import"
-description: "Learn how to configure Camunda Optimize to control variable import and enhance performance. By default, Camunda Optimize imports process variables to provide..."
+description: "## Overview By default, Camunda Optimize imports process variables to provide deep insights into both process performance and business context."
 ---
 
 Learn how to configure Camunda Optimize to control variable import and enhance performance.

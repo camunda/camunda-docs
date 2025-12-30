@@ -2,7 +2,7 @@
 id: message-send
 title: Message Send connector
 sidebar_label: Message Send
-description: "Send BPMN messages in Camunda by publishing buffered messages or correlating messages directly with a process instance. The Message Send connector can publis..."
+description: "Send BPMN messages in Camunda by publishing buffered messages or correlating messages directly with a process instance. The Message Send connector can publis."
 ---
 
 The Message Send connector can **publish** or **correlate** BPMN messages.  

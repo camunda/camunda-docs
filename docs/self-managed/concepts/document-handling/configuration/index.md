@@ -1,6 +1,6 @@
 ---
 title: Document handling configuration
-description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory. Camunda supports multiple storage options fo..."
+description: "Learn more about storage configuration options like Google Cloud Platform, AWS S3, local folders, and in-memory. Camunda supports multiple storage options fo."
 keywords: ["document handling", "document storage configuration"]
 ---
 

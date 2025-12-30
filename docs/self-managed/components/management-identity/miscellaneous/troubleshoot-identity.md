@@ -2,7 +2,7 @@
 id: troubleshoot-identity
 title: "Troubleshooting Management Identity"
 sidebar_label: "Troubleshooting"
-description: "Learn about solutions to common issues in Management Identity, such as complications connecting to Keycloak. Troubleshoot common issues with Management Ident..."
+description: "Troubleshooting guide for Troubleshooting Management Identity, covering common issues, errors, and resolution strategies."
 ---
 
 Troubleshoot common issues with Management Identity in a Self-Managed deployment.

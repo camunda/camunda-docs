@@ -2,7 +2,7 @@
 id: a2a-client-polling-connector
 title: A2A Client Polling connector
 sidebar_label: A2A Client Polling connector
-description: "The A2A Client Polling connector polls for responses from asynchronous A2A tasks. It is typically paired with the A2A Client connector when using the Polling..."
+description: "The A2A Client Polling connector polls for responses from asynchronous A2A tasks. It is typically paired with the A2A Client connector when using the Polling."
 ---
 
 The A2A Client Polling connector polls for responses from asynchronous A2A tasks.

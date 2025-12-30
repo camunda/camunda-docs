@@ -2,7 +2,7 @@
 id: camunda-exporter-indices-identity
 title: "Camunda identity index diagrams"
 sidebar_label: "Camunda index diagrams"
-description: "The Camunda identity index diagrams to which the Camunda Exporter will export system state information to. The following index diagrams show Camunda Exporter..."
+description: "The Camunda identity index diagrams to which the Camunda Exporter will export system state information to. The following index diagrams show Camunda Exporter."
 ---
 
 The following index diagrams show Camunda Exporter indices for Camunda identity.

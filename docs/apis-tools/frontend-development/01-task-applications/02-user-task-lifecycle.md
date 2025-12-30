@@ -1,7 +1,7 @@
 ---
 id: user-task-lifecycle
 title: "User task life cycle"
-description: "The task life cycle defines how users can interact with tasks and how work on these tasks is performed. It defines the core actions of your task application,..."
+description: "It defines the core actions of your task application, so you should define it before implementing your logic and user interface."
 ---
 
 import GHIcon from "@site/src/mdx/GitHubInlineIcon";

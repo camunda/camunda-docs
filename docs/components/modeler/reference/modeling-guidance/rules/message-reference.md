@@ -1,7 +1,7 @@
 ---
 id: message-reference
 title: Message reference
-description: "A message event or receive task must reference a message defined in the process. To fix this problem, open the Message group in the properties panel on the..."
+description: "Reference documentation for Message reference including specifications and usage guidelines. This guide provides detailed information for your deployment."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

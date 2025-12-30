@@ -1,7 +1,7 @@
 ---
 id: alerts
 title: Alerts
-description: "Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports..."
+description: "Learn about Alerts including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection.

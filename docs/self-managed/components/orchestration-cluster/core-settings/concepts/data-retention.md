@@ -1,7 +1,7 @@
 ---
 id: data-retention
 title: Data retention
-description: "The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration. All cluster data, including deployed..."
+description: "Learn about Data retention including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.

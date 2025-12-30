@@ -2,7 +2,7 @@
 id: aws-lambda
 title: AWS Lambda connector
 sidebar_label: AWS Lambda
-description: "The AWS Lambda connector is an outbound connector that allows you to connect your BPMN service with Amazon Web Service's AWS Lambda Service to invoke AWS..."
+description: "The AWS Lambda connector is an outbound connector that allows you to connect your BPMN service with Amazon Web Service's."
 ---
 
 The **AWS Lambda connector** is an outbound connector that allows you to connect your BPMN service with Amazon Web Service's [AWS Lambda Service](https://aws.amazon.com/lambda/) to invoke [AWS Lambda functions](https://aws.amazon.com/lambda/).

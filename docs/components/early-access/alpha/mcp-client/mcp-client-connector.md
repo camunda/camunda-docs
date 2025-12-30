@@ -1,6 +1,6 @@
 ---
 id: mcp-client-connector
-description: "This connector is not directly available on Camunda 8 SaaS. Instead, you can connect a custom connector runtime configured to run the MCP Client connector to..."
+description: "Instead, you can connect a custom connector runtime configured to run the MCP Client connector to your Camunda 8 SaaS instance."
 title: MCP Client connector
 sidebar_label: MCP Client connector
 ---

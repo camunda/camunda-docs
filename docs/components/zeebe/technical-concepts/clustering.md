@@ -1,7 +1,7 @@
 ---
 id: clustering
 title: "Clustering"
-description: "Zeebe can operate as a cluster of brokers, forming a peer-to-peer network. In this network, all brokers have the same responsibilities and there is no single..."
+description: "Learn about Clustering including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Zeebe can operate as a cluster of brokers, forming a peer-to-peer network.

@@ -1,7 +1,7 @@
 ---
 id: manage-ip-allowlists
 title: IP allowlists
-description: "If your organization works within Camunda's Enterprise plan, you can restrict access to clusters with an IP allowlist. In Camunda SaaS, Web Modeler has acces..."
+description: "In Camunda SaaS, Web Modeler has access to clusters by default, as allowlist assignments for IP addresses used by Web Modeler are managed automatically."
 keywords: [whitelist, allowlist, ip whitelist, ip allowlist]
 ---
 

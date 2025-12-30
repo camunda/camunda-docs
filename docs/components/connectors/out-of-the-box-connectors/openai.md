@@ -2,7 +2,7 @@
 id: openai
 title: OpenAI connector
 sidebar_label: OpenAI
-description: "The OpenAI connector is an outbound connector that allows you to use ChatGPT or Moderation API in your BPMN process. To use the OpenAI connector, create an..."
+description: "Learn about OpenAI connector including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The **OpenAI connector** is an outbound connector that allows you to use [ChatGPT](https://platform.openai.com/docs/guides/chat/chat-completions-beta)

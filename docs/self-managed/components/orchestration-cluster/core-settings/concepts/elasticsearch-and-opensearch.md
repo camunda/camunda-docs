@@ -1,7 +1,7 @@
 ---
 id: elasticsearch-and-opensearch
 title: "Elasticsearch and OpenSearch"
-description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch. Select the database by setting the CAMUNDA_DATABASE environment..."
+description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch. Select the database by setting the CAMUNDA_DATABASE environment."
 ---
 
 The Orchestration Cluster stores and reads data from either **Elasticsearch** or **OpenSearch**.

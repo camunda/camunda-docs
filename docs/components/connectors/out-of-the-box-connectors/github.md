@@ -2,7 +2,7 @@
 id: github
 title: GitHub connector
 sidebar_label: GitHub
-description: "[ {label: 'GitHub connector', value: 'outbound' }, {label: 'GitHub Webhook connector', value: 'inbound' } ]}> The GitHub connector is an outbound connector..."
+description: "[ {label: 'GitHub connector', value: 'outbound' }, {label: 'GitHub Webhook connector', value: 'inbound' } ]}> The GitHub."
 ---
 
 import Tabs from "@theme/Tabs";

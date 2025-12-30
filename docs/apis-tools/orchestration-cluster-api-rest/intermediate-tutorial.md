@@ -2,7 +2,7 @@
 id: orchestration-cluster-api-intermediate-tutorial
 title: Intermediate tutorial
 sidebar_label: Intermediate
-description: "In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster REST API, such as deploying resources, creating and..."
+description: "In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster REST API, such as."
 ---
 
 <span class="badge badge--intermediate">Intermediate</span>

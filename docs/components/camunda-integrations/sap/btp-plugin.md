@@ -1,7 +1,7 @@
 ---
 id: btp-plugin
 title: SAP BTP plugin
-description: "The Camunda SAP Business Technology Platform (BTP) plugin is an artifact run on BTP. It consists of a UI5 app, a CAP service layer and backend (using..."
+description: "Learn about SAP BTP plugin including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The [Camunda SAP Business Technology Platform (BTP) plugin](/reference/glossary.md#btp) is an artifact run on BTP. It consists of a [UI5 app](https://ui5.sap.com/), a [CAP service layer and backend](https://cap.cloud.sap/) (using PostgreSQL), and an [approuter](https://www.npmjs.com/package/@sap/approuter) for traffic dispatching.

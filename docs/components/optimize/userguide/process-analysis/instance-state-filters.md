@@ -1,7 +1,7 @@
 ---
 id: instance-state-filters
 title: Instance state filters
-description: "By default, a report considers all process instances, regardless of whether they are still running. This behavior can be adjusted with the Running Instances..."
+description: "By default, a report considers all process instances, regardless of whether they are still running. This behavior can be adjusted with the Running Instances."
 ---
 
 ## Running completed instances only filter

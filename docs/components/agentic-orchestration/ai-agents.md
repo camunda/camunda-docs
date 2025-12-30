@@ -1,7 +1,7 @@
 ---
 id: ai-agents
 title: AI agents
-description: "Start building and integrating AI agents into your end-to-end processes. - AI agents can perform a variety of functions, including making decisions, solving..."
+description: "</p> - AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions."
 keywords: ["agentic ai", "AI agents"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: system-configuration
 title: "Overview"
-description: "All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment..."
+description: "All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the."
 ---
 
 All distributions of Camunda Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config` which contains a file called `environment-config.yaml` with values that override the default Optimize properties.

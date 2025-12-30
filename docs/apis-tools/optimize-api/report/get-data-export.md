@@ -1,7 +1,7 @@
 ---
 id: get-data-export
 title: "Export report result data"
-description: "The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize. Users can export all report types (except..."
+description: "The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize. Users can export all report types (except."
 ---
 
 The data export API allows users to export large amounts of data in a machine-readable format (JSON) from Optimize.

@@ -2,7 +2,7 @@
 id: resource-management
 title: "Keycloak resource management"
 sidebar_label: "Keycloak resource management"
-description: "When using Keycloak as an IdP, Identity uses the following Keycloak resources: | Identity resource | Keycloak resource (and how it is filtered) | |..."
+description: "When using Keycloak as an IdP, Identity uses the following Keycloak resources: | Identity resource | Keycloak resource (and."
 ---
 
 When using Keycloak as an IdP, Identity uses the following Keycloak resources:

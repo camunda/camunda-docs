@@ -1,7 +1,7 @@
 ---
 id: camunda-marketplace
 title: Camunda Marketplace
-description: "Visit the Camunda Marketplace to browse available resources, and incorporate them into your project. Discover the Camunda Marketplace, your go-to destination..."
+description: "Learn about Camunda Marketplace including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Discover the **Camunda Marketplace**, your go-to destination for leveraging various contributions from the Camunda community, trusted partners, and the Camunda team.

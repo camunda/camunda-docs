@@ -2,7 +2,7 @@
 id: configure-multi-tenancy
 sidebar_label: Multi-tenancy
 title: Configure multi-tenancy in Helm chart
-description: "Multi-tenancy lets you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8..."
+description: "Multi-tenancy lets you isolate users, data, and workloads across tenants (for example, business units, departments, or customers)."
 ---
 
 import Tabs from "@theme/Tabs";

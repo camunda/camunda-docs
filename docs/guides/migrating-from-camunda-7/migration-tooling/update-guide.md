@@ -2,7 +2,7 @@
 id: update-guide
 title: Update guide
 sidebar_label: Update guide
-description: "Learn about breaking changes and migration steps to consider when updating Migration Tooling between versions. In this guide, you'll learn about the breaking..."
+description: "In this guide, you'll learn about the breaking changes and migration steps to consider when you upgrade Migration Tooling."
 ---
 
 In this guide, you'll learn about the breaking changes and migration steps to consider when you upgrade Migration Tooling.

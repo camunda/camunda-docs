@@ -2,7 +2,7 @@
 id: twilio
 title: Twilio connector
 sidebar_label: Twilio
-description: "Integrate your BPMN service with Twilio's messaging API to send SMS messages, get messages, and more. [ {label: 'Outbound', value: 'outbound' }, {label: 'Inb..."
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Twilio connector allows you to integrate."
 ---
 
 import Tabs from "@theme/Tabs";

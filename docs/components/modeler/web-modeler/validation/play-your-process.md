@@ -1,7 +1,7 @@
 ---
 id: play-your-process
 title: Play mode for rapid validation
-description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes. Play is a Zeebe-powered playground environment with..."
+description: "Play mode gives developers a playground environment to quickly iterate and manually test their processes. Play is a Zeebe-powered playground environment with."
 keywords:
   ["demo", "demoing", "collaboration", "rapid development", "Play", "Play mode"]
 ---

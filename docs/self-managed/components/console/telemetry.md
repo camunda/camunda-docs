@@ -2,7 +2,7 @@
 id: telemetry
 title: "Console (Self-Managed) telemetry"
 sidebar_label: "Telemetry"
-description: "At Camunda, we strive to offer an excellent user experience at a high and stable level. On a strictly opt-in basis, we are looking to collect environment and..."
+description: "On a strictly opt-in basis, we are looking to collect environment and usage data to improve your user experience further."
 ---
 
 At Camunda, we strive to offer an excellent user experience at a high and stable level. On a strictly opt-in basis, we are looking to collect environment and usage data to improve your user experience further. These insights help us understand typical environment setups and product usage patterns and will be used to make informed product improvement decisions that benefit you.

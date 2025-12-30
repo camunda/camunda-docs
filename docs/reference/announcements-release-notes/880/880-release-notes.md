@@ -2,7 +2,7 @@
 id: 880-release-notes
 title: "8.8 Release notes"
 sidebar_label: Release notes
-description: "These release notes identify the main new features included in the 8.8 minor release, including alpha feature releases. | Minor release date | Scheduled end..."
+description: "Learn about 8.8 Release notes including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 keywords: ["8.8 release notes", "release notes for 8.8", "release notes"]

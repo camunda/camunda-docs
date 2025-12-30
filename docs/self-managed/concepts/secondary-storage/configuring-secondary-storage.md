@@ -2,7 +2,7 @@
 id: configuring-secondary-storage
 sidebar_label: "Configure"
 title: "Configure secondary storage"
-description: "Learn how to configure secondary storage in Camunda Self-Managed environments using Helm, Docker, or manual deployment. Configure secondary storage to enable..."
+description: "Configure secondary storage to enable features such as Operate, Tasklist, Identity, and search-based REST APIs in Camunda Self-Managed environments."
 ---
 
 import Tabs from "@theme/Tabs";

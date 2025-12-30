@@ -1,7 +1,7 @@
 ---
 id: optimize-api-tutorial
 title: Tutorial
-description: "New to the Optimize API? Step through our tutorial to list your existing dashboard IDs and delete a dashboard. In this tutorial, we'll step through examples ..."
+description: "In this tutorial, we'll step through examples to highlight the capabilities of the Optimize API, such as listing your existing."
 ---
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Optimize API, such as listing your existing dashboard IDs, or deleting a dashboard.

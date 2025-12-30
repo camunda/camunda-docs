@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-textfield
 title: Textfield
-description: "A text field allowing the user to read and edit textual data. - Field label: Label displayed on top of the text field. Can either be an expression, plain..."
+description: "Learn about Textfield including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 A text field allowing the user to read and edit textual data.

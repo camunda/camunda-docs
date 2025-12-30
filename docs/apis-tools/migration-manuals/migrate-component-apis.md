@@ -2,7 +2,7 @@
 id: migrate-component-apis
 title: Migrate Component V1 APIs
 sidebar_label: "Component V1 APIs"
-description: "This document outlines the necessary changes to continue using the component REST APIs after upgrading to Camunda 8.8—if migration to the new Orchestration..."
+description: "This document outlines the necessary changes to continue using the component REST APIs after upgrading to Camunda 8.8—if."
 ---
 
 import Tabs from "@theme/Tabs";

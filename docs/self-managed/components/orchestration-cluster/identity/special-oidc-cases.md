@@ -1,7 +1,7 @@
 ---
 title: Special OIDC configuration cases
 sidebar_label: Special OIDC configuration cases
-description: "This page provides guidance for less common OIDC configuration scenarios. In some cases, the Orchestration Cluster backend and the user’s browser may need to..."
+description: "This page provides guidance for less common OIDC configuration scenarios. In some cases, the Orchestration Cluster backend and the user’s browser may need to."
 ---
 
 import Tabs from "@theme/Tabs";

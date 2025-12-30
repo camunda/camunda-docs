@@ -2,7 +2,7 @@
 id: email
 title: Email connector
 sidebar_label: Email
-description: "The Email connector allows you to connect your BPMN service with different email protocols such as SMTP, POP3 or IMAP. values={[{label: 'Email Outbound conne..."
+description: "values={[{label: 'Email Outbound connector', value: 'outbound' }, {label: 'Email Inbound connector', value: 'inbound' }]}> The."
 ---
 
 import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";

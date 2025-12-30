@@ -2,7 +2,7 @@
 id: overview
 title: Identity in Self-Managed
 sidebar_label: "Overview"
-description: "Identity is included by default with the Orchestration Cluster in all Self-Managed installation methods. Within a cluster, Identity provides unified,..."
+description: "Identity is included by default with the Orchestration Cluster in all Self-Managed installation methods. Within a cluster, Identity provides unified,."
 ---
 
 import Tabs from '@theme/Tabs';

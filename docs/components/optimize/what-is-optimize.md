@@ -1,7 +1,7 @@
 ---
 id: what-is-optimize
 title: What is Optimize?
-description: "New to Optimize? Visit our introductory guide to Optimize to get started. Camunda 8 is built to handle three key aspects of process automation: - Design -..."
+description: "Learn about What is Optimize? including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 :::note

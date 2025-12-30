@@ -2,7 +2,7 @@
 id: c8run-troubleshooting
 title: Troubleshoot Camunda 8 Run
 sidebar_label: "Troubleshooting"
-description: "Camunda 8 Run provides log files in the c8run/logs directory that can help diagnose most issues. Check these logs first when troubleshooting: - c8run.log –..."
+description: "Camunda 8 Run provides log files in the c8run/logs directory that can help diagnose most issues. Check these logs first when troubleshooting:"
 ---
 
 Camunda 8 Run provides log files in the `c8run/logs` directory that can help diagnose most issues. Check these logs first when troubleshooting:

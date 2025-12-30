@@ -7,7 +7,7 @@ tags:
   - E-Mail Notification
   - 4-Eyes-Principle
   - Overdue Task
-description: "Use Camunda task management features or implement your requirements in a generic way for readable models. The lifecycle of human task orchestration (like ass..."
+description: "## Using task assignment features The lifecycle of human task orchestration (like assigning, delegating, and completing tasks) is mostly a generic issue."
 ---
 
 ## Using task assignment features

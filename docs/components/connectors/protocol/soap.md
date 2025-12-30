@@ -2,7 +2,7 @@
 id: soap
 title: SOAP connector
 sidebar_label: SOAP
-description: "The SOAP connector is only supported by Self-Managed and Hybrid Camunda 8 instances. Simple Object Access Protocol (SOAP) is a messaging protocol..."
+description: "Learn about SOAP connector including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 :::note

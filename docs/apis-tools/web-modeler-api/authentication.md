@@ -3,7 +3,7 @@ id: index
 title: "Authentication"
 slug: /apis-tools/web-modeler-api/authentication
 sidebar_position: 2
-description: "Web Modeler API is a REST API and provides access to Web Modeler data. Requests and responses are in JSON notation. All Web Modeler API requests require auth..."
+description: "Learn about Authentication including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import Tabs from "@theme/Tabs";

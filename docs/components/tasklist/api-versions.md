@@ -2,7 +2,7 @@
 id: api-versions
 title: "Tasklist API versions"
 sidebar_label: "API versions"
-description: "Tasklist can be used in two modes: V1 (legacy) and V2: - Tasklist V1 is based on the deprecated Tasklist API. - Tasklist V2 is based on the new Orchestration..."
+description: "Tasklist can be used in two modes: V1 (legacy) and V2: - Tasklist V1 is based on the deprecated Tasklist API. - Tasklist V2 is based on the new Orchestration."
 ---
 
 Tasklist can be used in two modes: V1 (legacy) and V2:

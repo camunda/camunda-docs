@@ -1,7 +1,7 @@
 ---
 id: blueprints
 title: Blueprints
-description: "Use these blueprints to quickly implement common Camunda–ServiceNow integration scenarios. !Camunda ServiceNow integration blueprint Download the blueprint..."
+description: "Learn about Blueprints including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Use these blueprints to quickly implement common Camunda–ServiceNow integration scenarios.

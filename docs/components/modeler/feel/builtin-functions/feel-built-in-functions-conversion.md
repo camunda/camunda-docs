@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-conversion
 title: Conversion functions
-description: "Convert a value into a different type. Returns the given value as a string representation. Function signature ``feel string(from: Any): string ` Examples..."
+description: "Convert a value into a different type. Returns the given value as a string representation. Function signature ``feel string(from: Any): string ` Examples."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

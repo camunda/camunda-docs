@@ -1,7 +1,7 @@
 ---
 id: collaboration
 title: Collaborate with your team
-description: "Files and folders are stored in projects. The user access on files and folders is defined at the project level. When you access Web Modeler via the Camunda 8..."
+description: "Files and folders are stored in projects. The user access on files and folders is defined at the project level. When you access Web Modeler via the Camunda 8."
 ---
 
 import BulkAddUserImg from '../img/invite-all-organization-members.png';

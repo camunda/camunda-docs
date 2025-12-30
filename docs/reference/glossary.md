@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: "Glossary"
-description: "Explore and understand definitions for key Camunda 8 terms and abbreviations. The governed coordination and management of AI agents, humans, and systems in a..."
+description: "Learn about Glossary including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---

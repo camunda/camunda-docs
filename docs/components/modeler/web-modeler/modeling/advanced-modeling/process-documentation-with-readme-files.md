@@ -1,7 +1,7 @@
 ---
 id: process-documentation-with-readme-files
 title: Process documentation with README files
-description: "The README feature brings project documentation directly into the modeling workspaces of business users, developers, and project owners to help capture..."
+description: "The README feature brings project documentation directly into the modeling workspaces of business users, developers, and."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

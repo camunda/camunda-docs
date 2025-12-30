@@ -2,7 +2,7 @@
 id: cluster-variable-namespace-collisions
 title: Namespace collisions
 sidebar_label: "Namespace collisions"
-description: "Understand namespace collisions in cluster variables, how scope priority affects variable resolution, and how to safely handle overrides to avoid unexpected..."
+description: "Understand namespace collisions in cluster variables, how scope priority affects variable resolution, and how to safely handle."
 ---
 
 Understand namespace collisions in cluster variables, how scope priority affects variable resolution, and how to safely handle overrides to avoid unexpected behavior.

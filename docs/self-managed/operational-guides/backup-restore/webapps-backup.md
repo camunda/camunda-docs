@@ -2,7 +2,7 @@
 id: webapps-backup
 sidebar_label: Operate and Tasklist
 title: Web applications backup management API
-description: "As of the Camunda 8.8 release, the /actuator endpoints for backups have been moved to /actuator/backupHistory. The previous /actuator/backups endpoint is..."
+description: "As of the Camunda 8.8 release, the /actuator endpoints for backups have been moved to /actuator/backupHistory. The previous /actuator/backups endpoint is."
 keywords: ["backup", "backups"]
 ---
 

@@ -2,7 +2,7 @@
 id: accessing-components-without-ingress
 sidebar_label: Without Ingress
 title: Helm chart without Ingress setup
-description: "By default, the Camunda Helm chart does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster..."
+description: "By default, the Camunda Helm chart does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster."
 ---
 
 By default, the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) does not expose the Camunda services externally. So to interact with the Camunda services inside a Kubernetes cluster without Ingress setup, you can use `kubectl port-forward` to route traffic from your local machine to the cluster. This is useful for quick tests or for development purposes.

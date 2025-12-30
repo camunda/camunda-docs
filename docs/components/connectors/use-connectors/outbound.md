@@ -1,7 +1,7 @@
 ---
 id: outbound
 title: Use an outbound connector
-description: "Outbound connectors allow workflows to trigger external systems or services. Once a connector task is selected, the available configuration is visible in the..."
+description: "Outbound connectors allow workflows to trigger external systems or services. Once a connector task is selected, the available configuration is visible in the."
 ---
 
 [Outbound connectors](/components/connectors/connector-types.md#outbound-connectors) allow workflows to trigger external systems or services.

@@ -1,7 +1,7 @@
 ---
 id: connector-templates
 title: Connector templates
-description: "Connectors are available out-of-the-box (OOTB) and come with connector templates that customize how a BPMN element is shown and how it can be configured by..."
+description: "Connectors are available out-of-the-box (OOTB) and come with connector templates that customize how a BPMN element is shown."
 ---
 
 import Tabs from "@theme/Tabs";

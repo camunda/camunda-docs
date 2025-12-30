@@ -1,7 +1,7 @@
 ---
 id: edit-mode
 title: Overview
-description: "Edit mode allows you to configure the report and adjust it to your needs. The following operations are possible within edit mode: - Rename your report -..."
+description: "Edit mode allows you to configure the report and adjust it to your needs. The following operations are possible within edit mode:"
 ---
 
 Edit mode allows you to configure the report and adjust it to your needs. The following operations are possible within edit mode:

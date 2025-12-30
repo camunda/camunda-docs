@@ -1,7 +1,7 @@
 ---
 sidebar_label: Upgrade via Helm
 title: Helm chart upgrade
-description: "Upgrade to a more recent version of the Camunda Helm charts, and view configuration changes between versions. When upgrading to a new version of the Camunda ..."
+description: "When upgrading to a new version of the Camunda 8 Helm charts, upgrade sequentially from the latest patch version of the current."
 ---
 
 import { HelmChartValuesFileBitnamiLegacyLink } from "@site/src/components/CamundaDistributions";

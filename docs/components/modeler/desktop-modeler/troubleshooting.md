@@ -1,7 +1,7 @@
 ---
 id: troubleshooting
 title: Troubleshooting
-description: "You can start Desktop Modeler with the --disable-plugins flag. Depending on your operating system, you can find Desktop Modeler logs in different places: [..."
+description: "Troubleshooting guide for Troubleshooting with common issues and resolution strategies. This guide provides detailed information for your deployment."
 ---
 
 import Tabs from "@theme/Tabs";

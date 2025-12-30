@@ -1,7 +1,7 @@
 ---
 id: feel-string-expressions
 title: String expressions
-description: "Creates a new string value. ``feel "valid" ` An addition concatenates the strings. The result is a string containing the characters of both strings. `feel..."
+description: "Learn about FEEL string expressions including literals, concatenation, and string functions for text manipulation in Camunda."
 ---
 
 ### Literal

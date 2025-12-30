@@ -1,7 +1,7 @@
 ---
 id: environment-variables
 title: "Environment variables"
-description: "As a Spring Boot application, Zeebe supports any standard Spring configuration method. This configuration can be provided as a configuration file, through..."
+description: "As a Spring Boot application, Zeebe supports any standard Spring configuration method. This configuration can be provided as a configuration file, through."
 ---
 
 ## Environment variables for configuration

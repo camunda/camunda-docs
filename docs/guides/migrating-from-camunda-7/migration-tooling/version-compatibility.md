@@ -2,7 +2,7 @@
 id: version-compatibility
 title: Version compatibility
 sidebar_label: Version compatibility
-description: "The version compatibility matrix for comparing supported Camunda 7, Camunda 8 versions, and Migration Tooling versions. Each version of the Migration Tooling..."
+description: "The version compatibility matrix for comparing supported Camunda 7, Camunda 8 versions, and Migration Tooling versions. Each version of the Migration Tooling."
 ---
 
 Each version of the Migration Tooling is bound to a specific version of Camunda 7 and 8.

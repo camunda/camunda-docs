@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-introduction
 title: Introduction
-description: "FEEL includes many built-in functions. These functions can be invoked in expressions and unary-tests. FEEL includes many built-in functions. These functions ..."
+description: "Overview of Introduction covering key concepts, features, and getting started information. This guide provides detailed information for your deployment."
 ---
 
 FEEL includes many built-in functions. These functions can be invoked

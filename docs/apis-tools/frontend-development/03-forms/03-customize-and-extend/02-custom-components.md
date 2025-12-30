@@ -1,7 +1,7 @@
 ---
 id: custom-components
 title: "Custom components"
-description: "Form-js comes with an extension point to hook in custom components. You can define the renderer, the configuration options of the component in the properties..."
+description: "Learn about Custom components including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import GHIcon from "@site/src/mdx/GitHubInlineIcon";

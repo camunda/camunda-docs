@@ -2,7 +2,7 @@
 id: helm
 sidebar_label: "Helm"
 title: "Document handling configuration in Helm"
-description: "Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory storage (not suitable for..."
+description: "Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory."
 keywords: ["document handling", "document storage configuration"]
 ---
 

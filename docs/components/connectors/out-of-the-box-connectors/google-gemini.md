@@ -2,7 +2,7 @@
 id: google-gemini
 title: Google Gemini connector
 sidebar_label: Google Gemini
-description: "The Google Gemini connector is available for 8.7.0 or later. The Google Gemini connector is an outbound connector that allows you to access Gemini multimodal..."
+description: "::: The Google Gemini connector is an outbound connector that allows you to access Gemini multimodal models from Google."
 ---
 
 :::info

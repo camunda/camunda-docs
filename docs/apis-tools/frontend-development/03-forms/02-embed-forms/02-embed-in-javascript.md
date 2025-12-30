@@ -1,7 +1,7 @@
 ---
 id: embed-forms-in-javascript
 title: "Embed forms in JavaScript"
-description: "Learn how to embed the form viewer in your own applications and web pages using JavaScript. Set up the form viewer <GHIcon /> in your own JavaScript projects..."
+description: "Learn how to embed the form viewer in your own applications and web pages using JavaScript. Set up the form viewer <GHIcon /> in your own JavaScript projects."
 ---
 
 import FormViewer from "@site/src/mdx/FormViewer";

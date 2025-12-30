@@ -1,7 +1,7 @@
 ---
 id: idp-applications
 title: IDP applications
-description: "Create and manage your intelligent document processing document extraction templates in an IDP application folder. Create and manage your IDP document extrac..."
+description: "Learn about IDP applications including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import IdpApplicationImg from './img/idp-application.png';

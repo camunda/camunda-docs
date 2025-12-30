@@ -1,6 +1,6 @@
 ---
 id: switch-organization
-description: "If a user is assigned to more than one organization, the organization can be changed by clicking the Open Organizations icon in the top right corner of the..."
+description: "If a user is assigned to more than one organization, the organization can be changed by clicking the Open Organizations icon."
 title: Switch organization
 ---
 

@@ -2,7 +2,7 @@
 id: migrating-to-oca
 title: Migrate to the Orchestration Cluster API
 sidebar_label: Migrate to the Orchestration Cluster API
-description: "Migrate an existing Camunda 8 TypeScript application to use the Orchestration Cluster API. The SDK includes the Orchestration Cluster API client by depending..."
+description: "Migrate an existing Camunda 8 TypeScript application to use the Orchestration Cluster API. The SDK includes the Orchestration Cluster API client by depending."
 ---
 
 Migrate an existing Camunda 8 TypeScript application to use the Orchestration Cluster API.

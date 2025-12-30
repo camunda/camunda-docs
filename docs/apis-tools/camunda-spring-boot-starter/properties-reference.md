@@ -1,6 +1,6 @@
 ---
 id: properties-reference
-description: "Properties for the Camunda Spring Boot Starter. [ {label: 'Configuration property', value: 'property' }, {label: 'Environment variable', value: 'env' }, ] }>..."
+description: "Reference documentation for Properties reference including specifications and usage guidelines. This guide provides detailed information for your deployment."
 title: Properties reference
 ---
 

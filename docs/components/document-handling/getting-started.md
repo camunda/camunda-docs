@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: "Getting started"
-description: "Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the Orchestration Cluster..."
+description: "Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist."
 keywords: ["document handling"]
 ---
 

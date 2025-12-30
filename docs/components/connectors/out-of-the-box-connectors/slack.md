@@ -2,7 +2,7 @@
 id: slack
 title: Slack connector
 sidebar_label: Slack
-description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Slack connector is an outbound connector that allows you to send..."
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Slack connector is an outbound connector."
 ---
 
 import Tabs from "@theme/Tabs";

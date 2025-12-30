@@ -1,7 +1,7 @@
 ---
 id: connector-types
 title: Connector types
-description: "Connectors are categorized by the direction data flows into or out of Camunda 8. Outbound connectors allow workflows to trigger external systems or services,..."
+description: "Learn about Connector types including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Connectors are categorized by the direction data flows into or out of Camunda 8.

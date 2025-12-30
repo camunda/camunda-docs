@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-string
 title: String functions
-description: "Returns a substring of the given value starting at start position. Function signature ``feel substring(string: string, start position: number): string ` The..."
+description: "Learn about String functions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

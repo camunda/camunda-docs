@@ -2,7 +2,7 @@
 id: manage-tenants
 title: "Tenants for Optimize"
 sidebar_label: "Tenants for Optimize"
-description: "Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants (such as departments, teams, or external clients) while maintaining..."
+description: "Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants (such as departments, teams, or external."
 ---
 
 Multi-tenancy in Camunda 8 allows a single installation to host multiple tenants (such as departments, teams, or external clients) while maintaining per-tenant isolation of data and processes in a shared environment.

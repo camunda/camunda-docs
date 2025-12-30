@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-checkbox
 title: Checkbox
-description: "A checkbox allowing the user to read and edit boolean data. - Field label: Label displayed besides the checkbox. Can either be an expression, plain text, or..."
+description: "Learn about Checkbox including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 A checkbox allowing the user to read and edit boolean data.

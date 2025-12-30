@@ -1,7 +1,7 @@
 ---
 id: enable-alpha-features
 title: Enable alpha features
-description: "Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions. Customers in other subscriptions can still turn on/off these..."
+description: "Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions. Customers in other subscriptions can still turn on/off these."
 keywords: [alpha-features, alpha, admin, pre-release]
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library
 title: Overview of Form Elements
-description: "A form configuration starts off as a composition of Form Elements to define the structure. The specific behaviors are then defined as properties on the..."
+description: "The specific behaviors are then defined as properties on the individual elements via the properties panel on the right side of the screen."
 ---
 
 # Form Elements

@@ -1,7 +1,7 @@
 ---
 id: user-task-analytics
 title: User task analytics
-description: "In the realm of automated processes, the efficiency and effectiveness of a system are largely determined by how well it supports the user in performing their..."
+description: "In the realm of automated processes, the efficiency and effectiveness of a system are largely determined by how well it supports."
 ---
 
 In the realm of automated processes, the efficiency and effectiveness of a system are largely determined by how well it supports the user in performing their tasks. Often, businesses find that, despite automation, there still exist significant bottlenecks affecting overall productivity. These bottlenecks are commonly rooted in user tasks.

@@ -1,7 +1,7 @@
 ---
 id: import-entities
 title: "Import entities"
-description: "This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either..."
+description: "Learn about Import entities including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 This API allows users to import entity definitions such as reports and dashboards into existing collections. These entity definitions may be obtained either using the [report](../report/export-report-definitions/) or [dashboard](../dashboard/export-dashboard-definitions) export API or [via the UI](components/optimize/userguide/additional-features/export-import.md#exporting-entities).

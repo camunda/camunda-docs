@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-context
 title: Context functions
-description: "Returns the value of the context entry with the given key. Function signature ``feel get value(context: context, key: string): Any ` Examples `feel get..."
+description: "Learn about Context functions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

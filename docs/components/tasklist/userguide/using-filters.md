@@ -1,7 +1,7 @@
 ---
 id: using-filters
 title: Using filters
-description: "When you open the Tasks page, you will see the list of all tasks. This is a starting point for managing your workload. !tasklist-all-tasks As you browse..."
+description: "Learn about Using filters including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 When you open the **Tasks** page, you will see the list of all tasks. This is a starting point for managing your workload.

@@ -1,7 +1,7 @@
 ---
 id: template-metadata
 title: Template metadata
-description: "Learn about template metadata fields like name, ID, description, keywords, versioning, and JSON schema compatibility. The metadata of an element template con..."
+description: "The metadata of an element template contains important information about the template itself, such as its name, description."
 ---
 
 The metadata of an element template contains important information about the template itself, such as its name, description, version, compatibility with different Camunda versions, and the schema that is used to validate the template.

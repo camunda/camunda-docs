@@ -2,7 +2,7 @@
 id: user-task-access-restrictions
 title: "User task access restrictions"
 sidebar_label: "User task access restrictions"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions. User task access restrictions allow you to ..."
+description: "User task access restrictions allow you to ensure that only assigned or candidate users and groups can access user tasks in Tasklist."
 ---
 
 User task access restrictions allow you to ensure that only assigned or candidate [users](components/console/manage-organization/manage-users.md) and [groups](components/console/manage-organization/manage-user-groups.md) can access user tasks in [Tasklist](./introduction-to-tasklist.md). These restrictions are based on the candidate users and groups defined in a BPMN diagram.

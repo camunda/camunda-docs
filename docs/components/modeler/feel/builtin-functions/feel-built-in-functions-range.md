@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-range
 title: Range functions
-description: "A set of functions establish relationships between single scalar values and ranges of such values. All functions take two arguments and return true if the..."
+description: "Learn about Range functions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 A set of functions establish relationships between single scalar values and ranges of such values.

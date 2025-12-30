@@ -1,7 +1,7 @@
 ---
 id: client-authorization
 title: "Client authorization"
-description: "The Zeebe Gateway supports Orchestration Cluster Identity-based auth token validation. In the Camunda 8 Self-Managed Helm chart, authentication is enabled by..."
+description: "The Zeebe Gateway supports Orchestration Cluster Identity-based auth token validation. In the Camunda 8 Self-Managed Helm chart, authentication is enabled by."
 ---
 
 The Zeebe Gateway supports [Orchestration Cluster Identity](/self-managed/components/orchestration-cluster/identity/overview.md)-based auth token validation.

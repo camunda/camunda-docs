@@ -1,7 +1,7 @@
 ---
 id: health-readiness
 title: "Health readiness"
-description: "The purpose of Health-Readiness REST API is to return information indicating whether Optimize is ready to be used. The Health-Readiness REST API does not..."
+description: "Learn about Health readiness including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The purpose of Health-Readiness REST API is to return information indicating whether Optimize is ready to be used.

@@ -1,7 +1,7 @@
 ---
 id: link-events
 title: "Link events"
-description: "Link events are intermediate events that connect two sections of a process. They have no significance related to content, but facilitate the diagram-creation..."
+description: "Learn about Link events including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Link events are intermediate events that connect two sections of a process.

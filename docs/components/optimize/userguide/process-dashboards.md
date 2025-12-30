@@ -1,7 +1,7 @@
 ---
 id: process-dashboards
 title: Process dashboards
-description: "The process dashboards section gives you an overview of all the processes and their status on a single page. The Process Default Dashboards and KPIs section ..."
+description: "The Process Default Dashboards and KPIs section gives you an overview of all the processes and their status on a single page."
 ---
 
 ## Overview

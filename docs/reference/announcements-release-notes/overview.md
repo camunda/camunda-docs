@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Release announcements and release notes"
-description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of. Announcements and release notes for sup..."
+description: "Important announcements and release notes for upcoming and past Camunda 8 releases that customers should be aware of. Announcements and release notes for sup."
 ---
 
 Announcements and release notes for supported versions of the Camunda documentation.

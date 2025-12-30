@@ -2,7 +2,7 @@
 id: data-purge
 sidebar_label: Data purge
 title: Camunda data purge
-description: "The data purge feature allows you to delete all runtime and historical data from your cluster. This operation resets the cluster to an empty state while..."
+description: "Learn about Camunda data purge including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import Tabs from "@theme/Tabs";

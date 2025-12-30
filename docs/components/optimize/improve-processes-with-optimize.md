@@ -2,7 +2,7 @@
 id: improve-processes-with-optimize
 title: Getting started
 sidebar_label: Getting started
-description: "Leverage data collected during process execution, analyze bottlenecks, and examine areas for improvement. The following document provides a basic end-to-end ..."
+description: "Learn about Getting started including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 <span class="badge badge--beginner">Beginner</span>

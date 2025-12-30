@@ -2,7 +2,7 @@
 id: application-monitoring
 title: "Monitor Management Identity"
 sidebar_label: "Monitoring"
-description: "Monitor the health and operation of the Management Identity component in your Self-Managed deployment. You can use the following default exposed endpoints to..."
+description: "## Monitoring endpoints You can use the following default exposed endpoints to monitor how the Management Identity component is operating."
 ---
 
 Monitor the health and operation of the Management Identity component in your Self-Managed deployment.

@@ -2,7 +2,7 @@
 id: variables
 title: Inspect process variables
 sidebar_label: Variables
-description: "Track variables defined in the process diagram using the Variables view. This shows where a variable was created, which elements write to the variable, and..."
+description: "Track variables defined in the process diagram using the Variables view. This shows where a variable was created, which elements write to the variable, and."
 ---
 
 Track variables defined in the process diagram using the **Variables** view. This shows where a variable was created, which elements write to the variable, and the variable’s scope. Use this view to see which variables are available for use in an element and to troubleshoot problems with variables.

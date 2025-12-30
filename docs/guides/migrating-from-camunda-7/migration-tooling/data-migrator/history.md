@@ -2,7 +2,7 @@
 id: history
 title: History migration (experimental)
 sidebar_label: History migration
-description: "Use the History Data Migrator to copy process instance audit data to Camunda 8. The history migration mode of the Data Migrator will not be released before..."
+description: "Use the History Data Migrator to copy process instance audit data to Camunda 8. The history migration mode of the Data Migrator will not be released before."
 ---
 
 Use the History Data Migrator to copy process instance audit data to Camunda 8.

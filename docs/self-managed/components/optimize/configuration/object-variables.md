@@ -1,7 +1,7 @@
 ---
 id: object-variables
 title: "Object and list variable support"
-description: "Complex object variables can be imported into Optimize and thereafter be used in reports and filters. During import, Optimize flattens the given object..."
+description: "Complex object variables can be imported into Optimize and thereafter be used in reports and filters. During import, Optimize flattens the given object."
 ---
 
 import Tabs from "@theme/Tabs";

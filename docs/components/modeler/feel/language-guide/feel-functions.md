@@ -1,7 +1,7 @@
 ---
 id: feel-functions
 title: Functions
-description: "Invokes a built-in function (e.g. contains()) or a user-defined function by its name. The arguments of the function can be passed positional or named. -..."
+description: "The arguments of the function can be passed positional or named. - Positional: Only the values, in the same order as defined by the function (e."
 ---
 
 ### Invocation

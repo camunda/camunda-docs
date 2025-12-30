@@ -2,7 +2,7 @@
 id: configuration
 title: "Console configuration"
 sidebar_label: "Overview"
-description: "Console Self-Managed can be configured using environment variables and configuration parameters. Underscores in environment variables correspond to..."
+description: "Console Self-Managed can be configured using environment variables and configuration parameters. Underscores in environment variables correspond to."
 ---
 
 Console Self-Managed can be configured using environment variables and configuration parameters.

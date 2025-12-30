@@ -1,7 +1,7 @@
 ---
 id: localization
 title: "Localization"
-description: "To present a localized version of Optimize to users corresponding to their default browser language, Optimize provides the possibility to configure..."
+description: "To present a localized version of Optimize to users corresponding to their default browser language, Optimize provides the."
 ---
 
 To present a localized version of Optimize to users corresponding to their default browser language, Optimize provides the possibility to configure localizations.

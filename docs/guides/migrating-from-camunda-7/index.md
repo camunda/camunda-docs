@@ -2,7 +2,7 @@
 id: index
 title: Camunda 7 to Camunda 8 migration guide
 sidebar_label: Overview
-description: "Learn how to migrate process solutions developed for Camunda 7 to run on Camunda 8. This guide covers the typical migration journey from Camunda 7 to Camunda..."
+description: "Migration guide for Camunda 7 to Camunda 8 migration guide, detailing upgrade steps and considerations for your deployment."
 keywords: [Camunda 8, Camunda 7, migration guide, transition, transition guide]
 ---
 

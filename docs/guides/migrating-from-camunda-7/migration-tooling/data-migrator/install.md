@@ -2,7 +2,7 @@
 id: install
 title: Install and quick start
 sidebar_label: Install and quick start
-description: "Install the Data Migrator and run your first data migration. - Java 21+ - Running Camunda 8 (SaaS or self-managed) - Access to Camunda 7 database - Models..."
+description: "## Prerequisites - Java 21+ - Running Camunda 8 (SaaS or self-managed) - Access to Camunda 7 database - Models migrated and deployed to C8 ## Installation 1."
 ---
 
 Install the Data Migrator and run your first data migration.

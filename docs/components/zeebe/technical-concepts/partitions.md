@@ -1,7 +1,7 @@
 ---
 id: partitions
 title: "Partitions"
-description: "In Zeebe, all data is organized into partitions. A partition is a persistent stream of process-related events. In a cluster of brokers, partitions are..."
+description: "Learn about Partitions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 In Zeebe, all data is organized into **partitions**. A **partition** is a persistent stream of process-related events.

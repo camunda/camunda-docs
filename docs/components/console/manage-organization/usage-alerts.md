@@ -1,7 +1,7 @@
 ---
 id: usage-alerts
 title: Usage alerts
-description: "As an organization owner or admin, set up alerts for process instances, decision instances and task users. Usage alerts apply only to production clusters and..."
+description: "Usage alerts apply only to production clusters and are visible only to owners and admins in Starter and Enterprise organizations."
 ---
 
 :::note

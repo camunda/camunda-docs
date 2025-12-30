@@ -1,7 +1,7 @@
 ---
 id: release-policy
 title: "Release policy"
-description: "Camunda 8 follows the Camunda release policy with the following specific clarifications. You can find deprecation and support announcements on the..."
+description: ":::info You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview."
 ---
 
 Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.

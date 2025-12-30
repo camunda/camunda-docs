@@ -1,7 +1,7 @@
 ---
 id: orchestration-cluster-api-rest-swagger
 title: "Try with Swagger"
-description: "The Orchestration Cluster REST API is documented using the OpenAPI specification. You can explore, test, and interact with all API endpoints directly using..."
+description: "Learn about Try with Swagger including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The Orchestration Cluster REST API is documented using the [OpenAPI specification](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml). You can explore, test, and interact with all API endpoints directly using [Swagger UI](https://swagger.io/tools/swagger-ui/) - an interactive documentation interface.

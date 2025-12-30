@@ -1,7 +1,7 @@
 ---
 id: notices
 title: "Security notices"
-description: "Let's take a closer look at security notices, reporting vulnerabilities, and additional security information. Camunda publishes security notices after fixes ..."
+description: "Camunda publishes security notices after fixes are available.Stay informed about security updates by subscribing to our RSS feed."
 toc_max_heading_level: 2
 ---
 

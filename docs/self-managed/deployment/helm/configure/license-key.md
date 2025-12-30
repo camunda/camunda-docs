@@ -2,7 +2,7 @@
 id: license-key
 sidebar_label: License key
 title: Configure license key
-description: "Use this page to configure an enterprise license key for Camunda 8 components. You can either enter the key directly in your values.yaml file or reference an..."
+description: "Use this page to configure an enterprise license key for Camunda 8 components. You can either enter the key directly in your values.yaml file or reference an."
 ---
 
 Use this page to configure an enterprise license key for Camunda 8 components. You can either enter the key directly in your `values.yaml` file or reference an existing Kubernetes secret.

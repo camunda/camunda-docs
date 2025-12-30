@@ -2,7 +2,7 @@
 id: camunda-exporter-indices-tasklist
 title: "Tasklist index diagrams"
 sidebar_label: "Tasklist index diagrams"
-description: "The following index diagrams show Camunda Exporter indices for Tasklist. - tasklist-form - tasklist-metric - tasklist-process - tasklist-user -..."
+description: "The following index diagrams show Camunda Exporter indices for Tasklist. - tasklist-form - tasklist-metric - tasklist-process - tasklist-user -."
 ---
 
 The following index diagrams show Camunda Exporter indices for Tasklist.

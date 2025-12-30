@@ -2,7 +2,7 @@
 id: amazon-eventbridge
 sidebar_label: AWS EventBridge
 title: Amazon EventBridge connector
-description: "[ {label: 'Amazon EventBridge connector', value: 'outbound' }, {label: 'Amazon EventBridge Webhook connector', value: 'inbound' } ]}> The Amazon EventBridge..."
+description: "[ {label: 'Amazon EventBridge connector', value: 'outbound' }, {label: 'Amazon EventBridge Webhook connector', value: 'inbound'."
 ---
 
 import Tabs from "@theme/Tabs";

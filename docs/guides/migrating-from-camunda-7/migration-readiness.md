@@ -1,7 +1,7 @@
 ---
 id: migration-readiness
 title: Migration-ready solutions
-description: "To implement Camunda 7 process solutions that can be easily migrated, follow these rules and development practices. These practices might also inform a..."
+description: "Migration guide for Migration-ready solutions with upgrade steps and important considerations. This guide provides detailed information for your deployment."
 ---
 
 To implement Camunda 7 process solutions that can be easily migrated, follow these rules and development practices.

@@ -2,7 +2,7 @@
 id: sql
 title: SQL connector
 sidebar_label: SQL
-description: "Connect your BPMN process with SQL databases, learn how to create a SQL connector, and make it executable. The SQL connector is an outbound connector that al..."
+description: "The SQL connector is an outbound connector that allows you to connect your BPMN service with SQL databases (MariaDB, Microsoft SQL Server, PostgreSQL, MySQL)."
 ---
 
 The **SQL connector** is an outbound connector that allows you to connect your BPMN service with SQL databases (MariaDB, Microsoft SQL Server, PostgreSQL, MySQL).

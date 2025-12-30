@@ -1,7 +1,7 @@
 ---
 id: 870-release-notes
 title: "Release notes"
-description: "These release notes identify the new features included in 8.7, including alpha feature releases. As the Spring-Boot OSS Support for the bundled Spring-Boot..."
+description: "Learn about Release notes including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 keywords:
   [
     "product development lifecycle",

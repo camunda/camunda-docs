@@ -2,7 +2,7 @@
 id: manage-user-groups
 title: "Manage user groups"
 sidebar_label: "Manage user groups"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions. User groups are a way to organize users wit..."
+description: "User groups are a way to organize users within your organization.To create a group, navigate to the Organization section of Console and click on the Groups tab."
 ---
 
 User groups are a way to organize users within your organization.

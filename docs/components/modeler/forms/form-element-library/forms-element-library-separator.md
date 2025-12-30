@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-separator
 title: Separator
-description: "A separator element is used to create a visual separation between two elements. The separator element is typically utilized when you want to visually..."
+description: "svg' alt='Form Separator Symbol' /> ## Usage The separator element is typically utilized when you want to visually distinguish between form elements."
 ---
 
 A **separator** element is used to create a visual separation between two elements.

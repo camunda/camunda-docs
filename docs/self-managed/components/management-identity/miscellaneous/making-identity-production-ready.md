@@ -2,7 +2,7 @@
 id: making-identity-production-ready
 title: "Prepare Identity for production"
 sidebar_label: "Prepare Identity for production"
-description: "When moving Identity to a production environment, you should consider the following. As Keycloak is an external-based dependency of Identity, Camunda..."
+description: "When moving Identity to a production environment, you should consider the following. As Keycloak is an external-based dependency of Identity, Camunda."
 ---
 
 When moving Identity to a production environment, you should consider the following.

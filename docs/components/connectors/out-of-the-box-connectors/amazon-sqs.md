@@ -2,7 +2,7 @@
 id: amazon-sqs
 title: Amazon Simple Queue Service connector
 sidebar_label: AWS SQS
-description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Amazon SQS connector is an outbound connector that allows you to..."
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Amazon SQS connector is an outbound."
 ---
 
 import Tabs from "@theme/Tabs";

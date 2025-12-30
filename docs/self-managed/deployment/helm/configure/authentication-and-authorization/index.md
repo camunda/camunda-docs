@@ -1,7 +1,7 @@
 ---
 sidebar_label: Authentication and authorization
 title: Helm chart authentication and authorization configuration
-description: "Learn how to configure authentication and authorization for Camunda 8 Self-Managed deployments using Helm chart. Camunda 8 Self-Managed supports multiple aut..."
+description: "Camunda 8 Self-Managed supports multiple authentication methods for securing access to components deployed with the Helm chart."
 ---
 
 Camunda 8 Self-Managed supports multiple authentication methods for securing access to components deployed with the Helm chart. This section provides an overview of available authentication options and links to configuration guides for each method.

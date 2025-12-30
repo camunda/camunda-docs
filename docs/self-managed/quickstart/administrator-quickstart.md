@@ -2,7 +2,7 @@
 id: administrator-quickstart
 title: "Administrator quickstart"
 sidebar_label: "For Administrators"
-description: "This quickstart guides platform engineers and DevOps practitioners through deploying Camunda 8 Self-Managed to a local Kubernetes cluster using Kind..."
+description: "This quickstart guides platform engineers and DevOps practitioners through deploying Camunda 8 Self-Managed to a local Kubernetes."
 ---
 
 import Tabs from "@theme/Tabs";

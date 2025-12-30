@@ -1,7 +1,7 @@
 ---
 id: configuring-out-of-the-box-connectors
 title: Integrate a built-in connector
-description: "Ready to use out of the box, connectors help automate complex business processes by inserting them into BPMN diagrams. The launch of Camunda 8 also introduce..."
+description: "The launch of Camunda 8 also introduced an integration framework with a key goal: integrate faster to reduce the time it."
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 

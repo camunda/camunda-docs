@@ -1,7 +1,7 @@
 ---
 id: assertions
 title: Assertions
-description: "The class CamundaAssert is the entry point for all assertions. It is based on AssertJ and Awaitility. The assertions follow the style:..."
+description: "Learn about Assertions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The class `CamundaAssert` is the entry point for all assertions. It is based on [AssertJ](https://github.com/assertj/assertj) and [Awaitility](http://www.awaitility.org/).

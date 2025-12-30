@@ -1,7 +1,7 @@
 ---
 id: update-creditcard
 title: Update your credit card
-description: "When utilizing Camunda's Starter plan, follow these steps to update an expired or failing credit card. This setting is only visible in the Starter plan for o..."
+description: "Migration guide for Update your credit card with upgrade steps and important considerations. This guide provides detailed information for your deployment."
 ---
 
 :::note

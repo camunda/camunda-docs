@@ -1,7 +1,7 @@
 ---
 id: encryption-at-rest
 title: "Encryption at rest"
-description: "Encryption at rest protects stored data by making it unreadable without the appropriate decryption keys. By default, Camunda 8 SaaS uses a provider-managed..."
+description: "## Overview By default, Camunda 8 SaaS uses a provider-managed encryption key with [Google Cloud Platform (GCP) encryption](https://cloud."
 keywords:
   [
     "encryption",

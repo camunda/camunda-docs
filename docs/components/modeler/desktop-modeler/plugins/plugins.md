@@ -1,7 +1,7 @@
 ---
 id: plugins
 title: Plugins
-description: "The Camunda Modeler plugins API is not stable and might change in the future. Plugins allow you to change the appearance and behavior of Camunda Modeler and..."
+description: "Learn about Plugins including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 :::note

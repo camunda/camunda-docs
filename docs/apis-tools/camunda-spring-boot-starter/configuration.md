@@ -1,6 +1,6 @@
 ---
 id: configuration
-description: "This page uses YAML examples to show configuration properties. Alternate methods to externalize or override your configuration are provided by Spring Boot,..."
+description: "Configuration guide for Configuration with setup instructions and available customization options. This guide provides detailed information for your deployment."
 title: Configuration
 ---
 

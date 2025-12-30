@@ -1,7 +1,7 @@
 ---
 id: role
 title: Roles
-description: "A role is a collection of authorizations that defines a set of permissions. Roles are used to grant users the system and data access required to fulfill a..."
+description: "Learn about Roles including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import CreateRoleImg from './img/create-role-tab.png';

@@ -1,7 +1,7 @@
 ---
 id: element-templates-with-dependencies
 title: Element templates with dependencies
-description: "When creating element templates, you may want to link to a resource like a form, or pre-populate a secret expression. Your template might require a specific..."
+description: "When creating element templates, you may want to link to a resource like a form, or pre-populate a secret expression. Your template might require a specific."
 ---
 
 When creating element templates, you may want to link to a resource like a [form](/components/modeler/forms/camunda-forms-reference.md), or pre-populate a [secret](/components/connectors/use-connectors/index.md#using-secrets) expression. Your template might require a specific [job worker](/components/concepts/job-workers.md) to execute an action. These are all examples of dependencies.

@@ -2,7 +2,7 @@
 id: embeddings-vector-db
 title: Vector database connector
 sidebar_label: Vector database
-description: "The vector database connector allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for..."
+description: "The vector database connector allows embedding, storing, and retrieving Large Language Model (LLM) embeddings. This enables building AI-based solutions for."
 ---
 
 import Tabs from "@theme/Tabs";

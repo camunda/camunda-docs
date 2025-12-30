@@ -1,7 +1,7 @@
 ---
 id: custom-lint-rules
 title: Custom lint rules
-description: "Through Camunda Modeler plugins, you can add custom lint rules and configure or disable existing rules. bpmnlint is used to validate BPMN diagrams, so the..."
+description: "Learn about Custom lint rules including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Through Camunda Modeler plugins, you can add custom lint rules and configure or disable existing rules. [`bpmnlint`](https://github.com/bpmn-io/bpmnlint) is used to validate BPMN diagrams, so the plugins have to be [`bpmnlint` plugins](https://github.com/bpmn-io/bpmnlint#writing--consuming-custom-rules) at the core.

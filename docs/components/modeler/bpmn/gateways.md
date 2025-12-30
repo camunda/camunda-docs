@@ -1,7 +1,7 @@
 ---
 id: gateways
 title: "Overview"
-description: "Gateways are elements that route tokens in more complex patterns than plain sequence flow. BPMN's exclusive gateway chooses one sequence flow out of many..."
+description: "Overview of Overview covering key concepts, features, and getting started information. This guide provides detailed information for your deployment."
 ---
 
 Gateways are elements that route tokens in more complex patterns than plain sequence flow.

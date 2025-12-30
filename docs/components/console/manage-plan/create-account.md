@@ -1,7 +1,7 @@
 ---
 id: create-account
 title: Create an account
-description: "Create a Camunda 8 account to create clusters, deploy processes, and create a new instance. We're gradually rolling out changes that affect this page to..."
+description: "Learn about Create an account including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Create a Camunda 8 account to create clusters, deploy processes, and create a new instance.

@@ -1,7 +1,7 @@
 ---
 id: messages
 title: "Messages"
-description: "Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called message correlation. A..."
+description: "Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called message correlation."
 ---
 
 Process instances can respond to incoming messages. Published messages must be mapped onto a process instance. This step is called [message correlation](/components/modeler/bpmn/message-events/message-events.md#message-correlation).

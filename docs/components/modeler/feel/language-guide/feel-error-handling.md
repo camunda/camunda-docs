@@ -1,7 +1,7 @@
 ---
 id: feel-error-handling
 title: Error handling
-description: "FEEL doesn't define any error handling. Instead, it follows one simple rule: if something goes wrong, return null. If an expression can't be evaluated..."
+description: "Learn about Error handling including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 FEEL doesn't define any error handling. Instead, it follows one simple rule: if something

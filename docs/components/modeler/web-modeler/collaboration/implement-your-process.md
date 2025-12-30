@@ -1,7 +1,7 @@
 ---
 id: implement-your-process
 title: Implement mode for developers
-description: "Implement mode is tailored to developers and allows full access to an implementation-focused workspace. In the Implement mode view, developers have access to..."
+description: "Implement mode is tailored to developers and allows full access to an implementation-focused workspace. In the Implement mode view, developers have access to."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

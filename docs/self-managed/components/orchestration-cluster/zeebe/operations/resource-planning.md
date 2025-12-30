@@ -1,6 +1,6 @@
 ---
 id: resource-planning
-description: "The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends. While we cannot tell you exactly what you..."
+description: "_” is: it depends. While we cannot tell you exactly what you need, we can explain what depends, what it depends on, and how it depends on it."
 title: "Resource planning"
 keywords:
   [

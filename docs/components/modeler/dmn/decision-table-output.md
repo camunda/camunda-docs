@@ -1,7 +1,7 @@
 ---
 id: decision-table-output
 title: Output
-description: "!Output A decision table can have one or more outputs, also called output clauses. An output clause defines the id, label, name and type of a decision table..."
+description: "Learn about Output including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 ![Output](assets/decision-table/output.png)

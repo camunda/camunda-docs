@@ -1,7 +1,7 @@
 ---
 id: deploy-process-application
 title: Validate and deploy your process application
-description: "Validate your process application in development before deploying it to testing, staging, or production. Validate your process application in development bef..."
+description: "Learn about Validate and deploy your process application including key features, configuration, and implementation details."
 ---
 
 import DeployImg from './img/define-stages-deploy.png'

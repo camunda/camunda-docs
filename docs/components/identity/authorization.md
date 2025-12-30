@@ -1,7 +1,7 @@
 ---
 id: authorization
 title: Authorizations
-description: "Create and manage your Orchestration Cluster authorizations. An authorization grants an owner access to a resource and defines the specific permissions they..."
+description: "Learn about Authorizations including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import AuthImg from './img/create-authorization-tab.png';

@@ -1,7 +1,7 @@
 ---
 title: Debugging the authentication flow
 sidebar_label: Debugging the authentication flow
-description: "Learn how to troubleshoot unexpected authentication and authorization failures in the Orchestration Cluster. This guide explains how to debug issues in the a..."
+description: "Learn how to troubleshoot unexpected authentication and authorization failures in the Orchestration Cluster. This guide explains how to debug issues in the a."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-dynamiclist
 title: Dynamic list
-description: "The dynamic list element is designed to dynamically manage a list of form elements. It enables users to add or remove items from the list and is particularly..."
+description: "It enables users to add or remove items from the list and is particularly useful in scenarios where the number of items in a list is not fixed."
 ---
 
 The **dynamic list** element is designed to dynamically manage a list of form elements. It enables users to add or remove items from the list and is particularly useful in scenarios where the number of items in a list is not fixed.

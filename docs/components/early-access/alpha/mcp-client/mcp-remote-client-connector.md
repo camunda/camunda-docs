@@ -1,6 +1,6 @@
 ---
 id: mcp-remote-client-connector
-description: "The MCP Remote Client connector allows connecting an AI agent to a remote MCP server by configuring a connection to a Streamable HTTP (recommended) or HTTP..."
+description: "The MCP Remote Client connector allows connecting an AI agent to a remote MCP server by configuring a connection to a Streamable."
 title: MCP Remote Client connector
 sidebar_label: MCP Remote Client connector
 ---

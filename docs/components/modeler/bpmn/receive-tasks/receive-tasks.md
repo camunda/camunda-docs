@@ -1,7 +1,7 @@
 ---
 id: receive-tasks
 title: "Receive tasks"
-description: "Receive tasks reference a message; these are used to wait until a proper message is received. !Receive Tasks When a receive task is entered, a corresponding..."
+description: "Learn about Receive tasks including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Receive tasks reference a message; these are used to wait until a proper message is received.

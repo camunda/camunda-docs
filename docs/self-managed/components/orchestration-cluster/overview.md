@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Orchestration Cluster"
-description: "Install and configure Orchestration Cluster components in your Self-Managed environment. The Orchestration Cluster is the core component of Camunda 8,..."
+description: "## Installation and configuration The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes."
 ---
 
 Install and configure Orchestration Cluster components in your Self-Managed environment.

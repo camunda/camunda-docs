@@ -1,7 +1,7 @@
 ---
 id: manage-api-clients
 title: Manage API clients
-description: "To interact with an orchestration cluster from the outside, every client application must authenticate itself. An OAuth Flow is therefore used for..."
+description: "Learn about Manage API clients including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 To interact with an orchestration cluster from the outside, every client application must authenticate itself. An **OAuth Flow** is therefore used for authentication:

@@ -1,7 +1,7 @@
 ---
 id: use-connectors
 title: Use connectors
-description: "Use Camunda 8 connectors to access a growing range of external services or communication protocols. Desktop Modeler automatically fetches and updates element..."
+description: "Learn about Use connectors including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

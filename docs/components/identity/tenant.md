@@ -2,7 +2,7 @@
 id: tenant
 title: "Tenants"
 sidebar_label: "Tenants"
-description: "Use Identity to manage Orchestration Cluster tenants and isolate data within a single cluster. A tenant is a logical boundary for data within a Camunda 8..."
+description: "Learn about Tenants including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 <span class="badge badge--platform">Self-Managed only</span>

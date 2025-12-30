@@ -1,7 +1,7 @@
 ---
 id: resolve-incidents-update-variables
 title: Variables and incidents
-description: "This guide includes steps with community-supported zbctl. Every process instance created for the order-process.bpmn process model requires an orderValue so..."
+description: "This guide includes steps with community-supported zbctl. Every process instance created for the order-process.bpmn process model requires an orderValue so."
 ---
 
 import Tabs from "@theme/Tabs";

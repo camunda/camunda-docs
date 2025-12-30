@@ -1,7 +1,7 @@
 ---
 id: backpressure
 title: "Backpressure"
-description: "When a broker receives a client request, it is written to the event stream first (see section internal processing for details), and processed later by the..."
+description: "When a broker receives a client request, it is written to the event stream first (see section internal processing for details)."
 keywords: [back-pressure, backpressure, back pressure]
 ---
 

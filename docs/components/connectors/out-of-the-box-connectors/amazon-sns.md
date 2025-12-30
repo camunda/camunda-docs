@@ -2,7 +2,7 @@
 id: amazon-sns
 title: Amazon Simple Notification Service connector
 sidebar_label: AWS SNS
-description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Amazon Simple Notification Service (SNS) connector is an outbound..."
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Amazon Simple Notification Service."
 ---
 
 import Tabs from "@theme/Tabs";

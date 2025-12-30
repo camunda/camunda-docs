@@ -1,7 +1,7 @@
 ---
 id: publish-public-processes
 title: Publish processes via a form
-description: "Camunda 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to..."
+description: "Camunda 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without."
 ---
 
 import CreateFormImg from '../../img/create-form.png';

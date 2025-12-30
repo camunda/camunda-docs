@@ -1,6 +1,6 @@
 ---
 id: applications
-description: "In Management Identity, an application represents an entity that can request Management Identity to authenticate a user or a service for accessing management..."
+description: "In Management Identity, an application represents an entity that can request Management Identity to authenticate a user or."
 title: "Manage applications"
 sidebar_label: "Applications"
 ---

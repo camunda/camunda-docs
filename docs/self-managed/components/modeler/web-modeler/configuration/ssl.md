@@ -1,7 +1,7 @@
 ---
 id: ssl
 title: SSL
-description: "By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within..."
+description: "By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually."
 ---
 
 By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.

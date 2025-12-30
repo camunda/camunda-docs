@@ -1,7 +1,7 @@
 ---
 id: logging
 title: "Logging"
-description: "The client uses SLF4J for logging useful notes, such as exception stack traces when a job handler fails execution. Using the SLF4J API, any SLF4J..."
+description: "Learn about Logging including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 The client uses SLF4J for logging useful notes, such as exception stack traces when a job handler fails execution. Using the SLF4J API, any SLF4J implementation can be plugged in. The following example uses Log4J 2:

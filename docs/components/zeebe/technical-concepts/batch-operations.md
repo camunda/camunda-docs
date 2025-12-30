@@ -1,7 +1,7 @@
 ---
 id: batch-operations
 title: Batch operations
-description: "Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to: - Cancel hundreds of..."
+description: "Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to:"
 ---
 
 ## Overview

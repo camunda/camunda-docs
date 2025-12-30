@@ -2,7 +2,7 @@
 id: usage-metrics
 title: "Usage metrics"
 sidebar_label: "Usage metrics"
-description: "Console makes it easier to access usage metrics from Operate and Tasklist. The corresponding page allows you to select the time period and the clusters, and..."
+description: "The corresponding page allows you to select the time period and the clusters, and displays the subsequent consumption data."
 ---
 
 Console makes it easier to access usage metrics from Operate and Tasklist. The corresponding page allows you to select the time period and the clusters, and displays the subsequent consumption data. The same endpoints are queried as described [in the usage metrics documentation](/self-managed/components/orchestration-cluster/core-settings/concepts/usage-metrics.md).

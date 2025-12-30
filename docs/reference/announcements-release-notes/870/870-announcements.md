@@ -1,7 +1,7 @@
 ---
 id: 870-announcements
 title: "Release announcements"
-description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below. | Scheduled release date | Scheduled end..."
+description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.7 release are summarized below. | Scheduled release date | Scheduled end."
 toc_max_heading_level: 3
 ---
 

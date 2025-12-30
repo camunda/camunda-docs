@@ -1,7 +1,7 @@
 ---
 id: modeler-backup-and-restore
 title: Backup and restore Web Modeler data
-description: "To create a backup of Web Modeler data, you must back up the database that Web Modeler uses by following the instructions of the official PostgreSQL..."
+description: "To create a backup of Web Modeler data, you must back up the database that Web Modeler uses by following the instructions."
 keywords: ["backup", "backups"]
 ---
 

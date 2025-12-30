@@ -2,7 +2,7 @@
 id: ssl
 title: "Console SSL configuration"
 sidebar_label: "SSL"
-description: "By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend within the same Docker..."
+description: "By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend."
 ---
 
 By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.

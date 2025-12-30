@@ -2,7 +2,7 @@
 id: getting-started
 title: "Java client"
 sidebar_label: "Getting started"
-description: "Provide a job worker that handles polling for available jobs, use SLF4J for logging useful notes, and more. The Camunda Java Client is the official Java libr..."
+description: "Learn about Java client including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import Tabs from "@theme/Tabs";

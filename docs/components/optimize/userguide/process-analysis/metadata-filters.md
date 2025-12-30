@@ -1,7 +1,7 @@
 ---
 id: metadata-filters
 title: Metadata filters
-description: "Learn more about metadata filters, like date filters, assignee and candidate group filters, and more. In Optimize, there are two kinds of date filters: the s..."
+description: "Learn about Metadata filters including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 ## Date filters

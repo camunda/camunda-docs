@@ -1,7 +1,7 @@
 ---
 id: build-connector
 title: Build a custom connector
-description: "Can't find the connector you need? Build your own custom connector using connector templates or the SDK. Camunda supports two main ways to build custom..."
+description: "Can't find the connector you need? Build your own custom connector using connector templates or the SDK. Camunda supports two main ways to build custom."
 ---
 
 import "../react-components/\_connectors-table.css";

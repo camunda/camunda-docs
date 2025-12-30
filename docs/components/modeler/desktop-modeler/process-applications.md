@@ -1,7 +1,7 @@
 ---
 id: process-applications
 title: Process applications
-description: "Desktop modeler recognizes process applications you build and offers you advanced editor intelligence, deployment, and execution features within the context..."
+description: "Desktop modeler recognizes process applications you build and offers you advanced editor intelligence, deployment, and execution."
 ---
 
 import GroupingImg from './img/process-applications/grouping.png'

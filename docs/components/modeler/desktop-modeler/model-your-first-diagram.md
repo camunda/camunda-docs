@@ -1,7 +1,7 @@
 ---
 id: model-your-first-diagram
 title: Model your first diagram
-description: "After starting Desktop Modeler, you can model your first BPMN diagram. Follow the steps below: 1. Create a BPMN diagram by selecting BPMN diagram: !empty..."
+description: "After starting Desktop Modeler, you can model your first BPMN diagram. Follow the steps below: 1. Create a BPMN diagram by selecting BPMN diagram: !empty."
 ---
 
 After starting [Desktop Modeler](./index.md), you can model your first BPMN diagram. Follow the steps below:

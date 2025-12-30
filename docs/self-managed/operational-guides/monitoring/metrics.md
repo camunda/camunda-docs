@@ -1,6 +1,6 @@
 ---
 id: metrics
-description: "For distributed system monitoring, Camunda uses the Micrometer library as a facade to export metrics to supported implementations such as Prometheus,..."
+description: "For distributed system monitoring, Camunda uses the Micrometer library as a facade to export metrics to supported implementations."
 sidebar_label: Metrics
 title: Camunda components metrics
 keywords: ["observability", "metrics", "monitoring", "monitor"]

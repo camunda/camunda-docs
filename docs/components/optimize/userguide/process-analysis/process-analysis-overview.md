@@ -1,7 +1,7 @@
 ---
 id: process-analysis-overview
 title: Overview
-description: "The following documentation provides an opportunity to further analyze your reports through several methods: - Task analysis: Task analysis allows you to..."
+description: "The following documentation provides an opportunity to further analyze your reports through several methods: - Task analysis."
 ---
 
 The following documentation provides an opportunity to further analyze your reports through several methods:

@@ -2,7 +2,7 @@
 id: troubleshoot-missing-data
 title: "Troubleshoot missing data"
 sidebar_label: "Missing data"
-description: "Troubleshooting guide for when all your previous data appears to be missing after logging in to Web Modeler. Troubleshoot and resolve your Web Modeler missin..."
+description: "Troubleshoot and resolve your Web Modeler missing data issues.When logged in to Web Modeler, all your previous data appears to be missing."
 ---
 
 Troubleshoot and resolve your Web Modeler missing data issues.

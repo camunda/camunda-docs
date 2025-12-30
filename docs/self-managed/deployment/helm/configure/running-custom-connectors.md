@@ -2,7 +2,7 @@
 id: running-custom-connectors
 sidebar_label: Custom connectors
 title: Run custom connectors in Helm charts
-description: "You can deploy a custom connector in your Helm Kubernetes cluster along with the connectors bundle. The default runtime loads connectors from the classpath..."
+description: "You can deploy a custom connector in your Helm Kubernetes cluster along with the connectors bundle. The default runtime loads connectors from the classpath."
 ---
 
 You can deploy a custom connector in your Helm Kubernetes cluster along with the connectors bundle.

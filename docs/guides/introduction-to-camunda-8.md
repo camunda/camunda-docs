@@ -3,7 +3,7 @@ id: introduction-to-camunda
 title: Get started with Camunda
 sidebar_label: Get started with Camunda
 slug: /guides/
-description: "Get hands-on with Camunda 8 with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human..."
+description: "Start by running your first local project, building your first AI agent, and orchestrating human tasks and APIs using connectors."
 page_rank: 90
 ---
 

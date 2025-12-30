@@ -2,7 +2,7 @@
 id: easy-post
 title: EasyPost connector
 sidebar_label: EasyPost
-description: "The EasyPost connector is an outbound connector that allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with..."
+description: "The EasyPost connector is an outbound connector that allows you to create addresses, parcels, and shipments, as well as purchase."
 ---
 
 The **EasyPost connector** is an outbound connector that allows you to create addresses, parcels, and shipments, as well as purchase and verify shipments with [EasyPost Service](https://www.easypost.com/) from your BPMN process.

@@ -1,7 +1,7 @@
 ---
 id: about-templates
 title: Element templates in Modeler
-description: "Element templates are available only in BPMN diagrams. Element templates let you extend Modeler with domain-specific diagram elements, such as service and..."
+description: "Element templates are available only in BPMN diagrams. Element templates let you extend Modeler with domain-specific diagram elements, such as service and."
 ---
 
 :::note

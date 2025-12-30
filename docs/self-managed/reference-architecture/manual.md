@@ -2,7 +2,7 @@
 id: manual
 title: "Manual deployment overview"
 sidebar_label: Manual
-description: "This reference architecture provides guidance on deploying Camunda 8 Self-Managed as a standalone Java application. This deployment method is ideal for users..."
+description: "This reference architecture provides guidance on deploying Camunda 8 Self-Managed as a standalone Java application. This deployment method is ideal for users."
 ---
 
 <!-- Moving target, may be renamed, etc. -->

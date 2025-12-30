@@ -1,7 +1,7 @@
 ---
 id: dual-region
 title: "Dual-region setup (EKS)"
-description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication. Review our dual-region concept documentatio..."
+description: "Review our dual-region concept documentation before continuing to understand the current limitations and restrictions of this blueprint setup."
 ---
 
 <!-- Image source: https://docs.google.com/presentation/d/1w1KUsvx4r6RS7DAozx6X65BtLJcIxU6ve_y3bYFcfYk/edit?usp=sharing -->

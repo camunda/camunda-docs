@@ -1,6 +1,6 @@
 ---
 id: upgrade
-description: "This page explains how to manually upgrade a local, Self-Managed Camunda installation from an archive distribution. Use this guide if you unpacked a previous..."
+description: "Migration guide for Manually upgrade a local Camunda installation, detailing upgrade steps and important considerations."
 sidebar_label: Upgrade
 title: Manually upgrade a local Camunda installation
 ---

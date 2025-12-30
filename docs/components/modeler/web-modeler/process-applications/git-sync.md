@@ -1,7 +1,7 @@
 ---
 id: git-sync
 title: Git sync
-description: "Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their..."
+description: "Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps."
 ---
 
 import Tabs from "@theme/Tabs";

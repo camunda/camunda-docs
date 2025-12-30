@@ -1,6 +1,6 @@
 ---
 id: terminate-events
-description: "Terminate end events are the only kind of terminate events. When a process instance reaches a terminate end event, it terminates all element instances in the..."
+description: "When a process instance reaches a terminate end event, it terminates all element instances in the same flow scope as the end event."
 title: "Terminate events"
 decription: "BPMN terminate events allow a process model to cancel concurrent flows."
 ---

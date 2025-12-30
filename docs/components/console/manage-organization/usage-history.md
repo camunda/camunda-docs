@@ -1,7 +1,7 @@
 ---
 id: usage-history
 title: Usage history
-description: "The usage history is visible only to owners and admins for Trial, Enterprise, and Starter organizations. Three key metrics play a role in paid plans: the..."
+description: "Learn about Usage history including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 :::note

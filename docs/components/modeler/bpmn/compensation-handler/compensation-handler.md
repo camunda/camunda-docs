@@ -1,7 +1,7 @@
 ---
 id: compensation-handler
 title: "Compensation"
-description: "Activities that are associated to a compensation boundary event have a compensation marker. These activities are called compensation handlers and are in..."
+description: "Learn about Compensation including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Activities that are associated to a compensation boundary event have a compensation marker. These activities are called

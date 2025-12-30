@@ -2,7 +2,7 @@
 id: troubleshoot-proxy-configuration
 title: "Troubleshoot proxy configuration issues"
 sidebar_label: "Proxy configuration"
-description: "Troubleshoot and resolve issues in Web Modeler caused by incorrect or incomplete proxy configuration. Users experience a variety of failures when Web Modeler..."
+description: "Configuration guide for Troubleshoot proxy configuration issues, including setup and available options for your environment."
 ---
 
 Troubleshoot and resolve issues in Web Modeler caused by incorrect or incomplete proxy configuration.

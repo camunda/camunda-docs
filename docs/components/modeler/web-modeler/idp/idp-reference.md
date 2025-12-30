@@ -1,7 +1,7 @@
 ---
 id: idp-reference
 title: IDP reference
-description: "Technical reference information for IDP, including technical architecture, supported documents, and known limitations. IDP offers a composable architecture..."
+description: "Reference documentation for IDP reference including specifications and usage guidelines. This guide provides detailed information for your deployment."
 ---
 
 import IdpArchitectureImg from './img/idp-architecture-diagram.png';

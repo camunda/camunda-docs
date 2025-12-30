@@ -1,7 +1,7 @@
 ---
 id: agentic-orchestration-overview
 title: Agentic orchestration
-description: "Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks, deterministic rule sets, and..."
+description: "Camunda agentic orchestration allows you to orchestrate AI agents within your BPMN-based workflows, enabling human tasks."
 keywords: ["agentic orchestration"]
 ---
 

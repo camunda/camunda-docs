@@ -3,7 +3,7 @@ id: grpc
 title: "Overview"
 sidebar_position: 1
 slug: /apis-tools/zeebe-api/overview
-description: "Zeebe clients use gRPC to communicate with the cluster. Activate jobs, cancel and create process instances, and more. You can use gRPC — a high-performance, ..."
+description: "You can use gRPC — a high-performance, cross-platform remote procedure call (RPC) framework — to communicate with the Orchestration Cluster."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 

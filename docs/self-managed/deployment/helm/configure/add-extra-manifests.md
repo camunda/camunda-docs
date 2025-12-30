@@ -2,7 +2,7 @@
 id: add-extra-manifests
 sidebar_label: Custom manifests
 title: Add custom Kubernetes manifests in Helm charts
-description: "Learn how to add extra Kubernetes manifests to Helm deployments by defining them in the values.yaml file. Add extra Kubernetes manifests to the Camunda 8 Hel..."
+description: "Learn about Add custom Kubernetes manifests in Helm charts in Camunda, including key features and implementation details."
 ---
 
 Add extra Kubernetes manifests to the Camunda 8 [Helm chart](/self-managed/deployment/helm/install/quick-install.md) by defining them in the `values.yaml` file. Use this to include resources such as ConfigMaps, Deployments, or Services.

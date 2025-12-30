@@ -3,7 +3,7 @@ id: authentication
 title: Authentication
 slug: /apis-tools/administration-api/authentication
 sidebar_position: 2
-description: "Learn about access tokens and client credentials and scopes to get started with the Administration API. All Administration API requests require authenticatio..."
+description: "All Administration API requests require authentication.To authenticate, generate a JSON Web Token (JWT) and include it in each request."
 ---
 
 All Administration API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) and include it in each request.

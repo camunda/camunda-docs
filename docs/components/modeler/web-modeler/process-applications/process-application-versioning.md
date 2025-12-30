@@ -1,7 +1,7 @@
 ---
 id: process-application-versioning
 title: Process application versioning
-description: "With 8.7, "milestone" was renamed to "version". To learn more about this change, see the related release note. Process applications support versioning,..."
+description: "Process applications support versioning to create distinct versions. Save snapshots of all files and track throughout the development lifecycle."
 ---
 
 :::note

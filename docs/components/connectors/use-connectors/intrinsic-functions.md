@@ -1,7 +1,7 @@
 ---
 id: intrinsic-functions
 title: Intrinsic functions
-description: "Learn how to use intrinsic functions to preprocess connector input data before invoking a connector. Intrinsic functions are transformations you can use to p..."
+description: "Learn about Intrinsic functions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Intrinsic functions are transformations you can use to preprocess connector input data before invoking a connector.

@@ -3,7 +3,7 @@ id: docker
 sidebar_label: Docker
 title: Camunda Docker images
 keywords: ["camunda docker"]
-description: "Learn about Camunda Docker images, their supported platforms, and recommended production alternatives. Camunda provides official Docker images for all major ..."
+description: "Learn about Camunda Docker images, their supported platforms, and recommended production alternatives. Camunda provides official Docker images for all major."
 ---
 
 Camunda provides [official Docker images](https://hub.docker.com/u/camunda) for all major components.

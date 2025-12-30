@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Overview"
-description: "Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication..."
+description: "Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape."
 ---
 
 Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape.

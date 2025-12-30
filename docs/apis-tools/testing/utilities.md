@@ -1,7 +1,7 @@
 ---
 id: utilities
 title: Utilities
-description: "There are different utilities that can help you to write your process test. The Camunda runtime uses an internal clock to execute process instances and to..."
+description: "## Manipulate the clock The Camunda runtime uses an internal clock to execute process instances and to calculate when a BPMN timer event is due."
 ---
 
 There are different utilities that can help you to write your process test.

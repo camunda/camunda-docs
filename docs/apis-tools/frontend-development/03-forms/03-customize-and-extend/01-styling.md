@@ -1,7 +1,7 @@
 ---
 id: form-styling
 title: "Styling"
-description: "Forms can be easily styled by combining defining own CSS rules and overriding a set of CSS variables. If you want to go beyond CSS, you can fork the form..."
+description: "Learn about Styling including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 import GHIcon from "@site/src/mdx/GitHubInlineIcon";

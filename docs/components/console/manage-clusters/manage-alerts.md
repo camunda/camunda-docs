@@ -1,7 +1,7 @@
 ---
 id: manage-alerts
 title: Alerts
-description: "Camunda 8 can notify you when process instances stop with an error. There are two forms of notification: - By email to the email address of your user account..."
+description: "Learn about Alerts including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Camunda 8 can notify you when process instances stop with an error.

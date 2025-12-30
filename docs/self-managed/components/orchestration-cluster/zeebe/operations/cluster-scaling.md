@@ -1,7 +1,7 @@
 ---
 id: cluster-scaling
 title: "Cluster scaling"
-description: "Zeebe allows scaling an existing cluster by adding or removing brokers and by adding new partitions. Partitions are automatically redistributed over the set..."
+description: "Learn about Cluster scaling including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 Zeebe allows scaling an existing cluster by adding or removing brokers and by adding new partitions. Partitions are automatically redistributed over the set of brokers to spread the load evenly.

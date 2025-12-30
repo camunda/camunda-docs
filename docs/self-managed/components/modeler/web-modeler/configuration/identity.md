@@ -1,7 +1,7 @@
 ---
 id: identity
 title: "Identity"
-description: "By default, Web Modeler uses Keycloak for providing authentication. You can use a different OIDC provider by following the steps described in the OIDC..."
+description: "Configuration guide for Identity with setup instructions and available customization options. This guide provides detailed information for your deployment."
 ---
 
 ## Using a different OpenID Connect (OIDC) authentication provider than Keycloak

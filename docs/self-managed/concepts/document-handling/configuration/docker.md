@@ -2,7 +2,7 @@
 id: docker
 sidebar_label: Docker Compose
 title: Document handling configuration in Docker Compose
-description: "None of the storage options below with Docker Compose are suitable for production. If no storage configuration is provided, the default document storage is..."
+description: "Configuration guide for Document handling configuration in Docker Compose, including setup and available options for your environment."
 keywords: ["document handling", "document storage configuration"]
 ---
 

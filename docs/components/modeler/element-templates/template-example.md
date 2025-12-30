@@ -1,7 +1,7 @@
 ---
 id: template-example
 title: Example template
-description: "This page provides a complete example of an element template that demonstrates how to define user-editable fields and their mapping to BPMN 2.0 XML and..."
+description: "This page provides a complete example of an element template that demonstrates how to define user-editable fields and their."
 ---
 
 This page provides a complete example of an element template that demonstrates how to define user-editable fields and their mapping to BPMN 2.0 XML and Camunda extension elements.

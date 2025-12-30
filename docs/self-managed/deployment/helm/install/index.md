@@ -2,7 +2,7 @@
 id: index
 title: Install Camunda with Helm
 sidebar_label: Install
-description: "Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. This section provides two installation paths: - Quick install with Helm: Use this..."
+description: "Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts. This section provides two installation paths: - Quick install with Helm: Use this."
 ---
 
 Camunda 8 Self-Managed can be installed on Kubernetes using Helm charts.

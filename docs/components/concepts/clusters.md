@@ -1,7 +1,7 @@
 ---
 id: clusters
 title: "Clusters"
-description: "A cluster is a provided group of production-ready nodes that run Camunda 8. When creating a cluster in SaaS, you can choose the cluster type and size to meet..."
+description: "Learn about Clusters including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 A [cluster](/components/console/manage-clusters/create-cluster.md) is a provided group of production-ready nodes that run Camunda 8.

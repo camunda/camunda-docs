@@ -1,7 +1,7 @@
 ---
 id: user-permissions
 title: User permissions
-description: "By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the..."
+description: "Learn about User permissions including key features, configuration, and implementation details. This guide provides detailed information for your deployment."
 ---
 
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.

@@ -1,7 +1,7 @@
 ---
 id: external-variable-ingestion
 title: "External variable ingestion"
-description: "With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly, without the need for these variables..."
+description: "With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly."
 ---
 
 With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly,
