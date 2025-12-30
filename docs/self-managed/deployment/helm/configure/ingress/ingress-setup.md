@@ -2,7 +2,7 @@
 id: ingress-setup
 sidebar_label: With Ingress
 title: Configure the Helm chart with Ingress
-description: Set up and configure Ingress for Camunda 8 Self-Managed Helm deployments.
+description: "Starting with Camunda 8.8, the separated Ingress configuration is no longer supported.Instead, follow the combined Ingress setup described in this guide."
 ---
 
 import Tabs from "@theme/Tabs";

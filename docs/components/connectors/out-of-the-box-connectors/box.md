@@ -2,7 +2,7 @@
 id: box
 sidebar_label: Box
 title: Box connector
-description: Interact with the Box storage API.
+description: "The Box connector is an outbound connector that allows you to interact with the Box storage API from your BPMN process. To use the Box connector, you must..."
 ---
 
 The **Box connector** is an outbound connector that allows you to interact with the [Box](https://box.com/) storage API from your BPMN process.

@@ -1,7 +1,7 @@
 ---
 id: aws-ec2
 title: "Amazon EC2"
-description: "Learn how to install Camunda 8 on AWS EC2 instances."
+description: "This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services provided by AWS and..."
 ---
 
 This guide provides a detailed walkthrough for installing the Camunda 8 single JAR on AWS EC2 instances. It focuses on managed services provided by AWS and their cloud offering. Finally, you will verify that the connection to your Self-Managed Camunda 8 environment is functioning correctly.

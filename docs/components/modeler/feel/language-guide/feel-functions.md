@@ -1,7 +1,7 @@
 ---
 id: feel-functions
 title: Functions
-description: "This document outlines various functions and examples."
+description: "Invokes a built-in function (e.g. contains()) or a user-defined function by its name. The arguments of the function can be passed positional or named. -..."
 ---
 
 ### Invocation

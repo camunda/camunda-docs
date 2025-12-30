@@ -1,5 +1,6 @@
 ---
 id: elasticsearch-privileges
+description: "If you implement Camunda 8 with Elasticsearch as a service provider, the following privileges may be required: If an application cannot be granted cluster..."
 title: "Elasticsearch privileges"
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: user-permissions
 title: User permissions
-description: "To share a collection of reports and dashboards with other users, add them to the collection."
+description: "By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the..."
 ---
 
 By default, if you create a collection, only you can access the collection and the contents within. To share a collection with other users, add them to the collection.

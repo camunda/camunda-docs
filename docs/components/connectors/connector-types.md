@@ -1,7 +1,7 @@
 ---
 id: connector-types
 title: Connector types
-description: "Connectors come in type and subtypes that describe their functionality."
+description: "Connectors are categorized by the direction data flows into or out of Camunda 8. Outbound connectors allow workflows to trigger external systems or services,..."
 ---
 
 Connectors are categorized by the direction data flows into or out of Camunda 8.

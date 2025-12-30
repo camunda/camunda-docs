@@ -2,7 +2,7 @@
 id: identity
 title: Identity migration (experimental)
 sidebar_label: Identity migration
-description: "Migrate identity data to Camunda 8."
+description: "Migrate identity data. The identity migration mode of the Data Migrator is in an early development stage and will not be released before Camunda 8.9 (April..."
 ---
 
 Migrate identity data.

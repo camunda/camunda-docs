@@ -1,7 +1,7 @@
 ---
 id: health
 title: "Health status"
-description: "This document analyzes health status checks and responses."
+description: "The Zeebe Broker exposes three HTTP endpoints to query its health status: - Startup check - Ready check - Health check Startup check endpoint is exposed via..."
 ---
 
 ## Broker

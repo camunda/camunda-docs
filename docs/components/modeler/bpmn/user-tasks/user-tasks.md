@@ -1,7 +1,7 @@
 ---
 id: user-tasks
 title: "User tasks"
-description: "A user task is used to model work that needs to be done by a human actor."
+description: "A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application."
 ---
 
 A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.

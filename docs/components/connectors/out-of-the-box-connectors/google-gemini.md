@@ -2,7 +2,7 @@
 id: google-gemini
 title: Google Gemini connector
 sidebar_label: Google Gemini
-description: The Gemini large language models (LLMs) that are used by Gemini for Google Cloud are trained on datasets of publicly available code, Google Cloud-specific material, and other relevant technical information in addition to the datasets used to train the Gemini [foundation models](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf).
+description: "The Google Gemini connector is available for 8.7.0 or later. The Google Gemini connector is an outbound connector that allows you to access Gemini multimodal..."
 ---
 
 :::info

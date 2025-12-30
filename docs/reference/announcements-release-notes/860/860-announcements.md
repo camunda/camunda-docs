@@ -1,7 +1,7 @@
 ---
 id: 860-announcements
 title: "Release announcements"
-description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release."
+description: "Supported environment changes and breaking changes or deprecations for the Camunda 8.6 release are summarized below. | Release date | End of maintenance |..."
 toc_max_heading_level: 3
 ---
 

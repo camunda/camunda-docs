@@ -1,7 +1,7 @@
 ---
 id: decision-literal-expression
 title: Decision literal expression
-description: A decision literal expression represents decision logic which can be depicted as an expression in DMN.
+description: "A decision literal expression represents decision logic which can be depicted as an expression in DMN. !Decision literal expression A decision literal expres..."
 ---
 
 ![Decision literal expression](assets/decision-literal-expression/decision-literal-expression.png)

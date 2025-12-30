@@ -1,5 +1,6 @@
 ---
 title: Deciding about your stack
+description: "Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no..."
 tags:
   - Architecture
   - Stack

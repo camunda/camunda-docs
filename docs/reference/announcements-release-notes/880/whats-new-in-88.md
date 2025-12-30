@@ -2,7 +2,7 @@
 id: whats-new-in-88
 title: What's new in Camunda 8.8
 sidebar_label: What's new in Camunda 8.8
-description: "Learn more about what's new and changed in Camunda 8.8."
+description: "Important changes in Camunda 8.8 you should consider when upgrading from Camunda 8.7. Camunda 8.8 introduces important architectural changes and enhancements..."
 keywords:
   [
     "what's changed",

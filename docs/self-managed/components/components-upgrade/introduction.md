@@ -2,7 +2,7 @@
 id: introduction
 sidebar_label: Components update
 title: Camunda components update guide
-description: Follow the update procedure and guides when updating your Camunda 8 application or server installation version.
+description: "Follow the update procedure and guides when updating your Camunda 8 application or server installation version. Update guides lead you through the process fo..."
 ---
 
 # Camunda components update guide

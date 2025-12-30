@@ -2,7 +2,7 @@
 id: mapping-rules
 title: "Mapping rules"
 sidebar_label: "Mapping rules"
-description: "Map authentication entities from your Identity Provider (IdP) to Camunda-specific entities using mapping rules."
+description: "Map authentication entities from your Identity Provider (IdP) to Camunda-specific entities using mapping rules. Mapping rules are used to dynamically manage ..."
 ---
 
 Mapping rules are used to dynamically manage access control by [connecting your Identity Provider](connect-to-identity-provider.md) and mapping claims from a JWT access token to [Identity](/components/identity/identity-introduction.md) entities in Camunda 8.

@@ -2,7 +2,7 @@
 id: backpressure
 title: Manage backpressure with the TypeScript SDK
 sidebar_label: Manage backpressure
-description: Client-side adaptive backpressure
+description: "Learn how to manage backpressure with the TypeScript SDK.The Orchestration Cluster REST API client implements adaptive backpressure management."
 ---
 
 Learn how to manage backpressure with the TypeScript SDK.

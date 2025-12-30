@@ -1,7 +1,7 @@
 ---
 id: identity-introduction
 title: Introduction to Identity
-description: "Identity provides unified identity management and authorizations for an orchestration cluster."
+description: "Use the integrated Orchestration Cluster Identity component to manage Camunda 8 authentication, authorization, and entities."
 ---
 
 Use the integrated [Orchestration Cluster](../orchestration-cluster.md) Identity component to manage Camunda 8 authentication, authorization, and entities.

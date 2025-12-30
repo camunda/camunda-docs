@@ -1,7 +1,7 @@
 ---
 id: manage-users
 title: Manage users of your organization
-description: "Let's take a closer look at the rights and responsibilities of users in your organization."
+description: "When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the owner of the Camunda organization."
 ---
 
 When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the owner of the Camunda organization. This organization owns Modeler files and Zeebe clusters. The owner and any admins they assign can control access to these resources through managing their organization.

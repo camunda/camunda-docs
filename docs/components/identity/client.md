@@ -1,7 +1,7 @@
 ---
 id: client
 title: Clients
-description: "Learn how to configure and manage client access to an orchestration cluster."
+description: "Configure and manage client access to a cluster so the client application has the permissions it requires. A client is an application that interacts with an..."
 ---
 
 Configure and manage client access to a cluster so the client application has the permissions it requires.

@@ -1,5 +1,6 @@
 ---
 id: opensearch-without-cluster-privileges
+description: "If the Camunda single application cannot access OpenSearch with cluster-level privileges (for example, due to restrictive IAM or fine‑grained access control..."
 title: "OpenSearch without cluster privileges"
 keywords: ["opensearch", "schema", "backup", "standalone"]
 ---

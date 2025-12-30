@@ -1,7 +1,7 @@
 ---
 id: eks-helm
 title: "Install Camunda 8 on an EKS cluster"
-description: "Set up the Camunda 8 environment with Helm and an optional Ingress setup on Amazon EKS."
+description: "This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster."
 ---
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/deployment/helm/cloud-providers/openshift/terraform-setup.md. The user should have a similar experience when reading both guides. -->

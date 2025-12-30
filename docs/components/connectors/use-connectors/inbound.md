@@ -1,7 +1,7 @@
 ---
 id: inbound
 title: Use an inbound connector
-description: Learn how to use inbound connectors
+description: "Inbound connectors enable workflows to receive data or messages from external systems or services. Review our list of existing inbound connectors for more..."
 ---
 
 import Tabs from "@theme/Tabs";

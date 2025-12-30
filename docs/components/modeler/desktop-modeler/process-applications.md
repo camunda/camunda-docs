@@ -1,7 +1,7 @@
 ---
 id: process-applications
 title: Process applications
-description: In Desktop Modeler a process application is a folder that contains a .process-application file and a set of related files you can work on and deploy as a single bundle.
+description: "Desktop modeler recognizes process applications you build and offers you advanced editor intelligence, deployment, and execution features within the context..."
 ---
 
 import GroupingImg from './img/process-applications/grouping.png'

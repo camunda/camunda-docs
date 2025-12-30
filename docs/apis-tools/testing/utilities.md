@@ -1,7 +1,7 @@
 ---
 id: utilities
 title: Utilities
-description: "Use utilities to interact with the process instance."
+description: "There are different utilities that can help you to write your process test. The Camunda runtime uses an internal clock to execute process instances and to..."
 ---
 
 There are different utilities that can help you to write your process test.

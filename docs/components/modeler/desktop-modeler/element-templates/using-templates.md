@@ -1,7 +1,7 @@
 ---
 id: using-templates
 title: Using templates
-description: "Learn how to apply, remove, update, and replace templates."
+description: "If an element template matches a selected diagram element, the template catalog button is shown in the properties panel on the right side of the screen."
 ---
 
 ## Applying templates

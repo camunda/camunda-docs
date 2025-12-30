@@ -1,7 +1,7 @@
 ---
 id: element-template-generator
 title: Generate an element template
-description: Learn how to generate element or connector templates for easier creation of custom reusable elements.
+description: "Learn how to generate element or connector templates for easier creation of custom reusable elements. You can configure and automatically generate a custom e..."
 ---
 
 You can configure and automatically generate a custom element template in Web Modeler.

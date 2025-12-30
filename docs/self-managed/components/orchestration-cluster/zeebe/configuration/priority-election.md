@@ -1,7 +1,7 @@
 ---
 id: priority-election
 title: "Priority election"
-description: "An alternative to the default raft leader election."
+description: "Priority election is an alternative to the default raft leader election, where leader election is implemented by a random timer-based algorithm."
 ---
 
 Priority election is an alternative to the default raft leader election, where leader election is implemented by a random timer-based algorithm.

@@ -1,7 +1,7 @@
 ---
 id: properties
 title: "Property reference"
-description: "Learn about the configuration properties available in your Orchestration Cluster."
+description: "As a Spring Boot application, the Orchestration Cluster supports standard Spring configuration methods. The following configurations apply to all components..."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---

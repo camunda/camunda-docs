@@ -1,7 +1,7 @@
 ---
 id: blueprints
 title: Blueprints
-description: "Ready-to-use example processes demonstrating common Camunda–ServiceNow integration patterns."
+description: "Use these blueprints to quickly implement common Camunda–ServiceNow integration scenarios. !Camunda ServiceNow integration blueprint Download the blueprint..."
 ---
 
 Use these blueprints to quickly implement common Camunda–ServiceNow integration scenarios.

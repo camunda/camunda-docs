@@ -1,7 +1,7 @@
 ---
 id: logging
 title: "Logging"
-description: "Read details on additional logging configuration for Web Modeler."
+description: "Web Modeler's restapi component uses Apache Log4j 2 for logging.By default, the restapi component logs to the Docker container's standard output."
 ---
 
 ## Logging configuration for the `restapi` component

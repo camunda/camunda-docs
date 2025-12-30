@@ -2,7 +2,7 @@
 id: azure-blob-storage
 title: Azure blob storage connector
 sidebar_label: Azure Blob Storage
-description: Interact with Azure Blob Storage from your BPMN process.
+description: "The Azure Blob Storage connector is an outbound connector that allows you to interact with Azure Blob Storage resources from your BPMN processes."
 ---
 
 The **Azure Blob Storage connector** is an outbound connector that allows you to interact with

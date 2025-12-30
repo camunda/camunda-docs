@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-spacer
 title: Spacer
-description: Learn about this layout element to add vertical space between elements.
+description: "A spacer element is used to create a defined amount of vertical space between two elements.- Height: Defines the vertical space the spacer takes up."
 ---
 
 A **spacer** element is used to create a defined amount of vertical space between two elements.

@@ -1,7 +1,7 @@
 ---
 id: context-pad
 title: Context pad
-description: The context pad is a feature that allows you to add elements to your diagram and perform actions on elements.
+description: "The context pad is a feature that allows you to add elements to your diagram and perform actions on elements. The context pad is one of the main ways to inte..."
 ---
 
 The context pad is one of the main ways to interact with the diagram. Actions that change the selected element can be found in the context pad above the selected elements while actions that append or attach new elements are accessible through the plus icons.

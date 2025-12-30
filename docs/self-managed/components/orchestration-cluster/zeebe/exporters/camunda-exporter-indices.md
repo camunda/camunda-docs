@@ -2,7 +2,7 @@
 id: camunda-exporter-indices
 title: "Camunda Exporter indices diagrams"
 sidebar_label: "Camunda Exporter Indices"
-description: "The indices to which the Camunda Exporter will export system state information to."
+description: "Learn about Camunda Exporter indices diagrams in Camunda, including key features, configuration, and implementation details."
 ---
 
 import OperateIndices from './index-diagrams/operate-diagrams.md';

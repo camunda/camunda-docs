@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Overview"
-description: "Manage and analyze reports and dashboards with the Optimize API, including sharing, exporting, and more."
+description: "Manage and analyze reports and dashboards with the Optimize API, including sharing, exporting, and more. The Optimize API lets you programmatically manage an..."
 ---
 
 The Optimize API lets you programmatically manage and analyze reports and dashboards in Camunda Optimize. Use it to:

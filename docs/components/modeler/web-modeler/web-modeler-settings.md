@@ -1,7 +1,7 @@
 ---
 id: web-modeler-settings
 title: Web Modeler settings
-description: Configure email notifications and process application deployment policies in the Web Modeler settings.
+description: "Configure email notifications and process application deployment policies in the Web Modeler settings. Navigate to the Web Modeler settings by clicking on yo..."
 ---
 
 import WebModelerSettings from './img/web-modeler-settings/web-modeler-settings.png'

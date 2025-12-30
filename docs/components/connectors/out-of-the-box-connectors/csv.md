@@ -2,7 +2,7 @@
 id: csv
 sidebar_label: CSV
 title: CSV connector
-description: Reads CSV files and converts JSON data into CSV format for further usage
+description: "The CSV connector reads CSV files and converts JSON data to CSV format for document or text use.The CSV connector supports operations to read and write CSVs."
 ---
 
 The **CSV connector** reads CSV files and converts JSON data to CSV format for document or text use.

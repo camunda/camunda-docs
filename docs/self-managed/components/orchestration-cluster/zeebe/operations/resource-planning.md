@@ -1,5 +1,6 @@
 ---
 id: resource-planning
+description: "The short answer to “_what resources and configuration will I need to take Zeebe to production?_” is: it depends. While we cannot tell you exactly what you..."
 title: "Resource planning"
 keywords:
   [

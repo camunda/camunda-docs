@@ -2,7 +2,7 @@
 id: camunda-8-run
 sidebar_label: Camunda 8 Run
 title: Document handling configuration in Camunda 8 Run
-description: "Learn more about storage configuration options for Camunda 8 Run setups."
+description: "Camunda 8 Run can be used for local development only, and none of the storage options below are suitable for production."
 keywords: ["document handling", "document storage configuration"]
 ---
 

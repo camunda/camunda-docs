@@ -1,7 +1,7 @@
 ---
 id: management-api
 title: "Management API"
-description: "The Zeebe Gateway also exposes an HTTP endpoint for cluster management operations."
+description: "As well as the REST and gRPC API for process instance execution, the Zeebe Gateway exposes an HTTP endpoint for cluster management operations."
 ---
 
 import Tabs from "@theme/Tabs";

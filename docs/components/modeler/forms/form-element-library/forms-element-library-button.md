@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-button
 title: Button
-description: A form element to trigger form actions
+description: "A button allowing the user to trigger form actions. - Field label: Label to be displayed on top of the button. Can either be an expression, plain text, or..."
 ---
 
 A button allowing the user to trigger form actions.

@@ -2,7 +2,7 @@
 id: job-streaming
 title: "Job streaming"
 sidebar_label: "Job streaming"
-description: "Streaming job workers is expected to be long-lived to cut down on the latency overhead involved with re-creating a stream and propagating this throughout the cluster."
+description: "Job streaming is a long-lived process designed to reduce the latency involved with re-creating and propagating job workers."
 ---
 
 [Job streaming](../../../../../components/concepts/job-workers.md#job-streaming) is a long-lived process designed to reduce the latency involved with re-creating and propagating job workers.

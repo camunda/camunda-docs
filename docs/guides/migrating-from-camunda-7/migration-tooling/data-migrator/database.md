@@ -2,7 +2,7 @@
 id: database
 title: Database
 sidebar_label: Database
-description: "Database configuration for the Data Migrator."
+description: "Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS history) data sources.The Data Migrator uses JDBC to connect to these databases."
 ---
 
 Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS history) data sources. The Data Migrator uses JDBC to connect to these databases.

@@ -2,7 +2,7 @@
 id: migrate-to-camunda-process-test
 title: Migrate to Camunda Process Test
 sidebar_label: "Camunda Process Test"
-description: "Learn how to migrate from Zeebe Process Test to Camunda Process Test"
+description: "Camunda Process Test (CPT) is a library to test your BPMN processes and your process applications.It is the successor to Zeebe Process Test (ZPT)."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: resource-deletion
 title: "Resource deletion"
-description: "Use resource deletion to remove process definitions and decision requirements graphs from Camunda."
+description: "Resource deletions are currently not reflected in secondary storage.As a result you still see the deleted resources in Operate and Tasklist."
 ---
 
 :::info

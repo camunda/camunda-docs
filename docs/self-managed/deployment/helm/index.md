@@ -2,7 +2,7 @@
 id: index
 sidebar_label: Kubernetes with Helm
 title: Camunda Helm chart
-description: Learn how to install Camunda 8 Self-Managed using Kubernetes with Helm.
+description: "The 13.0.0-alpha4.1 Helm chart released with Camunda 8.8.0-alpha4 introduces a new default setup to support the 8.8 Identity management updates."
 page_rank: 80
 ---
 

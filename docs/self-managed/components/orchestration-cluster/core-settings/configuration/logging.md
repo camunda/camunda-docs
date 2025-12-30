@@ -1,7 +1,7 @@
 ---
 id: logging
 title: Logging
-description: Configure and manage logging for the Camunda 8 Self-Managed Orchestration Cluster components.
+description: "This page explains how to configure and manage logging in the Camunda 8 Self-Managed Orchestration Cluster, which includes Zeebe, Operate, Tasklist, and..."
 ---
 
 This page explains how to configure and manage logging in the **Camunda 8 Self-Managed Orchestration Cluster**, which includes **Zeebe**, **Operate**, **Tasklist**, and **Identity**. All components use the **Log4j2** framework.

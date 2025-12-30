@@ -1,7 +1,7 @@
 ---
 id: data-retention
 title: Data retention
-description: "Overview of how the Orchestration Cluster stores and archives data in Elasticsearch or OpenSearch."
+description: "The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration. All cluster data, including deployed..."
 ---
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.

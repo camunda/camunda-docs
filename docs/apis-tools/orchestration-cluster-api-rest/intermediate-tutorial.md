@@ -2,7 +2,7 @@
 id: orchestration-cluster-api-intermediate-tutorial
 title: Intermediate tutorial
 sidebar_label: Intermediate
-description: "Step through this intermediate Orchestration Cluster REST API tutorial to deploy resources, create and start a process instance, and view a process instance by its key."
+description: "In this tutorial, we'll step through examples to highlight the capabilities of the Orchestration Cluster REST API, such as deploying resources, creating and..."
 ---
 
 <span class="badge badge--intermediate">Intermediate</span>

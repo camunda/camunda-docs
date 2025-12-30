@@ -1,7 +1,7 @@
 ---
 title: Connect Identity to an identity provider
 sidebar_label: Connect to an identity provider
-description: Learn how to connect Camunda 8 Orchestration Cluster Identity to an external Identity Provider (IdP) via OpenID Connect (OIDC) for authentication and user management.
+description: "Configure Identity to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules."
 ---
 
 import Tabs from "@theme/Tabs";

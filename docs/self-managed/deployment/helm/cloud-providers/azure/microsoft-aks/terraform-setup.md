@@ -1,7 +1,7 @@
 ---
 id: aks-terraform
 title: "Deploy an AKS cluster with Terraform (advanced)"
-description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup."
+description: "Deploy an Azure Kubernetes Service (AKS) cluster with a Terraform module for a quick Camunda 8 setup. This guide provides a detailed tutorial for deploying a..."
 ---
 
 import Tabs from "@theme/Tabs";

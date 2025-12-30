@@ -2,7 +2,7 @@
 id: overview
 title: "Zeebe on Self-Managed"
 sidebar_label: "Overview"
-description: "About Zeebe"
+description: "Zeebe does not support network file systems (NFS) other types of network storage volumes at this time.Usage of NFS may cause data corruption."
 ---
 
 <!--

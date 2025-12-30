@@ -1,7 +1,7 @@
 ---
 id: delete-finished-instances
 title: Delete finished instances
-description: "Let's delete a canceled or completed process instance."
+description: "A finished process instance, meaning a canceled or a completed process instance, can be deleted from the Processes page or instance detail page."
 ---
 
 A finished process instance, meaning a canceled or a completed process instance, can be deleted from the **Processes** page or instance detail page.

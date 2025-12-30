@@ -2,7 +2,7 @@
 id: keycloak-update
 sidebar_label: Update Keycloak
 title: Camunda Keycloak updating
-description: "Review what has to be taken into account when updating Keycloak."
+description: "When updating Keycloak, follow the Keycloak upgrade guide and refer to the supported environments to ensure compatibility with tested Keycloak versions."
 ---
 
 When updating Keycloak, follow the [Keycloak upgrade guide](https://www.keycloak.org/docs/latest/upgrading/index.html) and refer to the [supported environments](reference/supported-environments.md#camunda-8-self-managed) to ensure compatibility with tested Keycloak versions.

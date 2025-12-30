@@ -1,7 +1,7 @@
 ---
 id: delete-report
 title: "Delete reports"
-description: "The REST API to delete reports from Optimize."
+description: "The report deletion API allows you to delete reports by ID from Optimize. During deletion a report will get removed from any dashboard or combined process..."
 ---
 
 The report deletion API allows you to delete reports by ID from Optimize.

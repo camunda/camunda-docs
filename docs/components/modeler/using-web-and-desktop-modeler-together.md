@@ -1,7 +1,7 @@
 ---
 id: using-web-and-desktop-modeler-together
 title: Using Web and Desktop Modeler together
-description: "Understand the implications of using Web Modeler and Desktop Modeler for modeling process diagrams."
+description: "Web Modeler and Desktop Modeler are both tools for designing BPMN diagrams, but they serve different purposes and shine in different scenarios."
 ---
 
 [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) and [Desktop Modeler](/components/modeler/desktop-modeler/index.md) are both tools for designing [BPMN](/components/modeler/bpmn/bpmn.md) diagrams, but they serve different purposes and shine in different scenarios.

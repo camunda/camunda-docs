@@ -1,7 +1,7 @@
 ---
 id: run-or-publish-your-process
 title: Run or publish your process
-description: "Flexible options to run or publish a process in any environment and to any audience."
+description: "When you design a process in Camunda Modeler, you have multiple flexible options to either run or publish it on Camunda 8."
 ---
 
 import Tabs from "@theme/Tabs";

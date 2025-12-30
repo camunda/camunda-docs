@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: Get started with RPA
-description: Learn how to create, test, and automate RPA scripts.
+description: "Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts. - New to RPA? See the overview page to learn about robotic process..."
 ---
 
 import RpaEditorInitial from './img/rpa-editor-initial.png';

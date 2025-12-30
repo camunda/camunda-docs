@@ -2,7 +2,7 @@
 id: amazon-s3
 sidebar_label: AWS S3
 title: Amazon S3 connector
-description: Interact with Amazon S3 services from your BPMN process.
+description: "The Amazon S3 connector is an outbound connector that allows you to interact with Amazon Simple Storage Service (Amazon S3) from your BPMN process."
 ---
 
 The **Amazon S3 connector** is an outbound connector that allows you to interact

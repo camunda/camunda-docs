@@ -1,7 +1,7 @@
 ---
 id: migration-readiness
 title: Migration-ready solutions
-description: "Learn how to build Camunda 7 solutions that are easy to migrate."
+description: "To implement Camunda 7 process solutions that can be easily migrated, follow these rules and development practices. These practices might also inform a..."
 ---
 
 To implement Camunda 7 process solutions that can be easily migrated, follow these rules and development practices.

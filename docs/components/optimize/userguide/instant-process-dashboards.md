@@ -1,7 +1,7 @@
 ---
 id: instant-process-dashboards
 title: Instant process dashboards
-description: "Use automatically generated dashboards and reports from Optimize to find insights for your processes."
+description: "Use automatically generated dashboards and reports from Optimize to find insights for your processes. Optimize serves as a comprehensive process optimization..."
 ---
 
 Optimize serves as a comprehensive process optimization tool, streamlining operations and enhancing efficiency for businesses. Notably, one of its standout features is the automatic generation of dashboards for each process, offering users clear insights into process performance.

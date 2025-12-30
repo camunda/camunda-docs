@@ -1,7 +1,7 @@
 ---
 id: backpressure
 title: "Backpressure"
-description: "This document outlines an overview of backpressure and its accompanying assets."
+description: "When a broker receives a client request, it is written to the event stream first (see section internal processing for details), and processed later by the..."
 keywords: [back-pressure, backpressure, back pressure]
 ---
 

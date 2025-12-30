@@ -2,7 +2,7 @@
 id: orchestrate-human-tasks
 title: Get started with human task orchestration
 sidebar_label: Orchestrate human tasks
-description: "For low-code developers using Camunda 8 SaaS, efficiently allocate work through user tasks."
+description: "This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed..."
 keywords: [human tasks, orchestration, getting started, user guide]
 ---
 

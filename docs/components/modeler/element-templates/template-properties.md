@@ -1,7 +1,7 @@
 ---
 id: template-properties
 title: Template properties
-description: "Learn how to define template properties including types, bindings, constraints, and advanced features."
+description: "Learn how to define template properties including types, bindings, constraints, and advanced features. The properties array is where you define what properti..."
 ---
 
 The `properties` array is where you define what properties should be applied to the BPMN element and how the properties panel will present these properties to the user when the template is applied.

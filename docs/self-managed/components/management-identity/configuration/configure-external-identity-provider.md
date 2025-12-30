@@ -2,7 +2,7 @@
 id: configure-external-identity-provider
 title: "Configure an external IdP using Keycloak"
 sidebar_label: "Configure an external IdP using Keycloak"
-description: "Learn how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory."
+description: "Learn how to configure an external identity provider like OpenID Connect, SAML, LDAP, or Active Directory. If you are using the default (built-in) Keycloak y..."
 ---
 
 If you are using the default (built-in) Keycloak you can configure an external identity provider (IdP) for user authentication, such as OpenID Connect, SAML, LDAP, or Active Directory.

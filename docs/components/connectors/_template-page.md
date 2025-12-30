@@ -1,7 +1,7 @@
 ---
 id: template-page
 title: Template connector
-description: "Description of this connector for SEO, search etc"
+description: "Single concise sentence of what you would use the connector for.The [connector name] connector enables AI agents to integrate with an LLM to provide..."
 ---
 
 import InboundConnectorBasics from '../../../components/react-components/\_connector-inbound-basics.md'

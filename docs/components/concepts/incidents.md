@@ -1,7 +1,7 @@
 ---
 id: incidents
 title: "Incidents"
-description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem."
+description: "A process instance is stuck at a particular point, and requires user interaction to resolve the problem. In Camunda 8, an incident represents a problem in pr..."
 ---
 
 In Camunda 8, an incident represents a problem in process execution. This means a process instance is stuck at a particular point and requires user interaction to resolve the problem.

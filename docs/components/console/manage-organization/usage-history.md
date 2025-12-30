@@ -1,7 +1,7 @@
 ---
 id: usage-history
 title: Usage history
-description: "Let's monitor our workflow usage."
+description: "The usage history is visible only to owners and admins for Trial, Enterprise, and Starter organizations. Three key metrics play a role in paid plans: the..."
 ---
 
 :::note

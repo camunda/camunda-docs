@@ -1,7 +1,7 @@
 ---
 id: variable-labeling
 title: Variable labeling
-description: Add a label for a variable in a process definition.
+description: "The variable labeling functionality allows users to add, update, and delete batches of variable labels so your data is more understandable by business users."
 ---
 
 The variable labeling functionality allows users to add, update, and delete batches of variable labels so your data is more understandable by business users. This allows Optimize to display a variable's label instead of its original name anywhere the given process definition is being used. Some examples of that would be

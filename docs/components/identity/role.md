@@ -1,7 +1,7 @@
 ---
 id: role
 title: Roles
-description: "Learn how to manage roles in an orchestration cluster."
+description: "A role is a collection of authorizations that defines a set of permissions. Roles are used to grant users the system and data access required to fulfill a..."
 ---
 
 import CreateRoleImg from './img/create-role-tab.png';

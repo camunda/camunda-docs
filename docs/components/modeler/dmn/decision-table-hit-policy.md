@@ -1,7 +1,7 @@
 ---
 id: decision-table-hit-policy
 title: Hit policy
-description: Specifies what the results of the evaluation of a decision table consist of.
+description: "!Hit Policy A decision table has a hit policy that specifies what the results of the evaluation of a decision table consist of."
 ---
 
 ![Hit Policy](assets/decision-table/hit-policy.png)

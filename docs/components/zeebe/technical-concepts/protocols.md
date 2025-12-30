@@ -1,7 +1,7 @@
 ---
 id: protocols
 title: "Protocols"
-description: "Let's discuss gRPC and supported clients."
+description: "Zeebe clients connect to brokers via a stateless gateway.For the communication between client and gateway, a mix of REST and gRPC is used."
 ---
 
 Zeebe clients connect to brokers via a stateless gateway.

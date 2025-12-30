@@ -1,7 +1,7 @@
 ---
 id: troubleshooting
 title: Troubleshooting
-description: "Resolve common issues with the Camunda–ServiceNow integration and ensure workflows run reliably."
+description: "Resolve common issues encountered while setting up or using the Camunda–ServiceNow integration and follow recommended actions to fix them."
 ---
 
 Resolve common issues encountered while setting up or using the Camunda–ServiceNow integration and follow recommended actions to fix them.

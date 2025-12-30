@@ -1,7 +1,7 @@
 ---
 id: compensation-handler
 title: "Compensation"
-description: "A compensation handler is an activity used to undo tasks that have already been executed."
+description: "Activities that are associated to a compensation boundary event have a compensation marker. These activities are called compensation handlers and are in..."
 ---
 
 Activities that are associated to a compensation boundary event have a compensation marker. These activities are called

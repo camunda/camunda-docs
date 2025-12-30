@@ -2,7 +2,7 @@
 id: index
 title: Install Camunda for production with Helm
 sidebar_label: Production install
-description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
+description: "The following is a scenario-based, production focused, step-by-step guide for setting up the Camunda Helm chart. It provides a resilient, production-ready..."
 ---
 
 The following is a **scenario-based, production focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient, production-ready architecture for Camunda 8, and minimizes complexity while offering a reliable foundation for most production use cases.

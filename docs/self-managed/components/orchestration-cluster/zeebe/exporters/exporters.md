@@ -1,5 +1,6 @@
 ---
 id: exporters
+description: "Zeebe comes packaged with three exporters: - Elasticsearch - OpenSearch - Camunda Exporter This section of the docs explains how these exporters can be..."
 title: "Exporters"
 sidebar_label: "Overview"
 ---

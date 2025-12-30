@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-temporal
 title: Temporal functions
-description: "This document outlines built-in temporal functions and examples."
+description: "Returns the current date and time including the timezone. Function signature ``feel now(): date and time ` Examples `feel now() // date and..."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

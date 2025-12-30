@@ -1,7 +1,7 @@
 ---
 id: tasklist-api-rest-variables-controller
 title: Variables API
-description: "Learn about the Variables API controller, including request parameters, and an HTTP request example."
+description: "Learn about the Variables API controller, including request parameters, and an HTTP request example. The Variables API controller provides an API to query va..."
 ---
 
 The Variables API controller provides an API to query variables.

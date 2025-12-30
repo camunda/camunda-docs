@@ -1,5 +1,6 @@
 ---
 id: secure-cluster-communication
+description: "TLS between nodes in the same cluster is disabled by default.Zeebe supports transport layer security (TLS v1.3) between all nodes in a Zeebe cluster."
 title: "Secure cluster communication"
 ---
 

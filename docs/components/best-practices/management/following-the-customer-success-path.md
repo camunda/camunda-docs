@@ -2,7 +2,7 @@
 title: "Following the customer success path"
 tags:
   - Project Management
-description: "Follow certain steps and Best Practices when evaluating and introducing process automation to help make it a success."
+description: "Follow certain steps and Best Practices when evaluating and introducing process automation to help make it a success. Following certain steps when evaluating..."
 ---
 
 Following certain steps when evaluating and introducing process automation helps to make it a success. Ensure you review the appropriate best practices at the right time.

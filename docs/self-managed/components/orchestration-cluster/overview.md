@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Orchestration Cluster"
-description: "How to install and configure an Orchestration Cluster."
+description: "Install and configure Orchestration Cluster components in your Self-Managed environment. The Orchestration Cluster is the core component of Camunda 8,..."
 ---
 
 Install and configure Orchestration Cluster components in your Self-Managed environment.

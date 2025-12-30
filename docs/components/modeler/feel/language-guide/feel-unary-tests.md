@@ -1,7 +1,7 @@
 ---
 id: feel-unary-tests
 title: Unary-tests
-description: "This document outlines unary-tests and examples."
+description: "A unary-tests expression is a special kind of boolean expression.Unary-tests expressions should be used for the input entries of a decision table (i.e."
 ---
 
 A unary-tests expression is a special kind of boolean expression. Unary-tests expressions should be used for the input

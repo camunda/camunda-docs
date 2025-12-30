@@ -1,7 +1,7 @@
 ---
 id: database-configuration
 title: "RDBMS configuration overview"
-description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
+description: "Camunda can use a relational database (RDBMS) as the secondary storage backend for Operate, Tasklist, Identity, and the Camunda REST API."
 ---
 
 Camunda can use a relational database (RDBMS) as the secondary storage backend for Operate, Tasklist, Identity, and the Camunda REST API.

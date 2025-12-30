@@ -1,5 +1,6 @@
 ---
 id: operate-configuration
+description: "As a Spring Boot application, Operate supports any standard Spring configuration method. By default, the configuration for Operate is stored in a YAML file..."
 title: Configuration
 ---
 

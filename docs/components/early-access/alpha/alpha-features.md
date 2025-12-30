@@ -2,7 +2,7 @@
 id: alpha-features
 title: Alpha features
 sidebar_label: Alpha features
-description: "Use alpha features to learn about upcoming changes, try them out, and share feedback."
+description: "You can use alpha features to learn about upcoming changes, try them out, and share feedback. To understand the difference between an alpha feature and an..."
 ---
 
 You can use alpha features to learn about upcoming changes, try them out, and share feedback.

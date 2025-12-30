@@ -1,7 +1,7 @@
 ---
 id: manage-cluster
 title: Manage your cluster
-description: "Follow these steps to rename, resume, update, resize, or delete your cluster."
+description: "Learn how to rename, resume, update, resize, or delete your cluster. A cluster can be renamed at any time. To rename your cluster, follow the steps below: 1...."
 ---
 
 Learn how to rename, resume, update, resize, or delete your cluster.

@@ -2,7 +2,7 @@
 id: amazon-textract
 title: Amazon Textract connector
 sidebar_label: AWS Textract
-description: Extract printed text, handwriting, layout elements, and structured data from documents using Amazon Textract.
+description: "Extract printed text, handwriting, layout elements, and structured data from documents using Amazon Textract. Integrate Amazon Textract to automatically extr..."
 ---
 
 import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'

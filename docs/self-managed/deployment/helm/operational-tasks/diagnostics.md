@@ -2,7 +2,7 @@
 id: diagnostics
 sidebar_label: Collecting diagnostics
 title: Helm chart diagnostics
-description: "Get diagnostics and logs from a Helm chart deployment."
+description: "This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster."
 ---
 
 ## Diagnostics collection script

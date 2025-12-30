@@ -1,5 +1,6 @@
 ---
 id: introduction-to-console
+description: "Camunda Console is the management application for the included products, such as Modeler, Tasklist, Operate, and Optimize."
 title: Introduction to Camunda Console
 ---
 

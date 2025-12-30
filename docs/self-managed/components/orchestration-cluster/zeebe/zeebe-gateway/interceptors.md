@@ -1,5 +1,6 @@
 ---
 id: interceptors
+description: "Interceptors are only applied to the gRPC API of the gateway, and do not affect any REST calls. For REST-related middleware, read the gateway filters..."
 title: "Interceptors"
 sidebar_label: "Interceptors"
 ---

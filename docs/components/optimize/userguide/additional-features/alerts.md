@@ -1,7 +1,7 @@
 ---
 id: alerts
 title: Alerts
-description: Get a notification as soon as your system is behaving in an unexpected manner.
+description: "Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports..."
 ---
 
 Optimize's alerting functionality can be used to notify you when your report hits a predefined critical value. You can create alerts for any number reports that exist within a collection.

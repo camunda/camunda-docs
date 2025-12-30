@@ -1,7 +1,7 @@
 ---
 id: select-process-definitions
 title: Select process definitions
-description: Every report relates to one or multiple process definitions, versions, and tenants.
+description: "Every report relates to one or multiple process definitions, versions, and tenants. You must choose at least one process definition you want to create a..."
 ---
 
 Every report relates to one or multiple process definitions, versions, and tenants. You must choose at least one process definition you want to create a report for.

@@ -1,7 +1,7 @@
 ---
 id: incident-handler
 title: ServiceNow Incident Handler
-description: "Create, update, or manage incidents in ServiceNow directly from Camunda processes using the incident handler connector."
+description: "Create, update, or manage incidents in ServiceNow directly from Camunda processes using the incident handler connector. Use the ServiceNow Incident Handler c..."
 ---
 
 Use the ServiceNow Incident Handler connector to create, read, update, or delete incidents in ServiceNow directly from Camunda processes.

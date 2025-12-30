@@ -2,7 +2,7 @@
 id: a2a-client
 title: A2A Client
 sidebar_label: A2A Client
-description: "Enables interaction with remote agents using the Agent-to-Agent (A2A) protocol."
+description: "The Agent-to-Agent (A2A) Client connectors enable Camunda processes to interact with remote agents using the A2A protocol."
 ---
 
 import Tabs from "@theme/Tabs";

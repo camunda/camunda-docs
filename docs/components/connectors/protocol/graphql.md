@@ -2,7 +2,7 @@
 id: graphql
 title: GraphQL connector
 sidebar_label: GraphQL
-description: Execute a GraphQL query or mutation from your BPMN process.
+description: "The GraphQL connector is an outbound protocol connector that allows you to execute a GraphQL query or mutation from your BPMN process."
 ---
 
 The **GraphQL connector** is an outbound protocol connector that allows you to execute a GraphQL query or mutation from your BPMN process.

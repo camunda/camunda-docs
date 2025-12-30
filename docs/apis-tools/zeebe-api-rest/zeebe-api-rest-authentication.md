@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-rest-authentication
 title: "Authentication"
-description: "Describes authentication options that can be used to access Zeebe REST API."
+description: "The Zeebe REST API is deprecated. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the..."
 ---
 
 :::warning

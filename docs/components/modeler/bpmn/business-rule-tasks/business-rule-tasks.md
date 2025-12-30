@@ -1,7 +1,7 @@
 ---
 id: business-rule-tasks
 title: "Business rule tasks"
-description: "A business rule task is used to model the evaluation of a business rule."
+description: "A business rule task is used to model the evaluation of a business rule; for example, a decision modeled in Decision Model and Notation (DMN)."
 ---
 
 A business rule task is used to model the evaluation of a business rule; for example, a decision

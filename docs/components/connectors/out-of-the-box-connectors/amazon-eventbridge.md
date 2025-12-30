@@ -2,7 +2,7 @@
 id: amazon-eventbridge
 sidebar_label: AWS EventBridge
 title: Amazon EventBridge connector
-description: Send events to Amazon EventBridge from your BPMN process.
+description: "[ {label: 'Amazon EventBridge connector', value: 'outbound' }, {label: 'Amazon EventBridge Webhook connector', value: 'inbound' } ]}> The Amazon EventBridge..."
 ---
 
 import Tabs from "@theme/Tabs";

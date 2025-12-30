@@ -1,7 +1,7 @@
 ---
 id: desktop-modeler-dmn
 title: DMN in Modeler
-description: "Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models, with modeling starting in the Decision Requirements Diagram (DRD) view."
+description: "Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group (OMG), which also operates worldwide..."
 ---
 
 Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group ([OMG](https://www.omg.org/)), which also operates worldwide standards for [BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).

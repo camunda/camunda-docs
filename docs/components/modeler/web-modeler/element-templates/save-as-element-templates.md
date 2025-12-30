@@ -1,7 +1,7 @@
 ---
 id: save-as-element-templates
 title: Save activity and event properties as reusable element templates
-description: Learn how to save supported activities and events as a reusable element template in Camunda Web Modeler.
+description: "Learn how to save supported activities and events as a reusable element template in Camunda Web Modeler. Element templates allow you to create reusable, conf..."
 ---
 
 import BusinessRuleTaskImg1 from './img/save-as-template/1-business-rule-task.png';

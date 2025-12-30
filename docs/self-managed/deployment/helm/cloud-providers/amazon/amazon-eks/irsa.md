@@ -1,7 +1,7 @@
 ---
 id: irsa
 title: "IAM Roles for Service Accounts (IRSA)"
-description: "Learn how to configure IAM roles for service accounts (IRSA) within AWS to authenticate workloads."
+description: "The c8-sm-checks utility is designed to validate IAM Roles for Service Accounts (IRSA) configuration in EKS Kubernetes clusters on AWS."
 ---
 
 import Tabs from '@theme/Tabs';

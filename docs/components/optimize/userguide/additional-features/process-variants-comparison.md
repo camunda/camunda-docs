@@ -1,7 +1,7 @@
 ---
 id: process-variants-comparison
 title: Process variants comparison
-description: Using copy data source tool to compare different variants of the process
+description: "When creating reports, it is possible to copy the data source and set different versions and/or tenants for each copy, as well as give it a custom title."
 ---
 
 When creating reports, it is possible to copy the data source and set different versions and/or tenants for each copy, as well as give it a custom title. This allows you to compare different variants of the process.

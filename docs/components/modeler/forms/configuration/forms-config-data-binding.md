@@ -1,7 +1,7 @@
 ---
 id: forms-config-data-binding
 title: Data binding
-description: How data from the process interacts with your form
+description: "Each form element that allows data manipulation is considered a form field and has a Key attribute.The "Key" serves a dual purpose: 1."
 ---
 
 ## Binding form fields to process data

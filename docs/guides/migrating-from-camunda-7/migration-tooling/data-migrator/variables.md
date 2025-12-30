@@ -2,7 +2,7 @@
 id: variables
 title: Variables
 sidebar_label: Variables
-description: "How the Data Migrator transforms Camunda 7 variables to Camunda 8."
+description: "The Data Migrator automatically handles the transformation of Camunda 7 variables to Camunda 8 compatible formats during migration."
 ---
 
 The Data Migrator automatically handles the transformation of Camunda 7 variables to Camunda 8 compatible formats during migration.

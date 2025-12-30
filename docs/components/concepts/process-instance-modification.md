@@ -1,7 +1,7 @@
 ---
 id: process-instance-modification
 title: "Process instance modification"
-description: "Use process instance modification to repair a running process instance."
+description: "Process instance modification is a powerful feature to repair a running process instance. The process instance may be stuck on an element, waiting for an..."
 ---
 
 Process instance modification is a powerful feature to repair a running process instance. The process instance may be

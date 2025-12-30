@@ -1,7 +1,7 @@
 ---
 id: what-is-optimize
 title: What is Optimize?
-description: "Leverage process data and analyze areas for improvement."
+description: "New to Optimize? Visit our introductory guide to Optimize to get started. Camunda 8 is built to handle three key aspects of process automation: - Design -..."
 ---
 
 :::note

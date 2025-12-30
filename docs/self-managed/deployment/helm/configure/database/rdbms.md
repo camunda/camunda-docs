@@ -2,7 +2,7 @@
 id: rdbms
 sidebar_label: Configure RDBMS
 title: Configure RDBMS in Helm chart
-description: "Configure an external relational database (RDBMS) as secondary storage for Camunda 8 Self-Managed using the Helm chart."
+description: "Configure an external relational database (RDBMS) as secondary storage for Camunda 8 Self-Managed using the Helm chart. Camunda 8 Self-Managed supports using..."
 ---
 
 Camunda 8 Self-Managed supports using an external relational database (RDBMS) as the Orchestration Cluster’s secondary storage instead of Elasticsearch or OpenSearch.

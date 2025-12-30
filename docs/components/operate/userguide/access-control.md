@@ -1,7 +1,7 @@
 ---
 id: access-control
 title: Access control
-description: "Grant users access to work with Operate."
+description: "If authorization control is enabled for your Orchestration Cluster, users require the following authorizations to work with Operate."
 ---
 
 If authorization control is enabled for your Orchestration Cluster, users require the following authorizations to work with Operate.

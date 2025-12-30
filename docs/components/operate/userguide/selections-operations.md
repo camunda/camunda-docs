@@ -1,7 +1,7 @@
 ---
 id: selections-operations
 title: Selections and operations
-description: "In some cases, you’ll need to retry or cancel many process instances at once."
+description: "In some cases, you’ll need to retry or cancel many process instances at once.Operate also supports this type of operation."
 ---
 
 In some cases, you’ll need to retry or cancel many process instances at once. Operate also supports this type of operation.

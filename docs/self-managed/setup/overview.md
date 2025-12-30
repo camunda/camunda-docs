@@ -2,7 +2,7 @@
 id: overview
 title: "Install Camunda 8 Self-Managed for production and advanced development setups"
 sidebar_label: "Overview"
-description: "This chapter contains information for users who want to deploy and run Camunda 8 Self-Managed in their self-managed cloud or own on-premise infrastructure in a production and advanced development environment."
+description: "This section provides an overview of the available recommendations for installing Camunda 8 Self-Managed in a production-ready environment, whether in a..."
 keywords: ["camunda download", "production installation"]
 ---
 

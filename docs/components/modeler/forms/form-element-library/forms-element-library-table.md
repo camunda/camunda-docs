@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-table
 title: Table
-description: Learn about the table form element to render tabular data.
+description: "This is an element allowing the user to render tabular data.- Table label: Label displayed on top of the table and as the accessible label."
 ---
 
 This is an element allowing the user to render tabular data.

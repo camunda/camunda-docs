@@ -1,7 +1,7 @@
 ---
 id: terraform-setup
 title: "Deploy a ROSA HCP Cluster with Terraform"
-description: "Deploy Red Hat OpenShift on AWS using a Terraform module for a quick Camunda 8 setup."
+description: "This guide provides a detailed tutorial for deploying a Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) capabilities."
 ---
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with ../amazon-eks/terraform-setup.md. The user should have a similar experience when reading both guides. -->

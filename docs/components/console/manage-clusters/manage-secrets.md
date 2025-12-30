@@ -1,7 +1,7 @@
 ---
 id: manage-secrets
 title: Connector secrets
-description: Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
+description: "Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes. Create secrets and reference them in your..."
 ---
 
 Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.

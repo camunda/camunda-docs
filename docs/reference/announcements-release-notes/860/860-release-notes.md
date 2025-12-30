@@ -1,7 +1,7 @@
 ---
 id: 860-release-notes
 title: "Release notes"
-description: "Release notes for 8.6, including alphas"
+description: "These release notes identify the new features included in 8.6, including alpha feature releases. As the Spring-Boot OSS Support for the bundled Spring-Boot..."
 keywords:
   [
     "product development lifecycle",

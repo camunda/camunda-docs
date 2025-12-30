@@ -1,7 +1,7 @@
 ---
 id: process-KPIs
 title: Process KPIs
-description: "Learn how key performance indicators (KPIs) can be created and used in Optimize."
+description: "Key performance indicators (KPIs) are reports represented by single numerical values with predefined targets.To create a custom KPI, follow the steps below: 1."
 ---
 
 Key performance indicators (KPIs) are reports represented by single numerical values with predefined targets.

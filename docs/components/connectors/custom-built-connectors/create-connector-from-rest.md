@@ -1,7 +1,7 @@
 ---
 id: create-connector-from-rest
 title: Create a custom REST connector
-description: Learn how to create a custom connector based on and using the Camunda REST connector as a starting point.
+description: "Learn how to create a custom connector based on and using the Camunda REST connector as a starting point. Create a custom REST connector based on and using t..."
 ---
 
 import CustomRestURLImg from './img/custom-rest-connector.png';

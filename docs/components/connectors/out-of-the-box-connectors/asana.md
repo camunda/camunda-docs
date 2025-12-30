@@ -2,7 +2,7 @@
 id: asana
 title: Asana connector
 sidebar_label: Asana
-description: Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana connector task, and get started.
+description: "Manage Asana projects and tasks from your BPMN process. Learn how to create an Asana connector task, and get started. The Asana connector is an outbound prot..."
 ---
 
 The Asana connector is an outbound protocol connector that allows you to connect your BPMN service with [Asana](https://asana.com/) to get and create Asana tasks and projects.

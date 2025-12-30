@@ -1,7 +1,7 @@
 ---
 id: form-js-concepts
 title: "Concepts"
-description: "Understand the basic concepts of form-js"
+description: "Use form-js, the open-source library that powers Camunda Forms, to embed forms anywhere from vanilla JavaScript to low-code application platforms."
 ---
 
 import clsx from "clsx";

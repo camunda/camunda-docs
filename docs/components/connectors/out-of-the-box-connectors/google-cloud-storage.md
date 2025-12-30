@@ -2,7 +2,7 @@
 id: google-cloud-storage
 title: Google Cloud storage connector
 sidebar_label: Google Cloud Storage
-description: Interact with Google Cloud Storage from your BPMN process.
+description: "The Google Cloud Storage connector is an outbound connector that allows you to interact with Google Cloud Storage resources from your BPMN processes."
 ---
 
 The **Google Cloud Storage connector** is an outbound connector that allows you to interact with

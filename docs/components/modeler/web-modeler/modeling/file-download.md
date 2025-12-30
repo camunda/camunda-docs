@@ -1,7 +1,7 @@
 ---
 id: file-download
 title: File download
-description: Learn how to download files from Web Modeler and export diagrams in different image formats.
+description: "You can download all the files stored in Web Modeler to your local computer for offline editing or integration into version control."
 ---
 
 import SingleFileDownloadImg from './img/download/single-file-download.png'

@@ -2,7 +2,7 @@
 id: troubleshooting-oidc
 sidebar_label: Troubleshoot OIDC authentication
 title: Troubleshoot OIDC authentication
-description: "Common issues and solutions when configuring OIDC authentication for Camunda 8 Self-Managed."
+description: "This page provides solutions to common issues encountered when configuring OIDC authentication for Camunda 8 Self-Managed."
 ---
 
 This page provides solutions to common issues encountered when configuring OIDC authentication for Camunda 8 Self-Managed.

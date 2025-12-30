@@ -2,7 +2,7 @@
 id: slack
 title: Slack connector
 sidebar_label: Slack
-description: Send messages to channels or users in your Slack workspace from your BPMN process.
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Slack connector is an outbound connector that allows you to send..."
 ---
 
 import Tabs from "@theme/Tabs";

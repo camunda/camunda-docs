@@ -1,7 +1,7 @@
 ---
 id: managing-tasks
 title: Managing tasks
-description: "How to assign and complete tasks in Tasklist."
+description: "When you've successfully logged in, you'll see the Tasks page: !tasklist-start-screen To find relevant tasks you can use filters."
 ---
 
 When you've successfully logged in, you'll see the **Tasks** page:

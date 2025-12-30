@@ -1,5 +1,6 @@
 ---
 id: network-ports
+description: "The broker cluster sits behind the gateway, which handles all requests (via REST and gRPC servers) from clients/workers and forwards events to brokers."
 title: "Network ports"
 ---
 

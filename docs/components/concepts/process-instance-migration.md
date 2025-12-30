@@ -1,7 +1,7 @@
 ---
 id: process-instance-migration
 title: "Process instance migration"
-description: "Use process instance migration to change the process definition of a running process instance."
+description: "Process instance migration fits a running process instance to a different process definition. This can be useful when the process definition of a running..."
 ---
 
 import TargetProcessDefinition from './assets/process-instance-migration/migration-joining-gateway-modeler-after.png';

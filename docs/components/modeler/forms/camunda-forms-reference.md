@@ -1,7 +1,7 @@
 ---
 id: camunda-forms-reference
 title: What are Camunda Forms?
-description: Streamline your human workflows with the help of Camunda Forms
+description: "The initial release of Camunda Forms includes a debut minimal feature set, which will be expanded with upcoming versions."
 ---
 
 :::note Support for Camunda Forms

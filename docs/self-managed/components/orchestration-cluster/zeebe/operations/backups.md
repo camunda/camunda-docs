@@ -1,7 +1,7 @@
 ---
 id: backups
 title: "Backups"
-description: "A guide to creating and installing Zeebe backups."
+description: "Refer to our documentation on backup and restore to learn how to take backups without downtime. As Zeebe fully manages the state of your process instances,..."
 keywords: ["backup", "backups"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: called-element
 title: Called element
-description: Reference for the `called-element` rule.
+description: "Call activities must specify the process ID of the called process. To fix this problem, open the Called element group in the properties panel on the right..."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

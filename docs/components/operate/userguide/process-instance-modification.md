@@ -1,7 +1,7 @@
 ---
 id: process-instance-modification
 title: Process instance modification
-description: "You may need to modify an active process instance to allow execution to continue."
+description: "You may need to modify an active process instance to allow execution to continue. The execution may be stuck, and you may want to continue the execution on a..."
 ---
 
 You may need to modify an active process instance to allow execution to continue. The execution may be stuck, and you may want to continue the execution on a different activity (i.e. skip or repeat activities).

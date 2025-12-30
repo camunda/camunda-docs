@@ -1,5 +1,6 @@
 ---
 id: zeebe-process-test
+description: "Zeebe Process Test is deprecated as of Camunda 8.8 and will be removed in Camunda 8.10.Our new testing library is Camunda Process Test."
 title: "Zeebe Process Test"
 ---
 

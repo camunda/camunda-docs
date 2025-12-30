@@ -1,7 +1,7 @@
 ---
 id: process-landscape-visualization
 title: Process landscape visualization
-description: "A comprehensive, hierarchical view of all processes within the project."
+description: "Process landscape view provides a visual map of BPMN files in a project and interfile call activities connections between them."
 ---
 
 import ProcessLandscapeVisualization from './img/process-landscape-visualization.png';

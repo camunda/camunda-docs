@@ -2,7 +2,7 @@
 id: configure-db-custom-headers
 sidebar_label: Configure custom HTTP headers
 title: Configure custom HTTP headers for database clients
-description: Learn how to add custom HTTP headers to database clients in Camunda 8 Self-Managed.
+description: "You can add custom HTTP headers to the Elasticsearch or OpenSearch clients used by Camunda components by creating a Java plugin and adding it to your Camunda..."
 ---
 
 import Tabs from "@theme/Tabs";

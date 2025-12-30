@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-group
 title: Group
-description: Learn about the group form element to group multiple form elements
+description: "The group element serves as a container to group various form elements together.It allows for nesting of fields and assists in organizing complex forms."
 ---
 
 The group element serves as a container to group various form elements together. It allows for nesting of fields and assists in organizing complex forms.

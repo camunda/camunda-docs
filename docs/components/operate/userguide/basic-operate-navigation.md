@@ -1,7 +1,7 @@
 ---
 id: basic-operate-navigation
 title: Getting familiar with Operate
-description: "Learn how to navigate Operate and its features."
+description: "This section and the next section, variables and incidents, assumes you’ve deployed a process to Zeebe and created at least one process instance."
 ---
 
 :::note

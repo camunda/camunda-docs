@@ -1,7 +1,7 @@
 ---
 id: start-instance
 title: Start a new process instance
-description: "After you have deployed your process to Camunda 8, you can start a new instance of this process via the play icon."
+description: "After you have deployed your process to Camunda 8, you can start a new instance of this process via the play icon. After you have deployed your process to Ca..."
 ---
 
 After you have [deployed your process to Camunda 8](./connect-to-camunda-8.md), you can start a new instance of this process via the play icon:

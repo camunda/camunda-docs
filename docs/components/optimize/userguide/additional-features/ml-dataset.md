@@ -1,7 +1,7 @@
 ---
 id: ml-dataset
 title: Machine learning-ready data set
-description: Export a raw data report in JSON format, which can be used for training a machine learning model.
+description: "The machine learning-ready data set feature allows the export of data into a single data set, easing performance of advanced analysis with Optimize."
 ---
 
 The machine learning-ready data set feature allows the export of data into a single data set, easing performance of advanced analysis with Optimize. The data set generated can contain process information and be assembled by generating a raw data report.

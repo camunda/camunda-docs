@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-authentication
 title: "Authentication"
-description: "Step through authentication options that can be used to access the Zeebe API (gRPC)."
+description: "This page describes the available authentication methods for accessing the Zeebe API (gRPC) in the Orchestration Cluster."
 ---
 
 import Tabs from "@theme/Tabs";

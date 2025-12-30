@@ -2,7 +2,7 @@
 id: googledrive
 title: Google Drive connector
 sidebar_label: Google Drive
-description: Create folders or files from a Google Drive template from your BPMN process.
+description: "The Google Drive connector is an outbound connector that allows you to create empty folders or files on Google Drive from templates from your BPMN process."
 ---
 
 The **Google Drive connector** is an outbound connector that allows you to create empty folders or files on [Google Drive](https://drive.google.com/) from templates from your BPMN process.

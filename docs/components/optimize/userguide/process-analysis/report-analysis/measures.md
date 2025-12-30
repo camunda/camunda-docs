@@ -1,7 +1,7 @@
 ---
 id: measures
 title: Measures
-description: You can add and change different aggregations like minimum, maximum, and median in the report configuration panel.
+description: "You can add and change different aggregations like minimum, maximum, and median in the report configuration panel. For duration and variable views, the defau..."
 ---
 
 ## Duration and variable report aggregation

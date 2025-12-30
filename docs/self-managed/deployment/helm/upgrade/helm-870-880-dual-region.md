@@ -2,7 +2,7 @@
 id: upgrade-hc-870-880-dual-region
 sidebar_label: Dual-Region Upgrade
 title: Camunda 8.7 to 8.8 Dual-Region Upgrade
-description: "Learn about Dual-Region specifics of the upgrade."
+description: "If you are upgrading a dual-region deployment to 8.8, the upgrade steps in the Upgrade 8.7 to 8.8 as well as well as the components upgrade guide apply."
 toc_max_heading_level: 3
 ---
 

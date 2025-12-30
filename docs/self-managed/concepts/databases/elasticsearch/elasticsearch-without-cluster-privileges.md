@@ -1,5 +1,6 @@
 ---
 id: elasticsearch-without-cluster-privileges
+description: "If the Camunda single application cannot access Elasticsearch with cluster-level privileges, you can run the schema manager as a standalone application,..."
 title: "Elasticsearch without cluster privileges"
 keywords: ["elasticsearch", "schema", "backup", "backups"]
 ---

@@ -1,7 +1,7 @@
 ---
 id: business-rule-task-linking
 title: Business rule task linking
-description: Use one of the following approaches to link the DMN decision to be called by a business rule task.
+description: "You can use either of the following approaches to link the DMN decision to be called by a business rule task. 1. Select a business rule task from the canvas...."
 ---
 
 import PropertiesPanelImg from './img/brt_properties-panel.png'

@@ -1,7 +1,7 @@
 ---
 id: camunda-docs-ai
 title: Camunda Docs AI
-description: Ask our smart AI-powered chatbot technical and non-technical questions about Camunda 8.
+description: "Camunda Docs AI is an alpha feature.To use this feature, enable the AI-powered features through the alpha features menu."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

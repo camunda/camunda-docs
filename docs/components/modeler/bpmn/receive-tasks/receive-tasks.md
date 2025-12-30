@@ -1,7 +1,7 @@
 ---
 id: receive-tasks
 title: "Receive tasks"
-description: "Receive tasks reference a message; these are used to wait until a proper message is received."
+description: "Receive tasks reference a message; these are used to wait until a proper message is received. !Receive Tasks When a receive task is entered, a corresponding..."
 ---
 
 Receive tasks reference a message; these are used to wait until a proper message is received.

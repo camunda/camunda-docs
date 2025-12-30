@@ -3,7 +3,7 @@ id: gateway-service
 title: "Zeebe API RPCs"
 slug: /apis-tools/zeebe-api/gateway-service
 sidebar_position: 2
-description: "The Zeebe client gRPC API is exposed through a single gateway service."
+description: "The Zeebe client gRPC API is exposed through a single gateway service.The current version of the protocol buffer file can be found in the Zeebe repository."
 ---
 
 The Zeebe client gRPC API is exposed through a single gateway service. The current version of the protocol buffer file

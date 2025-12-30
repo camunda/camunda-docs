@@ -2,7 +2,7 @@
 id: security
 title: "Security"
 sidebar_label: "Overview"
-description: "This document analyzes Zeebe's security features."
+description: "Zeebe supports the following security features: - Client-gateway authorization - Allows you set up authorization for the client and the gateway."
 ---
 
 Zeebe supports the following security features:

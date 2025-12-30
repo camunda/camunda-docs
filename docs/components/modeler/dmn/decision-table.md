@@ -1,7 +1,7 @@
 ---
 id: decision-table
 title: Overview
-description: This document outlines an overview of decision tables and their general properties.
+description: "!Decision Table A decision table represents decision logic which can be depicted as a table.It consists of inputs, outputs and rules."
 ---
 
 ![Decision Table](assets/decision-table/dish-table.png)

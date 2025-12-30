@@ -2,7 +2,7 @@
 id: saas-ip-addresses
 title: "Hostnames and IP addresses for Camunda connections"
 sidebar_label: Hostnames and IP addresses for Camunda connections
-description: "Details on the network configuration for Camunda 8 SaaS clusters."
+description: "Camunda 8 SaaS hostnames and IP addresses for inbound and outbound connections.Camunda SaaS uses static IP addresses for some of its services."
 ---
 
 <span class="badge badge--cloud">Camunda 8 SaaS only</span>

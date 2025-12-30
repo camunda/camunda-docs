@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: "Getting started with document handling"
-description: "Learn more about integration, secure management, and efficient storage and retrieval of documents across development and production environments in Self-Managed."
+description: "Camunda 8 Self-Managed supports document storage and management using Camunda Forms, connectors, Tasklist, and the Orchestration Cluster REST API."
 keywords: ["document handling", "document storage configuration"]
 ---
 

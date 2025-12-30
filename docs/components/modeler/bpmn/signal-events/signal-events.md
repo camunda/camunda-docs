@@ -1,7 +1,7 @@
 ---
 id: signal-events
 title: "Signal events"
-description: "Signal events are events which reference a signal; they are used to wait until a matching signal is received."
+description: "Signal events are events which reference a signal; they are used to wait until a matching signal is received. Signal events are events which reference a sign..."
 ---
 
 Signal events are events which reference a [signal](../../../concepts/signals.md).

@@ -2,7 +2,7 @@
 id: limitations
 title: Limitations
 sidebar_label: Limitations
-description: "Data Migrator limitations."
+description: "An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to..."
 ---
 
 An overview of the current limitations of the Camunda 7 to Camunda 8 Data Migrator, covering general limitations as well as specific limitations related to variables and BPMN elements.

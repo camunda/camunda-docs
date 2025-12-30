@@ -1,7 +1,7 @@
 ---
 id: flow-starter
 title: ServiceNow Flow Starter
-description: "Trigger ServiceNow flows from Camunda processes using the ServiceNow Flow Starter."
+description: "Use the ServiceNow Flow Starter connector to trigger ServiceNow flows from Camunda processes and correlate them using the ServiceNow Sys ID."
 ---
 
 Use the ServiceNow Flow Starter connector to trigger ServiceNow flows from Camunda processes and correlate them using the ServiceNow **Sys ID**.

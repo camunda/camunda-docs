@@ -1,7 +1,7 @@
 ---
 id: rfc-connector
 title: SAP RFC connector
-description: "The SAP RFC connector is a Java Spring Boot application that runs on SAP BTP."
+description: "The SAP RFC Connector is a protocol and outbound connector.<br/> This connector is a Java Spring Boot application that runs as a .war on the SAP Business..."
 ---
 
 The [SAP RFC](/reference/glossary.md#rfc) [Connector](/components/connectors/introduction.md) is a [protocol and outbound connector](/components/connectors/connector-types.md).<br/>

@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-list
 title: List functions
-description: "This document outlines built-in list functions and examples."
+description: "Returns true if the given list contains the element. Otherwise, returns false. Function signature ``feel list contains(list: list, element: Any): boolean `..."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

@@ -2,7 +2,7 @@
 id: diagram-converter
 title: Diagram Converter
 sidebar_label: Diagram Converter
-description: "Learn how to use the Diagram Converter to analyze and convert Camunda 7 diagrams to Camunda 8."
+description: "With Diagram Converter, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8."
 ---
 
 With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 diagram files (BPMN or DMN) and generates a list of tasks required for the migration.

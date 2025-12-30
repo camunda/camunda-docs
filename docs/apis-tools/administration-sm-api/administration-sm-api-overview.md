@@ -2,7 +2,7 @@
 id: administration-sm-api-overview
 title: "Overview"
 sidebar_position: 1
-description: "Access the Administration API for Self-Managed to retrieve cluster data, including installed apps and usage metrics."
+description: "Access the Administration API for Self-Managed to retrieve cluster data, including installed apps and usage metrics. The Administration API for Self-Managed ..."
 ---
 
 The Administration API for Self-Managed is a REST API that provides endpoints to retrieve cluster data, including installed apps and usage metrics.

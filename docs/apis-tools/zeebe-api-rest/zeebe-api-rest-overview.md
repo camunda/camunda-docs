@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-rest-overview
 title: "Overview"
-description: "Interact with Zeebe clusters. Run user task state operations for Zeebe user tasks."
+description: "The Zeebe REST API is a REST API designed to interact with the Zeebe workflow engine.Ensure you authenticate before accessing the Zeebe REST API."
 ---
 
 ## Introduction

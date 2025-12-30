@@ -2,7 +2,7 @@
 id: external-idp-via-internal-keycloak
 sidebar_label: External IdP via internal Keycloak
 title: Set up an external IdP with internal Keycloak
-description: Configure an external identity provider to authenticate users through the internal Keycloak identity broker.
+description: "Configure an external identity provider to authenticate users through the internal Keycloak identity broker. This guide explains how to configure the interna..."
 ---
 
 This guide explains how to configure the internal Keycloak instance as an identity broker that delegates authentication to an external identity provider (IdP), such as an OIDC provider, SAML, LDAP, or Active Directory.

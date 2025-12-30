@@ -1,7 +1,7 @@
 ---
 id: multi-tenancy
 title: "Multi-tenancy"
-description: "Learn about the supported multi-tenancy scenarios."
+description: "Multi-tenancy is the ability of Camunda 8 to serve multiple distinct tenants or clients within a single installation. From version 8.3 onwards, Optimize has..."
 ---
 
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>

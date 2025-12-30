@@ -1,7 +1,7 @@
 ---
 id: process-instance-migration
 title: Process instance migration
-description: "Migrate process instances from one process version to another using the process instance migration feature."
+description: "Migrate process instances from one process version to another using the process instance migration feature. Process instances can be migrated from one specif..."
 ---
 
 Process instances can be migrated from one specific process definition version to another using the process instance migration feature.

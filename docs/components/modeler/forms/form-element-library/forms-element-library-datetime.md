@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-datetime
 title: Datetime
-description: Learn about the datetime form element to read and edit date and time data.
+description: "A component allowing the user to read and edit date and time data.- Date label: Label displayed beside the date input field."
 ---
 
 A component allowing the user to read and edit date and time data.

@@ -1,7 +1,7 @@
 ---
 id: export-report-definitions
 title: "Export report definitions"
-description: "The REST API to export report definitions."
+description: "This API allows users to export report definitions which can later be imported into another Optimize system. The reports to be exported may be within a..."
 ---
 
 This API allows users to export report definitions which can later be imported into another Optimize system. The reports to be exported may be within a collection or private entities, the API has access to both.

@@ -2,7 +2,7 @@
 id: cluster-variable-use
 title: How to use cluster variables
 sidebar_label: "How to use"
-description: "Learn how to use and access cluster variables, from simple to advanced patterns."
+description: "Learn how to use and access cluster variables, from simple to advanced patterns.Map cluster variables to service task inputs."
 ---
 
 Learn how to use and access cluster variables, from simple to advanced patterns.

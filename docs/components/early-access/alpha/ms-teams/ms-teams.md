@@ -2,7 +2,7 @@
 id: ms-teams
 title: Camunda for Microsoft Teams app
 sidebar_label: Microsoft Teams app
-description: "Access Camunda functionality right from MS Teams"
+description: "View, claim, and complete Camunda tasks directly in Microsoft Teams.The Camunda for Microsoft Teams app integrates Camunda functionality within Microsoft Teams."
 ---
 
 import TeamsAppImg from './img/ms-teams-screenshot.png';

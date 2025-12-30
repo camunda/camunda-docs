@@ -1,7 +1,7 @@
 ---
 id: defining-task-priorities
 title: Defining task priorities
-description: "Organize and order your tasks with clear prioritization."
+description: "You can add prioritization to user task elements by specifying a priority value for a user task. This determines the task's importance in relation to other..."
 ---
 
 import styles from "./styles.module.css";

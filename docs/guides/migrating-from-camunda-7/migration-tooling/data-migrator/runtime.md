@@ -2,7 +2,7 @@
 id: runtime
 title: Runtime migration
 sidebar_label: Runtime migration
-description: "Migrate running Camunda 7 process instances to Camunda 8 while preserving state."
+description: "Migrate currently running process instances.Running refers to process instances in Camunda 7 are not yet ended and are currently waiting in a wait-state."
 ---
 
 Migrate currently running process instances.

@@ -1,5 +1,6 @@
 ---
 id: tasklist-configuration
+description: "As a Spring Boot application, Tasklist supports any standard Spring configuration method. By default, the configuration for Tasklist is stored in a YAML file..."
 title: Configuration
 ---
 

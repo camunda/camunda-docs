@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-iframe
 title: iframe
-description: Learn about the iframe form element to embed external content.
+description: "This is an element allowing the user to embed external content via an iframe. Every iframe component is a sandbox. This means that the content of the iframe..."
 ---
 
 This is an element allowing the user to embed external content via an iframe.

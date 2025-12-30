@@ -1,7 +1,7 @@
 ---
 id: overview
 title: Overview
-description: Learn how Camunda uses document and relational databases for secondary storage, including supported options, limitations, and where to find configuration details.
+description: "Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine."
 ---
 
 Camunda applications depend on a secondary storage backend to read workflow and decision data exported from the Zeebe engine.

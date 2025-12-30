@@ -1,7 +1,7 @@
 ---
 id: idp-document-extraction
 title: Document extraction
-description: "Document extraction projects form the basis for using intelligent document processing (IDP) in your end-to-end processes. Extract data from a single type of structured or unstructured document."
+description: "Extract data from a single type of structured or unstructured document.Document extraction templates form the basis for using IDP in your end-to-end processes."
 ---
 
 import IdpExtractionProjectModalImg from './img/idp-create-extraction-project-modal.png';

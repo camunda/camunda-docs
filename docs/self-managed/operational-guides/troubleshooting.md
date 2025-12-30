@@ -1,7 +1,7 @@
 ---
 sidebar_label: Troubleshooting
 title: Camunda components troubleshooting
-description: "Troubleshooting considerations in Platform deployment."
+description: "Due to recent changes in Bitnami's Helm charts (a third-party dependency), you may see a security warning when installing the Camunda Helm chart."
 ---
 
 ## Helm chart security warning

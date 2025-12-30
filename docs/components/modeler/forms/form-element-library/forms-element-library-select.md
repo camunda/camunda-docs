@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-select
 title: Select
-description: A form element to select a value from set options
+description: "A Select dropdown allowing the user to select one of multiple data option from larger datasets.- Field label: Label displayed above the select."
 ---
 
 A Select dropdown allowing the user to select one of multiple data option from larger datasets.

@@ -2,7 +2,7 @@
 id: edit-mode
 title: "Configure dashboards"
 sidebar_label: "Configure dashboards"
-description: "Configure and customize your dashboards in Edit mode."
+description: "Configure and customize your dashboards in Edit mode. It allows you to perform operations such as renaming, modifying or removing descriptions; adding,..."
 ---
 
 import TileEditButton from './img/tile-edit-button.png'

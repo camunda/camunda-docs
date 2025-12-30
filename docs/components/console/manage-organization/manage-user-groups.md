@@ -2,7 +2,7 @@
 id: manage-user-groups
 title: "Manage user groups"
 sidebar_label: "Manage user groups"
-description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions."
+description: "Control the level of access a user or group has to perform tasks in the system via user task access restrictions. User groups are a way to organize users wit..."
 ---
 
 User groups are a way to organize users within your organization.

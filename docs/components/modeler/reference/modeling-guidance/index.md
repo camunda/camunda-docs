@@ -2,7 +2,7 @@
 id: index
 title: Modeling guidance
 sidebar_label: About
-description: Learn how to resolve common modeling issues, using assistance baked into Camunda's modeling tools.
+description: "Modeler checks your BPMN diagram for problems affecting deployment and execution, and provides guidance on how to fix them."
 ---
 
 import DocCardList from '@theme/DocCardList';

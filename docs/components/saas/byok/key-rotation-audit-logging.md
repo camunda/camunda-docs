@@ -1,7 +1,7 @@
 ---
 id: key-rotation-audit-logging
 title: "Key rotation and audit logging"
-description: "Camunda cannot rotate customer-managed keys. Any key rotation must be performed manually within your Amazon account."
+description: "Camunda cannot rotate customer-managed keys. Any key rotation must be performed manually within your Amazon account. Learn more about key rotation and audit ..."
 ---
 
 Learn more about key rotation and audit logging when using Amazon BYOK with Camunda 8.8.

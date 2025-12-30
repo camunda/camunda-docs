@@ -2,7 +2,7 @@
 id: chart-parameters
 sidebar_label: Parameters
 title: Helm chart parameters
-description: Overview of Helm chart parameters for Camunda Self-Managed.
+description: "Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is..."
 ---
 
 Helm chart parameters let you configure the components and behavior of your Camunda Self-Managed installation. The main way to customize these parameters is by using a `values.yaml` file.

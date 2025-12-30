@@ -2,7 +2,7 @@
 id: connect-to-an-oidc-provider
 title: "Connect Management Identity to an identity provider"
 sidebar_label: Connect to an identity provider
-description: "To enable a smoother integration with your existing systems, connect to an OpenID Connect provider"
+description: "Configure Management Identity for your Camunda 8 Self-Managed deployment. This guide covers application-level configuration, including environment variables..."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -2,7 +2,7 @@
 id: http-webhook
 title: HTTP Webhook connector
 sidebar_label: HTTP Webhook
-description: Start a process instance with your custom webhook configuration, triggered by an external HTTP call.
+description: "Start a process instance with your custom webhook configuration, triggered by an external HTTP call. The HTTP Webhook connector is an inbound connector that ..."
 ---
 
 The **HTTP Webhook connector** is an inbound connector that allows you to start a BPMN process instance triggered by external HTTP call.

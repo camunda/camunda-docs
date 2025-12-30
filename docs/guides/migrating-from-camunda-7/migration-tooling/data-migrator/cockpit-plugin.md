@@ -2,7 +2,7 @@
 id: cockpit-plugin
 title: Cockpit plugin
 sidebar_label: Cockpit plugin
-description: "Web-based interface for viewing information about skipped entities during the migration process."
+description: "- The Cockpit plugin is an experimental feature and we don't recommend using it in production environments.- Read more about this plugin's limitations."
 ---
 
 :::warning Experimental feature

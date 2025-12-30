@@ -1,7 +1,7 @@
 ---
 id: get-dashboard-ids
 title: "Get dashboard IDs"
-description: "The REST API to retrieve all dashboard IDs in a given collection."
+description: "This API allows users to retrieve all dashboard IDs from a given collection. GET /api/public/dashboard The following request headers have to be provided with..."
 ---
 
 This API allows users to retrieve all dashboard IDs from a given collection.

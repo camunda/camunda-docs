@@ -2,7 +2,7 @@
 id: user-task-listeners
 title: "User task listeners"
 sidebar_label: "Overview"
-description: "User task listeners allow users to react to specific user task lifecycle events."
+description: "A user task listener allows users to react to specific user task lifecycle events.Try out our getting started with user task listeners guide."
 ---
 
 A user task listener allows users to react to specific user task lifecycle events.

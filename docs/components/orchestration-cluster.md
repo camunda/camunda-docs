@@ -2,7 +2,7 @@
 id: orchestration-cluster
 title: About the Orchestration Cluster
 sidebar_label: Orchestration Cluster
-description: ""
+description: "The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. It includes: - Zeebe as the workflow..."
 ---
 
 The Orchestration Cluster is the core component of Camunda 8, powering the automation and orchestration of processes. It includes:

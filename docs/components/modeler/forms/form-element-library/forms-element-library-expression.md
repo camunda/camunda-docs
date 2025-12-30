@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-expression
 title: Expression field
-description: A form element to compute form state
+description: "An expression field allowing the user to compute new data based on form state.- Key: Binds the field to a form variable, refer to data binding docs."
 ---
 
 An expression field allowing the user to compute new data based on form state.

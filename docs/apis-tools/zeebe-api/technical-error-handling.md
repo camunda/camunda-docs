@@ -3,7 +3,7 @@ id: technical-error-handling
 title: "Technical error handling"
 sidebar_position: 3
 slug: /apis-tools/zeebe-api/technical-error-handling
-description: "Learn more about business logic errors as a result of request processing logic."
+description: "In the documentation above, the documented errors are business logic errors. These errors are a result of request processing logic, and not serialization,..."
 ---
 
 In the documentation above, the documented errors are business logic errors.

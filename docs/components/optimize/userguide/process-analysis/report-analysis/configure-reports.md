@@ -1,7 +1,7 @@
 ---
 id: configure-reports
 title: Configure reports
-description: The configuration panel groups all the settings that can be applied to a report in one place.
+description: "The configuration panel groups all the settings that can be applied to a report in one place. To see the panel, click on the cog button available in the edit..."
 ---
 
 The configuration panel groups all the settings that can be applied to a report in one place. To see the panel, click on the cog button available in the edit mode of any report. Every visualization has different settings that can be configured in the panel.

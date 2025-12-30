@@ -3,7 +3,7 @@ id: backup
 sidebar_label: Create a backup
 title: Camunda backup creation
 keywords: ["backup", "backups"]
-description: "Learn how to back up your Camunda 8 Self-Managed components."
+description: "Back up your Camunda 8 Self-Managed components and cluster.To create a backup you must complete the following back up process."
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,7 +2,7 @@
 id: elasticsearch-exporter
 title: "Elasticsearch exporter"
 sidebar_label: "Elasticsearch"
-description: "The Zeebe Elasticsearch exporter acts as a bridge between Zeebe and Elasticsearch."
+description: "Please refer to supported environments to find out which versions of Elasticsearch are supported in a Camunda 8 Self-Managed setup."
 ---
 
 import Tabs from "@theme/Tabs";

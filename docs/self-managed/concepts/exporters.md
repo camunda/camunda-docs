@@ -1,7 +1,7 @@
 ---
 id: exporters
 title: Camunda exporters
-description: "As Zeebe processes jobs and processes, or performs internal maintenance, it generates an ordered stream of records."
+description: "As Zeebe processes jobs and processes, or performs internal maintenance, it generates an ordered stream of records. As Zeebe processes jobs and workflows, or..."
 ---
 
 import Tabs from "@theme/Tabs";

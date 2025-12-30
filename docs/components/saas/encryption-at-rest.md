@@ -1,7 +1,7 @@
 ---
 id: encryption-at-rest
 title: "Encryption at rest"
-description: "Camunda 8 SaaS cluster data at rest is protected using provider-managed or Camunda-managed encryption keys. AWS enterprise customers can bring their own KMS key (BYOK) for full control."
+description: "Encryption at rest protects stored data by making it unreadable without the appropriate decryption keys. By default, Camunda 8 SaaS uses a provider-managed..."
 keywords:
   [
     "encryption",

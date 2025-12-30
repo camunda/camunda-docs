@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: Glossary
-description: "Definitions of key terms and concepts used in the Camunda–ServiceNow integration."
+description: "Use this glossary to understand key terms and concepts when working with the Camunda–ServiceNow integration. | Term | Definition | Relevance |"
 ---
 
 Use this glossary to understand key terms and concepts when working with the Camunda–ServiceNow integration.

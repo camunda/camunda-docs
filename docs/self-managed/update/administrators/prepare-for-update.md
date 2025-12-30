@@ -1,7 +1,7 @@
 ---
 id: prepare-for-admin-upgrade
 title: "Prepare for upgrade"
-description: "Prepare for an upgrade to Camunda 8.8 Self-Managed – Administrator guide."
+description: "This guide is a starting point to get high level overview of preparation for an upgrade to Camunda 8.8 Self-Managed: assess your infrastructure, review..."
 ---
 
 This guide is a starting point to get high level overview of preparation for an upgrade to Camunda 8.8 Self-Managed: assess your infrastructure, review operational changes, and choose an upgrade strategy appropriate for your environment.

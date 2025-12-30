@@ -2,7 +2,7 @@
 id: data-purge
 sidebar_label: Data purge
 title: Camunda data purge
-description: "Purge data from your Camunda cluster"
+description: "The data purge feature allows you to delete all runtime and historical data from your cluster. This operation resets the cluster to an empty state while..."
 ---
 
 import Tabs from "@theme/Tabs";

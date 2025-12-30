@@ -1,7 +1,7 @@
 ---
 id: export-dashboard-definitions
 title: "Export dashboard definitions"
-description: "The REST API to export dashboard definitions."
+description: "This API allows users to export dashboard definitions which can later be imported into another Optimize system. Note that exporting a dashboard also exports..."
 ---
 
 This API allows users to export dashboard definitions which can later be imported into another Optimize system. Note that exporting a dashboard also exports all reports contained within the dashboard. The dashboards to be exported may be within a Collection or private entities, the API has access to both.

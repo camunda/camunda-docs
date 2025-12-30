@@ -1,7 +1,7 @@
 ---
 id: backups
 title: "Backups"
-description: "Learn more about backups with the Orchestration Cluster."
+description: "When running an orchestration cluster with secondary storage, you must configure a snapshot repository in your chosen database: - Elasticsearch snapshot..."
 ---
 
 When running an orchestration cluster with [secondary storage](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage), you must configure a snapshot repository in your chosen database:

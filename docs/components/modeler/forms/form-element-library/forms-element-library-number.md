@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-number
 title: Number
-description: A form element to read and edit numeric data
+description: "A number field allowing the user to read and edit numeric data.- Field label: Label displayed on top of the number field."
 ---
 
 A number field allowing the user to read and edit numeric data.

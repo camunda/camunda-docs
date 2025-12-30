@@ -1,7 +1,7 @@
 ---
 id: orchestration-cluster-api-rest-data-fetching
 title: "Data fetching"
-description: "Learn about fetching data using the Orchestration Cluster REST API."
+description: "The Orchestration Cluster REST API allows you to retrieve data from key resources like process definitions, user tasks, users, and tenants."
 ---
 
 import Tabs from "@theme/Tabs";

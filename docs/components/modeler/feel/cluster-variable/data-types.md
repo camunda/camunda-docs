@@ -2,7 +2,7 @@
 id: cluster-variable-data-types
 title: Supported data types
 sidebar_label: "Supported data types"
-description: "Understand data types supported by cluster variables."
+description: "Understand the data types supported by cluster variables for different configuration needs.- String: Text values for URLs, names, identifiers."
 ---
 
 Understand the data types supported by cluster variables for different configuration needs.

@@ -1,7 +1,7 @@
 ---
 id: saas
 title: Camunda 8 SaaS
-description: "Learn about Camunda 8 SaaS, the fully managed cloud-based service requiring no technical setup or installation, with maintenance and scaling is handled by Camunda."
+description: "Run Camunda 8 as a fully managed, cloud-based service.No technical setup or installation is needed, and maintenance and scaling is handled by Camunda."
 ---
 
 import SaasComplianceImg from './img/saas-compliance.png';

@@ -2,7 +2,7 @@
 id: a2a-client-connector
 title: A2A Client connector
 sidebar_label: A2A Client connector
-description: "Retrieve a remote agent's Agent Card and send messages to it."
+description: "The A2A Client connector is used to interact with A2A agents, by retrieving remote agent’s Agent Card and sending messages to that agent."
 ---
 
 The A2A Client connector is used to interact with A2A agents, by retrieving remote agent’s [Agent Card](https://a2a-protocol.org/v0.3.0/specification/#5-agent-discovery-the-agent-card) and sending messages to that agent.

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-taglist
 title: Taglist
-description: A form element to select multiple values from set options
+description: "A complex and searchable tag based component providing multi-selection for large datasets.- Field label: Label displayed on top of the taglist."
 ---
 
 A complex and searchable tag based component providing multi-selection for large datasets.

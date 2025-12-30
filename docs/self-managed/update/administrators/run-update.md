@@ -1,7 +1,7 @@
 ---
 id: run-admin-upgrade
 title: "Perform an upgrade"
-description: "Administrator checklist for executing a Camunda 8.8 Self-Managed upgrade."
+description: "This guide describes how to perform a Camunda 8.8 Self-Managed upgrade.Ensure you have completed all steps in Prepare for upgrade before continuing."
 ---
 
 import DocCardList from '@theme/DocCardList';

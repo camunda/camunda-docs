@@ -1,7 +1,7 @@
 ---
 id: escalation-reference
 title: Escalation reference
-description: Reference for the `escalation-reference` rule.
+description: "An escalation event must reference an escalation defined in the process.The referenced escalation must have a defined escalation code."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

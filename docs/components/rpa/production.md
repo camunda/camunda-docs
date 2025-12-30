@@ -1,7 +1,7 @@
 ---
 id: production
 title: RPA production setup
-description: Configure your RPA workers for production use cases.
+description: "Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.To get started, see get started with RPA."
 ---
 
 Use the RPA worker’s production configuration options to run RPA scripts reliably at scale.

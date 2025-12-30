@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-textfield
 title: Textfield
-description: A form element to read and edit textual data
+description: "A text field allowing the user to read and edit textual data. - Field label: Label displayed on top of the text field. Can either be an expression, plain..."
 ---
 
 A text field allowing the user to read and edit textual data.

@@ -1,7 +1,7 @@
 ---
 id: microsoft-aks
 title: "Microsoft AKS"
-description: "Deploy Camunda 8 Self-Managed on Microsoft AKS"
+description: "Azure Kubernetes Service (Microsoft AKS) is a managed container orchestration service for deploying and scaling Kubernetes applications in the cloud."
 ---
 
 import DocCardList from '@theme/DocCardList';

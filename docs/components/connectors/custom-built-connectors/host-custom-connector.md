@@ -1,7 +1,7 @@
 ---
 id: host-custom-connectors
 title: Host custom connectors
-description: "Learn how to host a custom connector developed with Connector SDK."
+description: "This guide explains how to host your own Connectors developed with Connector SDK.- Ensure you have to have a working Camunda cluster in SaaS or Self-Managed."
 ---
 
 This guide explains how to host your own **Connectors** developed with [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).

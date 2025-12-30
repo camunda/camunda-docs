@@ -1,7 +1,7 @@
 ---
 id: subprocesses
 title: "Overview"
-description: "This document outlines an overview of supported elements."
+description: "Subprocesses are element containers that allow defining common functionality.For example, you can attach an event to a subprocess's border."
 ---
 
 **Subprocesses** are element containers that allow defining common functionality. For example, you can attach an event to a subprocess's border.

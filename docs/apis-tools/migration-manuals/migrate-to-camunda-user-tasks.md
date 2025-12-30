@@ -2,7 +2,7 @@
 id: migrate-to-camunda-user-tasks
 title: Migrate to Camunda user tasks
 sidebar_label: "Camunda user tasks"
-description: "Learn how to migrate job worker-based user tasks to Camunda user tasks."
+description: "Camunda 8.7 introduced a new user task implementation type: Camunda user task (formerly named Zeebe user task). Camunda user tasks have several benefits..."
 ---
 
 import DocCardList from '@theme/DocCardList';

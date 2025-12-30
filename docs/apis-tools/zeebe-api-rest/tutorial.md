@@ -1,7 +1,7 @@
 ---
 id: zeebe-api-tutorial
 title: Tutorial
-description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Zeebe user task."
+description: "New to the Zeebe API? Step through our tutorial to assign and unassign a user to and from a Zeebe user task. In this tutorial, we'll step through examples to..."
 ---
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Zeebe API, such as assigning and unassigning a user to and from a Zeebe user task.

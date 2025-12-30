@@ -1,7 +1,7 @@
 ---
 id: enable-sharing
 title: "Enable sharing"
-description: "The REST API to enable sharing"
+description: "This API allows users to enable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in..."
 ---
 
 This API allows users to enable the sharing functionality for all reports and dashboards in Optimize. Note that this setting will be permanently persisted in memory and will take precedence over any other previous configurations (e.g. configuration files).

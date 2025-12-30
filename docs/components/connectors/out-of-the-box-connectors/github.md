@@ -2,7 +2,7 @@
 id: github
 title: GitHub connector
 sidebar_label: GitHub
-description: Manage GitHub issues and releases from your BPMN process.
+description: "[ {label: 'GitHub connector', value: 'outbound' }, {label: 'GitHub Webhook connector', value: 'inbound' } ]}> The GitHub connector is an outbound connector..."
 ---
 
 import Tabs from "@theme/Tabs";

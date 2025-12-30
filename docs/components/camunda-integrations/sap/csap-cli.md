@@ -1,7 +1,7 @@
 ---
 id: csap-cli
 title: CSAP CLI command line utility
-description: "Learn about CSAP, the CLI to configure all SAP integration artifacts for deployment."
+description: "The Camunda SAP Integration CLI (csap) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules."
 ---
 
 The [Camunda SAP Integration CLI](/reference/glossary.md#csap-cli) (`csap`) is a command-line tool designed to simplify the setup of Camunda's SAP integration modules. It provides a streamlined process for configuring and building these modules for deployment.

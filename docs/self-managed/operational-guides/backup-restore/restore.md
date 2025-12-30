@@ -3,7 +3,7 @@ id: restore
 title: "Restore a backup"
 sidebar_label: "Restore a backup"
 keywords: ["backup", "backups", "restore"]
-description: "Learn how to restore a Camunda 8 Self-Managed backup."
+description: "Restore a previous backup of your Camunda 8 Self-Managed components and cluster.To restore a backup you must complete the following main steps: 1."
 ---
 
 import Tabs from '@theme/Tabs';

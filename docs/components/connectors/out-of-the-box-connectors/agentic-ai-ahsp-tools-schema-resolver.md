@@ -2,7 +2,7 @@
 id: agentic-ai-ad-hoc-tools-schema-resolver
 sidebar_label: Ad-Hoc Tools Schema Resolver
 title: Ad-Hoc Tools Schema Resolver connector
-description: Resolve an input schema used in combination with LLMs for activities defined within an ad-hoc sub-process.
+description: "Resolve an input schema used in combination with LLMs for activities defined within an ad-hoc sub-process. The Ad-Hoc Tools Schema connector is an outbound c..."
 ---
 
 The **Ad-Hoc Tools Schema connector** is an outbound connector that implements the tool resolution part of

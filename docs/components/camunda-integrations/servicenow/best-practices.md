@@ -1,7 +1,7 @@
 ---
 id: best-practices
 title: Best practices
-description: "Recommended approaches for building secure, reliable, and maintainable Camunda–ServiceNow integrations."
+description: "Recommended approaches for building secure, reliable, and maintainable Camunda–ServiceNow integrations. Use these practices to build secure, reliable, and ma..."
 ---
 
 Use these practices to build secure, reliable, and maintainable Camunda–ServiceNow integrations.

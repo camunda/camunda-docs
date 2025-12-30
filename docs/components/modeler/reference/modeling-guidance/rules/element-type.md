@@ -1,7 +1,7 @@
 ---
 id: element-type
 title: Element type
-description: Reference for the `element-type` rule.
+description: "The element you modeled is not supported for execution by the selected Camunda version.It may be supported in a later version."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

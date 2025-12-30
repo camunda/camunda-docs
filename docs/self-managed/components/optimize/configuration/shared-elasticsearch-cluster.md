@@ -1,7 +1,7 @@
 ---
 id: shared-elasticsearch-cluster
 title: "Shared Elasticsearch/OpenSearch cluster"
-description: "Operate multiple Optimize instances on a shared Elasticsearch/OpenSearch cluster."
+description: "In case you have a large shared Elasticsearch/OpenSearch cluster that you want to operate multiple Optimize instances on that are intended to run in complete..."
 ---
 
 In case you have a large shared Elasticsearch/OpenSearch cluster that you want to operate multiple Optimize instances on that are intended to run in complete isolation from each other, it is required to change the [`*.settings.index.prefix`](./system-configuration.md#index-settings) setting for each Optimize instance.

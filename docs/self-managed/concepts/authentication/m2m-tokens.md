@@ -1,5 +1,6 @@
 ---
 id: m2m-tokens
+description: "A machine-to-machine (M2M) token is a token requested by one service so it can communicate with another service acting as itself."
 title: "Machine-to-machine (M2M) tokens"
 sidebar_label: "Machine-to-machine (M2M) tokens"
 ---

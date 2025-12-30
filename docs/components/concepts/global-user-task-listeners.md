@@ -2,7 +2,7 @@
 id: global-user-task-listeners
 title: "Global user task listeners"
 sidebar_label: "Global user task listeners"
-description: "Configure cluster‑wide listeners that react to user task lifecycle events across all processes."
+description: "Global user task listeners are user task listeners defined once for all processes in a cluster, instead of individually per user task."
 ---
 
 Global user task listeners are [user task listeners](/components/concepts/user-task-listeners.md) defined once for all processes in a cluster, instead of individually per [user task](/components/modeler/bpmn/user-tasks/user-tasks.md).

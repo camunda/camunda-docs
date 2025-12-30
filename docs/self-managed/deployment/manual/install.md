@@ -1,5 +1,6 @@
 ---
 id: install
+description: "This page guides you through the manual installation of Camunda 8 on a local machine, bare metal server, or virtual machine."
 title: "Camunda manual installation"
 sidebar_label: "Install"
 ---

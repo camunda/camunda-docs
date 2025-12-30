@@ -1,7 +1,7 @@
 ---
 id: variable-filters
 title: Variable filters
-description: Learn more about variable filters with booleans, strings, and more.
+description: "Use the Variable Filter to retrieve only those process instances which hold the specified variable value for the selected variable."
 ---
 
 Use the `Variable Filter` to retrieve only those process instances which hold the specified variable value for the selected variable.

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-separator
 title: Separator
-description: Learn about this layout element to add a visual separation between elements.
+description: "A separator element is used to create a visual separation between two elements. The separator element is typically utilized when you want to visually..."
 ---
 
 A **separator** element is used to create a visual separation between two elements.

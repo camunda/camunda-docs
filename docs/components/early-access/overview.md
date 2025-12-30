@@ -1,5 +1,6 @@
 ---
 id: overview
+description: "Introducing early access - a space to explore new features and components currently in development by Camunda. Early access includes two categories of..."
 title: Early access
 sidebar_label: Early access
 ---

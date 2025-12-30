@@ -2,7 +2,7 @@
 id: soap
 title: SOAP connector
 sidebar_label: SOAP
-description: The SOAP connector allows you to connect your BPMN process with SOAP services.
+description: "The SOAP connector is only supported by Self-Managed and Hybrid Camunda 8 instances. Simple Object Access Protocol (SOAP) is a messaging protocol..."
 ---
 
 :::note

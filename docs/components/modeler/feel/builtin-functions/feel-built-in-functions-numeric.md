@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-numeric
 title: Numeric functions
-description: "This document outlines built-in numeric functions and examples."
+description: "Rounds the given value at the given scale. Function signature ``feel decimal(n: number, scale: number): number ` Examples `feel decimal(1/3, 2) // .33..."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

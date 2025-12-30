@@ -2,7 +2,7 @@
 id: mapping-rules
 title: "Mapping rules"
 sidebar_label: "Mapping rules"
-description: "Learn how to create mapping rules for flexible resource access in the Orchestration Cluster for OIDC setups."
+description: "Learn how to create mapping rules for flexible resource access in the Orchestration Cluster for OIDC setups. Mapping rules provide flexible access to Orchest..."
 ---
 
 import MapImg from './img/mapping-rule-add-mapping-modal.png';

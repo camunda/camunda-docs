@@ -1,7 +1,7 @@
 ---
 id: delete-dashboard
 title: "Delete dashboards"
-description: "The REST API to delete dashboards from Optimize."
+description: "The dashboards deletion API allows you to delete dashboards by ID from Optimize.The deletion of a dashboard does not affect the referenced reports."
 ---
 
 The dashboards deletion API allows you to delete dashboards by ID from Optimize.

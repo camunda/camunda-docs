@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-checkbox-group
 title: Checkbox group
-description: A form element to select multiple values from set options
+description: "A set of checkbox options providing data multi-selection for small datasets.- Field label: Label displayed on top of the checkbox group."
 ---
 
 A set of checkbox options providing data multi-selection for small datasets.

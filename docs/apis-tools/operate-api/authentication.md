@@ -1,7 +1,7 @@
 ---
 id: operate-api-authentication
 title: Authentication
-description: "Authentication requirements for accessing the Operate REST API."
+description: "The Operate REST API is deprecated. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the..."
 ---
 
 :::warning

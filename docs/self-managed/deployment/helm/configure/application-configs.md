@@ -2,7 +2,7 @@
 id: application-configs
 sidebar_label: Components
 title: Configure Helm chart components
-description: "Learn how to configure individual Camunda components in Helm charts."
+description: "This page explains how to configure Camunda components in Helm charts. You can define options in values.yaml and provide custom files for additional..."
 ---
 
 This page explains how to configure Camunda components in Helm charts. You can define options in `values.yaml` and provide custom files for additional configuration.

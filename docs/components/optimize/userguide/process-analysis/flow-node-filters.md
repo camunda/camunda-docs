@@ -1,7 +1,7 @@
 ---
 id: flow-node-filters
 title: Flow node filters
-description: Take a closer look at flow node status filters, flow node date filters, flow node duration filters, and more.
+description: "Take a closer look at flow node status filters, flow node date filters, flow node duration filters, and more. Retrieve only those process instances that exec..."
 ---
 
 ## Flow node filter

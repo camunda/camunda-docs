@@ -1,7 +1,7 @@
 ---
 id: variable-labeling
 title: "Variable labeling"
-description: "The REST API to create, update, and delete variable labels in Optimize."
+description: "With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize. The variable labeling API allows users to add, update,..."
 ---
 
 With the variable labeling endpoint, variable labels can be added, updated, and deleted from Optimize.

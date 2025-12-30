@@ -1,7 +1,7 @@
 ---
 id: common-pitfalls
 title: Common pitfalls
-description: "Let's take a closer look at common issues and resolutions."
+description: "Let's take a closer look at common issues and resolutions within Console.- Your organization is on a trial plan and you have already created a cluster."
 ---
 
 Let's take a closer look at common issues and resolutions within Console.

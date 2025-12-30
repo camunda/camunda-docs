@@ -1,7 +1,7 @@
 ---
 id: performance
 title: Connector runtime performance
-description: "Learn how to optimize connector performance in your self-managed environment."
+description: "This guide explains how to optimize the configuration of outbound connectors in your self-managed environment to achieve consistent and predictable performance."
 ---
 
 This guide explains how to optimize the configuration of outbound connectors in your self-managed environment to achieve consistent and predictable performance.

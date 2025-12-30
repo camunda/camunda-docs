@@ -1,7 +1,7 @@
 ---
 id: using-filters
 title: Using filters
-description: "Find relevant tasks in Tasklist"
+description: "When you open the Tasks page, you will see the list of all tasks. This is a starting point for managing your workload. !tasklist-all-tasks As you browse..."
 ---
 
 When you open the **Tasks** page, you will see the list of all tasks. This is a starting point for managing your workload.

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-document-preview
 title: Document preview
-description: A form element to preview documents
+description: "A form element to preview and download documents. - Title: Title displayed on top of the element. - Can either be an expression, plain text, or templating..."
 ---
 
 import DocCardList from '@theme/DocCardList';

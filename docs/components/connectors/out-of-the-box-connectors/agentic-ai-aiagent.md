@@ -2,7 +2,7 @@
 id: agentic-ai-aiagent
 sidebar_label: AI Agent
 title: AI Agent connector
-description: AI agent connector implementing a feedback loop for user interactions and tool calls with an LLM.
+description: "Use the AI Agent connector to integrate Large Language Models (LLMs) with AI agents to build solutions using agentic orchestration."
 ---
 
 import AgentSubprocessImg from '../img/ai-agent-subprocess.png';

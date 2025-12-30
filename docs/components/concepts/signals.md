@@ -1,7 +1,7 @@
 ---
 id: signals
 title: "Signals"
-description: "Learn about broadcasting signals, which can trigger all matching signal events with a single broadcast."
+description: "Learn about broadcasting signals, which can trigger all matching signal events with a single broadcast. Signals are a similar concept to messages. However, m..."
 ---
 
 Signals are a similar concept to [messages](messages.md). However, messages are correlated to a specific

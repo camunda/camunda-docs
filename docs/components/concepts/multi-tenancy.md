@@ -2,7 +2,7 @@
 id: multi-tenancy
 title: "Multi-tenancy"
 sidebar_label: "Multi-tenancy"
-description: "Multi-tenancy allows you to host multiple tenants within a single Camunda installation."
+description: "Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available in Camunda 8 SaaS. Multi-tenancy in Camunda 8 enables a single installation to..."
 ---
 
 :::info

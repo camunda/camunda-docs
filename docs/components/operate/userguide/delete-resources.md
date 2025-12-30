@@ -1,7 +1,7 @@
 ---
 id: delete-resources
 title: Delete resources
-description: "Let's delete process and decision definitions."
+description: "A specific version of a resource, meaning a process or decision definition, can be deleted from the Processes and Decisions pages."
 ---
 
 A specific version of a resource, meaning a process or decision definition, can be deleted from the **Processes** and **Decisions** pages.

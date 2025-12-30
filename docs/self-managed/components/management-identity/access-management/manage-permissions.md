@@ -2,7 +2,7 @@
 id: manage-permissions
 title: Manage permissions
 sidebar_label: "Manage permissions"
-description: "Use Management Identity to manage permissions for roles and applications"
+description: "This guide describes how to manage permissions for roles and applications in Management Identity: - You can grant permissions to either roles or applications."
 ---
 
 This guide describes how to manage permissions for roles and applications in Management Identity:

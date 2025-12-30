@@ -2,7 +2,7 @@
 id: rabbitmq
 title: RabbitMQ connector
 sidebar_label: RabbitMQ
-description: Send messages to RabbitMQ from your BPMN process using the RabbitMQ connector.
+description: "[ {label: 'RabbitMQ Producer connector', value: 'outbound' }, {label: 'RabbitMQ inbound connector', value: 'inbound' } ]}> The RabbitMQ connector is an..."
 ---
 
 import Tabs from "@theme/Tabs";

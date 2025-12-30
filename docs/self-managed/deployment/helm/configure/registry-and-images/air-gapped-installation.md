@@ -2,7 +2,7 @@
 id: air-gapped-installation
 sidebar_label: Air-gapped environment
 title: Install Helm chart in air-gapped environments
-description: Install Camunda 8 Self-Managed in an air-gapped environment.
+description: "The Camunda Helm chart supports installation in air-gapped environments.By default, Docker images are pulled from Docker Hub."
 ---
 
 The [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) supports installation in air-gapped environments. By default, Docker images are pulled from Docker Hub. Because the chart depends on third-party images and charts, additional steps are required to make all charts available in your environment.

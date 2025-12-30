@@ -1,7 +1,7 @@
 ---
 id: gateway-health-probes
 title: "Gateway health probes"
-description: "This section outlines health status, probes, and responsiveness."
+description: "The health status for a standalone gateway is available at {zeebe-gateway}:9600/actuator/health. The following health indicators are enabled by default: -..."
 ---
 
 The health status for a standalone gateway is available at `{zeebe-gateway}:9600/actuator/health`.

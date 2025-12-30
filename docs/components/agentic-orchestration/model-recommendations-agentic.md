@@ -2,7 +2,7 @@
 id: model-recommendations-agentic
 title: LLM recommendations
 sidebar_label: LLM recommendations
-description: Prompting recommendations when using models for agentic process
+description: "Recommendations and best practices for working with Large Language Models (LLMs) and effective prompts. To implement an agentic process, you must choose a..."
 ---
 
 Recommendations and best practices for working with Large Language Models (LLMs) and effective prompts.

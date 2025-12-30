@@ -2,7 +2,7 @@
 id: agentic-ai-aiagent-task
 sidebar_label: AI Agent Task
 title: AI Agent Task connector
-description: AI agent connector implementation based on service tasks.
+description: "Implement an AI agent using an AI Agent connector applied to a service task, paired with an optional ad-hoc sub-process to provide tools usable by the AI."
 ---
 
 import ConfigurationModelProvider from './agentic-ai/aiagent/configuration/\_model-provider.md';

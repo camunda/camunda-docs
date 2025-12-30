@@ -2,7 +2,7 @@
 id: overview
 title: Optimize on Self-Managed
 sidebar_label: Overview
-description: "All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements."
+description: "All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment..."
 ---
 
 All distributions of Optimize come with a predefined set of configuration options that can be overwritten by the user, based on current environment requirements. To do that, have a look into the folder named `config`. There are two files, one called `environment-config.yaml` with values that override the default Optimize properties and another called `environment-logback.xml`, which sets the logging configuration.

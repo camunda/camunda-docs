@@ -1,7 +1,7 @@
 ---
 id: tasklist-api-rest-form-controller
 title: Form API
-description: "Learn about the Form API controller, including the request parameters and an HTTP request example."
+description: "The Form API controller provides an API to query forms.Get the form details by formId and processDefinitionKey required parameters."
 ---
 
 The Form API controller provides an API to query forms.

@@ -1,7 +1,7 @@
 ---
 id: version-compatibility
 title: Version compatibility checks
-description: "How Camunda 8 validates version compatibility during upgrades (broker and secondary storage)."
+description: "This page describes how Camunda 8 validates version compatibility when you upgrade a self-managed orchestration cluster."
 ---
 
 This page describes how Camunda 8 validates version compatibility when you upgrade a self-managed orchestration cluster. It covers:

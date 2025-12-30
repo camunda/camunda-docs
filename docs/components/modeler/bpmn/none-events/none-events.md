@@ -1,7 +1,7 @@
 ---
 id: none-events
 title: "None events"
-description: "None events are unspecified events, also called blank events."
+description: "None events are unspecified events, also called "blank" events.!process At most, a process can have one none start event (besides other types of start events)."
 ---
 
 None events are unspecified events, also called "blank" events.

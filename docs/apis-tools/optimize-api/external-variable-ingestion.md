@@ -1,7 +1,7 @@
 ---
 id: external-variable-ingestion
 title: "External variable ingestion"
-description: "The REST API to ingest external variable data into Optimize."
+description: "With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly, without the need for these variables..."
 ---
 
 With the external variable ingestion API, variable data held in external systems can be ingested into Optimize directly,

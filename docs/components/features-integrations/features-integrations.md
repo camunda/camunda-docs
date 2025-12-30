@@ -2,7 +2,7 @@
 id: features-integrations
 title: Features and integrations
 sidebar_label: Features and integrations
-description: "Features and integrations."
+description: "Get started with selected key features and integrations. Learn more about selected key features. Learn more about Camunda integrations. Introducing early..."
 ---
 
 Get started with selected key features and integrations.

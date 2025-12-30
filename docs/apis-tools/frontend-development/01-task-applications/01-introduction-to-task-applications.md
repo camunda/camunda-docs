@@ -1,7 +1,7 @@
 ---
 id: introduction-to-task-applications
 title: "Introduction to task applications"
-description: "Task applications are the interface between humans and Camunda processes to orchestrate human work."
+description: "Task applications are the interface between humans and Camunda processes to orchestrate human work. Learn key concepts of the architecture of task..."
 ---
 
 import TasklistProcessesImg from './img/tasklist-processes.png';

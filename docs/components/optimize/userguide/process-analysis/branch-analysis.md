@@ -1,7 +1,7 @@
 ---
 id: branch-analysis
 title: Branch analysis
-description: Optimize provides you with a statistical analysis for a given end event and a gateway.
+description: "If a process contains more than one end event, it is useful to know which path tokens took to reach a specific end event."
 ---
 
 ## Overview

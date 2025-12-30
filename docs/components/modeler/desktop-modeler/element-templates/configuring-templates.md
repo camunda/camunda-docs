@@ -1,7 +1,7 @@
 ---
 id: configuring-templates
 title: Configuring templates
-description: "Learn about global and local templates, which are loaded by the modeler at application startup."
+description: "Element templates are loaded by Desktop Modeler at application startup.Reloading it using Cmd+R or Ctrl+R reloads all templates."
 ---
 
 import Tabs from '@theme/Tabs';

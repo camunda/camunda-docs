@@ -1,7 +1,7 @@
 ---
 id: create-backups
 title: Backups
-description: "If your organization works within Camunda's Enterprise plan, you can create cluster backups."
+description: "If your organization works within Camunda's Enterprise plan, you can create a manual and scheduled backups of your cluster."
 ---
 
 If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can create a manual and scheduled [backups](/components/saas/backups.md) of your cluster.

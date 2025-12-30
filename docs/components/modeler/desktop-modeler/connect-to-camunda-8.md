@@ -1,7 +1,7 @@
 ---
 id: connect-to-camunda-8
 title: Deploy your first diagram
-description: "Follow these steps to directly deploy diagrams and start process instances in Camunda 8."
+description: "Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8.Follow the steps below to deploy a diagram to Camunda 8 SaaS."
 ---
 
 Desktop Modeler can directly deploy diagrams and start process instances in Camunda 8. Follow the steps below to deploy a diagram to **Camunda 8 SaaS**. To deploy to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/deploy-to-self-managed.md).

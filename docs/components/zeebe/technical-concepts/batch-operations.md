@@ -1,7 +1,7 @@
 ---
 id: batch-operations
 title: Batch operations
-description: How distributed batch operations work in Zeebe engine.
+description: "Batch operations allow you to perform actions on multiple process instances efficiently. This is particularly useful when you need to: - Cancel hundreds of..."
 ---
 
 ## Overview

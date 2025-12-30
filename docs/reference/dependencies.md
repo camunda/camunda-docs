@@ -1,7 +1,7 @@
 ---
 id: dependencies
 title: "Source code and third-party dependencies"
-description: "Dependencies and third-party libraries for all Camunda 8 components."
+description: "Camunda provides users and customers with source code access as part of its written offer, as well as CycloneDX SBOMs listing all direct and transitive..."
 keywords: ["dependencies", "third-party", "third-party libraries"]
 ---
 

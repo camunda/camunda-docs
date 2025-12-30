@@ -2,7 +2,7 @@
 id: operate-api-tutorial
 title: Tutorial
 slug: /apis-tools/operate-api/tutorial
-description: "Step through examples to implement an application using the Operate API and render a BPMN diagram."
+description: "In this tutorial, we'll step through examples to highlight the capabilities of the Operate API, such as rendering a BPMN diagram."
 ---
 
 In this tutorial, we'll step through examples to highlight the capabilities of the Operate API, such as rendering a BPMN diagram.

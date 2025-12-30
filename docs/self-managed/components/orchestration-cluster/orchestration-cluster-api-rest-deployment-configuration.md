@@ -1,7 +1,7 @@
 ---
 id: orchestration-cluster-api-rest-deployment-configuration
 title: "Deployment configuration"
-description: "Learn how to configure upload limits and multipart handling for Orchestration Cluster REST API."
+description: "The Orchestration Cluster REST API supports file and multipart uploads when deploying BPMN diagrams and other resources."
 ---
 
 ## Deployment configuration

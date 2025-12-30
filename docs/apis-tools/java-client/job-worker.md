@@ -1,7 +1,7 @@
 ---
 id: job-worker
 title: "Job worker"
-description: "Let's take a deeper look at job workers to handle jobs."
+description: "Job workers are the backbone of process automation in Camunda 8. They handle automated tasks (service tasks) in your BPMN processes by continuously polling..."
 keywords: ["backpressure", "back-pressure", "back pressure"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: "Getting started"
-description: "Learn more about integration, secure management, and efficient storage and retrieval of documents across development and production environments in a SaaS environment."
+description: "Camunda 8 provides built-in support for storing, tracking, and managing documents using Camunda Forms, connectors, Tasklist, and the Orchestration Cluster..."
 keywords: ["document handling"]
 ---
 

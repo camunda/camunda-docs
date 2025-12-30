@@ -1,7 +1,7 @@
 ---
 id: overview
 title: Overview
-description: "Let's get started with connectors by installing and running them."
+description: "The concept of a Connector consists of two parts: - The business logic is implemented by a connector function and executed by a Connector runtime environment."
 ---
 
 The concept of a [Connector](/components/connectors/introduction.md) consists of two parts:

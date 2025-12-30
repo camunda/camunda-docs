@@ -1,7 +1,7 @@
 ---
 id: test-scenario-files
 title: Test scenario files
-description: Define shareable, low-code tests for your BPMN processes
+description: "Test scenario files let you define shareable, low-code tests for your BPMN processes. They are stored in JSON format and can be created, edited, and managed..."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

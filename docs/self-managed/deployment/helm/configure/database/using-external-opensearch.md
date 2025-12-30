@@ -2,7 +2,7 @@
 id: using-external-opensearch
 sidebar_label: Amazon OpenSearch Service
 title: Use Amazon OpenSearch Service with the Helm chart
-description: Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance.
+description: "Learn how to connect a Camunda 8 Self-Managed Helm chart deployment to an external Amazon OpenSearch Service instance. Learn how to configure and use Amazon ..."
 ---
 
 Learn how to configure and use Amazon OpenSearch with the Helm chart.

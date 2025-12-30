@@ -2,7 +2,7 @@
 id: a2a-client-usage-patterns
 title: A2A Client usage patterns
 sidebar_label: A2A Client usage patterns
-description: "Usage patterns for the A2A Client connectors."
+description: "The A2A Client connectors often work in combination to interact with remote A2A agents.This page outlines common usage patterns for the A2A Client connectors."
 ---
 
 The [A2A Client connectors](./a2a-client.md) often work in combination to interact with remote A2A agents. This page outlines common usage patterns for the A2A Client connectors.

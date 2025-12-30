@@ -1,7 +1,7 @@
 ---
 id: feel
 title: FEEL
-description: Reference for the `feel` rule.
+description: "When using the FEEL expression language, you must specify a valid expression. !Invalid FEEL expression !Valid FEEL expression - FEEL expressions - Rule source"
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

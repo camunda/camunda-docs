@@ -2,7 +2,7 @@
 id: starting-configuration
 title: "Starting configuration for Identity"
 sidebar_label: "Starting configuration"
-description: "Understand the set of base configurations to operate Identity correctly."
+description: "Identity requires a set of base configurations to operate correctly.When Identity is started, it will create or update the following entities in Keycloak."
 ---
 
 Identity requires a set of base configurations to operate correctly. When Identity is started, it will create or update the following entities in Keycloak.

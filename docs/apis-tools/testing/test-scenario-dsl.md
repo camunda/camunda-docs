@@ -1,7 +1,7 @@
 ---
 id: test-scenario-dsl
 title: Test Scenario DSL
-description: "Write your process tests using the Test Scenario DSL."
+description: "You can write your process tests using the Test Scenario DSL instead of coding the test logic in Java. The DSL is a JSON-based format to describe test cases..."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: data-handling
 title: Data handling
-description: "Get editor support for variables by defining the variables in the process model."
+description: "The FEEL editor will suggest variables in the current element's scope when defining input and output mappings in a process."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

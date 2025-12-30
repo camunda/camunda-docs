@@ -1,7 +1,7 @@
 ---
 id: tasklist-localization
 title: Localization
-description: "Use the Tasklist interface in your local language."
+description: "When creating processes for audiences in non-English speaking regions, you can localize the Tasklist interface to the appropriate language."
 ---
 
 When creating processes for audiences in non-English speaking regions, you can localize the Tasklist interface to the appropriate language.

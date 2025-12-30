@@ -1,7 +1,7 @@
 ---
 id: bpmn-coverage
 title: "BPMN coverage"
-description: "List of BPMN symbols supported in Modelers"
+description: "export const Highlight = ({children, color}) => ( {children} ); The following BPMN elements are supported by our modeling tools."
 ---
 
 export const Highlight = ({children, color}) => (

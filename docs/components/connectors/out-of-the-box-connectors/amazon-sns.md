@@ -2,7 +2,7 @@
 id: amazon-sns
 title: Amazon Simple Notification Service connector
 sidebar_label: AWS SNS
-description: Publish messages to Amazon Simple Notification Service (SNS) from your BPMN process.
+description: "[ {label: 'Outbound', value: 'outbound' }, {label: 'Inbound', value: 'inbound' } ]}> The Amazon Simple Notification Service (SNS) connector is an outbound..."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -2,7 +2,7 @@
 id: 890-release-notes
 title: "8.9 Release notes"
 sidebar_label: Release notes
-description: "Release notes for 8.9, including alphas"
+description: "These release notes identify the main new features included in the 8.9 minor release, including alpha feature releases. | Minor release date | Scheduled end..."
 keywords: ["8.9 release notes", "release notes for 8.9", "release notes"]
 page_rank: 90
 ---

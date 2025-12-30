@@ -1,7 +1,7 @@
 ---
 id: ao-design
 title: Design and architecture
-description: "Plan and design your agentic orchestration solutions, and understand recommended architecture and workflow guidelines."
+description: "Plan and design your agentic orchestration solutions, and understand recommended architecture and workflow guidelines. Plan and design your agentic orchestra..."
 keywords: ["agentic ai", "AI agents"]
 ---
 

@@ -2,7 +2,7 @@
 id: guides
 sidebar_label: User guides
 title: Helm chart user guides
-description: "Various use cases configuring and deploying Camunda 8."
+description: "Camunda 8 Self-Managed is highly customizable and can be deployed in different setups. This section highlights various use cases and scenarios of configuring..."
 ---
 
 import DocCardList from '@theme/DocCardList';

@@ -1,7 +1,7 @@
 ---
 id: redhat-openshift-dual-region
 title: "Red Hat OpenShift Dual-Region"
-description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift in two regions"
+description: "This guide is designed to assist users aiming to deploy Camunda 8 in a dual-region setup on Red Hat OpenShift. The primary goal is to configure and integrate..."
 ---
 
 import Tabs from '@theme/Tabs';

@@ -1,7 +1,7 @@
 ---
 id: orchestration-cluster-api-rest-authentication
 title: "Authentication"
-description: "Step through authentication options for accessing the Orchestration Cluster REST API."
+description: "This page describes the available authentication methods for accessing the Orchestration Cluster REST API. It explains when to use each method and how to..."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-image
 title: Image view
-description: Learn about the image view form element to display an image.
+description: "An element allowing the user to display images. - Image source: Specifies the image source via expression, templating syntax or static value (hyperlink or..."
 ---
 
 An element allowing the user to display images.

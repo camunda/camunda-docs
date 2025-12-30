@@ -2,7 +2,7 @@
 id: hugging-face
 title: Hugging Face connector
 sidebar_label: Hugging Face
-description: Interact with Hugging Face models from your BPMN process.
+description: "The Hugging Face connector is an outbound connector that allows you to interact with Hugging Face models from your BPMN processes."
 ---
 
 The **Hugging Face connector** is an outbound connector that allows you to interact with

@@ -2,7 +2,7 @@
 id: opensearch-exporter
 title: "OpenSearch exporter"
 sidebar_label: "OpenSearch"
-description: "The Zeebe OpenSearch exporter acts as a bridge between Zeebe and OpenSearch."
+description: "Please refer to Supported Environments to find out which versions of OpenSearch are supported in a Camunda 8 Self-Managed setup."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: send-tasks
 title: "Send tasks"
-description: "A send task is used to model the publication of a message to an external system."
+description: "A send task is used to model the publication of a message to an external system; for example, to a Kafka topic or a mail server."
 ---
 
 A send task is used to model the publication of a message to an external system; for example, to a

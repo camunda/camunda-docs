@@ -1,7 +1,7 @@
 ---
 id: cancel-starter-subscription
 title: Cancel Starter plan subscription
-description: "When utilizing Camunda's Starter plan, follow these steps to cancel your subscription."
+description: "This setting is only visible in the Starter plan (formerly Professional plan) for owners and admins.The Starter plan is no longer available."
 ---
 
 :::note

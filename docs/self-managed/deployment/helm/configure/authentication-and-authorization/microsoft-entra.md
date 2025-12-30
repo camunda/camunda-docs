@@ -2,7 +2,7 @@
 id: microsoft-entra
 sidebar_label: Microsoft Entra
 title: Set up the Helm chart with an external Microsoft Entra tenant
-description: Learn how to connect the Camunda Helm chart to a Microsoft Entra tenant.
+description: "This guide shows you how to configure the Helm chart to use a Microsoft Entra tenant, with each Camunda component using a dedicated OIDC or OAuth client."
 ---
 
 This guide shows you how to configure the Helm chart to use a Microsoft Entra tenant, with each Camunda component using a dedicated OIDC or OAuth client.

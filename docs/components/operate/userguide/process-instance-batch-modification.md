@@ -1,7 +1,7 @@
 ---
 id: process-instance-batch-modification
 title: Process instance batch modification
-description: "You may need to move multiple active process instances to allow execution to continue."
+description: "If there was an issue in process execution that caused you to enter the wrong process branch or data was corrupted, you may need to select multiple process..."
 ---
 
 If there was an issue in process execution that caused you to enter the wrong process branch or data was corrupted, you may need to select multiple process instances and move them to the correct flow node in the process in a single operation.

@@ -1,7 +1,7 @@
 ---
 id: flags
 title: Flags
-description: "Flags allow you to control the availability of certain features within Desktop Modeler."
+description: "Flags allow you to control the availability of certain features within Desktop Modeler.Learn which flags are available and how to configure them."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,5 +1,6 @@
 ---
 id: troubleshoot-zeebe-connection
+description: "You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error. To resolve this issue, check if you can connect to Zeebe..."
 title: "Troubleshoot Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---

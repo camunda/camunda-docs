@@ -2,7 +2,7 @@
 id: eventual-consistency
 title: Manage Orchestration Cluster API data consistency
 sidebar_label: Manage data consistency
-description: Manage eventually consistent data when using the Orchestration Cluster API.
+description: "Learn how to manage eventually consistent data when using the Orchestration Cluster API.Data in Camunda 8 is eventually consistent."
 ---
 
 Learn how to manage eventually consistent data when using the Orchestration Cluster API.

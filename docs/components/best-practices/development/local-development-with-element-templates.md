@@ -3,7 +3,7 @@ title: "Local development with element templates and Camunda 8 Run"
 tags:
   - Element templates
   - Camunda 8 Run
-description: "Learn how to use Camunda 8 Run with element templates in your local development environment."
+description: "When working with element templates in your local development environment using Camunda 8 Run with Docker Compose, ensure all dependencies are provisioned..."
 ---
 
 When working with [element templates](/components/concepts/element-templates.md) in your local development environment using [Camunda 8 Run with Docker Compose](/self-managed/quickstart/developer-quickstart/c8run.md), ensure all dependencies are provisioned before you start.

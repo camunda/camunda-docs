@@ -2,7 +2,7 @@
 id: config-examples
 title: Configuration examples
 sidebar_label: Configuration examples
-description: "Configuration examples for the Data Migrator."
+description: "Configuration examples for the Data Migrator's configuration/application.yml. ``yaml camunda.client: mode: self-managed # Operation mode: 'self-managed' or..."
 ---
 
 Configuration examples for the Data Migrator's `configuration/application.yml`.

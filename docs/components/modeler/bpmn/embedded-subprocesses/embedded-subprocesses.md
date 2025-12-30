@@ -1,7 +1,7 @@
 ---
 id: embedded-subprocesses
 title: "Embedded subprocess"
-description: "An embedded subprocess allows you to group elements of the process."
+description: "An embedded subprocess allows you to group elements of the process.!embedded-subprocess An embedded subprocess must have exactly one none start event."
 ---
 
 An embedded subprocess allows you to group elements of the process.

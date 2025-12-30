@@ -1,7 +1,7 @@
 ---
 id: no-loop
 title: Infinite Loop
-description: Reference for the `no-loop` rule.
+description: "This error occurs when a BPMN model contains an automated loop (without human interaction or external event triggers).It may cause an endless recursion."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

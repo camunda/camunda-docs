@@ -1,7 +1,7 @@
 ---
 id: task-testing
 title: Task testing
-description: "Test implementation of a single BPMN task in Desktop Modeler."
+description: "Test a single task in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process."
 ---
 
 [Test a single task](../task-testing.md) in Desktop Modeler to quickly verify task logic, variable mappings, and configuration—without running the entire process.

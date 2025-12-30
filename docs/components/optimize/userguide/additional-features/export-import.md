@@ -1,7 +1,7 @@
 ---
 id: export-import
 title: Export and import
-description: Export and import Optimize entities.
+description: "Users can export entities by accessing the Export option in the entity menu. This downloads a JSON file which includes all relevant information that defines..."
 ---
 
 ## Exporting entities

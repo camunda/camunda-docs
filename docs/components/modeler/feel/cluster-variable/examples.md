@@ -2,7 +2,7 @@
 id: cluster-variable-examples
 title: Common use cases
 sidebar_label: "Use cases"
-description: "Explore practical ways to use cluster variables with real-world examples."
+description: "Explore practical ways to use cluster variables with real-world examples, including environment-specific configurations, SLA rules, and integration endpoints."
 ---
 
 Explore practical ways to use cluster variables with real-world examples, including environment-specific configurations, SLA rules, and integration endpoints.

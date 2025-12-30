@@ -2,7 +2,7 @@
 id: dual-region-operational-procedure
 sidebar_label: Dual-region operational procedure
 title: Helm chart dual-region operational procedure
-description: "The operational procedure concerning dual-region setups to recover from a region loss."
+description: "This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure."
 ---
 
 import Tabs from '@theme/Tabs';

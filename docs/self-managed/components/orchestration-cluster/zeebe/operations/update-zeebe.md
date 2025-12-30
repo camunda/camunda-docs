@@ -1,7 +1,7 @@
 ---
 id: update-zeebe
 title: "Update Zeebe"
-description: "This section describes how to update Zeebe to a new version."
+description: "Zeebe versions can be updated: - From any patch version to a newer patch of the same minor version - To any patch of the next minor version."
 ---
 
 Zeebe versions can be updated:

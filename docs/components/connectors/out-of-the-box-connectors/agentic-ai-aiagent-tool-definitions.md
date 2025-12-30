@@ -2,7 +2,7 @@
 id: agentic-ai-aiagent-tool-definitions
 sidebar_label: Tool Definitions
 title: AI Agent Tool Definitions
-description: Tool definitions for AI agents using the fromAi() function syntax
+description: "When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which have no incoming flows (root nodes..."
 ---
 
 import Tabs from "@theme/Tabs";

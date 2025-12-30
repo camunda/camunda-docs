@@ -1,7 +1,7 @@
 ---
 id: monitor-operation-status
 title: Monitor operation status
-description: "Monitor and investigate the status of any operation."
+description: "Operate offers a powerful way to monitor and investigate the status of any operation you start. This includes canceling and retrying process instances,..."
 ---
 
 Operate offers a powerful way to monitor and investigate the status of any operation you start. This includes canceling and retrying process instances, process instance migration, and modification.

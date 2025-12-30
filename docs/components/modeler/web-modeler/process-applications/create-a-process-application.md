@@ -1,7 +1,7 @@
 ---
 id: create-a-process-application
 title: Create a process application
-description: Create a process application and select a development cluster to deploy to.
+description: "Create a process application in your project to work on and deploy a set of related files. To create a process application, either: - Select Create process..."
 ---
 
 import EmptyProjectImg from './img/empty-project.png'

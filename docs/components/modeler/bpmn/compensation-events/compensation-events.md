@@ -1,7 +1,7 @@
 ---
 id: compensation-events
 title: "Compensation events"
-description: "Compensation events are used to undo tasks that have already been executed."
+description: "Compensation events assist with undoing steps that were already successfully completed in the case that their results are no longer desired and need to be..."
 ---
 
 Compensation events assist with undoing steps that were already successfully completed in the case that their results

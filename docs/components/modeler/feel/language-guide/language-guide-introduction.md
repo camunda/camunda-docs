@@ -1,5 +1,6 @@
 ---
 id: language-guide-introduction
+description: "Everything begins with data types.Read on this subject first to have a better understanding of the other content like expressions and built-in functions."
 title: Introduction
 ---
 

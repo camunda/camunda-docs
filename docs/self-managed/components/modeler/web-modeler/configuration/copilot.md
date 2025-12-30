@@ -1,7 +1,7 @@
 ---
 id: copilot
 title: "Copilot"
-description: "Configure Copilot in Web Modeler with a custom LLM provider."
+description: "Web Modeler supports using large language models (LLMs) to help users create BPMN diagrams, write FEEL expressions, and build forms."
 ---
 
 <span class="badge badge--alpha">Alpha</span>

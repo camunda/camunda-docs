@@ -2,7 +2,7 @@
 id: azure-open-ai
 title: Azure OpenAI connector
 sidebar_label: Azure OpenAI
-description: Interact with Azure OpenAI from your BPMN process.
+description: "The Azure OpenAI connector is an outbound connector that allows you to interact with Azure OpenAI models from your BPMN processes."
 ---
 
 The **Azure OpenAI connector** is an outbound connector that allows you to interact with

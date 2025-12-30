@@ -1,7 +1,7 @@
 ---
 id: error-reference
 title: Error reference
-description: Reference for the `error-reference` rule.
+description: "An error event must reference an error defined in the process. The referenced error must have a defined error code. To fix this problem, open the Error group..."
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";

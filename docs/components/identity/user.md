@@ -1,7 +1,7 @@
 ---
 id: user
 title: Users
-description: "Learn how to manage user access to an orchestration cluster."
+description: "Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API."
 ---
 
 Users are individuals who are granted with access to an orchestration cluster and it's components like Operate, Tasklist and REST API. User management differs depending on whether you are using Camunda 8 SaaS or a Self-Managed installation.

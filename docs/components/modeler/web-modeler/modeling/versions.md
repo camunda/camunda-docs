@@ -1,7 +1,7 @@
 ---
 id: versions
 title: Versions
-description: Work with versions in Web Modeler.
+description: "With 8.7, "milestone" has been renamed to "version". To learn more about this change, see the related release note. You can create a version at any time to..."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

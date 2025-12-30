@@ -1,7 +1,7 @@
 ---
 id: update-billing-reservations
 title: Update billing reservations
-description: "Let's manage our hardware packages and edit reservations."
+description: "This setting is only visible in the Starter plan and Enterprise plan for owners and admins.The Starter plan is no longer available."
 ---
 
 :::note

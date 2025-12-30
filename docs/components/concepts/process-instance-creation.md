@@ -1,7 +1,7 @@
 ---
 id: process-instance-creation
 title: "Process instance creation"
-description: "Depending on the process definition, an instance of it can be created in several ways."
+description: "Depending on the process definition, an instance of it can be created in several ways. Camunda 8 supports the following ways to create a process instance: -..."
 ---
 
 Depending on the process definition, an instance of it can be created in several ways.

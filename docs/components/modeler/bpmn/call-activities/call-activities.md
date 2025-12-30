@@ -1,7 +1,7 @@
 ---
 id: call-activities
 title: "Call activities"
-description: "A call activity (or reusable subprocess) allows you to call and invoke another process as part of this process."
+description: "A call activity (or reusable subprocess) allows you to call and invoke another process as part of this process. A call activity (or reusable subprocess) allo..."
 ---
 
 A call activity (or reusable subprocess) allows you to call and invoke another process as part of this process. It's similar to an [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md), but the process is externalized (i.e. stored as separated BPMN) and can be invoked by different processes.

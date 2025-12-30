@@ -1,7 +1,7 @@
 ---
 id: overview
 title: Report process analysis
-description: After creating a report, utilize process analysis for a closer look at your process instances.
+description: "The edit mode allows you to configure the report and adjust it to your needs. The following operations are possible within edit mode: - Rename your report -..."
 ---
 
 ## Edit mode

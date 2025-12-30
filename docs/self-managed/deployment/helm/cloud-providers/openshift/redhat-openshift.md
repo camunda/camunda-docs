@@ -1,7 +1,7 @@
 ---
 id: redhat-openshift
 title: "Red Hat OpenShift"
-description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
+description: "Red Hat OpenShift, a Kubernetes distribution maintained by Red Hat, provides options for both managed and on-premises hosting."
 ---
 
 <!-- (!) Note: Please ensure that this guide maintains a consistent structure and presentation style throughout, as with docs/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md. The user should have a similar experience when reading both guides. -->

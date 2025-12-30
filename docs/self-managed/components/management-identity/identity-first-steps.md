@@ -2,7 +2,7 @@
 id: get-started
 title: "Get started with Management Identity"
 sidebar_label: "Get started"
-description: "Learn more about starting Management Identity, accessing the UI, default users, the home screen, and more."
+description: "Learn more about starting Management Identity, accessing the UI, default users, the home screen, and more. Get started with Management Identity in Self-Manag..."
 ---
 
 import IdentityLoginImg from './img/identity-login-page.png';

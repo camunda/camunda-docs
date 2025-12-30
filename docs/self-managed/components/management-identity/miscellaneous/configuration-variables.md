@@ -2,7 +2,7 @@
 id: configuration-variables
 title: "Configuration variables"
 sidebar_label: "Configuration variables"
-description: "Learn more about core configuration, component configuration, database configuration, and feature flags."
+description: "Learn more about core configuration, component configuration, database configuration, and feature flags. As a Spring Boot application, Identity supports any ..."
 ---
 
 As a Spring Boot application, Identity supports any standard [Spring configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) method.

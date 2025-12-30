@@ -2,7 +2,7 @@
 id: mapping-rules
 title: "Mapping rules"
 sidebar_label: "Mapping rules"
-description: "Map your auth data to Camunda-specific data using mapping rules."
+description: "Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens. You can only use mapping rules if..."
 ---
 
 Use mapping rules to dynamically assign Management Identity entities to your users based on claims in your JWT tokens.

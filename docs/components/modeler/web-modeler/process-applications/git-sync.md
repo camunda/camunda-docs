@@ -1,7 +1,7 @@
 ---
 id: git-sync
 title: Git sync
-description: Connect Web Modeler to your Git repositories to keep your projects synced.
+description: "Organization owners and administrators can connect their Web Modeler process applications to GitHub, GitLab, and Azure DevOps, allowing users to keep their..."
 ---
 
 import Tabs from "@theme/Tabs";

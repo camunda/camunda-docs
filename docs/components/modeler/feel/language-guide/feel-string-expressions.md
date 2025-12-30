@@ -1,7 +1,7 @@
 ---
 id: feel-string-expressions
 title: String expressions
-description: "This document outlines string expressions and examples."
+description: "Creates a new string value. ``feel "valid" ` An addition concatenates the strings. The result is a string containing the characters of both strings. `feel..."
 ---
 
 ### Literal

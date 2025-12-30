@@ -1,7 +1,7 @@
 ---
 id: using-tasklist
 title: Overview
-description: "Use Tasklist to manage and complete tasks that require manual interaction."
+description: "The user interaction with a task may involve making updates, adding variables, filling out a Camunda Form, or simply reviewing and completing the task."
 ---
 
 import TasklistTasksPageSpecifications from '../img/tasklist-page-specifications.png';

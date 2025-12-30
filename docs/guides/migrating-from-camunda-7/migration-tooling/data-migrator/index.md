@@ -2,7 +2,7 @@
 id: index
 title: Data Migrator
 sidebar_label: Data Migrator
-description: "Overview of migrating Camunda 7 process data to Camunda 8 using the Data Migrator."
+description: "Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8.- History migration: Experimental and not intended for production usage."
 ---
 
 Use the Data Migrator to copy runtime and audit data from Camunda 7 to Camunda 8.

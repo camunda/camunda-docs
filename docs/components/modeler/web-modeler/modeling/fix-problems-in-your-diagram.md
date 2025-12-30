@@ -1,7 +1,7 @@
 ---
 id: fix-problems-in-your-diagram
 title: Fix problems in your diagram
-description: This feature assists you in debugging and fixing errors in your processes.
+description: "Based on a set of lint rules, Web Modeler continuously validates implementation properties for a process diagram while the user is modeling."
 ---
 
 ### Design time errors

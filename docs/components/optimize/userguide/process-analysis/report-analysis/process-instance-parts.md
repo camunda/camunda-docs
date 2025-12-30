@@ -1,7 +1,7 @@
 ---
 id: process-instance-parts
 title: Process instance parts
-description: In some cases, you may not be interested in the duration of the whole process instance, but only a certain part of it.
+description: "In some cases, you may not be interested in the duration of the whole process instance, but only a certain part of it. In some cases, you may not be interest..."
 ---
 
 In some cases, you may not be interested in the duration of the whole process instance, but only a certain part of it. For that scenario, there is an additional button called **Process Instance Part** available for every process instance duration view that only shows data for a single process definition.

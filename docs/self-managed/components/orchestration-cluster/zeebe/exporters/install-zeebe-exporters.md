@@ -1,7 +1,7 @@
 ---
 id: install-zeebe-exporters
 title: "Install Zeebe exporters"
-description: "Add dynamic exporters to Zeebe brokers in Camunda 8 Self-Managed deployment."
+description: "Camunda 8 Self-Managed Helm chart supports the addition of Zeebe exporters by using initContainer. The following is an example to install the..."
 ---
 
 Camunda 8 Self-Managed Helm chart supports the addition of Zeebe exporters by using `initContainer`.

@@ -2,7 +2,7 @@
 id: amazon-bedrock
 sidebar_label: Amazon Bedrock
 title: Amazon Bedrock connector
-description: Interact with the Amazon Bedrock connector from your BPMN process.
+description: "The Amazon Bedrock connector is an outbound connector that allows you to interact with Amazon Bedrock from your BPMN process."
 ---
 
 The **Amazon Bedrock connector** is an outbound connector that allows you to interact with

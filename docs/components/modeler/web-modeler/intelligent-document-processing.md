@@ -1,7 +1,7 @@
 ---
 id: idp
 title: Intelligent document processing (IDP)
-description: "Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes."
+description: "Use intelligent document processing (IDP) to integrate automated document processing into your end-to-end processes. Use intelligent document processing (IDP..."
 keywords:
   [
     IDP,

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-html
 title: HTML view
-description: A form element to display HTML content.
+description: "A flexible display component designed to quickly render HTML content for the user.- Content: This property accepts HTML content."
 ---
 
 A flexible display component designed to quickly render HTML content for the user.

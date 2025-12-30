@@ -1,7 +1,7 @@
 ---
 id: publish-public-processes
 title: Publish processes via a form
-description: "Share executable processes publicly with anyone from Web Modeler on Camunda 8 SaaS."
+description: "Camunda 8 SaaS offers a convenient solution for process developers who want to make their processes accessible to users without requiring them to sign up to..."
 ---
 
 import CreateFormImg from '../../img/create-form.png';

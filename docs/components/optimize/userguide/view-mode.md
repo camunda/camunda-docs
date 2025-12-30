@@ -2,7 +2,7 @@
 id: view-mode
 title: "Monitor dashboards"
 sidebar_label: "Monitor dashboards"
-description: "Monitor your dashboards and visualize your processes data with the View mode."
+description: "Monitor your dashboards and visualize your processes data with the View mode.It provides interactive charts, raw data tables, and sharing features."
 ---
 
 Monitor your dashboards and visualize your processes data with the **View mode**. It provides interactive charts, raw data tables, and sharing features.

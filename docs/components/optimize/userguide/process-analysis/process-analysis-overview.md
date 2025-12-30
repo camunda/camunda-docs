@@ -1,7 +1,7 @@
 ---
 id: process-analysis-overview
 title: Overview
-description: Further analyze your reports, and learn more about branch and task analysis.
+description: "The following documentation provides an opportunity to further analyze your reports through several methods: - Task analysis: Task analysis allows you to..."
 ---
 
 The following documentation provides an opportunity to further analyze your reports through several methods:

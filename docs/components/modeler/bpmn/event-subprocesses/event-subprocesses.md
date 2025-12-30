@@ -1,7 +1,7 @@
 ---
 id: event-subprocesses
 title: "Event subprocess"
-description: "An event subprocess is a subprocess triggered by an event."
+description: "An event subprocess is a subprocess triggered by an event.This can be added globally to the process, or locally inside an embedded subprocess."
 ---
 
 An event subprocess is a subprocess triggered by an event. This can be added globally to the process, or locally inside an embedded subprocess.

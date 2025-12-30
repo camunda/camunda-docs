@@ -3,7 +3,7 @@ id: deprecated-rpcs
 title: "Deprecated RPCs"
 slug: /apis-tools/zeebe-api/deprecated-rpcs
 sidebar_position: 4
-description: "The following RPCs are exposed by the gateway service, but have been deprecated."
+description: "The following RPCs are exposed by the gateway service, but have been deprecated.Deprecated since 8, replaced by DeployResource RPC."
 ---
 
 The following RPCs are exposed by the gateway service, but have been deprecated.

@@ -1,7 +1,7 @@
 ---
 id: system-configuration-platform-8
 title: "Camunda 8 system configuration"
-description: "Connection to Camunda 8."
+description: "Learn how to configure Camunda 8 system configuration including available settings, options, and best practices for your deployment environment."
 ---
 
 ### General settings

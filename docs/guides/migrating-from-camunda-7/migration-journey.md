@@ -2,7 +2,7 @@
 id: migration-journey
 title: Migration journey
 sidebar_label: Migration journey
-description: "Get started with your migration by understanding the main steps involved in a successful migration journey."
+description: "Get started with your migration by understanding the main steps involved in a successful migration journey. Although migration projects differ in complexity,..."
 ---
 
 Although migration projects differ in complexity, there is a common theme in how to approach the migration journey.

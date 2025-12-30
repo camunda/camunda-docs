@@ -2,7 +2,7 @@
 id: log-levels
 sidebar_label: Log levels
 title: Camunda components log levels
-description: "Learn about what information you can expect in various log levels and how to handle them"
+description: "When working with Camunda 8, you may see various messages in your logs. Not all messages require action. Camunda 8 uses the following log levels: | Log level..."
 ---
 
 When working with Camunda 8, you may see various messages in your logs. Not all messages require action.

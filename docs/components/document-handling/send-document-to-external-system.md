@@ -1,7 +1,7 @@
 ---
 id: send-document-to-external-system-via-connector
 title: Send a document to an external system via a connector
-description: "Learn more about outbound connectors that support document handling."
+description: "You can reference a document in an outbound connector. Connectors can use variables with document metadata as an input. The format of inputs will depend on..."
 keywords: ["document handling"]
 ---
 

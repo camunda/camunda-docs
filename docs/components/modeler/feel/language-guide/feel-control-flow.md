@@ -1,7 +1,7 @@
 ---
 id: feel-control-flow
 title: Control flow
-description: "This document outlines control flow and examples."
+description: "``feel if c then a else b ` Executes the expression a if the condition c evaluates to true.Otherwise, it executes the expression b."
 ---
 
 ### If conditions

@@ -1,7 +1,7 @@
 ---
 id: retrieve-invoices-or-update-billing-info
 title: Retrieve invoices or update your billing information
-description: "Retrieve and download your Starter plan invoices and update your billing information"
+description: "This setting is only visible in the Starter plan for owners and admins. The Starter plan is no longer available. - Existing customers using a Starter plan..."
 ---
 
 :::note

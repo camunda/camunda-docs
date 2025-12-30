@@ -1,7 +1,7 @@
 ---
 id: overview
 title: "Overview"
-description: "Learn more about Camunda integrations, such as Camunda's SAP and ServiceNow integrations."
+description: "Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication..."
 ---
 
 Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape.

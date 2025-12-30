@@ -2,7 +2,7 @@
 id: configure-flow-control
 sidebar_label: Flow control
 title: Camunda components flow control configuration
-description: "Configure flow control to limit write rates and manage exporting backlogs."
+description: "When internal requests are processed faster than the rate at which they are exported, backlogs of unexported records can occur."
 ---
 
 When internal requests are processed faster than the rate at which they are exported, backlogs of unexported records can occur. Flow control slows the write rate of new records through both static write limits and optional dynamic throttling, and prevents the stream from building an excessive backlog of records not yet exported.

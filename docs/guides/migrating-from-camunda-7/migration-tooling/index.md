@@ -2,7 +2,7 @@
 id: index
 title: Migration tools
 sidebar_label: Migration tools
-description: "Learn about the available migration tools."
+description: "Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. Camunda provides the following migration tools:..."
 ---
 
 Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools.

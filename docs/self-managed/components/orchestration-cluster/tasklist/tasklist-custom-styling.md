@@ -1,7 +1,7 @@
 ---
 id: tasklist-custom-styling
 title: Custom styling
-description: "Learn how to customize the Tasklist user interface by overriding Carbon Design System tokens with your own CSS."
+description: "Learn how to customize the Tasklist user interface by overriding Carbon Design System tokens with your own CSS. You can customize the Tasklist user interface..."
 ---
 
 You can customize the Tasklist user interface (UI) to visually align it with your organization's brand identity. You can adjust the appearance of various UI elements, such as backgrounds, layers, controls, buttons, and text.

@@ -1,7 +1,7 @@
 ---
 id: amazon-eks
 title: "Amazon EKS"
-description: "Deploy Camunda 8 Self-Managed on Amazon EKS"
+description: "Amazon Elastic Kubernetes Service (Amazon EKS) is a managed container service to run and scale Kubernetes applications in the cloud or on-premises."
 ---
 
 import DocCardList from '@theme/DocCardList';

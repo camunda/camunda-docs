@@ -1,7 +1,7 @@
 ---
 id: model-your-first-diagram
 title: Model your first diagram
-description: "After you've created a BPMN diagram, you can start modeling it."
+description: "After you've created a BPMN diagram, you can start modeling it.We've preconfigured a diagram consisting of a start event."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>

@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-textarea
 title: Text area
-description: Learn about the text area form element to read and edit multiline textual data.
+description: "A text area allowing the user to read and edit multiline textual data.- Field label: Label displayed on top of the text area."
 ---
 
 A text area allowing the user to read and edit multiline textual data.

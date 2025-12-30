@@ -2,7 +2,7 @@
 id: bpmn-dmn-feel
 title: BPMN, DMN, and FEEL
 sidebar_label: BPMN, DMN, and FEEL
-description: "Camunda overview"
+description: "Use Business Process Model and Notation (BPMN), Decision Model and Notation (DMN), and Friendly Enough Expression Language (FEEL) in your process diagrams."
 ---
 
 Use Business Process Model and Notation (BPMN), Decision Model and Notation (DMN), and Friendly Enough Expression Language (FEEL) in your process diagrams.

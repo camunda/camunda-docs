@@ -2,7 +2,7 @@
 id: gitlab
 title: GitLab connector
 sidebar_label: GitLab
-description: Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab connector task and get started.
+description: "Manage GitLab issues and releases from your BPMN process. Learn about creating a GitLab connector task and get started. The GitLab connector is an outbound c..."
 ---
 
 The **GitLab connector** is an outbound connector that allows you to connect your BPMN service with [GitLab](https://about.gitlab.com/) to manage GitLab issues and releases.

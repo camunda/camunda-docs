@@ -1,5 +1,6 @@
 ---
 id: setting-up-a-cluster
+description: "To set up a cluster, you need to adjust the cluster section in the Zeebe configuration file. Below is a snippet of the default Zeebe configuration file:..."
 title: "Setting up a Zeebe cluster"
 ---
 

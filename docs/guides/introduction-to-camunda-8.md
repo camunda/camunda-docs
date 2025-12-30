@@ -3,7 +3,7 @@ id: introduction-to-camunda
 title: Get started with Camunda
 sidebar_label: Get started with Camunda
 slug: /guides/
-description: "Learn about Camunda 8, a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices."
+description: "Get hands-on with Camunda 8 with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human..."
 page_rank: 90
 ---
 

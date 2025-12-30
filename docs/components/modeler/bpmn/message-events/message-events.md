@@ -1,7 +1,7 @@
 ---
 id: message-events
 title: "Message events"
-description: "Message events are events which reference a message; they are used to wait until a proper message is received."
+description: "Message events are events which reference a message; they are used to wait until a proper message is received. Message events are events which reference a me..."
 ---
 
 Message events are events which reference a message; they are used to wait until a proper message is received.

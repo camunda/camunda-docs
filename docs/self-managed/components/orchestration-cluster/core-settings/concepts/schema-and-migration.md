@@ -1,7 +1,7 @@
 ---
 id: schema-and-migration
 title: Schema and data migration
-description: "The orchestration cluster stores data with secondary storage and provides tools to manage schema and migrations."
+description: "The orchestration cluster stores data with secondary storage and provides tools to manage schema and migrations. The orchestration cluster persists runtime a..."
 ---
 
 The orchestration cluster persists runtime and task data in Elasticsearch. On first startup, all required indices and templates are automatically created.

@@ -1,7 +1,7 @@
 ---
 id: define-reports
 title: Define reports
-description: In this section of the report builder, you are characterizing the output of the report.
+description: "In this section of the report builder, you are characterizing the output of the report.Basically, you are defining "I want to view ..."
 ---
 
 In this section of the report builder, you are characterizing the output of the report. Basically, you are defining "I want to view ... grouped by ... visualized as ...". To understand better what "View" and "Group by" mean, you can use the analogy of a graph, where "View" is the y-axis and "Group by" is the x-axis.

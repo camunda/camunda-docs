@@ -1,7 +1,7 @@
 ---
 id: best-practices
 title: Best practices for custom-built element templates
-description: Learn the best practices for creating and managing custom-built element templates in Web Modeler.
+description: "When creating custom-built element templates, consider the following best practices to ensure they are effective, user-friendly, and maintainable."
 ---
 
 When creating custom-built element templates, consider the following best practices to ensure they are effective, user-friendly, and maintainable.

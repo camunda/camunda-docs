@@ -1,7 +1,7 @@
 ---
 id: organization-settings
 title: Organization management
-description: "Follow these instructions to manage your organization."
+description: "Organization management can be accessed via the Open Organizations icon in the navigation bar. !Open Organizations icon in navigation bar Using the context..."
 ---
 
 Organization management can be accessed via the **Open Organizations** icon in the navigation bar.

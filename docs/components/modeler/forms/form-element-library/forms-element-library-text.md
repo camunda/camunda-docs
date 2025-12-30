@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-text
 title: Text view
-description: A form element to display simple Markdown-powered text.
+description: "A Markdown-powered text component allowing to display simple information to the user.- Text: Either an expression, plain text, or templating syntax."
 ---
 
 A Markdown-powered text component allowing to display simple information to the user.

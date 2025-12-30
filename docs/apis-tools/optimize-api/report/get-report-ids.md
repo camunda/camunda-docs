@@ -1,7 +1,7 @@
 ---
 id: get-report-ids
 title: "Get report IDs"
-description: "The REST API to retrieve all report IDs in a given collection."
+description: "This API allows users to retrieve all report IDs from a given collection. GET /api/public/report The following request headers have to be provided with every..."
 ---
 
 This API allows users to retrieve all report IDs from a given collection.

@@ -1,7 +1,7 @@
 ---
 id: forms-config-options
 title: Options Source
-description: How to configure an options source on a form field
+description: "Certain form fields work from a set of pre-populated options that your user will want to select from, such as the Radio or Select fields."
 ---
 
 ## Configuring form field options sources

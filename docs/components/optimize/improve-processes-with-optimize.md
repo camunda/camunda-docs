@@ -2,7 +2,7 @@
 id: improve-processes-with-optimize
 title: Getting started
 sidebar_label: Getting started
-description: "Leverage data collected during process execution, analyze bottlenecks, and examine areas for improvement."
+description: "Leverage data collected during process execution, analyze bottlenecks, and examine areas for improvement. The following document provides a basic end-to-end ..."
 ---
 
 <span class="badge badge--beginner">Beginner</span>

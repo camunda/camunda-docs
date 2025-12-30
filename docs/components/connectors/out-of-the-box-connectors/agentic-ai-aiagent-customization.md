@@ -2,7 +2,7 @@
 id: agentic-ai-aiagent-customization
 sidebar_label: Customization
 title: AI Agent connector customization
-description: Customization of the AI Agent connector in self-managed or hybrid deployments
+description: "In a self-managed or hybrid environment, you can customize and extend the AI Agent connector to suit your specific needs."
 ---
 
 In a self-managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.

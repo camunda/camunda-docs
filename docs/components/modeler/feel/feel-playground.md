@@ -1,7 +1,7 @@
 ---
 id: feel-playground
 title: FEEL Playground
-description: "Learn more about using the Camunda FEEL Playground to check and validate your FEEL expressions"
+description: "Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler."
 ---
 
 import PlaygroundExampleImg from './assets/feel-playground-example.png';

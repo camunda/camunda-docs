@@ -1,7 +1,7 @@
 ---
 id: event-based-gateways
 title: "Event-based gateway"
-description: "An event-based gateway allows you to make a decision based on events."
+description: "An event-based gateway allows you to make a decision based on events.!process An event-based gateway must have at least two outgoing sequence flows."
 ---
 
 An event-based gateway allows you to make a decision based on events.

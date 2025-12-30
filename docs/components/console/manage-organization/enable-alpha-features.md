@@ -1,7 +1,7 @@
 ---
 id: enable-alpha-features
 title: Enable alpha features
-description: "Learn how admin users can manage access to alpha features in Console and Modeler. "
+description: "Opting-in to Camunda alpha terms currently only applies to Enterprise SaaS subscriptions. Customers in other subscriptions can still turn on/off these..."
 keywords: [alpha-features, alpha, admin, pre-release]
 ---
 

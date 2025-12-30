@@ -1,5 +1,6 @@
 ---
 id: delete-account
+description: "To delete your Camunda account, take the following steps: 1. Log in to your Camunda account. 2. Ensure you are in Camunda Console. To do this, select the..."
 title: Delete your Camunda account
 keywords: [account, delete, cancel]
 ---

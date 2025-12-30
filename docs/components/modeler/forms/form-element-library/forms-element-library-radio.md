@@ -1,7 +1,7 @@
 ---
 id: forms-element-library-radio
 title: Radio group
-description: A form element to select a value from set options
+description: "A radio group allowing the user to select one of multiple data options for small datasets.- Field label: Label displayed above the radio group."
 ---
 
 A radio group allowing the user to select one of multiple data options for small datasets.

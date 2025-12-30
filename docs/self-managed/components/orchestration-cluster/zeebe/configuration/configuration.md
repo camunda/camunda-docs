@@ -2,7 +2,7 @@
 id: configuration
 title: "Configuration"
 sidebar_label: "Overview"
-description: "Let's analyze how to configure Zeebe."
+description: "Zeebe can be configured through the following: - Configuration files - Environment variables - A mix of both If both configuration files and environment..."
 ---
 
 Zeebe can be configured through the following:

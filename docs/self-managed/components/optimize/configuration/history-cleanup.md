@@ -1,7 +1,7 @@
 ---
 id: history-cleanup
 title: "History cleanup"
-description: "Make sure that old data is automatically removed from Optimize."
+description: "To satisfy data protection laws or just for general storage management purposes, Optimize provides an automated cleanup functionality."
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 id: defining-templates
 title: Defining templates
-description: "Learn how to define an element template"
+description: "An element template is defined in a template descriptor files as a JSON object. The element template object is divided into required and optional key-value..."
 ---
 
 An element template is defined in a template descriptor files as a JSON object.

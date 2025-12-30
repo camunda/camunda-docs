@@ -1,7 +1,7 @@
 ---
 id: configuration
 title: Configuration
-description: "See how to configure Camunda Process Test"
+description: "By default, CPT uses a runtime based on Testcontainers. You can customize the runtime to your needs, or replace it with a Remote runtime, for example, if you..."
 ---
 
 import Tabs from "@theme/Tabs";

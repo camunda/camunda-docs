@@ -1,7 +1,7 @@
 ---
 id: cluster-connectors
 title: Manage your connectors
-description: "In Console you can monitor and manage the connectors you have running on your cluster on the Connector Management page."
+description: "In Console you can monitor and manage the connectors you have running on your cluster on the Connector Management page. Monitor and manage inbound connectors..."
 ---
 
 import ManageImg from './img/cluster-manage-connectors.png';

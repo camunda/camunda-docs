@@ -1,7 +1,7 @@
 ---
 id: tasks
 title: "Overview"
-description: "This document outlines an overview of supported elements."
+description: "The basic elements of BPMN processes are tasks; these are atomic units of work composed to create a meaningful result. Whenever a token reaches a task, the..."
 ---
 
 The basic elements of BPMN processes are tasks; these are atomic units of work composed to create a meaningful result. Whenever a token reaches a task, the token stops and Zeebe creates a job and notifies a registered worker to perform work. When that handler signals completion, the token continues on the outgoing sequence flow.

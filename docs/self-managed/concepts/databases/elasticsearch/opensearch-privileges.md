@@ -1,5 +1,6 @@
 ---
 id: opensearch-privileges
+description: "If you implement Camunda 8 with OpenSearch as a service provider, you must configure OpenSearch with the following permissions and default action groups in..."
 title: "OpenSearch privileges"
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: assertions
 title: Assertions
-description: "Use assertions to verify the process instance state."
+description: "The class CamundaAssert is the entry point for all assertions. It is based on AssertJ and Awaitility. The assertions follow the style:..."
 ---
 
 The class `CamundaAssert` is the entry point for all assertions. It is based on [AssertJ](https://github.com/assertj/assertj) and [Awaitility](http://www.awaitility.org/).

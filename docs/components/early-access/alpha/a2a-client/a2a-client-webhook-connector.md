@@ -2,7 +2,7 @@
 id: a2a-client-webhook-connector
 title: A2A Client Webhook connector
 sidebar_label: A2A Client Webhook connector
-description: "Receive callbacks from remote A2A agents via HTTP webhooks."
+description: "The A2A Client Webhook connector receives callbacks from remote A2A agents via HTTP webhooks. It is typically paired with the A2A Client connector when using..."
 ---
 
 The A2A Client Webhook connector receives callbacks from remote A2A agents via HTTP webhooks.

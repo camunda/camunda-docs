@@ -1,7 +1,7 @@
 ---
 id: filters
 title: Overview
-description: Define filters in Optimize to narrow down your view to only a subset of process instances.
+description: "Locating flaws in your process models can be a huge challenge when you have millions of process instances to sift through."
 ---
 
 Locating flaws in your process models can be a huge challenge when you have millions of process instances to sift through. Define filters in Optimize to narrow down your view to only a subset of process instances.

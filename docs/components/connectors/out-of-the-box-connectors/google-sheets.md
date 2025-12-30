@@ -2,7 +2,7 @@
 id: google-sheets
 title: Google Sheets connector
 sidebar_label: Google Sheets
-description: Use the Google Sheets connector to connect your BPMN service with Google Sheets.
+description: "The Google Sheets connector is an outbound connector that allows you to work with an existing or new spreadsheet on Google Drive from your BPMN process."
 ---
 
 The **Google Sheets connector** is an outbound connector that allows you to work with an existing or new spreadsheet
