@@ -63,7 +63,7 @@ Both types of endpoints can be routed through a load balancer to maintain availa
 
 Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, which can also be routed through the same HTTP load balancer.
 
-The orchestration components rely on **Elasticsearch** or **OpenSearch** as their data store.
+The orchestration components rely on [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) as their secondary storage for indexing and search.
 
 Components within the Orchestration Cluster communicate seamlessly, particularly:
 

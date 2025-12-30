@@ -4,7 +4,7 @@ title: "Elasticsearch and OpenSearch"
 description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch."
 ---
 
-The Orchestration Cluster stores and reads data from either **Elasticsearch** or **OpenSearch**.
+The Orchestration Cluster stores and reads data from either [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) (used as secondary storage for indexing and search).
 
 ## Select a database
 
@@ -38,7 +38,7 @@ You can specify either `host` and `port` (deprecated) or `url` (recommended).
 ## Common configuration options
 
 :::note
-`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`.
+`.{ES/OS}` in the values below reference either `.elasticsearch` or `.opensearch`. Both Elasticsearch and OpenSearch are used as secondary storage for indexing and search — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch) for the canonical definition.
 :::
 
 | Name                                             | Description                                  | Default value                                  |

@@ -6,7 +6,7 @@ description: "Overview of how the Orchestration Cluster stores and archives data
 
 The Orchestration Cluster centrally manages data retention for all data using unified storage and policy configuration.
 
-All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage in Elasticsearch or OpenSearch. The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
+All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
 
 During data archive, data is moved to a dated index (e.g., `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation.
 

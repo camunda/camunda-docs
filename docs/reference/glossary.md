@@ -159,6 +159,12 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ## E
 
+### Elasticsearch/OpenSearch
+
+Elasticsearch and OpenSearch are search and analytics engines commonly used as **secondary storage** for indexing, search, and analytics of exported runtime data. These systems are typically populated from primary storage and are consumed by tools such as Operate and Optimize. When documentation discusses search or analytics backing services, prefer linking to this glossary entry and to the `Secondary storage` definition for conceptual context.
+
+See also: [Secondary storage](#secondary-storage)
+
 ### Element
 
 A BPMN element is part of a [process](#process), defining one part of its BPMN model. Elements are the building blocks of a process and comprise [flow nodes](#flow-node), sequence flows, participants, data objects, and more.
@@ -170,6 +176,12 @@ A BPMN element is part of a [process](#process), defining one part of its BPMN m
 Use an element template to extend [Modeler](/components/modeler/about-modeler.md) with domain-specific diagram [elements](#element). The user edits such elements through a UI defined by the element template, and in the process configures standard technical bindings understood by the engine in simple and predictable ways. Element templates are used by [connectors](#connector) to create the connector-specific [element](#element) configuration.
 
 - [Element templates](/components/modeler/element-templates/about-templates.md)
+
+### Embedded H2
+
+Embedded H2 (file-based H2) refers to running the H2 relational database in a file-backed or embedded mode where the database files reside on the same host as the component using them. In Camunda documentation, this is commonly discussed as a lightweight primary storage option for development or certain Self-Managed deployments. Embedded H2 is not intended for high-availability production usage without appropriate backup and clustering strategies.
+
+See also: [Primary storage](#primary-storage)
 
 ### Embedding (vector embedding)
 
@@ -356,6 +368,12 @@ An inbound polling [connector](#connector) that periodically polls an external s
 
 A [Camunda workflow](#workflow) uses this type of connector to retrieve data from a remote system that does not support real-time notifications or webhooks, but instead requires the client to periodically request updates.
 
+### Primary storage
+
+Primary storage is the authoritative store for runtime state that the Orchestration Cluster needs to execute and recover processes (for example: partition logs, snapshots, and runtime state). Primary storage variants include embedded H2 (file-based H2), external RDBMS, or broker-local persistent stores depending on deployment.
+
+See also: [Orchestration Cluster](#orchestration-cluster), [Secondary storage](#secondary-storage)
+
 ### Process
 
 The general business construct — what you want to automate.  
@@ -423,6 +441,12 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 
 ## R
 
+### RDBMS
+
+RDBMS (Relational Database Management System) refers to external relational databases (for example PostgreSQL, MySQL) used as persistent storage for Camunda components. In the context of Camunda 8, an external RDBMS may be used as a form of **primary storage** for runtime state or as a **secondary storage** option depending on configuration.
+
+See also: [Primary storage](#primary-storage), [Embedded H2](#embedded-h2)
+
 ### Record
 
 A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
@@ -475,6 +499,12 @@ The use of software robots to automate repetitive, rule-based business tasks. RP
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
 
 - [SAP](/components/camunda-integrations/overview.md)
+
+### Secondary storage
+
+Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from primary storage and consumed by tools for observability and analytics (examples: Elasticsearch/OpenSearch and RDBMS-based secondary stores).
+
+See also: [Elasticsearch/OpenSearch](#elasticsearch--opensearch)
 
 ### Segment
 

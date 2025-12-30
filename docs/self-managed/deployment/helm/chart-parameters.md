@@ -30,12 +30,12 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 ### Bitnami subcharts
 
-| Section                | Purpose                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart)                       |
-| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart)    |
-| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) |
-| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
+| Section                | Purpose                                                                                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart). This is typically used as secondary storage — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch). |
+| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart)                                                                                                               |
+| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart)                                                                                                            |
+| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)                                                                                                                    |
 
 :::info
 Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production.

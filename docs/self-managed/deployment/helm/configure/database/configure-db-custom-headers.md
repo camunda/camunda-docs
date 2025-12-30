@@ -8,7 +8,7 @@ description: Learn how to add custom HTTP headers to database clients in Camunda
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can add custom HTTP headers to the Elasticsearch or OpenSearch clients used by Camunda components by creating a Java plugin and adding it to your Camunda 8 Self-Managed installation. Custom headers can help with adding authentication, tracking, or debugging to your database requests.
+You can add custom HTTP headers to the Elasticsearch or OpenSearch clients used by Camunda components (both are used as secondary storage for search/indexing) by creating a Java plugin and adding it to your Camunda 8 Self-Managed installation. Custom headers can help with adding authentication, tracking, or debugging to your database requests — see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearch--opensearch).
 
 ## Prerequisites
 
