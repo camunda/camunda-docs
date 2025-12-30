@@ -169,6 +169,7 @@ Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` f
 - Operate is not yet supported with RDBMS until alpha3.
 
 <span className="badge badge--breaking-change">Breaking change</span>
+
 </div>
 <div className="release-announcement-content">
 
