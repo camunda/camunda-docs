@@ -492,8 +492,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-incident-process-instance-statistics",
-          label: "Get incident process instance statistics",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics-by-definition",
+          label: "Get process instance statistics by definition",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics-by-error",
+          label: "Get process instance statistics by error",
           className: "api-method post",
         },
       ],
