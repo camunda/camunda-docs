@@ -185,6 +185,30 @@ data:
     management.endpoints.web.exposure.include: health,info,conditions,configprops,prometheus,loggers,usage-metrics,backups
 ```
 
+### Appending extra properties
+
+Often times, you only need to add a few custom properties to the default configuration, and do not want to override the entire configuration file. In this case, we've added a placeholder file within `extraConfiguration` called `additional-spring-properties.yaml`, anything defined here will be merged with the main configuration file and will be taken with higher precedence.
+
+It can be specified like this:
+
+```yaml
+<component>:
+  extraConfiguration:
+    additional-spring-properties.yaml: |
+      <options>
+```
+
+Or to be more specific, if I wanted to up the log level:
+```yaml
+orchestration:
+  extraConfiguration:
+    additional-spring-properties.yaml: |
+      logging:
+        level:
+          root: DEBUG
+```
+
+
 ## Practical example: migrating from environment variables to a configuration file
 
 This example shows how to convert a Zeebe backup configuration from environment variables to the `application.yaml` file format.
