@@ -10,7 +10,7 @@ import ProcessInstanceAfterMigration from './assets/process-instance-migration/m
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user.
+For example, a migrated active user task remains assigned to the same user (if there is no implementation migration).
 This principle applies to all parts of the process instance.
 
 :::tip
@@ -163,6 +163,22 @@ After migrating active element `A` to `B` and `Ad-Hoc Subprocess A` to `Ad-Hoc S
 To migrate ad-hoc subprocesses, you must provide a mapping instruction from the process instance’s ad-hoc subprocess ID to the target ad-hoc subprocess ID.
 
 Changing the scope of ad-hoc subprocesses during migration is not possible.
+:::
+
+## Migrate job-worker user tasks to Camunda user tasks
+
+User tasks with job worker implementation can be migrated to user tasks with Camunda user task implementation by providing mapping instructions between the source and the target user task.
+
+The target Camunda user task will preserve the `candidate groups`, `candidate users`, `due date`, `follow-up date`, and `form id`/`form key` of the source task.
+
+The target user task will set the priority as defined in the target user task definition, or set a default value if none is defined.
+
+:::important
+Camunda user tasks do not support embedded forms. When migrating a job-worker user task with embedded form to a Camunda user task, the form defined in the target user task definition will be used.
+:::
+
+:::important
+For the migration between different user task implementations the current `assignee` is not preserved. The target user task will be assigned to the initial assignee defined in the target user task definition.
 :::
 
 ## Deal with catch events
@@ -445,7 +461,7 @@ The following limitations exist that may be supported in future versions:
   - An element that becomes nested in a newly added subprocess
   - An element that was nested in a subprocess is no longer nested in that subprocess
 - Mapping instructions cannot change the element type
-- Mapping instructions cannot change the task implementation, for example, from a job worker user task to a Camunda user task.
+- Mapping instructions can only change the user task implementation from a job-worker user task to a Camunda user task, but not vice-versa
 - The process instance must be in a wait state, i.e. waiting for an event or external input like job completion. It may not be taking a sequence flow or triggering an event while migrating the instance.
 
 A full overview of error codes can be found in the migration command [RPC](/apis-tools/zeebe-api/gateway-service.md#migrateprocessinstance-rpc) or [REST](/apis-tools/orchestration-cluster-api-rest/specifications/migrate-process-instance.api.mdx).
