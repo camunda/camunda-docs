@@ -42,7 +42,7 @@ These release notes identify the main new features included in the 8.9 minor rel
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
 <!-- https://github.com/camunda/product-hub/issues/2229 -->
 
-Camunda 8 now supports _bring your own monitoring (BYOM)_ for SaaS clusters. You can activate a secure metrics endpoint for your C8 cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
+Camunda 8.9 introduces _bring your own monitoring (BYOM)_ for SaaS clusters. You can activate a secure metrics endpoint for your C8 cluster and integrate it with Prometheus, Datadog, or any monitoring system that supports Prometheus scraping.
 
 This gives you real-time visibility into cluster performance, helps you troubleshoot faster, and lets you seamlessly integrate with your existing observability stack.
 
@@ -52,7 +52,7 @@ This gives you real-time visibility into cluster performance, helps you troubles
 
 <!-- https://github.com/camunda/product-hub/issues/3065 -->
 
-Camunda 8 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
+Camunda 8.9 now supports migration of process instances that include ad-hoc subprocesses, covering both single-instance and multi-instance (parallel and sequential) variants.
 
 With this enhancement, you can:
 
@@ -99,7 +99,7 @@ This streamlines the deployment workflow and reduces setup friction.
 
 <!-- https://github.com/camunda/product-hub/issues/2717 -->
 
-Camunda 8 introduces cluster variables, letting you centrally manage configuration across your cluster. You can access these variables directly in the Modeler using FEEL expressions:
+Camunda 8.9 adds support for cluster variables, letting you centrally manage configuration across your cluster. You can access these variables directly in the Modeler using FEEL expressions:
 
 - `camunda.vars.cluster`: global scope.
 - `camunda.vars.tenant`: tenant scope.
@@ -127,7 +127,7 @@ This lets you:
 
 <!-- https://github.com/camunda/product-hub/issues/3025 -->
 
-Camunda 8 now supports Amazon Aurora as a secondary data store for orchestration clusters, in addition to existing options.
+Camunda 8.9 now supports Amazon Aurora as a secondary data store for orchestration clusters, in addition to existing options.
 
 - Supports Aurora PostgreSQL (compatible with PostgreSQL 14–17).
 - Designed for secure, high-performance, cloud-native deployments.
@@ -146,7 +146,7 @@ Helm charts and manual installation guides now include tested configurations and
 
 <!-- https://github.com/camunda/product-hub/issues/2586 -->
 
-Camunda 8 now introduces configuration-based global user task listeners for Self-Managed deployments.
+Camunda 8.9 introduces configuration-based global user task listeners for Self-Managed deployments.
 
 Administrators can define cluster-wide listeners using configuration files or environment variables, ensuring they are applied consistently from cluster startup and preserved across backup and restore operations.
 
@@ -156,7 +156,7 @@ All user task lifecycle events emit payloads containing full variable context an
 
 <!-- https://github.com/camunda/product-hub/issues/2690 -->
 
-Camunda 8 Helm charts now support RDBMS as fully integrated secondary storage options for orchestration clusters, providing a first-class alternative to Elasticsearch and OpenSearch.
+Camunda 8.9 Helm charts now support RDBMS as fully integrated secondary storage options for orchestration clusters, providing a first-class alternative to Elasticsearch and OpenSearch.
 
 With this update, administrators can:
 
