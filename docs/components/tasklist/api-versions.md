@@ -84,7 +84,11 @@ For detailed configuration options, including YAML configuration, see the [Taskl
 
 ### Authorization differences
 
-While Tasklist V2 uses fine-grained [authorization-based access control](../concepts/access-control/authorizations.md), accessing resources in Tasklist V1 API mode requires wildcard authorizations. More details for authorization changes in the V1 API can be found in the [migration guide](../../apis-tools/migration-manuals/migrate-component-apis.md#mapping-tasklist-permissions-to-new-authorizations). When switching between V1 and V2 mode, ensure authorizations are adjusted accordingly.
+Tasklist V2 uses fine-grained [authorization-based access control](../concepts/access-control/authorizations.md). In Tasklist V1 API mode, access to resources requires wildcard authorizations.
+
+For details about authorization changes in the V1 API, see the [migration guide](../../apis-tools/migration-manuals/migrate-component-apis.md#mapping-tasklist-permissions-to-new-authorizations).
+
+When switching between V1 and V2 mode, review and update authorizations to match the active mode.
 
 ### User task access restrictions
 
