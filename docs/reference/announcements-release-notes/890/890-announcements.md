@@ -88,7 +88,24 @@ To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-rel
 </div>
 <div className="release-announcement-content">
 
-#### MySQL and Microsoft SQL Server secondary storage support
+#### Amazon Aurora secondary storage
+
+Camunda 8.9 introduces Amazon Aurora as a secondary data store for orchestration clusters.
+
+:::info
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#use-amazon-aurora-for-secondary-storage).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL and Microsoft SQL Server secondary storage
 
 Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
 
@@ -119,6 +136,23 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 
 ### Deployment
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Cluster variables supported
+
+Camunda 8.9 introduces cluster variables, letting you centrally manage configuration across your cluster.
+
+:::info
+To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-release-notes/890/890-release-notes.md#manage-configuration-with-cluster-variables).
+:::
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

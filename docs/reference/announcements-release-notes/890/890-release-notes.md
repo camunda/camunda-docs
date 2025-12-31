@@ -109,6 +109,8 @@ If the same variable exists at multiple scopes, tenant overrides global, and pro
 
 Cluster variables support simple key-value pairs and nested objects, which you can access with dot notation for complex structures. You can manage all cluster variables via the Orchestration Cluster API.
 
+<p class="link-arrow">[Cluster variables overview](/components/modeler/feel/cluster-variable/overview.md)</p>
+
 #### Migrate legacy job-based user tasks to engine-managed user tasks
 
 <!-- https://github.com/camunda/product-hub/issues/2626 -->
