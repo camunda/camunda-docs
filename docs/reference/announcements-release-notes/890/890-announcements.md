@@ -23,36 +23,6 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 ## Key changes
 
-### Supported environments
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### OpenJDK 25 support
-
-Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch minimum version raised to 8.18.6+
-
-The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3). This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates. Upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
-
-</div>
-</div>
-
 ### Agentic orchestration
 
 <div className="release-announcement-row">
@@ -74,7 +44,60 @@ To learn more, see the [MCP](/components/early-access/alpha/mcp-client/mcp-clien
 </div>
 </div>
 
+### Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Deprecated: Operate Connector
+
+The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
+
+Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### Virtual threads support
+
+Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
+
+See [connector runtime performance](/self-managed/components/connectors/performance.md) for more information on optimizing connector performance with virtual threads.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
+
+</div>
+</div>
+
 ### Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL and Microsoft SQL Server secondary storage support
+
+Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
+
+:::info
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
+:::
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -95,24 +118,24 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
+### Deployment
+
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### MySQL and Microsoft SQL Server secondary storage support
+#### Helm chart `values.yaml` options for RDBMS
 
-Camunda 8.9 extends RDBMS secondary storage to include MySQL and Microsoft SQL Server as additional options for the Orchestration cluster.
+Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
 
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#mysql-and-microsoft-sql-server-secondary-storage).
-:::
+- Postgresql is currently supported.
+- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
+- Operate is not yet supported with RDBMS until alpha3.
 
 </div>
 </div>
-
-### Deployment
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -134,62 +157,7 @@ To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-rel
 </div>
 </div>
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Helm chart values.yaml options for RDBMS
-
-Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file. See `orchestration.data.secondaryStorage.rdbms` for details.
-
-- Postgresql is currently supported.
-- Other RDBMS databases like OracleDB and MariaDB have limited functionality now, but will be fully supported in future alpha releases.
-- Operate is not yet supported with RDBMS until alpha3.
-
-</div>
-</div>
-
 ### Modeler
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--new">New</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
-
-Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
-
-This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
-
-:::info
-To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
-
-Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the Orchestration Cluster uses.
-
-This enhancement ensures consistency across environments and simplifies setup for administrators.
-
-:::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
-:::
-
-</div>
-</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -205,28 +173,6 @@ This change aligns with the current Orchestration Cluster logging default as def
 
 :::info
 To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
-:::
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Web Modeler: JSON format changes
-
-When using JSON as the output for the logs the structure has slightly changed:
-
-- `logger`: This field is now renamed to `loggerName`.
-- `thread`: Previously represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
-
-See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
-
-:::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 :::
 
 </div>
@@ -272,19 +218,43 @@ To learn more, see the [8.9.0-alpha3 release notes](/reference/announcements-rel
 </div>
 </div>
 
-### Connectors
-
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--deprecated">Deprecated</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Deprecated: Operate Connector
+#### Web Modeler: JSON format changes
 
-The Operate Connector is deprecated, following the deprecation of the Operate API in Camunda 8.9 (see [Deprecated: Operate and Tasklist v1 REST APIs](/reference/announcements-release-notes/880/880-announcements.md#deprecated-operate-and-tasklist-v1-rest-apis)).
+When using JSON as the output for the logs the structure has slightly changed:
 
-Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) via the [REST Connector](/components/connectors/protocol/rest.md).
+- `logger`: This field is now renamed to `loggerName`.
+- `thread`: Previously represented the name of the thread. Now we have an object named `threadContext` with a field `name` that has this value.
+
+See [Logging documentation](/self-managed/components/modeler/web-modeler/configuration/logging.md#json-structure) for more information.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Web Modeler: Logging framework changed from Logback to Apache Log4j 2
+
+Web Modeler now uses [Apache Log4j 2](https://logging.apache.org/log4j/2.x/) for logging, in alignment with what the Orchestration Cluster uses.
+
+This enhancement ensures consistency across environments and simplifies setup for administrators.
+
+:::info
+To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-logging-framework-changes-from-logback-to-log4j2).
+:::
 
 </div>
 </div>
@@ -295,15 +265,60 @@ Going forward, you can use the [Orchestration Cluster REST API](/apis-tools/orch
 </div>
 <div className="release-announcement-content">
 
-#### Virtual threads support
+#### Web Modeler: RDBMS support (H2, MariaDB, MySQL)
 
-Camunda 8.9 provides support for virtual threads in the connector runtime. Virtual threads are enabled by default for outbound connectors.
+Camunda 8.9 adds support for H2, MariaDB, and MySQL as relational databases for Web Modeler.
 
-See [connector runtime performance](/self-managed/components/connectors/performance.md) for more information on optimizing connector performance with virtual threads.
+This enhancement aligns Web Modeler’s database configuration with the Orchestration cluster, ensuring consistent setup and improved integration across environments.
 
 :::info
-To learn more, see the [8.9.0-alpha2 release notes](/reference/announcements-release-notes/890/890-release-notes.md).
+To learn more, see the [8.9.0-alpha1 release notes](/reference/announcements-release-notes/890/890-release-notes.md#web-modeler-rdbms-support-h2-mariadb-mysql).
 :::
+
+</div>
+</div>
+
+### Supported environments
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch minimum version raised to 8.18.6+
+
+The minimum supported Elasticsearch version for the Orchestration cluster and Optimize is now 8.18.6 (previously 8.17.3). This aligns with the updated `ELASTICSEARCH_VERSION=8.18.6` default used by Camunda 8 Run, Docker Compose, and Helm templates. Upgrade your Elasticsearch/OpenSearch clusters before moving to Camunda 8.9 to avoid compatibility issues.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### OpenJDK 25 support
+
+Camunda 8.9 adds certification for OpenJDK 25 across the Orchestration Cluster, Connectors, Optimize, and supporting tooling. You can now run Self-Managed deployments on OpenJDK 21–25 without additional configuration changes.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### AWS Paris region added
+
+Camunda 8.9 adds support for the AWS Paris region in Camunda 8 SaaS.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
 
 </div>
 </div>
