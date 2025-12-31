@@ -199,6 +199,7 @@ It can be specified like this:
 ```
 
 Or to be more specific, if I wanted to up the log level:
+
 ```yaml
 orchestration:
   extraConfiguration:
