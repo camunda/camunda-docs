@@ -164,7 +164,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Cluster variable",
+      label: "Cluster Variable",
       items: [
         {
           type: "doc",
