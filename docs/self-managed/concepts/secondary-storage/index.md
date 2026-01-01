@@ -46,7 +46,18 @@ The following diagram shows how secondary storage fits into the Camunda data flo
 1. The exporter, part of Zeebe, streams workflow and task data to secondary storage.
 1. Applications such as Operate, Tasklist, and the REST API read data from secondary storage.
 
-## Configure secondary storage
+## Choosing a secondary storage backend
+
+When selecting a secondary storage backend for production, consider the following:
+
+- **Elasticsearch/OpenSearch** — Best for high-volume search, complex queries, analytics, dashboards, and long-term retention. Preferred when you need near real-time search, advanced aggregation capabilities, or large-scale observability. Requires operational expertise to run and scale Elasticsearch/OpenSearch clusters (or use a managed service).
+
+- **RDBMS** — Good fit for simpler query patterns, smaller historical datasets, lower operational complexity, and teams with strong RDBMS experience. Choose RDBMS when you prefer relational consistency and want to avoid running a dedicated search cluster.
+
+Recommendations:
+
+- For most production environments that require rich search and analytics (Operate, Tasklist, Optimize), consider **Elasticsearch/OpenSearch**. For teams prioritizing reduced operational overhead and smaller datasets, **RDBMS secondary storage** is a viable alternative.
+- Always run benchmarks and sizing exercises against realistic workloads before finalizing a choice. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and the Camunda 8 benchmark project there for guidance.
 
 Learn how to configure secondary storage in Self-Managed environments using Helm, Docker, or manual deployment.
 

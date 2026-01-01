@@ -7,6 +7,8 @@ description: "Follow best practices to maintain, back up, and monitor your secon
 
 Manage your secondary storage carefully to maintain data integrity, performance, and system stability.
 
+For definitions and conceptual context, see [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+
 ## Modifying secondary storage data
 
 :::warning
@@ -28,7 +30,7 @@ Unsupervised changes to secondary storage data can lead to severe issues, such a
 
 ## Configuring shards and replicas
 
-Proper configuration of shards and replicas in Elasticsearch or OpenSearch is essential for resilience and scalability.
+Proper configuration of shards and replicas in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) is essential for resilience and scalability.
 
 ### Shards
 
@@ -58,7 +60,7 @@ Regular backups of your secondary storage are critical for disaster recovery and
 
 ## Index templates
 
-Camunda uses index templates to define settings and mappings for indices in Elasticsearch and OpenSearch.
+Camunda uses index templates to define settings and mappings for indices in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 To prevent issues:
 

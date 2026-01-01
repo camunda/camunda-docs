@@ -65,6 +65,10 @@ Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, w
 
 The orchestration components rely on [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) as their secondary storage for indexing and search.
 
+:::note
+Elasticsearch/OpenSearch are common choices for secondary storage, but RDBMS-based secondary storage is supported for some components. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+:::
+
 Components within the Orchestration Cluster communicate seamlessly, particularly:
 
 - **Zeebe brokers** exchange data over gRPC endpoints for efficient inter-broker communication.

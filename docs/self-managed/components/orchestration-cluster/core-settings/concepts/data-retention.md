@@ -8,6 +8,10 @@ The Orchestration Cluster centrally manages data retention for all data using un
 
 All cluster data, including deployed process definitions, process instance state, user operations, and technical metadata, is written to secondary storage in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch). The data representing process instance state becomes immutable after the process instance is finished, and it becomes eligible for archiving.
 
+:::note
+While Elasticsearch/OpenSearch are typical secondary stores for indexing and archiving, some components can use RDBMS-based secondary storage. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms) for guidance on when RDBMS is appropriate.
+:::
+
 During data archive, data is moved to a dated index (e.g., `operate-variable_2020-01-01`), with the suffix representing the completion date of the associated process or operation.
 
 :::note

@@ -18,6 +18,19 @@ This section provides an overview of the available recommendations for installin
 To run Camunda 8 in a local environment for development or evaluation purposes only, review [running locally](/self-managed/quickstart/developer-quickstart.md)
 :::
 
-## Supported environments
+## Production storage choices
 
-For details on supported environments (e.g. Java or Elasticsearch versions), see [supported environments](/reference/supported-environments.md).
+Choosing the right storage configuration is a critical step for production deployments. Consider the following when preparing a production-ready installation:
+
+- Install Camunda 8 using one of the production deployment options above (Helm/Kubernetes recommended).
+- Read the Self-Managed storage concepts: [primary vs secondary storage](/components/concepts/concepts-overview.md) and [secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
+- Provision your chosen storage backend(s) before enabling web applications such as Operate, Tasklist, or Optimize.
+
+Recommendations:
+
+- Prefer managed or vendor-supported infrastructure for production (for example managed Elasticsearch/OpenSearch services or managed RDBMS) to reduce operational overhead and improve reliability.
+- Benchmark and size your environment using the guidance in [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and the Camunda benchmark project referenced.
+
+:::info
+For environment compatibility and supported versions, see [supported environments](/reference/supported-environments.md).
+:::
