@@ -28,6 +28,7 @@ https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/google-cloud-storage/#authentication
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/hubspot
 https://docs.camunda.io/docs/8.8/components/connectors/out-of-the-box-connectors/sql/#database
+https://docs.camunda.io/docs/8.9/components/connectors/out-of-the-box-connectors/azure-blob-storage/#oauth-20
 https://docs.camunda.io/docs/apis-clients/operate-api/#filter
 https://docs.camunda.io/docs/apis-clients/operate-api/#sort
 https://docs.camunda.io/docs/apis-tools/camunda-api-rest/specifications/upload-document-alpha/
@@ -35,6 +36,9 @@ https://docs.camunda.io/docs/apis-tools/operate-api/specifications/search
 https://docs.camunda.io/docs/apis-tools/operate-api/specifications/search/
 https://docs.camunda.io/docs/apis-tools/working-with-apis-tools
 https://docs.camunda.io/docs/components/camunda-integrations/overview
+https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/flow-starter
+https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/incident-handler
+https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/outbound-connector
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
@@ -48,6 +52,7 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/ama
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=outbound
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#execution-types
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/asana
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere/
@@ -95,6 +100,8 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/mic
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-teams
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/openai
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/operate
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/power-automate
+https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/power-automate/#oauth-token-endpoint
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/rabbitmq
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/rabbitmq-inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/rabbitmq/#routing-data
