@@ -11,6 +11,11 @@ This section provides an overview of the available recommendations for installin
 ## Production installations
 
 - [**Helm/Kubernetes**](/self-managed/deployment/helm/install/quick-install.md) (Recommended): We recommend using Kubernetes and Helm to run Camunda 8 Self-Managed in production. With the right configuration, Camunda 8 Self-Managed can be deployed on any Certified Kubernetes distribution (cloud or on-premises). We also officially support a variety of providers like [Red Hat OpenShift](../../self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md) and [Amazon EKS](../../self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md).
+
+:::note
+Starting in 8.9-alpha3, Camunda 8 Run (Camunda 8 Run) uses H2 as the default secondary storage out-of-the-box. Elasticsearch/OpenSearch remain bundled and supported as optional alternatives; see the [Camunda 8 Run configuration docs](../quickstart/developer-quickstart/c8run.md) for enabling Elasticsearch if required.
+:::
+
 - [**Docker**](/self-managed/deployment/docker/docker.md): All Camunda components are available as [Docker images](https://hub.docker.com/u/camunda) and can be used in production on Linux systems. Windows and macOS are only supported for development environments, not for production.
 - [**Manual**](/self-managed/deployment/manual/install.md): Run each Java application manually on virtual machines or bare-metal servers with a supported Java Virtual Machine (JVM). This method offers a significant amount of flexibility but requires manual configuration of component interactions. It is not recommended unless necessary, as you will need to configure the details for the components to interact correctly yourself. Windows and macOS are only supported for development environments, not for production.
 

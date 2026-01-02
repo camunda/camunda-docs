@@ -97,6 +97,10 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration component and share the same endpoint (port 8088).
    :::
 
+:::note
+Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch/OpenSearch are still provided and supported as optional alternatives; enable them explicitly if you require full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
+:::
+
 ## Full Cluster
 
 <!-- TODO: Add links to doc pages that explain each component. -->
