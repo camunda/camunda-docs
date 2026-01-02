@@ -1,11 +1,11 @@
 ---
 id: migrate-process-instances-batch-operation
-title: "Create a batch operation to migrate process instances"
+title: "Migrate process instances (batch)"
 description: "<MarkerEventuallyConsistentExtension /> [Learn about endpoint consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)"
-sidebar_label: "Create a batch operation to migrate process instances"
+sidebar_label: "Migrate process instances (batch)"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
 custom_edit_url: null
@@ -25,7 +25,7 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Create a batch operation to migrate process instances"}
+  children={"Migrate process instances (batch)"}
 ></Heading>
 
 <MethodEndpoint
@@ -37,7 +37,7 @@ import Heading from "@theme/Heading";
 <MarkerEventuallyConsistentExtension /> [Learn about endpoint
 consistency](../../orchestration-cluster-api-rest-data-fetching/#data-consistency)
 
-Migrate multiple instances of process instances.
+Migrate multiple process instances.
 Since only process instances with ACTIVE state can be migrated, any given
 filters for state are ignored and overridden during this batch operation.
 This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
@@ -398,7 +398,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   title: "StringFilterProperty",
                                 },
                               ],
-                              description: "The tenant ID.",
+                              description: "The tenant id.",
                             },
                             variables: {
                               description: "The process instance variables.",
@@ -817,7 +817,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         },
                                         $neq: {
                                           description:
-                                            "Checks for equality with the provided value.",
+                                            "Checks for inequality with the provided value.",
                                           allOf: [
                                             {
                                               description:
@@ -960,7 +960,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                   title: "StringFilterProperty",
                                 },
                               ],
-                              description: "The batch operation ID.",
+                              description: "The batch operation id.",
                             },
                             errorMessage: {
                               allOf: [
@@ -1204,7 +1204,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                 },
                               ],
                               description:
-                                "The element ID associated with the process instance.",
+                                "The element id associated with the process instance.",
                             },
                             hasElementInstanceIncident: {
                               description:
@@ -1380,7 +1380,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                               title: "StringFilterProperty",
                             },
                           ],
-                          description: "The process definition ID.",
+                          description: "The process definition id.",
                         },
                         processDefinitionName: {
                           allOf: [
@@ -1742,7 +1742,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                       properties: {
                         $or: {
                           description:
-                            'Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  "state": "ACTIVE",\n  "tenantId": 123,\n  "$or": [\n    { "processDefinitionId": "process_v1" },\n    { "processDefinitionId": "process_v2", "hasIncident": true }\n  ]\n}\n```\nThis matches process instances that:\n\n<ul style="padding-left: 20px; margin-left: 20px;">\n  <li style="list-style-type: disc;">are in <em>ACTIVE</em> state</li>\n  <li style="list-style-type: disc;">have tenant ID equal to <em>123</em></li>\n  <li style="list-style-type: disc;">and match either:\n    <ul style="padding-left: 20px; margin-left: 20px;">\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v1</em>, or</li>\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n',
+                            'Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied.\n\nTop-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match.\n<br>\n<em>Example:</em>\n\n```json\n{\n  "state": "ACTIVE",\n  "tenantId": 123,\n  "$or": [\n    { "processDefinitionId": "process_v1" },\n    { "processDefinitionId": "process_v2", "hasIncident": true }\n  ]\n}\n```\nThis matches process instances that:\n\n<ul style="padding-left: 20px; margin-left: 20px;">\n  <li style="list-style-type: disc;">are in <em>ACTIVE</em> state</li>\n  <li style="list-style-type: disc;">have tenant id equal to <em>123</em></li>\n  <li style="list-style-type: disc;">and match either:\n    <ul style="padding-left: 20px; margin-left: 20px;">\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v1</em>, or</li>\n      <li style="list-style-type: circle;"><code>processDefinitionId</code> is <em>process_v2</em> and <code>hasIncident</code> is <em>true</em></li>\n    </ul>\n  </li>\n</ul>\n<br>\n<p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments.\n',
                           type: "array",
                           items: {
                             description: "Process instance search filter.",
@@ -2090,7 +2090,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         title: "StringFilterProperty",
                                       },
                                     ],
-                                    description: "The tenant ID.",
+                                    description: "The tenant id.",
                                   },
                                   variables: {
                                     description:
@@ -2527,7 +2527,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                               },
                                               $neq: {
                                                 description:
-                                                  "Checks for equality with the provided value.",
+                                                  "Checks for inequality with the provided value.",
                                                 allOf: [
                                                   {
                                                     description:
@@ -2675,7 +2675,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                         title: "StringFilterProperty",
                                       },
                                     ],
-                                    description: "The batch operation ID.",
+                                    description: "The batch operation id.",
                                   },
                                   errorMessage: {
                                     allOf: [
@@ -2931,7 +2931,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                       },
                                     ],
                                     description:
-                                      "The element ID associated with the process instance.",
+                                      "The element id associated with the process instance.",
                                   },
                                   hasElementInstanceIncident: {
                                     description:
@@ -3109,7 +3109,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                                     title: "StringFilterProperty",
                                   },
                                 ],
-                                description: "The process definition ID.",
+                                description: "The process definition id.",
                               },
                               processDefinitionName: {
                                 allOf: [
@@ -3516,7 +3516,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                           "The mapping instructions describe how to map elements from the source process definition to the target process definition.\n",
                         properties: {
                           sourceElementId: {
-                            description: "The element ID to migrate from.",
+                            description: "The element id to migrate from.",
                             allOf: [
                               {
                                 description:
@@ -3529,7 +3529,7 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                             ],
                           },
                           targetElementId: {
-                            description: "The element ID to migrate into.",
+                            description: "The element id to migrate into.",
                             allOf: [
                               {
                                 description:
@@ -3602,15 +3602,15 @@ This is done asynchronously, the progress can be tracked using the batchOperatio
                 description: "The type of the batch operation.",
                 type: "string",
                 enum: [
-                  "CANCEL_PROCESS_INSTANCE",
-                  "RESOLVE_INCIDENT",
-                  "MIGRATE_PROCESS_INSTANCE",
-                  "MODIFY_PROCESS_INSTANCE",
-                  "DELETE_PROCESS_INSTANCE",
                   "ADD_VARIABLE",
-                  "UPDATE_VARIABLE",
+                  "CANCEL_PROCESS_INSTANCE",
                   "DELETE_DECISION_DEFINITION",
                   "DELETE_PROCESS_DEFINITION",
+                  "DELETE_PROCESS_INSTANCE",
+                  "MIGRATE_PROCESS_INSTANCE",
+                  "MODIFY_PROCESS_INSTANCE",
+                  "RESOLVE_INCIDENT",
+                  "UPDATE_VARIABLE",
                 ],
                 title: "BatchOperationTypeEnum",
               },

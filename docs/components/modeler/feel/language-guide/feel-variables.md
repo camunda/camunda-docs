@@ -1,14 +1,16 @@
 ---
 id: feel-variables
 title: Variables
-description: "This document outlines variables and examples."
+description: "Learn how to access variables, follow valid variable naming rules, and safely use escaped names when working with FEEL expressions."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";
 
-### Access variables
+Learn how to access variables, follow valid variable naming rules, and safely use escaped names when working with FEEL expressions.
 
-Access the value of a variable by its variable name.
+## Access variables
+
+Access the value of a variable by its [variable name](#variable-names).
 
 ```feel
 a + b
@@ -23,7 +25,6 @@ a.b
 If no variable exists with the given name, the expression returns `null`.
 
 :::tip
-
 Use a [null-check](/components/modeler/feel/language-guide/feel-boolean-expressions.md#null-check) if the variable can be `null` or is optional.
 
 ```feel
@@ -32,7 +33,7 @@ a != null and a.b > 10
 
 :::
 
-### Variable names
+## Variable names
 
 The name of a variable can be any alphanumeric string including the `_` symbol. For a combination of
 words, it's recommended to use the `camelCase` or the `snake_case` format. The `kebab-case` format
@@ -51,7 +52,7 @@ Restrictions of a variable name:
   , `then`, `else`, `for`, `return`, `between`, `instance`, `of`, `not`, `in`, `and`, `or`, `some`,
   `every`, `satisfies`).
 
-### Escape variable names
+#### Escape variable names
 
 <MarkerCamundaExtension></MarkerCamundaExtension>
 

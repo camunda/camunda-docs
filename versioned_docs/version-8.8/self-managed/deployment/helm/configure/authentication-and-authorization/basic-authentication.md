@@ -1,7 +1,7 @@
 ---
 id: basic-authentication
 sidebar_label: Basic authentication
-title: Helm chart basic authentication setup
+title: Set up the Helm chart with basic authentication
 description: Learn how to configure and manage basic authentication for Camunda 8 Self-Managed deployments using Helm chart.
 ---
 
@@ -16,6 +16,10 @@ Because basic authentication is enabled by default, components that depend on Ma
 - Keycloak
 - Optimize
   :::
+
+## Enable Orchestration Cluster and Connectors
+
+The Orchestration Cluster and Connectors are enabled by default with basic authentication. No additional configuration is required—simply deploy the Helm chart and these components will be available.
 
 ### Default users
 
@@ -33,7 +37,120 @@ For details on configuring initial users and their roles, see
 In Helm, arrays must be overwritten in full. If you change these configuration settings, keep in mind that the default array must be configured in your custom `values.yaml` if you want to keep those users and role assignments. For example, when adding the user `foo` or assigning roles to `foo`, keep also the values for the demo and connectors user.
 :::
 
+### Connect to the cluster
+
+To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, see [Accessing components without Ingress](../ingress/accessing-components-without-ingress.md).
+
+Log in with the default credentials: username `demo`, password `demo`.
+
+## Enable additional components
+
+The following components do not support basic authentication and require Management Identity with an OIDC provider:
+
+- Console
+- Web Modeler
+- Optimize
+
+You can still enable these components alongside a basic auth Orchestration Cluster by using a hybrid authentication setup:
+
+- **Orchestration Cluster and Connectors** use basic authentication
+- **Console, Web Modeler, Optimize, and Management Identity** use OIDC
+
+This guide shows how to configure hybrid authentication with internal Keycloak. You can also apply this approach with other OIDC setups, such as [external Keycloak](./external-keycloak.md) or an [external OIDC provider](./external-oidc-provider.md)
+
+When deploying process models from Web Modeler to a basic auth Orchestration Cluster, you will be prompted to enter credentials in the deployment dialog.
+
+### Configuration steps
+
+Follow the [internal Keycloak guide](./internal-keycloak.md) with these modifications:
+
+1. **Simplify the secret**: Omit the `identity-connectors-client-token` and `identity-orchestration-client-token` keys—they are not needed when using basic auth. See [Create a secret](./internal-keycloak.md#create-a-secret).
+
+2. **Set basic auth for the Orchestration Cluster and Connectors**:
+
+```yaml
+orchestration:
+  security:
+    authentication:
+      method: basic
+
+connectors:
+  security:
+    authentication:
+      method: basic
+```
+
+3. **Skip the OIDC sections** for the [Orchestration Cluster](./internal-keycloak.md#configure-orchestration-cluster) and [Connectors](./internal-keycloak.md#configure-connectors) in the internal Keycloak guide.
+
+### Full configuration example
+
+The following example shows the complete configuration for hybrid authentication with internal Keycloak:
+
+```yaml
+global:
+  identity:
+    auth:
+      enabled: true
+      optimize:
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-optimize-client-token"
+
+identity:
+  enabled: true
+  firstUser:
+    secret:
+      existingSecret: "camunda-credentials"
+      existingSecretKey: "identity-firstuser-password"
+
+identityKeycloak:
+  enabled: true
+  auth:
+    existingSecret: "camunda-credentials"
+    passwordSecretKey: "identity-keycloak-admin-password"
+  postgresql:
+    auth:
+      existingSecret: "camunda-credentials"
+      secretKeys:
+        adminPasswordKey: "identity-keycloak-postgresql-admin-password"
+        userPasswordKey: "identity-keycloak-postgresql-user-password"
+
+optimize:
+  enabled: true
+
+connectors:
+  security:
+    authentication:
+      method: basic
+
+webModeler:
+  enabled: true
+  restapi:
+    mail:
+      fromAddress: noreply@example.com
+
+webModelerPostgresql:
+  enabled: true
+  auth:
+    existingSecret: "camunda-credentials"
+    secretKeys:
+      adminPasswordKey: "webmodeler-postgresql-admin-password"
+      userPasswordKey: "webmodeler-postgresql-user-password"
+
+orchestration:
+  security:
+    authentication:
+      method: basic
+
+console:
+  enabled: true
+```
+
+### Connect to the cluster
+
+To access the additional components, see [Connect to the cluster](./internal-keycloak.md#connect-to-the-cluster) in the internal Keycloak guide.
+
 ## Next steps
 
-- To enable centralized authentication, see [Internal Keycloak](./internal-keycloak.md).
+- To enable centralized OIDC authentication for all components, see [Internal Keycloak](./internal-keycloak.md).
 - To integrate with an external identity provider, see [External OIDC provider](./external-oidc-provider.md).

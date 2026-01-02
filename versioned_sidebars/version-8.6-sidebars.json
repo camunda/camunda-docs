@@ -1571,7 +1571,8 @@
       },
       "items": ["reference/data-collection/usage-metrics"]
     },
-    "reference/glossary"
+    "reference/glossary",
+    "reference/legal"
   ],
   "Self-Managed": [
     "self-managed/about-self-managed",
@@ -1741,6 +1742,7 @@
           "Multi-region": ["self-managed/concepts/multi-region/dual-region"]
         },
         "self-managed/concepts/multi-tenancy",
+        "self-managed/concepts/custom-users-and-clients",
         "self-managed/concepts/elasticsearch-privileges",
         "self-managed/concepts/elasticsearch-without-cluster-privileges",
         "self-managed/concepts/opensearch-privileges",

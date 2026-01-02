@@ -28,6 +28,8 @@ const typeReplacements = {
     "enum[self-managed, saas]",
   "java.util.List<java.lang.String>": "array[string]",
   "java.net.URL": "url",
+  "org.springframework.boot.actuate.endpoint.Access":
+    "enum[none, read_only, unrestricted]",
 };
 
 const preserveGroups = ["camunda.client.worker.override"];

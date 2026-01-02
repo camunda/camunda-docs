@@ -378,11 +378,31 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 - The new Camunda Spring Boot Starter provides the `CamundaClient` when requested.
 - The `CamundaClient` uses REST as the default communication protocol, while the deprecated `ZeebeClient` still prefers gRPC.
 - If you want to continue using gRPC by default with the `CamundaClient`, you must explicitly set `camunda.client.prefer-rest-over-grpc: false` in your Spring configuration.
+- The new `CredentialsProvider` bean creation fails if there is a misconfiguration instead of falling back to a non-operational credentials provider
 
 :::
 :::info
 To learn more about migrating to the Camunda Java client, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
 :::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### The Node.js SDK is now the TypeScript SDK
+
+With the Camunda 8.8 release, the Node.js SDK now becomes the TypeScript SDK.
+
+- The **TypeScript SDK** provides clients for all Camunda 8 APIs. Use it in Node.js environments.
+
+- The **Orchestration Cluster API TypeScript client** is a lightweight client for the Camunda 8.8+ Orchestration Cluster REST API. Use it in Node.js or in the browser.
+
+To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md) documentation.
 
 </div>
 </div>
@@ -587,6 +607,25 @@ Only the combined Ingress configuration is officially supported. See the [Ingres
 
 :::caution
 Additional upgrade considerations are necessary for deployments that use custom scripts, such as Docker containers, manual installations, or custom-developed Kubernetes deployments. For these deployments, customers can either continue to deploy with their original 8.7 topology and upgrade each component independently, or adopt our Helm chart approach for the upgrade, which allows for unifying the deployment into a single JAR or container executable.
+:::
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Change</span>
+</div>
+<div className="release-announcement-content">
+  
+#### Helm chart: Custom users and clients for Management Identity
+
+You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
+
+See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
+
+:::caution
+Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
 :::
 
 </div>
