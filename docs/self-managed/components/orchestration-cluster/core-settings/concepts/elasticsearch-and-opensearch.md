@@ -7,7 +7,7 @@ description: "The Orchestration Cluster stores and reads data from either Elasti
 The Orchestration Cluster stores and reads data from either [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) (used as secondary storage for indexing and search).
 
 :::note
-Elasticsearch/OpenSearch are common secondary storage choices. For some deployments you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](../../../reference/glossary.md#rdbms) for details and limitations.
+Elasticsearch/OpenSearch are common secondary storage choices. For some deployments you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](../../../../../reference/glossary.md#rdbms) for details and limitations.
 :::
 
 ## Select a database
