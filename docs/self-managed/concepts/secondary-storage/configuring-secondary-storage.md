@@ -69,10 +69,6 @@ global:
       host: hostname
       port: 443
 
-# Disable inbuilt Bitnami chart
-elasticsearch:
-  enabled: false
-
 orchestration:
   data:
     secondaryStorage:
