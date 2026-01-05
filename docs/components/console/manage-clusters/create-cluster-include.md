@@ -54,11 +54,6 @@ Additionally, you can tag your cluster for `dev`, `test`, `stage`, or `prod`.
 - Tags have no impact on performance and can be changed later in the cluster details section of the cluster overview page.
 - [Authorization-based access control](/components/concepts/access-control/authorizations.md) is disabled by default for `dev` and `test` clusters, and enabled for `stage` and `prod` clusters. You can change this setting during and after cluster creation.
 
-:::info
-Only organization owners or users with the **Admin** role in Console can deploy from Web Modeler to `prod` clusters.
-Users without **Admin** roles can deploy only on `dev`, `test`, or `stage` clusters.
-:::
-
 :::caution Starter plans
 The Starter plan is no longer available.
 
