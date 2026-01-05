@@ -5,7 +5,7 @@ title: Configure the Helm chart with K8S Gateway API
 description: Set up and configure K8S Gateway API for Camunda 8 Self-Managed Helm deployments.
 ---
 
-The Kubernetes Gateway API is a newer way to manage ingress traffic in Kubernetes clusters. The Gateway API improves upon the Ingress API in the following ways:
+The Kubernetes Gateway API is a newer way to manage Ingress traffic in Kubernetes clusters. The Gateway API improves upon the Ingress API in the following ways:
 
 * Allows for a separation between Network operators who might have permissions to Gateway resources and Application developers who might have permissions to HTTPRoute resources.
 * Allows for configuration of Nginx outside of using labels and annotations to tweak behavior (which is also beneficial for limiting permissions).
