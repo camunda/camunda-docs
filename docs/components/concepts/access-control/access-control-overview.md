@@ -50,30 +50,72 @@ Authentication and authorization are the two fundamental concepts for access con
 
 ### Authentication
 
-Authentication verifies **who** a user or client is.
+Authentication verifies who a user or client is.
 Example: Logging in with a username/password or via SSO.
 
 ### Authorization
 
-Authorization determines what an authenticated user or client is allowed to access, and what that user or client is permitted to do with that access.
+Authorization determines what an authenticated user or client is allowed to access in Camunda 8, and which actions they can perform on those resources.
 
-Example: Access **Operate**, view running or completed process instances, start new process instances, or manage tasks.
+For example, a user’s authorizations may allow them to access Operate, view running or completed process instances, start new process instances, or claim and complete user tasks in Tasklist and through the Orchestration Cluster REST API.
 
-| Identity type                  | Authorization model              | Description                                                                                                          | Management interface                   |
-| :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
-| Orchestration Cluster Identity | Fine-grained permissions         | Controls access to applications, APIs, and resources through specific permissions for each resource type and action. | Camunda Identity UI or API             |
-| Management Identity            | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups.                                                          | Keycloak admin console or external IdP |
+| Identity type                  | Authorization model              | Description                                                                                                                                                                      | Management interface                   |
+| :----------------------------- | :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| Orchestration Cluster Identity | Fine-grained permissions         | Controls access to applications, APIs, and runtime resources through specific permissions for each resource type and action (for example, `PROCESS_DEFINITION` and `USER_TASK`). | Camunda Identity UI or API             |
+| Management Identity            | Role-based access control (RBAC) | Uses predefined roles and permissions for users and groups to manage Console, Web Modeler, and Optimize.                                                                         | Keycloak admin console or external IdP |
 
 ### How authentication and authorization work together
 
-1. **Authentication** happens first: The system verifies identity.
-2. **Authorization** happens next: The system verifies permissions.
+1. Authentication happens first: The system verifies identity.
+2. Authorization happens next: The system verifies permissions.
 
 A user must be both authenticated and authorized to access protected resources.
 
 :::info
 To learn more about authorization and how to configure permissions, see [Orchestration Cluster authorization](./authorizations.md).
 :::
+
+## Task authorizations and the Task worker role
+
+Camunda 8 provides both process-level and task-level permissions for user tasks.
+
+- Process-level permissions use the `PROCESS_DEFINITION` resource type. Permissions such as `READ_USER_TASK` and `UPDATE_USER_TASK` allow a user or group to see and work on all user tasks of a given process definition.
+- Task-level permissions use the `USER_TASK` resource type. Permissions such as `READ`, `UPDATE`, `CLAIM`, and `COMPLETE` control access to individual user tasks based on task properties like assignee, candidate users, and candidate groups.
+
+### Permission precedence
+
+Process-level permissions always take precedence over task-level permissions:
+
+- If a user or client holds a relevant `PROCESS_DEFINITION` permission (for example, `READ_USER_TASK` or `UPDATE_USER_TASK`), Camunda grants access without additionally checking `USER_TASK` permissions.
+- Task-level `USER_TASK` checks are evaluated only when no process-level permission applies for the current principal and process definition.
+
+This precedence ensures backward compatibility for existing configurations that rely purely on process-level permissions, while still allowing more restrictive task-level access where needed.
+
+### Property-based task authorizations
+
+Task-level permissions are evaluated using property-based access control:
+
+- Identity administrators can create `USER_TASK` authorizations that match on specific task properties:
+  - `assignee`
+  - `candidate users`
+  - `candidate groups`.
+- A user is authorized when their username or group memberships match one of these properties on the task and the authorization grants the required permission (for example, `READ`, `CLAIM`, or `COMPLETE`).
+
+These property-based checks are used by both the Tasklist UI and the Orchestration Cluster REST API, ensuring consistent task visibility and action rules across tools.
+
+### Default Task worker role
+
+On new installations and upgrades, Camunda Identity automatically creates a Task worker role:
+
+- Role ID: `task-worker`
+- Resource type: `USER_TASK`
+- Scope: Property-based authorizations on
+  - `assignee`
+  - `candidate users`
+  - `candidate groups`
+- Permissions: `READ`, `CLAIM`, and `COMPLETE` for matching tasks.
+
+This default role enables typical task workers to see, claim, and complete only the tasks they are responsible for, while administrators and managers can continue to use process-level permissions for broader oversight.
 
 ## Authentication methods overview
 
@@ -86,25 +128,25 @@ Camunda 8 supports multiple authentication methods depending on the environment:
 | [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic Auth / OIDC        | Basic Auth default, OIDC optional if configured.                               |
 | SaaS                                                                              | OIDC                     | OIDC required for all requests.                                                |
 
-- **No authentication:** only for local development (Run, Docker Compose).
-- **Basic authentication:** simple to set up; not recommended for production.
-- **OIDC-based authentication:** recommended for production Self-Managed and required for SaaS.
+- No authentication: only for local development (Run, Docker Compose).
+- Basic authentication: simple to set up; not recommended for production.
+- OIDC-based authentication: recommended for production Self-Managed and required for SaaS.
 
 :::info
 For API documentation, link to the centralized authentication overview instead of repeating environment defaults.
 :::
 
 :::warning
-The Operate, Tasklist, and Zeebe REST APIs are **deprecated**. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+The Operate, Tasklist, and Zeebe REST APIs are deprecated. While they continue to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
 Authentication for all these APIs works the same way; see the [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) page for details.
 :::
 
 ### Users and clients
 
-Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): **users** and **clients**. [Users](/components/identity/user.md) typically interact with the cluster through a browser, while [clients](/components/identity/client.md) interact programmatically through the APIs.
+Actions in an orchestration cluster can be executed by two kinds of authenticated entities (also known as principals): users and clients. [Users](/components/identity/user.md) typically interact with the cluster through a browser, while [clients](/components/identity/client.md) interact programmatically through the APIs.
 
-Although either principal type can use both Web UIs and APIs, the distinction matters. Users represent **individuals** who are granted access to an orchestration cluster, whereas clients represent **systems or applications**.
+Although either principal type can use both Web UIs and APIs, the distinction matters. Users represent individuals who are granted access to an orchestration cluster, whereas clients represent systems or applications.
 
 :::note
 If you're using basic authentication to secure your cluster, both users and clients are treated as users. There is no dedicated client concept in this configuration.
@@ -116,7 +158,7 @@ Distinguishing between users and clients aligns your access management with how 
 
 For environments using OIDC:
 
-1. Generate a **JSON Web Token (JWT)**.
+1. Generate a JSON Web Token (JWT).
 2. Include it in each API request as: `Authorization: Bearer <TOKEN>`.
 
 - [Generate a token (SaaS)](/components/console/manage-clusters/manage-api-clients.md#create-a-client)
@@ -139,3 +181,4 @@ Tokens expire according to the `expires_in` field returned by the IdP. After exp
 - [Authentication for Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md)
 - [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md)
 - [Orchestration Cluster authorization](./authorizations.md)
+- [User task access restrictions](../../../tasklist/user-task-access-restrictions/)
