@@ -57,5 +57,3 @@ global:
       external-dns.alpha.kubernetes.io/ttl: "60"
 ```
 
-
-
