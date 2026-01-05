@@ -53,7 +53,7 @@ Camunda supports multiple secondary storage backends, and the right choice depen
 For guidance on supported vendors, versions, and configuration, see:
 
 - [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
-- [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms)
+- [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 
 :::note

@@ -458,7 +458,7 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 
 RDBMS (Relational Database Management System) refers to a user-managed relational database used as a secondary storage backend in Camunda 8 Self-Managed deployments, depending on the component and configuration. An external RDBMS is used for query and retention use cases, not for core workflow execution state.
 
-- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms)
+- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms.md)
 
 See also: [Secondary storage](#secondary-storage)
 
