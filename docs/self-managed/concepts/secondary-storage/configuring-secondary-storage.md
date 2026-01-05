@@ -29,27 +29,57 @@ For the latest list of supported relational databases and versions, see the
 
 <TabItem value="helm">
 
-When deploying with Helm, set the secondary storage type and connection details in your `values.yaml` file:
+When deploying with Helm, set the secondary storage type, connection details, and rdbms exporters in your `values.yaml` file:
 
 ```yaml
-data:
-  secondary-storage:
-    type: rdbms
+orchestration:
+  exporters:
+    camunda:
+      enabled: false
     rdbms:
-      url: jdbc:h2:mem:camunda
-      username: sa
-      password:
+      enabled: true
+  data:
+    secondaryStorage:
+      type: rdbms
+      rdbms:
+        url: jdbc:postgresql://hostname:5432/camunda
+        username: camunda
+        secret:
+          existingSecret: camunda-db-secret
+          existingSecretKey: password
 ```
 
-To configure Elasticsearch instead:
+More information about RDBMS in the Camunda Helm chart can be found on this [configuration page](/self-managed/deployment/helm/configure/database/rdbms.md).
+
+For Elasticsearch:
+The Camunda Helm chart by default enables the related exporter and doesn't require extra configuration.
 
 ```yaml
-data:
-  secondary-storage:
-    type: elasticsearch
-    elasticsearch:
-      url: http://elasticsearch:9200/
+global:
+  elasticsearch:
+    enabled: true
+    external: true
+    auth:
+      username: elastic
+      secret:
+        existingSecret: camunda-db-secret
+        existingSecretKey: password
+    url:
+      protocol: http
+      host: hostname
+      port: 443
+
+# Disable inbuilt Bitnami chart
+elasticsearch:
+  enabled: false
+
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
 ```
+
+More information about Elasticsearch in the Camunda Helm chart can be found on this [configuration page](self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
 
 To explicitly disable secondary storage (for example, when running only the Zeebe engine), set:
 
