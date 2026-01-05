@@ -10,7 +10,7 @@ import ProcessInstanceAfterMigration from './assets/process-instance-migration/m
 Process instance migration fits a running process instance to a different process definition.
 This can be useful when the process definition of a running process instance needs changes due to bugs or updated requirements.
 While doing so, we aim to interfere as little as possible with the process instance state during the migration.
-For example, a migrated active user task remains assigned to the same user (if there is no implementation migration).
+For example, a migrated active user task remains assigned to the same user if no implementation migration occurs.
 This principle applies to all parts of the process instance.
 
 :::tip
@@ -165,21 +165,20 @@ To migrate ad-hoc subprocesses, you must provide a mapping instruction from the 
 Changing the scope of ad-hoc subprocesses during migration is not possible.
 :::
 
-## Migrate job-worker user tasks to Camunda user tasks
+## Migrate job worker user tasks to Camunda user tasks
 
-User tasks with job worker implementation can be migrated to user tasks with Camunda user task implementation by providing mapping instructions between the source and the target user task.
+You can migrate user tasks with a job worker implementation to Camunda user tasks by providing mapping instructions between the source and target user tasks.
 
-The target Camunda user task will preserve the `candidate groups`, `candidate users`, `due date`, `follow-up date`, and `form id`/`form key` of the source task.
+The target Camunda user task preserves `candidate groups`, `candidate users`, `due date`, `follow-up date`, and the `form id` or `form key` from the source task.
 
-The target user task will set the priority as defined in the target user task definition, or set a default value if none is defined.
-
-:::important
-Camunda user tasks do not support embedded forms. When migrating a job-worker user task with embedded form to a Camunda user task, the form defined in the target user task definition will be used.
-:::
+The target user task uses the priority defined in the target user task definition, or a default value if none is defined.
 
 :::important
-For the migration between different user task implementations the current `assignee` is not preserved. The target user task will be assigned to the initial assignee defined in the target user task definition.
-:::
+When you migrate a job worker user task to a Camunda user task:
+
+- Embedded forms are not supported. The form defined in the target user task definition is used.
+- The current `assignee` is not preserved. The task is assigned to the initial assignee defined in the target user task definition.
+  :::
 
 ## Deal with catch events
 
@@ -302,7 +301,7 @@ The target process definition contains a compensation boundary event attached to
 
 If the process instance is migrated by providing mapping instruction between service tasks `A` -> `A`, the compensation subscription will be created on completion of the element `A`.
 
-However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will **not** compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
+However, if the process instance is migrated by providing mapping instruction between service tasks `A` -> `B`, then triggering compensation throw event afterward will not compensate `A`. This is because the subscription is only opened when completing a task with a compensation boundary event.
 
 ## Deal with gateways
 
