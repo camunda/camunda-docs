@@ -14,7 +14,6 @@ The ingress-nginx Ingress controller will be EOL soon, so if you're wanting to s
 
 If you choose to switch away from ingress-nginx to another Ingress controller instead of the Gateway API, that is still supported.
 
-
 ## Prerequisites
 
 - Gateway API CRD's installed in your cluster
