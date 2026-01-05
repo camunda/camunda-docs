@@ -7,12 +7,12 @@ description: "Follow best practices to maintain, back up, and monitor your secon
 
 Manage your secondary storage carefully to maintain data integrity, performance, and system stability.
 
-For definitions and conceptual context, see [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+For definitions and conceptual context, see [secondary storage](/reference/glossary.md#secondary-storage).
 
 ## Modifying secondary storage data
 
 :::warning
-You should never manually modify data stored in secondary storage unless instructed by Camunda Support during an active support case. Do **not** make direct edits to data in secondary storage outside of explicit Camunda Support guidance.
+You should never manually modify data stored in secondary storage unless instructed by Camunda Support during an active support case. Do not make direct edits to data in secondary storage outside of explicit Camunda Support guidance.
 :::
 
 ### Risks of manual modification
@@ -28,11 +28,19 @@ Unsupervised changes to secondary storage data can lead to severe issues, such a
 | Security vulnerabilities   | Unauthorized changes can expose sensitive data or weaken access controls.                                      |
 | Compliance issues          | Altered records may violate internal or external data-integrity regulations.                                   |
 
-## Configuring shards and replicas
+## Configuring capacity and redundancy
 
-Proper configuration of shards and replicas in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) is essential for resilience and scalability.
+Secondary storage configuration depends on the backend you choose (for example, Elasticsearch/OpenSearch or an RDBMS). Use the documentation for your selected backend and validate decisions against your expected workload.
 
-### Shards
+:::note
+Backend selection and sizing should be based on benchmarking and realistic workload expectations. Prefer configuration choices that you can validate with measured throughput, latency, and retention needs.
+:::
+
+### Elasticsearch/OpenSearch: shards and replicas
+
+If you use [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) as your secondary storage backend, configure shards and replicas to support resilience and scalability.
+
+#### Shards
 
 Define shard count according to your data size and expected growth.
 
@@ -40,7 +48,7 @@ Define shard count according to your data size and expected growth.
 - More shards can improve scalability but increase management complexity.
 - Avoid over-sharding, which can reduce performance and add unnecessary overhead.
 
-### Replicas
+#### Replicas
 
 - **Single-node clusters:** Do not configure replicas. Replicas provide redundancy only when distributed across multiple nodes. On a single node, replicas remain unassigned and may prevent the cluster from reporting as healthy.
 
@@ -54,13 +62,13 @@ Regular backups of your secondary storage are critical for disaster recovery and
 
 - Follow the official Camunda backup procedure step by step.
 - Schedule backups regularly based on data volume and business requirements.
-- Periodically **test restore operations** to confirm that your backups are valid and usable.
+- Periodically test restore operations to confirm that your backups are valid and usable.
 
 </div>
 
 ## Index templates
 
-Camunda uses index templates to define settings and mappings for indices in [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+If you use [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch), Camunda uses index templates to define settings and mappings for indices.
 
 To prevent issues:
 
@@ -80,5 +88,5 @@ Use the [Data Layer Dashboard](/self-managed/operational-guides/monitoring/metri
 For example:
 
 - Track exporter and indexing latency.
-- Detect shard or replica imbalances.
-- Identify degraded query performance early.
+- Detect shard or replica imbalances (Elasticsearch/OpenSearch).
+- Identify degraded query performance early (Elasticsearch/OpenSearch or RDBMS).

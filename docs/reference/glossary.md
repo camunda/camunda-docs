@@ -1,7 +1,7 @@
 ---
 id: glossary
 title: "Glossary"
-description: "This section defines common terminology referenced within the documentation."
+description: "Definitions for common Camunda 8 terms and abbreviations used across the docs, including Orchestration Cluster concepts, storage roles, and key deployment terms."
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
@@ -58,8 +58,7 @@ A broad field of computer science focused on creating machines that can perform 
 ### AI agent
 
 An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
@@ -161,7 +160,9 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 ### Elasticsearch/OpenSearch
 
-Elasticsearch and OpenSearch are search and analytics engines commonly used as **secondary storage** for indexing, search, and analytics of exported runtime data. These systems are typically populated from primary storage and are consumed by tools such as Operate and Optimize. When documentation discusses search or analytics backing services, prefer linking to this glossary entry and to the `Secondary storage` definition for conceptual context.
+Elasticsearch and OpenSearch are search and analytics engines commonly used as secondary storage backends for indexing and querying exported runtime data. They are populated from [primary storage](#primary-storage) and consumed by components such as Operate and Optimize.
+
+- [Elasticsearch and OpenSearch](/self-managed/components/orchestration-cluster/core-settings/concepts/elasticsearch-and-opensearch.md)
 
 See also: [Secondary storage](#secondary-storage)
 
@@ -179,9 +180,13 @@ Use an element template to extend [Modeler](/components/modeler/about-modeler.md
 
 ### Embedded H2
 
-Embedded H2 (file-based H2) refers to running the H2 relational database in a file-backed or embedded mode where the database files reside on the same host as the component using them. In Camunda documentation, this is commonly discussed as a lightweight primary storage option for development or certain Self-Managed deployments. Embedded H2 is not intended for high-availability production usage without appropriate backup and clustering strategies.
+Embedded H2 (file-based H2) refers to running the H2 relational database in a file-backed mode where the database files reside on the same host as the component using them. In Camunda documentation, H2 is discussed as a lightweight secondary storage option for local development and evaluation.
 
-See also: [Primary storage](#primary-storage)
+Embedded H2 is not intended for production usage.
+
+- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
+
+See also: [Secondary storage](#secondary-storage), [H2](#h2)
 
 ### Embedding (vector embedding)
 
@@ -236,6 +241,12 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 ### Hallucination
 
 When an AI confidently produces incorrect or fabricated information that seems plausible. It reflects the model’s tendency to produce patterns that appear coherent but lack factual accuracy.
+
+### H2
+
+H2 is a lightweight relational database engine. In Camunda documentation, H2 refers to a secondary storage backend used for local development and evaluation.
+
+See also: [Embedded H2](#embedded-h2), [Secondary storage](#secondary-storage)
 
 ### Human task
 
@@ -370,9 +381,11 @@ A [Camunda workflow](#workflow) uses this type of connector to retrieve data fro
 
 ### Primary storage
 
-Primary storage is the authoritative store for runtime state that the Orchestration Cluster needs to execute and recover processes (for example: partition logs, snapshots, and runtime state). Primary storage variants include embedded H2 (file-based H2), external RDBMS, or broker-local persistent stores depending on deployment.
+Primary storage is the authoritative store for workflow execution state managed by the Orchestration Cluster. In Self-Managed deployments, Zeebe brokers persist partition logs and snapshots on local disk. This data is required to execute workflows, recover after failures, and replicate state across brokers.
 
-See also: [Orchestration Cluster](#orchestration-cluster), [Secondary storage](#secondary-storage)
+Primary storage is not a search or analytics backend, and it is not configured as an external database (such as Elasticsearch/OpenSearch, H2, or an external RDBMS).
+
+See also: [Orchestration Cluster](#orchestration-cluster), [Log](#log), [Partition](#partition), [Snapshot](#snapshot), [Secondary storage](#secondary-storage)
 
 ### Process
 
@@ -443,9 +456,11 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 
 ### RDBMS
 
-RDBMS (Relational Database Management System) refers to external relational databases (for example PostgreSQL, MySQL) used as persistent storage for Camunda components. In the context of Camunda 8, an external RDBMS may be used as a form of **primary storage** for runtime state or as a **secondary storage** option depending on configuration.
+RDBMS (Relational Database Management System) refers to a user-managed relational database used as a secondary storage backend in Camunda 8 Self-Managed deployments, depending on the component and configuration. An external RDBMS is used for query and retention use cases, not for core workflow execution state.
 
-See also: [Primary storage](#primary-storage), [Embedded H2](#embedded-h2)
+- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms)
+
+See also: [Secondary storage](#secondary-storage)
 
 ### Record
 
@@ -502,9 +517,16 @@ SAP stands for Systems, Applications, and Products in Data Processing; it's an e
 
 ### Secondary storage
 
-Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from primary storage and consumed by tools for observability and analytics (examples: Elasticsearch/OpenSearch and RDBMS-based secondary stores).
+Secondary storage is used for indexing, search, analytics, and long-term retention. Data in secondary storage is typically exported from [primary storage](#primary-storage) and consumed by tools for observability and analytics.
 
-See also: [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+Examples of secondary storage backends include:
+
+- [Elasticsearch/OpenSearch](#elasticsearchopensearch)
+- [RDBMS](#rdbms)
+- [Embedded H2](#embedded-h2)
+
+- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
+- [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
 
 ### Segment
 

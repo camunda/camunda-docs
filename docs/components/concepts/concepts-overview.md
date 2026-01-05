@@ -1,7 +1,7 @@
 ---
 id: concepts-overview
 title: "Introduction to Camunda 8"
-description: "The Camunda Concepts section details features of Camunda that likely span several components of the application. Learn more about job workers and workflow patterns, for example."
+description: "Learn how Camunda 8 components work together to orchestrate and automate business processes, including the platform architecture and storage roles."
 ---
 
 import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
@@ -17,20 +17,31 @@ You can deploy Camunda 8 in two ways:
 
 Camunda 8 combines powerful execution engines for BPMN processes and DMN decisions with tools for collaborative modeling, operations, and analytics. Camunda 8 [components](/components/components-overview.md) work together to form the complete Camunda 8 experience, allowing you to design, automate, and improve your business processes.
 
+Camunda 8 separates runtime execution data from analytical and operational data by using distinct storage roles.
+
 <img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
 
 :::note Storage architecture
 
-In the diagram above, storage components appear in two roles:
+In the diagram above, storage systems appear in two distinct roles:
 
-- **Primary storage** — The authoritative store for runtime state the Orchestration Cluster needs to execute and recover processes (partition logs, snapshots). See [primary storage](/reference/glossary.md#primary-storage).
-- **Secondary storage** — Systems used for indexing, search, analytics, and long-term retention, typically populated from primary storage (for example, Elasticsearch or OpenSearch). See [secondary storage](/reference/glossary.md#secondary-storage) and [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+- **Primary storage** — The authoritative store for runtime execution state used by the Orchestration Cluster to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
+- **Secondary storage** — Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
-For deployment and configuration guidance, see the Self-Managed deployment documentation:
+### Secondary storage implementations
+
+Camunda 8 supports multiple secondary storage backends, depending on the deployment model and configuration:
+
+- **Embedded H2** — A bundled secondary storage option for local development and lightweight setups. See [H2](/reference/glossary.md#h2).
+- **External RDBMS** — A user-managed relational database used as secondary storage in Self-Managed deployments. See [RDBMS](/reference/glossary.md#rdbms).
+- **Elasticsearch / OpenSearch** — Search-optimized backends commonly used for analytics and operational visibility. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+
+For deployment and configuration guidance, see the Self-Managed documentation:
 
 - [About Self-Managed](/self-managed/about-self-managed.md)
 - [Helm quick install](/self-managed/deployment/helm/install/quick-install.md)
-  :::
+
+:::
 
 :::info
 
@@ -79,8 +90,7 @@ Model and deploy business process diagrams with BPMN and DMN. By using industry-
 
 #### Connectors
 
-Connectors help you communicate with systems and technology, reducing the time
-required to automate and orchestrate business processes that span multiple systems. connectors are inserted into BPMN diagrams directly from within the Camunda Modeler interface. Once added to your diagram, they are configured via an intuitive properties panel on the right side of the screen.
+Connectors help you communicate with systems and technology, reducing the time required to automate and orchestrate business processes that span multiple systems. Connectors are inserted into BPMN diagrams directly from within the Camunda Modeler interface. Once added to your diagram, they are configured via an intuitive properties panel on the right side of the screen.
 
 #### Forms
 
@@ -88,11 +98,11 @@ required to automate and orchestrate business processes that span multiple syste
 
 ### Workflow engine & decision engine
 
-Powered by Zeebe, Camunda’s cloud-native workflow engine provides organizations with speed, scale, and security without the overhead of building and maintaining a complex infrastructure. Zeebe can scale throughput linearly by adding cluster nodes, allowing the processing of an unlimited amount of transactions at consistently low latencies. Zeebe also comes with a new fail-over architecture that also supports geo-replication across data centers to provide enterprise grade availability.
+Powered by Zeebe, Camunda’s cloud-native workflow engine provides organizations with speed, scale, and security without the overhead of building and maintaining a complex infrastructure. Zeebe can scale throughput linearly by adding cluster nodes, allowing the processing of an unlimited amount of transactions at consistently low latencies. Zeebe also supports geo-replication across data centers to provide enterprise-grade availability.
 
 ### Tasklist
 
-With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, they’ll observe it appear in Tasklist.
+With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owners can achieve end-to-end process automation by [orchestrating human tasks](/guides/getting-started-orchestrate-human-tasks.md). When a user needs to work on a task, it appears in Tasklist.
 
 ### Operate
 
@@ -104,7 +114,7 @@ With [Tasklist](/components/tasklist/introduction-to-tasklist.md), process owner
 
 ### Console
 
-With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Additionally, Console offers control over organizational settings such as user management, roles, and insights into usage metrics.
+With [Console](/components/console/introduction-to-console.md), teams can create, configure, manage, and monitor clusters for all environments from development to production. Console also offers control over organizational settings such as user management, roles, and insights into usage metrics.
 
 ## How does Camunda 8 compare to other solutions?
 

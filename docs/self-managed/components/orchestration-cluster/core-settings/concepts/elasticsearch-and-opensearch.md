@@ -1,13 +1,15 @@
 ---
 id: elasticsearch-and-opensearch
 title: "Elasticsearch and OpenSearch"
-description: "The Orchestration Cluster stores and reads data from either Elasticsearch or OpenSearch."
+description: "Learn how the Orchestration Cluster uses Elasticsearch/OpenSearch as a secondary storage option, and when an RDBMS-based secondary store may be used instead."
 ---
 
-The Orchestration Cluster stores and reads data from either [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) (used as secondary storage for indexing and search).
+The Orchestration Cluster stores and reads data from a configured secondary storage backend for indexing and search. Depending on your deployment and configuration, this backend can be [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch) or an [RDBMS](/reference/glossary.md#rdbms).
+
+This page focuses on using Elasticsearch and OpenSearch as the secondary storage backend.
 
 :::note
-Elasticsearch/OpenSearch are common secondary storage choices. For some deployments you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](../../../../../reference/glossary.md#rdbms) for details and limitations.
+Secondary storage is configurable. For RDBMS-based secondary storage, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms) for details and limitations.
 :::
 
 ## Select a database

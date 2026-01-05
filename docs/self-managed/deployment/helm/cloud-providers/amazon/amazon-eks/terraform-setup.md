@@ -415,7 +415,7 @@ The OpenSearch module creates an OpenSearch domain intended for Camunda platform
 The OpenSearch or Elasticsearch database is required to support the Orchestration Cluster components described in the [reference architecture](/self-managed/reference-architecture/reference-architecture.md): Zeebe (workflow data), Operate (monitoring), Tasklist (human tasks), Optimize (analytics), and Identity (user management, sessions, OIDC mappings).
 
 :::note
-OpenSearch/Elasticsearch are commonly used for the platform's secondary storage needs. Some teams prefer RDBMS-based secondary storage for parts of the application layer — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
+Secondary storage is configurable. Depending on the components you run and your requirements, you can use Elasticsearch/OpenSearch or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
 :::
 
 :::note Migration to OpenSearch is not supported
