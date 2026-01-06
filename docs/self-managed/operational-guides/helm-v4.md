@@ -12,6 +12,18 @@ Helm v4 is the latest major release of Helm which comes with a few minor breakin
 
 Learn more about other Helm v4 changes [here](https://helm.sh/docs/overview/#whats-new)
 
+## Camunda Helm Chart Compatibility
+
+The Camunda Helm chart is already compatible with Helm v3 and Helm v4, however, if your `values.yaml` supplies extra environment variables that conflict with the default, then may need to apply mitigations outlined below.
+
+| Chart version                  | Helm CLI v3    | Helm CLI v4                         |
+| ------------------------------ | -------------- | ----------------------------------- |
+| Camunda Platform 8.6 - 11.x    | ✅             | ✅ (with mitigations below)         |
+| Camunda Platform 8.7 - 12.x    | ✅             | ✅ (with mitigations below)         |
+| Camunda Platform 8.8 - 13.x    | ✅             | ✅ (with mitigations below)         |
+| Camunda Platform 8.9 - 14.x    | ✅             | ✅ (with mitigations below)         |
+
+
 ## Helm CLI Breaking Changes
 
 ### Server-side apply is now enabled by default
