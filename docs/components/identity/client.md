@@ -10,11 +10,7 @@ Configure and manage client access to a cluster so the client application has th
 
 A client is an application that interacts with an Orchestration Cluster via its APIs.
 
-This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) provider](../concepts/access-control/connect-to-identity-provider.md) for authentication.
-
-:::note
-If you are using the Orchestration Cluster with [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication), both end users and m2m applications are treated as users and must be [managed accordingly](user.md). The Identity UI does not display dedicated client options in basic authentication setups for this reason.
-:::
+This guide describes how to manage client access in SaaS and in Self-Managed environments that use an [external OpenID Connect (OIDC) identity provider](../concepts/access-control/connect-to-identity-provider.md) for authentication. If you are using the Orchestration Cluster with [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication), both end users and m2m applications are treated as users and must be [managed accordingly](user.md). The Identity UI does not display dedicated client options in basic authentication setups for this reason.
 
 ## Manage clients in SaaS
 
@@ -40,7 +36,11 @@ If you have enabled [authorizations](/components/concepts/access-control/authori
 
 If authorizations are disabled, your client will have full access based on the scopes you selected during creation.
 
-## Manage clients in Self-Managed
+## Manage clients in Self-Managed with an external OIDC identity provider
+
+:::note
+If you are using the Orchestration Cluster with [basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication), both end users and m2m applications are treated as users and must be [managed accordingly](user.md). 
+:::
 
 Configuring a client application in a [Self-Managed environment with OIDC](/self-managed/components/orchestration-cluster/identity/connect-external-identity-provider.md) involves two steps:
 
