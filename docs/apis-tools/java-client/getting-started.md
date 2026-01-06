@@ -197,7 +197,7 @@ The client will automatically read the environment variables and configure the a
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
-// There are 3 ways to define the authorization server url
+// There are three ways to define the authorization server URL
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
 private static final String CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]";
 private static final String CAMUNDA_ISSUER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]";
@@ -213,11 +213,11 @@ private static final String CLIENT_SECRET = "[Client Secret]";
 
 public static void main(String[] args) {
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
-            // select the authorization server configuration option according to your properties from above
+            // Select the authorization server configuration option according to your properties from above
             .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
             .issuerUrl(CAMUNDA_ISSUER_URL)
             .wellKnownConfigurationUrl(CAMUNDA_WELL_KNOWN_CONFIGURATION_URL)
-            // end authorization server
+            // End authorization server
             .audience(AUDIENCE)
             .scope(SCOPE)
             .clientId(CLIENT_ID)
@@ -240,7 +240,7 @@ public static void main(String[] args) {
 **Notes for Microsoft Entra ID**
 
 - Use `scope=CLIENT_ID_OC + "/.default"` instead of `scope=CLIENT_ID_OC`.
-- The issuer url is typically in the format:
+- The issuer URL is typically in the format:
 
 ```
 https://login.microsoftonline.com/<Microsoft Entra tenant ID>/v2.0
@@ -265,12 +265,11 @@ You can also set connection details via environment variables to create the clie
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
 export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
-# There are 3 ways to define the authorization server url
+# There are three ways to define the authorization server URL
 export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
-export CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]";
+export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]'
+export CAMUNDA_ISSUER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]'
 
-export CAMUNDA_ISSUER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]";
 export CAMUNDA_TOKEN_AUDIENCE='[Audience]'
 export CAMUNDA_CLIENT_ID='[Client ID]'
 export CAMUNDA_CLIENT_SECRET='[Client Secret]'
@@ -311,7 +310,7 @@ Several identity providers, such as Keycloak, support client mTLS authentication
 ```java
 private static final String CAMUNDA_GRPC_ADDRESS = "[Address of Zeebe API (gRPC) - default: http://localhost:26500]";
 private static final String CAMUNDA_REST_ADDRESS = "[Address of the Orchestration Cluster API - default: http://localhost:8080]";
-// there are 3 ways to define the authorization server url
+// There are three ways to define the authorization server URL
 private static final String CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
 private static final String CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]",
 private static final String CAMUNDA_ISSUER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]";
@@ -327,11 +326,11 @@ private static final String TRUSTSTORE_PASSWORD = "password";
 public static void main(String[] args) {
 
     CredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
-            // select the authorization server configuration option according to your properties from above
+            // Select the authorization server configuration option according to your properties from above
             .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
             .issuerUrl(CAMUNDA_ISSUER_URL)
             .wellKnownConfigurationUrl(CAMUNDA_WELL_KNOWN_CONFIGURATION_URL)
-            // end authorization server
+            // End authorization server
             .audience(AUDIENCE)
             .clientId(CLIENT_ID)
             .keystorePath(KEYSTORE_PATH)
@@ -367,10 +366,10 @@ You can also set connection details via environment variables to create the clie
 ```bash
 export CAMUNDA_GRPC_ADDRESS='[Address of Zeebe API (gRPC) - default: http://localhost:26500]'
 export CAMUNDA_REST_ADDRESS='[Address of the Orchestration Cluster API - default: http://localhost:8080]'
-# There are 3 ways to define the authorization server url
+# There are three ways to define the authorization server URL
 export CAMUNDA_AUTHORIZATION_SERVER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]'
-export CAMUNDA_AUTHORIZATION_SERVER_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token]";
-export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL = "[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]";
+export CAMUNDA_WELL_KNOWN_CONFIGURATION_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform/.well-known/openid-configuration]'
+export CAMUNDA_ISSUER_URL='[OAuth URL e.g. http://localhost:18080/auth/realms/camunda-platform]'
 
 export CAMUNDA_TOKEN_AUDIENCE='[Audience - default: zeebe-api]'
 export CAMUNDA_CLIENT_ID='[Client ID]'
