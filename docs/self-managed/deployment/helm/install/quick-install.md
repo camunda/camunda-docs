@@ -98,7 +98,7 @@ By default, the Helm chart deploys the Camunda orchestration cluster with **basi
    :::
 
 :::note
-Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch/OpenSearch are still provided and supported as optional alternatives; enable them explicitly if you require full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
+Starting in 8.9-alpha3, the default secondary storage used by Camunda 8 Run and default Helm values is H2 for lightweight, out-of-the-box setups. Elasticsearch is still provided and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Enable the backend you require explicitly if you need full-featured search/analytics or to run existing Elasticsearch-backed Operate instances.
 :::
 
 ## Full Cluster

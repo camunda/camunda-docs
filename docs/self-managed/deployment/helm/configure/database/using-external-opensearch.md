@@ -19,7 +19,7 @@ For more details, see the [architecture overview](/self-managed/about-self-manag
 By default, the [Helm chart deployment](/self-managed/setup/overview.md) installs a new Elasticsearch instance. This guide explains how to configure the Camunda Helm chart to use an external Amazon OpenSearch Service instance instead.
 
 :::note
-In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. OpenSearch/Elasticsearch remain bundled and supported as optional alternatives; use this guide when you want to run or connect to an external OpenSearch cluster instead of the default H2 store.
+In 8.9-alpha3, H2 is the default secondary storage for lightweight Camunda 8 Run and quick-install scenarios. Elasticsearch remains bundled and supported as an optional alternative; OpenSearch is supported for Self‑Managed deployments but is not bundled in Camunda 8 Run. Use this guide when you want to run or connect to an external OpenSearch cluster instead of the default H2 store.
 :::
 
 :::info OpenSearch support
