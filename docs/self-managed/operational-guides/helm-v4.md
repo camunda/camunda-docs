@@ -12,7 +12,7 @@ Helm v4 is the latest major release of Helm which comes with a few minor breakin
 
 Learn more about other Helm v4 changes [here](https://helm.sh/docs/overview/#whats-new)
 
-## Breaking Changes
+## Helm CLI Breaking Changes
 
 ### Server-side apply is now enabled by default
 
