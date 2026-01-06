@@ -64,7 +64,15 @@ docker run \
   -v ~/.kube:/root/.kube \
   alpine/helm:3.19 \
   install RELEASE camunda/camunda-platform \
-  <other-helm-options> \
+  <other-helm-cli-options> \
   ...
 ```
 
+### Helm CLI option --force is renamed to --force-replace
+
+If you rely on `--force` during `helm upgrade`, use `--force-replace` instead.
+
+
+### Post-renderers are now plugins and don't function as bash scripts
+
+If you were using a bash script as a post-renderer, you will need to convert it into a Helm plugin. See the Official Helm documentation for a [tutorial on building a postrenderer plugin](https://helm.sh/docs/plugins/developer/tutorial-postrenderer-plugin).
